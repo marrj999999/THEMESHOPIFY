@@ -1,0 +1,323 @@
+{% comment %}
+  BBC Carbon Calculator — Distinctive Brand Version
+  
+  Design Principles:
+  - Sharp card edges
+  - Bold stat display
+  - Bamboo stripe accent
+  - Dramatic comparison
+{% endcomment %}
+
+<section class="bbc-carbon">
+  <div class="bbc-carbon__container page-width">
+    <header class="bbc-carbon__header">
+      {% if section.settings.eyebrow != blank %}
+        <span class="bbc-carbon__eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+      <h2 class="bbc-carbon__heading">{{ section.settings.title }}</h2>
+      {% if section.settings.subtitle != blank %}
+        <p class="bbc-carbon__subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </header>
+    
+    <div class="bbc-carbon__comparison">
+      <div class="bbc-carbon__materials">
+        <div class="bbc-carbon__material">
+          <span class="bbc-carbon__icon material-symbols-outlined" aria-hidden="true">settings</span>
+          <span class="bbc-carbon__name">Aluminium</span>
+          <span class="bbc-carbon__value bbc-carbon__value--high">17.8 kg</span>
+          <span class="bbc-carbon__unit">CO₂ per frame</span>
+        </div>
+        <div class="bbc-carbon__material">
+          <span class="bbc-carbon__icon material-symbols-outlined" aria-hidden="true">layers</span>
+          <span class="bbc-carbon__name">Carbon Fibre</span>
+          <span class="bbc-carbon__value bbc-carbon__value--high">14.2 kg</span>
+          <span class="bbc-carbon__unit">CO₂ per frame</span>
+        </div>
+        <div class="bbc-carbon__material bbc-carbon__material--bamboo">
+          <span class="bbc-carbon__icon material-symbols-outlined" aria-hidden="true">eco</span>
+          <span class="bbc-carbon__name">Bamboo</span>
+          <span class="bbc-carbon__value bbc-carbon__value--low">7.7 kg</span>
+          <span class="bbc-carbon__unit">CO₂ per frame</span>
+        </div>
+      </div>
+      
+      <div class="bbc-carbon__savings">
+        <span class="bbc-carbon__savings-value">56.7%</span>
+        <span class="bbc-carbon__savings-label">Less CO₂ than aluminium frames</span>
+      </div>
+    </div>
+    
+    <div class="bbc-carbon__facts">
+      <div class="bbc-carbon__fact">
+        <span class="bbc-carbon__fact-icon" aria-hidden="true">{% render 'bbc-icons', icon: 'leaf' %}</span>
+        <span class="bbc-carbon__fact-text">Bamboo absorbs 35% more CO₂ than trees</span>
+      </div>
+      <div class="bbc-carbon__fact">
+        <span class="bbc-carbon__fact-icon" aria-hidden="true">🔄</span>
+        <span class="bbc-carbon__fact-text">Regrows in 3-5 years vs 30+ for timber</span>
+      </div>
+      <div class="bbc-carbon__fact">
+        <span class="bbc-carbon__fact-icon" aria-hidden="true">{% render 'bbc-icons', icon: 'globe' %}</span>
+        <span class="bbc-carbon__fact-text">No deforestation - grass not tree</span>
+      </div>
+    </div>
+    
+    {% if section.settings.learn_more_text != blank %}
+      <footer class="bbc-carbon__footer">
+        <a href="{{ section.settings.learn_more_url }}" class="bbc-carbon__link">
+          {{ section.settings.learn_more_text }} →
+        </a>
+      </footer>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .bbc-carbon {
+    padding: 100px 20px;
+    background: var(--bbc-cream, var(--bbc-cream));
+    position: relative;
+  }
+  
+  .bbc-carbon__container {
+    max-width: 900px;
+  }
+  
+  .bbc-carbon__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  
+  .bbc-carbon__eyebrow {
+    display: inline-block;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--bbc-teal, var(--bbc-teal));
+    margin-bottom: 12px;
+  }
+  
+  .bbc-carbon__heading {
+    font-family: var(--font-heading-family);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: var(--bbc-forest, var(--bbc-forest));
+    letter-spacing: -0.02em;
+    margin: 0 0 12px 0;
+    line-height: 1.1;
+  }
+  
+  .bbc-carbon__subtitle {
+    font-size: 1.0625rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.7;
+    margin: 0;
+  }
+  
+  .bbc-carbon__comparison {
+    background: white;
+    padding: 40px 32px;
+    border-left: 6px solid var(--bbc-teal, var(--bbc-teal));
+    margin-bottom: 32px;
+  }
+  
+  .bbc-carbon__materials {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  
+  .bbc-carbon__material {
+    text-align: center;
+    padding: 24px 16px;
+    background: var(--bbc-cream, var(--bbc-cream));
+  }
+  
+  .bbc-carbon__material--bamboo {
+    background: white;
+    border-left: 4px solid var(--bbc-teal, var(--bbc-teal));
+    box-shadow: 6px 6px 0 var(--bbc-teal, var(--bbc-teal));
+  }
+  
+  .bbc-carbon__icon {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  
+  .bbc-carbon__name {
+    display: block;
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin-bottom: 8px;
+  }
+  
+  .bbc-carbon__material--bamboo .bbc-carbon__name {
+    color: var(--bbc-teal, var(--bbc-teal));
+  }
+  
+  .bbc-carbon__value {
+    display: block;
+    font-family: var(--font-heading-family);
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  
+  .bbc-carbon__value--high {
+    color: #c53030;
+  }
+  
+  .bbc-carbon__value--low {
+    color: var(--bbc-teal, var(--bbc-teal));
+  }
+  
+  .bbc-carbon__unit {
+    font-size: 0.75rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.6;
+  }
+  
+  .bbc-carbon__savings {
+    background: var(--bbc-forest, var(--bbc-forest));
+    padding: 32px;
+    text-align: center;
+  }
+  
+  .bbc-carbon__savings-value {
+    display: block;
+    font-family: var(--font-heading-family);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    color: var(--bbc-gold, var(--bbc-gold));
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  
+  .bbc-carbon__savings-label {
+    font-size: 1.0625rem;
+    color: white;
+    opacity: 0.9;
+  }
+  
+  .bbc-carbon__facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  
+  .bbc-carbon__fact {
+    text-align: center;
+    padding: 20px 16px;
+  }
+  
+  .bbc-carbon__fact-icon {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  
+  .bbc-carbon__fact-text {
+    font-size: 0.875rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.8;
+    line-height: 1.5;
+  }
+  
+  .bbc-carbon__footer {
+    text-align: center;
+  }
+  
+  .bbc-carbon__link {
+    color: var(--bbc-teal, var(--bbc-teal));
+    font-weight: 700;
+    text-decoration: none;
+  }
+  
+  .bbc-carbon__link:hover {
+    text-decoration: underline;
+  }
+  
+  .bbc-carbon__link:focus-visible {
+    outline: 2px solid var(--bbc-gold, var(--bbc-gold));
+    outline-offset: 4px;
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-carbon {
+      padding: 60px 16px;
+    }
+    
+    .bbc-carbon__comparison {
+      padding: 24px 20px;
+    }
+    
+    .bbc-carbon__materials {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    
+    .bbc-carbon__material--bamboo {
+      box-shadow: 4px 4px 0 var(--bbc-teal, var(--bbc-teal));
+    }
+    
+    .bbc-carbon__facts {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Carbon Calculator",
+  "tag": "section",
+  "class": "bbc-carbon-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Sustainability"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Your Environmental Impact"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "See how much CO₂ you save by choosing bamboo over traditional frame materials"
+    },
+    {
+      "type": "text",
+      "id": "learn_more_text",
+      "label": "Link text",
+      "default": "Learn more about our sustainability"
+    },
+    {
+      "type": "url",
+      "id": "learn_more_url",
+      "label": "Link URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Carbon Calculator",
+      "settings": {
+        "eyebrow": "Sustainability",
+        "title": "Your Environmental Impact",
+        "subtitle": "See how much CO₂ you save by choosing bamboo over traditional frame materials"
+      }
+    }
+  ]
+}
+{% endschema %}

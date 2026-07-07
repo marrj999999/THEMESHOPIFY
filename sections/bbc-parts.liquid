@@ -1,0 +1,596 @@
+{% comment %}
+  BBC Parts - Clean product page for components and accessories
+  Uses global patterns from bbc-foundation.css
+{% endcomment %}
+
+{%- comment -%} 2026 refresh: load the redesign stylesheet and scope under .bbc-rd so brand tokens (Atkinson font, forest/bone/lime) apply. {%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+<style>
+  .bbc-rd.bbc-parts{ background:var(--bone); color:var(--ink); padding:32px 0; }
+  .bbc-rd .bbc-parts__title{ color:var(--forest); font-weight:800; }
+  .bbc-rd .bbc-parts__add-btn{ background:var(--lime); color:var(--forest); border:2px solid var(--ink); border-radius:10px; font-weight:800; }
+  .bbc-rd .bbc-parts__add-btn:hover{ background:var(--lime-700); }
+  .bbc-rd .bbc-parts__option-btn.active{ border-color:var(--forest); background:var(--paper); }
+  .bbc-rd .bbc-accordion__trigger{ color:var(--forest); font-weight:700; }
+  .bbc-rd .bbc-parts__h2{ color:var(--forest); font-weight:800; font-size:19px; margin:18px 0 6px; }
+  .bbc-rd .bbc-parts__description h3{ color:var(--forest); font-weight:700; font-size:15px; margin:14px 0 4px; }
+  .bbc-rd .bbc-fitment{ display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
+  .bbc-rd .bbc-fitment__chip{ background:var(--paper); border:1.5px solid var(--border-strong); border-radius:999px; padding:6px 13px; font-size:14px; font-weight:700; color:var(--ink); }
+  .bbc-rd .bbc-fitment__chip b{ color:var(--forest); }
+</style>
+<div class="bbc-rd bbc-parts" data-testid="parts-page">
+  <div class="bbc-parts__layout bbc-product-layout">
+
+    {%- comment -%} Gallery Column {%- endcomment -%}
+    <div class="bbc-parts__gallery bbc-sticky-sidebar">
+      <div class="bbc-gallery__main" data-testid="parts-main-image">
+        {%- if product.featured_media -%}
+          <img 
+            id="parts-main-image"
+            src="{{ product.featured_media | image_url: width: 800 }}"
+            alt="{{ product.featured_media.alt | escape }}"
+            width="800"
+            height="800"
+            loading="eager"
+          >
+        {%- else -%}
+          <div class="bbc-image-placeholder">
+            {% render 'bbc-icons', icon: 'image', size: 64 %}
+          </div>
+        {%- endif -%}
+      </div>
+      
+      {%- if product.media.size > 1 -%}
+        <div class="bbc-gallery__thumbs" data-testid="parts-thumbnails">
+          {%- for media in product.media limit: 5 -%}
+            <button 
+              type="button"
+              class="bbc-gallery__thumb{% if forloop.first %} active{% endif %}"
+              data-media-id="{{ media.id }}"
+              aria-label="View image {{ forloop.index }}"
+            >
+              <img 
+                src="{{ media | image_url: width: 120 }}"
+                alt="{{ media.alt | escape }}"
+                width="120"
+                height="120"
+                loading="lazy"
+              >
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+    
+    {%- comment -%} Info Column {%- endcomment -%}
+    <div class="bbc-parts__info">
+      
+      {%- comment -%} Breadcrumb {%- endcomment -%}
+      <nav class="bbc-parts__breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a> / 
+        <a href="/collections/maker-shop">Parts</a> / 
+        {{ product.title }}
+      </nav>
+      
+      {%- comment -%} Title {%- endcomment -%}
+      <h1 class="bbc-parts__title">{{ product.title }}</h1>
+
+      {%- if section.settings.fits_line != blank or product.metafields.custom.fits != blank -%}
+        <div class="bbc-fitment">
+          <span class="bbc-fitment__chip"><b>Fits</b> {{ product.metafields.custom.fits | default: section.settings.fits_line }}</span>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Product structured data (JSON-LD) {%- endcomment -%}
+      {%- assign cvp = product.selected_or_first_available_variant -%}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": {{ product.title | json }},
+        "description": {{ product.description | strip_html | truncate: 250 | json }},
+        {%- if product.featured_image -%}"image": [{{ product.featured_image | image_url: width: 1000 | json }}],{%- endif -%}
+        "brand": { "@type": "Brand", "name": "Bamboo Bicycle Club" },
+        {%- if cvp.sku != blank -%}"sku": {{ cvp.sku | json }},{%- endif -%}
+        "offers": { "@type": "Offer", "priceCurrency": {{ cart.currency.iso_code | json }}, "price": {{ cvp.price | divided_by: 100.0 }}, "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}", "url": {{ shop.url | append: product.url | json }} }
+      }
+      </script>
+
+      {%- comment -%} Price {%- endcomment -%}
+      <div class="bbc-parts__price-row">
+        <span class="bbc-price" data-testid="parts-price">
+          {{ product.price | money }}
+        </span>
+        {%- if product.compare_at_price > product.price -%}
+          <span class="bbc-price--was">{{ product.compare_at_price | money }}</span>
+        {%- endif -%}
+      </div>
+      
+      {%- comment -%} Variants {%- endcomment -%}
+      {%- if product.has_only_default_variant == false -%}
+        <div class="bbc-parts__variants">
+          {%- for option in product.options_with_values -%}
+            <div class="bbc-parts__option">
+              <label class="bbc-parts__option-label">{{ option.name }}</label>
+              <div class="bbc-parts__option-values">
+                {%- for value in option.values -%}
+                  <button 
+                    type="button"
+                    class="bbc-parts__option-btn{% if option.selected_value == value %} active{% endif %}"
+                    data-option="{{ option.name }}"
+                    data-value="{{ value }}"
+                  >
+                    {{ value }}
+                  </button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+        <script type="application/json" data-bbc-parts-variants>
+          {{ product.variants | json }}
+        </script>
+      {%- endif -%}
+      
+      {%- comment -%} Add to Cart {%- endcomment -%}
+      <form method="post" action="/cart/add" class="bbc-parts__form">
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        
+        <div class="bbc-parts__quantity">
+          <label for="parts-quantity">Quantity</label>
+          <div class="bbc-parts__quantity-controls">
+            <button type="button" class="bbc-parts__qty-btn" data-action="decrease" aria-label="Decrease quantity">
+              {% render 'bbc-icons', icon: 'minus', size: 20 %}
+            </button>
+            <input 
+              type="number" 
+              id="parts-quantity"
+              name="quantity" 
+              value="1" 
+              min="1" 
+              class="bbc-parts__qty-input"
+              data-testid="parts-quantity"
+            >
+            <button type="button" class="bbc-parts__qty-btn" data-action="increase" aria-label="Increase quantity">
+              {% render 'bbc-icons', icon: 'plus', size: 20 %}
+            </button>
+          </div>
+        </div>
+        
+        <button 
+          type="submit" 
+          class="bbc-parts__add-btn"
+          data-testid="parts-add-to-cart"
+          {% unless product.available %}disabled{% endunless %}
+        >
+          {% render 'bbc-icons', icon: 'cart', size: 20 %}
+          <span>
+            {%- if product.available -%}
+              Add to cart — {{ product.price | money }}
+            {%- else -%}
+              Sold Out
+            {%- endif -%}
+          </span>
+        </button>
+      </form>
+      
+      {%- comment -%} Shipping Info {%- endcomment -%}
+      <div class="bbc-shipping-info">
+        <div class="bbc-shipping-info__row">
+          {% render 'bbc-icons', icon: 'truck', size: 20 %}
+          <span><strong>Shipping from £12</strong> · tracked, dispatched from London</span>
+        </div>
+        <div class="bbc-shipping-info__row">
+          {% render 'bbc-icons', icon: 'globe', size: 20 %}
+          <span>Shipped worldwide to 36+ countries</span>
+        </div>
+      </div>
+      
+      {%- comment -%} Description {%- endcomment -%}
+      {%- if product.description != blank -%}
+        <h2 class="bbc-parts__h2">Details &amp; specs</h2>
+        <div class="bbc-parts__description">
+          {{ product.description }}
+        </div>
+      {%- endif -%}
+      
+      {%- comment -%} Collapsible Sections {%- endcomment -%}
+      <div class="bbc-accordion" data-testid="parts-accordion">
+        
+        {%- comment -%} Compatibility {%- endcomment -%}
+        <div class="bbc-accordion__item">
+          <button type="button" class="bbc-accordion__trigger" aria-expanded="false">
+            {% render 'bbc-icons', icon: 'wrench', size: 20 %}
+            <span>Compatibility</span>
+            {% render 'bbc-icons', icon: 'chevron-down', size: 20 %}
+          </button>
+          <div class="bbc-accordion__content">
+            <div class="bbc-accordion__content-inner">
+              {{ section.settings.compatibility_content }}
+            </div>
+          </div>
+        </div>
+        
+        {%- comment -%} Shipping {%- endcomment -%}
+        <div class="bbc-accordion__item">
+          <button type="button" class="bbc-accordion__trigger" aria-expanded="false">
+            {% render 'bbc-icons', icon: 'truck', size: 20 %}
+            <span>Shipping & Returns</span>
+            {% render 'bbc-icons', icon: 'chevron-down', size: 20 %}
+          </button>
+          <div class="bbc-accordion__content">
+            <div class="bbc-accordion__content-inner">
+              <p><strong>UK:</strong> £12 · <strong>Europe:</strong> £25 · <strong>USA:</strong> £45 · <strong>Rest of world:</strong> £75.</p>
+              <p>Tracked delivery, dispatched from our London workshop.</p>
+              <p>14-day returns on unused items in their original packaging.</p>
+            </div>
+          </div>
+        </div>
+        
+        {%- comment -%} Need Help {%- endcomment -%}
+        <div class="bbc-accordion__item">
+          <button type="button" class="bbc-accordion__trigger" aria-expanded="false">
+            {% render 'bbc-icons', icon: 'help', size: 20 %}
+            <span>Need Help?</span>
+            {% render 'bbc-icons', icon: 'chevron-down', size: 20 %}
+          </button>
+          <div class="bbc-accordion__content">
+            <div class="bbc-accordion__content-inner">
+              <p>Not sure if this part is right for your build?</p>
+              <p><strong>Email:</strong> <a href="mailto:info@bamboobicycleclub.org">info@bamboobicycleclub.org</a></p>
+              <p><strong>Facebook Group:</strong> <a href="https://facebook.com/groups/bamboobicycleclub" target="_blank">Join 4,000+ builders</a></p>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<style>
+/* ==============================================
+   BBC PARTS - Component-specific styles only
+   Inherits from bbc-foundation.css
+   ============================================== */
+
+.bbc-parts {
+  background: var(--bbc-white, var(--bbc-white));
+  padding-bottom: var(--space-16, 4rem);
+}
+
+/* Breadcrumb */
+.bbc-parts__breadcrumb {
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--bbc-text-muted, #64748b);
+  margin-bottom: var(--space-4, 1rem);
+}
+
+.bbc-parts__breadcrumb a {
+  color: var(--bbc-teal, var(--bbc-teal));
+  text-decoration: none;
+}
+
+.bbc-parts__breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+/* Title */
+.bbc-parts__title {
+  font-size: var(--text-3xl, 1.875rem);
+  font-weight: var(--font-bold, 700);
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin: 0 0 var(--space-4, 1rem) 0;
+  line-height: 1.2;
+}
+
+/* Price */
+.bbc-parts__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3, 0.75rem);
+  padding: var(--space-4, 1rem) 0;
+  border-bottom: 1px solid var(--bbc-border, #e5e5e5);
+  margin-bottom: var(--space-6, 1.5rem);
+}
+
+/* Variants */
+.bbc-parts__variants {
+  margin-bottom: var(--space-6, 1.5rem);
+}
+
+.bbc-parts__option {
+  margin-bottom: var(--space-4, 1rem);
+}
+
+.bbc-parts__option-label {
+  display: block;
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: var(--font-semibold, 600);
+  color: var(--bbc-heading, #0f172a);
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.bbc-parts__option-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2, 0.5rem);
+}
+
+.bbc-parts__option-btn {
+  padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
+  border: 2px solid var(--bbc-border, #e5e5e5);
+  border-radius: var(--radius-md, 0.375rem);
+  background: var(--bbc-white, var(--bbc-white));
+  font-size: var(--text-sm, 0.875rem);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.bbc-parts__option-btn:hover {
+  border-color: var(--bbc-forest, var(--bbc-forest));
+}
+
+.bbc-parts__option-btn.active {
+  border-color: var(--bbc-forest, var(--bbc-forest));
+  background: var(--bbc-forest, var(--bbc-forest));
+  color: var(--bbc-white, var(--bbc-white));
+}
+
+/* Quantity */
+.bbc-parts__quantity {
+  margin-bottom: var(--space-4, 1rem);
+}
+
+.bbc-parts__quantity label {
+  display: block;
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: var(--font-semibold, 600);
+  color: var(--bbc-heading, #0f172a);
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.bbc-parts__quantity-controls {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--bbc-border, #e5e5e5);
+  border-radius: var(--radius-md, 0.375rem);
+}
+
+.bbc-parts__qty-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--bbc-forest, var(--bbc-forest));
+}
+
+.bbc-parts__qty-btn:hover {
+  background: var(--bbc-cream, var(--bbc-cream));
+}
+
+.bbc-parts__qty-input {
+  width: 60px;
+  height: 44px;
+  text-align: center;
+  border: none;
+  border-left: 1px solid var(--bbc-border, #e5e5e5);
+  border-right: 1px solid var(--bbc-border, #e5e5e5);
+  font-size: var(--text-base, 1rem);
+  font-weight: var(--font-semibold, 600);
+}
+
+.bbc-parts__qty-input::-webkit-inner-spin-button,
+.bbc-parts__qty-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Add to Cart Button */
+.bbc-parts__add-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3, 0.75rem);
+  padding: var(--space-4, 1rem) var(--space-6, 1.5rem);
+  background: var(--bbc-forest, var(--bbc-forest));
+  color: var(--bbc-white, var(--bbc-white));
+  border: none;
+  border-radius: var(--radius-md, 0.375rem);
+  font-size: var(--text-lg, 1.125rem);
+  font-weight: var(--font-semibold, 600);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  margin-bottom: var(--space-6, 1.5rem);
+}
+
+.bbc-parts__add-btn:hover {
+  background: var(--bbc-forest-dark, var(--bbc-forest-dark));
+}
+
+.bbc-parts__add-btn:disabled {
+  background: var(--bbc-gray-300, #94a3b8);
+  cursor: not-allowed;
+}
+
+/* Description */
+.bbc-parts__description {
+  padding: var(--space-6, 1.5rem) 0;
+  border-bottom: 1px solid var(--bbc-border, #e5e5e5);
+  margin-bottom: var(--space-6, 1.5rem);
+  font-size: var(--text-base, 1rem);
+  line-height: 1.7;
+  color: var(--bbc-text, #334155);
+}
+
+.bbc-parts__description ul,
+.bbc-parts__description ol {
+  margin: var(--space-4, 1rem) 0;
+  padding-left: var(--space-6, 1.5rem);
+}
+
+.bbc-parts__description li {
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+/* Accordion overrides for parts */
+.bbc-parts .bbc-accordion__trigger {
+  gap: var(--space-3, 0.75rem);
+}
+
+.bbc-parts .bbc-accordion__trigger .material-symbols-outlined:first-child {
+  color: var(--bbc-teal, var(--bbc-teal));
+}
+
+.bbc-parts .bbc-accordion__trigger span {
+  flex: 1;
+}
+
+/* Info column spacing */
+.bbc-parts__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.bbc-parts__info > * + * {
+  margin-top: 0;
+}
+
+.bbc-parts__form {
+  margin-bottom: var(--space-6, 1.5rem);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Image gallery
+  const thumbs = document.querySelectorAll('.bbc-gallery__thumb');
+  const mainImg = document.getElementById('parts-main-image');
+  
+  thumbs.forEach(thumb => {
+    thumb.addEventListener('click', function() {
+      thumbs.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      const img = this.querySelector('img');
+      if (mainImg && img) {
+        mainImg.src = img.src.replace('120x120', '800x800').replace('width=120', 'width=800');
+      }
+    });
+  });
+  
+  // Quantity controls
+  const qtyInput = document.querySelector('.bbc-parts__qty-input');
+  const qtyBtns = document.querySelectorAll('.bbc-parts__qty-btn');
+  
+  qtyBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const action = this.dataset.action;
+      let value = parseInt(qtyInput.value) || 1;
+      if (action === 'increase') value++;
+      if (action === 'decrease' && value > 1) value--;
+      qtyInput.value = value;
+    });
+  });
+  
+  // Accordion
+  const accordionTriggers = document.querySelectorAll('.bbc-accordion__trigger');
+  
+  accordionTriggers.forEach(trigger => {
+    trigger.addEventListener('click', function() {
+      const item = this.closest('.bbc-accordion__item');
+      const isOpen = item.classList.contains('open');
+      
+      // Close all other items
+      document.querySelectorAll('.bbc-accordion__item.open').forEach(openItem => {
+        if (openItem !== item) {
+          openItem.classList.remove('open');
+          openItem.querySelector('.bbc-accordion__trigger').setAttribute('aria-expanded', 'false');
+        }
+      });
+      
+      // Toggle current item
+      item.classList.toggle('open');
+      this.setAttribute('aria-expanded', !isOpen);
+    });
+  });
+  
+  // Variant selection — find the matching variant and update the cart id, price + button.
+  (function () {
+    var dataEl = document.querySelector('[data-bbc-parts-variants]');
+    if (!dataEl) return;
+    var variants;
+    try { variants = JSON.parse(dataEl.textContent); } catch (e) { return; }
+    var idInput = document.querySelector('.bbc-parts__form input[name="id"]');
+    var priceEl = document.querySelector('.bbc-price');
+    var addBtn = document.querySelector('.bbc-parts__add-btn');
+    var addLabel = addBtn ? addBtn.querySelector('span') : null;
+
+    function money(cents) {
+      return '£' + (cents / 100).toFixed(2).replace(/\.00$/, '');
+    }
+    function selectedValues() {
+      var vals = [];
+      document.querySelectorAll('.bbc-parts__option').forEach(function (opt) {
+        var active = opt.querySelector('.bbc-parts__option-btn.active');
+        vals.push(active ? active.getAttribute('data-value') : null);
+      });
+      return vals;
+    }
+    function update() {
+      var sel = selectedValues();
+      var match = variants.find(function (v) {
+        return (v.options || []).every(function (o, i) { return o === sel[i]; });
+      });
+      if (!match) return;
+      if (idInput) idInput.value = match.id;
+      if (priceEl) priceEl.textContent = money(match.price);
+      if (addBtn) {
+        addBtn.disabled = !match.available;
+        if (addLabel) addLabel.textContent = match.available ? ('Add to cart — ' + money(match.price)) : 'Sold out';
+      }
+    }
+    document.querySelectorAll('.bbc-parts__option-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        this.closest('.bbc-parts__option-values')
+          .querySelectorAll('.bbc-parts__option-btn')
+          .forEach(function (s) { s.classList.remove('active'); });
+        this.classList.add('active');
+        update();
+      });
+    });
+    update();
+  })();
+});
+</script>
+
+{% schema %}
+{
+  "name": "BBC Parts",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "compatibility_content",
+      "label": "Compatibility content",
+      "default": "<p>Works with standard frame builds. Contact us if unsure about compatibility with your specific build.</p>"
+    },
+    {
+      "type": "text",
+      "id": "fits_line",
+      "label": "Fits line (chip under title)",
+      "info": "Optional default shown as a 'Fits …' chip. Per-product, set the custom.fits metafield to override.",
+      "default": "All BBC frame builds"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Parts"
+    }
+  ]
+}
+{% endschema %}

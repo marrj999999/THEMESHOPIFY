@@ -1,0 +1,129 @@
+/**
+ * Homepage Prefetch Fix
+ * Immediately hide checkout-related prefetches on homepage
+ * to prevent performance issues and unnecessary network requests
+ */
+
+/* Hide specific checkout prefetch files from the issue */
+.template-index link[href*="polyfills.D-3tW6RD.js"],
+.template-index link[href*="app.DAqj4RIl.js"],
+.template-index link[href*="vendor.DyY7uuKy.js"],
+.template-index link[href*="locale-en.B292wwYD.js"],
+.template-index link[href*="page-OnePage.DC_xdU7w.js"],
+.template-index link[href*="PaymentButtons.B0tAoVq3.js"],
+.template-index link[href*="LocalPickup.UDKID1QF.js"],
+.template-index link[href*="useShopPayButtonClassName.DMpSye9n.js"],
+.template-index link[href*="VaultedPayment.D7kAR9jq.js"],
+.template-index link[href*="MarketsProDisclaimer.DgQ5j7Nq.js"],
+.template-index link[href*="AddDiscountButton.BzvfSd-v.js"],
+.template-index link[href*="RememberMeDescriptionText.CYpfBtrv.js"],
+.template-index link[href*="ShopPayOptInDisclaimer.BRLfXC3a.js"],
+.template-index link[href*="MobileOrderSummary.8j4pEh-_.js"],
+.template-index link[href*="PayButtonSection.BFEwmbrp.js"],
+.template-index link[href*="SeparatePaymentsNotice.RItqkkr0.js"],
+.template-index link[href*="PaymentOptions.DleHMyGO.js"],
+.template-index link[href*="usePreselectSpi.CKbBX41H.js"],
+.template-index link[href*="StockProblemsLineItemList.v68VtXnI.js"],
+.template-index link[href*="component-ShopPayVerificationSwitch.Czh-Zv95.js"],
+.template-index link[href*="useSubscribeMessenger.BRR0i60s.js"],
+.template-index link[href*="shop-js-index.CaKY8b_6.js"],
+.template-index link[href*="v4.BKrj-4V8.js"],
+.template-index link[href*="ShipmentBreakdown.B6_fNclP.js"],
+.template-index link[href*="MerchandiseModal.Czgdb_PJ.js"],
+.template-index link[href*="StackedMerchandisePreview.DB-fHtQe.js"] {
+  display: none !important;
+}
+
+/* Hide checkout CSS files */
+.template-index link[href*="app.tXiHaxMF.css"],
+.template-index link[href*="OnePage.DYH7B_vD.css"],
+.template-index link[href*="LocalPickup.BD02NT8N.css"],
+.template-index link[href*="AddDiscountButton.CZ33y7Va.css"],
+.template-index link[href*="MobileOrderSummary.7lB-c-sA.css"],
+.template-index link[href*="PaymentOptions.PpwvcyQt.css"],
+.template-index link[href*="ShopPayVerificationSwitch.WW3cs_z5.css"],
+.template-index link[href*="useShopPayButtonClassName.BrcQzLuH.css"],
+.template-index link[href*="VaultedPayment.OxMVm7u-.css"],
+.template-index link[href*="StackedMerchandisePreview"] {
+  display: none !important;
+}
+
+/* Hide general checkout patterns */
+.template-index link[href*="/shopifycloud/checkout-web/"],
+.template-index link[href*="PaymentButtons"],
+.template-index link[href*="LocalPickup"],
+.template-index link[href*="ShopPay"] {
+  display: none !important;
+}
+
+/* Hide all checkout-related prefetches on non-commerce pages */
+.template-page link[href*="/shopifycloud/checkout-web/"],
+.template-blog link[href*="/shopifycloud/checkout-web/"],
+.template-article link[href*="/shopifycloud/checkout-web/"] {
+  display: none !important;
+}
+
+/* Performance optimization for homepage */
+.template-index {
+  /* Prevent layout shifts from removed prefetches */
+  contain: layout;
+}
+
+/* Ensure critical resources are prioritized on homepage */
+.template-index .hero-section img,
+.template-index .featured-section img {
+  loading: eager;
+  fetchpriority: high;
+}
+
+/* Defer non-critical resources on homepage */
+.template-index .section:not(.hero-section):not(.featured-section) img {
+  loading: lazy;
+  fetchpriority: low;
+}
+
+/* Optimize homepage sections for better Core Web Vitals */
+.template-index .section {
+  contain: layout style;
+}
+
+.template-index .hero-section {
+  contain: none; /* Don't constrain hero for better LCP */
+}
+
+/* Hide checkout-related content on homepage */
+.template-index .shopify-payment-button,
+.template-index .cart-drawer,
+.template-index .product-form {
+  display: none;
+}
+
+/* Optimize fonts for homepage performance */
+.template-index {
+  font-display: swap;
+}
+
+/* Remove checkout JavaScript from homepage */
+.template-index script[src*="checkout"],
+.template-index script[src*="payment"],
+.template-index script[src*="cart"] {
+  display: none !important;
+}
+
+/* Performance hints for homepage resources */
+.template-index .critical-content {
+  contain: layout;
+  will-change: auto;
+}
+
+/* Optimize homepage animations */
+.template-index .animate {
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .template-index .animate {
+    animation: none;
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "discipline": "Gravel (lugged)",
+  "audience": "Gravel, adventure, touring and bikepacking riders who want the most refined, precise version of a bamboo build — and who'd rather drop into pre-formed lugs than free-wrap every joint by hand.",
+  "positioning": {
+    "eyebrow": "Premium lugged build",
+    "title": "The lugged gravel frame, built right the first time.",
+    "lede": "Our step-up gravel kit swaps free-hand carbon wrapping for pre-formed aluminium lugs the bamboo simply bonds into — cleaner joints, more repeatable geometry and a more refined finish. Same adventure-ready gravel geometry, built to the most precise, durable standard we make."
+  },
+  "specs": [
+    { "label": "Construction", "value": "Pre-formed aluminium lugs" },
+    { "label": "Build time", "value": "15–25 hrs" },
+    { "label": "Tensile strength", "value": "~28,000 PSI" },
+    { "label": "Usage", "value": "Gravel · touring · bikepacking" }
+  ],
+  "who_for": [
+    { "title": "The precision-minded builder", "body": "You want joints that look and sit exactly right. Lugs locate every tube to a fixed angle, so geometry comes out repeatable and true with less room for free-hand error." },
+    { "title": "The weekend-pressed first-timer", "body": "Pre-formed lugs mean far less wrapping, so the build drops to 15–25 hours — the most approachable route into a real gravel frame, with one overnight cure." },
+    { "title": "The long-haul adventurer", "body": "Tour, bikepack and load it up. Lugged joints are cleaner to inspect and a tube can be replaced at the lug rather than re-wrapped from scratch — reassuring for big, remote miles." }
+  ],
+  "faq": [
+    { "q": "What does \"lugged\" mean, and how is it different from the standard gravel kit?", "a": "Instead of free-wrapping every joint with carbon-fibre tow, the bamboo tubes bond into pre-formed aluminium lugs — sockets that hold each tube at a fixed angle. You get cleaner, more precise joints, more repeatable geometry and a more refined finish. It's the premium step up from the standard carbon-wrapped gravel kit." },
+    { "q": "Is the lugged kit easier or harder to build?", "a": "Easier, and faster. The lugs locate the tubes for you and there's far less wrapping, so the build is 15–25 hours versus 25–40 for the standard gravel kit — with just one overnight cure. It's our most beginner-friendly route into a full gravel frame." },
+    { "q": "Is a lugged frame as strong as the wrapped one?", "a": "Yes. Bamboo gives ~28,000 PSI tensile strength — comparable to mild steel — and we've seen under a 1% failure rate across 4,000+ builds since 2012, with the design tested at Swansea University. Finished frames last 8–12 years with proper care." },
+    { "q": "Can I still repair it down the line?", "a": "Lugged construction is the more repairable option: because each tube bonds into its own lug socket, a damaged tube can be replaced at the joint rather than rebuilding a hand-wrapped union from scratch — handy if you tour or bikepack hard." },
+    { "q": "Do I need power tools?", "a": "No. Just basic hand tools — a hacksaw, files, sandpaper, a measuring tape and a work surface around 1200 × 600 mm. The lugs, bamboo, epoxy, jig and 15+ hours of video tutorials are all in the kit." }
+  ],
+  "reviews": [
+    {
+      "quote": "The lugged construction made it so much more approachable. I was nervous but the result is rock solid.",
+      "author": "Gravel Lugged builder",
+      "role": "Home kit build"
+    }
+  ],
+  "related": [
+    { "title": "Standard Gravel Kit", "note": "Same gravel geometry, hand-wrapped carbon joints — from £385", "fallback": "bbc-rd-prod-gravel.jpg" },
+    { "title": "Road Lugged Kit", "note": "Lugged precision tuned for fast tarmac", "fallback": "bbc-rd-road-charlie.jpg" },
+    { "title": "Gravel component pack", "note": "Fork, wheels, groupset and finishing kit to go ride-ready", "fallback": "bbc-rd-prod-build.jpg" }
+  ],
+  "hero_fallback": "bbc-rd-prod-gravel.jpg",
+  "price_from": "£595",
+  "needs_real_data": [
+    "Star rating + review count (standard page used unverified 4.8 / 214 — do NOT reuse for lugged)",
+    "A real lugged-build testimonial with attributable name/location (current quote is generic placeholder copy from the template)",
+    "Confirm standard Gravel kit cross-sell price (£385 from template) and the Gravel component-pack price (£425 standard page) are still current",
+    "Confirm Road Lugged cross-sell price (comparison section shows £795) before publishing any figure",
+    "Confirm the £595 lugged price and whether a compare-at / 'most refined' badge should show"
+  ]
+}

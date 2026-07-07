@@ -1,0 +1,626 @@
+{% comment %}
+  BBC Timeline Enhanced — Interactive, engaging timeline with rich storytelling
+  Research-backed design inspired by Trek, Rapha, and Specialized
+{% endcomment %}
+
+{%- style -%}
+  .bbc-timeline-enhanced {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8fffe 0%, var(--bbc-cream) 100%);
+    position: relative;
+  }
+
+  .bbc-timeline-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2373d393' fill-opacity='0.03'%3E%3Cpath d='m36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .bbc-timeline-enhanced__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bbc-timeline-enhanced__header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .bbc-timeline-enhanced__eyebrow {
+    font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--bbc-teal, var(--bbc-teal));
+    margin-bottom: 16px;
+  }
+
+  .bbc-timeline-enhanced__heading {
+    font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 24px 0;
+    line-height: 1.1;
+  }
+
+  .bbc-timeline-enhanced__intro {
+    font-family: var(--font-body-family, system-ui, sans-serif);
+    font-size: 1.25rem;
+    color: var(--bbc-slate, #4a5568);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* Timeline Track */
+  .bbc-timeline-enhanced__track {
+    position: relative;
+    padding: 0 0 0 80px;
+  }
+
+  /* Main timeline line */
+  .bbc-timeline-enhanced__track::before {
+    content: '';
+    position: absolute;
+    left: 39px;
+    top: 0;
+    bottom: -40px;
+    width: 4px;
+    background: linear-gradient(180deg, 
+      var(--bbc-teal, var(--bbc-teal)) 0%,
+      var(--bbc-gold, var(--bbc-gold)) 25%,
+      var(--bbc-forest, var(--bbc-forest)) 50%,
+      var(--bbc-teal, var(--bbc-teal)) 75%,
+      var(--bbc-gold, var(--bbc-gold)) 100%
+    );
+    border-radius: 2px;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.8);
+  }
+
+  .bbc-timeline-enhanced__item {
+    position: relative;
+    padding-bottom: 48px;
+    transition: all 0.4s ease;
+  }
+
+  .bbc-timeline-enhanced__item:last-child {
+    padding-bottom: 0;
+  }
+
+  .bbc-timeline-enhanced__item:hover {
+    transform: translateX(8px);
+  }
+
+  .bbc-timeline-enhanced__item:hover .bbc-timeline-enhanced__dot {
+    transform: scale(1.3);
+    box-shadow: 0 0 0 8px rgba(255, 169, 0, 0.2);
+  }
+
+  /* Timeline dots */
+  .bbc-timeline-enhanced__dot {
+    position: absolute;
+    left: -80px;
+    top: 8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 4px solid var(--bbc-white, var(--bbc-white));
+    z-index: 2;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .bbc-timeline-enhanced__item--major .bbc-timeline-enhanced__dot {
+    width: 28px;
+    height: 28px;
+    left: -84px;
+    top: 4px;
+    background: var(--bbc-gold, var(--bbc-gold));
+    border: 5px solid var(--bbc-white, var(--bbc-white));
+    box-shadow: 0 6px 20px rgba(255, 169, 0, 0.3);
+  }
+
+  .bbc-timeline-enhanced__item--regular .bbc-timeline-enhanced__dot {
+    background: var(--bbc-teal, var(--bbc-teal));
+  }
+
+  .bbc-timeline-enhanced__item--impact .bbc-timeline-enhanced__dot {
+    background: var(--bbc-forest, var(--bbc-forest));
+  }
+
+  /* Content cards */
+  .bbc-timeline-enhanced__content {
+    background: var(--bbc-white, var(--bbc-white));
+    padding: 24px 28px;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    border: 1px solid rgba(63, 139, 102, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bbc-timeline-enhanced__item:hover .bbc-timeline-enhanced__content {
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+    border-color: rgba(255, 169, 0, 0.2);
+  }
+
+  .bbc-timeline-enhanced__content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    transition: all 0.3s ease;
+  }
+
+  .bbc-timeline-enhanced__item--major .bbc-timeline-enhanced__content::before {
+    background: var(--bbc-gold, var(--bbc-gold));
+  }
+
+  .bbc-timeline-enhanced__item--regular .bbc-timeline-enhanced__content::before {
+    background: var(--bbc-teal, var(--bbc-teal));
+  }
+
+  .bbc-timeline-enhanced__item--impact .bbc-timeline-enhanced__content::before {
+    background: var(--bbc-forest, var(--bbc-forest));
+  }
+
+  .bbc-timeline-enhanced__year {
+    font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+    font-size: 0.875rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--bbc-teal, var(--bbc-teal));
+    margin-bottom: 8px;
+  }
+
+  .bbc-timeline-enhanced__title {
+    font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+  }
+
+  .bbc-timeline-enhanced__item--major .bbc-timeline-enhanced__title {
+    font-size: 1.375rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+  }
+
+  .bbc-timeline-enhanced__description {
+    font-family: var(--font-body-family, system-ui, sans-serif);
+    font-size: 1rem;
+    color: var(--bbc-slate, #4a5568);
+    line-height: 1.6;
+    margin: 0 0 16px 0;
+    /* Limit to 3 lines on desktop, 2 on mobile for cleaner look */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .bbc-timeline-enhanced__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .bbc-timeline-enhanced__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+  }
+
+  .bbc-timeline-enhanced__badge--award {
+    background: linear-gradient(135deg, var(--bbc-white)3cd 0%, #ffe69c 100%);
+    color: var(--bbc-forest, var(--bbc-forest));
+    border: 1px solid var(--bbc-gold, var(--bbc-gold));
+  }
+
+  .bbc-timeline-enhanced__badge--impact {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: var(--bbc-forest, var(--bbc-forest));
+    border: 1px solid var(--bbc-teal, var(--bbc-teal));
+  }
+
+  .bbc-timeline-enhanced__badge--milestone {
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    color: var(--bbc-forest, var(--bbc-forest));
+    border: 1px solid #d1d5db;
+  }
+
+  .bbc-timeline-enhanced__stats {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .bbc-timeline-enhanced__stat {
+    text-align: center;
+    flex: 1;
+  }
+
+  .bbc-timeline-enhanced__stat-number {
+    display: block;
+    font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin-bottom: 4px;
+  }
+
+  .bbc-timeline-enhanced__stat-label {
+    font-family: var(--font-body-family, system-ui, sans-serif);
+    font-size: 0.875rem;
+    color: var(--bbc-slate, #64748b);
+  }
+
+  /* Mobile Optimizations */
+  @media (max-width: 768px) {
+    .bbc-timeline-enhanced {
+      padding: 60px 0;
+    }
+
+    /* Fix 2026-02-23: header margin stays at 80px on mobile — too large */
+    .bbc-timeline-enhanced__header {
+      margin-bottom: 48px;
+    }
+
+    .bbc-timeline-enhanced__container {
+      padding: 0 16px;
+    }
+
+    .bbc-timeline-enhanced__track {
+      padding-left: 60px;
+    }
+
+    .bbc-timeline-enhanced__track::before {
+      left: 29px;
+    }
+
+    .bbc-timeline-enhanced__dot {
+      left: -60px;
+      width: 16px;
+      height: 16px;
+    }
+
+    .bbc-timeline-enhanced__item--major .bbc-timeline-enhanced__dot {
+      width: 20px;
+      height: 20px;
+      left: -62px;
+    }
+
+    .bbc-timeline-enhanced__content {
+      padding: 24px;
+    }
+
+    .bbc-timeline-enhanced__item:hover {
+      transform: none;
+    }
+
+    .bbc-timeline-enhanced__item {
+      padding-bottom: 40px;
+    }
+
+    .bbc-timeline-enhanced__description {
+      font-size: 0.9375rem;
+      -webkit-line-clamp: 2;
+    }
+
+    .bbc-timeline-enhanced__stats {
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .bbc-timeline-enhanced__badges {
+      justify-content: center;
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-timeline-enhanced__item:hover {
+      transform: none;
+    }
+
+    .bbc-timeline-enhanced__item:hover .bbc-timeline-enhanced__dot {
+      transform: none;
+    }
+  }
+{%- endstyle -%}
+
+<section class="bbc-timeline-enhanced">
+  <div class="bbc-timeline-enhanced__container">
+    {% if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.intro != blank %}
+      <div class="bbc-timeline-enhanced__header">
+        {% if section.settings.eyebrow != blank %}
+          <p class="bbc-timeline-enhanced__eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        {% if section.settings.heading != blank %}
+          <h2 class="bbc-timeline-enhanced__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+        {% if section.settings.intro != blank %}
+          <p class="bbc-timeline-enhanced__intro">{{ section.settings.intro }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="bbc-timeline-enhanced__track">
+      {% for block in section.blocks %}
+        <div class="bbc-timeline-enhanced__item bbc-timeline-enhanced__item--{{ block.settings.type | default: 'regular' }}" {{ block.shopify_attributes }}>
+          <div class="bbc-timeline-enhanced__dot"></div>
+          
+          <div class="bbc-timeline-enhanced__content">
+            <div class="bbc-timeline-enhanced__year">{{ block.settings.year }}</div>
+            <h3 class="bbc-timeline-enhanced__title">{{ block.settings.title }}</h3>
+            <p class="bbc-timeline-enhanced__description">{{ block.settings.description }}</p>
+            
+            {% if block.settings.badge_1 != blank or block.settings.badge_2 != blank %}
+              <div class="bbc-timeline-enhanced__badges">
+                {% if block.settings.badge_1 != blank %}
+                  <span class="bbc-timeline-enhanced__badge bbc-timeline-enhanced__badge--{{ block.settings.badge_1_type | default: 'milestone' }}">
+                    {{ block.settings.badge_1 }}
+                  </span>
+                {% endif %}
+                {% if block.settings.badge_2 != blank %}
+                  <span class="bbc-timeline-enhanced__badge bbc-timeline-enhanced__badge--{{ block.settings.badge_2_type | default: 'milestone' }}">
+                    {{ block.settings.badge_2 }}
+                  </span>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% if block.settings.stat_1_number != blank or block.settings.stat_2_number != blank or block.settings.stat_3_number != blank %}
+              <div class="bbc-timeline-enhanced__stats">
+                {% if block.settings.stat_1_number != blank %}
+                  <div class="bbc-timeline-enhanced__stat">
+                    <span class="bbc-timeline-enhanced__stat-number">{{ block.settings.stat_1_number }}</span>
+                    <span class="bbc-timeline-enhanced__stat-label">{{ block.settings.stat_1_label }}</span>
+                  </div>
+                {% endif %}
+                {% if block.settings.stat_2_number != blank %}
+                  <div class="bbc-timeline-enhanced__stat">
+                    <span class="bbc-timeline-enhanced__stat-number">{{ block.settings.stat_2_number }}</span>
+                    <span class="bbc-timeline-enhanced__stat-label">{{ block.settings.stat_2_label }}</span>
+                  </div>
+                {% endif %}
+                {% if block.settings.stat_3_number != blank %}
+                  <div class="bbc-timeline-enhanced__stat">
+                    <span class="bbc-timeline-enhanced__stat-number">{{ block.settings.stat_3_number }}</span>
+                    <span class="bbc-timeline-enhanced__stat-label">{{ block.settings.stat_3_label }}</span>
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Timeline Enhanced",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Our Journey"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "From London Workshop to Global Community"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "Every great story has humble beginnings. Ours started in a small London workshop with a simple belief: anyone can build a bicycle frame."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "milestone",
+      "name": "Milestone",
+      "settings": [
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year",
+          "default": "2012"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "BBC Founded"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "James and Ian open the first bamboo bicycle workshop in London, teaching people to build their own sustainable frames from scratch."
+        },
+        {
+          "type": "select",
+          "id": "type",
+          "label": "Milestone type",
+          "options": [
+            { "value": "regular", "label": "Regular milestone" },
+            { "value": "major", "label": "Major milestone" },
+            { "value": "impact", "label": "Impact milestone" }
+          ],
+          "default": "regular",
+          "info": "Major milestones have gold dots, Impact milestones have dark green dots"
+        },
+        {
+          "type": "header",
+          "content": "Badges (optional)"
+        },
+        {
+          "type": "text",
+          "id": "badge_1",
+          "label": "First badge text"
+        },
+        {
+          "type": "select",
+          "id": "badge_1_type",
+          "label": "First badge type",
+          "options": [
+            { "value": "milestone", "label": "Milestone" },
+            { "value": "award", "label": "Award" },
+            { "value": "impact", "label": "Impact" }
+          ],
+          "default": "milestone"
+        },
+        {
+          "type": "text",
+          "id": "badge_2",
+          "label": "Second badge text"
+        },
+        {
+          "type": "select",
+          "id": "badge_2_type",
+          "label": "Second badge type",
+          "options": [
+            { "value": "milestone", "label": "Milestone" },
+            { "value": "award", "label": "Award" },
+            { "value": "impact", "label": "Impact" }
+          ],
+          "default": "milestone"
+        },
+        {
+          "type": "header",
+          "content": "Stats (optional)"
+        },
+        {
+          "type": "text",
+          "id": "stat_1_number",
+          "label": "First stat number",
+          "info": "e.g., '50+' or '£24,000'"
+        },
+        {
+          "type": "text",
+          "id": "stat_1_label",
+          "label": "First stat label",
+          "info": "e.g., 'People trained' or 'Grant funding'"
+        },
+        {
+          "type": "text",
+          "id": "stat_2_number",
+          "label": "Second stat number"
+        },
+        {
+          "type": "text",
+          "id": "stat_2_label",
+          "label": "Second stat label"
+        },
+        {
+          "type": "text",
+          "id": "stat_3_number",
+          "label": "Third stat number"
+        },
+        {
+          "type": "text",
+          "id": "stat_3_label",
+          "label": "Third stat label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Timeline Enhanced",
+      "blocks": [
+        { 
+          "type": "milestone", 
+          "settings": { 
+            "year": "2012", 
+            "title": "BBC Founded", 
+            "description": "James and Ian open the first bamboo bicycle workshop in London, teaching people to build their own sustainable frames.",
+            "type": "major",
+            "badge_1": "Company Launch",
+            "badge_1_type": "milestone",
+            "stat_1_number": "2",
+            "stat_1_label": "Founders"
+          }
+        },
+        { 
+          "type": "milestone", 
+          "settings": { 
+            "year": "2015", 
+            "title": "Design Museum Exhibition", 
+            "description": "Our work is featured in the prestigious Cycle Revolution exhibition at London's Design Museum.",
+            "type": "regular",
+            "badge_1": "Major Recognition",
+            "badge_1_type": "award"
+          }
+        },
+        { 
+          "type": "milestone", 
+          "settings": { 
+            "year": "2020", 
+            "title": "Build to Bond Launches", 
+            "description": "Our flagship prison rehabilitation programme begins at HMP Lowdham Grange, helping parents build bicycles for their children.",
+            "type": "impact",
+            "badge_1": "Social Impact",
+            "badge_1_type": "impact",
+            "stat_1_number": "50+",
+            "stat_1_label": "Families connected"
+          }
+        },
+        { 
+          "type": "milestone", 
+          "settings": { 
+            "year": "2025", 
+            "title": "Investec Beyond Business Winner", 
+            "description": "Recognised with £24,000 for our educational work in prisons, helping parents maintain vital family connections.",
+            "type": "major",
+            "badge_1": "2025 Winner",
+            "badge_1_type": "award",
+            "badge_2": "Prison Education",
+            "badge_2_type": "impact",
+            "stat_1_number": "£24,000",
+            "stat_1_label": "Award funding",
+            "stat_2_number": "4,000+",
+            "stat_2_label": "Bikes built"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

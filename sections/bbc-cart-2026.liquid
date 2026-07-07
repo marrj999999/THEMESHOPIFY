@@ -1,0 +1,82 @@
+{%- comment -%}
+  Bamboo Bicycle Club — Cart (2026 redesign).
+  Native cart: quantity changes via {{ routes.cart_change_url }} (no JS required),
+  checkout via an HTML form POSTing to routes.cart_url with a name="checkout"
+  submit (Dawn pattern). Styling in assets/bbc-redesign-2026.css.
+{%- endcomment -%}
+
+
+<div class="bbc-rd bbc-rd-cart">
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      <span class="rd-eyebrow">{{ section.settings.eyebrow | default: 'Your basket' }}</span>
+      <h1 class="rd-coll-head rd-cmp-29312">{{ section.settings.heading | default: 'Your cart' }}</h1>
+
+      {%- if cart.item_count == 0 -%}
+        <div class="rd-cart-empty">
+          <p class="rd-lede">{{ section.settings.empty_text | default: 'Your cart is empty.' }}</p>
+          <a class="rd-btn rd-lime rd-mt3" href="{{ section.settings.empty_url | default: '/collections/home-build-kits' }}">{{ section.settings.empty_cta | default: 'Browse frame kits →' }}</a>
+        </div>
+      {%- else -%}
+        <form action="{{ routes.cart_url }}" method="post" id="rd-cart-form">
+          <div class="rd-cart-grid">
+            <div>
+              {%- for item in cart.items -%}
+                <div class="rd-line">
+                  <a class="rd-thumb" href="{{ item.url }}">
+                    {%- if item.image -%}<img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.image.alt | escape | default: item.product.title }}" width="96" height="96" loading="lazy">{%- endif -%}
+                  </a>
+                  <div>
+                    <h2 class="rd-fs-21px"><a href="{{ item.url }}">{{ item.product.title }}</a></h2>
+                    {%- unless item.product.has_only_default_variant -%}<div class="rd-variant">{{ item.variant.title }}</div>{%- endunless -%}
+                    {%- if item.selling_plan_allocation -%}<div class="rd-variant">{{ item.selling_plan_allocation.selling_plan.name }}</div>{%- endif -%}
+                    <div class="rd-qty">
+                      <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity={{ item.quantity | minus: 1 }}" aria-label="Decrease quantity">&minus;</a>
+                      <span class="rd-qn">{{ item.quantity }}</span>
+                      <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity={{ item.quantity | plus: 1 }}" aria-label="Increase quantity">+</a>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="rd-lp">{{ item.final_line_price | money }}</div>
+                    {%- if item.original_line_price > item.final_line_price -%}<div class="rd-variant rd-ta-right-strike">{{ item.original_line_price | money }}</div>{%- endif -%}
+                    <a class="rd-remove" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0">Remove</a>
+                  </div>
+                </div>
+              {%- endfor -%}
+              <a class="rd-nav-link rd-ib-mt22" href="{{ section.settings.empty_url | default: '/collections/home-build-kits' }}">&larr; Continue shopping</a>
+            </div>
+
+            <aside class="rd-summary">
+              <div class="rd-row"><span>Subtotal</span><span>{{ cart.total_price | money }}</span></div>
+              {%- if cart.cart_level_discount_applications.size > 0 -%}
+                {%- for d in cart.cart_level_discount_applications -%}<div class="rd-row rd-c-lime700"><span>{{ d.title }}</span><span>&minus;{{ d.total_allocated_amount | money }}</span></div>{%- endfor -%}
+              {%- endif -%}
+              <div class="rd-total"><span>Total</span><span>{{ cart.total_price | money }}</span></div>
+              <p class="rd-cmp-86504">Taxes &amp; shipping calculated at checkout.</p>
+              <button type="submit" name="checkout" class="rd-btn rd-lime rd-w-full-jc">{{ section.settings.checkout_label | default: 'Checkout' }}</button>
+              {%- if section.settings.cause_line != blank -%}<div class="rd-cause-bar rd-cmp-67002">{{ section.settings.cause_line }}</div>{%- endif -%}
+            </aside>
+          </div>
+        </form>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Cart 2026 (new)",
+  "tag": "div",
+  "class": "bbc-rd-cart-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Your basket" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your cart" },
+    { "type": "text", "id": "checkout_label", "label": "Checkout button label", "default": "Checkout" },
+    { "type": "text", "id": "cause_line", "label": "Funding cause line", "default": "Every kit helps fund accredited skills courses — inside prisons and schools." },
+    { "type": "text", "id": "empty_text", "label": "Empty-cart text", "default": "Your cart is empty." },
+    { "type": "text", "id": "empty_cta", "label": "Empty-cart button label", "default": "Browse frame kits →" },
+    { "type": "url", "id": "empty_url", "label": "Empty-cart button link (defaults to the kits collection)" }
+  ],
+  "presets": [ { "name": "Cart 2026 (new)" } ]
+}
+{% endschema %}

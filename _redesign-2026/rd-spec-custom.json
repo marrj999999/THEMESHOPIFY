@@ -1,0 +1,71 @@
+{
+  "discipline": "Custom",
+  "audience": "Riders who want a frame built to their exact geometry, fit and chosen discipline — people the stock sizes don't fit, and makers who want a genuine one-off dialled to them, not a fixed spec sheet.",
+  "positioning": {
+    "eyebrow": "Made-to-measure frame kit",
+    "title": "Your geometry, your discipline, built by your hands",
+    "lede": "A bamboo frame designed around you — any geometry, any discipline. You don't need to know frame design: we work through your measurements and riding style with you 1:1, then you build it."
+  },
+  "specs": [
+    { "label": "Geometry", "value": "Made to your measurements" },
+    { "label": "Discipline", "value": "Road · gravel · MTB · city" },
+    { "label": "Design support", "value": "1:1 guided — no expertise needed" },
+    { "label": "Construction", "value": "Bamboo, flax & carbon, by hand" }
+  ],
+  "who_for": [
+    {
+      "title": "The stock sizes don't fit you",
+      "body": "Too tall, too short, long legs, short reach — if off-the-peg geometry has never quite worked, we design the frame around your body instead of asking you to adapt to it."
+    },
+    {
+      "title": "You want an exact ride, your way",
+      "body": "A specific discipline and feel in mind — race-road, slack gravel, trail MTB, upright city. Tell us how and where you ride; we translate it into tube angles and lengths together."
+    },
+    {
+      "title": "You want a true one-off",
+      "body": "Made-by-you and made-for-you in one frame. Not a kit everyone else builds — a bike that exists only because you designed it, with our guidance at every step."
+    }
+  ],
+  "faq": [
+    {
+      "q": "Do I need to know anything about frame geometry?",
+      "a": "No. This is the whole point of the custom kit — you don't design it alone. Send us your height and inside-leg measurement and tell us how you want to ride, and we work out the tube angles, lengths and fit with you, 1:1, before anything ships. You bring the body and the riding style; we bring the geometry."
+    },
+    {
+      "q": "How does the custom process actually work?",
+      "a": "First we talk through your measurements, your chosen discipline and how the bike should feel. We design the geometry together and agree it with you. Only then do we prepare and ship your kit — bamboo tubes, a jig set up for your unique geometry, metal inserts, carbon-fibre tow and epoxy — plus the full video tutorials. You build it at home with direct support throughout."
+    },
+    {
+      "q": "Which disciplines can I choose?",
+      "a": "Any of them — road, gravel, MTB or city. We'll work with you on the frame type and the geometry that suits it, whether that's a fast road position, a stable gravel/touring setup, a slacker trail bike or an upright city commuter."
+    },
+    {
+      "q": "What measurements do I need to send?",
+      "a": "To start, your height and inside-leg measurement, plus a sense of your current bike and how you'd like this one to feel. From there we'll guide you on anything else we need. No special tools or fitting knowledge required on your side."
+    },
+    {
+      "q": "How long does it take, and why does it cost more than a stock kit?",
+      "a": "A custom build takes longer than a fixed-spec kit because you're designing the geometry from scratch with us first, and the build itself runs longer (more design and prep time up front). The price reflects the bespoke 1:1 design work and a jig set up specifically for your geometry — you're paying for the consultation and the made-to-measure fit, not just the materials. Lead time depends on the design stage; we confirm it with you when we scope your build. [FLAG: confirm real lead time]"
+    }
+  ],
+  "reviews": [
+    {
+      "quote": "I wanted something nobody else had. Now I ride a bike that's completely mine — geometry, shape, everything.",
+      "author": "Custom kit builder",
+      "role": "Bespoke geometry build"
+    }
+  ],
+  "related": [
+    { "title": "Gravel Frame Kit", "note": "Fixed-spec, adventure-ready geometry — from £385", "fallback": "bbc-rd-prod-gravel.jpg" },
+    { "title": "Road Frame Kit", "note": "Classic lugged road geometry, ready to build", "fallback": "bbc-rd-road-charlie.jpg" },
+    { "title": "Complete your build", "note": "Add a matched component pack to finish your bike", "fallback": "bbc-rd-prod-build.jpg" }
+  ],
+  "hero_fallback": "bbc-rd-detail.jpg",
+  "price_from": "£495",
+  "needs_real_data": [
+    "Lead time for a custom build (design stage + build) — not on file, flagged in FAQ",
+    "Exact measurement/intake process beyond height + inside-leg (is there a form, a call, a questionnaire?)",
+    "A real custom-build testimonial with named attribution (current quote is from the kit-custom template, author generic)",
+    "Whether the £495 / 20 variants map to discipline+size choices or are placeholder — confirm what the variant picker should show"
+  ]
+}

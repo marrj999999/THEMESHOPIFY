@@ -1,0 +1,160 @@
+/**
+ * BBC Performance Optimizer CSS
+ * Prevents layout shift and improves Core Web Vitals
+ * by optimizing resource loading and critical rendering path
+ */
+
+/* Prevent layout shift for dynamically loaded content */
+.prefetch-loading {
+  visibility: hidden;
+}
+
+.prefetch-loaded {
+  visibility: visible;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Optimize checkout button loading states */
+.shopify-payment-button {
+  min-height: 44px; /* Prevent layout shift */
+}
+
+.shopify-payment-button[data-shopify-buttoncontainer] {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Reduce paint complexity for performance */
+.product-media img,
+.collection-card img,
+.hero-media img {
+  will-change: auto; /* Reset will-change after animations */
+}
+
+/* Optimize font loading */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-display: swap; /* Ensure swap for better performance */
+}
+
+/* Prevent unused checkout styles from affecting homepage */
+.template-index .shopify-checkout-web,
+.template-page .shopify-checkout-web,
+.template-blog .shopify-checkout-web,
+.template-article .shopify-checkout-web {
+  display: none !important;
+}
+
+/* Optimize image loading for better LCP */
+.hero-media img,
+.featured-image img {
+  loading: eager; /* Load hero images immediately */
+}
+
+.product-media img:not(:first-child),
+.collection-grid img {
+  loading: lazy; /* Lazy load non-critical images */
+}
+
+/* Reduce Cumulative Layout Shift (CLS) */
+.media {
+  aspect-ratio: var(--aspect-ratio, 1);
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Optimize animations for 60fps */
+@media (prefers-reduced-motion: no-preference) {
+  .animate {
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation-fill-mode: both;
+  }
+}
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Optimize third-party widget containers */
+.instagram-widget,
+.facebook-widget,
+.trustpilot-widget {
+  contain: layout style paint;
+  min-height: 200px; /* Prevent layout shift */
+}
+
+/* Performance hints for browsers */
+.critical-resource {
+  loading: eager;
+  fetchpriority: high;
+}
+
+.non-critical-resource {
+  loading: lazy;
+  fetchpriority: low;
+}
+
+/* Optimize checkout-related elements for better interaction */
+.product-form__buttons,
+.cart-drawer__footer {
+  contain: layout;
+}
+
+/* Reduce render blocking for non-critical sections */
+.footer-block:not(.footer-block--newsletter) {
+  contain: layout style;
+}
+
+/* Homepage-specific optimizations */
+.template-index .section:not(.hero-section):not(.featured-section) {
+  contain: layout;
+}
+
+/* Optimize modal and drawer performance */
+.drawer,
+.modal {
+  contain: layout style paint;
+  will-change: transform;
+}
+
+.drawer.is-open,
+.modal.is-open {
+  will-change: auto; /* Reset after opening */
+}
+
+/* Critical path optimizations for above-the-fold content */
+.hero-section,
+.header-wrapper {
+  contain: none; /* Don't contain critical sections */
+}
+
+/* Below-the-fold sections can be contained for performance */
+.section:not(.hero-section):not(.header-wrapper) {
+  contain: layout style;
+}

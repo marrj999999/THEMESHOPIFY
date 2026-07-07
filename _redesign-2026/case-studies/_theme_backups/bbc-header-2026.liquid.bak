@@ -1,0 +1,237 @@
+{% comment %}
+  Bamboo Bicycle Club — Header / Nav (2026 redesign)
+  Global chrome: appears on every page (header group).
+
+  - Styling lives entirely in assets/bbc-redesign-2026.css (compound .bbc-rd.rd-header
+    selector). This section writes NO CSS — it only emits markup + a tiny toggle script.
+  - Commerce-safe: cart links to {{ routes.cart_url }} and shows {{ cart.item_count }};
+    the menu is a Shopify link_list (editable in Online Store > Navigation), supporting
+    one level of dropdown children (e.g. "Frame Kits").
+  - Mobile drawer is toggled by adding class "rd-open" to the <header>.
+{% endcomment %}
+
+{%- comment -%} Unified redesign stylesheet — loaded ONCE here (the header is on every page via the header group); all other bbc-*-2026 sections rely on this. Primary fonts preloaded (woff2, crossorigin) for faster first paint. {%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+{{ 'AtkinsonHyperlegible-Regular.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
+{{ 'AtkinsonHyperlegible-Bold.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
+
+<style>
+  .rd-vh{position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .rd-loc-form{display:inline-flex;align-items:center;margin:0}
+  .rd-loc-select{font:inherit;font-size:13px;padding:7px 10px;border:2px solid rgba(6,35,28,.28);border-radius:9px;background:transparent;color:inherit;max-width:185px;cursor:pointer;min-height:40px}
+  .rd-loc-select:focus{outline:3px solid #B9E84A;outline-offset:1px}
+  .rd-help-link{font:inherit;font-weight:700;text-decoration:none;white-space:nowrap}
+  .rd-ship-note{font-size:13px;opacity:.8;margin:12px 0 6px}
+  .rd-drop-open > .rd-drop{ opacity:1 !important; visibility:visible !important; pointer-events:auto !important; transform:translateY(0) !important; }
+  .rd-drop-open > .rd-nav-link .rd-caret{ transform:rotate(180deg); opacity:.95; }
+  .rd-nav-cta{ white-space:nowrap; flex-shrink:0; min-width:max-content; }
+  .rd-brand .rd-mk{ background:transparent !important; border:0 !important; box-shadow:none !important; overflow:visible; color:inherit; display:inline-flex; align-items:center; justify-content:center; }
+  .rd-brand .rd-mk svg{ width:100%; height:100%; display:block; }
+  .rd-skip{ position:absolute; left:-9999px; top:0; z-index:2000; background:#06231C; color:#fff; padding:10px 16px; border-radius:0 0 10px 0; font-family:"Atkinson Hyperlegible",sans-serif; font-weight:700; text-decoration:none; }
+  .rd-skip:focus{ left:0; }
+  :focus-visible{ outline:3px solid #06231C; outline-offset:2px; box-shadow:0 0 0 5px rgba(185,232,74,.55); }
+  .rd-brand{ gap:9px; align-items:center; flex-shrink:0; }
+  .rd-brand .rd-mk{ width:40px !important; height:40px !important; flex:0 0 40px; }
+  .rd-wordmark{ font-size:14px; line-height:1.12; font-weight:800; max-width:122px; display:inline-block; }
+  .rd-loc-select{ max-width:152px; }
+  .rd-nav-link, .rd-nav-link:link, .rd-nav-link:visited, .rd-nav-cta, .rd-brand, .rd-help-link{ text-decoration:none !important; }
+  .rd-nav-link:hover, .rd-brand:hover{ text-decoration:none !important; }
+  .rd-caret{ display:inline-block; width:0; height:0; margin-left:6px; vertical-align:middle; border-left:4px solid transparent; border-right:4px solid transparent; border-top:5px solid currentColor; opacity:.6; transition:transform .15s ease, opacity .15s ease; }
+  .rd-has-drop:hover .rd-caret, .rd-has-drop:focus-within .rd-caret{ transform:rotate(180deg); opacity:.95; }
+  .rd-logo-img{ height:46px; width:auto; display:block; max-width:210px; }
+  @media (max-width:749px){ .rd-logo-img{ height:40px; } }
+
+  /* Compact mega-menu: one "Menu" trigger that expands the full nav on hover OR click (button focus) */
+  .rd-megamenu{ position:relative; }
+  .rd-menu-trigger{ display:inline-flex; align-items:center; gap:10px; font:inherit; font-weight:700; font-size:16px; color:var(--charcoal); background:transparent; border:0; cursor:pointer; padding:9px 6px; line-height:1; border-radius:8px; }
+  .rd-menu-trigger:hover, .rd-megamenu:focus-within .rd-menu-trigger{ color:var(--forest); }
+  .rd-megamenu:focus-within .rd-menu-trigger{ outline:none; }
+  .rd-mt-bars{ display:inline-flex; flex-direction:column; justify-content:center; gap:3.5px; width:19px; }
+  .rd-mt-bars span{ display:block; height:2.3px; background:currentColor; border-radius:2px; transition:transform .2s ease; }
+  .rd-megamenu:hover .rd-mt-bars span:nth-child(2), .rd-megamenu:focus-within .rd-mt-bars span:nth-child(2){ transform:scaleX(.6); transform-origin:left; }
+  .rd-mega-panel{ position:absolute; top:calc(100% + 14px); right:0; width:min(700px,80vw); background:var(--paper); border:1.5px solid rgba(6,35,28,.18); border-radius:14px; box-shadow:0 18px 46px rgba(14,26,23,.18); padding:22px 24px; opacity:0; visibility:hidden; pointer-events:none; transform:translateY(8px); transition:opacity .18s ease, transform .18s ease; z-index:300; }
+  .rd-megamenu:hover .rd-mega-panel, .rd-megamenu:focus-within .rd-mega-panel{ pointer-events:auto; }
+  .rd-mega-panel::before{ content:""; position:absolute; top:-14px; left:0; right:0; height:14px; }
+  .rd-megamenu:hover .rd-mega-panel, .rd-megamenu:focus-within .rd-mega-panel{ opacity:1; visibility:visible; transform:translateY(0); }
+  .rd-mega-grid{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:16px 20px; }
+  .rd-mega-head{ display:block; font-weight:800; font-size:14px; color:var(--forest); margin:0 0 9px; padding-bottom:7px; border-bottom:1.5px solid rgba(6,35,28,.14); white-space:nowrap; }
+  .rd-mega-head:hover{ color:var(--forest); }
+  .rd-mega-col ul{ list-style:none; margin:0; padding:0; }
+  .rd-mega-col li a{ display:block; padding:5px 0; font-size:14px; font-weight:600; color:var(--charcoal); line-height:1.3; }
+  .rd-mega-col li a:hover{ color:var(--forest); }
+  @media (max-width:1080px){ .rd-mega-panel{ width:min(560px,84vw); } .rd-mega-grid{ grid-template-columns:repeat(3,1fr); } }
+</style>
+
+<a class="rd-skip" href="#MainContent">Skip to content</a>
+<header class="bbc-rd rd-header" id="rd-header2026">
+
+  {%- comment -%}
+    Utility bar — slim row ABOVE the primary nav (REI/Patagonia pattern).
+    Holds the international + service utilities (currency/country, Help, Search) so the
+    primary nav row stays focused on core navigation + cart + CTA.
+    Hidden ≤940px: mobile keeps search in the drawer and currency in the bottom of the drawer.
+  {%- endcomment -%}
+  <div class="rd-util-bar">
+    <div class="rd-util-wrap">
+      <div class="rd-util-left">
+        <span class="rd-util-note">Shipped worldwide to 36+ countries &middot; tracked delivery</span>
+        {%- if localization.available_countries.size > 1 -%}
+          {%- form 'localization', id: 'rd-loc-d', class: 'rd-loc-form rd-util-loc' -%}
+            <label for="rd-loc-d-sel" class="rd-vh">Country and currency</label>
+            <select id="rd-loc-d-sel" name="country_code" class="rd-loc-select" title="We ship worldwide &mdash; choose your country &amp; currency" onchange="this.form.submit()">
+              {%- for c in localization.available_countries -%}
+                <option value="{{ c.iso_code }}"{% if c.iso_code == localization.country.iso_code %} selected{% endif %}>{{ c.name }} ({{ c.currency.iso_code }} {{ c.currency.symbol }})</option>
+              {%- endfor -%}
+            </select>
+          {%- endform -%}
+        {%- endif -%}
+      </div>
+      <div class="rd-util-right">
+        <a class="rd-help-link rd-util-help" href="/pages/support-centre">Help</a>
+        <div class="rd-search-wrap rd-util-search">
+          <form class="rd-search" action="{{ routes.search_url }}" method="get" role="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+            <input type="search" name="q" placeholder="Search" aria-label="Search the site" autocomplete="off">
+          </form>
+          <div class="rd-results" role="listbox"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rd-nav-row">
+
+    {%- comment -%} Brand: roundel + wordmark {%- endcomment -%}
+    <a class="rd-brand" href="{{ routes.root_url }}" aria-label="Bamboo Bicycle Club &mdash; home"{% if request.page_type == 'index' %} aria-current="page"{% endif %}>
+      {%- if section.settings.logo -%}
+        <img class="rd-logo-img" src="{{ section.settings.logo | image_url: width: 480 }}" alt="{{ section.settings.brand_text | default: shop.name }}" width="{{ section.settings.logo.width }}" height="{{ section.settings.logo.height }}" fetchpriority="high">
+      {%- else -%}
+        <img class="rd-logo-img" src="{{ 'bbc-rd-logo.png' | asset_url }}" alt="Bamboo Bicycle Club" width="600" height="277" fetchpriority="high">
+      {%- endif -%}
+    </a>
+
+    {%- comment -%} Desktop primary nav — compact "Menu" trigger expands the full nav (hover or click) + cart + CTA {%- endcomment -%}
+    <nav class="rd-nav-links" aria-label="Primary">
+      <div class="rd-megamenu">
+        <button type="button" class="rd-menu-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="rd-mega-panel">
+          <span class="rd-mt-bars" aria-hidden="true"><span></span><span></span><span></span></span>Menu
+        </button>
+        <div class="rd-mega-panel" id="rd-mega-panel" role="menu" aria-label="Primary navigation">
+          <div class="rd-mega-grid">
+            {%- for link in section.settings.menu.links -%}
+              <div class="rd-mega-col">
+                <a class="rd-mega-head{% if link.active or link.child_active %} rd-active{% endif %}" href="{{ link.url }}" role="menuitem">{{ link.title }}</a>
+                {%- if link.links.size > 0 -%}
+                  <ul>{%- for child in link.links -%}<li><a href="{{ child.url }}" role="menuitem">{{ child.title }}</a></li>{%- endfor -%}</ul>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+
+      <a class="rd-cart" href="{{ routes.cart_url }}" aria-label="Cart, {{ cart.item_count }} item{{ cart.item_count | pluralize: '', 's' }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>{%- if cart.item_count > 0 -%}<span class="rd-cart-count">{{ cart.item_count }}</span>{%- endif -%}</a>
+      <a class="rd-nav-cta" href="{{ section.settings.cta_url | default: '/pages/bicycle-frame-building-workshop' }}">{{ section.settings.cta_label | default: 'Book a build' }}</a>
+    </nav>
+
+    {%- comment -%} Mobile hamburger (right-aligned on small screens) {%- endcomment -%}
+    <button class="rd-menu-btn" id="rd-menubtn" aria-label="Open menu" aria-expanded="false" aria-controls="rd-header2026"><span class="rd-bars"><span></span><span></span><span></span></span>Menu</button>
+  </div>
+
+  {%- comment -%} Mobile drawer — shown when .rd-open is on the header {%- endcomment -%}
+  <div class="rd-mobile">
+    <div class="rd-mwrap">
+      <div class="rd-search-wrap rd-msearch-wrap">
+        <form class="rd-search rd-msearch" action="{{ routes.search_url }}" method="get" role="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+          <input type="search" name="q" placeholder="Search kits, workshops…" aria-label="Search the site" autocomplete="off">
+        </form>
+        <div class="rd-results"></div>
+      </div>
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- if link.links.size > 0 -%}
+          {%- for child in link.links -%}
+            <a class="rd-sub" href="{{ child.url }}">{{ child.title }}</a>
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
+      <a class="rd-sub" href="/pages/support-centre">Help &amp; support</a>
+      <p class="rd-ship-note">We ship worldwide &mdash; 36+ countries.</p>
+      {%- if localization.available_countries.size > 1 -%}
+        {%- form 'localization', id: 'rd-loc-m', class: 'rd-loc-form' -%}
+          <label for="rd-loc-m-sel" class="rd-vh">Country and currency</label>
+          <select id="rd-loc-m-sel" name="country_code" class="rd-loc-select" onchange="this.form.submit()">
+            {%- for c in localization.available_countries -%}
+              <option value="{{ c.iso_code }}"{% if c.iso_code == localization.country.iso_code %} selected{% endif %}>{{ c.name }} ({{ c.currency.iso_code }} {{ c.currency.symbol }})</option>
+            {%- endfor -%}
+          </select>
+        {%- endform -%}
+      {%- endif -%}
+      <a class="rd-cart" href="{{ routes.cart_url }}" aria-label="Cart">Cart ({{ cart.item_count }})</a>
+      <a class="rd-mcta" href="{{ section.settings.cta_url | default: '/pages/bicycle-frame-building-workshop' }}">{{ section.settings.cta_label | default: 'Book a build' }}</a>
+    </div>
+  </div>
+
+</header>
+
+{%- comment -%} Mobile bottom tab bar — thumb zone. OUTSIDE the backdrop-filtered header so position:fixed anchors to the viewport (and so it stays put when the header auto-hides). Skipped on product pages (they keep their own sticky buy bar). {%- endcomment -%}
+{%- unless template contains 'product' -%}
+  {%- assign rdp = request.path -%}
+  <div class="bbc-rd">
+    <nav class="rd-botbar" aria-label="Primary (mobile)">
+      <a href="{{ routes.collections_url }}/home-build-kits"{% if rdp contains '/products/' or rdp contains 'kit' or rdp contains '/collections' %} class="rd-active"{% endif %}><svg viewBox="0 0 24 24"><circle cx="6" cy="16.5" r="3.3"/><circle cx="18" cy="16.5" r="3.3"/><path d="M6 16.5l4.5-7.5H16l-3.5 7.5M10.5 9h4"/></svg><span>Kits</span></a>
+      <a href="/pages/bicycle-frame-building-workshop"{% if rdp contains 'workshop' %} class="rd-active"{% endif %}><svg viewBox="0 0 24 24"><path d="M14.7 6.3a3.6 3.6 0 0 0-4.8 4.3l-5.2 5.2a1.7 1.7 0 0 0 2.4 2.4l5.2-5.2a3.6 3.6 0 0 0 4.3-4.8l-2.3 2.3-1.9-1.9 2.3-2.3z"/></svg><span>Workshops</span></a>
+      <a href="{{ routes.cart_url }}"{% if rdp contains 'cart' %} class="rd-active"{% endif %}><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><span>Bag{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</span></a>
+      <button type="button" id="rd-botmenu" aria-label="Open menu"><svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg><span>Menu</span></button>
+    </nav>
+  </div>
+{%- endunless -%}
+
+{%- comment -%} Nav behaviour is in an external, deferred asset (no parser-blocking inline JS) {%- endcomment -%}
+<script src="{{ 'bbc-rd-nav.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Header 2026 (new)",
+  "tag": "div",
+  "class": "bbc-rd-header-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image (in the roundel; empty = plain forest circle)"
+    },
+    {
+      "type": "text",
+      "id": "brand_text",
+      "label": "Brand text",
+      "default": "Bamboo Bicycle Club"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Primary menu",
+      "default": "main-menu",
+      "info": "One level of dropdown children is supported (e.g. a Frame Kits sub-menu). Manage menus in Online Store > Navigation."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA button label",
+      "default": "Book a build"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header 2026 (new)"
+    }
+  ]
+}
+{% endschema %}
+

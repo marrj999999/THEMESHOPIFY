@@ -1,0 +1,58 @@
+{% comment %}
+  BBC Schools — Impact & sustainability (Layer 1). The differentiator from every DT kit supplier.
+  Verified stats. Stat figures = blocks.
+{% endcomment %}
+<section class="bbc-schools-impact">
+  <div class="page-width">
+    <div class="bbc-schools-impact__inner">
+      {% if section.settings.eyebrow != blank %}<span class="bbc-schools-impact__eyebrow">{{ section.settings.eyebrow }}</span>{% endif %}
+      <h2 class="bbc-schools-impact__title">{{ section.settings.title }}</h2>
+      {% if section.settings.body != blank %}<div class="bbc-schools-impact__body">{{ section.settings.body }}</div>{% endif %}
+      <div class="bbc-schools-impact__stats">
+        {% for block in section.blocks %}
+          <div class="bbc-schools-impact__stat" {{ block.shopify_attributes }}>
+            <span class="bbc-schools-impact__fig">{{ block.settings.figure }}</span>
+            <span class="bbc-schools-impact__lbl">{{ block.settings.label }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .bbc-schools-impact{background:var(--bbc-forest,#073e27);color:#fff;padding:64px 0}
+  .bbc-schools-impact__inner{max-width:840px}
+  .bbc-schools-impact__eyebrow{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bbc-gold,#ffa900);margin-bottom:12px}
+  .bbc-schools-impact__title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.25rem);color:#fff;margin:0 0 14px;line-height:1.15}
+  .bbc-schools-impact__body{font-size:1.12rem;line-height:1.6;color:rgba(255,255,255,.92);margin:0 0 28px}
+  .bbc-schools-impact__body p{margin:0 0 10px}
+  .bbc-schools-impact__stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px}
+  .bbc-schools-impact__stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:20px}
+  .bbc-schools-impact__fig{display:block;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.9rem;color:var(--bbc-gold,#ffa900);line-height:1}
+  .bbc-schools-impact__lbl{display:block;font-size:.9rem;color:rgba(255,255,255,.85);margin-top:8px;line-height:1.4}
+</style>
+{% schema %}
+{
+  "name": "BBC Schools Impact",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Sustainability &amp; social impact" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Not a kit supplier — a social enterprise" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Every bamboo bike your students build is 56.7% lower carbon than an aluminium equivalent. And the same programme is transforming lives through our Build to Bond work — the engineering skills your students learn are the ones rebuilding futures elsewhere.</p>" }
+  ],
+  "blocks": [
+    { "type": "stat", "name": "Stat", "settings": [
+      { "type": "text", "id": "figure", "label": "Figure" },
+      { "type": "text", "id": "label", "label": "Label" }
+    ] }
+  ],
+  "presets": [
+    { "name": "BBC Schools Impact", "blocks": [
+      { "type": "stat", "settings": { "figure": "56.7%", "label": "lower carbon than aluminium" } },
+      { "type": "stat", "settings": { "figure": "4,000+", "label": "builders trained" } },
+      { "type": "stat", "settings": { "figure": "36+", "label": "countries" } },
+      { "type": "stat", "settings": { "figure": "CIC", "label": "social enterprise · DBS · insured" } }
+    ] }
+  ]
+}
+{% endschema %}

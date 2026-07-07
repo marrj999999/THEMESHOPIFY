@@ -1,0 +1,387 @@
+{%- comment -%}
+  BBC Kit Comparison Section
+  Research-backed: Apple, Canyon use comparison tables on product pages
+  Helps users choose between kit variants
+{%- endcomment -%}
+
+<section class="bbc-kit-comparison" style="padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;">
+  <div class="page-width">
+    {% if section.settings.title != blank %}
+      <h2 class="bbc-kit-comparison__title">{{ section.settings.title }}</h2>
+    {% endif %}
+    
+    {% if section.settings.subtitle != blank %}
+      <p class="bbc-kit-comparison__subtitle">{{ section.settings.subtitle }}</p>
+    {% endif %}
+
+    <div class="bbc-kit-comparison__table-wrapper">
+      <table class="bbc-kit-comparison__table">
+        <thead>
+          <tr>
+            <th class="bbc-kit-comparison__feature-col">Feature</th>
+            {% for block in section.blocks %}
+              {% if block.type == 'kit' %}
+                <th class="bbc-kit-comparison__kit-col">
+                  <div class="bbc-kit-comparison__kit-name">{{ block.settings.kit_name }}</div>
+                  <div class="bbc-kit-comparison__kit-price">{{ block.settings.kit_price }}</div>
+                  {% if block.settings.kit_badge != blank %}
+                    <span class="bbc-kit-comparison__badge">{{ block.settings.kit_badge }}</span>
+                  {% endif %}
+                </th>
+              {% endif %}
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {%- comment -%} Riding Style {%- endcomment -%}
+          <tr>
+            <td class="bbc-kit-comparison__feature">Best For</td>
+            {% for block in section.blocks %}
+              {% if block.type == 'kit' %}
+                <td>{{ block.settings.best_for }}</td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+          
+          {%- comment -%} Construction {%- endcomment -%}
+          <tr>
+            <td class="bbc-kit-comparison__feature">Construction</td>
+            {% for block in section.blocks %}
+              {% if block.type == 'kit' %}
+                <td>{{ block.settings.construction }}</td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+          
+          {%- comment -%} Difficulty {%- endcomment -%}
+          <tr>
+            <td class="bbc-kit-comparison__feature">Build Difficulty</td>
+            {% for block in section.blocks %}
+              {% if block.type == 'kit' %}
+                <td>{{ block.settings.difficulty }}</td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+          
+          {%- comment -%} Build Time {%- endcomment -%}
+          <tr>
+            <td class="bbc-kit-comparison__feature">Build Time</td>
+            {% for block in section.blocks %}
+              {% if block.type == 'kit' %}
+                <td>{{ block.settings.build_time }}</td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+          
+          {%- comment -%} Weight {%- endcomment -%}
+          <tr>
+            <td class="bbc-kit-comparison__feature">Frame Weight</td>
+            {% for block in section.blocks %}
+              {% if block.type == 'kit' %}
+                <td>{{ block.settings.weight }}</td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+          
+          {%- comment -%} Tire Clearance {%- endcomment -%}
+          <tr>
+            <td class="bbc-kit-comparison__feature">Max Tire Width</td>
+            {% for block in section.blocks %}
+              {% if block.type == 'kit' %}
+                <td>{{ block.settings.tire_clearance }}</td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+          
+          {%- comment -%} CTA Row {%- endcomment -%}
+          <tr class="bbc-kit-comparison__cta-row">
+            <td></td>
+            {% for block in section.blocks %}
+              {% if block.type == 'kit' %}
+                <td>
+                  {% if block.settings.kit_url != blank %}
+                    <a href="{{ block.settings.kit_url }}" class="bbc-kit-comparison__cta">
+                      View Kit
+                    </a>
+                  {% endif %}
+                </td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bbc-kit-comparison {
+    background: {{ section.settings.background_color }};
+  }
+
+  .bbc-kit-comparison__title {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+    color: #1a3a1a;
+  }
+
+  .bbc-kit-comparison__subtitle {
+    font-size: 16px;
+    text-align: center;
+    color: var(--bbc-gray-600);
+    margin-bottom: 32px;
+  }
+
+  .bbc-kit-comparison__table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .bbc-kit-comparison__table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+  }
+
+  .bbc-kit-comparison__table th,
+  .bbc-kit-comparison__table td {
+    padding: 16px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .bbc-kit-comparison__feature-col {
+    text-align: left;
+    width: 25%;
+  }
+
+  .bbc-kit-comparison__kit-col {
+    background: var(--bbc-cream);
+    vertical-align: top;
+    padding: 24px 16px;
+  }
+
+  .bbc-kit-comparison__kit-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a3a1a;
+    margin-bottom: 4px;
+  }
+
+  .bbc-kit-comparison__kit-price {
+    font-size: 16px;
+    color: var(--bbc-gray-600);
+    margin-bottom: 8px;
+  }
+
+  .bbc-kit-comparison__badge {
+    display: inline-block;
+    background: #d4af37;
+    color: #1a3a1a;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 0;
+  }
+
+  .bbc-kit-comparison__feature {
+    font-weight: 600;
+    text-align: left;
+    color: #1a3a1a;
+  }
+
+  .bbc-kit-comparison__cta-row td {
+    padding-top: 24px;
+    border-bottom: none;
+  }
+
+  .bbc-kit-comparison__cta {
+    display: inline-block;
+    background: #1a3a1a;
+    color: var(--bbc-white);
+    padding: 12px 24px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.2s;
+  }
+
+  .bbc-kit-comparison__cta:hover {
+    background: #2a5a2a;
+  }
+
+  @media (max-width: 749px) {
+    .bbc-kit-comparison__title {
+      font-size: 24px;
+    }
+    
+    .bbc-kit-comparison__table th,
+    .bbc-kit-comparison__table td {
+      padding: 12px 8px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Kit Comparison",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Compare Frame Kits"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Find the right kit for your riding style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "kit",
+      "name": "Kit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "kit_name",
+          "label": "Kit Name",
+          "default": "Road Kit"
+        },
+        {
+          "type": "text",
+          "id": "kit_price",
+          "label": "Price",
+          "default": "£795"
+        },
+        {
+          "type": "text",
+          "id": "kit_badge",
+          "label": "Badge (optional)"
+        },
+        {
+          "type": "url",
+          "id": "kit_url",
+          "label": "Kit URL"
+        },
+        {
+          "type": "text",
+          "id": "best_for",
+          "label": "Best For",
+          "default": "Road cycling"
+        },
+        {
+          "type": "text",
+          "id": "construction",
+          "label": "Construction",
+          "default": "Lugged joints"
+        },
+        {
+          "type": "text",
+          "id": "difficulty",
+          "label": "Build Difficulty",
+          "default": "Beginner"
+        },
+        {
+          "type": "text",
+          "id": "build_time",
+          "label": "Build Time",
+          "default": "15-25 hours"
+        },
+        {
+          "type": "text",
+          "id": "weight",
+          "label": "Frame Weight",
+          "default": "~1.8kg"
+        },
+        {
+          "type": "text",
+          "id": "tire_clearance",
+          "label": "Max Tire Width",
+          "default": "32mm"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Kit Comparison",
+      "blocks": [
+        {
+          "type": "kit",
+          "settings": {
+            "kit_name": "Road Lugged",
+            "kit_price": "£795",
+            "kit_badge": "Most Popular",
+            "best_for": "Road cycling",
+            "construction": "Lugged joints",
+            "difficulty": "Beginner friendly",
+            "build_time": "15-25 hours",
+            "weight": "~1.8kg",
+            "tire_clearance": "32mm"
+          }
+        },
+        {
+          "type": "kit",
+          "settings": {
+            "kit_name": "Gravel",
+            "kit_price": "£845",
+            "best_for": "Gravel & touring",
+            "construction": "Wrapped joints",
+            "difficulty": "Intermediate",
+            "build_time": "20-30 hours",
+            "weight": "~2.0kg",
+            "tire_clearance": "45mm"
+          }
+        },
+        {
+          "type": "kit",
+          "settings": {
+            "kit_name": "Road Carbon",
+            "kit_price": "£995",
+            "kit_badge": "Lightest",
+            "best_for": "Performance road",
+            "construction": "Carbon wrapped",
+            "difficulty": "Intermediate",
+            "build_time": "25-35 hours",
+            "weight": "~1.5kg",
+            "tire_clearance": "28mm"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

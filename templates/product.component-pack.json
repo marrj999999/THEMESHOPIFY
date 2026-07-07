@@ -1,0 +1,133 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "caption": {
+          "type": "text",
+          "settings": {
+            "text": "Complete groupset \u2014 everything you need to finish your build",
+            "text_style": "subtitle"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": false
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "collapsible-whats-included": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What's Included",
+            "icon": "box",
+            "content": "<p>See product description for full component list.</p><p>All component packs include everything needed to complete your bamboo bicycle \u2014 just add wheels and finishing touches.</p>",
+            "page": ""
+          }
+        },
+        "collapsible-compatibility": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Frame Compatibility",
+            "icon": "cog",
+            "content": "<p><strong>Works with:</strong> All BBC frame kits (Road, Gravel, MTB, City)</p><p><strong>Not sure which pack to choose?</strong></p><ul><li><strong>Road/Gravel:</strong> Shimano 105, GRX, or Campagnolo Ekar</li><li><strong>MTB:</strong> SRAM NX or Shimano Deore</li><li><strong>City:</strong> Single speed or internal hub</li></ul><p>Email us for personalized advice: info@bamboobicycleclub.org</p>",
+            "page": ""
+          }
+        },
+        "collapsible-shipping": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Shipping",
+            "icon": "truck",
+            "content": "<p><strong>UK:</strong> 2-3 days (\u00a315-25)</p><p><strong>EU:</strong> 5-7 days (\u00a335-50)</p><p><strong>International:</strong> 7-14 days (\u00a345-70)</p><p>Component packs ship separately from frame kits. Full tracking included.</p>",
+            "page": ""
+          }
+        },
+        "collapsible-installation": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Installation Support",
+            "icon": "question_mark",
+            "content": "<p>Not comfortable with component installation?</p><ul><li>Video guides on YouTube</li><li>Written installation guides</li><li>Take to your local bike shop</li><li>Book a finishing session at BBC London</li></ul>",
+            "page": ""
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "caption",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "collapsible-whats-included",
+        "collapsible-compatibility",
+        "collapsible-shipping",
+        "collapsible-installation",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "show",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Complete Your Order",
+        "heading_size": "h2",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products"
+  ]
+}

@@ -1,0 +1,125 @@
+{% comment %}
+  BBC Wishlist Functionality
+  Add to product cards: {% render 'bbc-wishlist-button', product: product %}
+  Add wishlist page: {% render 'bbc-wishlist-page' %}
+{% endcomment %}
+
+<style>
+.bbc-wishlist-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 10;
+}
+.bbc-wishlist-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: #666;
+  stroke-width: 2;
+  transition: all 0.2s;
+}
+.bbc-wishlist-btn:hover svg,
+.bbc-wishlist-btn.active svg {
+  stroke: #dc3545;
+  fill: #dc3545;
+}
+</style>
+
+{% if product %}
+  <button class="bbc-wishlist-btn" 
+    data-wishlist-add="{{ product.id }}"
+    data-product-title="{{ product.title | escape }}"
+    data-product-url="{{ product.url }}"
+    data-product-image="{{ product.featured_image | image_url: width: 200 }}"
+    data-product-price="{{ product.price | money }}"
+    aria-label="Add to wishlist">
+    <svg viewBox="0 0 24 24">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+    </svg>
+  </button>
+{% endif %}
+
+<script>
+(function() {
+  const WISHLIST_KEY = 'bbc_wishlist';
+  
+  function getWishlist() {
+    try {
+      return JSON.parse(localStorage.getItem(WISHLIST_KEY)) || [];
+    } catch(e) {
+      return [];
+    }
+  }
+  
+  function saveWishlist(items) {
+    localStorage.setItem(WISHLIST_KEY, JSON.stringify(items));
+    updateWishlistCount();
+  }
+  
+  function updateWishlistCount() {
+    const count = getWishlist().length;
+    document.querySelectorAll('[data-wishlist-count]').forEach(el => {
+      el.textContent = count;
+      el.style.display = count > 0 ? 'inline' : 'none';
+    });
+  }
+  
+  function initWishlistButtons() {
+    const wishlist = getWishlist();
+    
+    document.querySelectorAll('[data-wishlist-add]').forEach(btn => {
+      const productId = btn.dataset.wishlistAdd;
+      if (wishlist.some(item => item.id === productId)) {
+        btn.classList.add('active');
+      }
+      
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        let items = getWishlist();
+        const existingIndex = items.findIndex(item => item.id === productId);
+        
+        if (existingIndex > -1) {
+          items.splice(existingIndex, 1);
+          btn.classList.remove('active');
+        } else {
+          items.push({
+            id: productId,
+            title: btn.dataset.productTitle,
+            url: btn.dataset.productUrl,
+            image: btn.dataset.productImage,
+            price: btn.dataset.productPrice,
+            addedAt: new Date().toISOString()
+          });
+          btn.classList.add('active');
+        }
+        
+        saveWishlist(items);
+      });
+    });
+  }
+  
+  // Initialize
+  document.addEventListener('DOMContentLoaded', function() {
+    initWishlistButtons();
+    updateWishlistCount();
+  });
+  
+  // Expose for wishlist page
+  window.bbcWishlist = {
+    get: getWishlist,
+    save: saveWishlist,
+    remove: function(productId) {
+      let items = getWishlist();
+      items = items.filter(item => item.id !== productId);
+      saveWishlist(items);
+    }
+  };
+})();
+</script>

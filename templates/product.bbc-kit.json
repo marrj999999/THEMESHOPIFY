@@ -1,0 +1,415 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "caption": {
+          "type": "text",
+          "settings": {
+            "text": "Build your dream bamboo bike",
+            "text_style": "subtitle"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": false
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "collapsible-geometry": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Geometry & Sizing",
+            "icon": "ruler",
+            "content": "<p><strong>Not sure which size?</strong> Send us your height and inside leg measurement \u2014 we'll recommend the perfect fit.</p><p>Email: info@bamboobicycleclub.org</p>",
+            "page": ""
+          }
+        },
+        "collapsible-included": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What's Included",
+            "icon": "box",
+            "content": "<ul><li>5 heat-treated Moso bamboo tubes</li><li>Carbon fibre tow + two-part epoxy resin</li><li>Plywood alignment jig for perfect geometry</li><li>CNC machined headtube, BB shell &amp; dropouts</li><li>15+ hours of step-by-step video tutorials</li><li>Community access (4,000+ builders)</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible-time": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Build Time: 25-35 Hours",
+            "icon": "stopwatch",
+            "content": "<p><strong>Step 1 \u2014 Preparation:</strong> Unbox, inventory parts, watch tutorials (2-3 hrs)</p><p><strong>Step 2 \u2014 Jig Assembly:</strong> Set up jig, prepare bamboo tubes (4-6 hrs)</p><p><strong>Step 3 \u2014 Bonding:</strong> Join tubes with epoxy, wrap with carbon fibre (8-12 hrs)</p><p><strong>Step 4 \u2014 Curing:</strong> Wait for epoxy to fully cure (24-48 hrs)</p><p><strong>Step 5 \u2014 Finishing:</strong> Sand joints, apply sealant, add components (6-10 hrs)</p><p>Most builders work 2-3 hour sessions across multiple weekends.</p>",
+            "page": ""
+          }
+        },
+        "collapsible-durability": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Durability & Strength",
+            "icon": "star",
+            "content": "<p><strong>Lifespan:</strong> 8-12 years with proper care</p><p><strong>Tensile strength:</strong> ~28,000 PSI (comparable to steel)</p><p><strong>Failure rate:</strong> Under 1%</p><p>Bamboo absorbs vibration better than metal or carbon, giving you a smoother ride. Tested with Swansea University.</p>",
+            "page": ""
+          }
+        },
+        "collapsible-shipping": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Shipping & Customs",
+            "icon": "truck",
+            "content": "<p>Ships to <strong>36+ countries</strong> worldwide.</p><p><strong>UK:</strong> \u00a312, 5+ working days</p><p><strong>EU &amp; International:</strong> Confirmed at checkout</p><p>Full tracking on all orders. We ship twice a week from our London workshop.</p>",
+            "page": ""
+          }
+        },
+        "collapsible-support": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Help & Support",
+            "icon": "question-mark",
+            "content": "<p>You're not alone in this build!</p><ul><li>15+ hours of video tutorials on YouTube</li><li>Builder community (4,000+ members)</li><li>Comprehensive build guides</li><li>Direct email support from James</li></ul><p><strong>95% of our builders have zero prior experience.</strong></p>",
+            "page": ""
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "caption",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "collapsible-geometry",
+        "collapsible-included",
+        "collapsible-time",
+        "collapsible-durability",
+        "collapsible-shipping",
+        "collapsible-support",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "gallery_layout": "thumbnail",
+        "mobile_thumbnails": "show",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "whats-included": {
+      "type": "multicolumn",
+      "blocks": {
+        "col-bamboo": {
+          "type": "column",
+          "settings": {
+            "title": "Bamboo Tube Set",
+            "text": "<p>5 heat-treated Moso bamboo tubes, pre-shaped and ready to build</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "col-carbon": {
+          "type": "column",
+          "settings": {
+            "title": "Carbon Fibre & Epoxy",
+            "text": "<p>Pre-cut carbon fibre tow + two-part epoxy resin kit</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "col-jig": {
+          "type": "column",
+          "settings": {
+            "title": "Alignment Jig",
+            "text": "<p>Plywood jig for perfect geometry \u2014 ensures your frame is straight and true</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "col-metal": {
+          "type": "column",
+          "settings": {
+            "title": "Metal Components",
+            "text": "<p>CNC machined headtube, BB shell (BSA 68mm), and dropouts</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "col-video": {
+          "type": "column",
+          "settings": {
+            "title": "Video Tutorials",
+            "text": "<p>15+ hours of step-by-step video guidance on YouTube</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "col-community": {
+          "type": "column",
+          "settings": {
+            "title": "Community Access",
+            "text": "<p>Join 4,000+ builders for support, tips, and inspiration</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "col-bamboo",
+        "col-carbon",
+        "col-jig",
+        "col-metal",
+        "col-video",
+        "col-community"
+      ],
+      "settings": {
+        "title": "What's In The Box",
+        "heading_size": "h2",
+        "columns_desktop": 3,
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "build-timeline": {
+      "type": "collapsible-content",
+      "blocks": {
+        "step-1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Step 1: Preparation (2-3 hours)",
+            "icon": "clipboard",
+            "row_content": "<p>Unbox your kit, inventory all parts against the checklist, and watch the introductory video tutorials. Familiarise yourself with the tools and materials before starting.</p>",
+            "page": ""
+          }
+        },
+        "step-2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Step 2: Jig Assembly (4-6 hours)",
+            "icon": "ruler",
+            "row_content": "<p>Assemble the plywood alignment jig and set it to your chosen geometry. Prepare the bamboo tubes by checking fit and making any final adjustments.</p>",
+            "page": ""
+          }
+        },
+        "step-3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Step 3: Bonding (8-12 hours)",
+            "icon": "link",
+            "row_content": "<p>The main build phase. Join the bamboo tubes with epoxy resin and wrap the joints with carbon fibre tow. This is where your frame takes shape.</p>",
+            "page": ""
+          }
+        },
+        "step-4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Step 4: Curing (24-48 hours)",
+            "icon": "stopwatch",
+            "row_content": "<p>Let the epoxy fully cure at room temperature. No work needed \u2014 just patience. This ensures maximum joint strength.</p>",
+            "page": ""
+          }
+        },
+        "step-5": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Step 5: Finishing (6-10 hours)",
+            "icon": "check_circle",
+            "row_content": "<p>Sand the joints smooth, apply protective sealant to the bamboo, and install your headset and bottom bracket. Your frame is ready for components!</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "step-1",
+        "step-2",
+        "step-3",
+        "step-4",
+        "step-5"
+      ],
+      "settings": {
+        "caption": "Most builders spread this over 2-4 weekends",
+        "heading": "Build Timeline",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "color_scheme": "scheme-1",
+        "container_color_scheme": "scheme-2",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "durability": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Durability & Strength",
+            "heading_size": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>8-12 years</strong> lifespan \u00b7 <strong>&lt;1%</strong> failure rate \u00b7 <strong>28,000 PSI</strong> tensile strength</p><p>Bamboo's natural flexibility absorbs road vibration better than metal or carbon fibre, giving you a smoother, more comfortable ride. Tested with Swansea University. Builders have toured continents and raced on bamboo frames built from our kits.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "faq-1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Do I need special tools?",
+            "icon": "question_mark",
+            "row_content": "<p>No power tools required. Basic hand tools: hacksaw, files, sandpaper, measuring tape, and a work surface. Everything else is included in the kit.</p>",
+            "page": ""
+          }
+        },
+        "faq-2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What if I make a mistake?",
+            "icon": "question_mark",
+            "row_content": "<p>Most mistakes are fixable. Epoxy can be sanded and re-applied. Bamboo is forgiving. If you're stuck, our community forum has seen every problem \u2014 someone will have the answer within hours.</p>",
+            "page": ""
+          }
+        },
+        "faq-3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What else do I need to complete the bike?",
+            "icon": "question_mark",
+            "row_content": "<p>Fork, wheels, groupset, handlebars, saddle, and finishing components. We offer component packs with everything included, or you can source parts from any bike shop.</p>",
+            "page": ""
+          }
+        },
+        "faq-4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How strong is bamboo?",
+            "icon": "question_mark",
+            "row_content": "<p>28,000 PSI tensile strength \u2014 comparable to steel. Tested with Swansea University. Builders tour continents and race on them.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "faq-1",
+        "faq-2",
+        "faq-3",
+        "faq-4"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Common Questions",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "color_scheme": "scheme-1",
+        "container_color_scheme": "scheme-1",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "build-reviews": {
+      "type": "bbc-product-reviews",
+      "settings": {
+        "title": "What Builders Say",
+        "subtitle": "Real stories from 4,000+ builders in 36 countries",
+        "posts_count": 3,
+        "show_testimonial": true,
+        "testimonial_text": "I had zero experience \u2014 couldn't even change a puncture. Now I ride a bike I built with my own hands. The support from James and the community made all the difference.",
+        "testimonial_author": "Marcus K.",
+        "testimonial_detail": "Gravel build, London workshop 2024",
+        "background_color": "#f8f7f4",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Complete Your Build",
+        "heading_size": "h2",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "whats-included",
+    "build-timeline",
+    "durability",
+    "faq",
+    "build-reviews",
+    "related-products"
+  ]
+}

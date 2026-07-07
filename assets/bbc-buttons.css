@@ -1,0 +1,272 @@
+/* ═══════════════════════════════════════════════════════════════
+   BBC Global Button System
+   Consistent button styles across all sections
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────
+   Base Button
+   ───────────────────────────────────────────────────────────── */
+.bbc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-family: var(--font-heading-family, inherit);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 0;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.bbc-btn:disabled,
+.bbc-btn[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Arrow animation on hover */
+.bbc-btn svg {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+}
+
+.bbc-btn:hover svg {
+  transform: translateX(3px);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Style 1: Primary (BBC Gold)
+   Use for: Main CTAs, most important actions
+   ───────────────────────────────────────────────────────────── */
+.bbc-btn--primary {
+  background: var(--bbc-gold);
+  color: var(--bbc-forest);
+  border-color: var(--bbc-gold);
+}
+
+.bbc-btn--primary:hover {
+  background: #e09400;
+  border-color: #e09400;
+  color: var(--bbc-forest);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 169, 0, 0.3);
+}
+
+.bbc-btn--primary:active {
+  background: #cc8500;
+  border-color: #cc8500;
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.bbc-btn--primary:focus-visible {
+  outline: 2px solid var(--bbc-gold);
+  outline-offset: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Style 2: Secondary (Dark Green)
+   Use for: Secondary actions, dark backgrounds
+   ───────────────────────────────────────────────────────────── */
+.bbc-btn--secondary {
+  background: var(--bbc-forest);
+  color: #ffffff;
+  border-color: var(--bbc-forest);
+}
+
+.bbc-btn--secondary:hover {
+  background: #0a5234;
+  border-color: #0a5234;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(7, 62, 39, 0.3);
+}
+
+.bbc-btn--secondary:active {
+  background: var(--bbc-forest-dark);
+  border-color: var(--bbc-forest-dark);
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.bbc-btn--secondary:focus-visible {
+  outline: 2px solid var(--bbc-forest);
+  outline-offset: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Style 3: Outline (Adaptive)
+   Use for: Less prominent actions, pairs with primary
+   Context-aware: light outline on dark bg, dark outline on light bg
+   ───────────────────────────────────────────────────────────── */
+.bbc-btn--outline {
+  background: transparent;
+  color: var(--bbc-forest);
+  border-color: var(--bbc-forest);
+}
+
+.bbc-btn--outline:hover {
+  background: rgba(7, 62, 39, 0.08);
+  border-color: var(--bbc-forest);
+  color: var(--bbc-forest);
+  transform: translateY(-1px);
+}
+
+.bbc-btn--outline:active {
+  background: rgba(7, 62, 39, 0.15);
+  transform: translateY(0);
+}
+
+.bbc-btn--outline:focus-visible {
+  outline: 2px solid var(--bbc-forest);
+  outline-offset: 2px;
+}
+
+/* Outline on dark backgrounds (light variant) */
+.bbc-btn--outline-light {
+  background: transparent;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.bbc-btn--outline-light:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.bbc-btn--outline-light:active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(0);
+}
+
+.bbc-btn--outline-light:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Sizes
+   ───────────────────────────────────────────────────────────── */
+.bbc-btn--sm {
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+.bbc-btn--lg {
+  padding: 16px 32px;
+  font-size: 16px;
+}
+
+.bbc-btn--full {
+  width: 100%;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Mobile responsive
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 749px) {
+  .bbc-btn {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+
+  .bbc-btn--lg {
+    padding: 14px 28px;
+    font-size: 15px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Accessibility
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .bbc-btn,
+  .bbc-btn svg {
+    transition: none;
+  }
+
+  .bbc-btn:hover svg {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .bbc-btn {
+    border-width: 3px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Loading state
+   ───────────────────────────────────────────────────────────── */
+.bbc-btn.loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+
+.bbc-btn.loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: bbc-btn-spin 0.6s linear infinite;
+}
+
+@keyframes bbc-btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Button groups
+   ───────────────────────────────────────────────────────────── */
+.bbc-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.bbc-btn-group--center {
+  justify-content: center;
+}
+
+.bbc-btn-group--right {
+  justify-content: flex-end;
+}
+
+@media (max-width: 749px) {
+  .bbc-btn-group {
+    gap: 10px;
+  }
+
+  .bbc-btn-group--stack {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .bbc-btn-group--stack .bbc-btn {
+    width: 100%;
+  }
+}

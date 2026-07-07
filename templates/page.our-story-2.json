@@ -1,0 +1,233 @@
+{
+  "sections": {
+    "hero": {
+      "type": "bbc-page-hero",
+      "settings": {
+        "badge": "Since 2012",
+        "heading": "Our Story",
+        "subheading": "Building sustainable bicycles and stronger communities",
+        "style": "dark"
+      }
+    },
+    "origin": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "From Canada to London",
+            "heading_size": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>In 2012, James Marr returned from Canada with an unusual skill — the ability to build bicycle frames from bamboo. He opened a small workshop in London with a simple mission: teach others this craft.</p><p>What started as weekend workshops has grown into a global movement. Over 4,000 people across 36 countries have now built their own bamboo bicycles, each one as unique as its maker.</p>"
+          }
+        }
+      },
+      "block_order": ["heading", "text"],
+      "settings": {
+        "desktop_image_width": "medium",
+        "desktop_content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "padding_top": 80,
+        "padding_bottom": 60
+      }
+    },
+    "founders": {
+      "type": "bbc-founders",
+      "settings": {
+        "label": "The Team",
+        "heading": "Meet the Team",
+        "intro": "From London to Toulouse to Amersfoort — united by a shared belief that everyone should have the chance to build something meaningful with their hands."
+      },
+      "blocks": {
+        "james": {
+          "type": "founder",
+          "settings": {
+            "name": "James Marr",
+            "role": "Founder & CEO",
+            "location": "London, UK",
+            "bio": "James learned to build bamboo bicycles in Canada before returning to London to share this knowledge. He leads BBC's mission to make sustainable craftsmanship accessible to all — from corporate teams to schools to prisons."
+          }
+        },
+        "toulouse": {
+          "type": "founder",
+          "settings": {
+            "name": "Toulouse Workshop",
+            "role": "Workshop Partner",
+            "location": "Toulouse, France",
+            "bio": "BBC's French home, bringing bamboo bike building to the heart of cycling country. Workshops available in French and English."
+          }
+        },
+        "amersfoort": {
+          "type": "founder",
+          "settings": {
+            "name": "Amersfoort Workshop",
+            "role": "Workshop Partner",
+            "location": "Amersfoort, Netherlands",
+            "bio": "Our Dutch workshop serving the Netherlands and surrounding regions. Building a thriving community of European bamboo bike builders."
+          }
+        }
+      },
+      "block_order": ["james", "toulouse", "amersfoort"]
+    },
+    "values": {
+      "type": "multicolumn",
+      "blocks": {
+        "sustainability": {
+          "type": "column",
+          "settings": {
+            "title": "Sustainability",
+            "text": "<p>Bamboo absorbs 35% more CO₂ than trees and regrows in 3-5 years. Our frames produce 56.7% less carbon than aluminium.</p>"
+          }
+        },
+        "craftsmanship": {
+          "type": "column",
+          "settings": {
+            "title": "Craftsmanship",
+            "text": "<p>We teach traditional handcraft skills in a modern context, helping people reconnect with making things with their hands.</p>"
+          }
+        },
+        "community": {
+          "type": "column",
+          "settings": {
+            "title": "Community",
+            "text": "<p>From our London workshop to prisons to schools, we build more than bikes — we build confidence, skills, and connections.</p>"
+          }
+        }
+      },
+      "block_order": ["sustainability", "craftsmanship", "community"],
+      "settings": {
+        "title": "What We Stand For",
+        "heading_size": "h2",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "color_scheme": "scheme-2",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "timeline": {
+      "type": "bbc-timeline-v2",
+      "settings": {
+        "heading": "Our Journey",
+        "intro": "From a small London workshop to a global community of builders."
+      },
+      "blocks": {
+        "m1": { "type": "milestone", "settings": { "year": "2012", "title": "BBC Founded", "description": "James and Ian open the first bamboo bicycle workshop in London, teaching people to build their own sustainable frames.", "highlight": true }},
+        "m2": { "type": "milestone", "settings": { "year": "2014", "title": "DIY Kits Launch", "description": "We launch our first home build kits, making bamboo bike building accessible to people everywhere." }},
+        "m3": { "type": "milestone", "settings": { "year": "2015", "title": "Design Museum Exhibition", "description": "Our work is featured in the Cycle Revolution exhibition at the Design Museum.", "badge": "Major Recognition", "badge_icon": "museum" }},
+        "m4": { "type": "milestone", "settings": { "year": "2018", "title": "Kevin McCloud's Green Heroes", "description": "Selected for eco-friendly product design at Grand Designs Live.", "badge": "Award Winner", "badge_icon": "eco" }},
+        "m5": { "type": "milestone", "settings": { "year": "2020", "title": "Build to Bond Launches", "description": "Our flagship prison rehabilitation programme begins at HMP Lowdham Grange, helping parents build bicycles for their children.", "highlight": true }},
+        "m6": { "type": "milestone", "settings": { "year": "2025", "title": "Investec Beyond Business", "description": "Recognised for our educational work in prisons, helping parents maintain family connections.", "badge": "2025 Winner", "badge_icon": "emoji_events", "highlight": true }}
+      },
+      "block_order": ["m1", "m2", "m3", "m4", "m5", "m6"]
+    },
+    "press": {
+      "type": "bbc-press-logos-v2",
+      "settings": {
+        "label": "As Featured In",
+        "heading": "Trusted by leading publications",
+        "show_ft": true,
+        "show_guardian": true,
+        "show_telegraph": true,
+        "show_bikeradar": true,
+        "show_cyclingweekly": true,
+        "show_designmuseum": true,
+        "show_granddesigns": true
+      }
+    },
+    "impact-intro": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Beyond Bicycles"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our impact extends far beyond the workshop. Through <strong>Build to Bond</strong>, we help prisoners build bicycles as gifts for their children — creating tangible connections that last beyond prison walls. Our educational programmes bring hands-on STEM learning to schools and alternative education providers.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Our Impact",
+            "button_link": "/pages/impact"
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "full_width": true,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "stats": {
+      "type": "bbc-impact-stats",
+      "settings": {
+        "heading": "Our Global Community",
+        "subheading": "Building bikes and connections around the world"
+      },
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "number": "4,000+", "label": "Builders", "detail": "Worldwide" }},
+        "s2": { "type": "stat", "settings": { "number": "36", "label": "Countries", "detail": "And counting" }},
+        "s3": { "type": "stat", "settings": { "number": "13", "label": "Years", "detail": "Since 2012" }},
+        "s4": { "type": "stat", "settings": { "number": "56.7%", "label": "Less Carbon", "detail": "vs aluminium" }}
+      },
+      "block_order": ["s1", "s2", "s3", "s4"]
+    },
+    "cta": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ready to Build?"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Whether you want to build at home with one of our kits, join a workshop in London, or bring bamboo bike building to your organisation — we're here to help you get started.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Get in Touch",
+            "button_link": "/pages/contact-us"
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "padding_top": 60,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "origin",
+    "founders",
+    "values",
+    "timeline",
+    "press",
+    "impact-intro",
+    "stats",
+    "cta"
+  ]
+}

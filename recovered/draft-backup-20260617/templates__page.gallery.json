@@ -1,0 +1,200 @@
+{
+  "sections": {
+    "hero": {
+      "type": "bbc-page-hero",
+      "settings": {
+        "heading": "Builder Gallery",
+        "subheading": "Real bikes built by real people around the world",
+        "style": "light"
+      }
+    },
+    "gallery": {
+      "type": "bbc-gallery",
+      "blocks": {
+        "image-1": {
+          "type": "image",
+          "settings": {
+            "image_asset": "bbc-rd-gravel-sunset.jpg",
+            "alt": "Bamboo gravel bike",
+            "caption": ""
+          }
+        },
+        "image-2": {
+          "type": "image",
+          "settings": {
+            "image_asset": "bbc-rd-road-charlie.jpg",
+            "alt": "Bamboo road bike",
+            "caption": ""
+          }
+        },
+        "image-3": {
+          "type": "image",
+          "settings": {
+            "image_asset": "bbc-rd-bike-field.jpg",
+            "alt": "Bamboo bicycle",
+            "caption": ""
+          }
+        },
+        "image-4": {
+          "type": "image",
+          "settings": {
+            "image_asset": "bbc-rd-ebike.jpg",
+            "alt": "Bamboo e-bike",
+            "caption": ""
+          }
+        },
+        "image-5": {
+          "type": "image",
+          "settings": {
+            "image_asset": "bbc-rd-redbar.jpg",
+            "alt": "Bamboo road bike",
+            "caption": ""
+          }
+        },
+        "image-6": {
+          "type": "image",
+          "settings": {
+            "image_asset": "bbc-rd-gravel-fence.jpg",
+            "alt": "Bamboo gravel bike",
+            "caption": ""
+          }
+        },
+        "image-7": {
+          "type": "image",
+          "settings": {
+            "image_asset": "bbc-rd-cargo.jpg",
+            "alt": "Bamboo cargo bike",
+            "caption": ""
+          }
+        },
+        "image-8": {
+          "type": "image",
+          "settings": {
+            "image_asset": "bbc-rd-hero-ride.jpg",
+            "alt": "Bamboo bicycle",
+            "caption": ""
+          }
+        },
+        "image-9": {
+          "type": "image",
+          "settings": {
+            "image_asset": "bbc-rd-prod-balance.jpg",
+            "alt": "Bamboo balance bike",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "image-1",
+        "image-2",
+        "image-3",
+        "image-4",
+        "image-5",
+        "image-6",
+        "image-7",
+        "image-8",
+        "image-9"
+      ],
+      "settings": {
+        "heading": "Bikes Built by Our Community",
+        "label": "",
+        "columns": "3",
+        "image_ratio": "landscape",
+        "button_text": "Share your build on Instagram",
+        "button_link": "https:\/\/instagram.com\/bamboobicycleclub",
+        "background": "cream"
+      }
+    },
+    "testimonials": {
+      "type": "bbc-testimonials",
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I genuinely thought I'd fail. I have no mechanical skills whatsoever. Two days later I rolled out of the workshop on a bike I built myself. Still can't quite believe it.",
+            "name": "Sarah K.",
+            "role": "Marketing Manager",
+            "location": "London"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Built the balance bike kit with my daughter over a weekend. She's 7 now and still talks about 'our bike.' Best purchase I've ever made.",
+            "name": "Marcus T.",
+            "role": "Teacher",
+            "location": "Bristol"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I've built three frames now. Started with the workshop, then kits at home. There's nothing else like it.",
+            "name": "Yuki M.",
+            "role": "Software Developer",
+            "location": "Tokyo"
+          }
+        },
+        "t4": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Ordered the kit to South Africa, built it in my garage, and now I commute on it every day. The support from the BBC community was incredible.",
+            "name": "Johan V.",
+            "role": "Architect",
+            "location": "Cape Town"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "settings": {
+        "heading": "Builder Stories",
+        "subheading": "What our community says"
+      }
+    },
+    "instagram": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Tag us @bamboobicycleclub"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We love seeing your builds! Tag us on Instagram and your photo could be featured here.<\/p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Follow us on Instagram",
+            "button_link": "https:\/\/instagram.com\/bamboobicycleclub"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-3"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "gallery",
+    "testimonials",
+    "instagram"
+  ]
+}

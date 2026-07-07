@@ -1,0 +1,378 @@
+{% comment %}
+  BBC Product Features Bar
+  Replaces the hardcoded bbc-trust-badges snippet.
+  All features editable via theme editor — add, remove, reorder, relabel.
+  
+  Designed for kit product pages. Sits between the main product section
+  and the tabbed content sections.
+  
+  Usage: Add as a section to any product template.
+  Max 6 feature blocks recommended for clean horizontal layout.
+{% endcomment %}
+
+{%- style -%}
+.bbc-product-features {
+  padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.background }};
+  {% if section.settings.show_border_top %}border-top: 1px solid rgba(7, 62, 39, 0.1);{% endif %}
+  {% if section.settings.show_border_bottom %}border-bottom: 1px solid rgba(7, 62, 39, 0.1);{% endif %}
+}
+
+.bbc-product-features__inner {
+  max-width: {{ settings.page_width | default: 1200 }}px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.bbc-product-features__grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: {{ section.settings.alignment }};
+  gap: 8px 32px;
+}
+
+.bbc-product-features__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body-family, "Plus Jakarta Sans", system-ui, sans-serif);
+  font-size: {{ section.settings.font_size }}px;
+  font-weight: {{ section.settings.font_weight }};
+  color: {{ section.settings.text_color }};
+  white-space: nowrap;
+  min-height: 44px; /* Touch target */
+}
+
+{% if section.settings.show_dividers %}
+.bbc-product-features__item + .bbc-product-features__item {
+  padding-left: 32px;
+  border-left: 1px solid rgba(7, 62, 39, 0.15);
+}
+{% endif %}
+
+.bbc-product-features__item a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.bbc-product-features__item a:hover {
+  color: var(--bbc-teal);
+}
+
+.bbc-product-features__icon {
+  flex-shrink: 0;
+  width: {{ section.settings.icon_size }}px;
+  height: {{ section.settings.icon_size }}px;
+  color: {{ section.settings.icon_color }};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bbc-product-features__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Mobile: wrap to 2 columns */
+@media (max-width: 749px) {
+  .bbc-product-features__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    justify-items: start;
+  }
+
+  .bbc-product-features__item {
+    font-size: {{ section.settings.font_size | minus: 1 }}px;
+    white-space: normal;
+  }
+
+  {% if section.settings.show_dividers %}
+  .bbc-product-features__item + .bbc-product-features__item {
+    padding-left: 0;
+    border-left: none;
+  }
+  {% endif %}
+}
+{%- endstyle -%}
+
+{%- if section.blocks.size > 0 -%}
+<div class="bbc-product-features">
+  <div class="bbc-product-features__inner">
+    <div class="bbc-product-features__grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'feature' -%}
+          <div class="bbc-product-features__item" {{ block.shopify_attributes }}>
+            {%- liquid
+              assign has_link = false
+              if block.settings.link != blank
+                assign has_link = true
+              endif
+            -%}
+            {%- if has_link -%}<a href="{{ block.settings.link }}">{%- endif -%}
+
+            {%- if block.settings.icon != 'none' -%}
+              <span class="bbc-product-features__icon" aria-hidden="true">
+                {%- case block.settings.icon -%}
+                  {%- when 'shipping' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="1" y="3" width="15" height="13"/>
+                      <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                      <circle cx="5.5" cy="18.5" r="2.5"/>
+                      <circle cx="18.5" cy="18.5" r="2.5"/>
+                    </svg>
+                  {%- when 'verified' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                      <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                  {%- when 'shield' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                  {%- when 'leaf' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M17 8C8 10 5.9 16.17 3.82 21.2"/>
+                      <path d="M9.23 17.65C7.65 17.07 3 14.61 3 11.17V3l9 4 9-4v8.17c0 3.44-4.65 5.9-6.23 6.48"/>
+                    </svg>
+                  {%- when 'star' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  {%- when 'clock' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"/>
+                      <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                  {%- when 'heart' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                  {%- when 'award' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="8" r="7"/>
+                      <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                    </svg>
+                  {%- when 'globe' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"/>
+                      <line x1="2" y1="12" x2="22" y2="12"/>
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                  {%- when 'tool' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                    </svg>
+                  {%- when 'users' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                      <circle cx="9" cy="7" r="4"/>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                {%- endcase -%}
+              </span>
+            {%- endif -%}
+
+            <span>{{ block.settings.text }}</span>
+
+            {%- if has_link -%}</a>{%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "BBC Product Features",
+  "tag": "div",
+  "class": "bbc-product-features-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center",     "label": "Centre" },
+        { "value": "space-between", "label": "Space between" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dividers",
+      "label": "Show dividers between items",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border_top",
+      "label": "Border top",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border_bottom",
+      "label": "Border bottom",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 13
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#073e27"
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 14,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon colour",
+      "default": "#3f8b66"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Feature text",
+          "default": "Free UK Shipping"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "none",     "label": "None" },
+            { "value": "shipping", "label": "Shipping / Truck" },
+            { "value": "verified", "label": "Tick / Verified" },
+            { "value": "shield",   "label": "Shield / Returns" },
+            { "value": "leaf",     "label": "Leaf / Eco" },
+            { "value": "star",     "label": "Star" },
+            { "value": "clock",    "label": "Clock / Time" },
+            { "value": "heart",    "label": "Heart" },
+            { "value": "award",    "label": "Award / Accredited" },
+            { "value": "globe",    "label": "Globe / Worldwide" },
+            { "value": "tool",     "label": "Tool / Build" },
+            { "value": "users",    "label": "Community" }
+          ],
+          "default": "verified"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)",
+          "info": "Leave blank for no link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Product Features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": { "text": "Free UK Shipping", "icon": "shipping" }
+        },
+        {
+          "type": "feature",
+          "settings": { "text": "OCN Accredited", "icon": "award" }
+        },
+        {
+          "type": "feature",
+          "settings": { "text": "14-Day Returns", "icon": "shield" }
+        },
+        {
+          "type": "feature",
+          "settings": { "text": "50% Less CO\u2082", "icon": "leaf" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

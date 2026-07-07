@@ -1,0 +1,244 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-impact-2026",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "stat",
+          "settings": {
+            "number": "£11.41",
+            "label": "social return per £1",
+            "source": "independent SROI analysis"
+          }
+        },
+        "b2": {
+          "type": "stat",
+          "settings": {
+            "number": "90%",
+            "label": "programme completion",
+            "source": "BBC programme records"
+          }
+        },
+        "b3": {
+          "type": "stat",
+          "settings": {
+            "number": "26%",
+            "label": "measured confidence uplift",
+            "source": "independent evaluation"
+          }
+        },
+        "b4": {
+          "type": "stat",
+          "settings": {
+            "number": "£280",
+            "label": "cost per learner",
+            "source": "vs £2,200–4,500 sector average"
+          }
+        },
+        "b5": {
+          "type": "pathway",
+          "settings": {
+            "title": "Education",
+            "body": "OCN-accredited Level 1 & 2 training in sustainable manufacturing — a nationally recognised qualification, earned hands-on."
+          }
+        },
+        "b6": {
+          "type": "pathway",
+          "settings": {
+            "title": "Employment",
+            "body": "Routes into sustainable transport, manufacturing and composites — with growing employer links and support into work on release."
+          }
+        },
+        "b7": {
+          "type": "pathway",
+          "settings": {
+            "title": "Rehabilitation",
+            "body": "Therapeutic, focused making builds patience and resilience — and strengthens family connection through Build to Bond."
+          }
+        },
+        "b8": {
+          "type": "help",
+          "settings": {
+            "tag": "Buy",
+            "tag_lime": true,
+            "title": "Build or own a bike",
+            "body": "Book a workshop or buy a kit. Every purchase helps fund our prison and education programmes.",
+            "link_label": "Shop & book",
+            "lime": false
+          }
+        },
+        "b9": {
+          "type": "help",
+          "settings": {
+            "tag": "Partner",
+            "tag_lime": true,
+            "title": "Work with us",
+            "body": "Programmes for prisons, schools and colleges. OCN Level 2 accredited, with a self-delivery model for prisons.",
+            "link_label": "Explore partnerships",
+            "lime": false
+          }
+        },
+        "b10": {
+          "type": "help",
+          "settings": {
+            "tag": "Support",
+            "tag_lime": true,
+            "title": "Fund or champion",
+            "body": "Fund a cohort, offer placements, or champion our work. £11.41 of social value for every £1 invested.",
+            "link_label": "Talk to us",
+            "lime": true
+          }
+        },
+        "story_1": {
+          "type": "story",
+          "settings": {
+            "kind": "Prison",
+            "title": "Build to Bond: the full story",
+            "blurb": "Inside HMP Lowdham Grange, fathers build a bamboo balance bike for the child waiting at home.",
+            "image": "bbc-rd-b2b.jpg",
+            "url": "\/blogs\/impact\/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2"
+          }
+        },
+        "story_2": {
+          "type": "story",
+          "settings": {
+            "kind": "Epic journey",
+            "title": "8,288 miles to Patagonia",
+            "blurb": "Kate Rawles rode a BBC-built bamboo bike the length of South America for The Life Cycle.",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/articles\/CordilleraBlancaPeru_617cbc2f-5a4b-4f15-b3be-56011f4be10a.jpg?v=1771839617",
+            "url": "\/blogs\/impact\/kate-rawles-8-288-miles-to-patagonia-on-a-bamboo-bike"
+          }
+        },
+        "story_3": {
+          "type": "story",
+          "settings": {
+            "kind": "Epic journey",
+            "title": "11,300km across South America",
+            "blurb": "The 2 by Bamboo team crossed six countries on home-built bamboo bikes for charity.",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/articles\/CordilleraBlancaPeru_5b82b6d8-319e-4084-92c4-2065914ec4c3.jpg?v=1771839636",
+            "url": "\/blogs\/impact\/2-by-bamboo-11-300km-across-6-countries"
+          }
+        },
+        "story_4": {
+          "type": "story",
+          "settings": {
+            "kind": "Epic journey",
+            "title": "UK to Singapore, 22,000km for MSF",
+            "blurb": "Tom and Nicky rode bamboo bikes across the world, raising funds for MSF.",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/articles\/edad684e909bdbf87ecb75c13065888b_cc69559d-3cf7-499f-aa19-7e3ba5f2b5df.jpg",
+            "url": "\/blogs\/impact\/dr-tom-and-dr-nick-uk-to-singapore-for-msf"
+          }
+        },
+        "story_5": {
+          "type": "story",
+          "settings": {
+            "kind": "Corporate",
+            "title": "The Macallan — masters of their craft",
+            "blurb": "A distillery team built ten bamboo bikes together — craft meeting craft.",
+            "image": "bbc-rd-tb-macallan.jpg",
+            "url": "\/blogs\/impact\/the-macallan-whisky-masters-of-their-craft"
+          }
+        },
+        "story_6": {
+          "type": "story",
+          "settings": {
+            "kind": "Education",
+            "title": "UK Bamboo Summit, Coventry",
+            "blurb": "Leading the national conversation on bamboo's future in engineering and design.",
+            "image": "bbc-rd-cs-coventry.jpg",
+            "url": "\/blogs\/schools-and-education\/coventry-university-bbc-at-uk-bamboo-summit"
+          }
+        },
+        "story_7": {
+          "type": "story",
+          "settings": {
+            "kind": "Education",
+            "title": "UCL: a 100kg electric cargo bike",
+            "blurb": "Masters students engineered a bamboo e-cargo bike to carry 150kg.",
+            "image": "bbc-rd-cs-ucl.jpg",
+            "url": "\/blogs\/impact\/ucl-masters-bamboo-electric-cargo-bike-university"
+          }
+        },
+        "story_8": {
+          "type": "story",
+          "settings": {
+            "kind": "Global",
+            "title": "Teaching Kenya to build",
+            "blurb": "Skills that stay behind — communities building and maintaining their own bamboo bikes.",
+            "image": "bbc-rd-workshop.jpg",
+            "url": "\/blogs\/impact\/kenya-bamboo-bicycle-building-skills-transfer"
+          }
+        },
+        "story_9": {
+          "type": "story",
+          "settings": {
+            "kind": "Global",
+            "title": "Ghana Bamboo Bikes collaboration",
+            "blurb": "A UK–Africa bamboo bicycle exchange at the Birmingham festival.",
+            "image": "bbc-rd-cohort.jpg",
+            "url": "\/blogs\/impact\/ghana-bamboo-bikes-international-collaboration-at-birmingham-festival"
+          }
+        },
+        "story_10": {
+          "type": "story",
+          "settings": {
+            "kind": "Inclusion",
+            "title": "Building a bamboo bike with one hand",
+            "blurb": "Jon's story of determination and craft — proof anyone can build.",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/articles\/88d9e8b8012621f5946b32ce93b74c6c_7c3d767e-9d23-46a5-9203-ddad728ff26e.jpg?v=1771793497",
+            "url": "\/blogs\/impact\/jon-one-hand-bamboo-bicycle-disability-inclusion"
+          }
+        },
+        "story_11": {
+          "type": "story",
+          "settings": {
+            "kind": "Exhibition",
+            "title": "Design Museum: Cycle Revolution",
+            "blurb": "BBC's aerodynamic bamboo racing bike on permanent display in London.",
+            "image": "bbc-rd-cs-racing.jpg",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/news\/design-museum-cycle-revolution-exhibition-bbc-frame-on-display"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "story_1",
+        "story_2",
+        "story_3",
+        "story_4",
+        "story_5",
+        "story_6",
+        "story_7",
+        "story_8",
+        "story_9",
+        "story_10",
+        "story_11"
+      ]
+    },
+    "videoband": {
+      "type": "bbc-rd-video-embed",
+      "settings": {
+        "video_youtube": "2bSRrKXDWNE",
+        "eyebrow": "In the workshop",
+        "heading": "See the work behind the numbers",
+        "body": "Every frame starts as raw bamboo and a few hand tools — in our workshops, schools and prison programmes.",
+        "dark": true,
+        "caption": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "videoband"
+  ]
+}

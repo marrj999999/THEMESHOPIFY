@@ -1,0 +1,156 @@
+{
+  "sections": {
+    "hero": {
+      "type": "bbc-page-hero",
+      "settings": {
+        "badge": "OCN Level 2 Accredited",
+        "heading": "Education Programmes",
+        "subheading": "Hands-on courses in sustainable manufacturing for schools, alternative education providers, and rehabilitation settings",
+        "style": "dark"
+      }
+    },
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Through the <strong>Bamboo Mobility Project CIC</strong>, we deliver accredited educational programmes that combine hands-on making with employability skills. Our courses are designed for schools, alternative education providers, and rehabilitation settings.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "build-to-bond": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Build to Bond - Prison Rehabilitation",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our award-winning programme where incarcerated parents build bamboo balance bikes for their children.</p><p>• High completion rates • 26% confidence uplift • OCN Level 2 qualification • Employer interview opportunities</p><p><em>\"A genuinely impactful initiative.\"</em> — James Timpson, UK Prisons Minister</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Learn more about Build to Bond",
+            "button_link": "/pages/impact"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "desktop_image_width": "medium",
+        "color_scheme": "scheme-3"
+      }
+    },
+    "schools": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Schools Programme",
+            "heading_size": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>STEM education meets Design Technology. Students learn sustainable manufacturing, engineering principles, and hands-on craftsmanship while building real bamboo bicycles.</p><p>Suitable for Key Stage 3 & 4, GCSE & A-Level DT, Alternative provision, NEET programmes.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Request school information pack",
+            "button_link": "/pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "desktop_image_width": "medium",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "accreditation": {
+      "type": "multicolumn",
+      "blocks": {
+        "ocn": {
+          "type": "column",
+          "settings": {
+            "title": "OCN London",
+            "text": "<p>Level 2 qualification in Sustainable Manufacturing, recognised by employers and education providers.</p>"
+          }
+        },
+        "investec": {
+          "type": "column",
+          "settings": {
+            "title": "Investec Beyond Business",
+            "text": "<p>2025 award winner for our Build to Bond prison rehabilitation programme.</p>"
+          }
+        },
+        "hmpps": {
+          "type": "column",
+          "settings": {
+            "title": "HMPPS Approved",
+            "text": "<p>Approved provider for prison education delivering at HMP Lowdham Grange.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "ocn",
+        "investec",
+        "hmpps"
+      ],
+      "settings": {
+        "title": "Accreditation & Recognition",
+        "heading_size": "h2",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "color_scheme": "scheme-2",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "contact": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "Get in Touch About Education Programmes",
+        "heading_size": "h2",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "intro",
+    "build-to-bond",
+    "schools",
+    "accreditation",
+    "contact"
+  ]
+}

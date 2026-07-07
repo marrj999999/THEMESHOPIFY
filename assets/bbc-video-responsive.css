@@ -1,0 +1,91 @@
+/* =============================================================================
+   BBC — STANDARD RESPONSIVE VIDEO  (2026)
+   Single source of truth for every video / iframe / image media embed.
+
+   HOW TO USE
+   ----------
+   Wrap any one media element in a container with class `.rd-video`
+   (redesign-2026 sections) or `.bbc-video` (anywhere else):
+
+       <div class="rd-video">
+         <video class="rd-video-el" ... playsinline></video>   <!-- self-hosted mp4 -->
+       </div>
+
+       <div class="rd-video">
+         <iframe src="https://www.youtube-nocookie.com/embed/ID" ...></iframe>
+       </div>
+
+   The container becomes a responsive, ratio-locked box. The media child fills
+   it exactly, so it NEVER overflows the viewport and NEVER over-sizes on mobile.
+   Default ratio is 16:9 — override per instance with `style="--video-ratio:4/3"`.
+
+   Or just render the shared snippet:  {% render 'bbc-rd-video', ... %}
+
+   WHY THIS FILE EXISTS
+   --------------------
+   The old `.rd-video` rule forced `min-height:340px`, which was taller than a
+   16:9 box on phones — so videos looked stretched/over-sized on mobile. A
+   homepage-only `!important` patch fixed the aspect-ratio but missed the
+   min-height floor and only covered `<iframe>`. This file replaces all of that
+   with one consistent contract for every page and every media type.
+
+   Loaded LAST (after bbc-redesign-2026.css) and uses `!important` on the two
+   properties that previously fought it (height / min-height) so it always wins.
+   ========================================================================== */
+
+/* ---- The responsive ratio box -------------------------------------------- */
+.rd-video,
+.bbc-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--video-ratio, 16 / 9);
+  height: auto !important;
+  min-height: 0 !important;        /* kill the 340px floor that over-sized mobile video */
+  overflow: hidden;
+}
+
+/* ---- Any media child fills the box exactly ------------------------------- */
+.rd-video > video,
+.rd-video > iframe,
+.rd-video .rd-video-el,
+.rd-video > img,
+.bbc-video > video,
+.bbc-video > iframe,
+.bbc-video > img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;             /* fill the frame; no letterboxing */
+  border: 0;
+  display: block;
+}
+
+/* ---- Overlay + play button sit above the media --------------------------- */
+.rd-video .rd-ov,
+.rd-video .rd-play,
+.bbc-video__overlay,
+.bbc-video__play {
+  position: absolute;
+  z-index: 2;
+}
+
+/* ---- Empty placeholder state (no media chosen yet) ----------------------- */
+/* When the box holds no real media, drop the ratio lock and give it a
+   comfortable height so the "play" placeholder still looks right. */
+.rd-video:not(:has(video, iframe, img)),
+.bbc-video:not(:has(video, iframe, img)) {
+  aspect-ratio: auto;
+  min-height: 340px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Tiny phones: a touch shorter so the hero/video isn't dominant ------- */
+@media (max-width: 480px) {
+  .rd-video:not(:has(video, iframe, img)),
+  .bbc-video:not(:has(video, iframe, img)) {
+    min-height: 240px !important;
+  }
+}

@@ -1,0 +1,476 @@
+/* BBC Kit Product Page — Typography & Layout
+   Type scale: Canyon/Ribble benchmark
+   Rule: All overrides scoped to product page context
+   DO NOT use bare element selectors */
+
+/* ===== DAWN PRODUCT PAGE OVERRIDES ===== */
+
+/* Product title */
+.product h1 {
+  font-size: clamp(1.4rem, 1.2rem + 1vw, 1.8rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+  margin-bottom: 4px !important;
+}
+
+/* Subtitle — smaller, muted */
+.product .product__text[class*="subtitle"] {
+  font-size: 0.88rem !important;
+  line-height: 1.5 !important;
+  color: #666 !important;
+  margin-top: 0;
+  margin-bottom: 8px !important;
+}
+
+/* Price — prominent but not shouting */
+.product .price__regular,
+.product .price-item--regular {
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+  color: var(--bbc-forest) !important;
+}
+
+.product .price .price-item--sale {
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+}
+
+/* "Shipping calculated at checkout" */
+.product .product__tax {
+  font-size: 0.78rem !important;
+  color: #888 !important;
+}
+
+/* Pay-in-3 / Shop Pay installments */
+.product .shopify-payment-terms,
+.product [class*="payment-terms"] {
+  font-size: 0.82rem !important;
+  margin-top: 4px !important;
+}
+
+/* Size / Variant label */
+.product .product-form__group-label,
+.product .product-form__label,
+.product fieldset legend {
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: #333 !important;
+  margin-bottom: 8px !important;
+}
+
+/* Variant picker buttons — much smaller, cleaner */
+.product .product-form__input label {
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  padding: 10px 16px !important;
+  min-height: auto !important;
+  line-height: 1.3 !important;
+  border-radius: 6px !important;
+}
+
+/* Selected variant */
+.product .product-form__input input:checked + label {
+  font-weight: 600 !important;
+  border-width: 2px !important;
+}
+
+/* Quantity label */
+.product .quantity__label {
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+}
+
+/* Product description */
+.product .product__description {
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+/* Collapsible tab headings — accordion labels, not page sections */
+.product .accordion summary h2 {
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0 !important;
+}
+
+/* Collapsible content */
+.product .accordion .accordion__content {
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+/* FAQ section heading */
+.collapsible-content-wrapper h2 {
+  font-size: clamp(1.15rem, 1rem + 0.8vw, 1.5rem) !important;
+  font-weight: 700 !important;
+}
+
+/* FAQ question text */
+.collapsible-content .accordion summary .accordion__title,
+.collapsible-content .accordion summary span {
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+}
+
+/* FAQ answer text */
+.collapsible-content .accordion .accordion__content {
+  font-size: 0.85rem;
+  line-height: 1.65;
+}
+
+/* Share button */
+.product .share-button {
+  font-size: 0.8rem !important;
+}
+
+/* ===== WHAT'S IN THE BOX ===== */
+.bbc-kit-box {
+  --kit-forest: #073e27;
+  --kit-gold: #ffa900;
+  --kit-cream: #f8f7f2;
+  --kit-accent: #3f8b66;
+  padding: clamp(40px, 5vw, 64px) 0;
+  background: var(--kit-cream);
+}
+
+.bbc-kit-box__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.bbc-kit-box__header {
+  text-align: center;
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+.bbc-kit-box__eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kit-accent);
+  margin: 0 0 6px;
+}
+
+.bbc-kit-box__title {
+  font-size: clamp(1.25rem, 1rem + 1.2vw, 1.75rem) !important;
+  font-weight: 700 !important;
+  color: var(--kit-forest);
+  margin: 0 0 6px !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.bbc-kit-box__subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.bbc-kit-box__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.bbc-kit-box__item {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(7, 62, 39, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bbc-kit-box__item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(7, 62, 39, 0.08);
+}
+
+.bbc-kit-box__item-image {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--kit-cream);
+}
+
+.bbc-kit-box__item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bbc-kit-box__item-content {
+  padding: 16px;
+}
+
+.bbc-kit-box__item-name {
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  color: var(--kit-forest);
+  margin: 0 0 4px !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0 !important;
+}
+
+.bbc-kit-box__item-desc {
+  font-size: 0.8rem;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ===== BUILD JOURNEY ===== */
+.bbc-kit-journey {
+  --kit-forest: #073e27;
+  --kit-accent: #3f8b66;
+  padding: clamp(40px, 5vw, 64px) 0;
+  background: #fff;
+}
+
+.bbc-kit-journey__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.bbc-kit-journey__header {
+  text-align: center;
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+.bbc-kit-journey__title {
+  font-size: clamp(1.25rem, 1rem + 1.2vw, 1.75rem) !important;
+  font-weight: 700 !important;
+  color: var(--kit-forest);
+  margin: 0 0 6px !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.bbc-kit-journey__subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+.bbc-kit-journey__steps {
+  position: relative;
+  display: grid;
+  gap: 0;
+}
+
+.bbc-kit-journey__step {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  align-items: start;
+  gap: 0;
+  min-height: 88px;
+}
+
+.bbc-kit-journey__step-marker {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bbc-kit-journey__step-content {
+  grid-column: 2;
+  padding-left: 16px;
+  padding-bottom: 12px;
+  min-width: 0;
+}
+
+.bbc-kit-journey__step-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--kit-forest);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.bbc-kit-journey__step-line {
+  width: 2px;
+  flex: 1;
+  background: rgba(7, 62, 39, 0.12);
+  min-height: 20px;
+}
+
+.bbc-kit-journey__step:last-child .bbc-kit-journey__step-line {
+  display: none;
+}
+
+.bbc-kit-journey__step-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--kit-accent);
+  margin: 0 0 2px;
+}
+
+.bbc-kit-journey__step-name {
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  color: var(--kit-forest);
+  margin: 0 0 3px !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0 !important;
+}
+
+.bbc-kit-journey__step-desc {
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ===== BUILDER QUOTE ===== */
+.bbc-kit-quote {
+  --kit-forest: #073e27;
+  --kit-gold: #ffa900;
+  padding: clamp(36px, 4vw, 56px) 24px;
+  text-align: center;
+  background: var(--kit-forest);
+  color: #fff;
+}
+
+.bbc-kit-quote__inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bbc-kit-quote__stars {
+  color: var(--kit-gold);
+  font-size: 1rem;
+  margin-bottom: 12px;
+  letter-spacing: 3px;
+}
+
+.bbc-kit-quote__text {
+  font-size: clamp(0.95rem, 0.85rem + 0.5vw, 1.15rem);
+  font-style: italic;
+  line-height: 1.65;
+  margin: 0 0 12px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.bbc-kit-quote__attr {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.bbc-kit-quote__attr strong {
+  color: var(--kit-gold);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 749px) {
+  /* Box grid: 2-col */
+  .bbc-kit-box__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .bbc-kit-box__item-content {
+    padding: 12px;
+  }
+
+  .bbc-kit-box__item-name {
+    font-size: 0.82rem !important;
+  }
+
+  .bbc-kit-box__item-desc {
+    font-size: 0.75rem;
+  }
+
+  /* Journey: tighter on mobile */
+  .bbc-kit-journey__step {
+    grid-template-columns: 36px 1fr;
+    min-height: 72px;
+  }
+
+  .bbc-kit-journey__step-content {
+    padding-left: 12px;
+    padding-bottom: 10px;
+  }
+
+  .bbc-kit-journey__step-name {
+    font-size: 0.88rem !important;
+  }
+
+  .bbc-kit-journey__step-desc {
+    font-size: 0.8rem;
+  }
+
+  .bbc-kit-journey__step-dot {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+}
+
+/* Desktop: alternating journey */
+@media (min-width: 990px) {
+  .bbc-kit-journey__inner {
+    max-width: 800px;
+  }
+
+  .bbc-kit-journey__step {
+    grid-template-columns: 1fr 48px 1fr;
+  }
+
+  .bbc-kit-journey__step-marker {
+    grid-column: 2;
+  }
+
+  .bbc-kit-journey__step-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .bbc-kit-journey__step:nth-child(odd) .bbc-kit-journey__step-content {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: right;
+    padding-right: 24px;
+  }
+
+  .bbc-kit-journey__step:nth-child(odd) .bbc-kit-journey__step-marker {
+    grid-row: 1;
+  }
+
+  .bbc-kit-journey__step:nth-child(even) .bbc-kit-journey__step-content {
+    grid-column: 3;
+    text-align: left;
+    padding-left: 24px;
+  }
+
+  .bbc-kit-journey__step-dot {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  .bbc-kit-box__item { transition: none; }
+  .bbc-kit-box__item:hover { transform: none; }
+}

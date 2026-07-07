@@ -1,0 +1,537 @@
+{% comment %}
+  BBC Carbon Comparison Section
+  Research finding: "BBC's 56.7% carbon reduction claim is buried in a text paragraph.
+  Elvis & Kresse built their entire brand around material provenance. This is a differentiator."
+  Pattern sourced from: Elvis & Kresse (material story), Nudie Jeans (sustainability report visuals),
+  Patagonia (environmental footprint page)
+  
+  Renders a split visual: bamboo vs aluminium carbon bars with supporting facts.
+  No images needed — pure CSS with SVG icons.
+{% endcomment %}
+
+{%- style -%}
+.bbc-carbon {
+  padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.background_color }};
+}
+
+.bbc-carbon__container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.bbc-carbon__header {
+  max-width: 680px;
+  {% if section.settings.layout == 'center' %}
+    margin: 0 auto;
+    text-align: center;
+  {% endif %}
+  margin-bottom: 56px;
+}
+
+.bbc-carbon__eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bbc-teal);
+  margin-bottom: 16px;
+}
+
+.bbc-carbon__heading {
+  font-size: clamp(1.625rem, 3vw, 2.25rem);
+  font-weight: 800;
+  color: var(--bbc-forest);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.bbc-carbon__subheading {
+  font-size: 17px;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+/* The comparison itself */
+.bbc-carbon__comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.bbc-carbon__bar-wrap {
+  background: white;
+  padding: 36px 28px;
+  border: 1px solid rgba(7, 62, 39, 0.08);
+  position: relative;
+}
+
+.bbc-carbon__bar-wrap--highlight {
+  background: var(--bbc-forest);
+  border-color: var(--bbc-forest);
+}
+
+.bbc-carbon__material-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.bbc-carbon__bar-wrap .bbc-carbon__material-label {
+  color: #718096;
+}
+
+.bbc-carbon__bar-wrap--highlight .bbc-carbon__material-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Big percentage */
+.bbc-carbon__percent {
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+
+.bbc-carbon__bar-wrap .bbc-carbon__percent {
+  color: #e53e3e;
+}
+
+.bbc-carbon__bar-wrap--highlight .bbc-carbon__percent {
+  color: #6ee7b7;
+}
+
+.bbc-carbon__percent-label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.bbc-carbon__bar-wrap .bbc-carbon__percent-label {
+  color: #4a5568;
+}
+
+.bbc-carbon__bar-wrap--highlight .bbc-carbon__percent-label {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Progress bar */
+.bbc-carbon__bar-track {
+  height: 10px;
+  background: rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.bbc-carbon__bar-fill {
+  height: 100%;
+  transition: width 0.8s ease;
+}
+
+.bbc-carbon__bar-wrap .bbc-carbon__bar-fill {
+  background: #e53e3e;
+}
+
+.bbc-carbon__bar-wrap--highlight .bbc-carbon__bar-fill {
+  background: #6ee7b7;
+}
+
+/* Facts list */
+.bbc-carbon__facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bbc-carbon__fact {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.bbc-carbon__bar-wrap .bbc-carbon__fact {
+  color: #4a5568;
+}
+
+.bbc-carbon__bar-wrap--highlight .bbc-carbon__fact {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bbc-carbon__fact-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.bbc-carbon__bar-wrap .bbc-carbon__fact-dot {
+  background: #cbd5e0;
+}
+
+.bbc-carbon__bar-wrap--highlight .bbc-carbon__fact-dot {
+  background: #6ee7b7;
+}
+
+/* Badge on highlight card */
+.bbc-carbon__badge {
+  position: absolute;
+  top: -1px;
+  left: 28px;
+  background: var(--bbc-teal);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+}
+
+/* Bottom fact strip */
+.bbc-carbon__strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-top: 1px solid rgba(7, 62, 39, 0.1);
+  padding-top: 32px;
+}
+
+.bbc-carbon__strip-item {
+  flex: 1;
+  min-width: 200px;
+  padding: 0 24px;
+  border-right: 1px solid rgba(7, 62, 39, 0.1);
+}
+
+.bbc-carbon__strip-item:first-child {
+  padding-left: 0;
+}
+
+.bbc-carbon__strip-item:last-child {
+  border-right: none;
+}
+
+.bbc-carbon__strip-number {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--bbc-forest);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.bbc-carbon__strip-label {
+  font-size: 13px;
+  color: #718096;
+  line-height: 1.4;
+}
+
+@media (max-width: 749px) {
+  .bbc-carbon {
+    padding: 48px 0;
+  }
+
+  .bbc-carbon__comparison {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .bbc-carbon__percent {
+    font-size: 3rem;
+  }
+
+  .bbc-carbon__strip {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .bbc-carbon__strip-item {
+    padding: 0;
+    border-right: none;
+    border-bottom: 1px solid rgba(7, 62, 39, 0.1);
+    padding-bottom: 20px;
+  }
+
+  .bbc-carbon__strip-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+{%- endstyle -%}
+
+<section class="bbc-carbon">
+  <div class="bbc-carbon__container">
+
+    <div class="bbc-carbon__header">
+      {% if section.settings.eyebrow != blank %}
+        <p class="bbc-carbon__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h2 class="bbc-carbon__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="bbc-carbon__subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+
+    <div class="bbc-carbon__comparison">
+
+      <!-- Aluminium (baseline) -->
+      <div class="bbc-carbon__bar-wrap">
+        <p class="bbc-carbon__material-label">{{ section.settings.baseline_label }}</p>
+        <div class="bbc-carbon__percent">{{ section.settings.baseline_percent }}</div>
+        <p class="bbc-carbon__percent-label">{{ section.settings.baseline_desc }}</p>
+        <div class="bbc-carbon__bar-track">
+          <div class="bbc-carbon__bar-fill" style="width: 100%;"></div>
+        </div>
+        <ul class="bbc-carbon__facts">
+          {% for block in section.blocks %}
+            {% if block.type == 'baseline_fact' and block.settings.text != blank %}
+              <li class="bbc-carbon__fact">
+                <span class="bbc-carbon__fact-dot" aria-hidden="true"></span>
+                {{ block.settings.text }}
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Bamboo (hero) -->
+      <div class="bbc-carbon__bar-wrap bbc-carbon__bar-wrap--highlight">
+        <span class="bbc-carbon__badge">{{ section.settings.hero_badge }}</span>
+        <p class="bbc-carbon__material-label">{{ section.settings.hero_label }}</p>
+        <div class="bbc-carbon__percent">{{ section.settings.hero_percent }}</div>
+        <p class="bbc-carbon__percent-label">{{ section.settings.hero_desc }}</p>
+        <div class="bbc-carbon__bar-track">
+          <div class="bbc-carbon__bar-fill" style="width: {{ section.settings.hero_bar_pct }}%;"></div>
+        </div>
+        <ul class="bbc-carbon__facts">
+          {% for block in section.blocks %}
+            {% if block.type == 'hero_fact' and block.settings.text != blank %}
+              <li class="bbc-carbon__fact">
+                <span class="bbc-carbon__fact-dot" aria-hidden="true"></span>
+                {{ block.settings.text }}
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom stat strip -->
+    {% assign strip_blocks = section.blocks | where: 'type', 'strip_stat' %}
+    {% if strip_blocks.size > 0 %}
+      <div class="bbc-carbon__strip">
+        {% for block in strip_blocks %}
+          {% if block.settings.number != blank %}
+            <div class="bbc-carbon__strip-item" {{ block.shopify_attributes }}>
+              <div class="bbc-carbon__strip-number">{{ block.settings.number }}</div>
+              <div class="bbc-carbon__strip-label">{{ block.settings.label }}</div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Carbon Comparison",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Environmental Impact"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Bamboo vs Aluminium"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Every frame we build has a significantly lower environmental footprint than a conventional aluminium bicycle frame."
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Header alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Baseline (Aluminium)"
+    },
+    {
+      "type": "text",
+      "id": "baseline_label",
+      "label": "Material label",
+      "default": "Aluminium frame"
+    },
+    {
+      "type": "text",
+      "id": "baseline_percent",
+      "label": "Percentage display",
+      "default": "100%"
+    },
+    {
+      "type": "text",
+      "id": "baseline_desc",
+      "label": "Percentage description",
+      "default": "Carbon baseline"
+    },
+    {
+      "type": "header",
+      "content": "Hero (Bamboo)"
+    },
+    {
+      "type": "text",
+      "id": "hero_badge",
+      "label": "Badge text",
+      "default": "BBC Choice"
+    },
+    {
+      "type": "text",
+      "id": "hero_label",
+      "label": "Material label",
+      "default": "Bamboo frame"
+    },
+    {
+      "type": "text",
+      "id": "hero_percent",
+      "label": "Percentage display",
+      "default": "43.3%"
+    },
+    {
+      "type": "text",
+      "id": "hero_desc",
+      "label": "Percentage description",
+      "default": "56.7% less carbon than aluminium"
+    },
+    {
+      "type": "range",
+      "id": "hero_bar_pct",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "label": "Bar fill percentage",
+      "info": "Visual width of bamboo bar. Set to 43 to show 43.3% carbon level.",
+      "default": 43
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 40,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 40,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "baseline_fact",
+      "name": "Aluminium fact",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Fact",
+          "default": "Energy-intensive smelting process"
+        }
+      ]
+    },
+    {
+      "type": "hero_fact",
+      "name": "Bamboo fact",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Fact",
+          "default": "Absorbs 35% more CO₂ than trees"
+        }
+      ]
+    },
+    {
+      "type": "strip_stat",
+      "name": "Bottom stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "4,000+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Frames built"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Carbon Comparison",
+      "blocks": [
+        { "type": "baseline_fact", "settings": { "text": "Energy-intensive smelting process" } },
+        { "type": "baseline_fact", "settings": { "text": "Requires mining of bauxite ore" } },
+        { "type": "baseline_fact", "settings": { "text": "Does not regenerate naturally" } },
+        { "type": "hero_fact", "settings": { "text": "Absorbs 35% more CO₂ than equivalent trees" } },
+        { "type": "hero_fact", "settings": { "text": "Regenerates from roots — no replanting needed" } },
+        { "type": "hero_fact", "settings": { "text": "Harvested without destroying the plant" } },
+        { "type": "strip_stat", "settings": { "number": "4,000+", "label": "Bamboo frames built since 2012" } },
+        { "type": "strip_stat", "settings": { "number": "56.7%", "label": "Lower carbon than aluminium" } },
+        { "type": "strip_stat", "settings": { "number": "35%", "label": "More CO₂ absorbed than trees" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

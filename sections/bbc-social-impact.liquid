@@ -1,0 +1,432 @@
+{% comment %}
+  BBC Social Impact Section
+  Research insight: Mission supports purchase, doesn't lead it
+  Pattern from: Bambike, Patagonia, Elvis & Kresse, TOMS
+{% endcomment %}
+
+<section class="bbc-impact" aria-labelledby="impact-heading">
+  <div class="bbc-impact__container page-width">
+    
+    <div class="bbc-impact__grid {% render 'bbc-layout-classes', content_width: section.settings.content_width, visual_position: section.settings.visual_position, vertical_align: section.settings.vertical_align, mobile_order: section.settings.mobile_order, gap_size: section.settings.gap_size %}">
+      
+      {%- comment -%} Image {%- endcomment -%}
+      <div class="bbc-impact__image bbc-layout__visual">
+        {% if section.settings.image != blank %}
+          <img 
+            src="{{ section.settings.image | image_url: width: 800 }}"
+            srcset="{{ section.settings.image | image_url: width: 400 }} 400w,
+                    {{ section.settings.image | image_url: width: 600 }} 600w,
+                    {{ section.settings.image | image_url: width: 800 }} 800w"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            alt="Build to Bond programme - prisoners building bamboo bicycles"
+            loading="lazy"
+            class="bbc-impact__img"
+          >
+        {% else %}
+          <div class="bbc-impact__placeholder" aria-hidden="true">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="2"/>
+              <path d="M22 36c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="currentColor" stroke-width="2"/>
+              <circle cx="26" cy="26" r="3" fill="currentColor"/>
+              <circle cx="38" cy="26" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+        {% endif %}
+        
+        {%- comment -%} Award Badge {%- endcomment -%}
+        <div class="bbc-impact__badge">
+          <span class="bbc-impact__badge-title">Investec Beyond Business</span>
+          <span class="bbc-impact__badge-year">2025 Winner</span>
+        </div>
+      </div>
+      
+      {%- comment -%} Content {%- endcomment -%}
+      <div class="bbc-impact__content bbc-layout__content">
+        <span class="bbc-impact__label">More Than Bicycles</span>
+        <h2 id="impact-heading" class="bbc-impact__title">Building Bicycles.<br>Rebuilding Lives.</h2>
+        <p class="bbc-impact__desc">Through our <strong>Build to Bond</strong> programme, incarcerated parents build bamboo balance bikes for their children. It's hands-on education that strengthens family ties and builds real skills for life after release.</p>
+        
+        <ul class="bbc-impact__stats" role="list">
+          <li class="bbc-impact__stat">
+            <span class="bbc-impact__stat-icon" aria-hidden="true">{% render 'bbc-icons', icon: 'zap' %}</span>
+            <span class="bbc-impact__stat-text"><strong>26% confidence uplift</strong> in participants</span>
+          </li>
+          <li class="bbc-impact__stat">
+            <span class="bbc-impact__stat-icon" aria-hidden="true">{% render 'bbc-icons', icon: 'certificate' %}</span>
+            <span class="bbc-impact__stat-text"><strong>OCN Level 2</strong> qualification included</span>
+          </li>
+          <li class="bbc-impact__stat">
+            <span class="bbc-impact__stat-icon" aria-hidden="true">💼</span>
+            <span class="bbc-impact__stat-text"><strong>Employer partnerships</strong> for graduate interviews</span>
+          </li>
+        </ul>
+        
+        {%- comment -%} Endorsement Quote {%- endcomment -%}
+        <blockquote class="bbc-impact__quote">
+          <p>"A genuinely impactful initiative."</p>
+          <footer>
+            <cite>
+              <strong>James Timpson</strong>
+              <span>UK Prisons Minister</span>
+            </cite>
+          </footer>
+        </blockquote>
+        
+        <a href="{{ section.settings.button_link | default: '/pages/impact' }}" class="bbc-btn bbc-btn--{{ section.settings.button_style | default: 'secondary' }} bbc-impact__button">
+          {{ section.settings.button_text | default: 'Learn About Our Impact' }}
+        </a>
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+
+<style>
+  .bbc-impact {
+    padding: 80px 0;
+    background: var(--bbc-white, var(--bbc-white));
+  }
+  
+  .bbc-impact__container {
+    padding: 0 20px;
+  }
+  
+  .bbc-impact__grid {
+    /* Grid layout handled by shared bbc-layout classes */
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  /* Image */
+  .bbc-impact__image {
+    position: relative;
+  }
+  
+  .bbc-impact__img {
+    width: 100%;
+    height: auto;
+    border-left: 4px solid var(--bbc-teal, var(--bbc-teal));
+    box-shadow: var(--bbc-shadow-lg, 0 8px 24px rgba(0,0,0,0.12));
+  }
+  
+  .bbc-impact__placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--bbc-cream, var(--bbc-cream));
+    border-left: 4px solid var(--bbc-teal, var(--bbc-teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bbc-text-muted, #64748b);
+  }
+
+  .bbc-impact__badge {
+    position: absolute;
+    bottom: -16px;
+    right: 24px;
+    background: var(--bbc-gold, var(--bbc-gold));
+    color: var(--bbc-forest, var(--bbc-forest));
+    padding: 12px 20px;
+    border-left: 4px solid transparent;
+    text-align: center;
+    box-shadow: var(--bbc-shadow-md, 0 4px 12px rgba(0,0,0,0.1));
+  }
+  
+  .bbc-impact__badge-title {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .bbc-impact__badge-year {
+    display: block;
+    font-size: 14px;
+    font-weight: 800;
+  }
+  
+  /* Content — CSS fix 2026-03-27: removed max-width constraint causing text truncation */
+  .bbc-impact__content {
+    max-width: 100%;
+    min-width: 0; /* Prevents grid blowout */
+  }
+  
+  .bbc-impact__label {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--bbc-teal, var(--bbc-teal));
+    margin-bottom: 12px;
+  }
+  
+  .bbc-impact__title {
+    font-family: var(--bbc-font, 'Plus Jakarta Sans', sans-serif);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 20px 0;
+    line-height: 1.15;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .bbc-impact__desc {
+    font-size: 17px;
+    color: var(--bbc-text-muted, #64748b);
+    line-height: 1.8; /* Increased for readability */
+    margin: 0 0 28px 0;
+    /* CSS fix 2026-03-27: prevent text truncation */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: normal;
+    white-space: normal;
+  }
+  
+  .bbc-impact__desc strong {
+    color: var(--bbc-forest, var(--bbc-forest));
+    font-weight: 600;
+  }
+  
+  /* Stats */
+  .bbc-impact__stats {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .bbc-impact__stat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--bbc-text, #1e293b);
+  }
+  
+  .bbc-impact__stat-icon {
+    font-size: 20px;
+  }
+  
+  .bbc-impact__stat-text strong {
+    color: var(--bbc-forest, var(--bbc-forest));
+  }
+  
+  /* Quote */
+  .bbc-impact__quote {
+    margin: 0 0 28px 0;
+    padding: 20px 24px;
+    background: var(--bbc-cream, var(--bbc-cream));
+    border-left: 4px solid transparent;
+    border-left: 3px solid var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  .bbc-impact__quote p {
+    font-size: 18px;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 12px 0;
+  }
+  
+  .bbc-impact__quote cite {
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .bbc-impact__quote cite strong {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bbc-forest, var(--bbc-forest));
+  }
+  
+  .bbc-impact__quote cite span {
+    font-size: 13px;
+    color: var(--bbc-text-muted, #64748b);
+  }
+  
+  /* Button */
+  .bbc-impact__button {
+    display: inline-flex;
+    padding: 14px 28px;
+    background: var(--bbc-forest, var(--bbc-forest));
+    color: var(--bbc-white, var(--bbc-white));
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+  
+  .bbc-impact__button:hover {
+    background: var(--bbc-teal, var(--bbc-teal));
+    transform: translateY(-2px);
+  }
+  
+  .bbc-impact__button:focus-visible {
+    outline: 3px solid var(--bbc-gold, var(--bbc-gold));
+    outline-offset: 3px;
+  }
+  
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-impact__button { transition: none; }
+    .bbc-impact__button:hover { transform: none; }
+  }
+  
+  /* Tablet (768px–1023px) */
+  @media (max-width: 1023px) {
+    .bbc-impact__content {
+      max-width: 100%;
+    }
+  }
+
+  /* Mobile (max 768px) */
+  @media (max-width: 768px) {
+    .bbc-impact {
+      padding: 60px 0;
+    }
+    
+    .bbc-impact__badge {
+      bottom: auto;
+      top: 16px;
+      right: 16px;
+      padding: 10px 16px;
+    }
+    
+    .bbc-impact__title {
+      font-size: 28px;
+    }
+    
+    .bbc-impact__desc {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+  }
+  
+  /* Mobile small (max 480px) */
+  @media (max-width: 480px) {
+    .bbc-impact {
+      padding: 40px 0;
+    }
+    
+    .bbc-impact__title {
+      font-size: 24px;
+    }
+    
+    .bbc-impact__desc {
+      font-size: 15px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Social Impact",
+  "tag": "section",
+  "class": "bbc-impact-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "visual_position",
+      "label": "Image position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "Content/image width ratio",
+      "options": [
+        { "value": "50-50", "label": "Equal (50/50)" },
+        { "value": "60-40", "label": "More text (60/40)" },
+        { "value": "40-60", "label": "More image (40/60)" },
+        { "value": "70-30", "label": "Mostly text (70/30)" }
+      ],
+      "default": "50-50"
+    },
+    {
+      "type": "select",
+      "id": "vertical_align",
+      "label": "Vertical alignment",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "mobile_order",
+      "label": "Mobile stack order",
+      "options": [
+        { "value": "image_first", "label": "Image first" },
+        { "value": "text_first", "label": "Text first" }
+      ],
+      "default": "image_first",
+      "info": "Which appears first when stacked on mobile"
+    },
+    {
+      "type": "select",
+      "id": "gap_size",
+      "label": "Gap between columns",
+      "options": [
+        { "value": "sm", "label": "Small (24px)" },
+        { "value": "md", "label": "Medium (40px)" },
+        { "value": "lg", "label": "Large (64px)" }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Learn About Our Impact"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "primary", "label": "Primary (Gold)" },
+        { "value": "secondary", "label": "Secondary (Forest)" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "outline-light", "label": "Outline Light" },
+        { "value": "white", "label": "White" },
+        { "value": "gold", "label": "Gold" }
+      ],
+      "default": "secondary"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Social Impact"
+    }
+  ]
+}
+{% endschema %}

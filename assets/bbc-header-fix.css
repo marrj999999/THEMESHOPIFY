@@ -1,0 +1,169 @@
+/* BBC Header Fixes
+   Consistent sizing and typography for header/navigation
+*/
+
+/* CRITICAL: Fix logo text display */
+.header__heading-link {
+  white-space: nowrap !important;
+  word-break: normal !important;
+}
+
+.header__heading-link .h2 {
+  white-space: nowrap !important;
+  display: inline !important;
+}
+
+/* Ensure header heading has proper width */
+.header__heading {
+  min-width: max-content;
+}
+
+/* Font family for header */
+.header,
+.header *,
+.menu-drawer,
+.menu-drawer * {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Logo size */
+.header__heading-logo {
+  max-width: 180px;
+}
+
+@media screen and (max-width: 749px) {
+  .header__heading-logo {
+    max-width: 140px;
+  }
+}
+
+/* Navigation links - Desktop */
+.header__inline-menu .header__menu-item {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 0.75rem 0.5rem;
+}
+
+/* Prevent nav wrapping */
+.header__inline-menu {
+  flex-wrap: nowrap;
+}
+
+.header__inline-menu .list-menu {
+  flex-wrap: nowrap;
+  gap: 0;
+}
+
+/* Better spacing on larger screens */
+@media screen and (min-width: 1200px) {
+  .header__inline-menu .header__menu-item {
+    padding: 0.75rem 0.75rem;
+    font-size: 13px;
+  }
+}
+
+/* Compact on medium screens */
+@media screen and (max-width: 1199px) {
+  .header__inline-menu .header__menu-item {
+    font-size: 11px;
+    padding: 0.75rem 0.375rem;
+  }
+}
+
+/* Hide SUPPORT on smaller desktops - users can find via footer */
+@media screen and (max-width: 1100px) {
+  .header__inline-menu .list-menu__item:last-child {
+    display: none;
+  }
+}
+
+/* Navigation links - Mobile drawer */
+.menu-drawer__menu-item {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.menu-drawer__submenu .menu-drawer__menu-item {
+  font-size: 15px;
+}
+
+/* Announcement bar */
+.announcement-bar__message {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Header icons */
+.header__icon {
+  width: 22px;
+  height: 22px;
+}
+
+/* Mobile menu button */
+.header__icon--menu svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Cart count badge */
+.cart-count-bubble {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Header padding adjustments */
+@media screen and (max-width: 749px) {
+  .header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .header .header__heading-link {
+    padding: 0;
+  }
+}
+
+/* Mega menu font sizes */
+.mega-menu__link {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.mega-menu__link--level-2 {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* Predictive search */
+.predictive-search__item-heading {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Account/Cart text */
+.header__icon span {
+  font-size: 12px;
+}
+
+/* BBC brand colors for header */
+/* Header has dark green background, so text must be WHITE */
+.header {
+  --color-foreground: 255, 255, 255; /* White text on dark background */
+}
+
+/* Force all header text/icons to white */
+.header .header__menu-item,
+.header .list-menu__item > a,
+.header .list-menu__item > summary,
+.header__icon,
+.header__icon svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+.announcement-bar {
+  --color-foreground: 255, 255, 255;
+  --color-background: 7, 62, 39; /* BBC Forest */
+}

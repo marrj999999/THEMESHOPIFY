@@ -1,0 +1,49 @@
+{{ 'bbc-kit-product.css' | asset_url | stylesheet_tag }}
+
+<div class="bbc-kit-confidence" role="list" aria-label="Key facts">
+  {%- for block in section.blocks -%}
+    <div class="bbc-kit-confidence__item" role="listitem" {{ block.shopify_attributes }}>
+      <p class="bbc-kit-confidence__number">{{ block.settings.number }}</p>
+      <p class="bbc-kit-confidence__label">{{ block.settings.label }}</p>
+    </div>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Kit Confidence Bar",
+  "tag": "div",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "4,000+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Frames Built"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kit Confidence Bar",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "4,000+", "label": "Frames Built" } },
+        { "type": "stat", "settings": { "number": "<1%", "label": "Failure Rate" } },
+        { "type": "stat", "settings": { "number": "36+", "label": "Countries" } },
+        { "type": "stat", "settings": { "number": "95%", "label": "First-Time Builders" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

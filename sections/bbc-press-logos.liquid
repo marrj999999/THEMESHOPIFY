@@ -1,0 +1,286 @@
+{% comment %}
+  BBC Press + Recognition Bar
+  Research finding: "Every credible impact page shows publication logos in a visual strip.
+  BBC has a link to the FT article but no logo. Investec is mentioned but no badge."
+  Pattern sourced from: Jamie Oliver Group, Bikeworks, Divine Chocolate, Shannon Trust
+  All show horizontal recognition strips between content sections.
+{% endcomment %}
+
+{%- style -%}
+.bbc-press-logos {
+  padding: {{ section.settings.padding_top }}px 24px {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.background_color }};
+  border-top: 1px solid rgba(7, 62, 39, 0.08);
+  border-bottom: 1px solid rgba(7, 62, 39, 0.08);
+}
+
+.bbc-press-logos__container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.bbc-press-logos__eyebrow {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-foreground, #4a5568);
+  opacity: 0.6;
+  margin-bottom: 28px;
+}
+
+.bbc-press-logos__grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+/* Each logo item */
+.bbc-press-logos__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 32px;
+  gap: 4px;
+  text-decoration: none;
+  opacity: 0.65;
+  transition: opacity 0.2s ease;
+  border-right: 1px solid rgba(7, 62, 39, 0.1);
+  min-width: 140px;
+}
+
+.bbc-press-logos__item:last-child {
+  border-right: none;
+}
+
+.bbc-press-logos__item:hover {
+  opacity: 1;
+}
+
+/* If a logo image is provided */
+.bbc-press-logos__image {
+  display: block;
+  max-height: {{ section.settings.logo_height }}px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  filter: grayscale(1) contrast(0.8);
+  transition: filter 0.2s ease;
+}
+
+.bbc-press-logos__item:hover .bbc-press-logos__image {
+  filter: grayscale(0) contrast(1);
+}
+
+/* Text fallback when no logo image */
+.bbc-press-logos__name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--bbc-forest, var(--bbc-forest));
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  text-align: center;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.bbc-press-logos__type {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bbc-teal, var(--bbc-teal));
+  text-align: center;
+}
+
+@media (max-width: 749px) {
+  .bbc-press-logos {
+    padding: 32px 16px;
+  }
+
+  .bbc-press-logos__grid {
+    gap: 0;
+  }
+
+  .bbc-press-logos__item {
+    padding: 14px 20px;
+    min-width: 110px;
+    border-right: 1px solid rgba(7, 62, 39, 0.1);
+  }
+
+  .bbc-press-logos__item:nth-child(even) {
+    border-right: none;
+  }
+
+  .bbc-press-logos__name {
+    font-size: 13px;
+  }
+}
+{%- endstyle -%}
+
+<div class="bbc-press-logos">
+  <div class="bbc-press-logos__container">
+    {% if section.settings.eyebrow != blank %}
+      <p class="bbc-press-logos__eyebrow">{{ section.settings.eyebrow }}</p>
+    {% endif %}
+
+    <div class="bbc-press-logos__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'logo' %}
+          {% if block.settings.link != blank %}
+            <a href="{{ block.settings.link }}" class="bbc-press-logos__item" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
+          {% else %}
+            <div class="bbc-press-logos__item" {{ block.shopify_attributes }}>
+          {% endif %}
+
+          {% if block.settings.logo_image != blank %}
+            <img
+              src="{{ block.settings.logo_image | image_url: width: 240 }}"
+              alt="{{ block.settings.name }}"
+              class="bbc-press-logos__image"
+              loading="lazy"
+              width="120"
+              height="{{ section.settings.logo_height }}"
+            >
+          {% else %}
+            <span class="bbc-press-logos__name">{{ block.settings.name }}</span>
+          {% endif %}
+
+          {% if block.settings.badge != blank %}
+            <span class="bbc-press-logos__type">{{ block.settings.badge }}</span>
+          {% endif %}
+
+          {% if block.settings.link != blank %}
+            </a>
+          {% else %}
+            </div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "BBC Press Bar",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "As seen in & recognised by"
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "min": 24,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Logo height",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 16,
+      "max": 80,
+      "step": 8,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 16,
+      "max": 80,
+      "step": 8,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Publication / Award",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name (text fallback)",
+          "info": "Shown if no logo image uploaded. Use publication name e.g. 'Financial Times'",
+          "default": "Financial Times"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "Logo image",
+          "info": "Optional. If provided, used instead of text. Use monochrome PNG, transparent background."
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge label",
+          "info": "Small label below name e.g. '2025 Winner' or 'September 2025'"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Press Bar",
+      "blocks": [
+        {
+          "type": "logo",
+          "settings": {
+            "name": "Financial Times",
+            "badge": "September 2025",
+            "link": "https://www.ft.com/content/6ebe2eba-b832-4289-9924-2e9f948d5f98"
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "Investec",
+            "badge": "2025 Winner"
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "Kevin McCloud",
+            "badge": "Green Heroes 2018"
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "OCN London",
+            "badge": "Level 2 Accredited"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

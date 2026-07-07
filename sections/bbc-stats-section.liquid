@@ -1,0 +1,147 @@
+{% comment %}
+  BBC Stats Section — Clean Design
+  Simple stats bar with centered numbers
+{% endcomment %}
+
+<section class="bbc-section bbc-section--{{ section.settings.background }}">
+  <div class="bbc-container">
+    
+    {% if section.settings.heading != blank %}
+      <div class="bbc-stats-section__header">
+        {% if section.settings.label != blank %}
+          <p class="bbc-label">{{ section.settings.label }}</p>
+        {% endif %}
+        <h2 class="bbc-heading-md">{{ section.settings.heading }}</h2>
+      </div>
+    {% endif %}
+    
+    <div class="bbc-stats bbc-stats--{{ section.settings.layout }}">
+      {%- for block in section.blocks -%}
+        <div class="bbc-stat{% if block.settings.highlight %} bbc-stat--accent{% endif %}" {{ block.shopify_attributes }}>
+          <span class="bbc-stat__number">{{ block.settings.number }}</span>
+          <span class="bbc-stat__label">{{ block.settings.label }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+    
+  </div>
+</section>
+
+<style>
+  .bbc-stats-section__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  
+  .bbc-stats-section__header .bbc-label {
+    margin-bottom: 12px;
+  }
+  
+  .bbc-stats-section__header .bbc-heading-md {
+    margin: 0;
+  }
+  
+  .bbc-stats--spread {
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .bbc-stats--centered {
+    justify-content: center;
+  }
+  
+  /* Dark background variant */
+  .bbc-section--forest .bbc-stat__number {
+    color: var(--bbc-white, var(--bbc-white));
+  }
+  
+  .bbc-section--forest .bbc-stat__label {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .bbc-section--forest .bbc-stat--accent .bbc-stat__number {
+    color: var(--bbc-gold, var(--bbc-gold));
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Stats",
+  "tag": "section",
+  "class": "bbc-stats-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "centered", "label": "Centered" },
+        { "value": "spread", "label": "Spread out" }
+      ],
+      "default": "centered"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "cream", "label": "Cream" },
+        { "value": "forest", "label": "Forest Green" }
+      ],
+      "default": "cream"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "4,000+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Bikes Built"
+        },
+        {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "Highlight (gold)",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Stats",
+      "settings": {
+        "background": "cream"
+      },
+      "blocks": [
+        { "type": "stat", "settings": { "number": "4,000+", "label": "Bikes Built" } },
+        { "type": "stat", "settings": { "number": "36", "label": "Countries" } },
+        { "type": "stat", "settings": { "number": "12", "label": "Years" } },
+        { "type": "stat", "settings": { "number": "56.7%", "label": "Less CO₂", "highlight": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

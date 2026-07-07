@@ -1,0 +1,112 @@
+{% comment %}
+  BBC Layout Classes Helper
+  Outputs the correct CSS class string for the shared bbc-layout system.
+
+  Usage:
+    <div class="{% render 'bbc-layout-classes',
+      content_width: section.settings.content_width,
+      visual_position: section.settings.visual_position,
+      vertical_align: section.settings.vertical_align,
+      mobile_order: section.settings.mobile_order,
+      gap_size: section.settings.gap_size
+    %}">
+      <div class="bbc-layout__content">...</div>
+      <div class="bbc-layout__visual">...</div>
+    </div>
+
+  Standard Schema Settings to copy into each section's {% schema %}:
+
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "visual_position",
+      "label": "Image/visual position",
+      "options": [
+        { "value": "right", "label": "Right" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "Content/visual width ratio",
+      "options": [
+        { "value": "50-50", "label": "Equal (50/50)" },
+        { "value": "60-40", "label": "More text (60/40)" },
+        { "value": "40-60", "label": "More visual (40/60)" },
+        { "value": "70-30", "label": "Mostly text (70/30)" }
+      ],
+      "default": "50-50"
+    },
+    {
+      "type": "select",
+      "id": "vertical_align",
+      "label": "Vertical alignment",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "mobile_order",
+      "label": "Mobile stack order",
+      "options": [
+        { "value": "image_first", "label": "Image first" },
+        { "value": "text_first", "label": "Text first" }
+      ],
+      "default": "image_first",
+      "info": "Which appears first when stacked on mobile"
+    },
+    {
+      "type": "select",
+      "id": "gap_size",
+      "label": "Gap between columns",
+      "options": [
+        { "value": "sm", "label": "Small (24px)" },
+        { "value": "md", "label": "Medium (40px)" },
+        { "value": "lg", "label": "Large (64px)" }
+      ],
+      "default": "lg"
+    }
+
+{% endcomment %}
+
+{%- liquid
+  assign classes = 'bbc-layout'
+
+  if content_width != blank
+    assign classes = classes | append: ' bbc-layout--' | append: content_width
+  else
+    assign classes = classes | append: ' bbc-layout--50-50'
+  endif
+
+  if visual_position == 'left'
+    assign classes = classes | append: ' bbc-layout--visual-left'
+  endif
+
+  if vertical_align != blank
+    assign classes = classes | append: ' bbc-layout--align-' | append: vertical_align
+  else
+    assign classes = classes | append: ' bbc-layout--align-center'
+  endif
+
+  if mobile_order == 'text_first'
+    assign classes = classes | append: ' bbc-layout--mobile-text-first'
+  else
+    assign classes = classes | append: ' bbc-layout--mobile-image-first'
+  endif
+
+  if gap_size != blank
+    assign classes = classes | append: ' bbc-layout--gap-' | append: gap_size
+  else
+    assign classes = classes | append: ' bbc-layout--gap-lg'
+  endif
+-%}
+{{- classes -}}

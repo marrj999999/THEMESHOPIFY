@@ -1,0 +1,579 @@
+{% comment %}
+  BBC Hero Slider — Full-width carousel with video/image support
+  More impactful than plain text hero
+{% endcomment %}
+
+<section class="bbc-hero-slider" data-testid="bbc-hero-slider">
+  <div class="bbc-hero-slider__container">
+    
+    {%- comment -%} Slides {%- endcomment -%}
+    <div class="bbc-hero-slider__track" data-slides>
+      {% for block in section.blocks %}
+        {% if block.type == 'slide' %}
+          <div class="bbc-hero-slider__slide{% if forloop.first %} active{% endif %}" 
+               data-slide="{{ forloop.index0 }}"
+               {{ block.shopify_attributes }}>
+            
+            {%- comment -%} Background Media {%- endcomment -%}
+            <div class="bbc-hero-slider__media">
+              {% if block.settings.video_url != blank %}
+                <video autoplay muted loop playsinline class="bbc-hero-slider__video"{% if block.settings.poster_asset != blank %} poster="{{ block.settings.poster_asset | asset_url }}"{% endif %}>
+                  <source src="{{ block.settings.video_url }}" type="video/mp4">
+                </video>
+              {% elsif block.settings.image != blank %}
+                {{ block.settings.image | image_url: width: 1920 | image_tag:
+                  class: 'bbc-hero-slider__image',
+                  loading: 'eager',
+                  fetchpriority: 'high',
+                  alt: block.settings.heading
+                }}
+              {% elsif block.settings.image_asset != blank %}
+                <img class="bbc-hero-slider__image" src="{{ block.settings.image_asset | asset_url }}" loading="eager" fetchpriority="high" alt="{{ block.settings.heading | escape }}">
+              {% else %}
+                <div class="bbc-hero-slider__placeholder" style="background: {{ block.settings.bg_color | default: 'var(--bbc-forest)' }}"></div>
+              {% endif %}
+              <div class="bbc-hero-slider__overlay" style="opacity: {{ block.settings.overlay_opacity | default: 20 | divided_by: 100.0 }}"></div>
+            </div>
+            
+            {%- comment -%} Content {%- endcomment -%}
+            <div class="bbc-hero-slider__content page-width">
+              {% if block.settings.eyebrow != blank %}
+                <p class="bbc-hero-slider__eyebrow" style="color: {{ block.settings.eyebrow_color | default: 'var(--bbc-gold)' }}">{{ block.settings.eyebrow }}</p>
+              {% endif %}
+              
+              <h1 class="bbc-hero-slider__heading" style="color: {{ block.settings.heading_color | default: 'var(--bbc-white)' }}">{{ block.settings.heading }}</h1>
+              
+              {% if block.settings.subheading != blank %}
+                <p class="bbc-hero-slider__subheading" style="color: {{ block.settings.subheading_color | default: 'var(--bbc-white)' }}">{{ block.settings.subheading }}</p>
+              {% endif %}
+              
+              {% if block.settings.button_text != blank %}
+                <div class="bbc-hero-slider__actions">
+                  <a href="{{ block.settings.button_link }}" class="bbc-btn bbc-btn--{{ block.settings.button_style | default: 'primary' }} bbc-btn--lg">
+                    {{ block.settings.button_text }}
+                  </a>
+                  {% if block.settings.button_secondary_text != blank %}
+                    <a href="{{ block.settings.button_secondary_link }}" class="bbc-btn bbc-btn--{{ block.settings.button_secondary_style | default: 'outline-light' }} bbc-btn--lg">
+                      {{ block.settings.button_secondary_text }}
+                    </a>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    
+    {%- comment -%} Navigation Dots {%- endcomment -%}
+    {% if section.blocks.size > 1 %}
+      <div class="bbc-hero-slider__dots" data-dots>
+        {% for block in section.blocks %}
+          {% if block.type == 'slide' %}
+            <button class="bbc-hero-slider__dot{% if forloop.first %} active{% endif %}" 
+                    data-dot="{{ forloop.index0 }}"
+                    aria-label="Go to slide {{ forloop.index }}"></button>
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      {%- comment -%} Arrow Navigation {%- endcomment -%}
+      <button class="bbc-hero-slider__arrow bbc-hero-slider__arrow--prev" data-prev aria-label="Previous slide">
+        {% render 'bbc-icons', icon: 'chevron-down' %}
+      </button>
+      <button class="bbc-hero-slider__arrow bbc-hero-slider__arrow--next" data-next aria-label="Next slide">
+        {% render 'bbc-icons', icon: 'chevron-down' %}
+      </button>
+    {% endif %}
+    
+  </div>
+  
+  {%- comment -%} Press Logos Bar {%- endcomment -%}
+  {% if section.settings.show_press_bar %}
+    <div class="bbc-hero-slider__press">
+      <div class="page-width">
+        <span class="bbc-hero-slider__press-label">{{ section.settings.press_label | default: "Featured in:" }}</span>
+        <div class="bbc-hero-slider__press-logos">
+          <img src="{{ 'logo-ft.svg' | asset_url }}" alt="Financial Times" class="bbc-hero-slider__press-logo" width="120" height="32" loading="eager">
+          <img src="{{ 'logo-guardian.svg' | asset_url }}" alt="The Guardian" class="bbc-hero-slider__press-logo" width="100" height="32" loading="eager">
+          <img src="{{ 'logo-bikeradar.svg' | asset_url }}" alt="BikeRadar" class="bbc-hero-slider__press-logo" width="100" height="32" loading="eager">
+          <img src="{{ 'logo-roadcc.svg' | asset_url }}" alt="road.cc" class="bbc-hero-slider__press-logo" width="80" height="32" loading="eager">
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  
+</section>
+
+<style>
+.bbc-hero-slider {
+  position: relative;
+  background: var(--bbc-forest, var(--bbc-forest));
+}
+
+.bbc-hero-slider__container {
+  position: relative;
+  overflow: hidden;
+}
+
+.bbc-hero-slider__track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.bbc-hero-slider__slide {
+  flex: 0 0 100%;
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .bbc-hero-slider__slide {
+    min-height: 80vh;
+  }
+}
+
+.bbc-hero-slider__media {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.bbc-hero-slider__image,
+.bbc-hero-slider__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bbc-hero-slider__placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+.bbc-hero-slider__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(7, 62, 39, 0.85) 0%, rgba(7, 62, 39, 0.6) 100%);
+}
+
+.bbc-hero-slider__content {
+  position: relative;
+  z-index: 2;
+  color: var(--bbc-white);
+  padding: var(--bbc-space-12) var(--bbc-space-4);
+  max-width: 800px;
+}
+
+@media (min-width: 768px) {
+  .bbc-hero-slider__content {
+    padding: var(--bbc-space-16) 0;
+  }
+}
+
+.bbc-hero-slider__eyebrow {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: var(--bbc-space-4);
+}
+
+.bbc-hero-slider__heading {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0 0 var(--bbc-space-6);
+}
+
+.bbc-hero-slider__subheading {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  margin: 0 0 var(--bbc-space-8);
+  max-width: 600px;
+}
+
+.bbc-hero-slider__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--bbc-space-4);
+}
+
+/* Navigation */
+.bbc-hero-slider__dots {
+  position: absolute;
+  bottom: var(--bbc-space-6);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: var(--bbc-space-2);
+}
+
+.bbc-hero-slider__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.bbc-hero-slider__dot.active,
+.bbc-hero-slider__dot:hover {
+  background: var(--bbc-white);
+  transform: scale(1.2);
+}
+
+.bbc-hero-slider__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  color: var(--bbc-white);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+@media (min-width: 768px) {
+  .bbc-hero-slider__arrow {
+    display: flex;
+  }
+}
+
+.bbc-hero-slider__arrow:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.bbc-hero-slider__arrow--prev {
+  left: var(--bbc-space-4);
+}
+
+.bbc-hero-slider__arrow--next {
+  right: var(--bbc-space-4);
+}
+
+/* Press Bar */
+.bbc-hero-slider__press {
+  background: var(--bbc-white);
+  padding: var(--bbc-space-4) 0;
+  border-bottom: 1px solid var(--bbc-border, #e5e5e5);
+}
+
+.bbc-hero-slider__press .page-width {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--bbc-space-6);
+  flex-wrap: wrap;
+}
+
+.bbc-hero-slider__press-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--bbc-slate, #64748b);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bbc-hero-slider__press-logos {
+  display: flex;
+  align-items: center;
+  gap: var(--bbc-space-6);
+  flex-wrap: wrap;
+}
+
+.bbc-hero-slider__press-logo {
+  height: 24px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  opacity: 0.6;
+  filter: brightness(0) invert(1);
+}
+
+/* Button styles for hero */
+.bbc-hero-slider .bbc-btn--primary {
+  background: var(--bbc-gold, var(--bbc-gold));
+  color: var(--bbc-forest, var(--bbc-forest));
+  border: none;
+}
+
+.bbc-hero-slider .bbc-btn--primary:hover {
+  background: #e69900;
+}
+
+.bbc-hero-slider .bbc-btn--outline-light {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.5);
+  color: var(--bbc-white);
+}
+
+.bbc-hero-slider .bbc-btn--outline-light:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: var(--bbc-white);
+}
+
+.bbc-hero-slider .bbc-btn--lg {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const slider = document.querySelector('.bbc-hero-slider');
+  if (!slider) return;
+  
+  const track = slider.querySelector('[data-slides]');
+  const slides = slider.querySelectorAll('[data-slide]');
+  const dots = slider.querySelectorAll('[data-dot]');
+  const prevBtn = slider.querySelector('[data-prev]');
+  const nextBtn = slider.querySelector('[data-next]');
+  
+  if (slides.length <= 1) return;
+  
+  let currentSlide = 0;
+  let autoplayInterval;
+  
+  function goToSlide(index) {
+    currentSlide = (index + slides.length) % slides.length;
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === currentSlide);
+    });
+    
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentSlide);
+    });
+  }
+  
+  function nextSlide() {
+    goToSlide(currentSlide + 1);
+  }
+  
+  function prevSlide() {
+    goToSlide(currentSlide - 1);
+  }
+  
+  // Event listeners
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => goToSlide(i));
+  });
+  
+  if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+  if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+  
+  // Autoplay
+  function startAutoplay() {
+    autoplayInterval = setInterval(nextSlide, 6000);
+  }
+  
+  function stopAutoplay() {
+    clearInterval(autoplayInterval);
+  }
+  
+  startAutoplay();
+  slider.addEventListener('mouseenter', stopAutoplay);
+  slider.addEventListener('mouseleave', startAutoplay);
+});
+</script>
+
+{% schema %}
+{
+  "name": "Hero Slider",
+  "tag": "section",
+  "class": "section-hero-slider",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_press_bar",
+      "label": "Show press bar below hero",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "press_label",
+      "label": "Press bar label",
+      "default": "Featured in:"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background Image"
+        },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Or theme-asset background filename",
+          "info": "Filename of an image in /assets. Used only if no Background Image is picked and no video is set."
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL (MP4)"
+        },
+        {
+          "type": "text",
+          "id": "poster_asset",
+          "label": "Video poster theme-asset filename",
+          "info": "Filename of a poster image in /assets (e.g. bbc-rd-home-poster.jpg). Shows before the video loads."
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color (fallback)",
+          "default": "#073e27"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "label": "Overlay Opacity",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "default": 20
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow Text"
+        },
+        {
+          "type": "color",
+          "id": "eyebrow_color",
+          "label": "Eyebrow Color",
+          "default": "#ffa900"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Build Your Own Bamboo Bicycle"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "textarea",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Workshops in London. Kits shipped worldwide. No experience needed."
+        },
+        {
+          "type": "color",
+          "id": "subheading_color",
+          "label": "Subheading Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Book a Workshop"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button Style",
+          "options": [
+            { "value": "primary", "label": "Primary (Gold)" },
+            { "value": "secondary", "label": "Secondary (Dark Green)" },
+            { "value": "outline", "label": "Outline (Dark)" },
+            { "value": "outline-light", "label": "Outline (Light)" }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "text",
+          "id": "button_secondary_text",
+          "label": "Secondary Button Text"
+        },
+        {
+          "type": "url",
+          "id": "button_secondary_link",
+          "label": "Secondary Button Link"
+        },
+        {
+          "type": "select",
+          "id": "button_secondary_style",
+          "label": "Secondary Button Style",
+          "options": [
+            { "value": "primary", "label": "Primary (Gold)" },
+            { "value": "secondary", "label": "Secondary (Dark Green)" },
+            { "value": "outline", "label": "Outline (Dark)" },
+            { "value": "outline-light", "label": "Outline (Light)" }
+          ],
+          "default": "outline-light"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Slider",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "Since 2012",
+            "heading": "4,000 people have built their own bamboo bicycle.",
+            "subheading": "Workshops in London. Kits shipped worldwide. No experience needed.",
+            "button_text": "Book a Workshop",
+            "button_link": "/pages/bicycle-frame-building-workshop",
+            "button_secondary_text": "Shop Kits",
+            "button_secondary_link": "/collections/home-build-kits"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "Build with Us",
+            "heading": "No experience needed. Just patience.",
+            "subheading": "95% of our builders have never built anything like this before. You'll be in good company.",
+            "button_text": "See How It Works",
+            "button_link": "/pages/about"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "Proven Performance",
+            "heading": "8,288 miles through the Andes. On bamboo.",
+            "subheading": "Kate Rawles rode from Colombia to Tierra del Fuego on her BBC-built bike 'Woody'. The most reliable bike she's ever owned.",
+            "button_text": "Read Her Story",
+            "button_link": "/pages/gallery"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

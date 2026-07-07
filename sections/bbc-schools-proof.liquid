@@ -1,0 +1,56 @@
+{% comment %}
+  BBC Schools — Social proof (Layer 1). VERIFIED claims only (no Frensham, no CNN).
+  Quotes = blocks. Press line in settings.
+{% endcomment %}
+<section class="bbc-schools-proof">
+  <div class="page-width">
+    <div class="bbc-schools-proof__head">
+      {% if section.settings.eyebrow != blank %}<span class="bbc-schools-proof__eyebrow">{{ section.settings.eyebrow }}</span>{% endif %}
+      <h2 class="bbc-schools-proof__title">{{ section.settings.title }}</h2>
+    </div>
+    <div class="bbc-schools-proof__grid">
+      {% for block in section.blocks %}
+        <blockquote class="bbc-schools-proof__card" {{ block.shopify_attributes }}>
+          <p>{{ block.settings.quote }}</p>
+          <cite>{{ block.settings.by }}</cite>
+        </blockquote>
+      {% endfor %}
+    </div>
+    {% if section.settings.press != blank %}<p class="bbc-schools-proof__press">{{ section.settings.press }}</p>{% endif %}
+  </div>
+</section>
+<style>
+  .bbc-schools-proof{background:#fff;padding:64px 0}
+  .bbc-schools-proof__head{max-width:680px;margin:0 0 30px}
+  .bbc-schools-proof__eyebrow{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bbc-teal,#3f8b66);margin-bottom:10px}
+  .bbc-schools-proof__title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.25rem);color:var(--bbc-forest,#073e27);margin:0;line-height:1.15}
+  .bbc-schools-proof__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+  .bbc-schools-proof__card{background:var(--bbc-cream,#f8fafc);border-left:4px solid var(--bbc-gold,#ffa900);border-radius:12px;padding:22px 24px;margin:0}
+  .bbc-schools-proof__card p{font-size:1.05rem;line-height:1.5;font-style:italic;color:var(--bbc-gray-700,#1e293b);margin:0 0 12px}
+  .bbc-schools-proof__card cite{font-style:normal;font-weight:800;font-size:.88rem;color:var(--bbc-forest,#073e27)}
+  .bbc-schools-proof__press{text-align:center;font-size:.92rem;font-weight:700;color:var(--bbc-text-muted,#64748b);margin:30px 0 0}
+</style>
+{% schema %}
+{
+  "name": "BBC Schools Proof",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What people say" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Trusted by schools and the press" },
+    { "type": "text", "id": "press", "label": "Press line", "default": "Featured in The Guardian · Named a Kevin McCloud Green Hero" }
+  ],
+  "blocks": [
+    { "type": "quote", "name": "Quote", "settings": [
+      { "type": "textarea", "id": "quote", "label": "Quote" },
+      { "type": "text", "id": "by", "label": "Attribution" }
+    ] }
+  ],
+  "presets": [
+    { "name": "BBC Schools Proof", "blocks": [
+      { "type": "quote", "settings": { "quote": "Crafting bamboo bicycles goes beyond the workshop; it’s a journey of innovation, environmental responsibility, and the integration of STEM principles.", "by": "Nick Mills, Head of Design, Bradfield College" } },
+      { "type": "quote", "settings": { "quote": "Bamboo is officially the fastest growing plant in the world… light, hollow-tube construction, supremely engineered by nature.", "by": "Kevin McCloud, Grand Designs (Green Heroes)" } },
+      { "type": "quote", "settings": { "quote": "Going to the workshop was hands-down one of the best things I have ever done.", "by": "The Guardian" } }
+    ] }
+  ]
+}
+{% endschema %}

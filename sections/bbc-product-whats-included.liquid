@@ -1,0 +1,548 @@
+{% comment %}
+  BBC What's Included Section
+  Main kit contents + bonus value cards.
+  All content editable via theme editor.
+  
+  Block types:
+  - item: Main kit component (icon, title, description)
+  - bonus: Free/included bonus card (icon, badge, title, text, badge_style)
+{% endcomment %}
+
+{%- style -%}
+.bbc-included {
+  padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.background_color }};
+}
+.bbc-included__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.bbc-included__header {
+  margin-bottom: 2rem;
+}
+.bbc-included__title {
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", system-ui, sans-serif);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin: 0 0 0.5rem;
+}
+.bbc-included__subtitle {
+  font-size: 1rem;
+  color: #4a6355;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Main kit items */
+.bbc-included__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+.bbc-included__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  padding: 1rem;
+  background: var(--bbc-white);
+  border: 1px solid rgba(7,62,39,0.1);
+  border-left: 3px solid var(--bbc-teal, var(--bbc-teal));
+}
+.bbc-included__item-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--bbc-teal, var(--bbc-teal));
+  margin-top: 2px;
+}
+.bbc-included__item-icon svg { width: 100%; height: 100%; }
+.bbc-included__item-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin: 0 0 0.25rem;
+}
+.bbc-included__item-desc {
+  font-size: 0.82rem;
+  color: #4a6355;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Bonus divider */
+.bbc-included__bonus-heading {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4a6355;
+  margin: 0 0 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(7,62,39,0.1);
+}
+
+/* Bonus cards */
+.bbc-included__bonus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.bbc-included__bonus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.25rem 0.875rem;
+  background: var(--bbc-cream, var(--bbc-cream));
+  border: 1px solid rgba(7,62,39,0.08);
+}
+.bbc-included__bonus-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--bbc-teal, var(--bbc-teal));
+  margin-bottom: 0.6rem;
+}
+.bbc-included__bonus-icon svg { width: 100%; height: 100%; }
+.bbc-included__bonus-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  margin-bottom: 0.5rem;
+}
+.bbc-included__bonus-badge--green {
+  background: var(--bbc-teal, var(--bbc-teal));
+  color: var(--bbc-white);
+}
+.bbc-included__bonus-badge--gold {
+  background: var(--bbc-gold, var(--bbc-gold));
+  color: var(--bbc-forest, var(--bbc-forest));
+}
+.bbc-included__bonus-title {
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin: 0 0 0.3rem;
+}
+.bbc-included__bonus-text {
+  font-size: 0.8rem;
+  color: #4a6355;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* CTA strip */
+.bbc-included__cta {
+  background: var(--bbc-forest, var(--bbc-forest));
+  color: var(--bbc-white);
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.bbc-included__cta-content {}
+.bbc-included__cta-title {
+  font-weight: 800;
+  font-size: 1.05rem;
+  margin: 0 0 0.25rem;
+}
+.bbc-included__cta-text {
+  font-size: 0.875rem;
+  opacity: 0.85;
+  margin: 0;
+}
+.bbc-included__cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bbc-gold, var(--bbc-gold));
+  color: var(--bbc-forest, var(--bbc-forest));
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 10px 20px;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-height: 44px;
+}
+.bbc-included__cta-link:hover { opacity: 0.9; }
+
+@media (max-width: 749px) {
+  .bbc-included__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .bbc-included__bonus-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bbc-included__cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+{%- endstyle -%}
+
+<section class="bbc-included" id="whats-included">
+  <div class="bbc-included__inner">
+
+    {%- comment -%} Header {%- endcomment -%}
+    <header class="bbc-included__header">
+      <h2 class="bbc-included__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="bbc-included__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </header>
+
+    {%- comment -%} Main kit items {%- endcomment -%}
+    {%- assign item_blocks = section.blocks | where: 'type', 'item' -%}
+    {%- if item_blocks.size > 0 -%}
+      <div class="bbc-included__grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'item' -%}
+            <div class="bbc-included__item" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon != blank and block.settings.icon != 'none' -%}
+                <div class="bbc-included__item-icon" aria-hidden="true">
+                  {%- render 'bbc-icons', icon: block.settings.icon -%}
+                </div>
+              {%- endif -%}
+              <div>
+                <p class="bbc-included__item-title">{{ block.settings.item_title }}</p>
+                {%- if block.settings.item_description != blank -%}
+                  <p class="bbc-included__item-desc">{{ block.settings.item_description }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Bonus cards {%- endcomment -%}
+    {%- assign bonus_blocks = section.blocks | where: 'type', 'bonus' -%}
+    {%- if bonus_blocks.size > 0 -%}
+      {%- if section.settings.bonus_heading != blank -%}
+        <p class="bbc-included__bonus-heading">{{ section.settings.bonus_heading }}</p>
+      {%- endif -%}
+      <div class="bbc-included__bonus-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'bonus' -%}
+            <div class="bbc-included__bonus" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon != blank and block.settings.icon != 'none' -%}
+                <div class="bbc-included__bonus-icon" aria-hidden="true">
+                  {%- render 'bbc-icons', icon: block.settings.icon -%}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.badge != blank -%}
+                <span class="bbc-included__bonus-badge bbc-included__bonus-badge--{{ block.settings.badge_style }}">
+                  {{ block.settings.badge }}
+                </span>
+              {%- endif -%}
+              <p class="bbc-included__bonus-title">{{ block.settings.title }}</p>
+              {%- if block.settings.text != blank -%}
+                <p class="bbc-included__bonus-text">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} CTA strip {%- endcomment -%}
+    {%- if section.settings.show_cta -%}
+      <div class="bbc-included__cta">
+        <div class="bbc-included__cta-content">
+          {%- if section.settings.cta_title != blank -%}
+            <p class="bbc-included__cta-title">{{ section.settings.cta_title }}</p>
+          {%- endif -%}
+          {%- if section.settings.cta_text != blank -%}
+            <p class="bbc-included__cta-text">{{ section.settings.cta_text }}</p>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.cta_button_text != blank -%}
+          <a href="{{ section.settings.cta_button_link }}" class="bbc-included__cta-link">
+            {{ section.settings.cta_button_text }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC What's Included",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "What's In The Box"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Everything you need to build your bamboo bicycle frame"
+    },
+    {
+      "type": "header",
+      "content": "Bonus Cards"
+    },
+    {
+      "type": "text",
+      "id": "bonus_heading",
+      "label": "Bonus section heading",
+      "default": "Also Included — Free",
+      "info": "Appears above the bonus card row. Leave blank to hide."
+    },
+    {
+      "type": "header",
+      "content": "CTA Strip"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show CTA strip",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "CTA heading",
+      "default": "Need Components Too?"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA description",
+      "default": "Check out our Component Packs for wheels, groupset, and finishing kit."
+    },
+    {
+      "type": "text",
+      "id": "cta_button_text",
+      "label": "Button text",
+      "default": "View Component Packs"
+    },
+    {
+      "type": "url",
+      "id": "cta_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Spacing & Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 24,
+      "max": 96,
+      "step": 8,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 24,
+      "max": 96,
+      "step": 8,
+      "default": 48,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Kit Component",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "box",
+          "options": [
+            { "value": "none", "label": "No icon" },
+            { "value": "box", "label": "Box" },
+            { "value": "tools", "label": "Tools" },
+            { "value": "ruler", "label": "Ruler" },
+            { "value": "zap", "label": "Lightning / Strength" },
+            { "value": "check-circle", "label": "Check circle" },
+            { "value": "leaf", "label": "Leaf / Eco" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "star", "label": "Star" },
+            { "value": "award", "label": "Award" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "item_title",
+          "label": "Component name",
+          "default": "Bamboo Tubes"
+        },
+        {
+          "type": "textarea",
+          "id": "item_description",
+          "label": "Description",
+          "default": "Heat-treated Moso bamboo, pre-shaped and ready to build"
+        }
+      ]
+    },
+    {
+      "type": "bonus",
+      "name": "Bonus Card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "users",
+          "options": [
+            { "value": "none", "label": "No icon" },
+            { "value": "users", "label": "Users / Community" },
+            { "value": "mail", "label": "Mail / Email" },
+            { "value": "star", "label": "Star / Reviews" },
+            { "value": "globe", "label": "Globe" },
+            { "value": "award", "label": "Award" },
+            { "value": "check-circle", "label": "Check circle" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "zap", "label": "Lightning" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "support", "label": "Support" },
+            { "value": "clock", "label": "Clock" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge text",
+          "default": "Free",
+          "info": "E.g. 'Free', 'Included', 'Lifetime'. Leave blank to hide."
+        },
+        {
+          "type": "select",
+          "id": "badge_style",
+          "label": "Badge colour",
+          "default": "green",
+          "options": [
+            { "value": "green", "label": "Green (Free)" },
+            { "value": "gold", "label": "Gold (Included)" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card title",
+          "default": "Community Access"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Card description",
+          "default": "4,000+ builders worldwide"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC What's Included",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "icon": "zap",
+            "item_title": "5 Bamboo Tubes",
+            "item_description": "Heat-treated Moso bamboo, pre-shaped and ready to build"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "tools",
+            "item_title": "Carbon Fibre & Epoxy",
+            "item_description": "Pre-cut carbon fibre tow + marine-grade epoxy resin kit"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "ruler",
+            "item_title": "Alignment Jig",
+            "item_description": "Plywood jig for perfect geometry — ensures your frame is straight"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "box",
+            "item_title": "Metal Components",
+            "item_description": "CNC machined headtube, BB shell (BSA 68mm), and dropouts"
+          }
+        },
+        {
+          "type": "bonus",
+          "settings": {
+            "icon": "star",
+            "badge": "Free",
+            "badge_style": "green",
+            "title": "Video Tutorials",
+            "text": "15+ hours step-by-step on YouTube"
+          }
+        },
+        {
+          "type": "bonus",
+          "settings": {
+            "icon": "users",
+            "badge": "Free",
+            "badge_style": "green",
+            "title": "Community Access",
+            "text": "4,000+ builders worldwide"
+          }
+        },
+        {
+          "type": "bonus",
+          "settings": {
+            "icon": "mail",
+            "badge": "Free",
+            "badge_style": "green",
+            "title": "Email Support",
+            "text": "Direct help from our team"
+          }
+        },
+        {
+          "type": "bonus",
+          "settings": {
+            "icon": "award",
+            "badge": "Included",
+            "badge_style": "gold",
+            "title": "Build Manual",
+            "text": "Comprehensive illustrated guide"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

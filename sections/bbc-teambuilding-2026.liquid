@@ -1,0 +1,233 @@
+{%- comment -%}
+  BBC New Design (2026) — TEAM BUILDING page (corporate). A public advert that sells the
+  corporate team-build (a team builds a real bamboo bike together, in ~3 hrs to a full day,
+  and can donate it to a community charity). Mirrors the Education page pattern + reuses the
+  .bbc-rd CSS. Real clients (Four Seasons, General Motors, The Macallan, Hilton) + real case
+  studies linked to our blog. Social-enterprise CIC + donate-the-bike is the moat. Generic by
+  design (no prison named). Request-a-quote, no public price. Scoped under .bbc-rd.
+{%- endcomment -%}
+
+{%- liquid
+  assign enquire = section.settings.enquiry_url | default: '/pages/contact-us'
+  assign email_url = section.settings.enquiry_email | default: 'mailto:info@bamboobicycleclub.org'
+-%}
+
+<div class="bbc-rd bbc-rd-tb">
+
+  {%- comment -%} ---------- HERO ---------- {%- endcomment -%}
+  <header class="rd-hero rd-mh-70">
+    <div class="rd-bg"><img src="{{ section.settings.hero_image | default: 'bbc-rd-tb-hero.jpg' | asset_url }}" alt="{{ section.settings.hero_alt | default: 'A corporate team building bamboo bikes together' | escape }}" width="1400" height="933" fetchpriority="high"></div>
+    <div class="rd-scrim"></div>
+    <div class="rd-inner"><div class="rd-wrap">
+      <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><span class="rd-here">Team Building</span></nav>
+      <span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>
+      <h1 class="rd-mt2 rd-mw-18ch">{{ section.settings.hero_title }}</h1>
+      <p class="rd-lede">{{ section.settings.hero_lede }}</p>
+      <div class="rd-cta-row">
+        <a class="rd-btn rd-lime" href="{{ enquire }}">{{ section.settings.hero_cta1 | default: 'Request a quote' }} <span class="rd-arrow">&rarr;</span></a>
+        <a class="rd-btn rd-on-dark" href="#how">{{ section.settings.hero_cta2 | default: 'How it works' }}</a>
+      </div>
+    </div></div>
+  </header>
+
+  {%- comment -%} ---------- CLIENT LOGO STRIP ---------- {%- endcomment -%}
+  {%- assign clients = section.blocks | where: 'type', 'client' -%}
+  {%- if clients.size > 0 -%}
+    <section class="rd-pad-sm rd-paper rd-center">
+      <div class="rd-wrap">
+        <p class="rd-partnerlabel">{{ section.settings.clients_label }}</p>
+        <div class="rd-logogrid rd-mt2">
+          {%- for b in clients -%}
+            {%- capture cell -%}{%- if b.settings.logo_asset != blank -%}<img class="rd-logoimg" src="{{ b.settings.logo_asset | asset_url }}" alt="{{ b.settings.name | escape }}" loading="lazy">{%- else -%}<span class="rd-logotext">{{ b.settings.name }}</span>{%- endif -%}{%- endcapture -%}
+            {%- if b.settings.url != blank -%}<a class="rd-logocell" href="{{ b.settings.url }}" target="_blank" rel="noopener" aria-label="{{ b.settings.name | escape }} — read the case study">{{ cell }}</a>{%- else -%}<div class="rd-logocell">{{ cell }}</div>{%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- KEY FACTS ---------- {%- endcomment -%}
+  <section class="rd-pad-sm">
+    <div class="rd-wrap">
+      <div class="rd-facts">
+        <div class="rd-fact"><span class="rd-fact-n">5–50+</span><span class="rd-fact-l">people per team day</span></div>
+        <div class="rd-fact"><span class="rd-fact-n">3 hrs–full day</span><span class="rd-fact-l">flexible format</span></div>
+        <div class="rd-fact"><span class="rd-fact-n">Your venue</span><span class="rd-fact-l">UK-wide, or come to us</span></div>
+        <div class="rd-fact"><span class="rd-fact-n">No experience</span><span class="rd-fact-l">needed — we guide every step</span></div>
+        <div class="rd-fact"><span class="rd-fact-n">Indoor / outdoor</span><span class="rd-fact-l">we bring the workshop</span></div>
+        <div class="rd-fact"><span class="rd-fact-n">Donate the bikes</span><span class="rd-fact-l">to a community charity</span></div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- WHAT THE DAY IS (split) ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-steel" id="how">
+    <div class="rd-wrap">
+      <div class="rd-split rd-tight rd-gap48-ac">
+        <div>
+          <span class="rd-eyebrow">The real thing</span>
+          <h2>A real bike. Not a flat-pack kit.</h2>
+          <p class="rd-lede rd-mt2">Most “build-a-bike” days bolt together a children’s kit in an hour. On ours, your team works raw bamboo — cutting, mitring, binding and finishing — into a frame that genuinely rides.</p>
+          <ul class="rd-list rd-mt3">
+            <li>A proper hands-on engineering challenge that needs the whole team</li>
+            <li>Every step guided by our facilitators — no DIY skill required</li>
+            <li>You finish the day with a real, rideable bamboo bike</li>
+            <li>Run it at your office, an away-day venue, or our London workshop</li>
+          </ul>
+        </div>
+        <div class="rd-card rd-stamp rd-lime">
+          <div class="rd-ph rd-ar-43"><img src="{{ section.settings.day_image | default: 'bbc-rd-tb-gm.jpg' | asset_url }}" alt="A corporate team building bamboo bike frames together" width="1200" height="900"></div>
+          <div class="rd-body"><p class="rd-cmp-35205">Cut, mitre, bind, finish — a frame made by hand, by your team.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- CHARITY / CIC MOAT ---------- {%- endcomment -%}
+  <section class="rd-pad rd-dark rd-center">
+    <div class="rd-wrap rd-mw-820px">
+      <span class="rd-eyebrow rd-on-dark">Build it, then give it away</span>
+      <h2>The best team day you’ll do all year — and a bike for a child who needs one.</h2>
+      <p class="rd-lede rd-mt2 rd-mx-auto">Bamboo Bicycle Club is a social enterprise — Bamboo Mobility Project CIC. The fee for your day funds our accredited skills work in schools and prisons, so the spend has impact before a single bike is built. And the bikes your team makes can be donated to a community charity: one company built balance bikes that went to Upcycle, a Brixton charity getting more children cycling.</p>
+      <div class="rd-cta-row rd-jc-center rd-mt3"><a class="rd-btn rd-lime" href="{{ enquire }}">Request a quote <span class="rd-arrow">&rarr;</span></a></div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- CASE STUDIES ---------- {%- endcomment -%}
+  {%- assign cs = section.blocks | where: 'type', 'casestudy' -%}
+  {%- if cs.size > 0 -%}
+    <section class="rd-pad-sm">
+      <div class="rd-wrap">
+        <span class="rd-eyebrow">{{ section.settings.cs_eyebrow }}</span>
+        <h2 class="rd-mw-16ch">{{ section.settings.cs_title }}</h2>
+        {%- if section.settings.cs_lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.cs_lede }}</p>{%- endif -%}
+        <div class="rd-csgrid rd-mt4">
+          {%- for b in cs -%}
+            {%- assign img = b.settings.image | default: 'bbc-rd-tb-fourseasons.jpg' -%}
+            <a class="rd-cscard" href="{{ b.settings.url }}" {{ b.shopify_attributes }}>
+              <div class="rd-cscard__media"><img src="{{ img | asset_url }}" alt="{{ b.settings.company | escape }} team build — Bamboo Bicycle Club" loading="lazy" width="600" height="375">{%- if b.settings.kind != blank -%}<span class="rd-cscard__kind">{{ b.settings.kind }}</span>{%- endif -%}</div>
+              <div class="rd-cscard__body">
+                {%- if b.settings.quote != blank -%}<p class="rd-cscard__quote">{{ b.settings.quote }}</p>{%- if b.settings.attribution != blank -%}<p class="rd-cscard__attr">{{ b.settings.attribution }}</p>{%- endif -%}{%- endif -%}
+                {%- if b.settings.blurb != blank -%}<p class="rd-cscard__ctx">{{ b.settings.blurb }}</p>{%- endif -%}
+                <div class="rd-cscard__foot">
+                  {%- if b.settings.logo_asset != blank -%}<img class="rd-cscard__logo" src="{{ b.settings.logo_asset | asset_url }}" alt="{{ b.settings.company | escape }}" loading="lazy">{%- else -%}<span class="rd-cscard__inst">{{ b.settings.company }}</span>{%- endif -%}
+                  <span class="rd-cscard__more">{{ b.settings.link_label | default: 'Read the case study' }} <span class="rd-arrow">&rarr;</span></span>
+                </div>
+              </div>
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- CREDIBILITY STRIP ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-paper rd-center">
+    <div class="rd-wrap">
+      <span class="rd-eyebrow">Accountable & insured</span>
+      <h2 class="rd-mt2">A team day you can stand behind.</h2>
+      <div class="rd-flex rd-mt4 rd-jc-center">
+        <span class="rd-tag rd-lime">Social enterprise · Bamboo Mobility Project CIC</span>
+        <span class="rd-tag">Enhanced-DBS facilitators</span>
+        <span class="rd-tag">Public-liability insured</span>
+        <span class="rd-tag">Investec Beyond Business 2025</span>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- FAQ ---------- {%- endcomment -%}
+  {%- assign faqs = section.blocks | where: 'type', 'faq' -%}
+  {%- if faqs.size > 0 -%}
+    <section class="rd-pad-sm">
+      <div class="rd-wrap rd-mw-820px">
+        <span class="rd-eyebrow">Good to know</span>
+        <h2 class="rd-mt2">Questions teams ask.</h2>
+        <div class="rd-faqs rd-mt3">
+          {%- for b in faqs -%}
+            <details class="rd-faq" {{ b.shopify_attributes }}>
+              <summary>{{ b.settings.q }}</summary>
+              <div class="rd-faq-a">{{ b.settings.a }}</div>
+            </details>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- FINAL CTA ---------- {%- endcomment -%}
+  <section class="rd-pad rd-dark rd-center">
+    <div class="rd-wrap rd-mw-680px">
+      <span class="rd-eyebrow rd-on-dark">Bring it to your team</span>
+      <h2>Let’s build something your team will remember.</h2>
+      <p class="rd-lede rd-mt2 rd-mx-auto">Tell us your team size, a rough date and your venue — we’ll send a proper quote within one working day. Materials, facilitation and the charity handover are all included.</p>
+      <div class="rd-flex rd-mt3 rd-jc-center">
+        <a class="rd-btn rd-lime" href="{{ enquire }}">Request a quote <span class="rd-arrow">&rarr;</span></a>
+        <a class="rd-btn rd-on-dark" href="{{ email_url }}">Email us</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Team Building 2026",
+  "tag": "section",
+  "class": "section bbc-teambuilding-2026-wrap",
+  "settings": [
+    { "type": "url", "id": "enquiry_url", "label": "Enquiry / quote link", "info": "Default /pages/contact-us" },
+    { "type": "url", "id": "enquiry_email", "label": "Enquiry email (mailto:)" },
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_image", "label": "Hero image filename", "default": "bbc-rd-tb-hero.jpg" },
+    { "type": "text", "id": "hero_alt", "label": "Hero alt", "default": "A corporate team celebrating the bamboo bike they built together" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Corporate team building · with a purpose" },
+    { "type": "text", "id": "hero_title", "label": "Headline", "default": "Your team builds a real bamboo bike — together." },
+    { "type": "textarea", "id": "hero_lede", "label": "Lede", "default": "Not a flat-pack kit — your people cut, shape and bind raw bamboo into a frame that actually rides. Then, if you like, the finished bikes go to a community charity. A proper team day that leaves something behind." },
+    { "type": "text", "id": "hero_cta1", "label": "Primary CTA", "default": "Request a quote" },
+    { "type": "text", "id": "hero_cta2", "label": "Secondary CTA", "default": "How it works" },
+    { "type": "header", "content": "Client logo strip" },
+    { "type": "text", "id": "clients_label", "label": "Label", "default": "Teams from these brands have built with us" },
+    { "type": "header", "content": "What the day is" },
+    { "type": "text", "id": "day_image", "label": "Split image filename", "default": "bbc-rd-tb-gm.jpg" },
+    { "type": "header", "content": "Case studies" },
+    { "type": "text", "id": "cs_eyebrow", "label": "Eyebrow", "default": "Teams we've built with" },
+    { "type": "text", "id": "cs_title", "label": "Heading", "default": "Real teams, real bikes, written up on our blog." },
+    { "type": "textarea", "id": "cs_lede", "label": "Lede", "default": "From a hotel leadership team to a 50-strong cross-functional group — here's how a build day actually goes." }
+  ],
+  "blocks": [
+    {
+      "type": "client",
+      "name": "Client logo",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Client name", "default": "Four Seasons" },
+        { "type": "text", "id": "logo_asset", "label": "Logo theme-asset filename" },
+        { "type": "url", "id": "url", "label": "Link (case study)" }
+      ]
+    },
+    {
+      "type": "casestudy",
+      "name": "Case study",
+      "settings": [
+        { "type": "text", "id": "kind", "label": "Kind tag", "default": "Corporate" },
+        { "type": "text", "id": "company", "label": "Company", "default": "Four Seasons" },
+        { "type": "text", "id": "logo_asset", "label": "Company logo filename (optional)" },
+        { "type": "text", "id": "image", "label": "Card photo filename", "default": "bbc-rd-tb-fourseasons.jpg" },
+        { "type": "textarea", "id": "quote", "label": "Quote (verbatim)" },
+        { "type": "text", "id": "attribution", "label": "Attribution" },
+        { "type": "textarea", "id": "blurb", "label": "Context line" },
+        { "type": "url", "id": "url", "label": "Link (blog case study)" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Read the case study" }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        { "type": "text", "id": "q", "label": "Question", "default": "How many people can take part?" },
+        { "type": "textarea", "id": "a", "label": "Answer", "default": "From a team of 5 to 50+." }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Team Building 2026" } ]
+}
+{% endschema %}

@@ -1,0 +1,92 @@
+/* =============================================================================
+   BBC LAYOUT UTILITIES
+   Shared two-column layout system for editor-controllable sections
+
+   Standardized breakpoints:
+   - 768px: Primary (tablet and below → single column)
+   - 480px: Mobile-only refinements
+
+   Usage: Pair with snippets/bbc-layout-classes.liquid for DRY class output
+   ============================================================================= */
+
+/* --- Two-Column Layout Base --- */
+.bbc-layout {
+  display: grid;
+  gap: var(--bbc-layout-gap, var(--space-16, 4rem));
+  align-items: var(--bbc-layout-align, start);
+}
+
+/* Width Ratios */
+.bbc-layout--50-50 { grid-template-columns: 1fr 1fr; }
+.bbc-layout--60-40 { grid-template-columns: 1.5fr 1fr; }
+.bbc-layout--40-60 { grid-template-columns: 1fr 1.5fr; }
+.bbc-layout--70-30 { grid-template-columns: 2.33fr 1fr; }
+
+/* Vertical Alignment */
+.bbc-layout--align-top    { align-items: start; }
+.bbc-layout--align-center { align-items: center; }
+.bbc-layout--align-bottom { align-items: end; }
+
+/* Visual Position: Left (swap order) */
+.bbc-layout--visual-left .bbc-layout__visual {
+  order: -1;
+}
+
+/* Gap Sizes */
+.bbc-layout--gap-sm { gap: var(--space-6, 1.5rem); }
+.bbc-layout--gap-md { gap: var(--space-10, 2.5rem); }
+.bbc-layout--gap-lg { gap: var(--space-16, 4rem); }
+
+/* --- Mobile Responsive (768px primary breakpoint) --- */
+@media (max-width: 768px) {
+  .bbc-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-4, 1rem); /* Reduced from 2rem for mobile white space fix */
+  }
+
+  /* Respect gap-size settings on mobile */
+  .bbc-layout--gap-sm { gap: var(--space-4, 1rem); }
+  .bbc-layout--gap-md { gap: var(--space-6, 1.5rem); }
+  .bbc-layout--gap-lg { gap: var(--space-8, 2rem); }
+
+  /* Reset desktop visual-left on mobile — mobile order classes take over */
+  .bbc-layout--visual-left .bbc-layout__visual {
+    order: unset;
+  }
+
+  /* Mobile order: image/visual first (default) */
+  .bbc-layout--mobile-image-first .bbc-layout__visual {
+    order: -1;
+  }
+
+  .bbc-layout--mobile-image-first .bbc-layout__content {
+    order: 0;
+  }
+
+  /* Mobile order: text/content first */
+  .bbc-layout--mobile-text-first .bbc-layout__content {
+    order: -1;
+  }
+
+  .bbc-layout--mobile-text-first .bbc-layout__visual {
+    order: 0;
+  }
+}
+
+/* --- Dark Background Variant --- */
+.bbc-layout--dark {
+  color: #fff;
+}
+
+.bbc-layout--dark .bbc-layout__content {
+  color: #fff;
+}
+
+/* --- Accessibility --- */
+@media (prefers-reduced-motion: reduce) {
+  .bbc-layout,
+  .bbc-layout * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

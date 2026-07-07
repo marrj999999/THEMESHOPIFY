@@ -1,0 +1,336 @@
+{% comment %}
+  BBC Impact Hero Section
+  Research: Social enterprises lead with giant impact numbers (Timpson "4500+ colleagues", Clink "800 students")
+  Pattern: Single large stat + mission statement above fold
+{% endcomment %}
+
+{%- style -%}
+.bbc-impact-hero {
+  padding: 120px 0 80px;
+  background: {{ section.settings.background_color }};
+  text-align: center;
+}
+
+.bbc-impact-hero__container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.bbc-impact-hero__eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bbc-teal, var(--bbc-teal));
+  margin-bottom: 24px;
+}
+
+/* Research: Giant number pattern (Timpson, Clink, Groundwork) */
+.bbc-impact-hero__number {
+  font-size: 96px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.bbc-impact-hero__number-label {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin-bottom: 32px;
+}
+
+.bbc-impact-hero__heading {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin-bottom: 24px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bbc-impact-hero__subheading {
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--color-foreground, #4a5568);
+  max-width: 700px;
+  margin: 0 auto 40px;
+}
+
+.bbc-impact-hero__ctas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.bbc-impact-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  background: var(--bbc-forest, var(--bbc-forest));
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bbc-impact-hero__cta {
+    transition: none;
+  }
+}
+
+.bbc-impact-hero__cta:hover {
+  background: var(--bbc-teal, var(--bbc-teal));
+}
+
+.bbc-impact-hero__cta--secondary {
+  background: transparent;
+  color: var(--bbc-forest, var(--bbc-forest));
+  border: 2px solid var(--bbc-forest, var(--bbc-forest));
+  padding: 14px 30px;
+}
+
+.bbc-impact-hero__cta--secondary:hover {
+  background: var(--bbc-forest, var(--bbc-forest));
+  color: white;
+}
+
+/* Research: Impact report download (8/12 social enterprises have this) */
+.bbc-impact-hero__report-link {
+  display: block;
+  margin-top: 24px;
+  font-size: 14px;
+  color: var(--bbc-teal, var(--bbc-teal));
+  text-decoration: underline;
+}
+
+.bbc-impact-hero__report-link:hover {
+  color: var(--bbc-forest, var(--bbc-forest));
+}
+
+/* Research: "Lead with a human, not a stat" — participant quote below headline.
+   Pattern from Divine Chocolate (named farmer quotes), Shannon Trust, Bikeworks.
+   Renders between subheading and CTAs when a quote is provided. */
+.bbc-impact-hero__participant-quote {
+  max-width: 680px;
+  margin: 0 auto 40px;
+  padding: 28px 32px;
+  background: rgba(63, 139, 102, 0.06);
+  border-left: 3px solid var(--bbc-teal, var(--bbc-teal));
+  text-align: left;
+}
+
+.bbc-impact-hero__pq-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--bbc-forest, var(--bbc-forest));
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.bbc-impact-hero__pq-attribution {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--bbc-teal, var(--bbc-teal));
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 749px) {
+  .bbc-impact-hero {
+    padding: 80px 0 48px;
+  }
+  
+  .bbc-impact-hero__number {
+    font-size: 64px;
+  }
+  
+  .bbc-impact-hero__number-label {
+    font-size: 18px;
+  }
+  
+  .bbc-impact-hero__heading {
+    font-size: 32px;
+  }
+  
+  .bbc-impact-hero__subheading {
+    font-size: 17px;
+  }
+
+  .bbc-impact-hero__participant-quote {
+    padding: 20px 20px;
+    text-align: left;
+  }
+
+  .bbc-impact-hero__pq-text {
+    font-size: 16px;
+  }
+}
+{%- endstyle -%}
+
+<section class="bbc-impact-hero">
+  <div class="bbc-impact-hero__container">
+    {% if section.settings.eyebrow != blank %}
+      <p class="bbc-impact-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+    {% endif %}
+    
+    {% if section.settings.giant_number != blank %}
+      <div class="bbc-impact-hero__number">{{ section.settings.giant_number }}</div>
+      {% if section.settings.number_label != blank %}
+        <div class="bbc-impact-hero__number-label">{{ section.settings.number_label }}</div>
+      {% endif %}
+    {% endif %}
+    
+    <h1 class="bbc-impact-hero__heading">{{ section.settings.heading }}</h1>
+    
+    {% if section.settings.subheading != blank %}
+      <p class="bbc-impact-hero__subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+
+    {% if section.settings.participant_quote != blank %}
+      <div class="bbc-impact-hero__participant-quote">
+        <p class="bbc-impact-hero__pq-text">"{{ section.settings.participant_quote }}"</p>
+        {% if section.settings.participant_name != blank %}
+          <p class="bbc-impact-hero__pq-attribution">— {{ section.settings.participant_name }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+    
+    {% if section.settings.cta_text != blank and section.settings.cta_link != blank %}
+      <div class="bbc-impact-hero__ctas">
+        <a href="{{ section.settings.cta_link }}" class="bbc-impact-hero__cta">
+          {{ section.settings.cta_text }}
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        {% if section.settings.cta2_text != blank and section.settings.cta2_link != blank %}
+          <a href="{{ section.settings.cta2_link }}" class="bbc-impact-hero__cta bbc-impact-hero__cta--secondary">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M6.5 5.5l5 2.5-5 2.5V5.5z" fill="currentColor"/>
+            </svg>
+            {{ section.settings.cta2_text }}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+    
+    {% if section.settings.report_text != blank and section.settings.report_link != blank %}
+      <a href="{{ section.settings.report_link }}" class="bbc-impact-hero__report-link">
+        {{ section.settings.report_text }}
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Impact Hero",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Our Impact"
+    },
+    {
+      "type": "text",
+      "id": "giant_number",
+      "label": "Giant impact number",
+      "default": "4,000+"
+    },
+    {
+      "type": "text",
+      "id": "number_label",
+      "label": "Number label",
+      "default": "Lives Changed Through Building"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Building Bicycles. Rebuilding Lives."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Through bamboo bicycle building, we teach sustainable manufacturing skills, strengthen family bonds, and create pathways to employment."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA button text",
+      "default": "Partner With Us"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA button link"
+    },
+    {
+      "type": "text",
+      "id": "cta2_text",
+      "label": "Secondary CTA text",
+      "info": "Optional second button (outlined). e.g. 'Watch Our Video'"
+    },
+    {
+      "type": "url",
+      "id": "cta2_link",
+      "label": "Secondary CTA link"
+    },
+    {
+      "type": "text",
+      "id": "report_text",
+      "label": "Impact report link text",
+      "default": "Download Our Impact Report (PDF)"
+    },
+    {
+      "type": "url",
+      "id": "report_link",
+      "label": "Impact report link"
+    },
+    {
+      "type": "header",
+      "content": "Participant quote (optional)",
+      "info": "Research: Social enterprises that feature named participant quotes convert funders and partners significantly better. First name only is fine for privacy."
+    },
+    {
+      "type": "textarea",
+      "id": "participant_quote",
+      "label": "Quote",
+      "info": "Leave blank to hide. Example: 'The bike was the first thing I ever made with my own hands. When my daughter rode it, I felt like a dad again.'"
+    },
+    {
+      "type": "text",
+      "id": "participant_name",
+      "label": "Attribution",
+      "info": "e.g. 'James, Build to Bond participant, 2024' — first name only fine"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Impact Hero"
+    }
+  ]
+}
+{% endschema %}

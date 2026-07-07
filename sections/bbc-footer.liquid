@@ -1,0 +1,1073 @@
+{% comment %}
+  BBC Custom Footer v2 — Fully editable via Shopify theme editor
+  Redesigned 2026-02-24: All content now editable via schema settings + blocks
+  
+  Editable via editor:
+  - Logo (image picker with fallback)
+  - Tagline, email, location
+  - All 4 navigation menus (linked to Shopify Navigation menus)
+  - Trust bar items (blocks)
+  - Newsletter heading/text
+  - Awards (blocks)
+  - Show/hide toggles (now actually applied)
+{% endcomment %}
+
+{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  /* =========================================================
+     BBC FOOTER — CSS CUSTOM PROPERTIES
+     All colours/sizes controllable from theme editor
+     ========================================================= */
+  .bbc-footer {
+    --footer-bg:           var(--bbc-forest, var(--bbc-forest));
+    --footer-bg-alt:       rgba(0, 0, 0, 0.15);
+    --footer-text:         var(--bbc-white);
+    --footer-text-muted:   rgba(255, 255, 255, 0.65);
+    --footer-border:       rgba(255, 255, 255, 0.12);
+    --footer-link-hover:   var(--bbc-gold, var(--bbc-gold));
+    --footer-radius:       8px;
+    --footer-col-gap:      2rem;
+    background: var(--footer-bg);
+    color: var(--footer-text);
+    margin-top: 0;
+    font-family: var(--font-body-family, 'Plus Jakarta Sans', system-ui, sans-serif);
+  }
+
+  /* =========================================================
+     TRUST BAR
+     ========================================================= */
+  .bbc-footer__trust-bar {
+    background: var(--footer-bg-alt);
+    border-bottom: 1px solid var(--footer-border);
+  }
+
+  .bbc-footer__trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 1.25rem 0;
+    text-align: center;
+  }
+
+  .bbc-footer__trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .bbc-footer__trust-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    margin-bottom: 0.25rem;
+  }
+
+  .bbc-footer__trust-value {
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  .bbc-footer__trust-label {
+    font-size: 0.6875rem;
+    color: var(--footer-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* =========================================================
+     MAIN FOOTER GRID
+     ========================================================= */
+  .bbc-footer__main {
+    padding: 3rem 0 2.5rem;
+  }
+
+  .bbc-footer__grid {
+    display: grid;
+    grid-template-columns: 1.6fr repeat(4, 1fr);
+    gap: var(--footer-col-gap);
+    align-items: start;
+  }
+
+  /* =========================================================
+     BRAND COLUMN
+     ========================================================= */
+  .bbc-footer__brand {
+    padding-right: 1rem;
+  }
+
+  .bbc-footer__logo {
+    display: block;
+    width: {{ section.settings.logo_width | default: 160 }}px;
+    height: auto;
+    margin-bottom: 1.25rem;
+  }
+
+  .bbc-footer__tagline {
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--footer-text-muted);
+    margin-bottom: 1.5rem;
+    max-width: 280px;
+  }
+
+  .bbc-footer__contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 0.625rem;
+    font-size: 0.875rem;
+    color: var(--footer-text-muted);
+  }
+
+  .bbc-footer__contact-item a {
+    color: var(--footer-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .bbc-footer__contact-item a:hover {
+    color: var(--footer-link-hover);
+  }
+
+  /* Social icons */
+  .bbc-footer__social {
+    display: flex;
+    gap: 0.625rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .bbc-footer__social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: var(--footer-text);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    text-decoration: none;
+  }
+
+  .bbc-footer__social a:hover {
+    background: var(--bbc-gold, var(--bbc-gold));
+    color: var(--bbc-forest, var(--bbc-forest));
+    transform: translateY(-2px);
+  }
+
+  .bbc-footer__social svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* =========================================================
+     NAV COLUMNS
+     ========================================================= */
+  .bbc-footer__nav-column h3,
+  .bbc-footer__nav-column summary {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--footer-text);
+    margin-bottom: 1.125rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--footer-border);
+    list-style: none;
+  }
+
+  /* Remove default <summary> marker */
+  .bbc-footer__nav-column summary::-webkit-details-marker,
+  .bbc-footer__nav-column summary::marker {
+    display: none;
+  }
+
+  .bbc-footer__nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .bbc-footer__nav-list li {
+    margin-bottom: 0.5rem;
+  }
+
+  .bbc-footer__nav-list a {
+    color: var(--footer-text-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    transition: color 0.2s ease, padding-left 0.15s ease;
+    display: block;
+  }
+
+  .bbc-footer__nav-list a:hover {
+    color: var(--footer-link-hover);
+    padding-left: 4px;
+  }
+
+  /* =========================================================
+     NEWSLETTER
+     ========================================================= */
+  .bbc-footer__newsletter {
+    background: rgba(255, 255, 255, 0.04);
+    border-top: 1px solid var(--footer-border);
+    border-bottom: 1px solid var(--footer-border);
+    padding: 2.5rem 0;
+  }
+
+  .bbc-footer__newsletter-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .bbc-footer__newsletter-content h3 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: var(--footer-text);
+    line-height: 1.3;
+  }
+
+  .bbc-footer__newsletter-content p {
+    color: var(--footer-text-muted);
+    font-size: 0.9375rem;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  .bbc-footer__newsletter-form {
+    display: flex;
+    gap: 0.625rem;
+    max-width: 500px;
+  }
+
+  .bbc-footer__newsletter-input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.8125rem 1.125rem;
+    border: 1.5px solid var(--footer-border);
+    border-radius: var(--footer-radius);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--footer-text);
+    font-size: 0.9375rem;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .bbc-footer__newsletter-input::placeholder {
+    color: var(--footer-text-muted);
+  }
+
+  .bbc-footer__newsletter-input:focus {
+    outline: none;
+    border-color: var(--bbc-gold, var(--bbc-gold));
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .bbc-footer__newsletter-btn {
+    padding: 0.8125rem 1.5rem;
+    background: var(--bbc-gold, var(--bbc-gold));
+    color: var(--bbc-forest, var(--bbc-forest));
+    border: none;
+    border-radius: var(--footer-radius);
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease, transform 0.15s ease;
+    font-family: inherit;
+  }
+
+  .bbc-footer__newsletter-btn:hover {
+    background: var(--bbc-gold);
+    transform: translateY(-1px);
+  }
+
+  .bbc-footer__newsletter-success {
+    color: var(--bbc-gold, var(--bbc-gold));
+    font-size: 0.9375rem;
+    margin-top: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* =========================================================
+     AWARDS ROW
+     ========================================================= */
+  .bbc-footer__awards {
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--footer-border);
+  }
+
+  .bbc-footer__awards-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .bbc-footer__award {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    color: var(--footer-text-muted);
+    font-size: 0.8125rem;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+  }
+
+  .bbc-footer__award:hover {
+    opacity: 1;
+  }
+
+  /* =========================================================
+     BOTTOM BAR
+     ========================================================= */
+  .bbc-footer__bottom {
+    padding: 1.5rem 0;
+  }
+
+  .bbc-footer__bottom-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .bbc-footer__copyright {
+    font-size: 0.8125rem;
+    color: var(--footer-text-muted);
+  }
+
+  .bbc-footer__legal {
+    display: flex;
+    gap: 1.25rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+  }
+
+  .bbc-footer__legal a {
+    font-size: 0.8125rem;
+    color: var(--footer-text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .bbc-footer__legal a:hover {
+    color: var(--footer-link-hover);
+  }
+
+  .bbc-footer__payments {
+    display: flex;
+    gap: 0.375rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .bbc-footer__payments .payment-icon,
+  .bbc-footer__payments svg {
+    height: 22px;
+    width: auto;
+    border-radius: 3px;
+  }
+
+  /* =========================================================
+     MOBILE — max 989px (tablet + phone)
+     ========================================================= */
+  @media screen and (max-width: 989px) {
+    .bbc-footer__trust-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.875rem;
+    }
+
+    .bbc-footer__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    /* Brand column spans full width */
+    .bbc-footer__brand {
+      grid-column: 1 / -1;
+      padding-right: 0;
+      padding-bottom: 1.75rem;
+      margin-bottom: 0;
+      border-bottom: 1px solid var(--footer-border);
+      text-align: center;
+    }
+
+    .bbc-footer__logo {
+      margin: 0 auto 1.125rem;
+    }
+
+    .bbc-footer__tagline {
+      max-width: 100%;
+    }
+
+    .bbc-footer__contact-item {
+      justify-content: center;
+    }
+
+    .bbc-footer__social {
+      justify-content: center;
+    }
+
+    /* Nav columns: 2-per-row on tablet, collapsible */
+    .bbc-footer__nav-column {
+      border-bottom: 1px solid var(--footer-border);
+      padding: 0;
+    }
+
+    .bbc-footer__nav-column summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      margin-bottom: 0;
+      border-bottom: none;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .bbc-footer__nav-column summary::after {
+      content: '+';
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--footer-text-muted);
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .bbc-footer__nav-column[open] summary::after {
+      content: '−';
+    }
+
+    .bbc-footer__nav-list {
+      padding-bottom: 1rem;
+    }
+
+    .bbc-footer__newsletter-inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 1.5rem;
+    }
+
+    .bbc-footer__newsletter-form {
+      flex-direction: column;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .bbc-footer__awards-grid {
+      gap: 1.25rem;
+    }
+
+    .bbc-footer__award {
+      font-size: 0.75rem;
+    }
+
+    .bbc-footer__bottom-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .bbc-footer__legal {
+      justify-content: center;
+    }
+
+    .bbc-footer__payments {
+      justify-content: center;
+    }
+  }
+
+  /* =========================================================
+     MOBILE — max 599px
+     ========================================================= */
+  @media screen and (max-width: 599px) {
+    .bbc-footer__trust-grid {
+      padding: 1rem 0;
+      gap: 0.625rem;
+    }
+
+    .bbc-footer__trust-value {
+      font-size: 1rem;
+    }
+
+    /* Nav: 1 column on small phones */
+    .bbc-footer__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .bbc-footer__awards-grid {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.875rem;
+    }
+  }
+
+  /* =========================================================
+     DESKTOP — nav columns always open (override <details> hiding)
+     ========================================================= */
+  @media screen and (min-width: 990px) {
+    details.bbc-footer__nav-column > *:not(summary) {
+      display: block !important;
+    }
+
+    details.bbc-footer__nav-column summary {
+      pointer-events: none;
+      cursor: default;
+    }
+
+    details.bbc-footer__nav-column summary::after {
+      display: none !important;
+    }
+  }
+{%- endstyle -%}
+
+<footer class="bbc-footer" data-testid="site-footer">
+
+  {%- comment -%} ── TRUST BAR ──────────────────────────────────────────────── {%- endcomment -%}
+  {%- if section.settings.show_trust_bar -%}
+    {%- assign trust_blocks = section.blocks | where: 'type', 'trust_item' -%}
+    {%- if trust_blocks.size > 0 -%}
+      <div class="bbc-footer__trust-bar">
+        <div class="page-width">
+          <div class="bbc-footer__trust-grid">
+            {%- for block in trust_blocks -%}
+              <div class="bbc-footer__trust-item" {{ block.shopify_attributes }}>
+                <div class="bbc-footer__trust-icon">
+                  {% render 'bbc-icons', icon: block.settings.icon, size: 18 %}
+                </div>
+                <span class="bbc-footer__trust-value">{{ block.settings.value }}</span>
+                <span class="bbc-footer__trust-label">{{ block.settings.label }}</span>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- comment -%} ── MAIN FOOTER ────────────────────────────────────────────── {%- endcomment -%}
+  <div class="bbc-footer__main">
+    <div class="page-width">
+      <div class="bbc-footer__grid">
+
+        {%- comment -%} Brand column {%- endcomment -%}
+        <div class="bbc-footer__brand">
+          {%- if section.settings.logo != blank -%}
+            <img
+              src="{{ section.settings.logo | image_url: width: 320 }}"
+              alt="{{ shop.name }}"
+              class="bbc-footer__logo"
+              width="{{ section.settings.logo_width | default: 160 }}"
+              height="auto"
+              loading="lazy"
+            >
+          {%- else -%}
+            <img
+              src="{{ 'bbc-logo-white.svg' | asset_url }}"
+              alt="{{ shop.name }}"
+              class="bbc-footer__logo"
+              width="{{ section.settings.logo_width | default: 160 }}"
+              height="40"
+              loading="lazy"
+            >
+          {%- endif -%}
+
+          {%- if section.settings.tagline != blank -%}
+            <p class="bbc-footer__tagline">{{ section.settings.tagline }}</p>
+          {%- endif -%}
+
+          {%- if section.settings.email != blank -%}
+            <div class="bbc-footer__contact-item">
+              {% render 'bbc-icons', icon: 'mail', size: 16 %}
+              <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.location != blank -%}
+            <div class="bbc-footer__contact-item">
+              {% render 'bbc-icons', icon: 'map-pin', size: 16 %}
+              <span>{{ section.settings.location }}</span>
+            </div>
+          {%- endif -%}
+
+          <div class="bbc-footer__social">
+            {%- if settings.social_instagram_link != blank -%}
+              <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" aria-label="Instagram">
+                {% render 'bbc-icons', icon: 'instagram', size: 16 %}
+              </a>
+            {%- endif -%}
+            {%- if settings.social_facebook_link != blank -%}
+              <a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" aria-label="Facebook">
+                {% render 'bbc-icons', icon: 'facebook', size: 16 %}
+              </a>
+            {%- endif -%}
+            {%- if settings.social_youtube_link != blank -%}
+              <a href="{{ settings.social_youtube_link }}" target="_blank" rel="noopener" aria-label="YouTube">
+                {% render 'bbc-icons', icon: 'youtube', size: 16 %}
+              </a>
+            {%- endif -%}
+            {%- if settings.social_tiktok_link != blank -%}
+              <a href="{{ settings.social_tiktok_link }}" target="_blank" rel="noopener" aria-label="TikTok">
+                {% render 'bbc-icons', icon: 'tiktok', size: 16 %}
+              </a>
+            {%- endif -%}
+            <a href="https://www.strava.com/clubs/bamboobicycleclub" target="_blank" rel="noopener" aria-label="Strava">
+              {% render 'bbc-icons', icon: 'strava', size: 16 %}
+            </a>
+          </div>
+        </div>
+
+        {%- comment -%} Nav column helper macro {%- endcomment -%}
+        {%- assign nav_columns = 'shop,exp,about,support' | split: ',' -%}
+        {%- for col in nav_columns -%}
+          {%- assign heading_key = 'nav_' | append: col | append: '_heading' -%}
+          {%- assign menu_key    = 'nav_' | append: col -%}
+          {%- assign nav_menu    = linklists[section.settings[menu_key]] -%}
+          <details class="bbc-footer__nav-column" open>
+            <summary>{{ section.settings[heading_key] }}</summary>
+            <ul class="bbc-footer__nav-list">
+              {%- if nav_menu.links.size > 0 -%}
+                {%- for link in nav_menu.links -%}
+                  <li>
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                  </li>
+                {%- endfor -%}
+              {%- else -%}
+                {%- comment -%} Fallback hardcoded links when menu not yet configured {%- endcomment -%}
+                {%- case col -%}
+                  {%- when 'shop' -%}
+                    <li><a href="/collections/home-build-kits">All Frame Kits</a></li>
+                    <li><a href="/collections/road">Road Kits</a></li>
+                    <li><a href="/collections/gravel-adventure">Gravel Kits</a></li>
+                    <li><a href="/collections/mtb">MTB Kits</a></li>
+                    <li><a href="/collections/balance-bikes">Balance Bikes</a></li>
+                    <li><a href="/products/bamboo-bicycle-club-gift-card">Gift Vouchers</a></li>
+                    <li><a href="/collections/maker-shop">Components & Tools</a></li>
+                  {%- when 'exp' -%}
+                    <li><a href="/pages/bicycle-frame-building-workshop">DIY Workshops</a></li>
+                    <li><a href="/pages/bicycleteambuilding">Corporate Team Building</a></li>
+                    <li><a href="/pages/schools">School Programmes</a></li>
+                    <li><a href="/pages/impact">Build to Bond</a></li>
+                    <li><a href="/products/bamboo-bicycle-club-gift-card">Gift Experiences</a></li>
+                  {%- when 'about' -%}
+                    <li><a href="/pages/our-story-2">Our Story</a></li>
+                    <li><a href="/pages/why-bamboo">Why Bamboo?</a></li>
+                    <li><a href="/pages/gallery">Gallery</a></li>
+                    <li><a href="/pages/impact">Social Impact</a></li>
+                    <li><a href="/blogs/news">News</a></li>
+                  {%- when 'support' -%}
+                    <li><a href="/pages/frequently-asked-questions">FAQs</a></li>
+                    <li><a href="/pages/contact-us">Contact Us</a></li>
+                    <li><a href="/policies/shipping-policy">Shipping & Returns</a></li>
+                    <li><a href="/pages/bike-size-guide">Size Guide</a></li>
+                    <li><a href="https://www.facebook.com/groups/bamboobicycleclub" target="_blank" rel="noopener">Facebook Help Group</a></li>
+                {%- endcase -%}
+              {%- endif -%}
+            </ul>
+          </details>
+        {%- endfor -%}
+
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ── NEWSLETTER ─────────────────────────────────────────────── {%- endcomment -%}
+  {%- if section.settings.show_newsletter -%}
+    <div class="bbc-footer__newsletter">
+      <div class="page-width">
+        <div class="bbc-footer__newsletter-inner">
+          <div class="bbc-footer__newsletter-content">
+            <h3>{{ section.settings.newsletter_heading }}</h3>
+            <p>{{ section.settings.newsletter_text }}</p>
+          </div>
+          {%- form 'customer', id: 'FooterNewsletter', class: 'bbc-footer__newsletter-form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input
+              type="email"
+              name="contact[email]"
+              class="bbc-footer__newsletter-input"
+              placeholder="{{ section.settings.newsletter_placeholder | default: 'Your email address' }}"
+              required
+              autocomplete="email"
+              aria-label="{{ 'general.newsletter.email_placeholder' | t | default: 'Email address' }}"
+            >
+            <button type="submit" class="bbc-footer__newsletter-btn">
+              {{ section.settings.newsletter_button | default: 'Subscribe' }}
+            </button>
+            {%- if form.posted_successfully? -%}
+              <p class="bbc-footer__newsletter-success">
+                {% render 'bbc-icons', icon: 'check', size: 16 %}
+                {{ section.settings.newsletter_success | default: "You're in! Welcome to the community." }}
+              </p>
+            {%- endif -%}
+            {%- if form.errors -%}
+              <p style="color: #ff6b6b; font-size: 0.875rem; margin-top: 0.5rem;">
+                {{ form.errors.messages['email'] | default: 'Please check your email address.' }}
+              </p>
+            {%- endif -%}
+          {%- endform -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ── AWARDS ─────────────────────────────────────────────────── {%- endcomment -%}
+  {%- if section.settings.show_awards -%}
+    {%- assign award_blocks = section.blocks | where: 'type', 'award' -%}
+    {%- if award_blocks.size > 0 -%}
+      <div class="bbc-footer__awards">
+        <div class="page-width">
+          <div class="bbc-footer__awards-grid">
+            {%- for block in award_blocks -%}
+              <div class="bbc-footer__award" {{ block.shopify_attributes }}>
+                {% render 'bbc-icons', icon: block.settings.icon, size: 18 %}
+                <span>{{ block.settings.text }}</span>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- comment -%} ── BOTTOM BAR ─────────────────────────────────────────────── {%- endcomment -%}
+  <div class="bbc-footer__bottom">
+    <div class="page-width">
+      <div class="bbc-footer__bottom-inner">
+        <div class="bbc-footer__copyright">
+          &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}.
+          {%- if section.settings.company_reg != blank -%}
+            &nbsp;{{ section.settings.company_reg }}
+          {%- endif -%}
+        </div>
+
+        <ul class="bbc-footer__legal">
+          {%- for policy in shop.policies -%}
+            {%- if policy != blank -%}
+              <li><a href="{{ policy.url }}">{{ policy.title }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+
+        <div class="bbc-footer__payments">
+          <span class="visually-hidden">{{ 'sections.footer.payment_disclosure' | t | default: 'Accepted payment methods' }}</span>
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+{% schema %}
+{
+  "name": "BBC Footer",
+  "tag": "section",
+  "class": "bbc-footer-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image",
+      "info": "Leave blank to use the default bbc-logo-white.svg"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 80,
+      "max": 280,
+      "step": 8,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 160
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Build your own bamboo bicycle. Workshops in London, DIY kits shipped worldwide. Sustainable, unique, and unmistakably yours."
+    },
+    {
+      "type": "header",
+      "content": "Contact"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email address",
+      "default": "info@bamboobicycleclub.org"
+    },
+    {
+      "type": "text",
+      "id": "location",
+      "label": "Location",
+      "default": "London, UK"
+    },
+    {
+      "type": "text",
+      "id": "company_reg",
+      "label": "Company registration",
+      "default": "Bamboo Mobility Project CIC · Reg 16257348",
+      "info": "Shown in the copyright line at the bottom"
+    },
+    {
+      "type": "header",
+      "content": "Navigation Menus",
+      "info": "Connect to menus created in Online Store → Navigation"
+    },
+    {
+      "type": "text",
+      "id": "nav_shop_heading",
+      "label": "Shop column heading",
+      "default": "Shop"
+    },
+    {
+      "type": "link_list",
+      "id": "nav_shop",
+      "label": "Shop menu",
+      "info": "Create a 'footer-shop' menu in Online Store → Navigation"
+    },
+    {
+      "type": "text",
+      "id": "nav_exp_heading",
+      "label": "Experience column heading",
+      "default": "Experience"
+    },
+    {
+      "type": "link_list",
+      "id": "nav_exp",
+      "label": "Experience menu",
+      "info": "Create a 'footer-experience' menu in Navigation"
+    },
+    {
+      "type": "text",
+      "id": "nav_about_heading",
+      "label": "About column heading",
+      "default": "About"
+    },
+    {
+      "type": "link_list",
+      "id": "nav_about",
+      "label": "About menu",
+      "info": "Create a 'footer-about' menu in Navigation"
+    },
+    {
+      "type": "text",
+      "id": "nav_support_heading",
+      "label": "Support column heading",
+      "default": "Support"
+    },
+    {
+      "type": "link_list",
+      "id": "nav_support",
+      "label": "Support menu",
+      "info": "Create a 'footer-support' menu in Navigation"
+    },
+    {
+      "type": "header",
+      "content": "Trust Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_bar",
+      "default": true,
+      "label": "Show trust bar"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "default": true,
+      "label": "Show newsletter signup"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "default": "Join the Bamboo Community",
+      "label": "Newsletter heading"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_text",
+      "default": "Get workshop updates, building tips, and exclusive offers. Join 15,000+ bamboo enthusiasts.",
+      "label": "Newsletter description"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "default": "Your email address",
+      "label": "Email input placeholder"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button",
+      "default": "Subscribe",
+      "label": "Subscribe button text"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_success",
+      "default": "You're in! Welcome to the community.",
+      "label": "Success message"
+    },
+    {
+      "type": "header",
+      "content": "Awards & Recognition"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_awards",
+      "default": true,
+      "label": "Show awards row"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust statistic",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "calendar",
+              "label": "Calendar / Years"
+            },
+            {
+              "value": "users",
+              "label": "Users / Builders"
+            },
+            {
+              "value": "globe",
+              "label": "Globe / Countries"
+            },
+            {
+              "value": "support",
+              "label": "Support / Lifetime"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "award",
+              "label": "Award"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf / Eco"
+            }
+          ],
+          "default": "star"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "4,000+",
+          "info": "The big number or short phrase"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Builders Worldwide",
+          "info": "Supporting description (short)"
+        }
+      ]
+    },
+    {
+      "type": "award",
+      "name": "Award / Recognition",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "award",
+              "label": "Award / Trophy"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf / Green"
+            },
+            {
+              "value": "verified",
+              "label": "Verified badge"
+            },
+            {
+              "value": "newspaper",
+              "label": "Press / Media"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "shield",
+              "label": "Shield / Trust"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "book",
+              "label": "Book / Education"
+            }
+          ],
+          "default": "award"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Award text",
+          "default": "Investec Beyond Business 2025"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "BBC Footer"
+    }
+  ]
+}
+{% endschema %}

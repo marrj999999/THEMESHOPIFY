@@ -1,0 +1,570 @@
+{% comment %}
+  BBC Participant Story Section
+  Research finding: "No-one is named on the BBC impact page except Sally Allsopp (staff, not a participant).
+  Divine Chocolate names Ohemaa Dede Okesie Narh and Mary Lamptey with their own words.
+  Big Issue features vendor stories."
+  Pattern sourced from: Divine Chocolate, Big Issue, Bikeworks, charity:water
+  
+  Implementation notes:
+  - Photo is optional — section renders cleanly without it (text-only layout)
+  - First name only is fine for anonymity
+  - James needs: participant consent, first name, prison name (optional), 2-3 sentence quote
+  - If no photo available, use illustrated placeholder or silhouette
+{% endcomment %}
+
+{%- style -%}
+.bbc-participant-story {
+  padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.background_color }};
+  overflow: hidden;
+}
+
+.bbc-participant-story__container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.bbc-participant-story__eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bbc-teal, var(--bbc-teal));
+  margin-bottom: 20px;
+  text-align: {{ section.settings.text_align }};
+}
+
+/* Split layout: photo + text */
+.bbc-participant-story__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.bbc-participant-story__inner--no-photo {
+  grid-template-columns: 1fr;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.bbc-participant-story__inner--reversed .bbc-participant-story__visual {
+  order: 2;
+}
+
+/* Photo side */
+.bbc-participant-story__visual {
+  position: relative;
+}
+
+.bbc-participant-story__image-wrap {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  background: rgba(63, 139, 102, 0.08);
+}
+
+.bbc-participant-story__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Placeholder when no image — shows silhouette with BBC green tint */
+.bbc-participant-story__placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(160deg, var(--bbc-forest-light) 0%, var(--bbc-teal-light) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.bbc-participant-story__placeholder-icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(63, 139, 102, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bbc-participant-story__placeholder-text {
+  font-size: 13px;
+  color: var(--bbc-teal);
+  font-weight: 600;
+  text-align: center;
+  padding: 0 24px;
+  line-height: 1.5;
+}
+
+/* Accent block */
+.bbc-participant-story__accent {
+  position: absolute;
+  bottom: -16px;
+  left: -16px;
+  width: 80px;
+  height: 80px;
+  background: var(--bbc-teal, var(--bbc-teal));
+  z-index: 0;
+}
+
+/* Text side */
+.bbc-participant-story__content {
+  position: relative;
+  z-index: 1;
+}
+
+.bbc-participant-story__quote {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.bbc-participant-story__quote-mark {
+  display: block;
+  font-size: 80px;
+  line-height: 0.6;
+  color: var(--bbc-teal, var(--bbc-teal));
+  font-family: var(--font-body-family);
+  margin-bottom: 20px;
+  opacity: 0.4;
+}
+
+.bbc-participant-story__quote-text {
+  font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+  line-height: 1.55;
+  color: var(--bbc-forest, var(--bbc-forest));
+  font-style: italic;
+  font-weight: 500;
+  margin: 0 0 28px;
+}
+
+.bbc-participant-story__attribution {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bbc-participant-story__attr-bar {
+  width: 32px;
+  height: 3px;
+  background: var(--bbc-teal, var(--bbc-teal));
+  flex-shrink: 0;
+}
+
+.bbc-participant-story__attr-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--bbc-forest, var(--bbc-forest));
+}
+
+.bbc-participant-story__attr-role {
+  font-size: 13px;
+  color: var(--color-foreground, #4a5568);
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+/* Programme context tags */
+.bbc-participant-story__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.bbc-participant-story__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(63, 139, 102, 0.08);
+  border: 1px solid rgba(63, 139, 102, 0.2);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--bbc-forest, var(--bbc-forest));
+  letter-spacing: 0.02em;
+}
+
+/* Outcome numbers below quote */
+.bbc-participant-story__outcomes {
+  display: flex;
+  gap: 32px;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(7, 62, 39, 0.1);
+}
+
+.bbc-participant-story__outcome-number {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--bbc-forest, var(--bbc-forest));
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.bbc-participant-story__outcome-label {
+  font-size: 12px;
+  color: var(--color-foreground, #4a5568);
+  opacity: 0.7;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* Section heading (above the split) */
+.bbc-participant-story__section-heading {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--bbc-forest, var(--bbc-forest));
+  line-height: 1.1;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.bbc-participant-story__section-sub {
+  font-size: 17px;
+  color: var(--color-foreground, #4a5568);
+  line-height: 1.6;
+  margin-bottom: 48px;
+  max-width: 680px;
+}
+
+@media (max-width: 749px) {
+  .bbc-participant-story {
+    padding: 48px 0;
+  }
+
+  .bbc-participant-story__inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .bbc-participant-story__inner--reversed .bbc-participant-story__visual {
+    order: 0;
+  }
+
+  .bbc-participant-story__image-wrap {
+    aspect-ratio: 3/2;
+  }
+
+  .bbc-participant-story__quote-text {
+    font-size: 1.125rem;
+  }
+
+  .bbc-participant-story__outcomes {
+    gap: 20px;
+  }
+
+  .bbc-participant-story__outcome-number {
+    font-size: 26px;
+  }
+}
+{%- endstyle -%}
+
+{%- liquid
+  assign has_photo = false
+  if section.settings.photo != blank or section.settings.photo_asset != blank
+    assign has_photo = true
+  endif
+  assign inner_class = 'bbc-participant-story__inner'
+  unless has_photo
+    assign inner_class = inner_class | append: ' bbc-participant-story__inner--no-photo'
+  endunless
+  if section.settings.image_position == 'right'
+    assign inner_class = inner_class | append: ' bbc-participant-story__inner--reversed'
+  endif
+-%}
+
+<section class="bbc-participant-story">
+  <div class="bbc-participant-story__container">
+
+    {% if section.settings.section_heading != blank %}
+      <div style="text-align: {{ section.settings.text_align }}; margin-bottom: {% if section.settings.section_sub != blank %}0{% else %}48px{% endif %};">
+        {% if section.settings.eyebrow != blank %}
+          <p class="bbc-participant-story__eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        <h2 class="bbc-participant-story__section-heading">{{ section.settings.section_heading }}</h2>
+      </div>
+      {% if section.settings.section_sub != blank %}
+        <p class="bbc-participant-story__section-sub" style="text-align: {{ section.settings.text_align }};">{{ section.settings.section_sub }}</p>
+      {% endif %}
+    {% endif %}
+
+    <div class="{{ inner_class }}">
+
+      {% if has_photo %}
+        <div class="bbc-participant-story__visual">
+          <div class="bbc-participant-story__image-wrap">
+            <img
+              src="{% if section.settings.photo != blank %}{{ section.settings.photo | image_url: width: 800 }}{% else %}{{ section.settings.photo_asset | asset_url }}{% endif %}"
+              alt="{{ section.settings.photo_alt | default: section.settings.name }}"
+              class="bbc-participant-story__image"
+              loading="lazy"
+              width="800"
+            >
+          </div>
+          <div class="bbc-participant-story__accent" aria-hidden="true"></div>
+        </div>
+      {% elsif section.settings.show_placeholder %}
+        <div class="bbc-participant-story__visual">
+          <div class="bbc-participant-story__image-wrap">
+            <div class="bbc-participant-story__placeholder">
+              <div class="bbc-participant-story__placeholder-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="20" cy="14" r="8" stroke="var(--bbc-teal)" stroke-width="2"/>
+                  <path d="M4 36C4 28.268 11.163 22 20 22s16 6.268 16 14" stroke="var(--bbc-teal)" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <p class="bbc-participant-story__placeholder-text">Photo coming soon.<br>Story content ready.</p>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="bbc-participant-story__content">
+        {% unless has_photo %}
+          {% if section.settings.eyebrow != blank and section.settings.section_heading == blank %}
+            <p class="bbc-participant-story__eyebrow">{{ section.settings.eyebrow }}</p>
+          {% endif %}
+        {% endunless %}
+
+        <div class="bbc-participant-story__quote">
+          {% if section.settings.quote_mark %}
+            <span class="bbc-participant-story__quote-mark" aria-hidden="true">&ldquo;</span>
+          {% endif %}
+
+          <blockquote class="bbc-participant-story__quote-text">{{ section.settings.quote }}</blockquote>
+
+          <div class="bbc-participant-story__attribution">
+            <div class="bbc-participant-story__attr-bar"></div>
+            <div>
+              {% if section.settings.name != blank %}
+                <div class="bbc-participant-story__attr-name">{{ section.settings.name }}</div>
+              {% endif %}
+              {% if section.settings.role != blank %}
+                <div class="bbc-participant-story__attr-role">{{ section.settings.role }}</div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        {% assign has_tags = false %}
+        {% for block in section.blocks %}
+          {% if block.type == 'tag' and block.settings.label != blank %}
+            {% assign has_tags = true %}
+          {% endif %}
+        {% endfor %}
+        {% if has_tags %}
+          <div class="bbc-participant-story__tags">
+            {% for block in section.blocks %}
+              {% if block.type == 'tag' and block.settings.label != blank %}
+                <span class="bbc-participant-story__tag" {{ block.shopify_attributes }}>{{ block.settings.label }}</span>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% assign outcome_blocks = section.blocks | where: 'type', 'outcome' %}
+        {% if outcome_blocks.size > 0 %}
+          <div class="bbc-participant-story__outcomes">
+            {% for block in outcome_blocks %}
+              {% if block.settings.number != blank %}
+                <div {{ block.shopify_attributes }}>
+                  <div class="bbc-participant-story__outcome-number">{{ block.settings.number }}</div>
+                  <div class="bbc-participant-story__outcome-label">{{ block.settings.label }}</div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Participant Story",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header (optional)"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Real Stories"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section heading",
+      "default": "Stories From the Programme"
+    },
+    {
+      "type": "textarea",
+      "id": "section_sub",
+      "label": "Section subheading"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Header alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Quote"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Participant quote",
+      "info": "First person, 2-3 sentences. Example: 'Before the course I hadn't spoken to my daughter in two years. The bike was the first thing I ever made with my hands. When she rode it, I felt like a dad again.'",
+      "default": "Before the course, I hadn't spoken to my daughter in two years. The bike was the first thing I ever made with my own hands. When she rode it on family visit day, I felt like a dad again."
+    },
+    {
+      "type": "checkbox",
+      "id": "quote_mark",
+      "label": "Show decorative quote mark",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Name",
+      "info": "First name only for privacy. You can add a title: e.g. 'Marcus' or 'A participant, HMP Lowdham Grange'",
+      "default": "James"
+    },
+    {
+      "type": "text",
+      "id": "role",
+      "label": "Role / context",
+      "info": "e.g. 'Build to Bond participant, 2024' or 'HMP Lowdham Grange'",
+      "default": "Build to Bond participant, HMP Lowdham Grange"
+    },
+    {
+      "type": "header",
+      "content": "Photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo",
+      "label": "Participant photo",
+      "info": "Optional. Works without a photo — just shows the quote. Recommended: portrait orientation, 4:5 ratio, 800x1000px minimum. Must have written consent."
+    },
+    {
+      "type": "text",
+      "id": "photo_asset",
+      "label": "Or theme-asset photo filename",
+      "info": "Filename of an image in /assets (e.g. bbc-rd-prison-jig.jpg). Used only if no Participant photo is picked. Use generic, non-identifying shots."
+    },
+    {
+      "type": "text",
+      "id": "photo_alt",
+      "label": "Photo alt text"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_placeholder",
+      "label": "Show placeholder while waiting for photo",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f8f8f6"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 40,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 40,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tag",
+      "name": "Context tag",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Tag label",
+          "info": "e.g. '6-week programme' · 'OCN Level 2' · 'Family handover'",
+          "default": "Build to Bond programme"
+        }
+      ]
+    },
+    {
+      "type": "outcome",
+      "name": "Outcome stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "6 weeks"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Programme duration"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Participant Story",
+      "blocks": [
+        { "type": "tag", "settings": { "label": "Build to Bond" } },
+        { "type": "tag", "settings": { "label": "OCN Level 2" } },
+        { "type": "tag", "settings": { "label": "Family handover" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

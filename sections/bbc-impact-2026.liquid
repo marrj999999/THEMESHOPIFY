@@ -1,0 +1,444 @@
+{%- comment -%}
+  BBC New Design (2026) — "Our Impact / Build to Bond" page.
+  Single self-contained section, fully schema-driven (editable in the theme
+  editor) and scoped under .bbc-rd via bbc-redesign-2026.css so it cannot
+  affect other sections. Structure mirrors the design handoff (impact.html):
+  hero → 4-stat block (dark) → "a real workshop, inside" → Build to Bond
+  feature split → "more than a bike — a pathway" 3 cards → "three ways to be
+  part of it" 3 CTA cards → final CTA.
+
+  CONTENT POLICY (hard rules, updated 2026-06-20):
+  - Prisons MAY be named (rule changed 2026-06-17). Active named sites:
+    HMP Lowdham Grange (live), HMP Lindholme + HMP Foston Hall (rolling out).
+    NEVER link a named/identifiable participant to a named prison (GDPR/safeguarding).
+  - Source-of-truth figures only: 90% completion · £11.41 social return per £1
+    (NO attribution — figure unconfirmed across sources) · 4,000+ builders · 36 countries.
+    The 39% lower-reoffending figure is MoJ RESEARCH (family ties), never a BBC outcome.
+  Image fields fall back to bundled placeholder assets until real photos are
+  uploaded.
+{%- endcomment -%}
+
+
+{%- liquid
+  assign hero_cta1 = section.settings.hero_cta1_url | default: '/pages/bamboo-bicycle-club-education'
+  assign hero_cta2 = section.settings.hero_cta2_url | default: '/pages/contact-us'
+  assign b2b_cta1   = section.settings.b2b_cta1_url | default: '/pages/bamboo-bicycle-club-education'
+  assign final_c1   = section.settings.cta1_url | default: '/pages/bamboo-bicycle-club-education'
+  assign final_c2   = section.settings.cta2_url | default: '/pages/contact-us'
+-%}
+
+<div class="bbc-rd bbc-rd-impact">
+
+  {%- comment -%} ---------- HERO ---------- {%- endcomment -%}
+  <header class="rd-hero rd-mh-74">
+    <div class="rd-bg">
+      {%- if section.settings.hero_image != blank -%}
+        <img src="{{ section.settings.hero_image | image_url: width: 1600 }}" srcset="{{ section.settings.hero_image | image_url: width: 800 }} 800w, {{ section.settings.hero_image | image_url: width: 1200 }} 1200w, {{ section.settings.hero_image | image_url: width: 1600 }} 1600w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w, {{ section.settings.hero_image | image_url: width: 2600 }} 2600w" sizes="100vw" alt="{{ section.settings.hero_image_alt | default: 'Inside a Bamboo Bicycle Club workshop' | escape }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" fetchpriority="high" loading="eager">
+      {%- else -%}
+        <img src="{{ section.settings.hero_fallback | default: 'bbc-rd-workshop.jpg' | asset_url }}" alt="{{ section.settings.hero_image_alt | default: 'Inside a Bamboo Bicycle Club workshop' | escape }}" width="1500" height="999" fetchpriority="high" loading="eager">
+      {%- endif -%}
+    </div>
+    <div class="rd-scrim"></div>
+    <div class="rd-inner">
+      <div class="rd-wrap">
+        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><span class="rd-here">Impact</span></nav>
+        {%- if section.settings.hero_eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>{%- endif -%}
+        <h1 class="rd-mt2 rd-mw-15ch">{{ section.settings.hero_title }}</h1>
+        <p class="rd-lede">{{ section.settings.hero_lede }}</p>
+        <div class="rd-cta-row">
+          {%- if section.settings.hero_cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ hero_cta1 }}">{{ section.settings.hero_cta1_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+          {%- if section.settings.hero_cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ hero_cta2 }}">{{ section.settings.hero_cta2_label }}</a>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {%- comment -%} ---------- STATS (dark) ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-dark">
+    <div class="rd-wrap">
+      <div class="rd-stats">
+        {%- for block in section.blocks -%}{%- if block.type == 'stat' -%}
+          <div class="rd-stat" {{ block.shopify_attributes }}>
+            <div class="rd-num">{{ block.settings.number }}</div>
+            <div class="rd-lbl">{{ block.settings.label }}</div>
+            {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- THE STORY: a real workshop, inside ---------- {%- endcomment -%}
+  <section class="rd-pad">
+    <div class="rd-wrap rd-mw-820px">
+      {%- if section.settings.story_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.story_eyebrow }}</span>{%- endif -%}
+      <h2>{{ section.settings.story_title }}</h2>
+      {%- if section.settings.story_body_1 != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.story_body_1 }}</p>{%- endif -%}
+      {%- if section.settings.story_body_2 != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.story_body_2 }}</p>{%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- BUILD TO BOND FEATURE (split, dark) ---------- {%- endcomment -%}
+  <section class="rd-split rd-dark">
+    <div class="rd-media">
+      {%- if section.settings.b2b_image != blank -%}
+        <img src="{{ section.settings.b2b_image | image_url: width: 1400 }}" alt="{{ section.settings.b2b_image_alt | default: 'Inside a Bamboo Bicycle Club workshop' | escape }}" width="{{ section.settings.b2b_image.width }}" height="{{ section.settings.b2b_image.height }}">
+      {%- else -%}
+        <img src="{{ section.settings.b2b_fallback | default: 'bbc-rd-b2b.jpg' | asset_url }}" alt="{{ section.settings.b2b_image_alt | default: 'Inside a Bamboo Bicycle Club workshop' | escape }}" width="1400" height="933">
+      {%- endif -%}
+    </div>
+    <div class="rd-txt">
+      {%- if section.settings.b2b_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.b2b_eyebrow }}</span>{%- endif -%}
+      <h2>{{ section.settings.b2b_title }}</h2>
+      {%- if section.settings.b2b_body_1 != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.b2b_body_1 }}</p>{%- endif -%}
+      {%- if section.settings.b2b_body_2 != blank -%}<p class="rd-mt2">{{ section.settings.b2b_body_2 }}</p>{%- endif -%}
+      {%- if section.settings.b2b_quote != blank -%}
+        <div class="rd-pull rd-mt3">
+          <p class="rd-q">{{ section.settings.b2b_quote }}</p>
+          {%- if section.settings.b2b_cite != blank -%}<cite>{{ section.settings.b2b_cite }}</cite>{%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.b2b_cta1_label != blank -%}
+        <div class="rd-flex rd-mt3">
+          <a class="rd-btn rd-lime" href="{{ b2b_cta1 }}">{{ section.settings.b2b_cta1_label }} <span class="rd-arrow">&rarr;</span></a>
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- WHERE WE WORK (named prison sites) ---------- {%- endcomment -%}
+  {%- if section.settings.sites_title != blank -%}
+  <section class="rd-pad-sm rd-paper rd-center">
+    <div class="rd-wrap rd-mw-820px">
+      {%- if section.settings.sites_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.sites_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-mw-22ch rd-mx-auto">{{ section.settings.sites_title }}</h2>
+      {%- if section.settings.sites_body != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.sites_body }}</p>{%- endif -%}
+      {%- if section.settings.sites_list != blank -%}<div class="rd-sitenames rd-mt3">{{ section.settings.sites_list }}</div>{%- endif -%}
+      {%- if section.settings.sites_partner != blank -%}<p class="rd-frame-label rd-mt3">{{ section.settings.sites_partner }}</p>{%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- CASE STUDY CARD → full Build to Bond story ---------- {%- endcomment -%}
+  {%- if section.settings.cs_quote != blank -%}
+  <section class="rd-pad-sm">
+    <div class="rd-wrap rd-mw-820px">
+      <div class="rd-csgrid rd-csgrid-1">
+        <a class="rd-cscard" href="{{ section.settings.cs_url | default: '/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2' }}">
+          <div class="rd-cscard__media"><img src="{{ section.settings.cs_image | default: 'bbc-rd-b2b.jpg' | asset_url }}" alt="Inside the Build to Bond workshop at HMP Lowdham Grange" loading="lazy" width="600" height="375"><span class="rd-cscard__kind">{{ section.settings.cs_kind | default: 'Case study' }}</span></div>
+          <div class="rd-cscard__body">
+            <p class="rd-cscard__quote">{{ section.settings.cs_quote }}</p>
+            {%- if section.settings.cs_attr != blank -%}<p class="rd-cscard__attr">{{ section.settings.cs_attr }}</p>{%- endif -%}
+            {%- if section.settings.cs_blurb != blank -%}<p class="rd-cscard__ctx">{{ section.settings.cs_blurb }}</p>{%- endif -%}
+            <div class="rd-cscard__foot">
+              <span class="rd-cscard__inst">{{ section.settings.cs_site | default: 'Build to Bond · HMP Lowdham Grange' }}</span>
+              <span class="rd-cscard__more">{{ section.settings.cs_link_label | default: 'Read the full story' }} <span class="rd-arrow">&rarr;</span></span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- IMPACT STORIES — one per pillar (every kind of impact) ---------- {%- endcomment -%}
+  {%- if section.settings.stories_title != blank -%}
+  <section class="rd-pad-sm">
+    <div class="rd-wrap">
+      {%- if section.settings.stories_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.stories_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-mw-20ch">{{ section.settings.stories_title }}</h2>
+      {%- if section.settings.stories_lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.stories_lede }}</p>{%- endif -%}
+      <div class="rd-csgrid rd-mt4">
+        {%- for block in section.blocks -%}{%- if block.type == 'story' -%}
+          {%- assign cimg = block.settings.image | default: 'bbc-rd-cohort.jpg' -%}
+          <a class="rd-cscard" href="{{ block.settings.url | default: '/blogs/impact' }}" {{ block.shopify_attributes }}>
+            <div class="rd-cscard__media"><img src="{% if cimg contains '//' %}{{ cimg }}{% else %}{{ cimg | asset_url }}{% endif %}" alt="{{ block.settings.title | escape }}" loading="lazy" width="600" height="375">{%- if block.settings.kind != blank -%}<span class="rd-cscard__kind">{{ block.settings.kind }}</span>{%- endif -%}</div>
+            <div class="rd-cscard__body"><p class="rd-cscard__ctx">{{ block.settings.blurb }}</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">{{ block.settings.title }}</span><span class="rd-cscard__more">Read the story <span class="rd-arrow">&rarr;</span></span></div></div>
+          </a>
+        {%- endif -%}{%- endfor -%}
+      </div>
+      <div class="rd-mt4"><a class="rd-btn rd-ghost" href="{{ section.settings.stories_all_url | default: '/blogs/impact' }}">{{ section.settings.stories_all_label | default: 'See all impact stories' }} <span class="rd-arrow">&rarr;</span></a></div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- PATHWAY: more than a bike (3 cards) ---------- {%- endcomment -%}
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      {%- if section.settings.path_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.path_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-mw-20ch">{{ section.settings.path_title }}</h2>
+      <div class="rd-grid rd-g3 rd-mt4">
+        {%- for block in section.blocks -%}{%- if block.type == 'pathway' -%}
+          <div class="rd-card" {{ block.shopify_attributes }}>
+            <div class="rd-body">
+              <h3 class="rd-fs-21px">{{ block.settings.title }}</h3>
+              <p>{{ block.settings.body }}</p>
+            </div>
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+      {%- if section.settings.path_quote != blank -%}
+        <div class="rd-pull rd-mt4 rd-mw-60ch">
+          <p class="rd-q">{{ section.settings.path_quote }}</p>
+          {%- if section.settings.path_cite != blank -%}<cite>{{ section.settings.path_cite }}</cite>{%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- GET INVOLVED: three ways (3 CTA cards) ---------- {%- endcomment -%}
+  <section class="rd-pad rd-steel">
+    <div class="rd-wrap">
+      <div class="rd-center rd-cmp-84401">
+        {%- if section.settings.help_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.help_eyebrow }}</span>{%- endif -%}
+        <h2>{{ section.settings.help_title }}</h2>
+        {%- if section.settings.help_intro != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.help_intro }}</p>{%- endif -%}
+      </div>
+      <div class="rd-grid rd-g3">
+        {%- for block in section.blocks -%}{%- if block.type == 'help' -%}
+          {%- if block.settings.lime -%}{%- assign stamp = 'rd-card rd-stamp rd-lime' -%}{%- else -%}{%- assign stamp = 'rd-card rd-stamp' -%}{%- endif -%}
+          {%- if block.settings.tag_lime -%}{%- assign tagcls = 'rd-tag rd-lime' -%}{%- else -%}{%- assign tagcls = 'rd-tag' -%}{%- endif -%}
+          {%- assign help_url = block.settings.link_url | default: '/pages/contact-us' -%}
+          <div class="{{ stamp }}" {{ block.shopify_attributes }}>
+            <div class="rd-body">
+              {%- if block.settings.tag != blank -%}<span class="{{ tagcls }}">{{ block.settings.tag }}</span>{%- endif -%}
+              <h3 class="rd-mt2 rd-fs-21px">{{ block.settings.title }}</h3>
+              <p>{{ block.settings.body }}</p>
+              {%- if block.settings.link_label != blank -%}<a class="rd-btn rd-lime rd-mt3" href="{{ help_url }}">{{ block.settings.link_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- RECOGNISED BY (credibility quotes) ---------- {%- endcomment -%}
+  {%- if section.settings.cred_quote1 != blank -%}
+  <section class="rd-pad-sm rd-paper bbc-impact-cred">
+    <div class="rd-wrap">
+      {%- if section.settings.cred_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.cred_eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.cred_heading != blank -%}<h2 class="rd-mw-22ch">{{ section.settings.cred_heading }}</h2>{%- endif -%}
+      <div class="rd-grid rd-g2 rd-mt3">
+        <blockquote class="rd-card rd-stamp rd-cred-card">
+          <p class="rd-cred-q">&ldquo;{{ section.settings.cred_quote1 }}&rdquo;</p>
+          <cite class="rd-cred-cite"><b>{{ section.settings.cred_attr1 }}</b>{%- if section.settings.cred_src1 != blank -%}<span> &middot; {{ section.settings.cred_src1 }}</span>{%- endif -%}</cite>
+        </blockquote>
+        {%- if section.settings.cred_quote2 != blank -%}
+        <blockquote class="rd-card rd-stamp rd-cred-card">
+          <p class="rd-cred-q">&ldquo;{{ section.settings.cred_quote2 }}&rdquo;</p>
+          <cite class="rd-cred-cite"><b>{{ section.settings.cred_attr2 }}</b>{%- if section.settings.cred_src2 != blank -%}<span> &middot; {{ section.settings.cred_src2 }}</span>{%- endif -%}</cite>
+        </blockquote>
+        {%- endif -%}
+      </div>
+      {%- comment -%} real press logos (assets) + funder credit line {%- endcomment -%}
+      <div class="rd-center">
+        <p class="rd-partnerlabel rd-mt4">{{ section.settings.press_label | default: 'As featured in' }}</p>
+        <div class="rd-logogrid rd-mt2">
+          <span class="rd-logocell"><img class="rd-logoimg" src="{{ 'logo-financial-times.svg' | asset_url }}" alt="Financial Times" loading="lazy"></span>
+          <span class="rd-logocell"><img class="rd-logoimg" src="{{ 'logo-guardian.svg' | asset_url }}" alt="The Guardian" loading="lazy"></span>
+          <span class="rd-logocell"><img class="rd-logoimg" src="{{ 'logo-telegraph.svg' | asset_url }}" alt="The Telegraph" loading="lazy"></span>
+          <span class="rd-logocell"><img class="rd-logoimg" src="{{ 'logo-cnn.svg' | asset_url }}" alt="CNN" loading="lazy"></span>
+          <span class="rd-logocell"><img class="rd-logoimg" src="{{ 'logo-metro.svg' | asset_url }}" alt="Metro" loading="lazy"></span>
+          <span class="rd-logocell"><img class="rd-logoimg" src="{{ 'logo-fastcompany.svg' | asset_url }}" alt="Fast Company" loading="lazy"></span>
+        </div>
+        {%- if section.settings.press_more != blank -%}<p class="rd-ship-note rd-mt3"><a href="{{ section.settings.press_more_url | default: '/pages/media-page' }}">{{ section.settings.press_more }}</a></p>{%- endif -%}
+        {%- if section.settings.funder_line != blank -%}<p class="rd-ship-note rd-mt3">{{ section.settings.funder_line }}</p>{%- endif -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- FINAL CTA (dark, centred) ---------- {%- endcomment -%}
+  <section class="rd-pad rd-dark rd-center">
+    <div class="rd-wrap rd-mw-680px">
+      {%- if section.settings.cta_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.cta_eyebrow }}</span>{%- endif -%}
+      <h2>{{ section.settings.cta_title }}</h2>
+      {%- if section.settings.cta_lede != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.cta_lede }}</p>{%- endif -%}
+      <div class="rd-flex rd-mt3 rd-jc-center">
+        {%- if section.settings.cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ final_c1 }}">{{ section.settings.cta1_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ final_c2 }}">{{ section.settings.cta2_label }}</a>{%- endif -%}
+      </div>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Impact 2026 (new design)",
+  "tag": "section",
+  "class": "section bbc-impact-2026-wrap",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image (workshop, no identifiable learners)" },
+    { "type": "text", "id": "hero_fallback", "label": "Default hero photo filename", "default": "bbc-rd-workshop.jpg" },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt text", "default": "Builders at work in the bamboo bicycle workshop" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Our impact · Build to Bond" },
+    { "type": "text", "id": "hero_title", "label": "Headline", "default": "Building bikes. Rebuilding lives." },
+    { "type": "textarea", "id": "hero_lede", "label": "Lede", "default": "Inside prisons and schools, the same craft that builds a bike builds skills, confidence and the family ties that help people not return." },
+    { "type": "text", "id": "hero_cta1_label", "label": "Primary CTA label", "default": "Work with us" },
+    { "type": "url", "id": "hero_cta1_url", "label": "Primary CTA link (defaults to the education page)" },
+    { "type": "text", "id": "hero_cta2_label", "label": "Secondary CTA label", "default": "Support our work" },
+    { "type": "url", "id": "hero_cta2_url", "label": "Secondary CTA link (defaults to the contact page)" },
+
+    { "type": "header", "content": "Recognised by (credibility quotes)", "info": "Verified press / partner quotes. Leave quote 1 blank to hide the band." },
+    { "type": "text", "id": "cred_eyebrow", "label": "Eyebrow", "default": "Recognised by" },
+    { "type": "text", "id": "cred_heading", "label": "Heading (optional)", "default": "Reported and backed" },
+    { "type": "textarea", "id": "cred_quote1", "label": "Quote 1", "default": "Finding employment after release reduces the chance of reoffending significantly." },
+    { "type": "text", "id": "cred_attr1", "label": "Quote 1 attribution", "default": "Lord James Timpson, UK Prisons Minister" },
+    { "type": "text", "id": "cred_src1", "label": "Quote 1 source", "default": "Financial Times, September 2025" },
+    { "type": "textarea", "id": "cred_quote2", "label": "Quote 2", "default": "A truly inspiring cohort, delivering meaningful impact in their communities." },
+    { "type": "text", "id": "cred_attr2", "label": "Quote 2 attribution", "default": "Ruth Leas, CEO, Investec Bank" },
+    { "type": "text", "id": "cred_src2", "label": "Quote 2 source", "default": "Investec Beyond Business 2025" },
+    { "type": "text", "id": "press_label", "label": "Press strip label", "default": "As featured in" },
+    { "type": "textarea", "id": "funder_line", "label": "Funder credit line", "default": "Build to Bond is supported by The National Lottery Community Fund and Investec Beyond Business." },
+    { "type": "text", "id": "press_more", "label": "Press 'see more' link text", "default": "…and featured in 40+ publications — see all coverage →" },
+    { "type": "url", "id": "press_more_url", "label": "Press 'see more' link" },
+
+    { "type": "header", "content": "Where we work (named prison sites)", "info": "Prisons may be named. NEVER link a named participant to a named prison." },
+    { "type": "text", "id": "sites_eyebrow", "label": "Eyebrow", "default": "Where we work" },
+    { "type": "text", "id": "sites_title", "label": "Heading (blank to hide section)", "default": "Now inside three prisons — and growing." },
+    { "type": "textarea", "id": "sites_body", "label": "Body", "default": "Build to Bond runs now at HMP Lowdham Grange, and is rolling out to HMP Lindholme and HMP Foston Hall — delivered hand-in-hand with the prison teams." },
+    { "type": "text", "id": "sites_list", "label": "Named sites line (HTML allowed)", "default": "HMP Lowdham Grange &middot; HMP Lindholme &middot; HMP Foston Hall" },
+    { "type": "text", "id": "sites_partner", "label": "Partner line", "default": "In partnership with HM Prison &amp; Probation Service" },
+
+    { "type": "header", "content": "Case-study card (links to the full story)" },
+    { "type": "text", "id": "cs_kind", "label": "Card tag", "default": "Case study" },
+    { "type": "text", "id": "cs_image", "label": "Card image filename", "default": "bbc-rd-b2b.jpg" },
+    { "type": "textarea", "id": "cs_quote", "label": "Card quote (blank to hide card)", "default": "When one Maker received a balance-bike kit for his toddler, he was inspired that he could create something — and suddenly all that communication with his daughter developed that he might never have had." },
+    { "type": "text", "id": "cs_attr", "label": "Quote attribution", "default": "— A Build to Bond participant" },
+    { "type": "textarea", "id": "cs_blurb", "label": "Context line", "default": "How a six-week bamboo-bike course is rebuilding family ties inside HMP Lowdham Grange." },
+    { "type": "text", "id": "cs_site", "label": "Card footer label", "default": "Build to Bond · HMP Lowdham Grange" },
+    { "type": "url", "id": "cs_url", "label": "Card link (the full story)" },
+    { "type": "text", "id": "cs_link_label", "label": "Card link label", "default": "Read the full story" },
+
+    { "type": "header", "content": "Impact stories grid (one per pillar)" },
+    { "type": "text", "id": "stories_eyebrow", "label": "Eyebrow", "default": "Every kind of impact" },
+    { "type": "text", "id": "stories_title", "label": "Heading (blank to hide grid)", "default": "From prisons to Patagonia." },
+    { "type": "textarea", "id": "stories_lede", "label": "Lede", "default": "The same craft shows up everywhere — on epic journeys, in boardrooms, in classrooms and across the world." },
+    { "type": "text", "id": "st1_kind", "label": "Card 1 tag", "default": "Epic journey" },
+    { "type": "text", "id": "st1_title", "label": "Card 1 title", "default": "8,288 miles to Patagonia" },
+    { "type": "textarea", "id": "st1_blurb", "label": "Card 1 text", "default": "Kate Rawles rode a BBC-built bamboo bike the length of South America for The Life Cycle." },
+    { "type": "text", "id": "st1_image", "label": "Card 1 image filename", "default": "bbc-rd-gal-redroad.jpg" },
+    { "type": "url", "id": "st1_url", "label": "Card 1 link" },
+    { "type": "text", "id": "st2_kind", "label": "Card 2 tag", "default": "Corporate" },
+    { "type": "text", "id": "st2_title", "label": "Card 2 title", "default": "The Macallan — masters of their craft" },
+    { "type": "textarea", "id": "st2_blurb", "label": "Card 2 text", "default": "A distillery team built ten bamboo bikes together — craft meeting craft." },
+    { "type": "text", "id": "st2_image", "label": "Card 2 image filename", "default": "bbc-rd-tb-macallan.jpg" },
+    { "type": "url", "id": "st2_url", "label": "Card 2 link" },
+    { "type": "text", "id": "st3_kind", "label": "Card 3 tag", "default": "Education" },
+    { "type": "text", "id": "st3_title", "label": "Card 3 title", "default": "UK Bamboo Summit, Coventry" },
+    { "type": "textarea", "id": "st3_blurb", "label": "Card 3 text", "default": "Leading the national conversation on bamboo's future in engineering and design." },
+    { "type": "text", "id": "st3_image", "label": "Card 3 image filename", "default": "bbc-rd-cs-coventry.jpg" },
+    { "type": "url", "id": "st3_url", "label": "Card 3 link" },
+    { "type": "text", "id": "st4_kind", "label": "Card 4 tag", "default": "Global" },
+    { "type": "text", "id": "st4_title", "label": "Card 4 title", "default": "Teaching Kenya to build" },
+    { "type": "textarea", "id": "st4_blurb", "label": "Card 4 text", "default": "Skills that stay behind — communities building and maintaining their own bamboo bikes." },
+    { "type": "text", "id": "st4_image", "label": "Card 4 image filename", "default": "bbc-rd-cohort.jpg" },
+    { "type": "url", "id": "st4_url", "label": "Card 4 link" },
+    { "type": "url", "id": "stories_all_url", "label": "See-all link" },
+    { "type": "text", "id": "stories_all_label", "label": "See-all label", "default": "See all impact stories" },
+
+    { "type": "header", "content": "Stats (dark band)", "info": "Use only verified figures with their source label." },
+    { "type": "text", "id": "story_eyebrow", "label": "Story eyebrow", "default": "Inside the workshop" },
+
+    { "type": "header", "content": "A real workshop, inside" },
+    { "type": "text", "id": "story_title", "label": "Heading", "default": "A real workshop, inside." },
+    { "type": "textarea", "id": "story_body_1", "label": "Paragraph 1", "default": "Inside HMP Lowdham Grange — a Category-B men's prison in Nottinghamshire — we've built a 2,000 sq ft workshop where learners take a six-week, OCN-accredited course: from workshop safety and material science through frame construction, mechanics and finishing." },
+    { "type": "textarea", "id": "story_body_2", "label": "Paragraph 2", "default": "They earn an OCN Level 2 accreditation in sustainable design and manufacturing. Trusted learners are trained as instructors and help deliver the course. In the final week, frames are taken apart so the materials serve the next cohort — which is also what keeps it affordable." },
+
+    { "type": "header", "content": "Build to Bond feature" },
+    { "type": "image_picker", "id": "b2b_image", "label": "Feature image (workshop, no identifiable learners)" },
+    { "type": "text", "id": "b2b_fallback", "label": "Default feature photo filename", "default": "bbc-rd-b2b.jpg" },
+    { "type": "text", "id": "b2b_image_alt", "label": "Feature image alt text", "default": "The Build to Bond workshop inside HMP Lowdham Grange" },
+    { "type": "text", "id": "b2b_eyebrow", "label": "Eyebrow", "default": "The follow-on" },
+    { "type": "text", "id": "b2b_title", "label": "Heading", "default": "A bike that goes home." },
+    { "type": "textarea", "id": "b2b_body_1", "label": "Paragraph 1", "default": "The most engaged participants progress to Build to Bond — building a children's bamboo balance bike to gift to their own son, daughter, niece or nephew. That bike they keep. The bike goes home; the father stays inside." },
+    { "type": "textarea", "id": "b2b_body_2", "label": "Paragraph 2", "default": "It's built on the evidence that maintaining family contact is one of the strongest predictors of reduced reoffending — prisoners who keep close family ties are 39% less likely to reoffend (Lord Farmer Review, 2017)." },
+    { "type": "textarea", "id": "b2b_quote", "label": "Pull quote", "default": "Watching the pride on a father's face when he presents a bike to his child is something special." },
+    { "type": "text", "id": "b2b_cite", "label": "Quote attribution", "default": "— Sally Allsopp, Industries Manager" },
+    { "type": "text", "id": "b2b_cta1_label", "label": "CTA label", "default": "Run the programme" },
+    { "type": "url", "id": "b2b_cta1_url", "label": "CTA link (defaults to the education page)" },
+
+    { "type": "header", "content": "Pathway (intro)" },
+    { "type": "text", "id": "path_eyebrow", "label": "Eyebrow", "default": "What it opens up" },
+    { "type": "text", "id": "path_title", "label": "Heading", "default": "More than a bike — a pathway." },
+    { "type": "textarea", "id": "path_quote", "label": "Pull quote", "default": "Innovative projects, such as Build to Bond, support rehabilitation and help people leave prison as better citizens." },
+    { "type": "text", "id": "path_cite", "label": "Quote attribution", "default": "— Lord Timpson, Prisons Minister" },
+
+    { "type": "header", "content": "Get involved (intro)" },
+    { "type": "text", "id": "help_eyebrow", "label": "Eyebrow", "default": "Get involved" },
+    { "type": "text", "id": "help_title", "label": "Heading", "default": "Three ways to be part of it." },
+    { "type": "textarea", "id": "help_intro", "label": "Intro", "default": "Every route — buying, partnering or funding — creates measurable change." },
+
+    { "type": "header", "content": "Final CTA" },
+    { "type": "text", "id": "cta_eyebrow", "label": "Eyebrow", "default": "Join in" },
+    { "type": "text", "id": "cta_title", "label": "Heading", "default": "Help us build a more inclusive, skilled future." },
+    { "type": "textarea", "id": "cta_lede", "label": "Lede", "default": "Every bamboo bike built is a skill learned, a confidence gained, and a pathway opened." },
+    { "type": "text", "id": "cta1_label", "label": "CTA 1 label", "default": "Work with us" },
+    { "type": "url", "id": "cta1_url", "label": "CTA 1 link (defaults to the education page)" },
+    { "type": "text", "id": "cta2_label", "label": "CTA 2 label", "default": "Get in touch" },
+    { "type": "url", "id": "cta2_url", "label": "CTA 2 link (defaults to the contact page)" }
+  ],
+  "blocks": [
+    {
+      "type": "story",
+      "name": "Impact story card",
+      "settings": [
+        { "type": "text", "id": "kind", "label": "Tag (e.g. Epic journey)" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "blurb", "label": "Short text" },
+        { "type": "text", "id": "image", "label": "Image filename (assets/)" },
+        { "type": "url", "id": "url", "label": "Link to the full story" }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "90%" },
+        { "type": "text", "id": "label", "label": "Label", "default": "prison course completion" },
+        { "type": "text", "id": "source", "label": "Source", "default": "BBC programme records" }
+      ]
+    },
+    {
+      "type": "pathway",
+      "name": "Pathway card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Education" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "OCN-accredited Level 1 & 2 training in sustainable manufacturing — a nationally recognised qualification, earned hands-on." }
+      ]
+    },
+    {
+      "type": "help",
+      "name": "Ways-to-help card",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Tag", "default": "Buy" },
+        { "type": "checkbox", "id": "tag_lime", "label": "Lime tag", "default": true },
+        { "type": "text", "id": "title", "label": "Title", "default": "Build or own a bike" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Book a workshop or buy a kit. Every purchase helps fund our prison and education programmes." },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Shop & book" },
+        { "type": "url", "id": "link_url", "label": "Link (defaults to the contact page)" },
+        { "type": "checkbox", "id": "lime", "label": "Lime stamp shadow", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Impact 2026 (new design)",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "90%", "label": "prison course completion", "source": "BBC programme records" } },
+        { "type": "stat", "settings": { "number": "£11.41", "label": "social return per £1", "source": "PACT research" } },
+        { "type": "stat", "settings": { "number": "4,000+", "label": "people have built a bike", "source": "since 2012" } },
+        { "type": "stat", "settings": { "number": "36", "label": "countries reached", "source": "kits shipped worldwide" } },
+        { "type": "pathway", "settings": { "title": "Education", "body": "OCN-accredited Level 1 & 2 training in sustainable manufacturing — a nationally recognised qualification, earned hands-on." } },
+        { "type": "pathway", "settings": { "title": "Employment", "body": "Routes into sustainable transport, manufacturing and composites — with growing employer links and support into work on release." } },
+        { "type": "pathway", "settings": { "title": "Rehabilitation", "body": "Therapeutic, focused making builds patience and resilience — and strengthens family connection through Build to Bond." } },
+        { "type": "help", "settings": { "tag": "Buy", "tag_lime": true, "title": "Build or own a bike", "body": "Book a workshop or buy a kit. Every purchase helps fund our prison and education programmes.", "link_label": "Shop & book", "lime": false } },
+        { "type": "help", "settings": { "tag": "Partner", "tag_lime": true, "title": "Work with us", "body": "Programmes for prisons, schools and colleges. OCN Level 2 accredited, with a self-delivery model for prisons.", "link_label": "Explore partnerships", "lime": false } },
+        { "type": "help", "settings": { "tag": "Support", "tag_lime": true, "title": "Fund or champion", "body": "Fund a cohort, offer placements, or champion our work. £11.41 of social value for every £1 invested.", "link_label": "Talk to us", "lime": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

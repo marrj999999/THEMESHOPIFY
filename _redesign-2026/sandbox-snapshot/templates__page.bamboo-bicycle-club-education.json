@@ -1,0 +1,123 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-education-2026",
+      "blocks": {
+        "b0": {
+          "type": "stat",
+          "settings": {
+            "number": "4,000+",
+            "label": "people have built a bike",
+            "source": "since 2012"
+          }
+        },
+        "b1": {
+          "type": "stat",
+          "settings": {
+            "number": "90%",
+            "label": "prison course completion",
+            "source": "BBC programme records"
+          }
+        },
+        "b2": {
+          "type": "stat",
+          "settings": {
+            "number": "£11.41",
+            "label": "social return per £1",
+            "source": "PACT research"
+          }
+        },
+        "b3": {
+          "type": "stat",
+          "settings": {
+            "number": "1,544",
+            "label": "young people reached via schools",
+            "source": "education programme"
+          }
+        },
+        "b4": {
+          "type": "badge",
+          "settings": {
+            "label": "OCN Accredited — Sustainable Manufacturing",
+            "lime": true
+          }
+        },
+        "b6": {
+          "type": "badge",
+          "settings": {
+            "label": "Bamboo Mobility Project CIC",
+            "lime": false
+          }
+        },
+        "b7": {
+          "type": "badge",
+          "settings": {
+            "label": "Enhanced-DBS facilitators · public-liability insured",
+            "lime": false
+          }
+        },
+        "b8": {
+          "type": "badge",
+          "settings": {
+            "label": "Investec Beyond Business 2025",
+            "lime": false
+          }
+        },
+        "press_1": {
+          "type": "press",
+          "settings": {
+            "text": "FINANCIAL TIMES",
+            "style": "ft"
+          }
+        },
+        "press_2": {
+          "type": "press",
+          "settings": {
+            "text": "The Guardian",
+            "style": "serif"
+          }
+        },
+        "press_3": {
+          "type": "press",
+          "settings": {
+            "text": "BBC",
+            "style": "bbc"
+          }
+        },
+        "press_4": {
+          "type": "press",
+          "settings": {
+            "text": "Inside Time",
+            "style": "serif-italic"
+          }
+        },
+        "press_5": {
+          "type": "press",
+          "settings": {
+            "text": "Investec",
+            "style": "caps"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b6",
+        "b7",
+        "b8",
+        "press_1",
+        "press_2",
+        "press_3",
+        "press_4",
+        "press_5"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

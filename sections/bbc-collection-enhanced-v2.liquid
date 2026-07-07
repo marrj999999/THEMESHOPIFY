@@ -1,0 +1,360 @@
+{% comment %}
+  BBC Enhanced Collection Layout - Fixed Version
+  Uses Shopify's proven filtering system with improved styling
+{% endcomment %}
+
+{{ 'bbc-collection-enhanced.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-facets.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
+
+{%- unless section.settings.quick_add == 'none' -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  /* Enhanced styling for better spacing and typography */
+  .bbc-enhanced-collection {
+    --filter-text-size: {{ section.settings.filter_text_size }}rem;
+    --product-grid-gap: {{ section.settings.product_grid_gap }}px;
+  }
+
+  .bbc-enhanced-collection .facets__summary {
+    font-size: var(--filter-text-size) !important;
+    padding: 12px 16px !important;
+  }
+
+  .bbc-enhanced-collection .facets__label {
+    font-size: calc(var(--filter-text-size) * 0.95) !important;
+  }
+
+  .bbc-enhanced-collection .product-grid {
+    gap: var(--product-grid-gap) !important;
+  }
+
+  @media screen and (max-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} bbc-enhanced-collection">
+  {%- paginate collection.products by section.settings.products_per_page -%}
+    
+    {%- if section.settings.show_collection_info -%}
+      <div class="collection-info page-width">
+        {%- if section.settings.collection_heading != blank -%}
+          <h1 class="collection-title h1" style="margin-bottom: 16px;">{{ section.settings.collection_heading }}</h1>
+        {%- elsif collection.title -%}
+          <h1 class="collection-title h1" style="margin-bottom: 16px;">{{ collection.title }}</h1>
+        {%- endif -%}
+        
+        {%- if section.settings.collection_description != blank -%}
+          <div class="collection-description rte" style="margin-bottom: 32px;">
+            {{ section.settings.collection_description }}
+          </div>
+        {%- elsif collection.description != blank -%}
+          <div class="collection-description rte" style="margin-bottom: 32px;">
+            {{ collection.description }}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+      <div class="facets-wrapper page-width">
+        {% render 'facets',
+          results: collection,
+          enable_filtering: section.settings.enable_filtering,
+          enable_sorting: section.settings.enable_sorting,
+          filter_type: 'horizontal',
+          paginate: paginate
+        %}
+      </div>
+    {%- endif -%}
+
+    <div class="collection-products page-width">
+      {%- if collection.products.size == 0 -%}
+        <div class="collection-empty" style="text-align: center; padding: 48px 24px;">
+          <h2 class="h2">{{ section.settings.empty_title | default: 'No products found' }}</h2>
+          <p class="body-text">{{ section.settings.empty_text | default: 'Try adjusting your filters or search terms.' }}</p>
+        </div>
+      {%- else -%}
+        <div 
+          class="product-grid grid grid--{{ section.settings.columns_mobile }}-col-tablet-down grid--{{ section.settings.columns_desktop }}-col-desktop"
+          style="gap: var(--product-grid-gap);"
+        >
+          {%- for product in collection.products -%}
+            <div class="grid__item">
+              {% render 'card-product',
+                card_product: product,
+                media_aspect_ratio: section.settings.image_ratio,
+                image_shape: section.settings.image_shape,
+                show_secondary_image: section.settings.show_secondary_image,
+                show_vendor: section.settings.show_vendor,
+                show_rating: section.settings.show_rating,
+                lazy_load: forloop.index > 2,
+                quick_add: section.settings.quick_add,
+                section_id: section.id
+              %}
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          {% render 'pagination', paginate: paginate, anchor: '' %}
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "BBC Collection Enhanced",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Collection Information"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_info",
+      "default": true,
+      "label": "Show collection info"
+    },
+    {
+      "type": "text",
+      "id": "collection_heading",
+      "label": "Custom heading",
+      "info": "Leave blank to use collection title"
+    },
+    {
+      "type": "richtext",
+      "id": "collection_description",
+      "label": "Custom description",
+      "info": "Leave blank to use collection description"
+    },
+    {
+      "type": "header",
+      "content": "Product Grid"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 36,
+      "step": 4,
+      "default": 16,
+      "label": "Products per page"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "Desktop columns"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "default": "2",
+      "label": "Mobile columns",
+      "options": [
+        {
+          "value": "1",
+          "label": "1 column"
+        },
+        {
+          "value": "2",
+          "label": "2 columns"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "product_grid_gap",
+      "min": 16,
+      "max": 48,
+      "step": 8,
+      "unit": "px",
+      "default": 24,
+      "label": "Grid spacing"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait (4:5)"
+        },
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        }
+      ],
+      "default": "adapt",
+      "label": "Image ratio"
+    },
+    {
+      "type": "select",
+      "id": "image_shape",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "round",
+          "label": "Round"
+        }
+      ],
+      "default": "default",
+      "label": "Image shape"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "Show second product image on hover"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "Show vendor"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "Show product rating"
+    },
+    {
+      "type": "select",
+      "id": "quick_add",
+      "default": "none",
+      "label": "Quick add",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "standard",
+          "label": "Standard"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Filtering & Sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "default": true,
+      "label": "Enable filtering"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "default": true,
+      "label": "Enable sorting"
+    },
+    {
+      "type": "range",
+      "id": "filter_text_size",
+      "min": 1.2,
+      "max": 1.8,
+      "step": 0.1,
+      "unit": "rem",
+      "default": 1.3,
+      "label": "Filter text size"
+    },
+    {
+      "type": "header",
+      "content": "Empty State"
+    },
+    {
+      "type": "text",
+      "id": "empty_title",
+      "label": "Empty state title",
+      "default": "No products found"
+    },
+    {
+      "type": "textarea",
+      "id": "empty_text",
+      "label": "Empty state text",
+      "default": "Try adjusting your filters or search terms."
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 96,
+      "step": 8,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 96,
+      "step": 8,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Collection Enhanced",
+      "settings": {
+        "show_collection_info": true,
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "products_per_page": 16
+      }
+    }
+  ]
+}
+{% endschema %}

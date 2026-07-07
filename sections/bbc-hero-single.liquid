@@ -1,0 +1,572 @@
+{% comment %}
+  BBC Single Hero — Research-backed (12/12 sites use single hero, not carousels)
+  Mobile-first with research-backed specs:
+  - Button heights: 48px desktop, 52px mobile (WCAG 44px minimum)
+  - Typography: H1 48px→32px mobile
+  - Section padding: 80px→48px mobile
+{% endcomment %}
+
+{%- style -%}
+.bbc-hero-single {
+  position: relative;
+  min-height: {{ section.settings.min_height_mobile }}vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--bbc-forest, var(--bbc-forest));
+  overflow: hidden;
+}
+
+.bbc-hero-single__media {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.bbc-hero-single__media img,
+.bbc-hero-single__media video,
+.bbc-hero-single__media iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bbc-hero-single__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bbc-hero-single__media iframe {
+  border: none;
+  pointer-events: auto;
+}
+
+.bbc-hero-single__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(7, 62, 39, {{ section.settings.overlay_opacity | divided_by: 100.0 }}) 0%,
+    rgba(7, 62, 39, {{ section.settings.overlay_opacity | divided_by: 100.0 | times: 0.6 }}) 50%,
+    rgba(7, 62, 39, {{ section.settings.overlay_opacity | divided_by: 100.0 | times: 0.3 }}) 100%
+  );
+  z-index: 2;
+}
+
+.bbc-hero-single__content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 16px;
+}
+
+.bbc-hero-single__inner {
+  max-width: 640px;
+}
+
+.bbc-hero-single__eyebrow {
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--bbc-gold, var(--bbc-gold));
+  margin-bottom: 12px;
+}
+
+.bbc-hero-single__heading {
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--bbc-white);
+  margin: 0 0 16px;
+}
+
+.bbc-hero-single__subheading {
+  font-family: var(--font-body-family, system-ui, sans-serif);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 32px;
+  max-width: 520px;
+}
+
+.bbc-hero-single__ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bbc-hero-single__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  padding: 0 28px;
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.bbc-hero-single__btn--primary {
+  background: var(--bbc-gold, var(--bbc-gold));
+  color: var(--bbc-forest, var(--bbc-forest));
+  border: 2px solid var(--bbc-gold, var(--bbc-gold));
+}
+
+.bbc-hero-single__btn--primary:hover {
+  background: #e69800;
+  border-color: #e69800;
+}
+
+.bbc-hero-single__btn--secondary {
+  background: transparent;
+  color: var(--bbc-white);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.bbc-hero-single__btn--secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--bbc-white);
+}
+
+.bbc-hero-single__btn--outline {
+  background: transparent;
+  color: var(--bbc-forest, var(--bbc-forest));
+  border: 2px solid var(--bbc-forest, var(--bbc-forest));
+}
+
+.bbc-hero-single__btn--outline:hover {
+  background: var(--bbc-forest, var(--bbc-forest));
+  color: var(--bbc-white);
+}
+
+.bbc-hero-single__btn--white {
+  background: var(--bbc-white);
+  color: var(--bbc-forest, var(--bbc-forest));
+  border: 2px solid var(--bbc-white);
+}
+
+.bbc-hero-single__btn--white:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Button sizes */
+.bbc-hero-single__btn--sm {
+  height: 40px;
+  padding: 0 20px;
+  font-size: 0.875rem;
+}
+
+.bbc-hero-single__btn--lg {
+  height: 56px;
+  padding: 0 36px;
+  font-size: 1.125rem;
+}
+
+/* Trust badge strip */
+.bbc-hero-single__trust {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.bbc-hero-single__trust-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+}
+
+.bbc-hero-single__trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bbc-hero-single__trust-item svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--bbc-gold, var(--bbc-gold));
+}
+
+/* Desktop */
+@media (min-width: 750px) {
+  .bbc-hero-single {
+    min-height: {{ section.settings.min_height_desktop }}vh;
+  }
+
+  .bbc-hero-single__content {
+    padding: 80px 40px;
+  }
+
+  .bbc-hero-single__heading {
+    font-size: 3rem;
+  }
+
+  .bbc-hero-single__ctas {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .bbc-hero-single__btn {
+    height: 48px;
+    width: auto;
+  }
+
+  .bbc-hero-single__trust-items {
+    gap: 32px;
+  }
+}
+{%- endstyle -%}
+
+<section class="bbc-hero-single" data-section-id="{{ section.id }}">
+  {% if section.settings.video_url != blank %}
+    <div class="bbc-hero-single__media">
+      {%- if section.settings.video_url.type == 'youtube' -%}
+        <iframe 
+          src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?{% if section.settings.video_autoplay %}autoplay=1&{% endif %}{% if section.settings.video_muted %}mute=1&{% endif %}{% if section.settings.video_loop %}loop=1&playlist={{ section.settings.video_url.id }}&{% endif %}{% unless section.settings.video_controls %}controls=0&{% endunless %}modestbranding=1&rel=0&iv_load_policy=3"
+          class="bbc-hero-single__video"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+          title="{{ section.settings.heading | escape }}"
+        ></iframe>
+      {%- elsif section.settings.video_url.type == 'vimeo' -%}
+        <iframe 
+          src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}?{% if section.settings.video_autoplay %}autoplay=1&{% endif %}{% if section.settings.video_muted %}muted=1&{% endif %}{% if section.settings.video_loop %}loop=1&{% endif %}{% unless section.settings.video_controls %}controls=0&{% endunless %}title=0&byline=0&portrait=0&background=1"
+          class="bbc-hero-single__video"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+          title="{{ section.settings.heading | escape }}"
+        ></iframe>
+      {%- else -%}
+        <video 
+          class="bbc-hero-single__video"
+          {% if section.settings.video_autoplay %}autoplay{% endif %}
+          {% if section.settings.video_loop %}loop{% endif %}
+          {% if section.settings.video_muted %}muted{% endif %}
+          {% if section.settings.video_controls %}controls{% endif %}
+          playsinline
+          poster="{% if section.settings.image != blank %}{{ section.settings.image | image_url: width: 2000 }}{% endif %}"
+        >
+          <source src="{{ section.settings.video_url }}" type="video/mp4">
+          <!-- Fallback to image if video fails -->
+          {% if section.settings.image != blank %}
+            {{ section.settings.image | image_url: width: 2000 | image_tag:
+              loading: 'eager',
+              fetchpriority: 'high',
+              sizes: '100vw',
+              widths: '600, 900, 1200, 1800, 2400'
+            }}
+          {% endif %}
+        </video>
+      {%- endif -%}
+    </div>
+  {% elsif section.settings.image != blank %}
+    <div class="bbc-hero-single__media">
+      {{ section.settings.image | image_url: width: 2000 | image_tag:
+        loading: 'eager',
+        fetchpriority: 'high',
+        sizes: '100vw',
+        widths: '600, 900, 1200, 1800, 2400'
+      }}
+    </div>
+  {% endif %}
+
+  <div class="bbc-hero-single__overlay"></div>
+
+  <div class="bbc-hero-single__content">
+    <div class="bbc-hero-single__inner">
+      {% if section.settings.eyebrow != blank %}
+        <p class="bbc-hero-single__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+
+      <h1 class="bbc-hero-single__heading">{{ section.settings.heading }}</h1>
+
+      {% if section.settings.subheading != blank %}
+        <p class="bbc-hero-single__subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+
+      <div class="bbc-hero-single__ctas">
+        {%- comment -%} Section-level buttons (backward compatible) {%- endcomment -%}
+        {% if section.settings.button_text != blank %}
+          <a href="{{ section.settings.button_link }}" class="bbc-hero-single__btn bbc-hero-single__btn--{{ section.settings.button_style | default: 'primary' }}">
+            {{ section.settings.button_text }}
+          </a>
+        {% endif %}
+
+        {% if section.settings.button_secondary_text != blank %}
+          <a href="{{ section.settings.button_secondary_link }}" class="bbc-hero-single__btn bbc-hero-single__btn--{{ section.settings.button_style_secondary | default: 'secondary' }}">
+            {{ section.settings.button_secondary_text }}
+          </a>
+        {% endif %}
+
+        {%- comment -%} Button blocks (flexible, unlimited) {%- endcomment -%}
+        {% for block in section.blocks %}
+          {% if block.type == 'button' %}
+            <a 
+              href="{{ block.settings.button_link }}" 
+              class="bbc-hero-single__btn bbc-hero-single__btn--{{ block.settings.button_style | default: 'primary' }}{% if block.settings.button_size == 'small' %} bbc-hero-single__btn--sm{% elsif block.settings.button_size == 'large' %} bbc-hero-single__btn--lg{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.button_text }}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {%- comment -%} Trust items (only render trust_item blocks) {%- endcomment -%}
+      {%- assign trust_items = section.blocks | where: 'type', 'trust_item' -%}
+      {% if trust_items.size > 0 %}
+        <div class="bbc-hero-single__trust">
+          <div class="bbc-hero-single__trust-items">
+            {% for block in trust_items %}
+              <div class="bbc-hero-single__trust-item" {{ block.shopify_attributes }}>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+                <span>{{ block.settings.text }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero (Single)",
+  "tag": "section",
+  "class": "section-hero-single",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background Media"
+    },
+    { 
+      "type": "video_url", 
+      "id": "video_url", 
+      "label": "Background video",
+      "info": "Video will display instead of image when provided. Supports YouTube, Vimeo, or .mp4 file URLs.",
+      "accept": ["youtube", "vimeo"]
+    },
+    { 
+      "type": "checkbox", 
+      "id": "video_autoplay", 
+      "label": "Autoplay video",
+      "default": true,
+      "info": "Note: Most browsers require videos to be muted for autoplay to work"
+    },
+    { 
+      "type": "checkbox", 
+      "id": "video_loop", 
+      "label": "Loop video",
+      "default": true
+    },
+    { 
+      "type": "checkbox", 
+      "id": "video_muted", 
+      "label": "Mute video",
+      "default": true,
+      "info": "Required for autoplay on most browsers"
+    },
+    { 
+      "type": "checkbox", 
+      "id": "video_controls", 
+      "label": "Show video controls",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image (fallback)",
+      "info": "Used as video poster and fallback if video fails to load"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "min_height_desktop",
+      "label": "Minimum height (desktop)",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "default": 80,
+      "unit": "vh"
+    },
+    {
+      "type": "range",
+      "id": "min_height_mobile",
+      "label": "Minimum height (mobile)",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "default": 70,
+      "unit": "vh"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Since 2012"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Build your own bamboo bicycle"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Join 4,000+ people who've discovered the joy of building their own bike. Workshops in London. Kits shipped worldwide."
+    },
+    {
+      "type": "header",
+      "content": "Primary button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Book a Workshop"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "primary", "label": "Primary (Gold)" },
+        { "value": "secondary", "label": "Secondary (Outline Light)" },
+        { "value": "outline", "label": "Outline (Dark)" },
+        { "value": "white", "label": "White Solid" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "Secondary button"
+    },
+    {
+      "type": "text",
+      "id": "button_secondary_text",
+      "label": "Button text",
+      "default": "Shop Kits"
+    },
+    {
+      "type": "url",
+      "id": "button_secondary_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style_secondary",
+      "label": "Button style",
+      "options": [
+        { "value": "primary", "label": "Primary (Gold)" },
+        { "value": "secondary", "label": "Secondary (Outline Light)" },
+        { "value": "outline", "label": "Outline (Dark)" },
+        { "value": "white", "label": "White Solid" }
+      ],
+      "default": "secondary"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            { "value": "primary", "label": "Primary (Gold)" },
+            { "value": "secondary", "label": "Secondary (Outline Light)" },
+            { "value": "outline", "label": "Outline (Dark)" },
+            { "value": "white", "label": "White Solid" }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "select",
+          "id": "button_size",
+          "label": "Button size",
+          "options": [
+            { "value": "default", "label": "Default" },
+            { "value": "small", "label": "Small" },
+            { "value": "large", "label": "Large" }
+          ],
+          "default": "default"
+        }
+      ]
+    },
+    {
+      "type": "trust_item",
+      "name": "Trust item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "4,000+ bikes built"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero (Single)",
+      "blocks": [
+        { "type": "trust_item", "settings": { "text": "4,000+ bikes built" } },
+        { "type": "trust_item", "settings": { "text": "36+ countries" } },
+        { "type": "trust_item", "settings": { "text": "No experience needed" } }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

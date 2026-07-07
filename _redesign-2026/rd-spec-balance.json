@@ -1,0 +1,56 @@
+{
+  "discipline": "Balance",
+  "audience": "A parent or grandparent buying (or building) a child's very first bike as a meaningful, handmade gift — not a cyclist shopping for themselves.",
+  "positioning": {
+    "eyebrow": "A first bike, built by hand",
+    "title": "The keepsake first bike you build together.",
+    "lede": "A bamboo balance bike light enough for little legs, simple enough to build over a weekend, and personal enough to keep forever. It's the same bike a parent builds for their own child on our prison programme — so the one you make at home helps fund a place for a family to be reunited."
+  },
+  "specs": [
+    { "label": "Age range", "value": "Designed for ages 2–5 (FLAG: confirm lower bound)" },
+    { "label": "Weight", "value": "Light for little legs (FLAG: confirm kg)" },
+    { "label": "Build time", "value": "8–12 hrs — a weekend" },
+    { "label": "Finish", "value": "Hand-sealed natural bamboo" }
+  ],
+  "who_for": [
+    { "title": "First-time pedal-free riders", "body": "Balance-first learning: no pedals, no stabilisers. Children learn to glide and steer, then move to a pedal bike with real confidence." },
+    { "title": "A gift that means something", "body": "A handmade keepsake, not a plastic shop bike — built by you, kept for years, often passed down to the next child." },
+    { "title": "Parents who want to build it WITH their child", "body": "Few parts, forgiving bamboo, no power tools. A short, joyful project you can do alongside a toddler — or as a surprise." }
+  ],
+  "faq": [
+    { "q": "What age and size is this for?", "a": "Designed for children roughly aged 2–5, as a balance (pedal-free) first bike. The right fit depends on your child's inside-leg measurement more than age — send us their height and inside leg and we'll confirm it suits them. (FLAG: confirm exact age/height/inside-leg range and minimum age with James.)" },
+    { "q": "Is it light enough for a toddler to handle?", "a": "Bamboo is naturally light and the balance frame is small, so it's made to be manageable for little legs. We don't want to publish a weight we haven't measured — please confirm the finished weight in kg before this goes live. (FLAG: real weight needed.)" },
+    { "q": "Why no pedals?", "a": "Balance bikes teach the hard part first — balancing and steering — without pedals or stabilisers. Children glide with their feet, then move straight to a pedal bike, usually skipping stabilisers altogether." },
+    { "q": "How hard is the build, and how long does it take?", "a": "It's our simplest kit — fewer parts than an adult frame and around 8–12 hours, comfortably a weekend. No power tools: just basic hand tools (hacksaw, files, sandpaper, tape) and a work surface. Most builders start with zero experience, and our community can help if you get stuck." },
+    { "q": "Is it safe and strong enough for a child?", "a": "The bamboo frame is sealed and tough — around 28,000 PSI tensile strength (comparable to mild steel), under 1% failure across 4,000+ builds, and tested with Swansea University. As with any child's bike, fit a helmet and supervise early rides. (FLAG: confirm any child-specific safety standard or wording with James.)" }
+  ],
+  "reviews": [
+    {
+      "quote": "Built this with my daughter for her 3rd birthday. The look on her face when she realized we made it together was priceless.",
+      "author": "Proud Parent",
+      "role": "Balance bike builder, London"
+    },
+    {
+      "quote": "Much more meaningful than buying a plastic balance bike from the shop. A gift he'll remember forever.",
+      "author": "Gift Giver",
+      "role": "Grandparent build, Cambridge"
+    }
+  ],
+  "related": [
+    { "title": "Component finishing pack", "note": "Wheels, headset, bars and saddle to turn the frame into a ride-ready balance bike.", "fallback": "bbc-rd-prod-build.jpg" },
+    { "title": "Frame kits for grown-ups", "note": "When they outgrow it — build your own gravel or road frame next.", "fallback": "bbc-rd-bike-field.jpg" },
+    { "title": "The Build to Bond story", "note": "How a bike built inside reunites a parent with their child.", "fallback": "bbc-rd-team.jpg" }
+  ],
+  "hero_fallback": "bbc-rd-prod-balance.jpg",
+  "price_from": "£165",
+  "funding_emphasis": "This is the one kit that mirrors our prison programme exactly: inside, a parent builds a balance bike for their own child as the first step back to their family. When you build one for your child at home, your purchase helps fund a place for another parent to do the same — one first bike funding another.",
+  "needs_real_data": [
+    "Finished balance-bike weight in kg (NOT stated anywhere in BBC source files — must confirm before publishing a weight claim)",
+    "Exact age / height / inside-leg suitability range and minimum age (BBC template says ages 2–5; task brief suggested ~18 months; reconcile and confirm lower bound)",
+    "Whether '8–12 hours' is the agreed public build-time figure for the balance kit (taken from product.kit-balance.json collapsible-time; confirm)",
+    "Star rating and review count for the buy box (Gravel design used 4.8 / 214 — unverified; no balance-specific numbers exist)",
+    "Any child-specific safety standard / certification or required safety wording (e.g. helmet, supervision, min age) the page should carry",
+    "Exact funding wording for THIS kit — '10% of profits' (kit-balance template) vs 'every kit funds a place' (base PDP); pick the canonical phrasing",
+    "Real names/permission for the parent and grandparent testimonials (currently anonymised as 'Proud Parent' / 'Gift Giver')"
+  ]
+}

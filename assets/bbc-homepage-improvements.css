@@ -1,0 +1,423 @@
+/**
+ * BBC Homepage Styling Improvements
+ * Research-based optimizations following bicycle industry best practices
+ * Inspired by Trek, Specialized, Canyon clean design patterns
+ */
+
+/* Hero Section Enhancement */
+.bbc-hero-single {
+  position: relative;
+}
+
+.bbc-hero-single .hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.bbc-hero-single .hero-heading {
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.bbc-hero-single .hero-subheading {
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  line-height: 1.4;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bbc-hero-single .trust-bar {
+  margin-top: 3rem;
+  opacity: 0.85;
+}
+
+/* Section Spacing - Research-Based */
+.page-width {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 1200px) {
+  .page-width {
+    padding: 0 2rem;
+  }
+}
+
+/* Improved Section Headers */
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-header .eyebrow {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bbc-forest);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.section-header h2 {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.section-header .intro-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(var(--color-foreground), 0.8);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Two Ways to Build - Enhanced Cards */
+.bbc-options .option-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.bbc-options .option-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bbc-options .option-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.bbc-options .option-card.highlighted {
+  border: 2px solid var(--bbc-forest);
+  transform: scale(1.02);
+}
+
+.bbc-options .badge {
+  position: absolute;
+  top: -10px;
+  left: 2rem;
+  background: var(--bbc-gold);
+  color: var(--bbc-forest);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Content Sections - Improved Typography */
+.bbc-content .content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .bbc-content .content-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.bbc-content .content-text {
+  max-width: none;
+}
+
+.bbc-content .features-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0 0;
+}
+
+.bbc-content .feature-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.bbc-content .feature-item::before {
+  content: '✓';
+  color: var(--bbc-teal);
+  font-weight: 600;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* Story Section - Better Statistics Display */
+.bbc-story .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+  text-align: center;
+}
+
+.bbc-story .stat-item {
+  padding: 1.5rem 1rem;
+}
+
+.bbc-story .stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--bbc-forest);
+  line-height: 1;
+  display: block;
+}
+
+.bbc-story .stat-label {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+}
+
+/* Journeys Section - Map Enhancement */
+.bbc-journeys {
+  background: var(--bbc-forest);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.bbc-journeys::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('path-to-world-map.svg') center/cover;
+  opacity: 0.1;
+  z-index: 1;
+}
+
+.bbc-journeys .content {
+  position: relative;
+  z-index: 2;
+}
+
+.bbc-journeys .featured-journey {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2.5rem;
+  margin: 3rem 0;
+  backdrop-filter: blur(10px);
+}
+
+/* Press Recognition - Logo Grid */
+.bbc-press-recognition .press-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+  align-items: center;
+}
+
+.bbc-press-recognition .press-logo {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  filter: grayscale(100%);
+  max-height: 40px;
+  width: auto;
+}
+
+.bbc-press-recognition .press-logo:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+
+/* Testimonials - Card Layout */
+.bbc-homepage-testimonials .testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.bbc-homepage-testimonials .testimonial-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  position: relative;
+}
+
+.bbc-homepage-testimonials .quote-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.bbc-homepage-testimonials .quote-author {
+  font-weight: 600;
+  color: var(--bbc-forest);
+}
+
+.bbc-homepage-testimonials .quote-role {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-top: 0.25rem;
+}
+
+/* Final CTA - Enhanced Design */
+.bbc-cta {
+  background: var(--bbc-forest);
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.bbc-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+.bbc-cta .content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bbc-cta h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+.bbc-cta .cta-text {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+}
+
+.bbc-cta .button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.bbc-cta .btn {
+  min-width: 180px;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bbc-cta .btn-primary {
+  background: var(--bbc-gold);
+  color: var(--bbc-forest);
+}
+
+.bbc-cta .btn-secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.bbc-cta .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+  
+  .section-header h2 {
+    font-size: 2.2rem;
+  }
+  
+  .bbc-options .option-cards {
+    gap: 1.5rem;
+  }
+  
+  .bbc-options .option-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .bbc-content .content-grid {
+    gap: 2rem;
+  }
+  
+  .bbc-journeys .featured-journey {
+    padding: 2rem 1.5rem;
+  }
+  
+  .bbc-cta .button-group {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .bbc-cta .btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus States */
+.btn:focus-visible,
+.option-card:focus-visible {
+  outline: 3px solid var(--bbc-gold);
+  outline-offset: 2px;
+}
+
+/* Performance - Reduce Layout Shifts */
+.bbc-hero-single,
+.bbc-options,
+.bbc-content,
+.bbc-story,
+.bbc-journeys,
+.bbc-press-recognition,
+.bbc-homepage-testimonials,
+.bbc-cta {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+}

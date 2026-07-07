@@ -1,0 +1,312 @@
+{% comment %}
+  BBC Countdown Timer
+  Create urgency for sales, workshop dates, or launches
+{% endcomment %}
+
+<section class="bbc-countdown {{ section.settings.style }}" id="countdown-{{ section.id }}">
+  <div class="bbc-container">
+    <div class="bbc-countdown__content">
+      {% if section.settings.heading != blank %}
+        <h2 class="bbc-countdown__title">{{ section.settings.heading }}</h2>
+      {% endif %}
+      
+      {% if section.settings.subheading != blank %}
+        <p class="bbc-countdown__subtitle">{{ section.settings.subheading }}</p>
+      {% endif %}
+      
+      <div class="bbc-countdown__timer" 
+           data-end-date="{{ section.settings.end_date }}"
+           data-end-time="{{ section.settings.end_time }}"
+           role="timer"
+           aria-live="polite"
+           aria-atomic="true">
+        <div class="bbc-countdown__unit">
+          <span class="bbc-countdown__number" data-days>00</span>
+          <span class="bbc-countdown__label">Days</span>
+        </div>
+        <div class="bbc-countdown__separator">:</div>
+        <div class="bbc-countdown__unit">
+          <span class="bbc-countdown__number" data-hours>00</span>
+          <span class="bbc-countdown__label">Hours</span>
+        </div>
+        <div class="bbc-countdown__separator">:</div>
+        <div class="bbc-countdown__unit">
+          <span class="bbc-countdown__number" data-minutes>00</span>
+          <span class="bbc-countdown__label">Minutes</span>
+        </div>
+        <div class="bbc-countdown__separator">:</div>
+        <div class="bbc-countdown__unit">
+          <span class="bbc-countdown__number" data-seconds>00</span>
+          <span class="bbc-countdown__label">Seconds</span>
+        </div>
+      </div>
+      
+      <div class="bbc-countdown__expired" style="display: none;">
+        {{ section.settings.expired_message | default: 'This offer has ended' }}
+      </div>
+      
+      {% if section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_link }}" class="bbc-btn bbc-btn--{{ section.settings.button_style | default: 'primary' }} bbc-countdown__button">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+.bbc-countdown {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.bbc-countdown.style-banner {
+  background: var(--bbc-forest, var(--bbc-forest));
+  color: white;
+}
+
+.bbc-countdown.style-banner .bbc-countdown__title,
+.bbc-countdown.style-banner .bbc-countdown__number {
+  color: white;
+}
+
+.bbc-countdown.style-banner .bbc-countdown__subtitle,
+.bbc-countdown.style-banner .bbc-countdown__label,
+.bbc-countdown.style-banner .bbc-countdown__separator {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bbc-countdown.style-highlight {
+  background: var(--bbc-gold, var(--bbc-gold));
+  color: var(--bbc-forest, var(--bbc-forest));
+}
+
+.bbc-countdown.style-highlight .bbc-countdown__title,
+.bbc-countdown.style-highlight .bbc-countdown__number,
+.bbc-countdown.style-highlight .bbc-countdown__subtitle,
+.bbc-countdown.style-highlight .bbc-countdown__label {
+  color: var(--bbc-forest, var(--bbc-forest));
+}
+
+.bbc-countdown.style-minimal {
+  background: var(--bbc-cream, var(--bbc-cream));
+}
+
+.bbc-countdown__title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin: 0 0 8px;
+}
+
+.bbc-countdown__subtitle {
+  font-size: 1rem;
+  color: var(--bbc-gray-500);
+  margin: 0 0 24px;
+}
+
+.bbc-countdown__timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.bbc-countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+}
+
+.bbc-countdown__number {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  color: var(--bbc-forest, var(--bbc-forest));
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.bbc-countdown__label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--bbc-gray-500);
+  margin-top: 4px;
+}
+
+.bbc-countdown__separator {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--bbc-border, #ccc);
+  margin-top: -20px;
+}
+
+.bbc-countdown__expired {
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 20px;
+}
+
+.bbc-countdown__button {
+  display: inline-block;
+  padding: 14px 32px;
+  background: var(--bbc-forest, var(--bbc-forest));
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.bbc-countdown__button:hover {
+  background: var(--bbc-teal, var(--bbc-teal));
+  transform: translateY(-2px);
+}
+
+.bbc-countdown.style-banner .bbc-countdown__button {
+  background: var(--bbc-gold, var(--bbc-gold));
+  color: var(--bbc-forest, var(--bbc-forest));
+}
+
+.bbc-countdown.style-highlight .bbc-countdown__button {
+  background: var(--bbc-forest, var(--bbc-forest));
+  color: white;
+}
+
+@media (max-width: 480px) {
+  .bbc-countdown__unit {
+    min-width: 50px;
+  }
+  
+  .bbc-countdown__separator {
+    font-size: 1.5rem;
+  }
+}
+</style>
+
+<script>
+(function() {
+  const timer = document.querySelector('#countdown-{{ section.id }} .bbc-countdown__timer');
+  if (!timer) return;
+  
+  const endDate = timer.dataset.endDate;
+  const endTime = timer.dataset.endTime || '23:59';
+  const endDateTime = new Date(endDate + 'T' + endTime + ':00');
+  
+  const daysEl = timer.querySelector('[data-days]');
+  const hoursEl = timer.querySelector('[data-hours]');
+  const minutesEl = timer.querySelector('[data-minutes]');
+  const secondsEl = timer.querySelector('[data-seconds]');
+  const expiredEl = document.querySelector('#countdown-{{ section.id }} .bbc-countdown__expired');
+  
+  function updateCountdown() {
+    const now = new Date();
+    const diff = endDateTime - now;
+    
+    if (diff <= 0) {
+      timer.style.display = 'none';
+      expiredEl.style.display = 'block';
+      return;
+    }
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    daysEl.textContent = String(days).padStart(2, '0');
+    hoursEl.textContent = String(hours).padStart(2, '0');
+    minutesEl.textContent = String(minutes).padStart(2, '0');
+    secondsEl.textContent = String(seconds).padStart(2, '0');
+    
+    requestAnimationFrame(() => setTimeout(updateCountdown, 1000));
+  }
+  
+  updateCountdown();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "BBC Countdown",
+  "tag": "section",
+  "class": "bbc-countdown-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Workshop Booking Closes Soon"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Limited spaces available for March"
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "End Date",
+      "info": "Format: YYYY-MM-DD (e.g., 2026-03-15)",
+      "default": "2026-03-15"
+    },
+    {
+      "type": "text",
+      "id": "end_time",
+      "label": "End Time",
+      "info": "Format: HH:MM (24-hour, e.g., 18:00)",
+      "default": "18:00"
+    },
+    {
+      "type": "text",
+      "id": "expired_message",
+      "label": "Expired Message",
+      "default": "This offer has ended"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Book Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "primary", "label": "Primary (Gold)" },
+        { "value": "secondary", "label": "Secondary (Forest)" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "outline-light", "label": "Outline Light" },
+        { "value": "white", "label": "White" },
+        { "value": "gold", "label": "Gold" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        { "value": "style-minimal", "label": "Minimal (Light)" },
+        { "value": "style-banner", "label": "Banner (Dark)" },
+        { "value": "style-highlight", "label": "Highlight (Gold)" }
+      ],
+      "default": "style-banner"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Countdown"
+    }
+  ]
+}
+{% endschema %}

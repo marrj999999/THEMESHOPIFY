@@ -1,0 +1,123 @@
+{% comment %}
+  BBC Schools Programmes — the offer, in schools' purchasing language (Layer 1)
+  Reconciled to current model: free speaker intro · reusable frame programme + optional £800 bike.
+  OCN shown as an option, not led (engagement currency, not league-table currency).
+  Cards = blocks so James can edit/add. CTAs anchor to #enquiry-form.
+{% endcomment %}
+
+<section class="bbc-schools-prog">
+  <div class="page-width">
+    <div class="bbc-schools-prog__head">
+      {% if section.settings.eyebrow != blank %}<span class="bbc-schools-prog__eyebrow">{{ section.settings.eyebrow }}</span>{% endif %}
+      <h2 class="bbc-schools-prog__title">{{ section.settings.title }}</h2>
+      {% if section.settings.intro != blank %}<p class="bbc-schools-prog__intro">{{ section.settings.intro }}</p>{% endif %}
+    </div>
+
+    <div class="bbc-schools-prog__grid">
+      {% for block in section.blocks %}
+        <div class="bbc-schools-card{% if block.settings.featured %} bbc-schools-card--featured{% endif %}" {{ block.shopify_attributes }}>
+          {% if block.settings.badge != blank %}<span class="bbc-schools-card__badge">{{ block.settings.badge }}</span>{% endif %}
+          <h3 class="bbc-schools-card__title">{{ block.settings.title }}</h3>
+          <div class="bbc-schools-card__price">{{ block.settings.price }}</div>
+          {% if block.settings.meta != blank %}<div class="bbc-schools-card__meta">{{ block.settings.meta }}</div>{% endif %}
+          {% if block.settings.body != blank %}<div class="bbc-schools-card__body">{{ block.settings.body }}</div>{% endif %}
+          <a class="bbc-schools-card__cta" href="{{ block.settings.cta_link | default: '#enquiry-form' }}">{{ block.settings.cta_text | default: 'Enquire' }} &rarr;</a>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.note != blank %}
+      <p class="bbc-schools-prog__note">{{ section.settings.note }}</p>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .bbc-schools-prog{background:var(--bbc-cream,#f8fafc);padding:64px 0}
+  .bbc-schools-prog__head{max-width:720px;margin:0 0 36px}
+  .bbc-schools-prog__eyebrow{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bbc-teal,#3f8b66);margin-bottom:10px}
+  .bbc-schools-prog__title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.25rem);color:var(--bbc-forest,#073e27);margin:0 0 12px;line-height:1.15}
+  .bbc-schools-prog__intro{font-size:1.1rem;line-height:1.55;color:var(--bbc-text,#1e293b);margin:0}
+  .bbc-schools-prog__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+  .bbc-schools-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--bbc-gray-100,#e2e8f0);border-top:5px solid var(--bbc-teal,#3f8b66);border-radius:14px;padding:26px;box-shadow:0 2px 10px rgba(7,62,39,.05)}
+  .bbc-schools-card--featured{border-top-color:var(--bbc-gold,#ffa900);box-shadow:0 8px 26px rgba(7,62,39,.1)}
+  .bbc-schools-card__badge{align-self:flex-start;font-size:.72rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--bbc-forest,#073e27);background:var(--bbc-gold-light,#fff4d6);border-radius:999px;padding:4px 12px;margin-bottom:14px}
+  .bbc-schools-card__title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.25rem;color:var(--bbc-forest,#073e27);margin:0 0 6px;line-height:1.2}
+  .bbc-schools-card__price{font-weight:800;font-size:1.05rem;color:var(--bbc-teal,#3f8b66);margin:0 0 10px}
+  .bbc-schools-card__meta{font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--bbc-text-muted,#64748b);margin:0 0 12px}
+  .bbc-schools-card__body{font-size:.96rem;line-height:1.55;color:var(--bbc-text,#1e293b);margin:0 0 18px;flex:1}
+  .bbc-schools-card__body p{margin:0 0 8px}
+  .bbc-schools-card__cta{font-weight:800;font-size:.98rem;color:var(--bbc-forest,#073e27);text-decoration:none;border-bottom:2px solid var(--bbc-gold,#ffa900);align-self:flex-start;padding-bottom:2px}
+  .bbc-schools-card__cta:hover{color:var(--bbc-teal,#3f8b66)}
+  .bbc-schools-prog__note{font-size:.88rem;color:var(--bbc-text-muted,#64748b);margin:26px 0 0;max-width:70ch}
+</style>
+
+{% schema %}
+{
+  "name": "BBC Schools Programmes",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The programmes" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Start free. Build for real." },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "A free bamboo-speaker workshop is your way in. When you're ready, the bamboo bike-build programme uses a reusable kit you buy once and re-run every year for the cost of bamboo." },
+    { "type": "textarea", "id": "note", "label": "Footnote", "default": "Optional OCN accreditation is available where it counts for your learners (alternative provision, SEND, FE and post-16). Most schools fund programmes from existing budgets or a grant." }
+  ],
+  "blocks": [
+    {
+      "type": "programme",
+      "name": "Programme card",
+      "settings": [
+        { "type": "text", "id": "badge", "label": "Badge" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "price", "label": "Price" },
+        { "type": "text", "id": "meta", "label": "Meta (age / curriculum)" },
+        { "type": "richtext", "id": "body", "label": "Description" },
+        { "type": "text", "id": "cta_text", "label": "Button text", "default": "Enquire" },
+        { "type": "url", "id": "cta_link", "label": "Button link (default: #enquiry-form)" },
+        { "type": "checkbox", "id": "featured", "label": "Feature this card (gold)", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Schools Programmes",
+      "blocks": [
+        {
+          "type": "programme",
+          "settings": {
+            "badge": "Start here — free",
+            "title": "Bamboo Speaker — free introduction",
+            "price": "FREE",
+            "meta": "Ages 11–16 · KS3 / KS4 · D&T · Physics · ~2–3 hrs",
+            "body": "<p>The no-cost way in. Students design, build and tune a passive bamboo speaker that makes a phone louder with no power — then prove it with a fair test. See the model work before you commit to anything.</p>",
+            "cta_text": "Book a free taster",
+            "featured": true
+          }
+        },
+        {
+          "type": "programme",
+          "settings": {
+            "badge": "The build programme",
+            "title": "Sustainable Bicycle Technical Development",
+            "price": "Reusable kit — from £[price] · optional take-home bike £800",
+            "meta": "Ages 14–18 · KS4 / post-16 · NEA-grade D&T",
+            "body": "<p>Students build a real bamboo gravel-bike frame on a <strong>reusable rig</strong> — buy the kit once, re-run every year for the cost of bamboo. Option to complete a frame into a fully built take-home bike for £800.</p>",
+            "cta_text": "Enquire about the programme"
+          }
+        },
+        {
+          "type": "programme",
+          "settings": {
+            "badge": "We come to you",
+            "title": "Teacher-led taster day",
+            "price": "From £[price] per day",
+            "meta": "KS3–post-16 · DBS-checked · risk assessments included",
+            "body": "<p>Our DBS-checked team runs a hands-on build day at your school — everything supplied, including risk assessments. The easiest way to trial the experience with a class.</p>",
+            "cta_text": "Book a day"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

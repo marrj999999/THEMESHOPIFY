@@ -1,0 +1,182 @@
+/**
+ * BBC PRACTICAL SPACING SYSTEM
+ * Fixes the huge gaps from research system - reduces by ~40%
+ * Based on research but with reasonable visual gaps
+ * 
+ * PROBLEM: Research system created 96px-192px gaps (too huge!)
+ * SOLUTION: Reduce section padding by ~40% for practical use
+ */
+
+:root {
+  /* FIXED: Practical 8-Point Spacing Scale */
+  --bbc-space-xs: 8px;   /* Tiny spacing */
+  --bbc-space-sm: 16px;  /* Small spacing */
+  --bbc-space-md: 24px;  /* Medium spacing */
+  --bbc-space-lg: 32px;  /* Large spacing */
+  --bbc-space-xl: 40px;  /* Extra large */
+  --bbc-space-xxl: 48px; /* Maximum spacing */
+
+  /* FIXED: Practical Section Padding (reduces gaps by ~40%) */
+  --bbc-section-mobile: var(--bbc-space-lg);      /* 32px mobile (was 48px) */
+  --bbc-section-tablet: var(--bbc-space-xl);      /* 40px tablet (was 64px) */
+  --bbc-section-desktop: var(--bbc-space-xxl);    /* 48px desktop (was 72px) */
+  
+  /* FIXED: Section Type Variations */
+  --bbc-compact-mobile: var(--bbc-space-md);      /* 24px compact mobile (was 32px) */
+  --bbc-compact-desktop: var(--bbc-space-lg);     /* 32px compact desktop (was 48px) */
+  --bbc-hero-mobile: var(--bbc-space-xl);         /* 40px hero mobile (was 64px) */
+  --bbc-hero-desktop: var(--bbc-space-xxl);       /* 48px hero desktop (was 80px) */
+}
+
+/* FIXED: Override Research System - Apply Practical Spacing */
+
+/* ALL SECTIONS - Base practical padding */
+.shopify-section {
+  padding-top: var(--bbc-section-mobile) !important;
+  padding-bottom: var(--bbc-section-mobile) !important;
+}
+
+@media screen and (min-width: 750px) {
+  .shopify-section {
+    padding-top: var(--bbc-section-tablet) !important;
+    padding-bottom: var(--bbc-section-tablet) !important;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .shopify-section {
+    padding-top: var(--bbc-section-desktop) !important;
+    padding-bottom: var(--bbc-section-desktop) !important;
+  }
+}
+
+/* HERO SECTIONS - Slightly more space but reasonable */
+/* NOTE: First section padding removed — handled by bbc-header-improved.css */
+.section-image-banner,
+.section-bbc-page-hero,
+.section-bbc-kit-hero,
+.section-bbc-impact-hero,
+.section--hero {
+  padding-top: var(--bbc-hero-mobile) !important;
+  padding-bottom: var(--bbc-hero-mobile) !important;
+}
+
+@media screen and (min-width: 750px) {
+  .section-image-banner,
+  .section-bbc-page-hero,
+  .section-bbc-kit-hero,
+  .section-bbc-impact-hero,
+  .section--hero {
+    padding-top: var(--bbc-hero-desktop) !important;
+    padding-bottom: var(--bbc-hero-desktop) !important;
+  }
+}
+
+/* First section after header — NO top padding (tight to header) */
+#MainContent > .shopify-section:first-child {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* COMPACT SECTIONS - Minimal space for tight content */
+.section--compact,
+.shopify-section[class*="trust"],
+.shopify-section[class*="testimonial"],
+.shopify-section[class*="press"],
+.shopify-section[class*="stats"] {
+  padding-top: var(--bbc-compact-mobile) !important;
+  padding-bottom: var(--bbc-compact-mobile) !important;
+}
+
+@media screen and (min-width: 750px) {
+  .section--compact,
+  .shopify-section[class*="trust"],
+  .shopify-section[class*="testimonial"],
+  .shopify-section[class*="press"],
+  .shopify-section[class*="stats"] {
+    padding-top: var(--bbc-compact-desktop) !important;
+    padding-bottom: var(--bbc-compact-desktop) !important;
+  }
+}
+
+/* FOOTER - Remove excessive top padding */
+.shopify-section-group-footer-group .shopify-section {
+  padding-top: var(--bbc-space-lg) !important; /* 32px instead of huge gap */
+}
+
+/* COLLECTION PAGE SPECIFIC FIXES */
+.bbc-collection-enhanced,
+.collection {
+  gap: var(--bbc-space-md) !important; /* 24px gaps instead of huge ones */
+}
+
+.collection-filters {
+  padding: var(--bbc-space-md) !important; /* 24px instead of excessive padding */
+}
+
+.product-grid {
+  margin-top: var(--bbc-space-md) !important; /* 24px top margin, not huge gap */
+}
+
+/* ADJACENT SECTIONS - Reduce compound gaps */
+.shopify-section + .shopify-section {
+  margin-top: calc(-1 * var(--bbc-space-sm)) !important; /* Reduce gap by 16px */
+}
+
+/* SPECIFIC PROBLEMATIC SECTIONS */
+.rich-text {
+  padding-top: var(--bbc-space-md) !important; /* 24px not massive gap */
+  padding-bottom: var(--bbc-space-md) !important;
+}
+
+.featured-collection {
+  padding-top: var(--bbc-space-lg) !important; /* 32px not massive gap */
+  padding-bottom: var(--bbc-space-lg) !important;
+}
+
+/* VISUAL GAP CALCULATION 
+   Old system: 48px + 48px = 96px gaps (too huge!)
+   New system: 32px + 32px = 64px gaps (much better!)
+   With overlap fix: 32px + 32px - 16px = 48px gaps (perfect!)
+*/
+
+/* =============================================================================
+   BBC CUSTOM SECTION EXCEPTIONS — Fix 2026-02-24
+   
+   The global .shopify-section padding rule above creates DOUBLE-PADDING when
+   BBC custom sections have their own internal spacing via .bbc-section (80px)
+   or self-defined padding. Stack example:
+     .shopify-section: 48px top  ← from rule above
+     .bbc-section:     80px top  ← from bbc-foundation.css --section-py
+     TOTAL:           128px      ← causes excessive whitespace
+   
+   Fix: Zero out outer .shopify-section padding for all BBC custom sections
+   so that internal section padding is the only source of spacing.
+   Uses CSS :has() — supported in Chrome 105+, Safari 15.4+, Firefox 121+.
+   ============================================================================= */
+
+/* Sections using .bbc-section class (options, content, testimonials, cta) */
+.shopify-section:has(.bbc-section),
+/* Standalone BBC sections with self-defined padding */
+.shopify-section:has(.bbc-hero-single),
+.shopify-section:has(.bbc-story),
+.shopify-section:has(.bbc-journeys),
+.shopify-section:has(.bbc-press),
+.shopify-section:has(.bbc-press-logos-v3),
+.shopify-section:has(.bbc-timeline-enhanced),
+.shopify-section:has(.bbc-founders),
+.shopify-section:has(.bbc-page-hero),
+.shopify-section:has(.bbc-endorsements),
+.shopify-section:has(.bbc-impact-stats),
+.shopify-section:has(.bbc-testimonials-grid) {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Header section group — header has its own internal padding via .header { }
+   The global .shopify-section rule was adding 32px white space ABOVE and BELOW
+   the navigation bar, creating the reported "header top/bottom white gap". */
+.shopify-section-group-header-group .shopify-section {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}

@@ -1,0 +1,105 @@
+{%- comment -%}
+  BBC 2026 — Press archive ("As featured in") page. Self-contained, scoped under
+  .bbc-rd via bbc-redesign-2026.css. Logo wall (real logos) + a full list of
+  press coverage as editable press_item blocks linking to the blog re-posts.
+{%- endcomment -%}
+
+<div class="bbc-rd bbc-rd-press">
+  <style>
+    .bbc-rd-press .rd-presslist{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:8px; }
+    .bbc-rd-press a.rd-pressitem{ display:flex; flex-direction:column; gap:6px; background:var(--bone); border:2px solid var(--ink); border-radius:9px; box-shadow:4px 4px 0 var(--ink); padding:18px 20px; text-decoration:none; color:var(--ink); transition:transform .15s ease, box-shadow .15s ease; }
+    @media(hover:hover){ .bbc-rd-press a.rd-pressitem:hover{ transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--lime-700); } }
+    .bbc-rd-press .rd-pressitem__outlet{ font-weight:800; font-size:13px; letter-spacing:.04em; text-transform:uppercase; color:var(--forest); }
+    .bbc-rd-press .rd-pressitem__head{ font-weight:700; font-size:16px; line-height:1.3; color:var(--charcoal); }
+    .bbc-rd-press .rd-pressitem__more{ font-weight:700; font-size:13px; color:var(--forest); margin-top:2px; }
+    @media(max-width:640px){ .bbc-rd-press .rd-presslist{ grid-template-columns:1fr; } }
+  </style>
+
+  {%- comment -%} ---------- HEADING ---------- {%- endcomment -%}
+  <section class="rd-pad rd-center">
+    <div class="rd-wrap rd-mw-820px">
+      <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><span class="rd-here">{{ section.settings.crumb | default: 'Press' }}</span></nav>
+      {%- if section.settings.eyebrow != blank -%}<span class="rd-eyebrow rd-mt2">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h1 class="rd-mw-18ch rd-mx-auto">{{ section.settings.heading }}</h1>
+      {%- if section.settings.lede != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.lede }}</p>{%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- LOGO WALL (real logos) ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-steel rd-center">
+    <div class="rd-wrap">
+      {%- if section.settings.logos_label != blank -%}<p class="rd-partnerlabel">{{ section.settings.logos_label }}</p>{%- endif -%}
+      <div class="rd-logogrid rd-mt3">
+        <span class="rd-logocell"><img class="rd-logoimg" src="{{ 'logo-financial-times.svg' | asset_url }}" alt="Financial Times" loading="lazy"></span>
+        <span class="rd-logocell"><img class="rd-logoimg" src="{{ 'logo-guardian.svg' | asset_url }}" alt="The Guardian" loading="lazy"></span>
+        <span class="rd-logocell"><img class="rd-logoimg" src="{{ 'logo-telegraph.svg' | asset_url }}" alt="The Telegraph" loading="lazy"></span>
+        <span class="rd-logocell"><img class="rd-logoimg" src="{{ 'logo-cnn.svg' | asset_url }}" alt="CNN" loading="lazy"></span>
+        <span class="rd-logocell"><img class="rd-logoimg" src="{{ 'logo-metro.svg' | asset_url }}" alt="Metro" loading="lazy"></span>
+        <span class="rd-logocell"><img class="rd-logoimg" src="{{ 'logo-fastcompany.svg' | asset_url }}" alt="Fast Company" loading="lazy"></span>
+        <span class="rd-logocell"><img class="rd-logoimg" src="{{ 'logo-wallpaper.svg' | asset_url }}" alt="Wallpaper*" loading="lazy"></span>
+        <span class="rd-logocell"><img class="rd-logoimg" src="{{ 'logo-hindustantimes.svg' | asset_url }}" alt="Hindustan Times" loading="lazy"></span>
+        <span class="rd-logocell"><img class="rd-logoimg" src="{{ 'logo-design-museum.svg' | asset_url }}" alt="Design Museum" loading="lazy"></span>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- FULL COVERAGE LIST ---------- {%- endcomment -%}
+  {%- assign items = section.blocks | where: 'type', 'press_item' -%}
+  {%- if items.size > 0 -%}
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      {%- if section.settings.list_heading != blank -%}<h2 class="rd-mw-18ch">{{ section.settings.list_heading }}</h2>{%- endif -%}
+      <div class="rd-presslist">
+        {%- for block in items -%}
+          <a class="rd-pressitem" href="{{ block.settings.url | default: '/blogs/news' }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.outlet != blank -%}<span class="rd-pressitem__outlet">{{ block.settings.outlet }}</span>{%- endif -%}
+            <span class="rd-pressitem__head">{{ block.settings.headline }}</span>
+            <span class="rd-pressitem__more">Read the coverage &rarr;</span>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- CTA ---------- {%- endcomment -%}
+  <section class="rd-pad rd-dark rd-center">
+    <div class="rd-wrap rd-mw-680px">
+      <h2>{{ section.settings.cta_title | default: 'Writing about bamboo, craft or rehabilitation?' }}</h2>
+      {%- if section.settings.cta_lede != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.cta_lede }}</p>{%- endif -%}
+      <div class="rd-flex rd-mt3 rd-jc-center"><a class="rd-btn rd-lime" href="{{ section.settings.cta_url | default: '/pages/contact-us' }}">{{ section.settings.cta_label | default: 'Get in touch' }} <span class="rd-arrow">&rarr;</span></a></div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Press archive 2026",
+  "tag": "section",
+  "class": "section bbc-press-archive-wrap",
+  "settings": [
+    { "type": "text", "id": "crumb", "label": "Breadcrumb", "default": "Press" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "As featured in" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "40+ publications. One bamboo bike." },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "Since 2012, the Bamboo Bicycle Club has been covered by national press, the design world and the global cycling media — from the Financial Times and The Guardian to CNN, Wallpaper* and beyond." },
+    { "type": "text", "id": "logos_label", "label": "Logo wall label", "default": "Selected coverage" },
+    { "type": "text", "id": "list_heading", "label": "List heading", "default": "Every story, in one place." },
+    { "type": "text", "id": "cta_title", "label": "CTA heading", "default": "Writing about bamboo, craft or rehabilitation?" },
+    { "type": "textarea", "id": "cta_lede", "label": "CTA lede", "default": "We're always happy to talk to press — for interviews, images or a workshop visit." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Get in touch" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" }
+  ],
+  "blocks": [
+    {
+      "type": "press_item",
+      "name": "Press item",
+      "settings": [
+        { "type": "text", "id": "outlet", "label": "Outlet" },
+        { "type": "text", "id": "headline", "label": "Headline" },
+        { "type": "url", "id": "url", "label": "Link to the coverage" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Press archive 2026" } ]
+}
+{% endschema %}

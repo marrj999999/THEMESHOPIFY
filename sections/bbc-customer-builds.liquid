@@ -1,0 +1,697 @@
+{% comment %}
+  BBC Customer Builds - User Generated Content Showcase
+  Displays customer build photos and stories for social proof
+  
+  Features:
+  - Manual UGC curation (until Instagram API)
+  - Customer testimonials with social links
+  - Hashtag promotion (#bamboobuilds)
+  - Before/after galleries
+  - Social sharing encouragement
+{% endcomment %}
+
+<section class="bbc-customer-builds" id="customer-builds-{{ section.id }}">
+  <div class="bbc-container">
+    {% if section.settings.heading != blank %}
+      <div class="bbc-customer-builds__header">
+        <span class="bbc-customer-builds__label">{{ section.settings.label | default: 'Real Builds' }}</span>
+        <h2 class="bbc-customer-builds__title">{{ section.settings.heading }}</h2>
+        {% if section.settings.subheading != blank %}
+          <p class="bbc-customer-builds__subtitle">{{ section.settings.subheading }}</p>
+        {% endif %}
+        
+        {% if section.settings.hashtag != blank %}
+          <div class="bbc-customer-builds__hashtag">
+            <a href="https://instagram.com/explore/tags/{{ section.settings.hashtag | remove: '#' }}" 
+               target="_blank" 
+               rel="noopener"
+               class="bbc-customer-builds__hashtag-link">
+              {% render 'bbc-icons', icon: 'instagram', size: 20 %}
+              #{{ section.settings.hashtag | remove: '#' }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="bbc-customer-builds__grid">
+      {% for block in section.blocks %}
+        <div class="bbc-customer-builds__item" {{ block.shopify_attributes }}>
+          {% if block.type == 'build' %}
+            <!-- Build showcase block -->
+            <div class="bbc-build-card">
+              {% if block.settings.before_image != blank and block.settings.after_image != blank %}
+                <!-- Before/After slider -->
+                <div class="bbc-build-card__slider">
+                  <div class="bbc-build-card__slide bbc-build-card__slide--before">
+                    {{ block.settings.before_image | image_url: width: 600 | image_tag: 
+                      loading: 'lazy',
+                      class: 'bbc-build-card__image',
+                      alt: 'Before building'
+                    }}
+                    <span class="bbc-build-card__slide-label">Before</span>
+                  </div>
+                  <div class="bbc-build-card__slide bbc-build-card__slide--after active">
+                    {{ block.settings.after_image | image_url: width: 600 | image_tag: 
+                      loading: 'lazy',
+                      class: 'bbc-build-card__image',
+                      alt: 'Completed bamboo bicycle'
+                    }}
+                    <span class="bbc-build-card__slide-label">After</span>
+                  </div>
+                  <button class="bbc-build-card__toggle" aria-label="Toggle before/after">
+                    {% render 'bbc-icons', icon: 'compare', size: 20 %}
+                  </button>
+                </div>
+              {% elsif block.settings.main_image != blank %}
+                <!-- Single image -->
+                <div class="bbc-build-card__single">
+                  {{ block.settings.main_image | image_url: width: 600 | image_tag: 
+                    loading: 'lazy',
+                    class: 'bbc-build-card__image',
+                    alt: block.settings.customer_name | append: ' build'
+                  }}
+                </div>
+              {% endif %}
+              
+              <div class="bbc-build-card__content">
+                {% if block.settings.customer_name != blank %}
+                  <div class="bbc-build-card__header">
+                    <h3 class="bbc-build-card__name">{{ block.settings.customer_name }}</h3>
+                    {% if block.settings.location != blank %}
+                      <span class="bbc-build-card__location">
+                        {% render 'bbc-icons', icon: 'location', size: 16 %}
+                        {{ block.settings.location }}
+                      </span>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                
+                {% if block.settings.kit_type != blank %}
+                  <div class="bbc-build-card__kit">
+                    <span class="bbc-build-card__kit-label">Kit:</span>
+                    {% if block.settings.kit_link != blank %}
+                      <a href="{{ block.settings.kit_link }}" class="bbc-build-card__kit-link">
+                        {{ block.settings.kit_type }}
+                      </a>
+                    {% else %}
+                      <span>{{ block.settings.kit_type }}</span>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                
+                {% if block.settings.testimonial != blank %}
+                  <blockquote class="bbc-build-card__quote">
+                    "{{ block.settings.testimonial }}"
+                  </blockquote>
+                {% endif %}
+                
+                {% if block.settings.social_link != blank %}
+                  <a href="{{ block.settings.social_link }}" 
+                     target="_blank" 
+                     rel="noopener"
+                     class="bbc-build-card__social">
+                    {% render 'bbc-icons', icon: 'instagram', size: 16 %}
+                    View on Instagram
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    
+    {% if section.settings.cta_text != blank %}
+      <div class="bbc-customer-builds__footer">
+        <div class="bbc-customer-builds__cta">
+          <h3>{{ section.settings.cta_text }}</h3>
+          {% if section.settings.cta_subtitle != blank %}
+            <p>{{ section.settings.cta_subtitle }}</p>
+          {% endif %}
+          
+          <div class="bbc-customer-builds__buttons">
+            {% if section.settings.workshop_button_text != blank %}
+              <a href="{{ section.settings.workshop_button_link | default: '/pages/bicycle-frame-building-workshop' }}" 
+                 class="bbc-customer-builds__button bbc-customer-builds__button--primary">
+                {{ section.settings.workshop_button_text }}
+              </a>
+            {% endif %}
+            
+            {% if section.settings.kit_button_text != blank %}
+              <a href="{{ section.settings.kit_button_link | default: '/collections/home-build-kits' }}" 
+                 class="bbc-customer-builds__button bbc-customer-builds__button--secondary">
+                {{ section.settings.kit_button_text }}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+        
+        {% if section.settings.share_prompt != blank %}
+          <div class="bbc-customer-builds__share">
+            <p>{{ section.settings.share_prompt }}</p>
+            <div class="bbc-customer-builds__share-buttons">
+              <a href="https://instagram.com" 
+                 target="_blank" 
+                 class="bbc-customer-builds__share-btn">
+                {% render 'bbc-icons', icon: 'instagram', size: 20 %}
+                Instagram
+              </a>
+              <a href="https://tiktok.com" 
+                 target="_blank" 
+                 class="bbc-customer-builds__share-btn">
+                {% render 'bbc-icons', icon: 'tiktok', size: 20 %}
+                TikTok
+              </a>
+              <a href="https://youtube.com" 
+                 target="_blank" 
+                 class="bbc-customer-builds__share-btn">
+                {% render 'bbc-icons', icon: 'youtube', size: 20 %}
+                YouTube
+              </a>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+.bbc-customer-builds {
+  padding: var(--section-py, 80px) var(--section-px, 24px);
+  background: {{ section.settings.background_color | default: 'var(--bbc-cream, var(--bbc-cream))' }};
+}
+
+.bbc-customer-builds__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.bbc-customer-builds__label {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--bbc-teal, var(--bbc-teal));
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.bbc-customer-builds__title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+
+.bbc-customer-builds__subtitle {
+  font-size: var(--text-lg, 1.125rem);
+  color: var(--bbc-text-muted, #64748b);
+  margin: 0 0 20px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bbc-customer-builds__hashtag-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--bbc-forest, var(--bbc-forest));
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.125rem;
+  transition: color 0.2s;
+}
+
+.bbc-customer-builds__hashtag-link:hover {
+  color: var(--bbc-teal, var(--bbc-teal));
+}
+
+.bbc-customer-builds__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 32px;
+  margin-bottom: 64px;
+}
+
+/* Build Card Styles */
+.bbc-build-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(7, 62, 39, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bbc-build-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(7, 62, 39, 0.15);
+}
+
+.bbc-build-card__slider {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+}
+
+.bbc-build-card__single {
+  height: 280px;
+  overflow: hidden;
+}
+
+.bbc-build-card__slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.bbc-build-card__slide.active {
+  opacity: 1;
+}
+
+.bbc-build-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bbc-build-card__slide-label {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.bbc-build-card__toggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--bbc-teal, var(--bbc-teal));
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.bbc-build-card__toggle:hover {
+  background: var(--bbc-forest, var(--bbc-forest));
+}
+
+.bbc-build-card__content {
+  padding: 24px;
+}
+
+.bbc-build-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.bbc-build-card__name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin: 0;
+}
+
+.bbc-build-card__location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--bbc-text-muted, #64748b);
+  font-size: 0.875rem;
+}
+
+.bbc-build-card__kit {
+  margin-bottom: 16px;
+  font-size: 0.875rem;
+}
+
+.bbc-build-card__kit-label {
+  color: var(--bbc-text-muted, #64748b);
+}
+
+.bbc-build-card__kit-link {
+  color: var(--bbc-teal, var(--bbc-teal));
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.bbc-build-card__kit-link:hover {
+  text-decoration: underline;
+}
+
+.bbc-build-card__quote {
+  font-style: italic;
+  color: var(--bbc-text-muted, #64748b);
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+.bbc-build-card__social {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--bbc-forest, var(--bbc-forest));
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+}
+
+.bbc-build-card__social:hover {
+  color: var(--bbc-teal, var(--bbc-teal));
+}
+
+/* Footer CTA */
+.bbc-customer-builds__footer {
+  text-align: center;
+  padding-top: 48px;
+  border-top: 1px solid var(--bbc-gray-200, #e2e8f0);
+}
+
+.bbc-customer-builds__cta h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin: 0 0 12px;
+}
+
+.bbc-customer-builds__cta p {
+  color: var(--bbc-text-muted, #64748b);
+  margin: 0 0 32px;
+}
+
+.bbc-customer-builds__buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.bbc-customer-builds__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.bbc-customer-builds__button--primary {
+  background: var(--bbc-forest, var(--bbc-forest));
+  color: white;
+}
+
+.bbc-customer-builds__button--primary:hover {
+  background: var(--bbc-teal, var(--bbc-teal));
+  transform: translateY(-2px);
+}
+
+.bbc-customer-builds__button--secondary {
+  background: transparent;
+  color: var(--bbc-forest, var(--bbc-forest));
+  border: 2px solid var(--bbc-forest, var(--bbc-forest));
+}
+
+.bbc-customer-builds__button--secondary:hover {
+  background: var(--bbc-forest, var(--bbc-forest));
+  color: white;
+}
+
+.bbc-customer-builds__share {
+  padding-top: 32px;
+  border-top: 1px solid var(--bbc-gray-200, #e2e8f0);
+}
+
+.bbc-customer-builds__share p {
+  font-weight: 600;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin-bottom: 16px;
+}
+
+.bbc-customer-builds__share-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.bbc-customer-builds__share-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--bbc-gray-100, #f1f5f9);
+  color: var(--bbc-forest, var(--bbc-forest));
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.bbc-customer-builds__share-btn:hover {
+  background: var(--bbc-teal, var(--bbc-teal));
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .bbc-customer-builds__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .bbc-customer-builds__buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .bbc-customer-builds__button {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .bbc-build-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+</style>
+
+<script>
+// Before/After toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const toggleButtons = document.querySelectorAll('.bbc-build-card__toggle');
+  
+  toggleButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const slider = this.parentElement;
+      const slides = slider.querySelectorAll('.bbc-build-card__slide');
+      
+      slides.forEach(slide => {
+        slide.classList.toggle('active');
+      });
+    });
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "BBC Customer Builds",
+  "tag": "section",
+  "class": "bbc-customer-builds-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Real Builds"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built by Our Community"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "See what our builders have created with bamboo kits and workshops"
+    },
+    {
+      "type": "text",
+      "id": "hashtag",
+      "label": "Instagram Hashtag",
+      "default": "bamboobuilds",
+      "info": "Without the # symbol"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f5f5f0"
+    },
+    {
+      "type": "header",
+      "content": "Call to Action"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Heading",
+      "default": "Ready to Build Your Own?"
+    },
+    {
+      "type": "text",
+      "id": "cta_subtitle",
+      "label": "CTA Subtitle",
+      "default": "Join thousands of builders worldwide"
+    },
+    {
+      "type": "text",
+      "id": "workshop_button_text",
+      "label": "Workshop Button Text",
+      "default": "Book Workshop"
+    },
+    {
+      "type": "url",
+      "id": "workshop_button_link",
+      "label": "Workshop Button Link"
+    },
+    {
+      "type": "text",
+      "id": "kit_button_text",
+      "label": "Kit Button Text",
+      "default": "Shop Kits"
+    },
+    {
+      "type": "url",
+      "id": "kit_button_link",
+      "label": "Kit Button Link"
+    },
+    {
+      "type": "text",
+      "id": "share_prompt",
+      "label": "Share Prompt",
+      "default": "Share your build and inspire others!"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "build",
+      "name": "Customer Build",
+      "settings": [
+        {
+          "type": "text",
+          "id": "customer_name",
+          "label": "Customer Name"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location"
+        },
+        {
+          "type": "image_picker",
+          "id": "main_image",
+          "label": "Main Build Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "before_image",
+          "label": "Before Image (optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_image",
+          "label": "After Image (optional)"
+        },
+        {
+          "type": "text",
+          "id": "kit_type",
+          "label": "Kit Type",
+          "info": "e.g., Gravel Kit, Road Kit, Custom"
+        },
+        {
+          "type": "url",
+          "id": "kit_link",
+          "label": "Link to Kit Product"
+        },
+        {
+          "type": "textarea",
+          "id": "testimonial",
+          "label": "Customer Quote"
+        },
+        {
+          "type": "url",
+          "id": "social_link",
+          "label": "Instagram Post Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Customer Builds",
+      "blocks": [
+        {
+          "type": "build",
+          "settings": {
+            "customer_name": "Sarah",
+            "location": "London, UK",
+            "kit_type": "Gravel Kit",
+            "testimonial": "Building my own bike was an incredible experience. The bamboo ride is so smooth!"
+          }
+        },
+        {
+          "type": "build",
+          "settings": {
+            "customer_name": "Mike",
+            "location": "Berlin, Germany", 
+            "kit_type": "Road Kit",
+            "testimonial": "Never thought I could build a bike frame. BBC made it possible!"
+          }
+        },
+        {
+          "type": "build",
+          "settings": {
+            "customer_name": "Emma",
+            "location": "Sydney, Australia",
+            "kit_type": "City Kit", 
+            "testimonial": "My bamboo bike gets compliments everywhere I ride. So proud to have built it myself."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

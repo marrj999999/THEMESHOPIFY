@@ -1,0 +1,2296 @@
+/* =============================================================================
+   BBC FOUNDATION CSS
+   A bulletproof design system foundation with UX best practices
+   
+   This provides the BONES — typography, buttons, forms, icons, spacing.
+   Add personality through images and content in Shopify.
+   ============================================================================= */
+
+/* =============================================================================
+   1. CSS RESET & BASE
+   ============================================================================= */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* =============================================================================
+   1b. UNIVERSAL GAP FIX — Remove white space between header and content
+   ============================================================================= */
+
+/* Main content wrapper - no top spacing */
+#MainContent,
+main#MainContent,
+.content-for-layout {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* First section after header - no top spacing */
+#MainContent > .shopify-section:first-child {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* All template types */
+[class*="template-"] #MainContent > .shopify-section:first-child {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* BBC custom sections when first */
+#MainContent > .shopify-section:first-child [class*="bbc-"],
+#MainContent > .shopify-section:first-child .collection-banner {
+  margin-top: 0 !important;
+}
+
+/* Header section - no bottom spacing */
+.section-header,
+.shopify-section-group-header-group {
+  margin-bottom: 0 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #1e293b;
+  background: #ffffff;
+  min-height: 100vh;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* =============================================================================
+   2. CSS CUSTOM PROPERTIES (Design Tokens)
+   ============================================================================= */
+
+:root {
+  /* Brand Colors */
+  --bbc-forest: #073e27;
+  --bbc-forest-dark: #052e1d;
+  --bbc-forest-light: #e8f0eb;
+  --bbc-teal: #3f8b66;
+  --bbc-teal-light: #d0e4d8;
+  --bbc-gold: #ffa900;
+  --bbc-gold-dark: #e69900;
+  --bbc-gold-light: #fff4d6;
+  
+  /* Neutrals */
+  --bbc-white: #ffffff;
+  --bbc-cream: #f8fafc;
+  --bbc-gray-50: #f1f5f9;
+  --bbc-gray-100: #e2e8f0;
+  --bbc-gray-200: #cbd5e1;
+  --bbc-gray-300: #94a3b8;
+  --bbc-gray-400: #64748b;
+  --bbc-gray-500: #475569;
+  --bbc-gray-600: #334155;
+  --bbc-gray-700: #1e293b;
+  --bbc-gray-900: #0f172a;
+  
+  /* Semantic Colors */
+  --bbc-text: var(--bbc-gray-700);
+  --bbc-text-muted: var(--bbc-gray-400);
+  --bbc-heading: var(--bbc-gray-900);
+  --bbc-border: var(--bbc-gray-100);
+  --bbc-surface: var(--bbc-white);
+  --bbc-surface-alt: var(--bbc-cream);
+  
+  /* Feedback Colors */
+  --bbc-success: #10b981;
+  --bbc-success-bg: #ecfdf5;
+  --bbc-error: #ef4444;
+  --bbc-error-bg: #fef2f2;
+  --bbc-warning: #f59e0b;
+  --bbc-warning-bg: #fffbeb;
+  --bbc-info: #3b82f6;
+  --bbc-info-bg: #eff6ff;
+  
+  /* Typography Scale (Major Third - 1.25) */
+  --text-xs: 0.75rem;      /* 12px */
+  --text-sm: 0.875rem;     /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg: 1.125rem;     /* 18px - body default */
+  --text-xl: 1.25rem;      /* 20px */
+  --text-2xl: 1.5rem;      /* 24px */
+  --text-3xl: 1.875rem;    /* 30px */
+  --text-4xl: 2.25rem;     /* 36px */
+  --text-5xl: 3rem;        /* 48px */
+  --text-6xl: 3.75rem;     /* 60px */
+  
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.6;
+  --leading-loose: 1.8;
+  
+  /* Font Weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+  
+  /* Spacing Scale (4px base) */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  --space-32: 8rem;     /* 128px */
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
+  
+  /* Z-index Scale */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+  
+  /* Container Widths */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1200px;
+  --container-2xl: 1400px;
+  
+  /* Section Spacing */
+  --section-py: var(--space-20);
+  --section-px: var(--space-6);
+  
+  /* ==========================================================================
+     VARIABLE ALIASES
+     For backward compatibility with sections using --bbc-space-X naming
+     ========================================================================== */
+  
+  /* Spacing Aliases */
+  --bbc-space-1: var(--space-1);
+  --bbc-space-2: var(--space-2);
+  --bbc-space-3: var(--space-3);
+  --bbc-space-4: var(--space-4);
+  --bbc-space-5: var(--space-5);
+  --bbc-space-6: var(--space-6);
+  --bbc-space-8: var(--space-8);
+  --bbc-space-10: var(--space-10);
+  --bbc-space-12: var(--space-12);
+  --bbc-space-16: var(--space-16);
+  --bbc-space-20: var(--space-20);
+  --bbc-space-24: var(--space-24);
+  --bbc-space-32: var(--space-32);
+  
+  /* Color Aliases */
+  --bbc-black: var(--bbc-gray-900);
+  --bbc-slate: var(--bbc-gray-700);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-py: var(--space-12);
+    --section-px: var(--space-5);
+    --text-5xl: 2.5rem;
+    --text-6xl: 3rem;
+  }
+}
+
+/* =============================================================================
+   2b. MATERIAL SYMBOLS ICONS
+   Required for Material Symbols Outlined font to render as icons
+   ============================================================================= */
+
+/* @font-face rules to ensure fonts load (backup for link tag) */
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(https://fonts.gstatic.com/s/materialsymbolsoutlined/v314/kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzaxHMPdY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOem.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Material Symbols Rounded';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(https://fonts.gstatic.com/s/materialsymbolsrounded/v313/syl0-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjpZIvDmUSVOK7BDB_Qb9vUSzq3wzLK-P0J-V_Zs-QtQth3-jOcbTCVpeRL2w5rwZu2rIekXxKJKJBjAa8.ttf) format('truetype');
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Rounded variant (if used) */
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Icon size variants */
+.material-symbols-outlined.icon-sm,
+.material-symbols-rounded.icon-sm { font-size: 18px; }
+
+.material-symbols-outlined.icon-md,
+.material-symbols-rounded.icon-md { font-size: 24px; }
+
+.material-symbols-outlined.icon-lg,
+.material-symbols-rounded.icon-lg { font-size: 32px; }
+
+.material-symbols-outlined.icon-xl,
+.material-symbols-rounded.icon-xl { font-size: 48px; }
+
+/* =============================================================================
+   3. TYPOGRAPHY
+   ============================================================================= */
+
+/* Headings */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  color: var(--bbc-heading);
+  margin-bottom: var(--space-4);
+}
+
+h1, .h1 { font-size: var(--text-5xl); }
+h2, .h2 { font-size: var(--text-4xl); }
+h3, .h3 { font-size: var(--text-3xl); }
+h4, .h4 { font-size: var(--text-2xl); }
+h5, .h5 { font-size: var(--text-xl); }
+h6, .h6 { font-size: var(--text-lg); font-weight: var(--font-semibold); }
+
+/* Standardized Section Headings — Override clamp() inconsistencies */
+.section h2, 
+.bbc-section h2,
+[class*="bbc-"] > .page-width > h2 {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  color: var(--bbc-heading);
+  margin: 0 0 var(--space-6);
+}
+
+@media (max-width: 768px) {
+  .section h2, 
+  .bbc-section h2,
+  [class*="bbc-"] > .page-width > h2 {
+    font-size: var(--text-3xl);
+  }
+}
+
+/* Body text */
+p {
+  margin-bottom: var(--space-4);
+  color: var(--bbc-text);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.lead {
+  font-size: var(--text-xl);
+  line-height: var(--leading-relaxed);
+  color: var(--bbc-text);
+}
+
+.small {
+  font-size: var(--text-sm);
+}
+
+.muted {
+  color: var(--bbc-text-muted);
+}
+
+/* Links */
+a {
+  color: var(--bbc-forest);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--bbc-teal);
+}
+
+/* =============================================================================
+   DARK SECTION LINK OVERRIDES
+   All sections with dark green backgrounds need white/gold links
+   ============================================================================= */
+
+/* Header navigation - ONLY the top nav bar (dark green background) */
+.bbc-header__main a,
+.bbc-header__nav-link,
+.bbc-header__nav a,
+.bbc-header__actions a,
+.bbc-header__logo a {
+  color: #ffffff !important;
+  text-decoration: none;
+}
+
+.bbc-header__nav-link:hover,
+.bbc-header__nav a:hover {
+  color: #ffffff !important;
+  opacity: 0.9;
+}
+
+/* Mobile menu - WHITE background, needs DARK text */
+.bbc-header__mobile-menu a,
+.bbc-header__mobile-link,
+.bbc-header__mobile-nav a,
+.bbc-header__mobile-section a,
+.bbc-header__mobile-section summary {
+  color: #073e27 !important; /* Dark green on white */
+  text-decoration: none;
+}
+
+.bbc-header__mobile-section ul a {
+  color: #555555 !important; /* Slightly lighter for sub-items */
+}
+
+.bbc-header__mobile-menu a:hover,
+.bbc-header__mobile-link:hover {
+  color: #3f8b66 !important; /* BBC Teal on hover */
+}
+
+/* Mobile menu header (dark green bar at top) */
+.bbc-header__mobile-menu-header,
+.bbc-header__mobile-menu-header * {
+  color: #ffffff !important;
+}
+
+/* Dawn mobile drawer (fallback) */
+.menu-drawer a,
+.menu-drawer__menu-item {
+  color: #073e27 !important;
+}
+
+/* Footer - all links white or gold */
+.bbc-footer a,
+.bbc-footer__nav-list a,
+.bbc-footer__contact-item a,
+.bbc-footer__social a,
+.bbc-footer__copyright a,
+.bbc-footer__legal a {
+  color: rgba(255, 255, 255, 0.85) !important;
+  text-decoration: none;
+}
+
+.bbc-footer a:hover,
+.bbc-footer__nav-list a:hover,
+.bbc-footer__contact-item a:hover {
+  color: #ffa900 !important; /* BBC Gold on hover */
+}
+
+/* Announcement bar */
+.bbc-header__announcement a,
+.announcement-bar a {
+  color: #ffa900 !important; /* BBC Gold */
+}
+
+/* Dark section containers - generic override */
+[style*="background: #073e27"] a,
+[style*="background:#073e27"] a,
+[style*="background: var(--bbc-forest)"] a,
+.section--dark a,
+.bg-forest a {
+  color: #ffffff !important;
+}
+
+/* Common dark BBC sections */
+.bbc-awards a,
+.bbc-community a,
+.bbc-countdown a,
+.bbc-endorsements a,
+.bbc-contact-options a,
+.bbc-customer-builds a,
+.bbc-cycle-to-work a,
+.bbc-build-to-bond a,
+.bbc-carbon-calculator a,
+.bbc-comparison-table a,
+.bbc-epic-journeys a,
+.bbc-founders a,
+.bbc-impact-hero a,
+.bbc-social-impact a,
+.bbc-trust-bar a,
+.bbc-video-hero a {
+  color: #ffffff !important;
+}
+
+/* Hero sections with dark overlays */
+.bbc-hero a,
+.bbc-hero-single a,
+.bbc-hero-slider a,
+.bbc-hero-v2 a,
+.bbc-kit-hero a,
+.bbc-page-hero a {
+  color: #ffffff !important;
+}
+
+/* Buttons in dark sections should stay as designed */
+.bbc-btn,
+.btn,
+[class*="button"] {
+  color: inherit;
+}
+
+/* LIGHT BACKGROUND OVERRIDES - dropdown menus, modals on white */
+.bbc-header__dropdown a,
+.bbc-header__dropdown-simple a,
+.mega-menu a,
+.header__submenu a {
+  color: #333333 !important; /* Dark text on white dropdown */
+}
+
+.bbc-header__dropdown a:hover,
+.bbc-header__dropdown-simple a:hover {
+  color: var(--bbc-forest, #073e27) !important;
+}
+
+a:focus-visible {
+  outline: 3px solid var(--bbc-gold);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Remove underline for links that are buttons or nav items */
+.btn, .nav-link, .card-link {
+  text-decoration: none;
+}
+
+/* Lists */
+ul, ol {
+  padding-left: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+li {
+  margin-bottom: var(--space-2);
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+
+/* Semantic elements */
+strong, b {
+  font-weight: var(--font-semibold);
+}
+
+em, i {
+  font-style: italic;
+}
+
+mark {
+  background: var(--bbc-gold-light);
+  padding: 0.1em 0.2em;
+  border-radius: var(--radius-sm);
+}
+
+/* Labels / Overlines */
+.label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--bbc-forest);
+  margin-bottom: var(--space-3);
+}
+
+/* =============================================================================
+   4. BUTTONS
+   Best practice: clear states (default, hover, active, focus, disabled, loading)
+   ============================================================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 2px solid transparent;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-base);
+}
+
+/* Button Sizes */
+.btn-sm {
+  min-height: 40px;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+}
+
+.btn-lg {
+  min-height: 56px;
+  padding: var(--space-4) var(--space-8);
+  font-size: var(--text-lg);
+}
+
+/* Primary Button (Gold) */
+.btn-primary {
+  background: var(--bbc-gold);
+  color: var(--bbc-gray-900);
+  border-color: var(--bbc-gold);
+}
+
+.btn-primary:hover {
+  background: var(--bbc-gold-dark);
+  border-color: var(--bbc-gold-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:active {
+  background: #cc8800;
+  border-color: #cc8800;
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Secondary Button (Forest) */
+.btn-secondary {
+  background: var(--bbc-forest);
+  color: var(--bbc-white);
+  border-color: var(--bbc-forest);
+}
+
+.btn-secondary:hover {
+  background: var(--bbc-forest-dark);
+  border-color: var(--bbc-forest-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary:active {
+  background: #031f13;
+  border-color: #031f13;
+  transform: translateY(0);
+}
+
+/* Outline Button */
+.btn-outline {
+  background: transparent;
+  color: var(--bbc-forest);
+  border-color: var(--bbc-forest);
+}
+
+.btn-outline:hover {
+  background: var(--bbc-forest);
+  color: var(--bbc-white);
+}
+
+.btn-outline:active {
+  background: var(--bbc-forest-dark);
+}
+
+/* Ghost Button (text only) */
+.btn-ghost {
+  background: transparent;
+  color: var(--bbc-forest);
+  border-color: transparent;
+}
+
+.btn-ghost:hover {
+  background: var(--bbc-gray-50);
+}
+
+/* White Button (for dark backgrounds) */
+.btn-white {
+  background: var(--bbc-white);
+  color: var(--bbc-forest);
+  border-color: var(--bbc-white);
+}
+
+.btn-white:hover {
+  background: var(--bbc-gray-50);
+  border-color: var(--bbc-gray-50);
+}
+
+/* Focus State (all buttons) */
+.btn:focus-visible {
+  outline: 3px solid var(--bbc-gold);
+  outline-offset: 2px;
+}
+
+/* Disabled State */
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Loading State */
+.btn.loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+
+.btn.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: btn-spin 0.6s linear infinite;
+}
+
+.btn-primary.loading::after { border-color: var(--bbc-gray-900); border-right-color: transparent; }
+.btn-secondary.loading::after { border-color: var(--bbc-white); border-right-color: transparent; }
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Button with Icon */
+.btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.btn-sm svg { width: 16px; height: 16px; }
+.btn-lg svg { width: 24px; height: 24px; }
+
+/* Icon-only Button */
+.btn-icon {
+  padding: var(--space-3);
+  min-width: 48px;
+}
+
+.btn-icon.btn-sm { padding: var(--space-2); min-width: 40px; }
+.btn-icon.btn-lg { padding: var(--space-4); min-width: 56px; }
+
+/* =============================================================================
+   5. FORM ELEMENTS
+   ============================================================================= */
+
+/* Form Group */
+.form-group {
+  margin-bottom: var(--space-5);
+}
+
+/* Labels */
+.form-label {
+  display: block;
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: var(--bbc-heading);
+  margin-bottom: var(--space-2);
+}
+
+.form-label.required::after {
+  content: ' *';
+  color: var(--bbc-error);
+}
+
+/* Input, Textarea, Select Base Styles */
+.form-input,
+.form-textarea,
+.form-select {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--bbc-text);
+  background: var(--bbc-white);
+  border: 2px solid var(--bbc-border);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--bbc-gray-300);
+}
+
+/* Focus State */
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--bbc-forest);
+  box-shadow: 0 0 0 3px rgba(7, 62, 39, 0.15);
+}
+
+/* Error State */
+.form-input.error,
+.form-textarea.error,
+.form-select.error {
+  border-color: var(--bbc-error);
+}
+
+.form-input.error:focus,
+.form-textarea.error:focus,
+.form-select.error:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+/* Success State */
+.form-input.success,
+.form-textarea.success,
+.form-select.success {
+  border-color: var(--bbc-success);
+}
+
+/* Disabled State */
+.form-input:disabled,
+.form-textarea:disabled,
+.form-select:disabled {
+  background: var(--bbc-gray-50);
+  color: var(--bbc-gray-400);
+  cursor: not-allowed;
+}
+
+/* Textarea */
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Select */
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='%2364748b'%3E%3Cpath d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-4) center;
+  padding-right: var(--space-12);
+}
+
+/* Help Text */
+.form-help {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--bbc-text-muted);
+  margin-top: var(--space-2);
+}
+
+/* Error Message */
+.form-error {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--bbc-error);
+  margin-top: var(--space-2);
+}
+
+/* Checkbox & Radio */
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.form-check input[type="checkbox"],
+.form-check input[type="radio"] {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  accent-color: var(--bbc-forest);
+  cursor: pointer;
+}
+
+.form-check-label {
+  font-size: var(--text-base);
+  color: var(--bbc-text);
+  cursor: pointer;
+}
+
+/* =============================================================================
+   6. ICONS
+   ============================================================================= */
+
+/* Icon sizing classes */
+.icon {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.icon-sm { width: 16px; height: 16px; }
+.icon-md { width: 24px; height: 24px; }
+.icon-lg { width: 32px; height: 32px; }
+.icon-xl { width: 48px; height: 48px; }
+
+/* Icon colors */
+.icon-forest { color: var(--bbc-forest); }
+.icon-gold { color: var(--bbc-gold); }
+.icon-muted { color: var(--bbc-text-muted); }
+.icon-success { color: var(--bbc-success); }
+.icon-error { color: var(--bbc-error); }
+
+/* Icon in text alignment */
+.icon-inline {
+  display: inline-flex;
+  vertical-align: middle;
+  margin-right: var(--space-2);
+}
+
+/* =============================================================================
+   7. LAYOUT COMPONENTS
+   ============================================================================= */
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--container-xl);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--section-px);
+  padding-right: var(--section-px);
+}
+
+.container-sm { max-width: var(--container-sm); }
+.container-md { max-width: var(--container-md); }
+.container-lg { max-width: var(--container-lg); }
+.container-narrow { max-width: 800px; }
+
+/* Section */
+.section {
+  padding-top: var(--section-py);
+  padding-bottom: var(--section-py);
+}
+
+.section-white { background: var(--bbc-white); }
+.section-cream { background: var(--bbc-cream); }
+.section-forest { background: var(--bbc-forest); }
+.section-forest * { color: var(--bbc-white); }
+.section-forest .label { color: var(--bbc-gold); }
+.section-forest .muted { color: rgba(255,255,255,0.7); }
+
+/* Grid — prefixed to avoid conflict with Dawn's .grid (display: flex) */
+.bbc-grid-base {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.bbc-grid-base.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.bbc-grid-base.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.bbc-grid-base.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 1024px) {
+  .bbc-grid-base.grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .bbc-grid-base.grid-2, .bbc-grid-base.grid-3, .bbc-grid-base.grid-4 { grid-template-columns: 1fr; }
+}
+
+/* Two Column Layout — prefixed to avoid generic class collision */
+.bbc-two-col-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+.bbc-two-col-layout-reverse {
+  direction: rtl;
+}
+
+.bbc-two-col-layout-reverse > * {
+  direction: ltr;
+}
+
+@media (max-width: 900px) {
+  .bbc-two-col-layout, .bbc-two-col-layout-reverse {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    direction: ltr;
+  }
+}
+
+/* Flex utilities */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: var(--space-2); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+.gap-8 { gap: var(--space-8); }
+
+/* =============================================================================
+   8. CARDS
+   ============================================================================= */
+
+/* Scoped to BBC sections only — don't override Dawn's product .card */
+.bbc-card,
+.bbc-section .card:not(.card--standard):not(.card--card):not(.card--media) {
+  background: var(--bbc-white);
+  border: 1px solid var(--bbc-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  transition: box-shadow var(--transition-base);
+}
+
+/* On cream background */
+.section-cream .card {
+  background: var(--bbc-white);
+  border-color: transparent;
+  box-shadow: var(--shadow-sm);
+}
+
+/* On white background */
+.section-white .card {
+  background: var(--bbc-cream);
+  border-color: transparent;
+}
+
+/* Clickable card */
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-link:hover .card {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.card-link:focus-visible .card {
+  outline: 3px solid var(--bbc-gold);
+  outline-offset: 2px;
+}
+
+/* Card with image */
+.card-image {
+  margin: calc(var(--space-8) * -1);
+  margin-bottom: var(--space-6);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+}
+
+/* =============================================================================
+   9. IMAGES & MEDIA
+   ============================================================================= */
+
+/* Image placeholder (for Shopify editor) */
+.image-placeholder {
+  background: linear-gradient(135deg, var(--bbc-cream) 0%, var(--bbc-gray-100) 100%);
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16/10;
+  color: var(--bbc-gray-300);
+}
+
+.image-placeholder svg {
+  width: 64px;
+  height: 64px;
+}
+
+/* Responsive image container */
+.image-container {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Aspect ratios */
+.aspect-square { aspect-ratio: 1; }
+.aspect-video { aspect-ratio: 16/9; }
+.aspect-photo { aspect-ratio: 4/3; }
+.aspect-portrait { aspect-ratio: 3/4; }
+
+/* =============================================================================
+   10. QUOTES & TESTIMONIALS
+   ============================================================================= */
+
+.quote {
+  padding: var(--space-8);
+  background: var(--bbc-cream);
+  border-left: 4px solid var(--bbc-gold);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+
+.section-cream .quote {
+  background: var(--bbc-white);
+}
+
+.quote-text {
+  font-size: var(--text-xl);
+  font-weight: var(--font-medium);
+  font-style: italic;
+  line-height: var(--leading-relaxed);
+  color: var(--bbc-heading);
+  margin-bottom: var(--space-6);
+}
+
+.quote-author {
+  font-size: var(--text-base);
+  font-weight: var(--font-bold);
+  color: var(--bbc-heading);
+}
+
+.quote-role {
+  font-size: var(--text-sm);
+  color: var(--bbc-text-muted);
+  margin-top: var(--space-1);
+}
+
+/* =============================================================================
+   11. LISTS & FEATURES
+   ============================================================================= */
+
+/* Feature list with checkmarks — Modern flat style */
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  margin: 0;
+  font-size: var(--text-lg);
+  color: var(--bbc-text);
+  line-height: 1.5;
+}
+
+.feature-list li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  background-color: var(--bbc-teal);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+}
+
+/* Simple icon list */
+.icon-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.icon-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.icon-list li:last-child {
+  margin-bottom: 0;
+}
+
+.icon-list svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--bbc-forest);
+}
+
+/* =============================================================================
+   12. STATS
+   ============================================================================= */
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-16);
+  padding: var(--space-8) 0;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: var(--text-5xl);
+  font-weight: var(--font-extrabold);
+  color: var(--bbc-forest);
+  line-height: 1;
+}
+
+.section-forest .stat-number {
+  color: var(--bbc-gold);
+}
+
+.stat-label {
+  font-size: var(--text-base);
+  color: var(--bbc-text-muted);
+  margin-top: var(--space-2);
+}
+
+.section-forest .stat-label {
+  color: rgba(255,255,255,0.8);
+}
+
+@media (max-width: 768px) {
+  .stats { gap: var(--space-8); }
+  .stat-number { font-size: var(--text-4xl); }
+}
+
+/* =============================================================================
+   13. ACCORDION / FAQ
+   ============================================================================= */
+
+.accordion {
+  border: 1px solid var(--bbc-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.accordion-item {
+  border-bottom: 1px solid var(--bbc-border);
+}
+
+.accordion-item:last-child {
+  border-bottom: none;
+}
+
+.accordion-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-5) var(--space-6);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  text-align: left;
+  color: var(--bbc-heading);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.accordion-trigger:hover {
+  background: var(--bbc-gray-50);
+}
+
+.accordion-trigger:focus-visible {
+  outline: 3px solid var(--bbc-gold);
+  outline-offset: -3px;
+}
+
+.accordion-trigger svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  transition: transform var(--transition-base);
+}
+
+.accordion-item.active .accordion-trigger svg {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  display: none;
+  padding: 0 var(--space-6) var(--space-6);
+  color: var(--bbc-text);
+}
+
+.accordion-item.active .accordion-content {
+  display: block;
+}
+
+/* =============================================================================
+   14. BADGES & TAGS
+   ============================================================================= */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.badge-forest {
+  background: var(--bbc-forest);
+  color: var(--bbc-white);
+}
+
+.badge-gold {
+  background: var(--bbc-gold);
+  color: var(--bbc-gray-900);
+}
+
+.badge-outline {
+  background: transparent;
+  border: 1px solid var(--bbc-border);
+  color: var(--bbc-text);
+}
+
+.badge-success {
+  background: var(--bbc-success-bg);
+  color: #047857;
+}
+
+/* =============================================================================
+   15. ALERTS / NOTICES
+   ============================================================================= */
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-base);
+}
+
+.alert svg {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin-top: 2px;
+}
+
+.alert-info {
+  background: var(--bbc-info-bg);
+  color: #1e40af;
+}
+
+.alert-success {
+  background: var(--bbc-success-bg);
+  color: #047857;
+}
+
+.alert-warning {
+  background: var(--bbc-warning-bg);
+  color: #92400e;
+}
+
+.alert-error {
+  background: var(--bbc-error-bg);
+  color: #b91c1c;
+}
+
+/* =============================================================================
+   16. NAVIGATION
+   ============================================================================= */
+
+/* Nav pills / tabs */
+.nav-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-pill {
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: var(--bbc-text);
+  background: transparent;
+  border: 2px solid var(--bbc-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.nav-pill:hover {
+  border-color: var(--bbc-forest);
+  color: var(--bbc-forest);
+}
+
+.nav-pill.active {
+  background: var(--bbc-forest);
+  border-color: var(--bbc-forest);
+  color: var(--bbc-white);
+}
+
+.nav-pill:focus-visible {
+  outline: 3px solid var(--bbc-gold);
+  outline-offset: 2px;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--bbc-text-muted);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumbs li:not(:last-child)::after {
+  content: '/';
+  margin-left: var(--space-2);
+  color: var(--bbc-gray-300);
+}
+
+.breadcrumbs a {
+  color: var(--bbc-text-muted);
+}
+
+.breadcrumbs a:hover {
+  color: var(--bbc-forest);
+}
+
+/* =============================================================================
+   17. SKIP LINK (Accessibility)
+   ============================================================================= */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--space-4) var(--space-6);
+  background: var(--bbc-forest);
+  color: var(--bbc-white);
+  font-weight: var(--font-semibold);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  z-index: var(--z-modal);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* =============================================================================
+   18. UTILITY CLASSES
+   ============================================================================= */
+
+/* Text alignment */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* Spacing */
+.mt-0 { margin-top: 0; }
+.mt-4 { margin-top: var(--space-4); }
+.mt-6 { margin-top: var(--space-6); }
+.mt-8 { margin-top: var(--space-8); }
+.mt-12 { margin-top: var(--space-12); }
+
+.mb-0 { margin-bottom: 0; }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-6 { margin-bottom: var(--space-6); }
+.mb-8 { margin-bottom: var(--space-8); }
+.mb-12 { margin-bottom: var(--space-12); }
+
+.pt-0 { padding-top: 0; }
+.pb-0 { padding-bottom: 0; }
+
+/* Display */
+.hidden { display: none; }
+.block { display: block; }
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =============================================================================
+   19. RESPONSIVE VISIBILITY
+   ============================================================================= */
+
+@media (max-width: 768px) {
+  .hide-mobile { display: none !important; }
+}
+
+@media (min-width: 769px) {
+  .hide-desktop { display: none !important; }
+}
+
+/* =============================================================================
+   20. PRINT STYLES
+   ============================================================================= */
+
+@media print {
+  body {
+    font-size: 12pt;
+    color: #000;
+    background: #fff;
+  }
+  
+  .btn, .nav-pills, .accordion-trigger svg {
+    display: none;
+  }
+  
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+  
+  .section {
+    padding: 20pt 0;
+  }
+}
+
+/* =============================================================================
+   21. BBC LEGACY CLASS ALIASES
+   For backward compatibility with existing sections
+   ============================================================================= */
+
+/* Section aliases */
+.bbc-section { padding: var(--section-py) var(--section-px); }
+.bbc-section--white { background: var(--bbc-white); }
+.bbc-section--cream { background: var(--bbc-cream); }
+.bbc-section--forest { background: var(--bbc-forest); }
+
+/* =============================================================================
+   GREEN BACKGROUND COLOR RULES
+   When background is green (forest), all text is white except highlights in gold
+   ============================================================================= */
+
+/* Base rule: all text white on green backgrounds — FORCE WITH !important */
+.bbc-section--forest,
+.bbc-section--forest *,
+[data-color-scheme="green"],
+[data-color-scheme="green"] *,
+.bbc-bg-green,
+.bbc-bg-green * {
+  color: #fff !important;
+}
+
+/* Headings - white FORCED */
+.bbc-section--forest h1,
+.bbc-section--forest h2,
+.bbc-section--forest h3,
+.bbc-section--forest h4,
+.bbc-section--forest h5,
+.bbc-section--forest h6,
+.bbc-section--forest .bbc-h1,
+.bbc-section--forest .bbc-h2,
+.bbc-section--forest .bbc-h3,
+[data-color-scheme="green"] h1,
+[data-color-scheme="green"] h2,
+[data-color-scheme="green"] h3,
+[data-color-scheme="green"] h4,
+[data-color-scheme="green"] h5,
+[data-color-scheme="green"] h6 {
+  color: #fff !important;
+}
+
+/* Paragraphs and text - white FORCED */
+.bbc-section--forest p,
+.bbc-section--forest span,
+.bbc-section--forest li,
+.bbc-section--forest .bbc-text,
+.bbc-section--forest .bbc-text-lg,
+.bbc-section--forest blockquote,
+.bbc-section--forest cite,
+[data-color-scheme="green"] p,
+[data-color-scheme="green"] span,
+[data-color-scheme="green"] li,
+[data-color-scheme="green"] blockquote {
+  color: #fff !important;
+}
+
+/* Muted text - slightly transparent white */
+.bbc-section--forest .text-muted,
+.bbc-section--forest .bbc-text-muted,
+[data-color-scheme="green"] .text-muted {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* HIGHLIGHT TEXT - Gold (labels, accents, emphasis) FORCED */
+.bbc-section--forest .bbc-label,
+.bbc-section--forest .bbc-highlight,
+.bbc-section--forest .highlight,
+.bbc-section--forest .accent,
+.bbc-section--forest .text-gold,
+.bbc-section--forest strong.highlight,
+.bbc-section--forest em.highlight,
+.bbc-section--forest .eyebrow,
+.bbc-section--forest [class*="eyebrow"],
+.bbc-section--forest [class*="stat-number"],
+.bbc-section--forest [class*="distance"],
+[data-color-scheme="green"] .bbc-label,
+[data-color-scheme="green"] .highlight,
+[data-color-scheme="green"] .accent,
+[data-color-scheme="green"] .text-gold {
+  color: #ffa900 !important;
+}
+
+/* Links on green - white with gold hover */
+.bbc-section--forest a:not(.bbc-btn),
+[data-color-scheme="green"] a:not(.bbc-btn) {
+  color: var(--bbc-white);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.bbc-section--forest a:not(.bbc-btn):hover,
+[data-color-scheme="green"] a:not(.bbc-btn):hover {
+  color: var(--bbc-gold);
+}
+
+/* Buttons on green backgrounds */
+.bbc-section--forest .bbc-btn--primary,
+[data-color-scheme="green"] .bbc-btn--primary {
+  background: var(--bbc-gold);
+  color: var(--bbc-gray-900);
+  border-color: var(--bbc-gold);
+}
+
+.bbc-section--forest .bbc-btn--secondary,
+.bbc-section--forest .bbc-btn--outline,
+[data-color-scheme="green"] .bbc-btn--secondary,
+[data-color-scheme="green"] .bbc-btn--outline {
+  background: transparent;
+  color: var(--bbc-white);
+  border-color: var(--bbc-white);
+}
+
+.bbc-section--forest .bbc-btn--secondary:hover,
+.bbc-section--forest .bbc-btn--outline:hover,
+[data-color-scheme="green"] .bbc-btn--secondary:hover,
+[data-color-scheme="green"] .bbc-btn--outline:hover {
+  background: var(--bbc-white);
+  color: var(--bbc-forest);
+}
+
+/* Icons on green - white, highlight icons gold */
+.bbc-section--forest .material-symbols-rounded,
+.bbc-section--forest svg,
+[data-color-scheme="green"] .material-symbols-rounded,
+[data-color-scheme="green"] svg {
+  color: var(--bbc-white);
+  fill: var(--bbc-white);
+}
+
+.bbc-section--forest .icon-highlight,
+.bbc-section--forest .icon-gold,
+[data-color-scheme="green"] .icon-highlight,
+[data-color-scheme="green"] .icon-gold {
+  color: var(--bbc-gold);
+  fill: var(--bbc-gold);
+}
+
+/* Form elements on green */
+.bbc-section--forest input,
+.bbc-section--forest textarea,
+.bbc-section--forest select,
+[data-color-scheme="green"] input,
+[data-color-scheme="green"] textarea,
+[data-color-scheme="green"] select {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--bbc-white);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.bbc-section--forest input::placeholder,
+.bbc-section--forest textarea::placeholder,
+[data-color-scheme="green"] input::placeholder,
+[data-color-scheme="green"] textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.bbc-section--forest input:focus,
+.bbc-section--forest textarea:focus,
+[data-color-scheme="green"] input:focus,
+[data-color-scheme="green"] textarea:focus {
+  border-color: var(--bbc-gold);
+  outline-color: var(--bbc-gold);
+}
+
+/* Cards on green - keep white background, dark text */
+.bbc-section--forest .bbc-card,
+[data-color-scheme="green"] .bbc-card {
+  background: var(--bbc-white);
+}
+
+.bbc-section--forest .bbc-card *,
+[data-color-scheme="green"] .bbc-card * {
+  color: var(--bbc-gray-700);
+}
+
+.bbc-section--forest .bbc-card h1,
+.bbc-section--forest .bbc-card h2,
+.bbc-section--forest .bbc-card h3,
+[data-color-scheme="green"] .bbc-card h1,
+[data-color-scheme="green"] .bbc-card h2,
+[data-color-scheme="green"] .bbc-card h3 {
+  color: var(--bbc-heading);
+}
+
+/* Borders on green - white/transparent */
+.bbc-section--forest hr,
+[data-color-scheme="green"] hr {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Stats/numbers highlight in gold FORCED */
+.bbc-section--forest .stat-number,
+.bbc-section--forest .bbc-stat__number,
+.bbc-section--forest [class*="__stat"],
+.bbc-section--forest [class*="__number"],
+.bbc-section--forest [class*="stat-number"],
+[data-color-scheme="green"] .stat-number,
+[data-color-scheme="green"] .bbc-stat__number {
+  color: #ffa900 !important;
+}
+
+/* Stats labels stay white */
+.bbc-section--forest [class*="stat-label"],
+.bbc-section--forest [class*="__label"] {
+  color: #fff !important;
+}
+
+/* Utility class for inline gold highlight */
+.text-gold,
+.bbc-gold {
+  color: var(--bbc-gold) !important;
+}
+
+/* Background utilities */
+.bbc-bg-green,
+.bbc-bg-forest {
+  background: var(--bbc-forest);
+}
+
+.bbc-bg-teal {
+  background: var(--bbc-teal);
+}
+
+/* Teal background - same rules as forest (green) */
+.bbc-section--teal { background: var(--bbc-teal); }
+
+.bbc-section--teal,
+.bbc-section--teal *,
+.bbc-bg-teal,
+.bbc-bg-teal * {
+  color: var(--bbc-white);
+}
+
+.bbc-section--teal .bbc-label,
+.bbc-section--teal .highlight,
+.bbc-section--teal .text-gold,
+.bbc-bg-teal .bbc-label,
+.bbc-bg-teal .highlight {
+  color: var(--bbc-gold);
+}
+
+.bbc-section--teal a:not(.bbc-btn),
+.bbc-bg-teal a:not(.bbc-btn) {
+  color: var(--bbc-white);
+}
+
+.bbc-section--teal a:not(.bbc-btn):hover,
+.bbc-bg-teal a:not(.bbc-btn):hover {
+  color: var(--bbc-gold);
+}
+
+/* Container aliases */
+.bbc-container { max-width: var(--container-xl); margin: 0 auto; }
+.bbc-container--narrow { max-width: 800px; }
+
+/* Typography aliases */
+.bbc-h1 { font-size: var(--text-5xl); font-weight: var(--font-bold); line-height: var(--leading-tight); color: var(--bbc-heading); margin: 0; }
+.bbc-h2 { font-size: var(--text-4xl); font-weight: var(--font-bold); line-height: var(--leading-tight); color: var(--bbc-heading); margin: 0; }
+.bbc-h3 { font-size: var(--text-2xl); font-weight: var(--font-bold); line-height: var(--leading-snug); color: var(--bbc-heading); margin: 0; }
+.bbc-text-lg { font-size: var(--text-xl); line-height: var(--leading-relaxed); color: var(--bbc-text); margin: 0; }
+.bbc-text { font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--bbc-text); margin: 0; }
+.bbc-label { display: block; font-size: var(--text-sm); font-weight: var(--font-bold); text-transform: uppercase; letter-spacing: 0.08em; color: var(--bbc-forest); margin-bottom: var(--space-3); }
+
+/* Button aliases */
+.bbc-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-3); min-height: 56px; padding: var(--space-4) var(--space-8); font-size: var(--text-lg); font-weight: var(--font-semibold); text-decoration: none; border-radius: var(--radius-full); border: 2px solid transparent; cursor: pointer; transition: all var(--transition-base); }
+.bbc-btn--primary { background: var(--bbc-gold); color: var(--bbc-gray-900); border-color: var(--bbc-gold); }
+.bbc-btn--primary:hover { background: var(--bbc-gold-dark); border-color: var(--bbc-gold-dark); transform: translateY(-1px); }
+.bbc-btn--primary:active { background: #cc8800; transform: translateY(0); }
+.bbc-btn--secondary { background: var(--bbc-forest); color: var(--bbc-white); border-color: var(--bbc-forest); }
+.bbc-btn--secondary:hover { background: var(--bbc-forest-dark); border-color: var(--bbc-forest-dark); }
+.bbc-btn--outline { background: transparent; color: var(--bbc-forest); border-color: var(--bbc-forest); }
+.bbc-btn--outline:hover { background: var(--bbc-forest); color: var(--bbc-white); }
+.bbc-btn--white { background: var(--bbc-white); color: var(--bbc-forest); border-color: var(--bbc-white); }
+.bbc-btn:focus-visible { outline: 3px solid var(--bbc-gold); outline-offset: 2px; }
+.bbc-btn:disabled, .bbc-btn.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+
+/* Layout aliases */
+.bbc-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: center; }
+@media (max-width: 900px) { .bbc-two-col { grid-template-columns: 1fr; gap: var(--space-8); } }
+
+/* Card aliases */
+.bbc-card { padding: var(--space-8); background: var(--bbc-white); border: 1px solid var(--bbc-border); border-radius: var(--radius-xl); }
+.bbc-section--white .bbc-card { background: var(--bbc-cream); border-color: transparent; }
+.bbc-section--cream .bbc-card { background: var(--bbc-white); border-color: transparent; }
+
+/* Quote aliases */
+.bbc-quote { padding: var(--space-8); background: var(--bbc-cream); border-left: 4px solid var(--bbc-gold); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+.bbc-section--cream .bbc-quote { background: var(--bbc-white); }
+.bbc-quote__text { font-size: var(--text-xl); font-weight: var(--font-medium); font-style: italic; line-height: var(--leading-relaxed); color: var(--bbc-heading); margin: 0 0 var(--space-6) 0; }
+.bbc-quote__author { font-size: var(--text-base); font-weight: var(--font-bold); color: var(--bbc-heading); }
+.bbc-quote__role { font-size: var(--text-sm); color: var(--bbc-text-muted); display: block; margin-top: var(--space-1); }
+
+/* Stats aliases */
+.bbc-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-16); padding: var(--space-8) 0; }
+.bbc-stat { text-align: center; }
+.bbc-stat__number { font-size: var(--text-5xl); font-weight: var(--font-extrabold); color: var(--bbc-forest); line-height: 1; }
+.bbc-stat__label { font-size: var(--text-base); color: var(--bbc-text-muted); margin-top: var(--space-2); display: block; }
+@media (max-width: 768px) { .bbc-stats { gap: var(--space-8); } .bbc-stat__number { font-size: var(--text-4xl); } }
+
+/* Feature list aliases */
+.bbc-features { list-style: none; padding: 0; margin: 0; }
+.bbc-features li { display: flex; align-items: flex-start; gap: var(--space-4); padding: var(--space-4) 0; border-bottom: 1px solid var(--bbc-border); }
+.bbc-features li:last-child { border-bottom: none; }
+.bbc-features li svg { flex-shrink: 0; width: 24px; height: 24px; color: var(--bbc-forest); margin-top: 2px; }
+
+/* Image placeholder alias */
+.bbc-image-placeholder { background: linear-gradient(135deg, var(--bbc-cream) 0%, var(--bbc-gray-100) 100%); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; min-height: 300px; color: var(--bbc-gray-300); }
+.bbc-image-placeholder svg { width: 64px; height: 64px; }
+
+/* Utility aliases */
+.bbc-center { text-align: center; }
+.bbc-text-center { text-align: center; }
+.bbc-mb-sm { margin-bottom: var(--space-4); }
+.bbc-mb-md { margin-bottom: var(--space-6); }
+.bbc-mb-lg { margin-bottom: var(--space-10); }
+.bbc-mb-xl { margin-bottom: var(--space-16); }
+
+/* Typography aliases (used across sections) */
+.bbc-heading-lg { font-size: var(--text-4xl); font-weight: var(--font-bold); line-height: var(--leading-tight); color: var(--bbc-heading); margin: 0; }
+.bbc-heading-md { font-size: var(--text-2xl); font-weight: var(--font-bold); line-height: var(--leading-snug); color: var(--bbc-heading); margin: 0; }
+.bbc-heading-sm { font-size: var(--text-xl); font-weight: var(--font-semibold); line-height: var(--leading-snug); color: var(--bbc-heading); margin: 0; }
+.bbc-body { font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--bbc-text); }
+.bbc-body-lg { font-size: var(--text-xl); line-height: var(--leading-relaxed); color: var(--bbc-text); }
+.bbc-body-sm { font-size: var(--text-base); line-height: var(--leading-relaxed); color: var(--bbc-text-muted); }
+
+/* Feature list with checkmarks */
+.bbc-feature-list { list-style: none; padding: 0; margin: 0; }
+.bbc-feature-list__item { display: flex; align-items: flex-start; gap: var(--space-3); padding: var(--space-3) 0; font-size: var(--text-lg); color: var(--bbc-text); }
+.bbc-feature-list__item::before { content: ''; flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; background: var(--bbc-teal); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E"); -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E"); }
+
+/* Visual card alias */
+.bbc-visual-card { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-radius: var(--radius-2xl); padding: var(--space-10); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 280px; }
+.bbc-visual-card__icon { width: 80px; height: 80px; background: var(--bbc-forest); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-6); }
+.bbc-visual-card__icon svg { width: 40px; height: 40px; color: var(--bbc-white); }
+
+/* Dark section text overrides */
+.bbc-section--forest .bbc-h1,
+.bbc-section--forest .bbc-h2,
+.bbc-section--forest .bbc-h3 { color: var(--bbc-white); }
+.bbc-section--forest .bbc-text-lg,
+.bbc-section--forest .bbc-text { color: rgba(255,255,255,0.9); }
+.bbc-section--forest .bbc-stat__number { color: var(--bbc-gold); }
+.bbc-section--forest .bbc-stat__label { color: rgba(255,255,255,0.8); }
+
+/* ========================================
+   PILLS (Quick Links)
+   ======================================== */
+
+.bbc-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bbc-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: transparent;
+  border: 1.5px solid var(--bbc-forest, #073e27);
+  border-radius: 50px;
+  color: var(--bbc-forest, #073e27);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.bbc-pill:hover,
+.bbc-pill--active {
+  background: var(--bbc-forest, #073e27);
+  color: white;
+}
+
+.bbc-pill:focus-visible {
+  outline: 2px solid var(--bbc-gold, #ffa900);
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .bbc-pills {
+    justify-content: center;
+  }
+  
+  .bbc-pill {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+  }
+}
+
+/* =============================================================================
+   GLOBAL COMPONENT PATTERNS
+   Standard CSS for reusable patterns across the site
+   ============================================================================= */
+
+/* Modal/Overlay Pattern */
+.bbc-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--bbc-white);
+  transform: translateY(-100%);
+  transition: transform 0.3s ease, visibility 0s 0.3s;
+  z-index: 1001;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.bbc-modal.active,
+.bbc-modal[aria-hidden="false"] {
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+  transition: transform 0.3s ease, visibility 0s 0s;
+}
+
+/* Sticky Sidebar Pattern (for product pages) */
+.bbc-sticky-sidebar {
+  position: relative;
+  align-self: start;
+}
+
+@media (min-width: 990px) {
+  .bbc-sticky-sidebar {
+    position: sticky;
+    top: 120px;
+    max-height: calc(100vh - 140px);
+    z-index: 1;
+  }
+}
+
+/* Tab Pattern */
+.bbc-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--bbc-border, #e5e5e5);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.bbc-tab {
+  padding: var(--space-4, 1rem) var(--space-6, 1.5rem);
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: var(--font-semibold, 600);
+  color: var(--bbc-text-muted, #64748b);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.bbc-tab:hover {
+  color: var(--bbc-forest, #073e27);
+}
+
+.bbc-tab.active,
+.bbc-tab[aria-selected="true"] {
+  color: var(--bbc-forest, #073e27);
+  border-bottom-color: var(--bbc-forest, #073e27);
+}
+
+.bbc-tab-panel {
+  padding: var(--space-8, 2rem) 0;
+}
+
+.bbc-tab-panel[hidden] {
+  display: none;
+}
+
+/* Product Grid Pattern */
+.bbc-product-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12, 3rem);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-8, 2rem) var(--space-6, 1.5rem);
+}
+
+@media (max-width: 989px) {
+  .bbc-product-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-6, 1.5rem);
+    padding: var(--space-4, 1rem);
+  }
+}
+
+/* Image Gallery Pattern */
+.bbc-gallery {
+  position: relative;
+}
+
+.bbc-gallery__main {
+  aspect-ratio: 1;
+  background: var(--bbc-cream, #f8fafc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-3, 0.75rem);
+  border-radius: var(--radius-lg, 0.5rem);
+  overflow: hidden;
+}
+
+.bbc-gallery__main img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.bbc-gallery__thumbs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-2, 0.5rem);
+}
+
+.bbc-gallery__thumb {
+  aspect-ratio: 1;
+  background: var(--bbc-cream, #f8fafc);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md, 0.375rem);
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.bbc-gallery__thumb:hover,
+.bbc-gallery__thumb.active {
+  border-color: var(--bbc-forest, #073e27);
+}
+
+.bbc-gallery__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Trust Signal Pattern */
+.bbc-trust-signals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4, 1rem) var(--space-6, 1.5rem);
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--bbc-text-muted, #64748b);
+}
+
+.bbc-trust-signal {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2, 0.5rem);
+}
+
+.bbc-trust-signal svg,
+.bbc-trust-signal .material-symbols-outlined {
+  color: var(--bbc-teal, #3f8b66);
+  font-size: 1.25rem;
+}
+
+/* Price Display Pattern */
+.bbc-price {
+  font-size: var(--text-2xl, 1.5rem);
+  font-weight: var(--font-bold, 700);
+  color: var(--bbc-forest, #073e27);
+}
+
+.bbc-price--was {
+  font-size: var(--text-lg, 1.125rem);
+  font-weight: normal;
+  color: var(--bbc-text-muted, #64748b);
+  text-decoration: line-through;
+  margin-right: var(--space-2, 0.5rem);
+}
+
+/* Shipping Info Pattern */
+.bbc-shipping-info {
+  padding: var(--space-4, 1rem);
+  background: rgba(63, 139, 102, 0.08);
+  border-radius: var(--radius-md, 0.375rem);
+  font-size: var(--text-sm, 0.875rem);
+}
+
+.bbc-shipping-info__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2, 0.5rem);
+  padding: var(--space-1, 0.25rem) 0;
+}
+
+.bbc-shipping-info svg,
+.bbc-shipping-info .material-symbols-outlined {
+  color: var(--bbc-teal, #3f8b66);
+  font-size: 1.125rem;
+}
+
+/* Upsell Card Pattern */
+.bbc-upsell {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4, 1rem);
+}
+
+.bbc-upsell__card {
+  padding: var(--space-5, 1.25rem);
+  background: var(--bbc-cream, #f8fafc);
+  border: 1px solid var(--bbc-border, #e5e5e5);
+  border-radius: var(--radius-lg, 0.5rem);
+}
+
+.bbc-upsell__title {
+  font-size: var(--text-lg, 1.125rem);
+  font-weight: var(--font-semibold, 600);
+  color: var(--bbc-forest, #073e27);
+  margin: 0 0 var(--space-2, 0.5rem) 0;
+}
+
+.bbc-upsell__desc {
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--bbc-text-muted, #64748b);
+  margin: 0 0 var(--space-3, 0.75rem) 0;
+}
+
+.bbc-upsell__price {
+  font-weight: var(--font-bold, 700);
+  color: var(--bbc-forest, #073e27);
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
+/* FAQ Accordion Pattern */
+.bbc-accordion {
+  border-top: 1px solid var(--bbc-border, #e5e5e5);
+}
+
+.bbc-accordion__item {
+  border-bottom: 1px solid var(--bbc-border, #e5e5e5);
+}
+
+.bbc-accordion__trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4, 1rem) 0;
+  background: none;
+  border: none;
+  font-size: var(--text-base, 1rem);
+  font-weight: var(--font-medium, 500);
+  color: var(--bbc-heading, #0f172a);
+  text-align: left;
+  cursor: pointer;
+}
+
+.bbc-accordion__trigger svg,
+.bbc-accordion__trigger .material-symbols-outlined {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.bbc-accordion__item.open .bbc-accordion__trigger svg,
+.bbc-accordion__item.open .bbc-accordion__trigger .material-symbols-outlined {
+  transform: rotate(180deg);
+}
+
+.bbc-accordion__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.bbc-accordion__item.open .bbc-accordion__content {
+  max-height: 500px;
+}
+
+.bbc-accordion__content-inner {
+  padding: 0 0 var(--space-4, 1rem) 0;
+  font-size: var(--text-base, 1rem);
+  color: var(--bbc-text-muted, #64748b);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   CLS PREVENTION — Cumulative Layout Shift Fixes
+   ========================================================================== */
+
+/* Reserve space for images with aspect-ratio */
+img:not([width]):not([height]) {
+  aspect-ratio: attr(width) / attr(height);
+}
+
+/* Default aspect ratios for common image containers */
+.bbc-product-image,
+.bbc-collection-image {
+  aspect-ratio: 1 / 1;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.bbc-hero-image,
+.bbc-banner-image {
+  aspect-ratio: 16 / 9;
+}
+
+/* Prevent CLS from font loading */
+body {
+  font-synthesis: none;
+}
+
+/* Reserve space for Material Symbols icons */
+.material-symbols-outlined,
+.material-symbols-rounded {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Prevent CLS from async CSS loading */
+.bbc-btn,
+.button,
+[class*="btn"] {
+  min-height: 44px; /* Reserve button height */
+}

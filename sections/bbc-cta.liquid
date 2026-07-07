@@ -1,0 +1,134 @@
+{% comment %}
+  BBC CTA — LSV Style
+{% endcomment %}
+
+<section class="bbc-section bbc-section--{{ section.settings.background }}">
+  <div class="bbc-container bbc-container--narrow bbc-center">
+    
+    <h2 class="bbc-h2 bbc-mb-md">{{ section.settings.heading }}</h2>
+    
+    {% if section.settings.text != blank %}
+      <p class="bbc-text-lg bbc-mb-lg">{{ section.settings.text }}</p>
+    {% endif %}
+    
+    <div class="bbc-cta-buttons">
+      {% if section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_link }}" class="bbc-btn bbc-btn--{{ section.settings.button_style | default: 'primary' }}">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+      {% if section.settings.button_secondary_text != blank %}
+        <a href="{{ section.settings.button_secondary_link }}" class="bbc-btn bbc-btn--{{ section.settings.button_secondary_style | default: 'outline' }}">
+          {{ section.settings.button_secondary_text }}
+        </a>
+      {% endif %}
+    </div>
+    
+  </div>
+</section>
+
+<style>
+  /* GREEN BACKGROUND RULE: All text white, highlights gold */
+  .bbc-section--forest.bbc-section,
+  .bbc-section--forest * {
+    color: var(--bbc-white) !important;
+  }
+  
+  .bbc-section--forest .bbc-h2,
+  .bbc-section--forest h2 {
+    color: var(--bbc-white) !important;
+  }
+  
+  .bbc-section--forest .bbc-text-lg,
+  .bbc-section--forest p {
+    color: var(--bbc-white) !important;
+  }
+  
+  .bbc-cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+  
+  .bbc-section--forest .bbc-btn--white {
+    color: var(--bbc-forest, var(--bbc-forest)) !important;
+  }
+  
+  .bbc-section--forest .bbc-btn--outline {
+    color: var(--bbc-white) !important;
+    border-color: var(--bbc-white);
+  }
+  
+  .bbc-section--forest .bbc-btn--outline:hover {
+    background: var(--bbc-white);
+    color: var(--bbc-forest, var(--bbc-forest)) !important;
+  }
+  
+  @media (max-width: 480px) {
+    .bbc-cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .bbc-cta-buttons .bbc-btn {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC CTA",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Ready to Build?" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button_text", "label": "Button", "default": "Get Started" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "primary", "label": "Primary (Gold)" },
+        { "value": "secondary", "label": "Secondary (Forest)" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "outline-light", "label": "Outline Light" },
+        { "value": "white", "label": "White" },
+        { "value": "gold", "label": "Gold" }
+      ],
+      "default": "primary"
+    },
+    { "type": "text", "id": "button_secondary_text", "label": "Secondary button" },
+    { "type": "url", "id": "button_secondary_link", "label": "Secondary button link" },
+    {
+      "type": "select",
+      "id": "button_secondary_style",
+      "label": "Secondary button style",
+      "options": [
+        { "value": "primary", "label": "Primary (Gold)" },
+        { "value": "secondary", "label": "Secondary (Forest)" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "outline-light", "label": "Outline Light" },
+        { "value": "white", "label": "White" },
+        { "value": "gold", "label": "Gold" }
+      ],
+      "default": "outline"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "cream", "label": "Cream" },
+        { "value": "forest", "label": "Forest Green" }
+      ],
+      "default": "forest"
+    }
+  ],
+  "presets": [{ "name": "BBC CTA" }]
+}
+{% endschema %}

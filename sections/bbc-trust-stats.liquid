@@ -1,0 +1,155 @@
+{% comment %}
+  BBC Trust Stats Bar
+  Research insight: Trust signals immediately after hero increase conversions
+  Pattern from: Allbirds, Grovemade, Ugmonk
+{% endcomment %}
+
+<section class="bbc-trust-stats" aria-label="Our track record">
+  <div class="bbc-trust-stats__container page-width">
+    <div class="bbc-trust-stats__grid">
+      
+      <div class="bbc-trust-stats__item">
+        <span class="bbc-trust-stats__value" aria-hidden="true">4,000+</span>
+        <span class="bbc-trust-stats__label">Bikes Built</span>
+      </div>
+      
+      <div class="bbc-trust-stats__divider" aria-hidden="true"></div>
+      
+      <div class="bbc-trust-stats__item">
+        <span class="bbc-trust-stats__value" aria-hidden="true">36+</span>
+        <span class="bbc-trust-stats__label">Countries</span>
+      </div>
+      
+      <div class="bbc-trust-stats__divider" aria-hidden="true"></div>
+      
+      <div class="bbc-trust-stats__item">
+        <span class="bbc-trust-stats__value" aria-hidden="true">13</span>
+        <span class="bbc-trust-stats__label">Years Experience</span>
+      </div>
+      
+      <div class="bbc-trust-stats__divider" aria-hidden="true"></div>
+      
+      <div class="bbc-trust-stats__item">
+        <span class="bbc-trust-stats__value" aria-hidden="true">56.7%</span>
+        <span class="bbc-trust-stats__label">Lower Carbon</span>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<style>
+  .bbc-trust-stats {
+    background: var(--bbc-cream, var(--bbc-cream));
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(7, 62, 39, 0.08);
+  }
+  
+  .bbc-trust-stats__container {
+    padding: 0 20px;
+  }
+  
+  .bbc-trust-stats__grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  
+  .bbc-trust-stats__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+    min-width: 100px;
+  }
+  
+  .bbc-trust-stats__value {
+    font-family: var(--bbc-font, 'Plus Jakarta Sans', sans-serif);
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--bbc-forest, var(--bbc-forest));
+    line-height: 1;
+  }
+  
+  .bbc-trust-stats__label {
+    font-family: var(--bbc-font, 'Plus Jakarta Sans', sans-serif);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--bbc-grey, var(--bbc-gray-600));
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .bbc-trust-stats__divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(7, 62, 39, 0.15);
+  }
+  
+  /* Tablet */
+  @media (max-width: 768px) {
+    .bbc-trust-stats__grid {
+      gap: 20px;
+    }
+    
+    .bbc-trust-stats__item {
+      min-width: 80px;
+    }
+    
+    .bbc-trust-stats__value {
+      font-size: 24px;
+    }
+    
+    .bbc-trust-stats__label {
+      font-size: 11px;
+    }
+    
+    .bbc-trust-stats__divider {
+      height: 32px;
+    }
+  }
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    .bbc-trust-stats {
+      padding: 20px 0;
+    }
+    
+    .bbc-trust-stats__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 16px;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    
+    .bbc-trust-stats__divider {
+      display: none;
+    }
+    
+    .bbc-trust-stats__item {
+      min-width: unset;
+    }
+    
+    .bbc-trust-stats__value {
+      font-size: 28px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Trust Stats",
+  "tag": "section",
+  "class": "bbc-trust-stats-section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "BBC Trust Stats"
+    }
+  ]
+}
+{% endschema %}

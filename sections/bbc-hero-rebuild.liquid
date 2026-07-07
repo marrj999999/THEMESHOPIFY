@@ -1,0 +1,493 @@
+{% comment %}
+BBC Hero Section v6 - REBUILD
+Focus: Impact + Conversion + Brand
+Design: Mission-driven, visual hero, clear CTAs, responsive, accessible
+Target: Build to Bond story + Workshop/Kit booking
+{% endcomment %}
+
+<section class="bbc-hero-rebuild" style="background: linear-gradient(135deg, var(--bbc-forest) 0%, #1b4332 100%);">
+  <div class="bbc-hero-rebuild__container">
+    
+    {%- comment -%} LEFT: Text Content {%- endcomment -%}
+    <div class="bbc-hero-rebuild__content">
+      
+      {%- comment -%} Mission Label {%- endcomment -%}
+      <div class="bbc-hero-rebuild__label">
+        <span class="bbc-hero-rebuild__label-text">{{ section.settings.label | default: 'BUILD TO BOND INITIATIVE' }}</span>
+      </div>
+      
+      {%- comment -%} Main Headline {%- endcomment -%}
+      <h1 class="bbc-hero-rebuild__heading">
+        {{ section.settings.heading | default: 'Building Bicycles.<br>Rebuilding Lives.' }}
+      </h1>
+      
+      {%- comment -%} Subheading {%- endcomment -%}
+      <p class="bbc-hero-rebuild__subheading">
+        {{ section.settings.subheading | default: 'Through Build to Bond, incarcerated parents craft bamboo bikes for their children—hands-on learning that strengthens families.' }}
+      </p>
+      
+      {%- comment -%} Trust Indicators (3 items) {%- endcomment -%}
+      <div class="bbc-hero-rebuild__trust">
+        <div class="bbc-hero-rebuild__trust-item">
+          <span class="bbc-hero-rebuild__trust-icon">🏆</span>
+          <span class="bbc-hero-rebuild__trust-text">{{ section.settings.trust_1 | default: 'Investec 2025 Winner' }}</span>
+        </div>
+        <div class="bbc-hero-rebuild__trust-item">
+          <span class="bbc-hero-rebuild__trust-icon">👥</span>
+          <span class="bbc-hero-rebuild__trust-text">{{ section.settings.trust_2 | default: '4,000+ Trained' }}</span>
+        </div>
+        <div class="bbc-hero-rebuild__trust-item">
+          <span class="bbc-hero-rebuild__trust-icon">🎓</span>
+          <span class="bbc-hero-rebuild__trust-text">{{ section.settings.trust_3 | default: 'OCN Level 2' }}</span>
+        </div>
+      </div>
+      
+      {%- comment -%} CTAs {%- endcomment -%}
+      <div class="bbc-hero-rebuild__ctas">
+        <a href="{{ section.settings.cta_primary_url | default: '/collections/home-build-kits' }}" class="bbc-hero-rebuild__btn bbc-hero-rebuild__btn--primary">
+          {{ section.settings.cta_primary_text | default: 'Build a Kit' }}
+          <span class="bbc-hero-rebuild__btn-arrow">→</span>
+        </a>
+        <a href="{{ section.settings.cta_secondary_url | default: '/pages/bicycle-frame-building-workshop' }}" class="bbc-hero-rebuild__btn bbc-hero-rebuild__btn--secondary">
+          {{ section.settings.cta_secondary_text | default: 'Book a Workshop' }}
+        </a>
+      </div>
+      
+      {%- comment -%} Quick Stats {%- endcomment -%}
+      <div class="bbc-hero-rebuild__stats">
+        <div class="bbc-hero-rebuild__stat">
+          <span class="bbc-hero-rebuild__stat-number">4,000+</span>
+          <span class="bbc-hero-rebuild__stat-label">Bikes Built</span>
+        </div>
+        <div class="bbc-hero-rebuild__stat">
+          <span class="bbc-hero-rebuild__stat-number">36</span>
+          <span class="bbc-hero-rebuild__stat-label">Countries</span>
+        </div>
+        <div class="bbc-hero-rebuild__stat">
+          <span class="bbc-hero-rebuild__stat-number">Since 2012</span>
+          <span class="bbc-hero-rebuild__stat-label">14 Years</span>
+        </div>
+      </div>
+    </div>
+    
+    {%- comment -%} RIGHT: Hero Visual (Image or Video) {%- endcomment -%}
+    <div class="bbc-hero-rebuild__visual">
+      {%- if section.settings.use_video and section.settings.video_url != blank -%}
+        <div class="bbc-hero-rebuild__video-wrapper">
+          {%- if section.settings.video_url contains 'youtube' or section.settings.video_url contains 'youtu.be' -%}
+            {%- capture youtube_id -%}
+              {%- if section.settings.video_url contains 'v=' -%}
+                {{ section.settings.video_url | split: 'v=' | last | split: '&' | first }}
+              {%- elsif section.settings.video_url contains 'youtu.be/' -%}
+                {{ section.settings.video_url | split: '/' | last }}
+              {%- endif -%}
+            {%- endcapture -%}
+            <iframe
+              src="https://www.youtube.com/embed/{{ youtube_id }}?autoplay=1&mute=1&loop=1&modestbranding=1&rel=0"
+              class="bbc-hero-rebuild__video"
+              frameborder="0"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+              title="{{ section.settings.heading | escape }}"
+            ></iframe>
+          {%- else -%}
+            <video
+              class="bbc-hero-rebuild__video"
+              autoplay
+              muted
+              loop
+              playsinline
+              poster="{% if section.settings.image %}{{ section.settings.image | image_url: width: 1000 }}{% endif %}"
+            >
+              <source src="{{ section.settings.video_url }}" type="video/mp4">
+            </video>
+          {%- endif -%}
+        </div>
+      {%- elsif section.settings.image -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 800 }}"
+          srcset="{{ section.settings.image | image_url: width: 600 }} 600w,
+                  {{ section.settings.image | image_url: width: 800 }} 800w,
+                  {{ section.settings.image | image_url: width: 1200 }} 1200w"
+          sizes="(max-width: 900px) 100vw, 50vw"
+          alt="{{ section.settings.image.alt | default: section.settings.heading }}"
+          class="bbc-hero-rebuild__image"
+          loading="eager"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+        >
+      {%- else -%}
+        <div class="bbc-hero-rebuild__placeholder">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M14,6L10.5,9.5L13.5,12.5L10,16H18L14,6M4,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4Z"/>
+          </svg>
+          <p>Add hero image in theme editor</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .bbc-hero-rebuild {
+    padding: 120px 20px;
+    background: linear-gradient(135deg, var(--bbc-forest) 0%, #1b4332 100%);
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+  }
+
+  .bbc-hero-rebuild__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+  }
+
+  {%- comment -%} CONTENT SIDE {%- endcomment -%}
+  .bbc-hero-rebuild__content {
+    color: white;
+  }
+
+  .bbc-hero-rebuild__label {
+    display: inline-block;
+    background: rgba(253, 191, 20, 0.2);
+    border: 1px solid var(--bbc-gold);
+    border-radius: 20px;
+    padding: 8px 16px;
+    margin-bottom: 32px;
+  }
+
+  .bbc-hero-rebuild__label-text {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--bbc-gold);
+  }
+
+  .bbc-hero-rebuild__heading {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    color: white;
+    max-width: 520px;
+  }
+
+  .bbc-hero-rebuild__subheading {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 520px;
+    font-weight: 400;
+  }
+
+  {%- comment -%} TRUST INDICATORS {%- endcomment -%}
+  .bbc-hero-rebuild__trust {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .bbc-hero-rebuild__trust-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .bbc-hero-rebuild__trust-icon {
+    font-size: 24px;
+  }
+
+  .bbc-hero-rebuild__trust-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  {%- comment -%} CTA BUTTONS {%- endcomment -%}
+  .bbc-hero-rebuild__ctas {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .bbc-hero-rebuild__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .bbc-hero-rebuild__btn--primary {
+    background: var(--bbc-gold);
+    color: var(--bbc-forest);
+  }
+
+  .bbc-hero-rebuild__btn--primary:hover {
+    background: #f5a500;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(253, 191, 20, 0.3);
+  }
+
+  .bbc-hero-rebuild__btn--secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .bbc-hero-rebuild__btn--secondary:hover {
+    background: white;
+    color: var(--bbc-forest);
+    transform: translateY(-2px);
+  }
+
+  .bbc-hero-rebuild__btn-arrow {
+    font-size: 18px;
+  }
+
+  {%- comment -%} STATS {%- endcomment -%}
+  .bbc-hero-rebuild__stats {
+    display: flex;
+    gap: 48px;
+  }
+
+  .bbc-hero-rebuild__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .bbc-hero-rebuild__stat-number {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--bbc-gold);
+  }
+
+  .bbc-hero-rebuild__stat-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  {%- comment -%} VISUAL SIDE {%- endcomment -%}
+  .bbc-hero-rebuild__visual {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    aspect-ratio: 4 / 5;
+  }
+
+  .bbc-hero-rebuild__image,
+  .bbc-hero-rebuild__video,
+  .bbc-hero-rebuild__video-wrapper {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .bbc-hero-rebuild__video-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bbc-hero-rebuild__video {
+    width: 100%;
+    height: 100%;
+  }
+
+  .bbc-hero-rebuild__placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(7, 62, 39, 0.1) 0%, rgba(27, 67, 50, 0.1) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .bbc-hero-rebuild__placeholder svg {
+    width: 80px;
+    height: 80px;
+  }
+
+  {%- comment -%} MOBILE RESPONSIVE {%- endcomment -%}
+  @media (max-width: 1024px) {
+    .bbc-hero-rebuild {
+      padding: 80px 20px;
+      min-height: auto;
+    }
+
+    .bbc-hero-rebuild__container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .bbc-hero-rebuild__heading {
+      font-size: 48px;
+    }
+
+    .bbc-hero-rebuild__visual {
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .bbc-hero-rebuild {
+      padding: 60px 16px;
+    }
+
+    .bbc-hero-rebuild__heading {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+
+    .bbc-hero-rebuild__subheading {
+      font-size: 16px;
+      margin-bottom: 24px;
+    }
+
+    .bbc-hero-rebuild__trust {
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .bbc-hero-rebuild__ctas {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .bbc-hero-rebuild__btn {
+      width: 100%;
+      justify-content: center;
+      padding: 14px 24px;
+      font-size: 15px;
+    }
+
+    .bbc-hero-rebuild__stats {
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .bbc-hero-rebuild__visual {
+      aspect-ratio: 1 / 1.2;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero Section - Rebuild",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Mission Label",
+      "default": "BUILD TO BOND INITIATIVE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "Building Bicycles. Rebuilding Lives."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Through Build to Bond, incarcerated parents craft bamboo bikes for their children—hands-on learning that strengthens families."
+    },
+    {
+      "type": "text",
+      "id": "trust_1",
+      "label": "Trust Indicator 1",
+      "default": "Investec 2025 Winner"
+    },
+    {
+      "type": "text",
+      "id": "trust_2",
+      "label": "Trust Indicator 2",
+      "default": "4,000+ Trained"
+    },
+    {
+      "type": "text",
+      "id": "trust_3",
+      "label": "Trust Indicator 3",
+      "default": "OCN Level 2"
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_text",
+      "label": "Primary CTA Text",
+      "default": "Build a Kit"
+    },
+    {
+      "type": "url",
+      "id": "cta_primary_url",
+      "label": "Primary CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_text",
+      "label": "Secondary CTA Text",
+      "default": "Book a Workshop"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_url",
+      "label": "Secondary CTA URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_video",
+      "label": "Use Video Instead of Image",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL (YouTube, Vimeo, or MP4)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Build to Bond Hero",
+      "settings": {
+        "label": "BUILD TO BOND INITIATIVE",
+        "heading": "Building Bicycles. Rebuilding Lives.",
+        "cta_primary_text": "Build a Kit",
+        "cta_primary_url": "/collections/home-build-kits",
+        "cta_secondary_text": "Book a Workshop",
+        "cta_secondary_url": "/pages/bicycle-frame-building-workshop"
+      }
+    }
+  ]
+}
+{% endschema %}

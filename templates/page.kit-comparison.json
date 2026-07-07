@@ -1,0 +1,312 @@
+{
+  "sections": {
+    "hero": {
+      "type": "bbc-page-hero",
+      "settings": {
+        "heading": "Kit Comparison Guide",
+        "subheading": "Find the perfect bamboo bike kit for your riding style and experience level",
+        "style": "light"
+      }
+    },
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Each of our bamboo bike kits is designed for different riding styles, experience levels, and build preferences. This guide will help you choose the perfect kit for your first bamboo bike build.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "quick-selector": {
+      "type": "rich-text",
+      "blocks": {
+        "beginner": {
+          "type": "text",
+          "settings": {
+            "title": "First Time Builder",
+            "description": "Never built a bike before? Start here.",
+            "recommendation": "Gravel Kit or City Kit",
+            "button_text": "View Beginner Kits",
+            "button_link": "/collections/beginner-kits"
+          }
+        },
+        "experienced": {
+          "type": "text",
+          "settings": {
+            "title": "Have Built Before",
+            "description": "Ready for more advanced geometry?",
+            "recommendation": "Road Kit or Custom Kit",
+            "button_text": "View Advanced Kits",
+            "button_link": "/collections/advanced-kits"
+          }
+        },
+        "specific": {
+          "type": "text",
+          "settings": {
+            "title": "Specific Use Case",
+            "description": "Touring, commuting, or racing?",
+            "recommendation": "Touring or Fatbike Kit",
+            "button_text": "View Specialty Kits",
+            "button_link": "/collections/specialty-kits"
+          }
+        }
+      },
+      "block_order": [
+        "beginner",
+        "experienced",
+        "specific"
+      ],
+      "settings": {
+        "heading": "Quick Kit Selector",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "comparison-table": {
+      "type": "bbc-comparison-table",
+      "blocks": {
+        "gravel": {
+          "type": "column",
+          "settings": {
+            "kit_name": "Gravel Kit",
+            "price": "\u00a3425",
+            "build_time": "25-35 hours",
+            "skill_level": "Beginner-Intermediate",
+            "best_for": "Versatile riding, first builds",
+            "geometry": "Relaxed, stable",
+            "popular": true,
+            "product_link": "/products/gravel-kit"
+          }
+        },
+        "road": {
+          "type": "column",
+          "settings": {
+            "kit_name": "Road Kit",
+            "price": "\u00a3445",
+            "build_time": "30-40 hours",
+            "skill_level": "Intermediate",
+            "best_for": "Fast road cycling, racing",
+            "geometry": "Aggressive, aerodynamic",
+            "popular": false,
+            "product_link": "/products/road-kit"
+          }
+        },
+        "city": {
+          "type": "column",
+          "settings": {
+            "kit_name": "City Kit",
+            "price": "\u00a3395",
+            "build_time": "20-30 hours",
+            "skill_level": "Beginner",
+            "best_for": "Urban commuting, casual rides",
+            "geometry": "Upright, comfortable",
+            "popular": false,
+            "product_link": "/products/city-kit"
+          }
+        },
+        "touring": {
+          "type": "column",
+          "settings": {
+            "kit_name": "Touring Kit",
+            "price": "\u00a3475",
+            "build_time": "35-45 hours",
+            "skill_level": "Intermediate-Advanced",
+            "best_for": "Long distance, load carrying",
+            "geometry": "Stable, luggage-ready",
+            "popular": false,
+            "product_link": "/products/touring-kit"
+          }
+        },
+        "fatbike": {
+          "type": "column",
+          "settings": {
+            "kit_name": "Fatbike Kit",
+            "price": "\u00a3525",
+            "build_time": "40-50 hours",
+            "skill_level": "Advanced",
+            "best_for": "Snow, sand, adventure",
+            "geometry": "Wide, aggressive",
+            "popular": false,
+            "product_link": "/products/fatbike-kit"
+          }
+        },
+        "custom": {
+          "type": "column",
+          "settings": {
+            "kit_name": "Custom Kit",
+            "price": "\u00a3595",
+            "build_time": "50-60 hours",
+            "skill_level": "Expert",
+            "best_for": "Unique builds, specific needs",
+            "geometry": "Your specifications",
+            "popular": false,
+            "product_link": "/products/custom-kit"
+          }
+        }
+      },
+      "block_order": [
+        "gravel",
+        "road",
+        "city",
+        "touring",
+        "fatbike",
+        "custom"
+      ],
+      "settings": {
+        "heading": "Complete Kit Comparison",
+        "show_filters": true,
+        "highlight_popular": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "sizing-guide": {
+      "type": "bbc-size-calculator",
+      "settings": {
+        "heading": "Get Your Frame Size Right",
+        "description": "Proper sizing is crucial for comfort and performance. Use our calculator or email us your measurements for personalized recommendations.",
+        "email_option": true,
+        "contact_email": "info@bamboobicycleclub.org",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "kit-features": {
+      "type": "multicolumn",
+      "blocks": {
+        "beginner-friendly": {
+          "type": "column",
+          "settings": {
+            "title": "Beginner-Friendly",
+            "text": "<p>95% of our builders have zero prior experience. Our kits include everything you need plus 15+ hours of video tutorials.</p>",
+            "link_label": "Watch Tutorials",
+            "link": "https://youtube.com/@bamboobicycleclub"
+          }
+        },
+        "quality-materials": {
+          "type": "column",
+          "settings": {
+            "title": "Premium Materials",
+            "text": "<p>Heat-treated Moso bamboo, two-part epoxy, and CNC machined aluminum components. Built to last 8-12 years.</p>",
+            "link_label": "Material Details",
+            "link": "/pages/why-bamboo"
+          }
+        },
+        "global-shipping": {
+          "type": "column",
+          "settings": {
+            "title": "Worldwide Shipping",
+            "text": "<p>We ship to 36+ countries with full tracking and customs support. Most orders arrive within 7-14 days.</p>",
+            "link_label": "Shipping Info",
+            "link": "/pages/shipping"
+          }
+        },
+        "community-support": {
+          "type": "column",
+          "settings": {
+            "title": "Community & Support",
+            "text": "<p>Join 4,000+ builders in our community forum. Get help, share progress, and celebrate your finished build.</p>",
+            "link_label": "Join Community",
+            "link": "/pages/community"
+          }
+        }
+      },
+      "block_order": [
+        "beginner-friendly",
+        "quality-materials",
+        "global-shipping",
+        "community-support"
+      ],
+      "settings": {
+        "title": "Why Choose BBC Kits?",
+        "heading_size": "h2",
+        "columns_desktop": 2,
+        "columns_mobile": "1",
+        "image_width": "full",
+        "color_scheme": "scheme-2",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "faq": {
+      "type": "bbc-quick-faq",
+      "blocks": {
+        "faq-1": {
+          "type": "faq",
+          "settings": {
+            "question": "Which kit should I choose as a beginner?",
+            "answer": "The Gravel Kit is our most popular choice for first-time builders. It offers versatile geometry, moderate build complexity, and works well for most riding styles."
+          }
+        },
+        "faq-2": {
+          "type": "faq",
+          "settings": {
+            "question": "What's the difference between lugged and bonded construction?",
+            "answer": "Lugged kits use pre-made aluminum joints (easier, faster build). Bonded kits require wrapping joints with carbon fiber (more hands-on, traditional method)."
+          }
+        },
+        "faq-3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I modify the geometry?",
+            "answer": "Standard kits have fixed geometry optimized for each style. For custom geometry, choose our Custom Kit option with personalized specifications."
+          }
+        },
+        "faq-4": {
+          "type": "faq",
+          "settings": {
+            "question": "What tools do I need?",
+            "answer": "Basic hand tools only: hacksaw, files, sandpaper, measuring tape. No power tools required. Full tool list included with kit."
+          }
+        }
+      },
+      "block_order": [
+        "faq-1",
+        "faq-2",
+        "faq-3",
+        "faq-4"
+      ],
+      "settings": {
+        "heading": "Common Questions",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "cta": {
+      "type": "bbc-cta",
+      "settings": {
+        "heading": "Ready to Start Building?",
+        "text": "<p>Choose your kit above or book a workshop to build with expert guidance in London, Amersfoort, or Toulouse.</p>",
+        "button_text": "View All Kits",
+        "button_link": "/collections/bamboo-bike-kits",
+        "button_secondary_text": "Book Workshop",
+        "button_secondary_link": "/pages/bicycle-frame-building-workshop",
+        "background_color": "#f8f7f4",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "intro",
+    "quick-selector",
+    "comparison-table",
+    "sizing-guide",
+    "kit-features",
+    "faq",
+    "cta"
+  ]
+}

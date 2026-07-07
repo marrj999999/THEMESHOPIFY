@@ -1,0 +1,425 @@
+{% comment %}
+  BBC Workshop Booking — Distinctive Brand Version
+  
+  Design Principles:
+  - Sharp card edges
+  - Left border accent
+  - Bamboo stripe decoration
+  - Bold typography
+{% endcomment %}
+
+<section class="bbc-workshop-booking">
+  <div class="bbc-workshop-booking__container page-width">
+    <header class="bbc-workshop-booking__header">
+      {% if section.settings.eyebrow != blank %}
+        <span class="bbc-workshop-booking__eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+      <h2 class="bbc-workshop-booking__heading">{{ section.settings.title }}</h2>
+      {% if section.settings.description != blank %}
+        <p class="bbc-workshop-booking__description">{{ section.settings.description }}</p>
+      {% endif %}
+    </header>
+    
+    {% if section.blocks.size > 0 %}
+      <div class="bbc-workshop-booking__grid">
+        {% for block in section.blocks %}
+          <article class="bbc-workshop-card{% if forloop.first %} bbc-workshop-card--featured{% endif %}" {{ block.shopify_attributes }}>
+            <h3 class="bbc-workshop-card__name">{{ block.settings.workshop_name }}</h3>
+            <div class="bbc-workshop-card__price">{{ block.settings.price }}</div>
+            <ul class="bbc-workshop-card__details">
+              {% if block.settings.duration != blank %}
+                <li><span class="bbc-workshop__meta-icon" aria-hidden="true">{% render 'bbc-icons', icon: 'clock' %}</span> {{ block.settings.duration }}</li>
+              {% endif %}
+              {% if block.settings.location != blank %}
+                <li><span class="bbc-workshop__meta-icon" aria-hidden="true">{% render 'bbc-icons', icon: 'map-pin' %}</span> {{ block.settings.location }}</li>
+              {% endif %}
+              {% if block.settings.includes != blank %}
+                <li><span class="bbc-workshop__meta-icon" aria-hidden="true">{% render 'bbc-icons', icon: 'bike' %}</span> {{ block.settings.includes }}</li>
+              {% endif %}
+            </ul>
+            {% if block.settings.booking_url != blank %}
+              <a href="{{ block.settings.booking_url }}" class="bbc-btn bbc-btn--{{ block.settings.button_style | default: 'secondary' }} bbc-workshop-card__button" target="_blank" rel="noopener">
+                {{ block.settings.button_text | default: "Check Availability" }}
+              </a>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+    
+    {% if section.settings.calendly_url != blank %}
+      <div class="bbc-workshop-booking__calendar">
+        <div class="calendly-inline-widget" data-url="{{ section.settings.calendly_url }}" style="min-width:320px;height:600px;"></div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+      </div>
+    {% endif %}
+    
+    {% if section.settings.contact_text != blank %}
+      <footer class="bbc-workshop-booking__footer">
+        <p>{{ section.settings.contact_text }}</p>
+        <a href="/pages/contact" class="bbc-workshop-booking__contact-link">Get in Touch →</a>
+      </footer>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .bbc-workshop-booking {
+    padding: 100px 20px;
+    background: var(--bbc-cream, var(--bbc-cream));
+    position: relative;
+  }
+  
+  /* Bamboo stripe accent */
+  .bbc-workshop-booking::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(
+      to right,
+      var(--bbc-gold, var(--bbc-gold)) 0%,
+      var(--bbc-gold, var(--bbc-gold)) 30%,
+      transparent 30%,
+      transparent 40%,
+      var(--bbc-teal, var(--bbc-teal)) 40%,
+      var(--bbc-teal, var(--bbc-teal)) 100%
+    );
+  }
+  
+  .bbc-workshop-booking__header {
+    margin-bottom: 48px;
+    max-width: 600px;
+  }
+  
+  .bbc-workshop-booking__eyebrow {
+    display: inline-block;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--bbc-teal, var(--bbc-teal));
+    margin-bottom: 12px;
+  }
+  
+  .bbc-workshop-booking__heading {
+    font-family: var(--font-heading-family);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: var(--bbc-forest, var(--bbc-forest));
+    letter-spacing: -0.02em;
+    margin: 0 0 16px 0;
+    line-height: 1.1;
+  }
+  
+  .bbc-workshop-booking__description {
+    font-size: 1.125rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.7;
+    margin: 0;
+    line-height: 1.6;
+  }
+  
+  .bbc-workshop-booking__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  
+  /* Workshop card - sharp, confident */
+  .bbc-workshop-card {
+    background: white;
+    padding: 32px 28px;
+    border-left: 4px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  
+  .bbc-workshop-card:hover {
+    border-left-color: var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  .bbc-workshop-card--featured {
+    border-left-color: var(--bbc-gold, var(--bbc-gold));
+    box-shadow: 8px 8px 0 var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-workshop-card {
+      transition: none;
+    }
+  }
+  
+  .bbc-workshop-card__name {
+    font-family: var(--font-heading-family);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 12px 0;
+  }
+  
+  .bbc-workshop-card__price {
+    font-family: var(--font-heading-family);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin-bottom: 20px;
+  }
+  
+  .bbc-workshop-card__details {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+  }
+  
+  .bbc-workshop-card__details li {
+    padding: 8px 0;
+    font-size: 0.9375rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .bbc-workshop-card__button {
+    display: block;
+    width: 100%;
+    padding: 16px 24px;
+    background: var(--bbc-forest, var(--bbc-forest));
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  
+  .bbc-workshop-card__button:hover {
+    background: var(--bbc-teal, var(--bbc-teal));
+  }
+  
+  .bbc-workshop-card__button:focus-visible {
+    outline: 2px solid var(--bbc-gold, var(--bbc-gold));
+    outline-offset: 4px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-workshop-card__button {
+      transition: none;
+    }
+  }
+  
+  .bbc-workshop-booking__calendar {
+    background: white;
+    padding: 32px;
+    margin-bottom: 48px;
+  }
+  
+  .bbc-workshop-booking__footer {
+    padding: 32px;
+    background: white;
+    border-left: 4px solid var(--bbc-teal, var(--bbc-teal));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .bbc-workshop-booking__footer p {
+    font-size: 1rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.8;
+    margin: 0;
+  }
+  
+  .bbc-workshop-booking__contact-link {
+    color: var(--bbc-teal, var(--bbc-teal));
+    font-weight: 700;
+    text-decoration: none;
+  }
+  
+  .bbc-workshop-booking__contact-link:hover {
+    text-decoration: underline;
+  }
+  
+  .bbc-workshop-booking__contact-link:focus-visible {
+    outline: 2px solid var(--bbc-gold, var(--bbc-gold));
+    outline-offset: 4px;
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-workshop-booking {
+      padding: 60px 16px;
+    }
+    
+    .bbc-workshop-booking__grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .bbc-workshop-card {
+      padding: 24px 20px;
+    }
+    
+    .bbc-workshop-card--featured {
+      box-shadow: 6px 6px 0 var(--bbc-gold, var(--bbc-gold));
+    }
+    
+    .bbc-workshop-booking__footer {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Workshop Booking",
+  "tag": "section",
+  "class": "bbc-workshop-booking-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Workshops"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Book Your Workshop"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Join us in London for a hands-on bamboo bicycle building experience. Build your own custom frame over 2-3 days with expert guidance."
+    },
+    {
+      "type": "url",
+      "id": "calendly_url",
+      "label": "Calendly embed URL"
+    },
+    {
+      "type": "text",
+      "id": "contact_text",
+      "label": "Contact text",
+      "default": "Questions about workshops? Contact us directly."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "workshop",
+      "name": "Workshop Option",
+      "settings": [
+        {
+          "type": "text",
+          "id": "workshop_name",
+          "label": "Workshop name",
+          "default": "Road Bike Workshop"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "£500"
+        },
+        {
+          "type": "text",
+          "id": "duration",
+          "label": "Duration",
+          "default": "2-3 days"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "London Workshop"
+        },
+        {
+          "type": "text",
+          "id": "includes",
+          "label": "What's included",
+          "default": "All materials & frame kit"
+        },
+        {
+          "type": "url",
+          "id": "booking_url",
+          "label": "Booking URL"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Check Availability"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            { "value": "primary", "label": "Primary (Gold)" },
+            { "value": "secondary", "label": "Secondary (Forest)" },
+            { "value": "outline", "label": "Outline" },
+            { "value": "outline-light", "label": "Outline Light" },
+            { "value": "white", "label": "White" },
+            { "value": "gold", "label": "Gold" }
+          ],
+          "default": "secondary"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Workshop Booking",
+      "settings": {
+        "eyebrow": "Workshops",
+        "title": "Book Your Workshop",
+        "description": "Join us in London for a hands-on bamboo bicycle building experience. Build your own custom frame over 2-3 days with expert guidance."
+      },
+      "blocks": [
+        {
+          "type": "workshop",
+          "settings": {
+            "workshop_name": "Road Bike Workshop",
+            "price": "£500",
+            "duration": "2-3 days",
+            "location": "London Workshop",
+            "includes": "All materials & frame kit",
+            "button_text": "Check Availability"
+          }
+        },
+        {
+          "type": "workshop",
+          "settings": {
+            "workshop_name": "Gravel/Adventure",
+            "price": "£550",
+            "duration": "2-3 days",
+            "location": "London Workshop",
+            "includes": "All materials & frame kit",
+            "button_text": "Check Availability"
+          }
+        },
+        {
+          "type": "workshop",
+          "settings": {
+            "workshop_name": "MTB Workshop",
+            "price": "£595",
+            "duration": "3 days",
+            "location": "London Workshop",
+            "includes": "All materials & frame kit",
+            "button_text": "Check Availability"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

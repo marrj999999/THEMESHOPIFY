@@ -1,0 +1,116 @@
+{%- comment -%}
+  Bamboo Bicycle Club — Contact (2026 redesign).
+  Distinct "ways in" routes (the audit's funder/partner/maker journeys) + a
+  native Shopify contact form. Styling in assets/bbc-redesign-2026.css.
+{%- endcomment -%}
+
+<div class="bbc-rd bbc-rd-contact">
+
+  {%- comment -%} ---------- HERO (photo banner, editable image) ---------- {%- endcomment -%}
+  <header class="rd-hero rd-mh-70">
+    <div class="rd-bg">
+      {%- if section.settings.hero_image != blank -%}
+        <img src="{{ section.settings.hero_image | image_url: width: 1600 }}" srcset="{{ section.settings.hero_image | image_url: width: 800 }} 800w, {{ section.settings.hero_image | image_url: width: 1200 }} 1200w, {{ section.settings.hero_image | image_url: width: 1600 }} 1600w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w" sizes="100vw" alt="{{ section.settings.hero_image_alt | default: 'People building bamboo bikes in the workshop' | escape }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" fetchpriority="high" loading="eager">
+      {%- else -%}
+        <img src="{{ section.settings.hero_fallback | default: 'bbc-rd-workshop.jpg' | asset_url }}" alt="{{ section.settings.hero_image_alt | default: 'People building bamboo bikes in the workshop' | escape }}" width="1500" height="999" fetchpriority="high" loading="eager">
+      {%- endif -%}
+    </div>
+    <div class="rd-scrim"></div>
+    <div class="rd-inner">
+      <div class="rd-wrap">
+        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><span class="rd-here">Contact</span></nav>
+        {%- if section.settings.eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h1 class="rd-mt2 rd-mw-15ch">{{ section.settings.heading | default: 'Talk to us' }}</h1>
+        <p class="rd-lede">{{ section.settings.intro | default: 'However you want to be part of it — build a bike, run a programme, or back the mission — there is a door for you.' }}</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="rd-pad">
+    <div class="rd-wrap">
+
+      {%- comment -%} Distinct routes — funder / partner / maker {%- endcomment -%}
+      {%- assign route_blocks = section.blocks | where: 'type', 'route' -%}
+      {%- if route_blocks.size > 0 -%}
+        <div class="rd-grid rd-g3 rd-mb-52px">
+          {%- for block in route_blocks -%}
+            {%- assign u = block.settings.link_url | default: '#' -%}
+            <div class="rd-card rd-stamp" {{ block.shopify_attributes }}>
+              <div class="rd-body">
+                {%- if block.settings.tag != blank -%}<span class="rd-tag rd-lime">{{ block.settings.tag }}</span>{%- endif -%}
+                <h2 class="rd-mt2 rd-fs-21px">{{ block.settings.title }}</h2>
+                <p class="rd-cmp-34664">{{ block.settings.body }}</p>
+                {%- if block.settings.link_label != blank -%}<a class="rd-btn rd-lime" href="{{ u }}">{{ block.settings.link_label }}</a>{%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <h2 class="rd-mb-8px">{{ section.settings.form_heading | default: 'Send us a message' }}</h2>
+      {%- if section.settings.contact_line != blank -%}<p class="rd-lede rd-mb-8px">{{ section.settings.contact_line }}</p>{%- endif -%}
+      {%- if section.settings.contact_phone != blank -%}<p class="rd-mb-24px">Call us: <a href="tel:{{ section.settings.contact_phone | remove: ' ' }}">{{ section.settings.contact_phone }}</a></p>{%- endif -%}
+
+      {%- form 'contact' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="rd-form-note rd-ok">{{ section.settings.success_text | default: "Thanks — we've got your message and will be in touch." }}</div>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <div class="rd-form-note rd-err">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+        <div class="rd-form">
+          <div><label for="rd-cname">Name</label><input id="rd-cname" type="text" name="contact[name]" value="{{ form.name }}" autocomplete="name"></div>
+          <div><label for="rd-cemail">Email</label><input id="rd-cemail" type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" required></div>
+          <div><label for="rd-cphone">Phone (optional)</label><input id="rd-cphone" type="tel" name="contact[phone]" value="{{ form.phone }}" autocomplete="tel"></div>
+          <div><label for="rd-cmsg">Message</label><textarea id="rd-cmsg" name="contact[body]" required>{{ form.body }}</textarea></div>
+          <div><button type="submit" class="rd-btn rd-lime">{{ section.settings.submit_label | default: 'Send message' }}</button></div>
+        </div>
+      {%- endform -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Contact 2026 (new)",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Get in touch" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Talk to us" },
+    { "type": "textarea", "id": "intro", "label": "Intro" },
+    { "type": "header", "content": "Hero image" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image (workshop / build day — no identifiable learners)" },
+    { "type": "text", "id": "hero_fallback", "label": "Default hero photo filename", "default": "bbc-rd-workshop.jpg" },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt text", "default": "Inside the bamboo bicycle workshop" },
+    { "type": "header", "content": "Form & details" },
+    { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Send us a message" },
+    { "type": "text", "id": "contact_line", "label": "Contact line (email)", "default": "Prefer email? info@bamboobicycleclub.org" },
+    { "type": "text", "id": "contact_phone", "label": "Phone (optional)", "default": "+44 7446 930945" },
+    { "type": "text", "id": "submit_label", "label": "Submit button label", "default": "Send message" },
+    { "type": "text", "id": "success_text", "label": "Success message", "default": "Thanks — we've got your message and will be in touch." }
+  ],
+  "blocks": [
+    {
+      "type": "route",
+      "name": "Way in",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Tag", "default": "Make" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Build a bike" },
+        { "type": "textarea", "id": "body", "label": "Body" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Workshops & kits →" },
+        { "type": "url", "id": "link_url", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact 2026 (new)",
+      "blocks": [
+        { "type": "route", "settings": { "tag": "Make", "title": "Build a bike", "body": "Book a workshop or order a kit — no experience needed.", "link_label": "Workshops & kits →" } },
+        { "type": "route", "settings": { "tag": "Partner", "title": "Work with us", "body": "Run an accredited programme in a prison, school or college, or a corporate team-build day.", "link_label": "Our programmes →" } },
+        { "type": "route", "settings": { "tag": "Support", "title": "Back the mission", "body": "Fund a cohort, offer placements, or champion our work.", "link_label": "Get involved →" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,139 @@
+{%- comment -%}
+  BBC New Design (2026) — Builder Gallery page, single self-contained section.
+  Scoped under .bbc-rd / .bbc-rd-gallery via bbc-redesign-2026.css (loaded in layout).
+  Reuses the shared .rd-* component classes to match the rest of the 2026 system.
+{%- endcomment -%}
+
+{%- liquid
+  assign insta = section.settings.insta_url | default: 'https://instagram.com/bamboobicycleclub'
+-%}
+
+<div class="bbc-rd bbc-rd-gallery">
+
+  {%- comment -%} ---------- HERO (light) ---------- {%- endcomment -%}
+  <section class="rd-pad rd-paper">
+    <div class="rd-wrap">
+      <span class="rd-eyebrow">{{ section.settings.hero_eyebrow }}</span>
+      <h1>{{ section.settings.hero_title }}</h1>
+      <p class="rd-lede rd-maxw rd-mt2">{{ section.settings.hero_lede }}</p>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- GALLERY GRID ---------- {%- endcomment -%}
+  {%- assign images = section.blocks | where: 'type', 'image' -%}
+  {%- if images.size > 0 -%}
+    <section class="rd-pad-sm">
+      <div class="rd-wrap">
+        {%- if section.settings.grid_heading != blank -%}<h2>{{ section.settings.grid_heading }}</h2>{%- endif -%}
+        <div class="rd-grid rd-g3 rd-mt3">
+          {%- for b in images -%}
+            <figure class="rd-card rd-stamp" {{ b.shopify_attributes }}>
+              {%- if b.settings.image != blank -%}
+                <img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.alt | escape }}" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;">
+              {%- else -%}
+                <img src="{{ b.settings.image_fallback | asset_url }}" alt="{{ b.settings.alt | escape }}" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;">
+              {%- endif -%}
+              {%- if b.settings.caption != blank -%}<figcaption class="rd-src" style="padding:12px 16px;">{{ b.settings.caption }}</figcaption>{%- endif -%}
+            </figure>
+          {%- endfor -%}
+        </div>
+        {%- if section.settings.grid_cta_label != blank -%}
+          <p class="rd-mt3 rd-center"><a class="rd-btn rd-ghost" href="{{ insta }}">{{ section.settings.grid_cta_label }} <span class="rd-arrow">&rarr;</span></a></p>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- BUILDER STORIES ---------- {%- endcomment -%}
+  {%- assign stories = section.blocks | where: 'type', 'story' -%}
+  {%- if stories.size > 0 -%}
+    <section class="rd-pad rd-dark">
+      <div class="rd-wrap">
+        <span class="rd-eyebrow rd-on-dark">{{ section.settings.stories_eyebrow }}</span>
+        <h2>{{ section.settings.stories_heading }}</h2>
+        {%- if section.settings.stories_sub != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.stories_sub }}</p>{%- endif -%}
+        <div class="rd-grid rd-g2 rd-mt3">
+          {%- for b in stories -%}
+            <blockquote class="rd-card rd-card-free" style="padding:28px;" {{ b.shopify_attributes }}>
+              <p class="rd-q">{{ b.settings.quote }}</p>
+              <cite class="rd-mt2" style="display:block;">{{ b.settings.name }}{% if b.settings.role != blank %} · {{ b.settings.role }}{% endif %}{% if b.settings.location != blank %} · {{ b.settings.location }}{% endif %}</cite>
+            </blockquote>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- INSTAGRAM CTA ---------- {%- endcomment -%}
+  <section class="rd-pad rd-darker">
+    <div class="rd-wrap rd-center">
+      <h2>{{ section.settings.insta_heading }}</h2>
+      <p class="rd-lede rd-maxw rd-mt2" style="margin-inline:auto;">{{ section.settings.insta_body }}</p>
+      {%- if section.settings.insta_label != blank -%}
+        <p class="rd-mt3"><a class="rd-btn rd-lime rd-btn-lg" href="{{ insta }}">{{ section.settings.insta_label }} <span class="rd-arrow">&rarr;</span></a></p>
+      {%- endif -%}
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Gallery 2026 (new)",
+  "tag": "section",
+  "class": "section bbc-gallery-2026-wrap",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Builder gallery" },
+    { "type": "text", "id": "hero_title", "label": "Headline", "default": "Real bikes, real builders" },
+    { "type": "textarea", "id": "hero_lede", "label": "Lede", "default": "Every frame here was built by someone who'd mostly never touched a bike before — in workshops, at kitchen tables, in garages around the world." },
+    { "type": "header", "content": "Gallery grid" },
+    { "type": "text", "id": "grid_heading", "label": "Heading", "default": "Bikes built by our community" },
+    { "type": "text", "id": "grid_cta_label", "label": "CTA label", "default": "Share your build on Instagram" },
+    { "type": "header", "content": "Builder stories" },
+    { "type": "text", "id": "stories_eyebrow", "label": "Eyebrow", "default": "Builder stories" },
+    { "type": "text", "id": "stories_heading", "label": "Heading", "default": "What our community says" },
+    { "type": "textarea", "id": "stories_sub", "label": "Subheading" },
+    { "type": "header", "content": "Instagram CTA" },
+    { "type": "text", "id": "insta_heading", "label": "Heading", "default": "Tag us @bamboobicycleclub" },
+    { "type": "textarea", "id": "insta_body", "label": "Body", "default": "We love seeing your builds. Tag us on Instagram and your photo could be featured here." },
+    { "type": "text", "id": "insta_label", "label": "CTA label", "default": "Follow us on Instagram" },
+    { "type": "url", "id": "insta_url", "label": "Instagram URL" }
+  ],
+  "blocks": [
+    { "type": "image", "name": "Gallery image", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "image_fallback", "label": "Default image filename", "default": "bbc-rd-bike-field.jpg" },
+      { "type": "text", "id": "alt", "label": "Alt text", "default": "Bamboo bicycle" },
+      { "type": "text", "id": "caption", "label": "Caption" }
+    ]},
+    { "type": "story", "name": "Builder story", "settings": [
+      { "type": "textarea", "id": "quote", "label": "Quote", "default": "Quote" },
+      { "type": "text", "id": "name", "label": "Name", "default": "Name" },
+      { "type": "text", "id": "role", "label": "Role" },
+      { "type": "text", "id": "location", "label": "Location" }
+    ]}
+  ],
+  "presets": [
+    {
+      "name": "Gallery 2026 (new)",
+      "settings": {},
+      "blocks": [
+        { "type": "image", "settings": { "image_fallback": "bbc-rd-gravel-sunset.jpg", "alt": "Bamboo gravel bike at golden hour" } },
+        { "type": "image", "settings": { "image_fallback": "bbc-rd-road-charlie.jpg", "alt": "Bamboo road bike with red bar tape" } },
+        { "type": "image", "settings": { "image_fallback": "bbc-rd-bike-field.jpg", "alt": "Bamboo bicycle out in a field" } },
+        { "type": "image", "settings": { "image_fallback": "bbc-rd-ebike.jpg", "alt": "Bamboo e-bike build" } },
+        { "type": "image", "settings": { "image_fallback": "bbc-rd-redbar.jpg", "alt": "Bamboo road bike ready to ride" } },
+        { "type": "image", "settings": { "image_fallback": "bbc-rd-gravel-fence.jpg", "alt": "Bamboo gravel bike leaning on a fence" } },
+        { "type": "image", "settings": { "image_fallback": "bbc-rd-cargo.jpg", "alt": "Bamboo cargo bike build" } },
+        { "type": "image", "settings": { "image_fallback": "bbc-rd-hero-ride.jpg", "alt": "Rider on a bamboo bicycle" } },
+        { "type": "image", "settings": { "image_fallback": "bbc-rd-prod-balance.jpg", "alt": "Children's bamboo balance bike" } },
+        { "type": "story", "settings": { "quote": "I genuinely thought I'd fail. I have no mechanical skills whatsoever. Two days later I rolled out of the workshop on a bike I built myself. Still can't quite believe it.", "name": "Sarah K.", "role": "Marketing Manager", "location": "London" } },
+        { "type": "story", "settings": { "quote": "Built the balance bike kit with my daughter over a weekend. She's 7 now and still talks about 'our bike.' Best purchase I've ever made.", "name": "Marcus T.", "role": "Teacher", "location": "Bristol" } },
+        { "type": "story", "settings": { "quote": "I've built three frames now. Started with the workshop, then kits at home. There's nothing else like it.", "name": "Yuki M.", "role": "Software Developer", "location": "Tokyo" } },
+        { "type": "story", "settings": { "quote": "Ordered the kit to South Africa, built it in my garage, and now I commute on it every day. The support from the BBC community was incredible.", "name": "Johan V.", "role": "Architect", "location": "Cape Town" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

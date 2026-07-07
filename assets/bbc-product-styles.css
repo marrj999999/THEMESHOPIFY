@@ -1,0 +1,766 @@
+/* ==========================================================================
+   BBC Product Page Styles
+   Single source of truth for all product sections
+   ========================================================================== */
+
+/* Load Plus Jakarta Sans font */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+/* ==========================================================================
+   DESIGN TOKENS
+   ========================================================================== */
+
+:root {
+  /* Colors */
+  --bbc-forest: #073e27;
+  --bbc-teal: #3f8b66;
+  --bbc-gold: #ffa900;
+  --bbc-white: #ffffff;
+  --bbc-cream: #f8f7f4;
+  --bbc-sand: #f0ede6;
+  --bbc-stone: #e8e5de;
+  --bbc-grey: #666666;
+  --bbc-charcoal: #333333;
+  
+  /* Typography */
+  --bbc-font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
+  /* Font Sizes - Mobile First */
+  --bbc-size-xs: 0.75rem;    /* 12px */
+  --bbc-size-sm: 0.875rem;   /* 14px */
+  --bbc-size-base: 1rem;     /* 16px */
+  --bbc-size-lg: 1.125rem;   /* 18px */
+  --bbc-size-xl: 1.25rem;    /* 20px */
+  --bbc-size-2xl: 1.5rem;    /* 24px */
+  --bbc-size-3xl: 1.875rem;  /* 30px */
+  --bbc-size-4xl: 2.25rem;   /* 36px */
+  
+  /* Spacing */
+  --bbc-sp-1: 0.25rem;   /* 4px */
+  --bbc-sp-2: 0.5rem;    /* 8px */
+  --bbc-sp-3: 0.75rem;   /* 12px */
+  --bbc-sp-4: 1rem;      /* 16px */
+  --bbc-sp-5: 1.25rem;   /* 20px */
+  --bbc-sp-6: 1.5rem;    /* 24px */
+  --bbc-sp-8: 2rem;      /* 32px */
+  --bbc-sp-10: 2.5rem;   /* 40px */
+  --bbc-sp-12: 3rem;     /* 48px */
+  
+  /* Radius - Sharp edges for distinctive brand */
+  --bbc-radius-sm: 0;
+  --bbc-radius-md: 0;
+  --bbc-radius-lg: 0;
+  --bbc-radius-xl: 0;
+  --bbc-radius-full: 9999px; /* Keep for pills/badges */
+  
+  /* Shadows */
+  --bbc-shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --bbc-shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+  --bbc-shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+  
+  /* Transitions */
+  --bbc-ease: 200ms ease;
+}
+
+/* ==========================================================================
+   BASE STYLES
+   ========================================================================== */
+
+/* Apply font to all BBC sections */
+[class*="bbc-"] {
+  font-family: var(--bbc-font);
+  box-sizing: border-box;
+}
+
+[class*="bbc-"] *,
+[class*="bbc-"] *::before,
+[class*="bbc-"] *::after {
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY RULES
+   ========================================================================== */
+
+/* Section Titles - Always the same */
+.bbc-section-title {
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-2xl);
+  font-weight: 700;
+  color: var(--bbc-forest);
+  margin: 0 0 var(--bbc-sp-2) 0;
+  line-height: 1.2;
+}
+
+/* Section Subtitles */
+.bbc-section-subtitle {
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-base);
+  font-weight: 400;
+  color: var(--bbc-grey);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Card Titles */
+.bbc-card-title {
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-base);
+  font-weight: 600;
+  color: var(--bbc-forest);
+  margin: 0 0 var(--bbc-sp-1) 0;
+  line-height: 1.3;
+}
+
+/* Body Text */
+.bbc-text {
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-sm);
+  font-weight: 400;
+  color: var(--bbc-grey);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Small Text */
+.bbc-text-sm {
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-xs);
+  font-weight: 400;
+  color: var(--bbc-grey);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Stat Numbers */
+.bbc-stat-value {
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-3xl);
+  font-weight: 800;
+  color: var(--bbc-forest);
+  line-height: 1;
+}
+
+.bbc-stat-label {
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-xs);
+  font-weight: 500;
+  color: var(--bbc-grey);
+}
+
+/* Desktop font scaling */
+@media (min-width: 768px) {
+  .bbc-section-title {
+    font-size: var(--bbc-size-3xl);
+  }
+  
+  .bbc-section-subtitle {
+    font-size: var(--bbc-size-lg);
+  }
+  
+  .bbc-stat-value {
+    font-size: var(--bbc-size-4xl);
+  }
+}
+
+/* ==========================================================================
+   LAYOUT
+   ========================================================================== */
+
+.bbc-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--bbc-sp-4);
+}
+
+.bbc-section {
+  padding: var(--bbc-sp-10) 0;
+}
+
+.bbc-section--cream {
+  background: var(--bbc-cream);
+}
+
+.bbc-section--white {
+  background: var(--bbc-white);
+}
+
+.bbc-header {
+  text-align: center;
+  margin-bottom: var(--bbc-sp-8);
+}
+
+/* Grid */
+.bbc-grid {
+  display: grid;
+  gap: var(--bbc-sp-4);
+}
+
+.bbc-grid--2 {
+  grid-template-columns: 1fr;
+}
+
+.bbc-grid--3 {
+  grid-template-columns: 1fr;
+}
+
+.bbc-grid--4 {
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (min-width: 640px) {
+  .bbc-grid--2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .bbc-grid--3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .bbc-grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .bbc-grid--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .bbc-grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ==========================================================================
+   COMPONENTS
+   ========================================================================== */
+
+/* Cards - Sharp edges with left border accent */
+.bbc-card {
+  background: var(--bbc-white);
+  padding: var(--bbc-sp-4);
+  border-left: 4px solid transparent;
+  transition: border-color 200ms ease;
+}
+
+.bbc-card:hover {
+  border-left-color: var(--bbc-gold);
+}
+
+.bbc-card--flat {
+  background: var(--bbc-cream);
+}
+
+.bbc-card--featured {
+  border-left-color: var(--bbc-gold);
+  box-shadow: 6px 6px 0 var(--bbc-gold);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bbc-card {
+    transition: none;
+  }
+}
+
+/* Icon Box */
+.bbc-icon-box {
+  width: 40px;
+  height: 40px;
+  background: var(--bbc-forest);
+  border-radius: var(--bbc-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bbc-white);
+  flex-shrink: 0;
+}
+
+.bbc-icon-box svg {
+  width: 20px;
+  height: 20px;
+}
+
+.bbc-icon-box--sm {
+  width: 32px;
+  height: 32px;
+}
+
+.bbc-icon-box--sm svg {
+  width: 16px;
+  height: 16px;
+}
+
+.bbc-icon-box--lg {
+  width: 48px;
+  height: 48px;
+}
+
+.bbc-icon-box--lg svg {
+  width: 24px;
+  height: 24px;
+}
+
+.bbc-icon-box--outline {
+  background: transparent;
+  border: 2px solid var(--bbc-forest);
+  color: var(--bbc-forest);
+}
+
+.bbc-icon-box--teal {
+  background: var(--bbc-teal);
+}
+
+/* Badges */
+.bbc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--bbc-sp-1);
+  padding: var(--bbc-sp-1) var(--bbc-sp-2);
+  font-size: var(--bbc-size-xs);
+  font-weight: 600;
+  border-radius: var(--bbc-radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.bbc-badge--gold {
+  background: var(--bbc-gold);
+  color: var(--bbc-forest);
+}
+
+.bbc-badge--green {
+  background: rgba(63, 139, 102, 0.15);
+  color: var(--bbc-teal);
+}
+
+/* Buttons - Sharp edges, no translateY */
+.bbc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--bbc-sp-2);
+  padding: var(--bbc-sp-3) var(--bbc-sp-5);
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 200ms ease;
+}
+
+.bbc-btn:focus-visible {
+  outline: 2px solid var(--bbc-gold);
+  outline-offset: 4px;
+}
+
+.bbc-btn--primary {
+  background: var(--bbc-forest);
+  color: var(--bbc-white);
+}
+
+.bbc-btn--primary:hover {
+  background: var(--bbc-teal);
+}
+
+.bbc-btn--gold {
+  background: var(--bbc-gold);
+  color: var(--bbc-forest);
+}
+
+.bbc-btn--gold:hover {
+  background: #e69900;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bbc-btn {
+    transition: none;
+  }
+}
+
+.bbc-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* CTA Box - Sharp with bamboo stripe */
+.bbc-cta {
+  background: var(--bbc-forest);
+  padding: var(--bbc-sp-5);
+  color: var(--bbc-white);
+  text-align: center;
+  position: relative;
+}
+
+.bbc-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    var(--bbc-gold) 0%,
+    var(--bbc-gold) 60%,
+    transparent 60%,
+    transparent 70%,
+    var(--bbc-teal) 70%,
+    var(--bbc-teal) 100%
+  );
+}
+
+.bbc-cta-title {
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-base);
+  font-weight: 600;
+  margin: 0 0 var(--bbc-sp-1) 0;
+}
+
+.bbc-cta-text {
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-sm);
+  opacity: 0.9;
+  margin: 0 0 var(--bbc-sp-4) 0;
+}
+
+/* ==========================================================================
+   PRODUCT TABS
+   ========================================================================== */
+
+.bbc-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bbc-white);
+  border-bottom: 1px solid var(--bbc-stone);
+}
+
+.bbc-tabs__list {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.bbc-tabs__list::-webkit-scrollbar {
+  display: none;
+}
+
+.bbc-tabs__tab {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--bbc-sp-1);
+  padding: var(--bbc-sp-3) var(--bbc-sp-4);
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-sm);
+  font-weight: 500;
+  color: var(--bbc-grey);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color var(--bbc-ease), border-color var(--bbc-ease);
+  white-space: nowrap;
+}
+
+.bbc-tabs__tab:hover {
+  color: var(--bbc-forest);
+}
+
+.bbc-tabs__tab.active,
+.bbc-tabs__tab[aria-selected="true"] {
+  color: var(--bbc-forest);
+  font-weight: 600;
+  border-bottom-color: var(--bbc-gold);
+}
+
+.bbc-tabs__tab svg {
+  width: 16px;
+  height: 16px;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .bbc-tabs__tab svg {
+    display: block;
+  }
+}
+
+/* ==========================================================================
+   ITEM LIST (What's Included, Features)
+   ========================================================================== */
+
+.bbc-item {
+  display: flex;
+  gap: var(--bbc-sp-3);
+  align-items: flex-start;
+  padding: var(--bbc-sp-4);
+  background: var(--bbc-cream);
+  border-left: 4px solid transparent;
+  transition: border-color 200ms ease;
+}
+
+.bbc-item:hover {
+  border-left-color: var(--bbc-teal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bbc-item {
+    transition: none;
+  }
+}
+
+.bbc-item__icon {
+  width: 40px;
+  height: 40px;
+  background: var(--bbc-forest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bbc-white);
+  flex-shrink: 0;
+}
+
+.bbc-item__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.bbc-item__title {
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-base);
+  font-weight: 600;
+  color: var(--bbc-forest);
+  margin: 0 0 var(--bbc-sp-1) 0;
+}
+
+.bbc-item__desc {
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-sm);
+  color: var(--bbc-grey);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   STATS ROW
+   ========================================================================== */
+
+.bbc-stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--bbc-sp-6);
+  flex-wrap: wrap;
+  margin-bottom: var(--bbc-sp-8);
+}
+
+.bbc-stats__item {
+  text-align: center;
+  min-width: 80px;
+}
+
+/* ==========================================================================
+   TIMELINE (Build Time)
+   ========================================================================== */
+
+.bbc-timeline {
+  background: var(--bbc-white);
+  border-radius: var(--bbc-radius-lg);
+  padding: var(--bbc-sp-5);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bbc-timeline__title {
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-base);
+  font-weight: 600;
+  color: var(--bbc-forest);
+  text-align: center;
+  margin: 0 0 var(--bbc-sp-4) 0;
+}
+
+.bbc-timeline__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbc-sp-2);
+}
+
+.bbc-timeline__item {
+  display: flex;
+  align-items: center;
+  gap: var(--bbc-sp-3);
+  padding: var(--bbc-sp-3);
+  background: var(--bbc-cream);
+  border-radius: var(--bbc-radius-md);
+}
+
+.bbc-timeline__num {
+  width: 28px;
+  height: 28px;
+  background: var(--bbc-forest);
+  border-radius: var(--bbc-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bbc-white);
+  font-size: var(--bbc-size-xs);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.bbc-timeline__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.bbc-timeline__name {
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-sm);
+  font-weight: 600;
+  color: var(--bbc-forest);
+  margin: 0;
+}
+
+.bbc-timeline__desc {
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-xs);
+  color: var(--bbc-grey);
+  margin: 0;
+}
+
+.bbc-timeline__time {
+  background: var(--bbc-gold);
+  color: var(--bbc-forest);
+  padding: var(--bbc-sp-1) var(--bbc-sp-2);
+  border-radius: var(--bbc-radius-full);
+  font-size: var(--bbc-size-xs);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   TABLE (Geometry, Shipping)
+   ========================================================================== */
+
+.bbc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-sm);
+}
+
+.bbc-table th,
+.bbc-table td {
+  padding: var(--bbc-sp-2) var(--bbc-sp-3);
+  text-align: left;
+  border-bottom: 1px solid var(--bbc-stone);
+}
+
+.bbc-table th {
+  background: var(--bbc-forest);
+  color: var(--bbc-white);
+  font-weight: 600;
+  font-size: var(--bbc-size-xs);
+  text-transform: uppercase;
+}
+
+.bbc-table th:first-child {
+  border-radius: var(--bbc-radius-md) 0 0 0;
+}
+
+.bbc-table th:last-child {
+  border-radius: 0 var(--bbc-radius-md) 0 0;
+}
+
+.bbc-table tr:nth-child(even) {
+  background: var(--bbc-cream);
+}
+
+.bbc-table td:first-child {
+  font-weight: 500;
+  color: var(--bbc-forest);
+}
+
+/* ==========================================================================
+   PROOF BOX (Durability)
+   ========================================================================== */
+
+.bbc-proof {
+  background: var(--bbc-forest);
+  border-radius: var(--bbc-radius-lg);
+  padding: var(--bbc-sp-6);
+  color: var(--bbc-white);
+}
+
+.bbc-proof__title {
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-lg);
+  font-weight: 600;
+  text-align: center;
+  margin: 0 0 var(--bbc-sp-5) 0;
+}
+
+.bbc-proof__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--bbc-sp-3);
+}
+
+@media (min-width: 640px) {
+  .bbc-proof__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.bbc-proof__item {
+  text-align: center;
+  padding: var(--bbc-sp-3);
+  background: rgba(255,255,255,0.1);
+  border-radius: var(--bbc-radius-md);
+}
+
+.bbc-proof__icon {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto var(--bbc-sp-2);
+  color: var(--bbc-gold);
+}
+
+.bbc-proof__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.bbc-proof__text {
+  font-family: var(--bbc-font);
+  font-size: var(--bbc-size-sm);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visible for keyboard users */
+.bbc-tabs__tab:focus-visible,
+.bbc-btn:focus-visible,
+a[class*="bbc-"]:focus-visible {
+  outline: 2px solid var(--bbc-gold);
+  outline-offset: 2px;
+}

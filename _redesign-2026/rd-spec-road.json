@@ -1,0 +1,96 @@
+{
+  "discipline": "Road",
+  "audience": "A distance-focused road rider — sportive, club-run and all-day-endurance cyclist who wants a comfortable, efficient drop-bar bike with character, and who'd rather build their own one-of-a-kind frame than buy another anonymous carbon machine.",
+  "positioning": {
+    "eyebrow": "Why bamboo for the road",
+    "title": "A road bike that stays smooth when the miles stack up.",
+    "lede": "Built for endurance, not just the first 40km. Bamboo's natural vibration damping takes the sting out of rough tarmac and long days in the saddle, so you finish a century fresher — on a drop-bar frame you made with your own hands."
+  },
+  "specs": [
+    { "label": "Ride feel", "value": "Compliant & vibration-damping" },
+    { "label": "Geometry", "value": "Endurance road, drop-bar" },
+    { "label": "Tyre clearance", "value": "Modern road rubber, up to ~32mm" },
+    { "label": "Tensile strength", "value": "~28,000 PSI" }
+  ],
+  "who_for": [
+    {
+      "title": "You ride long, not just fast",
+      "body": "Sportives, club runs and all-day endurance miles. If finishing fresh matters more to you than a 200g weight saving, bamboo's damping earns its keep over the distance."
+    },
+    {
+      "title": "You want road comfort without a dead ride",
+      "body": "Bamboo soaks up road buzz the way a good steel frame does, but stays torsionally stiff so your power still goes to the back wheel. Smooth, not flexy."
+    },
+    {
+      "title": "You'd rather build it than buy it",
+      "body": "A frame nobody else owns, finished by you over a few weekends — and every kit funds a place on our prison frame-building course. Not for the watts-obsessed crit racer chasing the lightest aero rig."
+    }
+  ],
+  "faq": [
+    {
+      "q": "Is a bamboo road frame stiff and efficient enough for fast riding?",
+      "a": "Yes. Bamboo is torsionally stiff, so power transfer to the rear wheel is direct — builders ride theirs daily and on long tours. It's tuned for endurance comfort rather than crit-race rigidity, so you trade a little outright stiffness for a noticeably smoother ride over distance. Tensile strength is around 28,000 PSI, comparable to mild steel."
+    },
+    {
+      "q": "How much does a finished bamboo road bike weigh?",
+      "a": "Bamboo is naturally a touch heavier than a top-end carbon race frame, so it's built for all-day comfort and durability rather than the lightest possible climbing weight. Most builders find the smoother ride and the fact they built it themselves more than worth it. Send us your build goals and we'll advise on the lightest sensible component spec."
+    },
+    {
+      "q": "Will the frame survive years of big road miles?",
+      "a": "Yes. We've seen under a 1% failure rate across 4,000+ builds since 2012, the design has been independently tested with Swansea University, and frames last 8-12 years with proper care — many of our 2012 builds are still ridden daily. Seal it, dry it after wet rides and store it indoors."
+    },
+    {
+      "q": "What drivetrain and groupset can I run?",
+      "a": "The frame works with all major road groupsets. Add one of our matched component packs — Shimano 105 hydraulic disc, a clean single-speed pack, or GRX for road-plus versatility — or source your own parts from any bike shop. We'll advise on the right setup for how you ride."
+    },
+    {
+      "q": "How wide a tyre will it take?",
+      "a": "It's built around modern road rubber — comfortably running wider tyres than a classic race frame for lower pressures and more compliance on rough surfaces. Tell us the tyres you have in mind and we'll confirm clearance for your build before you order."
+    }
+  ],
+  "reviews": [
+    {
+      "quote": "Still riding mine daily after 7 years. Built it at home using the kit. It's outlasted two steel bikes I owned before.",
+      "author": "Jamie",
+      "role": "Road kit builder, Romania — Verified Builder"
+    },
+    {
+      "quote": "Bamboo absorbs road buzz beautifully. Better than carbon in many ways, and I built it myself.",
+      "author": "Louise",
+      "role": "Road kit builder, UK"
+    },
+    {
+      "quote": "I had zero experience — couldn't even change a puncture. Now I ride a bike I built with my own hands. The support from James and the community made all the difference.",
+      "author": "Marcus K.",
+      "role": "Road kit build, London"
+    }
+  ],
+  "related": [
+    {
+      "title": "Gravel Frame Build Kit",
+      "note": "Same compliant ride, slacker geometry and wider clearance for gravel, light touring and bikepacking.",
+      "fallback": "bbc-rd-prod-gravel.jpg"
+    },
+    {
+      "title": "Road Single-Speed Pack",
+      "note": "Strip it back — a clean, low-maintenance single-speed build for fast city road miles.",
+      "fallback": "bbc-rd-prod-build.jpg"
+    },
+    {
+      "title": "Custom Frame Kit",
+      "note": "Dial in your exact road geometry — built to your measurements. Request a quote.",
+      "fallback": "bbc-rd-detail.jpg"
+    }
+  ],
+  "hero_fallback": "bbc-rd-road-charlie.jpg",
+  "price_from": "£375",
+  "needs_real_data": [
+    "Star rating value and review count (baseline section ships placeholder 4.8 / 214 and '98% would build again' — none verified for the Road product; confirm or remove).",
+    "Exact tyre clearance figure for the road frame — brief says ~28-32mm; not stated in any verified BBC source file. Confirm the real max clearance before publishing a hard number; copy currently hedges with 'up to ~32mm' / 'tell us and we'll confirm'.",
+    "Build-time figure: brief specifies 25-35 hrs, but the road template's own 'Build Time' collapsible says 20-40 hrs. Spec follows the brief (25-35) where build time is referenced; reconcile the two before launch.",
+    "Finished road-build weight: no verified BBC weight figure exists; FAQ answers qualitatively ('a touch heavier than top-end carbon') rather than quoting a number — supply a real weight range if one is wanted.",
+    "Single-speed component pack price (£425 from brief) not surfaced as a hard figure in the related-kit note; add if a price is wanted on the cross-sell card.",
+    "Road-specific imagery — only generic bbc-rd-* placeholders are available; replace hero and related-kit fallbacks with real photos of a road build.",
+    "Whether a road-specific component-pack bundle (Shimano 105 hydraulic / GRX) should replace the gravel 'from £425' bundle block and its total price on the live page."
+  ]
+}

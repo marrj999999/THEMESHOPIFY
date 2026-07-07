@@ -1,0 +1,373 @@
+{% comment %}
+  BBC Build Reviews Section
+  Shows customer build stories from the blog
+{% endcomment %}
+
+{%- style -%}
+  .bbc-reviews {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.background_color }};
+  }
+  .bbc-reviews__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .bbc-reviews__header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .bbc-reviews__title {
+    font-family: var(--font-heading-family);
+    font-size: 2rem;
+    color: var(--bbc-forest);
+    margin-bottom: 0.5rem;
+  }
+  .bbc-reviews__subtitle {
+    color: var(--bbc-gray-600);
+    font-size: 1.1rem;
+  }
+  .bbc-reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  .bbc-reviews__card {
+    background: white;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(7, 62, 39, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+  .bbc-reviews__card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(7, 62, 39, 0.15);
+  }
+  .bbc-reviews__card-image {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--bbc-cream);
+  }
+  .bbc-reviews__card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  .bbc-reviews__card:hover .bbc-reviews__card-image img {
+    transform: scale(1.05);
+  }
+  .bbc-reviews__card-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    background: linear-gradient(135deg, var(--bbc-forest) 0%, var(--bbc-teal) 100%);
+  }
+  .bbc-reviews__card-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .bbc-reviews__card-tag {
+    display: inline-block;
+    background: var(--bbc-gold);
+    color: var(--bbc-forest);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    width: fit-content;
+  }
+  .bbc-reviews__card-title {
+    font-family: var(--font-heading-family);
+    font-size: 1.2rem;
+    color: var(--bbc-forest);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+  .bbc-reviews__card-excerpt {
+    color: var(--bbc-gray-600);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 1rem;
+  }
+  .bbc-reviews__card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--bbc-teal);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .bbc-reviews__cta {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .bbc-reviews__cta-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--bbc-forest) 0%, var(--bbc-teal) 100%);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s;
+  }
+  .bbc-reviews__cta-btn:hover {
+    border-left-color: var(--bbc-teal, var(--bbc-teal));
+  }
+  
+  /* Accessibility: focus states */
+  .bbc-reviews__card:focus-visible {
+    outline: 3px solid var(--bbc-gold, var(--bbc-gold));
+    outline-offset: 4px;
+  }
+  
+  .bbc-reviews__cta-btn:focus-visible {
+    outline: 3px solid var(--bbc-gold, var(--bbc-gold));
+    outline-offset: 4px;
+  }
+  
+  /* Accessibility: reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-reviews__card,
+    .bbc-reviews__cta-btn {
+      transition: none;
+    }
+    .bbc-reviews__card:hover {
+      transform: none;
+    }
+    .bbc-reviews__card:hover .bbc-reviews__card-image img {
+      transform: none;
+    }
+    .bbc-reviews__cta-btn:hover {
+      transform: none;
+    }
+  }
+  .bbc-reviews__testimonial {
+    margin-top: 2.5rem;
+    background: linear-gradient(135deg, var(--bbc-forest) 0%, var(--bbc-teal) 100%);
+    border-radius: 0;
+    padding: 2.5rem;
+    color: white;
+    text-align: center;
+  }
+  .bbc-reviews__testimonial-quote {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+  .bbc-reviews__testimonial-quote::before {
+    content: '"';
+    font-size: 3rem;
+    line-height: 0;
+    vertical-align: -0.5rem;
+    opacity: 0.5;
+  }
+  .bbc-reviews__testimonial-author {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  .bbc-reviews__testimonial-detail {
+    opacity: 0.8;
+    font-size: 0.9rem;
+  }
+{%- endstyle -%}
+
+<div class="bbc-reviews" id="reviews">
+  <div class="bbc-reviews__container">
+    <div class="bbc-reviews__header">
+      <h2 class="bbc-reviews__title">{{ section.settings.title }}</h2>
+      <p class="bbc-reviews__subtitle">{{ section.settings.subtitle }}</p>
+    </div>
+    
+    <div class="bbc-reviews__grid">
+      {%- assign blog = blogs['club-news'] -%}
+      {%- if blog -%}
+        {%- for article in blog.articles limit: section.settings.posts_count -%}
+          <a href="{{ article.url }}" class="bbc-reviews__card">
+            <div class="bbc-reviews__card-image">
+              {%- if article.image -%}
+                <img src="{{ article.image | image_url: width: 600 }}" 
+                     alt="{{ article.title }}" 
+                     width="600" 
+                     height="{{ 600 | divided_by: article.image.aspect_ratio | round }}"
+                     loading="lazy">
+              {%- else -%}
+                <div class="bbc-reviews__card-image-placeholder">{% render 'bbc-icons', icon: 'bike', size: 32 %}</div>
+              {%- endif -%}
+            </div>
+            <div class="bbc-reviews__card-body">
+              {%- if article.tags.size > 0 -%}
+                <span class="bbc-reviews__card-tag">{{ article.tags.first }}</span>
+              {%- endif -%}
+              <h3 class="bbc-reviews__card-title">{{ article.title }}</h3>
+              <p class="bbc-reviews__card-excerpt">{{ article.excerpt_or_content | strip_html | truncate: 120 }}</p>
+              <span class="bbc-reviews__card-meta">Read Full Story →</span>
+            </div>
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Fallback if blog not found -->
+        <a href="/blogs/club-news/building-my-first-bamboo-bicycle-a-journey-from-novice-to-10-000km" class="bbc-reviews__card">
+          <div class="bbc-reviews__card-image">
+            <div class="bbc-reviews__card-image-placeholder">{% render 'bbc-icons', icon: 'bike', size: 32 %}</div>
+          </div>
+          <div class="bbc-reviews__card-body">
+            <span class="bbc-reviews__card-tag">Gravel</span>
+            <h3 class="bbc-reviews__card-title">Building My First Bamboo Bicycle: A Journey from Novice to 10,000km</h3>
+            <p class="bbc-reviews__card-excerpt">How a complete beginner built their dream gravel bike and rode it across Europe...</p>
+            <span class="bbc-reviews__card-meta">Read Full Story →</span>
+          </div>
+        </a>
+        <a href="/blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike" class="bbc-reviews__card">
+          <div class="bbc-reviews__card-image">
+            <div class="bbc-reviews__card-image-placeholder">{% render 'bbc-icons', icon: 'bike', size: 32 %}</div>
+          </div>
+          <div class="bbc-reviews__card-body">
+            <span class="bbc-reviews__card-tag">Road</span>
+            <h3 class="bbc-reviews__card-title">Taro: 10 Years Riding My Hand-Built Bamboo Bike</h3>
+            <p class="bbc-reviews__card-excerpt">A decade with the same frame — the ultimate test of bamboo durability...</p>
+            <span class="bbc-reviews__card-meta">Read Full Story →</span>
+          </div>
+        </a>
+        <a href="/blogs/club-news/a-family-ride-like-no-other-the-swiss-bamboo-tandem" class="bbc-reviews__card">
+          <div class="bbc-reviews__card-image">
+            <div class="bbc-reviews__card-image-placeholder">{% render 'bbc-icons', icon: 'bike', size: 32 %}</div>
+          </div>
+          <div class="bbc-reviews__card-body">
+            <span class="bbc-reviews__card-tag">Custom</span>
+            <h3 class="bbc-reviews__card-title">A Family Ride Like No Other: The Swiss Bamboo Tandem</h3>
+            <p class="bbc-reviews__card-excerpt">Building a tandem for family adventures in the Swiss Alps...</p>
+            <span class="bbc-reviews__card-meta">Read Full Story →</span>
+          </div>
+        </a>
+      {%- endif -%}
+    </div>
+    
+    <div class="bbc-reviews__cta">
+      <a href="/blogs/club-news" class="bbc-reviews__cta-btn bbc-btn bbc-btn--{{ section.settings.button_style | default: 'secondary' }}">View All Build Stories</a>
+    </div>
+    
+    {% if section.settings.show_testimonial %}
+      <div class="bbc-reviews__testimonial">
+        <p class="bbc-reviews__testimonial-quote">{{ section.settings.testimonial_text }}</p>
+        <div class="bbc-reviews__testimonial-author">{{ section.settings.testimonial_author }}</div>
+        <div class="bbc-reviews__testimonial-detail">{{ section.settings.testimonial_detail }}</div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "BBC Build Reviews",
+  "tag": "section",
+  "class": "bbc-reviews-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Build Reviews & Stories"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Real stories from our community of 4,000+ builders worldwide"
+    },
+    {
+      "type": "range",
+      "id": "posts_count",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "label": "Number of posts to show",
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonial",
+      "label": "Show testimonial",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_text",
+      "label": "Testimonial quote",
+      "default": "Still riding mine daily after 7 years. Built it at home using the kit. It's outlasted two steel bikes I owned before. The bamboo just keeps going."
+    },
+    {
+      "type": "text",
+      "id": "testimonial_author",
+      "label": "Testimonial author",
+      "default": "Jamie"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_detail",
+      "label": "Testimonial detail",
+      "default": "Home kit builder, Romania • 7+ years riding"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "primary", "label": "Gold Button" },
+        { "value": "secondary", "label": "Forest Button" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "outline-light", "label": "Outline Light" },
+        { "value": "white", "label": "White Button" },
+        { "value": "gold", "label": "Gold Hover" }
+      ],
+      "default": "secondary"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f8f7f4"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Build Reviews"
+    }
+  ]
+}
+{% endschema %}

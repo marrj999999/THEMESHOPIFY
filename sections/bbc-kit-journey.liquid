@@ -1,0 +1,86 @@
+{{ 'bbc-kit-product.css' | asset_url | stylesheet_tag }}
+
+<section class="bbc-kit-journey" aria-labelledby="kit-journey-title-{{ section.id }}">
+  <div class="bbc-kit-journey__inner">
+    <div class="bbc-kit-journey__header">
+      <h2 id="kit-journey-title-{{ section.id }}" class="bbc-kit-journey__title">{{ section.settings.heading }}</h2>
+      {% if section.settings.subtitle != blank %}
+        <p class="bbc-kit-journey__subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+
+    <div class="bbc-kit-journey__steps">
+      {%- for block in section.blocks -%}
+        <div class="bbc-kit-journey__step" {{ block.shopify_attributes }}>
+          <div class="bbc-kit-journey__step-marker">
+            <div class="bbc-kit-journey__step-dot">{{ forloop.index }}</div>
+            <div class="bbc-kit-journey__step-line"></div>
+          </div>
+          <div class="bbc-kit-journey__step-content">
+            <p class="bbc-kit-journey__step-label">{{ block.settings.time }}</p>
+            <h3 class="bbc-kit-journey__step-name">{{ block.settings.title }}</h3>
+            <p class="bbc-kit-journey__step-desc">{{ block.settings.description }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Build Journey",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your Build Journey"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Most builders spread this over 2–4 weekends"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "time",
+          "label": "Time estimate",
+          "default": "2–3 hours"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step title",
+          "default": "Step Name"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Build Journey",
+      "blocks": [
+        { "type": "step", "settings": { "time": "2–3 hours", "title": "Unbox & Prepare", "description": "Inventory all parts against the checklist, watch the intro tutorials, familiarise yourself with tools and materials." } },
+        { "type": "step", "settings": { "time": "4–6 hours", "title": "Jig Setup & Tube Prep", "description": "Assemble the alignment jig, set your geometry, prepare the bamboo tubes. This is where precision matters." } },
+        { "type": "step", "settings": { "time": "8–12 hours", "title": "Bonding & Wrapping", "description": "The main build. Join tubes with epoxy, wrap joints with carbon fibre tow. Your frame takes shape." } },
+        { "type": "step", "settings": { "time": "24–48 hours", "title": "Curing", "description": "Let the epoxy cure at room temperature. No work — just patience. Maximum joint strength." } },
+        { "type": "step", "settings": { "time": "6–10 hours", "title": "Finish & Fit", "description": "Sand joints smooth, seal the bamboo, install headset and BB. Ready for components." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

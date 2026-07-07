@@ -1,0 +1,561 @@
+{% comment %}
+  BBC Hero Section v2
+  Research-driven redesign:
+  - Video background support (Shopify-hosted, YouTube, Vimeo, MP4)
+  - Clearer value proposition
+  - Trust signals integrated
+  - Single clear CTA hierarchy
+  Updated 2026-02-18: added proper video/video_url type support
+{% endcomment %}
+
+{%- liquid
+  assign has_shopify_video = false
+  if section.settings.video != blank
+    assign has_shopify_video = true
+  endif
+  assign has_yt_vimeo = false
+  if section.settings.video_embed != blank
+    assign has_yt_vimeo = true
+    assign embed_type = section.settings.video_embed.type
+    assign embed_id = section.settings.video_embed.id
+  endif
+  assign has_mp4 = false
+  if section.settings.video_url != blank
+    assign has_mp4 = true
+  endif
+-%}
+
+<section class="bbc-hero-v2" aria-label="Welcome to Bamboo Bicycle Club">
+  {%- comment -%} Video or Image Background {%- endcomment -%}
+  <div class="bbc-hero-v2__media">
+    {%- if has_shopify_video -%}
+      {{
+        section.settings.video
+        | video_tag:
+          class: 'bbc-hero-v2__video',
+          autoplay: true,
+          loop: true,
+          muted: true,
+          controls: false,
+          playsinline: true,
+          image_size: '1920x'
+      }}
+    {%- elsif has_yt_vimeo -%}
+      {%- if embed_type == 'youtube' -%}
+        <iframe
+          class="bbc-hero-v2__video bbc-hero-v2__video--iframe"
+          src="https://www.youtube.com/embed/{{ embed_id }}?autoplay=1&mute=1&loop=1&playlist={{ embed_id }}&controls=0&rel=0&modestbranding=1&playsinline=1"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          aria-hidden="true"
+          tabindex="-1"
+          title="Background video"
+        ></iframe>
+      {%- elsif embed_type == 'vimeo' -%}
+        <iframe
+          class="bbc-hero-v2__video bbc-hero-v2__video--iframe"
+          src="https://player.vimeo.com/video/{{ embed_id }}?autoplay=1&muted=1&loop=1&background=1&transparent=0"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          aria-hidden="true"
+          tabindex="-1"
+          title="Background video"
+        ></iframe>
+      {%- endif -%}
+    {%- elsif has_mp4 -%}
+      <video
+        class="bbc-hero-v2__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        poster="{{ section.settings.background_image | image_url: width: 1920 }}"
+        aria-hidden="true"
+      >
+        <source src="{{ section.settings.video_url }}" type="video/mp4">
+      </video>
+    {%- elsif section.settings.background_image != blank -%}
+      <img 
+        class="bbc-hero-v2__image"
+        src="{{ section.settings.background_image | image_url: width: 1920 }}"
+        srcset="{{ section.settings.background_image | image_url: width: 800 }} 800w,
+                {{ section.settings.background_image | image_url: width: 1200 }} 1200w,
+                {{ section.settings.background_image | image_url: width: 1920 }} 1920w"
+        sizes="100vw"
+        alt=""
+        loading="eager"
+      >
+    {% endif %}
+    <div class="bbc-hero-v2__overlay" aria-hidden="true"></div>
+  </div>
+
+  <div class="bbc-hero-v2__container page-width">
+    <div class="bbc-hero-v2__content">
+      {%- comment -%} Eyebrow Text {%- endcomment -%}
+      <p class="bbc-hero-v2__eyebrow">
+        <span class="bbc-hero-v2__eyebrow-icon material-symbols-outlined" aria-hidden="true">eco</span>
+        Since 2012 • 4,000+ builders worldwide
+      </p>
+      
+      {%- comment -%} Main Heading {%- endcomment -%}
+      <h1 class="bbc-hero-v2__heading">
+        {{ section.settings.heading | default: 'Build Your Own Bamboo Bicycle' }}
+      </h1>
+      
+      {%- comment -%} Value Proposition {%- endcomment -%}
+      <p class="bbc-hero-v2__value-prop">
+        {{ section.settings.subheading | default: "The most rewarding project you'll ever complete. No experience needed." }}
+      </p>
+      
+      {%- comment -%} Key Benefits {%- endcomment -%}
+      <ul class="bbc-hero-v2__benefits" role="list">
+        <li class="bbc-hero-v2__benefit">
+          <svg class="bbc-hero-v2__benefit-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>No prior experience required</span>
+        </li>
+        <li class="bbc-hero-v2__benefit">
+          <svg class="bbc-hero-v2__benefit-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Video tutorials & community support</span>
+        </li>
+        <li class="bbc-hero-v2__benefit">
+          <svg class="bbc-hero-v2__benefit-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Ships worldwide from London</span>
+        </li>
+      </ul>
+      
+      {%- comment -%} Call to Action Buttons {%- endcomment -%}
+      <div class="bbc-hero-v2__cta">
+        <a href="{{ section.settings.button_primary_link | default: '/collections/home-build-kits' }}" class="bbc-hero-v2__btn bbc-hero-v2__btn--primary">
+          {{ section.settings.button_primary_text | default: 'Shop Frame Kits' }}
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="{{ section.settings.button_secondary_link | default: '/pages/workshops' }}" class="bbc-hero-v2__btn bbc-hero-v2__btn--secondary">
+          {{ section.settings.button_secondary_text | default: 'Book a Workshop' }}
+        </a>
+      </div>
+      
+      {%- comment -%} Press Credibility {%- endcomment -%}
+      <div class="bbc-hero-v2__press">
+        <span class="bbc-hero-v2__press-label">As featured in</span>
+        <div class="bbc-hero-v2__press-logos">
+          <span class="bbc-hero-v2__press-logo">Financial Times</span>
+          <span class="bbc-hero-v2__press-divider">•</span>
+          <span class="bbc-hero-v2__press-logo">BikeRadar</span>
+          <span class="bbc-hero-v2__press-divider">•</span>
+          <span class="bbc-hero-v2__press-logo">Design Museum</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  {%- comment -%} Scroll indicator {%- endcomment -%}
+  <div class="bbc-hero-v2__scroll" aria-hidden="true">
+    <span class="bbc-hero-v2__scroll-text">Scroll</span>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<style>
+  /* Hero v2 - Research-driven design */
+  .bbc-hero-v2 {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    background-color: var(--bbc-forest, var(--bbc-forest));
+    overflow: hidden;
+  }
+  
+  /* Media (Video/Image) */
+  .bbc-hero-v2__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  
+  .bbc-hero-v2__video,
+  .bbc-hero-v2__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* YouTube/Vimeo iframe as background */
+  .bbc-hero-v2__video--iframe {
+    position: absolute;
+    inset: -10%;
+    width: 120%;
+    height: 120%;
+    pointer-events: none;
+    border: none;
+    object-fit: unset;
+  }
+  
+  .bbc-hero-v2__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(7, 62, 39, 0.92) 0%,
+      rgba(7, 62, 39, 0.75) 50%,
+      rgba(7, 62, 39, 0.85) 100%
+    );
+  }
+  
+  /* Container */
+  .bbc-hero-v2__container {
+    position: relative;
+    z-index: 1;
+    padding: 120px 20px 80px;
+    width: 100%;
+  }
+  
+  .bbc-hero-v2__content {
+    max-width: 680px;
+  }
+  
+  /* Eyebrow */
+  .bbc-hero-v2__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--bbc-gold, var(--bbc-gold));
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  
+  .bbc-hero-v2__eyebrow-icon {
+    font-size: 18px;
+  }
+  
+  /* Heading */
+  .bbc-hero-v2__heading {
+    font-family: var(--bbc-font, 'Plus Jakarta Sans', sans-serif);
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 800;
+    color: white;
+    line-height: 1.05;
+    margin: 0 0 24px 0;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  
+  /* Value Proposition */
+  .bbc-hero-v2__value-prop {
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    margin: 0 0 32px 0;
+    max-width: 540px;
+  }
+  
+  /* Benefits List */
+  .bbc-hero-v2__benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 0 0 36px 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .bbc-hero-v2__benefit {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.95);
+  }
+  
+  .bbc-hero-v2__benefit-icon {
+    flex-shrink: 0;
+    color: var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  /* CTA Buttons */
+  .bbc-hero-v2__cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  
+  .bbc-hero-v2__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 18px 36px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .bbc-hero-v2__btn--primary {
+    background: var(--bbc-gold, var(--bbc-gold));
+    color: var(--bbc-forest, var(--bbc-forest));
+    border: 2px solid var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  .bbc-hero-v2__btn--primary:hover {
+    background: #ffb82e;
+    border-color: #ffb82e;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 169, 0, 0.3);
+  }
+  
+  .bbc-hero-v2__btn--secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+  }
+  
+  .bbc-hero-v2__btn--secondary:hover {
+    background: white;
+    color: var(--bbc-forest, var(--bbc-forest));
+    border-color: white;
+  }
+  
+  /* Focus states */
+  .bbc-hero-v2__btn:focus-visible {
+    outline: 3px solid var(--bbc-gold, var(--bbc-gold));
+    outline-offset: 3px;
+  }
+  
+  .bbc-hero-v2__btn--secondary:focus-visible {
+    outline-color: white;
+  }
+  
+  /* Press Section */
+  .bbc-hero-v2__press {
+    padding-top: 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  
+  .bbc-hero-v2__press-label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 10px;
+  }
+  
+  .bbc-hero-v2__press-logos {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .bbc-hero-v2__press-logo {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  
+  .bbc-hero-v2__press-divider {
+    color: rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Scroll Indicator */
+  .bbc-hero-v2__scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.6);
+    animation: bounceDown 2s ease-in-out infinite;
+  }
+  
+  .bbc-hero-v2__scroll-text {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  @keyframes bounceDown {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+  
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-hero-v2__btn { transition: none; }
+    .bbc-hero-v2__btn:hover { transform: none; }
+    .bbc-hero-v2__scroll { animation: none; }
+    .bbc-hero-v2__video { display: none; }
+  }
+  
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .bbc-hero-v2 {
+      min-height: 80vh;
+    }
+    
+    .bbc-hero-v2__container {
+      padding: 100px 20px 60px;
+    }
+  }
+  
+  /* Mobile */
+  @media (max-width: 768px) {
+    .bbc-hero-v2 {
+      min-height: 100vh;
+      min-height: 100svh; /* Safari fix */
+    }
+    
+    .bbc-hero-v2__container {
+      padding: 80px 16px 100px;
+    }
+    
+    .bbc-hero-v2__eyebrow {
+      font-size: 12px;
+    }
+    
+    .bbc-hero-v2__heading {
+      font-size: 36px;
+    }
+    
+    .bbc-hero-v2__value-prop {
+      font-size: 18px;
+    }
+    
+    .bbc-hero-v2__benefits {
+      gap: 12px;
+    }
+    
+    .bbc-hero-v2__benefit {
+      font-size: 15px;
+    }
+    
+    .bbc-hero-v2__cta {
+      flex-direction: column;
+    }
+    
+    .bbc-hero-v2__btn {
+      width: 100%;
+      padding: 16px 24px;
+    }
+    
+    .bbc-hero-v2__scroll {
+      display: none;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Hero v2",
+  "tag": "section",
+  "class": "bbc-hero-v2-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image",
+      "info": "Recommended: 1920x1080px minimum"
+    },
+    {
+      "type": "header",
+      "content": "Video (choose one source)"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Shopify-hosted video",
+      "info": "Upload via Shopify Files. Best quality and performance. Autoplays muted."
+    },
+    {
+      "type": "video_url",
+      "id": "video_embed",
+      "label": "YouTube or Vimeo URL",
+      "accept": ["youtube", "vimeo"],
+      "info": "Paste a YouTube or Vimeo URL. Will autoplay muted in background."
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Direct MP4 URL",
+      "info": "For self-hosted MP4s. Only used if no Shopify video or YouTube/Vimeo URL is set."
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Build Your Own Bamboo Bicycle"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "The most rewarding project you'll ever complete. No experience needed."
+    },
+    {
+      "type": "header",
+      "content": "Primary Button"
+    },
+    {
+      "type": "text",
+      "id": "button_primary_text",
+      "label": "Text",
+      "default": "Shop Frame Kits"
+    },
+    {
+      "type": "url",
+      "id": "button_primary_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Secondary Button"
+    },
+    {
+      "type": "text",
+      "id": "button_secondary_text",
+      "label": "Text",
+      "default": "Book a Workshop"
+    },
+    {
+      "type": "url",
+      "id": "button_secondary_link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Hero v2"
+    }
+  ]
+}
+{% endschema %}

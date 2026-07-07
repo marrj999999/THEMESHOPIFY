@@ -1,0 +1,111 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-impact-2026",
+      "blocks": {
+        "b0": {
+          "type": "stat",
+          "settings": {
+            "number": "90%",
+            "label": "prison course completion",
+            "source": "BBC programme records"
+          }
+        },
+        "b1": {
+          "type": "stat",
+          "settings": {
+            "number": "£11.41",
+            "label": "social return per £1",
+            "source": "PACT research"
+          }
+        },
+        "b2": {
+          "type": "stat",
+          "settings": {
+            "number": "4,000+",
+            "label": "people have built a bike",
+            "source": "since 2012"
+          }
+        },
+        "b3": {
+          "type": "stat",
+          "settings": {
+            "number": "36",
+            "label": "countries reached",
+            "source": "kits shipped worldwide"
+          }
+        },
+        "b4": {
+          "type": "pathway",
+          "settings": {
+            "title": "Education",
+            "body": "OCN-accredited Level 1 & 2 training in sustainable manufacturing — a nationally recognised qualification, earned hands-on."
+          }
+        },
+        "b5": {
+          "type": "pathway",
+          "settings": {
+            "title": "Employment",
+            "body": "Routes into sustainable transport, manufacturing and composites — with growing employer links and support into work on release."
+          }
+        },
+        "b6": {
+          "type": "pathway",
+          "settings": {
+            "title": "Rehabilitation",
+            "body": "Therapeutic, focused making builds patience and resilience — and strengthens family connection through Build to Bond."
+          }
+        },
+        "b7": {
+          "type": "help",
+          "settings": {
+            "tag": "Buy",
+            "tag_lime": true,
+            "title": "Build or own a bike",
+            "body": "Book a workshop or buy a kit. Every purchase helps fund our prison and education programmes.",
+            "link_label": "Shop & book",
+            "lime": false
+          }
+        },
+        "b8": {
+          "type": "help",
+          "settings": {
+            "tag": "Partner",
+            "tag_lime": true,
+            "title": "Work with us",
+            "body": "Programmes for prisons, schools and colleges. OCN Level 2 accredited, with a self-delivery model for prisons.",
+            "link_label": "Explore partnerships",
+            "lime": false
+          }
+        },
+        "b9": {
+          "type": "help",
+          "settings": {
+            "tag": "Support",
+            "tag_lime": true,
+            "title": "Fund or champion",
+            "body": "Fund a cohort, offer placements, or champion our work. £11.41 of social value for every £1 invested.",
+            "link_label": "Talk to us",
+            "lime": true
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

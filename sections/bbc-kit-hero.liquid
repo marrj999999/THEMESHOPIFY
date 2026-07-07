@@ -1,0 +1,547 @@
+{% comment %}
+  BBC Kit Hero Section
+  A beautiful, conversion-optimized product hero for kit pages
+{% endcomment %}
+
+{%- style -%}
+.bbc-kit-hero {
+  --kit-forest: var(--bbc-forest);
+  --kit-teal: var(--bbc-teal);
+  --kit-gold: var(--bbc-gold);
+  --kit-cream: #f8f7f4;
+  --kit-grey: var(--bbc-gray-500);
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+}
+
+.bbc-kit-hero__wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+@media (max-width: 989px) {
+  .bbc-kit-hero__wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1rem;
+  }
+}
+
+/* Gallery Side */
+.bbc-kit-hero__gallery {
+  position: relative;
+}
+
+.bbc-kit-hero__main-image {
+  position: relative;
+  border-radius: 0;
+  overflow: hidden;
+  background: var(--kit-cream);
+  aspect-ratio: 4/3;
+}
+
+.bbc-kit-hero__main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.bbc-kit-hero__badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--kit-gold);
+  color: var(--kit-forest);
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bbc-kit-hero__thumbnails {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.bbc-kit-hero__thumbnail {
+  aspect-ratio: 1;
+  border: 2px solid transparent;
+  cursor: pointer;
+  overflow: hidden;
+  background: var(--kit-cream);
+  transition: border-color 0.2s ease;
+}
+
+.bbc-kit-hero__thumbnail:hover,
+.bbc-kit-hero__thumbnail.active {
+  border-color: var(--kit-forest);
+}
+
+.bbc-kit-hero__thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Info Side */
+.bbc-kit-hero__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.bbc-kit-hero__breadcrumb {
+  font-size: 0.8125rem;
+  color: var(--kit-grey);
+}
+
+.bbc-kit-hero__breadcrumb a {
+  color: var(--kit-teal);
+  text-decoration: none;
+}
+
+.bbc-kit-hero__breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.bbc-kit-hero__title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--kit-forest);
+  line-height: 1.1;
+  margin: 0;
+}
+
+@media (max-width: 989px) {
+  .bbc-kit-hero__title {
+    font-size: 1.875rem;
+  }
+}
+
+.bbc-kit-hero__tagline {
+  font-size: 1.125rem;
+  color: var(--kit-grey);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.bbc-kit-hero__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.bbc-kit-hero__stars {
+  display: flex;
+  gap: 0.125rem;
+  color: var(--kit-gold);
+}
+
+.bbc-kit-hero__stars svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.bbc-kit-hero__review-count {
+  font-size: 0.875rem;
+  color: var(--kit-grey);
+}
+
+.bbc-kit-hero__review-count a {
+  color: var(--kit-teal);
+  text-decoration: underline;
+}
+
+/* Price */
+.bbc-kit-hero__price-block {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.bbc-kit-hero__price {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--kit-forest);
+}
+
+.bbc-kit-hero__compare-price {
+  font-size: 1.125rem;
+  color: var(--kit-grey);
+  text-decoration: line-through;
+}
+
+.bbc-kit-hero__savings {
+  background: var(--kit-gold);
+  color: var(--kit-forest);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Trust Signals */
+.bbc-kit-hero__trust {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.bbc-kit-hero__trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--kit-forest);
+}
+
+.bbc-kit-hero__trust-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--kit-teal);
+  flex-shrink: 0;
+}
+
+/* CTA */
+.bbc-kit-hero__cta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.bbc-kit-hero__add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: var(--kit-forest);
+  color: white;
+  border: none;
+  padding: 1.125rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  font-family: inherit;
+}
+
+.bbc-kit-hero__add-btn:hover {
+  background: #0a5535;
+}
+
+.bbc-kit-hero__add-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.bbc-kit-hero__secondary-cta {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.bbc-kit-hero__link-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 2px solid var(--kit-forest);
+  color: var(--kit-forest);
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.bbc-kit-hero__link-btn:hover {
+  background: var(--kit-forest);
+  color: white;
+}
+
+.bbc-kit-hero__link-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Shipping Info */
+.bbc-kit-hero__shipping {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--kit-cream);
+  font-size: 0.875rem;
+}
+
+.bbc-kit-hero__shipping-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bbc-kit-hero__shipping-item svg {
+  width: 18px;
+  height: 18px;
+  color: var(--kit-teal);
+  flex-shrink: 0;
+}
+
+/* Support Block */
+.bbc-kit-hero__support {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #e5e5e5;
+}
+
+.bbc-kit-hero__support-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--kit-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.bbc-kit-hero__support-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--kit-teal);
+}
+
+.bbc-kit-hero__support-text {
+  flex: 1;
+}
+
+.bbc-kit-hero__support-title {
+  font-weight: 700;
+  color: var(--kit-forest);
+  margin: 0 0 0.25rem 0;
+  font-size: 0.9375rem;
+}
+
+.bbc-kit-hero__support-desc {
+  color: var(--kit-grey);
+  margin: 0;
+  font-size: 0.8125rem;
+}
+{%- endstyle -%}
+
+<section class="bbc-kit-hero" data-testid="kit-hero">
+  <div class="bbc-kit-hero__wrapper">
+    <!-- Gallery Side -->
+    <div class="bbc-kit-hero__gallery">
+      <div class="bbc-kit-hero__main-image">
+        {% if product.featured_image %}
+          <img 
+            src="{{ product.featured_image | image_url: width: 900 }}"
+            alt="{{ product.featured_image.alt | default: product.title }}"
+            width="900"
+            height="675"
+            loading="eager"
+            id="main-product-image"
+          >
+        {% endif %}
+        {% if section.settings.show_badge %}
+          <div class="bbc-kit-hero__badge">{{ section.settings.badge_text }}</div>
+        {% endif %}
+      </div>
+      
+      {% if product.images.size > 1 %}
+        <div class="bbc-kit-hero__thumbnails">
+          {% for image in product.images limit: 5 %}
+            <button 
+              class="bbc-kit-hero__thumbnail {% if forloop.first %}active{% endif %}"
+              data-image-src="{{ image | image_url: width: 900 }}"
+              data-image-alt="{{ image.alt | default: product.title }}"
+              aria-label="View image {{ forloop.index }}"
+            >
+              <img 
+                src="{{ image | image_url: width: 150 }}"
+                alt="{{ image.alt | default: product.title }}"
+                width="150"
+                height="150"
+                loading="lazy"
+              >
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+    
+    <!-- Info Side -->
+    <div class="bbc-kit-hero__info">
+      <nav class="bbc-kit-hero__breadcrumb">
+        <a href="/">Home</a> / 
+        <a href="/collections/home-build-kits">Frame Kits</a> / 
+        {{ product.title }}
+      </nav>
+      
+      <h1 class="bbc-kit-hero__title">{{ product.title }}</h1>
+      
+      <p class="bbc-kit-hero__tagline">{{ section.settings.tagline | default: "Build your own bamboo bicycle frame at home — no prior experience needed." }}</p>
+      
+      <div class="bbc-kit-hero__rating">
+        <div class="bbc-kit-hero__stars">
+          {% for i in (1..5) %}
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          {% endfor %}
+        </div>
+        <span class="bbc-kit-hero__review-count">
+          4.9 • <a href="#reviews">Read {{ section.settings.review_count | default: 127 }} reviews</a>
+        </span>
+      </div>
+      
+      <div class="bbc-kit-hero__price-block">
+        <span class="bbc-kit-hero__price">{{ product.price | money }}</span>
+        {% if product.compare_at_price > product.price %}
+          <span class="bbc-kit-hero__compare-price">{{ product.compare_at_price | money }}</span>
+          <span class="bbc-kit-hero__savings">Save {{ product.compare_at_price | minus: product.price | money }}</span>
+        {% endif %}
+      </div>
+      
+      <div class="bbc-kit-hero__trust">
+        <div class="bbc-kit-hero__trust-item">
+          <svg class="bbc-kit-hero__trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span>95% first-time builders</span>
+        </div>
+        <div class="bbc-kit-hero__trust-item">
+          <svg class="bbc-kit-hero__trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>{{ section.settings.build_time | default: "20-40" }} hours build time</span>
+        </div>
+        <div class="bbc-kit-hero__trust-item">
+          <svg class="bbc-kit-hero__trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          <span>Everything included</span>
+        </div>
+        <div class="bbc-kit-hero__trust-item">
+          <svg class="bbc-kit-hero__trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>4,000+ builders worldwide</span>
+        </div>
+      </div>
+      
+      <div class="bbc-kit-hero__cta">
+        {%- form 'product', product, id: 'product-form-hero', novalidate: 'novalidate' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="bbc-kit-hero__add-btn" {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            {% if product.selected_or_first_available_variant.available %}
+              Add to Cart — {{ product.price | money }}
+            {% else %}
+              Sold Out
+            {% endif %}
+          </button>
+        {%- endform -%}
+        
+        <div class="bbc-kit-hero__secondary-cta">
+          <a href="#whats-included" class="bbc-kit-hero__link-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            What's Included
+          </a>
+          <a href="/pages/contact-us" class="bbc-kit-hero__link-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Ask a Question
+          </a>
+        </div>
+      </div>
+      
+      <div class="bbc-kit-hero__shipping">
+        <div class="bbc-kit-hero__shipping-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <span><strong>Free UK shipping</strong> on all kits</span>
+        </div>
+        <div class="bbc-kit-hero__shipping-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Ships in <strong>3-5 working days</strong></span>
+        </div>
+        <div class="bbc-kit-hero__shipping-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>International shipping available</span>
+        </div>
+      </div>
+      
+      <div class="bbc-kit-hero__support">
+        <div class="bbc-kit-hero__support-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"/></svg>
+        </div>
+        <div class="bbc-kit-hero__support-text">
+          <p class="bbc-kit-hero__support-title">Expert support included</p>
+          <p class="bbc-kit-hero__support-desc">Email, community forum, and video tutorials — we're with you every step.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Simple image gallery
+  document.querySelectorAll('.bbc-kit-hero__thumbnail').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const mainImg = document.getElementById('main-product-image');
+      mainImg.src = btn.dataset.imageSrc;
+      mainImg.alt = btn.dataset.imageAlt;
+      document.querySelectorAll('.bbc-kit-hero__thumbnail').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "BBC Kit Hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Product Tagline",
+      "default": "Build your own bamboo bicycle frame at home — no prior experience needed."
+    },
+    {
+      "type": "text",
+      "id": "build_time",
+      "label": "Build Time (hours)",
+      "default": "20-40"
+    },
+    {
+      "type": "number",
+      "id": "review_count",
+      "label": "Review Count",
+      "default": 127
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show Badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "Most Popular"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Kit Hero"
+    }
+  ]
+}
+{% endschema %}

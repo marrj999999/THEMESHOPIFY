@@ -1,0 +1,384 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "caption": {
+          "type": "text",
+          "settings": {
+            "text": "Ride anywhere \u2014 beach, snow, sand, or trail. The ultimate adventure machine.",
+            "text_style": "subtitle"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": false
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "collapsible-geometry": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Geometry & Sizing",
+            "icon": "ruler",
+            "content": "<p><strong>Not sure which size?</strong> Send us your height and inside leg measurement \u2014 we'll recommend the perfect fit.</p><p>Email: hello@bamboobicycleclub.org</p>",
+            "page": ""
+          }
+        },
+        "collapsible-included": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What's Included",
+            "icon": "box",
+            "content": "<ul><li>5 heat-treated Moso bamboo tubes (pre-shaped)</li><li>Flax fibre wrap + two-part epoxy resin</li><li>Plywood alignment jig for precise geometry</li><li>CNC machined headtube, BB shell (BSA 68mm) &amp; dropouts</li><li>15+ hours of step-by-step video tutorials</li><li>Community access \u2014 4,000+ builders worldwide</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible-time": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Build Time: 30\u201345 Hours",
+            "icon": "stopwatch",
+            "content": "<p>Larger tubes and wider clearances add time. Worth every hour.</p><p><strong>Prep:</strong> 2\u20133 hrs \u00b7 <strong>Jig &amp; tubes:</strong> 6\u20138 hrs \u00b7 <strong>Bonding:</strong> 12\u201316 hrs \u00b7 <strong>Curing:</strong> 24\u201348 hrs \u00b7 <strong>Finishing:</strong> 8\u201312 hrs</p>",
+            "page": ""
+          }
+        },
+        "collapsible-durability": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Durability & Strength",
+            "icon": "check_mark",
+            "content": "<p><strong>Lifespan:</strong> 8\u201312 years with proper care</p><p><strong>Tensile strength:</strong> ~28,000 PSI \u2014 comparable to mild steel</p><p><strong>Failure rate:</strong> Under 1% across 4,000+ builds</p><p>Bamboo naturally absorbs road vibration better than metal, giving you a smoother, more comfortable ride. Tested with Swansea University.</p>",
+            "page": ""
+          }
+        },
+        "collapsible-shipping": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Shipping & Customs",
+            "icon": "truck",
+            "content": "<p>Ships to <strong>36+ countries</strong> worldwide.</p><p><strong>UK:</strong> \u00a312, 5+ working days</p><p><strong>EU &amp; International:</strong> Confirmed at checkout</p><p>Full tracking on all orders. We ship twice a week from our London workshop.</p>",
+            "page": ""
+          }
+        },
+        "collapsible-support": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Help & Support",
+            "icon": "chat_bubble",
+            "content": "<p>You're not alone in this build.</p><ul><li>15+ hours of video tutorials</li><li>Active builder community (4,000+ members)</li><li>Comprehensive build guides</li><li>Direct support from James and the team</li></ul><p><strong>95% of our builders have zero prior experience.</strong></p>",
+            "page": ""
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "caption",
+        "variant_picker",
+        "price",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "collapsible-geometry",
+        "collapsible-included",
+        "collapsible-time",
+        "collapsible-durability",
+        "collapsible-shipping",
+        "collapsible-support",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "gallery_layout": "thumbnail",
+        "mobile_thumbnails": "show",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 48,
+        "padding_bottom": 16
+      }
+    },
+    "whats-included": {
+      "type": "bbc-kit-whats-included",
+      "blocks": {
+        "i1": {
+          "type": "item",
+          "settings": {
+            "title": "Bamboo Tube Set",
+            "description": "5 heat-treated Moso bamboo tubes, pre-shaped and ready to build"
+          }
+        },
+        "i2": {
+          "type": "item",
+          "settings": {
+            "title": "Flax Fibre & Epoxy",
+            "description": "Flax fibre wrap with two-part epoxy resin"
+          }
+        },
+        "i3": {
+          "type": "item",
+          "settings": {
+            "title": "Alignment Jig",
+            "description": "Plywood jig \u2014 ensures your frame is straight and true"
+          }
+        },
+        "i4": {
+          "type": "item",
+          "settings": {
+            "title": "Metal Components",
+            "description": "CNC machined headtube, BB shell (BSA 68mm), and dropouts"
+          }
+        },
+        "i5": {
+          "type": "item",
+          "settings": {
+            "title": "Video Tutorials",
+            "description": "15+ hours of step-by-step guidance on YouTube"
+          }
+        },
+        "i6": {
+          "type": "item",
+          "settings": {
+            "title": "Builder Community",
+            "description": "Join 4,000+ builders for support, tips, and inspiration"
+          }
+        }
+      },
+      "block_order": [
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5",
+        "i6"
+      ],
+      "settings": {
+        "eyebrow": "Everything You Need",
+        "heading": "What's In The Box",
+        "subtitle": "Every kit includes everything to build a complete frame \u2014 no hidden extras"
+      }
+    },
+    "quote-inline": {
+      "type": "bbc-kit-quote",
+      "settings": {
+        "quote": "I took it to the beach. Then the forest. Then snow. It handles everything I throw at it.",
+        "name": "Fatbike Builder",
+        "context": "Home kit build",
+        "show_stars": true
+      }
+    },
+    "build-journey": {
+      "type": "bbc-kit-journey",
+      "blocks": {
+        "step-1": {
+          "type": "step",
+          "settings": {
+            "time": "2\u20133 hours",
+            "title": "Unbox & Prepare",
+            "description": "Big tubes, big build. Get familiar with the oversized components."
+          }
+        },
+        "step-2": {
+          "type": "step",
+          "settings": {
+            "time": "6\u20138 hours",
+            "title": "Jig Setup & Tube Prep",
+            "description": "Fatbike geometry with massive tyre clearance. Wider tubes need careful fitting."
+          }
+        },
+        "step-3": {
+          "type": "step",
+          "settings": {
+            "time": "12\u201316 hours",
+            "title": "Bonding & Wrapping",
+            "description": "Larger joints need more wrapping. Take your time \u2014 the result is worth it."
+          }
+        },
+        "step-4": {
+          "type": "step",
+          "settings": {
+            "time": "24\u201348 hours",
+            "title": "Curing",
+            "description": "Full cure time for maximum strength."
+          }
+        },
+        "step-5": {
+          "type": "step",
+          "settings": {
+            "time": "8\u201312 hours",
+            "title": "Finish & Fit",
+            "description": "Sand, seal, and dream about where you'll ride first."
+          }
+        }
+      },
+      "block_order": [
+        "step-1",
+        "step-2",
+        "step-3",
+        "step-4",
+        "step-5"
+      ],
+      "settings": {
+        "heading": "Your Build Journey",
+        "subtitle": "Most builders spread this over a few weekends"
+      }
+    },
+    "faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "faq-1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Do I need special tools?",
+            "icon": "question_mark",
+            "row_content": "<p>No power tools required. Basic hand tools: hacksaw, files, sandpaper, measuring tape, and a work surface. Everything else is in the kit.</p>",
+            "page": ""
+          }
+        },
+        "faq-2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What if I make a mistake?",
+            "icon": "question_mark",
+            "row_content": "<p>Most mistakes are fixable. Epoxy can be sanded and re-applied. Bamboo is forgiving. If you're stuck, our community has seen every problem \u2014 someone will have the answer within hours.</p>",
+            "page": ""
+          }
+        },
+        "faq-3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What else do I need to complete the bike?",
+            "icon": "question_mark",
+            "row_content": "<p>Fork, wheels, groupset, handlebars, saddle, and finishing components. We offer component packs with everything included, or source parts from any bike shop.</p>",
+            "page": ""
+          }
+        },
+        "faq-4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How strong is a bamboo frame?",
+            "icon": "question_mark",
+            "row_content": "<p>~28,000 PSI tensile strength \u2014 comparable to mild steel, but lighter. Under 1% failure rate across 4,000+ builds since 2012. Tested with Swansea University.</p>",
+            "page": ""
+          }
+        },
+        "faq-5": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I ride in the rain?",
+            "icon": "question_mark",
+            "row_content": "<p>Yes. Finished frames are sealed with epoxy resin. Dry your bike after wet rides and store indoors.</p>",
+            "page": ""
+          }
+        },
+        "faq-6": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How long will the frame last?",
+            "icon": "question_mark",
+            "row_content": "<p>8\u201312 years with proper care. Many of our 2012 builds are still being ridden daily.</p>",
+            "page": ""
+          }
+        },
+        "faq-extra-1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What tyre sizes will it fit?",
+            "icon": "question_mark",
+            "row_content": "<p>Designed for 26\u00d74\" or 27.5\u00d74\" fat tyres. Massive clearance for sand, snow, and soft ground.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "faq-1",
+        "faq-2",
+        "faq-3",
+        "faq-4",
+        "faq-extra-1",
+        "faq-5",
+        "faq-6"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Common Questions",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "color_scheme": "scheme-1",
+        "container_color_scheme": "scheme-1",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "complete-build": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Complete Your Build",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "component-packs",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "main",
+    "whats-included",
+    "quote-inline",
+    "build-journey",
+    "faq",
+    "complete-build"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "discipline": "Mountain",
+  "audience": "Trail and XC riders who want a hardtail mountain frame they built themselves — people who value durability and impact resistance on rough terrain over featherweight numbers, and who like that a bamboo frame is a genuine talking point on the trail.",
+  "positioning": {
+    "eyebrow": "Hardtail MTB kit",
+    "title": "A hardtail that soaks up the trail, not your wallet.",
+    "lede": "Bigger bamboo tubes, tighter tolerances and disc-ready 29er geometry — built by hand to take roots, rocks and drops. Bamboo's natural damping kills trail chatter the way an alloy frame never will, and the joints are stronger than the tubes."
+  },
+  "specs": [
+    { "label": "Wheel size", "value": "29er frame · 650B/27.5\" pack option" },
+    { "label": "Geometry", "value": "Hardtail trail / XC, disc mounts" },
+    { "label": "Build time", "value": "30–45 hrs" },
+    { "label": "Tensile strength", "value": "~28,000 PSI" }
+  ],
+  "who_for": [
+    { "title": "Trail & XC hardtail riders", "body": "Singletrack, roots and rock gardens on a rigid-rear frame. Disc-brake mounts and clearance for big off-road rubber." },
+    { "title": "Riders who want a frame that lasts", "body": "Under 1% failure across 4,000+ builds, 8–12 year life with care. Bamboo dents and repairs — it doesn't shatter on impact like carbon." },
+    { "title": "Builders who want the story", "body": "No experience needed — 95% of builders start with none. Roll up to the trailhead on a bamboo hardtail you built yourself." }
+  ],
+  "faq": [
+    { "q": "Can a bamboo frame really handle proper trail riding?", "a": "Yes. Bamboo's natural damping is a real advantage on rough terrain, and the bonded joints are stronger than the tubes themselves. Riders hit singletrack, roots and drops on BBC hardtails regularly. Tested with Swansea University, under 1% failure across 4,000+ builds since 2012." },
+    { "q": "Is it stiff enough to climb and put power down?", "a": "The MTB kit uses bigger-diameter bamboo tubes and tighter tolerances than our road and gravel kits, built for off-road loads. Builders report it climbs well and descends confidently — 'the 29er geometry is spot on.'" },
+    { "q": "Will it survive impacts and rough terrain?", "a": "Bamboo is a natural composite at roughly 28,000 PSI tensile strength — comparable to mild steel but lighter. Unlike carbon it doesn't fail catastrophically on a hard hit, and any damage can be repaired with epoxy anywhere in the world." },
+    { "q": "What wheel size and brakes does it take?", "a": "It's built around 29er geometry with disc-brake mounts and a BSA 68mm bottom bracket. Our MTB component pack is specced for 650B/27.5\" if you prefer the smaller, punchier wheel — your call." },
+    { "q": "How long does the MTB frame take to build?", "a": "About 30–45 hours over a few weekends — a little longer than our road and gravel kits because the tubes are larger and the off-road tolerances are tighter. No power tools needed: just basic hand tools and a work surface." }
+  ],
+  "reviews": [
+    { "quote": "Rides lovely. Build quality is better than I expected for a home-built frame. Taking it on proper trails now.", "author": "SingleTrack World Member", "role": "MTB builder, UK" },
+    { "quote": "The 29er geometry is spot on. Climbs well, descends confidently. People can't believe it's bamboo.", "author": "Trail Rider", "role": "29er build, Wales" },
+    { "quote": "Bamboo dampens trail chatter better than my old hardtail. More forgiving on roots and rocks.", "author": "Hardtail Fan", "role": "MTB builder, Scotland" }
+  ],
+  "related": [
+    { "title": "Gravel Frame Build Kit", "note": "Drop-bar sibling — wider clearance for mixed terrain and bikepacking.", "fallback": "bbc-rd-prod-gravel.jpg" },
+    { "title": "MTB 650B Component Pack", "note": "Fork, wheels, groupset and finishing kit to make it ride-ready (from £962).", "fallback": "bbc-rd-prod-build.jpg" },
+    { "title": "Custom Frame Kit", "note": "Dial in your own head angle, chainstay and tube lengths. Request a quote.", "fallback": "bbc-rd-road-charlie.jpg" }
+  ],
+  "hero_fallback": "bbc-rd-prod-build.jpg",
+  "price_from": "£385",
+  "needs_real_data": [
+    "rating_value (Gravel default 4.8 is unverified — supply real MTB star rating or hide)",
+    "review_count (Gravel default 214 is unverified — supply real MTB review count or hide)",
+    "reviews_subline / '98% would build again' (unverified design figure — replace or remove)",
+    "MTB review attributions are forum-handle/role only (no full names or verified-builder status) — confirm or upgrade if real named builders are available",
+    "MTB frame geometry table (seat/top/head tube, stack, reach, chainstay, BB drop, exact tyre clearance in mm) — kit-mtb template has no MTB-specific numbers; current geometry section still holds Gravel/road defaults",
+    "Exact off-road tyre clearance figure (e.g. up to 2.4\") — not stated in source content",
+    "Number of sizes shown to map to the 8 live variants (confirm size/colour split)"
+  ]
+}

@@ -1,0 +1,379 @@
+{%- comment -%}
+  BBC — Why Bamboo? (2026 "complete", light-touch rebuild). Hardcoded, no editor blocks.
+  Website voice: big statements, images, a video, scannable data, "read more" links into
+  case studies / research / other pages. Same .rd-* / .wbx-* / .rdr-* system as the theme.
+  Order: Feel > Build > Strength > "understanding = sustainability" > proof (data + research).
+  Claim-safe: verified figures only; no absolute steel-strength boast, no carbon % claims.
+  Prison references stay GENERIC (no site named, no learner identified) per BBC policy.
+{%- endcomment -%}
+
+{%- liquid
+  assign hero_fb = section.settings.hero_fallback   | default: 'bbc-rd-hero-ride.jpg'
+  assign sci_fb  = section.settings.science_image_fb | default: 'bbc-rd-gravel-sunset.jpg'
+  assign acc_fb  = section.settings.access_image_fb  | default: 'bbc-rd-frame-build.jpg'
+  assign str_fb  = section.settings.strength_image_fb | default: 'bbc-rd-detail.jpg'
+  assign vid_src = section.settings.video_url | default: 'https://cdn.shopify.com/videos/c/vp/a66c9c6ad4e54ed5b506582dbb7d751c/a66c9c6ad4e54ed5b506582dbb7d751c.HD-720p-1.6Mbps-76173427.mp4'
+-%}
+
+<div class="bbc-rd bbc-rd-whybamboo">
+  <style>
+    .bbc-rd-whybamboo{ overflow-x:hidden; }
+    .bbc-rd-whybamboo img{ max-width:100%; }
+    .bbc-rd-whybamboo .rd-pad{ padding:clamp(40px,7vw,80px) 0; }
+    .bbc-rd-whybamboo .rd-hero{ min-height:66vh; }
+    .bbc-rd-whybamboo .rd-hero .rd-bg img{ object-position:center 42%; }
+    .bbc-rd-whybamboo .rd-hero h1{ font-size:clamp(32px,5.2vw,60px); line-height:1.02; letter-spacing:-.02em; }
+    /* stat band */
+    .bbc-rd-whybamboo .rd-wb-statsband{ background:var(--forest,#003C32); padding:clamp(26px,3.2vw,42px) 0; }
+    .bbc-rd-whybamboo .rd-wb-statsband .rd-dark{ background:var(--forest,#003C32); }
+    .bbc-rd-whybamboo .rd-wb-statsband .rd-num{ text-shadow:none; }
+    /* split beats — bigger media, one-line copy */
+    .bbc-rd-whybamboo .rd-split{ align-items:stretch; }
+    .bbc-rd-whybamboo .rd-split .rd-media{ min-height:440px; }
+    .bbc-rd-whybamboo .rd-split .rd-txt{ padding:clamp(36px,4vw,68px); align-self:center; }
+    .bbc-rd-whybamboo .rd-split .rd-txt h2{ font-size:clamp(28px,2.4vw+1rem,44px); line-height:1.06; letter-spacing:-.01em; }
+    .bbc-rd-whybamboo .beat-say{ font-size:clamp(17px,1.1vw+.6rem,21px); line-height:1.5; margin-top:16px; }
+    /* video */
+    .bbc-rd-whybamboo .wb-video{ border-radius:16px; overflow:hidden; background:#000; }
+    .bbc-rd-whybamboo .wb-video video, .bbc-rd-whybamboo .wb-video iframe{ display:block; width:100%; aspect-ratio:16/9; border:0; }
+    /* big centred statement */
+    .bbc-rd-whybamboo .wb-say{ text-align:center; }
+    .bbc-rd-whybamboo .wb-say h2{ font-size:clamp(30px,3.4vw+1rem,58px); line-height:1.04; letter-spacing:-.02em; max-width:20ch; margin-inline:auto; }
+    .bbc-rd-whybamboo .wb-say p{ max-width:46ch; margin-inline:auto; }
+    /* pull quote */
+    .bbc-rd-whybamboo .wb-pull p{ font-size:clamp(24px,2vw+1rem,40px); line-height:1.18; font-weight:800; letter-spacing:-.01em; color:var(--forest,#003C32); max-width:22ch; margin:0 auto; text-align:center; }
+    .bbc-rd-whybamboo .wb-pull cite{ display:block; margin-top:20px; font-style:normal; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:#5a6b60; text-align:center; }
+    /* comparison (wbx) */
+    .bbc-rd-whybamboo .wbx{ --wf:var(--forest,#003C32); --wg:#ffa900; --wt:#3f8b66; --wm:#5a6b60; }
+    .bbc-rd-whybamboo .wbx-tiles{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(0,60,50,.14); border:1px solid rgba(0,60,50,.14); border-radius:12px; overflow:hidden; }
+    .bbc-rd-whybamboo .wbx-tile{ background:#fff; padding:24px 20px; }
+    .bbc-rd-whybamboo .wbx-num{ font-weight:800; font-size:clamp(1.7rem,1.1rem + 1.4vw,2.3rem); color:var(--wf); line-height:1.05; font-variant-numeric:lining-nums tabular-nums; }
+    .bbc-rd-whybamboo .wbx-unit{ font-weight:700; font-size:12.5px; color:var(--wt); margin-top:3px; }
+    .bbc-rd-whybamboo .wbx-lbl{ font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--wm); margin-top:9px; line-height:1.35; }
+    .bbc-rd-whybamboo .wbx-cap{ font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--wm); margin:0 0 14px; }
+    .bbc-rd-whybamboo .wbx-bar{ display:grid; grid-template-columns:130px 1fr 52px; align-items:center; gap:14px; margin-bottom:12px; }
+    .bbc-rd-whybamboo .wbx-bn{ font-size:13px; font-weight:700; color:var(--wf); }
+    .bbc-rd-whybamboo .wbx-bt{ height:16px; background:rgba(0,60,50,.08); border-radius:8px; overflow:hidden; }
+    .bbc-rd-whybamboo .wbx-bf{ height:100%; background:var(--wt); border-radius:8px; }
+    .bbc-rd-whybamboo .wbx-bar.is-hl .wbx-bf{ background:var(--wg); }
+    .bbc-rd-whybamboo .wbx-bv{ font-size:13px; font-weight:700; color:var(--wm); text-align:right; font-variant-numeric:lining-nums tabular-nums; }
+    .bbc-rd-whybamboo .wb-more{ margin-top:20px; border:1px solid rgba(0,60,50,.16); border-radius:12px; background:#fff; }
+    .bbc-rd-whybamboo .wb-more summary{ cursor:pointer; padding:16px 20px; font-weight:700; color:var(--wf); font-size:15px; list-style:none; }
+    .bbc-rd-whybamboo .wb-more summary::-webkit-details-marker{ display:none; }
+    .bbc-rd-whybamboo .wb-more summary::after{ content:"  +"; color:#3f8b66; }
+    .bbc-rd-whybamboo .wb-more[open] summary::after{ content:"  –"; }
+    .bbc-rd-whybamboo .wb-more .wb-more-body{ padding:0 20px 8px; }
+    .bbc-rd-whybamboo .wbx-tablewrap{ overflow-x:auto; }
+    .bbc-rd-whybamboo .wbx-table{ width:100%; border-collapse:collapse; font-variant-numeric:lining-nums tabular-nums; }
+    .bbc-rd-whybamboo .wbx-table th,.bbc-rd-whybamboo .wbx-table td{ text-align:right; padding:12px 14px; border-bottom:1px solid rgba(0,60,50,.14); font-size:13.5px; white-space:nowrap; }
+    .bbc-rd-whybamboo .wbx-table :is(th,td):first-child{ text-align:left; white-space:normal; }
+    .bbc-rd-whybamboo .wbx-table thead th{ font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--wm); font-weight:700; border-bottom-width:2px; }
+    .bbc-rd-whybamboo .wbx-table tbody th{ font-weight:700; color:var(--wf); }
+    .bbc-rd-whybamboo .wbx-table td.b{ color:var(--wf); font-weight:800; background:rgba(255,169,0,.08); }
+    .bbc-rd-whybamboo .wbx-note{ font-size:12px; line-height:1.5; color:var(--wm); }
+    /* research / technical area */
+    .bbc-rd-whybamboo .rdr-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(0,60,50,.14); border:1px solid rgba(0,60,50,.14); border-radius:12px; overflow:hidden; }
+    .bbc-rd-whybamboo .rdr-cell{ background:#fff; padding:22px 20px; }
+    .bbc-rd-whybamboo .rdr-cell .n{ font-weight:800; font-size:1.7rem; color:var(--forest,#003C32); font-variant-numeric:lining-nums tabular-nums; }
+    .bbc-rd-whybamboo .rdr-cell .u{ font-size:12px; font-weight:700; color:#3f8b66; margin-top:2px; }
+    .bbc-rd-whybamboo .rdr-cell .l{ font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:#5a6b60; margin-top:8px; line-height:1.35; }
+    .bbc-rd-whybamboo .rdr-unis{ display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; }
+    .bbc-rd-whybamboo .rdr-uni{ background:#fff; border:1px solid rgba(0,60,50,.16); border-radius:999px; padding:10px 18px; font-size:14.5px; font-weight:700; color:var(--forest,#003C32); }
+    .bbc-rd-whybamboo .rdr-uni span{ display:block; font-size:11px; font-weight:500; letter-spacing:.02em; text-transform:none; color:#5a6b60; }
+    .bbc-rd-whybamboo .rdr-papers{ list-style:none; margin:0; padding:0; }
+    .bbc-rd-whybamboo .rdr-papers li{ padding:12px 0; border-bottom:1px solid rgba(0,60,50,.12); font-size:14.5px; line-height:1.5; }
+    .bbc-rd-whybamboo .rdr-papers li:last-child{ border-bottom:0; }
+    .bbc-rd-whybamboo .rdr-papers .t{ font-weight:700; color:var(--forest,#003C32); }
+
+    @media(max-width:900px){
+      .bbc-rd-whybamboo .rd-split{ grid-template-columns:1fr !important; }
+      .bbc-rd-whybamboo .rd-split .rd-media{ aspect-ratio:16/10; min-height:0; height:60vw; max-height:460px; }
+      .bbc-rd-whybamboo .rd-split.rd-rev .rd-media{ order:0; }
+      .bbc-rd-whybamboo .rd-split .rd-txt{ padding:32px 26px; }
+      .bbc-rd-whybamboo .wbx-tiles{ grid-template-columns:repeat(2,1fr); }
+      .bbc-rd-whybamboo .rdr-grid{ grid-template-columns:repeat(2,1fr); }
+    }
+    @media(max-width:600px){
+      .bbc-rd-whybamboo .rd-hero{ min-height:60vh; }
+      .bbc-rd-whybamboo .rd-hero h1{ font-size:31px; line-height:1.06; max-width:16ch; }
+      .bbc-rd-whybamboo .rd-pad{ padding:40px 0; }
+      .bbc-rd-whybamboo .rd-wb-statsband .rd-num{ font-size:28px; }
+      .bbc-rd-whybamboo .rd-split .rd-media{ aspect-ratio:16/11; height:64vw; max-height:360px; }
+      .bbc-rd-whybamboo .rd-split .rd-txt{ padding:26px 20px; }
+      .bbc-rd-whybamboo .wbx-tablewrap{ position:relative; }
+      .bbc-rd-whybamboo .wbx-tablewrap::after{ content:"swipe →"; display:block; text-align:right; margin-top:6px; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:#8a968d; }
+    }
+  </style>
+
+  {%- comment -%} ---------- HERO ---------- {%- endcomment -%}
+  <header class="rd-hero">
+    <div class="rd-bg">
+      {%- if section.settings.hero_image != blank -%}
+        <img src="{{ section.settings.hero_image | image_url: width: 2000 }}" srcset="{{ section.settings.hero_image | image_url: width: 1200 }} 1200w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w" sizes="100vw" alt="A hand-built bamboo bicycle on the open road" fetchpriority="high" loading="eager">
+      {%- else -%}
+        <img src="{{ hero_fb | asset_url }}" alt="A bamboo gravel bike on a dramatic coastal clifftop" width="1600" height="900" fetchpriority="high" loading="eager">
+      {%- endif -%}
+    </div>
+    <div class="rd-scrim"></div>
+    <div class="rd-inner">
+      <div class="rd-wrap">
+        <span class="rd-eyebrow rd-on-dark">Why bamboo?</span>
+        <h1>Build it yourself. By hand. In a weekend.</h1>
+        <p class="rd-lede">Grown on six continents. Shaped with hand tools. Tested in university labs.</p>
+      </div>
+    </div>
+  </header>
+
+  {%- comment -%} ---------- STAT BAND ---------- {%- endcomment -%}
+  <section class="rd-wb-statsband">
+    <div class="rd-wrap">
+      <div class="rd-stats rd-dark">
+        <div class="rd-stat"><div class="rd-num">0.7</div><div class="rd-lbl">g/cm³ — lighter than every metal</div></div>
+        <div class="rd-stat"><div class="rd-num">84 MPa</div><div class="rd-lbl">Tensile, tested at Swansea</div></div>
+        <div class="rd-stat"><div class="rd-num">3–5 yrs</div><div class="rd-lbl">To grow frame-grade</div></div>
+        <div class="rd-stat"><div class="rd-num">4,000+</div><div class="rd-lbl">Builders trained since 2012</div></div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- VIDEO: bamboo under test ---------- {%- endcomment -%}
+  <section class="rd-pad rd-paper">
+    <div class="rd-wrap">
+      <span class="rd-eyebrow">Tested</span>
+      <h2>Watch bamboo under test</h2>
+      <div class="wb-video rd-mt3">
+        {%- if section.settings.video_youtube != blank -%}
+          <iframe src="https://www.youtube-nocookie.com/embed/{{ section.settings.video_youtube }}?rel=0" title="Bamboo under test at Swansea University" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        {%- else -%}
+          <video controls preload="metadata" playsinline poster="{{ 'bbc-rd-frame-build.jpg' | asset_url }}"><source src="{{ vid_src }}" type="video/mp4"></video>
+        {%- endif -%}
+      </div>
+      <p class="rd-mt2"><a class="rd-btn rd-text" href="/blogs/news/bamboo-testing-with-swansea-university">Read the Swansea study <span class="rd-arrow">&rarr;</span></a></p>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- BEAT 1 — the science / vibration ---------- {%- endcomment -%}
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      <div class="rd-split">
+        <div class="rd-media">
+          <img src="{% if section.settings.science_image != blank %}{{ section.settings.science_image | image_url: width: 1400 }}{% else %}{{ sci_fb | asset_url }}{% endif %}" alt="A bamboo bike on a quiet road at dawn" loading="lazy">
+        </div>
+        <div class="rd-txt">
+          <span class="rd-eyebrow">The science</span>
+          <h2>A ride you can feel</h2>
+          <p class="beat-say">Bamboo's fibres turn road buzz into a trace of heat — so less of the rough road reaches your hands.</p>
+          <p class="rd-mt2"><a class="rd-btn rd-text" href="#why-research">The research behind it <span class="rd-arrow">&rarr;</span></a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- PULL QUOTE ---------- {%- endcomment -%}
+  <section class="rd-pad rd-paper">
+    <div class="rd-wrap rd-maxw wb-pull">
+      <p>&ldquo;The most reliable bike I've ever owned — a smooth, shock-absorbing ride.&rdquo;</p>
+      <cite>Kate Rawles — 8,288 miles, Colombia to Patagonia, on a BBC bamboo frame</cite>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- BEAT 2 — accessibility / build ---------- {%- endcomment -%}
+  <section class="rd-pad rd-dark">
+    <div class="rd-wrap">
+      <div class="rd-split rd-rev">
+        <div class="rd-media">
+          <img src="{% if section.settings.access_image != blank %}{{ section.settings.access_image | image_url: width: 1400 }}{% else %}{{ acc_fb | asset_url }}{% endif %}" alt="A bamboo frame on the build jig with hand tools" loading="lazy">
+        </div>
+        <div class="rd-txt">
+          <span class="rd-eyebrow rd-on-dark">Accessibility</span>
+          <h2>Anyone can build one</h2>
+          <p class="beat-say">No welding, no moulds, no factory — just bamboo, a jig and hand tools. Most builders start with zero experience.</p>
+          <p class="rd-mt2"><a class="rd-btn rd-text" href="/blogs/club-news">See the build stories <span class="rd-arrow">&rarr;</span></a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- BEAT 3 — strength / moves with you ---------- {%- endcomment -%}
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      <div class="rd-split">
+        <div class="rd-media">
+          <img src="{% if section.settings.strength_image != blank %}{{ section.settings.strength_image | image_url: width: 1400 }}{% else %}{{ str_fb | asset_url }}{% endif %}" alt="A bamboo frame joint reinforced with flax and carbon" loading="lazy">
+        </div>
+        <div class="rd-txt">
+          <span class="rd-eyebrow">Strength &amp; ride</span>
+          <h2>Strong where it counts</h2>
+          <p class="beat-say">Comparable to mild steel — tested to BS ISO 22157 at Swansea — with every joint reinforced in flax and carbon. Compliant over bumps, stiff under power.</p>
+          <p class="rd-mt2"><a class="rd-btn rd-text" href="/blogs/news/bamboo-testing-with-swansea-university">Read the test results <span class="rd-arrow">&rarr;</span></a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- BIG STATEMENT — education = sustainability ---------- {%- endcomment -%}
+  <section class="rd-pad rd-darker">
+    <div class="rd-wrap rd-maxw wb-say">
+      <span class="rd-eyebrow rd-on-dark">Why this matters</span>
+      <h2>Understanding is the real sustainability</h2>
+      <p class="rd-lede rd-mt2">Understand a material and you use it better. That's why everything we do is teaching — and why we work with universities to push bamboo and biocomposites forward.</p>
+      <p class="rd-mt3"><a class="rd-btn rd-lime" href="/pages/impact">Our mission <span class="rd-arrow">&rarr;</span></a></p>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- COMPARISON (light; full table folded) ---------- {%- endcomment -%}
+  <section class="rd-pad rd-paper wbx">
+    <div class="rd-wrap">
+      <span class="rd-eyebrow">The engineering</span>
+      <h2>How bamboo measures up</h2>
+      <div class="wbx-tiles rd-mt3">
+        <div class="wbx-tile"><div class="wbx-num">0.7</div><div class="wbx-unit">g/cm³ density</div><div class="wbx-lbl">Lightest of the four</div></div>
+        <div class="wbx-tile"><div class="wbx-num">High</div><div class="wbx-unit">vibration damping</div><div class="wbx-lbl">Several times higher than metal</div></div>
+        <div class="wbx-tile"><div class="wbx-num">3–5</div><div class="wbx-unit">years to harvest</div><div class="wbx-lbl">A tree takes decades</div></div>
+        <div class="wbx-tile"><div class="wbx-num">Yes</div><div class="wbx-unit">build by hand</div><div class="wbx-lbl">Jig &amp; hand tools</div></div>
+      </div>
+
+      <div class="rd-mt3">
+        <p class="wbx-cap">Density · g/cm³ — lower is lighter</p>
+        <div class="wbx-bar"><span class="wbx-bn">Steel</span><span class="wbx-bt"><span class="wbx-bf" style="width:100%"></span></span><span class="wbx-bv">7.8</span></div>
+        <div class="wbx-bar"><span class="wbx-bn">Aluminium</span><span class="wbx-bt"><span class="wbx-bf" style="width:34%"></span></span><span class="wbx-bv">2.7</span></div>
+        <div class="wbx-bar"><span class="wbx-bn">Carbon fibre</span><span class="wbx-bt"><span class="wbx-bf" style="width:20%"></span></span><span class="wbx-bv">1.5</span></div>
+        <div class="wbx-bar is-hl"><span class="wbx-bn">Bamboo</span><span class="wbx-bt"><span class="wbx-bf" style="width:10%"></span></span><span class="wbx-bv">0.7</span></div>
+      </div>
+
+      <details class="wb-more">
+        <summary>See the full numbers</summary>
+        <div class="wb-more-body">
+          <div class="wbx-tablewrap">
+            <table class="wbx-table">
+              <thead><tr><th scope="col">Property</th><th scope="col">Bamboo</th><th scope="col">Steel</th><th scope="col">Aluminium</th><th scope="col">Carbon</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Density (g/cm³)</th><td class="b">0.6–0.9</td><td>7.8</td><td>2.7</td><td>1.5</td></tr>
+                <tr><th scope="row">Tensile strength (MPa)</th><td class="b">84 tested · 90–200 culm</td><td>560–1,400</td><td>310</td><td>600–3,500 †</td></tr>
+                <tr><th scope="row">Stiffness — modulus (GPa)</th><td class="b">6–20</td><td>205</td><td>69</td><td>120–200</td></tr>
+                <tr><th scope="row">Vibration damping</th><td class="b">High</td><td>Very low</td><td>Low</td><td>Moderate</td></tr>
+                <tr><th scope="row">Build it yourself?</th><td class="b">Yes</td><td>Braze / weld</td><td>Weld</td><td>Autoclave — no</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="wbx-note rd-mt2">Ranges vary with species, alloy and lay-up. Our 84 MPa is a real culm section tested at Swansea (BS ISO 22157); whole-culm literature runs higher. † Carbon's headline strength is along-fibre only. Sources: Swansea test data; Sharma &amp; Harries (2015); Wegst &amp; Ashby (2004).</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- BUILD GALLERY ---------- {%- endcomment -%}
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      <span class="rd-eyebrow">Design versatility</span>
+      <h2>Any design. Any rider.</h2>
+      <div class="rd-csgrid rd-mt3">
+        {%- assign builds = 'Tandem|Swiss Family Tandem|Three-person tandem for the school run|bbc-rd-bike-field.jpg|/blogs/club-news/a-family-ride-like-no-other-the-swiss-bamboo-tandem;;Cargo|Adam''s Cargo Bike|Long-tail cargo, built in a London flat|bbc-rd-cargo.jpg|/blogs/club-news/custom-cargo-bike-by-adam;;Aero Road|Adrian''s Aero Build|Custom aero profile, internal cabling|bbc-rd-redbar.jpg|/blogs/club-news/adrians-aero-bamboo-bike;;Gravel|Tim''s Gravel Explorer|First-time builder, the Netherlands|bbc-rd-gravel-fence.jpg|/blogs/club-news/gravel-bike-by-tim;;10-Year Rider|Taro''s Daily Commuter|Still his daily bike after a decade|bbc-rd-gal-rider.jpg|/blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike' | split: ';;' -%}
+        {%- for b in builds -%}
+          {%- assign f = b | split: '|' -%}
+          <a class="rd-cscard" href="{{ f[4] }}">
+            <div class="rd-cscard__media">
+              <img src="{{ f[3] | asset_url }}" alt="{{ f[1] | escape }}" loading="lazy">
+              <span class="rd-cscard__kind">{{ f[0] }}</span>
+            </div>
+            <div class="rd-cscard__body">
+              <h3 class="rd-cscard__inst">{{ f[1] }}</h3>
+              <p class="rd-cscard__ctx">{{ f[2] }}</p>
+              <span class="rd-cscard__more">Read the build &rarr;</span>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- TECHNICAL / RESEARCH AREA ---------- {%- endcomment -%}
+  <section class="rd-pad rd-paper" id="why-research">
+    <div class="rd-wrap">
+      <span class="rd-eyebrow">The evidence</span>
+      <h2>The research behind bamboo</h2>
+      <p class="rd-lede rd-maxw rd-mt2">We don't just build with bamboo — we study it, and teach it. Here's the work behind the claims.</p>
+
+      <div class="rdr-grid rd-mt3">
+        <div class="rdr-cell"><div class="n">84.3</div><div class="u">MPa tensile</div><div class="l">Swansea · BS ISO 22157</div></div>
+        <div class="rdr-cell"><div class="n">71.0</div><div class="u">MPa flexural</div><div class="l">Ultimate flexural stress</div></div>
+        <div class="rdr-cell"><div class="n">57.7</div><div class="u">MPa compressive</div><div class="l">Ultimate compressive stress</div></div>
+        <div class="rdr-cell"><div class="n">6.4</div><div class="u">GPa modulus</div><div class="l">Young's modulus</div></div>
+      </div>
+
+      <p class="rd-eyebrow rd-mt3" style="color:#3f8b66;">Universities we've worked with</p>
+      <div class="rdr-unis">
+        <div class="rdr-uni">Swansea University<span>Materials testing to BS ISO 22157</span></div>
+        <div class="rdr-uni">University College London<span>"Pedal Progress" · IMechE Group Project Award</span></div>
+        <div class="rdr-uni">University of Manchester<span>Bamboo-composite materials research</span></div>
+        <div class="rdr-uni">Oxford Brookes University<span>World-first 3D-printed bamboo bike</span></div>
+        <div class="rdr-uni">London South Bank University<span>Campus innovation hub &amp; composites R&amp;D</span></div>
+        <div class="rdr-uni">Coventry University<span>UK Bamboo Summit 2024</span></div>
+        <div class="rdr-uni">University of Cumbria<span>Kate Rawles' 8,288-mile "Woody"</span></div>
+        <div class="rdr-uni">UT San Antonio<span>US bamboo build chapter</span></div>
+      </div>
+
+      <details class="wb-more">
+        <summary>Papers &amp; studies</summary>
+        <div class="wb-more-body">
+          <ul class="rdr-papers">
+            <li><span class="t">Utilising the Raw Structure of Bamboo for Indoor Bicycle Storage</span> — Isabel Hillier, thesis, 2024 (BBC-supported).</li>
+            <li><span class="t">Advancing engineered bamboo materials for sustainable construction</span> — Neil Thomas (Atelier One) et al., <em>Nature</em>-format review.</li>
+            <li><span class="t">Influence of a bamboo frame on bicycle ride comfort</span> — Oxford Brookes, <em>Vehicle System Dynamics</em>, 2013.</li>
+            <li><span class="t">Viscoelastic properties of bamboo</span> — Amada &amp; Lakes, <em>J. Materials Science</em>, 1997.</li>
+            <li><span class="t">Contribution of Bamboo for Vibratory Comfort in Cycling</span> — Chiementin et al., 2017.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- FAQ ---------- {%- endcomment -%}
+  <section class="rd-pad">
+    <div class="rd-wrap rd-maxw">
+      <span class="rd-eyebrow">Good to know</span>
+      <h2>Questions, answered</h2>
+      <div class="rd-faq rd-mt3">
+        <details><summary>How strong is a bamboo frame?</summary><div class="rd-a"><p>Comparable to mild steel in tension — about 84 MPa, tested to BS ISO 22157 at Swansea — while far lighter. Every joint is reinforced with flax-and-carbon lugs, and we test frames beyond their service life.</p></div></details>
+        <details><summary>Does it crack, or mind the rain?</summary><div class="rd-a"><p>Our tubes are heat-treated and sealed with epoxy. Dry after wet rides and store indoors — the same care you'd give any quality frame.</p></div></details>
+        <details><summary>Do I need experience to build one?</summary><div class="rd-a"><p>No — most builders start with none. Workshop frames finish in 2 days with expert guidance; home kits include step-by-step instructions and video.</p></div></details>
+        <details><summary>How long will it last?</summary><div class="rd-a"><p>Many of our 2012 frames are still ridden daily, 13 years on. Keep it sealed and stored indoors and it goes the distance.</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- FINAL CTA ---------- {%- endcomment -%}
+  <section class="rd-pad rd-darker">
+    <div class="rd-wrap rd-center">
+      <h2>Build your bamboo bike</h2>
+      <p class="rd-lede rd-maxw rd-mt2" style="margin-inline:auto;">Join 4,000+ people who've built their own — by hand, in a weekend.</p>
+      <p class="rd-mt3"><a class="rd-btn rd-lime rd-btn-lg" href="shopify://collections/frame-build-kits">Shop frame kits <span class="rd-arrow">&rarr;</span></a></p>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Why Bamboo (complete)",
+  "tag": "section",
+  "class": "section bbc-why-bamboo-complete-wrap",
+  "settings": [
+    { "type": "paragraph", "content": "Light-touch hardcoded page. Swap the photos + video below; text edits are made in the .liquid file." },
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "hero_fallback", "label": "Default hero filename", "default": "bbc-rd-hero-ride.jpg" },
+    { "type": "header", "content": "Video" },
+    { "type": "text", "id": "video_youtube", "label": "YouTube ID (blank = use the Swansea film)" },
+    { "type": "url", "id": "video_url", "label": "Or an .mp4 URL" },
+    { "type": "header", "content": "Beat images" },
+    { "type": "image_picker", "id": "science_image", "label": "1 — Science / ride" },
+    { "type": "text", "id": "science_image_fb", "label": "Default filename", "default": "bbc-rd-gravel-sunset.jpg" },
+    { "type": "image_picker", "id": "access_image", "label": "2 — Accessibility" },
+    { "type": "text", "id": "access_image_fb", "label": "Default filename", "default": "bbc-rd-frame-build.jpg" },
+    { "type": "image_picker", "id": "strength_image", "label": "3 — Strength" },
+    { "type": "text", "id": "strength_image_fb", "label": "Default filename", "default": "bbc-rd-detail.jpg" }
+  ],
+  "presets": [ { "name": "Why Bamboo (complete)" } ]
+}
+{% endschema %}

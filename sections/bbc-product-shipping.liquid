@@ -1,0 +1,86 @@
+{% render 'bbc-design-system' %}
+{% render 'bbc-icons' %}
+
+<section class="bbc-section bbc-section--cream" id="shipping">
+  <div class="bbc-container">
+    <header class="bbc-header">
+      <h2 class="bbc-section-title">{{ section.settings.title }}</h2>
+      <p class="bbc-section-subtitle">We ship to <strong style="color: var(--bbc-teal);">36+ countries</strong> worldwide</p>
+    </header>
+    
+    <div class="bbc-grid bbc-grid--3">
+      <div class="bbc-card">
+        <h3 class="bbc-card-title" style="display: flex; align-items: center; gap: var(--bbc-sp-2); margin-bottom: var(--bbc-sp-3);">
+          {% render 'bbc-icons', icon: 'globe' %} United Kingdom
+        </h3>
+        <table class="bbc-table">
+          <tr><td>Delivery</td><td>2–3 days</td></tr>
+          <tr><td>Cost</td><td>£15–25</td></tr>
+          <tr><td>Tracking</td><td><span class="bbc-badge bbc-badge--green">Full tracking</span></td></tr>
+        </table>
+      </div>
+      
+      <div class="bbc-card">
+        <h3 class="bbc-card-title" style="display: flex; align-items: center; gap: var(--bbc-sp-2); margin-bottom: var(--bbc-sp-3);">
+          {% render 'bbc-icons', icon: 'globe' %} European Union
+        </h3>
+        <table class="bbc-table">
+          <tr><td>Delivery</td><td>5–7 days</td></tr>
+          <tr><td>Cost</td><td>£35–50</td></tr>
+          <tr><td>Tracking</td><td><span class="bbc-badge bbc-badge--green">Full tracking</span></td></tr>
+        </table>
+      </div>
+      
+      <div class="bbc-card">
+        <h3 class="bbc-card-title" style="display: flex; align-items: center; gap: var(--bbc-sp-2); margin-bottom: var(--bbc-sp-3);">
+          {% render 'bbc-icons', icon: 'globe' %} International
+        </h3>
+        <table class="bbc-table">
+          <tr><td>USA / Canada</td><td>7–14 days</td></tr>
+          <tr><td>Australia</td><td>10–14 days</td></tr>
+          <tr><td>Cost</td><td>£45–70</td></tr>
+        </table>
+      </div>
+    </div>
+    
+    <div class="bbc-card" style="margin-top: var(--bbc-sp-6);">
+      <h3 class="bbc-card-title" style="display: flex; align-items: center; gap: var(--bbc-sp-2); margin-bottom: var(--bbc-sp-4);">
+        {% render 'bbc-icons', icon: 'document' %} Customs & Duties
+      </h3>
+      <div class="bbc-grid bbc-grid--2">
+        <div style="display: flex; gap: var(--bbc-sp-3); align-items: flex-start;">
+          <div class="bbc-icon-box bbc-icon-box--sm" style="background: var(--bbc-cream); color: var(--bbc-teal);">{% render 'bbc-icons', icon: 'package' %}</div>
+          <div>
+            <p class="bbc-card-title">Import Duties</p>
+            <p class="bbc-text-sm">Customs duties vary by country. You may need to pay local import taxes.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: var(--bbc-sp-3); align-items: flex-start;">
+          <div class="bbc-icon-box bbc-icon-box--sm" style="background: var(--bbc-cream); color: var(--bbc-teal);">{% render 'bbc-icons', icon: 'award' %}</div>
+          <div>
+            <p class="bbc-card-title">Workshop Attendees</p>
+            <p class="bbc-text-sm">Generally no customs on frames you build at our workshops.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bbc-cta" style="margin-top: var(--bbc-sp-6);">
+      <p class="bbc-cta-text">Shipping somewhere not listed? We probably ship there too!</p>
+      <a href="mailto:info@bamboobicycleclub.org?subject=Shipping%20Enquiry" class="bbc-btn bbc-btn--gold">
+        {% render 'bbc-icons', icon: 'mail' %} Contact Us For Quote
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Shipping",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Shipping & Customs" }
+  ],
+  "presets": [{ "name": "BBC Shipping" }]
+}
+{% endschema %}

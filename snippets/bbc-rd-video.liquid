@@ -1,0 +1,80 @@
+{%- comment -%}
+  BBC — Standard responsive video renderer (2026)
+  ------------------------------------------------
+  One call renders any video into the standard responsive `.rd-video` box
+  (see assets/bbc-video-responsive.css). Never overflows / over-sizes on mobile.
+
+  Usage:
+    {%- comment -%} Self-hosted MP4 (theme asset or external URL) {%- endcomment -%}
+    {% render 'bbc-rd-video',
+        mp4: section.settings.video_mp4,
+        mp4_asset: 'bbc-rd-build-teaser.mp4',
+        poster: section.settings.video_image,
+        poster_asset: 'bbc-rd-build-poster.jpg',
+        alt: 'Watch a build' %}
+
+    {%- comment -%} YouTube / Vimeo (lazy iframe) {%- endcomment -%}
+    {% render 'bbc-rd-video', youtube_id: 'ckCwJXJGKD0', title: 'Watch a build' %}
+    {% render 'bbc-rd-video', vimeo_id: '123456789', title: 'Watch a build' %}
+
+  Optional:
+    ratio:    aspect ratio override, e.g. '4/3' (default 16/9)
+    autoplay: true  -> muted autoplay loop (MP4 background style)
+    controls: false -> hide native controls on MP4 (default true)
+{%- endcomment -%}
+
+{%- liquid
+  assign _ratio = ratio | default: '16/9'
+
+  assign _poster = ''
+  if poster != blank and poster != null
+    assign _poster = poster | image_url: width: 1600
+  elsif poster_asset != blank
+    assign _poster = poster_asset | asset_url
+  endif
+
+  assign _mp4 = ''
+  if mp4 != blank and mp4 != null
+    assign _mp4 = mp4
+  elsif mp4_asset != blank
+    assign _mp4 = mp4_asset | asset_url
+  endif
+-%}
+
+<div class="rd-video" style="--video-ratio: {{ _ratio }};">
+  {%- if youtube_id != blank -%}
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/{{ youtube_id }}?rel=0"
+      title="{{ title | default: 'Video' | escape }}"
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen></iframe>
+
+  {%- elsif vimeo_id != blank -%}
+    <iframe
+      src="https://player.vimeo.com/video/{{ vimeo_id }}"
+      title="{{ title | default: 'Video' | escape }}"
+      loading="lazy"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen></iframe>
+
+  {%- elsif _mp4 != blank -%}
+    <video
+      class="rd-video-el"
+      playsinline
+      {% if _poster != blank %}poster="{{ _poster }}"{% endif %}
+      {% if autoplay %}autoplay muted loop{% endif %}
+      {% unless controls == false %}controls{% endunless %}
+      preload="none"
+      aria-label="{{ title | default: alt | default: 'Video' | escape }}">
+      {% # theme-check-disable RemoteAsset %}
+      <source src="{{ _mp4 }}" type="video/mp4">
+      {% # theme-check-enable RemoteAsset %}
+    </video>
+
+  {%- else -%}
+    {%- comment -%} Empty state — placeholder play button {%- endcomment -%}
+    <span class="rd-play" aria-hidden="true"></span>
+  {%- endif -%}
+</div>

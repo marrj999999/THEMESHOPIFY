@@ -1,0 +1,58 @@
+{% comment %}
+  BBC Schools — How it works (Layer 1). Demystifies the process. Steps = blocks.
+{% endcomment %}
+<section class="bbc-schools-how">
+  <div class="page-width">
+    <div class="bbc-schools-how__head">
+      {% if section.settings.eyebrow != blank %}<span class="bbc-schools-how__eyebrow">{{ section.settings.eyebrow }}</span>{% endif %}
+      <h2 class="bbc-schools-how__title">{{ section.settings.title }}</h2>
+      {% if section.settings.intro != blank %}<p class="bbc-schools-how__intro">{{ section.settings.intro }}</p>{% endif %}
+    </div>
+    <ol class="bbc-schools-how__steps">
+      {% for block in section.blocks %}
+        <li class="bbc-schools-how__step" {{ block.shopify_attributes }}>
+          <span class="bbc-schools-how__num">{{ forloop.index }}</span>
+          <h3 class="bbc-schools-how__steptitle">{{ block.settings.title }}</h3>
+          {% if block.settings.body != blank %}<p class="bbc-schools-how__stepbody">{{ block.settings.body }}</p>{% endif %}
+        </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+<style>
+  .bbc-schools-how{background:#fff;padding:64px 0}
+  .bbc-schools-how__head{max-width:680px;margin:0 0 34px}
+  .bbc-schools-how__eyebrow{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bbc-teal,#3f8b66);margin-bottom:10px}
+  .bbc-schools-how__title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.25rem);color:var(--bbc-forest,#073e27);margin:0 0 12px;line-height:1.15}
+  .bbc-schools-how__intro{font-size:1.1rem;line-height:1.55;color:var(--bbc-text,#1e293b);margin:0}
+  .bbc-schools-how__steps{list-style:none;counter-reset:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin:0;padding:0}
+  .bbc-schools-how__step{position:relative;padding:0}
+  .bbc-schools-how__num{display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:var(--bbc-gold,#ffa900);color:var(--bbc-forest,#073e27);font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:12px}
+  .bbc-schools-how__steptitle{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.1rem;color:var(--bbc-forest,#073e27);margin:0 0 6px}
+  .bbc-schools-how__stepbody{font-size:.96rem;line-height:1.55;color:var(--bbc-text,#1e293b);margin:0}
+</style>
+{% schema %}
+{
+  "name": "BBC Schools How It Works",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How it works" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "From first enquiry to students building" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "We make it simple — and we do the heavy lifting." }
+  ],
+  "blocks": [
+    { "type": "step", "name": "Step", "settings": [
+      { "type": "text", "id": "title", "label": "Step title" },
+      { "type": "textarea", "id": "body", "label": "Step text" }
+    ] }
+  ],
+  "presets": [
+    { "name": "BBC Schools How It Works", "blocks": [
+      { "type": "step", "settings": { "title": "Get in touch", "body": "Tell us your year group and what you want to achieve. We recommend the right starting point — no cost, no commitment." } },
+      { "type": "step", "settings": { "title": "Free speaker taster", "body": "We run (or ship) the free bamboo-speaker workshop so you can see the model work with a real class first." } },
+      { "type": "step", "settings": { "title": "Choose your programme", "body": "Step up to the reusable bike-build kit and teacher pack — bought once, re-run every year for the cost of bamboo." } },
+      { "type": "step", "settings": { "title": "We support delivery", "body": "Our DBS-checked team runs it, or we train your staff in half a day. Risk assessments and curriculum maps are included." } }
+    ] }
+  ]
+}
+{% endschema %}

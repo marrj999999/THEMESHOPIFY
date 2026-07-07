@@ -1,0 +1,208 @@
+{{ 'bbc-why-bamboo.css' | asset_url | stylesheet_tag }}
+
+<section class="bbc-wb-builds" aria-labelledby="wb-builds-title">
+  <div class="bbc-wb-builds__header">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="bbc-wb-hero__eyebrow" style="color: var(--wb-accent-green);">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h2 id="wb-builds-title" class="bbc-wb-builds__title">{{ section.settings.heading }}</h2>
+    {%- if section.settings.subtitle != blank -%}
+      <p class="bbc-wb-builds__subtitle">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="bbc-wb-builds__grid">
+    {%- for block in section.blocks -%}
+      {%- assign card_tag = 'div' -%}
+      {%- if block.settings.link != blank -%}{%- assign card_tag = 'a' -%}{%- endif -%}
+
+      <{{ card_tag }}
+        {%- if block.settings.link != blank %} href="{{ block.settings.link }}"{% endif %}
+        class="bbc-wb-build-card {% if block.settings.video_url != blank %}bbc-wb-build-card--video{% endif %}"
+        {{ block.shopify_attributes }}>
+
+        {%- comment -%} Media: video takes priority over image {%- endcomment -%}
+        {%- if block.settings.video_url != blank -%}
+          <div class="bbc-wb-build-card__video">
+            {%- if block.settings.video_url.type == 'youtube' -%}
+              <iframe
+                src="https://www.youtube.com/embed/{{ block.settings.video_url.id }}?rel=0&modestbranding=1"
+                title="{{ block.settings.title | escape }}"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy">
+              </iframe>
+            {%- elsif block.settings.video_url.type == 'vimeo' -%}
+              <iframe
+                src="https://player.vimeo.com/video/{{ block.settings.video_url.id }}?title=0&byline=0&portrait=0"
+                title="{{ block.settings.title | escape }}"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+                loading="lazy">
+              </iframe>
+            {%- endif -%}
+          </div>
+        {%- elsif block.settings.image -%}
+          {{ block.settings.image | image_url: width: 800 | image_tag: class: 'bbc-wb-build-card__img', loading: 'lazy', alt: block.settings.title | escape }}
+        {%- else -%}
+          <div class="bbc-wb-build-card__img-placeholder"></div>
+        {%- endif -%}
+
+        {%- unless block.settings.video_url != blank -%}
+          <div class="bbc-wb-build-card__overlay">
+            {%- if block.settings.type != blank -%}
+              <p class="bbc-wb-build-card__type">{{ block.settings.type }}</p>
+            {%- endif -%}
+            <h3 class="bbc-wb-build-card__name">{{ block.settings.title }}</h3>
+            {%- if block.settings.description != blank -%}
+              <p class="bbc-wb-build-card__desc">{{ block.settings.description }}</p>
+            {%- endif -%}
+          </div>
+        {%- endunless -%}
+
+        {%- if block.settings.video_url != blank -%}
+          <div class="bbc-wb-build-card__video-caption">
+            {%- if block.settings.type != blank -%}
+              <p class="bbc-wb-build-card__type" style="color: var(--wb-accent-green); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 4px;">{{ block.settings.type }}</p>
+            {%- endif -%}
+            <h3 class="bbc-wb-build-card__name" style="color: var(--wb-forest); font-size: 1rem; font-weight: 700; margin: 0 0 4px;">{{ block.settings.title }}</h3>
+            {%- if block.settings.description != blank -%}
+              <p style="font-size: 0.85rem; color: var(--wb-text-muted); margin: 0;">{{ block.settings.description }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+      </{{ card_tag }}>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.button_text != blank -%}
+    {%- assign bs = section.settings.button_style | default: 'link' -%}
+    <div style="text-align: center; margin-top: clamp(32px, 4vw, 48px);">
+      <a href="{{ section.settings.button_link }}" class="bbc-wb-btn bbc-wb-btn--{{ bs }}">
+        {{ section.settings.button_text }}
+        {%- if bs == 'link' -%}
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        {%- endif -%}
+      </a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Build Gallery",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Design Versatility"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Any Design. Any Rider."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Road bikes, cargo bikes, tandems, gravel explorers, balance bikes — the only limit is your imagination."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "See All Build Stories"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "link",          "label": "↗ Text link (with arrow)" },
+        { "value": "secondary",     "label": "■ Forest green — filled" },
+        { "value": "primary",       "label": "■ Gold — filled" },
+        { "value": "outline",       "label": "□ Outline green" },
+        { "value": "outline-light", "label": "□ Outline white (dark backgrounds)" },
+        { "value": "white",         "label": "■ White — filled (dark backgrounds)" }
+      ],
+      "default": "link",
+      "info": "Gallery sits on a cream background — outline green or text link both work well."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "build",
+      "name": "Build",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Media"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "label": "Video URL (overrides photo)",
+          "accept": ["youtube", "vimeo"],
+          "info": "Paste a YouTube or Vimeo link. When set, replaces the photo with an embedded video."
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "type",
+          "label": "Build type / tag",
+          "default": "Custom Build"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Builder Name"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Short description"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link to full story"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Build Gallery",
+      "blocks": [
+        { "type": "build", "settings": { "type": "Tandem", "title": "Swiss Family Tandem", "description": "Three-person tandem for the school run and family holidays" } },
+        { "type": "build", "settings": { "type": "Cargo", "title": "Adam's Cargo Bike", "description": "Long-tail cargo built in a London flat" } },
+        { "type": "build", "settings": { "type": "Aero Road", "title": "Adrian's Aero Build", "description": "Custom aero profile with internal cabling" } },
+        { "type": "build", "settings": { "type": "Gravel", "title": "Tim's Gravel Explorer", "description": "First-time builder from the Netherlands" } },
+        { "type": "build", "settings": { "type": "10-Year Rider", "title": "Taro's Daily Commuter", "description": "Still riding daily after a decade" } },
+        { "type": "build", "settings": { "type": "Team Build", "title": "Four Seasons Corporate", "description": "12 managers, zero experience, one frame in 3 hours" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

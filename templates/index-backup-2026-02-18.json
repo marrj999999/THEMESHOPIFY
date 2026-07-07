@@ -1,0 +1,308 @@
+{
+  "sections": {
+    "hero": {
+      "type": "bbc-hero-single",
+      "settings": {
+        "eyebrow": "Since 2012",
+        "heading": "4,000 people have built their own bamboo bicycle.",
+        "subheading": "Workshops in London. Kits shipped worldwide. No experience needed.",
+        "button_text": "Book a Workshop",
+        "button_link": "/pages/bicycle-frame-building-workshop",
+        "button_secondary_text": "Shop Kits",
+        "button_secondary_link": "/collections/home-build-kits",
+        "overlay_opacity": 55,
+        "min_height_desktop": 80,
+        "min_height_mobile": 70
+      },
+      "blocks": {
+        "trust1": { "type": "trust_item", "settings": { "text": "4,000+ bikes built" } },
+        "trust2": { "type": "trust_item", "settings": { "text": "36+ countries" } },
+        "trust3": { "type": "trust_item", "settings": { "text": "No experience needed" } }
+      },
+      "block_order": ["trust1", "trust2", "trust3"]
+    },
+    "press_bar": {
+      "type": "bbc-press-bar",
+      "settings": {
+        "label": "As Featured In",
+        "background": "#f5f5f0",
+        "logo_height": 32,
+        "logo_height_mobile": 24,
+        "padding_desktop": 48,
+        "padding_mobile": 32
+      },
+      "blocks": {
+        "logo1": { "type": "logo", "settings": { "logo_asset": "logo-ft.svg", "name": "Financial Times" } },
+        "logo2": { "type": "logo", "settings": { "logo_asset": "logo-guardian.svg", "name": "The Guardian" } },
+        "logo3": { "type": "logo", "settings": { "logo_asset": "logo-bikeradar-full.svg", "name": "BikeRadar" } },
+        "logo4": { "type": "logo", "settings": { "logo_asset": "logo-roadcc-full.svg", "name": "road.cc" } },
+        "logo5": { "type": "logo", "settings": { "logo_asset": "logo-design-museum-full.svg", "name": "Design Museum" } },
+        "logo6": { "type": "logo", "settings": { "logo_asset": "logo-grand-designs-full.svg", "name": "Grand Designs" } }
+      },
+      "block_order": ["logo1", "logo2", "logo3", "logo4", "logo5", "logo6"]
+    },
+    "options": {
+      "type": "bbc-options",
+      "settings": {
+        "label": "",
+        "heading": "Two Ways to Build",
+        "text": "",
+        "footer_text": "",
+        "background": "white"
+      },
+      "blocks": {
+        "workshop": {
+          "type": "option",
+          "settings": {
+            "badge": "Most Popular",
+            "icon": "build",
+            "title": "Join a Workshop",
+            "description": "Build your frame in 2-3 days with expert guidance. Walk in a beginner, leave with a bike.",
+            "features": "From £500|2-3 days, all inclusive|London workshop|Small groups of 4-6",
+            "button_text": "View Workshops",
+            "button_link": "/pages/bicycle-frame-building-workshop",
+            "highlight": true
+          }
+        },
+        "kit": {
+          "type": "option",
+          "settings": {
+            "icon": "package_2",
+            "title": "Build at Home",
+            "description": "Complete DIY frame kit with video tutorials and community support. Build at your own pace.",
+            "features": "From £375|35-40 hours total|Ships worldwide|Video guides included",
+            "button_text": "Shop Kits",
+            "button_link": "/collections/home-build-kits",
+            "highlight": false
+          }
+        }
+      },
+      "block_order": ["workshop", "kit"]
+    },
+    "story": {
+      "type": "bbc-story",
+      "settings": {
+        "eyebrow": "Our Story",
+        "heading": "13 years of teaching people to build",
+        "story_text": "<p>In 2012, James and Ian opened a small workshop in Hackney with one goal: prove that anyone can build a bicycle frame.</p><p>What started as a weekend experiment became a movement. Today, BBC frames have been ridden from London to New Zealand, across the Andes, and through monsoons in India.</p><p>Every bike we help create is someone's first — and usually their favourite.</p>",
+        "founder_quote": "If we want people to choose sustainable options, we need to offer something better than what polluting products can be.",
+        "founder_name": "James Marr",
+        "founder_role": "Founder",
+        "timeline_title": "Key Milestones"
+      },
+      "blocks": {
+        "stat1": { "type": "stat", "settings": { "number": "4,000+", "label": "Bikes Built", "detail": "And counting" } },
+        "stat2": { "type": "stat", "settings": { "number": "36", "label": "Countries", "detail": "Worldwide" } },
+        "stat3": { "type": "stat", "settings": { "number": "13", "label": "Years", "detail": "Since 2012" } },
+        "m1": { "type": "milestone", "settings": { "year": "2012", "title": "BBC Founded", "description": "James & Ian open first workshop in Hackney" } },
+        "m2": { "type": "milestone", "settings": { "year": "2015", "title": "Design Museum", "description": "Featured in Cycle Revolution exhibition" } },
+        "m3": { "type": "milestone", "settings": { "year": "2018", "title": "Green Heroes", "description": "Kevin McCloud award at Grand Designs Live" } },
+        "m4": { "type": "milestone", "settings": { "year": "2020", "title": "Build to Bond", "description": "Prison rehabilitation programme launches" } },
+        "m5": { "type": "milestone", "settings": { "year": "2025", "title": "Investec Winner", "description": "Beyond Business award for social impact" } }
+      },
+      "block_order": ["stat1", "stat2", "stat3", "m1", "m2", "m3", "m4", "m5"]
+    },
+    "why_bamboo": {
+      "type": "bbc-content",
+      "settings": {
+        "label": "Why Bamboo?",
+        "heading": "Nature's Perfect Frame Material",
+        "text": "<p>Bamboo combines the best qualities of steel, carbon, and titanium. It's stronger than steel, absorbs vibration better than carbon fibre, and grows back in just 3-5 years.</p>",
+        "image_position": "right",
+        "background": "white"
+      },
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "text": "56.7% lower carbon footprint than aluminium" } },
+        "f2": { "type": "feature", "settings": { "text": "Natural vibration dampening for comfortable rides" } },
+        "f3": { "type": "feature", "settings": { "text": "Tensile strength comparable to steel" } },
+        "f4": { "type": "feature", "settings": { "text": "Each frame is unique — your bike, your build" } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"]
+    },
+    "journeys": {
+      "type": "bbc-journeys",
+      "settings": {
+        "eyebrow": "Adventure",
+        "heading": "Where Our Bikes Go",
+        "featured_distance": "8,288 miles",
+        "featured_title": "Colombia to Tierra del Fuego",
+        "featured_name": "Kate Rawles, Environmental Advocate",
+        "featured_quote": "Woody turned out to be the most reliable bike I've ever owned. I had hardly any mechanical problems on the whole journey.",
+        "featured_description": "Kate rode her BBC-built bamboo bike 'Woody' through the Andes, documenting the journey in her book 'The Life Cycle'.",
+        "cta_text": "See More Adventures",
+        "cta_link": "/pages/gallery"
+      },
+      "blocks": {
+        "j1": { "type": "journey", "settings": { "route": "London to New Zealand", "distance": "12,000+ miles" } },
+        "j2": { "type": "journey", "settings": { "route": "Pamir Highway, Winter", "distance": "1,200 miles" } },
+        "j3": { "type": "journey", "settings": { "route": "Daily Commute, 7+ Years", "rider": "Jamie, Romania" } }
+      },
+      "block_order": ["j1", "j2", "j3"]
+    },
+    "press": {
+      "type": "bbc-press-recognition",
+      "settings": {
+        "eyebrow": "Recognition",
+        "heading": "Awards & Press",
+        "featured_quote": "Bamboo Bicycle Club taps into 'the IKEA effect' — that extra bit of affection people reserve for objects they put together themselves.",
+        "quote_source": "Financial Times",
+        "quote_date": "September 2025",
+        "awards_title": "Awards & Recognition"
+      },
+      "blocks": {
+        "a1": { "type": "award", "settings": { "icon": "emoji_events", "name": "Investec Beyond Business", "year": "2025 Winner", "description": "£24,000 for prison education work" } },
+        "a2": { "type": "award", "settings": { "icon": "eco", "name": "Kevin McCloud's Green Heroes", "year": "2018", "description": "Grand Designs Live" } },
+        "a3": { "type": "award", "settings": { "icon": "school", "name": "OCN Level 2 Accredited", "year": "", "description": "Educational programmes" } },
+        "a4": { "type": "award", "settings": { "icon": "museum", "name": "Design Museum Exhibition", "year": "2015-16", "description": "Cycle Revolution" } }
+      },
+      "block_order": ["a1", "a2", "a3", "a4"]
+    },
+    "impact": {
+      "type": "bbc-content",
+      "settings": {
+        "label": "Social Impact",
+        "heading": "Building More Than Bikes",
+        "text": "<p>From prison rehabilitation to school programmes, we use bamboo bicycle building to create real change. Our Build to Bond programme helps parents in prison build bikes for their children — maintaining family connections and learning skills for release.</p>",
+        "button_text": "See Our Impact",
+        "button_link": "/pages/impact",
+        "image_position": "left",
+        "background": "cream"
+      },
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "text": "OCN Level 2 accredited programmes" } },
+        "f2": { "type": "feature", "settings": { "text": "Prison rehabilitation partnership" } },
+        "f3": { "type": "feature", "settings": { "text": "200+ graduates to date" } },
+        "q1": {
+          "type": "quote",
+          "settings": {
+            "quote": "Innovative projects like Build to Bond support rehabilitation and help people leave prison as better citizens.",
+            "name": "James Timpson",
+            "role": "UK Prisons Minister"
+          }
+        }
+      },
+      "block_order": ["f1", "f2", "f3", "q1"]
+    },
+    "testimonials": {
+      "type": "bbc-homepage-testimonials",
+      "settings": {
+        "label": "From Our Builders",
+        "heading": "Real Stories",
+        "background": "white"
+      },
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Still riding mine daily after 7 years. Built it at home in Romania using the kit. It's outlasted two steel bikes I owned before.",
+            "name": "Jamie",
+            "role": "Kit builder, 7+ years"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Rides lovely. Build quality is better than I expected for a home-built frame.",
+            "name": "SingleTrack World",
+            "role": "Forum review"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "How did it feel riding something mostly made from a member of the grass family? Surprisingly good.",
+            "name": "BikeRadar",
+            "role": "Video review"
+          }
+        }
+      },
+      "block_order": ["t1", "t2", "t3"]
+    },
+    "gallery": {
+      "type": "bbc-gallery",
+      "settings": {
+        "label": "Community",
+        "heading": "Built by Our Makers",
+        "columns": "3",
+        "button_text": "See More Builds",
+        "button_link": "/pages/gallery",
+        "background": "cream"
+      },
+      "blocks": {
+        "img1": { "type": "image", "settings": {} },
+        "img2": { "type": "image", "settings": {} },
+        "img3": { "type": "image", "settings": {} },
+        "img4": { "type": "image", "settings": {} },
+        "img5": { "type": "image", "settings": {} },
+        "img6": { "type": "image", "settings": {} }
+      },
+      "block_order": ["img1", "img2", "img3", "img4", "img5", "img6"]
+    },
+    "faq": {
+      "type": "bbc-faq",
+      "settings": {
+        "label": "",
+        "heading": "Common Questions",
+        "cta_prefix": "Still have questions?",
+        "cta_text": "Get in Touch",
+        "cta_link": "/pages/contact-us",
+        "background": "white"
+      },
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need any experience?",
+            "answer": "<p>No. 95% of our builders have never built anything like this before. Our guides and video tutorials make it accessible to complete beginners.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "How long does it take to build?",
+            "answer": "<p>A workshop takes 2-3 days. Building from a kit at home typically takes 35-40 hours spread over several weekends.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Is a bamboo bicycle strong enough?",
+            "answer": "<p>Absolutely. Bamboo has a higher tensile strength than steel. Our frames are tested and rated for riders up to 120kg. One of our bikes has been ridden 8,288 miles through the Andes.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "<p>Yes, we ship kits to 36+ countries worldwide. International shipping typically costs £50-150 depending on destination.</p>"
+          }
+        }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"]
+    },
+    "cta": {
+      "type": "bbc-cta",
+      "settings": {
+        "heading": "Your bike is waiting to be built",
+        "text": "Join 4,000+ people who've discovered the joy of building their own.",
+        "button_text": "Get Started",
+        "button_link": "/collections/home-build-kits",
+        "background": "forest"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "press_bar",
+    "options",
+    "story",
+    "why_bamboo",
+    "journeys",
+    "press",
+    "impact",
+    "testimonials",
+    "gallery",
+    "faq",
+    "cta"
+  ]
+}

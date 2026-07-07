@@ -1,0 +1,266 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-why-bamboo-2026",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "stat",
+          "settings": {
+            "number": "2–4×",
+            "label": "Stronger than steel for its weight",
+            "source": "Specific strength vs mild steel"
+          }
+        },
+        "b2": {
+          "type": "stat",
+          "settings": {
+            "number": "<1%",
+            "label": "Frame failure rate",
+            "source": "across 4,000+ frames"
+          }
+        },
+        "b3": {
+          "type": "stat",
+          "settings": {
+            "number": "~50%",
+            "label": "Less CO₂ than aluminium",
+            "source": "Wageningen lifecycle study"
+          }
+        },
+        "b4": {
+          "type": "stat",
+          "settings": {
+            "number": "4,000+",
+            "label": "frames built & ridden",
+            "source": "real-world durability proof"
+          }
+        },
+        "b5": {
+          "type": "feature",
+          "settings": {
+            "eyebrow": "The science",
+            "heading": "Stronger than steel, gram for gram",
+            "image_fallback": "bbc-rd-detail.jpg",
+            "image_alt": "Close-up of a bamboo bicycle frame joint showing the natural fibre structure",
+            "reverse": false,
+            "dark": false,
+            "cta_label": "Read the Swansea University study",
+            "cta_url": "\/blogs\/news\/bamboo-testing-with-swansea-university",
+            "body": "Bamboo's tensile strength reaches around 28,000 PSI — in the same range as mild steel, but at a fraction of the weight. Unlike steel, bamboo is a natural composite: parallel cellulose fibres in a lignin matrix, running the full length of the culm. The same structural principle as carbon fibre, evolved over millions of years. | We tested this with Swansea University. Their three-point flexural bending tests on our actual bamboo tubes confirmed high stiffness and consistent mechanical properties across samples — bamboo behaves like a high-performance engineering material, because it is one."
+          }
+        },
+        "b6": {
+          "type": "quote",
+          "settings": {
+            "quote": "Woody turned out to be the most reliable bike I've ever owned. I had hardly any mechanical problems on the whole journey and it was a smooth and shock-absorbing ride.",
+            "attribution": "Kate Rawles",
+            "context": "8,288 miles, Colombia to Patagonia, on a BBC-built bamboo frame"
+          }
+        },
+        "b7": {
+          "type": "feature",
+          "settings": {
+            "eyebrow": "Ride quality",
+            "heading": "A ride you can actually feel",
+            "image_fallback": "bbc-rd-hero-ride.jpg",
+            "image_alt": "Rider on a bamboo bicycle on the open road",
+            "reverse": true,
+            "dark": false,
+            "cta_label": "",
+            "body": "The fibre structure that makes bamboo strong also makes it comfortable. Those parallel fibres absorb road vibration naturally — something aluminium and steel simply can't match. Less buzz through the handlebars, less fatigue over long distances, a smoother ride on rough roads. | This isn't marketing, it's physics. Bamboo's natural damping has been documented in structural engineering for decades. In a bicycle frame it means you arrive fresher, with less strain on your hands, wrists and back."
+          }
+        },
+        "b8": {
+          "type": "quote",
+          "settings": {
+            "quote": "Having had it now for about 7 years and ridden it hard — the ride is much smoother than my Cooper. I've ridden over about half of Crete with it.",
+            "attribution": "Jamie",
+            "context": "London workshop builder, 7-year review"
+          }
+        },
+        "b9": {
+          "type": "feature",
+          "settings": {
+            "eyebrow": "Accessibility",
+            "heading": "Why it matters",
+            "image_fallback": "bbc-rd-frame-build.jpg",
+            "image_alt": "A bamboo frame being built on a jig with simple hand tools",
+            "reverse": false,
+            "dark": true,
+            "cta_label": "",
+            "body": "To make an aluminium frame you need bauxite mines, smelters running at 1,000°C and factories of CNC machines. Carbon fibre needs petroleum-derived precursors, autoclaves and clean rooms. | To make a bamboo bicycle frame you need bamboo, a jig, hand tools and two days. That's it. | We teach beginners — most with no prior experience at all — to build their own frame in a weekend. Through our Build to Bond programme, frame-building reconnects fathers with their children inside the criminal justice system."
+          }
+        },
+        "b10": {
+          "type": "feature",
+          "settings": {
+            "eyebrow": "Sustainability",
+            "heading": "The carbon maths",
+            "image_fallback": "bbc-rd-bamboo-tubes.jpg",
+            "image_alt": "Raw bamboo culms that regrow in 3 to 5 years",
+            "reverse": true,
+            "dark": false,
+            "cta_label": "Our carbon footprint analysis",
+            "cta_url": "\/blogs\/news\/using-ai-to-look-at-a-bamboo-bicycle-carbon-footprint",
+            "body": "A peer-reviewed lifecycle analysis by Wageningen University found bamboo bicycle frames have roughly 50% lower environmental impact than aluminium, and about 30% less than steel. | Bamboo reaches structural maturity in 3–5 years; trees take 20–50. It regrows from its root system with no replanting, needs no pesticides or irrigation, and sequesters carbon as it grows. | Most carbon-fibre sports equipment lasts just 3 years and 90% ends up in landfill. A bamboo frame? Still being ridden a decade later."
+          }
+        },
+        "b12": {
+          "type": "quote",
+          "settings": {
+            "quote": "I knew nothing about bike maintenance. I thought that if I could be involved in the whole process of putting it together, I'd have a better idea of how to tackle any inevitable breakages. It reminded me how satisfying it is to build something from scratch.",
+            "attribution": "Soraya",
+            "context": "4-day London workshop, road bamboo bike build"
+          }
+        },
+        "b13": {
+          "type": "build",
+          "settings": {
+            "kind": "Tandem",
+            "title": "Swiss Family Tandem",
+            "body": "Three-person bamboo tandem for the school run. Built at home in Switzerland from our kit.",
+            "link": "\/blogs\/club-news\/a-family-ride-like-no-other-the-swiss-bamboo-tandem",
+            "image_fallback": "bbc-rd-bike-field.jpg"
+          }
+        },
+        "b14": {
+          "type": "build",
+          "settings": {
+            "kind": "Cargo",
+            "title": "Adam's Cargo Bike",
+            "body": "Long-tail cargo built in a London flat. \"Surprisingly solid, takes quite a bit of load.\"",
+            "link": "\/blogs\/club-news\/custom-cargo-bike-by-adam",
+            "image_fallback": "bbc-rd-cargo.jpg"
+          }
+        },
+        "b15": {
+          "type": "build",
+          "settings": {
+            "kind": "Aero Road",
+            "title": "Adrian's Aero Build",
+            "body": "Custom aero profile with foam inserts and internal cabling. Third BBC build.",
+            "link": "\/blogs\/club-news\/adrians-aero-bamboo-bike",
+            "image_fallback": "bbc-rd-redbar.jpg"
+          }
+        },
+        "b16": {
+          "type": "build",
+          "settings": {
+            "kind": "Gravel",
+            "title": "Tim's Gravel Explorer",
+            "body": "First-time builder from the Netherlands. \"My hands are itching to build a second.\"",
+            "link": "\/blogs\/club-news\/gravel-bike-by-tim",
+            "image_fallback": "bbc-rd-gravel-fence.jpg"
+          }
+        },
+        "b17": {
+          "type": "build",
+          "settings": {
+            "kind": "10-Year Rider",
+            "title": "Taro's Daily Commuter",
+            "body": "Architect built for an Alzheimer's charity ride. Still his daily bamboo bike after a decade.",
+            "link": "\/blogs\/club-news\/taro-10-years-riding-my-hand-built-bamboo-bike",
+            "image_fallback": "bbc-rd-hero-ride.jpg"
+          }
+        },
+        "b18": {
+          "type": "build",
+          "settings": {
+            "kind": "Team Build",
+            "title": "Four Seasons Corporate",
+            "body": "12 senior managers, zero experience, one complete bamboo frame in three hours.",
+            "link": "\/blogs\/news\/building-with-bamboo-how-four-seasons-senior-team-crafted-a-bike-in-three-hours",
+            "image_fallback": "bbc-rd-road-charlie.jpg"
+          }
+        },
+        "b19": {
+          "type": "faq",
+          "settings": {
+            "question": "Does a bamboo bicycle frame crack or split?",
+            "answer": "Properly treated and sealed bamboo is very stable. Our tubes are heat-treated to remove moisture and sealed with epoxy resin. Store indoors and avoid prolonged exposure to extreme wet conditions."
+          }
+        },
+        "b20": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I ride a bamboo bike in the rain?",
+            "answer": "Yes. Finished frames are fully sealed with epoxy resin. Dry your bike after wet rides and store it indoors — the same care you'd give any quality frame."
+          }
+        },
+        "b21": {
+          "type": "faq",
+          "settings": {
+            "question": "Is bamboo really stronger than steel?",
+            "answer": "Per unit weight, yes. Bamboo's tensile strength is around 28,000 PSI — in the same range as mild steel — but significantly lighter, giving a superior strength-to-weight ratio. Confirmed by our Swansea University testing."
+          }
+        },
+        "b22": {
+          "type": "faq",
+          "settings": {
+            "question": "What about the joints?",
+            "answer": "The joints are the strongest part. Carbon-fibre and epoxy lugs exceed the strength of the bamboo tubes themselves. Our method has been refined over 13 years and 4,000+ builds."
+          }
+        },
+        "b23": {
+          "type": "faq",
+          "settings": {
+            "question": "How long will a bamboo frame last?",
+            "answer": "8–12 years with proper care, with an under-1% failure rate across 4,000+ frames. Many of our 2012 builds are still ridden daily."
+          }
+        },
+        "b24": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need experience to build one?",
+            "answer": "No — most of our builders start with no prior experience. Workshop frames are completed in 2 days with full expert guidance; home kits include step-by-step instructions and video tutorials."
+          }
+        },
+        "b25": {
+          "type": "faq",
+          "settings": {
+            "question": "What types of bamboo bicycle can I build?",
+            "answer": "Any type — road, gravel, mountain, cargo, tandem, balance bike. The geometry is defined by your jig setup, so the design is up to you."
+          }
+        },
+        "b26": {
+          "type": "faq",
+          "settings": {
+            "question": "Is bamboo a sustainable material for bicycles?",
+            "answer": "Yes — one of the most sustainable structural materials there is. A peer-reviewed Wageningen University analysis found ~50% lower environmental impact than aluminium. Bamboo matures in 3–5 years, sequesters carbon as it grows, and needs no pesticides or irrigation."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b12",
+        "b13",
+        "b14",
+        "b15",
+        "b16",
+        "b17",
+        "b18",
+        "b19",
+        "b20",
+        "b21",
+        "b22",
+        "b23",
+        "b24",
+        "b25",
+        "b26"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

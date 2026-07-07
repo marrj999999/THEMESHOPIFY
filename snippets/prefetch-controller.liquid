@@ -1,0 +1,88 @@
+{% comment %}
+  BBC Prefetch Controller
+  Controls which prefetch links are loaded based on page type
+  to optimize performance and reduce unnecessary network requests
+  
+  Usage: {% render 'prefetch-controller' %}
+{% endcomment %}
+
+{%- liquid
+  # Determine if checkout prefetches are needed for current page
+  assign needs_checkout_prefetches = false
+  
+  # Pages that need checkout prefetches
+  case template
+    when 'product'
+      assign needs_checkout_prefetches = true
+    when 'cart'  
+      assign needs_checkout_prefetches = true
+    when 'collection'
+      # Collections might have quick add to cart
+      assign needs_checkout_prefetches = true
+    when 'search'
+      # Search results might have products
+      assign needs_checkout_prefetches = true
+  endcase
+  
+  # Check if we're on a kit product page specifically
+  if product and product.type contains 'Kit'
+    assign needs_checkout_prefetches = true
+  endif
+  
+  # Check if page has add to cart functionality
+  if template contains 'product' or page.handle contains 'shop' or page.handle contains 'store'
+    assign needs_checkout_prefetches = true
+  endif
+-%}
+
+{%- comment -%} Add data attribute to body for JavaScript prefetch optimizer {%- endcomment -%}
+<script>
+  document.documentElement.setAttribute('data-checkout-prefetch', '{{ needs_checkout_prefetches }}');
+  document.documentElement.setAttribute('data-template', '{{ template }}');
+  document.documentElement.setAttribute('data-page-type', '{{ request.page_type }}');
+</script>
+
+{%- comment -%} Only include checkout-related scripts on pages that need them {%- endcomment -%}
+{%- if needs_checkout_prefetches -%}
+  {%- comment -%} Checkout prefetches will be loaded by Shopify's content_for_header {%- endcomment -%}
+  <script>
+    console.log('[Prefetch Controller] Allowing checkout prefetches on {{ template }} page');
+  </script>
+{%- else -%}
+  <script>
+    console.log('[Prefetch Controller] Blocking checkout prefetches on {{ template }} page');
+    // Mark for prefetch optimizer to remove checkout prefetches
+    window.BBC_BlockCheckoutPrefetches = true;
+  </script>
+{%- endif -%}
+
+{%- comment -%} Homepage-specific optimizations {%- endcomment -%}
+{%- if template == 'index' -%}
+  <script>
+    // Defer non-critical resources on homepage
+    document.addEventListener('DOMContentLoaded', function() {
+      // Delay loading of non-critical widgets
+      setTimeout(function() {
+        // Instagram feed, social widgets, etc. can load after critical content
+        const nonCriticalWidgets = document.querySelectorAll('.instagram-widget, .social-widget');
+        nonCriticalWidgets.forEach(function(widget) {
+          widget.classList.add('deferred-loaded');
+        });
+      }, 1000);
+    });
+  </script>
+{%- endif -%}
+
+{%- comment -%} Product page optimizations {%- endcomment -%}
+{%- if template contains 'product' -%}
+  <script>
+    // Preload critical product resources
+    document.addEventListener('DOMContentLoaded', function() {
+      // Prioritize add to cart functionality
+      const addToCartButtons = document.querySelectorAll('.product-form__buttons');
+      addToCartButtons.forEach(function(button) {
+        button.classList.add('critical-resource');
+      });
+    });
+  </script>
+{%- endif -%}

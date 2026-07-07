@@ -1,0 +1,9 @@
+{% comment %}
+  BBC Design System - Loads global CSS once
+  Include in theme.liquid or at top of product template
+{% endcomment %}
+
+{% unless bbc_styles_loaded %}
+  {{ 'bbc-product-styles.css' | asset_url | stylesheet_tag }}
+  {% assign bbc_styles_loaded = true %}
+{% endunless %}

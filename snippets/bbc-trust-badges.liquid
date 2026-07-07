@@ -1,0 +1,87 @@
+{%- comment -%}
+  BBC Trust Badges — Product Page Version
+  Research: 8/10 product pages show trust signals below price/CTA
+  Sources: Rapha, Patagonia, Warby Parker, Everlane (2026-02-15)
+  
+  Usage: {% render 'bbc-trust-badges' %}
+  
+  Design decisions (research-backed):
+  - Compact inline format (not large icons)
+  - 4 key USPs that address top objections
+  - 13px font desktop, 12px mobile
+  - 44px min touch targets on mobile
+{%- endcomment -%}
+
+<div class="bbc-trust-badges">
+  <div class="bbc-trust-badges__item">
+    {%- render 'bbc-icons', icon: 'shipping' -%}
+    <span>Free UK Shipping</span>
+  </div>
+  <div class="bbc-trust-badges__item">
+    {%- render 'bbc-icons', icon: 'verified' -%}
+    <span>OCN Accredited</span>
+  </div>
+  <div class="bbc-trust-badges__item">
+    {%- render 'bbc-icons', icon: 'shield' -%}
+    <span>14-Day Returns</span>
+  </div>
+  <div class="bbc-trust-badges__item">
+    {%- render 'bbc-icons', icon: 'leaf' -%}
+    <span>50% Less CO₂</span>
+  </div>
+</div>
+
+<style>
+  /* 
+   * BBC Product Trust Badges
+   * Research: Rapha, Patagonia use compact horizontal bars
+   * Mobile: 2x2 grid with 44px touch targets
+   */
+  .bbc-trust-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px 0;
+    margin: 16px 0;
+    border-top: 1px solid rgba(7, 62, 39, 0.1);
+    border-bottom: 1px solid rgba(7, 62, 39, 0.1);
+  }
+
+  .bbc-trust-badges__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #073e27;
+  }
+
+  .bbc-trust-badges__item svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: #3f8b66;
+  }
+
+  /* Mobile: 2x2 grid layout */
+  @media (max-width: 749px) {
+    .bbc-trust-badges {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 12px 0;
+    }
+    
+    .bbc-trust-badges__item {
+      font-size: 12px;
+      min-height: 44px; /* Touch target */
+      padding: 8px 0;
+    }
+
+    .bbc-trust-badges__item svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+</style>

@@ -1,0 +1,103 @@
+{%- comment -%}
+  Bamboo Bicycle Club — Collection / listing (2026 redesign).
+  Renders {{ collection }} products in the .bbc-rd stamp-card style with a
+  funding cause line, sort, and pagination. Styling lives in
+  assets/bbc-redesign-2026.css. Guarded so it degrades off a collection page.
+{%- endcomment -%}
+
+
+<div class="bbc-rd bbc-rd-collection">
+
+  <section class="rd-pad-sm rd-paper">
+    <div class="rd-wrap rd-coll-head">
+      <span class="rd-eyebrow">{{ section.settings.eyebrow | default: 'Build at home' }}</span>
+      {%- if collection -%}
+        <h1>{{ collection.title }}</h1>
+        {%- if collection.description != blank -%}
+          <div class="rd-lede rd-mt2 rd-mw-62ch">{{ collection.description }}</div>
+        {%- endif -%}
+      {%- else -%}
+        <h1>{{ section.settings.fallback_title | default: 'Frame kits' }}</h1>
+      {%- endif -%}
+    </div>
+  </section>
+
+  <section class="rd-pad">
+    <div class="rd-wrap">
+
+      {%- if section.settings.cause_line != blank -%}
+        <div class="rd-cause-bar">{{ section.settings.cause_line }}</div>
+      {%- endif -%}
+
+      {%- if collection -%}
+        {%- paginate collection.products by section.settings.per_page -%}
+          <div class="rd-coll-bar">
+            <span class="rd-coll-count">{{ collection.products_count }} {% if collection.products_count == 1 %}kit{% else %}kits{% endif %}</span>
+            {%- if collection.sort_options.size > 0 -%}
+              <form method="get" class="rd-sort">
+                <label for="rd-sortby">Sort</label>
+                <select id="rd-sortby" name="sort_by" onchange="this.form.submit()">
+                  {%- assign cur = collection.sort_by | default: collection.default_sort_by -%}
+                  {%- for opt in collection.sort_options -%}
+                    <option value="{{ opt.value }}"{% if opt.value == cur %} selected{% endif %}>{{ opt.name }}</option>
+                  {%- endfor -%}
+                </select>
+              </form>
+            {%- endif -%}
+          </div>
+
+          <div class="rd-grid rd-g3">
+            {%- for product in collection.products -%}
+              <a class="rd-card rd-stamp" href="{{ product.url }}">
+                <div class="rd-ph">
+                  {%- if product.featured_image -%}
+                    <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.featured_image.alt | escape | default: product.title }}" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}" loading="lazy">
+                  {%- else -%}
+                    <img src="{{ 'bbc-rd-prod-gravel.jpg' | asset_url }}" alt="{{ product.title | escape }}" width="1000" height="1000" loading="lazy">
+                  {%- endif -%}
+                  {%- if product.type != blank -%}<span class="rd-tag rd-lime rd-cardtag">{{ product.type }}</span>{%- endif -%}
+                </div>
+                <div class="rd-body">
+                  <h2 class="rd-fs-18px">{{ product.title }}</h2>
+                  <div class="rd-price">{% if product.price_varies %}From {% endif %}{{ product.price | money }}{% if product.compare_at_price > product.price %}<span class="rd-was">{{ product.compare_at_price | money }}</span>{% endif %}</div>
+                </div>
+              </a>
+            {%- else -%}
+              <p class="rd-lede">No products in this collection yet.</p>
+            {%- endfor -%}
+          </div>
+
+          {%- if paginate.pages > 1 -%}
+            <nav class="rd-pagination" aria-label="Pagination">
+              {%- for part in paginate.parts -%}
+                {%- if part.is_link -%}
+                  <a href="{{ part.url }}" aria-label="Page {{ part.title }}">{{ part.title }}</a>
+                {%- else -%}
+                  <span{% if part.title == paginate.current_page %} class="rd-cur" aria-current="page"{% endif %}>{{ part.title }}</span>
+                {%- endif -%}
+              {%- endfor -%}
+            </nav>
+          {%- endif -%}
+        {%- endpaginate -%}
+      {%- else -%}
+        <p class="rd-lede">Add this section to a collection template to list its products.</p>
+      {%- endif -%}
+
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Collection 2026 (new)",
+  "tag": "div",
+  "class": "bbc-rd-collection-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Build at home" },
+    { "type": "text", "id": "fallback_title", "label": "Title (used off a collection page)", "default": "Frame kits" },
+    { "type": "text", "id": "cause_line", "label": "Funding cause line", "default": "Every kit you build helps fund accredited skills courses inside prisons and schools." },
+    { "type": "range", "id": "per_page", "label": "Products per page", "min": 6, "max": 24, "step": 3, "default": 12 }
+  ],
+  "presets": [ { "name": "Collection 2026 (new)" } ]
+}
+{% endschema %}

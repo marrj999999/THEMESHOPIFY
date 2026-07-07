@@ -1,0 +1,1005 @@
+{% comment %}
+  BBC Custom Header — Clean & Simple
+  
+  Design Principles:
+  - Logo left, nav center, actions right
+  - Simple flexbox layout (no absolute positioning)
+  - Mobile-first responsive
+  - BBC brand colors throughout
+  - DYNAMIC MENU from Shopify Navigation (not hardcoded)
+{% endcomment %}
+
+{%- liquid
+  assign logo_text = 'Bamboo Bicycle Club'
+  assign logo_width = section.settings.logo_width | default: 300
+  if section.settings.logo
+    assign has_logo = true
+  endif
+  
+  comment
+    Get the menu from settings, fallback to 'bbc-main-nav' or 'main-menu'
+  endcomment
+  assign menu_handle = section.settings.menu | default: 'bbc-main-nav'
+  assign menu = linklists[menu_handle]
+  if menu.links.size == 0
+    assign menu = linklists['main-menu']
+  endif
+-%}
+
+<header class="bbc-header" data-testid="bbc-header">
+  {%- comment -%} ANNOUNCEMENT BAR {%- endcomment -%}
+  {% if section.settings.show_announcement %}
+  <div class="bbc-header__announcement" role="region" aria-label="Announcement">
+    <div class="bbc-header__announcement-inner page-width">
+      <p>{{ section.settings.announcement_text | default: "Free UK shipping on orders over £100 • Worldwide delivery available" }}</p>
+      {% if section.settings.announcement_link != blank %}
+        <a href="{{ section.settings.announcement_link }}">{{ section.settings.announcement_link_text | default: "Learn more" }}</a>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+  
+  {%- comment -%} MAIN HEADER {%- endcomment -%}
+  <div class="bbc-header__main">
+    <div class="bbc-header__inner page-width">
+      
+      {%- comment -%} Mobile Menu Toggle {%- endcomment -%}
+      <button 
+        class="bbc-header__menu-toggle" 
+        aria-label="Open menu" 
+        aria-expanded="false"
+        aria-controls="bbc-mobile-menu"
+        data-testid="nav-toggle"
+      >
+        <span class="bbc-hamburger" aria-hidden="true">
+          <span class="bbc-hamburger__bar bbc-hamburger__bar--top"></span>
+          <span class="bbc-hamburger__bar bbc-hamburger__bar--mid"></span>
+          <span class="bbc-hamburger__bar bbc-hamburger__bar--bot"></span>
+        </span>
+      </button>
+      
+      {%- comment -%} Logo {%- endcomment -%}
+      <div class="bbc-header__logo" style="max-width: {{ logo_width }}px">
+        <a href="{{ routes.root_url }}" class="bbc-header__logo-link" aria-label="{{ shop.name }} - Home">
+          {% if has_logo %}
+            <img 
+              src="{{ section.settings.logo | image_url: width: 1000 }}"
+              class="bbc-header__logo-image"
+              loading="eager"
+              width="{{ logo_width }}"
+              alt="{{ shop.name }}"
+            >
+          {% else %}
+            {%- comment -%} Fallback to white logo SVG {%- endcomment -%}
+            <img 
+              src="{{ 'bbc-logo-white.svg' | asset_url }}"
+              class="bbc-header__logo-image"
+              loading="eager"
+              width="{{ logo_width }}"
+              alt="{{ shop.name }}"
+            >
+          {% endif %}
+        </a>
+      </div>
+      
+      {%- comment -%} Desktop Navigation — DYNAMIC from Shopify Navigation {%- endcomment -%}
+      <nav class="bbc-header__nav" aria-label="Main navigation">
+        <ul class="bbc-header__nav-list" role="menubar">
+          {%- for link in menu.links -%}
+            {%- if link.links.size > 0 -%}
+              {%- comment -%} Has children — show dropdown {%- endcomment -%}
+              <li class="bbc-header__nav-item bbc-header__nav-item--has-dropdown" role="none">
+                <a href="{{ link.url }}" class="bbc-header__nav-link{% if link.active %} bbc-header__nav-link--active{% endif %}" role="menuitem">
+                  {{ link.title }}
+                  <svg class="bbc-header__nav-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </a>
+                <div class="bbc-header__dropdown bbc-header__dropdown--narrow" role="menu">
+                  <div class="bbc-header__dropdown-inner">
+                    <ul class="bbc-header__dropdown-simple">
+                      {%- for child_link in link.links -%}
+                        <li><a href="{{ child_link.url }}" role="menuitem">{{ child_link.title }}</a></li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            {%- else -%}
+              {%- comment -%} No children — direct link {%- endcomment -%}
+              <li class="bbc-header__nav-item" role="none">
+                <a href="{{ link.url }}" class="bbc-header__nav-link{% if link.active %} bbc-header__nav-link--active{% endif %}" role="menuitem">
+                  {{ link.title }}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+          
+        </ul>
+      </nav>
+      
+      {%- comment -%} Right Side Actions {%- endcomment -%}
+      <div class="bbc-header__actions">
+        {%- comment -%} Search {%- endcomment -%}
+        <button class="bbc-header__action bbc-header__search-toggle" aria-label="Search" data-testid="search-open">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+        
+        {%- comment -%} Account (Desktop only) {%- endcomment -%}
+        {% if shop.customer_accounts_enabled %}
+        <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="bbc-header__action bbc-header__account" aria-label="Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </a>
+        {% endif %}
+        
+        {%- comment -%} Cart {%- endcomment -%}
+        <a href="{{ routes.cart_url }}" class="bbc-header__action bbc-header__cart" aria-label="Cart" data-testid="cart-count">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span class="bbc-header__cart-count{% if cart.item_count == 0 %} hidden{% endif %}" aria-label="{{ cart.item_count }} items">
+            {{ cart.item_count }}
+          </span>
+        </a>
+      </div>
+      
+    </div>
+  </div>
+  
+  {%- comment -%} Search Modal — role="dialog" with proper ARIA {%- endcomment -%}
+  <div class="bbc-header__search-modal" id="search-modal" role="dialog" aria-modal="true" aria-labelledby="search-modal-title" aria-hidden="true">
+    <div class="bbc-header__search-modal-inner page-width">
+      <h2 id="search-modal-title" class="visually-hidden">Search our store</h2>
+      <form action="{{ routes.search_url }}" method="get" class="bbc-header__search-form" role="search">
+        <label for="search-input" class="visually-hidden">Search</label>
+        <input 
+          type="search" 
+          id="search-input"
+          name="q" 
+          placeholder="Search kits, workshops, guides..." 
+          class="bbc-header__search-input"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          data-testid="search-input"
+        >
+        <button type="submit" class="bbc-header__search-submit" aria-label="Submit search" data-testid="search-submit">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </form>
+      <button class="bbc-header__search-close" aria-label="Close search" type="button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  
+</header>
+
+{%- comment -%} Mobile Menu — OUTSIDE header to avoid iOS Safari stacking context bug with position:sticky {%- endcomment -%}
+<div class="bbc-header__mobile-menu" id="bbc-mobile-menu" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title" aria-hidden="true">
+  <div class="bbc-header__mobile-menu-header">
+    <h2 id="mobile-menu-title" class="bbc-header__mobile-menu-title">Menu</h2>
+    <button class="bbc-header__mobile-menu-close" aria-label="Close menu" type="button">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="bbc-header__mobile-menu-inner">
+    <nav class="bbc-header__mobile-nav" aria-label="Mobile navigation">
+      
+      {%- comment -%} DYNAMIC Mobile Menu from Shopify Navigation {%- endcomment -%}
+      <ul role="list">
+      {%- for link in menu.links -%}
+        {%- if link.links.size > 0 -%}
+          {%- comment -%} Has children — show expandable section {%- endcomment -%}
+          <li>
+            <details class="bbc-header__mobile-section">
+              <summary aria-expanded="false">
+                {{ link.title }}
+                <svg class="bbc-header__mobile-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+              </summary>
+              <ul role="list">
+                {%- for child_link in link.links -%}
+                  <li><a href="{{ child_link.url }}">{{ child_link.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </details>
+          </li>
+        {%- else -%}
+          {%- comment -%} No children — direct link {%- endcomment -%}
+          <li><a href="{{ link.url }}" class="bbc-header__mobile-link">{{ link.title }}</a></li>
+        {%- endif -%}
+      {%- endfor -%}
+      </ul>
+      
+    </nav>
+    
+    {%- comment -%} Mobile Footer {%- endcomment -%}
+    <div class="bbc-header__mobile-footer">
+      {% if shop.customer_accounts_enabled %}
+      <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">
+        {% if customer %}My Account{% else %}Log In{% endif %}
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+/* ==========================================================================
+   BBC Header — Clean Flexbox Layout
+   ========================================================================== */
+
+.bbc-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--bbc-forest);
+  margin-bottom: 0; /* Override generic .bbc-header class from product-styles */
+}
+
+/* Announcement Bar */
+.bbc-header__announcement {
+  background: #052e1c;
+  color: var(--bbc-white);
+  padding: 10px 0;
+  font-size: 13px;
+  text-align: center;
+}
+
+.bbc-header__announcement p {
+  margin: 0;
+  color: var(--bbc-white);
+}
+
+.bbc-header__announcement-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.bbc-header__announcement a {
+  color: var(--bbc-gold);
+  text-decoration: underline;
+}
+
+/* Main Header */
+.bbc-header__main {
+  background: var(--bbc-forest);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.bbc-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  min-height: 64px;
+  gap: 24px;
+}
+
+/* Logo */
+.bbc-header__logo {
+  flex-shrink: 0;
+  flex-grow: 0;
+  max-width: 500px;
+}
+
+.bbc-header__logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.bbc-header__logo-image {
+  height: auto;
+  width: 100%;
+  max-width: 500px;
+  max-height: 60px;
+  object-fit: contain;
+}
+
+.bbc-header__logo-text {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--bbc-white);
+  white-space: nowrap;
+}
+
+/* Navigation */
+.bbc-header__nav {
+  display: none;
+  flex: 1;
+  justify-content: center;
+}
+
+@media (min-width: 990px) {
+  .bbc-header__nav {
+    display: flex;
+  }
+}
+
+.bbc-header__nav-list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bbc-header__nav-item {
+  position: relative;
+}
+
+.bbc-header__nav-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bbc-white);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.15s, box-shadow 0.2s ease, color 0.15s;
+}
+
+.bbc-header__nav-link:hover {
+  color: var(--bbc-gold) !important;
+  background: rgba(255, 169, 0, 0.1);
+  box-shadow: inset 0 -2px 0 rgba(255, 169, 0, 0.7);
+}
+
+.bbc-header__nav-arrow {
+  opacity: 0.6;
+  transition: transform 0.2s;
+}
+
+.bbc-header__nav-item:hover .bbc-header__nav-arrow {
+  transform: rotate(180deg);
+}
+
+/* Active page indicator — gold bottom line */
+.bbc-header__nav-link--active {
+  position: relative;
+  color: var(--bbc-gold) !important; /* Override foundation var(--bbc-white) !important */
+}
+
+.bbc-header__nav-link--active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 14px;
+  right: 14px;
+  height: 2px;
+  background: var(--bbc-gold);
+  border-radius: 1px;
+}
+
+
+/* Hamburger → X animation */
+.bbc-hamburger {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+}
+
+.bbc-hamburger__bar {
+  display: block;
+  position: absolute;
+  width: 22px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+.bbc-hamburger__bar--top { transform: translateY(-6px); }
+.bbc-hamburger__bar--mid { transform: translateY(0); }
+.bbc-hamburger__bar--bot { transform: translateY(6px); }
+
+/* Active: bars collapse to X */
+.bbc-header__menu-toggle.active .bbc-hamburger__bar--top {
+  transform: translateY(0) rotate(45deg);
+}
+.bbc-header__menu-toggle.active .bbc-hamburger__bar--mid {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.bbc-header__menu-toggle.active .bbc-hamburger__bar--bot {
+  transform: translateY(0) rotate(-45deg);
+}
+
+/* Dropdown Menus */
+.bbc-header__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  min-width: 400px;
+  padding-top: 8px; /* Bridge gap for hover */
+  z-index: 100;
+}
+
+.bbc-header__dropdown--narrow {
+  min-width: 200px;
+}
+
+.bbc-header__nav-item:hover .bbc-header__dropdown,
+.bbc-header__nav-item:focus-within .bbc-header__dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.bbc-header__dropdown-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 20px 24px;
+  background: var(--bbc-white);
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+}
+
+.bbc-header__dropdown--narrow .bbc-header__dropdown-inner {
+  display: block;
+  padding: 12px 16px;
+  background: var(--bbc-white);
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+}
+
+.bbc-header__dropdown-col ul,
+.bbc-header__dropdown-simple {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bbc-header__dropdown-heading {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--bbc-gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.bbc-header__dropdown-col a,
+.bbc-header__dropdown-simple a {
+  display: block;
+  padding: 6px 8px;
+  font-size: 14px;
+  color: var(--bbc-gray-900);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+
+.bbc-header__dropdown-col a:hover,
+.bbc-header__dropdown-simple a:hover {
+  color: var(--bbc-forest);
+  background: rgba(7, 62, 39, 0.07);
+  box-shadow: inset 3px 0 0 var(--bbc-gold);
+}
+
+/* Actions */
+.bbc-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.bbc-header__action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--bbc-white);
+  transition: background 0.15s;
+}
+
+.bbc-header__action:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.bbc-header__cart {
+  position: relative;
+}
+
+.bbc-header__cart-count {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 18px;
+  height: 18px;
+  background: var(--bbc-gold);
+  color: var(--bbc-forest);
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bbc-header__cart-count.hidden {
+  display: none;
+}
+
+/* Mobile Menu Toggle */
+.bbc-header__menu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--bbc-white);
+  padding: 0;
+}
+
+@media (min-width: 990px) {
+  .bbc-header__menu-toggle {
+    display: none;
+  }
+}
+
+/* Search Modal */
+.bbc-header__search-modal {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bbc-white);
+  padding: 16px 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.bbc-header__search-modal.active {
+  display: block;
+}
+
+.bbc-header__search-modal-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bbc-header__search-form {
+  flex: 1;
+  display: flex;
+  gap: 8px;
+}
+
+.bbc-header__search-input {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 2px solid #e5e5e5;
+  border-radius: 4px;
+  outline: none;
+}
+
+.bbc-header__search-input:focus {
+  border-color: var(--bbc-forest);
+}
+
+.bbc-header__search-submit {
+  padding: 12px 20px;
+  background: var(--bbc-forest);
+  color: var(--bbc-white);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.bbc-header__search-close {
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--bbc-gray-600);
+}
+
+/* Mobile Menu */
+.bbc-header__mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bbc-white);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 1002;
+  overflow-y: auto;
+}
+
+.bbc-header__mobile-menu.active {
+  transform: translateX(0);
+}
+
+.bbc-header__mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e5e5;
+  background: var(--bbc-forest);
+  color: var(--bbc-white);
+}
+
+.bbc-header__mobile-menu-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.bbc-header__mobile-menu-close {
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--bbc-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bbc-header__mobile-menu-inner {
+  padding: 20px;
+}
+
+.bbc-header__mobile-link {
+  display: block;
+  padding: 14px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--bbc-forest);
+  text-decoration: none;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.bbc-header__mobile-section {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.bbc-header__mobile-section summary {
+  padding: 14px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--bbc-gray-900);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bbc-header__mobile-section summary::after {
+  content: '+';
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--bbc-gray-400);
+}
+
+.bbc-header__mobile-section[open] summary::after {
+  content: '−';
+}
+
+.bbc-header__mobile-section ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 14px 16px;
+}
+
+.bbc-header__mobile-section li {
+  padding: 8px 0;
+}
+
+.bbc-header__mobile-section a {
+  color: var(--bbc-gray-600);
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.bbc-header__mobile-footer {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.bbc-header__mobile-footer a {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--bbc-forest);
+  color: var(--bbc-white);
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Hide account icon on mobile */
+.bbc-header__account {
+  display: none;
+}
+
+@media (min-width: 990px) {
+  .bbc-header__account {
+    display: flex;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // =========================================================================
+  // ACCESSIBILITY: Mobile menu toggle with focus management
+  // =========================================================================
+  const menuToggle = document.querySelector('.bbc-header__menu-toggle');
+  const mobileMenu = document.querySelector('.bbc-header__mobile-menu');
+  const menuClose = document.querySelector('.bbc-header__mobile-menu-close');
+  
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener('click', function() {
+      mobileMenu.classList.add('active');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      menuToggle.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      // Focus the close button for accessibility
+      menuClose?.focus();
+    });
+    
+    const closeMobileMenu = function() {
+      mobileMenu.classList.remove('active');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.classList.remove('active');
+      document.body.style.overflow = '';
+      // Return focus to menu toggle
+      menuToggle.focus();
+    };
+    
+    menuClose?.addEventListener('click', closeMobileMenu);
+    
+    // Focus trap within mobile menu
+    mobileMenu.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') {
+        const focusable = mobileMenu.querySelectorAll('a, button, input, [tabindex]:not([tabindex="-1"])');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+  }
+  
+  // =========================================================================
+  // ACCESSIBILITY: Search modal toggle with focus management
+  // =========================================================================
+  const searchToggle = document.querySelector('.bbc-header__search-toggle');
+  const searchModal = document.querySelector('.bbc-header__search-modal');
+  const searchClose = document.querySelector('.bbc-header__search-close');
+  const searchInput = document.querySelector('.bbc-header__search-input');
+  
+  if (searchToggle && searchModal) {
+    searchToggle.addEventListener('click', function() {
+      searchModal.classList.add('active');
+      searchModal.setAttribute('aria-hidden', 'false');
+      searchToggle.setAttribute('aria-expanded', 'true');
+      // Focus the search input for immediate typing
+      searchInput?.focus();
+    });
+    
+    const closeSearchModal = function() {
+      searchModal.classList.remove('active');
+      searchModal.setAttribute('aria-hidden', 'true');
+      searchToggle.setAttribute('aria-expanded', 'false');
+      // Return focus to search toggle
+      searchToggle.focus();
+    };
+    
+    searchClose?.addEventListener('click', closeSearchModal);
+    
+    // Focus trap within search modal
+    searchModal.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') {
+        const focusable = searchModal.querySelectorAll('input, button, [tabindex]:not([tabindex="-1"])');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+  }
+  
+  // =========================================================================
+  // ACCESSIBILITY: Close modals on Escape key
+  // =========================================================================
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      if (searchModal?.classList.contains('active')) {
+        searchModal.classList.remove('active');
+        searchModal.setAttribute('aria-hidden', 'true');
+        searchToggle?.setAttribute('aria-expanded', 'false');
+        searchToggle?.focus();
+      }
+      if (mobileMenu?.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        menuToggle?.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        menuToggle?.focus();
+      }
+    }
+  });
+  
+  // =========================================================================
+  // ACCESSIBILITY: Handle aria-expanded on details/summary elements
+  // =========================================================================
+  const detailsElements = document.querySelectorAll('.bbc-header__mobile-section');
+  detailsElements.forEach(function(details) {
+    const summary = details.querySelector('summary');
+    if (summary) {
+      // Set initial state
+      summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+      
+      // Update on toggle
+      details.addEventListener('toggle', function() {
+        summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+      });
+    }
+  });
+  
+  // =========================================================================
+  // ACCESSIBILITY: Handle dropdown keyboard navigation
+  // =========================================================================
+  const navItems = document.querySelectorAll('.bbc-header__nav-item--has-dropdown');
+  navItems.forEach(function(item) {
+    const link = item.querySelector('.bbc-header__nav-link');
+    const dropdown = item.querySelector('.bbc-header__dropdown');
+    
+    if (link && dropdown) {
+      // Open dropdown on Enter/Space
+      link.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          dropdown.classList.toggle('active');
+          link.setAttribute('aria-expanded', dropdown.classList.contains('active') ? 'true' : 'false');
+        }
+        // Arrow down to first dropdown item
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          const firstLink = dropdown.querySelector('a');
+          firstLink?.focus();
+        }
+      });
+      
+      // Escape to close dropdown
+      dropdown.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          dropdown.classList.remove('active');
+          link.setAttribute('aria-expanded', 'false');
+          link.focus();
+        }
+      });
+    }
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "BBC Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "info": "Select the menu to display. Manage menus in Online Store > Navigation."
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image",
+      "info": "Recommended: SVG or PNG with transparent background"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 150,
+      "max": 500,
+      "step": 10,
+      "default": 300,
+      "unit": "px",
+      "label": "Logo width"
+    },
+    {
+      "type": "header",
+      "content": "Announcement Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "Free UK shipping on orders over £100 • Worldwide delivery available"
+    },
+    {
+      "type": "url",
+      "id": "announcement_link",
+      "label": "Announcement link"
+    },
+    {
+      "type": "text",
+      "id": "announcement_link_text",
+      "label": "Link text",
+      "default": "Learn more"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Header"
+    }
+  ]
+}
+{% endschema %}

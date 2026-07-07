@@ -1,0 +1,87 @@
+{
+  "discipline": "Road (carbon-lugged)",
+  "audience": "A distance road rider who wants the flagship bamboo build — endurance drop-bar comfort with carbon-lug joints that answer the two things road buyers worry about most: weight and stiffness — and who'd rather hand-build a one-off frame than buy another anonymous carbon machine.",
+  "positioning": {
+    "eyebrow": "The flagship road build",
+    "title": "Bamboo's ride feel, carbon-lug precision.",
+    "lede": "Our premium road kit joins the bamboo with pre-formed carbon-fibre lugs instead of hand-wrapped tow — lighter, stiffer joints and a cleaner finish that looks like a custom frame-shop build. You still get bamboo's all-day vibration damping; you just get it on the lightest, stiffest, sharpest-looking frame we make."
+  },
+  "specs": [
+    { "label": "Construction", "value": "Pre-formed carbon-fibre lugs" },
+    { "label": "Ride feel", "value": "Compliant, with stiffer joints" },
+    { "label": "Geometry", "value": "Endurance road, drop-bar" },
+    { "label": "Build time", "value": "15–25 hrs (lugs are faster)" }
+  ],
+  "who_for": [
+    {
+      "title": "You want the lightest, stiffest bamboo road frame",
+      "body": "Carbon lugs are lighter and stiffer than hand-wrapped fibre joints, so this is the build for the road rider who loves bamboo's compliance but won't compromise on joint weight or power transfer. It's the answer to 'is bamboo stiff and light enough?' — yes, and more so here."
+    },
+    {
+      "title": "You want it to look like a custom frame-shop build",
+      "body": "Pre-formed lugs give clean, uniform joints with none of the variability of hand-wrapping. Builders tell us people assume it came from a custom workshop, not a home kit. The premium tier looks the part."
+    },
+    {
+      "title": "You'd rather build it — with a head start",
+      "body": "Lugged construction is more forgiving and noticeably faster than wrapping each joint by hand (15–25 hrs vs 20–40 on the standard kit). A flagship one-off you finished yourself — and every kit funds a place on our prison frame-building course."
+    }
+  ],
+  "faq": [
+    {
+      "q": "What are carbon lugs, and how are they different from the standard road kit?",
+      "a": "On our standard road kit you wrap each joint by hand with carbon-fibre tow and epoxy. This flagship kit instead joins the bamboo with pre-formed carbon-fibre lugs — ready-shaped carbon sockets the tubes bond into. They give a cleaner, more uniform joint, a lighter and stiffer frame, and a faster, more forgiving build. It's the same endurance road geometry and the same bamboo ride feel — just the premium construction."
+    },
+    {
+      "q": "Are carbon lugs really lighter and stiffer than wrapped joints?",
+      "a": "Yes — that's the whole point of the lugged build. Pre-formed carbon lugs are lighter and torsionally stiffer than the equivalent hand-wrapped fibre joint, so more of your power goes to the back wheel and the finished frame is the lightest road frame we make. You still keep bamboo's natural vibration damping for all-day comfort — you're sharpening the joints, not deadening the ride."
+    },
+    {
+      "q": "Is it stiff and efficient enough for fast road riding?",
+      "a": "Yes. Bamboo is already torsionally stiff, and the carbon lugs add stiffness at the joints, so power transfer is direct and precise. It's tuned for endurance comfort rather than crit-race harshness, but of our road builds this is the stiffest and most responsive. Tensile strength is around 28,000 PSI, comparable to mild steel."
+    },
+    {
+      "q": "Why is this kit £795 when the standard road kit is less?",
+      "a": "The pre-formed carbon lugs are a premium component — they cost more to produce than a reel of carbon tow, and they deliver the lighter, stiffer, cleaner-finished flagship frame. You're paying for the lug construction and the result. If you'd rather hand-wrap your joints and save, the standard Road kit is the same geometry and ride feel at a lower price."
+    },
+    {
+      "q": "Will the frame survive years of big road miles?",
+      "a": "Yes. We've seen under a 1% failure rate across 4,000+ builds since 2012, the design has been independently tested with Swansea University, and frames last 8–12 years with proper care — many of our 2012 builds are still ridden daily. Seal it, dry it after wet rides and store it indoors."
+    }
+  ],
+  "reviews": [
+    {
+      "quote": "The carbon lugs give it a really clean look. People think it's a custom frame shop build, not a home kit.",
+      "author": "Road Lugged Builder",
+      "role": "Home kit build, UK"
+    }
+  ],
+  "related": [
+    {
+      "title": "Road Frame Build Kit",
+      "note": "Same road geometry and ride feel, joined with hand-wrapped carbon tow instead of lugs — the more affordable way in.",
+      "fallback": "bbc-rd-prod-build.jpg"
+    },
+    {
+      "title": "Gravel Frame Build Kit",
+      "note": "Same compliant ride, slacker geometry and wider clearance for gravel, light touring and bikepacking.",
+      "fallback": "bbc-rd-bike-field.jpg"
+    },
+    {
+      "title": "Custom Frame Kit",
+      "note": "Dial in your exact road geometry — built to your measurements. Request a quote.",
+      "fallback": "bbc-rd-detail.jpg"
+    }
+  ],
+  "hero_fallback": "bbc-rd-road-charlie.jpg",
+  "price_from": "£795",
+  "needs_real_data": [
+    "Star rating value and review count (baseline section ships placeholder 4.8 / 214 — not verified for any kit; the cross-cutting rule BLANKS this on all kits in favour of the subline 'Rated by the builders who made one'. Keep blanked until real lugged-kit review data exists).",
+    "Only one verbatim review exists for the lugged road kit (carried from templates/product.kit-road-lugged.json quote-inline). Need 1–2 more real road-lugged builder quotes for the reviews grid (the standard road kit's quotes are tow-wrapped builds, not lugged — do not silently reuse).",
+    "Quantified weight/stiffness delta vs the standard road kit: copy claims carbon lugs are 'lighter and stiffer' (true directionally and consistent with the kit's own positioning), but NO measured gram/stiffness figure exists in any BBC source. Supply a real finished-frame weight and/or a stiffness number if a hard figure is wanted; otherwise keep the comparative-but-unquantified framing.",
+    "Exact tyre clearance for the road frame (~32mm assumed from the standard road spec; not separately verified for the lugged frame). Confirm before publishing a hard number.",
+    "Build-time figure: this kit's template says 15–25 hrs (lugged = faster); standard road template says 20–40 hrs. Spec uses 15–25 for the lugged kit and 20–40 as the standard-kit comparison — confirm both are current.",
+    "Price relationship: £795 lugged vs the standard road kit's lower price (brief/spec reference it as 'the cheaper option'); confirm the exact live standard-road price for the cross-sell and the 'why £795' FAQ before publishing.",
+    "Road-lugged-specific imagery: only generic bbc-rd-* placeholders are available (allowed set: bbc-rd-road-charlie.jpg, bbc-rd-detail.jpg, bbc-rd-bike-field.jpg, bbc-rd-prod-build.jpg). Replace hero + related fallbacks with a real photo of a carbon-lugged road build (ideally one that shows a lug joint).",
+    "Component-pack pairing/price for the bundle block on the live page (the standard road spec used a single-speed pack — confirm the right pack and total for a £795 flagship build)."
+  ]
+}

@@ -1,0 +1,584 @@
+/**
+ * BBC Mobile & Responsive Fixes
+ * Breakpoints: 320px, 375px, 768px, 1024px, 1440px
+ * 
+ * Addresses:
+ * - Tap target minimum 44x44px (WCAG 2.1 AA)
+ * - Mobile spacing optimization
+ * - Text truncation issues
+ * - Overflow issues
+ * - Sticky element performance
+ */
+
+/* =============================================================================
+   1. GLOBAL TAP TARGET FIXES — 44px minimum
+   ============================================================================= */
+
+/* Interactive elements on mobile */
+@media screen and (max-width: 749px) {
+  /* Buttons */
+  .button,
+  .shopify-payment-button__button,
+  .product-form__submit,
+  button[type="submit"],
+  .btn,
+  [role="button"] {
+    min-height: 48px !important; /* Slightly above 44px for comfort */
+    min-width: 48px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  /* Links in navigation */
+  .header__menu-item,
+  .menu-drawer__menu-item,
+  nav a,
+  .footer a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 12px;
+  }
+  
+  /* Form inputs */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  textarea,
+  select,
+  .field__input {
+    min-height: 48px !important;
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+  }
+  
+  /* Radio/checkbox labels (variant selectors) */
+  .product-form__input label,
+  .variant-input label,
+  input[type="radio"] + label,
+  input[type="checkbox"] + label {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+  }
+  
+  /* Quantity selectors */
+  .quantity__button {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+  
+  /* Icon buttons */
+  .icon-button,
+  [class*="icon-"] button,
+  button[class*="icon"] {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* =============================================================================
+   2. MOBILE SPACING OPTIMIZATION (320px-749px)
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  /* Reduce excessive section padding on mobile */
+  .shopify-section {
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
+  }
+  
+  /* Page width padding on mobile */
+  .page-width {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  
+  /* Product grid spacing */
+  .product-grid {
+    gap: 12px !important;
+  }
+  
+  /* Card content padding */
+  .card__content,
+  .card-information {
+    padding: 12px !important;
+  }
+  
+  /* Reduce heading sizes for mobile */
+  h1, .h1 {
+    font-size: clamp(1.75rem, 6vw, 2.5rem) !important;
+    line-height: 1.2 !important;
+  }
+  
+  h2, .h2 {
+    font-size: clamp(1.5rem, 5vw, 2rem) !important;
+    line-height: 1.25 !important;
+  }
+  
+  h3, .h3 {
+    font-size: clamp(1.25rem, 4vw, 1.5rem) !important;
+    line-height: 1.3 !important;
+  }
+}
+
+/* Ultra-small mobile (320px) */
+@media screen and (max-width: 359px) {
+  .page-width {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  
+  .shopify-section {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+  
+  /* Smaller font sizes at 320px */
+  body {
+    font-size: 14px !important;
+  }
+}
+
+/* =============================================================================
+   3. CART PAGE TEXT FIX
+   ============================================================================= */
+
+/* Fix cart item layout on mobile - TABLE-based layout */
+@media screen and (max-width: 749px) {
+  /* Force cart table to use block display for stacking */
+  .cart-items,
+  .cart-items tbody,
+  .cart-items thead,
+  .cart-items tr,
+  .cart-items td,
+  .cart-items th {
+    display: block !important;
+    width: 100% !important;
+  }
+  
+  /* Hide table header on mobile */
+  .cart-items thead {
+    display: none !important;
+  }
+  
+  /* Cart item row - use flexbox for layout */
+  .cart-items .cart-item,
+  .cart-items tr.cart-item {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    padding: 15px 0 !important;
+    border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+  }
+  
+  /* First cell (product details) - takes remaining space */
+  .cart-items .cart-item td:first-child,
+  .cart-items tr.cart-item td:first-child {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    display: flex !important;
+    gap: 12px !important;
+  }
+  
+  /* Image container */
+  .cart-item__image-container {
+    flex: 0 0 70px !important;
+    width: 70px !important;
+  }
+  
+  .cart-item__image {
+    width: 70px !important;
+    max-width: 70px !important;
+  }
+  
+  /* Details container - must be wide enough for text */
+  .cart-item__details {
+    flex: 1 1 auto !important;
+    min-width: 100px !important;
+  }
+  
+  /* CRITICAL: Fix the text wrapping */
+  .cart-item__name,
+  .cart-item__name.break,
+  .cart-item__name.h4,
+  a.cart-item__name {
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    display: block !important;
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Product options (size, color, etc) */
+  .product-option,
+  .cart-item__details .product-option {
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    font-size: 12px !important;
+  }
+  
+  /* Price column - hide duplicate, show in details */
+  .cart-items .cart-item td.cart-item__totals,
+  .cart-items tr.cart-item td.cart-item__totals {
+    position: absolute !important;
+    right: 0 !important;
+    top: 15px !important;
+  }
+  
+  /* Quantity cell - full width row */
+  .cart-items .cart-item .cart-item__quantity,
+  .cart-items tr.cart-item td:last-child {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+  }
+}
+
+/* =============================================================================
+   4. COLLECTION PAGE TEXT TRUNCATION FIX
+   ============================================================================= */
+
+/* Product card titles - prevent aggressive truncation */
+@media screen and (max-width: 749px) {
+  .card__heading,
+  .card__heading a,
+  .card-information__text,
+  .full-unstyled-link {
+    font-size: 13px !important;
+    line-height: 1.35 !important;
+    /* Allow 2 lines before truncating */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    max-height: 2.7em !important; /* 2 lines at 1.35 line-height */
+  }
+  
+  /* Price display - ensure full visibility */
+  .price,
+  .price-item,
+  .price__regular,
+  .price__sale {
+    font-size: 14px !important;
+    white-space: nowrap !important;
+  }
+  
+  /* "From" prefix should not wrap */
+  .price .price-item--regular::before,
+  .price--on-sale .price-item--regular::before {
+    white-space: nowrap !important;
+  }
+}
+
+/* =============================================================================
+   4. OVERFLOW FIX — Prevent horizontal scroll
+   ============================================================================= */
+
+/* Global overflow prevention */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+}
+
+/* Elements that commonly cause overflow */
+.page-width,
+.container,
+main,
+#MainContent,
+.shopify-section {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+/* Images */
+img,
+video,
+iframe,
+embed,
+object {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Tables on mobile */
+@media screen and (max-width: 749px) {
+  table {
+    display: block !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    max-width: 100% !important;
+  }
+}
+
+/* =============================================================================
+   5. STICKY ELEMENTS — Performance optimization
+   ============================================================================= */
+
+/* Sticky header optimization */
+.header-wrapper.header-wrapper--border-bottom,
+.shopify-section-header-sticky {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  /* Hardware acceleration for smooth scrolling */
+  transform: translateZ(0) !important;
+  -webkit-transform: translateZ(0) !important;
+  will-change: transform !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+}
+
+/* Sticky add-to-cart bar on product pages (if exists) */
+.product-form__sticky {
+  position: sticky !important;
+  bottom: 0 !important;
+  z-index: 100 !important;
+  background: rgb(var(--color-background)) !important;
+  padding: 12px 16px !important;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1) !important;
+  transform: translateZ(0) !important;
+}
+
+/* =============================================================================
+   6. TABLET BREAKPOINT (768px)
+   ============================================================================= */
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  /* 2-column layouts work well at tablet */
+  .product-grid.grid--3-col-desktop {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  /* Slightly larger section padding */
+  .shopify-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+  
+  /* Better page width */
+  .page-width {
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+  }
+}
+
+/* =============================================================================
+   7. DESKTOP BREAKPOINTS (1024px+, 1440px+)
+   ============================================================================= */
+
+@media screen and (min-width: 990px) and (max-width: 1199px) {
+  /* Standard desktop */
+  .shopify-section {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  /* Large desktop */
+  .shopify-section {
+    padding-top: 56px !important;
+    padding-bottom: 56px !important;
+  }
+  
+  /* Max content width */
+  .page-width {
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* =============================================================================
+   8. REDUCED MOTION — Accessibility
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .sticky,
+  [class*="sticky"] {
+    position: relative !important;
+  }
+}
+
+/* =============================================================================
+   9. TOUCH DEVICE OPTIMIZATIONS
+   ============================================================================= */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects that don't work on touch */
+  .card-wrapper:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Better tap feedback */
+  a, button, [role="button"], label, input, select, textarea {
+    -webkit-tap-highlight-color: rgba(7, 62, 39, 0.15) !important;
+  }
+  
+  /* Ensure enough spacing between tappable elements */
+  .card-wrapper + .card-wrapper,
+  li + li,
+  .grid__item + .grid__item {
+    margin-top: 8px;
+  }
+}
+
+/* =============================================================================
+   10. PERFORMANCE — Slower connections
+   ============================================================================= */
+
+/* Reduce animations for save-data mode */
+@media (prefers-reduced-data: reduce) {
+  img, video {
+    content-visibility: auto !important;
+  }
+  
+  /* Disable background images in save-data mode */
+  [style*="background-image"] {
+    background-image: none !important;
+  }
+}
+
+/* Lazy loading hints */
+img[loading="lazy"],
+iframe[loading="lazy"] {
+  content-visibility: auto !important;
+  contain-intrinsic-size: 300px !important;
+}
+
+/* =============================================================================
+   11. MOBILE MENU DRAWER
+   ============================================================================= */
+
+@media screen and (max-width: 989px) {
+  .menu-drawer__menu {
+    padding: 16px !important;
+  }
+  
+  .menu-drawer__menu-item {
+    padding: 14px 16px !important; /* Comfortable tap target */
+    min-height: 48px !important;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.08) !important;
+  }
+  
+  /* Nested menu items */
+  .menu-drawer__menu--child .menu-drawer__menu-item {
+    padding-left: 32px !important;
+  }
+}
+
+/* =============================================================================
+   12. FOOTER MOBILE OPTIMIZATION
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  .footer__content-top {
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+  
+  .footer__column {
+    width: 100% !important;
+    text-align: center !important;
+  }
+  
+  /* Stack footer links on mobile */
+  .footer__list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: center !important;
+  }
+  
+  /* Footer link tap targets */
+  .footer__list-item a {
+    padding: 8px 12px !important;
+    min-height: 44px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+}
+
+/* =============================================================================
+   HEADER DROPDOWN FIX
+   Two issues were clipping/hiding the nav dropdown menus:
+
+   1. OVERFLOW CLIPPING: bbc-mobile-fixes.css applies overflow-x:hidden to
+      .page-width and .shopify-section — this clips absolutely-positioned
+      dropdown menus that extend below the header. Fixed with overflow:visible.
+
+   2. STACKING CONTEXT: The header section group has no explicit position set,
+      so its z-index (4) from base.css has no effect (z-index only applies to
+      positioned elements). Without a stacking context on the group, the dropdown
+      inside .bbc-header (sticky, z:1000) can still be painted behind page content
+      like the hero/collection banner. Fixed by creating a proper stacking context
+      on the header group at z:100, which beats all normal page content (z:3 etc).
+   ============================================================================= */
+
+.shopify-section-group-header-group {
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  position: relative !important;
+  z-index: 100 !important;
+}
+
+.shopify-section-group-header-group .shopify-section,
+.shopify-section-group-header-group .page-width,
+.bbc-header,
+.bbc-header__inner {
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+}
+
+/* Dropdown must always appear above page content (hero banners, product images etc.) */
+.bbc-header__nav-item:hover .bbc-header__dropdown,
+.bbc-header__nav-item:focus-within .bbc-header__dropdown {
+  z-index: 9999 !important;
+}
+
+/* =============================================================================
+   NAV LINK COLOUR OVERRIDES
+   bbc-foundation.css sets color:#fff !important on .bbc-header__nav-link.
+   These rules need to load AFTER to override with higher specificity + !important.
+   ============================================================================= */
+
+/* Hover: gold colour */
+.bbc-header__nav .bbc-header__nav-link:hover {
+  color: var(--bbc-gold) !important;
+  background: rgba(255, 169, 0, 0.1);
+}
+
+/* Active page: gold colour */
+.bbc-header__nav .bbc-header__nav-link--active {
+  color: var(--bbc-gold) !important;
+}
+
+/* Arrow: full white opacity on hover */
+.bbc-header__nav-item:hover .bbc-header__nav-arrow,
+.bbc-header__nav-item:focus-within .bbc-header__nav-arrow {
+  opacity: 1;
+}

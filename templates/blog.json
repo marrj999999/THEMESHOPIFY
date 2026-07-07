@@ -1,1 +1,19 @@
-{"sections":{"main":{"type":"blog","custom_css":[],"settings":{"default_color":"none","blog_style":"standard","post_columns":2,"image_aspect_ratio":0.8,"show_rss_icon":false,"show_date":false,"show_author":false,"show_tags":true,"show_comments_count":false,"tag_alignment":"left","bg_color_secondary":true,"padding_top":60,"padding_bottom":60}}},"order":["main"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "layout": "collage",
+        "show_image": true,
+        "image_height": "medium",
+        "show_date": true,
+        "show_author": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

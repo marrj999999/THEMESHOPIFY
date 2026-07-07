@@ -1,0 +1,79 @@
+{%- comment -%}
+  BBC New Design (2026) — "From the Club" featured-stories band.
+  Surfaces hand-picked blog stories on the homepage (the blog had no homepage
+  entry point). Self-contained; reuses the shared .rd card system so it inherits
+  the existing responsive breakpoints. Each card = image + tag + title + excerpt,
+  linking to a real article. Two-track by design: builder stories + mission stories.
+{%- endcomment -%}
+<div class="bbc-rd bbc-rd-stories">
+  <section class="rd-section rd-pad-sm{% if section.settings.paper %} rd-paper{% endif %}">
+    <div class="rd-wrap">
+      <div class="rd-flex rd-stories-head">
+        <div>
+          {%- if section.settings.eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+          <h2 class="rd-mw-22ch">{{ section.settings.heading }}</h2>
+        </div>
+        {%- if section.settings.view_all_url != blank -%}
+          <a class="rd-link-arrow" href="{{ section.settings.view_all_url }}">{{ section.settings.view_all_label | default: 'All stories' }} <span aria-hidden="true">&#8594;</span></a>
+        {%- endif -%}
+      </div>
+
+      <div class="rd-grid rd-g3 rd-mt3">
+        {%- for block in section.blocks -%}
+          <a class="rd-card rd-stamp rd-story-card" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+            <div class="rd-ph">
+              <img class="rd-img-cover" src="{{ block.settings.image_fallback | default: 'bbc-rd-detail.jpg' | asset_url }}"
+                   alt="{{ block.settings.title | escape }}" width="800" height="600" loading="lazy">
+              {%- if block.settings.tag != blank -%}<span class="rd-tag rd-lime rd-cardtag">{{ block.settings.tag }}</span>{%- endif -%}
+            </div>
+            <div class="rd-body">
+              <h3 class="rd-fs-21px">{{ block.settings.title }}</h3>
+              {%- if block.settings.excerpt != blank -%}<p class="rd-mt1">{{ block.settings.excerpt }}</p>{%- endif -%}
+              <span class="rd-link-arrow rd-story-more">{{ block.settings.cta | default: 'Read the story' }} <span aria-hidden="true">&#8594;</span></span>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{%- style -%}
+  .bbc-rd-stories .rd-stories-head{ justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; }
+  .bbc-rd-stories .rd-story-card{ display:flex; flex-direction:column; text-decoration:none; }
+  .bbc-rd-stories .rd-story-card .rd-ph{ aspect-ratio:8/5; overflow:hidden; }
+  .bbc-rd-stories .rd-story-card .rd-img-cover{ width:100%; height:100%; object-fit:cover; transition:transform .4s ease; }
+  .bbc-rd-stories .rd-story-card:hover .rd-img-cover{ transform:scale(1.04); }
+  .bbc-rd-stories .rd-story-card .rd-body{ flex:1; display:flex; flex-direction:column; }
+  .bbc-rd-stories .rd-story-more{ margin-top:auto; padding-top:14px; }
+{%- endstyle -%}
+
+{% schema %}
+{
+  "name": "BBC Stories Band",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "From the Club" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Stories from our builders" },
+    { "type": "text", "id": "view_all_label", "label": "View-all label", "default": "All stories" },
+    { "type": "url", "id": "view_all_url", "label": "View-all link" },
+    { "type": "checkbox", "id": "paper", "label": "Paper background", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "story",
+      "name": "Story",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Tag" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "excerpt", "label": "Excerpt" },
+        { "type": "text", "id": "image_fallback", "label": "Image asset filename" },
+        { "type": "url", "id": "link", "label": "Article link" },
+        { "type": "text", "id": "cta", "label": "CTA label", "default": "Read the story" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "BBC Stories Band" }]
+}
+{% endschema %}

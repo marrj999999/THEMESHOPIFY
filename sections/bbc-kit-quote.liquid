@@ -1,0 +1,54 @@
+{{ 'bbc-kit-product.css' | asset_url | stylesheet_tag }}
+
+<section class="bbc-kit-quote" aria-label="Builder testimonial">
+  <div class="bbc-kit-quote__inner">
+    {% if section.settings.show_stars %}
+      <div class="bbc-kit-quote__stars" aria-label="5 star review">★★★★★</div>
+    {% endif %}
+    <blockquote>
+      <p class="bbc-kit-quote__text">"{{ section.settings.quote }}"</p>
+    </blockquote>
+    <p class="bbc-kit-quote__attr">
+      <strong>{{ section.settings.name }}</strong>
+      {% if section.settings.context != blank %} — {{ section.settings.context }}{% endif %}
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kit Builder Quote",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "I had zero experience — couldn't even change a puncture. Now I ride a bike I built with my own hands."
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Name",
+      "default": "Marcus K."
+    },
+    {
+      "type": "text",
+      "id": "context",
+      "label": "Context",
+      "default": "Road kit build, London"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stars",
+      "label": "Show star rating",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kit Builder Quote"
+    }
+  ]
+}
+{% endschema %}

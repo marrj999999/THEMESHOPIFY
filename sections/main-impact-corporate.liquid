@@ -1,0 +1,177 @@
+{% comment %} Corporate Learning section — BBC Impact Page {% endcomment %}
+
+{% unless section.settings.hide_section %}
+<section class="impact-corporate-section" style="padding: 80px 20px; background: #fff;">
+  <div class="page-width" style="max-width: 1100px; margin: 0 auto;">
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 60px;">
+      <div>
+        {% if section.settings.heading != blank %}
+          <p style="color: #8BC34A; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; font-size: 0.85rem;">{{ section.settings.label }}</p>
+          <h2 style="margin-bottom: 20px; font-size: 2rem;">{{ section.settings.heading }}</h2>
+        {% endif %}
+        {% if section.settings.body != blank %}
+          <div style="color: #555; line-height: 1.8; font-size: 1rem;">{{ section.settings.body }}</div>
+        {% endif %}
+        {% if section.settings.cta_text != blank and section.settings.cta_url != blank %}
+          <a href="{{ section.settings.cta_url }}"
+             style="display: inline-block; margin-top: 28px; background: #2E7D32; color: #fff; padding: 14px 28px; border-radius: 4px; text-decoration: none; font-weight: 600;">
+            {{ section.settings.cta_text }}
+          </a>
+        {% endif %}
+      </div>
+      {% if section.settings.image != blank %}
+        <div>
+          <img src="{{ section.settings.image | image_url: width: 700 }}"
+               alt="{{ section.settings.image_alt | default: 'Corporate team build at BBC' }}"
+               style="width: 100%; border-radius: 8px; display: block;"
+               loading="lazy">
+        </div>
+      {% endif %}
+    </div>
+
+    {% if section.blocks.size > 0 %}
+    <div style="display: grid; grid-template-columns: repeat({{ section.blocks.size | at_most: 3 }}, 1fr); gap: 24px;">
+      {% for block in section.blocks %}
+        {% if block.type == 'client_card' %}
+        <div style="border: 1px solid #e8e8e8; border-radius: 8px; padding: 28px; background: #fafafa;" {{ block.shopify_attributes }}>
+          {% if block.settings.stat_number != blank %}
+            <p style="font-size: 2rem; font-weight: 700; color: #2E7D32; margin: 0 0 4px;">{{ block.settings.stat_number }}</p>
+          {% endif %}
+          {% if block.settings.stat_label != blank %}
+            <p style="font-weight: 600; margin: 0 0 8px; font-size: 1rem;">{{ block.settings.stat_label }}</p>
+          {% endif %}
+          {% if block.settings.stat_context != blank %}
+            <p style="color: #777; font-size: 0.9rem; margin: 0;">{{ block.settings.stat_context }}</p>
+          {% endif %}
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+{% endunless %}
+
+<style>
+  @media (max-width: 768px) {
+    .impact-corporate-section .page-width > div:first-child {
+      grid-template-columns: 1fr !important;
+    }
+    .impact-corporate-section .page-width > div:last-child {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Corporate Learning",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "hide_section",
+      "label": "Hide this section",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label (small text above heading)",
+      "default": "🏢 Corporate Learning"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Corporate Learning That Leaves Something Behind"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body copy",
+      "default": "<p>We've delivered team-building workshops for Four Seasons Hotel Hampshire, The Macallan Whisky (10 bikes in a single day), Hilton Bankside, and GM Motors in Zurich. In December 2024, a corporate team built bamboo balance bikes at our workshop — then donated them to Upcycle, a cycling charity in Brixton.</p><p>Our mobile workshop comes to you. Hotel venues. Corporate offices. Across Europe. Every bike built teaches something real about craft, precision, and sustainable materials.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Section image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "Corporate team build at BBC London workshop"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA button text",
+      "default": "Book a team build →"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA button URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "client_card",
+      "name": "Client card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "stat_number",
+          "label": "Stat / highlight",
+          "default": "12 people"
+        },
+        {
+          "type": "text",
+          "id": "stat_label",
+          "label": "Label",
+          "default": "3 hours · 1 bamboo bike frame"
+        },
+        {
+          "type": "text",
+          "id": "stat_context",
+          "label": "Context / client name",
+          "default": "Four Seasons Hotel Hampshire, April 2025"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Corporate Learning",
+      "blocks": [
+        {
+          "type": "client_card",
+          "settings": {
+            "stat_number": "12 people",
+            "stat_label": "3 hours · 1 bamboo bike frame",
+            "stat_context": "Four Seasons Hotel Hampshire, April 2025"
+          }
+        },
+        {
+          "type": "client_card",
+          "settings": {
+            "stat_number": "10 bikes",
+            "stat_label": "1 day · Masters of Their Craft",
+            "stat_context": "The Macallan Whisky, April 2024"
+          }
+        },
+        {
+          "type": "client_card",
+          "settings": {
+            "stat_number": "Hire fleet",
+            "stat_label": "Staff trained → public hire bikes",
+            "stat_context": "Hilton Bankside, London"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,134 @@
+/* BBC Size Calculator Styles */
+
+.bbc-size-calculator {
+  padding: 3rem 2rem;
+  background: var(--bbc-cream, var(--bbc-cream));
+}
+
+.bbc-size-calculator__container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.bbc-size-calculator__heading {
+  font-family: var(--font-heading-family, 'Plus Jakarta Sans', sans-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--bbc-forest, var(--bbc-forest));
+  text-align: center;
+  margin: 0 0 0.5rem 0;
+}
+
+.bbc-size-calculator__subtitle {
+  font-size: 1rem;
+  color: var(--bbc-grey, #666);
+  text-align: center;
+  margin: 0 0 2rem 0;
+}
+
+.bbc-size-calculator__form {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(7, 62, 39, 0.06);
+}
+
+.bbc-size-calculator__field {
+  margin-bottom: 1.5rem;
+}
+
+.bbc-size-calculator__label {
+  display: block;
+  font-weight: 600;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin-bottom: 0.5rem;
+}
+
+.bbc-size-calculator__input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid rgba(7, 62, 39, 0.15);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.bbc-size-calculator__input:focus {
+  outline: none;
+  border-color: var(--bbc-teal, var(--bbc-teal));
+}
+
+.bbc-size-calculator__input:focus-visible {
+  outline: 2px solid var(--bbc-gold, var(--bbc-gold));
+  outline-offset: 2px;
+}
+
+.bbc-size-calculator__result {
+  background: var(--bbc-forest, var(--bbc-forest));
+  color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.bbc-size-calculator__result-label {
+  font-size: 0.875rem;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+.bbc-size-calculator__result-size {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--bbc-gold, var(--bbc-gold));
+}
+
+.bbc-size-calculator__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bbc-gold, var(--bbc-gold));
+  color: var(--bbc-forest, var(--bbc-forest));
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.bbc-size-calculator__cta:hover {
+  transform: translateY(-2px);
+}
+
+.bbc-size-calculator__cta:focus-visible {
+  outline: 2px solid var(--bbc-forest, var(--bbc-forest));
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bbc-size-calculator__input,
+  .bbc-size-calculator__cta {
+    transition: none;
+  }
+  
+  .bbc-size-calculator__cta:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .bbc-size-calculator {
+    padding: 2rem 1rem;
+  }
+  
+  .bbc-size-calculator__heading {
+    font-size: 1.5rem;
+  }
+  
+  .bbc-size-calculator__form {
+    padding: 1.5rem;
+  }
+}

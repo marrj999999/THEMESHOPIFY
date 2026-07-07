@@ -1,0 +1,90 @@
+{% comment %}
+  BBC Schools Hero — public schools/education advert (Layer 1)
+  Reframes BBC as an education supplier, not a bike club. Verified proof only.
+  Brand: forest/gold/cream + Plus Jakarta. Tokens from bbc-foundation.css (with fallbacks).
+  CTAs anchor to #enquiry-form (the bbc-schools-enquiry section).
+{% endcomment %}
+
+<section class="bbc-schools-hero{% if section.settings.image != blank %} bbc-schools-hero--img{% endif %}">
+  {% if section.settings.image != blank %}
+    <div class="bbc-schools-hero__bg">
+      {{ section.settings.image | image_url: width: 1920 | image_tag: loading: 'eager', sizes: '100vw', class: 'bbc-schools-hero__bgimg' }}
+      <span class="bbc-schools-hero__scrim"></span>
+    </div>
+  {% endif %}
+  <div class="page-width">
+    <div class="bbc-schools-hero__inner">
+      {% if section.settings.eyebrow != blank %}
+        <span class="bbc-schools-hero__eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+      <h1 class="bbc-schools-hero__title">{{ section.settings.title }}</h1>
+      {% if section.settings.subtitle != blank %}
+        <p class="bbc-schools-hero__subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+      <div class="bbc-schools-hero__cta">
+        {% if section.settings.cta_text != blank %}
+          <a class="bbc-schools-btn bbc-schools-btn--gold" href="{{ section.settings.cta_link | default: '#enquiry-form' }}">{{ section.settings.cta_text }}</a>
+        {% endif %}
+        {% if section.settings.cta2_text != blank %}
+          <a class="bbc-schools-btn bbc-schools-btn--outline" href="{{ section.settings.cta2_link | default: '#enquiry-form' }}">{{ section.settings.cta2_text }}</a>
+        {% endif %}
+      </div>
+      {% if section.settings.show_trust %}
+        <ul class="bbc-schools-hero__trust" role="list">
+          {% if section.settings.stat1 != blank %}<li>{{ section.settings.stat1 }}</li>{% endif %}
+          {% if section.settings.stat2 != blank %}<li>{{ section.settings.stat2 }}</li>{% endif %}
+          {% if section.settings.stat3 != blank %}<li>{{ section.settings.stat3 }}</li>{% endif %}
+        </ul>
+        {% if section.settings.press != blank %}
+          <p class="bbc-schools-hero__press">{{ section.settings.press }}</p>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .bbc-schools-hero{position:relative;background:var(--bbc-forest,#073e27);color:#fff;overflow:hidden}
+  .bbc-schools-hero__bg{position:absolute;inset:0;z-index:0}
+  .bbc-schools-hero__bgimg{width:100%;height:100%;object-fit:cover;display:block}
+  .bbc-schools-hero__scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,62,39,.92),rgba(7,62,39,.62))}
+  .bbc-schools-hero .page-width{position:relative;z-index:1}
+  .bbc-schools-hero__inner{max-width:760px;padding:64px 0}
+  .bbc-schools-hero__eyebrow{display:inline-block;font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bbc-gold,#ffa900);margin-bottom:14px}
+  .bbc-schools-hero__title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(2rem,4.5vw,3.25rem);line-height:1.1;color:#fff;margin:0 0 16px}
+  .bbc-schools-hero__subtitle{font-size:1.18rem;line-height:1.5;color:rgba(255,255,255,.92);margin:0 0 28px;max-width:60ch}
+  .bbc-schools-hero__cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px}
+  .bbc-schools-btn{display:inline-block;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1rem;text-decoration:none;border-radius:10px;padding:13px 26px;transition:transform .12s,box-shadow .12s}
+  .bbc-schools-btn:hover{transform:translateY(-2px)}
+  .bbc-schools-btn--gold{background:var(--bbc-gold,#ffa900);color:var(--bbc-forest,#073e27);box-shadow:0 4px 14px rgba(255,169,0,.3)}
+  .bbc-schools-btn--outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6)}
+  .bbc-schools-btn--outline:hover{border-color:#fff}
+  .bbc-schools-hero__trust{list-style:none;display:flex;flex-wrap:wrap;gap:10px 20px;margin:0 0 10px;padding:0}
+  .bbc-schools-hero__trust li{font-weight:700;font-size:.95rem;color:#fff;position:relative;padding-left:22px}
+  .bbc-schools-hero__trust li::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:50%;background:var(--bbc-gold,#ffa900)}
+  .bbc-schools-hero__press{font-size:.85rem;color:rgba(255,255,255,.8);margin:0}
+  @media (max-width:749px){.bbc-schools-hero__inner{padding:44px 0}}
+</style>
+
+{% schema %}
+{
+  "name": "BBC Schools Hero",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image (build in progress)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "For schools & colleges" },
+    { "type": "text", "id": "title", "label": "Headline", "default": "Real engineering. Built by hand. In your classroom." },
+    { "type": "textarea", "id": "subtitle", "label": "Subheading", "default": "Make Engineers brings hands-on, sustainable bamboo engineering into KS3–post-16 — a free taster to start, and a full bike-build programme when you're ready. Curriculum-mapped, low-prep, run by our team or yours." },
+    { "type": "text", "id": "cta_text", "label": "Primary button", "default": "Start with a free taster" },
+    { "type": "url", "id": "cta_link", "label": "Primary button link (default: #enquiry-form)" },
+    { "type": "text", "id": "cta2_text", "label": "Secondary button", "default": "Request the one-pager" },
+    { "type": "url", "id": "cta2_link", "label": "Secondary button link (default: #enquiry-form)" },
+    { "type": "checkbox", "id": "show_trust", "label": "Show trust strip", "default": true },
+    { "type": "text", "id": "stat1", "label": "Stat 1", "default": "4,000+ builders trained" },
+    { "type": "text", "id": "stat2", "label": "Stat 2", "default": "36+ countries" },
+    { "type": "text", "id": "stat3", "label": "Stat 3", "default": "56.7% lower carbon than aluminium" },
+    { "type": "text", "id": "press", "label": "Press line", "default": "As featured in The Guardian · Named a Kevin McCloud Green Hero" }
+  ],
+  "presets": [{ "name": "BBC Schools Hero" }]
+}
+{% endschema %}

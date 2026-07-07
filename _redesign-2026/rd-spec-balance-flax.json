@@ -1,0 +1,53 @@
+{
+  "discipline": "Balance (flax)",
+  "audience": "An eco-minded or budget-conscious parent or grandparent buying (or building) a child's very first bike as a handmade, natural gift — and schools/education partners who want the most sustainable, lowest-cost build.",
+  "positioning": {
+    "eyebrow": "The most natural first bike",
+    "title": "A first bike made of plants, not plastic.",
+    "lede": "Our most sustainable and most affordable balance bike: bamboo tubes joined with natural flax fibre and resin — no metal lugs, no carbon, no plastic shop bike. It's the same first bike a parent builds for their own child on our prison programme, so the one you make at home helps fund a place for a family to be reunited."
+  },
+  "specs": [
+    { "label": "Age range", "value": "Designed for ages 2–5 (FLAG: confirm lower bound)" },
+    { "label": "Construction", "value": "Bamboo + flax fibre — fully natural joints, no lugs or carbon" },
+    { "label": "Build time", "value": "10–15 hrs — our simplest kit" },
+    { "label": "Weight", "value": "Light for little legs (FLAG: confirm kg)" }
+  ],
+  "who_for": [
+    { "title": "Parents who want the greenest first bike", "body": "100% natural materials — bamboo and flax, no carbon fibre and no plastic. The most sustainable, most hand-made bike we sell, and a keepsake to pass down rather than throw away." },
+    { "title": "Anyone watching the budget", "body": "The flax build skips the CNC and 3D-printed lugs, so it's our most affordable kit. A meaningful handmade first bike without an adult-frame price tag." },
+    { "title": "Schools, colleges & partnership programmes", "body": "Built around natural-fibre jointing and basic hand tools, the flax kit suits group and education builds where sustainability and cost matter most. Talk to us about partnership pricing." }
+  ],
+  "faq": [
+    { "q": "What age and size is this for?", "a": "Designed for children roughly aged 2–5, as a balance (pedal-free) first bike. Fit depends on your child's inside-leg measurement more than age — send us their height and inside leg and we'll confirm it suits them. (FLAG: confirm exact age/height/inside-leg range and minimum age with James.)" },
+    { "q": "Is it light enough for a toddler to handle?", "a": "Bamboo is naturally light and the balance frame is small, so it's made to be manageable for little legs. We don't want to publish a weight we haven't measured — please confirm the finished weight in kg before this goes live. (FLAG: real weight needed; likely stated nowhere in BBC source.)" },
+    { "q": "Why choose flax over the lugged balance bike?", "a": "Two reasons: it's greener and cheaper. The flax kit joins the bamboo with natural plant fibre and resin instead of metal or 3D-printed lugs — so it's 100% natural materials (bamboo and flax, no carbon), the most sustainable build we make, and our most affordable. The lugged version uses metal/printed lug joints, which some builders prefer for the look and a slightly more guided build. Both make the same pedal-free first bike." },
+    { "q": "How hard is the build, and how long does it take?", "a": "It's our simplest kit — around 10–15 hours, comfortably spread over a weekend or two. No power tools: just basic hand tools (hacksaw, files, sandpaper, tape) and a work surface. You bond the bamboo tubes with epoxy and wrap each joint in flax fibre. Most builders start with zero experience, and our community of 4,000+ can help if you get stuck." },
+    { "q": "Is it safe and strong enough for a child?", "a": "The flax-and-bamboo frame is sealed and tough — bamboo runs around 28,000 PSI tensile strength (comparable to mild steel), under 1% failure across 4,000+ builds, and tested with Swansea University. As with any child's bike, fit a helmet and supervise early rides. (FLAG: confirm any child-specific safety standard or required wording with James; flax-joint testing data for the balance frame not separately stated.)" }
+  ],
+  "reviews": [
+    {
+      "quote": "The flax finish is gorgeous — every time I look at it I smile. And I built it myself.",
+      "author": "Balance Flax Builder",
+      "role": "Home kit build"
+    }
+  ],
+  "related": [
+    { "title": "Component finishing pack", "note": "Wheels, headset, bars and saddle to turn the frame into a ride-ready balance bike.", "fallback": "bbc-rd-prod-build.jpg" },
+    { "title": "Lugged balance bike", "note": "Same first bike with metal/printed lug joints — a slightly more guided build if you prefer the lugged look.", "fallback": "bbc-rd-prod-balance.jpg" },
+    { "title": "The Build to Bond story", "note": "How a bike built inside reunites a parent with their child — the programme this kit mirrors.", "fallback": "bbc-rd-team.jpg" }
+  ],
+  "hero_fallback": "bbc-rd-prod-balance.jpg",
+  "price_from": "£66",
+  "funding_emphasis": "This kit mirrors our prison programme exactly: inside, a parent builds a balance bike for their own child as a first step back to their family. When you build one for your child at home, your purchase helps fund a place for another parent to do the same — one first bike funding another.",
+  "needs_real_data": [
+    "Finished balance-bike weight in kg (NOT stated anywhere in BBC source files — must confirm before publishing any weight claim)",
+    "Exact age / height / inside-leg suitability range and minimum age (templates say ages 2–5; reconcile and confirm lower bound)",
+    "Whether '10–15 hours' is the agreed public build-time figure for the flax balance kit (taken from the kit-balance-flax template collapsible-time; confirm)",
+    "Whether the £66–£86 price band is current and which figure leads ('From £66')",
+    "Any child-specific safety standard / certification or required safety wording (helmet, supervision, min age) the page should carry",
+    "Flax-joint-specific strength/test data for the BALANCE frame (the ~28,000 PSI / Swansea figures are general bamboo-frame numbers, not flax-balance-specific)",
+    "Exact partnership/education pricing or wording for schools & colleges (the 'Partnership' tag implies a programme — confirm what to say publicly)",
+    "Canonical funding phrasing for THIS kit (mirror wording vs '10% of profits' vs 'every kit funds a place')",
+    "Real name/permission for the testimonial (currently anonymised as 'Balance Flax Builder')"
+  ]
+}

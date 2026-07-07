@@ -1,0 +1,31 @@
+{%- comment -%}
+  bbc-size-data — CANONICAL BBC rider sizing, single source of truth.
+  Numbers taken verbatim from the live /pages/size-guide (inseam-first, XS–2XL).
+  Do NOT hand-edit per-section size tables elsewhere — render this instead.
+  Renders a clean, accessible height + inseam → frame-size table.
+{%- endcomment -%}
+<div class="bbc-rd bbc-size-data">
+  <table class="bbc-size-data__table">
+    <caption class="rd-vh">Bamboo Bicycle Club frame size guide — by height and inseam</caption>
+    <thead>
+      <tr><th scope="col">Frame size</th><th scope="col">Rider height</th><th scope="col">Inseam</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row">XS</th><td>148–163 cm</td><td>68–74 cm</td></tr>
+      <tr><th scope="row">S</th><td>160–173 cm</td><td>74–80 cm</td></tr>
+      <tr><th scope="row">M</th><td>170–183 cm</td><td>78–86 cm</td></tr>
+      <tr><th scope="row">L</th><td>180–193 cm</td><td>84–92 cm</td></tr>
+      <tr><th scope="row">XL</th><td>190–203 cm</td><td>90–100 cm</td></tr>
+      <tr><th scope="row">2XL</th><td>200 cm +</td><td>98 cm +</td></tr>
+    </tbody>
+  </table>
+  <p class="bbc-size-data__note">Inseam is the better guide — measure barefoot, floor to crotch. Bands overlap on purpose: if you fall between two, choose the smaller frame.</p>
+</div>
+<style>
+  .bbc-size-data__table{ width:100%; border-collapse:collapse; font-family:var(--rd-sans); }
+  .bbc-size-data__table th, .bbc-size-data__table td{ padding:10px 12px; text-align:left; border-bottom:1.5px solid var(--mist); }
+  .bbc-size-data__table thead th{ font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:var(--subtle); border-bottom:2px solid var(--border-strong); }
+  .bbc-size-data__table tbody th{ font-weight:800; color:var(--forest); }
+  .bbc-size-data__table tbody tr:hover{ background:var(--paper); }
+  .bbc-size-data__note{ font-size:14px; color:var(--subtle); margin-top:12px; }
+</style>

@@ -1,0 +1,385 @@
+{% comment %}
+  BBC Frame Size Calculator — Distinctive Brand Version
+  
+  Design Principles:
+  - Sharp edges
+  - Bold result display
+  - Bamboo stripe accent
+  - Proper form styling
+{% endcomment %}
+
+<section class="bbc-size-calc">
+  <div class="bbc-size-calc__container page-width">
+    <header class="bbc-size-calc__header">
+      {% if section.settings.eyebrow != blank %}
+        <span class="bbc-size-calc__eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+      <h2 class="bbc-size-calc__heading">{{ section.settings.title }}</h2>
+      {% if section.settings.subtitle != blank %}
+        <p class="bbc-size-calc__subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </header>
+    
+    <div class="bbc-size-calc__form">
+      <div class="bbc-size-calc__inputs">
+        <div class="bbc-size-calc__field">
+          <label for="height-cm" class="bbc-size-calc__label">Height (cm)</label>
+          <input type="number" id="height-cm" class="bbc-size-calc__input" placeholder="175" min="140" max="210">
+        </div>
+        <span class="bbc-size-calc__or">or</span>
+        <div class="bbc-size-calc__field bbc-size-calc__field--imperial">
+          <label class="bbc-size-calc__label">Height (ft/in)</label>
+          <div class="bbc-size-calc__imperial-inputs">
+            <input type="number" id="height-ft" class="bbc-size-calc__input bbc-size-calc__input--small" placeholder="5" min="4" max="7" aria-label="Feet">
+            <input type="number" id="height-in" class="bbc-size-calc__input bbc-size-calc__input--small" placeholder="9" min="0" max="11" aria-label="Inches">
+          </div>
+        </div>
+      </div>
+      
+      <button type="button" id="calculate-size" class="bbc-size-calc__button">
+        Find My Size
+      </button>
+    </div>
+    
+    <div id="size-result" class="bbc-size-calc__result" hidden>
+      <div class="bbc-size-calc__result-content">
+        <span class="bbc-size-calc__result-label">Your recommended size</span>
+        <span id="result-size" class="bbc-size-calc__result-size">Medium</span>
+        <span id="result-range" class="bbc-size-calc__result-range">168 - 184cm / 5'6" - 6'0"</span>
+        <a href="{{ routes.collections_url }}/frame-build-kits" class="bbc-size-calc__cta">
+          Shop Frame Kits →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bbc-size-calc {
+    padding: 80px 20px;
+    background: var(--bbc-cream, var(--bbc-cream));
+  }
+  
+  .bbc-size-calc__container {
+    max-width: 600px;
+  }
+  
+  .bbc-size-calc__header {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  .bbc-size-calc__eyebrow {
+    display: inline-block;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--bbc-teal, var(--bbc-teal));
+    margin-bottom: 12px;
+  }
+  
+  .bbc-size-calc__heading {
+    font-family: var(--font-heading-family);
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 800;
+    color: var(--bbc-forest, var(--bbc-forest));
+    letter-spacing: -0.02em;
+    margin: 0 0 12px 0;
+    line-height: 1.1;
+  }
+  
+  .bbc-size-calc__subtitle {
+    font-size: 1rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.7;
+    margin: 0;
+  }
+  
+  .bbc-size-calc__form {
+    background: white;
+    padding: 32px;
+    border-left: 4px solid var(--bbc-teal, var(--bbc-teal));
+    margin-bottom: 24px;
+  }
+  
+  .bbc-size-calc__inputs {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .bbc-size-calc__field {
+    flex: 1;
+    min-width: 120px;
+  }
+  
+  .bbc-size-calc__label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .bbc-size-calc__input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid rgba(7, 62, 39, 0.15);
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--bbc-forest, var(--bbc-forest));
+    transition: border-color 0.2s ease;
+  }
+  
+  .bbc-size-calc__input:focus {
+    outline: none;
+    border-color: var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  .bbc-size-calc__input--small {
+    width: 70px;
+  }
+  
+  .bbc-size-calc__imperial-inputs {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .bbc-size-calc__or {
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.5;
+    font-size: 0.875rem;
+    padding-bottom: 14px;
+  }
+  
+  .bbc-size-calc__button {
+    display: block;
+    width: 100%;
+    padding: 16px 32px;
+    background: var(--bbc-forest, var(--bbc-forest));
+    color: white;
+    border: none;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .bbc-size-calc__button:hover {
+    background: var(--bbc-teal, var(--bbc-teal));
+  }
+  
+  .bbc-size-calc__button:focus-visible {
+    outline: 2px solid var(--bbc-gold, var(--bbc-gold));
+    outline-offset: 4px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-size-calc__input,
+    .bbc-size-calc__button {
+      transition: none;
+    }
+  }
+  
+  /* Result - bold, celebratory */
+  .bbc-size-calc__result {
+    background: var(--bbc-forest, var(--bbc-forest));
+    padding: 40px 32px;
+    text-align: center;
+  }
+  
+  .bbc-size-calc__result[hidden] {
+    display: none;
+  }
+  
+  .bbc-size-calc__result-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--bbc-gold, var(--bbc-gold));
+    margin-bottom: 12px;
+  }
+  
+  .bbc-size-calc__result-size {
+    display: block;
+    font-family: var(--font-heading-family);
+    font-size: 3rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  
+  .bbc-size-calc__result-range {
+    display: block;
+    font-size: 1rem;
+    color: white;
+    opacity: 0.8;
+    margin-bottom: 24px;
+  }
+  
+  .bbc-size-calc__cta {
+    display: inline-block;
+    padding: 14px 28px;
+    background: var(--bbc-gold, var(--bbc-gold));
+    color: var(--bbc-forest, var(--bbc-forest));
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  
+  .bbc-size-calc__cta:hover {
+    background: white;
+  }
+  
+  .bbc-size-calc__cta:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 4px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-size-calc__cta {
+      transition: none;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-size-calc {
+      padding: 60px 16px;
+    }
+    
+    .bbc-size-calc__form {
+      padding: 24px;
+    }
+    
+    .bbc-size-calc__inputs {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .bbc-size-calc__or {
+      text-align: center;
+      padding: 0;
+    }
+    
+    .bbc-size-calc__imperial-inputs {
+      justify-content: center;
+    }
+    
+    .bbc-size-calc__result-size {
+      font-size: 2.5rem;
+    }
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const sizes = [
+    { name: 'Small', minCm: 157, maxCm: 170, range: '157 - 170cm / 5\'2" - 5\'7"' },
+    { name: 'Medium', minCm: 168, maxCm: 184, range: '168 - 184cm / 5\'6" - 6\'0"' },
+    { name: 'Large', minCm: 180, maxCm: 193, range: '180 - 193cm / 5\'11" - 6\'4"' },
+    { name: 'X-Large', minCm: 190, maxCm: 200, range: '190 - 200cm / 6\'3" - 6\'7"' }
+  ];
+  
+  const calculateBtn = document.getElementById('calculate-size');
+  const heightCm = document.getElementById('height-cm');
+  const heightFt = document.getElementById('height-ft');
+  const heightIn = document.getElementById('height-in');
+  const resultDiv = document.getElementById('size-result');
+  const resultSize = document.getElementById('result-size');
+  const resultRange = document.getElementById('result-range');
+  
+  if (!calculateBtn) return;
+  
+  calculateBtn.addEventListener('click', function() {
+    let cm = parseInt(heightCm.value);
+    
+    if (!cm && heightFt.value) {
+      const ft = parseInt(heightFt.value) || 0;
+      const inches = parseInt(heightIn.value) || 0;
+      cm = Math.round((ft * 30.48) + (inches * 2.54));
+    }
+    
+    if (!cm || cm < 140 || cm > 210) {
+      alert('Please enter a valid height between 140-210cm (4\'7" - 6\'11")');
+      return;
+    }
+    
+    let recommended = sizes[1];
+    for (const size of sizes) {
+      if (cm >= size.minCm && cm <= size.maxCm) {
+        recommended = size;
+        break;
+      }
+    }
+    
+    if (cm < 157) recommended = sizes[0];
+    if (cm > 193) recommended = sizes[3];
+    
+    resultSize.textContent = recommended.name;
+    resultRange.textContent = recommended.range;
+    resultDiv.hidden = false;
+    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+  
+  heightCm.addEventListener('input', function() {
+    heightFt.value = '';
+    heightIn.value = '';
+  });
+  
+  heightFt.addEventListener('input', function() { heightCm.value = ''; });
+  heightIn.addEventListener('input', function() { heightCm.value = ''; });
+});
+</script>
+
+{% schema %}
+{
+  "name": "BBC Size Calculator",
+  "tag": "section",
+  "class": "bbc-size-calc-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Sizing Guide"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Find Your Frame Size"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Enter your height to find your perfect bamboo bicycle frame size"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Size Calculator",
+      "settings": {
+        "eyebrow": "Sizing Guide",
+        "title": "Find Your Frame Size",
+        "subtitle": "Enter your height to find your perfect bamboo bicycle frame size"
+      }
+    }
+  ]
+}
+{% endschema %}

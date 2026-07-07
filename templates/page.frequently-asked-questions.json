@@ -1,0 +1,302 @@
+{
+  "sections": {
+    "hero": {
+      "type": "bbc-page-hero",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "subheading": "Everything you need to know about building your own bamboo bicycle",
+        "style": "light"
+      }
+    },
+    "faq_general": {
+      "type": "bbc-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need any experience to build a bamboo bicycle?",
+            "answer": "<p>None at all. 95% of our builders have never built a bike frame before \u2014 most haven't picked up a hacksaw since school. Our workshops give you hands-on guidance at every step, and our home kits come with video tutorials that walk you through the whole thing. If you can follow instructions and aren't afraid of getting your hands dirty, you can build a bike.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "How long does it take to build a frame?",
+            "answer": "<p><strong>In our workshop:</strong> 2 days (Saturday-Sunday, 9:30am\u20134:30pm each day). We also run 3-4 day workshops that include custom paint finishing.</p><p><strong>At home with a kit:</strong> 20-40 hours total. Most people spread this over 2-4 weekends. Pre-lugged kits are quicker \u2014 you could do one in a weekend if you're keen.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Is bamboo actually strong enough for a bike?",
+            "answer": "<p>Stronger per gram than steel. Bamboo has a tensile strength of 28,000 PSI \u2014 and the natural fibre structure absorbs road vibration better than metal, which means a smoother ride. Our frames have a failure rate under 1%. People have toured continents, raced ultra-endurance events, and commuted daily for 10+ years on frames built from our kits. Kate Rawles rode one 8,288 miles from Colombia to Ushuaia.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "How long will a bamboo frame last?",
+            "answer": "<p>8-12 years with proper care \u2014 and we've got builders still riding frames from our first year (2012). The natural oils in bamboo plus our UV-protective clear coat keep things solid. Store it indoors, avoid leaving it in extreme heat, and it'll outlast most of the components you put on it.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Can I ride in the rain?",
+            "answer": "<p>Yes. The frame is sealed with epoxy resin, making it water-resistant. Ride in the rain, commute through winter \u2014 just dry it off afterwards and don't leave it submerged in a puddle. Common sense stuff.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "What makes BBC different from other bamboo bike builders?",
+            "answer": "<p>We're not selling bikes \u2014 we're teaching people to build them. That's been our focus since 2012. Over 4,000 builders across 36 countries. Our kits and workshops are designed for complete beginners, and we back everything with lifetime expert support. We're also a social enterprise: our Bamboo Mobility Project CIC runs Build to Bond, teaching bike-building in prisons to strengthen family bonds.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ],
+      "settings": {
+        "heading": "Getting Started",
+        "background": "white"
+      }
+    },
+    "faq_kits": {
+      "type": "bbc-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "What's included in a home build kit?",
+            "answer": "<p>Everything you need to build a complete frame: heat-treated Moso bamboo tubes, metal lugs (pre-fitted for lugged kits), epoxy resin, CNC machined headtube, BSA 68mm bottom bracket shell, dropouts, a single-use plywood alignment jig, and full video tutorial access. Just add basic hand tools.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "What tools do I need?",
+            "answer": "<p>Nothing specialist. A hacksaw or pipe cutter, files and sandpaper, measuring tape, mixing containers, disposable gloves, and clamps. Most builders already have these. Every kit includes a detailed tool list so there are no surprises.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "What's the difference between lugged and non-lugged kits?",
+            "answer": "<p><strong>Lugged (pre-fabricated connections):</strong> Quicker to assemble, fixed geometry, less complex. Perfect for first-time builders \u2014 you can have a frame in a weekend.</p><p><strong>Non-lugged (build your own connections):</strong> More customisable, takes 2-3 days longer, allows custom geometry. Better for builders who want full creative control.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "What else do I need to make it a rideable bike?",
+            "answer": "<p>The kit builds a complete frame. To ride it, you'll need: fork, headset, bottom bracket, crankset, wheels, handlebars, stem, seatpost, saddle, brakes, and drivetrain. We sell component packs (City, Single-Speed, Gravel) or you can source parts from any bike shop. Many builders repurpose components from an old bike \u2014 works perfectly.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "What if I make a mistake?",
+            "answer": "<p>The epoxy has a long working time, so you can adjust as you go. If something goes wrong, our community Facebook group has 4,000+ builders who've seen it all \u2014 and our team is always available via email. We've never had someone who couldn't finish their build.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "How much do kits cost?",
+            "answer": "<p>Frame kits start from \u00a3375. Gravel kits from \u00a3385. Balance bike kits are \u00a3165. We're also registered with all major Cycle to Work providers (Cyclescheme, Bike2Work, etc.) \u2014 that can save you 25-39%.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ],
+      "settings": {
+        "heading": "Home Build Kits",
+        "background": "cream"
+      }
+    },
+    "faq_workshops": {
+      "type": "bbc-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "What should I bring to a workshop?",
+            "answer": "<p>Just yourself and old clothes you don't mind getting dusty (especially Day 2 \u2014 epoxy work). Closed-toe shoes are essential. We provide all tools, materials, safety equipment, tea and coffee. Optional: a camera to document your build, and lunch or funds for local cafes.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Where are workshops held?",
+            "answer": "<p>Three locations:</p><p><strong>London, UK</strong> \u2014 Our primary workshop at Argall Works, 7 Argall Ave, London E10 7QE (5-minute walk from Lea Bridge Station).</p><p><strong>Amersfoort, Netherlands</strong> \u2014 Our European hub.</p><p><strong>Toulouse, France</strong> \u2014 Our French location.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Can I bring a friend?",
+            "answer": "<p>Each builder works on their own frame, so your friend would need their own booking. We keep groups small to ensure quality instruction. Couples and friends often book together \u2014 it's a great shared experience.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use Cycle to Work?",
+            "answer": "<p>Yes. We're registered with all major Cycle to Work providers \u2014 Cyclescheme, Bike2Work, and others. This can save you 25-39% on your workshop or kit purchase. Just contact us for a quote compatible with your employer's scheme.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Can I attend from overseas?",
+            "answer": "<p>Absolutely \u2014 we regularly host international visitors. Workshop price includes shipping the frame back to you. For accommodation near our London workshop, we recommend the Olympic Park area (Stratford) \u2014 great hotels and easy connections to central London.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "How do I get my frame home?",
+            "answer": "<p>A bare frame fits easily in most car boots. If you're using public transport, we can provide a frame bag. For international visitors, we ship the frame to you \u2014 it's included in the workshop price.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ],
+      "settings": {
+        "heading": "Workshops",
+        "background": "white"
+      }
+    },
+    "faq_technical": {
+      "type": "bbc-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "What bottom bracket standard do you use?",
+            "answer": "<p>BSA 68mm threaded \u2014 the most widely compatible standard. No proprietary nonsense.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "What size frame should I get?",
+            "answer": "<p>We have sizing guides on our website. If in doubt, send us your height and inside leg measurement and we'll recommend the right size. Custom geometries are available for non-standard fits.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use disc brakes?",
+            "answer": "<p>Yes. All our modern kits are disc brake compatible with modular dropout options for different axle standards.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "What tyre clearance do the frames have?",
+            "answer": "<p>Our Carbon Road kit fits up to 38mm tyres with slight modification to chain stays. Gravel kits accommodate wider tyres for off-road riding. Check individual product pages for specifics.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use internal cable routing?",
+            "answer": "<p>Yes \u2014 all our kits support internal cable routing.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "settings": {
+        "heading": "Technical Specs",
+        "background": "cream"
+      }
+    },
+    "faq_shipping": {
+      "type": "bbc-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "<p>Yes \u2014 36+ countries and counting. Kits are carefully packaged to protect the bamboo during transit. UK delivery is 2-3 days, EU 5-7 days, international 10-14 days. Full tracking on every shipment.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "What about customs and import duties?",
+            "answer": "<p>International orders may be subject to local import duties and taxes \u2014 these vary by country and are the buyer's responsibility. We declare accurate values on customs forms. EU customers: since Brexit, VAT and duties apply. For Germany, we sometimes ship via our Netherlands branch to simplify customs.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "What's your returns policy?",
+            "answer": "<p>Unused kits in original packaging can be returned within 14 days for a full refund (minus shipping costs). Once you've started building, we can't accept returns \u2014 but we'll help you troubleshoot any issues until you're happy with the result.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "What's your workshop cancellation policy?",
+            "answer": "<p>Full refund up to 14 days before your workshop date. 50% refund 7-14 days before. Within 7 days, we offer a date transfer rather than refund (subject to availability). Life happens \u2014 just let us know as early as you can.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "heading": "Shipping & Returns",
+        "background": "white"
+      }
+    },
+    "cta": {
+      "type": "bbc-cta",
+      "settings": {
+        "heading": "Still have questions?",
+        "text": "Our team responds to every message \u2014 usually within a few hours.",
+        "button_text": "Get in Touch",
+        "button_link": "/pages/contact-us",
+        "background": "forest"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "faq_general",
+    "faq_kits",
+    "faq_workshops",
+    "faq_technical",
+    "faq_shipping",
+    "cta"
+  ]
+}

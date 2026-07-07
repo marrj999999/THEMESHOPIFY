@@ -1,0 +1,369 @@
+{% comment %}
+  BBC Path Selector
+  Research insight: Clear segmentation reduces decision paralysis
+  Pattern from: Calfee "Find Your Bike", Brother Cycles, Fairlight
+{% endcomment %}
+
+<section class="bbc-paths" aria-label="Choose your path">
+  <div class="bbc-paths__container page-width">
+    
+    <header class="bbc-paths__header">
+      <h2 class="bbc-paths__title">How Would You Like to Build?</h2>
+      <p class="bbc-paths__subtitle">Whether you want to work at home or with expert guidance, we've got you covered.</p>
+    </header>
+    
+    <div class="bbc-paths__grid">
+      
+      {%- comment -%} DIY Kit Path {%- endcomment -%}
+      <a href="{{ section.settings.kit_link | default: '/collections/home-build-kits' }}" class="bbc-paths__card bbc-paths__card--kit">
+        <div class="bbc-paths__card-icon" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect x="6" y="14" width="36" height="28" rx="2" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M6 22h36" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M16 6v8M32 6v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="16" cy="32" r="4" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="32" cy="32" r="4" stroke="currentColor" stroke-width="2.5"/>
+          </svg>
+        </div>
+        <div class="bbc-paths__card-content">
+          <h3 class="bbc-paths__card-title">Build at Home</h3>
+          <p class="bbc-paths__card-desc">DIY frame kits shipped to your door with video tutorials and community support.</p>
+          <ul class="bbc-paths__card-features">
+            <li>£550–750 per kit</li>
+            <li>20–40 hours build time</li>
+            <li>Ships to 36+ countries</li>
+          </ul>
+          <span class="bbc-paths__card-cta">
+            Shop Kits
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+      </a>
+      
+      {%- comment -%} Workshop Path {%- endcomment -%}
+      <a href="{{ section.settings.workshop_link | default: '/pages/workshops' }}" class="bbc-paths__card bbc-paths__card--workshop">
+        <div class="bbc-paths__card-icon" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="20" r="8" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M12 42c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M34 14l6-6M38 14l-2-6M34 10l6 2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="bbc-paths__card-content">
+          <h3 class="bbc-paths__card-title">Learn with Experts</h3>
+          <p class="bbc-paths__card-desc">Hands-on workshops in London, Amsterdam, and Toulouse with all materials included.</p>
+          <ul class="bbc-paths__card-features">
+            <li>£1,200–1,500 all-inclusive</li>
+            <li>2–3 days intensive</li>
+            <li>Small groups (max 4)</li>
+          </ul>
+          <span class="bbc-paths__card-cta">
+            View Workshops
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+      </a>
+      
+    </div>
+    
+    {%- comment -%} Help deciding {%- endcomment -%}
+    <div class="bbc-paths__help">
+      <p>Not sure which is right for you? <a href="{{ section.settings.help_link | default: '/pages/contact-us' }}">Chat with us</a> — we'll help you decide.</p>
+    </div>
+    
+  </div>
+</section>
+
+<style>
+  .bbc-paths {
+    padding: 80px 0;
+    background: white;
+  }
+  
+  .bbc-paths__container {
+    padding: 0 20px;
+  }
+  
+  .bbc-paths__header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 48px;
+  }
+  
+  .bbc-paths__title {
+    font-family: var(--bbc-font, 'Plus Jakarta Sans', sans-serif);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 12px 0;
+    line-height: 1.2;
+  }
+  
+  .bbc-paths__subtitle {
+    font-size: 18px;
+    color: var(--bbc-grey, var(--bbc-gray-600));
+    margin: 0;
+    line-height: 1.5;
+  }
+  
+  .bbc-paths__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .bbc-paths__card {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 32px;
+    border-left: 4px solid var(--bbc-teal, var(--bbc-teal));
+    text-decoration: none;
+    transition: all 0.25s ease;
+    border: 2px solid transparent;
+  }
+  
+  .bbc-paths__card--kit {
+    background: var(--bbc-cream, var(--bbc-cream));
+  }
+  
+  .bbc-paths__card--workshop {
+    background: linear-gradient(135deg, var(--bbc-forest, var(--bbc-forest)) 0%, #0a5535 100%);
+  }
+  
+  .bbc-paths__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  }
+  
+  .bbc-paths__card--kit:hover {
+    border-color: var(--bbc-teal, var(--bbc-teal));
+  }
+  
+  .bbc-paths__card--workshop:hover {
+    box-shadow: 0 12px 40px rgba(7, 62, 39, 0.3);
+  }
+  
+  .bbc-paths__card:focus-visible {
+    outline: 3px solid var(--bbc-gold, var(--bbc-gold));
+    outline-offset: 4px;
+  }
+  
+  .bbc-paths__card-icon {
+    margin-bottom: 24px;
+  }
+  
+  .bbc-paths__card--kit .bbc-paths__card-icon {
+    color: var(--bbc-forest, var(--bbc-forest));
+  }
+  
+  .bbc-paths__card--workshop .bbc-paths__card-icon {
+    color: var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  .bbc-paths__card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .bbc-paths__card-title {
+    font-family: var(--bbc-font, 'Plus Jakarta Sans', sans-serif);
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+    line-height: 1.2;
+  }
+  
+  .bbc-paths__card--kit .bbc-paths__card-title {
+    color: var(--bbc-forest, var(--bbc-forest));
+  }
+  
+  .bbc-paths__card--workshop .bbc-paths__card-title {
+    color: white;
+  }
+  
+  .bbc-paths__card-desc {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+  }
+  
+  .bbc-paths__card--kit .bbc-paths__card-desc {
+    color: var(--bbc-grey, var(--bbc-gray-600));
+  }
+  
+  .bbc-paths__card--workshop .bbc-paths__card-desc {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  
+  .bbc-paths__card-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .bbc-paths__card-features li {
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 20px;
+    position: relative;
+  }
+  
+  .bbc-paths__card-features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+  
+  .bbc-paths__card--kit .bbc-paths__card-features li {
+    color: var(--bbc-forest, var(--bbc-forest));
+  }
+  
+  .bbc-paths__card--kit .bbc-paths__card-features li::before {
+    color: var(--bbc-teal, var(--bbc-teal));
+  }
+  
+  .bbc-paths__card--workshop .bbc-paths__card-features li {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .bbc-paths__card--workshop .bbc-paths__card-features li::before {
+    color: var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  .bbc-paths__card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: auto;
+  }
+  
+  .bbc-paths__card--kit .bbc-paths__card-cta {
+    color: var(--bbc-forest, var(--bbc-forest));
+  }
+  
+  .bbc-paths__card--workshop .bbc-paths__card-cta {
+    color: var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  .bbc-paths__card-cta svg {
+    transition: transform 0.2s ease;
+  }
+  
+  .bbc-paths__card:hover .bbc-paths__card-cta svg {
+    transform: translateX(4px);
+  }
+  
+  .bbc-paths__help {
+    text-align: center;
+    margin-top: 32px;
+  }
+  
+  .bbc-paths__help p {
+    font-size: 15px;
+    color: var(--bbc-grey, var(--bbc-gray-600));
+    margin: 0;
+  }
+  
+  .bbc-paths__help a {
+    color: var(--bbc-forest, var(--bbc-forest));
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  
+  .bbc-paths__help a:hover {
+    color: var(--bbc-teal, var(--bbc-teal));
+  }
+  
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-paths__card { transition: none; }
+    .bbc-paths__card:hover { transform: none; }
+    .bbc-paths__card-cta svg { transition: none; }
+    .bbc-paths__card:hover .bbc-paths__card-cta svg { transform: none; }
+  }
+  
+  /* Mobile */
+  @media (max-width: 768px) {
+    .bbc-paths {
+      padding: 60px 0;
+    }
+    
+    .bbc-paths__title {
+      font-size: 28px;
+    }
+    
+    .bbc-paths__subtitle {
+      font-size: 16px;
+    }
+    
+    .bbc-paths__grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    
+    .bbc-paths__card {
+      padding: 28px 24px;
+    }
+    
+    .bbc-paths__card-icon {
+      margin-bottom: 16px;
+    }
+    
+    .bbc-paths__card-icon svg {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .bbc-paths__card-title {
+      font-size: 20px;
+    }
+    
+    .bbc-paths__card-desc {
+      font-size: 15px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Path Selector",
+  "tag": "section",
+  "class": "bbc-paths-section",
+  "settings": [
+    {
+      "type": "url",
+      "id": "kit_link",
+      "label": "Kit path link"
+    },
+    {
+      "type": "url",
+      "id": "workshop_link",
+      "label": "Workshop path link"
+    },
+    {
+      "type": "url",
+      "id": "help_link",
+      "label": "Help link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Path Selector"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,54 @@
+{%- comment -%}
+  Bamboo Bicycle Club — Article (2026 redesign).
+  Hero (optional article image + scrim + breadcrumb + meta) then the article
+  body as .rd-prose. Styling in assets/bbc-redesign-2026.css.
+{%- endcomment -%}
+
+
+<div class="bbc-rd bbc-rd-article">
+  {%- if article -%}
+    <header class="rd-hero rd-dark rd-mh-auto"{% unless article.image %}{% endunless %}>
+      {%- if article.image -%}
+        <div class="rd-bg"><img src="{{ article.image | image_url: width: 1600 }}" srcset="{{ article.image | image_url: width: 800 }} 800w, {{ article.image | image_url: width: 1200 }} 1200w, {{ article.image | image_url: width: 1600 }} 1600w, {{ article.image | image_url: width: 2000 }} 2000w, {{ article.image | image_url: width: 2600 }} 2600w" sizes="100vw" alt="{{ article.image.alt | escape | default: article.title }}" width="{{ article.image.width }}" height="{{ article.image.height }}" fetchpriority="high" loading="eager"></div>
+        <div class="rd-scrim"></div>
+      {%- endif -%}
+      <div class="rd-inner rd-pt-56"{% unless article.image %}{% endunless %}>
+        <div class="rd-wrap rd-mw-820px">
+          <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="{{ blog.url }}">{{ blog.title }}</a><span class="rd-sep">/</span><span class="rd-here">{{ article.title | truncatewords: 5 }}</span></nav>
+          {%- if article.tags.size > 0 -%}<span class="rd-frame-label rd-c-lime">{{ article.tags.first }}</span>{%- endif -%}
+          <h1 class="rd-mt2">{{ article.title }}</h1>
+          <div class="rd-article-meta">
+            <span>{{ article.published_at | date: '%-d %B %Y' }}</span>
+            {%- if article.author != blank -%}<span>By {{ article.author }}</span>{%- endif -%}
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="rd-pad">
+      <div class="rd-wrap">
+        <div class="rd-prose">{{ article.content }}</div>
+
+        <div class="rd-prose rd-mt4 rd-cmp-28057">
+          <a class="rd-btn rd-ghost" href="{{ blog.url }}">&larr; All {{ blog.title | downcase }}</a>
+          <a class="rd-btn rd-lime" href="{{ section.settings.cta_url | default: '/pages/bicycle-frame-building-workshop' }}">{{ section.settings.cta_label | default: 'Book a build →' }}</a>
+        </div>
+      </div>
+    </section>
+  {%- else -%}
+    <section class="rd-pad"><div class="rd-wrap"><p class="rd-lede">Add this section to an article template to render a post.</p></div></section>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Article 2026 (new)",
+  "tag": "div",
+  "class": "bbc-rd-article-section",
+  "settings": [
+    { "type": "text", "id": "cta_label", "label": "Footer CTA label", "default": "Book a build →" },
+    { "type": "url", "id": "cta_url", "label": "Footer CTA link (defaults to the workshop page)" }
+  ],
+  "presets": [ { "name": "Article 2026 (new)" } ]
+}
+{% endschema %}
