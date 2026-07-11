@@ -12,6 +12,7 @@
 
 {%- comment -%} Unified redesign stylesheet — loaded ONCE here (the header is on every page via the header group); all other bbc-*-2026 sections rely on this. Primary fonts preloaded (woff2, crossorigin) for faster first paint. {%- endcomment -%}
 {{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+{{ 'bbc-type-scale.css' | asset_url | stylesheet_tag }}
 {{ 'AtkinsonHyperlegible-Regular.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
 {{ 'AtkinsonHyperlegible-Bold.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
 
@@ -60,6 +61,17 @@
   .rd-mega-col li a{ display:block; padding:5px 0; font-size:14px; font-weight:600; color:var(--charcoal); line-height:1.3; }
   .rd-mega-col li a:hover{ color:var(--forest); }
   @media (max-width:1080px){ .rd-mega-panel{ width:min(560px,84vw); } .rd-mega-grid{ grid-template-columns:repeat(3,1fr); } }
+
+  /* Mobile menu accordion — collapse to top-level categories, expand on tap */
+  .rd-macc{ border-bottom:1.5px solid var(--mist); }
+  .rd-macc > summary{ list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:10px; padding:13px 6px; font-weight:700; font-size:16px; color:var(--charcoal); }
+  .rd-macc > summary::-webkit-details-marker{ display:none; }
+  .rd-macc > summary:focus-visible{ outline:3px solid #06231C; outline-offset:-3px; }
+  .rd-macc-chev{ width:9px; height:9px; border-right:2.4px solid currentColor; border-bottom:2.4px solid currentColor; transform:rotate(45deg) translate(-1px,-1px); transition:transform .2s ease; opacity:.55; flex:0 0 auto; }
+  .rd-macc[open] > summary .rd-macc-chev{ transform:rotate(225deg); opacity:.9; }
+  .rd-macc-body{ display:grid; gap:0; padding:0 0 8px; animation:rd-macc-in .2s ease; }
+  .rd-macc-body .rd-sub{ border-bottom:0 !important; padding-top:9px; padding-bottom:9px; }
+  @keyframes rd-macc-in{ from{ opacity:0; transform:translateY(-4px); } to{ opacity:1; transform:none; } }
 </style>
 
 <a class="rd-skip" href="#MainContent">Skip to content</a>
@@ -74,7 +86,7 @@
   <div class="rd-util-bar">
     <div class="rd-util-wrap">
       <div class="rd-util-left">
-        <span class="rd-util-note">Shipped worldwide to 36+ countries &middot; tracked delivery</span>
+        <span class="rd-util-note">Shipped worldwide to 45 countries &middot; tracked delivery</span>
         {%- if localization.available_countries.size > 1 -%}
           {%- form 'localization', id: 'rd-loc-d', class: 'rd-loc-form rd-util-loc' -%}
             <label for="rd-loc-d-sel" class="rd-vh">Country and currency</label>
@@ -112,6 +124,14 @@
 
     {%- comment -%} Desktop primary nav — compact "Menu" trigger expands the full nav (hover or click) + cart + CTA {%- endcomment -%}
     <nav class="rd-nav-links" aria-label="Primary">
+      <div class="rd-quicklinks">
+        {%- assign qlabels = "Build a bike,Workshops,Why bamboo,Impact" | split: "," -%}
+        {%- assign qurls = "/collections/home-build-kits,/pages/bicycle-frame-building-workshop,/pages/why-bamboo,/pages/impact" | split: "," -%}
+        {%- for lbl in qlabels -%}
+          {%- assign qu = qurls[forloop.index0] -%}
+          <a class="rd-nav-link rd-quicklink{% if request.path == qu %} rd-ql-active{% endif %}" href="{{ qu }}">{{ lbl }}</a>
+        {%- endfor -%}
+      </div>
       <div class="rd-megamenu">
         <button type="button" class="rd-menu-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="rd-mega-panel">
           <span class="rd-mt-bars" aria-hidden="true"><span></span><span></span><span></span></span>Menu
@@ -149,15 +169,21 @@
         <div class="rd-results"></div>
       </div>
       {%- for link in section.settings.menu.links -%}
-        <a href="{{ link.url }}">{{ link.title }}</a>
         {%- if link.links.size > 0 -%}
-          {%- for child in link.links -%}
-            <a class="rd-sub" href="{{ child.url }}">{{ child.title }}</a>
-          {%- endfor -%}
+          <details class="rd-macc">
+            <summary>{{ link.title }}<span class="rd-macc-chev" aria-hidden="true"></span></summary>
+            <div class="rd-macc-body">
+              {%- for child in link.links -%}
+                <a class="rd-sub" href="{{ child.url }}">{{ child.title }}</a>
+              {%- endfor -%}
+            </div>
+          </details>
+        {%- else -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
         {%- endif -%}
       {%- endfor -%}
       <a class="rd-sub" href="/pages/support-centre">Help &amp; support</a>
-      <p class="rd-ship-note">We ship worldwide &mdash; 36+ countries.</p>
+      <p class="rd-ship-note">We ship worldwide &mdash; 45 countries.</p>
       {%- if localization.available_countries.size > 1 -%}
         {%- form 'localization', id: 'rd-loc-m', class: 'rd-loc-form' -%}
           <label for="rd-loc-m-sel" class="rd-vh">Country and currency</label>
@@ -182,13 +208,24 @@
     <nav class="rd-botbar" aria-label="Primary (mobile)">
       <a href="{{ routes.collections_url }}/home-build-kits"{% if rdp contains '/products/' or rdp contains 'kit' or rdp contains '/collections' %} class="rd-active"{% endif %}><svg viewBox="0 0 24 24"><circle cx="6" cy="16.5" r="3.3"/><circle cx="18" cy="16.5" r="3.3"/><path d="M6 16.5l4.5-7.5H16l-3.5 7.5M10.5 9h4"/></svg><span>Kits</span></a>
       <a href="/pages/bicycle-frame-building-workshop"{% if rdp contains 'workshop' %} class="rd-active"{% endif %}><svg viewBox="0 0 24 24"><path d="M14.7 6.3a3.6 3.6 0 0 0-4.8 4.3l-5.2 5.2a1.7 1.7 0 0 0 2.4 2.4l5.2-5.2a3.6 3.6 0 0 0 4.3-4.8l-2.3 2.3-1.9-1.9 2.3-2.3z"/></svg><span>Workshops</span></a>
-      <a href="{{ routes.cart_url }}"{% if rdp contains 'cart' %} class="rd-active"{% endif %}><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><span>Bag{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</span></a>
+      <a href="{{ routes.cart_url }}"{% if rdp contains 'cart' %} class="rd-active"{% endif %}><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><span>Basket{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</span></a>
       <button type="button" id="rd-botmenu" aria-label="Open menu"><svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg><span>Menu</span></button>
     </nav>
   </div>
 {%- endunless -%}
 
 {%- comment -%} Nav behaviour is in an external, deferred asset (no parser-blocking inline JS) {%- endcomment -%}
+<script>
+  (function(){
+    var accs = document.querySelectorAll('.rd-mobile .rd-macc');
+    accs.forEach(function(d){
+      d.addEventListener('toggle', function(){
+        if(!d.open) return;
+        accs.forEach(function(o){ if(o!==d && o.open) o.open=false; });
+      });
+    });
+  })();
+</script>
 <script src="{{ 'bbc-rd-nav.js' | asset_url }}" defer></script>
 
 {% schema %}

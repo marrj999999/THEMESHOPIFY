@@ -56,6 +56,10 @@
                 {%- case col_key -%}
                   {%- when 'mission' -%}
                     <li><a href="/pages/impact">Our impact</a></li>
+                    <li><a href="/pages/impact-report">Impact report</a></li>
+                    <li><a href="/pages/build-to-bond">Build to Bond</a></li>
+                    <li><a href="/pages/schools">Schools &amp; education</a></li>
+                    <li><a href="/pages/support-mission">Back the mission</a></li>
                     <li><a href="/pages/why-bamboo">Why bamboo</a></li>
                     <li><a href="/blogs/news">News &amp; stories</a></li>
                   {%- when 'help' -%}
@@ -64,10 +68,11 @@
                     <li><a href="/pages/frequently-asked-questions">FAQs</a></li>
                   {%- when 'company' -%}
                     <li><a href="/pages/our-story-2">Our story</a></li>
-                    <li><a href="/pages/team-building">Team building</a></li>
+                    <li><a href="/pages/bicycleteambuilding">Team building</a></li>
                     <li><a href="/pages/gallery">Gallery</a></li>
                   {%- else -%}
                     <li><a href="/collections/home-build-kits">Home-build kits</a></li>
+                    <li><a href="/pages/which-kit">Which kit is right for me?</a></li>
                     <li><a href="/collections/road">Road</a></li>
                     <li><a href="/collections/gravel-adventure">Gravel &amp; adventure</a></li>
                     <li><a href="/collections/mtb">Mountain</a></li>
@@ -98,11 +103,19 @@
       </div>
     {%- endif -%}
 
+
+    <div class="rd-foot-press" aria-label="As featured in">
+      {%- assign flogos = "logo-financial-times.svg,logo-guardian.svg,logo-roadcc.svg,logo-design-museum.svg,logo-inside-time.svg" | split: "," -%}{%- assign fnames = "Financial Times,The Guardian,road.cc,Design Museum,Inside Time" | split: "," -%}
+      {%- for lg in flogos -%}<img src="{{ lg | asset_url }}" alt="Featured in {{ fnames[forloop.index0] }}" height="20" loading="lazy">{%- endfor -%}
+    </div>
+    <p class="rd-foot-signoff">One craft. One engine for change.</p>
     <div class="rd-foot-bottom">
       <span>{{ section.settings.legal | default: '© 2026 Bamboo Bicycle Club · Bamboo Mobility Project CIC · Reg 16257348' }}</span>
       <span class="rd-cmp-88744">
         {%- for block in section.blocks -%}{%- if block.type == 'badge' -%}<span class="rd-tag" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>{%- endif -%}{%- endfor -%}
       </span>
+
+      <span class="rd-foot-pay">{% for type in shop.enabled_payment_types limit: 6 %}{{ type | payment_type_svg_tag: class: "rd-payicon" }}{% endfor %}</span>
       {%- if section.settings.policy_menu != blank -%}
         <span class="rd-foot-policy">
           {%- for l in section.settings.policy_menu.links -%}<a href="{{ l.url }}">{{ l.title }}</a>{%- endfor -%}
@@ -166,8 +179,8 @@
         { "type": "column", "settings": { "heading": "Company" } },
         { "type": "badge", "settings": { "text": "OCN Accredited" } },
         { "type": "badge", "settings": { "text": "Social enterprise · CIC" } },
-        { "type": "badge", "settings": { "text": "Secure checkout" } },
-        { "type": "badge", "settings": { "text": "Investec Beyond Business 2025" } }
+        { "type": "badge", "settings": { "text": "Investec Beyond Business 2025" } },
+        { "type": "badge", "settings": { "text": "Secure checkout" } }
       ]
     }
   ]

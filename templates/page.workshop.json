@@ -1,231 +1,243 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "workshop_blocks": {
-      "type": "bbc-workshop-blocks",
+    "main": {
+      "type": "bbc-workshops-2026",
       "blocks": {
-        "hero_block": {
-          "type": "hero",
+        "b0": {
+          "type": "stat",
           "settings": {
-            "eyebrow": "Hands-On Experience",
-            "title": "Build Your Own Bamboo Bicycle",
-            "subtitle": "2-3 days. Expert guidance. A frame that's truly yours.",
-            "primary_cta_text": "Book a Workshop",
-            "primary_cta_url": "#booking",
-            "secondary_cta_text": "See How It Works",
-            "secondary_cta_url": "#experience"
+            "number": "95%",
+            "label": "had never built before"
           }
         },
-        "trust_bar_block": {
-          "type": "trust_bar",
+        "b1": {
+          "type": "stat",
           "settings": {
-            "stat_1_number": "4,000+",
-            "stat_1_label": "Bikes Built",
-            "stat_2_number": "13",
-            "stat_2_label": "Years Experience",
-            "stat_3_number": "3",
-            "stat_3_label": "Workshop Locations",
-            "stat_4_number": "95%",
-            "stat_4_label": "First-Time Builders"
+            "number": "2–3 days",
+            "label": "to build a complete frame"
           }
         },
-        "intro_block": {
-          "type": "intro",
+        "b2": {
+          "type": "stat",
           "settings": {
-            "heading": "No Experience? No Problem.",
-            "text": "Since 2012, we've taught thousands of people — most with zero framebuilding experience — to create their own bamboo bicycles. Our workshops are designed for complete beginners. If you can hold a tool, you can build a bike.",
-            "highlight_1": "Small groups (max 6 builders)",
-            "highlight_2": "Expert guidance every step",
-            "highlight_3": "Take home a rideable frame"
+            "number": "All-in",
+            "label": "materials, tools & tuition included"
           }
         },
-        "experience_block": {
-          "type": "experience",
+        "b3": {
+          "type": "stat",
           "settings": {
-            "eyebrow": "The Workshop Experience",
-            "heading": "What Happens Over 2-3 Days",
-            "subheading": "From raw bamboo to finished frame — here's your journey",
-            "day1_title": "Design & Setup",
-            "day1_item1": "Custom geometry consultation based on your riding style",
-            "day1_item2": "Select your bamboo tubes from our sustainably-sourced stock",
-            "day1_item3": "Set up your frame in our precision jig system",
-            "day1_item4": "Learn tube mitering and preparation techniques",
-            "day1_duration": "Approx 6-8 hours",
-            "day2_title": "Building & Joining",
-            "day2_item1": "Heat treat bamboo joints for strength",
-            "day2_item2": "Wrap joints with natural fibers and epoxy",
-            "day2_item3": "Learn the BBC lug system for perfect alignment",
-            "day2_item4": "Build bottom bracket and headtube assemblies",
-            "day2_duration": "Approx 8-10 hours",
-            "day3_title": "Finishing & Completion",
-            "day3_item1": "Final wrapping and joint finishing",
-            "day3_item2": "Sand and prep for clear coat",
-            "day3_item3": "Apply protective finish",
-            "day3_item4": "Final inspection and celebration!",
-            "day3_duration": "Approx 4-6 hours",
-            "show_note": true,
-            "note_text": "Build times vary by frame type. Road frames typically complete in 2 days. MTB and complex geometries may need 3 days."
+            "number": "25–39%",
+            "label": "typical saving via Cycle to Work"
           }
         },
-        "gallery_block": {
-          "type": "gallery",
+        "b4": {
+          "type": "step",
           "settings": {
-            "eyebrow": "The Results",
-            "heading": "Workshop Builds",
-            "subheading": "Frames built by first-time builders just like you",
-            "instagram_url": "https://instagram.com/bamboobicycleclub"
+            "title": "Select & cut your bamboo",
+            "body": "Choose your culms and mitre them to your personalised frame drawing."
           }
         },
-        "video_block": {
-          "type": "video",
+        "b5": {
+          "type": "step",
           "settings": {
-            "heading": "See the Workshop in Action"
+            "title": "Set the jig",
+            "body": "Lock the geometry — tailored to your body measurements, taken in advance."
           }
         },
-        "included_block": {
-          "type": "included",
+        "b6": {
+          "type": "step",
           "settings": {
-            "eyebrow": "Everything You Need",
-            "heading": "What's Included",
-            "item1_title": "Complete Frame Kit",
-            "item1_text": "All bamboo tubes, lugs, dropouts, and materials needed to build your frame",
-            "item2_title": "Expert Guidance",
-            "item2_text": "Step-by-step instruction from experienced frame builders (max 6 per session)",
-            "item3_title": "Professional Tools",
-            "item3_text": "Access to all tools, jigs, and equipment — nothing to buy or bring",
-            "item4_title": "Lunch & Refreshments",
-            "item4_text": "Tea, coffee, snacks, and lunch provided throughout your build days",
-            "item5_title": "Community Access",
-            "item5_text": "Join our global builder community for ongoing support and inspiration",
-            "item6_title": "Video Tutorials",
-            "item6_text": "Full access to our tutorial library for component assembly and maintenance"
+            "title": "Lash & bond the joints",
+            "body": "Wrap the joints in natural fibre and high-strength bio-resin."
           }
         },
-        "testimonials_block": {
-          "type": "testimonials",
+        "b7": {
+          "type": "step",
           "settings": {
-            "eyebrow": "Builder Stories",
-            "heading": "What Our Workshop Graduates Say",
-            "testimonial_1_quote": "An incredible experience. I came with zero framebuilding experience and left with a bike I'm genuinely proud of. The instructors were patient, knowledgeable, and clearly passionate about what they do.",
-            "testimonial_1_name": "Workshop Participant",
-            "testimonial_1_detail": "First-time builder, London",
-            "testimonial_2_quote": "Best birthday present I ever gave myself. Two days of pure focus and creativity. Now I ride past bike shops and think I made something better than anything in there.",
-            "testimonial_2_name": "Marcus",
-            "testimonial_2_detail": "Gravel build, Netherlands",
-            "testimonial_3_quote": "The small group size meant we got loads of individual attention. James and the team were brilliant at explaining the why, not just the how.",
-            "testimonial_3_name": "Sarah",
-            "testimonial_3_detail": "Road bike build, Bristol"
+            "title": "Finish & ride away",
+            "body": "Final inspection, a celebration, and a frame ready for components."
           }
         },
-        "locations_block": {
-          "type": "locations",
+        "b8": {
+          "type": "how_tag",
           "settings": {
-            "eyebrow": "Where We Build",
-            "heading": "Workshop Locations",
-            "london_title": "London, UK",
-            "london_text": "Our original workshop in East London. The heart of Bamboo Bicycle Club since 2012.",
-            "london_address": "Hackney, London E8",
-            "london_url": "#booking",
-            "amersfoort_title": "Amersfoort, Netherlands",
-            "amersfoort_text": "Our European hub serving the Netherlands, Belgium, and Germany.",
-            "amersfoort_address": "Amersfoort, NL",
-            "amersfoort_url": "#booking",
-            "toulouse_title": "Toulouse, France",
-            "toulouse_text": "Our newest location serving southern France and Spain.",
-            "toulouse_address": "Toulouse, France",
-            "toulouse_url": "/pages/toulouse"
+            "label": "Tools provided"
           }
         },
-        "pricing_block": {
-          "type": "pricing",
+        "b9": {
+          "type": "how_tag",
           "settings": {
-            "eyebrow": "Book Your Build",
-            "heading": "Workshop Options",
-            "subheading": "Choose your frame type. All include complete materials and expert guidance.",
-            "option1_title": "Road Frame",
-            "option1_price": "£500",
-            "option1_feature1": "2-day workshop",
-            "option1_feature2": "Lightweight road geometry",
-            "option1_feature3": "All materials included",
-            "option1_feature4": "Lunch & refreshments",
-            "option1_url": "/products/road-frame-workshop",
-            "option2_badge": "Most Popular",
-            "option2_title": "Gravel / Adventure",
-            "option2_price": "£550",
-            "option2_feature1": "2-3 day workshop",
-            "option2_feature2": "Versatile adventure geometry",
-            "option2_feature3": "Disc brake compatible",
-            "option2_feature4": "All materials included",
-            "option2_url": "/products/gravel-frame-workshop",
-            "option3_title": "Hardtail MTB",
-            "option3_price": "£595",
-            "option3_feature1": "3-day workshop",
-            "option3_feature2": "Trail-ready geometry",
-            "option3_feature3": "Disc brake compatible",
-            "option3_feature4": "Boost or standard spacing",
-            "option3_url": "/products/mtb-frame-workshop",
-            "show_cycle_to_work": true,
-            "cycle_to_work_title": "Cycle to Work Accepted",
-            "cycle_to_work_text": "Save 25-39% through your employer's scheme. We're registered with all major providers."
+            "label": "Lunch & coffee"
           }
         },
-        "faq_block": {
+        "b10": {
+          "type": "how_tag",
+          "settings": {
+            "label": "Expert 1:1 guidance"
+          }
+        },
+        "b11": {
+          "type": "how_tag",
+          "settings": {
+            "label": "Group discounts 3+"
+          }
+        },
+        "b12": {
+          "type": "location",
+          "settings": {
+            "fallback": "bbc-rd-ws-london.jpg",
+            "image_alt": "Builders shaping bamboo frame tubes at a Bamboo Bicycle Club workshop",
+            "title": "London E8",
+            "body": "Our home workshop in Hackney. Weekends & weekdays, year-round.",
+            "link_label": "Book London"
+          }
+        },
+        "b13": {
+          "type": "location",
+          "settings": {
+            "fallback": "bbc-rd-ws-amersfoort.jpg",
+            "image_alt": "People building bamboo bike frames around a workbench at a weekend workshop",
+            "title": "Amersfoort, NL",
+            "body": "Run by Tim, who built his own bamboo gravel bike with us. Serving the Netherlands, Belgium and Germany. All materials included.",
+            "link_label": "Meet Tim & book",
+            "link_url": "/pages/amersfoort-workshop"
+          }
+        },
+        "b14": {
+          "type": "location",
+          "settings": {
+            "fallback": "bbc-rd-ws-toulouse.jpg",
+            "image_alt": "Builders gathered around a finished bamboo bike on a Toulouse street",
+            "title": "Toulouse, FR",
+            "body": "Serving southern France and Spain. All materials included.",
+            "link_label": "About Toulouse workshops",
+            "link_url": "/pages/toulouse-workshop"
+          }
+        },
+        "b15": {
+          "type": "frame_tag",
+          "settings": {
+            "label": "Road · 2 days",
+            "lime": true
+          }
+        },
+        "b16": {
+          "type": "frame_tag",
+          "settings": {
+            "label": "Gravel · 2 days",
+            "lime": false
+          }
+        },
+        "b17": {
+          "type": "frame_tag",
+          "settings": {
+            "label": "MTB · 3 days",
+            "lime": false
+          }
+        },
+        "b18": {
+          "type": "frame_tag",
+          "settings": {
+            "label": "City & tourer",
+            "lime": false
+          }
+        },
+        "b19": {
           "type": "faq",
           "settings": {
-            "eyebrow": "Common Questions",
-            "heading": "Workshop FAQ",
-            "faq1_question": "Do I need any experience?",
-            "faq1_answer": "None at all. 95% of our workshop participants have never built anything like this before. We guide you through every step, from selecting your bamboo to the final finish.",
-            "faq2_question": "What should I bring?",
-            "faq2_answer": "Just yourself and old clothes you don't mind getting epoxy on. We provide everything else — tools, materials, safety equipment, lunch, tea and coffee.",
-            "faq3_question": "Can I bring a friend?",
-            "faq3_answer": "Absolutely! Many people book with partners or friends. Building together is a great experience. Group discounts available for 3+ bookings.",
-            "faq4_question": "Can I use Cycle to Work?",
-            "faq4_answer": "Yes! We're registered with all major Cycle to Work providers including Cyclescheme, Cycle Solutions, and Bike2Work. You can typically save 25-39%.",
-            "faq5_question": "How do I get my frame home?",
-            "faq5_answer": "Most people carry their frame on public transport or in a car boot. We can also arrange courier shipping (additional cost) if you're traveling from further away.",
-            "faq6_question": "What about components?",
-            "faq6_answer": "The workshop produces a complete frame ready for components. We can advise on component choices, and sell complete groupset packages separately.",
-            "faq7_question": "How long will the frame last?",
-            "faq7_answer": "With proper care, bamboo frames ride for 8-12+ years. We've had frames from our earliest workshops still going strong. Our support doesn't end when you leave.",
-            "faq8_question": "What's your cancellation policy?",
-            "faq8_answer": "Full refund if cancelled 14+ days before. 50% refund or date transfer 7-13 days before. No refund within 7 days, but you can transfer your booking to someone else."
+            "question": "Do I need any experience?",
+            "answer": "None at all. Around 95% of participants have never built anything like this before — we guide you through every step."
           }
         },
-        "press_block": {
-          "type": "press",
+        "b20": {
+          "type": "faq",
           "settings": {
-            "label": "As featured in"
+            "question": "Can I come with someone?",
+            "answer": "Yes — many people book with partners or friends. Group discounts are available for 3 or more."
           }
         },
-        "contact_block": {
-          "type": "contact",
+        "b21": {
+          "type": "faq",
           "settings": {
-            "heading": "Questions? We're Here to Help",
-            "text": "Not sure which workshop is right for you? Need to discuss accessibility, dates, or group bookings?",
-            "email_text": "Email Us",
-            "email_url": "mailto:hello@bamboobicycleclub.org",
-            "contact_text": "Contact Form",
-            "contact_url": "/pages/contact"
+            "question": "Can I use Cycle to Work?",
+            "answer": "Yes. We're registered with all major providers, so you can typically save 25–39%."
+          }
+        },
+        "b22": {
+          "type": "faq",
+          "settings": {
+            "question": "What do I leave with?",
+            "answer": "A complete frame ready for components. We can advise on, or supply, a groupset to finish the build."
+          }
+        },
+        "b23": {
+          "type": "faq",
+          "settings": {
+            "question": "What should I bring?",
+            "answer": "Just yourself and old clothes you don't mind getting epoxy on. Tools, materials, safety kit, lunch, tea and coffee are all provided."
+          }
+        },
+        "b24": {
+          "type": "faq",
+          "settings": {
+            "question": "How long will the frame last?",
+            "answer": "With proper care, bamboo frames ride for years — we still have frames from our earliest workshops going strong. Our support doesn't end when you leave."
           }
         }
       },
       "block_order": [
-        "hero_block",
-        "trust_bar_block",
-        "intro_block",
-        "experience_block",
-        "gallery_block",
-        "video_block",
-        "included_block",
-        "testimonials_block",
-        "locations_block",
-        "pricing_block",
-        "faq_block",
-        "press_block",
-        "contact_block"
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b11",
+        "b12",
+        "b13",
+        "b14",
+        "b15",
+        "b16",
+        "b17",
+        "b18",
+        "b19",
+        "b20",
+        "b21",
+        "b22",
+        "b23",
+        "b24"
       ],
       "settings": {}
+    },
+    "videoband": {
+      "type": "bbc-rd-video-embed",
+      "settings": {
+        "video_youtube": "6N9P6yYjVg4",
+        "eyebrow": "The build",
+        "heading": "See exactly what you'll build",
+        "body": "Two days, start to finish — filmed in our London workshop. No experience needed, just bamboo and hand tools.",
+        "dark": false,
+        "caption": ""
+      }
     }
   },
-  "order": ["workshop_blocks"]
+  "order": [
+    "main",
+    "videoband"
+  ]
 }

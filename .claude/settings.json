@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "deny": [
+      "Write(templates/**)",
+      "Edit(templates/**)",
+      "Write(config/settings_data.json)",
+      "Edit(config/settings_data.json)",
+      "Bash(shopify theme push --theme=191768756598*)",
+      "Bash(shopify theme push --theme=195991470454*)"
+    ]
+  }
+}

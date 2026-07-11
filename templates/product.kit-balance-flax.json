@@ -1,374 +1,302 @@
 {
   "sections": {
     "main": {
-      "type": "main-product",
+      "type": "bbc-product-2026",
       "blocks": {
-        "title": {
-          "type": "title",
-          "settings": {}
-        },
-        "caption": {
-          "type": "text",
+        "b0": {
+          "type": "perk",
           "settings": {
-            "text": "100% natural materials \u2014 bamboo and flax, no carbon fibre, beautifully sustainable.",
-            "text_style": "subtitle"
+            "text": "No power tools required — just basic hand tools"
           }
         },
-        "price": {
-          "type": "price",
-          "settings": {}
-        },
-        "variant_picker": {
-          "type": "variant_picker",
+        "b1": {
+          "type": "perk",
           "settings": {
-            "picker_type": "button",
-            "swatch_shape": "circle"
+            "text": "Illustrated manual + 15+ hours of step-by-step video"
           }
         },
-        "quantity_selector": {
-          "type": "quantity_selector",
-          "settings": {}
-        },
-        "buy_buttons": {
-          "type": "buy_buttons",
+        "b2": {
+          "type": "perk",
           "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": false
+            "text": "Lifetime community of 4,000+ builders for support"
           }
         },
-        "description": {
-          "type": "description",
-          "settings": {}
-        },
-        "collapsible-geometry": {
-          "type": "collapsible_tab",
+        "b3": {
+          "type": "perk",
           "settings": {
-            "heading": "Geometry & Sizing",
-            "icon": "ruler",
-            "content": "<p><strong>Not sure which size?</strong> Send us your height and inside leg measurement \u2014 we'll recommend the perfect fit.</p><p>Email: hello@bamboobicycleclub.org</p>",
-            "page": ""
+            "text": "Cycle to Work accepted — save through salary sacrifice"
           }
         },
-        "collapsible-included": {
-          "type": "collapsible_tab",
+        "b4": {
+          "type": "need",
           "settings": {
-            "heading": "What's Included",
-            "icon": "box",
-            "content": "<ul><li>5 heat-treated Moso bamboo tubes (pre-shaped)</li><li>Flax fibre wrap + two-part epoxy resin</li><li>Plywood alignment jig for precise geometry</li><li>CNC machined headtube, BB shell (BSA 68mm) &amp; dropouts</li><li>15+ hours of step-by-step video tutorials</li><li>Community access \u2014 4,000+ builders worldwide</li></ul>",
-            "page": ""
+            "title": "Basic hand tools",
+            "description": "A hacksaw, files, sandpaper, a measuring tape — no power tools. Everything else is in the kit."
           }
         },
-        "collapsible-time": {
-          "type": "collapsible_tab",
+        "b5": {
+          "type": "need",
           "settings": {
-            "heading": "Build Time: 10\u201315 Hours",
-            "icon": "stopwatch",
-            "content": "<p>A simpler build \u2014 perfect for a first project or building with older children.</p><p><strong>Prep:</strong> 1\u20132 hrs \u00b7 <strong>Jig &amp; tubes:</strong> 2\u20133 hrs \u00b7 <strong>Bonding:</strong> 3\u20135 hrs \u00b7 <strong>Curing:</strong> 24 hrs \u00b7 <strong>Finishing:</strong> 2\u20133 hrs</p>",
-            "page": ""
+            "title": "A bit of space",
+            "description": "A sturdy table around 1200 × 600 mm and a spot the frame can sit undisturbed while joints cure."
           }
         },
-        "collapsible-durability": {
-          "type": "collapsible_tab",
+        "b6": {
+          "type": "need",
           "settings": {
-            "heading": "Durability & Strength",
-            "icon": "check_mark",
-            "content": "<p><strong>Lifespan:</strong> 8\u201312 years with proper care</p><p><strong>Tensile strength:</strong> ~28,000 PSI \u2014 comparable to mild steel</p><p><strong>Failure rate:</strong> Under 1% across 4,000+ builds</p><p>Bamboo naturally absorbs road vibration better than metal, giving you a smoother, more comfortable ride. Tested with Swansea University.</p>",
-            "page": ""
+            "title": "A few weekends",
+            "description": "25–35 hours across multiple sessions. No rush — bamboo is forgiving and most mistakes are fixable."
           }
         },
-        "collapsible-shipping": {
-          "type": "collapsible_tab",
+        "b7": {
+          "type": "spec",
           "settings": {
-            "heading": "Shipping & Customs",
-            "icon": "truck",
-            "content": "<p>Ships to <strong>36+ countries</strong> worldwide.</p><p><strong>UK:</strong> \u00a312, 5+ working days</p><p><strong>EU &amp; International:</strong> Confirmed at checkout</p><p>Full tracking on all orders. We ship twice a week from our London workshop.</p>",
-            "page": ""
+            "label": "Age range",
+            "value": "Designed for ages 2–5"
           }
         },
-        "collapsible-support": {
-          "type": "collapsible_tab",
+        "b8": {
+          "type": "spec",
           "settings": {
-            "heading": "Help & Support",
-            "icon": "chat_bubble",
-            "content": "<p>You're not alone in this build.</p><ul><li>15+ hours of video tutorials</li><li>Active builder community (4,000+ members)</li><li>Comprehensive build guides</li><li>Direct support from James and the team</li></ul><p><strong>95% of our builders have zero prior experience.</strong></p>",
-            "page": ""
+            "label": "Construction",
+            "value": "Bamboo + flax fibre — fully natural joints, no lugs or carbon"
           }
         },
-        "share": {
-          "type": "share",
+        "b9": {
+          "type": "spec",
           "settings": {
-            "share_label": "Share"
+            "label": "Build time",
+            "value": "10–15 hrs — our simplest kit"
+          }
+        },
+        "b10": {
+          "type": "spec",
+          "settings": {
+            "label": "Weight",
+            "value": "Light for little legs"
+          }
+        },
+        "b11": {
+          "type": "step",
+          "settings": {
+            "title": "Set the geometry",
+            "description": "Set the little-rider geometry on the jig — low and stable, with plant-based flax joints."
+          }
+        },
+        "b12": {
+          "type": "step",
+          "settings": {
+            "title": "Join & wrap",
+            "description": "Bond the tubes into the pre-formed lugs and leave to cure — no free-hand fibre wrapping needed."
+          }
+        },
+        "b13": {
+          "type": "step",
+          "settings": {
+            "title": "Cure",
+            "description": "Leave it for a full cure — that's where maximum joint strength comes from."
+          }
+        },
+        "b14": {
+          "type": "step",
+          "settings": {
+            "title": "Sand, seal & ride",
+            "description": "Sand smooth, seal the bamboo, fit the headset and bottom bracket. Adventure awaits."
+          }
+        },
+        "b15": {
+          "type": "review",
+          "settings": {
+            "quote": "The bike was the first thing I ever made with my own hands. When my daughter rode it on a family visit, I felt like a dad again.",
+            "cite": "— a Build to Bond programme participant"
+          }
+        },
+        "b16": {
+          "type": "stat",
+          "settings": {
+            "number": "4,000+",
+            "label": "builders trained",
+            "source": "since 2012, 36 countries"
+          }
+        },
+        "b17": {
+          "type": "stat",
+          "settings": {
+            "number": "Swansea",
+            "label": "University tested",
+            "source": "independent testing"
+          }
+        },
+        "b18": {
+          "type": "stat",
+          "settings": {
+            "number": "1 yr",
+            "label": "kit warranty",
+            "source": "+ 14-day returns on unopened kits"
+          }
+        },
+        "b19": {
+          "type": "stat",
+          "settings": {
+            "number": "~2×/wk",
+            "label": "shipped from London",
+            "source": "full tracking"
+          }
+        },
+        "b20": {
+          "type": "faq",
+          "settings": {
+            "question": "What age and size is this for?",
+            "answer": "Designed for children roughly aged 2–5, as a balance (pedal-free) first bike. Fit depends on your child's inside-leg measurement more than age — send us their height and inside leg and we'll confirm it suits them."
+          }
+        },
+        "b21": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it light enough for a toddler to handle?",
+            "answer": "Bamboo is naturally light and the balance frame is small, so it's made to be manageable for little legs. We don't want to publish a weight we haven't measured — please confirm the finished weight in kg before this goes live."
+          }
+        },
+        "b22": {
+          "type": "faq",
+          "settings": {
+            "question": "Why choose flax over the lugged balance bike?",
+            "answer": "Two reasons: it's greener and cheaper. The flax kit joins the bamboo with natural plant fibre and resin instead of metal or 3D-printed lugs — so it's 100% natural materials (bamboo and flax, no carbon), the most sustainable build we make, and our most affordable. The lugged version uses metal/printed lug joints, which some builders prefer for the look and a slightly more guided build. Both make the same pedal-free first bike."
+          }
+        },
+        "b23": {
+          "type": "faq",
+          "settings": {
+            "question": "How hard is the build, and how long does it take?",
+            "answer": "It's our simplest kit — around 10–15 hours, comfortably spread over a weekend or two. No power tools: just basic hand tools (hacksaw, files, sandpaper, tape) and a work surface. You bond the bamboo tubes with epoxy and wrap each joint in flax fibre. Most builders start with zero experience, and our community of 4,000+ can help if you get stuck."
+          }
+        },
+        "b24": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it safe and strong enough for a child?",
+            "answer": "Very strong for its weight. Bamboo is a light, hollow natural composite and every joint is reinforced with carbon-fibre, giving a high strength-to-weight ratio. Our bamboo is independently tested at Swansea University. Builders ride these frames daily and tour continents — with proper care they last for years."
+          }
+        },
+        "b25": {
+          "type": "related",
+          "settings": {
+            "title": "Component finishing pack",
+            "price": "",
+            "url": "",
+            "fallback": "bbc-rd-prod-build.jpg"
+          }
+        },
+        "b26": {
+          "type": "related",
+          "settings": {
+            "title": "Lugged balance bike",
+            "price": "",
+            "url": "",
+            "fallback": "bbc-rd-prod-balance.jpg"
+          }
+        },
+        "b27": {
+          "type": "related",
+          "settings": {
+            "title": "The Build to Bond story",
+            "price": "",
+            "url": "",
+            "fallback": "bbc-rd-team.jpg"
+          }
+        },
+        "hl1": {
+          "type": "highlight",
+          "settings": {
+            "heading": "No welding, no workshop",
+            "body": "Build the whole frame on your kitchen table with basic hand tools — everything else is in the kit.",
+            "fallback": "bbc-rd-bamboo-tubes.jpg"
+          }
+        },
+        "hl2": {
+          "type": "highlight",
+          "settings": {
+            "heading": "Everything in the box",
+            "body": "Bamboo, the jig, metal fittings, resin, fibre and 15+ hours of step-by-step video — you only add the components.",
+            "fallback": "bbc-rd-prod-build.jpg"
+          }
+        },
+        "hl3": {
+          "type": "highlight",
+          "settings": {
+            "heading": "Every kit funds learning",
+            "body": "Your build helps fund accredited skills courses in prisons and schools. You learn a skill — so does someone else.",
+            "fallback": "bbc-rd-prod-flax.jpg"
           }
         }
       },
       "block_order": [
-        "title",
-        "caption",
-        "variant_picker",
-        "price",
-        "quantity_selector",
-        "buy_buttons",
-        "description",
-        "collapsible-geometry",
-        "collapsible-included",
-        "collapsible-time",
-        "collapsible-durability",
-        "collapsible-shipping",
-        "collapsible-support",
-        "share"
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b11",
+        "b12",
+        "b13",
+        "b14",
+        "b15",
+        "b16",
+        "b17",
+        "b18",
+        "b19",
+        "b20",
+        "b21",
+        "b22",
+        "b23",
+        "b24",
+        "b25",
+        "b26",
+        "b27",
+        "hl1",
+        "hl2",
+        "hl3"
       ],
       "settings": {
-        "enable_sticky_info": true,
-        "media_size": "medium",
-        "constrain_to_viewport": true,
-        "gallery_layout": "thumbnail",
-        "mobile_thumbnails": "show",
-        "hide_variants": true,
-        "enable_video_looping": false,
-        "padding_top": 48,
-        "padding_bottom": 16
+        "product_badge": "First bike · flax · eco",
+        "product_subtitle": "Our most sustainable and most affordable balance bike: bamboo tubes joined with natural flax fibre and resin — no metal lugs, no carbon, no plastic shop bike. It's the same first bike a parent builds for their own child on our prison programme, so the one you make at home helps fund a place for a family to be reunited.",
+        "rating_value": "",
+        "review_count": "",
+        "reviews_subline": "Rated by the builders who made one",
+        "why_heading": "A first bike made of plants, not plastic.",
+        "why_fallback": "bbc-rd-ride-balance.jpg",
+        "loop_step1_sm": "a balance bike · from £66",
+        "related_heading": "More first bikes",
+        "bundle_b_label": "Wheels & finishing",
+        "bundle_b_price": "—",
+        "bundle_total_price": "—",
+        "why_quote": "The flax finish is gorgeous — every time I look at it I smile. And I built it myself.",
+        "why_quote_cite": "Balance Flax Builder, Home kit build",
+        "loop_heading": "This kit mirrors our prison programme exactly: inside, a parent builds a balance bike for their own child as a first step back to their family. When you build one for your child at home, your purchase helps fund a place for another parent to do the same — one first bike funding another.",
+        "why_eyebrow": "Why bamboo for a first bike",
+        "build_video_id": "GevFK1s-I8w",
+        "why_image_alt": "A plant-based flax bamboo balance bike"
       }
     },
-    "whats-included": {
-      "type": "bbc-kit-whats-included",
-      "blocks": {
-        "i1": {
-          "type": "item",
-          "settings": {
-            "title": "Bamboo Tube Set",
-            "description": "5 heat-treated Moso bamboo tubes, pre-shaped and ready to build"
-          }
-        },
-        "i2": {
-          "type": "item",
-          "settings": {
-            "title": "Flax Fibre & Epoxy",
-            "description": "Flax fibre wrap with two-part epoxy resin \u2014 fully natural jointing"
-          }
-        },
-        "i3": {
-          "type": "item",
-          "settings": {
-            "title": "Alignment Jig",
-            "description": "Plywood jig \u2014 ensures your frame is straight and true"
-          }
-        },
-        "i4": {
-          "type": "item",
-          "settings": {
-            "title": "Metal Components",
-            "description": "CNC machined headtube, BB shell (BSA 68mm), and dropouts"
-          }
-        },
-        "i5": {
-          "type": "item",
-          "settings": {
-            "title": "Video Tutorials",
-            "description": "15+ hours of step-by-step guidance on YouTube"
-          }
-        },
-        "i6": {
-          "type": "item",
-          "settings": {
-            "title": "Builder Community",
-            "description": "Join 4,000+ builders for support, tips, and inspiration"
-          }
-        }
-      },
-      "block_order": [
-        "i1",
-        "i2",
-        "i3",
-        "i4",
-        "i5",
-        "i6"
-      ],
+    "videoband": {
+      "type": "bbc-rd-video-embed",
       "settings": {
-        "eyebrow": "Everything You Need",
-        "heading": "What's In The Box",
-        "subtitle": "Every kit includes everything to build a complete frame \u2014 no hidden extras"
-      }
-    },
-    "quote-inline": {
-      "type": "bbc-kit-quote",
-      "settings": {
-        "quote": "The flax finish is gorgeous \u2014 every time I look at it I smile. And I built it myself.",
-        "name": "Balance Flax Builder",
-        "context": "Home kit build",
-        "show_stars": true
-      }
-    },
-    "build-journey": {
-      "type": "bbc-kit-journey",
-      "blocks": {
-        "step-1": {
-          "type": "step",
-          "settings": {
-            "time": "1\u20132 hours",
-            "title": "Unbox & Prepare",
-            "description": "Inventory all parts, watch the intro tutorials."
-          }
-        },
-        "step-2": {
-          "type": "step",
-          "settings": {
-            "time": "2\u20133 hours",
-            "title": "Jig Setup & Tube Prep",
-            "description": "Assemble jig, set geometry, prepare bamboo tubes."
-          }
-        },
-        "step-3": {
-          "type": "step",
-          "settings": {
-            "time": "3\u20135 hours",
-            "title": "Flax Wrapping",
-            "description": "Join tubes with epoxy and wrap with flax fibre. Natural and beautiful."
-          }
-        },
-        "step-4": {
-          "type": "step",
-          "settings": {
-            "time": "24 hours",
-            "title": "Curing",
-            "description": "Let the epoxy cure at room temperature. Maximum strength."
-          }
-        },
-        "step-5": {
-          "type": "step",
-          "settings": {
-            "time": "2\u20133 hours",
-            "title": "Finish & Fit",
-            "description": "Sand smooth, seal bamboo, install headset and BB."
-          }
-        }
-      },
-      "block_order": [
-        "step-1",
-        "step-2",
-        "step-3",
-        "step-4",
-        "step-5"
-      ],
-      "settings": {
-        "heading": "Your Build Journey",
-        "subtitle": "Most builders spread this over a few weekends"
-      }
-    },
-    "faq": {
-      "type": "collapsible-content",
-      "blocks": {
-        "faq-1": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Do I need special tools?",
-            "icon": "question_mark",
-            "row_content": "<p>No power tools required. Basic hand tools: hacksaw, files, sandpaper, measuring tape, and a work surface. Everything else is in the kit.</p>",
-            "page": ""
-          }
-        },
-        "faq-2": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "What if I make a mistake?",
-            "icon": "question_mark",
-            "row_content": "<p>Most mistakes are fixable. Epoxy can be sanded and re-applied. Bamboo is forgiving. If you're stuck, our community has seen every problem \u2014 someone will have the answer within hours.</p>",
-            "page": ""
-          }
-        },
-        "faq-3": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "What else do I need to complete the bike?",
-            "icon": "question_mark",
-            "row_content": "<p>Fork, wheels, groupset, handlebars, saddle, and finishing components. We offer component packs with everything included, or source parts from any bike shop.</p>",
-            "page": ""
-          }
-        },
-        "faq-4": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "How strong is a bamboo frame?",
-            "icon": "question_mark",
-            "row_content": "<p>~28,000 PSI tensile strength \u2014 comparable to mild steel, but lighter. Under 1% failure rate across 4,000+ builds since 2012. Tested with Swansea University.</p>",
-            "page": ""
-          }
-        },
-        "faq-5": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Can I ride in the rain?",
-            "icon": "question_mark",
-            "row_content": "<p>Yes. Finished frames are sealed with epoxy resin. Dry your bike after wet rides and store indoors.</p>",
-            "page": ""
-          }
-        },
-        "faq-6": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "How long will the frame last?",
-            "icon": "question_mark",
-            "row_content": "<p>8\u201312 years with proper care. Many of our 2012 builds are still being ridden daily.</p>",
-            "page": ""
-          }
-        }
-      },
-      "block_order": [
-        "faq-1",
-        "faq-2",
-        "faq-3",
-        "faq-4",
-        "faq-5",
-        "faq-6"
-      ],
-      "settings": {
-        "caption": "",
-        "heading": "Common Questions",
-        "heading_size": "h2",
-        "heading_alignment": "left",
-        "layout": "none",
-        "color_scheme": "scheme-1",
-        "container_color_scheme": "scheme-1",
-        "open_first_collapsible_row": false,
-        "image_ratio": "adapt",
-        "padding_top": 48,
-        "padding_bottom": 48
-      }
-    },
-    "complete-build": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Complete Your Build",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "component-packs",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "enable_quick_add": false,
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 48,
-        "padding_bottom": 48
+        "video_youtube": "ckCwJXJGKD0",
+        "eyebrow": "Before you buy",
+        "heading": "Watch the build, start to finish",
+        "body": "Every kit ships with 15+ hours of step-by-step video. Here's a taste of what you'll do.",
+        "dark": false
       }
     }
   },
   "order": [
     "main",
-    "whats-included",
-    "quote-inline",
-    "build-journey",
-    "faq",
-    "complete-build"
+    "videoband"
   ]
 }

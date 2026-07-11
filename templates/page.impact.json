@@ -1,1090 +1,294 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "impact-hero": {
-      "type": "bbc-impact-hero",
-      "settings": {
-        "eyebrow": "Our Impact",
-        "giant_number": "4,000+",
-        "number_label": "Lives Changed Through Building",
-        "heading": "Building Bicycles. Rebuilding Lives.",
-        "subheading": "13 years. 4,000+ people trained. 36 countries. From London prisons to Dutch classrooms, Patagonia expeditions to corporate workshops — bamboo bicycle building changes people.",
-        "participant_quote": "The bike was the first thing I ever made with my own hands. When my daughter rode it on family visit day, I felt like a dad again.",
-        "participant_name": "A Build to Bond participant, HMP Lowdham Grange",
-        "cta_text": "Partner With Us",
-        "cta_link": "/pages/contact-us",
-        "report_text": "Download Our Impact Report (PDF)",
-        "report_link": "",
-        "background_color": "#ffffff"
-      }
-    },
-    "press-logos": {
-      "type": "bbc-press-logos",
-      "settings": {
-        "eyebrow": "As seen in & recognised by",
-        "logo_height": 36,
-        "background_color": "#ffffff",
-        "padding_top": 40,
-        "padding_bottom": 40
-      },
+    "main": {
+      "type": "bbc-impact-2026",
       "blocks": {
-        "press-ft": {
-          "type": "logo",
-          "settings": {
-            "name": "Financial Times",
-            "badge": "September 2025",
-            "link": "https://www.ft.com/content/6ebe2eba-b832-4289-9924-2e9f948d5f98"
-          }
-        },
-        "press-investec": {
-          "type": "logo",
-          "settings": {
-            "name": "Investec",
-            "badge": "2025 Winner"
-          }
-        },
-        "press-mccloud": {
-          "type": "logo",
-          "settings": {
-            "name": "Kevin McCloud",
-            "badge": "Green Heroes 2018"
-          }
-        },
-        "press-ocn": {
-          "type": "logo",
-          "settings": {
-            "name": "OCN London",
-            "badge": "Level 2 Accredited"
-          }
-        }
-      },
-      "block_order": [
-        "press-ft",
-        "press-investec",
-        "press-mccloud",
-        "press-ocn"
-      ]
-    },
-    "problem": {
-      "type": "bbc-problem-statement",
-      "settings": {
-        "eyebrow": "Why This Matters",
-        "heading": "Family Connection Reduces Reoffending",
-        "text": "<p>Research consistently shows that maintaining family ties during imprisonment is one of the most effective ways to reduce reoffending. Yet 45% of prisoners lose contact with their children — damaging the relationships most crucial to successful rehabilitation.</p>",
-        "background_color": "#f8f8f6"
-      },
-      "blocks": {
-        "stat-1": {
+        "stat_completion": {
           "type": "stat",
           "settings": {
-            "number": "39%",
-            "label": "less likely to reoffend",
-            "source": "MoJ Farmer Review"
+            "number": "90%",
+            "label": "prison course completion",
+            "source": "BBC programme records",
+            "comparator": ""
           }
         },
-        "stat-2": {
-          "type": "stat",
-          "settings": {
-            "number": "£11.41",
-            "label": "return per £1 invested",
-            "source": "PACT Research"
-          }
-        },
-        "stat-3": {
-          "type": "stat",
-          "settings": {
-            "number": "45%",
-            "label": "of prisoners lose family contact",
-            "source": "Prison Reform Trust"
-          }
-        }
-      },
-      "block_order": [
-        "stat-1",
-        "stat-2",
-        "stat-3"
-      ]
-    },
-    "stats": {
-      "type": "bbc-impact-stats",
-      "settings": {
-        "heading": "Our Impact at a Glance",
-        "subheading": "Measurable change through sustainable craftsmanship since 2012"
-      },
-      "blocks": {
-        "stat-1": {
-          "type": "stat",
-          "settings": {
-            "number": "4,000+",
-            "label": "Builders Trained",
-            "detail": "Since 2012",
-            "source": "BBC Programme Records"
-          }
-        },
-        "stat-2": {
-          "type": "stat",
-          "settings": {
-            "number": "36",
-            "label": "Countries",
-            "detail": "Global community",
-            "source": "BBC Community Data"
-          }
-        },
-        "stat-3": {
-          "type": "stat",
-          "settings": {
-            "number": "−CO₂",
-            "label": "Carbon Negative Frame",
-            "detail": "Independent lifecycle analysis",
-            "source": "Independent lifecycle analysis, 2024"
-          }
-        },
-        "stat-4": {
-          "type": "stat",
-          "settings": {
-            "number": "26%",
-            "label": "Confidence Uplift",
-            "detail": "Participant self-assessment",
-            "source": "Programme Surveys"
-          }
-        },
-        "stat-5": {
-          "type": "stat",
-          "settings": {
-            "number": "39%",
-            "label": "Less Reoffending",
-            "detail": "With maintained family ties",
-            "source": "MoJ Farmer Review"
-          }
-        },
-        "stat-6": {
-          "type": "stat",
-          "settings": {
-            "number": "£11.41",
-            "label": "Return Per £1",
-            "detail": "Social return on investment",
-            "source": "PACT Research"
-          }
-        },
-        "stat-7": {
-          "type": "stat",
-          "settings": {
-            "number": "3,500+",
-            "label": "Bikes Built",
-            "detail": "Since 2012",
-            "source": "BBC Programme Records, 2012–2025"
-          }
-        }
-      },
-      "block_order": [
-        "stat-1",
-        "stat-2",
-        "stat-3",
-        "stat-4",
-        "stat-5",
-        "stat-6",
-        "stat-7"
-      ]
-    },
-    "build-to-bond-intro": {
-      "type": "rich-text",
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "padding_top": 80,
-        "padding_bottom": 40
-      },
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Build to Bond"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Our flagship prison rehabilitation programme. Parents in prison build bamboo balance bikes as gifts for their children — creating tangible connections that last beyond prison walls.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text"
-      ]
-    },
-    "how-it-works": {
-      "type": "bbc-how-it-works",
-      "settings": {
-        "eyebrow": "The Programme",
-        "heading": "How Build to Bond Works",
-        "intro": "A structured 6-week programme that creates lasting connections between parents in prison and their children.",
-        "background_color": "#ffffff"
-      },
-      "blocks": {
-        "step-1": {
-          "type": "step",
-          "settings": {
-            "title": "Learn",
-            "description": "Gain OCN Level 2 accreditation in Sustainable Manufacturing — a real qualification that counts towards employment.",
-            "duration": "6-week programme"
-          }
-        },
-        "step-2": {
-          "type": "step",
-          "settings": {
-            "title": "Build",
-            "description": "Create a bamboo balance bike with your hands. Every joint, every layer — skills that transfer beyond prison.",
-            "duration": "Hands-on training"
-          }
-        },
-        "step-3": {
-          "type": "step",
-          "settings": {
-            "title": "Connect",
-            "description": "Present the bike to your child during a family visit. A tangible gift that represents presence, not absence.",
-            "duration": "Family handover"
-          }
-        },
-        "step-4": {
-          "type": "step",
-          "settings": {
-            "title": "Thrive",
-            "description": "A nationally-recognised qualification, improved confidence, and direct pathways to employer interviews after release.",
-            "duration": "Employment pathway"
-          }
-        }
-      },
-      "block_order": [
-        "step-1",
-        "step-2",
-        "step-3",
-        "step-4"
-      ]
-    },
-    "video": {
-      "type": "bbc-video-text",
-      "settings": {
-        "eyebrow": "See It In Action",
-        "heading": "Watch a Build to Bond Session",
-        "text": "<p>See what happens inside a Build to Bond workshop — the focused craft, the pride in building something with your hands, and the moment a parent presents a bike to their child for the first time.</p>",
-        "button_text": "Learn more about the programme",
-        "button_link": "/pages/bamboo-bicycle-club-education",
-        "video_url": "",
-        "background_color": "#f8f8f6",
-        "visual_position": "left",
-        "content_width": "50-50",
-        "vertical_align": "center",
-        "mobile_order": "image_first",
-        "gap_size": "lg"
-      },
-      "blocks": {
-        "video-stat-1": {
-          "type": "stat",
-          "settings": {
-            "number": "6 weeks",
-            "label": "Programme duration"
-          }
-        },
-        "video-stat-2": {
+        "stat_ocn": {
           "type": "stat",
           "settings": {
             "number": "Level 2",
-            "label": "OCN Qualification"
+            "label": "OCN — Sustainable Design & Manufacturing",
+            "source": "OCN London accredited",
+            "comparator": ""
           }
         },
-        "video-stat-3": {
+        "stat_builders": {
           "type": "stat",
           "settings": {
-            "number": "1 bike",
-            "label": "Built per participant"
-          }
-        }
-      },
-      "block_order": [
-        "video-stat-1",
-        "video-stat-2",
-        "video-stat-3"
-      ]
-    },
-    "outcomes": {
-      "type": "bbc-outcomes",
-      "settings": {
-        "eyebrow": "Programme Results",
-        "heading": "What We've Achieved",
-        "intro": "Measurable outcomes from our rehabilitation and education programmes.",
-        "background_color": "#ffffff"
-      },
-      "blocks": {
-        "outcome-1": {
-          "type": "outcome",
-          "settings": {
-            "icon": "check-circle",
-            "number": "83%+",
-            "label": "Completion Rate",
-            "description": "Participants complete the full 6-week Build to Bond programme — significantly above industry average for prison education.",
-            "source": "HMP Lowdham Grange pilot data"
-          }
-        },
-        "outcome-2": {
-          "type": "outcome",
-          "settings": {
-            "icon": "trending-up",
-            "number": "26%",
-            "label": "Confidence Uplift",
-            "description": "Participants report measurably higher self-confidence and self-esteem after completing the programme.",
-            "source": "Participant self-assessment surveys"
-          }
-        },
-        "outcome-3": {
-          "type": "outcome",
-          "settings": {
-            "icon": "briefcase",
-            "number": "",
-            "label": "Employment Pathway",
-            "description": "Guaranteed interview on release — Build to Bond graduates are connected directly to employment partners committed to second chances.",
-            "source": "BBC Employment Pathway"
-          }
-        }
-      },
-      "block_order": [
-        "outcome-1",
-        "outcome-2",
-        "outcome-3"
-      ]
-    },
-    "participant-story": {
-      "type": "bbc-participant-story",
-      "settings": {
-        "eyebrow": "In Their Words",
-        "section_heading": "Stories From the Programme",
-        "section_sub": "",
-        "text_align": "left",
-        "quote": "The bamboo bike course offers more than just technical training — it provides an avenue for creativity, teamwork, and self-expression. Watching the pride on a father’s face when he presents a bike to his child is something special.",
-        "quote_mark": true,
-        "name": "Sally Allsopp",
-        "role": "Industries Manager, HMP Lowdham Grange",
-        "show_placeholder": false,
-        "image_position": "left",
-        "background_color": "#f8f8f6",
-        "padding_top": 80,
-        "padding_bottom": 80
-      },
-      "blocks": {
-        "tag-1": {
-          "type": "tag",
-          "settings": {
-            "label": "Build to Bond"
-          }
-        },
-        "tag-2": {
-          "type": "tag",
-          "settings": {
-            "label": "OCN Level 2"
-          }
-        },
-        "tag-3": {
-          "type": "tag",
-          "settings": {
-            "label": "HMP Lowdham Grange"
-          }
-        }
-      },
-      "block_order": [
-        "tag-1",
-        "tag-2",
-        "tag-3"
-      ]
-    },
-    "theory": {
-      "type": "bbc-theory-of-change",
-      "settings": {
-        "heading": "Why Building Bikes Rebuilds Lives",
-        "intro": "Our rehabilitation programmes aren't just about learning a craft. They're built on proven principles of behavioural change and family connection."
-      },
-      "blocks": {
-        "pillar-1": {
-          "type": "pillar",
-          "settings": {
-            "title": "The IKEA Effect",
-            "description": "Research shows we value things more when we build them ourselves. When a parent builds a bike for their child, that emotional investment creates lasting bonds.",
-            "evidence": "Featured in Financial Times"
-          }
-        },
-        "pillar-2": {
-          "type": "pillar",
-          "settings": {
-            "title": "Family Ties Matter",
-            "description": "Prisoners who maintain family contact are 39% less likely to reoffend. Building a bicycle creates a tangible connection — a present that represents presence.",
-            "evidence": "Farmer Review (MoJ Research)"
-          }
-        },
-        "pillar-3": {
-          "type": "pillar",
-          "settings": {
-            "title": "Hands-On Learning",
-            "description": "Many people in prison struggled in traditional education. Working with their hands, solving real problems — this is how they learn best.",
-            "evidence": "OCN Level 2 Accredited"
-          }
-        },
-        "pillar-4": {
-          "type": "pillar",
-          "settings": {
-            "title": "Sustainable Self-Delivery",
-            "description": "We train prison staff to deliver the programme independently. No ongoing dependency — a one-time investment that keeps delivering value for years.",
-            "evidence": "Self-delivery model"
-          }
-        }
-      },
-      "block_order": [
-        "pillar-1",
-        "pillar-2",
-        "pillar-3",
-        "pillar-4"
-      ]
-    },
-    "timeline": {
-      "type": "bbc-impact-timeline",
-      "settings": {
-        "eyebrow": "Our Journey",
-        "heading": "14 Years of Building Impact",
-        "subheading": "From a single workshop in London to a global programme changing lives.",
-        "background_color": "#f8f8f6",
-        "padding_top": 80,
-        "padding_bottom": 80
-      },
-      "blocks": {
-        "t1": {
-          "type": "milestone",
-          "settings": {
-            "year": "2012",
-            "milestone": "BBC Founded",
-            "detail": "First workshops, London",
-            "highlight": false
-          }
-        },
-        "t2": {
-          "type": "milestone",
-          "settings": {
-            "year": "2014",
-            "milestone": "First Prison",
-            "detail": "Build to Bond piloted",
-            "highlight": true
-          }
-        },
-        "t3": {
-          "type": "milestone",
-          "settings": {
-            "year": "2018",
-            "milestone": "Kevin McCloud",
-            "detail": "Green Heroes, Grand Designs Live",
-            "highlight": false
-          }
-        },
-        "t4": {
-          "type": "milestone",
-          "settings": {
-            "year": "2022",
-            "milestone": "OCN Level 2",
-            "detail": "Accredited qualification",
-            "highlight": true
-          }
-        },
-        "t5": {
-          "type": "milestone",
-          "settings": {
-            "year": "2025",
-            "milestone": "FT + Investec",
-            "detail": "National recognition",
-            "highlight": false
-          }
-        },
-        "t6": {
-          "type": "milestone",
-          "settings": {
-            "year": "Now",
-            "milestone": "4,000+ Builders",
-            "detail": "36 countries",
-            "highlight": true
-          }
-        },
-        "t-2014-munich": {
-          "type": "milestone",
-          "settings": {
-            "year": "2014",
-            "milestone": "Munich franchise opens — BBC goes international",
-            "detail": "",
-            "highlight": true
-          }
-        },
-        "t-2016-utc": {
-          "type": "milestone",
-          "settings": {
-            "year": "2016",
-            "milestone": "Southbank UTC: students build and ride their own bikes",
-            "detail": "",
-            "highlight": false
-          }
-        },
-        "t-2017-hague": {
-          "type": "milestone",
-          "settings": {
-            "year": "2017",
-            "milestone": "The Hague: 7 bikes built by pupils using BBC's school kit",
-            "detail": "",
-            "highlight": false
-          }
-        },
-        "t-2018-ucl": {
-          "type": "milestone",
-          "settings": {
-            "year": "2018",
-            "milestone": "UCL Masters: students engineer an electric bamboo bike",
-            "detail": "",
-            "highlight": true
-          }
-        },
-        "t-2019-kenya": {
-          "type": "milestone",
-          "settings": {
-            "year": "2019",
-            "milestone": "Munich team teaches bamboo building in Kenya",
-            "detail": "",
-            "highlight": false
-          }
-        },
-        "t-2023-kate": {
-          "type": "milestone",
-          "settings": {
-            "year": "2023",
-            "milestone": "Kate Rawles cycles 8,288 miles Colombia → Ushuaia on Woody",
-            "detail": "",
-            "highlight": true
-          }
-        },
-        "t-2024-multi": {
-          "type": "milestone",
-          "settings": {
-            "year": "2024",
-            "milestone": "Toulouse franchise opens; Macallan 10-bike session; Coventry summit",
-            "detail": "",
-            "highlight": false
-          }
-        },
-        "t-2025-cic": {
-          "type": "milestone",
-          "settings": {
-            "year": "2025",
-            "milestone": "Education CIC formed; Stoke College partnership",
-            "detail": "",
-            "highlight": false
-          }
-        }
-      },
-      "block_order": [
-        "t1",
-        "t-2014-munich",
-        "t2",
-        "t-2016-utc",
-        "t-2017-hague",
-        "t-2018-ucl",
-        "t3",
-        "t-2019-kenya",
-        "t4",
-        "t-2023-kate",
-        "t-2024-multi",
-        "t-2025-cic",
-        "t5",
-        "t6"
-      ]
-    },
-    "endorsements": {
-      "type": "bbc-endorsements",
-      "settings": {
-        "heading": "Recognition & Support"
-      },
-      "blocks": {
-        "award-investec": {
-          "type": "award",
-          "settings": {
-            "icon": "emoji_events",
-            "award_name": "Investec Beyond Business",
-            "year": "2025 Winner",
-            "description": "One of four national winners. Recognised for BBC's social enterprise mission — training 4,000+ people across communities, prisons, and schools worldwide."
-          }
-        },
-        "award-kevin": {
-          "type": "award",
-          "settings": {
-            "icon": "eco",
-            "award_name": "Kevin McCloud's Green Heroes",
-            "year": "2018",
-            "description": "Selected for eco-friendly product design at Grand Designs Live"
-          }
-        },
-        "quote-timpson": {
-          "type": "quote",
-          "settings": {
-            "quote": "Innovative projects, such as Build to Bond, support rehabilitation and help people leave prison as better citizens, boosting the economy and keeping our streets safe.",
-            "name": "James Timpson",
-            "role": "UK Prisons Minister"
-          }
-        },
-        "press-ft": {
-          "type": "press",
-          "settings": {
-            "publication": "Financial Times",
-            "headline": "How Bamboo Bicycle Club is helping to break the prison cycle",
-            "date": "September 2025",
-            "link": "https://www.ft.com/content/6ebe2eba-b832-4289-9924-2e9f948d5f98"
-          }
-        }
-      },
-      "block_order": [
-        "quote-timpson",
-        "award-investec",
-        "award-kevin",
-        "press-ft"
-      ]
-    },
-    "carbon": {
-      "type": "bbc-carbon-compare",
-      "settings": {
-        "eyebrow": "Environmental Impact",
-        "heading": "Bamboo vs Aluminium",
-        "subheading": "Every frame we build has a significantly lower environmental footprint than a conventional aluminium bicycle frame.",
-        "layout": "left",
-        "baseline_label": "Aluminium frame",
-        "baseline_percent": "100%",
-        "baseline_desc": "Carbon baseline",
-        "hero_badge": "BBC Choice",
-        "hero_label": "Bamboo frame",
-        "hero_percent": "43.3%",
-        "hero_desc": "56.7% less carbon than aluminium",
-        "hero_bar_pct": 43,
-        "background_color": "#ffffff",
-        "padding_top": 80,
-        "padding_bottom": 80
-      },
-      "blocks": {
-        "bf1": {
-          "type": "baseline_fact",
-          "settings": {
-            "text": "Energy-intensive smelting process"
-          }
-        },
-        "bf2": {
-          "type": "baseline_fact",
-          "settings": {
-            "text": "Requires mining of bauxite ore"
-          }
-        },
-        "bf3": {
-          "type": "baseline_fact",
-          "settings": {
-            "text": "Does not regenerate naturally"
-          }
-        },
-        "hf1": {
-          "type": "hero_fact",
-          "settings": {
-            "text": "Absorbs 35% more CO₂ than equivalent trees"
-          }
-        },
-        "hf2": {
-          "type": "hero_fact",
-          "settings": {
-            "text": "Regenerates from roots — no replanting needed"
-          }
-        },
-        "hf3": {
-          "type": "hero_fact",
-          "settings": {
-            "text": "Harvested without destroying the plant"
-          }
-        },
-        "ss1": {
-          "type": "strip_stat",
-          "settings": {
             "number": "4,000+",
-            "label": "Bamboo frames built since 2012"
+            "label": "people have built a bike",
+            "source": "since 2012",
+            "comparator": ""
           }
         },
-        "ss2": {
-          "type": "strip_stat",
+        "stat_countries": {
+          "type": "stat",
           "settings": {
-            "number": "56.7%",
-            "label": "Lower carbon than aluminium"
+            "number": "45",
+            "label": "countries reached",
+            "source": "kits shipped worldwide",
+            "comparator": ""
           }
         },
-        "ss3": {
-          "type": "strip_stat",
+        "help_buy": {
+          "type": "help",
           "settings": {
-            "number": "35%",
-            "label": "More CO₂ absorbed vs trees"
+            "tag": "Buy",
+            "tag_lime": true,
+            "title": "Build or own a bike",
+            "body": "Book a workshop or buy a kit. Every purchase helps fund our prison and education programmes.",
+            "link_label": "Shop & book",
+            "link_url": "/collections/home-build-kits",
+            "lime": false
+          }
+        },
+        "help_partner": {
+          "type": "help",
+          "settings": {
+            "tag": "Partner",
+            "tag_lime": true,
+            "title": "Run it in your prison",
+            "body": "A self-delivery model for prisons: we train your staff, you run the workshop. OCN Level 2 accredited. Schools and colleges run Make Engineers.",
+            "link_label": "For prisons",
+            "link_url": "/pages/prisons",
+            "lime": false
+          }
+        },
+        "help_support": {
+          "type": "help",
+          "settings": {
+            "tag": "Support",
+            "tag_lime": true,
+            "title": "Fund or champion",
+            "body": "Fund a cohort, offer placements, or champion our work. Every contribution goes directly into accredited skills courses inside prisons and schools.",
+            "link_label": "Back the mission",
+            "link_url": "/pages/support-mission",
+            "lime": true
+          }
+        },
+        "policy_18bn": {
+          "type": "policy",
+          "settings": {
+            "number": "~£18bn",
+            "label": "the annual cost of reoffending",
+            "source": "Ministry of Justice"
+          }
+        },
+        "policy_9pp": {
+          "type": "policy",
+          "settings": {
+            "number": "up to 9pp",
+            "label": "reduction in reoffending from in-prison education",
+            "source": "MoJ education evidence"
+          }
+        },
+        "policy_40": {
+          "type": "policy",
+          "settings": {
+            "number": "~40%",
+            "label": "less likely to reoffend with family contact maintained",
+            "source": "Lord Farmer Review"
+          }
+        },
+        "policy_1m": {
+          "type": "policy",
+          "settings": {
+            "number": "1m+",
+            "label": "16–24-year-olds out of work or education",
+            "source": "ONS"
+          }
+        },
+        "story_ucl": {
+          "type": "story",
+          "settings": {
+            "kind": "Education",
+            "title": "Masters students built a 100kg electric bamboo cargo bike.",
+            "blurb": "Real engineering in a university lab — the same craft, scaled up.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/IMAGE_2_LOAFLY_248a5253-795b-404f-adee-2fc1bd586e91.png?v=1771793521",
+            "url": "/blogs/impact/ucl-masters-bamboo-electric-cargo-bike-university"
+          }
+        },
+        "story_fourseasons": {
+          "type": "story",
+          "settings": {
+            "kind": "Team day",
+            "title": "Twelve senior managers swapped spreadsheets for spoke keys.",
+            "blurb": "A corporate team-build that puts a real bamboo frame — and a donated balance bike — into the world.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/IMG_9772_blogheader_v2q60_1ad2b61a-0f2d-47d9-88fc-b15ca8efc229.webp?v=1771793491",
+            "url": "/blogs/impact/four-seasons-hampshire-corporate-bamboo-team-build"
+          }
+        },
+        "story_upcycle": {
+          "type": "story",
+          "settings": {
+            "kind": "Community",
+            "title": "Balance bikes, built at a team day, donated to a community project.",
+            "blurb": "The commercial side funding the mission — before a bike is even finished.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/SRW08823_e2572015-b157-475c-8f9c-89decaa65462.jpg?v=1771793508",
+            "url": "/blogs/impact/corporate-team-build-upcycle-brixton-bamboo-balance-bikes"
+          }
+        },
+        "story_kenya": {
+          "type": "story",
+          "settings": {
+            "kind": "Global",
+            "title": "Teaching Kenya to build — the knowledge stays behind.",
+            "blurb": "Skills transfer, not aid: local people learn to make and maintain their own bikes.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/01-kirui-riding-bamboo-bike_dcde22a5-5ad1-4db3-b880-048d3e462e5a.jpg?v=1771793527",
+            "url": "/blogs/impact/kenya-bamboo-bicycle-building-skills-transfer"
+          }
+        },
+        "story_macallan": {
+          "type": "story",
+          "settings": {
+            "kind": "Team day",
+            "title": "The Macallan — masters of their craft.",
+            "blurb": "A distillery team built ten bamboo bikes together — craft meeting craft.",
+            "image": "bbc-rd-tb-macallan.jpg",
+            "url": "/blogs/impact/the-macallan-whisky-masters-of-their-craft"
+          }
+        },
+        "story_cohort": {
+          "type": "story",
+          "settings": {
+            "kind": "Community",
+            "title": "4,000+ people have built a bamboo bike with us.",
+            "blurb": "From first-timers to funded cohorts — a growing community learning real skills since 2012.",
+            "image": "bbc-rd-cohort.jpg",
+            "url": "/blogs/impact"
           }
         }
       },
       "block_order": [
-        "bf1",
-        "bf2",
-        "bf3",
-        "hf1",
-        "hf2",
-        "hf3",
-        "ss1",
-        "ss2",
-        "ss3"
-      ]
-    },
-    "partners": {
-      "type": "bbc-partner-logos",
+        "stat_completion",
+        "stat_ocn",
+        "stat_builders",
+        "stat_countries",
+        "help_buy",
+        "help_partner",
+        "help_support",
+        "policy_18bn",
+        "policy_9pp",
+        "policy_40",
+        "policy_1m",
+        "story_ucl",
+        "story_fourseasons",
+        "story_upcycle",
+        "story_kenya",
+        "story_macallan",
+        "story_cohort"
+      ],
       "settings": {
-        "heading": "Our Partners",
-        "logo_height": 50,
-        "background_color": "#f8f8f6"
-      },
-      "blocks": {
-        "partner-1": {
-          "type": "partner",
-          "settings": {
-            "name": "London South Bank University"
-          }
-        },
-        "partner-2": {
-          "type": "partner",
-          "settings": {
-            "name": "Oxford Brookes University"
-          }
-        },
-        "partner-3": {
-          "type": "partner",
-          "settings": {
-            "name": "University of Manchester"
-          }
-        },
-        "partner-4": {
-          "type": "partner",
-          "settings": {
-            "name": "HMP Lowdham Grange"
-          }
-        },
-        "partner-ucl": {
-          "type": "logo",
-          "settings": {
-            "name": "University College London (UCL)"
-          }
-        },
-        "partner-coventry": {
-          "type": "logo",
-          "settings": {
-            "name": "Coventry University"
-          }
-        },
-        "partner-stoke": {
-          "type": "logo",
-          "settings": {
-            "name": "Stoke-on-Trent College"
-          }
-        },
-        "partner-investec": {
-          "type": "logo",
-          "settings": {
-            "name": "Investec"
-          }
-        },
-        "partner-tnl": {
-          "type": "logo",
-          "settings": {
-            "name": "TNL Community Fund"
-          }
-        },
-        "partner-bigissue": {
-          "type": "logo",
-          "settings": {
-            "name": "Big Issue Invest"
-          }
-        }
-      },
-      "block_order": [
-        "partner-1",
-        "partner-2",
-        "partner-3",
-        "partner-4",
-        "partner-ucl",
-        "partner-coventry",
-        "partner-stoke",
-        "partner-investec",
-        "partner-tnl",
-        "partner-bigissue"
-      ]
-    },
-    "funder-cta": {
-      "type": "bbc-impact-funder-cta",
-      "settings": {
-        "eyebrow": "Work With Us",
-        "heading": "Partner With Bamboo Bicycle Club",
-        "subheading": "Whether you run a prison, a school, or a company with a CSR budget, we have a programme that delivers measurable impact.",
-        "background_color": "#f8f8f6",
-        "padding_top": 80,
-        "padding_bottom": 80
-      },
-      "blocks": {
-        "card-prison": {
-          "type": "card",
-          "settings": {
-            "icon": "building",
-            "audience": "For Prisons",
-            "title": "Bring Build to Bond to Your Prison",
-            "body": "We train your staff to deliver the programme independently. A one-time investment that keeps delivering impact — no ongoing fees. OCN Level 2 accredited. Self-delivery model used at HMP Lowdham Grange.",
-            "link_text": "Request a programme pack",
-            "link_url": "/pages/contact-us",
-            "primary": true
-          }
-        },
-        "card-school": {
-          "type": "card",
-          "settings": {
-            "icon": "school",
-            "audience": "For Schools",
-            "title": "STEM + Sustainability Education",
-            "body": "Bring hands-on bamboo building to the classroom. Curriculum-linked projects that teach materials science, sustainability, and engineering through making.",
-            "link_text": "Book a school session",
-            "link_url": "/pages/contact-us",
-            "primary": false
-          }
-        },
-        "card-funder": {
-          "type": "card",
-          "settings": {
-            "icon": "briefcase",
-            "audience": "For Funders & Corporates",
-            "title": "Support Proven Rehabilitation",
-            "body": "£11.41 return per £1 invested. Fund a programme cohort, sponsor a family handover session, or integrate Build to Bond into your employee CSR strategy.",
-            "link_text": "Talk to us about funding",
-            "link_url": "/pages/contact-us",
-            "primary": false
-          }
-        }
-      },
-      "block_order": [
-        "card-prison",
-        "card-school",
-        "card-funder"
-      ]
-    },
-    "cta": {
-      "type": "rich-text",
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "full_width": true,
-        "padding_top": 60,
-        "padding_bottom": 80
-      },
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Ready to Make a Difference?"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Every bamboo bike built in a prison is a conversation started, a skill learned, and a family bond strengthened. Get in touch to bring the programme to your organisation.</p>"
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Get in Touch",
-            "button_link": "/pages/contact-us"
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ]
-    },
-    "main-impact-corporate": {
-      "type": "main-impact-corporate",
-      "settings": {
-        "hide_section": false,
-        "label": "🏢 Corporate Learning",
-        "heading": "Corporate Learning That Leaves Something Behind",
-        "body": "<p>We've delivered team-building workshops for Four Seasons Hotel Hampshire, The Macallan Whisky (10 bikes in a single day), Hilton Bankside, and GM Motors in Zurich. In December 2024, a corporate team built bamboo balance bikes at our workshop — then donated them to Upcycle, a cycling charity in Brixton.</p><p>Our mobile workshop comes to you. Hotel venues. Corporate offices. Across Europe. Every bike built teaches something real about craft, precision, and sustainable materials.</p>",
-        "image_alt": "Corporate team build at BBC London workshop",
-        "cta_text": "Book a team build →",
-        "cta_url": "/pages/contact-us"
-      },
-      "blocks": {
-        "corp-card-1": {
-          "type": "client_card",
-          "settings": {
-            "stat_number": "12 people",
-            "stat_label": "3 hours · 1 bamboo bike frame",
-            "stat_context": "Four Seasons Hotel Hampshire, April 2025"
-          }
-        },
-        "corp-card-2": {
-          "type": "client_card",
-          "settings": {
-            "stat_number": "10 bikes",
-            "stat_label": "1 day · Masters of Their Craft",
-            "stat_context": "The Macallan Whisky, April 2024"
-          }
-        },
-        "corp-card-3": {
-          "type": "client_card",
-          "settings": {
-            "stat_number": "Hire fleet",
-            "stat_label": "Staff trained → public hire bikes",
-            "stat_context": "Hilton Bankside, London"
-          }
-        }
-      },
-      "block_order": [
-        "corp-card-1",
-        "corp-card-2",
-        "corp-card-3"
-      ]
-    },
-    "main-impact-international": {
-      "type": "main-impact-international",
-      "settings": {
-        "hide_section": false,
-        "label": "🌍 International Programmes",
-        "heading": "36 Countries. One Material. One Method.",
-        "body": "<p>Since 2012, people in 36+ countries have built bamboo bicycles using BBC's methods. Three international workshop franchises — Munich (est. 2014), Amersfoort, Netherlands (est. 2019), and Toulouse, France (est. 2024) — run independent weekly programmes. In 2017, pupils at a school in The Hague built 7 bamboo bikes using our educational starter kit. In 2023, Kate Rawles cycled 8,288 miles from Colombia to Ushuaia on a bamboo bike built at our London workshop from UK-sourced materials.</p>",
-        "cta_text": "Open a workshop in your city →",
-        "cta_url": "/pages/contact-us"
-      },
-      "blocks": {
-        "intl-munich": {
-          "type": "franchise_card",
-          "settings": {
-            "country_flag": "🇩🇪",
-            "name": "Munich, Germany",
-            "established": "Est. 2014 — BBC's first international franchise",
-            "description": "4,600 community members. Active weekly workshops. Munich team taught in Kenya, 2019."
-          }
-        },
-        "intl-amersfoort": {
-          "type": "franchise_card",
-          "settings": {
-            "country_flag": "🇳🇱",
-            "name": "Amersfoort, Netherlands",
-            "established": "Est. 2019",
-            "description": "Active education and community workshop hub. Regular gravel and city bike builds."
-          }
-        },
-        "intl-toulouse": {
-          "type": "franchise_card",
-          "settings": {
-            "country_flag": "🇫🇷",
-            "name": "Toulouse, France",
-            "established": "Est. 2024 — Third international franchise",
-            "description": "Serving France's strong cycling community. Launched May 2024."
-          }
-        }
-      },
-      "block_order": [
-        "intl-munich",
-        "intl-amersfoort",
-        "intl-toulouse"
-      ]
-    },
-    "impact-testimonials": {
-      "type": "bbc-impact-testimonials",
-      "settings": {
-        "heading": "Stories From Our Builders"
-      },
-      "blocks": {
-        "story-hasan": {
-          "type": "story_card",
-          "settings": {
-            "quote": "It was instrumental in creating a shift in my life — gaining confidence in myself and realising that there are different ways of learning.",
-            "name": "Hasan",
-            "role": "Workshop participant",
-            "link_text": "Read Hasan's story",
-            "link_url": "/blogs/impact/hasan-building-a-bamboo-bike-changed-how-i-learn"
-          }
-        },
-        "story-jock": {
-          "type": "story_card",
-          "settings": {
-            "quote": "I built my bamboo bike here, then cycled 3,000km from London to Bergen, Norway — for PAPYRUS, in memory of my friend Joe.",
-            "name": "Jock",
-            "role": "BBC workshop builder, 2023",
-            "link_text": "Read Jock's story",
-            "link_url": "/blogs/impact/jocks-ride-to-norway-3-000km-for-papyrus"
-          }
-        },
-        "story-taro": {
-          "type": "story_card",
-          "settings": {
-            "quote": "Ten years on my hand-built bamboo bike — and still going.",
-            "name": "Taro",
-            "role": "Built at BBC London, 2015. Still riding in Japan.",
-            "link_text": "Read Taro's story",
-            "link_url": "/blogs/impact/taro-ten-years-on-one-bamboo-bike"
-          }
-        }
-      },
-      "block_order": [
-        "story-hasan",
-        "story-jock",
-        "story-taro"
-      ]
-    },
-    "carbon-source-note": {
-      "type": "rich-text",
-      "settings": {
-        "desktop_content_position": "start",
-        "content_alignment": "left",
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "padding_top": 0,
-        "padding_bottom": 48
-      },
-      "blocks": {
-        "carbon-source-text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>In October 2024, Manish — founder of a sustainable AI company and BBC workshop participant — independently calculated the full lifecycle carbon footprint of a BBC bamboo bike. His finding: <strong>the frame is carbon negative.</strong> Bamboo sequesters more carbon during growth than is emitted across the entire manufacturing and assembly process.</p><p><a href=\"/blogs/impact/manish-bamboo-bikes-have-a-negative-carbon-footprint\">Read the full analysis →</a></p>"
-          }
-        }
-      },
-      "block_order": [
-        "carbon-source-text"
-      ]
+        "hero_fallback": "bbc-rd-workshop.jpg",
+        "hero_image_alt": "Builders at work in the bamboo bicycle workshop",
+        "hero_eyebrow": "Build bikes · build skills · build futures",
+        "hero_title": "Building bikes. Rebuilding lives.",
+        "hero_lede": "We use bamboo bike-building to give practical skills and a way forward to people locked out of education — in schools before exclusion, and in prisons after.",
+        "hero_cta1_label": "Partner with us",
+        "hero_cta1_url": "/pages/prisons",
+        "hero_cta2_label": "Back the mission",
+        "hero_cta2_url": "/pages/support-mission",
+        "data_as_of": "Data updated July 2026 — BBC programme records",
+        "report_label": "Read the 2026 impact report",
+        "report_url": "",
+        "arms_eyebrow": "One mission, two arms",
+        "arms_title": "Skills before exclusion. Skills after.",
+        "arms_tagline": "One craft — two ends of the same problem.",
+        "arm1_tag": "1. Prevention — Make Engineers",
+        "arm1_title": "Before exclusion",
+        "arm1_body": "Reaching SEND, PRU and at-risk young people before disengagement hardens into exclusion — their first real, positive encounter with engineering and design.",
+        "arm1_flow": "Taster | Short course, real build | Recognised achievement | Warm hand-off to college or training",
+        "arm2_tag": "2. Rehabilitation — Build to Bond",
+        "arm2_title": "After the system missed them",
+        "arm2_body": "Re-engaging people inside prison with accredited skills, a strengthened family bond, and a route towards employment on release.",
+        "arm2_flow": "Course | OCN accreditation | Family bond | Peer instructor | Link to work on release",
+        "policy_eyebrow": "Why now",
+        "policy_title": "Both arms sit on live national priorities.",
+        "cred_eyebrow": "Recognised by",
+        "cred_heading": "Reported and backed",
+        "cred_quote1": "A truly inspiring cohort — each of these social enterprise businesses are focused on addressing important societal issues, delivering meaningful impact in their communities.",
+        "cred_attr1": "Investec Beyond Business",
+        "cred_src1": "2025 winner",
+        "cred_quote2": "In the programme there's maths and English, but it's built into design, creativity and bike mechanics.",
+        "cred_attr2": "Inside Time",
+        "cred_src2": "National prison newspaper",
+        "press_label": "As featured in",
+        "funder_line": "Build to Bond is supported by The National Lottery Community Fund and Investec Beyond Business.",
+        "funder_logo": "logo-nlcf.svg",
+        "funder_logo_alt": "The National Lottery Community Fund",
+        "accred_logo": "logo-ocn-london.svg",
+        "accred_logo_alt": "OCN London",
+        "press_more": "…and featured in 40+ publications — see all coverage →",
+        "awards_line": "Investec Beyond Business winner · Kevin McCloud’s Green Heroes · OCN accredited",
+        "press_more_url": "",
+        "sites_eyebrow": "Where we work",
+        "sites_title": "Accredited programmes across four active prison sites.",
+        "sites_body": "Live delivery at HMP Lowdham Grange, HMP Foston Hall, HMP Lindholme and HMYOI Feltham — with a self-delivery model that trains staff and peer instructors to run the workshop.",
+        "sites_list": "HMP Lowdham Grange · HMP Foston Hall · HMP Lindholme · HMYOI Feltham",
+        "sites_partner": "In partnership with HM Prison & Probation Service",
+        "cs_kind": "Case study",
+        "cs_image": "bbc-rd-prison-empty.jpg",
+        "cs_quote": "",
+        "cs_attr": "— A Build to Bond participant",
+        "cs_blurb": "How a six-week bamboo-bike course is rebuilding family ties inside HMP Lowdham Grange.",
+        "cs_site": "Build to Bond · HMP Lowdham Grange",
+        "cs_url": "",
+        "cs_link_label": "Read the full story",
+        "stories_eyebrow": "Every kind of impact",
+        "stories_title": "From prisons to Patagonia.",
+        "stories_lede": "The same craft shows up everywhere — on epic journeys, in boardrooms, in classrooms and across the world.",
+        "stories_all_url": "",
+        "stories_all_label": "See all impact stories",
+        "story_eyebrow": "Inside the workshop",
+        "story_title": "A real workshop, inside.",
+        "story_body_1": "Inside HMP Lowdham Grange — a Category-B men's prison in Nottinghamshire — we've built a 2,000 sq ft workshop where learners take a six-week, OCN-accredited course: from workshop safety and material science through frame construction, mechanics and finishing.",
+        "story_body_2": "They earn an OCN Level 2 accreditation in sustainable design and manufacturing. Trusted learners are trained as instructors and help deliver the course. In the final week, frames are taken apart so the materials serve the next cohort — which is also what keeps it affordable.",
+        "b2b_fallback": "bbc-rd-b2b.jpg",
+        "b2b_image_alt": "The Build to Bond workshop inside HMP Lowdham Grange",
+        "b2b_eyebrow": "The follow-on",
+        "b2b_title": "A bike that goes home.",
+        "b2b_body_1": "The most engaged participants progress to Build to Bond — building a children's bamboo balance bike to gift to their own son, daughter, niece or nephew. That bike they keep. The bike goes home; the father stays inside.",
+        "b2b_body_2": "It's built on the evidence that maintaining family contact is one of the strongest predictors of reduced reoffending — people who keep close family ties while in prison are 39% less likely to reoffend (Lord Farmer Review, 2017).",
+        "b2b_quote": "Watching the pride on a father's face when he presents a bike to his child is something special.",
+        "b2b_cite": "— Sally Allsopp, Industries Manager",
+        "b2b_cta1_label": "Run the programme",
+        "b2b_cta1_url": "/pages/prisons",
+        "path_eyebrow": "",
+        "path_title": "",
+        "path_quote": "",
+        "path_cite": "",
+        "help_eyebrow": "Get involved",
+        "help_title": "Three ways to be part of it.",
+        "help_intro": "Every route — buying, partnering or funding — creates measurable change.",
+        "cta_eyebrow": "Join in",
+        "cta_title": "Help us build a more inclusive, skilled future.",
+        "cta_lede": "Every bamboo bike built is a skill learned, a confidence gained, and a pathway opened.",
+        "cta1_label": "Run it in your prison",
+        "cta1_url": "/pages/prisons",
+        "cta2_label": "Back the mission",
+        "cta2_url": "/pages/support-mission"
+      }
     }
   },
   "order": [
-    "impact-hero",
-    "press-logos",
-    "problem",
-    "stats",
-    "build-to-bond-intro",
-    "endorsements",
-    "how-it-works",
-    "video",
-    "outcomes",
-    "participant-story",
-    "impact-testimonials",
-    "theory",
-    "timeline",
-    "carbon",
-    "carbon-source-note",
-    "main-impact-corporate",
-    "main-impact-international",
-    "partners",
-    "funder-cta",
-    "cta"
+    "main"
   ]
 }
