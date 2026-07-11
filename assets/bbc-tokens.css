@@ -1,0 +1,79 @@
+/* ============================================================
+   BBC — DESIGN TOKENS (single source of truth)
+   Created 2026-07-12 (Phase 1, design brief 2026-07-11).
+   LOAD ORDER: this sheet loads LAST in theme.liquid, so its
+   :root definitions win every earlier :root (foundation,
+   unified-styles, aaa-2026, Dawn settings). Scoped .bbc-rd
+   tokens in bbc-redesign-2026.css still win inside .bbc-rd —
+   values are kept identical here so there is no visual fork.
+   RULES: new work reads tokens from HERE. No new hex anywhere
+   else. Full brief: qa/DESIGN-BRIEF.md.
+   ============================================================ */
+
+/* ---- Atkinson Hyperlegible (self-hosted) — declared here so the
+   typeface exists on EVERY page, not just pages that load
+   bbc-redesign-2026.css (fixes cart/account/search fallback). */
+@font-face{ font-family:'Atkinson Hyperlegible'; font-style:normal; font-weight:400; font-display:swap; src:url('AtkinsonHyperlegible-Regular.woff2') format('woff2'), url('AtkinsonHyperlegible-Regular.ttf') format('truetype'); }
+@font-face{ font-family:'Atkinson Hyperlegible'; font-style:italic; font-weight:400; font-display:swap; src:url('AtkinsonHyperlegible-Italic.woff2') format('woff2'), url('AtkinsonHyperlegible-Italic.ttf') format('truetype'); }
+@font-face{ font-family:'Atkinson Hyperlegible'; font-style:normal; font-weight:700; font-display:swap; src:url('AtkinsonHyperlegible-Bold.woff2') format('woff2'), url('AtkinsonHyperlegible-Bold.ttf') format('truetype'); }
+@font-face{ font-family:'Atkinson Hyperlegible'; font-style:italic; font-weight:700; font-display:swap; src:url('AtkinsonHyperlegible-BoldItalic.woff2') format('woff2'), url('AtkinsonHyperlegible-BoldItalic.ttf') format('truetype'); }
+
+:root{
+  /* ---- Type ---- */
+  --rd-sans:"Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+  --font-display:var(--rd-sans);
+  /* Dawn chrome override (kill Jakarta rendering everywhere;
+     checkout is Shopify-hosted and unaffected): */
+  --font-body-family:"Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+  --font-heading-family:"Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+  --bbc-font:var(--rd-sans); /* legacy alias (bbc-product-styles) */
+
+  /* ---- Type scale (mirror of bbc-type-scale.css; that sheet
+     stays for .bbc-rd h2 sizing, values MUST match) ---- */
+  --fs-hero:clamp(42px,6.6vw,86px);
+  --fs-h1:clamp(38px,5.4vw,72px);
+  --fs-h2:clamp(32px,6.6vw,84px);
+  --fs-h3:clamp(22px,2.6vw,32px);
+  --fs-lede:clamp(18px,1.8vw,22px);
+
+  /* ---- Colour canon (2026 system; hex lives HERE only) ---- */
+  --forest:#003C32; --forest-700:#002A23; --forest-300:#1F6655;
+  --teal:#3F8B66; --gold:#FFA900;
+  --lime:#D4FD62; --lime-700:#9BC02E; --lime-aaa:#c6f24e;
+  --bone:#E6DCC8;            /* block-system "paper" surface */
+  --paper:#F1E9D8;           /* rd in-page paper (kept, matches .bbc-rd) */
+  --steel:#DEE6F0;           /* cool surface / stand-out boxes */
+  --ink:#0E1A17; --charcoal:#2A332F;
+  --mist:#CFC5B0; --subtle:#384540; --border-strong:#B8AE9C;
+
+  /* ---- Legacy namespace repoints (old sheets keep working,
+     but resolve to canon — kills the #073e27 stragglers and the
+     two competing limes) ---- */
+  --bbc-forest:var(--forest);
+  --bbc-forest-dark:var(--forest-700);
+  --bbc-heading:var(--forest);
+  --bbc-lime:var(--lime);
+  --rd-lime:var(--lime);
+  --bbc-gold:var(--gold);
+  --bbc-teal:var(--teal);
+
+  /* ---- Spacing / radius / shadow (canonical home; unified-styles
+     copies are scheduled for removal) ---- */
+  --bbc-space-1:4px; --bbc-space-2:8px; --bbc-space-3:12px;
+  --bbc-space-4:16px; --bbc-space-5:24px; --bbc-space-6:32px;
+  --bbc-space-7:48px; --bbc-space-8:64px;
+  --bbc-radius-sm:4px; --bbc-radius-md:8px; --bbc-radius-lg:12px;
+  --bbc-shadow-sm:0 1px 2px rgba(0,0,0,.05);
+  --bbc-shadow-md:0 4px 12px rgba(0,0,0,.08);
+  --bbc-shadow-lg:0 8px 24px rgba(0,0,0,.12);
+
+  /* ---- Measures ---- */
+  --measure:66ch; --measure-lede:54ch; --measure-head:18ch;
+  --rd-container:1200px;
+}
+
+/* ---- Atkinson enforcement (beats bbc-foundation's hardcoded
+   Jakarta body rule by load order; icon classes set their own
+   font-family and are untouched) ---- */
+body, button, input, select, textarea{ font-family:var(--rd-sans); }
+h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }

@@ -1,0 +1,394 @@
+
+/* ==========================================================================
+   BBC STATEMENT — standard headline-first editorial component (2026)
+   Site-wide standard: any section (or hand-authored markup) inside .bbc-rd
+   can use the .bbcst-* classes. Everything LEFT-justified, labels lowercase,
+   standard 18px body. One accent system, no colour clashes:
+     light backgrounds (paper / lime / steel) -> FOREST accent + dark text
+     dark backgrounds (forest / background-image) -> LIME accent + light text
+   Button hierarchy: .is-primary (solid pill) -> .is-secondary (outline) ->
+   .bbcst-links (additional text links). All colours meet WCAG AAA (>=7:1 body,
+   >=4.5:1 large) on the ACTUAL theme backgrounds (bone #E6DCC8, forest #003C32,
+   lime #D4FD62, steel #DEE6F0). Wrap selectors are compound (.bbc-rd.bbcst-wrap)
+   because the wrap element carries .bbc-rd itself.
+   ========================================================================== */
+.bbc-rd.bbcst-wrap{ position:relative; }
+.bbc-rd.bbcst-wrap.is-paper{ background:var(--bone,#E6DCC8); }
+.bbc-rd.bbcst-wrap.is-forest{ background:var(--forest,#003C32); }
+.bbc-rd.bbcst-wrap.is-lime{ background:var(--lime,#D4FD62); }
+.bbc-rd.bbcst-wrap.is-steel{ background:#DEE6F0; }
+
+.bbc-rd .bbcst{ position:relative; padding:clamp(48px,7vw,120px) clamp(24px,5vw,90px); min-height:82vh; display:flex; flex-direction:column; justify-content:center; }
+.bbc-rd .bbcst.is-compact{ min-height:0; padding:clamp(44px,6vw,84px) clamp(24px,5vw,90px); }
+.bbc-rd .bbcst-inner{ position:relative; z-index:2; width:100%; text-align:left; }
+
+/* eyebrow — lowercase label */
+.bbc-rd .bbcst-eyebrow{ display:block; font-size:15px; font-weight:800; letter-spacing:.01em; color:var(--forest,#003C32); margin:0 0 clamp(16px,2vw,26px); }
+/* headline — the content */
+.bbc-rd .bbcst-head{ font-size:clamp(3rem,10.5vw,10.5rem); line-height:.9; letter-spacing:-.04em; font-weight:800; margin:0; color:var(--forest,#003C32); text-wrap:balance; max-width:none; }
+.bbc-rd .bbcst-star{ font-size:.3em; font-weight:800; vertical-align:super; color:var(--forest,#003C32); line-height:0; }
+
+/* supporting text — standard 18px body + footnote, left, below the headline */
+.bbc-rd .bbcst-support{ margin-top:clamp(26px,3.4vw,46px); max-width:62ch; }
+.bbc-rd .bbcst-body{ font-size:18px; line-height:1.6; margin:0; color:#26332e; }
+.bbc-rd .bbcst-note{ font-size:14px; line-height:1.6; margin:12px 0 0; color:#3a443f; }
+
+/* image — below the headline (device / editorial) */
+.bbc-rd .bbcst-figure{ margin:clamp(26px,3.4vw,48px) 0 0; max-width:1000px; }
+.bbc-rd .bbcst-figure img{ display:block; width:100%; height:auto; border-radius:16px; }
+
+/* actions — primary + secondary buttons */
+.bbc-rd .bbcst-actions{ display:flex; flex-wrap:wrap; gap:14px; margin-top:clamp(28px,3.4vw,44px); }
+.bbc-rd .bbcst-btn{ display:inline-block; font-weight:800; font-size:16px; letter-spacing:.01em; text-decoration:none; padding:15px 30px; border-radius:999px; border:2px solid transparent; transition:transform .1s ease, opacity .15s ease; }
+.bbc-rd .bbcst-btn:active{ transform:scale(.985); }
+.bbc-rd .bbcst-btn.is-primary{ background:var(--forest,#003C32); color:var(--bone,#E6DCC8); border-color:var(--forest,#003C32); }
+.bbc-rd .bbcst-btn.is-primary:hover{ opacity:.9; }
+.bbc-rd .bbcst-btn.is-secondary{ background:transparent; color:var(--forest,#003C32); border-color:var(--forest,#003C32); }
+.bbc-rd .bbcst-btn.is-secondary:hover{ background:var(--forest,#003C32); color:var(--bone,#E6DCC8); }
+
+/* additional links */
+.bbc-rd .bbcst-links{ display:flex; flex-wrap:wrap; gap:12px 24px; align-items:center; margin-top:clamp(22px,2.6vw,32px); }
+.bbc-rd .bbcst-link{ font-size:15px; font-weight:700; text-decoration:none; color:var(--forest,#003C32); border-bottom:2px solid var(--forest,#003C32); padding-bottom:2px; white-space:nowrap; }
+.bbc-rd .bbcst-link:hover{ opacity:.6; }
+
+/* lime background — dark accents keep, just the muted note needs lifting */
+.bbc-rd.bbcst-wrap.is-lime .bbcst-note{ color:#1f4530; }
+
+/* dark backgrounds (forest + background-image) — lime accent, light text */
+.bbc-rd.bbcst-wrap.is-forest .bbcst-head,
+.bbc-rd.bbcst-wrap.has-bg .bbcst-head{ color:var(--bone,#E6DCC8); }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-eyebrow,
+.bbc-rd.bbcst-wrap.has-bg .bbcst-eyebrow{ color:var(--lime,#D4FD62); }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-star,
+.bbc-rd.bbcst-wrap.has-bg .bbcst-star{ color:var(--lime,#D4FD62); }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-body,
+.bbc-rd.bbcst-wrap.has-bg .bbcst-body{ color:#cfe0d7; }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-note{ color:#c9d8d0; }
+.bbc-rd.bbcst-wrap.has-bg .bbcst-note{ color:#dbe6df; }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-link,
+.bbc-rd.bbcst-wrap.has-bg .bbcst-link{ color:var(--bone,#E6DCC8); border-bottom-color:var(--lime,#D4FD62); }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-btn.is-primary,
+.bbc-rd.bbcst-wrap.has-bg .bbcst-btn.is-primary{ background:var(--lime,#D4FD62); color:var(--forest,#003C32); border-color:var(--lime,#D4FD62); }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-btn.is-secondary,
+.bbc-rd.bbcst-wrap.has-bg .bbcst-btn.is-secondary{ color:var(--bone,#E6DCC8); border-color:var(--bone,#E6DCC8); }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-btn.is-secondary:hover,
+.bbc-rd.bbcst-wrap.has-bg .bbcst-btn.is-secondary:hover{ background:var(--bone,#E6DCC8); color:var(--forest,#003C32); }
+
+/* background-image mode: full-bleed photo + scrim */
+.bbc-rd .bbcst-bg{ position:absolute; inset:0; z-index:0; overflow:hidden; }
+.bbc-rd .bbcst-bg img{ width:100%; height:100%; object-fit:cover; display:block; }
+.bbc-rd .bbcst-scrim{ position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(0,32,26,.5), rgba(0,32,26,.8)); }
+
+@media(max-width:749px){
+  .bbc-rd .bbcst{ min-height:0; padding:clamp(44px,10vw,64px) 22px; justify-content:flex-start; }
+  .bbc-rd .bbcst-head{ font-size:clamp(2.5rem,12vw,5rem) !important; }
+  .bbc-rd .bbcst-actions{ gap:12px; }
+  .bbc-rd .bbcst-btn{ text-align:center; }
+}
+
+/* ==========================================================================
+   BBC PILLAR — full-height image + big-headline "beat" (pairs with statement)
+   Same standard: forest accent on light / lime accent on dark, lowercase
+   kickers, 18px body, left-justified. AAA on the real theme backgrounds.
+   ========================================================================== */
+.bbc-rd .bbcpl-wrap{ overflow:hidden; }
+.bbc-rd .bbcpl{ display:grid; grid-template-columns:1.02fr .98fr; grid-template-rows:minmax(84vh,auto); align-items:stretch; }
+.bbc-rd .bbcpl.is-rev .bbcpl-media{ order:2; }
+.bbc-rd .bbcpl.is-paper{ background:var(--bone,#E6DCC8); }
+.bbc-rd .bbcpl.is-steel{ background:#DEE6F0; }
+.bbc-rd .bbcpl.is-forest{ background:var(--forest,#003C32); }
+.bbc-rd .bbcpl-media{ position:relative; min-height:0; }
+.bbc-rd .bbcpl-media img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+.bbc-rd .bbcpl-txt{ display:flex; align-items:center; padding:clamp(40px,5vw,96px); text-align:left; }
+.bbc-rd .bbcpl-inner{ max-width:640px; }
+/* kicker (lowercase) */
+.bbc-rd .bbcpl-idx{ display:flex; align-items:center; gap:14px; margin:0 0 clamp(18px,2vw,30px); font-size:14px; font-weight:800; letter-spacing:.02em; color:var(--forest,#003C32); }
+.bbc-rd .bbcpl-rule{ display:inline-block; width:44px; height:3px; background:var(--forest,#003C32); flex:none; }
+.bbc-rd .bbcpl-num{ font-variant-numeric:tabular-nums; color:inherit; }
+/* headline */
+.bbc-rd .bbcpl-title{ font-size:clamp(3rem,7.2vw,7rem); line-height:.94; letter-spacing:-.02em; font-weight:800; margin:0; color:var(--forest,#003C32); text-wrap:balance; }
+/* body 18px standard */
+.bbc-rd .bbcpl-body{ font-size:18px; line-height:1.6; margin:clamp(20px,2vw,28px) 0 0; max-width:46ch; color:#26332e; }
+/* quote */
+.bbc-rd .bbcpl-quote{ margin:clamp(22px,2.4vw,34px) 0 0; padding:0 0 0 20px; border-left:3px solid var(--forest,#003C32); }
+.bbc-rd .bbcpl-quote blockquote{ margin:0; font-size:19px; line-height:1.45; font-style:italic; color:var(--forest,#003C32); }
+.bbc-rd .bbcpl-quote figcaption{ margin-top:12px; font-size:13px; letter-spacing:.01em; color:#3a443f; font-style:normal; }
+.bbc-rd .bbcpl-qtag{ display:inline-block; background:rgba(0,60,50,.1); color:var(--forest,#003C32); font-weight:800; padding:2px 8px; border-radius:4px; margin-right:8px; }
+/* cta link (matches statement link) */
+.bbc-rd .bbcpl-cta{ display:inline-block; margin-top:clamp(22px,2.4vw,32px); font-size:15px; font-weight:700; text-decoration:none; color:var(--forest,#003C32); border-bottom:2px solid var(--forest,#003C32); padding-bottom:2px; }
+.bbc-rd .bbcpl-cta:hover{ opacity:.6; }
+/* forest variant — lime accent, light text */
+.bbc-rd .bbcpl.is-forest .bbcpl-title{ color:var(--bone,#E6DCC8); }
+.bbc-rd .bbcpl.is-forest .bbcpl-idx{ color:var(--lime,#D4FD62); }
+.bbc-rd .bbcpl.is-forest .bbcpl-rule{ background:var(--lime,#D4FD62); }
+.bbc-rd .bbcpl.is-forest .bbcpl-body{ color:#cfe0d7; }
+.bbc-rd .bbcpl.is-forest .bbcpl-quote{ border-left-color:var(--lime,#D4FD62); }
+.bbc-rd .bbcpl.is-forest .bbcpl-quote blockquote{ color:#eaf3ee; }
+.bbc-rd .bbcpl.is-forest .bbcpl-quote figcaption{ color:#c9d8d0; }
+.bbc-rd .bbcpl.is-forest .bbcpl-qtag{ background:rgba(212,253,98,.16); color:var(--lime,#D4FD62); }
+.bbc-rd .bbcpl.is-forest .bbcpl-cta{ color:var(--bone,#E6DCC8); border-bottom-color:var(--lime,#D4FD62); }
+@media(max-width:900px){
+  .bbc-rd .bbcpl{ grid-template-columns:1fr; grid-template-rows:auto; }
+  .bbc-rd .bbcpl.is-rev .bbcpl-media{ order:0; }
+  .bbc-rd .bbcpl-media{ min-height:0; aspect-ratio:16/10; }
+  .bbc-rd .bbcpl-txt{ padding:clamp(34px,7vw,52px) 24px; }
+  .bbc-rd .bbcpl-title{ font-size:clamp(2.6rem,11vw,4.4rem) !important; }
+}
+
+/* ============================================================
+   HOMEPAGE ROLLOUT — bring bbc-home-2026 (.bbc-rd-home) beats
+   up to the bbcst standard: big lowercase headlines, left-
+   justified, lowercase eyebrows. Loaded site-wide wherever a
+   statement/pillar section is present.
+   ============================================================ */
+/* section headlines -> statement scale (none contain proper nouns) */
+.bbc-rd.bbc-rd-home h2{
+  font-size:clamp(2.6rem,5.8vw,5.6rem);
+  line-height:.98;
+  letter-spacing:-.02em;
+  text-transform:lowercase;
+  text-align:left;
+}
+/* hero headline -> full statement scale */
+.bbc-rd.bbc-rd-home .ew-h1{
+  font-size:clamp(3rem,8.5vw,8.5rem);
+  line-height:.96;
+  letter-spacing:-.025em;
+  text-transform:lowercase;
+  text-align:left;
+}
+/* eyebrows lowercase to match bbcst kickers */
+.bbc-rd.bbc-rd-home .rd-eyebrow{ text-transform:lowercase; letter-spacing:.04em; }
+/* centered bands go left, per the standard */
+.bbc-rd.bbc-rd-home .rd-center{ text-align:left; }
+.bbc-rd.bbc-rd-home .rd-center h2{ margin-left:0; margin-right:0; }
+@media(max-width:900px){
+  .bbc-rd.bbc-rd-home h2{ font-size:clamp(2.2rem,9vw,3.4rem) !important; }
+  .bbc-rd.bbc-rd-home .ew-h1{ font-size:clamp(2.6rem,11.5vw,4.6rem) !important; }
+}
+/* pin formerly-centered wrappers to the left margin (match card grids) */
+.bbc-rd.bbc-rd-home .rd-wrap > .rd-center,
+.bbc-rd.bbc-rd-home .rd-center .rd-wrap > *{ margin-left:0; }
+.bbc-rd.bbc-rd-home .rd-center [class*="rd-mw-"]{ margin-left:0; margin-right:auto; }
+/* the generated rd-cmp-* wrappers centre with !important — match it to pin left */
+.bbc-rd.bbc-rd-home .rd-center[class*="rd-cmp-"]{ margin-left:0 !important; margin-right:auto !important; }
+.bbc-rd.bbc-rd-home .ew-eyebrow{ text-transform:lowercase; letter-spacing:.04em; }
+
+/* ============================================================
+   REFINEMENT PASS 2026-07-07 — optimum sizes, one button
+   system, image alignment. Direction: brutalist-editorial
+   ("deliberate, human, imperfect") — big lowercase display,
+   hard-cropped images, one accent per surface, hard button
+   hierarchy.
+   ============================================================ */
+/* body measure: cap at ~65 characters for readability */
+.bbc-rd .bbcst-body{ max-width:34em; }
+.bbc-rd .bbcpl-body{ max-width:30em; }
+/* pillar media fills its column — image and text edges align */
+.bbc-rd .bbcpl-media{ position:relative; overflow:hidden; }
+.bbc-rd .bbcpl-media img{ position:absolute; inset:0; width:100% !important; height:100% !important; object-fit:cover; display:block; }
+/* ONE button system: legacy rd-btn adopts the standard pill */
+.bbc-rd .rd-btn{ border-radius:999px !important; font-size:15px !important; font-weight:700; padding:14px 28px !important; }
+/* hierarchy on dark surfaces: lime fill = the ONE primary; bone fills demote to outline secondary */
+.bbc-rd .rd-btn.rd-on-dark{ background:transparent !important; color:var(--bone,#E6DCC8) !important; border:2px solid var(--bone,#E6DCC8) !important; }
+.bbc-rd .rd-btn.rd-on-dark:hover{ background:rgba(230,220,200,.14) !important; }
+/* standard buttons: unified sizing */
+.bbc-rd .bbcst-btn{ font-size:15px; padding:14px 28px; }
+@media(max-width:600px){
+  /* thumb-friendly: stacked full-width buttons */
+  .bbc-rd .bbcst-actions{ flex-direction:column; align-items:stretch; }
+  .bbc-rd .bbcst-btn{ text-align:center; }
+  /* mobile reading size */
+  .bbc-rd .bbcst-body, .bbc-rd .bbcpl-body{ font-size:16px; }
+}
+
+/* ============================================================
+   QA FIX PASS 2026-07-07 (round 1) — sitewide audit findings.
+   This sheet now loads globally from theme.liquid, so every
+   rule below is scoped to .bbc-rd (or a named 2026 wrapper /
+   theme-frontend element) and never touches checkout/admin.
+   Finding IDs refer to the 2026-07-07 QA sweep.
+   ============================================================ */
+
+/* ---- F1/F2/F16 · statement button/link text pairs (locked table).
+   bbc-redesign-2026.css forces `color:inherit !important` on
+   `.bbc-rd a:not(...)x5` (0,6,1) which made statement buttons/links
+   render ink on any surface. `:not(#_)` lifts these to id-level
+   specificity so the locked pairs win. */
+.bbc-rd a.bbcst-btn.is-primary:not(#_){ background:var(--forest,#003C32) !important; color:var(--bone,#E6DCC8) !important; }
+.bbc-rd.bbcst-wrap.is-forest a.bbcst-btn.is-primary:not(#_),
+.bbc-rd.bbcst-wrap.has-bg a.bbcst-btn.is-primary:not(#_){ background:var(--lime,#D4FD62) !important; color:var(--forest,#003C32) !important; }
+.bbc-rd a.bbcst-btn.is-secondary:not(#_){ background:transparent !important; color:var(--forest,#003C32) !important; border-color:var(--forest,#003C32) !important; }
+.bbc-rd a.bbcst-btn.is-secondary:not(#_):hover{ background:var(--forest,#003C32) !important; color:var(--bone,#E6DCC8) !important; }
+.bbc-rd.bbcst-wrap.is-forest a.bbcst-btn.is-secondary:not(#_),
+.bbc-rd.bbcst-wrap.has-bg a.bbcst-btn.is-secondary:not(#_){ background:transparent !important; color:var(--bone,#E6DCC8) !important; border-color:var(--bone,#E6DCC8) !important; }
+.bbc-rd.bbcst-wrap.is-forest a.bbcst-btn.is-secondary:not(#_):hover,
+.bbc-rd.bbcst-wrap.has-bg a.bbcst-btn.is-secondary:not(#_):hover{ background:var(--bone,#E6DCC8) !important; color:var(--forest,#003C32) !important; }
+.bbc-rd a.bbcst-link:not(#_){ color:var(--forest,#003C32) !important; }
+.bbc-rd.bbcst-wrap.is-forest a.bbcst-link:not(#_),
+.bbc-rd.bbcst-wrap.has-bg a.bbcst-link:not(#_){ color:var(--bone,#E6DCC8) !important; }
+
+/* ---- F19/F21 · header logo unconstrained (600x277 source blew the
+   header to 342px and pushed the CTA offscreen). Id selector beats the
+   global img{height:auto !important} tie. */
+#rd-header2026 .rd-logo-img{ height:46px !important; width:auto !important; max-width:210px !important; }
+@media(max-width:749px){
+  #rd-header2026 .rd-logo-img{ height:40px !important; max-width:170px !important; }
+}
+
+/* ---- F20 · invisible cart-drawer taking 468px of flow above the header
+   on bbc-*-2026 templates. The custom element itself carries .drawer —
+   restore Dawn's fixed positioning on both the element and any inner
+   .drawer, so the hidden drawer takes no flow space. */
+cart-drawer.drawer,
+cart-drawer .drawer{ position:fixed !important; top:0; left:0; visibility:hidden; }
+cart-drawer.drawer.active,
+cart-drawer.drawer.animate,
+cart-drawer.active .drawer,
+cart-drawer.animate .drawer{ visibility:visible; }
+
+/* ---- F9 · home hero ew-btn system → standard pill (radius 999,
+   palette lime, no offset shadow) */
+.bbc-rd .ew-btn{ border-radius:999px !important; font-size:15px !important; font-weight:700; }
+.bbc-rd a.ew-btn.is-lime:not(#_){ background:var(--lime,#D4FD62) !important; color:var(--forest,#003C32) !important; box-shadow:none !important; }
+.bbc-rd a.ew-btn.is-lime:not(#_):hover{ box-shadow:none !important; transform:none; opacity:.9; }
+.bbc-rd a.ew-btn.is-ghost:not(#_){ background:transparent !important; color:var(--bone,#E6DCC8) !important; border-color:var(--bone,#E6DCC8) !important; }
+
+/* ---- F10/F47/F54/F69 · "ghost" secondary had a solid #fff fill (an
+   off-palette fifth surface + second filled button). True outline. */
+.bbc-rd .rd-btn.rd-ghost{ background:transparent !important; color:var(--forest,#003C32) !important; border:2px solid var(--forest,#003C32) !important; }
+.bbc-rd .rd-btn.rd-ghost:hover{ background:rgba(0,60,50,.08) !important; }
+.bbc-rd .rd-dark .rd-btn.rd-ghost,
+.bbc-rd .rd-hero .rd-btn.rd-ghost{ color:var(--bone,#E6DCC8) !important; border-color:var(--bone,#E6DCC8) !important; }
+.bbc-rd .rd-dark .rd-btn.rd-ghost:hover,
+.bbc-rd .rd-hero .rd-btn.rd-ghost:hover{ background:rgba(230,220,200,.14) !important; }
+
+/* ---- F24/F53/F68 · colour grammar: lime fill is reserved for DARK
+   surfaces; on light surfaces the filled primary is forest + bone. */
+.bbc-rd .rd-btn.rd-lime{ background:var(--forest,#003C32) !important; color:var(--bone,#E6DCC8) !important; border-color:var(--forest,#003C32) !important; }
+/* re-enable the lime fill on the known dark surfaces */
+.bbc-rd .rd-dark .rd-btn.rd-lime,
+.bbc-rd .rd-hero .rd-btn.rd-lime,
+.bbc-rd.rd-footer .rd-btn.rd-lime,
+#bbc-rd-stickybar .rd-btn.rd-lime{ background:var(--lime,#D4FD62) !important; color:var(--forest,#003C32) !important; border-color:var(--lime,#D4FD62) !important; }
+
+/* ---- F13 · home door-card row had 3 adjacent lime pills (+3 lime
+   chips). One lime primary (first door); the rest demote to bone
+   outline on the photo scrim. */
+.bbc-rd .rd-door .rd-btn.rd-lime{ background:transparent !important; color:var(--bone,#E6DCC8) !important; border:2px solid var(--bone,#E6DCC8) !important; }
+.bbc-rd .rd-grid .rd-door:first-of-type .rd-btn.rd-lime{ background:var(--lime,#D4FD62) !important; color:var(--forest,#003C32) !important; border-color:var(--lime,#D4FD62) !important; }
+.bbc-rd .rd-door:not(:first-of-type) .rd-tag.rd-lime{ background:transparent !important; color:var(--bone,#E6DCC8) !important; border:1px solid var(--bone,#E6DCC8) !important; }
+
+/* ---- F6/F8 · card rows: CTAs bottom-aligned so per-card buttons sit
+   on one baseline regardless of copy length. */
+.bbc-rd .rd-card:has(.rd-btn){ display:flex; flex-direction:column; }
+.bbc-rd .rd-card:has(.rd-btn) > .rd-body{ display:flex; flex-direction:column; flex:1 1 auto; align-items:flex-start; }
+.bbc-rd .rd-card > .rd-body .rd-btn{ margin-top:auto !important; }
+.bbc-rd .rd-card > .rd-body .rd-btn{ white-space:nowrap; }
+
+/* ---- F27 · 50/50 split media fills its column (kills the forest voids
+   above/below the photo; global img{height:auto!important} beaten by
+   inset+!important per BLOCK-SYSTEM 3b) */
+.bbc-rd .rd-split .rd-media{ position:relative; overflow:hidden; }
+.bbc-rd .rd-split .rd-media img{ position:absolute; inset:0; width:100% !important; height:100% !important; object-fit:cover; display:block; }
+@media(max-width:900px){
+  .bbc-rd .rd-split .rd-media{ aspect-ratio:16/10; }
+}
+
+/* ---- F17/F46/F57/F72 · footer press wall: uniform cap height instead
+   of the shared 205x300 portrait box (FT lockup was ~300px tall). */
+.bbc-rd .rd-foot-press{ display:flex; align-items:center; flex-wrap:wrap; gap:28px clamp(24px,4vw,48px); }
+.bbc-rd .rd-foot-press img{ height:34px !important; width:auto !important; max-width:170px !important; object-fit:contain; }
+
+/* ---- F75 · parts variant selected state (was white-on-cream) +
+   F66 parts ATC pill */
+.bbc-parts__option-btn.active{ background:var(--forest,#003C32) !important; color:var(--bone,#E6DCC8) !important; border-color:var(--forest,#003C32) !important; }
+.bbc-parts__add-btn{ border-radius:999px !important; }
+
+/* ---- F73 · PDP forest impact band: heading and .rd-loop grid share a
+   left edge (grid was +10px) */
+.bbc-rd.bbc-rd-product .rd-loop{ margin-inline-start:0; padding-inline-start:0; }
+
+/* ---- F55 · gallery hero rail (was centred at x=342 vs the 152 grid
+   rail) — pin the 820 measure to the shared 1136px rail edge */
+.bbc-rd.bbc-rd-page .rd-hero .rd-wrap.rd-mw-820px{ margin-left:max(24px, calc(50% - 568px)); margin-right:auto; }
+
+/* ---- F28 · our-story opening copy column pinned to the heading rail */
+.bbc-rd.bbc-rd-about .rd-wrap.rd-mw-820px{ margin-left:max(24px, calc(50% - 568px)); margin-right:auto; }
+
+/* ---- F29 · our-story "Three things" heading left-set over its grid */
+.bbc-rd.bbc-rd-about .rd-pad.rd-paper .rd-center{ text-align:left; }
+.bbc-rd.bbc-rd-about .rd-pad.rd-paper .rd-center[class*="rd-cmp-"]{ margin-left:0 !important; margin-right:auto !important; }
+
+/* ---- F56 · article hero H1 shares the 632px body rail */
+.bbc-rd.bbc-rd-article .rd-art-hero__inner{ max-width:632px; margin-inline:auto; }
+
+/* ---- F58 · gallery "Show us what you made." beat left-set to the rail */
+.bbc-rd.bbc-rd-sharebuild .rd-center{ text-align:left; }
+.bbc-rd.bbc-rd-sharebuild .rd-wrap.rd-mw-680px{ margin-left:max(24px, calc(50% - 568px)); margin-right:auto; }
+.bbc-rd.bbc-rd-sharebuild .rd-mx-auto{ margin-left:0 !important; margin-right:auto !important; }
+.bbc-rd.bbc-rd-sharebuild .rd-jc-center{ justify-content:flex-start !important; }
+
+/* ---- F49 · light-surface centred band headlines go left (teambuilding /
+   theory-of-change / which-kit). Forest closers stay centred pending the
+   F34 ruling in BLOCK-SYSTEM.md. */
+.bbc-rd.bbc-rd-tb section.rd-pad:not(.rd-dark) .rd-center,
+.bbc-rd.bbc-rd-toc section.rd-pad:not(.rd-dark) .rd-center,
+.bbc-rd.bbc-rd-kitpicker section.rd-pad:not(.rd-dark) .rd-center{ text-align:left; }
+.bbc-rd.bbc-rd-tb section.rd-pad:not(.rd-dark) .rd-center[class*="rd-cmp-"],
+.bbc-rd.bbc-rd-toc section.rd-pad:not(.rd-dark) .rd-center[class*="rd-cmp-"],
+.bbc-rd.bbc-rd-kitpicker section.rd-pad:not(.rd-dark) .rd-center[class*="rd-cmp-"]{ margin-left:0 !important; margin-right:auto !important; }
+
+/* ---- F48 · mobile: marketing CTAs stack full-width (≤600px rule).
+   Header CTA and footer subscribe are excluded. */
+@media(max-width:600px){
+  .bbc-rd section .rd-btn,
+  .bbc-rd .rd-hero .rd-btn{ display:block; width:100%; text-align:center; }
+  footer.bbc-rd.rd-footer .rd-btn{ display:inline-block; width:auto; }
+}
+
+/* ============================================================
+   PHASE-1 ADDITIONS (2026-07-12, design brief 2026-07-11)
+   ============================================================ */
+
+/* ---- Steel stand-out box (James: "happy to use further stand
+   out boxes"). Steel surface text pairs per BLOCK-SYSTEM §3c. */
+.rd-callout-steel{
+  background:var(--steel,#DEE6F0);
+  color:var(--ink,#0E1A17);
+  border-left:6px solid var(--forest,#003C32);
+  padding:28px 32px;
+  border-radius:2px;
+}
+.rd-callout-steel h3, .rd-callout-steel .rd-callout-head{
+  color:var(--ink,#0E1A17); margin:0 0 8px;
+}
+.rd-callout-steel p{ color:#2a3530; margin:0; max-width:var(--measure,66ch); }
+.rd-callout-steel .rd-eyebrow{ color:#17553a; }
+
+/* ---- Duotone image treatment (Brand Guidelines recipe: B&W +
+   FOREST block on EXCLUSION + 80% black gradient on MULTIPLY).
+   Wrap any <img> in .rd-duotone. Mission-page imagery only. */
+.rd-duotone{ position:relative; isolation:isolate; overflow:hidden; display:block; }
+.rd-duotone>img{ display:block; width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.06); }
+.rd-duotone::before{ content:""; position:absolute; inset:0; background:var(--forest,#003C32); mix-blend-mode:exclusion; pointer-events:none; }
+.rd-duotone::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.8) 100%); mix-blend-mode:multiply; pointer-events:none; }
+
+/* ---- Scroll reveal ("more life", James 2026-07-11). Pure CSS
+   scroll-driven animation: progressive enhancement, no JS, no
+   fallback needed (unsupported browsers just show the content),
+   and reduced-motion users are never animated. Add .rd-reveal
+   to any band/card. */
+@media (prefers-reduced-motion: no-preference){
+  @supports (animation-timeline: view()){
+    .rd-reveal{
+      animation:rd-rise both;
+      animation-timeline:view();
+      animation-range:entry 0% entry 55%;
+    }
+    @keyframes rd-rise{
+      from{ opacity:0; transform:translateY(22px); }
+      to{ opacity:1; transform:none; }
+    }
+  }
+}

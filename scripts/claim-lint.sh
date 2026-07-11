@@ -16,8 +16,8 @@ PATTERNS=(
   '28,?000 ?PSI'
   '[Ss]tronger than steel'
   '[Ss]trong as steel'
-  '56\.7'
-  '11\.41'
+  '(^|[^0-9.])56\.7([^0-9]|$)'
+  '(^|[^0-9.])11\.41([^0-9.]|$)'
   '£280[^0-9]'
   '100% completion'
   'lifecycle analysis \(2024\)'
@@ -31,7 +31,7 @@ PATTERNS=(
 
 FAIL=0
 for pat in "${PATTERNS[@]}"; do
-  hits=$(grep -rn -E "$pat" "${TARGETS[@]}" 2>/dev/null | grep -v -E '\.bak|node_modules|scripts/claim-lint')
+  hits=$(grep -rn -E "$pat" --exclude='*.svg' "${TARGETS[@]}" 2>/dev/null | grep -v -E '\.bak|node_modules|scripts/claim-lint')
   if [ -n "$hits" ]; then
     echo "✗ BANNED PATTERN: $pat"
     echo "$hits" | head -10

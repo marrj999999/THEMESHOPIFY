@@ -3,8 +3,7 @@
    Single source of truth for all product sections
    ========================================================================== */
 
-/* Load Plus Jakarta Sans font */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+/* Jakarta retired 2026-07-12 (Atkinson-only; the Google @import here was a render-blocking request the 2026-07-06 font audit missed). Canonical font stack: bbc-tokens.css. */
 
 /* ==========================================================================
    DESIGN TOKENS
@@ -12,7 +11,7 @@
 
 :root {
   /* Colors */
-  --bbc-forest: #073e27;
+  --bbc-forest: #003C32;
   --bbc-teal: #3f8b66;
   --bbc-gold: #ffa900;
   --bbc-white: #ffffff;
@@ -22,8 +21,8 @@
   --bbc-grey: #666666;
   --bbc-charcoal: #333333;
   
-  /* Typography */
-  --bbc-font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* Typography — Atkinson-only (2026-07-12); bbc-tokens.css also repoints this */
+  --bbc-font: 'Atkinson Hyperlegible', ui-sans-serif, system-ui, sans-serif;
   
   /* Font Sizes - Mobile First */
   --bbc-size-xs: 0.75rem;    /* 12px */

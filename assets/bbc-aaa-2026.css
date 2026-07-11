@@ -1,0 +1,47 @@
+:root{
+  /* === BBC AAA palette (all pairings >=7:1, verified) === */
+  --bbc-ink:#14211c; --bbc-forest:#003C32; --bbc-forest-dark:#002A23; --bbc-forest-light:#e8f0eb;
+  --bbc-cream:#faf7f0; --bbc-lime:#c6f24e; --bbc-lime-dark:#b4e23a; --bbc-pine:#14533a;
+  --bbc-slate:#334155; --bbc-gold:#ffa900;
+  --bbc-text:#14211c; --bbc-text-muted:#334155; --bbc-heading:#073e27; --rd-lime:#c6f24e;
+  /* === optimised type scale (modular ~1.25) + measure === */
+  --t-body:1.125rem; --t-lede:1.375rem; --t-h3:1.5rem; --t-h2:2.25rem; --t-h1:3.25rem;
+  --measure:66ch; --measure-lede:54ch; --measure-head:18ch;
+}
+@media (max-width:680px){ :root{ --t-h1:2.25rem; --t-h2:1.75rem; --t-h3:1.3rem; --t-lede:1.1875rem; } }
+
+/* ---- Typography & measure (scoped to redesign content) ---- */
+.rd-wrap, .rd-section, [class^="rd-"]{ -webkit-font-smoothing:antialiased; }
+.rd-wrap p:not(.rd-eyebrow), .rd-cscard__ctx{ font-size:var(--t-body); line-height:1.6; max-width:var(--measure); }
+.rd-lede{ font-size:var(--t-lede)!important; line-height:1.5; max-width:var(--measure-lede); }
+.rd-wrap h1{ font-size:var(--t-h1); line-height:1.08; } .rd-wrap h2{ font-size:var(--t-h2); line-height:1.15; }
+.rd-wrap h3{ font-size:var(--t-h3); line-height:1.2; }
+.rd-wrap h1,.rd-wrap h2{ max-width:var(--measure-head); text-wrap:balance; }
+
+/* ---- Links: AAA, always underlined, highlighted ---- */
+.rd-wrap a:not(.rd-btn):not(.ew-btn):not(.rd-door):not(.rd-cscard):not(.acc-card):not(.rd-logocell):not(.rd-cscard__more){
+  color:var(--bbc-forest); text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:3px; text-decoration-color:var(--bbc-pine);
+}
+.rd-wrap a:not(.rd-btn):not(.rd-door):not(.rd-cscard):hover{ text-decoration-color:var(--bbc-lime-dark); background:rgba(198,242,78,.30); }
+.rd-on-dark a:not(.rd-btn), .rd-forest a:not(.rd-btn), [class*="--dark"] a:not(.rd-btn){ color:var(--bbc-lime); text-decoration-color:var(--bbc-lime); }
+/* universal keyboard focus ring (accessibility win, keyboard only) */
+a:focus-visible, button:focus-visible, .rd-btn:focus-visible, .rd-door:focus-visible, [tabindex]:focus-visible{
+  outline:3px solid var(--bbc-forest); outline-offset:3px; border-radius:4px;
+}
+.rd-on-dark :focus-visible, .rd-forest :focus-visible{ outline-color:var(--bbc-lime); }
+
+/* ---- Buttons: highlighted, AAA, 44px tap target ---- */
+.rd-btn{ min-height:44px; display:inline-flex; align-items:center; justify-content:center; gap:.45em; font-weight:700; border-radius:10px; padding:.7em 1.25em; text-decoration:none; border:2px solid transparent; line-height:1.1; transition:transform .12s ease, box-shadow .12s ease, background .12s ease; }
+.rd-btn.rd-lime{ background:var(--bbc-lime); color:var(--bbc-forest); border-color:var(--bbc-forest); box-shadow:0 3px 0 var(--bbc-forest); }
+.rd-btn.rd-lime:hover{ transform:translateY(-2px); box-shadow:0 5px 0 var(--bbc-forest); background:var(--bbc-lime-dark); }
+.rd-btn.rd-ghost{ background:transparent; color:var(--bbc-forest); border-color:var(--bbc-forest); }
+.rd-btn.rd-ghost:hover{ background:var(--bbc-forest); color:#fff; }
+.rd-on-dark .rd-btn.rd-ghost, .rd-btn.rd-on-dark{ color:#fff; border-color:#fff; background:transparent; }
+.rd-on-dark .rd-btn.rd-on-dark:hover{ background:#fff; color:var(--bbc-forest); }
+
+/* ---- muted + gold-badge ---- */
+.rd-src, .rd-cscard__attr{ color:var(--bbc-slate); }
+.rd-badge-gold{ background:var(--bbc-gold); color:var(--bbc-ink); font-weight:700; border-radius:999px; padding:.25em .7em; }
+
+/* Buttons are never underlined (beats high-specificity global a-underline rule) */
+.rd-wrap a.ew-btn, .rd-wrap a.rd-btn, .bbc-rd a.ew-btn, .bbc-rd a.rd-btn, .bbc-rd-home a.ew-btn{ text-decoration:none !important; }
