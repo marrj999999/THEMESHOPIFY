@@ -46,12 +46,13 @@
 ### ✅ Use CSS Variables for Colors
 ```css
 /* Always use these — never hardcode hex values */
---bbc-forest: #073e27;    /* Primary dark green */
+--bbc-forest: #003C32;    /* Primary dark green — CANON 2026-07-02 (legacy #073e27 retired) */
 --bbc-teal: #3f8b66;      /* Secondary green */
 --bbc-gold: #ffa900;      /* Accent/CTA */
 --bbc-cream: #f8f7f4;     /* Light background */
---bbc-steel: #8da4c1;     /* Secondary accent */
+--bbc-steel: #8da4c1;     /* Secondary accent (2026 surface steel = #DEE6F0, see qa/DESIGN-BRIEF.md) */
 ```
+> 2026 design-system surfaces (paper `#E6DCC8` · forest `#003C32` · lime `#D4FD62` · steel `#DEE6F0`) and the full locked brief live in `qa/DESIGN-BRIEF.md` + `qa/BLOCK-SYSTEM.md`.
 
 ### ✅ Use CSS Variables for Typography
 ```css
