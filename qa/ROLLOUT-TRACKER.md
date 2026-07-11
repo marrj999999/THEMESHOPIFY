@@ -7,9 +7,9 @@ Created 2026-07-11 (Phase 0). Update on every state change.*
 ## Phase gates (non-page work)
 | Item | Status | Evidence |
 |---|---|---|
-| Phase 0 — brief locked, stale docs fixed, commit | 🔵 | this file, DESIGN-BRIEF.md |
-| Phase R — DESIGN-RESEARCH.md delivered | ⬜ | |
-| Phase 1 — unified CSS deployed + regression sweep | ⬜ | |
+| Phase 0 — brief locked, stale docs fixed, commit | ✅ | commits 9ff1c1a; vault Brand&Voice/Brand Guidelines fixed |
+| Phase R — DESIGN-RESEARCH.md delivered | ✅ | qa/DESIGN-RESEARCH.md (R1+R2b; R2a analytics BLOCKED — needs GA4/GSC access for MCP identity) |
+| Phase 1 — unified CSS deployed + regression sweep | 🟡 | bbc-tokens.css + 4 files deployed & read-back-identical; Gate-4 JS sweep clean on 7 pages (home/impact/why-bamboo/PDP/our-story/cart/collection); awaiting James (Gate 5) |
 | Phase 4 — download card · email band · timeline · comparison table · world map · quote wall | ⬜ | |
 
 ## Pages (Tier 1 — already on standard; re-verify after Phase 1 CSS unification)
@@ -57,7 +57,7 @@ Created 2026-07-11 (Phase 0). Update on every state change.*
 ## Cross-cutting sweeps (whole theme — per-page work misses these)
 | Sweep | Status | Evidence |
 |---|---|---|
-| Banned claims (claim-lint whole theme) | ⬜ | |
+| Banned claims (claim-lint whole theme) | 🟡 | LOCAL clean (18 strays fixed, commit fafceee; lint hardened vs SVG false-positives); remote sections were already clean — re-verify remote after Phase 5 pushes |
 | "36" → "45 countries" everywhere | ⬜ | |
 | Workshop price consistency — ⚠️ sources conflict: £795 (CLAUDE.md/June audit) vs £595/£595/£695 (memory 2026-07, workshops page) vs "From £500" (old homepage). Resolve against live page + James in Phase 5 | ⬜ | |
 | "Level 1 & 2" mushes → per-arm placeholders | ⬜ | |
@@ -66,7 +66,7 @@ Created 2026-07-11 (Phase 0). Update on every state change.*
 | Makers language (no prisoners/learners) | ⬜ | |
 | Alt text on all new/edited images | ⬜ | |
 | Build-to-Bond year = 2024 · 14 years · people-trained label | ⬜ | |
-| Jakarta/Fraunces/Hanken font remnants = zero | ⬜ | |
+| Jakarta/Fraunces/Hanken font remnants = zero | 🟡 | Deployed pages sweep = 0 rendered remnants; hardcoded refs remain in Tier-4/5 dead sections (retire, don't fix) |
 | Editability: no hardcoded text/img/URL in touched sections | ⬜ | |
 | Repeating-content de-dup (James's wince list) | ⬜ | |
 
