@@ -70,6 +70,7 @@
   {%- comment -%} ---------- STATS (dark) ---------- {%- endcomment -%}
   <section class="rd-pad-sm rd-dark">
     <div class="rd-wrap">
+      {%- if section.settings.stats_label != blank -%}<span class="rd-eyebrow">{{ section.settings.stats_label }}</span>{%- endif -%}
       <div class="rd-stats">
         {%- for block in section.blocks -%}{%- if block.type == 'stat' and block.settings.source != blank -%}
           <div class="rd-stat" {{ block.shopify_attributes }}>
@@ -487,6 +488,12 @@
       "type": "url",
       "id": "hero_cta2_url",
       "label": "Secondary CTA link (defaults to the contact page)"
+    },
+    {
+      "type": "text",
+      "id": "stats_label",
+      "label": "Stats band label",
+      "default": "the record since 2012"
     },
     {
       "type": "text",
