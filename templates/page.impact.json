@@ -42,7 +42,7 @@
         "help_buy": {
           "type": "help",
           "settings": {
-            "tag": "Buy",
+            "tag": "buy",
             "tag_lime": true,
             "title": "Build or own a bike",
             "body": "Book a workshop or buy a kit. Every purchase helps fund our prison and education programmes.",
@@ -54,7 +54,7 @@
         "help_partner": {
           "type": "help",
           "settings": {
-            "tag": "Partner",
+            "tag": "partner",
             "tag_lime": true,
             "title": "Run it in your prison",
             "body": "A self-delivery model for prisons: we train your staff, you run the workshop. OCN Level 2 accredited. Schools and colleges run Make Engineers.",
@@ -66,7 +66,7 @@
         "help_support": {
           "type": "help",
           "settings": {
-            "tag": "Support",
+            "tag": "support",
             "tag_lime": true,
             "title": "Fund or champion",
             "body": "Fund a cohort, offer placements, or champion our work. Every contribution goes directly into accredited skills courses inside prisons and schools.",
@@ -110,7 +110,7 @@
         "backer_nlcf": {
           "type": "backer",
           "settings": {
-            "logo": "logo-nlcf.svg",
+            "logo": "",
             "label": "The National Lottery Community Fund",
             "url": ""
           }
@@ -134,7 +134,7 @@
         "backer_ocn": {
           "type": "backer",
           "settings": {
-            "logo": "logo-ocn-london.svg",
+            "logo": "",
             "label": "OCN London accredited",
             "url": ""
           }
@@ -142,7 +142,7 @@
         "backer_hmpps": {
           "type": "backer",
           "settings": {
-            "logo": "logo-hmpps.png",
+            "logo": "",
             "label": "HMPPS",
             "url": ""
           }
@@ -241,14 +241,14 @@
       "settings": {
         "hero_fallback": "bbc-rd-workshop.jpg",
         "hero_image_alt": "Builders at work in the bamboo bicycle workshop",
-        "hero_eyebrow": "Build bikes \u00b7 build skills \u00b7 build futures",
+        "hero_eyebrow": "build bikes \u00b7 build skills \u00b7 build futures",
         "hero_title": "building bikes. rebuilding lives.",
         "hero_lede": "We use bamboo bike-building to give practical skills and a way forward to people locked out of education \u2014 in schools before exclusion, and in prisons after.",
         "hero_cta1_label": "Partner with us",
         "hero_cta1_url": "/pages/prisons",
         "hero_cta2_label": "Back the mission",
         "hero_cta2_url": "/pages/support-mission",
-        "data_as_of": "Data updated July 2026 \u2014 BBC programme records",
+        "data_as_of": "Data updated July 2026",
         "report_label": "Read the 2026 impact report",
         "report_url": "/pages/impact-report",
         "arms_eyebrow": "what we do",
@@ -273,13 +273,13 @@
         "cred_attr2": "",
         "cred_src2": "",
         "press_label": "As featured in",
-        "funder_line": "Build to Bond is supported by The National Lottery Community Fund and Investec Beyond Business.",
+        "funder_line": "",
         "funder_logo": "logo-nlcf.svg",
         "funder_logo_alt": "The National Lottery Community Fund",
         "accred_logo": "logo-ocn-london.svg",
         "accred_logo_alt": "OCN London",
         "press_more": "\u2026and featured in 40+ publications \u2014 see all coverage \u2192",
-        "awards_line": "Investec Beyond Business winner \u00b7 Kevin McCloud\u2019s Green Heroes \u00b7 OCN accredited",
+        "awards_line": "",
         "press_more_url": "",
         "sites_eyebrow": "where we operate",
         "sites_title": "from four UK prisons to 45 countries.",
