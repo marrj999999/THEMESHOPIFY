@@ -754,3 +754,9 @@ cart-drawer.animate .drawer{ visibility:visible; }
   .bbc-rd-impact .rd-mapcall{ position:static; display:inline-block; margin:8px 8px 0 0; box-shadow:2px 2px 0 var(--ink,#0E1A17); }
   .bbc-rd-impact .rd-mapcall::before{ display:none; }
 }
+
+/* symbol-only fork diagram (James: "build with symbols") */
+.bbc-rd-impact .rd-fork2{ margin:clamp(18px,3vw,34px) 0 6px; text-align:left; }
+.bbc-rd-impact .rd-fork2__label{ display:block; font-size:14px; font-weight:800; letter-spacing:.06em; text-transform:lowercase; color:var(--forest,#003C32); margin-bottom:6px; }
+.bbc-rd-impact .rd-forksym{ width:100%; max-width:880px; height:auto; display:block; font-family:inherit; }
+@media (max-width:759px){ .bbc-rd-impact .rd-forksym{ max-width:100%; } }

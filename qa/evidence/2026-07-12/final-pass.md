@@ -13,3 +13,4 @@ journey pass 20:17:13: axis ROOT fix (!important vs load-order tie), station tim
 full-review closures 21:15:41: 820px wrap + rd-cmp (:has reach — wrapper outside scope div, the real reason 2 fixes missed), logo rows one 34px mobile height, closer joins left axis (ruling), 9pts label plain-English. Length kept: James's case-study request + his length ruling.
 frame infographic (real geometry, routes animate riding the tubes) + stats-on-map callouts 21:34:31
 REVERT 21:44:07: frame infographic disabled + map callouts removed per James (shipped unseen = process breach; page back to last-good state)
+symbol-only fork diagram 21:54:12 (James: drop frame, build with symbols)
