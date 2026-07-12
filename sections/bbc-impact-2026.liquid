@@ -73,8 +73,8 @@
       {%- if section.settings.stats_label != blank -%}<span class="rd-eyebrow">{{ section.settings.stats_label }}</span>{%- endif -%}
       <div class="rd-stats">
         {%- for block in section.blocks -%}{%- if block.type == 'stat' and block.settings.source != blank -%}
-          <div class="rd-stat" {{ block.shopify_attributes }}>
-            <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
+          <div class="rd-stat rd-reveal" {{ block.shopify_attributes }}>
+            <div class="rd-num">{{ block.settings.number }}</div>
             <div class="rd-lbl">{{ block.settings.label }}</div>
             <div class="rd-src">{{ block.settings.source }}</div>
             {%- if block.settings.comparator != blank -%}<div class="rd-comparator">{{ block.settings.comparator }}</div>{%- endif -%}
@@ -142,8 +142,8 @@
       </div>
       <div class="rd-policy rd-mt4">
         {%- for block in section.blocks -%}{%- if block.type == 'policy' -%}
-          <div class="rd-stat" {{ block.shopify_attributes }}>
-            <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
+          <div class="rd-stat rd-reveal" {{ block.shopify_attributes }}>
+            <div class="rd-num">{{ block.settings.number }}</div>
             <div class="rd-lbl">{{ block.settings.label }}</div>
             {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
           </div>
