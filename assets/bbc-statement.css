@@ -715,3 +715,6 @@ cart-drawer.animate .drawer{ visibility:visible; }
 /* eyebrow dash never touches label — incl. dark-band variant (James IMG_3205) */
 .bbc-rd-impact .rd-eyebrow::before, .bbc-rd-impact .rd-frame-label::before{ margin-right:10px !important; }
 .bbc-rd-impact .rd-backers{ justify-items:start; }
+/* get-involved cards: same object language as the rest of the page */
+.bbc-rd-impact .rd-steel .rd-card{ border:2.5px solid var(--ink,#0E1A17); border-radius:6px; transition:transform .18s ease, box-shadow .18s ease; }
+@media (hover:hover){ .bbc-rd-impact .rd-steel .rd-card:hover{ transform:translateY(-4px); box-shadow:8px 8px 0 var(--ink,#0E1A17); } }

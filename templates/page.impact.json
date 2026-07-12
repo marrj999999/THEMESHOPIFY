@@ -118,7 +118,7 @@
         "backer_lsbu": {
           "type": "backer",
           "settings": {
-            "logo": "",
+            "logo": "logo-lsbu.svg",
             "label": "LSBU Innovation Hub",
             "url": ""
           }
@@ -202,6 +202,36 @@
             "label": "Investec Beyond Business",
             "url": ""
           }
+        },
+        "story_ucl": {
+          "type": "story",
+          "settings": {
+            "kind": "Education",
+            "title": "Masters students built a 100kg electric bamboo cargo bike.",
+            "blurb": "Real engineering in a university lab \u2014 the same craft, scaled up.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/IMAGE_2_LOAFLY_248a5253-795b-404f-adee-2fc1bd586e91.png?v=1771793521",
+            "url": "/blogs/impact/ucl-masters-bamboo-electric-cargo-bike-university"
+          }
+        },
+        "story_upcycle": {
+          "type": "story",
+          "settings": {
+            "kind": "Community",
+            "title": "Balance bikes, built at a team day, donated to a community project.",
+            "blurb": "The commercial side funding the mission \u2014 before a bike is even finished.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/SRW08823_e2572015-b157-475c-8f9c-89decaa65462.jpg?v=1771793508",
+            "url": "/blogs/impact/corporate-team-build-upcycle-brixton-bamboo-balance-bikes"
+          }
+        },
+        "story_kenya": {
+          "type": "story",
+          "settings": {
+            "kind": "Global",
+            "title": "Teaching Kenya to build \u2014 the knowledge stays behind.",
+            "blurb": "Skills transfer, not aid: local people learn to make and maintain their own bikes.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/01-kirui-riding-bamboo-bike_dcde22a5-5ad1-4db3-b880-048d3e462e5a.jpg?v=1771793527",
+            "url": "/blogs/impact/kenya-bamboo-bicycle-building-skills-transfer"
+          }
         }
       },
       "block_order": [
@@ -227,7 +257,10 @@
         "op_kits",
         "op_workshops",
         "op_overseas",
-        "op_partners"
+        "op_partners",
+        "story_ucl",
+        "story_upcycle",
+        "story_kenya"
       ],
       "settings": {
         "hero_fallback": "bbc-rd-workshop.jpg",
@@ -286,7 +319,7 @@
         "cs_url": "",
         "cs_link_label": "Read the full story",
         "stories_eyebrow": "Every kind of impact",
-        "stories_title": "",
+        "stories_title": "the evidence \u2014 real projects, linked.",
         "stories_lede": "The same craft shows up everywhere \u2014 on epic journeys, in boardrooms, in classrooms and across the world.",
         "stories_all_url": "",
         "stories_all_label": "See all impact stories",
@@ -309,7 +342,7 @@
         "path_quote": "",
         "path_cite": "",
         "help_eyebrow": "Get involved",
-        "help_title": "three ways you can be part of this.",
+        "help_title": "pick your way in.",
         "help_intro": "Every route \u2014 buying, partnering or funding \u2014 creates measurable change.",
         "cta_eyebrow": "Join in",
         "cta_title": "help us build a more inclusive, skilled future.",
