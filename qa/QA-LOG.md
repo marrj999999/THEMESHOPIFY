@@ -1,6 +1,14 @@
 # QA Log — CUSTOMTHEME20262 redesign
 *Defects, fixes, verdicts. Newest first.*
 
+## 2026-07-12 — JAMES G5 VERDICT: still not at standard. Directives (verbatim intent):
+1. UNIVERSAL STYLE: too many font styles + inconsistent symbols across bands — define ONE ruleset (type sizes, node/symbol style, chip style, button style) and apply it to EVERY band; no per-band variation. Hero still not large on his phone (screenshots IMG_3193–3198 in uploads/ — READ THEM at next pass start).
+2. 'Accredited programmes' band makes no sense — rewrite/rethink (zero-knowledge rule).
+3. 'Where we operate' band must show the FULLER picture: Project Zero Camden, LSBU, other partner orgs + overseas — Kenya, bamboo labs in Ethiopia, etc. Research vault/blog for the complete operations list before writing it.
+4. Logos still inconsistent/missing (duplicates found by CRIT + gaps) — one consistent logo system.
+5. THIS PAGE = THE FORMULA for all other pages. Get it right once, reuse everywhere.
+PROCESS ANSWER OWED: why still missed → fixes shipped band-by-band without a whole-page style pass; next pass = whole-page universal-style sweep against a written checklist, screenshot EVERY band mobile-first, CRIT re-run, THEN James.
+
 ## 2026-07-12 — PATHWAYS BAND BUILT & DEPLOYED (fork & converge)
 Per qa/PATHWAYS-SPEC.md: mission ✱ node forks into two distinct panels — make engineers (paper/lime track, schools·before) vs build to bond (forest/steel track, prisons·after) — converging on the lime strip 'both pathways end in the same place ✱ a way forward.' Per-pathway CTAs (school → /pages/schools; commission → /pages/contact-us). Numbered node steps reused; dark-surface overrides; mobile = one continuous left rail. All copy editable; inline .rd-arms patch deleted; claim-lint clean; browser asserts: fork ✓ paper/forest/lime surfaces ✓ names ✓ 5 dark steps ✓. G5: James phone-check pending.
 Symbols system: ✱ = mission origin node (honesty motif), numbered lime/steel nodes = pathway steps, track chips carry words (colour never the only cue). Photos deliberately stay in adjacent bands (type-on-flat-colour rule).
