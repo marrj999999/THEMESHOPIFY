@@ -608,3 +608,9 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-eyebrow::before{ margin-right:10px; }
 /* eyebrows: lowercase wins over the section-inline uppercase (caps war — one central !important, per replan) */
 .bbc-rd-impact .rd-eyebrow, .bbc-rd-impact .rd-frame-label{ text-transform:lowercase !important; }
+/* where-we-operate groups (FORMULA: 18px titles, 16px items, count chip) */
+.bbc-rd-impact .rd-ops{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; list-style:none; margin:0; padding:0; text-align:left; }
+.bbc-rd-impact .rd-ops__cell{ border:2.5px solid var(--ink,#0E1A17); border-radius:6px; background:var(--paper,#F1E9D8); padding:20px 22px; position:relative; }
+.bbc-rd-impact .rd-ops__count{ position:absolute; top:-14px; right:16px; min-width:34px; height:28px; padding:0 10px; border-radius:999px; background:var(--lime,#D4FD62); color:var(--forest,#003C32); border:2px solid var(--ink,#0E1A17); font-weight:800; font-size:15px; display:inline-flex; align-items:center; justify-content:center; }
+.bbc-rd-impact h3.rd-ops__title{ font-size:18px !important; font-weight:800; margin:0 0 6px; text-transform:none; }
+.bbc-rd-impact .rd-ops__items{ font-size:16px !important; line-height:1.5; margin:0; color:#3a443f; }

@@ -73,7 +73,7 @@
       <div class="rd-stats">
         {%- for block in section.blocks -%}{%- if block.type == 'stat' and block.settings.source != blank -%}
           <div class="rd-stat" {{ block.shopify_attributes }}>
-            <div class="rd-num">{{ block.settings.number }}</div>
+            <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
             <div class="rd-lbl">{{ block.settings.label }}</div>
             <div class="rd-src">{{ block.settings.source }}</div>
             {%- if block.settings.comparator != blank -%}<div class="rd-comparator">{{ block.settings.comparator }}</div>{%- endif -%}
@@ -142,7 +142,7 @@
       <div class="rd-policy rd-mt4">
         {%- for block in section.blocks -%}{%- if block.type == 'policy' -%}
           <div class="rd-stat" {{ block.shopify_attributes }}>
-            <div class="rd-num">{{ block.settings.number }}</div>
+            <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
             <div class="rd-lbl">{{ block.settings.label }}</div>
             {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
           </div>
@@ -199,6 +199,18 @@
       <h2 class="rd-mw-22ch rd-mx-auto">{{ section.settings.sites_title }}</h2>
       {%- if section.settings.sites_body != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.sites_body }}</p>{%- endif -%}
       {%- if section.settings.sites_list != blank -%}<div class="rd-sitenames rd-mt3">{{ section.settings.sites_list }}</div>{%- endif -%}
+      {%- assign ops = section.blocks | where: "type", "opgroup" -%}
+      {%- if ops.size > 0 -%}
+      <ul class="rd-ops rd-mt3" role="list">
+        {%- for block in ops -%}
+        <li class="rd-ops__cell" {{ block.shopify_attributes }}>
+          <span class="rd-ops__count">{{ block.settings.count }}</span>
+          <h3 class="rd-ops__title">{{ block.settings.title }}</h3>
+          <p class="rd-ops__items">{{ block.settings.items }}</p>
+        </li>
+        {%- endfor -%}
+      </ul>
+      {%- endif -%}
       {%- if section.settings.sites_partner != blank -%}<p class="rd-frame-label rd-mt3">{{ section.settings.sites_partner }}</p>{%- endif -%}
     </div>
   </section>
@@ -310,6 +322,7 @@
       {%- if section.settings.cred_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.cred_eyebrow }}</span>{%- endif -%}
       {%- if section.settings.cred_heading != blank -%}<h2 class="rd-mw-22ch">{{ section.settings.cred_heading }}</h2>{%- endif -%}
       {%- if section.settings.cred_sub != blank -%}<p class="rd-lede rd-mt1">{{ section.settings.cred_sub }}</p>{%- endif -%}
+      {%- if section.settings.cred_mech != blank -%}<div class="rd-callout-steel rd-mt3" style="text-align:left;"><p>{{ section.settings.cred_mech }}</p></div>{%- endif -%}
       <div class="rd-grid rd-g2 rd-mt3">
         <blockquote class="rd-card rd-stamp rd-cred-card">
           <p class="rd-cred-q">&ldquo;{{ section.settings.cred_quote1 }}&rdquo;</p>
@@ -612,6 +625,12 @@
       "id": "press_label",
       "label": "Press strip label",
       "default": "As featured in"
+    },
+    {
+      "type": "textarea",
+      "id": "cred_mech",
+      "label": "Funder mechanism line (how the money works)",
+      "default": "Kit and workshop revenue covers our running costs. Funder money goes directly to programme delivery — and funders get completions, OCN awards and session data each term."
     },
     {
       "type": "text",
@@ -1226,6 +1245,15 @@
           "label": "Lime stamp shadow",
           "default": false
         }
+      ]
+    },
+    {
+      "type": "opgroup",
+      "name": "Where-we-operate group",
+      "settings": [
+        { "type": "text", "id": "count", "label": "Count badge (e.g. 4)" },
+        { "type": "text", "id": "title", "label": "Group title (verb-honest: we run / we've taught in)" },
+        { "type": "textarea", "id": "items", "label": "Names, · separated" }
       ]
     },
     {

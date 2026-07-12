@@ -162,6 +162,54 @@
             "label": "Inside Time",
             "url": "/blogs/news/inside-time-bamboozling-way-to-build-bikes-bamboo-bicycle-club-at-lowdham-grange"
           }
+        },
+        "op_prisons": {
+          "type": "opgroup",
+          "settings": {
+            "count": "4",
+            "title": "prison programmes \u2014 we run",
+            "items": "HMP Lowdham Grange \u00b7 HMP Foston Hall \u00b7 HMP Lindholme \u00b7 HMYOI Feltham, with HM Prison & Probation Service"
+          }
+        },
+        "op_edu": {
+          "type": "opgroup",
+          "settings": {
+            "count": "10",
+            "title": "schools & universities \u2014 we deliver with",
+            "items": "LSBU \u00b7 UCL \u00b7 Coventry University \u00b7 Bradfield College \u00b7 Frensham Heights \u00b7 Stoke-on-Trent College \u00b7 Southbank UTC \u00b7 Swansea University (testing) and more"
+          }
+        },
+        "op_workshops": {
+          "type": "opgroup",
+          "settings": {
+            "count": "1",
+            "title": "public workshops \u2014 we run",
+            "items": "London \u2014 monthly frame-building weekends"
+          }
+        },
+        "op_hubs": {
+          "type": "opgroup",
+          "settings": {
+            "count": "3",
+            "title": "international hubs \u2014 our partners run",
+            "items": "Amersfoort \u00b7 Toulouse \u00b7 Munich"
+          }
+        },
+        "op_overseas": {
+          "type": "opgroup",
+          "settings": {
+            "count": "5",
+            "title": "overseas skills transfers \u2014 we have taught in",
+            "items": "Kenya \u00b7 Rwanda \u00b7 Sweden \u00b7 The Hague \u00b7 Ethiopia (wheelchair project with BBC Munich)"
+          }
+        },
+        "op_kits": {
+          "type": "opgroup",
+          "settings": {
+            "count": "45",
+            "title": "countries \u2014 kits built worldwide",
+            "items": "From the UK to New Zealand, every kit is built by its owner"
+          }
         }
       },
       "block_order": [
@@ -182,7 +230,13 @@
         "backer_ocn",
         "backer_hmpps",
         "backer_ft",
-        "backer_insidetime"
+        "backer_insidetime",
+        "op_prisons",
+        "op_edu",
+        "op_workshops",
+        "op_hubs",
+        "op_overseas",
+        "op_kits"
       ],
       "settings": {
         "hero_fallback": "bbc-rd-workshop.jpg",
@@ -227,10 +281,10 @@
         "press_more": "\u2026and featured in 40+ publications \u2014 see all coverage \u2192",
         "awards_line": "Investec Beyond Business winner \u00b7 Kevin McCloud\u2019s Green Heroes \u00b7 OCN accredited",
         "press_more_url": "",
-        "sites_eyebrow": "Where we work",
-        "sites_title": "accredited programmes across four active prison sites.",
-        "sites_body": "Live delivery at HMP Lowdham Grange, HMP Foston Hall, HMP Lindholme and HMYOI Feltham \u2014 with a self-delivery model that trains staff and peer instructors to run the workshop.",
-        "sites_list": "HMP Lowdham Grange \u00b7 HMP Foston Hall \u00b7 HMP Lindholme \u00b7 HMYOI Feltham",
+        "sites_eyebrow": "where we operate",
+        "sites_title": "from four UK prisons to 45 countries.",
+        "sites_body": "We run standing programmes in UK prisons, schools and universities, monthly workshops in London, and partner hubs in Europe \u2014 and our kits have been built in 45 countries.",
+        "sites_list": "",
         "sites_partner": "In partnership with HM Prison & Probation Service",
         "cs_kind": "Case study",
         "cs_image": "bbc-rd-prison-empty.jpg",
@@ -287,7 +341,8 @@
         "arm2_cta_label": "commission a programme \u2192",
         "arm2_cta_url": "/pages/contact-us",
         "converge_title": "both pathways end in the same place \u2731 a way forward.",
-        "converge_note": "\u2731 the same hands-on engineering course in both settings \u2014 built around a bike the maker keeps."
+        "converge_note": "\u2731 the same hands-on engineering course in both settings \u2014 built around a bike the maker keeps.",
+        "cred_mech": "Kit and workshop revenue covers our running costs. Funder money goes directly to programme delivery \u2014 and funders get completions, OCN awards and session data each term."
       }
     }
   },
