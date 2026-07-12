@@ -292,6 +292,19 @@
   </section>
   {%- endif -%}
 
+  {%- comment -%} ---------- WHAT'S NEXT (forward band, A2 — funder question: what does new money do?) ---------- {%- endcomment -%}
+  {%- if section.settings.next_title != blank -%}
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      {%- if section.settings.next_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.next_eyebrow }}</span>{%- endif -%}
+      <h2>{{ section.settings.next_title }}</h2>
+      {%- if section.settings.next_lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.next_lede }}</p>{%- endif -%}
+      {%- assign nx = section.settings.next_flow | split: '|' -%}
+      <div class="rd-flow rd-mt3">{%- for st in nx -%}<span class="rd-flow__step">{{ st | strip }}</span>{%- endfor -%}</div>
+    </div>
+  </section>
+  {%- endif -%}
+
   {%- comment -%} ---------- GET INVOLVED: three ways (3 CTA cards) ---------- {%- endcomment -%}
   <section class="rd-pad rd-steel">
     <div class="rd-wrap">
@@ -325,7 +338,28 @@
       {%- if section.settings.cred_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.cred_eyebrow }}</span>{%- endif -%}
       {%- if section.settings.cred_heading != blank -%}<h2 class="rd-mw-22ch">{{ section.settings.cred_heading }}</h2>{%- endif -%}
       {%- if section.settings.cred_sub != blank -%}<p class="rd-lede rd-mt1">{{ section.settings.cred_sub }}</p>{%- endif -%}
-      {%- if section.settings.cred_mech != blank -%}<div class="rd-callout-steel rd-mt3" style="text-align:left;"><p>{{ section.settings.cred_mech }}</p></div>{%- endif -%}
+      {%- if section.settings.promise1 != blank -%}
+      <div class="rd-callout-steel rd-mt3" style="text-align:left;">
+        <ul class="rd-promises" role="list">
+          {%- for i in (1..3) -%}
+          {%- assign pk = 'promise' | append: i -%}{%- assign pu = 'promise' | append: i | append: '_url' -%}
+          {%- if section.settings[pk] != blank -%}
+          <li class="rd-promises__row"><span class="rd-promises__star">&#10033;</span> {{ section.settings[pk] }}{%- if section.settings[pu] != blank %} <a href="{{ section.settings[pu] }}">see for yourself &rarr;</a>{%- endif -%}</li>
+          {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+      {%- elsif section.settings.cred_mech != blank -%}<div class="rd-callout-steel rd-mt3" style="text-align:left;"><p>{{ section.settings.cred_mech }}</p></div>{%- endif -%}
+      {%- if section.settings.report_card_title != blank -%}
+      <div class="rd-dlcard rd-mt3">
+        <span class="rd-dlcard__badge">report</span>
+        <div class="rd-dlcard__body">
+          <p class="rd-dlcard__title">{{ section.settings.report_card_title }}</p>
+          {%- if section.settings.report_card_meta != blank -%}<p class="rd-dlcard__meta">{{ section.settings.report_card_meta }}</p>{%- endif -%}
+        </div>
+        <a class="rd-path__cta" style="margin-top:0;" href="{{ section.settings.report_card_url | default: '/pages/impact-report' }}">read it &rarr;</a>
+      </div>
+      {%- endif -%}
       <div class="rd-grid rd-g2 rd-mt3">
         <blockquote class="rd-card rd-stamp rd-cred-card">
           <p class="rd-cred-q">&ldquo;{{ section.settings.cred_quote1 }}&rdquo;</p>
@@ -636,6 +670,19 @@
       "default": "the full picture →"
     },
     { "type": "url", "id": "ops_more_url", "label": "Full picture link target" },
+    { "type": "text", "id": "next_eyebrow", "label": "What's-next eyebrow", "default": "what's next" },
+    { "type": "text", "id": "next_title", "label": "What's-next heading" },
+    { "type": "text", "id": "next_lede", "label": "What's-next lede (one sentence)" },
+    { "type": "textarea", "id": "next_flow", "label": "What's-next ambitions, | separated" },
+    { "type": "text", "id": "promise1", "label": "Promise 1" },
+    { "type": "url", "id": "promise1_url", "label": "Promise 1 proof link" },
+    { "type": "text", "id": "promise2", "label": "Promise 2" },
+    { "type": "url", "id": "promise2_url", "label": "Promise 2 proof link" },
+    { "type": "text", "id": "promise3", "label": "Promise 3" },
+    { "type": "url", "id": "promise3_url", "label": "Promise 3 proof link" },
+    { "type": "text", "id": "report_card_title", "label": "Report card title" },
+    { "type": "text", "id": "report_card_meta", "label": "Report card meta line" },
+    { "type": "url", "id": "report_card_url", "label": "Report card link" },
     {
       "type": "textarea",
       "id": "cred_mech",

@@ -624,3 +624,14 @@ cart-drawer.animate .drawer{ visibility:visible; }
 
 /* FINAL PASS G3: one left axis in get-involved (h2 left + centred lede violated FORMULA §4) */
 .bbc-rd-impact .rd-center .rd-lede{ text-align:left; margin-inline:0; }
+
+/* A4 promises + A3 download card (final pass) */
+.bbc-rd-impact .rd-promises{ list-style:none; margin:0; padding:0; }
+.bbc-rd-impact .rd-promises__row{ font-size:17px; line-height:1.5; padding:8px 0; }
+.bbc-rd-impact .rd-promises__row a{ font-weight:700; color:#17553a; }
+.bbc-rd-impact .rd-promises__star{ color:#17553a; font-weight:800; margin-right:8px; }
+.bbc-rd-impact .rd-dlcard{ display:flex; align-items:center; gap:18px; border:2.5px solid var(--ink,#0E1A17); border-radius:6px; background:var(--paper,#F1E9D8); padding:18px 22px; text-align:left; box-shadow:5px 5px 0 var(--lime-700,#9BC02E); flex-wrap:wrap; }
+.bbc-rd-impact .rd-dlcard__badge{ background:var(--forest,#003C32); color:var(--lime,#D4FD62); font-weight:800; font-size:13px; padding:6px 12px; border-radius:4px; text-transform:lowercase; }
+.bbc-rd-impact .rd-dlcard__body{ flex:1; min-width:180px; }
+.bbc-rd-impact p.rd-dlcard__title{ font-weight:800; font-size:18px !important; margin:0; }
+.bbc-rd-impact p.rd-dlcard__meta{ font-size:14px !important; margin:2px 0 0; color:#3a443f; }
