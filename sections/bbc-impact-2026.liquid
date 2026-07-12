@@ -202,7 +202,7 @@
       {%- assign ops = section.blocks | where: "type", "opgroup" -%}
       {%- if ops.size > 0 -%}
       <ul class="rd-ops rd-mt3" role="list">
-        {%- for block in ops -%}
+        {%- for block in ops limit: 4 -%}
         <li class="rd-ops__cell" {{ block.shopify_attributes }}>
           <span class="rd-ops__count">{{ block.settings.count }}</span>
           <h3 class="rd-ops__title">{{ block.settings.title }}</h3>
@@ -210,6 +210,9 @@
         </li>
         {%- endfor -%}
       </ul>
+      {%- if ops.size > 4 and section.settings.ops_more_label != blank -%}
+      <p class="rd-mt3" style="text-align:left;"><a class="rd-path__cta" style="margin-top:0;" href="{{ section.settings.ops_more_url | default: '/pages/our-story-2' }}">{{ section.settings.ops_more_label }}</a></p>
+      {%- endif -%}
       {%- endif -%}
       {%- if section.settings.sites_partner != blank -%}<p class="rd-frame-label rd-mt3">{{ section.settings.sites_partner }}</p>{%- endif -%}
     </div>
@@ -626,6 +629,13 @@
       "label": "Press strip label",
       "default": "As featured in"
     },
+    {
+      "type": "text",
+      "id": "ops_more_label",
+      "label": "Where-we-operate 'full picture' link label",
+      "default": "the full picture →"
+    },
+    { "type": "url", "id": "ops_more_url", "label": "Full picture link target" },
     {
       "type": "textarea",
       "id": "cred_mech",

@@ -232,11 +232,11 @@
         "backer_insidetime",
         "op_prisons",
         "op_edu",
-        "op_workshops",
         "op_hubs",
+        "op_kits",
+        "op_workshops",
         "op_overseas",
-        "op_partners",
-        "op_kits"
+        "op_partners"
       ],
       "settings": {
         "hero_fallback": "bbc-rd-workshop.jpg",
@@ -342,7 +342,8 @@
         "arm2_cta_url": "/pages/contact-us",
         "converge_title": "both pathways end in the same place \u2731 a way forward.",
         "converge_note": "\u2731 the same hands-on engineering course in both settings \u2014 built around a bike the maker keeps.",
-        "cred_mech": "Kit and workshop revenue covers our running costs. Funder money goes directly to programme delivery \u2014 and funders get completions, OCN awards and session data each term."
+        "cred_mech": "Kit and workshop revenue covers our running costs. Funder money goes directly to programme delivery \u2014 and funders get completions, OCN awards and session data each term.",
+        "ops_more_label": "the full picture \u2192"
       }
     }
   },
