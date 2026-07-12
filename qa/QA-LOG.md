@@ -5,7 +5,7 @@
 J1 ANIMATE ALL STATS — move-in + count animation (re-enable count-up: the freeze was a test-pane artifact he never saw; add entrance reveal to stat cards)
 J2 WORLD MAP INFOGRAPHIC — where-we-operate: replace text-only with a world map plotting our locations + the 45 countries (was already a Phase-4 queued component; £0 = inline SVG, lime location dots, editable)
 J3 PATHWAYS BAND RETHINK — mission/schools/prisons opener "not clear enough, visually not stimulating" — next design pass: consider per-pathway duotone imagery (his instinct overrides the type-only rule), stronger fork visual
-(His two pending calls — 3-CTA weight + page length — remain open.)
+JAMES RULED (2026-07-13): 3 equal CTAs in get-involved = fine (deliberate equal-doors grid, sanctioned like the homepage signpost); page length = accepted (he can cut later). Both closed.
 
 
 ## 2026-07-13 — DEFINE: Impact final pass (quality over speed — James green-lit)

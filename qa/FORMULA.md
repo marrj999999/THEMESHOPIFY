@@ -12,7 +12,7 @@
 | Body | 17px | sentence | max 34em measure |
 | Step/list | 16px | sentence | |
 | Chip/eyebrow | 13–15px, weight 800 | lowercase | |
-| Button | 15px pill; primary = fill (forest on light / lime on dark), secondary = 2px outline pill | | never underlined links as CTAs; max one primary per band |
+| Button | 15px pill; primary = fill (forest on light / lime on dark), secondary = 2px outline pill | | never underlined links as CTAs; max one primary per band — EXCEPT deliberate equal-doors card grids (James 2026-07-13: get-involved 3-CTA, homepage signpost) |
 | Footnote | 14px | | carries the ✱ |
 
 ## 2 · Symbol system (only these)
