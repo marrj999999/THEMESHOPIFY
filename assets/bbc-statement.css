@@ -528,31 +528,43 @@ cart-drawer.animate .drawer{ visibility:visible; }
   border:1.5px solid var(--ink,#0E1A17);
   background:var(--lime,#D4FD62); color:var(--forest,#003C32);
 }
-.bbc-rd-impact .rd-path--prisons .rd-path__chip{ background:var(--steel,#DEE6F0); color:var(--ink,#0E1A17); border-color:var(--steel,#DEE6F0); }
+.bbc-rd-impact .rd-path--prisons .rd-path__chip{ background:var(--steel,#DEE6F0); color:var(--ink,#0E1A17); border-color:var(--ink,#0E1A17); }
 /* pathway name — small display moment, lowercase, left */
-.bbc-rd-impact .rd-path__name{
-  font-size:clamp(2rem,3.4vw,2.9rem); line-height:.97; letter-spacing:-.02em;
+.bbc-rd-impact h3.rd-path__name{
+  font-size:clamp(2.1rem,3.6vw,2.9rem) !important; line-height:.97; letter-spacing:-.02em;
   font-weight:800; text-transform:lowercase; margin:16px 0 0; color:var(--ink,#0E1A17);
 }
-.bbc-rd-impact .rd-path--prisons .rd-path__name{ color:var(--bone,#E6DCC8); }
-.bbc-rd-impact .rd-path__who{ font-size:16px; line-height:1.55; margin:10px 0 0; max-width:34em; color:#3a443f; }
-.bbc-rd-impact .rd-path--prisons .rd-path__who{ color:#cfe0d7; }
+.bbc-rd-impact .rd-path--prisons h3.rd-path__name{ color:var(--bone,#E6DCC8); }
+.bbc-rd-impact .rd-path p.rd-path__who{ font-size:17px !important; line-height:1.55; margin:10px 0 0; max-width:34em; color:#3a443f; }
+.bbc-rd-impact .rd-path--prisons p.rd-path__who{ color:#cfe0d7; }
+
+/* hierarchy lock: steps + body must stay clearly below the name */
+.bbc-rd-impact .rd-path .rd-flow__step{ font-size:16px !important; line-height:1.45; padding:8px 0 8px 46px; }
+.bbc-rd-impact .rd-path .rd-flow__step::before{ width:30px; height:30px; font-size:15px; top:5px; }
+.bbc-rd-impact .rd-path .rd-flow__step::after{ left:14px; top:37px; }
+.bbc-rd-impact .rd-path .rd-flow{ margin-top:18px; }
 /* dark-surface overrides for the reused .rd-flow numbered nodes */
 .bbc-rd-impact .rd-path--prisons .rd-flow__step{ color:var(--bone,#E6DCC8); }
 .bbc-rd-impact .rd-path--prisons .rd-flow__step::before{
-  background:var(--steel,#DEE6F0); color:var(--ink,#0E1A17); border-color:var(--bone,#E6DCC8);
+  background:var(--bone,#E6DCC8); color:var(--forest,#003C32); border-color:var(--lime,#D4FD62);
 }
 .bbc-rd-impact .rd-path--prisons .rd-flow__step::after{ background:var(--bone,#E6DCC8); opacity:.35; }
-/* per-pathway CTA (bottom-pinned, matches .bbcpl-cta grammar) */
-.bbc-rd-impact .rd-path__cta{
-  margin-top:auto; padding-top:22px; align-self:flex-start;
-  font-size:15px; font-weight:700; text-decoration:none;
-  color:var(--forest,#003C32); border-bottom:2px solid var(--forest,#003C32); padding-bottom:2px;
+/* per-pathway CTA — standard pill buttons (BLOCK-SYSTEM: forest fill
+   on light, lime fill on dark). Filled buttons sidestep the global
+   link-underline/colour rules that broke the underlined version. */
+.bbc-rd-impact .rd-path__cta,
+.bbc-rd-impact a.rd-path__cta:not(#_){
+  margin-top:auto; align-self:flex-start; display:inline-block;
+  margin-block-start:26px; padding:13px 24px; border-radius:999px;
+  font-size:15px; font-weight:700; line-height:1;
+  background:var(--forest,#003C32); color:var(--bone,#E6DCC8) !important;
+  text-decoration:none !important; border:none;
 }
-.bbc-rd-impact a.rd-path__cta:not(#_){ color:var(--forest,#003C32); } /* beat the global inherit rule */
 .bbc-rd-impact .rd-path--prisons .rd-path__cta,
-.bbc-rd-impact .rd-path--prisons a.rd-path__cta:not(#_){ color:var(--bone,#E6DCC8); border-bottom-color:var(--lime,#D4FD62); }
-.bbc-rd-impact .rd-path__cta:hover{ opacity:.65; }
+.bbc-rd-impact .rd-path--prisons a.rd-path__cta:not(#_){
+  background:var(--lime,#D4FD62); color:var(--forest,#003C32) !important;
+}
+.bbc-rd-impact .rd-path__cta:hover{ opacity:.85; }
 
 /* convergence strip — the band's single lime surface */
 .bbc-rd-impact .rd-converge{
@@ -568,27 +580,14 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-converge__title .bbcst-star{ color:var(--forest,#003C32); }
 .bbc-rd-impact .rd-converge__note{ font-size:14px; line-height:1.6; margin:14px 0 0; color:#3a443f; max-width:66ch; }
 
-/* mobile: fork geometry collapses to one continuous left rail */
+/* mobile: simple static stack — no absolute geometry (the rail/label
+   version collided; simpler wins) */
 @media (max-width:759px){
-  .bbc-rd-impact .rd-paths{ grid-template-columns:1fr; gap:0; }
-  .bbc-rd-impact .rd-fork{ height:auto; padding:6px 0 22px 0; }
-  .bbc-rd-impact .rd-fork::before{ left:21px; top:44px; bottom:0; height:auto; transform:none; }
-  .bbc-rd-impact .rd-fork::after,
+  .bbc-rd-impact .rd-paths{ grid-template-columns:1fr; gap:24px; }
+  .bbc-rd-impact .rd-fork{ position:static; height:auto; display:flex; align-items:center; gap:14px; margin:10px 0 22px; }
+  .bbc-rd-impact .rd-fork::before, .bbc-rd-impact .rd-fork::after,
   .bbc-rd-impact .rd-fork__drop{ display:none; }
-  .bbc-rd-impact .rd-fork__node{ left:0; transform:none; }
-  .bbc-rd-impact .rd-fork__label{ left:60px; top:12px; white-space:normal; }
-  .bbc-rd-impact .rd-path{ position:relative; margin-left:14px; }
-  .bbc-rd-impact .rd-path + .rd-path{ margin-top:0; }
-  /* rail segment between stacked cards */
-  .bbc-rd-impact .rd-path::before{
-    content:""; position:absolute; left:5px; top:-24px; height:24px; width:3px;
-    background:var(--forest,#003C32); transform:translateX(-100%);
-  }
-  .bbc-rd-impact .rd-path--prisons{ margin-top:24px; }
-  .bbc-rd-impact .rd-converge{ margin-left:14px; position:relative; }
-  .bbc-rd-impact .rd-converge::before{
-    content:""; position:absolute; left:5px; top:-24px; height:24px; width:3px;
-    background:var(--forest,#003C32); transform:translateX(-100%);
-  }
+  .bbc-rd-impact .rd-fork__node, .bbc-rd-impact .rd-fork__label{ position:static; transform:none; white-space:normal; }
   .bbc-rd-impact .rd-converge{ margin-top:24px; }
+}
 }
