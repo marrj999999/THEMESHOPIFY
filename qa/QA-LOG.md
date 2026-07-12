@@ -1,6 +1,9 @@
 # QA Log — CUSTOMTHEME20262 redesign
 *Defects, fixes, verdicts. Newest first.*
 
+## 2026-07-13 — FRAME INFOGRAPHIC: DROPPED (tested fully, evidence-based)
+Three attempts, all failed the quality bar BEFORE reaching the page: (1) hand-coded SVG shipped blind — James rejected; (2) Recraft round 1: beautiful bike illustration, zero infographic elements; (3) Recraft round 2 (schematic prompt): hex codes as literal text + AI-soup. Decision: the pathway story is carried by the journey cards + duotone imagery; the frame-metaphor idea is parked (revisit only with a human designer or if James supplies a sketch). Map callouts also dropped — clean choropleth + cards stands. ~4 Recraft credits spent.
+
 ## 2026-07-13 — JAMES G5 on impact: "content better BUT boring" — 3 directives
 J1 ANIMATE ALL STATS — move-in + count animation (re-enable count-up: the freeze was a test-pane artifact he never saw; add entrance reveal to stat cards)
 J2 WORLD MAP INFOGRAPHIC — where-we-operate: replace text-only with a world map plotting our locations + the 45 countries (was already a Phase-4 queued component; £0 = inline SVG, lime location dots, editable)
