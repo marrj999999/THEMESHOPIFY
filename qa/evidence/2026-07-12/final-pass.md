@@ -8,3 +8,4 @@ CRIT r2 closures 18:48:54: FORMULA role clarifications (pathway-name display + c
 CRIT r3 closures 18:58:39: D1 lime eyebrow on dark, D2 one chip style, D3 left-axis eyebrows, D4 lowercase card titles, D5 Investec dedup
 CRIT r4 mechanical 19:08:30: rd-mx-auto killed (one axis), star glyph forest+19px, backers labelled 'backed by & accredited by', Inside Time regrouped out. HELD FOR JAMES: 3-CTA equal-weight vs demote; page length 14.8k vs 11k target
 J1 stats animation restored 19:17:45 (count-up + rd-reveal entrance)
+J3 20:00:47: per-pathway duotone imagery (schools group / empty prison workshop — safeguarding-safe defaults), bleed crop, bigger fork node

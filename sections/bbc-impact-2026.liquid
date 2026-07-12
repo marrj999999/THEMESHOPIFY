@@ -102,6 +102,9 @@
       </div>
       <div class="rd-paths">
         <div class="rd-path rd-path--schools rd-reveal">
+          <span class="rd-duotone rd-path__media">
+            <img src="{% if section.settings.arm1_image != blank %}{{ section.settings.arm1_image | image_url: width: 900 }}{% else %}{{ 'bbc-rd-wb-group.jpg' | asset_url }}{% endif %}" alt="{{ section.settings.arm1_image_alt | default: 'A school group with the bamboo bike frame they built' | escape }}" loading="lazy" width="900" height="500">
+          </span>
           <span class="rd-path__chip">{{ section.settings.arm1_chip | default: 'in schools · before exclusion' }}</span>
           <h3 class="rd-path__name">{{ section.settings.arm1_name | default: 'make engineers' }}</h3>
           <p class="rd-path__who">{{ section.settings.arm1_who | default: "for SEND, PRU and at-risk young people being pushed out of the classroom — often their first positive encounter with engineering." }}</p>
@@ -112,6 +115,9 @@
           {%- endif -%}
         </div>
         <div class="rd-path rd-path--prisons rd-reveal">
+          <span class="rd-duotone rd-path__media">
+            <img src="{% if section.settings.arm2_image != blank %}{{ section.settings.arm2_image | image_url: width: 900 }}{% else %}{{ 'bbc-rd-prison-empty.jpg' | asset_url }}{% endif %}" alt="{{ section.settings.arm2_image_alt | default: 'Inside the Build to Bond workshop — benches, jigs and frames' | escape }}" loading="lazy" width="900" height="500">
+          </span>
           <span class="rd-path__chip">{{ section.settings.arm2_chip | default: 'in prisons · after' }}</span>
           <h3 class="rd-path__name">{{ section.settings.arm2_name | default: 'build to bond' }}</h3>
           <p class="rd-path__who">{{ section.settings.arm2_who | default: 'for people inside prison rebuilding skills, family ties and a route to work on release.' }}</p>
@@ -593,6 +599,10 @@
       "label": "Arm 2 pathway (| separated)",
       "default": "Course | OCN accreditation | Family bond | Peer instructor | Link to work on release"
     },
+    { "type": "image_picker", "id": "arm1_image", "label": "Pathway 1 image (schools)" },
+    { "type": "text", "id": "arm1_image_alt", "label": "Pathway 1 image alt" },
+    { "type": "image_picker", "id": "arm2_image", "label": "Pathway 2 image (workshop space only — no identifiable people)" },
+    { "type": "text", "id": "arm2_image_alt", "label": "Pathway 2 image alt" },
     { "type": "text", "id": "fork_label", "label": "Fork label", "default": "one mission, two pathways" },
     { "type": "text", "id": "arm1_chip", "label": "Pathway 1 chip", "default": "in schools · before exclusion" },
     { "type": "text", "id": "arm1_name", "label": "Pathway 1 name", "default": "make engineers" },
