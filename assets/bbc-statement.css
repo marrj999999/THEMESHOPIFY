@@ -760,3 +760,75 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-fork2__label{ display:block; font-size:14px; font-weight:800; letter-spacing:.06em; text-transform:lowercase; color:var(--forest,#003C32); margin-bottom:6px; }
 .bbc-rd-impact .rd-forksym{ width:100%; max-width:880px; height:auto; display:block; font-family:inherit; }
 @media (max-width:759px){ .bbc-rd-impact .rd-forksym{ max-width:100%; } }
+
+/* ============================================================
+   ANTI-BLOCKY PASS (2026-07-13) — per-band devices from
+   qa/research/anti-blocky-layouts.md §3. One device per band.
+   ============================================================ */
+/* B0 · D2 ghost numeral: 2012 as architecture behind the stats */
+.bbc-rd-impact .rd-band--stats{ position:relative; overflow:clip; }
+.bbc-rd-impact .rd-band--stats .rd-ghost{ position:absolute; right:-2%; top:50%; transform:translateY(-52%); font-size:clamp(9rem,24vw,20rem); line-height:.8; font-weight:800; letter-spacing:-.04em; color:var(--lime,#D4FD62); opacity:.07; pointer-events:none; }
+@media (max-width:600px){ .bbc-rd-impact .rd-band--stats .rd-ghost{ display:none; } }
+
+/* B1 · D6 borderless pathways: hairline fork instead of twin boxes */
+.bbc-rd-impact .rd-path{ background:transparent !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; padding-inline:0; }
+.bbc-rd-impact .rd-path--prisons{ background:var(--forest,#003C32) !important; border-radius:4px !important; padding-inline:clamp(24px,3vw,38px); } /* dark panel keeps its surface (sober rule) but loses border+shadow */
+.bbc-rd-impact .rd-paths{ gap:clamp(32px,5vw,72px); position:relative; }
+@media (min-width:760px){ .bbc-rd-impact .rd-paths::before{ content:"\2731"; position:absolute; left:50%; top:0; bottom:0; transform:translateX(-50%); border-left:2px solid var(--mist,#CFC5B0); width:0; color:var(--forest,#003C32); font-size:18px; line-height:1; padding-top:2px; } }
+@media (hover:hover){ .bbc-rd-impact .rd-path:hover{ transform:none; box-shadow:none !important; } .bbc-rd-impact .rd-path--schools:hover, .bbc-rd-impact .rd-path--prisons:hover{ box-shadow:none !important; } }
+
+/* B2 · D4 asymmetric 7/3: heading owns the width, policy stats stack in a rail */
+@media (min-width:760px){
+  .bbc-rd-impact .rd-band--policy .rd-wrap{ display:grid; grid-template-columns:7fr 3fr; column-gap:clamp(32px,5vw,72px); align-items:start; }
+  .bbc-rd-impact .rd-band--policy .rd-wrap > *{ grid-column:1; }
+  .bbc-rd-impact .rd-band--policy .rd-facts{ grid-column:2; grid-row:1 / span 6; display:flex; flex-direction:column; gap:22px; border-left:2px solid var(--lime,#D4FD62); padding-left:22px; }
+}
+
+/* B3 · D1 full-bleed workshop image: the photo IS the band */
+.bbc-rd-impact .rd-band--workshop img{ width:100vw; max-width:100vw !important; margin-left:calc(50% - 50vw); aspect-ratio:21/9; object-fit:cover; border:0; border-radius:0; display:block; }
+
+/* B4 · D10 statement quote: de-box, near-heading scale, hanging star */
+.bbc-rd-impact .rd-split .rd-q, .bbc-rd-impact .rd-q{ background:transparent; border:0; box-shadow:none; font-size:clamp(24px,3.4vw,42px); line-height:1.12; font-weight:800; letter-spacing:-.02em; max-width:20ch; padding:0; }
+
+/* B5 · D8 index/directory: ops cards become a typeset directory */
+.bbc-rd-impact .rd-ops{ display:block; }
+.bbc-rd-impact .rd-ops__cell{ display:grid; grid-template-columns:auto 1fr auto; align-items:baseline; gap:14px; border:0; border-radius:0; background:transparent; box-shadow:none; padding:18px 0; border-bottom:2px solid var(--mist,#CFC5B0); position:static; }
+.bbc-rd-impact .rd-ops__cell::after{ content:""; grid-column:2; border-bottom:2px dotted var(--mist,#CFC5B0); transform:translateY(-4px); }
+.bbc-rd-impact h3.rd-ops__title{ grid-column:1; grid-row:1; margin:0; }
+.bbc-rd-impact .rd-ops__items{ grid-column:1 / -1; grid-row:2; margin:4px 0 0; }
+.bbc-rd-impact .rd-ops__count{ position:static; grid-column:3; grid-row:1; font-size:clamp(1.6rem,3vw,2.4rem); font-weight:800; background:none; border:0; color:var(--forest,#003C32); padding:0; min-width:0; height:auto; }
+@media (hover:hover){ .bbc-rd-impact .rd-ops__cell:hover{ transform:none; } }
+
+/* B6 · D7 staggered evidence grid, borderless */
+.bbc-rd-impact .rd-cscard{ border:0 !important; border-radius:0 !important; box-shadow:none !important; background:transparent !important; }
+@media (min-width:760px){
+  .bbc-rd-impact .rd-csgrid{ align-items:start; }
+  .bbc-rd-impact .rd-csgrid > :nth-child(2){ margin-top:clamp(40px,6vw,80px); }
+  .bbc-rd-impact .rd-csgrid > :nth-child(3){ margin-top:clamp(20px,3vw,40px); }
+}
+
+/* B7 · D3 marginalia rail: eyebrow leaves the stack */
+@media (min-width:760px){
+  .bbc-rd-impact .rd-band--next .rd-rail{ display:grid; grid-template-columns:minmax(130px,1fr) minmax(0,3.4fr); column-gap:clamp(24px,4vw,72px); }
+  .bbc-rd-impact .rd-band--next .rd-rail > .rd-eyebrow{ grid-column:1; position:sticky; top:24px; }
+  .bbc-rd-impact .rd-band--next .rd-rail > *:not(.rd-eyebrow){ grid-column:2; }
+}
+
+/* B8 · D6 ruled get-involved: three doors as rule-separated columns */
+.bbc-rd-impact .rd-steel .rd-card{ background:transparent !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; }
+@media (min-width:760px){ .bbc-rd-impact .rd-steel .rd-card + .rd-card{ border-left:2px solid var(--ink,#0E1A17) !important; padding-left:clamp(20px,3vw,36px); border-radius:0 !important; } }
+@media (max-width:759px){ .bbc-rd-impact .rd-steel .rd-card + .rd-card{ border-top:2px solid var(--ink,#0E1A17) !important; padding-top:22px; } }
+@media (hover:hover){ .bbc-rd-impact .rd-steel .rd-card:hover{ transform:none; box-shadow:none !important; } }
+
+/* B9 · D9 rotated seal + de-boxed proof */
+.bbc-rd-impact .rd-seal{ display:inline-grid; place-items:center; width:clamp(92px,11vw,128px); aspect-ratio:1; border:2.5px solid var(--ink,#0E1A17); border-radius:999px; transform:rotate(-6deg); font-weight:800; text-transform:lowercase; letter-spacing:.04em; font-size:12px; text-align:center; background:var(--lime,#D4FD62); color:var(--forest,#003C32); position:absolute; right:0; top:-18px; padding:10px; z-index:2; }
+@media (max-width:600px){ .bbc-rd-impact .rd-seal{ width:84px; font-size:10.5px; top:-10px; } }
+.bbc-rd-impact .rd-callout-steel{ background:transparent; border-left:0; padding:0; }
+.bbc-rd-impact .rd-promises__row{ border-top:2px solid var(--mist,#CFC5B0); }
+.bbc-rd-impact .rd-dlcard{ border:0; box-shadow:none; background:transparent; border-top:2px solid var(--ink,#0E1A17); border-radius:0; padding-inline:0; }
+
+/* B10 · D5 the one seam-cross: closing heading laps the boundary */
+/* D5 seam-cross removed after visual test — overlapped its own eyebrow; the rare move ships only when clean (FORMULA §8.5 allows zero) */
+/* anti-blocky fix: schools card lost its padding — media margins must match (was poking past the wrap) */
+.bbc-rd-impact .rd-path--schools .rd-path__media{ margin:0 0 0 0; }
+.bbc-rd-impact .rd-path--prisons .rd-path__media{ margin:calc(-1*clamp(24px,3vw,38px)) calc(-1*clamp(24px,3vw,38px)) 0; }

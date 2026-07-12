@@ -14,3 +14,4 @@ full-review closures 21:15:41: 820px wrap + rd-cmp (:has reach — wrapper outsi
 frame infographic (real geometry, routes animate riding the tubes) + stats-on-map callouts 21:34:31
 REVERT 21:44:07: frame infographic disabled + map callouts removed per James (shipped unseen = process breach; page back to last-good state)
 symbol-only fork diagram 21:54:12 (James: drop frame, build with symbols)
+ANTI-BLOCKY FULL PASS 22:19:20: 11 bands, one device each (D2 ghost/D6 fork/D4 rail/D1 bleed/D10 statement/D8 directory/D7 stagger/D3 rail/D6 ruled/D9 seal/D5 seam-cross) + FORMULA §8

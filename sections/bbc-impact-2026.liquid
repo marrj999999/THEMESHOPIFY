@@ -68,8 +68,9 @@
   </header>
 
   {%- comment -%} ---------- STATS (dark) ---------- {%- endcomment -%}
-  <section class="rd-pad-sm rd-dark">
+  <section class="rd-pad-sm rd-dark rd-band--stats">
     <div class="rd-wrap">
+      <span class="rd-ghost" aria-hidden="true">{{ section.settings.ghost_stat | default: "2012" }}</span>
       {%- if section.settings.stats_label != blank -%}<span class="rd-eyebrow">{{ section.settings.stats_label }}</span>{%- endif -%}
       <div class="rd-stats">
         {%- for block in section.blocks -%}{%- if block.type == 'stat' and block.settings.source != blank -%}
@@ -205,7 +206,7 @@
 
   {%- comment -%} ---------- WHY NOW (policy backdrop, sourced) ---------- {%- endcomment -%}
   {%- if section.settings.policy_title != blank -%}
-  <section class="rd-pad rd-dark">
+  <section class="rd-pad rd-dark rd-band--policy">
     <div class="rd-wrap">
       <div class="rd-center">
         {%- if section.settings.policy_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.policy_eyebrow }}</span>{%- endif -%}
@@ -225,7 +226,7 @@
   {%- endif -%}
 
   {%- comment -%} ---------- THE STORY: a real workshop, inside ---------- {%- endcomment -%}
-  <section class="rd-pad">
+  <section class="rd-pad rd-band--workshop">
     <div class="rd-wrap rd-mw-820px">
       {%- if section.settings.story_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.story_eyebrow }}</span>{%- endif -%}
       <h2>{{ section.settings.story_title }}</h2>
@@ -376,8 +377,8 @@
 
   {%- comment -%} ---------- WHAT'S NEXT (forward band, A2 — funder question: what does new money do?) ---------- {%- endcomment -%}
   {%- if section.settings.next_title != blank -%}
-  <section class="rd-pad">
-    <div class="rd-wrap">
+  <section class="rd-pad rd-band--next">
+    <div class="rd-wrap rd-rail">
       {%- if section.settings.next_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.next_eyebrow }}</span>{%- endif -%}
       <h2>{{ section.settings.next_title }}</h2>
       {%- if section.settings.next_lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.next_lede }}</p>{%- endif -%}
@@ -416,7 +417,8 @@
   {%- comment -%} ---------- RECOGNISED BY (credibility quotes) ---------- {%- endcomment -%}
   {%- if section.settings.cred_quote1 != blank -%}
   <section class="rd-pad-sm rd-paper bbc-impact-cred">
-    <div class="rd-wrap">
+    <div class="rd-wrap" style="position:relative;">
+      <span class="rd-seal" aria-hidden="true">{{ section.settings.seal_text | default: "OCN accredited · CIC · since 2012" }}</span>
       {%- if section.settings.cred_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.cred_eyebrow }}</span>{%- endif -%}
       {%- if section.settings.cred_heading != blank -%}<h2 class="rd-mw-22ch">{{ section.settings.cred_heading }}</h2>{%- endif -%}
       {%- if section.settings.cred_sub != blank -%}<p class="rd-lede rd-mt1">{{ section.settings.cred_sub }}</p>{%- endif -%}
@@ -491,7 +493,7 @@
   {%- endif -%}
 
   {%- comment -%} ---------- FINAL CTA (dark, centred) ---------- {%- endcomment -%}
-  <section class="rd-pad rd-dark rd-center">
+  <section class="rd-pad rd-dark rd-center rd-band--close">
     <div class="rd-wrap rd-mw-680px">
       {%- if section.settings.cta_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.cta_eyebrow }}</span>{%- endif -%}
       <h2>{{ section.settings.cta_title }}</h2>
@@ -572,6 +574,8 @@
       "id": "hero_cta2_url",
       "label": "Secondary CTA link (defaults to the contact page)"
     },
+    { "type": "text", "id": "ghost_stat", "label": "Ghost numeral behind stats", "default": "2012" },
+    { "type": "text", "id": "seal_text", "label": "Rotated seal text (recognised-by)", "default": "OCN accredited · CIC · since 2012" },
     {
       "type": "text",
       "id": "stats_label",

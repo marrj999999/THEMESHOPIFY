@@ -38,3 +38,13 @@ Zero-knowledge headers (who/what/for-whom) · stats always sourced · Makers lan
 - Fixes were band-scoped; consistency is page-scoped. This file exists because no written per-page contract existed — DESIGN-BRIEF set direction, BLOCK-SYSTEM set primitives, but nothing bound a PAGE to one ruleset.
 - Verification measured properties, not appearance. Fix: eyeballed mobile screenshot of every changed band, every time.
 - Copy edits and style edits travelled separately (lowercase CSS crushed STEM/Makers). Fix: copy+style change together per band.
+
+## 8 · Anti-blocky grammar (blocking at Gate 1 — from qa/research/anti-blocky-layouts.md)
+1. One device per band, never two (device library D1–D12 in the research file).
+2. No two adjacent bands share a layout shape (card-grid · index-list · asym-split · statement · bleed · stat-row · rail).
+3. Max ONE bordered-card band per page; page-wide bordered-box count ≤ 6.
+4. The eyebrow may not open every band: ≥2 bands relocate it to a rail or drop it; never >3 consecutive top-left openers.
+5. ≥1 containment break per page (bleed/ghost/seam-cross); exactly ONE seam-cross.
+6. No dead right column: >40% empty desktop width in a contained band = defect — fill with a device or go full-bleed.
+7. Density alternation: never 3 consecutive dense bands.
+*A page is a sequence, not a stack of equal boxes.*
