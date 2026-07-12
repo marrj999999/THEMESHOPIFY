@@ -261,9 +261,7 @@
           <img src="{{ 'bbc-world-map.svg' | asset_url }}" alt="{{ section.settings.map_alt | escape }}" width="1000" height="472" loading="lazy">
         {%- endif -%}
         {%- if section.settings.map_caption != blank -%}<figcaption class="rd-opsmap__cap">{{ section.settings.map_caption }}</figcaption>{%- endif -%}
-        <span class="rd-mapcall rd-mapcall--uk">{{ section.settings.map_call_uk | default: 'UK — 4 prison sites · 10 schools & universities · london workshops' }}</span>
-  <span class="rd-mapcall rd-mapcall--eu">{{ section.settings.map_call_eu | default: '3 partner hubs — amersfoort · toulouse · munich' }}</span>
-  <span class="rd-mapcall rd-mapcall--world">{{ section.settings.map_call_world | default: 'kits built in 45 countries' }}</span>
+        
 </figure>
       {%- endif -%}
       {%- assign ops = section.blocks | where: "type", "opgroup" -%}
