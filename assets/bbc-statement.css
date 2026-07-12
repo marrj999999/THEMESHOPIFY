@@ -424,7 +424,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact h2{
   font-size:clamp(2.8rem,7vw,5.4rem) !important;
   line-height:.97 !important; letter-spacing:-.02em;
-  text-transform:lowercase; text-align:left;
+  text-align:left;
   max-width:none; margin-inline:0;
 }
 .bbc-rd-impact h1{ text-align:left; }
@@ -591,3 +591,10 @@ cart-drawer.animate .drawer{ visibility:visible; }
   .bbc-rd-impact .rd-converge{ margin-top:24px; }
 }
 }
+
+/* CRIT 2026-07-12 fixes */
+@media (max-width:749px){
+  .bbc-rd-impact h1{ font-size:clamp(2.9rem,12.5vw,4.4rem) !important; line-height:.97 !important; }
+}
+/* CRIT#2: converge payoff — beat the aaa-2026 paragraph cap */
+.bbc-rd-impact p.rd-converge__title{ font-size:clamp(1.5rem,2.8vw,2.2rem) !important; }
