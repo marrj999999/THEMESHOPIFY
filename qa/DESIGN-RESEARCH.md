@@ -347,3 +347,21 @@ These are structural facts about the site, useful for framing once numbers arriv
   - `search_analytics` dims `query` (top 20 by clicks), dims `page` (top 20 by clicks), dims `device`
   - `detect_quick_wins` same window
   - Filter `page contains /pages/impact|support-mission|about|why-bamboo` for the funder-path volumes vs `products/|collections/` for commerce.
+
+---
+
+# PART 2b — YouTube Analytics UPDATE (2026-07-12, OAuth restored)
+
+Re-auth done (brand-account consent via James's logged-in Chrome). Channel confirmed: Bamboo Bicycle Club, UCbqUW1DKIGxnh0YVM1LaJEw.
+
+**Last 12 months (Jul 2025–Jul 2026), with ZERO uploads:** 23,232 views · 24,300 min watched · avg view duration 88s · avg view % 18.8 · +148 subs (−56) · 205 likes · 105 shares.
+
+**Top by views (12mo):** carbon-wrapped joints Short 3,248 · e-cargo train bike 1,791 · £500 frame jig 1,191 · cargo trike 1,104 · sanding-the-grain 1,057.
+
+**⚠️ Revised conclusion vs the public-data pass:** for ON-SITE embeds, watch time beats reach — and the watch-time table is inverted vs the views table:
+- **Dropouts explainer: 77s avg duration, 1,064 min watched (the most of anything)** — 7× the retention of the top Short (10s avg).
+- 3D-lug live build: 81s avg duration, 774 min watched.
+- Frame jig: 36s avg — best of the "workshop credibility" set.
+So: Shorts win social reach, but **explainer/build content is what holds attention — those are the PDP/support-page embeds.** The R2b shortlist stands, with retention data now confirming picks #1–#3 and promoting the dropouts explainer into FAQ/support placement.
+
+**Maintenance note:** the OAuth client ("My Email App", Google Cloud) is in **Testing** status → refresh tokens expire every 7 days (this is why it died Jun 21). Permanent fix, James, 2 mins: Google Cloud Console → APIs & Services → OAuth consent screen → **Publish app** (to "In production"). Until then, the token dies weekly and needs the same re-consent.
