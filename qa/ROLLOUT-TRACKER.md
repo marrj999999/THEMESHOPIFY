@@ -21,7 +21,7 @@ Created 2026-07-11 (Phase 0). Update on every state change.*
 ## Pages (Tier 2 — retrofit + content)
 | Page | Section | Phase | Status |
 |---|---|---|---|
-| /pages/impact | bbc-impact-2026 | **2 (priority)** | ⬜ |
+| /pages/impact | bbc-impact-2026 | **2 (priority)** | 🔵 diagnosed (QA-LOG D1–D12); rebuild next |
 | /pages/workshop(s) | bbc-workshops-2026 | 5 | ⬜ |
 | /pages/schools + education | bbc-education-2026 | 5 | ⬜ |
 | /pages/prisons | bbc-commissioners-2026 (slimmed → points into Impact) | 5 | ⬜ |
