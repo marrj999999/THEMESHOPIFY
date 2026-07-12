@@ -780,15 +780,16 @@ cart-drawer.animate .drawer{ visibility:visible; }
 /* B2 · D4 asymmetric 7/3: heading owns the width, policy stats stack in a rail */
 @media (min-width:760px){
   .bbc-rd-impact .rd-band--policy .rd-wrap{ display:grid; grid-template-columns:7fr 3fr; column-gap:clamp(32px,5vw,72px); align-items:start; }
-  .bbc-rd-impact .rd-band--policy .rd-wrap > *{ grid-column:1; }
-  .bbc-rd-impact .rd-band--policy .rd-facts{ grid-column:2; grid-row:1 / span 6; display:flex; flex-direction:column; gap:22px; border-left:2px solid var(--lime,#D4FD62); padding-left:22px; }
+  .bbc-rd-impact .rd-band--policy .rd-wrap > .rd-center{ grid-column:1; }
+  .bbc-rd-impact .rd-band--policy .rd-policy{ grid-column:2; grid-row:1; display:flex !important; flex-direction:column; gap:22px; border-left:2px solid var(--lime,#D4FD62); padding-left:22px; margin-top:0; }
 }
 
-/* B3 · D1 full-bleed workshop image: the photo IS the band */
-.bbc-rd-impact .rd-band--workshop img{ width:100vw; max-width:100vw !important; margin-left:calc(50% - 50vw); aspect-ratio:21/9; object-fit:cover; border:0; border-radius:0; display:block; }
+/* B3 · D1 full-bleed: the workshop photo (single case card band) IS the band */
+.bbc-rd-impact .rd-csgrid-1 .rd-cscard__media{ width:100vw; max-width:100vw; margin-left:calc(50% - 50vw); aspect-ratio:21/9; border-radius:0; }
+.bbc-rd-impact .rd-csgrid-1 .rd-cscard__media img{ width:100%; height:100%; object-fit:cover; border-radius:0; }
 
 /* B4 · D10 statement quote: de-box, near-heading scale, hanging star */
-.bbc-rd-impact .rd-split .rd-q, .bbc-rd-impact .rd-q{ background:transparent; border:0; box-shadow:none; font-size:clamp(24px,3.4vw,42px); line-height:1.12; font-weight:800; letter-spacing:-.02em; max-width:20ch; padding:0; }
+.bbc-rd-impact .rd-split .rd-q, .bbc-rd-impact .rd-q{ background:transparent; border:0; box-shadow:none; font-size:clamp(24px,3.4vw,42px) !important; line-height:1.12 !important; font-weight:800; letter-spacing:-.02em; max-width:20ch; padding:0; }
 
 /* B5 · D8 index/directory: ops cards become a typeset directory */
 .bbc-rd-impact .rd-ops{ display:block; }
@@ -832,3 +833,8 @@ cart-drawer.animate .drawer{ visibility:visible; }
 /* anti-blocky fix: schools card lost its padding — media margins must match (was poking past the wrap) */
 .bbc-rd-impact .rd-path--schools .rd-path__media{ margin:0 0 0 0; }
 .bbc-rd-impact .rd-path--prisons .rd-path__media{ margin:calc(-1*clamp(24px,3vw,38px)) calc(-1*clamp(24px,3vw,38px)) 0; }
+/* cred quote: the last box — becomes a pure pull-quote (100% sweep) */
+.bbc-impact-cred .rd-card, .bbc-impact-cred [class*="quote"], .bbc-rd-impact .rd-cred-q{ }
+.bbc-rd-impact .bbc-impact-cred .rd-stamp, .bbc-rd-impact .bbc-impact-cred blockquote,
+.bbc-rd-impact .rd-cred-q, .bbc-rd-impact .rd-cred-q *{ }
+.bbc-rd-impact .bbc-impact-cred .rd-card.rd-stamp{ background:transparent !important; border:0 !important; box-shadow:none !important; padding:0 !important; }
