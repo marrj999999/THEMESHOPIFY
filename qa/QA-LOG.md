@@ -1,6 +1,22 @@
 # QA Log — CUSTOMTHEME20262 redesign
 *Defects, fixes, verdicts. Newest first.*
 
+## 2026-07-13 — DEFINE: Impact final pass (quality over speed — James green-lit)
+Sources: qa/research/similar-charity-impact-funder-page.md (adopt/adapt) + qa/CRIT-impact-final-2026-07-12.md (defects 4-10) + James directives.
+BUILD LIST (each closes with evidence):
+A1 Benchmark-paired stats — national-baseline second line in stat cards ONLY where Proof Bank verifies the baseline (never invent)
+A2 "what's next" forward band — 3 numbered lime-node ambitions (sites, school cohorts, hubs) before get-involved; no £ amounts
+A3 Impact report → proper download-asset card inside recognised-by (was a text link)
+A4 Steel money-model callout → 3 verifiable promises, each ending in an arrow proof-link (report / OCN / coverage)
+A5 Where-we-operate: 7 rows → 4 + "the full picture →" link (progressive disclosure; fixes mixed chip semantics)
+A6 Quote attribution style: outcome-carrying ("former Maker, now peer instructor"), anonymised per hard rule
+G1 Page length: 15,179px @375 → target ≤11k (recognised-by band 2,419px is the main cut; fix its 4-line h2)
+G2 Reveal-on-scroll blank-viewport fallback (observed scrollY 800-1500) — tone down or remove .rd-reveal on this page
+G3 get-involved band: one-left-axis fix (h2 left, lede centred = violation)
+C4-C10 remaining CRIT defects per report
+HOLD: ops-band final wording pending James's 6 confirmations (ships conservative until then).
+
+
 ## 2026-07-12 — JAMES G5 VERDICT: still not at standard. Directives (verbatim intent):
 1. UNIVERSAL STYLE: too many font styles + inconsistent symbols across bands — define ONE ruleset (type sizes, node/symbol style, chip style, button style) and apply it to EVERY band; no per-band variation. Hero still not large on his phone (screenshots IMG_3193–3198 in uploads/ — READ THEM at next pass start).
 2. 'Accredited programmes' band makes no sense — rewrite/rethink (zero-knowledge rule).
