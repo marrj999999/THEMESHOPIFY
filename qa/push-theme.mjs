@@ -1,5 +1,13 @@
 // Push listed files from local dir to the Shopify theme via themeFilesUpsert
 import { readFileSync } from 'fs';
+// GATE GUARD (2026-07-12): refuse to push unless qa/gate-check.sh passed <10 min ago
+import { statSync, existsSync } from 'fs';
+const tok = new URL('./.gate-pass', import.meta.url).pathname;
+if (!existsSync(tok) || (Date.now() - statSync(tok).mtimeMs) > 600000) {
+  console.error('✗ BLOCKED: run qa/gate-check.sh <changed files> first (token missing/stale).');
+  process.exit(1);
+}
+
 import { join } from 'path';
 
 const cfg = JSON.parse(readFileSync(process.env.HOME + '/.claude.json', 'utf8'));
