@@ -1,83 +1,74 @@
-# CRIT (final gate) — /pages/impact — draft 196820238710 — 2026-07-12 (fresh re-run after the final-pass FAIL)
+# CRIT (step-5 gate) — /pages/impact — draft 196820238710 — 2026-07-12 (fresh independent re-run)
 
-*Fresh-eyes CRIT, sceptical (did not build the page). Driven in real headless Chrome via the repo's Playwright (in-app pane freezes on this page). `Shopify.theme.id` **196820238710** confirmed on-screen (the "CUSTOMTHEME20262 · Draft" preview bar is visible in every capture). Mobile 375×812 first, cookies declined (mobile run auto-declined; the desktop pass banner re-appeared low on one long capture — noted, no finding depends on it). Desktop 1280px second. Every number below is a measured `getComputedStyle`/`getBoundingClientRect` value or a WCAG ratio computed from sampled fg/bg — none estimated.*
+*Sceptical fresh-eyes CRIT (did not build this page). Driven in real headless Chrome via the repo's Playwright (`chromium-1223`), not the in-app pane. `window.Shopify.theme.id` = **196820238710** confirmed programmatically AND the "CUSTOMTHEME20262 · Draft" preview bar is visible in every capture. Cookies auto-declined (`cookieClicked=true`) on both viewports. Mobile **375×812** first, then desktop **1280×800**. Every px is a measured `getComputedStyle`/`getBoundingClientRect`; every ratio a WCAG contrast computed from sampled fg/effective-bg. Nothing estimated.*
 
-**Evidence:** `qa/evidence/today/` — `m-band-00-hero…m-band-10-final-cta.png` + `d-band-00…d-band-10` (22 band shots, element-captured full-height), `metrics-m.json`, `metrics-d.json`. Scripts: `crit.mjs`, `shots.mjs`, `bands.mjs`.
+**Evidence:** `qa/evidence/today/` — mobile `band-00-hero.png … band-10-final-cta.png`, desktop `band-00-hero-d.png … band-10-final-cta-d.png`, `gate-metrics-m.json`, `gate-metrics-d.json`. Script: `crit-gate.mjs` (independent of the prior run's `crit.mjs`). Prior CRIT preserved at `qa/evidence/today/CRIT-impact-prior-1838.md.bak`.
 
-**Page metrics:** mobile total **15,235px (~18.8 screens)** · desktop **10,468px** · horizontal overflow at 375px: **none** (0 overflowers, docW==winW==375) · AAA sweep: 25 lowest pairs sampled, **min 7.20:1** (Sally Allsopp cite 14px), all others ≥7.37 — **PASS**.
+**Page-level measured facts**
+| Metric | Mobile 375 | Desktop 1280 |
+|---|---|---|
+| Total height | **14,962px (~18.4 screens)** | 10,245px |
+| Horizontal overflow | **none** (docW 375 = winW, 0 overflowers) | none (docW 1280, 0) |
+| Count-up animation | **none** — 5 timed samples over 1.9s byte-identical | n/a |
+| Banned claims (28k PSI / stronger-than-steel / 56.7 / 11.41 / £280 / 100% / "36+") | **0** | 0 |
+| "learners" / "prisoners" in body | **0 / 0** (Makers voice holds) | 0 / 0 |
+| "45 countries" (not 36+) | ✓ | ✓ |
+| Lowest AAA pairs | ✱ 6.96 (17px/800), Sally cite 7.20 (14px), then ≥7.37 | same |
 
 ---
 
-## Claimed fixes since the last CRIT — verified one by one
-
-| Prior blocker | Verdict now | Evidence |
+## Verified since the prior CRIT (genuine closes)
+| Prior blocker | Now | Evidence |
 |---|---|---|
-| Mobile hero h1 = 28px (James rejected twice) | ✅ **FIXED** — h1 renders **46.9px** mobile / 84.5px desktop, weight 800, lowercase, left. Largest display moment on mobile. | `metrics-m` h1; `m-band-00-hero.png` |
-| Stats count-up animating (41→82→90) | ✅ **FIXED** — 4 timed DOM samples over 1.45s all identical ("90%+ / Level 2 / 4,000+ / 45 / ~£18bn / up to 9pts"). No animation. | `metrics-m.statSamples` |
-| "both arms" stale vocab | ✅ **FIXED** — h2 now "both pathways sit on live national priorities." | band-03 text |
-| "~40%" vs "39%" contradiction | ✅ **FIXED** — both band 3 and band 5 now cite **39%** (MoJ family-contact data). | band-03/05 text |
-| NLCF + OCN backer logos 0×0 invisible | ✅ **FIXED** — render at 170×44 (desktop) / consistent 44px height. | `metrics` logos; `d-band-09` |
-| FT logo duplicated (press + backers) | ✅ **FIXED** — FT now only in press wall; backers = NLCF/OCN/HMPPS/chips. backed-by vs featured-in now grouped. | band-09 shots |
-| ops partnership card proper-noun crush | ⚠️ **HALF** — the in-card line "…with HM Prison & Probation Service" now keeps HM caps ✓, but a **second** partnership caption below the band still crushes to "**hm prison & probation service**" (see D3). | `m-band-06` |
-| where-we-operate verb-honest 4-group + "full picture →" (A5) | ✅ **LANDED** — 4 count-badged groups, verb-honest ("we run / we deliver with / our partners run / kits built worldwide"), "the full picture →" link present, NZ correctly framed as a kit destination, no Camden/Project-Zero confusion, HMPPS caps in-card. | `m-band-06` |
-| "what's next" forward band, no £ (A2) | ✅ **LANDED** — 3 numbered lime-node ambitions, no £ amounts. Clean band. | `m-band-07` |
-| 3 verifiable promises → proof-links (A4) + report download card (A3) | ✅ **LANDED** — steel callout, 3 ✱ promises each "see for yourself →"; "The 2026 impact report" download-asset card with badge. | `m-band-09` |
-
-**Real, material progress** — five items James personally rejected are genuinely closed, and claims/sourcing/AAA/safeguarding are clean. But the gate is mechanical and binary, and blocking rows still fail.
+| HMPPS crown logo duplicated (60px float in ops band + 170×44 in backers) | ✅ **RESOLVED** — no backer logo images render at all; HMPPS is now a single text chip. `imgs` = workshop, b2b, + 4 press SVGs only. | `gate-metrics-m` imgs; `band-06`, `band-09` |
+| Backers row mixed real logos + text chips | ✅ **RESOLVED** — backers now a uniform text-chip set (NLCF · Investec · LSBU · OCN London · HMPPS · Inside Time); press wall (FT/Guardian/Telegraph/CNN) is the only logo group, all 44px tall. Consistent *within* each group. | `band-09`, imgs 44px |
+| Band-6 footer caption crushed to "hm prison & probation service" | ✅ **FIXED** — renders proper-cased "In partnership with HM Prison & Probation Service" (measured P/800/tt:none). | `band-06`; contrast row |
+| Count-up animating; "~40%"/39%; "both arms" vocab | ✅ all hold — static stats, 39% consistent, "both pathways". | statSamples; band-03/05 |
 
 ---
 
 ## Per-band FORMULA scorecard
+Rows: **T**ype-roles · **S**ymbols · **L**ogo · **A**natomy/one-axis · **Z**ero-knowledge header · **C**olour-grammar · **AAA**(measured).
 
-Rows: **T**ype roles · **S**ymbols · **L**ogo system · **A**natomy/one-axis · **Z**ero-knowledge header · **C**olour grammar · **AAA** (measured).
-
-| # | Band | T | S | L | A | Z | C | AAA | Verdict |
+| # | Band (surface) | T | S | L | A | Z | C | AAA | Verdict |
 |---|---|---|---|---|---|---|---|---|---|
-| 0 | Hero (dark) | ✅ h1 46.9/84.5 largest (desktop h2 86.4 marginally > h1 84.5 — nit) | ✅ | n/a | ⚠️ 2 CTAs; secondary is a **ghost/outline** button (2nd button style) | ✅ | ✅ lime-on-dark fill ✓ | 9.12 | **PASS** |
-| 1 | Stats (dark) | ✅ nums big | ✅ | n/a | ❌ **no eyebrow, no h2, no lede** — 4 raw stats hit a stranger cold | ❌ | ✅ | 8.5+ | **FAIL** (band anatomy + zero-knowledge; source line "BBC programme records" also printed twice) |
-| 2 | What we do / pathways fork (paper) | ✅ h3 33.6 per scale | ✅ ✱ + numbered nodes + **lowercase** word-chips | n/a | ✅ fork geometry excellent; eyebrow centered vs h2 left (nit) | ✅ | ✅ paper/forest/lime | 8.5+ | **PASS** (best band on the page) |
-| 3 | Why now / policy (dark) | ✅ | ✅ | n/a | ⚠️ eyebrow centered vs h2 left | ✅ | ✅ | 8.5+ | **PASS** — all 4 stats sourced (MoJ ×3, ONS); 39% consistent; "up to 9pts" now reads with "reduction in reoffending" |
-| 4 | Inside the workshop (paper) | ✅ | ✅ | n/a | ⚠️ no workshop image on an imagery-licensed band | ✅ | ✅ | 8.5+ | **PASS** (nit) |
-| 5 | The follow-on / Build to Bond (dark split) | ✅ "Makers" casing | ✅ | n/a | ✅ image + split | ✅ 39% cited | ✅ | 8.5+ | **PASS** (father-only framing = James's call) |
-| 6 | Where we operate (paper, centred) | ⚠️ group h3 **18px** (off-scale) | ✅ count-badge nodes | ❌ HMPPS crown **60px** floats atop band, ungrouped, **and duplicated** in band 9 | ⚠️ eyebrow/h2/lede/footer centred vs left group cards | ✅ verified, verb-honest, safe | ✅ | 8.3+ | **CONDITIONAL** — content is right & safe, but D3 crush + D2 logo dup + h3 off-scale |
-| 7 | What's next (paper) | ✅ | ✅ numbered lime nodes | n/a | ✅ | ✅ | ✅ | 8.3+ | **PASS** (clean new band, no £) |
-| 8 | Get involved / three ways (steel) | ⚠️ card h3 **21px** (`.rd-fs-21px`, off-scale) | ❌ tags **BUY/PARTNER/SUPPORT render UPPERCASE** | n/a | ⚠️ eyebrow centred vs h2 left; **SUPPORT card has the lone lime edge-shadow** (others dark) | ✅ | ✅ forest-on-light fill ✓ | 8.0+ | **CONDITIONAL** |
-| 9 | Recognised by (paper) | ⚠️ mixed | ✅ ✱ promises | ❌ backers row **mixes real logos (Community Fund, OCN, HMPPS) with text chips (Investec, LSBU, Inside Time)**; HMPPS ×2; FT optically tiny (35px vs Telegraph 180px); **"AS FEATURED IN" + "INVESTEC…GREEN HEROES · OCN ACCREDITED" caps lines** | ❌ **2,485px — biggest band on page; the G1 cut target GREW** | ✅ | ✅ | 7.20+ | **FAIL** (worst band — the one a funder scrolls before the ask) |
-| 10 | Final CTA / Join in (dark, centred) | ✅ | ✅ | n/a | ⚠️ eyebrow centred; 2 CTAs (ghost "Back the mission"); primary "Run it in your prison →" addresses 1 of 3 audiences | ⚠️ adjective headline vs big-type=claims | ✅ | 8.5+ | **PASS** (nits, James's call) |
+| 0 | Hero (dark) | ⚠️ mob h1 46.9 ✓ largest; **desktop h1 84.5 < h2 86.4 → hero beaten** | ✅ | n/a | ❌ **2 CTAs, 2nd is ghost/outline** | ✅ | ✅ lime-on-dark | 9.12 | **FAIL** (D5 ghost btn; D7 desktop h1<h2) |
+| 1 | Stats (dark) | ✅ nums big | ✅ | n/a | ❌ **no eyebrow, no h2, no lede** — 4 bare numbers hit a stranger cold | ❌ | ✅ | 8.5+ | **FAIL** (D2) |
+| 2 | What we do / fork (paper) | ✅ h3 33.6/46.1 on-scale | ✅ ✱ + numbered nodes + lowercase word-chips | n/a | ⚠️ eyebrow centred vs h2 left | ✅ | ✅ paper/forest/lime | 8.5+ | **PASS** (best band; axis nit) |
+| 3 | Why now (dark) | ✅ | ✅ | n/a | ⚠️ eyebrow centred vs h2 left | ✅ | ✅ | 8.5+ | **PASS** — 4 stats sourced, 39% consistent |
+| 4 | Inside the workshop (paper) | ✅ | ✅ | n/a | ✅ eyebrow left | ✅ | ✅ | 8.5+ | **PASS** |
+| 5 | Follow-on / Build to Bond (dark) | ✅ Makers casing | ✅ | n/a | ✅ image + split | ✅ 39% cited | ✅ | 8.5+ | **PASS** |
+| 6 | Where we operate (paper) | ⚠️ **group h3 = 21px (off the 33.6/46.1 h3 scale)** | ✅ count-badge lime nodes | ✅ no stray logo now | ⚠️ eyebrow + footer caption centred; cards left; footer caption **duplicates** in-card "with HM Prison & Probation Service" | ✅ verb-honest, safe, NZ framed as kit destination | ✅ | 8.3+ | **CONDITIONAL** (D1 h3 size; D6 dup caption) |
+| 7 | What's next (paper) | ⚠️ node-title h3 21px (off-scale) | ✅ numbered lime nodes | n/a | ✅ | ✅ | ✅ | 8.3+ | **PASS** (no £; but adds page height) |
+| 8 | Get involved / 3 ways (steel) | ⚠️ card h3 21px (off-scale) | ❌ **tags BUY/PARTNER/SUPPORT render UPPERCASE/700 — 2nd chip style** | n/a | ⚠️ eyebrow centred vs h2 left; SUPPORT card carries a lone lime edge-shadow | ✅ | ✅ forest-on-light fill | 8.0+ | **FAIL** (D3 chip system) |
+| 9 | Recognised by (paper) | ⚠️ mixed (report-card h3 21px) | ✅ ✱ promises | ⚠️ press logos 44px ✓ but **FT optically 35px vs Telegraph 180px**; backers text-only | ❌ **2,271px — biggest band on page (the G1 driver a funder scrolls before the ask); "AS FEATURED IN" caps line; 6 stacked backer chips** | ✅ | ✅ | 7.20+ | **FAIL** (D4 length) |
+| 10 | Final CTA / Join in (dark) | ✅ | ✅ | n/a | ⚠️ eyebrow centred; 2 CTAs incl. ghost "Back the mission"; primary "Run it in your prison →" addresses 1 of 3 audiences | ⚠️ adjective headline | ✅ | 8.5+ | **PASS** (nits, James's call) |
 
-**Cross-cutting:** one h1 ✓ · one h2 size ✓ (43.2/86.4) · **THREE h3 sizes ❌ (33.6 pathways / 18 ops / 21 steel-cards)** · eyebrows uniform 14px but **weight 700 not 800**, and alignment splits centre (5 bands) vs left (4 bands) · buttons: fill colour correct per surface (forest-on-light, lime-on-dark) ✓ **but ghost/outline is a 2nd style on hero + final CTA + report link ❌** · **chips inconsistent: lowercase word-chips (pathways) vs UPPERCASE tags (get-involved) ❌** · **logos: press row 44px ✓ / backers 44px ✓ but HMPPS crown 60px = 3rd height, HMPPS twice, backers row mixes logos+text-chips ❌** · banned claims 0 ✓ · "learners"/"prisoners" 0 ✓ · 45 countries (no "36+") ✓ · no horizontal overflow ✓ · count-up disabled ✓ · safeguarding: no participant↔prison linkage ✓.
+**Cross-cutting (measured):**
+one h1 mobile ✓ · **one h2 size ✓ (43.2 mob / 86.4 desk)** · **TWO h3 sizes ❌ (33.6/46.1 pathways vs 21 for ops-groups + get-involved cards + report card)** · eyebrows uniform 14px but **weight 700 not the §1-spec 800 ❌**, and **alignment splits centre (5 bands) vs left (4) ❌** · buttons: fill colour correct per surface (forest-on-light rgb(0,60,50) / lime-on-dark rgb(212,253,98)) ✓ **but a ghost/outline style (transparent bg + bone border) is a 2nd button style on hero + report link + final CTA ❌** · **chips: lowercase/800 word-chips (pathways) vs UPPERCASE/700 tags (get-involved) ❌** · press logos uniform 44px height ✓ · banned 0 ✓ · Makers voice ✓ · 45 countries ✓ · no h-overflow ✓ · count-up off ✓ · safeguarding: no participant↔prison linkage ✓.
 
 ---
 
 ## Ranked defects (selector + fix)
 
-1. **G1 page-length REGRESSION — mobile 15,235px (~18.8 screens), +538px vs the last CRIT's 14,697; target ≤11k.** The stated definition-of-done for this pass. The single named cut target — **band 9 `section.rd-pad-sm.bbc-impact-cred` = 2,485px (was 2,419/2,237)** — *grew* instead. Band 9 is carrying: stat line + 3-promise steel callout + report card + Investec quote card + 4-logo press wall + "…40+ publications" link + awards caps line + supported-by sentence + 6-cell backers row. **Fix:** split or thin band 9 — drop the awards caps line (D5) and the redundant "Build to Bond is supported by…" sentence (the logos already say it), collapse the Investec pull-quote to 2–3 lines, and set the promises/press/backers into one tighter grid. Adding band 7 (what's next) without compensating cuts is what pushed the total up; the plan required folding new beats in *without* growth.
+**D1 — Two h3 sizes: type-role "ONE size per role" broken (James directive #1).** Pathway names render **33.6px mob / 46.1px desk** (`.bbc-impact-2026-wrap h3` on the fork cards — on FORMULA §1 scale clamp(2.1rem,3.6vw,2.9rem)), but every other h3 renders **21px**: ops group headers ("schools & universities — we deliver with"), get-involved card titles ("Build or own a bike"), and the report-card title. Two sizes for one role. **Fix:** give the 21px h3s a distinct semantic (they are card/sub-labels, not pathway names) — either demote them to a defined sub-head token OR bring them onto the single h3 scale. Do not leave two live h3 sizes.
 
-2. **Logo system still not unified (James directive #4).** (a) `logo-hmpps.png` renders **twice**: 60×60 floating at the top of band 6 (`.bbc-rd-impact .rd-ops` region) **and** 170×44 in the band-9 backers row — two heights, two locations, against FORMULA §3 "each logo ONCE per page, ONE height per row." (b) The band-9 backers row mixes **real logos** (Community Fund, OCN London, HMPPS crown) with **text chips** (Investec Beyond Business, LSBU Innovation Hub, Inside Time) — not one system. **Fix:** remove the 60px ops-band crown (the in-card text "with HM Prison & Probation Service" already carries it), keep HMPPS once in backers at 44px; and either source the Investec/LSBU/Inside-Time logo files or render ALL backers as uniform text chips — don't half-and-half. (Investec + LSBU logo files are the long-standing open ask.)
+**D2 — Stats band (band 1) has no header: zero-knowledge + band-anatomy FAIL.** Four bare numbers ("90%+ / Level 2 / 4,000+ / 45") are the *first* content after the hero, with no eyebrow/h2/lede (confirmed: first eyebrow in the DOM is "what we do", band 2). FORMULA §4 mandates eyebrow → h2 → lede → content on *every* band. **Fix:** add an eyebrow + explaining h2 to `.bbc-impact-2026-wrap` band-1 (e.g. eyebrow "the numbers" / h2 "what fourteen years adds up to."). Also drop the "Data updated July 2026" line stranded at the band foot, or fold it into the source line.
 
-3. **Proper-noun crush, band 6 footer caption.** Selector: `.bbc-rd-impact .rd-frame-label` — `assets/bbc-statement.css:604` `text-transform:lowercase !important` crushes the properly-cased source ("In partnership with HM Prison & Probation Service", section line 778) to "**hm prison & probation service**". This is the exact STEM/Makers/HMPPS crush class James keeps hitting. It also **duplicates** the same phrase already inside the prison-programmes card above it. **Fix:** drop `.rd-frame-label` from the lowercase rule (author its casing at source — it already is), or delete the footer caption entirely as a redundant repeat of the in-card line.
+**D3 — Second chip system: get-involved tags render UPPERCASE/700.** Selector: the `buy`/`partner`/`support` pills in band 8 compute `text-transform:uppercase; font-weight:700`, while the pathway chips ("in schools · before exclusion") compute lowercase/800 (FORMULA §1 chip = 13–15px, weight 800, lowercase). Two chip styles on one page (James directive #1: one ruleset for chips). **Fix:** author the get-involved tags to the pathway-chip class — lowercase, weight 800 — so all chips read as one system.
 
-4. **Stats band (band 1) has no header — zero-knowledge + band-anatomy FAIL.** Four raw numbers ("90%+ / Level 2 / 4,000+ / 45") are the *first* content a stranger meets, with no eyebrow/h2/lede. FORMULA §4 mandates eyebrow → h2 (explains) → lede → content on *every* band. **Fix:** add an eyebrow + explaining h2 (e.g. eyebrow "the numbers", h2 "what fourteen years adds up to.") and drop the duplicate "BBC programme records" (printed under 90%+ *and* in the footer line).
+**D4 — G1 page-length still FAILS: mobile 14,962px (~18.4 screens) vs ≤11k target.** The stated definition-of-done. It fell only ~273px from the prior CRIT's 15,235 and remains ~4,000px over target. Main driver unchanged: **band 9 `recognised-by` = 2,271px** (3-promise steel callout + report card + long Investec pull-quote + 4 press logos + "40+ publications" link + "AS FEATURED IN" caps line + **6 vertically-stacked backer chips**), plus the new "what's next" band (615px) was added without compensating cuts. **Fix:** thin band 9 — set the 6 backer chips into a 2–3-per-row wrap grid (not 1/row), collapse the Investec quote to ≤3 lines, drop the redundant caps "AS FEATURED IN" divider, and pair the promises/press/backers tighter. New beats must fold in without growing the total (the plan's rule).
 
-5. **Uppercase label/chip grammar (3 spots).** (a) `.bbc-rd .rd-partnerlabel` — `assets/bbc-redesign-2026.css:157` `text-transform:uppercase` renders "As featured in" → "AS FEATURED IN" and the awards line → "INVESTEC BEYOND BUSINESS WINNER · KEVIN MCCLOUD'S GREEN HEROES · OCN ACCREDITED" (12.5px, also below the 13px min). (b) get-involved `.rd-tag` chips render BUY/PARTNER/SUPPORT uppercase while the pathways `.rd-fork` word-chips are lowercase. **Fix:** set `.rd-partnerlabel` and `.rd-tag` to `text-transform:lowercase`, bump to 13–15px/800; the prior CRIT already asked the awards caps line be deleted or merged — do that.
+**D5 — Ghost/outline button is a 2nd button style (James directive #1).** Measured: "Back the mission" (hero, dark) and "Read the 2026 impact report →" and "Back the mission" (final CTA) compute `background:rgba(0,0,0,0); border:2px solid rgb(230,220,200)` — an outline style alongside the solid forest/lime fills. FORMULA §1: "ONE style." **Fix:** make secondary actions the same pill fill (lime-on-dark / forest-on-light) with a weight/opacity difference if hierarchy is needed, or demote them to plain inline links — not a third button skin.
 
-6. **Three h3 sizes — Type-role violation (James directive #1: ONE ruleset, no per-band variation).** Pathways h3 `33.6px` (2.1rem, correct) vs ops-group `h3.rd-ops__title` **18px** (`bbc-statement.css:609 !important`) vs steel-card `h3.rd-fs-21px` **21px** (section line 325). **Fix:** if ops-group and card titles are a genuinely different role, demote them out of `<h3>` to a defined label token and document that token in FORMULA §1; otherwise unify to the card/pathway h3 size. One size per role is the whole point of the pass.
+**D6 — Eyebrow spec + one-axis both off.** Eyebrows compute **weight 700** (FORMULA §1 chip/eyebrow = weight 800) and their alignment **splits centre (what-we-do, why-now, where-we-operate, get-involved, join-in) vs left (inside-workshop, follow-on, what's-next, recognised-by)** — FORMULA §4 "one left axis." **Fix:** set every eyebrow to weight 800 and one alignment (left, to match the h2/lede left axis). Also delete the band-6 footer caption "In partnership with HM Prison & Probation Service" — it is a centred duplicate of the line already inside the prisons card.
 
-7. **Ghost/outline button = a second button style.** FORMULA §1: ONE style — forest fill on light / lime fill on dark. The transparent-bg "Back the mission" (hero + final CTA) and "Read the 2026 impact report →" (stats band) are outline buttons (bg `rgba(0,0,0,0)`, 999px, bone text). **Fix:** either make them the primary fill for their surface, or demote to a plain inline arrow-link — don't keep a 3rd pill variant.
+**D7 — Desktop hero is not the largest type.** At 1280 the hero h1 = **84.5px** but band h2 = **86.4px** — a band head (§1) exceeds the hero display moment ("nothing rivals it"). Marginal (1.9px) but mechanically the hero loses. **Fix:** nudge the hero h1 clamp up (or the h2 clamp down) so h1 > h2 at every breakpoint.
 
-8. **One-left-axis (desktop).** Band containers sit at x=40 (most), **x=230** (`.rd-mw-820px`: bands 6 & 7, centred) and **x=300** (`.rd-mw-680px`: band 10, centred) — three axes vs FORMULA §4 "one left axis." Plus eyebrow alignment splits centre/left across bands. **Fix:** commit centred bands to the same left grid, or accept centring as a documented exception and at least align the eyebrows consistently.
-
-9. **Polish.** SUPPORT card (band 8) lone lime edge-shadow → match the other cards' dark stamp (`.rd-stamp.rd-lime` on the 3rd `help` block); FT optical size in press wall (35px wide vs 180px Telegraph) → allow the wide FT wordmark or a taller stacked mark; eyebrow weight 700 → 800 to hit the spec chip weight; band 4 could take the workshop image its licence allows.
+**Nits (non-blocking):** ✱ glyph contrast 6.96:1 at 17px/800 is a hair under AAA 7:1 (decorative; all real copy ≥7.20) · FT press logo optically tiny (35px wide monogram) beside Telegraph 180px though row height is uniform 44px · "see for yourself →" proof links are underlined (acceptable as inline links, not primary CTAs).
 
 ---
 
-## Verdict: **NOT READY FOR JAMES — one more fix pass.**
+## VERDICT: **FAIL**
 
-This is the strongest the page has been: the mobile hero (James's twice-rejected item) is fixed, the count-up is gone, the pathways fork and the new "what's next" band are genuinely good, the operations band is verified/verb-honest/safe, and claims, sourcing, AAA and safeguarding are all clean. Credit where due — five prior blockers are closed.
-
-But the gate is binary and three FORMULA rows still fail hard, and every one is an item James has named before:
-- **Length went the wrong way** — the pass whose stated goal was ≤11k shipped **15,235px**, and the exact band it was meant to trim (recognised-by, 2,485px) grew. That alone fails the pass's definition-of-done.
-- **The logo system is still not one system** (HMPPS twice at two heights; backers row half real-logos / half text-chips) — directive #4, unmet.
-- **"hm prison & probation service"** still crushes in the band-6 footer — the recurring proper-noun-crush class — and the stats band still greets a stranger with headerless numbers.
-
-Fix defects 1–6 (all have concrete selectors above), re-screenshot bands 1, 6, 8 and 9 mobile-first, re-measure page height, then hand to James.
+The FORMULA is a binary contract — a band ships only if every row passes. Four bands FAIL (hero, stats, get-involved, recognised-by) and one is CONDITIONAL (where-we-operate). Real progress is banked — the HMPPS logo duplicate, the logo/text mixing, the proper-noun crush, count-up, banned claims, Makers voice, safeguarding and AAA (bar one decorative glyph) are all clean — but the whole-page universal-style pass James demanded is not done: **two h3 sizes, two chip styles, a ghost button style, weight-700 mixed-axis eyebrows, a header-less stats band, and a ~15k-px page length that missed the ≤11k target.** Back to WORKFLOW step 2. Do not hand to James (step 6).

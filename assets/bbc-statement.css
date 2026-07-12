@@ -639,3 +639,12 @@ cart-drawer.animate .drawer{ visibility:visible; }
 
 /* unify card-title role at 21px (help/get-involved cards) + chips lowercase at source only */
 .bbc-rd-impact .rd-steel h3, .bbc-rd-impact .rd-card h3:not(.rd-path__name){ font-size:21px !important; }
+
+/* CRIT r2 closures */
+.bbc-rd-impact .rd-eyebrow{ font-weight:800; }
+.bbc-rd-impact .rd-tag{ text-transform:lowercase; font-weight:800; letter-spacing:.04em; }
+.bbc-rd-impact h1{ font-size:clamp(3rem,7.5vw,6rem) !important; } /* hero must out-scale band h2 on desktop too */
+@media (max-width:759px){
+  .bbc-rd-impact .rd-backers{ grid-template-columns:repeat(2,1fr); gap:10px; }
+  .bbc-rd-impact .rd-backers__cell{ height:auto; min-height:48px; }
+}

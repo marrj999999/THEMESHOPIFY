@@ -6,12 +6,13 @@
 |---|---|---|---|
 | Hero h1 | clamp(2.9rem,12.5vw,5.4rem) mobile-first | lowercase, proper nouns kept | THE display moment, nothing rivals it |
 | Band head h2 | clamp(2.4rem,7vw,5.4rem) | lowercase-at-source | explains who/what to a stranger (zero-knowledge rule) |
-| Card/pathway name h3 | clamp(2.1rem,3.6vw,2.9rem) | lowercase | |
+| Pathway-name h3 (display role) | clamp(2.1rem,3.6vw,2.9rem) | lowercase | pathways band only |
+| Card-title h3 (ops/help/report cards) | 21px | lowercase | one size, everywhere else |
 | Lede/subhead | 17–20px | sentence | one sentence, ≤15 words |
 | Body | 17px | sentence | max 34em measure |
 | Step/list | 16px | sentence | |
 | Chip/eyebrow | 13–15px, weight 800 | lowercase | |
-| Button | 15px pill, ONE style: forest fill on light / lime fill on dark | | never underlined links as CTAs |
+| Button | 15px pill; primary = fill (forest on light / lime on dark), secondary = 2px outline pill | | never underlined links as CTAs; max one primary per band |
 | Footnote | 14px | | carries the ✱ |
 
 ## 2 · Symbol system (only these)
