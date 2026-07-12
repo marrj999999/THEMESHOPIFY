@@ -109,7 +109,7 @@
           <h3 class="rd-path__name">{{ section.settings.arm1_name | default: 'make engineers' }}</h3>
           <p class="rd-path__who">{{ section.settings.arm1_who | default: "for SEND, PRU and at-risk young people being pushed out of the classroom — often their first positive encounter with engineering." }}</p>
           {%- assign a1 = section.settings.arm1_flow | split: '|' -%}
-          <div class="rd-flow">{%- for st in a1 -%}<span class="rd-flow__step">{{ st | strip }}</span>{%- endfor -%}</div>
+          <div class="rd-flow">{%- for st in a1 -%}{%- assign parts = st | split: "::" -%}<span class="rd-flow__step"><b>{{ parts[0] | strip }}</b>{%- if parts[1] -%}<small>{{ parts[1] | strip }}</small>{%- endif -%}</span>{%- endfor -%}</div>
           {%- if section.settings.arm1_cta_label != blank -%}
             <a class="rd-path__cta" href="{{ section.settings.arm1_cta_url | default: '/pages/schools' }}">{{ section.settings.arm1_cta_label }}</a>
           {%- endif -%}
@@ -122,7 +122,7 @@
           <h3 class="rd-path__name">{{ section.settings.arm2_name | default: 'build to bond' }}</h3>
           <p class="rd-path__who">{{ section.settings.arm2_who | default: 'for people inside prison rebuilding skills, family ties and a route to work on release.' }}</p>
           {%- assign a2 = section.settings.arm2_flow | split: '|' -%}
-          <div class="rd-flow">{%- for st in a2 -%}<span class="rd-flow__step">{{ st | strip }}</span>{%- endfor -%}</div>
+          <div class="rd-flow">{%- for st in a2 -%}{%- assign parts = st | split: "::" -%}<span class="rd-flow__step"><b>{{ parts[0] | strip }}</b>{%- if parts[1] -%}<small>{{ parts[1] | strip }}</small>{%- endif -%}</span>{%- endfor -%}</div>
           {%- if section.settings.arm2_cta_label != blank -%}
             <a class="rd-path__cta" href="{{ section.settings.arm2_cta_url | default: '/pages/contact-us' }}">{{ section.settings.arm2_cta_label }}</a>
           {%- endif -%}

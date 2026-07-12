@@ -368,14 +368,6 @@
         "tt": "none",
         "ta": "center",
         "x": 240
-      },
-      {
-        "t": "Inside Time",
-        "px": 14,
-        "w": "800",
-        "tt": "none",
-        "ta": "center",
-        "x": 58
       }
     ],
     "ledes": [
@@ -554,12 +546,36 @@
         "y": 71
       },
       {
+        "src": "bbc-rd-wb-group.jpg",
+        "natW": 1400,
+        "natH": 933,
+        "cw": 287,
+        "ch": 159,
+        "y": 1706
+      },
+      {
+        "src": "bbc-rd-prison-empty.jpg",
+        "natW": 2200,
+        "natH": 1467,
+        "cw": 287,
+        "ch": 159,
+        "y": 2441
+      },
+      {
         "src": "bbc-rd-b2b.jpg",
         "natW": 1600,
         "natH": 1066,
         "cw": 544,
         "ch": 340,
-        "y": 4708
+        "y": 5027
+      },
+      {
+        "src": "bbc-world-map.svg",
+        "natW": 0,
+        "natH": 0,
+        "cw": 343,
+        "ch": 162,
+        "y": 6832
       },
       {
         "src": "logo-financial-times.svg",
@@ -567,7 +583,7 @@
         "natH": 0,
         "cw": 30,
         "ch": 38,
-        "y": 10979
+        "y": 11574
       },
       {
         "src": "logo-guardian.svg",
@@ -575,7 +591,7 @@
         "natH": 0,
         "cw": 113,
         "ch": 38,
-        "y": 10979
+        "y": 11574
       },
       {
         "src": "logo-telegraph.svg",
@@ -583,7 +599,7 @@
         "natH": 0,
         "cw": 113,
         "ch": 38,
-        "y": 11085
+        "y": 11680
       },
       {
         "src": "logo-cnn.svg",
@@ -591,34 +607,34 @@
         "natH": 0,
         "cw": 80,
         "ch": 38,
-        "y": 11085
+        "y": 11680
       }
     ],
     "svgs": [],
     "docW": 375,
     "winW": 375,
-    "docH": 14831,
+    "docH": 15392,
     "overflowers": [],
     "banned": [],
     "hasLearners": false,
     "hasPrisoners": false,
     "has45": true,
-    "bodyLen": 5728
+    "bodyLen": 5855
   },
   "contrastsLow": [
-    {
-      "t": "✱",
-      "cr": 6.96,
-      "px": 17,
-      "w": "800",
-      "tag": "SPAN"
-    },
     {
       "t": "— Sally Allsopp, Industries Manager",
       "cr": 7.2,
       "px": 14,
       "w": "700",
       "tag": "CITE"
+    },
+    {
+      "t": "backed by & accredited by",
+      "cr": 7.25,
+      "px": 13,
+      "w": "800",
+      "tag": "SPAN"
     },
     {
       "t": "Inside the workshop",

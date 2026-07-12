@@ -428,7 +428,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 }
 /* One left axis per band — centred heads over left content was the
    misalignment James flagged */
-.bbc-rd-impact .rd-center{ text-align:left; }
+.bbc-rd-impact .rd-center{ text-align:left !important; }
 .bbc-rd-impact .rd-center .rd-eyebrow::before{ margin:0 0 10px; }
 .bbc-rd-impact .rd-center h2, .bbc-rd-impact .rd-center .rd-lede{ margin-inline:0; }
 .bbc-rd-impact .rd-lede{ max-width:34em; }
@@ -662,7 +662,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 /* D1: surface-aware eyebrow — lime on dark (was 1.24:1 unreadable) */
 .bbc-rd-impact .rd-dark .rd-eyebrow{ color:var(--lime,#D4FD62) !important; }
 /* D3: eyebrows share the left axis everywhere */
-.bbc-rd-impact .rd-eyebrow{ display:block; text-align:left !important; }
+.bbc-rd-impact .rd-eyebrow{ display:block !important; text-align:left !important; }
 /* D2: ONE chip style — lime fill, ink border, 800 (tags need !important vs legacy uppercase) */
 .bbc-rd-impact .rd-tag{ text-transform:lowercase !important; font-weight:800 !important; }
 .bbc-rd-impact .rd-backers__chip{ background:var(--lime,#D4FD62); color:var(--forest,#003C32); border:1.5px solid var(--ink,#0E1A17); font-weight:800; }
@@ -685,3 +685,29 @@ cart-drawer.animate .drawer{ visibility:visible; }
 /* bigger fork moment */
 .bbc-rd-impact .rd-fork__node{ width:56px; height:56px; font-size:32px; }
 .bbc-rd-impact .rd-fork__label{ font-size:16px; }
+
+/* CRIT-final root fixes + James hover/journey pass (2026-07-13) */
+.bbc-rd-impact [class*="rd-cmp-"]{ margin-inline:0 !important; } /* generated wrapper centring (band 8) */
+/* JOURNEY TIMELINE: thick coloured rail, stations with title+detail, hover life */
+.bbc-rd-impact .rd-path .rd-flow{ position:relative; }
+.bbc-rd-impact .rd-path .rd-flow__step{ padding:12px 0 12px 56px; transition:transform .18s ease; }
+.bbc-rd-impact .rd-path .rd-flow__step::after{ width:4px; left:15px; opacity:1; background:var(--lime,#D4FD62); }
+.bbc-rd-impact .rd-path--prisons .rd-flow__step::after{ background:var(--steel,#DEE6F0); opacity:1; }
+.bbc-rd-impact .rd-path .rd-flow__step::before{ width:34px; height:34px; font-size:16px; box-shadow:0 0 0 4px var(--paper,#F1E9D8); transition:transform .18s ease; }
+.bbc-rd-impact .rd-path--prisons .rd-flow__step::before{ box-shadow:0 0 0 4px var(--forest,#003C32); }
+.bbc-rd-impact .rd-flow__step b{ display:block; font-size:16px; }
+.bbc-rd-impact .rd-flow__step small{ display:block; font-size:13.5px; font-weight:400; color:#3a443f; margin-top:2px; }
+.bbc-rd-impact .rd-path--prisons .rd-flow__step small{ color:#cfe0d7; }
+@media (hover:hover){
+  .bbc-rd-impact .rd-flow__step:hover{ transform:translateX(4px); }
+  .bbc-rd-impact .rd-flow__step:hover::before{ transform:scale(1.15); }
+  .bbc-rd-impact .rd-path{ transition:transform .2s ease, box-shadow .2s ease; }
+  .bbc-rd-impact .rd-path:hover{ transform:translateY(-4px); }
+  .bbc-rd-impact .rd-path--schools:hover{ box-shadow:8px 8px 0 var(--lime-700,#9BC02E); }
+  .bbc-rd-impact .rd-path--prisons:hover{ box-shadow:8px 8px 0 var(--forest-700,#002A23); }
+  .bbc-rd-impact .rd-path__media{ overflow:hidden; }
+  .bbc-rd-impact .rd-path__media img{ transition:transform .35s ease; }
+  .bbc-rd-impact .rd-path:hover .rd-path__media img{ transform:scale(1.04); }
+  .bbc-rd-impact .rd-ops__cell, .bbc-rd-impact .rd-dlcard{ transition:transform .18s ease; }
+  .bbc-rd-impact .rd-ops__cell:hover, .bbc-rd-impact .rd-dlcard:hover{ transform:translateY(-3px); }
+}
