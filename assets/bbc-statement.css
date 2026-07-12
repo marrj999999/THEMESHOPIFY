@@ -718,3 +718,16 @@ cart-drawer.animate .drawer{ visibility:visible; }
 /* get-involved cards: same object language as the rest of the page */
 .bbc-rd-impact .rd-steel .rd-card{ border:2.5px solid var(--ink,#0E1A17); border-radius:6px; transition:transform .18s ease, box-shadow .18s ease; }
 @media (hover:hover){ .bbc-rd-impact .rd-steel .rd-card:hover{ transform:translateY(-4px); box-shadow:8px 8px 0 var(--ink,#0E1A17); } }
+
+/* FULL-REVIEW closures (2026-07-13) — file:line-located defects */
+/* workshop band 820px wrap centred (redesign-2026:563) → one axis */
+.bbc-rd-impact .rd-mw-820px{ margin-inline:0 !important; }
+/* generated rd-cmp wrapper sits OUTSIDE the scope div → :has() reach */
+.shopify-section:has(.bbc-rd-impact) [class*="rd-cmp-"]{ margin-inline:0 !important; }
+/* logo rows: ONE mobile height (FORMULA 34px) for press + backers */
+@media (max-width:759px){
+  .bbc-rd-impact .rd-logoimg{ height:34px !important; }
+  .bbc-rd-impact .rd-backers__logo{ height:34px !important; }
+}
+/* design ruling: final CTA closer joins the left axis (one system) */
+.bbc-rd-impact section.rd-center, .bbc-rd-impact .rd-dark.rd-center{ text-align:left !important; }

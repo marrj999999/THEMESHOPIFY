@@ -10,3 +10,4 @@ CRIT r4 mechanical 19:08:30: rd-mx-auto killed (one axis), star glyph forest+19p
 J1 stats animation restored 19:17:45 (count-up + rd-reveal entrance)
 J3 20:00:47: per-pathway duotone imagery (schools group / empty prison workshop — safeguarding-safe defaults), bleed crop, bigger fork node
 journey pass 20:17:13: axis ROOT fix (!important vs load-order tie), station timeline (title+detail, coloured rails), hover system (cards lift, images zoom, stations slide)
+full-review closures 21:15:41: 820px wrap + rd-cmp (:has reach — wrapper outside scope div, the real reason 2 fixes missed), logo rows one 34px mobile height, closer joins left axis (ruling), 9pts label plain-English. Length kept: James's case-study request + his length ruling.

@@ -57,6 +57,14 @@
         "x": 262
       },
       {
+        "t": "the evidence — real projects, linked.",
+        "px": 86.4,
+        "w": "800",
+        "tt": "none",
+        "ta": "left",
+        "x": 72
+      },
+      {
         "t": "what new funding builds next.",
         "px": 86.4,
         "w": "800",
@@ -65,7 +73,7 @@
         "x": 72
       },
       {
-        "t": "three ways you can be part of this.",
+        "t": "pick your way in.",
         "px": 86.4,
         "w": "800",
         "tt": "none",
@@ -178,7 +186,7 @@
         "w": "700",
         "tt": "lowercase",
         "ta": "left",
-        "x": 582
+        "x": 72
       },
       {
         "t": "Why now",
@@ -186,7 +194,7 @@
         "w": "700",
         "tt": "lowercase",
         "ta": "left",
-        "x": 595
+        "x": 72
       },
       {
         "t": "Inside the workshop",
@@ -210,7 +218,15 @@
         "w": "700",
         "tt": "lowercase",
         "ta": "left",
-        "x": 554
+        "x": 262
+      },
+      {
+        "t": "Every kind of impact",
+        "px": 14,
+        "w": "700",
+        "tt": "lowercase",
+        "ta": "left",
+        "x": 72
       },
       {
         "t": "what's next",
@@ -226,7 +242,7 @@
         "w": "700",
         "tt": "lowercase",
         "ta": "left",
-        "x": 576
+        "x": 313
       },
       {
         "t": "Recognised by",
@@ -242,7 +258,7 @@
         "w": "700",
         "tt": "lowercase",
         "ta": "left",
-        "x": 603
+        "x": 332
       }
     ],
     "chips": [
@@ -285,38 +301,6 @@
         "tt": "lowercase",
         "ta": "start",
         "x": 871
-      },
-      {
-        "t": "The National Lottery Community Fund",
-        "px": 14,
-        "w": "800",
-        "tt": "none",
-        "ta": "center",
-        "x": 96
-      },
-      {
-        "t": "LSBU Innovation Hub",
-        "px": 14,
-        "w": "800",
-        "tt": "none",
-        "ta": "center",
-        "x": 417
-      },
-      {
-        "t": "OCN London accredited",
-        "px": 14,
-        "w": "800",
-        "tt": "none",
-        "ta": "center",
-        "x": 690
-      },
-      {
-        "t": "HMPPS",
-        "px": 14,
-        "w": "800",
-        "tt": "none",
-        "ta": "center",
-        "x": 1035
       }
     ],
     "ledes": [
@@ -359,6 +343,14 @@
         "tt": "none",
         "ta": "left",
         "x": 262
+      },
+      {
+        "t": "The same craft shows up everywhere — on epic journ",
+        "px": 22,
+        "w": "400",
+        "tt": "none",
+        "ta": "start",
+        "x": 72
       },
       {
         "t": "Three ambitions, in order — each one costed and re",
@@ -435,6 +427,16 @@
         "deco": "none"
       },
       {
+        "t": "See all impact stories →",
+        "px": 15,
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 60, 50)",
+        "bd": "rgb(0, 60, 50)",
+        "bw": "2px",
+        "radius": "999px",
+        "deco": "none"
+      },
+      {
         "t": "Shop & book →",
         "px": 15,
         "bg": "rgb(0, 60, 50)",
@@ -498,17 +500,17 @@
         "src": "bbc-rd-wb-group.jpg",
         "natW": 1400,
         "natH": 933,
-        "cw": 470,
-        "ch": 261,
-        "y": 1718
+        "cw": 546,
+        "ch": 303,
+        "y": 1672
       },
       {
         "src": "bbc-rd-prison-empty.jpg",
         "natW": 2200,
         "natH": 1467,
-        "cw": 470,
-        "ch": 261,
-        "y": 1718
+        "cw": 546,
+        "ch": 303,
+        "y": 1672
       },
       {
         "src": "bbc-rd-b2b.jpg",
@@ -516,7 +518,7 @@
         "natH": 1066,
         "cw": 640,
         "ch": 520,
-        "y": 4372
+        "y": 4455
       },
       {
         "src": "bbc-world-map.svg",
@@ -524,7 +526,31 @@
         "natH": 0,
         "cw": 1160,
         "ch": 420,
-        "y": 5746
+        "y": 5824
+      },
+      {
+        "src": "IMAGE_2_LOAFLY_248a5253-795b-404f-adee-2",
+        "natW": 0,
+        "natH": 0,
+        "cw": 357,
+        "ch": 223,
+        "y": 7267
+      },
+      {
+        "src": "SRW08823_e2572015-b157-475c-8f9c-89decaa",
+        "natW": 0,
+        "natH": 0,
+        "cw": 357,
+        "ch": 223,
+        "y": 7267
+      },
+      {
+        "src": "01-kirui-riding-bamboo-bike_dcde22a5-5ad",
+        "natW": 0,
+        "natH": 0,
+        "cw": 357,
+        "ch": 223,
+        "y": 7267
       },
       {
         "src": "logo-financial-times.svg",
@@ -532,7 +558,7 @@
         "natH": 0,
         "cw": 35,
         "ch": 44,
-        "y": 9337
+        "y": 10324
       },
       {
         "src": "logo-guardian.svg",
@@ -540,7 +566,7 @@
         "natH": 0,
         "cw": 134,
         "ch": 44,
-        "y": 9337
+        "y": 10324
       },
       {
         "src": "logo-telegraph.svg",
@@ -548,7 +574,7 @@
         "natH": 0,
         "cw": 180,
         "ch": 44,
-        "y": 9337
+        "y": 10324
       },
       {
         "src": "logo-cnn.svg",
@@ -556,19 +582,59 @@
         "natH": 0,
         "cw": 92,
         "ch": 44,
-        "y": 9337
+        "y": 10324
+      },
+      {
+        "src": "logo-investec.svg",
+        "natW": 0,
+        "natH": 0,
+        "cw": 208,
+        "ch": 44,
+        "y": 10513
+      },
+      {
+        "src": "logo-nlcf.svg",
+        "natW": 0,
+        "natH": 0,
+        "cw": 208,
+        "ch": 44,
+        "y": 10513
+      },
+      {
+        "src": "logo-lsbu.svg",
+        "natW": 0,
+        "natH": 0,
+        "cw": 208,
+        "ch": 44,
+        "y": 10513
+      },
+      {
+        "src": "logo-ocn-london.svg",
+        "natW": 0,
+        "natH": 0,
+        "cw": 208,
+        "ch": 44,
+        "y": 10513
+      },
+      {
+        "src": "logo-hmpps.png",
+        "natW": 0,
+        "natH": 0,
+        "cw": 208,
+        "ch": 44,
+        "y": 10517
       }
     ],
     "svgs": [],
     "docW": 1280,
     "winW": 1280,
-    "docH": 11083,
+    "docH": 12066,
     "overflowers": [],
     "banned": [],
     "hasLearners": false,
     "hasPrisoners": false,
     "has45": true,
-    "bodyLen": 5855
+    "bodyLen": 6600
   },
   "contrastsLow": [
     {
@@ -587,6 +653,13 @@
     },
     {
       "t": "Inside the workshop",
+      "cr": 7.37,
+      "px": 14,
+      "w": "700",
+      "tag": "SPAN"
+    },
+    {
+      "t": "Every kind of impact",
       "cr": 7.37,
       "px": 14,
       "w": "700",
@@ -773,13 +846,6 @@
       "px": 46,
       "w": "800",
       "tag": "H3"
-    },
-    {
-      "t": "join the workshop course",
-      "cr": 9.12,
-      "px": 16,
-      "w": "700",
-      "tag": "SPAN"
     }
   ]
 }
