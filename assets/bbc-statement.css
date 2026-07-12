@@ -731,3 +731,26 @@ cart-drawer.animate .drawer{ visibility:visible; }
 }
 /* design ruling: final CTA closer joins the left axis (one system) */
 .bbc-rd-impact section.rd-center, .bbc-rd-impact .rd-dark.rd-center{ text-align:left !important; }
+
+/* BIKE-FRAME INFOGRAPHIC (James-approved concept) */
+.bbc-rd-impact .rd-frameinfo{ margin-top:clamp(22px,3vw,40px); text-align:left; }
+.bbc-rd-impact .rd-frame-info{ width:100%; max-width:880px; height:auto; display:block; font-family:inherit; }
+.bbc-rd-impact .rd-frameinfo__caption{ font-size:14px; color:#3a443f; margin:10px 0 0; max-width:66ch; }
+@media (max-width:759px){ .bbc-rd-impact .rd-fi__labels{ display:none; } .bbc-rd-impact .rd-frameinfo__caption{ font-size:13.5px; } }
+@media (prefers-reduced-motion: no-preference){
+  .bbc-rd-impact .rd-fi__route{ stroke-dasharray:1200; stroke-dashoffset:1200; animation:rd-ride 2.2s ease-out forwards; }
+  .bbc-rd-impact .rd-fi__route--b{ animation-delay:.5s; }
+  @keyframes rd-ride{ to{ stroke-dashoffset:0; } }
+}
+/* STATS ON THE MAP: region callouts over the figure */
+.bbc-rd-impact .rd-opsmap{ position:relative; }
+.bbc-rd-impact .rd-mapcall{ position:absolute; background:var(--paper,#F1E9D8); border:2px solid var(--ink,#0E1A17); border-radius:6px; padding:8px 12px; font-size:13.5px; font-weight:700; line-height:1.35; box-shadow:3px 3px 0 var(--ink,#0E1A17); max-width:220px; text-align:left; }
+.bbc-rd-impact .rd-mapcall::before{ content:""; position:absolute; width:10px; height:10px; border-radius:50%; background:var(--lime,#D4FD62); border:2px solid var(--ink,#0E1A17); }
+.bbc-rd-impact .rd-mapcall--uk{ left:31%; top:2%; } .bbc-rd-impact .rd-mapcall--uk::before{ left:76%; bottom:-26px; }
+.bbc-rd-impact .rd-mapcall--eu{ left:56%; top:34%; } .bbc-rd-impact .rd-mapcall--eu::before{ left:-22px; top:8px; }
+.bbc-rd-impact .rd-mapcall--world{ right:2%; bottom:6%; border-color:var(--forest,#003C32); }
+.bbc-rd-impact .rd-mapcall--world::before{ display:none; }
+@media (max-width:759px){
+  .bbc-rd-impact .rd-mapcall{ position:static; display:inline-block; margin:8px 8px 0 0; box-shadow:2px 2px 0 var(--ink,#0E1A17); }
+  .bbc-rd-impact .rd-mapcall::before{ display:none; }
+}

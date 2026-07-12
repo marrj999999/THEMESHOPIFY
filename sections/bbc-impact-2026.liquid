@@ -94,12 +94,60 @@
         {%- if section.settings.arms_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.arms_eyebrow }}</span>{%- endif -%}
         <h2 class="rd-mw-26ch rd-mx-auto">{{ section.settings.arms_title }}</h2>
       </div>
+      {%- if section.settings.frame_info_enable -%}
+      <div class="rd-frameinfo rd-reveal" aria-hidden="false"><svg class="rd-frame-info" viewBox="0 0 960 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="One frame, two triangles: the schools pathway on the front triangle, the prisons pathway on the rear — both meeting at the saddle: a way forward.">
+  <g fill="none" stroke="var(--mist,#CFC5B0)" stroke-width="2.5">
+    <circle cx="203" cy="430" r="184"/><circle cx="758" cy="430" r="184"/>
+  </g>
+  <g fill="none" stroke="var(--forest,#003C32)" stroke-width="5" stroke-linecap="round">
+    <path d="M340,135 L640,150"/> <path d="M640,150 L667,228"/>
+    <path d="M430,430 L667,228"/> <path d="M430,430 L340,135"/>
+    <path d="M667,228 L758,430" stroke-width="3.5"/>
+    <path d="M430,430 L203,430"/> <path d="M203,430 L340,135"/>
+    <path d="M306,109 l60,-6" stroke-width="7"/>
+  </g>
+  <g class="rd-fi__route rd-fi__route--a" stroke="var(--lime,#D4FD62)" stroke-width="7" fill="none" stroke-linecap="round" opacity=".85">
+    <path d="M430,430 L667,228 L640,150 L340,135"/>
+  </g>
+  <g class="rd-fi__route rd-fi__route--b" stroke="var(--steel,#DEE6F0)" stroke-width="7" fill="none" stroke-linecap="round" opacity=".9">
+    <path d="M430,430 L203,430 L340,135"/>
+  </g>
+  <g class="rd-fi__nodes" font-family="inherit" font-weight="800" font-size="17" text-anchor="middle">
+    <circle cx="560" cy="319" r="17" fill="var(--lime,#D4FD62)" stroke="var(--forest,#003C32)" stroke-width="2.5"/>
+    <text x="560" y="325" fill="var(--forest,#003C32)">1</text>
+    <circle cx="667" cy="228" r="17" fill="var(--lime,#D4FD62)" stroke="var(--forest,#003C32)" stroke-width="2.5"/>
+    <text x="667" y="234" fill="var(--forest,#003C32)">2</text>
+    <circle cx="640" cy="150" r="17" fill="var(--lime,#D4FD62)" stroke="var(--forest,#003C32)" stroke-width="2.5"/>
+    <text x="640" y="156" fill="var(--forest,#003C32)">3</text>
+    <circle cx="475" cy="142" r="17" fill="var(--lime,#D4FD62)" stroke="var(--forest,#003C32)" stroke-width="2.5"/>
+    <text x="475" y="148" fill="var(--forest,#003C32)">4</text>
+    <circle cx="316" cy="430" r="17" fill="var(--steel,#DEE6F0)" stroke="var(--forest,#003C32)" stroke-width="2.5"/>
+    <text x="316" y="436" fill="var(--forest,#003C32)">1</text>
+    <circle cx="203" cy="430" r="17" fill="var(--steel,#DEE6F0)" stroke="var(--forest,#003C32)" stroke-width="2.5"/>
+    <text x="203" y="436" fill="var(--forest,#003C32)">2</text>
+    <circle cx="265" cy="297" r="17" fill="var(--steel,#DEE6F0)" stroke="var(--forest,#003C32)" stroke-width="2.5"/>
+    <text x="265" y="303" fill="var(--forest,#003C32)">3</text>
+    <circle cx="430" cy="430" r="26" fill="var(--forest,#003C32)"/>
+    <text x="430" y="438" font-size="26" fill="var(--lime,#D4FD62)">&#10033;</text>
+    <circle cx="340" cy="135" r="13" fill="var(--forest,#003C32)" stroke="var(--lime,#D4FD62)" stroke-width="3"/>
+  </g>
+  <g class="rd-fi__labels" font-size="15" font-weight="700" fill="var(--ink,#0E1A17)">
+    <text x="430" y="497" text-anchor="middle">one mission</text>
+    <text x="294" y="91" text-anchor="end" font-size="17">a way forward.</text>
+    <text x="595" y="331">{{ section.settings.arm1_name | default: 'make engineers' }}</text>
+    <text x="316" y="392" text-anchor="middle">{{ section.settings.arm2_name | default: 'build to bond' }}</text>
+  </g>
+</svg>
+        <p class="rd-frameinfo__caption">{{ section.settings.frame_info_caption | default: 'one frame, two triangles — the power goes in at the same place, and both routes end at the saddle.' }}</p>
+      </div>
+      {%- else -%}
       <div class="rd-fork" aria-hidden="true">
         <span class="rd-fork__node">&#10033;</span>
         <span class="rd-fork__label">{{ section.settings.fork_label | default: 'one mission, two pathways' }}</span>
         <span class="rd-fork__drop is-a"></span>
         <span class="rd-fork__drop is-b"></span>
       </div>
+      {%- endif -%}
       <div class="rd-paths">
         <div class="rd-path rd-path--schools rd-reveal">
           <span class="rd-duotone rd-path__media">
@@ -213,7 +261,10 @@
           <img src="{{ 'bbc-world-map.svg' | asset_url }}" alt="{{ section.settings.map_alt | escape }}" width="1000" height="472" loading="lazy">
         {%- endif -%}
         {%- if section.settings.map_caption != blank -%}<figcaption class="rd-opsmap__cap">{{ section.settings.map_caption }}</figcaption>{%- endif -%}
-      </figure>
+        <span class="rd-mapcall rd-mapcall--uk">{{ section.settings.map_call_uk | default: 'UK — 4 prison sites · 10 schools & universities · london workshops' }}</span>
+  <span class="rd-mapcall rd-mapcall--eu">{{ section.settings.map_call_eu | default: '3 partner hubs — amersfoort · toulouse · munich' }}</span>
+  <span class="rd-mapcall rd-mapcall--world">{{ section.settings.map_call_world | default: 'kits built in 45 countries' }}</span>
+</figure>
       {%- endif -%}
       {%- assign ops = section.blocks | where: "type", "opgroup" -%}
       {%- if ops.size > 0 -%}
@@ -603,6 +654,8 @@
     { "type": "text", "id": "arm1_image_alt", "label": "Pathway 1 image alt" },
     { "type": "image_picker", "id": "arm2_image", "label": "Pathway 2 image (workshop space only — no identifiable people)" },
     { "type": "text", "id": "arm2_image_alt", "label": "Pathway 2 image alt" },
+    { "type": "checkbox", "id": "frame_info_enable", "label": "Use the bike-frame infographic (replaces the fork)", "default": true },
+    { "type": "text", "id": "frame_info_caption", "label": "Frame infographic caption" },
     { "type": "text", "id": "fork_label", "label": "Fork label", "default": "one mission, two pathways" },
     { "type": "text", "id": "arm1_chip", "label": "Pathway 1 chip", "default": "in schools · before exclusion" },
     { "type": "text", "id": "arm1_name", "label": "Pathway 1 name", "default": "make engineers" },
