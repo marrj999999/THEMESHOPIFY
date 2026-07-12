@@ -609,6 +609,15 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-ops__count{ position:absolute; top:-14px; right:16px; min-width:34px; height:28px; padding:0 10px; border-radius:999px; background:var(--lime,#D4FD62); color:var(--forest,#003C32); border:2px solid var(--ink,#0E1A17); font-weight:800; font-size:15px; display:inline-flex; align-items:center; justify-content:center; }
 .bbc-rd-impact h3.rd-ops__title{ font-size:21px !important; font-weight:800; margin:0 0 6px; text-transform:none; }
 .bbc-rd-impact .rd-ops__items{ font-size:16px !important; line-height:1.5; margin:0; color:#3a443f; }
+/* where-we-operate world map (J2) — breaks out of the 820px wrap, centred on the viewport;
+   marker pulse lives inside the SVG itself (renders via <img>) with its own reduced-motion guard */
+.bbc-rd-impact .rd-opsmap{ position:relative; left:50%; transform:translateX(-50%); width:min(1160px, calc(100vw - 40px)); margin:32px 0 0; padding:0; }
+.bbc-rd-impact .rd-opsmap img{ display:block; width:100% !important; max-width:100% !important; height:auto !important; max-height:420px; object-fit:contain; object-position:center top; }
+.bbc-rd-impact .rd-opsmap__cap{ font-size:14px; line-height:1.5; color:#3a443f; margin:10px auto 0; text-align:center; max-width:60ch; }
+@media (max-width:749px){
+  .bbc-rd-impact .rd-opsmap{ width:calc(100vw - 32px); margin-top:24px; }
+  .bbc-rd-impact .rd-opsmap__cap{ text-align:left; }
+}
 
 /* FINAL PASS G2: reveals must never blank a viewport — items start
    visible (.3 opacity floor) and settle quickly; fast scrolls always
