@@ -210,6 +210,14 @@
             "title": "countries \u2014 kits built worldwide",
             "items": "From the UK to New Zealand, every kit is built by its owner"
           }
+        },
+        "op_partners": {
+          "type": "opgroup",
+          "settings": {
+            "count": "6",
+            "title": "partners \u2014 we work with",
+            "items": "Brilliant Bamboo (UK bamboo supplier) \u00b7 New Futures Network \u00b7 Project Zero (Waltham Forest) \u00b7 HM Prison & Probation Service \u00b7 OCN London \u00b7 Bamboo UK Group"
+          }
         }
       },
       "block_order": [
@@ -236,6 +244,7 @@
         "op_workshops",
         "op_hubs",
         "op_overseas",
+        "op_partners",
         "op_kits"
       ],
       "settings": {
