@@ -412,3 +412,66 @@ cart-drawer.animate .drawer{ visibility:visible; }
    lazy-load lag reads intentional, not broken (QA-LOG D11) ---- */
 .rd-cscard__media{ aspect-ratio:8/5; background:var(--forest-700,#002A23); }
 .rd-cscard__media img{ width:100%; height:100%; object-fit:cover; }
+
+/* ============================================================
+   IMPACT PAGE RETROFIT — big-type standard (2026-07-12, James
+   feedback: "what happened to large fonts"). Pattern per
+   BLOCK-SYSTEM Tier-2: heads go statement-scale/lowercase/LEFT.
+   ============================================================ */
+/* Section heads: statement scale, lowercase (h2 set audited — no
+   proper nouns), left rag, tight leading. Mobile needs its own
+   !important clamp to beat bbc-mobile-fixes (documented gotcha). */
+.bbc-rd-impact h2{
+  font-size:clamp(2.8rem,7vw,5.4rem) !important;
+  line-height:.97 !important; letter-spacing:-.02em;
+  text-transform:lowercase; text-align:left;
+  max-width:none; margin-inline:0;
+}
+.bbc-rd-impact h1{ text-align:left; }
+@media (max-width:749px){
+  .bbc-rd-impact h2{ font-size:clamp(2.7rem,11.5vw,4rem) !important; }
+}
+/* One left axis per band — centred heads over left content was the
+   misalignment James flagged */
+.bbc-rd-impact .rd-center{ text-align:left; }
+.bbc-rd-impact .rd-center .rd-eyebrow::before{ margin:0 0 10px; }
+.bbc-rd-impact .rd-center h2, .bbc-rd-impact .rd-center .rd-lede{ margin-inline:0; }
+.bbc-rd-impact .rd-lede{ max-width:34em; }
+/* Eyebrows lowercase (brief: lowercase human voice) */
+.bbc-rd-impact .rd-eyebrow, .bbc-rd-impact .rd-frame-label{ text-transform:lowercase; letter-spacing:.14em; }
+
+/* ---- Mission pathway as a GRAPHIC: numbered lime nodes on a
+   spine (replaces plain text + arrows), all viewports ---- */
+.bbc-rd-impact .rd-flow{ counter-reset:step; display:flex; flex-direction:column; align-items:stretch; gap:0; margin-top:16px; }
+.bbc-rd-impact .rd-flow__step{ counter-increment:step; position:relative; padding:9px 0 9px 50px; font-weight:700; font-size:16px; }
+.bbc-rd-impact .rd-flow__step::before{
+  content:counter(step); position:absolute; left:0; top:4px;
+  width:34px; height:34px; border-radius:50%;
+  background:var(--lime,#D4FD62); color:var(--forest,#003C32);
+  display:grid; place-items:center; font-weight:800; font-size:16px;
+  border:2px solid var(--forest,#003C32);
+}
+.bbc-rd-impact .rd-flow__step::after{
+  content:""; position:absolute; left:16px; top:42px; bottom:-5px;
+  width:2px; background:var(--forest,#003C32); opacity:.28;
+}
+.bbc-rd-impact .rd-flow__step:last-child::after{ display:none; }
+.bbc-rd-impact .rd-flow__arrow{ display:none; }
+
+/* ---- Quotes: proper pull-quote treatment (James: "quotes look
+   awful") — giant lime mark, big italic Atkinson, small-caps attr */
+.bbc-rd-impact .rd-cred-q{
+  position:relative; font-size:clamp(1.35rem,2.4vw,1.9rem);
+  line-height:1.3; font-style:italic; font-weight:700;
+  padding-left:26px; margin:0; text-align:left;
+}
+.bbc-rd-impact .rd-cred-q::before{
+  content:"\201C"; position:absolute; left:-6px; top:-18px;
+  font-size:4.4rem; line-height:1; color:var(--lime,#D4FD62);
+  font-style:normal; -webkit-text-stroke:2px var(--forest,#003C32);
+}
+
+/* ---- More lime: policy numbers + stat numbers get the accent on
+   dark bands; backer chips lime-edged ---- */
+.bbc-rd-impact .rd-dark .rd-facts b, .bbc-rd-impact .rd-dark [class*="policy"] b{ color:var(--lime,#D4FD62); }
+.bbc-rd-impact .rd-backers__chip{ border-color:var(--lime,#D4FD62); }
