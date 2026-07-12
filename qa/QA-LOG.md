@@ -1,6 +1,9 @@
 # QA Log — CUSTOMTHEME20262 redesign
 *Defects, fixes, verdicts. Newest first.*
 
+## 2026-07-12 — James directive: TWO PATHWAYS rebrand (impact arms band)
+The two arms must read as two DISTINCT named pathways (early prevention vs support-further-on), not twin cards: different visual identities, branded as pathways from one shared mission node, stranger-clear headers. Stakeholder review + UX/CSS research running → qa/PATHWAYS-SPEC.md; build next pass against that spec. Also standing: storytelling zero-knowledge rule (memory) applies to all remaining body copy on this page.
+
 ## 2026-07-12 — Phase 2 rebuild pass 1 DEPLOYED (impact page)
 Fixed & verified in-browser on the draft: D1 (90%+) · D2 (Makers, 0 "learners") · D3 (mobile pathway steps CSS) · D4 (lowercase hero "building bikes. rebuilding lives.") · D5 (Backed-by strip renders, 7 cells: NLCF/OCN/HMPPS/FT/Inside Time logos + Investec/LSBU text chips — logo files for those two still wanted) · D6 (longevity subline live) · D7 (story wall removed, -6 blocks; stashed at scratchpad/impact-story-blocks-stash.json for why-bamboo) · D8 (report_url explicit → /pages/impact-report) · D11 (cscard aspect-ratio placeholder) · June-audit #5 (39% now cited to MoJ family-contact data, both spots).
 Open: D9 (funder mechanism beat — needs design, next pass) · D10 (quote attribution check) · D12 (length re-measure after settle) · Investec+LSBU logo files · a downloadable impact-report PDF (page exists, PDF doesn't).
