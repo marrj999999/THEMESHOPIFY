@@ -711,3 +711,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
   .bbc-rd-impact .rd-ops__cell, .bbc-rd-impact .rd-dlcard{ transition:transform .18s ease; }
   .bbc-rd-impact .rd-ops__cell:hover, .bbc-rd-impact .rd-dlcard:hover{ transform:translateY(-3px); }
 }
+
+/* eyebrow dash never touches label — incl. dark-band variant (James IMG_3205) */
+.bbc-rd-impact .rd-eyebrow::before, .bbc-rd-impact .rd-frame-label::before{ margin-right:10px !important; }
+.bbc-rd-impact .rd-backers{ justify-items:start; }
