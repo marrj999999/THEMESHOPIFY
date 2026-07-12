@@ -608,3 +608,19 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-ops__count{ position:absolute; top:-14px; right:16px; min-width:34px; height:28px; padding:0 10px; border-radius:999px; background:var(--lime,#D4FD62); color:var(--forest,#003C32); border:2px solid var(--ink,#0E1A17); font-weight:800; font-size:15px; display:inline-flex; align-items:center; justify-content:center; }
 .bbc-rd-impact h3.rd-ops__title{ font-size:18px !important; font-weight:800; margin:0 0 6px; text-transform:none; }
 .bbc-rd-impact .rd-ops__items{ font-size:16px !important; line-height:1.5; margin:0; color:#3a443f; }
+
+/* FINAL PASS G2: reveals must never blank a viewport — items start
+   visible (.3 opacity floor) and settle quickly; fast scrolls always
+   see content (Bike Project cautionary tale, similar-pages research) */
+@media (prefers-reduced-motion: no-preference){
+  @supports (animation-timeline: view()){
+    .bbc-rd-impact .rd-reveal{
+      animation:rd-rise-safe both; animation-timeline:view();
+      animation-range:entry 0% entry 30%;
+    }
+  }
+}
+@keyframes rd-rise-safe{ from{ opacity:.3; transform:translateY(12px); } to{ opacity:1; transform:none; } }
+
+/* FINAL PASS G3: one left axis in get-involved (h2 left + centred lede violated FORMULA §4) */
+.bbc-rd-impact .rd-center .rd-lede{ text-align:left; margin-inline:0; }
