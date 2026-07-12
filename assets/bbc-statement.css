@@ -598,3 +598,13 @@ cart-drawer.animate .drawer{ visibility:visible; }
 }
 /* CRIT#2: converge payoff — beat the aaa-2026 paragraph cap */
 .bbc-rd-impact p.rd-converge__title{ font-size:clamp(1.5rem,2.8vw,2.2rem) !important; }
+
+/* backed-by: ONE grid, uniform cell height (2026-07-12 sweep) */
+.bbc-rd-impact .rd-backers{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:18px; align-items:center; justify-items:center; }
+.bbc-rd-impact .rd-backers__cell{ height:56px; display:flex; align-items:center; justify-content:center; }
+.bbc-rd-impact .rd-backers__logo{ max-height:44px !important; height:auto !important; max-width:150px; }
+.bbc-rd-impact .rd-backers__chip{ font-size:14px; }
+/* eyebrow dash must never touch the label */
+.bbc-rd-impact .rd-eyebrow::before{ margin-right:10px; }
+/* eyebrows: lowercase wins over the section-inline uppercase (caps war — one central !important, per replan) */
+.bbc-rd-impact .rd-eyebrow, .bbc-rd-impact .rd-frame-label{ text-transform:lowercase !important; }

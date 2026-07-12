@@ -335,7 +335,6 @@
         </div>
         {%- if section.settings.press_more != blank -%}<p class="rd-ship-note rd-mt3"><a href="{{ section.settings.press_more_url | default: '/pages/media-page' }}">{{ section.settings.press_more }}</a></p>{%- endif -%}
         {%- if section.settings.awards_line != blank -%}<p class="rd-partnerlabel rd-mt3">{{ section.settings.awards_line }}</p>{%- endif -%}
-        {%- if section.settings.funder_logo != blank or section.settings.accred_logo != blank -%}<div class="rd-mt3 rd-flex rd-jc-center" style="gap:32px;align-items:center;">{%- if section.settings.funder_logo != blank -%}<img src="{{ section.settings.funder_logo | asset_url }}" alt="{{ section.settings.funder_logo_alt | default: 'The National Lottery Community Fund' | escape }}" loading="lazy" style="height:56px !important;width:auto !important;max-width:220px;object-fit:contain;">{%- endif -%}{%- if section.settings.accred_logo != blank -%}<img src="{{ section.settings.accred_logo | asset_url }}" alt="{{ section.settings.accred_logo_alt | default: 'OCN London' | escape }}" loading="lazy" style="height:48px !important;width:auto !important;max-width:180px;object-fit:contain;">{%- endif -%}</div>{%- endif -%}
         {%- if section.settings.funder_line != blank -%}<p class="rd-ship-note{% if section.settings.funder_logo != blank %} rd-mt1{% else %} rd-mt3{% endif %}">{{ section.settings.funder_line }}</p>{%- endif -%}
         {%- assign backers = section.blocks | where: "type", "backer" -%}
         {%- if backers.size > 0 -%}
