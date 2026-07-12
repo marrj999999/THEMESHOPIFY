@@ -12,7 +12,7 @@ const verdict = await agent(
 Checklist: /Users/jamesmarr/Projects/bbc-theme-new/qa/FORMULA.md (score rows mechanically). Context: qa/QA-LOG.md top entries, qa/OPERATIONS-MAP.md.
 Page: ${page} — drive headless Chrome via the repo's Playwright (the in-app pane freezes on long pages). Mobile 375x812 FIRST, decline cookies, screenshot EVERY band, save to /Users/jamesmarr/Projects/bbc-theme-new/qa/evidence/${date}/ as band-NN-name.png; then a 1280px desktop pass. Measure computed px and contrast ratios — never estimate.
 Write the per-band scorecard + ranked defects (selector + fix each) + binary verdict to qa/CRIT-<page-slug>-${date}.md.`,
-  { label: 'crit', model: 'opus', schema: { type: 'object', required: ['ready', 'topDefects', 'reportPath'], properties: {
+  { label: 'crit', model: 'sonnet', schema: { type: 'object', required: ['ready', 'topDefects', 'reportPath'], properties: {
       ready: { type: 'boolean' },
       topDefects: { type: 'array', items: { type: 'string' }, maxItems: 5 },
       reportPath: { type: 'string' } } } }
