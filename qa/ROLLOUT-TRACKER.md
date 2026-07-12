@@ -69,6 +69,7 @@ Created 2026-07-11 (Phase 0). Update on every state change.*
 | Jakarta/Fraunces/Hanken font remnants = zero | 🟡 | Deployed pages sweep = 0 rendered remnants; hardcoded refs remain in Tier-4/5 dead sections (retire, don't fix) |
 | Editability: no hardcoded text/img/URL in touched sections | ⬜ | |
 | Repeating-content de-dup (James's wince list) | ⬜ | |
+| **Storytelling zero-knowledge pass — EVERY page's heads explain who/what (James 2026-07-12, see memory)** | 🔵 impact done pass 1 | |
 
 ## End-of-rollout completeness audit
 | Item | Status |
