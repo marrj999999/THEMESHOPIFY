@@ -23,9 +23,6 @@
   @media(max-width:900px){ .rd-policy{ grid-template-columns:1fr 1fr; } }
   @media(max-width:560px){ .rd-policy{ grid-template-columns:1fr; } }
   /* Two arms → aligned side-by-side columns (rd-arms was undefined in the CSS, so it stacked) */
-  .bbc-rd-impact .rd-arms{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3vw,36px); align-items:stretch; }
-  .bbc-rd-impact .rd-arms > .rd-card{ height:100%; }
-  .bbc-rd-impact .rd-arms__spine{ display:none; }
   @media(max-width:760px){ .bbc-rd-impact .rd-arms{ grid-template-columns:1fr; } }
   /* Delivery-partner (HMPPS) logo header in the "Where we work" band */
   .bbc-rd-impact .rd-deliver-logo{ display:block; width:60px; height:60px; margin:0 auto 20px; border-radius:8px; }
@@ -96,28 +93,40 @@
         {%- if section.settings.arms_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.arms_eyebrow }}</span>{%- endif -%}
         <h2 class="rd-mw-26ch rd-mx-auto">{{ section.settings.arms_title }}</h2>
       </div>
-      <div class="rd-arms rd-mt4">
-        <div class="rd-card rd-stamp"><div class="rd-body">
-          <span class="rd-tag rd-lime">{{ section.settings.arm1_tag }}</span>
-          <h3 class="rd-mt2 rd-fs-21px">{{ section.settings.arm1_title }}</h3>
-          <p>{{ section.settings.arm1_body }}</p>
-          {%- assign a1 = section.settings.arm1_flow | split: '|' -%}
-          <div class="rd-flow">{%- for st in a1 -%}<span class="rd-flow__step">{{ st | strip }}</span>{%- unless forloop.last -%}<span class="rd-flow__arrow">&rarr;</span>{%- endunless -%}{%- endfor -%}</div>
-        </div></div>
-        <div class="rd-arms__spine" aria-hidden="true">
-          <div class="rd-arms__stem"></div>
-          <div class="rd-arms__node">1</div>
-          <div class="rd-arms__stem"></div>
-        </div>
-        <div class="rd-card rd-stamp"><div class="rd-body">
-          <span class="rd-tag rd-lime">{{ section.settings.arm2_tag }}</span>
-          <h3 class="rd-mt2 rd-fs-21px">{{ section.settings.arm2_title }}</h3>
-          <p>{{ section.settings.arm2_body }}</p>
-          {%- assign a2 = section.settings.arm2_flow | split: '|' -%}
-          <div class="rd-flow">{%- for st in a2 -%}<span class="rd-flow__step">{{ st | strip }}</span>{%- unless forloop.last -%}<span class="rd-flow__arrow">&rarr;</span>{%- endunless -%}{%- endfor -%}</div>
-        </div></div>
+      <div class="rd-fork" aria-hidden="true">
+        <span class="rd-fork__node">&#10033;</span>
+        <span class="rd-fork__label">{{ section.settings.fork_label | default: 'one mission, two pathways' }}</span>
+        <span class="rd-fork__drop is-a"></span>
+        <span class="rd-fork__drop is-b"></span>
       </div>
-      {%- if section.settings.arms_tagline != blank -%}<p class="rd-arms__tagline">{{ section.settings.arms_tagline }}</p>{%- endif -%}
+      <div class="rd-paths">
+        <div class="rd-path rd-path--schools rd-reveal">
+          <span class="rd-path__chip">{{ section.settings.arm1_chip | default: 'in schools · before exclusion' }}</span>
+          <h3 class="rd-path__name">{{ section.settings.arm1_name | default: 'make engineers' }}</h3>
+          <p class="rd-path__who">{{ section.settings.arm1_who | default: "for SEND, PRU and at-risk young people being pushed out of the classroom — often their first positive encounter with engineering." }}</p>
+          {%- assign a1 = section.settings.arm1_flow | split: '|' -%}
+          <div class="rd-flow">{%- for st in a1 -%}<span class="rd-flow__step">{{ st | strip }}</span>{%- endfor -%}</div>
+          {%- if section.settings.arm1_cta_label != blank -%}
+            <a class="rd-path__cta" href="{{ section.settings.arm1_cta_url | default: '/pages/schools' }}">{{ section.settings.arm1_cta_label }}</a>
+          {%- endif -%}
+        </div>
+        <div class="rd-path rd-path--prisons rd-reveal">
+          <span class="rd-path__chip">{{ section.settings.arm2_chip | default: 'in prisons · after' }}</span>
+          <h3 class="rd-path__name">{{ section.settings.arm2_name | default: 'build to bond' }}</h3>
+          <p class="rd-path__who">{{ section.settings.arm2_who | default: 'for people inside prison rebuilding skills, family ties and a route to work on release.' }}</p>
+          {%- assign a2 = section.settings.arm2_flow | split: '|' -%}
+          <div class="rd-flow">{%- for st in a2 -%}<span class="rd-flow__step">{{ st | strip }}</span>{%- endfor -%}</div>
+          {%- if section.settings.arm2_cta_label != blank -%}
+            <a class="rd-path__cta" href="{{ section.settings.arm2_cta_url | default: '/pages/contact-us' }}">{{ section.settings.arm2_cta_label }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+      {%- if section.settings.converge_title != blank -%}
+      <div class="rd-converge rd-reveal">
+        <p class="rd-converge__title">{{ section.settings.converge_title }}</p>
+        {%- if section.settings.converge_note != blank -%}<p class="rd-converge__note">{{ section.settings.converge_note }}</p>{%- endif -%}
+      </div>
+      {%- endif -%}
     </div>
   </section>
   {%- endif -%}
@@ -518,6 +527,19 @@
       "label": "Arm 2 pathway (| separated)",
       "default": "Course | OCN accreditation | Family bond | Peer instructor | Link to work on release"
     },
+    { "type": "text", "id": "fork_label", "label": "Fork label", "default": "one mission, two pathways" },
+    { "type": "text", "id": "arm1_chip", "label": "Pathway 1 chip", "default": "in schools · before exclusion" },
+    { "type": "text", "id": "arm1_name", "label": "Pathway 1 name", "default": "make engineers" },
+    { "type": "textarea", "id": "arm1_who", "label": "Pathway 1 — who it's for" },
+    { "type": "text", "id": "arm1_cta_label", "label": "Pathway 1 CTA label", "default": "bring it to your school →" },
+    { "type": "url", "id": "arm1_cta_url", "label": "Pathway 1 CTA link" },
+    { "type": "text", "id": "arm2_chip", "label": "Pathway 2 chip", "default": "in prisons · after" },
+    { "type": "text", "id": "arm2_name", "label": "Pathway 2 name", "default": "build to bond" },
+    { "type": "textarea", "id": "arm2_who", "label": "Pathway 2 — who it's for" },
+    { "type": "text", "id": "arm2_cta_label", "label": "Pathway 2 CTA label", "default": "commission a programme →" },
+    { "type": "url", "id": "arm2_cta_url", "label": "Pathway 2 CTA link" },
+    { "type": "text", "id": "converge_title", "label": "Convergence strip title", "default": "both pathways end in the same place ✱ a way forward." },
+    { "type": "textarea", "id": "converge_note", "label": "Convergence footnote", "default": "✱ the same hands-on engineering course in both settings — built around a bike the maker keeps." },
     {
       "type": "header",
       "content": "Why now (policy backdrop)"

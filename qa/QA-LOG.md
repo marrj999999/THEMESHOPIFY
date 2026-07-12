@@ -1,6 +1,10 @@
 # QA Log — CUSTOMTHEME20262 redesign
 *Defects, fixes, verdicts. Newest first.*
 
+## 2026-07-12 — PATHWAYS BAND BUILT & DEPLOYED (fork & converge)
+Per qa/PATHWAYS-SPEC.md: mission ✱ node forks into two distinct panels — make engineers (paper/lime track, schools·before) vs build to bond (forest/steel track, prisons·after) — converging on the lime strip 'both pathways end in the same place ✱ a way forward.' Per-pathway CTAs (school → /pages/schools; commission → /pages/contact-us). Numbered node steps reused; dark-surface overrides; mobile = one continuous left rail. All copy editable; inline .rd-arms patch deleted; claim-lint clean; browser asserts: fork ✓ paper/forest/lime surfaces ✓ names ✓ 5 dark steps ✓. G5: James phone-check pending.
+Symbols system: ✱ = mission origin node (honesty motif), numbered lime/steel nodes = pathway steps, track chips carry words (colour never the only cue). Photos deliberately stay in adjacent bands (type-on-flat-colour rule).
+
 ## 2026-07-12 — James directive: TWO PATHWAYS rebrand (impact arms band)
 The two arms must read as two DISTINCT named pathways (early prevention vs support-further-on), not twin cards: different visual identities, branded as pathways from one shared mission node, stranger-clear headers. Stakeholder review + UX/CSS research running → qa/PATHWAYS-SPEC.md; build next pass against that spec. Also standing: storytelling zero-knowledge rule (memory) applies to all remaining body copy on this page.
 

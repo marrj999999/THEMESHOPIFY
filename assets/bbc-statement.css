@@ -475,3 +475,120 @@ cart-drawer.animate .drawer{ visibility:visible; }
    dark bands; backer chips lime-edged ---- */
 .bbc-rd-impact .rd-dark .rd-facts b, .bbc-rd-impact .rd-dark [class*="policy"] b{ color:var(--lime,#D4FD62); }
 .bbc-rd-impact .rd-backers__chip{ border-color:var(--lime,#D4FD62); }
+
+/* ============================================================
+   PATHWAYS BAND — fork & converge (2026-07-12 spec)
+   One mission node → two colour-coded pathway panels
+   (schools = light/lime · prisons = dark/steel) → one
+   lime convergence strip. Reuses .rd-flow numbered nodes.
+   ============================================================ */
+/* fork connector (desktop) — pure CSS, aria-hidden in markup */
+.bbc-rd-impact .rd-fork{ position:relative; height:96px; margin-top:clamp(20px,3vw,36px); }
+.bbc-rd-impact .rd-fork__node{
+  position:absolute; left:50%; top:0; transform:translateX(-50%);
+  width:44px; height:44px; border-radius:50%; background:var(--forest,#003C32);
+  color:var(--lime,#D4FD62); display:grid; place-items:center;
+  font-size:26px; font-weight:800; line-height:1; z-index:1;
+}
+.bbc-rd-impact .rd-fork__label{
+  position:absolute; left:calc(50% + 34px); top:10px;
+  font-size:14px; font-weight:800; letter-spacing:.04em;
+  text-transform:lowercase; color:var(--forest,#003C32); white-space:nowrap;
+}
+.bbc-rd-impact .rd-fork::before{ /* stem down from node */
+  content:""; position:absolute; left:50%; top:44px; height:18px; width:3px;
+  background:var(--forest,#003C32); transform:translateX(-50%);
+}
+.bbc-rd-impact .rd-fork::after{ /* horizontal split bar */
+  content:""; position:absolute; top:62px; left:25%; right:25%; height:3px;
+  background:var(--forest,#003C32);
+}
+.bbc-rd-impact .rd-fork__drop{ position:absolute; top:62px; width:3px; height:34px; background:var(--forest,#003C32); }
+.bbc-rd-impact .rd-fork__drop.is-a{ left:calc(25% - 1.5px); }
+.bbc-rd-impact .rd-fork__drop.is-b{ right:calc(25% - 1.5px); }
+.bbc-rd-impact .rd-fork__drop::after{ /* track-coloured terminal dot */
+  content:""; position:absolute; left:50%; bottom:-7px; transform:translateX(-50%);
+  width:14px; height:14px; border-radius:50%; border:2px solid var(--ink,#0E1A17);
+}
+.bbc-rd-impact .rd-fork__drop.is-a::after{ background:var(--lime,#D4FD62); }
+.bbc-rd-impact .rd-fork__drop.is-b::after{ background:var(--steel,#DEE6F0); }
+
+/* pathway panels (replace the twin .rd-card.rd-stamp) */
+.bbc-rd-impact .rd-paths{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3vw,36px); align-items:stretch; }
+.bbc-rd-impact .rd-path{
+  border:2.5px solid var(--ink,#0E1A17); border-radius:6px;
+  padding:clamp(24px,3vw,38px); display:flex; flex-direction:column;
+}
+.bbc-rd-impact .rd-path--schools{ background:var(--paper,#F1E9D8); box-shadow:5px 5px 0 var(--lime-700,#9BC02E); }
+.bbc-rd-impact .rd-path--prisons{ background:var(--forest,#003C32); border-color:var(--forest-700,#002A23); box-shadow:5px 5px 0 var(--forest-700,#002A23); }
+/* track chip */
+.bbc-rd-impact .rd-path__chip{
+  align-self:flex-start; font-size:13px; font-weight:800; letter-spacing:.06em;
+  text-transform:lowercase; padding:6px 14px; border-radius:999px;
+  border:1.5px solid var(--ink,#0E1A17);
+  background:var(--lime,#D4FD62); color:var(--forest,#003C32);
+}
+.bbc-rd-impact .rd-path--prisons .rd-path__chip{ background:var(--steel,#DEE6F0); color:var(--ink,#0E1A17); border-color:var(--steel,#DEE6F0); }
+/* pathway name — small display moment, lowercase, left */
+.bbc-rd-impact .rd-path__name{
+  font-size:clamp(2rem,3.4vw,2.9rem); line-height:.97; letter-spacing:-.02em;
+  font-weight:800; text-transform:lowercase; margin:16px 0 0; color:var(--ink,#0E1A17);
+}
+.bbc-rd-impact .rd-path--prisons .rd-path__name{ color:var(--bone,#E6DCC8); }
+.bbc-rd-impact .rd-path__who{ font-size:16px; line-height:1.55; margin:10px 0 0; max-width:34em; color:#3a443f; }
+.bbc-rd-impact .rd-path--prisons .rd-path__who{ color:#cfe0d7; }
+/* dark-surface overrides for the reused .rd-flow numbered nodes */
+.bbc-rd-impact .rd-path--prisons .rd-flow__step{ color:var(--bone,#E6DCC8); }
+.bbc-rd-impact .rd-path--prisons .rd-flow__step::before{
+  background:var(--steel,#DEE6F0); color:var(--ink,#0E1A17); border-color:var(--bone,#E6DCC8);
+}
+.bbc-rd-impact .rd-path--prisons .rd-flow__step::after{ background:var(--bone,#E6DCC8); opacity:.35; }
+/* per-pathway CTA (bottom-pinned, matches .bbcpl-cta grammar) */
+.bbc-rd-impact .rd-path__cta{
+  margin-top:auto; padding-top:22px; align-self:flex-start;
+  font-size:15px; font-weight:700; text-decoration:none;
+  color:var(--forest,#003C32); border-bottom:2px solid var(--forest,#003C32); padding-bottom:2px;
+}
+.bbc-rd-impact a.rd-path__cta:not(#_){ color:var(--forest,#003C32); } /* beat the global inherit rule */
+.bbc-rd-impact .rd-path--prisons .rd-path__cta,
+.bbc-rd-impact .rd-path--prisons a.rd-path__cta:not(#_){ color:var(--bone,#E6DCC8); border-bottom-color:var(--lime,#D4FD62); }
+.bbc-rd-impact .rd-path__cta:hover{ opacity:.65; }
+
+/* convergence strip — the band's single lime surface */
+.bbc-rd-impact .rd-converge{
+  margin-top:clamp(24px,3vw,40px); background:var(--lime,#D4FD62);
+  border:2.5px solid var(--ink,#0E1A17); border-radius:6px;
+  box-shadow:5px 5px 0 var(--ink,#0E1A17);
+  padding:clamp(20px,2.6vw,30px) clamp(22px,3vw,38px);
+}
+.bbc-rd-impact .rd-converge__title{
+  font-size:clamp(1.5rem,2.8vw,2.2rem); line-height:1.05; letter-spacing:-.02em;
+  font-weight:800; text-transform:lowercase; margin:0; color:var(--forest,#003C32);
+}
+.bbc-rd-impact .rd-converge__title .bbcst-star{ color:var(--forest,#003C32); }
+.bbc-rd-impact .rd-converge__note{ font-size:14px; line-height:1.6; margin:14px 0 0; color:#3a443f; max-width:66ch; }
+
+/* mobile: fork geometry collapses to one continuous left rail */
+@media (max-width:759px){
+  .bbc-rd-impact .rd-paths{ grid-template-columns:1fr; gap:0; }
+  .bbc-rd-impact .rd-fork{ height:auto; padding:6px 0 22px 0; }
+  .bbc-rd-impact .rd-fork::before{ left:21px; top:44px; bottom:0; height:auto; transform:none; }
+  .bbc-rd-impact .rd-fork::after,
+  .bbc-rd-impact .rd-fork__drop{ display:none; }
+  .bbc-rd-impact .rd-fork__node{ left:0; transform:none; }
+  .bbc-rd-impact .rd-fork__label{ left:60px; top:12px; white-space:normal; }
+  .bbc-rd-impact .rd-path{ position:relative; margin-left:14px; }
+  .bbc-rd-impact .rd-path + .rd-path{ margin-top:0; }
+  /* rail segment between stacked cards */
+  .bbc-rd-impact .rd-path::before{
+    content:""; position:absolute; left:5px; top:-24px; height:24px; width:3px;
+    background:var(--forest,#003C32); transform:translateX(-100%);
+  }
+  .bbc-rd-impact .rd-path--prisons{ margin-top:24px; }
+  .bbc-rd-impact .rd-converge{ margin-left:14px; position:relative; }
+  .bbc-rd-impact .rd-converge::before{
+    content:""; position:absolute; left:5px; top:-24px; height:24px; width:3px;
+    background:var(--forest,#003C32); transform:translateX(-100%);
+  }
+  .bbc-rd-impact .rd-converge{ margin-top:24px; }
+}
