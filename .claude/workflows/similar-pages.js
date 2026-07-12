@@ -15,7 +15,7 @@ Context first: /Users/jamesmarr/Projects/bbc-theme-new/qa/FORMULA.md + DESIGN-BR
 3. Score OUR page against the same criteria (browse it, mobile 375px first).
 4. Output "adopt / adapt / avoid" table: pattern · which site · the theory reason · how it lands in OUR system (selector/band-level suggestion).
 Write to /Users/jamesmarr/Projects/bbc-theme-new/qa/research/similar-${pt.replace(/[^a-z0-9]+/gi,'-').toLowerCase()}.md. Never recommend banned claims or off-system styling.`,
-  { label: 'compare', schema: { type: 'object', required: ['sites', 'adopt', 'ourGaps', 'filePath'], properties: {
+  { label: 'compare', model: 'opus', schema: { type: 'object', required: ['sites', 'adopt', 'ourGaps', 'filePath'], properties: {
       sites: { type: 'array', items: { type: 'string' }, maxItems: 6 },
       adopt: { type: 'array', items: { type: 'string' }, maxItems: 6 },
       ourGaps: { type: 'array', items: { type: 'string' }, maxItems: 6 },

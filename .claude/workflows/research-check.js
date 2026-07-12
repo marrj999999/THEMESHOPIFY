@@ -14,7 +14,7 @@ const res = await agent(
 3. FRESH EXAMPLES: find 2-3 current best-in-class references for THIS SPECIFIC element (web search + fetch; screenshot-level detail in words). For each: URL, what it does brilliantly, one concrete buildable "steal this" (layout/type/behaviour), and one "skip this".
 4. VERDICT: enough context to build? What's still missing and who can supply it (vault gap vs James question)?
 Write findings to /Users/jamesmarr/Projects/bbc-theme-new/qa/research/${page}-${el.replace(/[^a-z0-9]+/gi,'-').toLowerCase()}.md`,
-  { label: 'research', schema: { type: 'object', required: ['enoughContext', 'references', 'missing', 'filePath'], properties: {
+  { label: 'research', model: 'sonnet', schema: { type: 'object', required: ['enoughContext', 'references', 'missing', 'filePath'], properties: {
       enoughContext: { type: 'boolean' },
       references: { type: 'array', items: { type: 'string' }, maxItems: 5 },
       missing: { type: 'array', items: { type: 'string' }, maxItems: 5 },
