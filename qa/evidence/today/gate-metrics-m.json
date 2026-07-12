@@ -59,7 +59,7 @@
     "h1": [
       {
         "t": "building bikes. rebuilding lives.",
-        "px": 46.9,
+        "px": 48,
         "w": "800",
         "tt": "none",
         "ta": "left",
@@ -216,6 +216,14 @@
     ],
     "eyebrows": [
       {
+        "t": "the record since 2012",
+        "px": 14,
+        "w": "700",
+        "tt": "lowercase",
+        "ta": "start",
+        "x": 18
+      },
+      {
         "t": "what we do",
         "px": 14,
         "w": "700",
@@ -343,7 +351,7 @@
         "w": "700",
         "tt": "none",
         "ta": "center",
-        "x": 85
+        "x": 205
       },
       {
         "t": "LSBU Innovation Hub",
@@ -351,7 +359,7 @@
         "w": "700",
         "tt": "none",
         "ta": "center",
-        "x": 104
+        "x": 42
       },
       {
         "t": "OCN London accredited",
@@ -359,7 +367,7 @@
         "w": "700",
         "tt": "none",
         "ta": "center",
-        "x": 95
+        "x": 205
       },
       {
         "t": "HMPPS",
@@ -367,7 +375,7 @@
         "w": "700",
         "tt": "none",
         "ta": "center",
-        "x": 157
+        "x": 76
       },
       {
         "t": "Inside Time",
@@ -375,7 +383,7 @@
         "w": "700",
         "tt": "none",
         "ta": "center",
-        "x": 138
+        "x": 219
       }
     ],
     "ledes": [
@@ -550,7 +558,7 @@
         "natW": 1600,
         "natH": 1066,
         "cw": 375,
-        "ch": 601,
+        "ch": 646,
         "y": 71
       },
       {
@@ -559,7 +567,7 @@
         "natH": 1066,
         "cw": 544,
         "ch": 340,
-        "y": 4624
+        "y": 4708
       },
       {
         "src": "logo-financial-times.svg",
@@ -567,7 +575,7 @@
         "natH": 0,
         "cw": 30,
         "ch": 38,
-        "y": 10894
+        "y": 10979
       },
       {
         "src": "logo-guardian.svg",
@@ -575,7 +583,7 @@
         "natH": 0,
         "cw": 113,
         "ch": 38,
-        "y": 10894
+        "y": 10979
       },
       {
         "src": "logo-telegraph.svg",
@@ -583,7 +591,7 @@
         "natH": 0,
         "cw": 113,
         "ch": 38,
-        "y": 11000
+        "y": 11085
       },
       {
         "src": "logo-cnn.svg",
@@ -591,21 +599,28 @@
         "natH": 0,
         "cw": 80,
         "ch": 38,
-        "y": 11000
+        "y": 11085
       }
     ],
     "svgs": [],
     "docW": 375,
     "winW": 375,
-    "docH": 14962,
+    "docH": 14843,
     "overflowers": [],
     "banned": [],
     "hasLearners": false,
     "hasPrisoners": false,
     "has45": true,
-    "bodyLen": 5734
+    "bodyLen": 5753
   },
   "contrastsLow": [
+    {
+      "t": "the record since 2012",
+      "cr": 1.24,
+      "px": 14,
+      "w": "700",
+      "tag": "SPAN"
+    },
     {
       "t": "✱",
       "cr": 6.96,
@@ -770,7 +785,7 @@
     {
       "t": "building bikes. rebuilding lives.",
       "cr": 9.12,
-      "px": 47,
+      "px": 48,
       "w": "800",
       "tag": "H1"
     },
@@ -808,13 +823,6 @@
       "px": 34,
       "w": "800",
       "tag": "H3"
-    },
-    {
-      "t": "join the workshop course",
-      "cr": 9.12,
-      "px": 16,
-      "w": "700",
-      "tag": "SPAN"
     }
   ]
 }

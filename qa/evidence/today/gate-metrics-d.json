@@ -8,7 +8,7 @@
     "h1": [
       {
         "t": "building bikes. rebuilding lives.",
-        "px": 84.5,
+        "px": 96,
         "w": "800",
         "tt": "none",
         "ta": "left",
@@ -164,6 +164,14 @@
       }
     ],
     "eyebrows": [
+      {
+        "t": "the record since 2012",
+        "px": 14,
+        "w": "700",
+        "tt": "lowercase",
+        "ta": "start",
+        "x": 72
+      },
       {
         "t": "what we do",
         "px": 14,
@@ -508,7 +516,7 @@
         "natH": 1066,
         "cw": 640,
         "ch": 520,
-        "y": 4071
+        "y": 4111
       },
       {
         "src": "logo-financial-times.svg",
@@ -516,7 +524,7 @@
         "natH": 0,
         "cw": 35,
         "ch": 44,
-        "y": 8523
+        "y": 8563
       },
       {
         "src": "logo-guardian.svg",
@@ -524,7 +532,7 @@
         "natH": 0,
         "cw": 134,
         "ch": 44,
-        "y": 8523
+        "y": 8563
       },
       {
         "src": "logo-telegraph.svg",
@@ -532,7 +540,7 @@
         "natH": 0,
         "cw": 180,
         "ch": 44,
-        "y": 8523
+        "y": 8563
       },
       {
         "src": "logo-cnn.svg",
@@ -540,21 +548,28 @@
         "natH": 0,
         "cw": 92,
         "ch": 44,
-        "y": 8523
+        "y": 8563
       }
     ],
     "svgs": [],
     "docW": 1280,
     "winW": 1280,
-    "docH": 10245,
+    "docH": 10284,
     "overflowers": [],
     "banned": [],
     "hasLearners": false,
     "hasPrisoners": false,
     "has45": true,
-    "bodyLen": 5734
+    "bodyLen": 5753
   },
   "contrastsLow": [
+    {
+      "t": "the record since 2012",
+      "cr": 1.24,
+      "px": 14,
+      "w": "700",
+      "tag": "SPAN"
+    },
     {
       "t": "✱",
       "cr": 6.96,
@@ -719,7 +734,7 @@
     {
       "t": "building bikes. rebuilding lives.",
       "cr": 9.12,
-      "px": 84,
+      "px": 96,
       "w": "800",
       "tag": "H1"
     },
@@ -757,13 +772,6 @@
       "px": 46,
       "w": "800",
       "tag": "H3"
-    },
-    {
-      "t": "join the workshop course",
-      "cr": 9.12,
-      "px": 16,
-      "w": "700",
-      "tag": "SPAN"
     }
   ]
 }

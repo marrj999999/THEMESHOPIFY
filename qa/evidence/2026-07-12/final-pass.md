@@ -5,3 +5,4 @@ G1+A6 18:23:02: heading shortened, quote2 dropped, body2 trimmed, press 6->4. A1
 CRIT-round2 fixes 18:40:36: dup HMPPS removed, backers all-chips (uniform until Investec/LSBU logo files), frame/partner labels proper-case, card-title unified 21px, source-line dedupe, credit-line dups dropped
 stats band label 'the record since 2012' added (James) 18:43:16
 CRIT r2 closures 18:48:54: FORMULA role clarifications (pathway-name display + card-title 21 + secondary outline sanctioned), eyebrow 800, tags lowercase, backers 2-up mobile, h1 desktop 96px, quote trimmed, featured-in lowercase. D2 already fixed by James's 'record since 2012'.
+CRIT r3 closures 18:58:39: D1 lime eyebrow on dark, D2 one chip style, D3 left-axis eyebrows, D4 lowercase card titles, D5 Investec dedup

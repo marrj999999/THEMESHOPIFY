@@ -648,3 +648,13 @@ cart-drawer.animate .drawer{ visibility:visible; }
   .bbc-rd-impact .rd-backers{ grid-template-columns:repeat(2,1fr); gap:10px; }
   .bbc-rd-impact .rd-backers__cell{ height:auto; min-height:48px; }
 }
+
+/* CRIT r3 closures */
+/* D1: surface-aware eyebrow — lime on dark (was 1.24:1 unreadable) */
+.bbc-rd-impact .rd-dark .rd-eyebrow{ color:var(--lime,#D4FD62) !important; }
+/* D3: eyebrows share the left axis everywhere */
+.bbc-rd-impact .rd-eyebrow{ display:block; text-align:left !important; }
+/* D2: ONE chip style — lime fill, ink border, 800 (tags need !important vs legacy uppercase) */
+.bbc-rd-impact .rd-tag{ text-transform:lowercase !important; font-weight:800 !important; }
+.bbc-rd-impact .rd-backers__chip{ background:var(--lime,#D4FD62); color:var(--forest,#003C32); border:1.5px solid var(--ink,#0E1A17); font-weight:800; }
+.bbc-rd-impact .rd-dlcard__badge{ background:var(--lime,#D4FD62); color:var(--forest,#003C32); border:1.5px solid var(--ink,#0E1A17); border-radius:999px; }
