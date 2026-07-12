@@ -1,109 +1,74 @@
-# CRIT — /pages/impact (fresh-eyes gate, 2026-07-12)
+# CRIT (final gate) — /pages/impact — draft 196820238710 — 2026-07-12, fresh CRIT run
 
-**Gate:** step 5 of qa/WORKFLOW.md. Reviewer did not build the page. Binary verdict.
-**Target:** https://bamboobicycleclub.org/pages/impact?preview_theme_id=196820238710
-**Theme confirmed:** `196820238710` (CUSTOMTHEME20262, **Draft**) — asserted via `window.Shopify.theme.id` on both passes, and the "CUSTOMTHEME20262 · Draft" bar is visible in captures. ✓
-**Method:** repo Playwright (chromium-1223, headless) → mobile 375×812 (deviceScaleFactor 2, isMobile) FIRST, cookies declined (`cookieClicked=true`), then desktop 1280. Every band scrolled to trigger lazy-load, screenshotted to `qa/evidence/today/band-NN-name(.-d).png`. Computed px + WCAG contrast ratios measured in-page (never estimated). Raw: `gate-metrics-m.json`, `gate-metrics-d.json`.
+*Fresh-eyes CRIT before James. I did not build this page. Reviewed in real headless Chrome via the repo's Playwright (`qa/evidence/today/crit-gate.mjs`) — the in-app pane freezes on this long page. Mobile 375×812 FIRST, cookie banner declined, then a 1280px desktop pass. `Shopify.theme.id` **196820238710** confirmed on every run (mobile + desktop). Every number below is a measured computed value, a timed DOM sample, or a WCAG-formula contrast ratio — none estimated.*
 
----
+**Evidence:** `qa/evidence/today/` — `band-00-hero`…`band-10-final-cta` (mobile) + matching `-d` desktop shots, plus `gate-metrics-m.json` / `gate-metrics-d.json` (type sizes, axes, contrast sweep, stat samples, banned-claim scan).
 
-## Global checks (measured)
-
-| Check | Mobile 375 | Desktop 1280 | Verdict |
-|---|---|---|---|
-| Theme = draft 196820238710 | ✓ | ✓ | PASS |
-| Horizontal overflow | docW 375 = winW, overflowers **0** | docW 1280 = winW, 0 | PASS |
-| Banned claims (28k PSI / stronger-than-steel / 56.7 / 11.41 / £280 / 100% / 36+) | **none** | none | PASS |
-| Voice: "learners" / "prisoners" in body | both **false** | false | PASS |
-| "45 countries" (updated Proof Bank) | present | present | PASS |
-| Count-up settles to final values | stable across 5 samples | — | PASS |
-| Page length @375 (QA-LOG G1 target ≤11,000px) | **14,843px** | 10,284px | **FAIL (mobile 35% over target)** |
-| Lowest contrast on page | **1.24:1** | 1.24:1 | **FAIL (see D1)** |
-
-Everything below the 1.24 outlier passes AAA: next-lowest is the ✱ glyph at 6.96 (17px/800 = large text, AAA-large 4.5 ✓), cite 7.20, and all body/heads ≥7.37. Contrast is excellent **except the one eyebrow**.
+**Page metrics (fresh):**
+- Mobile total **14,831px (~18 screens)** · desktop **10,284px**.
+- Horizontal overflow at 375px: **none** (`docW==winW==375`, `overflowers: []`). Desktop: none.
+- Banned-claim scan: **clean** (`28,000 / stronger than steel / 56.7 / 11.41 / 280 per / 100% completion / 36+` all absent). `learners` 0, `prisoners` 0, `45 countries` used.
+- Count-up: **stable** — `.rd-num` samples identical at 0/300/700/1100/1600 ms (`90%+ · Level 2 · 4,000+ · 45 · ~£18bn · up to 9pts · 39% · 1m+`). The animation is gone.
+- AAA sweep (30 lowest pairs): lowest is the **✱ glyph at 6.96:1**, then Sally cite 7.20, then everything ≥7.37. All body/heading text passes AAA; only the ✱ is marginally under 7.0.
 
 ---
 
-## Per-band scorecard
+## Claimed fixes since the last CRIT — verified one by one (being fair before being sceptical)
 
-Rows scored against FORMULA.md §1–5. A band passes only if every applicable row passes.
+| Prior blocker | Verdict now | Evidence |
+|---|---|---|
+| Mobile hero h1 = 28px (smaller than every h2) | ✅ **FIXED** — h1 **48px** mobile / **96px** desktop, weight 800, clearly dominant over the 43.2/86.4px h2s | band-00, `gate-metrics-m.h1` |
+| Stats count-up animates on a funder page | ✅ **FIXED** — 5 timed samples identical; no re-animation | statSamples |
+| "both arms" stale vocab | ✅ **FIXED** — h2 reads "both pathways sit on live national priorities." | band-03, h2[1] |
+| ~40% vs 39% self-contradiction | ✅ **FIXED** — both the policy band and Build-to-Bond now say **39% (MoJ family-contact data)** | band-03 / band-05 |
+| Proper-noun crush "hm prison & probation" | ✅ **FIXED** — renders "In partnership with **HM Prison & Probation Service**" (caps preserved) | band-06, contrast row |
+| Backers band: NLCF/OCN 0×0 invisible, chip overlap/clip, FT ×2 | ✅ **FIXED** — funders now lime **text chips**; press logos (FT/Guardian/Telegraph/CNN) render at a **consistent 44px height**; no FT duplicate as a backer | band-09, imgs[] |
+| Steel chips UPPERCASE (BUY/PARTNER/SUPPORT) | ✅ **FIXED** — render lowercase `buy / partner / support` | band-08, chips[] |
+| Stats band had no header (zero-knowledge fail) | ✅ **IMPROVED** — now carries an eyebrow "the record since 2012" + sourced sublabels | band-01 |
+| A2 forward "what's next" band / A5 4-group ops band | ✅ **LANDED** — 3 numbered lime-node ambitions (no £); ops band = 4 count-badged groups + "the full picture →", verb-honest, matches OPERATIONS-MAP | band-06/07 |
 
-| # | Band | Type roles | One-left-axis | Chip/symbol system | Contrast | Zero-knowledge header | Verdict |
-|---|---|---|---|---|---|---|---|
-| 00 | hero | h1 48/96px, lowercase ✓ | ✓ all left | tagline eyebrow ✓ | 9.12 ✓ | ✓ mission lede verbatim | **PASS** |
-| 01 | stats | nums lime ✓, 21px labels | ✓ | — | **eyebrow 1.24 ✗** | ✓ | **FAIL** (D1) |
-| 02 | what-we-do (pathways) | display h3 33.6px ✓, nodes ✓ | **eyebrow centered ✗** | pathway chips lc/800 ✓ (internally exemplary) | ✓ | ✓ | **FAIL** (D3 axis only) |
-| 03 | why-now | ✓ | **eyebrow centered ✗** | baseline stat pairs ✓ | ✓ | ✓ | **FAIL** (D3) |
-| 04 | inside-workshop | ✓ | ✓ | — | ✓ | ✓ Cat-B prison named | **PASS** |
-| 05 | follow-on | ✓ | ✓ (left x32) | — | ✓ | ✓ | **PASS** |
-| 06 | where-we-operate | card-titles lc ✓, 21px | **eyebrow centered ✗** | count badges 4/10/3/45 ✓ | ✓ | ✓ franchise framing correct | **FAIL** (D3) |
-| 07 | what's-next | ✓ nodes 1-3, no £ ✓ | ✓ | ✓ | ✓ | ✓ | **PASS** |
-| 08 | get-involved | **card-titles Title-case ✗** | **eyebrow centered ✗** | **UPPERCASE lime chips ✗**; shadow colour inconsistent | ✓ | ✓ | **FAIL** (D2,D3,D4) |
-| 09 | recognised-by | ✓ | ✓ | **funder chips = 3rd style; Investec named 2× ✗** | press logos 44px consistent ✓ | ✓ | **FAIL** (D2,D5) |
-| 10 | final-cta (join in) | ✓ | **eyebrow centered ✗** | — | ✓ | ✓ | **FAIL** (D3) |
-
-**6 of 10 bands fail at least one row.**
+The genuinely hard content is right: the fork-and-converge pathways band, the verb-honest operations groups, all four policy stats sourced (MoJ / MoJ / MoJ / ONS), the funder-mechanism steel promises, and the impact-report download card are all in place and safe (no participant↔prison linkage; empty-workshop photo).
 
 ---
 
-## Ranked defects (selector + fix)
+## Per-band FORMULA scorecard
 
-### D1 — CRITICAL · Stats eyebrow is invisible (1.24:1)
-"the record since 2012" renders **dark forest text on the forest stats surface** — measured 1.24:1, below even the 3:1 non-text floor. Its lime leader-dash renders; the words do not (verified in `band-01-stats.png`). The eyebrow colour token is not surface-aware — it uses the light-surface dark-green everywhere.
-**Selector:** `.bbc-impact-2026-wrap` stats band `[class*="eyebrow"]` (span, 14px/700).
-**Fix:** on forest/dark surfaces set eyebrow colour to `--bbc-lime` (#D4FD62) or bone (#E6DCC8) — mirror the surface-inversion the stat sublabels already use. Blocking: an unreadable labelled element ships nothing.
+Rows: **T**ype roles · **S**ymbols · **L**ogo · **A**natomy/one-left-**axis** · **Z**ero-knowledge header · **C**olour grammar · **AAA** (measured) · verdict.
 
-### D2 — HIGH · Chip system still not unified (James G5 #1, open since 2026-07-12)
-Four distinct chip treatments live on one page:
-1. pathway chips — 13px/800, **lowercase**, lime fill (`in schools · before exclusion`)
-2. get-involved chips — 14px/700, **UPPERCASE**, lime fill (`BUY` / `PARTNER` / `SUPPORT`)
-3. funder chips — 14px/700, **Title/sentence case**, lime **outline** (`Investec Beyond Business`, `LSBU Innovation Hub`…)
-4. download tag — forest fill (`report`)
-FORMULA §1/§2 mandates ONE chip style; colour differentiates surface, never style. This is the exact headline James rejected the last three passes on.
-**Selector:** get-involved `.rd-card [class*="chip"]`, recognised-by `[class*="chip"]`/funder pills, pathways chips.
-**Fix:** pick one spec — 13–15px, weight **800**, lowercase, one shape (fill on light, outline reserved only if a second semantic is truly needed) — and apply page-wide. Kill the `text-transform:uppercase` on get-involved chips and the title-case on funder chips.
+| # | Band | T | S | L | Axis | Z | C | AAA | Verdict |
+|---|---|---|---|---|---|---|---|---|---|
+| 0 | Hero | ✅ h1 48/96px dominant | ✅ | n/a | ✅ left, 2-CTA pair is system | ✅ | ✅ | 9.12 | **PASS** |
+| 1 | Record / stats (dark) | ✅ | ✅ | n/a | ✅ eyebrow+stats left | ⚠️ eyebrow-only, no h2 | ✅ | 8.5+ | **PASS (nit)** |
+| 2 | What we do — pathways fork (paper) | ✅ h2 43.2 / h3 33.6 / body 17 | ✅ ✱ + numbered nodes + word-chips | n/a | ❌ **eyebrow centered, h2 left** | ✅ | ✅ | 8.4–9.1 | **FAIL (axis)** |
+| 3 | Why now — policy (dark) | ✅ | ✅ | n/a | ❌ **eyebrow centered (x595), h2+stats left (x72)** — see band-03-why-now-d | ✅ 4 stats sourced | ✅ | 8.5+ | **FAIL (axis)** |
+| 4 | Inside the workshop (paper) | ⚠️ body 19px (17 elsewhere) | ✅ | n/a | ⚠️ desktop content x=262 off page grid | ✅ | ✅ | 8.37+ | **CONDITIONAL** |
+| 5 | The follow-on (split, dark) | ⚠️ body 19px | ✅ | n/a | ✅ image-left split geometry OK | ✅ 39% cited, Sally attributed (staff, safe) | ✅ | 7.2–8.5 | **PASS (nit)** |
+| 6 | Where we operate (paper) | ✅ h3 21px group titles | ✅ count-badge nodes | ✅ no stray logos | ❌ **eyebrow centered; partnership line centered vs left h2** | ✅ verb-honest, verified list | ✅ | 8.31+ | **FAIL (axis)** |
+| 7 | What's next (paper) | ✅ | ✅ 3 lime nodes | n/a | ✅ eyebrow+h2 left, no £ | ✅ | ✅ | 8.5+ | **PASS** |
+| 8 | Get involved — three ways (steel) | ✅ chips lowercase now | ⚠️ | n/a | ❌ **eyebrow centered; 3 forest-fill CTAs = 3 primaries** | ✅ | ✅ | 7.97+ | **FAIL (axis + one-primary-max)** |
+| 9 | Recognised by (paper) | ✅ press logos ONE height (44px) | ✅ | ⚠️ funder chips unlabeled + mixed semantics (funder/accreditor/authority/press) | ✅ eyebrow+h2 left | ✅ steel promises + report card | ✅ | 10.8 | **CONDITIONAL** |
+| 10 | Final CTA (dark) | ✅ | ✅ | n/a | ❌ **eyebrow centered, h2 left**; primary "Run it in your prison" = 1 of 3 audiences | ✅ | ✅ | 8.5+ | **FAIL (axis)** |
 
-### D3 — HIGH · One-left-axis broken on 5 of 10 bands
-Eyebrows are centered while their h2 + lede are left-aligned on **what-we-do, why-now, where-we-operate, get-involved, join-in** (measured `text-align:center`, x 101–150, vs h2 x 18). FORMULA §4 "One left axis." This is the recurring G3 defect (QA-LOG line 16) never fully closed — it was fixed on get-involved's h2/lede but the eyebrow above them was left centered.
-**Selector:** the section/eyebrow modifier applying `text-align:center` on those five bands (likely a `.rd-center` / band-level alignment class).
-**Fix:** force eyebrow (and any centered sub-head) to `text-align:left` on these bands so the whole band shares one left axis. Do it once as a wrap-level rule, not band-by-band.
+**Cross-cutting PASS:** one h2 size everywhere (43.2 / 86.4px) ✓ · button system one 15px pill (lime-fill / forest-fill / 2px-outline, radius 999px) ✓ · zero banned claims ✓ · "learners"/"prisoners" 0 ✓ · 45 countries consistent ✓ · symbols clean (✱ ×3, numbered nodes, word-chips) ✓ · press logos one height ✓ · safeguarding ✓.
 
-### D4 — MEDIUM · Card-title h3 casing contradicts itself across bands
-FORMULA row 10: card-title h3 = 21px **lowercase**. where-we-operate + follow-on obey it (`prison programmes — we run`); **get-involved uses Title case** (`Build or own a bike`, `Run it in your prison`, `Fund or champion`). Same role, two cases, on one page.
-**Selector:** get-involved `.rd-card h3` (21px/800, tt:none).
-**Fix:** lowercase the three card titles at source (copy+style together per FORMULA §7 lesson), or set the h3 rule `text-transform:lowercase` for this role globally.
-
-### D5 — MEDIUM · Duplicate name breaks the once-per-page logo/name rule
-"Investec Beyond Business" is printed **twice** in recognised-by — once as the quote-card attribution ("Investec Beyond Business — backing BBC since 2025") and again as a funder chip below. FORMULA §3 "each logo … ONCE per page."
-**Selector:** recognised-by quote `cite` + funder chip list.
-**Fix:** drop one instance — keep the quote attribution, remove the redundant Investec funder chip (or vice-versa). (OCN also recurs across stats / steel-callout / chip, but as accreditation prose not a logo — lower priority, tidy if trimming.)
-
-### D6 — MEDIUM · Mobile page still 35% over the length target
-14,843px @375 vs QA-LOG G1 target ≤11,000px (was 15,179 — only −2% this pass). The recognised-by band (~2,067px) and the pathways band (~1,918px) are the largest cuts available.
-**Fix:** per QA-LOG A5/G1 plan — the length work is not done; recognised-by still stacks steel callout + report card + quote card + press grid + funder chips at full height.
-
-### Minor (non-blocking, log for the fix pass)
-- **M1** Eyebrow weight is 700 across the page; FORMULA §1 chip/eyebrow = weight **800**. Bump for consistency.
-- **M2** Steel callout uses `see for yourself →` as an **underlined inline link ×3** acting as a CTA — FORMULA §1 "never underlined links as CTAs." Borderline (inline body links), but the repetition reads as three buttons.
-- **M3** get-involved 3rd card ("SUPPORT") has a **lime** hard drop-shadow while cards 1–2 have dark shadows — inconsistent within one row.
-- **M4** get-involved band carries **3 primary fill CTAs** (FORMULA §1 "max one primary per band"). Defensible 3-card pattern, but flags against the literal rule.
-- **M5** `bbc-rd-b2b.jpg` computes 544px wide inside the 375 viewport (clipped, no overflow) — confirm the full-bleed crop is intentional.
-- **Hierarchy note (not a defect):** hero h1 exceeds spec (48/96px vs the 5.4rem cap) which *helps* — but the FORMULA itself caps h1 and h2 both at 5.4rem, so band heads (86.4px desktop) sit only ~11% below the hero. The hero still reads as the display moment because it wraps to 3 full lines; flagging the formula's own weak h1/h2 separation for James, not dinging the build.
+**Cross-cutting FAIL:** **the one-left-axis rule (FORMULA §4) is violated on 5 of 10 bands.** Mobile eyebrow x-positions split cleanly in two: LEFT (x≈18) on record / inside-workshop / what's-next / recognised-by, but CENTERED (x=101–150) on what-we-do / why-now / where-we-operate / get-involved / join-in — and in every centered case the h2 below it is hard-left, so the eyebrow floats off its own heading's axis. Desktop compounds it: h2 left-edges land at **x=72, 262, 313, 332** (four axes) instead of one. This is exactly the "inconsistent, per-band variation" James rejected at the last G5.
 
 ---
 
-## What's genuinely good (be fair)
-- Hero is now a real display moment — 3 big lowercase lines over a darkened workshop photo, lime tagline, mission lede **verbatim** to the locked wording, clean fill/outline button pair. James's "hero not large on my phone" complaint reads as largely addressed at 375.
-- Voice + claims are clean: 0 banned claims, 0 "learners/prisoners", "45 countries", "90%+", OCN levels correctly split (L1 schools / L2 prisons), franchise hubs correctly "our partners run", NZ used as kit-reach not a hub — all consistent with OPERATIONS-MAP.
-- The **pathways band is reference-quality** — fork node, differentiated lime/steel pathway identities carrying words not colour alone, numbered nodes, converge strip, STEM preserved uppercase. It is the proof the one-system look is achievable; the rest of the page just hasn't been leveled up to it.
-- Buttons ARE consistent: 15px, 999px pill, 2px, forest-fill-on-light / lime-fill-on-dark / bone-outline — the most disciplined system on the page.
-- Press logos share one height (44px desktop / 38px mobile), grouped "featured in" separate from "backed by" per §3.
-- No horizontal overflow, no missing/broken images, count-ups settle.
+## Remaining defects, ranked (selector + fix)
+
+1. **One-left-axis broken (FORMULA §4) — the dominant, page-wide defect.** Eyebrow centered above a left h2 on bands 2/3/6/8/10; desktop content columns indented to x=262/313/332 on bands 4/6/8/10 vs the page axis x=72. *Fix:* force every `.rd-eyebrow` (and its header wrapper) to `text-align:left`, and pin the band content wrappers (`.rd-wrap` / the get-involved, three-ways, ops and final-cta inner containers) to ONE shared `max-width` + left grid column — delete the per-band `text-align:center` / `margin:0 auto` on header blocks. Re-screenshot bands 2/3/6/8/10 mobile + desktop after. *(Verify in `band-03-why-now-d.png` — the split is unmistakable.)*
+2. **✱ mission glyph fails AAA (6.96:1 on paper).** Measured below the 7:1 AAA floor (17px, not "large text"). *Fix:* repoint the ✱ colour on paper surfaces to `--forest` (#003C32, ratio >7:1) or the teal-ink token, or render it ≥18px/700 so it qualifies as large text. Every other text pair passes.
+3. **Page length 14,831px mobile (~18 screens)** vs the pass's own **G1 target ≤11,000px**. Biggest single cuts: Recognised-by band (2,055px) and the stacked policy-stat band. *Fix:* tighten vertical `--rd-pad` on paper bands and 2-up the policy stats / backer chips on mobile. (Not a FORMULA row, but a named G1 gate item that is still 35% over.)
+4. **Get-involved: three forest-fill CTAs in one band** (`Shop & book →` · `For prisons →` · `Back the mission →`) violate "max one primary per band." *Fix:* either accept as an equal-weight card-grid choice (James's call) or demote two cards' buttons to the 2px-outline secondary and keep one lime/forest primary.
+5. **Recognised-by funder chips: unlabeled + mixed semantics (FORMULA §3 grouping).** The lime chip group `The National Lottery Community Fund · LSBU Innovation Hub · OCN London accredited · HMPPS · Inside Time` sits *below* the "featured in" press logos with no heading of its own and blends funder + accreditor + authority + a press title (Inside Time). *Fix:* add a "backed by / accredited by" label above the chip group, and move **Inside Time** up beside the press logos where it belongs.
+6. **Off-scale body size + caps micro-labels.** Follow-on / inside-workshop body renders **19px** where the rest of the page body is 17px; stat-source sublabels render UPPERCASE (`BBC PROGRAMME RECORDS`, `MINISTRY OF JUSTICE`, `KITS SHIPPED WORLDWIDE`) against the lowercase system. The caps are consistent across all stat bands (one deliberate "source" convention), so low priority — but normalise body to 17px per the type table.
+7. **Conversion nit (James's call).** Final-CTA primary "Run it in your prison" addresses only prison commissioners; the page also serves buyers and funders.
+
+**Capture caveat:** the desktop `band-03-why-now-d` and `band-08-get-involved-d` shots caught the cookie banner **re-rendering** at the bottom (the harness declined it on load; it reappears in the desktop context). It does not obscure the axis findings and the **mobile screenshots are clean and authoritative**. Not a page defect.
 
 ---
 
-## VERDICT: **FAIL**
+## Verdict: **NOT READY FOR JAMES — one more fix pass.**
 
-Per FORMULA line 2 ("a band ships only if every row passes") and James's directive that this page IS the formula for every other page: **6 of 10 bands fail a row.** The two blockers are D1 (a labelled eyebrow at 1.24:1 is literally unreadable) and D2 (the chip system is still not unified — the specific thing rejected the last three passes). D3 (half the bands break the one-left-axis rule) compounds the "too many styles" verdict. The page is materially better than prior passes and close, but it is not at the standard. Return to WORKFLOW step 2 for a whole-page pass closing D1–D6 together (copy+style per band), then re-CRIT before James.
-
-*Evidence: `qa/evidence/today/band-00…10-*.png` (mobile) + `-d.png` (desktop), `gate-metrics-m.json`, `gate-metrics-d.json`.*
+This is a large step forward: every blocker from the last CRIT (28px hero, live count-up, "both arms", 40/39 conflict, proper-noun crush, the broken backers grid) is genuinely fixed, claims and AAA are clean, and the new forward/operations/mechanism beats all landed. But the gate is mechanical and binary, and **FORMULA §4 (one left axis) fails on half the bands** — the exact per-band inconsistency James called out at G5 — plus the ✱ marginally misses AAA and the page is still 35% over the G1 length target. Fix defect **1** (axis — one systemic change closes five band failures), **2** (✱ contrast), and ideally **3** (length), re-screenshot bands 2/3/6/8/10 on both viewports, then hand to James.

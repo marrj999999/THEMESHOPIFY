@@ -388,7 +388,8 @@
         {%- if section.settings.funder_line != blank -%}<p class="rd-ship-note{% if section.settings.funder_logo != blank %} rd-mt1{% else %} rd-mt3{% endif %}">{{ section.settings.funder_line }}</p>{%- endif -%}
         {%- assign backers = section.blocks | where: "type", "backer" -%}
         {%- if backers.size > 0 -%}
-        <ul class="rd-backers rd-mt3" role="list">
+        <span class="rd-backers__label">{{ section.settings.backers_label | default: 'backed by & accredited by' }}</span>
+        <ul class="rd-backers" role="list">
           {%- for block in backers -%}
           <li class="rd-backers__cell" {{ block.shopify_attributes }}>
             {%- if block.settings.url != blank -%}<a href="{{ block.settings.url }}" class="rd-backers__link">{%- endif -%}

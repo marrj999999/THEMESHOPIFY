@@ -139,7 +139,7 @@
         "x": 673
       },
       {
-        "t": "Build or own a bike",
+        "t": "build or own a bike",
         "px": 21,
         "w": "800",
         "tt": "none",
@@ -147,7 +147,7 @@
         "x": 98
       },
       {
-        "t": "Run it in your prison",
+        "t": "run it in your prison",
         "px": 21,
         "w": "800",
         "tt": "none",
@@ -155,7 +155,7 @@
         "x": 485
       },
       {
-        "t": "Fund or champion",
+        "t": "fund or champion",
         "px": 21,
         "w": "800",
         "tt": "none",
@@ -169,7 +169,7 @@
         "px": 14,
         "w": "700",
         "tt": "lowercase",
-        "ta": "start",
+        "ta": "left",
         "x": 72
       },
       {
@@ -177,7 +177,7 @@
         "px": 14,
         "w": "700",
         "tt": "lowercase",
-        "ta": "center",
+        "ta": "left",
         "x": 582
       },
       {
@@ -185,7 +185,7 @@
         "px": 14,
         "w": "700",
         "tt": "lowercase",
-        "ta": "center",
+        "ta": "left",
         "x": 595
       },
       {
@@ -193,7 +193,7 @@
         "px": 14,
         "w": "700",
         "tt": "lowercase",
-        "ta": "start",
+        "ta": "left",
         "x": 262
       },
       {
@@ -201,7 +201,7 @@
         "px": 14,
         "w": "700",
         "tt": "lowercase",
-        "ta": "start",
+        "ta": "left",
         "x": 712
       },
       {
@@ -209,7 +209,7 @@
         "px": 14,
         "w": "700",
         "tt": "lowercase",
-        "ta": "center",
+        "ta": "left",
         "x": 554
       },
       {
@@ -217,7 +217,7 @@
         "px": 14,
         "w": "700",
         "tt": "lowercase",
-        "ta": "start",
+        "ta": "left",
         "x": 72
       },
       {
@@ -225,7 +225,7 @@
         "px": 14,
         "w": "700",
         "tt": "lowercase",
-        "ta": "center",
+        "ta": "left",
         "x": 576
       },
       {
@@ -233,7 +233,7 @@
         "px": 14,
         "w": "700",
         "tt": "lowercase",
-        "ta": "start",
+        "ta": "left",
         "x": 72
       },
       {
@@ -241,7 +241,7 @@
         "px": 14,
         "w": "700",
         "tt": "lowercase",
-        "ta": "center",
+        "ta": "left",
         "x": 603
       }
     ],
@@ -265,74 +265,66 @@
       {
         "t": "buy",
         "px": 14,
-        "w": "700",
-        "tt": "uppercase",
+        "w": "800",
+        "tt": "lowercase",
         "ta": "start",
         "x": 98
       },
       {
         "t": "partner",
         "px": 14,
-        "w": "700",
-        "tt": "uppercase",
+        "w": "800",
+        "tt": "lowercase",
         "ta": "start",
         "x": 485
       },
       {
         "t": "support",
         "px": 14,
-        "w": "700",
-        "tt": "uppercase",
+        "w": "800",
+        "tt": "lowercase",
         "ta": "start",
         "x": 871
       },
       {
         "t": "The National Lottery Community Fund",
         "px": 14,
-        "w": "700",
+        "w": "800",
         "tt": "none",
         "ta": "center",
         "x": 96
       },
       {
-        "t": "Investec Beyond Business",
-        "px": 14,
-        "w": "700",
-        "tt": "none",
-        "ta": "center",
-        "x": 284
-      },
-      {
         "t": "LSBU Innovation Hub",
         "px": 14,
-        "w": "700",
+        "w": "800",
         "tt": "none",
         "ta": "center",
-        "x": 473
+        "x": 332
       },
       {
         "t": "OCN London accredited",
         "px": 14,
-        "w": "700",
+        "w": "800",
         "tt": "none",
         "ta": "center",
-        "x": 661
+        "x": 549
       },
       {
         "t": "HMPPS",
         "px": 14,
-        "w": "700",
+        "w": "800",
         "tt": "none",
         "ta": "center",
-        "x": 892
+        "x": 837
       },
       {
         "t": "Inside Time",
         "px": 14,
-        "w": "700",
+        "w": "800",
         "tt": "none",
         "ta": "center",
-        "x": 1061
+        "x": 1044
       }
     ],
     "ledes": [
@@ -560,16 +552,9 @@
     "hasLearners": false,
     "hasPrisoners": false,
     "has45": true,
-    "bodyLen": 5753
+    "bodyLen": 5728
   },
   "contrastsLow": [
-    {
-      "t": "the record since 2012",
-      "cr": 1.24,
-      "px": 14,
-      "w": "700",
-      "tag": "SPAN"
-    },
     {
       "t": "✱",
       "cr": 6.96,
@@ -772,6 +757,13 @@
       "px": 46,
       "w": "800",
       "tag": "H3"
+    },
+    {
+      "t": "join the workshop course",
+      "cr": 9.12,
+      "px": 16,
+      "w": "700",
+      "tag": "SPAN"
     }
   ]
 }

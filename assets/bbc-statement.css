@@ -658,3 +658,12 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-tag{ text-transform:lowercase !important; font-weight:800 !important; }
 .bbc-rd-impact .rd-backers__chip{ background:var(--lime,#D4FD62); color:var(--forest,#003C32); border:1.5px solid var(--ink,#0E1A17); font-weight:800; }
 .bbc-rd-impact .rd-dlcard__badge{ background:var(--lime,#D4FD62); color:var(--forest,#003C32); border:1.5px solid var(--ink,#0E1A17); border-radius:999px; }
+
+/* CRIT r4 mechanical closures */
+/* one left axis: kill centred heading boxes (rd-mx-auto) inside impact */
+.bbc-rd-impact .rd-mx-auto{ margin-inline:0 !important; }
+/* mission glyph AAA on paper: forest + >=18px everywhere it appears */
+.bbc-rd-impact .rd-promises__star, .bbc-rd-impact .bbcst-star,
+.bbc-rd-impact .rd-converge__title .bbcst-star{ color:var(--forest,#003C32) !important; font-size:19px; }
+/* backers group label */
+.bbc-rd-impact .rd-backers__label{ display:block; font-size:13px; font-weight:800; letter-spacing:.14em; text-transform:lowercase; color:#17553a; margin:26px 0 10px; text-align:left; }
