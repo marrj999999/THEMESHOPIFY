@@ -11,4 +11,4 @@
 6 **JAMES (G5)** — handoff = evidence screenshots (SendUserFile) + preview link + what changed + what's still open. His verdict in QA-LOG verbatim; any feedback becomes named defects → step 1.
 7 **CLOSE** — git commit per pass; ROLLOUT-TRACKER row updated; page closes only on all-green + James same-version.
 
-Cadence: fix passes are whole-page, never band-scoped. One page in flight at a time. Deviations logged in the tracker BEFORE acting.
+Cadence: fix passes are whole-page, never band-scoped. CRIT runs after EVERY James-feedback batch — token pressure never suspends the gate (rule added 2026-07-13 after quality drift recurred without it). One page in flight at a time. Deviations logged in the tracker BEFORE acting.
