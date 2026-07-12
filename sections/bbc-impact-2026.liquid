@@ -300,6 +300,7 @@
     <div class="rd-wrap">
       {%- if section.settings.cred_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.cred_eyebrow }}</span>{%- endif -%}
       {%- if section.settings.cred_heading != blank -%}<h2 class="rd-mw-22ch">{{ section.settings.cred_heading }}</h2>{%- endif -%}
+      {%- if section.settings.cred_sub != blank -%}<p class="rd-lede rd-mt1">{{ section.settings.cred_sub }}</p>{%- endif -%}
       <div class="rd-grid rd-g2 rd-mt3">
         <blockquote class="rd-card rd-stamp rd-cred-card">
           <p class="rd-cred-q">&ldquo;{{ section.settings.cred_quote1 }}&rdquo;</p>
@@ -327,6 +328,22 @@
         {%- if section.settings.awards_line != blank -%}<p class="rd-partnerlabel rd-mt3">{{ section.settings.awards_line }}</p>{%- endif -%}
         {%- if section.settings.funder_logo != blank or section.settings.accred_logo != blank -%}<div class="rd-mt3 rd-flex rd-jc-center" style="gap:32px;align-items:center;">{%- if section.settings.funder_logo != blank -%}<img src="{{ section.settings.funder_logo | asset_url }}" alt="{{ section.settings.funder_logo_alt | default: 'The National Lottery Community Fund' | escape }}" loading="lazy" style="height:56px !important;width:auto !important;max-width:220px;object-fit:contain;">{%- endif -%}{%- if section.settings.accred_logo != blank -%}<img src="{{ section.settings.accred_logo | asset_url }}" alt="{{ section.settings.accred_logo_alt | default: 'OCN London' | escape }}" loading="lazy" style="height:48px !important;width:auto !important;max-width:180px;object-fit:contain;">{%- endif -%}</div>{%- endif -%}
         {%- if section.settings.funder_line != blank -%}<p class="rd-ship-note{% if section.settings.funder_logo != blank %} rd-mt1{% else %} rd-mt3{% endif %}">{{ section.settings.funder_line }}</p>{%- endif -%}
+        {%- assign backers = section.blocks | where: "type", "backer" -%}
+        {%- if backers.size > 0 -%}
+        <ul class="rd-backers rd-mt3" role="list">
+          {%- for block in backers -%}
+          <li class="rd-backers__cell" {{ block.shopify_attributes }}>
+            {%- if block.settings.url != blank -%}<a href="{{ block.settings.url }}" class="rd-backers__link">{%- endif -%}
+            {%- if block.settings.logo != blank -%}
+            <img class="rd-backers__logo" src="{{ block.settings.logo | asset_url }}" alt="{{ block.settings.label | escape }}" loading="lazy">
+            {%- else -%}
+            <span class="rd-backers__chip">{{ block.settings.label }}</span>
+            {%- endif -%}
+            {%- if block.settings.url != blank -%}</a>{%- endif -%}
+          </li>
+          {%- endfor -%}
+        </ul>
+        {%- endif -%}
       </div>
     </div>
   </section>
@@ -574,6 +591,12 @@
       "id": "press_label",
       "label": "Press strip label",
       "default": "As featured in"
+    },
+    {
+      "type": "text",
+      "id": "cred_sub",
+      "label": "Credibility subline (longevity anchor)",
+      "default": "14 years. 4,000+ people trained. 3,500+ bikes across 45 countries."
     },
     {
       "type": "textarea",
@@ -933,7 +956,7 @@
       "type": "textarea",
       "id": "b2b_body_2",
       "label": "Paragraph 2",
-      "default": "It's built on the evidence that maintaining family contact is one of the strongest predictors of reduced reoffending — people who keep close family ties while in prison are 39% less likely to reoffend (Lord Farmer Review, 2017)."
+      "default": "It's built on the evidence that maintaining family contact is one of the strongest predictors of reduced reoffending — people who keep close family ties while in prison are 39% less likely to reoffend (MoJ family-contact data)."
     },
     {
       "type": "textarea",
@@ -1182,6 +1205,15 @@
           "label": "Lime stamp shadow",
           "default": false
         }
+      ]
+    },
+    {
+      "type": "backer",
+      "name": "Backed-by logo/chip",
+      "settings": [
+        { "type": "text", "id": "logo", "label": "Logo asset filename (assets/, optional)" },
+        { "type": "text", "id": "label", "label": "Name (alt text, or text chip if no logo)" },
+        { "type": "url", "id": "url", "label": "Link (optional)" }
       ]
     },
     {

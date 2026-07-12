@@ -1,6 +1,12 @@
 # QA Log — CUSTOMTHEME20262 redesign
 *Defects, fixes, verdicts. Newest first.*
 
+## 2026-07-12 — Phase 2 rebuild pass 1 DEPLOYED (impact page)
+Fixed & verified in-browser on the draft: D1 (90%+) · D2 (Makers, 0 "learners") · D3 (mobile pathway steps CSS) · D4 (lowercase hero "building bikes. rebuilding lives.") · D5 (Backed-by strip renders, 7 cells: NLCF/OCN/HMPPS/FT/Inside Time logos + Investec/LSBU text chips — logo files for those two still wanted) · D6 (longevity subline live) · D7 (story wall removed, -6 blocks; stashed at scratchpad/impact-story-blocks-stash.json for why-bamboo) · D8 (report_url explicit → /pages/impact-report) · D11 (cscard aspect-ratio placeholder) · June-audit #5 (39% now cited to MoJ family-contact data, both spots).
+Open: D9 (funder mechanism beat — needs design, next pass) · D10 (quote attribution check) · D12 (length re-measure after settle) · Investec+LSBU logo files · a downloadable impact-report PDF (page exists, PDF doesn't).
+Gates: G1 lint clean · G2 pushed+validated (one schema race: template must push AFTER section; and a silent failed replace caught by remote-schema verify — lesson: assert every replacement) · G3 in-browser asserts pass · G5 James pending.
+
+
 ## 2026-07-12 — Phase 2 diagnosis: /pages/impact (draft theme, desktop + 375px mobile emulation)
 
 **The good news: no structural breakage found on the draft.**

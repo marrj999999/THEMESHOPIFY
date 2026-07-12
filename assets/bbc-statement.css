@@ -392,3 +392,23 @@ cart-drawer.animate .drawer{ visibility:visible; }
     }
   }
 }
+
+/* ---- Impact page: Backed-by strip (Phase 2, 2026-07-12) ---- */
+.rd-backers{ display:flex; flex-wrap:wrap; gap:20px 36px; align-items:center; justify-content:center; list-style:none; margin:0; padding:0; }
+.rd-backers__cell{ display:flex; align-items:center; }
+.rd-backers__logo{ height:44px !important; width:auto !important; max-width:180px; object-fit:contain; display:block; }
+.rd-backers__chip{ display:inline-block; font-weight:700; font-size:15px; padding:8px 16px; border:2px solid currentColor; border-radius:999px; white-space:nowrap; }
+.rd-backers__link{ text-decoration:none; color:inherit; }
+@media (max-width:600px){ .rd-backers{ gap:14px 22px; } .rd-backers__logo{ height:34px !important; } }
+
+/* ---- Pathway flow: stack on mobile (QA-LOG D3) — inline arrows read
+   as run-on text under 600px; vertical steps with turned arrows ---- */
+@media (max-width:600px){
+  .rd-flow{ display:flex; flex-direction:column; align-items:flex-start; gap:4px; }
+  .rd-flow__arrow{ transform:rotate(90deg); display:inline-block; margin-left:14px; }
+}
+
+/* ---- Case-study card media: reserve space + tinted placeholder so
+   lazy-load lag reads intentional, not broken (QA-LOG D11) ---- */
+.rd-cscard__media{ aspect-ratio:8/5; background:var(--forest-700,#002A23); }
+.rd-cscard__media img{ width:100%; height:100%; object-fit:cover; }
