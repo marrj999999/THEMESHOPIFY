@@ -407,6 +407,13 @@ cart-drawer.animate .drawer{ visibility:visible; }
    lazy-load lag reads intentional, not broken (QA-LOG D11) ---- */
 .rd-cscard__media{ aspect-ratio:8/5; background:var(--forest-700,#002A23); }
 .rd-cscard__media img{ width:100%; height:100%; object-fit:cover; }
+@keyframes rd-rise-safe{ from{ opacity:.3; transform:translateY(12px); } to{ opacity:1; transform:none; } }
+
+/* ============================================================
+   IMPACT PAGE — consolidated block (2026-07-13). All .bbc-rd-impact
+   rules gathered in cascade order; identical duplicates removed.
+   ============================================================ */
+
 
 /* ============================================================
    IMPACT PAGE RETROFIT — big-type standard (2026-07-12, James
@@ -630,7 +637,6 @@ cart-drawer.animate .drawer{ visibility:visible; }
     }
   }
 }
-@keyframes rd-rise-safe{ from{ opacity:.3; transform:translateY(12px); } to{ opacity:1; transform:none; } }
 
 /* FINAL PASS G3: one left axis in get-involved (h2 left + centred lede violated FORMULA §4) */
 .bbc-rd-impact .rd-center .rd-lede{ text-align:left; margin-inline:0; }
@@ -838,3 +844,6 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .bbc-impact-cred .rd-stamp, .bbc-rd-impact .bbc-impact-cred blockquote,
 .bbc-rd-impact .rd-cred-q, .bbc-rd-impact .rd-cred-q *{ }
 .bbc-rd-impact .bbc-impact-cred .rd-card.rd-stamp{ background:transparent !important; border:0 !important; box-shadow:none !important; padding:0 !important; }
+/* type bridge (James): ledes carry the jump to display heads; station details legible on mobile */
+.bbc-rd-impact .rd-lede{ font-size:clamp(19px,1.9vw,22px) !important; line-height:1.5; }
+.bbc-rd-impact .rd-flow__step small{ font-size:14.5px; }

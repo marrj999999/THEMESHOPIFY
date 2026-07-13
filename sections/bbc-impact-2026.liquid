@@ -204,27 +204,6 @@
   </section>
   {%- endif -%}
 
-  {%- comment -%} ---------- WHY NOW (policy backdrop, sourced) ---------- {%- endcomment -%}
-  {%- if section.settings.policy_title != blank -%}
-  <section class="rd-pad rd-dark rd-band--policy">
-    <div class="rd-wrap">
-      <div class="rd-center">
-        {%- if section.settings.policy_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.policy_eyebrow }}</span>{%- endif -%}
-        <h2 class="rd-mw-22ch">{{ section.settings.policy_title }}</h2>
-      </div>
-      <div class="rd-policy rd-mt4">
-        {%- for block in section.blocks -%}{%- if block.type == 'policy' -%}
-          <div class="rd-stat rd-reveal" {{ block.shopify_attributes }}>
-            <div class="rd-num">{{ block.settings.number }}</div>
-            <div class="rd-lbl">{{ block.settings.label }}</div>
-            {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
-          </div>
-        {%- endif -%}{%- endfor -%}
-      </div>
-    </div>
-  </section>
-  {%- endif -%}
-
   {%- comment -%} ---------- THE STORY: a real workshop, inside ---------- {%- endcomment -%}
   <section class="rd-pad rd-band--workshop">
     <div class="rd-wrap rd-mw-820px">
@@ -262,45 +241,6 @@
       {%- endif -%}
     </div>
   </section>
-
-  {%- comment -%} ---------- WHERE WE WORK (named prison sites) ---------- {%- endcomment -%}
-  {%- if section.settings.sites_title != blank -%}
-  <section class="rd-pad-sm rd-paper rd-center">
-    <div class="rd-wrap rd-mw-820px">
-      {%- if section.settings.sites_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.sites_eyebrow }}</span>{%- endif -%}
-      <h2 class="rd-mw-22ch rd-mx-auto">{{ section.settings.sites_title }}</h2>
-      {%- if section.settings.sites_body != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.sites_body }}</p>{%- endif -%}
-      {%- if section.settings.sites_list != blank -%}<div class="rd-sitenames rd-mt3">{{ section.settings.sites_list }}</div>{%- endif -%}
-      {%- if section.settings.map_enable -%}
-      <figure class="rd-opsmap rd-mt3">
-        {%- if section.settings.map_image != blank -%}
-          <img src="{{ section.settings.map_image | image_url: width: 2000 }}" alt="{{ section.settings.map_alt | escape }}" width="{{ section.settings.map_image.width }}" height="{{ section.settings.map_image.height }}" loading="lazy">
-        {%- else -%}
-          <img src="{{ 'bbc-world-map.svg' | asset_url }}" alt="{{ section.settings.map_alt | escape }}" width="1000" height="472" loading="lazy">
-        {%- endif -%}
-        {%- if section.settings.map_caption != blank -%}<figcaption class="rd-opsmap__cap">{{ section.settings.map_caption }}</figcaption>{%- endif -%}
-        
-</figure>
-      {%- endif -%}
-      {%- assign ops = section.blocks | where: "type", "opgroup" -%}
-      {%- if ops.size > 0 -%}
-      <ul class="rd-ops rd-mt3" role="list">
-        {%- for block in ops limit: 4 -%}
-        <li class="rd-ops__cell" {{ block.shopify_attributes }}>
-          <span class="rd-ops__count">{{ block.settings.count }}</span>
-          <h3 class="rd-ops__title">{{ block.settings.title }}</h3>
-          <p class="rd-ops__items">{{ block.settings.items }}</p>
-        </li>
-        {%- endfor -%}
-      </ul>
-      {%- if ops.size > 4 and section.settings.ops_more_label != blank -%}
-      <p class="rd-mt3" style="text-align:left;"><a class="rd-path__cta" style="margin-top:0;" href="{{ section.settings.ops_more_url | default: '/pages/our-story-2' }}">{{ section.settings.ops_more_label }}</a></p>
-      {%- endif -%}
-      {%- endif -%}
-      {%- if section.settings.sites_partner != blank -%}<p class="rd-frame-label rd-mt3">{{ section.settings.sites_partner }}</p>{%- endif -%}
-    </div>
-  </section>
-  {%- endif -%}
 
   {%- comment -%} ---------- CASE STUDY CARD → full Build to Bond story ---------- {%- endcomment -%}
   {%- if section.settings.cs_quote != blank -%}
@@ -375,44 +315,44 @@
   </section>
   {%- endif -%}
 
-  {%- comment -%} ---------- WHAT'S NEXT (forward band, A2 — funder question: what does new money do?) ---------- {%- endcomment -%}
-  {%- if section.settings.next_title != blank -%}
-  <section class="rd-pad rd-band--next">
-    <div class="rd-wrap rd-rail">
-      {%- if section.settings.next_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.next_eyebrow }}</span>{%- endif -%}
-      <h2>{{ section.settings.next_title }}</h2>
-      {%- if section.settings.next_lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.next_lede }}</p>{%- endif -%}
-      {%- assign nx = section.settings.next_flow | split: '|' -%}
-      <div class="rd-flow rd-mt3">{%- for st in nx -%}<span class="rd-flow__step">{{ st | strip }}</span>{%- endfor -%}</div>
+  {%- comment -%} ---------- WHERE WE WORK (named prison sites) ---------- {%- endcomment -%}
+  {%- if section.settings.sites_title != blank -%}
+  <section class="rd-pad-sm rd-paper rd-center">
+    <div class="rd-wrap rd-mw-820px">
+      {%- if section.settings.sites_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.sites_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-mw-22ch rd-mx-auto">{{ section.settings.sites_title }}</h2>
+      {%- if section.settings.sites_body != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.sites_body }}</p>{%- endif -%}
+      {%- if section.settings.sites_list != blank -%}<div class="rd-sitenames rd-mt3">{{ section.settings.sites_list }}</div>{%- endif -%}
+      {%- if section.settings.map_enable -%}
+      <figure class="rd-opsmap rd-mt3">
+        {%- if section.settings.map_image != blank -%}
+          <img src="{{ section.settings.map_image | image_url: width: 2000 }}" alt="{{ section.settings.map_alt | escape }}" width="{{ section.settings.map_image.width }}" height="{{ section.settings.map_image.height }}" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'bbc-world-map.svg' | asset_url }}" alt="{{ section.settings.map_alt | escape }}" width="1000" height="472" loading="lazy">
+        {%- endif -%}
+        {%- if section.settings.map_caption != blank -%}<figcaption class="rd-opsmap__cap">{{ section.settings.map_caption }}</figcaption>{%- endif -%}
+        
+</figure>
+      {%- endif -%}
+      {%- assign ops = section.blocks | where: "type", "opgroup" -%}
+      {%- if ops.size > 0 -%}
+      <ul class="rd-ops rd-mt3" role="list">
+        {%- for block in ops limit: 4 -%}
+        <li class="rd-ops__cell" {{ block.shopify_attributes }}>
+          <span class="rd-ops__count">{{ block.settings.count }}</span>
+          <h3 class="rd-ops__title">{{ block.settings.title }}</h3>
+          <p class="rd-ops__items">{{ block.settings.items }}</p>
+        </li>
+        {%- endfor -%}
+      </ul>
+      {%- if ops.size > 4 and section.settings.ops_more_label != blank -%}
+      <p class="rd-mt3" style="text-align:left;"><a class="rd-path__cta" style="margin-top:0;" href="{{ section.settings.ops_more_url | default: '/pages/our-story-2' }}">{{ section.settings.ops_more_label }}</a></p>
+      {%- endif -%}
+      {%- endif -%}
+      {%- if section.settings.sites_partner != blank -%}<p class="rd-frame-label rd-mt3">{{ section.settings.sites_partner }}</p>{%- endif -%}
     </div>
   </section>
   {%- endif -%}
-
-  {%- comment -%} ---------- GET INVOLVED: three ways (3 CTA cards) ---------- {%- endcomment -%}
-  <section class="rd-pad rd-steel">
-    <div class="rd-wrap">
-      <div class="rd-center rd-cmp-84401">
-        {%- if section.settings.help_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.help_eyebrow }}</span>{%- endif -%}
-        <h2>{{ section.settings.help_title }}</h2>
-        {%- if section.settings.help_intro != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.help_intro }}</p>{%- endif -%}
-      </div>
-      <div class="rd-grid rd-g3">
-        {%- for block in section.blocks -%}{%- if block.type == 'help' -%}
-          {%- if block.settings.lime -%}{%- assign stamp = 'rd-card rd-stamp rd-lime' -%}{%- else -%}{%- assign stamp = 'rd-card rd-stamp' -%}{%- endif -%}
-          {%- if block.settings.tag_lime -%}{%- assign tagcls = 'rd-tag rd-lime' -%}{%- else -%}{%- assign tagcls = 'rd-tag' -%}{%- endif -%}
-          {%- assign help_url = block.settings.link_url | default: '/pages/contact-us' -%}
-          <div class="{{ stamp }}" {{ block.shopify_attributes }}>
-            <div class="rd-body">
-              {%- if block.settings.tag != blank -%}<span class="{{ tagcls }}">{{ block.settings.tag }}</span>{%- endif -%}
-              <h3 class="rd-mt2 rd-fs-21px">{{ block.settings.title }}</h3>
-              <p>{{ block.settings.body }}</p>
-              {%- if block.settings.link_label != blank -%}<a class="rd-btn rd-lime rd-mt3" href="{{ help_url }}">{{ block.settings.link_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
-            </div>
-          </div>
-        {%- endif -%}{%- endfor -%}
-      </div>
-    </div>
-  </section>
 
   {%- comment -%} ---------- RECOGNISED BY (credibility quotes) ---------- {%- endcomment -%}
   {%- if section.settings.cred_quote1 != blank -%}
@@ -491,6 +431,66 @@
     </div>
   </section>
   {%- endif -%}
+
+  {%- comment -%} ---------- WHY NOW (policy backdrop, sourced) ---------- {%- endcomment -%}
+  {%- if section.settings.policy_title != blank -%}
+  <section class="rd-pad rd-dark rd-band--policy">
+    <div class="rd-wrap">
+      <div class="rd-center">
+        {%- if section.settings.policy_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.policy_eyebrow }}</span>{%- endif -%}
+        <h2 class="rd-mw-22ch">{{ section.settings.policy_title }}</h2>
+      </div>
+      <div class="rd-policy rd-mt4">
+        {%- for block in section.blocks -%}{%- if block.type == 'policy' -%}
+          <div class="rd-stat rd-reveal" {{ block.shopify_attributes }}>
+            <div class="rd-num">{{ block.settings.number }}</div>
+            <div class="rd-lbl">{{ block.settings.label }}</div>
+            {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- WHAT'S NEXT (forward band, A2 — funder question: what does new money do?) ---------- {%- endcomment -%}
+  {%- if section.settings.next_title != blank -%}
+  <section class="rd-pad rd-band--next">
+    <div class="rd-wrap rd-rail">
+      {%- if section.settings.next_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.next_eyebrow }}</span>{%- endif -%}
+      <h2>{{ section.settings.next_title }}</h2>
+      {%- if section.settings.next_lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.next_lede }}</p>{%- endif -%}
+      {%- assign nx = section.settings.next_flow | split: '|' -%}
+      <div class="rd-flow rd-mt3">{%- for st in nx -%}<span class="rd-flow__step">{{ st | strip }}</span>{%- endfor -%}</div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- GET INVOLVED: three ways (3 CTA cards) ---------- {%- endcomment -%}
+  <section class="rd-pad rd-steel">
+    <div class="rd-wrap">
+      <div class="rd-center rd-cmp-84401">
+        {%- if section.settings.help_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.help_eyebrow }}</span>{%- endif -%}
+        <h2>{{ section.settings.help_title }}</h2>
+        {%- if section.settings.help_intro != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.help_intro }}</p>{%- endif -%}
+      </div>
+      <div class="rd-grid rd-g3">
+        {%- for block in section.blocks -%}{%- if block.type == 'help' -%}
+          {%- if block.settings.lime -%}{%- assign stamp = 'rd-card rd-stamp rd-lime' -%}{%- else -%}{%- assign stamp = 'rd-card rd-stamp' -%}{%- endif -%}
+          {%- if block.settings.tag_lime -%}{%- assign tagcls = 'rd-tag rd-lime' -%}{%- else -%}{%- assign tagcls = 'rd-tag' -%}{%- endif -%}
+          {%- assign help_url = block.settings.link_url | default: '/pages/contact-us' -%}
+          <div class="{{ stamp }}" {{ block.shopify_attributes }}>
+            <div class="rd-body">
+              {%- if block.settings.tag != blank -%}<span class="{{ tagcls }}">{{ block.settings.tag }}</span>{%- endif -%}
+              <h3 class="rd-mt2 rd-fs-21px">{{ block.settings.title }}</h3>
+              <p>{{ block.settings.body }}</p>
+              {%- if block.settings.link_label != blank -%}<a class="rd-btn rd-lime rd-mt3" href="{{ help_url }}">{{ block.settings.link_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
 
   {%- comment -%} ---------- FINAL CTA (dark, centred) ---------- {%- endcomment -%}
   <section class="rd-pad rd-dark rd-center rd-band--close">
