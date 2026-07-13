@@ -618,12 +618,12 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-ops__items{ font-size:16px !important; line-height:1.5; margin:0; color:#3a443f; }
 /* where-we-operate world map (J2) — breaks out of the 820px wrap, centred on the viewport;
    marker pulse lives inside the SVG itself (renders via <img>) with its own reduced-motion guard */
-.bbc-rd-impact .rd-opsmap{ position:relative; left:50%; transform:translateX(-50%); width:min(1160px, calc(100vw - 40px)); margin:32px 0 0; padding:0; }
-.bbc-rd-impact .rd-opsmap img{ display:block; width:100% !important; max-width:100% !important; height:auto !important; max-height:420px; object-fit:contain; object-position:center top; }
-.bbc-rd-impact .rd-opsmap__cap{ font-size:14px; line-height:1.5; color:#3a443f; margin:10px auto 0; text-align:center; max-width:60ch; }
+
+
+
 @media (max-width:749px){
-  .bbc-rd-impact .rd-opsmap{ width:calc(100vw - 32px); margin-top:24px; }
-  .bbc-rd-impact .rd-opsmap__cap{ text-align:left; }
+  
+  
 }
 
 /* FINAL PASS G2: reveals must never blank a viewport — items start
@@ -749,7 +749,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
   @keyframes rd-ride{ to{ stroke-dashoffset:0; } }
 }
 /* STATS ON THE MAP: region callouts over the figure */
-.bbc-rd-impact .rd-opsmap{ position:relative; }
+
 .bbc-rd-impact .rd-mapcall{ position:absolute; background:var(--paper,#F1E9D8); border:2px solid var(--ink,#0E1A17); border-radius:6px; padding:8px 12px; font-size:13.5px; font-weight:700; line-height:1.35; box-shadow:3px 3px 0 var(--ink,#0E1A17); max-width:220px; text-align:left; }
 .bbc-rd-impact .rd-mapcall::before{ content:""; position:absolute; width:10px; height:10px; border-radius:50%; background:var(--lime,#D4FD62); border:2px solid var(--ink,#0E1A17); }
 .bbc-rd-impact .rd-mapcall--uk{ left:31%; top:2%; } .bbc-rd-impact .rd-mapcall--uk::before{ left:76%; bottom:-26px; }
@@ -923,28 +923,28 @@ cart-drawer.animate .drawer{ visibility:visible; }
 }
 
 /* WORLD MAP — full-bleed wide, big stats dropped in the ocean (James 2026-07-13) */
-.bbc-rd-impact .rd-mapfull{ margin-inline:0; }
-.bbc-rd-impact .rd-opsmap{ position:relative; width:100vw; margin-left:calc(50% - 50vw); margin-block:0; }
-.bbc-rd-impact .rd-opsmap > img{ display:block; width:100% !important; max-width:none !important; height:auto !important; max-height:none !important; object-fit:contain; aspect-ratio:300/129; }
-.bbc-rd-impact .rd-mapstats{ position:absolute; inset:0; pointer-events:none; }
-.bbc-rd-impact .rd-mapstat{ position:absolute; text-align:left; }
-.bbc-rd-impact .rd-mapstat b{ display:block; font-size:clamp(2rem,4.6vw,4.4rem); line-height:.82; font-weight:800; letter-spacing:-.03em; color:var(--forest,#003C32); text-shadow:0 0 2px var(--bone,#E6DCC8), 0 0 14px var(--bone,#E6DCC8), 2px 2px 0 var(--bone,#E6DCC8); }
-.bbc-rd-impact .rd-mapstat span{ display:block; font-size:clamp(11px,.9vw,14px); font-weight:800; letter-spacing:.02em; color:var(--forest,#003C32); max-width:14ch; margin-top:3px; text-shadow:0 0 8px var(--bone,#E6DCC8), 0 1px 0 var(--bone,#E6DCC8); }
+
+
+
+
+
+
+
 /* ocean placements (equirectangular): North Pacific, North Atlantic, Indian Ocean, far-right Pacific */
-.bbc-rd-impact .rd-mapstat--d b{ font-size:clamp(2.6rem,6.5vw,6rem); }
-.bbc-rd-impact .rd-mapstat--d span, .bbc-rd-impact .rd-mapstat--b span, .bbc-rd-impact .rd-mapstat--a span{ margin-left:auto; }
-.bbc-rd-impact .rd-opsmap__cap{ margin:14px 0 0; max-width:60ch; text-align:left; }
+
+
+
 /* MOBILE: overlay off — map full-width, stats become a 2x2 row on the page axis */
 @media (max-width:759px){
   /* cancel full-bleed on mobile: map + stats sit in the normal page gutter (18px) */
-  .bbc-rd-impact .rd-opsmap{ width:auto; margin-left:0; }
-  .bbc-rd-impact .rd-mapstats{ position:static; inset:auto; display:grid; grid-template-columns:1fr 1fr; gap:22px 20px; padding:24px 0 0; width:100%; box-sizing:border-box; }
-  .bbc-rd-impact .rd-mapstat{ position:static; inset:auto; text-align:left !important; }
-  .bbc-rd-impact .rd-mapstat span{ margin-left:0 !important; max-width:none; }
-  .bbc-rd-impact .rd-mapstat .rd-num{ font-size:clamp(2.4rem,12vw,3.4rem); text-shadow:none; }
-  .bbc-rd-impact .rd-mapstat span{ text-shadow:none; }
-  .bbc-rd-impact .rd-mapstat--d .rd-num{ font-size:clamp(2.6rem,13vw,3.8rem); }
-  .bbc-rd-impact .rd-opsmap__cap{ padding:16px 18px 0; }
+  
+  
+  
+  
+  
+  
+  
+  
 }
 
 /* where-we-operate: single CENTRED big-number stat row under the map (de-dup + central, James 2026-07-13) */
@@ -956,7 +956,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-ops__items{ font-size:13px !important; line-height:1.45; color:#5a655f; margin:6px auto 0; max-width:26ch; text-align:center; }
 @media (max-width:759px){ .bbc-rd-impact .rd-ops{ grid-template-columns:repeat(2,1fr); gap:24px 18px; } }
 /* map: clean + centred */
-.bbc-rd-impact .rd-opsmap > img{ margin-inline:auto; }
+
 
 /* where-we-operate detail: names row (numbers now live ON the map — no repeat) */
 .bbc-rd-impact .rd-ops{ display:flex !important; flex-wrap:wrap; justify-content:center; gap:14px 30px; grid-template-columns:none !important; }
@@ -964,8 +964,43 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact h3.rd-ops__title{ font-size:14px !important; }
 
 /* MAP STATS — authoritative distributed ocean placement (measured geography; !important beats strays) */
-.bbc-rd-impact .rd-mapstat--d{ right:6% !important; left:auto !important; top:22% !important; text-align:right !important; }   /* 45 — Pacific right, hero */
-.bbc-rd-impact .rd-mapstat--b{ left:19% !important; right:auto !important; top:5%  !important; text-align:left !important; }   /* 10 — N Atlantic top */
-.bbc-rd-impact .rd-mapstat--a{ left:31% !important; right:auto !important; top:66% !important; text-align:left !important; }   /* 4 — S Atlantic */
-.bbc-rd-impact .rd-mapstat--c{ left:59% !important; right:auto !important; top:70% !important; text-align:left !important; }   /* 3 — Indian Ocean */
-.bbc-rd-impact .rd-mapstat--d b{ font-size:clamp(2.6rem,6.5vw,6rem); }
+
+
+/* MAP STATS — all four in the open Pacific (James 2026-07-13), right-aligned stack */
+
+
+   /* 45 hero */
+   /* 10 */
+   /* 4 */
+   /* 3 */
+
+
+
+@media (max-width:759px){   }
+
+/* ============================================================
+   WORLD MAP — clean rewrite 2026-07-13 (flex-centred, wide,
+   all 4 stats in the Pacific per James). Replaces all prior
+   map CSS. Mobile: map on top, stats 2x2 on the page axis.
+   ============================================================ */
+.bbc-rd-impact .rd-mapwide{ width:min(1120px, calc(100% - 48px)); margin-inline:auto; }
+.bbc-rd-impact .rd-opsmap{ position:relative; width:100%; max-width:1080px; margin:0; }
+.bbc-rd-impact .rd-opsmap > img{ display:block; width:100%; height:auto; }
+.bbc-rd-impact .rd-opsmap__cap{ margin:14px 0 0; max-width:60ch; text-align:left; align-self:flex-start; }
+/* stats stacked in the open Pacific (right side of the map) */
+.bbc-rd-impact .rd-mapstats{ position:absolute; inset:0; pointer-events:none; }
+.bbc-rd-impact .rd-mapstat{ position:absolute; right:2%; text-align:right; }
+.bbc-rd-impact .rd-mapstat b{ display:block; font-weight:800; line-height:.82; letter-spacing:-.03em; color:var(--forest,#003C32); font-size:clamp(2rem,4.6vw,4.2rem); }
+.bbc-rd-impact .rd-mapstat span{ display:block; font-size:clamp(11px,1vw,14px); font-weight:800; color:var(--forest,#003C32); max-width:14ch; margin:3px 0 0 auto; }
+.bbc-rd-impact .rd-mapstat--d{ top:8%; }  .bbc-rd-impact .rd-mapstat--d b{ font-size:clamp(2.6rem,6vw,5.6rem); }
+.bbc-rd-impact .rd-mapstat--b{ top:33%; }
+.bbc-rd-impact .rd-mapstat--a{ top:56%; }
+.bbc-rd-impact .rd-mapstat--c{ top:79%; }
+@media (max-width:759px){
+  .bbc-rd-impact .rd-mapstats{ position:static; display:grid; grid-template-columns:1fr 1fr; gap:22px 20px; padding:24px 0 0; width:100%; }
+  .bbc-rd-impact .rd-mapstat{ position:static; right:auto; text-align:left; }
+  .bbc-rd-impact .rd-mapstat span{ margin-left:0; }
+  .bbc-rd-impact .rd-mapstat b{ font-size:clamp(2.4rem,12vw,3.4rem); }
+  .bbc-rd-impact .rd-mapstat--d b{ font-size:clamp(2.6rem,13vw,3.8rem); }
+  .bbc-rd-impact .rd-opsmap__cap{ align-self:stretch; }
+}

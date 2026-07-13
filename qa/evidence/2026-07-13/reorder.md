@@ -9,3 +9,6 @@ full-bleed map + ocean stats 11:22:20: desktop overlay in sea gaps, mobile 2x2 o
 map mobile fix 11:35:14: 2x2 grid on 18px axis, kill leaking right-align, no clip, drop halo on mobile
 de-dup + central 11:53:23: removed map overlay stats, directory→centred 4-up big-number row w/ names, map centred
 stats-inside-map 12:01:11: overlay back (distributed ocean by measured geography), directory→names-only (no number repeat)
+pacific stack 12:10:19: all 4 stats right-aligned in the open Pacific per James
+map bleed fix 12:12:55: removed broken full-bleed (was shifting -452px offscreen), map now centred max 1040 wide
+map OUT of 820 wrap 12:16:52: now full-width sibling, centred max 1120
