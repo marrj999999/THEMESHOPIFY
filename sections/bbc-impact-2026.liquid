@@ -287,45 +287,55 @@
   </section>
   {%- endif -%}
 
-  {%- comment -%} ---------- IMPACT VOICES (quote slider, APG carousel) ---------- {%- endcomment -%}
+  {%- comment -%} ---------- IMPACT VOICES (rolling quote reel) ---------- {%- endcomment -%}
   {%- assign sq = section.blocks | where: "type", "scrollquote" -%}
   {%- if sq.size > 0 -%}
-  <section class="rd-pad-sm rd-paper rd-band--quotes">
-    <div class="rd-wrap rd-qhead">
-      {%- if section.settings.quotes_label != blank -%}<span class="rd-eyebrow">{{ section.settings.quotes_label }}</span>{%- endif -%}
-      <div class="rd-qnav" hidden>
-        <button type="button" class="rd-qbtn" data-dir="-1" aria-label="Previous quote">&larr;</button>
-        <span class="rd-qcount" aria-live="polite"><b>1</b>&thinsp;/&thinsp;{{ sq.size }}</span>
-        <button type="button" class="rd-qbtn" data-dir="1" aria-label="Next quote">&rarr;</button>
+  <section class="rd-pad-sm rd-dark rd-band--quotes">
+    <div class="rd-wrap">
+      <div class="rd-qhead">
+        <div class="rd-qnav" hidden>
+          <button type="button" class="rd-qbtn rd-qbtn--pause" aria-label="Pause the moving quotes" aria-pressed="false">&#10073;&#10073;</button>
+          <button type="button" class="rd-qbtn" data-dir="-1" aria-label="Previous quote">&larr;</button>
+          <button type="button" class="rd-qbtn" data-dir="1" aria-label="Next quote">&rarr;</button>
+        </div>
+        {%- if section.settings.quotes_label != blank -%}<span class="rd-eyebrow">{{ section.settings.quotes_label }}</span>{%- endif -%}
       </div>
     </div>
     <div class="rd-qscroll" role="region" aria-roledescription="carousel" aria-label="{{ section.settings.quotes_label | default: 'what the impact sounds like' | escape }}" tabindex="0">
-      {%- for block in sq -%}
-      <figure class="rd-qscroll__item" role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} of {{ sq.size }}" {{ block.shopify_attributes }}>
-        <blockquote class="rd-qscroll__q">&ldquo;{{ block.settings.text }}&rdquo;</blockquote>
-        <figcaption class="rd-qscroll__a">{{ block.settings.attr }}{%- if block.settings.source != blank %} <span class="rd-qsrc">&middot; {{ block.settings.source }}</span>{% endif -%}</figcaption>
-      </figure>
-      {%- endfor -%}
+      <div class="rd-qtrack">
+        {%- for block in sq -%}
+        <figure class="rd-qscroll__item" role="group" aria-label="{{ forloop.index }} of {{ sq.size }}" {{ block.shopify_attributes }}>
+          <blockquote class="rd-qscroll__q">&ldquo;{{ block.settings.text }}&rdquo;</blockquote>
+          <figcaption class="rd-qscroll__a"><b>{{ block.settings.attr }}</b>{%- if block.settings.source != blank %} <span class="rd-qsrc">&middot; {{ block.settings.source }}</span>{% endif -%}</figcaption>
+        </figure>
+        {%- endfor -%}
+        {%- for block in sq -%}
+        <figure class="rd-qscroll__item" aria-hidden="true">
+          <blockquote class="rd-qscroll__q">&ldquo;{{ block.settings.text }}&rdquo;</blockquote>
+          <figcaption class="rd-qscroll__a"><b>{{ block.settings.attr }}</b>{%- if block.settings.source != blank %} <span class="rd-qsrc">&middot; {{ block.settings.source }}</span>{% endif -%}</figcaption>
+        </figure>
+        {%- endfor -%}
+      </div>
     </div>
     <script>
     (() => {
       document.querySelectorAll('.rd-band--quotes').forEach((band) => {
-        const rail = band.querySelector('.rd-qscroll'),
-              nav  = band.querySelector('.rd-qnav'),
-              cur  = band.querySelector('.rd-qcount b'),
-              items = [...rail.querySelectorAll('.rd-qscroll__item')];
-        if (!nav || items.length < 2) return;
+        const rail = band.querySelector('.rd-qscroll'), track = band.querySelector('.rd-qtrack'),
+              nav = band.querySelector('.rd-qnav');
+        if (!nav) return;
         nav.hidden = false;
-        const [prev, next] = nav.querySelectorAll('.rd-qbtn');
-        const index = () => { const x = rail.scrollLeft; let best = 0;
+        const pause = band.querySelector('.rd-qbtn--pause');
+        const manual = () => { band.classList.add('is-manual'); pause.setAttribute('aria-pressed','true'); pause.textContent = '\u25B6'; };
+        const roll = () => { band.classList.remove('is-manual'); pause.setAttribute('aria-pressed','false'); pause.innerHTML = '&#10073;&#10073;'; };
+        pause.addEventListener('click', () => band.classList.contains('is-manual') ? roll() : manual());
+        nav.addEventListener('click', (e) => { const b = e.target.closest('[data-dir]');
+          if (!b) return; manual();
+          const items = [...rail.querySelectorAll('.rd-qscroll__item:not([aria-hidden])')];
+          const x = rail.scrollLeft; let best = 0;
           items.forEach((el, i) => { if (Math.abs(el.offsetLeft - rail.offsetLeft - x) < Math.abs(items[best].offsetLeft - rail.offsetLeft - x)) best = i; });
-          return best; };
-        const paint = () => { const i = index(); cur.textContent = i + 1;
-          prev.disabled = i === 0; next.disabled = i === items.length - 1; };
-        nav.addEventListener('click', (e) => { const b = e.target.closest('.rd-qbtn');
-          if (b) items[Math.min(items.length - 1, Math.max(0, index() + +b.dataset.dir))].scrollIntoView({ block:'nearest', inline:'start', behavior:'smooth' }); });
-        rail.addEventListener('scroll', () => requestAnimationFrame(paint), { passive:true });
-        paint();
+          const t = items[Math.min(items.length - 1, Math.max(0, best + +b.dataset.dir))];
+          if (t) t.scrollIntoView({ block:'nearest', inline:'start', behavior:'smooth' });
+        });
       });
     })();
     </script>

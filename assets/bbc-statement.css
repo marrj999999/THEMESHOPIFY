@@ -880,3 +880,26 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-qbtn[disabled]{ opacity:.3; cursor:default; background:transparent; }
 .bbc-rd-impact .rd-qcount{ font-size:14px; font-weight:800; color:var(--forest,#003C32); font-variant-numeric:tabular-nums; }
 .bbc-rd-impact .rd-qsrc{ font-weight:400; color:#5a655f; }
+/* IMPACT VOICES — rolling reel on forest (James: fun, key proof) */
+.bbc-rd-impact .rd-band--quotes{ overflow:clip; }
+.bbc-rd-impact .rd-band--quotes .rd-qhead{ justify-content:flex-start; gap:20px; flex-direction:row-reverse; justify-content:flex-end; margin-bottom:14px; }
+.bbc-rd-impact .rd-band--quotes .rd-eyebrow{ color:var(--lime,#D4FD62) !important; }
+.bbc-rd-impact .rd-band--quotes .rd-qscroll{ overflow:hidden; padding-block:14px 22px; }
+.bbc-rd-impact .rd-qtrack{ display:flex; gap:clamp(40px,5vw,88px); width:max-content; animation:rd-roll 55s linear infinite; }
+@keyframes rd-roll{ to{ transform:translateX(-50%); } }
+.bbc-rd-impact .rd-band--quotes:hover .rd-qtrack,
+.bbc-rd-impact .rd-band--quotes:focus-within .rd-qtrack{ animation-play-state:paused; }
+.bbc-rd-impact .rd-band--quotes.is-manual .rd-qtrack{ animation:none; }
+.bbc-rd-impact .rd-band--quotes.is-manual .rd-qscroll{ overflow-x:auto; scroll-snap-type:x mandatory; }
+@media (prefers-reduced-motion: reduce){
+  .bbc-rd-impact .rd-qtrack{ animation:none; }
+  .bbc-rd-impact .rd-band--quotes .rd-qscroll{ overflow-x:auto; }
+}
+/* type worked: quote bold statement, attribution bold name + light source */
+.bbc-rd-impact .rd-band--quotes .rd-qscroll__q{ color:var(--bone,#E6DCC8); font-size:clamp(22px,2.6vw,34px); line-height:1.18; font-weight:800; letter-spacing:-.015em; }
+.bbc-rd-impact .rd-band--quotes .rd-qscroll__q::before{ color:var(--lime,#D4FD62); }
+.bbc-rd-impact .rd-band--quotes .rd-qscroll__a{ color:#cfe0d7; font-weight:400; font-size:14px; margin-top:10px; }
+.bbc-rd-impact .rd-band--quotes .rd-qscroll__a b{ color:var(--bone,#E6DCC8); font-weight:800; }
+.bbc-rd-impact .rd-band--quotes .rd-qsrc{ color:#9db8ad; }
+.bbc-rd-impact .rd-band--quotes .rd-qbtn{ border-color:var(--bone,#E6DCC8); color:var(--bone,#E6DCC8); }
+.bbc-rd-impact .rd-band--quotes .rd-qbtn:hover{ background:var(--lime,#D4FD62); color:var(--forest,#003C32); }
