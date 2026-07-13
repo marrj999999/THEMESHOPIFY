@@ -98,7 +98,7 @@ const count = await page.evaluate(() => {
   uniq.forEach((o,i)=>o.el.setAttribute('data-gband',String(i)));
   return uniq.map(o=>o.h);
 });
-const names=['stats','what-we-do','why-now','inside-workshop','follow-on','where-we-operate','whats-next','get-involved','recognised-by','final-cta','extra'];
+const names=['stats','one-craft-two-arms','inside-workshop','build-to-bond-feature','the-evidence-stories','where-we-work','recognised-by','why-now-policy','whats-next','get-involved','final-cta'];
 
 const band0top = await page.evaluate(()=>{const e=document.querySelector('[data-gband="0"]');return e?Math.round(e.getBoundingClientRect().top+window.scrollY):700;});
 await page.evaluate(()=>window.scrollTo(0,0));
@@ -110,15 +110,16 @@ for(let i=0;i<count.length;i++){
   if(!h) continue;
   const nm = names[i]||('band'+i);
   try {
-    await h.scrollIntoViewIfNeeded(); await page.waitForTimeout(150);
-    if (count[i] > 3800) { // tall band: clip
-      const box = await h.boundingBox();
-      await page.evaluate(y=>window.scrollTo(0,y), Math.round(box.y));
-      await page.waitForTimeout(150);
-      await page.screenshot({ path:`${DIR}/band-${String(i+1).padStart(2,'0')}-${nm}${suffix}.png`, clip:{x:0,y:0,width:VW,height:Math.min(count[i],3800)} });
-    } else {
-      await h.screenshot({ path:`${DIR}/band-${String(i+1).padStart(2,'0')}-${nm}${suffix}.png` });
-    }
+    // Always use full-page scroll + clip screenshot (NOT elementHandle.screenshot()) —
+    // element screenshots of tall (>~1500px) elements containing mix-blend-mode
+    // pseudo-elements (.rd-duotone) render as a flat dark gradient in headless
+    // Chromium (compositing artifact), a false positive verified against true
+    // full-page renders during this pass. clip-based capture matches what a real
+    // visitor sees.
+    const box = await h.boundingBox();
+    await page.evaluate(y=>window.scrollTo(0,y), Math.round(box.y));
+    await page.waitForTimeout(200);
+    await page.screenshot({ path:`${DIR}/band-${String(i+1).padStart(2,'0')}-${nm}${suffix}.png`, clip:{x:0,y:0,width:VW,height:Math.min(count[i],3800)} });
   } catch(e){ console.log('shot fail',i,nm,e.message.slice(0,60)); }
 }
 console.log((DESKTOP?'DESKTOP':'MOBILE')+' done. themeId='+themeId+' cookieClicked='+cookieClicked+' docH='+metrics.docH+' docW='+metrics.docW+' winW='+metrics.winW+' bands='+count.length);

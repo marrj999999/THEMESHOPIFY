@@ -4,7 +4,7 @@
 ## 1 · Type roles (ONE size per role, no exceptions)
 | Role | Size | Case | Notes |
 |---|---|---|---|
-| Hero h1 | clamp(2.9rem,12.5vw,5.4rem) mobile-first | lowercase, proper nouns kept | THE display moment, nothing rivals it |
+| Hero h1 | clamp(3rem,7.5vw,6rem) desktop / clamp(2.9rem,12.5vw,4.4rem) mobile | lowercase, proper nouns kept | THE display moment — must out-scale every band h2 on ALL viewports (ruling 2026-07-13) |
 | Band head h2 | clamp(2.4rem,7vw,5.4rem) | lowercase-at-source | explains who/what to a stranger (zero-knowledge rule) |
 | Pathway-name h3 (display role) | clamp(2.1rem,3.6vw,2.9rem) | lowercase | pathways band only |
 | Card-title h3 (ops/help/report cards) | 21px | lowercase | one size, everywhere else |

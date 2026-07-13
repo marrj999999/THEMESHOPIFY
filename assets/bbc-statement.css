@@ -847,3 +847,10 @@ cart-drawer.animate .drawer{ visibility:visible; }
 /* type bridge (James): ledes carry the jump to display heads; station details legible on mobile */
 .bbc-rd-impact .rd-lede{ font-size:clamp(19px,1.9vw,22px) !important; line-height:1.5; }
 .bbc-rd-impact .rd-flow__step small{ font-size:14.5px; }
+/* SIGN-OFF CRIT closures (2026-07-13) */
+/* 820px wraps join the page axis (was flush-left after the margin-0 fix) */
+.bbc-rd-impact .rd-wrap.rd-mw-820px{ margin-left:max(0px, calc((100vw - 1264px) / 2)) !important; margin-right:auto !important; }
+/* lazy imgs must never blank during fast scroll on this page */
+.bbc-rd-impact img[loading="lazy"]{ content-visibility:visible !important; }
+/* seal: keep inside the mobile viewport */
+@media (max-width:600px){ .bbc-rd-impact .rd-seal{ right:8px; } }
