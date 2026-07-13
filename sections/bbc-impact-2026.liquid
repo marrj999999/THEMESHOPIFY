@@ -220,7 +220,27 @@
     </div>
   </section>
 
-  {%- comment -%} ---------- CASE STUDY CARD → full Build to Bond story ---------- {%- endcomment -%}
+  {%- comment -%} ---------- WHY NOW (policy backdrop, sourced) ---------- {%- endcomment -%}
+  {%- if section.settings.policy_title != blank -%}
+  <section class="rd-pad rd-dark rd-band--policy">
+    <div class="rd-wrap">
+      <div class="rd-center">
+        {%- if section.settings.policy_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.policy_eyebrow }}</span>{%- endif -%}
+        <h2 class="rd-mw-22ch">{{ section.settings.policy_title }}</h2>
+      </div>
+      <div class="rd-policy rd-mt4">
+        {%- for block in section.blocks -%}{%- if block.type == 'policy' -%}
+          <div class="rd-stat rd-reveal" {{ block.shopify_attributes }}>
+            <div class="rd-num">{{ block.settings.number }}</div>
+            <div class="rd-lbl">{{ block.settings.label }}</div>
+            {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+{%- comment -%} ---------- CASE STUDY CARD → full Build to Bond story ---------- {%- endcomment -%}
   {%- if section.settings.cs_quote != blank -%}
   <section class="rd-pad-sm">
     <div class="rd-wrap rd-mw-820px">
@@ -463,27 +483,7 @@
   </section>
   {%- endif -%}
 
-  {%- comment -%} ---------- WHY NOW (policy backdrop, sourced) ---------- {%- endcomment -%}
-  {%- if section.settings.policy_title != blank -%}
-  <section class="rd-pad rd-dark rd-band--policy">
-    <div class="rd-wrap">
-      <div class="rd-center">
-        {%- if section.settings.policy_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.policy_eyebrow }}</span>{%- endif -%}
-        <h2 class="rd-mw-22ch">{{ section.settings.policy_title }}</h2>
-      </div>
-      <div class="rd-policy rd-mt4">
-        {%- for block in section.blocks -%}{%- if block.type == 'policy' -%}
-          <div class="rd-stat rd-reveal" {{ block.shopify_attributes }}>
-            <div class="rd-num">{{ block.settings.number }}</div>
-            <div class="rd-lbl">{{ block.settings.label }}</div>
-            {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
-          </div>
-        {%- endif -%}{%- endfor -%}
-      </div>
-    </div>
-  </section>
-  {%- endif -%}
-
+  
   {%- comment -%} ---------- WHAT'S NEXT (forward band, A2 — funder question: what does new money do?) ---------- {%- endcomment -%}
   {%- if section.settings.next_title != blank -%}
   <section class="rd-pad rd-band--next">
@@ -523,22 +523,7 @@
     </div>
   </section>
 
-  {%- comment -%} ---------- FINAL CTA (dark, centred) ---------- {%- endcomment -%}
-  <section class="rd-pad rd-dark rd-center rd-band--close">
-    <div class="rd-wrap rd-mw-680px">
-      {%- if section.settings.cta_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.cta_eyebrow }}</span>{%- endif -%}
-      <h2>{{ section.settings.cta_title }}</h2>
-      {%- if section.settings.cta_lede != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.cta_lede }}</p>{%- endif -%}
-      <div class="rd-flex rd-mt3 rd-jc-center">
-        {%- if section.settings.cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ final_c1 }}">{{ section.settings.cta1_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
-        {%- if section.settings.cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ final_c2 }}">{{ section.settings.cta2_label }}</a>{%- endif -%}
-      </div>
-    </div>
-  </section>
-
-</div>
-
-{% schema %}
+  {% schema %}
 {
   "name": "Impact 2026 (new design)",
   "tag": "section",

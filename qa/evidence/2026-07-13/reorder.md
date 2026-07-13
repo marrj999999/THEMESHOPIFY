@@ -12,3 +12,4 @@ stats-inside-map 12:01:11: overlay back (distributed ocean by measured geography
 pacific stack 12:10:19: all 4 stats right-aligned in the open Pacific per James
 map bleed fix 12:12:55: removed broken full-bleed (was shifting -452px offscreen), map now centred max 1040 wide
 map OUT of 820 wrap 12:16:52: now full-width sibling, centred max 1120
+content tighten 2026-07-13 12:34:33: band2 heading rewrite, b2b eyebrow+prose, cred_sub cut, sites de-dup, why-now moved up, final CTA cut, reel 6→3
