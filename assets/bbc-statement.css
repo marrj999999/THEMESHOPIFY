@@ -928,14 +928,10 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-opsmap > img{ display:block; width:100% !important; max-width:none !important; height:auto !important; max-height:none !important; object-fit:contain; aspect-ratio:300/129; }
 .bbc-rd-impact .rd-mapstats{ position:absolute; inset:0; pointer-events:none; }
 .bbc-rd-impact .rd-mapstat{ position:absolute; text-align:left; }
-.bbc-rd-impact .rd-mapstat .rd-num{ display:block; font-size:clamp(2rem,4.6vw,4.4rem); line-height:.82; font-weight:800; letter-spacing:-.03em; color:var(--forest,#003C32); text-shadow:0 0 2px var(--bone,#E6DCC8), 0 0 14px var(--bone,#E6DCC8), 2px 2px 0 var(--bone,#E6DCC8); }
+.bbc-rd-impact .rd-mapstat b{ display:block; font-size:clamp(2rem,4.6vw,4.4rem); line-height:.82; font-weight:800; letter-spacing:-.03em; color:var(--forest,#003C32); text-shadow:0 0 2px var(--bone,#E6DCC8), 0 0 14px var(--bone,#E6DCC8), 2px 2px 0 var(--bone,#E6DCC8); }
 .bbc-rd-impact .rd-mapstat span{ display:block; font-size:clamp(11px,.9vw,14px); font-weight:800; letter-spacing:.02em; color:var(--forest,#003C32); max-width:14ch; margin-top:3px; text-shadow:0 0 8px var(--bone,#E6DCC8), 0 1px 0 var(--bone,#E6DCC8); }
 /* ocean placements (equirectangular): North Pacific, North Atlantic, Indian Ocean, far-right Pacific */
-.bbc-rd-impact .rd-mapstat--b{ right:5%; top:52%; text-align:right; }  /* 10 — far-right empty Pacific */
-.bbc-rd-impact .rd-mapstat--a{ right:5%;  top:76%; text-align:right; }  /* 4 — far-right empty Pacific lower */
-.bbc-rd-impact .rd-mapstat--c{ left:30%; top:72%; }  /* 3 — Indian Ocean/S Atlantic (verified good) */
-.bbc-rd-impact .rd-mapstat--d{ right:3%; top:20%; text-align:right; }  /* 45 — N Pacific far right, hero */
-.bbc-rd-impact .rd-mapstat--d .rd-num{ font-size:clamp(2.6rem,6.5vw,6rem); }
+.bbc-rd-impact .rd-mapstat--d b{ font-size:clamp(2.6rem,6.5vw,6rem); }
 .bbc-rd-impact .rd-mapstat--d span, .bbc-rd-impact .rd-mapstat--b span, .bbc-rd-impact .rd-mapstat--a span{ margin-left:auto; }
 .bbc-rd-impact .rd-opsmap__cap{ margin:14px 0 0; max-width:60ch; text-align:left; }
 /* MOBILE: overlay off — map full-width, stats become a 2x2 row on the page axis */
@@ -955,9 +951,21 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-ops{ display:grid !important; grid-template-columns:repeat(4,1fr); gap:28px 24px; margin-top:clamp(24px,3vw,40px); }
 .bbc-rd-impact .rd-ops__cell{ display:block !important; text-align:center; border:0 !important; padding:0 !important; background:transparent !important; }
 .bbc-rd-impact .rd-ops__cell::after{ display:none !important; }
-.bbc-rd-impact .rd-ops__count{ position:static !important; display:block !important; font-size:clamp(2.6rem,4.5vw,4.6rem) !important; line-height:.9; font-weight:800; letter-spacing:-.03em; color:var(--forest,#003C32) !important; margin:0 auto; }
+
 .bbc-rd-impact h3.rd-ops__title{ font-size:15px !important; font-weight:800; text-transform:lowercase; margin:8px 0 0; text-align:center; }
 .bbc-rd-impact .rd-ops__items{ font-size:13px !important; line-height:1.45; color:#5a655f; margin:6px auto 0; max-width:26ch; text-align:center; }
 @media (max-width:759px){ .bbc-rd-impact .rd-ops{ grid-template-columns:repeat(2,1fr); gap:24px 18px; } }
 /* map: clean + centred */
 .bbc-rd-impact .rd-opsmap > img{ margin-inline:auto; }
+
+/* where-we-operate detail: names row (numbers now live ON the map — no repeat) */
+.bbc-rd-impact .rd-ops{ display:flex !important; flex-wrap:wrap; justify-content:center; gap:14px 30px; grid-template-columns:none !important; }
+.bbc-rd-impact .rd-ops__cell{ flex:0 1 auto; max-width:280px; }
+.bbc-rd-impact h3.rd-ops__title{ font-size:14px !important; }
+
+/* MAP STATS — authoritative distributed ocean placement (measured geography; !important beats strays) */
+.bbc-rd-impact .rd-mapstat--d{ right:6% !important; left:auto !important; top:22% !important; text-align:right !important; }   /* 45 — Pacific right, hero */
+.bbc-rd-impact .rd-mapstat--b{ left:19% !important; right:auto !important; top:5%  !important; text-align:left !important; }   /* 10 — N Atlantic top */
+.bbc-rd-impact .rd-mapstat--a{ left:31% !important; right:auto !important; top:66% !important; text-align:left !important; }   /* 4 — S Atlantic */
+.bbc-rd-impact .rd-mapstat--c{ left:59% !important; right:auto !important; top:70% !important; text-align:left !important; }   /* 3 — Indian Ocean */
+.bbc-rd-impact .rd-mapstat--d b{ font-size:clamp(2.6rem,6.5vw,6rem); }

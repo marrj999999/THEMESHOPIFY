@@ -364,7 +364,13 @@
           {%- else -%}
             <img src="{{ 'bbc-world-map.svg' | asset_url }}" alt="{{ section.settings.map_alt | escape }}" width="1000" height="472" loading="lazy">
           {%- endif -%}
-        </figure>
+                <div class="rd-mapstats" aria-hidden="true">
+          <div class="rd-mapstat rd-mapstat--a"><b>{{ section.settings.mstat1_num | default: '4' }}</b><span>{{ section.settings.mstat1_lbl | default: 'active prison sites' }}</span></div>
+          <div class="rd-mapstat rd-mapstat--b"><b>{{ section.settings.mstat2_num | default: '10' }}</b><span>{{ section.settings.mstat2_lbl | default: 'schools & universities' }}</span></div>
+          <div class="rd-mapstat rd-mapstat--c"><b>{{ section.settings.mstat3_num | default: '3' }}</b><span>{{ section.settings.mstat3_lbl | default: 'international hubs' }}</span></div>
+          <div class="rd-mapstat rd-mapstat--d"><b>{{ section.settings.mstat4_num | default: '45' }}</b><span>{{ section.settings.mstat4_lbl | default: 'countries reached' }}</span></div>
+        </div>
+      </figure>
         {%- if section.settings.map_caption != blank -%}<figcaption class="rd-opsmap__cap">{{ section.settings.map_caption }}</figcaption>{%- endif -%}
       </div>
       {%- endif -%}
@@ -373,7 +379,7 @@
       <ul class="rd-ops rd-mt3" role="list">
         {%- for block in ops limit: 4 -%}
         <li class="rd-ops__cell" {{ block.shopify_attributes }}>
-          <span class="rd-ops__count">{{ block.settings.count }}</span>
+          
           <h3 class="rd-ops__title">{{ block.settings.title }}</h3>
           <p class="rd-ops__items">{{ block.settings.items }}</p>
         </li>
