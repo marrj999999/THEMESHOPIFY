@@ -817,7 +817,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 /* B7 · D3 marginalia rail: eyebrow leaves the stack */
 @media (min-width:900px){
   .bbc-rd-impact .rd-band--next .rd-rail{ display:grid; grid-template-columns:minmax(130px,1fr) minmax(0,3.4fr); column-gap:clamp(24px,4vw,72px); }
-  .bbc-rd-impact .rd-band--next .rd-rail > .rd-eyebrow{ grid-column:1; position:sticky; top:24px; }
+  .bbc-rd-impact .rd-band--next .rd-rail > .rd-eyebrow{ grid-column:1; grid-row:1; position:sticky; top:24px; align-self:start; }
   .bbc-rd-impact .rd-band--next .rd-rail > *:not(.rd-eyebrow){ grid-column:2; }
 }
 
@@ -849,7 +849,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-flow__step small{ font-size:14.5px; }
 /* SIGN-OFF CRIT closures (2026-07-13) */
 /* 820px wraps join the page axis (was flush-left after the margin-0 fix) */
-.bbc-rd-impact .rd-wrap.rd-mw-820px{ margin-left:max(0px, calc((100vw - 1264px) / 2)) !important; margin-right:auto !important; }
+.bbc-rd-impact .rd-wrap.rd-mw-820px{ margin-left:max(0px, calc((100vw - 1200px) / 2)) !important; margin-right:auto !important; }
 /* lazy imgs must never blank during fast scroll on this page */
 .bbc-rd-impact img[loading="lazy"]{ content-visibility:visible !important; }
 /* seal: keep inside the mobile viewport */
@@ -857,7 +857,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 
 /* responsive + quotes pass (2026-07-13) */
 .bbc-rd-impact .rd-band--close h2{ margin-left:0 !important; padding-left:0 !important; }
-.bbc-rd-impact .rd-band--close .rd-wrap{ padding-left:32px !important; margin-left:max(0px, calc((100vw - 1264px) / 2)) !important; margin-right:auto !important; }  /* rd-mw-680px was margin-left:44 — join the axis like the 820 wraps */
+.bbc-rd-impact .rd-band--close .rd-wrap{ padding-left:32px !important; margin-left:max(0px, calc((100vw - 1200px) / 2)) !important; margin-right:auto !important; }  /* rd-mw-680px was margin-left:44 — join the axis like the 820 wraps */
 /* BUILDERS SAY — scroll-snap quote strip (multiple quotes, James) */
 .bbc-rd-impact .rd-qscroll{ display:flex; gap:clamp(28px,4vw,64px); overflow-x:auto; scroll-snap-type:x mandatory; padding:18px max(32px, calc((100vw - 1200px)/2 + 32px)) 26px; -webkit-overflow-scrolling:touch; scrollbar-width:thin; scrollbar-color:var(--forest,#003C32) transparent; }
 .bbc-rd-impact .rd-qscroll__item{ scroll-snap-align:start; flex:0 0 auto; width:min(78vw,520px); margin:0; }
@@ -903,3 +903,21 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-band--quotes .rd-qsrc{ color:#9db8ad; }
 .bbc-rd-impact .rd-band--quotes .rd-qbtn{ border-color:var(--bone,#E6DCC8); color:var(--bone,#E6DCC8); }
 .bbc-rd-impact .rd-band--quotes .rd-qbtn:hover{ background:var(--lime,#D4FD62); color:var(--forest,#003C32); }
+/* world map: align figure + caption to the page left axis (was centred in the wrap) */
+.bbc-rd-impact .rd-opsmap{ margin-inline:0; text-align:left; }
+.bbc-rd-impact .rd-opsmap{ width:auto !important; max-width:100% !important; margin-inline:0 !important; }
+.bbc-rd-impact .rd-opsmap img{ display:block; width:100% !important; max-width:900px !important; margin-inline:0 !important; }
+.bbc-rd-impact .rd-opsmap__cap{ max-width:60ch; margin-inline:0; text-align:left; }
+
+/* alignment finish (2026-07-13): heading stays on the 72 axis in device bands */
+@media (min-width:900px){
+  /* marginalia rail: eyebrow floats into the left margin, heading holds the axis */
+  .bbc-rd-impact .rd-band--next .rd-rail{ display:block; position:relative; }
+  .bbc-rd-impact .rd-band--next .rd-rail > .rd-eyebrow{ position:absolute; left:0; top:6px; width:auto; }  /* sits in the 32px gutter, heading holds 72 */
+  .bbc-rd-impact .rd-band--next .rd-rail > *:not(.rd-eyebrow){ margin-left:0; }
+  .bbc-rd-impact .rd-band--next .rd-rail > h2{ margin-top:34px; }
+  /* B2B split: text column first so the heading lands on the page axis; image right */
+  .bbc-rd-impact .rd-split.rd-dark{ }
+  .bbc-rd-impact .rd-split.rd-dark .rd-media{ order:2; }
+  .bbc-rd-impact .rd-split.rd-dark .rd-txt{ order:1; }
+}
