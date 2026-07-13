@@ -364,12 +364,6 @@
           {%- else -%}
             <img src="{{ 'bbc-world-map.svg' | asset_url }}" alt="{{ section.settings.map_alt | escape }}" width="1000" height="472" loading="lazy">
           {%- endif -%}
-          <div class="rd-mapstats">
-            <div class="rd-mapstat rd-mapstat--a"><b class="rd-num">{{ section.settings.mstat1_num | default: '4' }}</b><span>{{ section.settings.mstat1_lbl | default: 'active prison sites' }}</span></div>
-            <div class="rd-mapstat rd-mapstat--b"><b class="rd-num">{{ section.settings.mstat2_num | default: '10' }}</b><span>{{ section.settings.mstat2_lbl | default: 'schools & universities' }}</span></div>
-            <div class="rd-mapstat rd-mapstat--c"><b class="rd-num">{{ section.settings.mstat3_num | default: '3' }}</b><span>{{ section.settings.mstat3_lbl | default: 'international hubs' }}</span></div>
-            <div class="rd-mapstat rd-mapstat--d"><b class="rd-num">{{ section.settings.mstat4_num | default: '45' }}</b><span>{{ section.settings.mstat4_lbl | default: 'countries — kits shipped' }}</span></div>
-          </div>
         </figure>
         {%- if section.settings.map_caption != blank -%}<figcaption class="rd-opsmap__cap">{{ section.settings.map_caption }}</figcaption>{%- endif -%}
       </div>

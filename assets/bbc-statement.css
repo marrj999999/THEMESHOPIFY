@@ -950,3 +950,14 @@ cart-drawer.animate .drawer{ visibility:visible; }
   .bbc-rd-impact .rd-mapstat--d .rd-num{ font-size:clamp(2.6rem,13vw,3.8rem); }
   .bbc-rd-impact .rd-opsmap__cap{ padding:16px 18px 0; }
 }
+
+/* where-we-operate: single CENTRED big-number stat row under the map (de-dup + central, James 2026-07-13) */
+.bbc-rd-impact .rd-ops{ display:grid !important; grid-template-columns:repeat(4,1fr); gap:28px 24px; margin-top:clamp(24px,3vw,40px); }
+.bbc-rd-impact .rd-ops__cell{ display:block !important; text-align:center; border:0 !important; padding:0 !important; background:transparent !important; }
+.bbc-rd-impact .rd-ops__cell::after{ display:none !important; }
+.bbc-rd-impact .rd-ops__count{ position:static !important; display:block !important; font-size:clamp(2.6rem,4.5vw,4.6rem) !important; line-height:.9; font-weight:800; letter-spacing:-.03em; color:var(--forest,#003C32) !important; margin:0 auto; }
+.bbc-rd-impact h3.rd-ops__title{ font-size:15px !important; font-weight:800; text-transform:lowercase; margin:8px 0 0; text-align:center; }
+.bbc-rd-impact .rd-ops__items{ font-size:13px !important; line-height:1.45; color:#5a655f; margin:6px auto 0; max-width:26ch; text-align:center; }
+@media (max-width:759px){ .bbc-rd-impact .rd-ops{ grid-template-columns:repeat(2,1fr); gap:24px 18px; } }
+/* map: clean + centred */
+.bbc-rd-impact .rd-opsmap > img{ margin-inline:auto; }
