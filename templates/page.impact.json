@@ -233,39 +233,52 @@
             "url": "/blogs/impact/kenya-bamboo-bicycle-building-skills-transfer"
           }
         },
-        "sq1": {
+        "iq1": {
           "type": "scrollquote",
           "settings": {
-            "text": "The satisfaction is enormous.",
-            "attr": "Darek S \u2014 home kit builder"
+            "text": "The bike was the first thing I ever made with my own hands. When my daughter rode it on family visit day, I felt like a dad again.",
+            "attr": "Maker, Build to Bond",
+            "source": ""
           }
         },
-        "sq2": {
+        "iq2": {
           "type": "scrollquote",
           "settings": {
-            "text": "It rides like it was on rails.",
-            "attr": "Jim C \u2014 gravel kit"
+            "text": "The bamboo bike course offers more than just technical training \u2014 it provides an avenue for creativity, teamwork, and self-expression.",
+            "attr": "Sally Allsopp, Industries and Community Manager, HMP Lowdham Grange",
+            "source": "Inside Time, Nov 2025"
           }
         },
-        "sq3": {
+        "iq3": {
           "type": "scrollquote",
           "settings": {
-            "text": "100k on the first weekend.",
-            "attr": "Ben S \u2014 road build"
+            "text": "Innovative projects, such as Build to Bond, support rehabilitation and help people leave prison as better citizens, boosting the economy and keeping our streets safe.",
+            "attr": "Lord Timpson, UK Prisons Minister",
+            "source": "Financial Times, Sept 2025"
           }
         },
-        "sq4": {
+        "iq4": {
           "type": "scrollquote",
           "settings": {
-            "text": "The imperfections are beautiful.",
-            "attr": "Darren K \u2014 first-time builder"
+            "text": "Bamboo Bicycle Club reconnects excluded learners with education by delivering hands-on, industry-relevant, accredited programmes in sustainable design and mobility.",
+            "attr": "Investec Beyond Business \u2014 2025 award citation",
+            "source": ""
           }
         },
-        "sq5": {
+        "iq5": {
           "type": "scrollquote",
           "settings": {
-            "text": "A year on \u2014 still rides beautifully.",
-            "attr": "Neil C \u2014 commuter build"
+            "text": "Pandas eat it. Schoolchildren used to be caned with it. But now prisoners at Lowdham Grange have found a surprising new use for bamboo \u2014 making bicycles out of it.",
+            "attr": "Inside Time",
+            "source": "prisoners' national newspaper, 100k+ readers"
+          }
+        },
+        "iq6": {
+          "type": "scrollquote",
+          "settings": {
+            "text": "Bamboo bikes have that cool factor that excites them. There's maths and English in the programme \u2014 but it's built into design, creativity and bike mechanics.",
+            "attr": "James Marr, Founder",
+            "source": "in Inside Time"
           }
         }
       },
@@ -296,11 +309,12 @@
         "story_ucl",
         "story_upcycle",
         "story_kenya",
-        "sq1",
-        "sq2",
-        "sq3",
-        "sq4",
-        "sq5"
+        "iq1",
+        "iq2",
+        "iq3",
+        "iq4",
+        "iq5",
+        "iq6"
       ],
       "settings": {
         "hero_fallback": "bbc-rd-workshop.jpg",
@@ -330,8 +344,8 @@
         "policy_title": "both pathways sit on live national priorities.",
         "cred_eyebrow": "Recognised by",
         "cred_heading": "who backs this work.",
-        "cred_quote1": "A truly inspiring cohort \u2014 each of these social enterprise businesses are focused on addressing important societal issues, delivering meaningful impact in their communities.",
-        "cred_attr1": "Investec Beyond Business award, 2025",
+        "cred_quote1": "Finding employment after release reduces the chance of reoffending significantly, which is why we are improving opportunities to help prisoners turn their lives around.",
+        "cred_attr1": "Lord Timpson, UK Prisons Minister \u2014 Inside Time",
         "cred_src1": "2025 winner",
         "cred_quote2": "",
         "cred_attr2": "",
@@ -424,7 +438,7 @@
         "stats_label": "the record since 2012",
         "map_caption": "\u2731 the 45 countries our kits have shipped to since 2012 \u2014 straight from our customer records. home in dark green.",
         "frame_info_enable": false,
-        "quotes_label": "builders say"
+        "quotes_label": "what the impact sounds like"
       }
     }
   },

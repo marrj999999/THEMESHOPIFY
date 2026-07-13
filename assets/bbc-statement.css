@@ -869,3 +869,14 @@ cart-drawer.animate .drawer{ visibility:visible; }
   .bbc-rd-impact .rd-split .rd-wrap, .bbc-rd-impact .rd-split > div,
   .bbc-rd-impact .rd-band--close .rd-wrap{ padding-left:18px !important; padding-right:18px !important; margin-left:0 !important; }
 }
+/* impact-voices slider chrome (research spec) */
+.bbc-rd-impact .rd-qscroll{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ .bbc-rd-impact .rd-qscroll{ scroll-behavior:auto; } }
+.bbc-rd-impact .rd-qscroll:focus-visible{ outline:3px solid var(--forest,#003C32); outline-offset:4px; }
+.bbc-rd-impact .rd-qhead{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+.bbc-rd-impact .rd-qnav{ display:flex; align-items:center; gap:10px; }
+.bbc-rd-impact .rd-qbtn{ width:44px; height:44px; border-radius:50%; border:2px solid var(--forest,#003C32); background:transparent; color:var(--forest,#003C32); font-size:18px; cursor:pointer; }
+.bbc-rd-impact .rd-qbtn:hover{ background:var(--lime,#D4FD62); }
+.bbc-rd-impact .rd-qbtn[disabled]{ opacity:.3; cursor:default; background:transparent; }
+.bbc-rd-impact .rd-qcount{ font-size:14px; font-weight:800; color:var(--forest,#003C32); font-variant-numeric:tabular-nums; }
+.bbc-rd-impact .rd-qsrc{ font-weight:400; color:#5a655f; }
