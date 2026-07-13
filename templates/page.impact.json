@@ -232,6 +232,41 @@
             "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/01-kirui-riding-bamboo-bike_dcde22a5-5ad1-4db3-b880-048d3e462e5a.jpg?v=1771793527",
             "url": "/blogs/impact/kenya-bamboo-bicycle-building-skills-transfer"
           }
+        },
+        "sq1": {
+          "type": "scrollquote",
+          "settings": {
+            "text": "The satisfaction is enormous.",
+            "attr": "Darek S \u2014 home kit builder"
+          }
+        },
+        "sq2": {
+          "type": "scrollquote",
+          "settings": {
+            "text": "It rides like it was on rails.",
+            "attr": "Jim C \u2014 gravel kit"
+          }
+        },
+        "sq3": {
+          "type": "scrollquote",
+          "settings": {
+            "text": "100k on the first weekend.",
+            "attr": "Ben S \u2014 road build"
+          }
+        },
+        "sq4": {
+          "type": "scrollquote",
+          "settings": {
+            "text": "The imperfections are beautiful.",
+            "attr": "Darren K \u2014 first-time builder"
+          }
+        },
+        "sq5": {
+          "type": "scrollquote",
+          "settings": {
+            "text": "A year on \u2014 still rides beautifully.",
+            "attr": "Neil C \u2014 commuter build"
+          }
         }
       },
       "block_order": [
@@ -260,7 +295,12 @@
         "op_partners",
         "story_ucl",
         "story_upcycle",
-        "story_kenya"
+        "story_kenya",
+        "sq1",
+        "sq2",
+        "sq3",
+        "sq4",
+        "sq5"
       ],
       "settings": {
         "hero_fallback": "bbc-rd-workshop.jpg",
@@ -383,7 +423,8 @@
         "report_card_url": "/pages/impact-report",
         "stats_label": "the record since 2012",
         "map_caption": "\u2731 the 45 countries our kits have shipped to since 2012 \u2014 straight from our customer records. home in dark green.",
-        "frame_info_enable": false
+        "frame_info_enable": false,
+        "quotes_label": "builders say"
       }
     }
   },

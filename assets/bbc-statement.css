@@ -784,7 +784,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 @media (hover:hover){ .bbc-rd-impact .rd-path:hover{ transform:none; box-shadow:none !important; } .bbc-rd-impact .rd-path--schools:hover, .bbc-rd-impact .rd-path--prisons:hover{ box-shadow:none !important; } }
 
 /* B2 · D4 asymmetric 7/3: heading owns the width, policy stats stack in a rail */
-@media (min-width:760px){
+@media (min-width:900px){
   .bbc-rd-impact .rd-band--policy .rd-wrap{ display:grid; grid-template-columns:7fr 3fr; column-gap:clamp(32px,5vw,72px); align-items:start; }
   .bbc-rd-impact .rd-band--policy .rd-wrap > .rd-center{ grid-column:1; }
   .bbc-rd-impact .rd-band--policy .rd-policy{ grid-column:2; grid-row:1; display:flex !important; flex-direction:column; gap:22px; border-left:2px solid var(--lime,#D4FD62); padding-left:22px; margin-top:0; }
@@ -808,14 +808,14 @@ cart-drawer.animate .drawer{ visibility:visible; }
 
 /* B6 · D7 staggered evidence grid, borderless */
 .bbc-rd-impact .rd-cscard{ border:0 !important; border-radius:0 !important; box-shadow:none !important; background:transparent !important; }
-@media (min-width:760px){
+@media (min-width:900px){
   .bbc-rd-impact .rd-csgrid{ align-items:start; }
   .bbc-rd-impact .rd-csgrid > :nth-child(2){ margin-top:clamp(40px,6vw,80px); }
   .bbc-rd-impact .rd-csgrid > :nth-child(3){ margin-top:clamp(20px,3vw,40px); }
 }
 
 /* B7 · D3 marginalia rail: eyebrow leaves the stack */
-@media (min-width:760px){
+@media (min-width:900px){
   .bbc-rd-impact .rd-band--next .rd-rail{ display:grid; grid-template-columns:minmax(130px,1fr) minmax(0,3.4fr); column-gap:clamp(24px,4vw,72px); }
   .bbc-rd-impact .rd-band--next .rd-rail > .rd-eyebrow{ grid-column:1; position:sticky; top:24px; }
   .bbc-rd-impact .rd-band--next .rd-rail > *:not(.rd-eyebrow){ grid-column:2; }
@@ -854,3 +854,18 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact img[loading="lazy"]{ content-visibility:visible !important; }
 /* seal: keep inside the mobile viewport */
 @media (max-width:600px){ .bbc-rd-impact .rd-seal{ right:8px; } }
+
+/* responsive + quotes pass (2026-07-13) */
+.bbc-rd-impact .rd-band--close h2{ margin-left:0 !important; padding-left:0 !important; }
+.bbc-rd-impact .rd-band--close .rd-wrap{ padding-left:32px !important; margin-left:max(0px, calc((100vw - 1264px) / 2)) !important; margin-right:auto !important; }  /* rd-mw-680px was margin-left:44 — join the axis like the 820 wraps */
+/* BUILDERS SAY — scroll-snap quote strip (multiple quotes, James) */
+.bbc-rd-impact .rd-qscroll{ display:flex; gap:clamp(28px,4vw,64px); overflow-x:auto; scroll-snap-type:x mandatory; padding:18px max(32px, calc((100vw - 1200px)/2 + 32px)) 26px; -webkit-overflow-scrolling:touch; scrollbar-width:thin; scrollbar-color:var(--forest,#003C32) transparent; }
+.bbc-rd-impact .rd-qscroll__item{ scroll-snap-align:start; flex:0 0 auto; width:min(78vw,520px); margin:0; }
+.bbc-rd-impact .rd-qscroll__q{ font-size:clamp(24px,3vw,38px); line-height:1.15; font-weight:800; letter-spacing:-.02em; margin:0; border:0; padding:0; }
+.bbc-rd-impact .rd-qscroll__q::before{ content:"\2731"; color:#17553a; font-size:.6em; margin-right:10px; }
+.bbc-rd-impact .rd-qscroll__a{ margin-top:12px; font-size:14px; font-weight:700; color:#3a443f; }
+/* mobile single axis: the split band + mw-680 wrap carry 32px vs the page's 18 — unify */
+@media (max-width:899px){
+  .bbc-rd-impact .rd-split .rd-wrap, .bbc-rd-impact .rd-split > div,
+  .bbc-rd-impact .rd-band--close .rd-wrap{ padding-left:18px !important; padding-right:18px !important; margin-left:0 !important; }
+}

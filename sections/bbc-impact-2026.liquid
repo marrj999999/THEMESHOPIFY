@@ -287,6 +287,24 @@
   </section>
   {%- endif -%}
 
+  {%- comment -%} ---------- BUILDERS SAY (scrolling quotes) ---------- {%- endcomment -%}
+  {%- assign sq = section.blocks | where: "type", "scrollquote" -%}
+  {%- if sq.size > 0 -%}
+  <section class="rd-pad-sm rd-paper rd-band--quotes">
+    <div class="rd-wrap">
+      {%- if section.settings.quotes_label != blank -%}<span class="rd-eyebrow">{{ section.settings.quotes_label }}</span>{%- endif -%}
+    </div>
+    <div class="rd-qscroll" tabindex="0" role="region" aria-label="What people say">
+      {%- for block in sq -%}
+      <figure class="rd-qscroll__item" {{ block.shopify_attributes }}>
+        <blockquote class="rd-qscroll__q">&ldquo;{{ block.settings.text }}&rdquo;</blockquote>
+        <figcaption class="rd-qscroll__a">{{ block.settings.attr }}</figcaption>
+      </figure>
+      {%- endfor -%}
+    </div>
+  </section>
+  {%- endif -%}
+
   {%- comment -%} ---------- PATHWAY: more than a bike (3 cards) — gated: only render if there is pathway content ---------- {%- endcomment -%}
   {%- assign has_pathway = false -%}
   {%- for block in section.blocks -%}{%- if block.type == 'pathway' -%}{%- assign has_pathway = true -%}{%- endif -%}{%- endfor -%}
@@ -574,6 +592,7 @@
       "id": "hero_cta2_url",
       "label": "Secondary CTA link (defaults to the contact page)"
     },
+    { "type": "text", "id": "quotes_label", "label": "Quotes band label", "default": "builders say" },
     { "type": "text", "id": "ghost_stat", "label": "Ghost numeral behind stats", "default": "2012" },
     { "type": "text", "id": "seal_text", "label": "Rotated seal text (recognised-by)", "default": "OCN accredited · CIC · since 2012" },
     {
@@ -1433,6 +1452,14 @@
         { "type": "text", "id": "count", "label": "Count badge (e.g. 4)" },
         { "type": "text", "id": "title", "label": "Group title (verb-honest: we run / we've taught in)" },
         { "type": "textarea", "id": "items", "label": "Names, · separated" }
+      ]
+    },
+    {
+      "type": "scrollquote",
+      "name": "Scrolling quote",
+      "settings": [
+        { "type": "textarea", "id": "text", "label": "Quote" },
+        { "type": "text", "id": "attr", "label": "Attribution (name — context)" }
       ]
     },
     {
