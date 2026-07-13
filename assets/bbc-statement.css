@@ -904,10 +904,10 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-band--quotes .rd-qbtn{ border-color:var(--bone,#E6DCC8); color:var(--bone,#E6DCC8); }
 .bbc-rd-impact .rd-band--quotes .rd-qbtn:hover{ background:var(--lime,#D4FD62); color:var(--forest,#003C32); }
 /* world map: align figure + caption to the page left axis (was centred in the wrap) */
-.bbc-rd-impact .rd-opsmap{ margin-inline:0; text-align:left; }
-.bbc-rd-impact .rd-opsmap{ width:auto !important; max-width:100% !important; margin-inline:0 !important; }
-.bbc-rd-impact .rd-opsmap img{ display:block; width:100% !important; max-width:900px !important; margin-inline:0 !important; }
-.bbc-rd-impact .rd-opsmap__cap{ max-width:60ch; margin-inline:0; text-align:left; }
+
+
+
+
 
 /* alignment finish (2026-07-13): heading stays on the 72 axis in device bands */
 @media (min-width:900px){
@@ -920,4 +920,33 @@ cart-drawer.animate .drawer{ visibility:visible; }
   .bbc-rd-impact .rd-split.rd-dark{ }
   .bbc-rd-impact .rd-split.rd-dark .rd-media{ order:2; }
   .bbc-rd-impact .rd-split.rd-dark .rd-txt{ order:1; }
+}
+
+/* WORLD MAP — full-bleed wide, big stats dropped in the ocean (James 2026-07-13) */
+.bbc-rd-impact .rd-mapfull{ margin-inline:0; }
+.bbc-rd-impact .rd-opsmap{ position:relative; width:100vw; margin-left:calc(50% - 50vw); margin-block:0; }
+.bbc-rd-impact .rd-opsmap > img{ display:block; width:100% !important; max-width:none !important; height:auto !important; max-height:none !important; object-fit:contain; aspect-ratio:300/129; }
+.bbc-rd-impact .rd-mapstats{ position:absolute; inset:0; pointer-events:none; }
+.bbc-rd-impact .rd-mapstat{ position:absolute; text-align:left; }
+.bbc-rd-impact .rd-mapstat .rd-num{ display:block; font-size:clamp(2rem,4.6vw,4.4rem); line-height:.82; font-weight:800; letter-spacing:-.03em; color:var(--forest,#003C32); text-shadow:0 0 2px var(--bone,#E6DCC8), 0 0 14px var(--bone,#E6DCC8), 2px 2px 0 var(--bone,#E6DCC8); }
+.bbc-rd-impact .rd-mapstat span{ display:block; font-size:clamp(11px,.9vw,14px); font-weight:800; letter-spacing:.02em; color:var(--forest,#003C32); max-width:14ch; margin-top:3px; text-shadow:0 0 8px var(--bone,#E6DCC8), 0 1px 0 var(--bone,#E6DCC8); }
+/* ocean placements (equirectangular): North Pacific, North Atlantic, Indian Ocean, far-right Pacific */
+.bbc-rd-impact .rd-mapstat--b{ right:5%; top:52%; text-align:right; }  /* 10 — far-right empty Pacific */
+.bbc-rd-impact .rd-mapstat--a{ right:5%;  top:76%; text-align:right; }  /* 4 — far-right empty Pacific lower */
+.bbc-rd-impact .rd-mapstat--c{ left:30%; top:72%; }  /* 3 — Indian Ocean/S Atlantic (verified good) */
+.bbc-rd-impact .rd-mapstat--d{ right:3%; top:20%; text-align:right; }  /* 45 — N Pacific far right, hero */
+.bbc-rd-impact .rd-mapstat--d .rd-num{ font-size:clamp(2.6rem,6.5vw,6rem); }
+.bbc-rd-impact .rd-mapstat--d span, .bbc-rd-impact .rd-mapstat--b span, .bbc-rd-impact .rd-mapstat--a span{ margin-left:auto; }
+.bbc-rd-impact .rd-opsmap__cap{ margin:14px 0 0; max-width:60ch; text-align:left; }
+/* MOBILE: overlay off — map full-width, stats become a 2x2 row on the page axis */
+@media (max-width:759px){
+  /* cancel full-bleed on mobile: map + stats sit in the normal page gutter (18px) */
+  .bbc-rd-impact .rd-opsmap{ width:auto; margin-left:0; }
+  .bbc-rd-impact .rd-mapstats{ position:static; inset:auto; display:grid; grid-template-columns:1fr 1fr; gap:22px 20px; padding:24px 0 0; width:100%; box-sizing:border-box; }
+  .bbc-rd-impact .rd-mapstat{ position:static; inset:auto; text-align:left !important; }
+  .bbc-rd-impact .rd-mapstat span{ margin-left:0 !important; max-width:none; }
+  .bbc-rd-impact .rd-mapstat .rd-num{ font-size:clamp(2.4rem,12vw,3.4rem); text-shadow:none; }
+  .bbc-rd-impact .rd-mapstat span{ text-shadow:none; }
+  .bbc-rd-impact .rd-mapstat--d .rd-num{ font-size:clamp(2.6rem,13vw,3.8rem); }
+  .bbc-rd-impact .rd-opsmap__cap{ padding:16px 18px 0; }
 }

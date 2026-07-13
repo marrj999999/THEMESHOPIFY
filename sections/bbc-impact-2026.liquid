@@ -357,15 +357,22 @@
       {%- if section.settings.sites_body != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.sites_body }}</p>{%- endif -%}
       {%- if section.settings.sites_list != blank -%}<div class="rd-sitenames rd-mt3">{{ section.settings.sites_list }}</div>{%- endif -%}
       {%- if section.settings.map_enable -%}
-      <figure class="rd-opsmap rd-mt3">
-        {%- if section.settings.map_image != blank -%}
-          <img src="{{ section.settings.map_image | image_url: width: 2000 }}" alt="{{ section.settings.map_alt | escape }}" width="{{ section.settings.map_image.width }}" height="{{ section.settings.map_image.height }}" loading="lazy">
-        {%- else -%}
-          <img src="{{ 'bbc-world-map.svg' | asset_url }}" alt="{{ section.settings.map_alt | escape }}" width="1000" height="472" loading="lazy">
-        {%- endif -%}
+      <div class="rd-mapfull rd-mt3">
+        <figure class="rd-opsmap">
+          {%- if section.settings.map_image != blank -%}
+            <img src="{{ section.settings.map_image | image_url: width: 2400 }}" alt="{{ section.settings.map_alt | escape }}" loading="lazy">
+          {%- else -%}
+            <img src="{{ 'bbc-world-map.svg' | asset_url }}" alt="{{ section.settings.map_alt | escape }}" width="1000" height="472" loading="lazy">
+          {%- endif -%}
+          <div class="rd-mapstats">
+            <div class="rd-mapstat rd-mapstat--a"><b class="rd-num">{{ section.settings.mstat1_num | default: '4' }}</b><span>{{ section.settings.mstat1_lbl | default: 'active prison sites' }}</span></div>
+            <div class="rd-mapstat rd-mapstat--b"><b class="rd-num">{{ section.settings.mstat2_num | default: '10' }}</b><span>{{ section.settings.mstat2_lbl | default: 'schools & universities' }}</span></div>
+            <div class="rd-mapstat rd-mapstat--c"><b class="rd-num">{{ section.settings.mstat3_num | default: '3' }}</b><span>{{ section.settings.mstat3_lbl | default: 'international hubs' }}</span></div>
+            <div class="rd-mapstat rd-mapstat--d"><b class="rd-num">{{ section.settings.mstat4_num | default: '45' }}</b><span>{{ section.settings.mstat4_lbl | default: 'countries — kits shipped' }}</span></div>
+          </div>
+        </figure>
         {%- if section.settings.map_caption != blank -%}<figcaption class="rd-opsmap__cap">{{ section.settings.map_caption }}</figcaption>{%- endif -%}
-        
-</figure>
+      </div>
       {%- endif -%}
       {%- assign ops = section.blocks | where: "type", "opgroup" -%}
       {%- if ops.size > 0 -%}

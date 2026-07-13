@@ -5,3 +5,5 @@ impact-voices slider 09:48:12: 6 verified quotes (Maker/staff/minister/funder/pr
 rolling reel 10:00:18: forest band, 55s marquee (hover/focus pause + WCAG pause btn), nav top-left, worked type
 removals + map align 10:45:20: fork2 diagram gone, cred bottom quote gone, map left-aligned
 alignment finish 10:50:07: rail eyebrow to margin (heading holds axis), B2B split text-first
+full-bleed map + ocean stats 11:22:20: desktop overlay in sea gaps, mobile 2x2 on page axis
+map mobile fix 11:35:14: 2x2 grid on 18px axis, kill leaking right-align, no clip, drop halo on mobile
