@@ -316,7 +316,7 @@
 
   {%- comment -%} ---------- IMPACT STORIES — one per pillar (every kind of impact) ---------- {%- endcomment -%}
   {%- if section.settings.stories_title != blank -%}
-  <section class="rd-pad-sm">
+  <section class="rd-pad-sm" id="evidence">
     <div class="rd-wrap">
       {%- if section.settings.stories_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.stories_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal rd-mw-20ch">{{ section.settings.stories_title }}</h2>
@@ -367,6 +367,7 @@
           {%- endif -%}
         {%- endif -%}{%- endfor -%}
       </div>
+      {%- if section.settings.stories_proofline != blank -%}<p class="rd-evproof-line">{{ section.settings.stories_proofline }}</p>{%- endif -%}
       <div class="rd-mt4"><a class="rd-btn rd-ghost" href="{{ section.settings.stories_all_url | default: '/blogs/impact' }}">{{ section.settings.stories_all_label | default: 'See all impact stories' }} <span class="rd-arrow">&rarr;</span></a></div>
       {% render 'bbc-video-lightbox' %}
     </div>
@@ -627,6 +628,29 @@
 .rd-cscard--ev{position:relative}
 .rd-cscard--ev .rd-cscard__stretch::after{content:"";position:absolute;inset:0}
 .rd-cscard--ev .rd-cscard__meta a,.rd-cscard--ev .rd-cscard__evq cite{position:relative;z-index:1}
+/* under-wall proof line — the archive statement (editable) */
+.rd-evproof-line{margin:26px 0 0;font-size:14px;font-weight:800;letter-spacing:.02em;opacity:.75}
+/* ---- evidence motion (2026-07-22) — every rule inert under reduced-motion ----
+   Chips use the same scroll-driven idiom as .rd-reveal (bbc-statement): pure CSS,
+   @supports-guarded — unsupported browsers and reduced-motion just see the chips.
+   (First version keyed on a .rd-in class that this reveal system never adds.) */
+@media (prefers-reduced-motion: no-preference){
+  @supports (animation-timeline: view()){
+    .rd-cscard__outs li{animation:rd-chip-in both;animation-timeline:view();animation-range:entry 0% entry 40%}
+    .rd-cscard__outs li:nth-child(2){animation-range:entry 8% entry 48%}
+    .rd-cscard__outs li:nth-child(3){animation-range:entry 16% entry 56%}
+    .rd-cscard__outs li:nth-child(4){animation-range:entry 24% entry 64%}
+  }
+  @keyframes rd-chip-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  /* card hover lift (pointer devices) */
+  .rd-cscard--ev{transition:transform .22s ease,box-shadow .22s ease}
+  @media (hover:hover){
+    .rd-cscard--ev:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(14,26,23,.12)}
+  }
+  /* filter change: surviving cards rise in */
+  @keyframes rd-evin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .rd-evin{animation:rd-evin .28s ease both}
+}
 {% endstylesheet %}
 
 {% javascript %}
@@ -643,10 +667,21 @@ document.addEventListener('click', function (e) {
   });
   var kind = tab.getAttribute('data-kind');
   wall.querySelectorAll(':scope > [data-kind]').forEach(function (card) {
-    if (kind === 'all' || card.getAttribute('data-kind') === kind) card.removeAttribute('hidden');
-    else card.setAttribute('hidden', '');
+    if (kind === 'all' || card.getAttribute('data-kind') === kind) {
+      card.removeAttribute('hidden');
+      card.classList.add('rd-evin');
+      card.addEventListener('animationend', function () { card.classList.remove('rd-evin'); }, { once: true });
+    } else card.setAttribute('hidden', '');
   });
 });
+/* deep link: /pages/impact#evidence-prisons pre-filters the wall (runs AFTER the
+   click handler is registered — first version clicked into the void) */
+(function () {
+  var m = location.hash.match(/^#evidence-([a-z]+)$/);
+  if (!m) return;
+  var tab = document.querySelector('.rd-evfilter__tab[data-kind="' + m[1] + '"]');
+  if (tab) tab.click();
+})();
 {% endjavascript %}
 
   {% schema %}
@@ -1267,6 +1302,12 @@ document.addEventListener('click', function (e) {
     {
       "type": "header",
       "content": "Impact stories grid (one per pillar)"
+    },
+    {
+      "type": "text",
+      "id": "stories_proofline",
+      "label": "Under-wall proof line",
+      "default": "56 independently verifiable case studies on file — these are six."
     },
     {
       "type": "text",

@@ -109,3 +109,42 @@ Marketing/Story Bank · qa/DESIGN-RESEARCH.md lanes 2–3.
 **Defect caught by the loop:** first wall version wrapped cards in `<a>` while the new source link was also an `<a>` — nested anchors made the parser shatter cards (orphan text survived filtering). Rebuilt as div + stretched-link. Verified: 6 direct children, 0 strays, filter exact.
 
 **Flagged for James (store content, live-shared):** ⛔ GM Motors team-build article is still live on the news blog (do-not-cite canon — unpublish?) · a live article is titled "4,000 across 36 countries" (canon is 45) · three duplicate Investec articles want de-dup (I linked the news one).
+
+## 8 · The COMPLETE Impact page — how the case studies now work (analysis, 2026-07-22)
+
+Band-by-band (deployed order), each band's job in the evidence architecture:
+
+| # | Band | Job | Case-study role |
+|---|---|---|---|
+| 1 | Hero (dark image, locked mission verbatim, 2 CTAs) | orient a stranger in 5s | none — promise only |
+| 2 | Book a discovery call (steel) | THE primary ask (Chris/Unbounce: one main course) | none — but see rec 1 |
+| 3 | Stats (dark, 4 counts) | scale credibility | aggregate evidence |
+| 4 | "one craft, two ends of the same problem" | mechanism | none |
+| 5 | **Flagship: Build to Bond deep card** | the ONE deep proof (Big Issue depth-beats-volume) | outcome chips (staggered), oversubscription statement, provenance line → FT/Inside Time/Investec |
+| 6 | Sally Allsopp pull-quote + Run the programme | commissioner voice → programme ask | corrected attribution |
+| 7 | Policy stats (9pts / 39%, MoJ-labelled) | baseline-anchored context (Switchback device) | the national numbers our stories sit inside |
+| 8 | Segments — 4 audience questions | routing (Bounce Back) | see rec 2: should deep-link the wall |
+| 9 | Backers logos | third-party badges | validation, not stories |
+| 10 | Quote reel | voices texture | verbatim quotes ONLY — no numbers, no dup with wall ✓ |
+| 11 | Where we work (map) | breadth | the WHERE |
+| 12 | **Evidence wall (#evidence)** | breadth proof: 6 filterable dated sourced cards + 3 playable films + proofline ("56 on file") | the WHAT — reachable pre-filtered via #evidence-<kind> |
+| 13 | Help/support + final CTA | the closing ask | lands after evidence ✓ |
+
+**The page now reads: promise → ask → scale → mechanism → deep proof → voice → context → routing → badges → voices → where → what → ask.** Proof brackets the ask instead of trailing it.
+
+### How to USE the case studies (per audience)
+- **Commissioner (prison)**: hero → flagship (chips + FT/Inside Time) → Allsopp → `#evidence-prisons` (Investec rationale). Their whole journey is checkable third-party voice.
+- **Funder**: stats → policy baselines → proofline ("56 independently verifiable on file") → provenance links out. NEXT: the dated PDF (blocker #7) is now the only missing artifact.
+- **Corporate**: segment question → Brixton team-day film card (`#evidence-community`).
+- **Teacher/HE**: Rwanda + UCL cards (`#evidence-education`), both with named partners; UCL plays the e-cargo film.
+- **Press/curious**: Kenya card now plays the NTV Kenya broadcast in-card — a national broadcaster telling the story for us.
+
+### Recommendations left open for James
+1. Band 2 could carry one line — "the evidence is below ↓ (#evidence)" — so the ask points at proof (charity:water: proof promised at the moment of asking). One sentence, zero layout change.
+2. Segment cards (band 8) secondary links → pre-filtered wall anchors instead of generic pages.
+3. 7th card available: **bamboo wheelchairs** — NTV Kenya broadcast exists (WSS6dTdDG8Q) + our article; would give community a video too.
+4. Story order test once GA4 lands: which kinds get filtered/clicked.
+5. Live-shared content actions: unpublish GM Motors article (⛔) · retitle the "36 countries" article · de-dup ×3 Investec articles.
+
+### Media verification (this session)
+6/6 card images load (HEAD 200, lazy-load confirmed) · 3/3 films mount the youtube-nocookie iframe on click (Brixton xv0x13KNCBw · UCL iB2iHTzT2oQ e-cargo · Kenya EBmY4QpSHo0 NTV) · filter exact per kind · deep-link #evidence-<kind> works (after fixing a handler-order bug) · chip stagger rebuilt in the bbc-statement scroll-driven idiom (first version keyed a class the system never adds — caught because chips went invisible) · hover lift + filter rise-in, all reduced-motion-inert · mobile 390 zero overflow.

@@ -290,3 +290,6 @@ absorb bbc-aaa-2026 (3.6KB, live link/focus/btn systems + stale type vars) into 
 ## IMPACT EVIDENCE SYSTEM (visual-tour build, end of day)
 Shots: ev-flagship-1280, ev-wall-1280, ev-wall-filtered-fixed (prisons→1 card), ev-wall-all-lower, ev-wall-390.
 Verified: 4 outcome chips + 3 provenance links render; 6 evidence cards (3 new: Investec/Rwanda/Soraya — all content verbatim from Grants/Case Study Signposts.md ✅ set); filter tabs exact; nested-anchor shatter fixed (div+stretched-link); mobile 390 zero overflow. Section pushed before template (schema race). Sally Allsopp FT misattribution fixed earlier this session.
+
+## EVIDENCE SYSTEM — media/motion/analysis pass (ev6–ev10)
+All 6 card images 200 ✓ · 3 films play in-card (incl. NEW: NTV Kenya EBmY4QpSHo0 as Kenya's video+source; e-cargo iB2iHTzT2oQ on UCL) · flagship gains "Running — and oversubscribed — since late 2024" + proofline "56 independently verifiable case studies on file — these are six." · motion: chip stagger (scroll-driven, @supports+reduced-motion guarded — REGRESSION CAUGHT: first version invisible chips), hover lift, filter rise-in · deep-link #evidence-<kind> (order bug caught+fixed) · whole-page analysis → research doc §8.
