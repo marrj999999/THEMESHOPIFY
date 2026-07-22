@@ -128,16 +128,24 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
    Home's per-word animated .ew-h1 aligned to the same scale.
    ============================================================ */
 .bbc-rd .rd-hero h1,
-.bbc-rd:not(.bbc-rd-product) .rd-pad h1,
+.bbc-rd:not(.bbc-rd-product) .rd-pad h1:not(.rd-prose h1),
 .bbc-rd.bbc-rd-home .ew-h1{ font-size:clamp(3.4rem,9vw,7.75rem) !important; line-height:.95 !important; letter-spacing:-.025em !important; }
 /* ^ .rd-pad h1 added 2026-07-22: light-paper heroes (which-kit, theory-of-change,
    impact-report, media-page) sat outside .rd-hero and fell to aaa-2026's stale
-   52px var. Product pages excluded — the PDP h1 is a product title, not a masthead. */
+   52px var. Product pages excluded — the PDP h1 is a product title, not a masthead.
+   .rd-prose excluded — headings typed into page BODY content must not masthead. */
 @media (max-width:749px){
   .bbc-rd .rd-hero h1,
-  .bbc-rd:not(.bbc-rd-product) .rd-pad h1,
+  .bbc-rd:not(.bbc-rd-product) .rd-pad h1:not(.rd-prose h1),
   .bbc-rd.bbc-rd-home .ew-h1{ font-size:clamp(2.9rem,12vw,4.6rem) !important; }
 }
+
+/* Prose (rendered page.content — legacy/legal/content pages): headings typed in
+   the admin RTE take the H3 ROLE, not display/band scale. An 8×h1 privacy policy
+   must read as a document, not eight mastheads (caught by the 2026-07-22 audit). */
+.bbc-rd .rd-prose h1,
+.bbc-rd .rd-prose h2{ font-size:clamp(21px,2.3vw,29px) !important; line-height:1.2 !important; letter-spacing:0 !important; font-weight:700; }
+.bbc-rd .rd-prose h3{ font-size:21px !important; line-height:1.25 !important; }
 
 /* ============================================================
    2026 CONSOLIDATION — CANONICAL BAND HEADING (h2)

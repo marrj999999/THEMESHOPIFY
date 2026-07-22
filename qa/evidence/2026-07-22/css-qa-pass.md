@@ -246,3 +246,36 @@ Screenshots: sweep-01-home … sweep-08-pdp-player-press (+ earlier footer-wordm
 - `/pages/education` 404s; real handle `/pages/schools`. If any nav/link targets `education`, needs a repoint check at go-live.
 - Home h2s "Learn to Build a bike." / "Unique team building day" carry Title Case in source (James edits) but render lowercase visually — no action.
 - Gallery page title rename deferred to go-live IA reframe (live-shared content).
+
+## FULL-ESTATE CONFORMANCE AUDIT (134 loads: 67 URLs × 1280+390, headless Chrome/Playwright)
+Scope: home · 38 pages (2026 + legacy) · 10 collections + list · 14 products (one per live template suffix) · cart/search/blog/404.
+Raw data: scratchpad audit-results.json (h1/h2/body px, fonts, Jakarta scan, overflow, JS errors, alt gaps, per-page CSS network weight).
+
+### Result after fixes
+- **100% of the estate renders on the 2026 system** (.bbc-rd) — including all legacy pages (via bbc-page-2026), merch + gift-card PDPs (default template → bbc-rd-product), parts/component-packs (bbc-parts).
+- **Atkinson everywhere; 0 Jakarta leaks** on all 134 loads (theme.liquid loads no Jakarta; legacy Jakarta rules live only in unrendered sections).
+- **0 horizontal overflow, 0 JS errors, 0 imgs without alt** at both widths, all URLs.
+- Type roles measured: display 115 (heroes, cart, 404) · collection/blog/search title 46 · kit PDP title 42 · parts title 30 · body 18. Mobile: 47/28/30. Coherent hierarchy, no strays.
+
+### Defects found → fixed this audit
+1. **Light-paper heroes at 52px** (which-kit, theory-of-change, impact-report, media-page): outside .rd-hero so aaa-2026's stale --t-h1 won. Fix: universal §5 display role extended to `.rd-pad h1` (product + prose excluded). Verified 115/47.
+2. **Prose headings ballooned/mis-scaled** (regression risk from fix 1 + pre-existing `.bbc-rd h2` at 95px in content): support-centre + size-guide 2×h1, privacy-policy 8×h1. Fix: `.rd-prose h1/h2` → h3 role (29px), `.rd-prose h3` → 21px. Verified: privacy = 1 masthead + 7×29px document headings.
+3. **8 dead CSS assets deleted** (server + repo ~31KB): research-system, performance-optimizer, homepage-prefetch-fix, header-fix, type-scale, theme.css, component-collection-hero, component-progress-bar. Network data confirms zero pages requested them. Stale layout/theme.liquid.backup-2026-03-27 removed from repo (was never on server).
+
+### CSS weight (compressed transfer, measured)
+- Content pages ≈64.5KB CSS · collections ≈105KB · PDPs ≈113KB (delta = Dawn commerce + Shopify checkout/Shop Pay preloads — platform-controlled).
+- BBC stack sitewide ≈52KB compressed across 15 sheets; biggest: redesign-2026 12.8 · base 10.5 · statement 7.8 · foundation 7.8. Universal 1.9KB.
+- instafeed-7.1.0.css (app) loads 0KB everywhere; accelerated-checkout compat double-loads on ~7 pages (Shopify-injected).
+
+### Non-defects (analyser expectation noise)
+Commerce titles at 42/46/30px are deliberate roles, not masthead misses. /products/workshopvoucher 404s because the product isn't published to the Online Store channel (storefront voucher = bamboo-bicycle-club-gift-card, which renders fine; footer links it correctly).
+
+### Parked for James (content-owned / store-level)
+- Privacy-policy body uses 8 semantic h1s (visual fixed; the HTML lives in the admin page body — live-shared, needs an admin edit or go-live pass).
+- Legacy page titles are Title Case (store page titles, live-shared): University papers, Geometry set, Whats in the box, etc.
+- media-page h1 carries the HELD "40+ publications" figure.
+- main-menu "Workshops"/"Programmes" point at /pages/bicycle-frame-building-workshop while the canonical workshops page is /pages/workshops (both live, same template — SEO/analytics split; IA-consolidation decision).
+- Local .bak clutter (sections/bbc-timeline.liquid.bak-20260218, templates/page.impact.json.bak-20260224-111345) — rm blocked by session perms.
+
+### CSS optimisation next steps (flagged, not executed — each needs its own tie-audit)
+absorb bbc-aaa-2026 (3.6KB, live link/focus/btn systems + stale type vars) into universal · consolidate the 1–2KB micro-sheets (buttons/layout/spacing) · migrate section-level styles to {% stylesheet %} blocks (7/38 adopted).
