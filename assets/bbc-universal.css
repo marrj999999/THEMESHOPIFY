@@ -128,9 +128,14 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
    Home's per-word animated .ew-h1 aligned to the same scale.
    ============================================================ */
 .bbc-rd .rd-hero h1,
+.bbc-rd:not(.bbc-rd-product) .rd-pad h1,
 .bbc-rd.bbc-rd-home .ew-h1{ font-size:clamp(3.4rem,9vw,7.75rem) !important; line-height:.95 !important; letter-spacing:-.025em !important; }
+/* ^ .rd-pad h1 added 2026-07-22: light-paper heroes (which-kit, theory-of-change,
+   impact-report, media-page) sat outside .rd-hero and fell to aaa-2026's stale
+   52px var. Product pages excluded — the PDP h1 is a product title, not a masthead. */
 @media (max-width:749px){
   .bbc-rd .rd-hero h1,
+  .bbc-rd:not(.bbc-rd-product) .rd-pad h1,
   .bbc-rd.bbc-rd-home .ew-h1{ font-size:clamp(2.9rem,12vw,4.6rem) !important; }
 }
 
