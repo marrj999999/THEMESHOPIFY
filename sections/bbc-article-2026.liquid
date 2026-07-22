@@ -53,6 +53,23 @@
 <div class="bbc-rd bbc-rd-article{% if is_case %} bbc-rd-article--case{% endif %}">
   <article>
 
+    {%- comment -%} Article schema (audit 2026-07-22 — articles had no structured data) {%- endcomment -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": {{ article.title | json }},
+        "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+        "dateModified": {{ article.updated_at | default: article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+        {%- if article.image -%}
+        "image": {{ article.image | image_url: width: 1200 | prepend: 'https:' | json }},
+        {%- endif -%}
+        "author": { "@type": "Organization", "name": "Bamboo Bicycle Club" },
+        "publisher": { "@type": "Organization", "name": "Bamboo Bicycle Club", "url": {{ shop.url | json }} },
+        "mainEntityOfPage": {{ canonical_url | json }}
+      }
+    </script>
+
     {%- comment -%} ===== HERO ===== {%- endcomment -%}
     <header class="rd-art-hero{% if article.image %} rd-art-hero--img{% endif %}{% if is_case %} rd-art-hero--case{% endif %}">
       {%- if article.image -%}

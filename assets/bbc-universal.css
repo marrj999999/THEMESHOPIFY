@@ -147,6 +147,12 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
 .bbc-rd .rd-prose h2{ font-size:clamp(21px,2.3vw,29px) !important; line-height:1.2 !important; letter-spacing:0 !important; font-weight:700; }
 .bbc-rd .rd-prose h3{ font-size:21px !important; line-height:1.25 !important; }
 
+/* ARTICLE HEADLINE role (blog posts — long editorial titles can run 8–12 words, so
+   masthead display would wrap 6+ lines; audit 2026-07-22 found articles falling to
+   aaa-2026's stale var instead of a deliberate role). ~54px @1280, documented in
+   qa/TYPE-SCALE.md. */
+.bbc-rd .rd-art-hero h1{ font-size:clamp(2.2rem,4.2vw,3.5rem) !important; line-height:1.05 !important; letter-spacing:-.015em !important; }
+
 /* ============================================================
    2026 CONSOLIDATION — CANONICAL BAND HEADING (h2)
    Every band heading matches Impact (clamp 2.8–5.4rem). Fixes the

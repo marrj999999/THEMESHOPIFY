@@ -30,6 +30,8 @@ wrap ≤5 lines at desktop.
 | Display (hero h1) | `clamp(3.4rem, 9vw, 7.75rem)` | **115px** (cap 124) | lh .95 · tracking -0.025em |
 | Band h2 | `clamp(3rem, 7.4vw, 6.4rem)` | **95px** (cap 102) | lh .97 · always < h1 |
 | Sub-head h3 | `clamp(21px, 2.3vw, 29px)` | 29px | lh 1.12 |
+| Article headline | `clamp(2.2rem, 4.2vw, 3.5rem)` | **54px** (cap 56) | lh 1.05 · blog posts only (`.rd-art-hero h1`) — editorial titles run 8–12 words, display would wrap 6+ lines. Added 2026-07-22 audit. |
+| Prose headings (page body RTE) | h3 role values | 29px | `.rd-prose h1/h2` — admin-typed content must read as a document, never masthead. Added 2026-07-22 audit. |
 | Lede | 22px | 22 | lh 1.6 |
 | Body | **18px** | 18 | lh 1.5 (brief-locked) |
 | Buttons | 15px w700 | — | pill standard |

@@ -9,7 +9,22 @@
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- else -%}
+      {%- comment -%} brand-roundel fallback — audit 2026-07-22 found no favicon set in settings {%- endcomment -%}
+      <link rel="icon" type="image/png" href="{{ 'bbc-rd-roundel.png' | asset_url }}">
     {%- endif -%}
+
+    {%- comment -%} Organization schema (sitewide; audit 2026-07-22 — none was output anywhere) {%- endcomment -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Bamboo Bicycle Club",
+        "url": {{ shop.url | append: '/' | json }},
+        "logo": {{ 'bbc-rd-logo.png' | asset_url | prepend: 'https:' | json }},
+        "description": "We use bamboo bike-building to give practical skills and a way forward to people locked out of education — in schools before exclusion, and in prisons after."
+      }
+    </script>
 
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>

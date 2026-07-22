@@ -279,3 +279,10 @@ Commerce titles at 42/46/30px are deliberate roles, not masthead misses. /produc
 
 ### CSS optimisation next steps (flagged, not executed — each needs its own tie-audit)
 absorb bbc-aaa-2026 (3.6KB, live link/focus/btn systems + stale type vars) into universal · consolidate the 1–2KB micro-sheets (buttons/layout/spacing) · migrate section-level styles to {% stylesheet %} blocks (7/38 adopted).
+
+## FUNCTIONAL + META CHECK-PASS (post-audit "what else" sweep)
+- Footer email capture: EXISTS + correct (`form_type=customer` → Shopify subscriber, per brief). ✓
+- Article pages (missed by URL-list crawl): were 52px stale h1, no schema → **fixed**: new ARTICLE HEADLINE role 54px (`.rd-art-hero h1`, documented in TYPE-SCALE.md) + Article JSON-LD in bbc-article-2026. ✓
+- Favicon: none was set → roundel fallback added in theme.liquid (settings.favicon still wins if James sets one). ✓
+- Structured data: PDPs already had Product ✓; added sitewide Organization (mission-locked description); articles now Article. All parse in-browser. ✓
+- Web vitals (desktop, measured): LCP 604–708ms · CLS 0–0.002 · TTFB ~460ms · weights: home 1.5MB / PDP 2.0MB / collection 2.9MB (1.15MB grid imagery). All well inside Google "good".
