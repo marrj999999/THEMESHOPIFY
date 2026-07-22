@@ -181,7 +181,7 @@
     <div class="ew-copy">
       <div class="ew-rule"></div>
       {%- if section.settings.hero_eyebrow != blank -%}<p class="ew-eyebrow" style="--d:0s">{{ section.settings.hero_eyebrow }}</p>{%- endif -%}
-      <h1 class="ew-h1"><span class="wd" style="--d:.1s">More</span> <span class="wd" style="--d:.2s">than</span> <span class="wd" style="--d:.3s">a</span> <span class="wd" style="--d:.4s">bike.</span><span class="ew-fwd"><span class="wd" style="--d:.55s">A</span> <span class="wd" style="--d:.65s">way</span> <span class="wd" style="--d:.75s">forward.</span></span></h1>
+      <h1 class="ew-h1"><span class="wd" style="--d:.1s">more</span> <span class="wd" style="--d:.2s">than</span> <span class="wd" style="--d:.3s">a</span> <span class="wd" style="--d:.4s">bike.</span><span class="ew-fwd"><span class="wd" style="--d:.55s">a</span> <span class="wd" style="--d:.65s">way</span> <span class="wd" style="--d:.75s">forward.</span></span></h1>
       {%- if section.settings.hero_lede != blank -%}<p class="ew-lede">{{ section.settings.hero_lede }}</p>{%- endif -%}
       <div class="ew-cta">
         {%- if section.settings.hero_cta1_label != blank -%}<a class="ew-btn is-lime" href="{{ hero_cta1 }}">{{ section.settings.hero_cta1_label }} &rarr;</a>{%- endif -%}
@@ -390,13 +390,69 @@
   {%- comment -%} ---------- STATS ---------- {%- endcomment -%}
   
 
+  {%- comment -%} ---------- DOORS ---------- {%- endcomment -%}
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      <div class="rd-center rd-cmp-20294">
+        <span class="rd-eyebrow">{{ section.settings.doors_kicker }}</span>
+        <h2 class="rd-reveal">{{ section.settings.doors_title }}</h2>
+        <p class="rd-lede rd-mt2">{{ section.settings.doors_intro }}</p>
+      </div>
+      <div class="rd-grid rd-g3">
+        {%- for block in section.blocks -%}{%- if block.type == 'door' -%}
+          {%- assign door_url = block.settings.link_url | default: '/' -%}
+          <a class="rd-door" href="{{ door_url }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 1200 }}" srcset="{{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 800 }} 800w, {{ block.settings.image | image_url: width: 1200 }} 1200w, {{ block.settings.image | image_url: width: 1600 }} 1600w" sizes="(max-width:749px) 92vw, 33vw" alt="{{ block.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
+            {%- else -%}
+              <img src="{{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '900x' }}" srcset="{{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '400x' }} 400w, {{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '600x' }} 600w, {{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '900x' }} 900w, {{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '1400x' }} 1400w" sizes="(max-width:749px) 92vw, 42vw" alt="{{ block.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="1200" height="900">
+            {%- endif -%}
+            <div class="rd-ov"></div>
+            <div class="rd-c">
+              {%- if block.settings.tag != blank -%}<span class="rd-tag rd-lime">{{ block.settings.tag }}</span>{%- endif -%}
+              <h3 class="rd-mt2">{{ block.settings.title }}</h3>
+              <p>{{ block.settings.body }}</p>
+              {%- if block.settings.link_label != blank -%}<span class="rd-btn rd-lime">{{ block.settings.link_label }}</span>{%- endif -%}
+            </div>
+          </a>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- IMPACT FEATURE ---------- {%- endcomment -%}
+  <section class="rd-split rd-dark">
+    <div class="rd-reveal rd-media">
+      {%- if section.settings.impact_image != blank -%}
+        <img src="{{ section.settings.impact_image | image_url: width: 1400 }}" srcset="{{ section.settings.impact_image | image_url: width: 600 }} 600w, {{ section.settings.impact_image | image_url: width: 900 }} 900w, {{ section.settings.impact_image | image_url: width: 1400 }} 1400w, {{ section.settings.impact_image | image_url: width: 1800 }} 1800w" sizes="(max-width:749px) 100vw, 50vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="{{ section.settings.impact_image.width }}" height="{{ section.settings.impact_image.height }}" loading="lazy">
+      {%- else -%}
+        <img src="{{ 'bbc-rd-cohort.jpg' | asset_img_url: '900x' }}" srcset="{{ 'bbc-rd-cohort.jpg' | asset_img_url: '400x' }} 400w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '600x' }} 600w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '900x' }} 900w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '1400x' }} 1400w" sizes="(max-width:749px) 92vw, 42vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="1400" height="933">
+      {%- endif -%}
+    </div>
+    <div class="rd-txt">
+      <span class="rd-eyebrow rd-on-dark">{{ section.settings.impact_kicker }}</span>
+      <h2 class="rd-reveal">{{ section.settings.impact_title }}</h2>
+      <p class="rd-lede rd-mt2">{{ section.settings.impact_body }}</p>
+      {%- if section.settings.impact_quote != blank -%}
+        <div class="rd-reveal rd-pull rd-mt3">
+          <p class="rd-q">{{ section.settings.impact_quote }}</p>
+          {%- if section.settings.impact_cite != blank -%}<cite>{{ section.settings.impact_cite }}</cite>{%- endif -%}
+        </div>
+      {%- endif -%}
+      <div class="rd-flex rd-mt3">
+        {%- if section.settings.impact_cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ feat_cta1 }}">{{ section.settings.impact_cta1_label }}</a>{%- endif -%}
+        {%- if section.settings.impact_cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ feat_cta2 }}">{{ section.settings.impact_cta2_label }}</a>{%- endif -%}
+      </div>
+    </div>
+  </section>
+
   {%- comment -%} ---------- FUNDING LOOP ---------- {%- endcomment -%}
   <section class="rd-dark rd-pad-sm">
     <div class="rd-wrap">
       <div class="rd-flex rd-between rd-gap-24">
         <div>
           <span class="rd-eyebrow">{{ section.settings.loop_kicker }}</span>
-          <h2 class="rd-mw-16ch">{{ section.settings.loop_heading }}</h2>
+          <h2 class="rd-reveal rd-mw-16ch">{{ section.settings.loop_heading }}</h2>
         </div>
         <p class="rd-maxw-s rd-m-0">{{ section.settings.loop_intro }}</p>
       </div>
@@ -406,32 +462,6 @@
         <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s2_big }}</div><div class="rd-sm">{{ section.settings.loop_s2_sm }}</div></div>
         <div class="rd-arr">&rarr;</div>
         <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s3_big }}</div><div class="rd-sm">{{ section.settings.loop_s3_sm }}</div></div>
-      </div>
-    </div>
-  </section>
-
-  {%- comment -%} ---------- IMPACT FEATURE ---------- {%- endcomment -%}
-  <section class="rd-split rd-dark">
-    <div class="rd-media">
-      {%- if section.settings.impact_image != blank -%}
-        <img src="{{ section.settings.impact_image | image_url: width: 1400 }}" srcset="{{ section.settings.impact_image | image_url: width: 600 }} 600w, {{ section.settings.impact_image | image_url: width: 900 }} 900w, {{ section.settings.impact_image | image_url: width: 1400 }} 1400w, {{ section.settings.impact_image | image_url: width: 1800 }} 1800w" sizes="(max-width:749px) 100vw, 50vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="{{ section.settings.impact_image.width }}" height="{{ section.settings.impact_image.height }}" loading="lazy">
-      {%- else -%}
-        <img src="{{ 'bbc-rd-cohort.jpg' | asset_img_url: '900x' }}" srcset="{{ 'bbc-rd-cohort.jpg' | asset_img_url: '400x' }} 400w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '600x' }} 600w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '900x' }} 900w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '1400x' }} 1400w" sizes="(max-width:749px) 92vw, 42vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="1400" height="933">
-      {%- endif -%}
-    </div>
-    <div class="rd-txt">
-      <span class="rd-eyebrow rd-on-dark">{{ section.settings.impact_kicker }}</span>
-      <h2>{{ section.settings.impact_title }}</h2>
-      <p class="rd-lede rd-mt2">{{ section.settings.impact_body }}</p>
-      {%- if section.settings.impact_quote != blank -%}
-        <div class="rd-pull rd-mt3">
-          <p class="rd-q">{{ section.settings.impact_quote }}</p>
-          {%- if section.settings.impact_cite != blank -%}<cite>{{ section.settings.impact_cite }}</cite>{%- endif -%}
-        </div>
-      {%- endif -%}
-      <div class="rd-flex rd-mt3">
-        {%- if section.settings.impact_cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ feat_cta1 }}">{{ section.settings.impact_cta1_label }}</a>{%- endif -%}
-        {%- if section.settings.impact_cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ feat_cta2 }}">{{ section.settings.impact_cta2_label }}</a>{%- endif -%}
       </div>
     </div>
   </section>
@@ -474,7 +504,7 @@
     <div class="rd-wrap">
       <div class="acc-head">
         <span class="rd-eyebrow">{{ section.settings.why_kicker | default: 'Built by anyone' }}</span>
-        <h2 class="acc-title">{{ section.settings.why_title | default: 'No workshop. No welding. No experience needed.' }}</h2>
+        <h2 class="rd-reveal acc-title">{{ section.settings.why_title | default: 'no workshop. no welding. no experience needed.' }}</h2>
         <p class="acc-lede">{{ section.settings.why_lede | default: 'Bamboo frames go together with a few hand tools, a jig and a weekend — and most builders have never made anything before.' }}</p>
       </div>
       <ul class="acc-stats">
@@ -484,23 +514,23 @@
       </ul>
       <ul class="acc-cards">
         <li class="acc-card"><a href="{{ section.settings.why_card1_url | default: '/pages/workshops' }}">
-          <img src="{% if section.settings.why_card1_img != blank %}{{ section.settings.why_card1_img | image_url: width: 480 }}{% else %}{{ 'bbc-rd-wb-kit.jpg' | asset_url }}{% endif %}" alt="{{ section.settings.why_card1_alt | default: 'The Bamboo Bicycle Club frame kit laid out — tubes, lugs, jig and tools' | escape }}" width="480" height="360" loading="lazy">
-          <h3>{{ section.settings.why_card1_title | default: 'Simple hand tools' }}</h3>
+          {%- render "bbc-media", image: section.settings.why_card1_img, fallback: "bbc-rd-wb-kit.jpg", video: section.settings.why_card1_video_file, youtube: section.settings.why_card1_video_url, alt: section.settings.why_card1_alt -%}
+          <h3>{{ section.settings.why_card1_title | default: 'simple hand tools' }}</h3>
           <p>{{ section.settings.why_card1_body | default: 'A file, a saw, some sandpaper — everything else comes in the kit.' }}</p>
         </a></li>
         <li class="acc-card"><a href="{{ section.settings.why_card2_url | default: '/pages/workshops' }}">
-          <img src="{% if section.settings.why_card2_img != blank %}{{ section.settings.why_card2_img | image_url: width: 480 }}{% else %}{{ 'bbc-rd-wb-builder.jpg' | asset_url }}{% endif %}" alt="{{ section.settings.why_card2_alt | default: 'A first-time builder standing with the bamboo bike he made' | escape }}" width="480" height="360" loading="lazy">
-          <h3>{{ section.settings.why_card2_title | default: 'No experience needed' }}</h3>
+          {%- render "bbc-media", image: section.settings.why_card2_img, fallback: "bbc-rd-wb-builder.jpg", video: section.settings.why_card2_video_file, youtube: section.settings.why_card2_video_url, alt: section.settings.why_card2_alt -%}
+          <h3>{{ section.settings.why_card2_title | default: 'no experience needed' }}</h3>
           <p>{{ section.settings.why_card2_body | default: 'Most builders have never made anything before. We guide every step.' }}</p>
         </a></li>
         <li class="acc-card"><a href="{{ section.settings.why_card3_url | default: '/pages/workshops' }}">
-          <img src="{% if section.settings.why_card3_img != blank %}{{ section.settings.why_card3_img | image_url: width: 480 }}{% else %}{{ 'bbc-rd-wb-group.jpg' | asset_url }}{% endif %}" alt="{{ section.settings.why_card3_alt | default: 'A diverse group of people gathered around a finished bamboo bike' | escape }}" width="480" height="360" loading="lazy">
-          <h3>{{ section.settings.why_card3_title | default: 'Any age, anywhere' }}</h3>
+          {%- render "bbc-media", image: section.settings.why_card3_img, fallback: "bbc-rd-wb-group.jpg", video: section.settings.why_card3_video_file, youtube: section.settings.why_card3_video_url, alt: section.settings.why_card3_alt -%}
+          <h3>{{ section.settings.why_card3_title | default: 'any age, anywhere' }}</h3>
           <p>{{ section.settings.why_card3_body | default: 'Built at kitchen tables in 45 countries, by people of all ages.' }}</p>
         </a></li>
         <li class="acc-card"><a href="{{ section.settings.why_card4_url | default: '/pages/workshops' }}">
           <img src="{% if section.settings.why_card4_img != blank %}{{ section.settings.why_card4_img | image_url: width: 480 }}{% else %}{{ 'bbc-rd-wb-ride.jpg' | asset_url }}{% endif %}" alt="{{ section.settings.why_card4_alt | default: 'Riding a finished bamboo bike on the road' | escape }}" width="480" height="360" loading="lazy">
-          <h3>{{ section.settings.why_card4_title | default: 'Built to last' }}</h3>
+          <h3>{{ section.settings.why_card4_title | default: 'built to last' }}</h3>
           <p>{{ section.settings.why_card4_body | default: 'Light, strong and it soaks up the road. These bikes get ridden hard.' }}</p>
         </a></li>
       </ul>
@@ -515,48 +545,18 @@
   <section class="rd-pad rd-paper">
     <div class="rd-wrap">
       <span class="rd-eyebrow">Proven on the road</span>
-      <h2 class="rd-mw-20ch">Bamboo soaks up the road — riders and reviewers agree.</h2>
+      <h2 class="rd-reveal rd-mw-20ch">bamboo soaks up the road — riders and reviewers agree.</h2>
       <p class="rd-lede rd-mt2">Not just our word. National press, pro reviewers and ten-year riders all land on the same thing: it rides beautifully.</p>
       <div class="rd-csgrid rd-mt4">
-        <a class="rd-cscard rd-cscard--video" href="https://www.youtube.com/watch?v=cQxbC-njbGQ" data-yt="cQxbC-njbGQ">
+        <a class="rd-reveal rd-cscard rd-cscard--video" href="https://www.youtube.com/watch?v=cQxbC-njbGQ" data-yt="cQxbC-njbGQ">
           <div class="rd-cscard__media"><img src="{{ 'bbc-rd-gcn.jpg' | asset_url }}" alt="GCN reviews a bamboo bike on test" loading="lazy" width="600" height="338"><span class="rd-cscard__kind">GCN review</span><span class="rd-cscard__play" aria-hidden="true"></span></div>
           <div class="rd-cscard__body"><p class="rd-cscard__ctx">Global Cycling Network puts a bamboo bike to the test: &ldquo;Are bamboo bikes actually any good?&rdquo;</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">Global Cycling Network</span><span class="rd-cscard__more">Watch the film <span class="rd-arrow">&rarr;</span></span></div></div>
         </a>
-        <div class="rd-cscard"><div class="rd-cscard__body"><p class="rd-cscard__quote">Bamboo naturally dampens vibration, allowing the smoothest ride.</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">The Guardian</span></div></div></div>
-        <div class="rd-cscard"><div class="rd-cscard__body"><p class="rd-cscard__quote">A really, really comfortable ride &mdash; smooth but not too flexy.</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">Kate Rawles &middot; BikeRadar</span></div></div></div>
-        <a class="rd-cscard" href="/blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike"><div class="rd-cscard__body"><p class="rd-cscard__ctx"><strong>Taro</strong> still rides the same frame after <strong>10 years</strong> of daily commuting.</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">Builder story</span><span class="rd-cscard__more">Read his story <span class="rd-arrow">&rarr;</span></span></div></div></a>
+        <div class="rd-reveal rd-cscard"><div class="rd-cscard__body"><p class="rd-cscard__quote">Bamboo naturally dampens vibration, allowing the smoothest ride.</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">The Guardian</span></div></div></div>
+        <div class="rd-reveal rd-cscard"><div class="rd-cscard__body"><p class="rd-cscard__quote">A really, really comfortable ride &mdash; smooth but not too flexy.</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">Kate Rawles &middot; BikeRadar</span></div></div></div>
+        <a class="rd-reveal rd-cscard" href="/blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike"><div class="rd-cscard__body"><p class="rd-cscard__ctx"><strong>Taro</strong> still rides the same frame after <strong>10 years</strong> of daily commuting.</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">Builder story</span><span class="rd-cscard__more">Read his story <span class="rd-arrow">&rarr;</span></span></div></div></a>
       </div>
       {% render 'bbc-video-lightbox' %}
-    </div>
-  </section>
-
-  {%- comment -%} ---------- DOORS ---------- {%- endcomment -%}
-  <section class="rd-pad">
-    <div class="rd-wrap">
-      <div class="rd-center rd-cmp-20294">
-        <span class="rd-eyebrow">{{ section.settings.doors_kicker }}</span>
-        <h2>{{ section.settings.doors_title }}</h2>
-        <p class="rd-lede rd-mt2">{{ section.settings.doors_intro }}</p>
-      </div>
-      <div class="rd-grid rd-g3">
-        {%- for block in section.blocks -%}{%- if block.type == 'door' -%}
-          {%- assign door_url = block.settings.link_url | default: '/' -%}
-          <a class="rd-door" href="{{ door_url }}" {{ block.shopify_attributes }}>
-            {%- if block.settings.image != blank -%}
-              <img src="{{ block.settings.image | image_url: width: 1200 }}" srcset="{{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 800 }} 800w, {{ block.settings.image | image_url: width: 1200 }} 1200w, {{ block.settings.image | image_url: width: 1600 }} 1600w" sizes="(max-width:749px) 92vw, 33vw" alt="{{ block.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
-            {%- else -%}
-              <img src="{{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '900x' }}" srcset="{{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '400x' }} 400w, {{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '600x' }} 600w, {{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '900x' }} 900w, {{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '1400x' }} 1400w" sizes="(max-width:749px) 92vw, 42vw" alt="{{ block.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="1200" height="900">
-            {%- endif -%}
-            <div class="rd-ov"></div>
-            <div class="rd-c">
-              {%- if block.settings.tag != blank -%}<span class="rd-tag rd-lime">{{ block.settings.tag }}</span>{%- endif -%}
-              <h3 class="rd-mt2">{{ block.settings.title }}</h3>
-              <p>{{ block.settings.body }}</p>
-              {%- if block.settings.link_label != blank -%}<span class="rd-btn rd-lime">{{ block.settings.link_label }}</span>{%- endif -%}
-            </div>
-          </a>
-        {%- endif -%}{%- endfor -%}
-      </div>
     </div>
   </section>
 
@@ -564,13 +564,13 @@
   <section class="rd-pad">
     <div class="rd-wrap">
       <div class="rd-flex rd-between rd-mb-36px">
-        <div><span class="rd-eyebrow">{{ section.settings.kits_kicker }}</span><h2>{{ section.settings.kits_title }}</h2></div>
+        <div><span class="rd-eyebrow">{{ section.settings.kits_kicker }}</span><h2 class="rd-reveal">{{ section.settings.kits_title }}</h2></div>
         {%- if section.settings.kits_link_label != blank -%}<a class="rd-btn rd-ghost" href="{{ kits_url }}">{{ section.settings.kits_link_label }}</a>{%- endif -%}
       </div>
       <div class="rd-grid rd-g4">
         {%- for block in section.blocks -%}{%- if block.type == 'kit' -%}
           {%- assign kit_link = block.settings.link_url | default: kits_url -%}
-          <a class="rd-card" href="{{ kit_link }}" {{ block.shopify_attributes }}>
+          <a class="rd-reveal rd-card" href="{{ kit_link }}" {{ block.shopify_attributes }}>
             <div class="rd-ph">
               {%- if block.settings.image != blank -%}
                 <img src="{{ block.settings.image | image_url: width: 900 }}" srcset="{{ block.settings.image | image_url: width: 400 }} 400w, {{ block.settings.image | image_url: width: 600 }} 600w, {{ block.settings.image | image_url: width: 900 }} 900w, {{ block.settings.image | image_url: width: 1200 }} 1200w" sizes="(max-width:749px) 92vw, 30vw" alt="{{ block.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
@@ -589,49 +589,56 @@
     </div>
   </section>
 
-  {%- comment -%} ---------- WATCH A BUILD (video, editable) ---------- {%- endcomment -%}
-  {%- assign v_poster = 'bbc-rd-workshop.jpg' | asset_url -%}
-  {%- if section.settings.video_poster != blank -%}{%- assign v_poster = section.settings.video_poster | image_url: width: 1600 -%}{%- endif -%}
-  {%- assign v_src = 'https://cdn.shopify.com/videos/c/vp/c2e2bca8470a4a719fc9cafdcbe502a4/c2e2bca8470a4a719fc9cafdcbe502a4.HD-720p-1.6Mbps-86587636.mp4' -%}
-  {%- if section.settings.video_mp4 != blank -%}{%- assign v_src = section.settings.video_mp4 -%}{%- endif -%}
+  {%- comment -%} ---------- WATCH A BUILD (YouTube, inline-play) ----------
+     Rebuilt 2026-07-22 (James): complete-build film sourced from the BBC channel —
+     UhuzVI2yVNU "Building a Bamboo Bike Frame from a Home Kit (Full Build)", the
+     channel's best-performing full build (16.4k views, 9m25s, box of raw bamboo →
+     rideable frame). Poster + lime play → plays inline via bbc-media (no iframe
+     until click). Legacy video_mp4 path kept only when no YouTube URL is set.
+  ---------- {%- endcomment -%}
+  {%- comment -%} NOTE: no rd-center — the homepage's one-left-axis rule
+     (bbc-statement.css:172) forces mw-wraps left inside rd-center; we follow
+     the axis instead: left-aligned head, full-wrap cinematic video. {%- endcomment -%}
   {%- if section.settings.show_video != false -%}
-  <section class="rd-pad-sm rd-dark rd-center">
-    <div class="rd-wrap rd-mw-820px">
+  <section class="rd-pad rd-dark">
+    <div class="rd-wrap">
       {%- if section.settings.video_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.video_eyebrow }}</span>{%- endif -%}
-      {%- if section.settings.video_title != blank -%}<h2 class="rd-mt2">{{ section.settings.video_title }}</h2>{%- endif -%}
+      {%- if section.settings.video_title != blank -%}<h2 class="rd-reveal rd-mt2">{{ section.settings.video_title }}</h2>{%- endif -%}
+      {%- if section.settings.video_lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.video_lede }}</p>{%- endif -%}
+      {%- assign yt = section.settings.video_url | default: 'https://www.youtube.com/watch?v=DAMHyvr698k' -%}
+      {%- if yt != blank -%}
+      <div class="rd-reveal rd-mt3" style="border-radius:14px;overflow:hidden;">
+        {%- render 'bbc-media', image: section.settings.video_poster, youtube: yt, label: section.settings.video_chip, alt: section.settings.video_title, class: 'bbc-media--ar169', sizes: '(max-width:749px) 100vw, 1136px' -%}
+      </div>
+      {%- elsif section.settings.video_mp4 != blank -%}
       <div class="rd-video rd-mt3" style="position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#06231C;">
-        <video poster="{{ v_poster }}" controls preload="none" playsinline aria-label="{{ section.settings.video_title | default: 'From bare bamboo to the open road — building a bamboo bike frame' | escape }}" style="position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;">
-          <source src="{{ v_src }}" type="video/mp4">
+        <video poster="{% if section.settings.video_poster != blank %}{{ section.settings.video_poster | image_url: width: 1600 }}{% else %}{{ 'bbc-rd-workshop.jpg' | asset_url }}{% endif %}" controls preload="none" playsinline aria-label="{{ section.settings.video_title | escape }}" style="position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;">
+          <source src="{{ section.settings.video_mp4 }}" type="video/mp4">
         </video>
       </div>
+      {%- endif -%}
+      {%- if section.settings.video_credit != blank -%}<p class="rd-ship-note rd-mt2">{{ section.settings.video_credit }}</p>{%- endif -%}
     </div>
   </section>
   {%- endif -%}
 
-  {%- comment -%} ---------- PRESS ---------- {%- endcomment -%}
+  {%- comment -%} ---------- PRESS (standard block, 2026-07-22) ----------
+     Rendered via snippets/bbc-press.liquid — the sitewide standard
+     (research: quote-anchored logo bar; contract in qa/PRESS-BLOCK.md).
+     Styled-text fake logos REMOVED (real logos only, house rule).
+  ---------- {%- endcomment -%}
   <section class="rd-pad-sm rd-steel">
-    <div class="rd-wrap rd-center">
-      <span class="rd-eyebrow">{{ section.settings.press_kicker }}</span>
-      {%- assign press_blocks = section.blocks | where: 'type', 'press' -%}
-      {%- if press_blocks.size > 0 -%}
-        <div class="rd-logobar rd-mt3">
-          {%- for block in press_blocks -%}
-            {%- if block.settings.logo_asset != blank -%}
-              <span class="rd-lg" {{ block.shopify_attributes }}><img class="rd-lg-img" src="{{ block.settings.logo_asset | asset_url }}" alt="{{ block.settings.text | escape }}" loading="lazy" style="height:26px !important;width:auto !important;max-width:150px;object-fit:contain;"></span>
-            {%- elsif block.settings.style == 'bbc' -%}
-              <span class="rd-lg rd-lg-bbc" {{ block.shopify_attributes }}>{%- assign letters = block.settings.text | strip | split: '' -%}{%- for ch in letters -%}{%- unless ch == ' ' -%}<b>{{ ch }}</b>{%- endunless -%}{%- endfor -%}</span>
-            {%- elsif block.settings.style == 'serif-italic' -%}
-              <span class="rd-lg rd-lg-serif rd-it" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
-            {%- else -%}
-              <span class="rd-lg rd-lg-{{ block.settings.style }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
-      {%- if section.settings.press_quote != blank -%}
-        <p class="rd-mt4 rd-cmp-43643">{{ section.settings.press_quote }}</p>
-        <p class="rd-cmp-36671">{{ section.settings.press_cite }}</p>
-      {%- endif -%}
+    <div class="rd-wrap">
+      {%- render 'bbc-press',
+          style: 'bar',
+          align: 'left',
+          reel: true,
+          preset: 'national',
+          label: section.settings.press_kicker,
+          quote: section.settings.press_quote,
+          cite: section.settings.press_cite,
+          more_label: section.settings.press_more_label,
+          more_url: section.settings.press_more_url -%}
     </div>
   </section>
 
@@ -639,7 +646,7 @@
   <section class="rd-pad rd-dark rd-center">
     <div class="rd-wrap rd-mw-760px">
       <span class="rd-eyebrow rd-on-dark">{{ section.settings.cta_kicker }}</span>
-      <h2>{{ section.settings.cta_title }}</h2>
+      <h2 class="rd-reveal">{{ section.settings.cta_title }}</h2>
       <p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.cta_lede }}</p>
       <div class="rd-flex rd-mt3 rd-jc-center">
         {%- if section.settings.cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ final_c1 }}">{{ section.settings.cta1_label }}</a>{%- endif -%}
@@ -704,7 +711,7 @@
       "type": "text",
       "id": "hero_title",
       "label": "Headline",
-      "default": "More than a bike. A way forward."
+      "default": "more than a bike. a way forward."
     },
     {
       "type": "textarea",
@@ -748,7 +755,7 @@
       "type": "text",
       "id": "loop_heading",
       "label": "Heading",
-      "default": "One craft. One engine for change."
+      "default": "one craft. one engine for change."
     },
     {
       "type": "textarea",
@@ -806,7 +813,7 @@
       "type": "text",
       "id": "doors_title",
       "label": "Title",
-      "default": "One club, many ways in."
+      "default": "one club, many ways in."
     },
     {
       "type": "textarea",
@@ -839,7 +846,7 @@
       "type": "text",
       "id": "impact_title",
       "label": "Title",
-      "default": "Building bikes. Building futures."
+      "default": "building bikes. building futures."
     },
     {
       "type": "textarea",
@@ -895,7 +902,7 @@
       "type": "text",
       "id": "why_title",
       "label": "Title",
-      "default": "Four reasons the material does the heavy lifting"
+      "default": "four reasons the material does the heavy lifting"
     },
     {
       "type": "textarea",
@@ -922,7 +929,7 @@
       "type": "text",
       "id": "p1_title",
       "label": "Title",
-      "default": "Simple hand tools"
+      "default": "simple hand tools"
     },
     {
       "type": "textarea",
@@ -938,7 +945,7 @@
       "type": "text",
       "id": "p2_title",
       "label": "Title",
-      "default": "Rides smoother"
+      "default": "rides smoother"
     },
     {
       "type": "textarea",
@@ -954,7 +961,7 @@
       "type": "text",
       "id": "p3_title",
       "label": "Title",
-      "default": "Anyone can build it"
+      "default": "anyone can build it"
     },
     {
       "type": "textarea",
@@ -970,7 +977,7 @@
       "type": "text",
       "id": "p4_title",
       "label": "Title",
-      "default": "Greener by far"
+      "default": "greener by far"
     },
     {
       "type": "textarea",
@@ -998,7 +1005,30 @@
       "type": "text",
       "id": "video_title",
       "label": "Heading",
-      "default": "From bare bamboo to the open road."
+      "default": "from bare bamboo to the open road."
+    },
+    {
+      "type": "textarea",
+      "id": "video_lede",
+      "label": "Lede (under the heading)",
+      "default": "One kit, one pair of hands — the whole build, from a box of raw bamboo to a frame you can ride."
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "YouTube video (plays inline — defaults to the Full Build film)"
+    },
+    {
+      "type": "text",
+      "id": "video_chip",
+      "label": "Ticket chip on the poster",
+      "default": "watch the full build · 29 min"
+    },
+    {
+      "type": "text",
+      "id": "video_credit",
+      "label": "Credit line (under the video)",
+      "default": "the full build film · 9 minutes, start to finish · from our YouTube channel"
     },
     {
       "type": "image_picker",
@@ -1030,7 +1060,7 @@
       "type": "text",
       "id": "kits_title",
       "label": "Title",
-      "default": "Frame kits, shipped worldwide."
+      "default": "frame kits, shipped worldwide."
     },
     {
       "type": "text",
@@ -1052,6 +1082,17 @@
       "id": "press_kicker",
       "label": "Kicker",
       "default": "As seen in & recognised by"
+    },
+    {
+      "type": "text",
+      "id": "press_more_label",
+      "label": "All-coverage link label",
+      "default": "read the coverage →"
+    },
+    {
+      "type": "url",
+      "id": "press_more_url",
+      "label": "All-coverage link (defaults to the news blog)"
     },
     {
       "type": "textarea",
@@ -1095,7 +1136,7 @@
       "type": "text",
       "id": "cta_title",
       "label": "Title",
-      "default": "Build it. Ride it. Pass it on."
+      "default": "build it. ride it. pass it on."
     },
     {
       "type": "textarea",
@@ -1279,6 +1320,36 @@
       "type": "url",
       "id": "why_cta_url",
       "label": "Band CTA link"
+    },
+    {
+      "type": "url",
+      "id": "why_card1_video_url",
+      "label": "Video URL (plays inline)"
+    },
+    {
+      "type": "video",
+      "id": "why_card1_video_file",
+      "label": "Or upload a video (plays inline)"
+    },
+    {
+      "type": "url",
+      "id": "why_card2_video_url",
+      "label": "Video URL (plays inline)"
+    },
+    {
+      "type": "video",
+      "id": "why_card2_video_file",
+      "label": "Or upload a video (plays inline)"
+    },
+    {
+      "type": "url",
+      "id": "why_card3_video_url",
+      "label": "Video URL (plays inline)"
+    },
+    {
+      "type": "video",
+      "id": "why_card3_video_file",
+      "label": "Or upload a video (plays inline)"
     }
   ],
   "blocks": [
@@ -1337,7 +1408,7 @@
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "Build your own"
+          "default": "build your own"
         },
         {
           "type": "textarea",
@@ -1365,7 +1436,7 @@
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "Comparable to mild steel"
+          "default": "comparable to mild steel"
         },
         {
           "type": "textarea",
@@ -1399,7 +1470,7 @@
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "Road & Gravel"
+          "default": "road & gravel"
         },
         {
           "type": "textarea",

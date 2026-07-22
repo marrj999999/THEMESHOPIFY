@@ -10,11 +10,11 @@
   <section class="rd-pad">
     <div class="rd-wrap">
       <span class="rd-eyebrow">{{ section.settings.eyebrow | default: 'Your basket' }}</span>
-      <h1 class="rd-coll-head rd-cmp-29312">{{ section.settings.heading | default: 'Your cart' }}</h1>
+      <h1 class="rd-coll-head rd-cmp-29312">{{ section.settings.heading | default: 'your basket' }}</h1>
 
       {%- if cart.item_count == 0 -%}
         <div class="rd-cart-empty">
-          <p class="rd-lede">{{ section.settings.empty_text | default: 'Your cart is empty.' }}</p>
+          <div class="rd-lede">{{ section.settings.empty_text | default: 'Your cart is empty.' }}</div>
           <a class="rd-btn rd-lime rd-mt3" href="{{ section.settings.empty_url | default: '/collections/home-build-kits' }}">{{ section.settings.empty_cta | default: 'Browse frame kits →' }}</a>
         </div>
       {%- else -%}
@@ -27,7 +27,7 @@
                     {%- if item.image -%}<img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.image.alt | escape | default: item.product.title }}" width="96" height="96" loading="lazy">{%- endif -%}
                   </a>
                   <div>
-                    <h2 class="rd-fs-21px"><a href="{{ item.url }}">{{ item.product.title }}</a></h2>
+                    <h2 class="rd-reveal rd-fs-21px"><a href="{{ item.url }}">{{ item.product.title }}</a></h2>
                     {%- unless item.product.has_only_default_variant -%}<div class="rd-variant">{{ item.variant.title }}</div>{%- endunless -%}
                     {%- if item.selling_plan_allocation -%}<div class="rd-variant">{{ item.selling_plan_allocation.selling_plan.name }}</div>{%- endif -%}
                     <div class="rd-qty">
@@ -69,14 +69,52 @@
   "tag": "div",
   "class": "bbc-rd-cart-section",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Your basket" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Your cart" },
-    { "type": "text", "id": "checkout_label", "label": "Checkout button label", "default": "Checkout" },
-    { "type": "text", "id": "cause_line", "label": "Funding cause line", "default": "Every kit helps fund accredited skills courses — inside prisons and schools." },
-    { "type": "text", "id": "empty_text", "label": "Empty-cart text", "default": "Your cart is empty." },
-    { "type": "text", "id": "empty_cta", "label": "Empty-cart button label", "default": "Browse frame kits →" },
-    { "type": "url", "id": "empty_url", "label": "Empty-cart button link (defaults to the kits collection)" }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Checkout"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "your basket"
+    },
+    {
+      "type": "text",
+      "id": "checkout_label",
+      "label": "Checkout button label",
+      "default": "Checkout"
+    },
+    {
+      "type": "text",
+      "id": "cause_line",
+      "label": "Funding cause line",
+      "default": "Every kit helps fund accredited skills courses — inside prisons and schools."
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "Empty-cart text",
+      "default": "Your basket is empty."
+    },
+    {
+      "type": "text",
+      "id": "empty_cta",
+      "label": "Empty-cart button label",
+      "default": "Browse frame kits →"
+    },
+    {
+      "type": "url",
+      "id": "empty_url",
+      "label": "Empty-cart button link (defaults to the kits collection)"
+    }
   ],
-  "presets": [ { "name": "Cart 2026 (new)" } ]
+  "presets": [
+    {
+      "name": "Cart 2026 (new)"
+    }
+  ]
 }
 {% endschema %}

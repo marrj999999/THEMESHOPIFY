@@ -10,14 +10,14 @@
 
   <section class="rd-pad-sm rd-paper">
     <div class="rd-wrap rd-coll-head">
-      <span class="rd-eyebrow">{{ section.settings.eyebrow | default: 'Build at home' }}</span>
+      <span class="rd-eyebrow">{%- if section.settings.eyebrow != blank -%}{% if collection.handle == 'home-build-kits' or collection.handle == 'road' or collection.handle == 'gravel-adventure' or collection.handle == 'mtb' or collection.handle == 'balance-bikes' %}{{ section.settings.eyebrow }}{% else %}Everything we make{% endif %}{%- elsif collection.handle == 'gift' -%}Give a build{%- elsif collection.handle == 'maker-shop' -%}From our workshop{%- else -%}Build at home{%- endif -%}</span>
       {%- if collection -%}
         <h1>{{ collection.title }}</h1>
         {%- if collection.description != blank -%}
           <div class="rd-lede rd-mt2 rd-mw-62ch">{{ collection.description }}</div>
         {%- endif -%}
       {%- else -%}
-        <h1>{{ section.settings.fallback_title | default: 'Frame kits' }}</h1>
+        <h1>{{ section.settings.fallback_title | default: 'frame kits' }}</h1>
       {%- endif -%}
     </div>
   </section>
@@ -26,13 +26,17 @@
     <div class="rd-wrap">
 
       {%- if section.settings.cause_line != blank -%}
-        <div class="rd-cause-bar">{{ section.settings.cause_line }}</div>
+        <div class="rd-cause-bar">{%- if collection.handle == 'gift' -%}Every gift you give helps fund accredited skills courses inside prisons and schools.{%- elsif collection.handle == 'maker-shop' or collection.handle == 'component-packs' -%}Every order helps fund accredited skills courses inside prisons and schools.{%- else -%}{{ section.settings.cause_line }}{%- endif -%}
+      {%- assign kit_handles = "home-build-kits,road,gravel-adventure,mtb,balance-bikes,component-packs" | split: "," -%}
+      {%- if kit_handles contains collection.handle and section.settings.proof_line != blank -%}
+        <div class="rd-cause-bar rd-proof-bar">{{ section.settings.proof_line }} <a href="/pages/why-bamboo">See the testing &rarr;</a></div>
+      {%- endif -%}</div>
       {%- endif -%}
 
       {%- if collection -%}
         {%- paginate collection.products by section.settings.per_page -%}
           <div class="rd-coll-bar">
-            <span class="rd-coll-count">{{ collection.products_count }} {% if collection.products_count == 1 %}kit{% else %}kits{% endif %}</span>
+            <span class="rd-coll-count">{{ collection.products_count }} {% if collection.handle == 'home-build-kits' %}{% if collection.products_count == 1 %}kit{% else %}kits{% endif %}{% elsif collection.handle == 'component-packs' %}{% if collection.products_count == 1 %}pack{% else %}packs{% endif %}{% else %}{% if collection.products_count == 1 %}product{% else %}products{% endif %}{% endif %}</span>
             {%- if collection.sort_options.size > 0 -%}
               <form method="get" class="rd-sort">
                 <label for="rd-sortby">Sort</label>
@@ -48,18 +52,21 @@
 
           <div class="rd-grid rd-g3">
             {%- for product in collection.products -%}
-              <a class="rd-card rd-stamp" href="{{ product.url }}">
+              <a class="rd-reveal rd-card rd-stamp" href="{{ product.url }}">
                 <div class="rd-ph">
                   {%- if product.featured_image -%}
                     <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.featured_image.alt | escape | default: product.title }}" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}" loading="lazy">
+                    {%- if product.images[1] -%}
+                      <img class="rd-ph-alt" src="{{ product.images[1] | image_url: width: 800 }}" alt="" aria-hidden="true" width="{{ product.images[1].width }}" height="{{ product.images[1].height }}" loading="lazy">
+                    {%- endif -%}
                   {%- else -%}
                     <img src="{{ 'bbc-rd-prod-gravel.jpg' | asset_url }}" alt="{{ product.title | escape }}" width="1000" height="1000" loading="lazy">
                   {%- endif -%}
                   {%- if product.type != blank -%}<span class="rd-tag rd-lime rd-cardtag">{{ product.type }}</span>{%- endif -%}
                 </div>
                 <div class="rd-body">
-                  <h2 class="rd-fs-18px">{{ product.title }}</h2>
-                  <div class="rd-price">{% if product.price_varies %}From {% endif %}{{ product.price | money }}{% if product.compare_at_price > product.price %}<span class="rd-was">{{ product.compare_at_price | money }}</span>{% endif %}</div>
+                  <h2 class="rd-reveal rd-fs-18px">{{ product.title }}</h2>
+                  <div class="rd-price">{% if product.price == 0 %}Free — postage only{% elsif product.price_varies %}From {{ product.price | money_without_trailing_zeros }}{% else %}{{ product.price | money_without_trailing_zeros }}{% endif %}{% if product.compare_at_price > product.price %}<span class="rd-was">{{ product.compare_at_price | money_without_trailing_zeros }}</span>{% endif %}</div>
                 </div>
               </a>
             {%- else -%}
@@ -93,11 +100,44 @@
   "tag": "div",
   "class": "bbc-rd-collection-section",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Build at home" },
-    { "type": "text", "id": "fallback_title", "label": "Title (used off a collection page)", "default": "Frame kits" },
-    { "type": "text", "id": "cause_line", "label": "Funding cause line", "default": "Every kit you build helps fund accredited skills courses inside prisons and schools." },
-    { "type": "range", "id": "per_page", "label": "Products per page", "min": 6, "max": 24, "step": 3, "default": 12 }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Build at home"
+    },
+    {
+      "type": "text",
+      "id": "fallback_title",
+      "label": "Title (used off a collection page)",
+      "default": "frame kits"
+    },
+    {
+      "type": "text",
+      "id": "proof_line",
+      "label": "Proof line (third-party credibility)",
+      "default": "Independently strength-tested to BS ISO 22157 at Swansea University — tensile strength comparable to mild steel."
+    },
+    {
+      "type": "text",
+      "id": "cause_line",
+      "label": "Funding cause line",
+      "default": "Every kit you build helps fund OCN-accredited skills courses inside prisons and schools."
+    },
+    {
+      "type": "range",
+      "id": "per_page",
+      "label": "Products per page",
+      "min": 6,
+      "max": 24,
+      "step": 3,
+      "default": 12
+    }
   ],
-  "presets": [ { "name": "Collection 2026 (new)" } ]
+  "presets": [
+    {
+      "name": "Collection 2026 (new)"
+    }
+  ]
 }
 {% endschema %}

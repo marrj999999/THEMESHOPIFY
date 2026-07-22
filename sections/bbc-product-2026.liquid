@@ -137,13 +137,13 @@
             <div class="rd-cmp-24279">
               <span class="rd-cmp-99566">
                 {%- if product.price_varies -%}
-                  From {{ product.price_min | money }}
+                  From {{ product.price_min | money_without_trailing_zeros }}
                 {%- else -%}
-                  {{ cv.price | money }}
+                  {{ cv.price | money_without_trailing_zeros }}
                 {%- endif -%}
               </span>
               {%- if cv.compare_at_price and cv.compare_at_price > cv.price -%}
-                <span class="rd-was-price">{{ cv.compare_at_price | money }}</span>
+                <span class="rd-was-price">{{ cv.compare_at_price | money_without_trailing_zeros }}</span>
               {%- endif -%}
             </div>
 
@@ -160,7 +160,7 @@
                   {%- for v in product.variants -%}
                     <label class="rd-vbtn{% if v == cv %} rd-sel{% endif %}{% unless v.available %} rd-oos{% endunless %}">
                       <input class="rd-ac-forest" type="radio" name="id" value="{{ v.id }}" {% if v == cv %}checked{% endif %} {% unless v.available %}disabled{% endunless %}>
-                      {{ v.title }} — {{ v.price | money }}
+                      {{ v.title }} — {{ v.price | money_without_trailing_zeros }}
                     </label>
                   {%- endfor -%}
                 </div>
@@ -263,7 +263,7 @@
         <div class="rd-grid rd-g2 rd-mt3">
           <div>{% render 'bbc-size-data' %}</div>
           <div class="rd-card rd-stamp"><div class="rd-body">
-            {%- if section.settings.sizing_body != blank -%}<p class="rd-lede">{{ section.settings.sizing_body }}</p>{%- endif -%}
+            {%- if section.settings.sizing_body != blank -%}<div class="rd-lede">{{ section.settings.sizing_body }}</div>{%- endif -%}
             <p class="rd-mt2">{{ section.settings.sizing_note | default: "Your frame's size is set on the jig you build on — so pick the size that matches your fit, then fine-tune with seatpost, stem and saddle. Being between sizes is normal: build the smaller one." }}</p>
             <a class="rd-btn rd-ghost rd-mt2" href="{{ section.settings.custom_url | default: '/products/custom-frame' }}">{{ section.settings.custom_cta | default: "Outside these sizes? Build a custom frame" }} <span class="rd-arrow" aria-hidden="true">&#8594;</span></a>
           </div></div>
@@ -276,11 +276,6 @@
               <tr {{ b.shopify_attributes }}><th scope="row">{{ b.settings.label }}</th><td>{{ b.settings.value }}</td></tr>
             {%- endfor -%}
           </table>
-          <style>
-            .bbc-geo-table{ width:100%; max-width:560px; border-collapse:collapse; font-family:var(--rd-sans); }
-            .bbc-geo-table th, .bbc-geo-table td{ padding:9px 12px; border-bottom:1.5px solid var(--mist); text-align:left; }
-            .bbc-geo-table th{ font-weight:700; color:var(--forest); width:45%; }
-          </style>
         {%- endif -%}
       </div>
     </section>
@@ -320,7 +315,7 @@
       <div class="rd-mt3 rd-cmp-00502">
         <div class="rd-card rd-stamp"><div class="rd-body">
           <div class="rd-frame-label">{{ section.settings.bundle_a_label }}</div>
-          <div class="rd-cmp-57334">{% if product.price_varies %}From {{ product.price_min | money }}{% else %}{{ product.price | money }}{% endif %}</div>
+          <div class="rd-cmp-57334">{% if product.price_varies %}From {{ product.price_min | money_without_trailing_zeros }}{% else %}{{ product.price | money_without_trailing_zeros }}{% endif %}</div>
           <p>{{ section.settings.bundle_a_text }}</p>
         </div></div>
         <div class="rd-cmp-76373" aria-hidden="true">+</div>
@@ -519,7 +514,17 @@
       <span class="rd-eyebrow rd-on-dark">Watch the build</span>
       <h2 class="rd-mt2">See a frame come together.</h2>
       <p class="rd-lede rd-mt2">The same hand-build every kit follows — start to finish, on camera.</p>
-      <div class="rd-ytwrap rd-mt3"><iframe src="https://www.youtube-nocookie.com/embed/{{ section.settings.build_video_id | default: 'ckCwJXJGKD0' }}" title="Bamboo Bicycle Club — frame build film" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      {%- comment -%} standard player (2026-07-22): facade + auto YouTube thumbnail — no iframe until click {%- endcomment -%}
+      <div class="rd-mt3" style="border-radius:14px;overflow:hidden;">
+        {%- assign bv = section.settings.build_video_id | default: 'ckCwJXJGKD0' -%}
+        {%- render 'bbc-media', youtube: bv, label: 'watch the build film', alt: 'Bamboo Bicycle Club — frame build film', class: 'bbc-media--ar169', sizes: '(max-width:749px) 100vw, 900px' -%}
+      </div>
+      {%- comment -%} press proof in the PDP mid-page zone (qa/PRESS-BLOCK.md) {%- endcomment -%}
+      {%- if section.settings.press_quote != blank -%}
+      <div class="rd-mt4">
+        {%- render 'bbc-press', style: 'bar', preset: 'cycling', quote: section.settings.press_quote, cite: section.settings.press_cite -%}
+      </div>
+      {%- endif -%}
     </div>
   </section>
 
@@ -564,7 +569,7 @@
         <div class="rd-stats">
           {%- for block in stats -%}
             <div class="rd-stat" {{ block.shopify_attributes }}>
-              <div class="rd-num">{{ block.settings.number }}</div>
+              <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
               <div class="rd-lbl">{{ block.settings.label }}</div>
               {%- if block.settings.source != blank -%}
                 <div class="rd-src">{{ block.settings.source }}</div>
@@ -668,7 +673,7 @@
       <div class="rd-wrap rd-cmp-47707">
         <span class="rd-fw-800">{{ product.title }}</span>
         <span class="rd-c-lime-b">
-          {%- if product.price_varies -%}From {{ product.price_min | money }}{%- else -%}{{ cv.price | money }}{%- endif -%}
+          {%- if product.price_varies -%}From {{ product.price_min | money_without_trailing_zeros }}{%- else -%}{{ cv.price | money_without_trailing_zeros }}{%- endif -%}
         </span>
         <span class="rd-ml-auto"></span>
         <a class="rd-btn rd-lime rd-p-11px22px" href="#bbc-buy-form">Add to cart <span class="rd-arrow" aria-hidden="true">&#8594;</span></a>
@@ -720,195 +725,815 @@
   "tag": "section",
   "class": "bbc-rd-product-section",
   "settings": [
-    { "type": "header", "content": "Buy box" },
-    { "type": "text", "id": "product_badge", "label": "Badge above title", "default": "Home build kit" },
-    { "type": "textarea", "id": "product_subtitle", "label": "Subtitle under title", "default": "Adventure-ready geometry for gravel roads, light touring and bikepacking — hand-built by you from bamboo, flax and carbon." },
-    { "type": "text", "id": "rating_value", "label": "Rating value (leave blank until verified)", "info": "Leave blank to hide the rating. Only fill with REAL review data — an unverified rating is a trust/legal risk." },
-    { "type": "text", "id": "review_count", "label": "Review count (leave blank until verified)", "info": "Shown next to the rating; leave blank until you have real numbers." },
-    { "type": "text", "id": "stock_line", "label": "In-stock / shipping line", "default": "In stock — ships ~twice a week from our London workshop, fully tracked." },
-    { "type": "text", "id": "secondary_label", "label": "Secondary button label", "default": "Prefer a workshop?" },
-    { "type": "url", "id": "secondary_url", "label": "Secondary button link" },
-    { "type": "text", "id": "reassure_line", "label": "Reassurance line under buttons", "default": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks" },
-    { "type": "textarea", "id": "mission_line", "label": "Mission line (social-value proof by the buy button)", "default": "Build your own — and help fund a place on our Build to Bond prison programme." },
-    { "type": "textarea", "id": "buddy_text", "label": "Build-with-a-buddy offer", "default": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories." },
-    { "type": "image_picker", "id": "gallery_fallback", "label": "Gallery fallback image", "info": "Used only when the product has no images." },
-    { "type": "header", "content": "Build confidence & support" },
-    { "type": "text", "id": "difficulty_label", "label": "Difficulty chip", "default": "Beginner-friendly · no experience needed" },
-    { "type": "text", "id": "build_time_label", "label": "Build-time chip", "default": "~25–45 hrs · a few weekends" },
-    { "type": "text", "id": "confidence_eyebrow", "label": "Confidence eyebrow", "default": "Build with confidence" },
-    { "type": "text", "id": "confidence_heading", "label": "Confidence heading", "default": "You've got this — and we've got you" },
-    { "type": "text", "id": "reversible_heading", "label": "Reversibility heading", "default": "You can't really ruin it" },
-    { "type": "textarea", "id": "reversible_body", "label": "Reversibility body", "default": "The glue is slow and adjustable, each joint wrap is additive (more = stronger), and a cured joint simply sands back to shape. The kit even ships with spare bamboo — at no single point is a mistake permanent." },
-    { "type": "text", "id": "tools_heading", "label": "Tools heading", "default": "Tools you'll need" },
-    { "type": "textarea", "id": "tools_text", "label": "Tools list (separate with |)", "default": "Hacksaw|Files|Sandpaper|Tape measure|A rounded wood file|Electrical & masking tape|A 1200×600mm board|No power tools needed" },
-    { "type": "text", "id": "support_heading", "label": "Support heading", "default": "You're never on your own" },
-    { "type": "textarea", "id": "support_text", "label": "Support body", "default": "Stuck mid-build? Get help fast through our builder forum, step-by-step YouTube videos, WhatsApp and email. Most of our builders start with zero experience." },
-    { "type": "text", "id": "care_heading", "label": "Care heading", "default": "Caring for your frame" },
-    { "type": "textarea", "id": "care_body", "label": "Care body", "default": "Seal the bamboo and store it indoors; dry it after wet rides. A frame you built — and understand — is one you can maintain and repair yourself for years." },
-    { "type": "text", "id": "policy_heading", "label": "Policy heading", "default": "Warranty, returns & shipping" },
-    { "type": "textarea", "id": "policy_text", "label": "Policy lines (separate with |)", "default": "1-year warranty on the kit materials|Full refund within 14 days on unopened, unused kits|Ships in ~2 weeks · UK £12 · Europe £25 · USA £45 · rest of world £75" },
-    { "type": "header", "content": "Highlights" },
-    { "type": "text", "id": "highlights_eyebrow", "label": "Highlights eyebrow", "default": "Why builders love it" },
-    { "type": "text", "id": "highlights_heading", "label": "Highlights heading", "default": "What makes it different" },
-    { "type": "header", "content": "Size & fit" },
-    { "type": "checkbox", "id": "show_sizing", "label": "Show the size & fit section", "default": true },
-    { "type": "text", "id": "sizing_eyebrow", "label": "Sizing eyebrow", "default": "Find your fit" },
-    { "type": "text", "id": "sizing_heading", "label": "Sizing heading", "default": "Built to fit you" },
-    { "type": "textarea", "id": "sizing_body", "label": "Sizing intro", "default": "No sizing gamble: you build your frame to fit you. Use your height and inseam to pick your size." },
-    { "type": "textarea", "id": "sizing_note", "label": "Sizing note", "default": "Your frame's size is set on the jig you build on — so pick the size that matches your fit, then fine-tune with seatpost, stem and saddle. Being between sizes is normal: build the smaller one." },
-    { "type": "text", "id": "geo_heading", "label": "Geometry table heading", "default": "Frame geometry" },
-    { "type": "text", "id": "custom_cta", "label": "Custom CTA label", "default": "Outside these sizes? Build a custom frame" },
-    { "type": "url", "id": "custom_url", "label": "Custom CTA link" },
-    { "type": "header", "content": "Breadcrumb & links" },
-    { "type": "url", "id": "crumb_home_url", "label": "Breadcrumb: Home link" },
-    { "type": "url", "id": "crumb_kits_url", "label": "Breadcrumb: Frame Kits link" },
-    { "type": "url", "id": "reviews_url", "label": "Rating link target" },
-    { "type": "header", "content": "Funding loop (dark band)" },
-    { "type": "text", "id": "loop_eyebrow", "label": "Loop eyebrow", "default": "Every kit does more" },
-    { "type": "textarea", "id": "loop_heading", "label": "Loop heading", "default": "Your build helps fund accredited skills courses — inside prisons and schools." },
-    { "type": "text", "id": "loop_step1_big", "label": "Loop step 1 — big", "default": "You build" },
-    { "type": "text", "id": "loop_step1_sm", "label": "Loop step 1 — small", "default": "a gravel frame" },
-    { "type": "text", "id": "loop_step2_big", "label": "Loop step 2 — big", "default": "Profits fund" },
-    { "type": "text", "id": "loop_step2_sm", "label": "Loop step 2 — small", "default": "accredited skills courses" },
-    { "type": "text", "id": "loop_step3_big", "label": "Loop step 3 — big", "default": "A life changes" },
-    { "type": "text", "id": "loop_step3_sm", "label": "Loop step 3 — small", "default": "skills · confidence · futures" },
-    { "type": "text", "id": "loop_cta_label", "label": "Loop button label", "default": "See our impact" },
-    { "type": "url", "id": "loop_url", "label": "Loop button link" },
-    { "type": "header", "content": "Complete your build (bundle)" },
-    { "type": "text", "id": "bundle_eyebrow", "label": "Bundle eyebrow", "default": "What it costs to actually ride" },
-    { "type": "text", "id": "bundle_heading", "label": "Bundle heading", "default": "Complete your build, the easy way." },
-    { "type": "textarea", "id": "bundle_lede", "label": "Bundle intro", "default": "The kit is the frame. Add a matched component pack — fork, wheels, groupset, finishing kit — and you're ride-ready. Or source parts from any bike shop; your frame fits all major groupsets." },
-    { "type": "text", "id": "bundle_a_label", "label": "Bundle: frame label", "default": "Frame kit" },
-    { "type": "text", "id": "bundle_a_price", "label": "Bundle: frame price text", "default": "From £385" },
-    { "type": "textarea", "id": "bundle_a_text", "label": "Bundle: frame description", "default": "Everything to build the bamboo gravel frame." },
-    { "type": "text", "id": "bundle_b_label", "label": "Bundle: component-pack label", "default": "Gravel component pack" },
-    { "type": "text", "id": "bundle_b_price", "label": "Bundle: component-pack price text", "default": "From £425" },
-    { "type": "textarea", "id": "bundle_b_text", "label": "Bundle: component-pack description", "default": "Fork, wheels, groupset, bars, saddle and finishing kit." },
-    { "type": "text", "id": "bundle_total_label", "label": "Bundle: total label", "default": "Ride-ready, all in" },
-    { "type": "text", "id": "bundle_total_price", "label": "Bundle: total price text", "default": "From £810" },
-    { "type": "textarea", "id": "bundle_total_text", "label": "Bundle: total description", "default": "A complete, one-of-a-kind gravel bike — built by you." },
-    { "type": "text", "id": "bundle_cta_label", "label": "Bundle button label", "default": "Add the component pack" },
-    { "type": "url", "id": "bundle_url", "label": "Bundle button link" },
-    { "type": "textarea", "id": "bundle_foot", "label": "Bundle footnote", "default": "Prefer to choose your own parts? Skip the pack — the frame works with any standard groupset, and we'll advise." },
-    { "type": "header", "content": "What you'll need at home" },
-    { "type": "text", "id": "need_eyebrow", "label": "Need eyebrow", "default": "Before you order" },
-    { "type": "text", "id": "need_heading", "label": "Need heading", "default": "What you'll need at home." },
-    { "type": "header", "content": "Build steps" },
-    { "type": "text", "id": "steps_eyebrow", "label": "Steps eyebrow", "default": "How you'll build it" },
-    { "type": "text", "id": "steps_heading", "label": "Steps heading", "default": "Four stages, across a few weekends." },
-    { "type": "header", "content": "Why bamboo (split)" },
-    { "type": "text", "id": "why_eyebrow", "label": "Why eyebrow", "default": "Why bamboo" },
-    { "type": "text", "id": "why_heading", "label": "Why heading", "default": "A smoother, more compliant ride." },
-    { "type": "textarea", "id": "why_body", "label": "Why body", "default": "Bamboo's natural vibration damping takes the edge off rough trails — ideal for bikepacking. Frames are compatible with all major groupsets and can be built around Shimano GRX or Rohloff geared hubs." },
-    { "type": "textarea", "id": "why_quote", "label": "Why pull-quote", "default": "The current trend is for carbon frames that lack environmental credentials. Bamboo is easy to grow, offsets its carbon footprint, and — combined with flax and bio-composites — offers a viable alternative." },
-    { "type": "text", "id": "why_quote_cite", "label": "Why quote attribution" },
-    { "type": "image_picker", "id": "why_image", "label": "Why image" },
-    { "type": "text", "id": "why_image_alt", "label": "Why image alt text", "default": "Close detail of a hand-wrapped bamboo frame joint" },
-    { "type": "text", "id": "why_fallback", "label": "Why image fallback filename", "default": "bbc-rd-bamboo-tubes.jpg", "info": "Bundled asset used until a real image is set." },
-    { "type": "header", "content": "In-kit / not-in-kit" },
-    { "type": "text", "id": "inkit_heading", "label": "In-the-kit heading", "default": "In the kit" },
-    { "type": "textarea", "id": "inkit_body", "label": "In-the-kit body", "default": "Heat-treated Moso bamboo tubes (with spares), a full-size frame blueprint, a plywood alignment jig, the CNC metal parts that the steering, cranks and wheels bolt to (head tube, bottom-bracket shell and dropouts), carbon-fibre tow (the reinforcing fibre you wrap each joint with), two-part epoxy resin, and an illustrated manual plus 15+ hours of step-by-step video tutorials." },
-    { "type": "text", "id": "notkit_heading", "label": "Not-in-the-kit heading", "default": "You'll add" },
-    { "type": "textarea", "id": "notkit_body", "label": "Not-in-the-kit body", "default": "Fork, wheels, groupset, handlebars, saddle and finishing components. Grab a complete component pack from us, or source parts from any bike shop." },
-    { "type": "header", "content": "Reviews" },
-    { "type": "text", "id": "reviews_eyebrow", "label": "Reviews eyebrow", "default": "Builder reviews" },
-    { "type": "text", "id": "reviews_heading", "label": "Reviews heading (FLAG: confirm rating)", "default": "Rated by the builders who made one", "info": "Design said 'Rated 4.8 from 214 builders' — not verified." },
-    { "type": "text", "id": "reviews_subline", "label": "Reviews sub-line", "info": "Optional. Blank by default (the heading already covers it). Use a real, verifiable line only — e.g. a true average rating." },
-    { "type": "text", "id": "stories_heading", "label": "Builder-stories heading", "default": "Built by people like you" },
-    { "type": "header", "content": "Build video" },
-    { "type": "text", "id": "build_video_id", "label": "YouTube video ID", "default": "ckCwJXJGKD0", "info": "Per-kit build video. Defaults to the general frame-build film — set a kit-specific YouTube ID (the part after watch?v=) for each kit if you have one." },
-    { "type": "header", "content": "FAQ" },
-    { "type": "text", "id": "faq_eyebrow", "label": "FAQ eyebrow", "default": "Common questions" },
-    { "type": "text", "id": "faq_heading", "label": "FAQ heading", "default": "Before you build." },
-    { "type": "header", "content": "Related kits" },
-    { "type": "text", "id": "related_heading", "label": "Related heading", "default": "More kits to build" },
-    { "type": "text", "id": "related_cta_label", "label": "Related button label", "default": "All frame kits" },
-    { "type": "url", "id": "related_cta_url", "label": "Related button link" }
+    {
+      "type": "header",
+      "content": "Buy box"
+    },
+    {
+      "type": "text",
+      "id": "product_badge",
+      "label": "Badge above title",
+      "default": "Home build kit"
+    },
+    {
+      "type": "textarea",
+      "id": "product_subtitle",
+      "label": "Subtitle under title",
+      "default": "Adventure-ready geometry for gravel roads, light touring and bikepacking — hand-built by you from bamboo, flax and carbon."
+    },
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Rating value (leave blank until verified)",
+      "info": "Leave blank to hide the rating. Only fill with REAL review data — an unverified rating is a trust/legal risk."
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Review count (leave blank until verified)",
+      "info": "Shown next to the rating; leave blank until you have real numbers."
+    },
+    {
+      "type": "text",
+      "id": "stock_line",
+      "label": "In-stock / shipping line",
+      "default": "In stock — ships ~twice a week from our London workshop, fully tracked."
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "Prefer a workshop?"
+    },
+    {
+      "type": "url",
+      "id": "secondary_url",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "text",
+      "id": "reassure_line",
+      "label": "Reassurance line under buttons",
+      "default": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks"
+    },
+    {
+      "type": "textarea",
+      "id": "mission_line",
+      "label": "Mission line (social-value proof by the buy button)",
+      "default": "Build your own — and help fund a place on our Build to Bond prison programme. Profits fund accredited skills courses inside prisons and schools."
+    },
+    {
+      "type": "textarea",
+      "id": "buddy_text",
+      "label": "Build-with-a-buddy offer",
+      "default": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories."
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_fallback",
+      "label": "Gallery fallback image",
+      "info": "Used only when the product has no images."
+    },
+    {
+      "type": "header",
+      "content": "Build confidence & support"
+    },
+    {
+      "type": "text",
+      "id": "difficulty_label",
+      "label": "Difficulty chip",
+      "default": "Beginner-friendly · no experience needed"
+    },
+    {
+      "type": "text",
+      "id": "build_time_label",
+      "label": "Build-time chip",
+      "default": "~25–45 hrs · a few weekends"
+    },
+    {
+      "type": "text",
+      "id": "confidence_eyebrow",
+      "label": "Confidence eyebrow",
+      "default": "Build with confidence"
+    },
+    {
+      "type": "text",
+      "id": "confidence_heading",
+      "label": "Confidence heading",
+      "default": "you've got this — and we've got you"
+    },
+    {
+      "type": "text",
+      "id": "reversible_heading",
+      "label": "Reversibility heading",
+      "default": "you can't really ruin it"
+    },
+    {
+      "type": "textarea",
+      "id": "reversible_body",
+      "label": "Reversibility body",
+      "default": "The glue is slow and adjustable, each joint wrap is additive (more = stronger), and a cured joint simply sands back to shape. The kit even ships with spare bamboo — at no single point is a mistake permanent."
+    },
+    {
+      "type": "text",
+      "id": "tools_heading",
+      "label": "Tools heading",
+      "default": "tools you'll need"
+    },
+    {
+      "type": "textarea",
+      "id": "tools_text",
+      "label": "Tools list (separate with |)",
+      "default": "Hacksaw|Files|Sandpaper|Tape measure|A rounded wood file|Electrical & masking tape|A 1200×600mm board|No power tools needed"
+    },
+    {
+      "type": "text",
+      "id": "support_heading",
+      "label": "Support heading",
+      "default": "you're never on your own"
+    },
+    {
+      "type": "textarea",
+      "id": "support_text",
+      "label": "Support body",
+      "default": "Stuck mid-build? Get help fast through our builder forum, step-by-step YouTube videos, WhatsApp and email. Most of our builders start with zero experience."
+    },
+    {
+      "type": "text",
+      "id": "care_heading",
+      "label": "Care heading",
+      "default": "caring for your frame"
+    },
+    {
+      "type": "textarea",
+      "id": "care_body",
+      "label": "Care body",
+      "default": "Seal the bamboo and store it indoors; dry it after wet rides. A frame you built — and understand — is one you can maintain and repair yourself for years."
+    },
+    {
+      "type": "text",
+      "id": "policy_heading",
+      "label": "Policy heading",
+      "default": "warranty, returns & shipping"
+    },
+    {
+      "type": "textarea",
+      "id": "policy_text",
+      "label": "Policy lines (separate with |)",
+      "default": "1-year warranty on the kit materials|Full refund within 14 days on unopened, unused kits|Ships in ~2 weeks · UK £12 · Europe £25 · USA £45 · rest of world £75"
+    },
+    {
+      "type": "header",
+      "content": "Highlights"
+    },
+    {
+      "type": "text",
+      "id": "highlights_eyebrow",
+      "label": "Highlights eyebrow",
+      "default": "Why builders love it"
+    },
+    {
+      "type": "text",
+      "id": "highlights_heading",
+      "label": "Highlights heading",
+      "default": "what makes it different"
+    },
+    {
+      "type": "header",
+      "content": "Size & fit"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sizing",
+      "label": "Show the size & fit section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sizing_eyebrow",
+      "label": "Sizing eyebrow",
+      "default": "Find your fit"
+    },
+    {
+      "type": "text",
+      "id": "sizing_heading",
+      "label": "Sizing heading",
+      "default": "built to fit you"
+    },
+    {
+      "type": "textarea",
+      "id": "sizing_body",
+      "label": "Sizing intro",
+      "default": "No sizing gamble: you build your frame to fit you. Use your height and inseam to pick your size."
+    },
+    {
+      "type": "textarea",
+      "id": "sizing_note",
+      "label": "Sizing note",
+      "default": "Your frame's size is set on the jig you build on — so pick the size that matches your fit, then fine-tune with seatpost, stem and saddle. Being between sizes is normal: build the smaller one."
+    },
+    {
+      "type": "text",
+      "id": "geo_heading",
+      "label": "Geometry table heading",
+      "default": "frame geometry"
+    },
+    {
+      "type": "text",
+      "id": "custom_cta",
+      "label": "Custom CTA label",
+      "default": "Outside these sizes? Build a custom frame"
+    },
+    {
+      "type": "url",
+      "id": "custom_url",
+      "label": "Custom CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Breadcrumb & links"
+    },
+    {
+      "type": "url",
+      "id": "crumb_home_url",
+      "label": "Breadcrumb: Home link"
+    },
+    {
+      "type": "url",
+      "id": "crumb_kits_url",
+      "label": "Breadcrumb: Frame Kits link"
+    },
+    {
+      "type": "url",
+      "id": "reviews_url",
+      "label": "Rating link target"
+    },
+    {
+      "type": "header",
+      "content": "Funding loop (dark band)"
+    },
+    {
+      "type": "text",
+      "id": "loop_eyebrow",
+      "label": "Loop eyebrow",
+      "default": "Every kit does more"
+    },
+    {
+      "type": "textarea",
+      "id": "loop_heading",
+      "label": "Loop heading",
+      "default": "your build helps fund accredited skills courses — inside prisons and schools."
+    },
+    {
+      "type": "text",
+      "id": "loop_step1_big",
+      "label": "Loop step 1 — big",
+      "default": "You build"
+    },
+    {
+      "type": "text",
+      "id": "loop_step1_sm",
+      "label": "Loop step 1 — small",
+      "default": "a gravel frame"
+    },
+    {
+      "type": "text",
+      "id": "loop_step2_big",
+      "label": "Loop step 2 — big",
+      "default": "Profits fund"
+    },
+    {
+      "type": "text",
+      "id": "loop_step2_sm",
+      "label": "Loop step 2 — small",
+      "default": "accredited skills courses"
+    },
+    {
+      "type": "text",
+      "id": "loop_step3_big",
+      "label": "Loop step 3 — big",
+      "default": "A life changes"
+    },
+    {
+      "type": "text",
+      "id": "loop_step3_sm",
+      "label": "Loop step 3 — small",
+      "default": "skills · confidence · futures"
+    },
+    {
+      "type": "text",
+      "id": "loop_cta_label",
+      "label": "Loop button label",
+      "default": "See our impact"
+    },
+    {
+      "type": "url",
+      "id": "loop_url",
+      "label": "Loop button link"
+    },
+    {
+      "type": "header",
+      "content": "Complete your build (bundle)"
+    },
+    {
+      "type": "text",
+      "id": "bundle_eyebrow",
+      "label": "Bundle eyebrow",
+      "default": "What it costs to actually ride"
+    },
+    {
+      "type": "text",
+      "id": "bundle_heading",
+      "label": "Bundle heading",
+      "default": "complete your build, the easy way."
+    },
+    {
+      "type": "textarea",
+      "id": "bundle_lede",
+      "label": "Bundle intro",
+      "default": "The kit is the frame. Add a matched component pack — fork, wheels, groupset, finishing kit — and you're ride-ready. Or source parts from any bike shop; your frame fits all major groupsets."
+    },
+    {
+      "type": "text",
+      "id": "bundle_a_label",
+      "label": "Bundle: frame label",
+      "default": "Frame kit"
+    },
+    {
+      "type": "text",
+      "id": "bundle_a_price",
+      "label": "Bundle: frame price text",
+      "default": "From £385"
+    },
+    {
+      "type": "textarea",
+      "id": "bundle_a_text",
+      "label": "Bundle: frame description",
+      "default": "Everything to build the bamboo gravel frame."
+    },
+    {
+      "type": "text",
+      "id": "bundle_b_label",
+      "label": "Bundle: component-pack label",
+      "default": "Gravel component pack"
+    },
+    {
+      "type": "text",
+      "id": "bundle_b_price",
+      "label": "Bundle: component-pack price text",
+      "default": "From £425"
+    },
+    {
+      "type": "textarea",
+      "id": "bundle_b_text",
+      "label": "Bundle: component-pack description",
+      "default": "Fork, wheels, groupset, bars, saddle and finishing kit."
+    },
+    {
+      "type": "text",
+      "id": "bundle_total_label",
+      "label": "Bundle: total label",
+      "default": "Ride-ready, all in"
+    },
+    {
+      "type": "text",
+      "id": "bundle_total_price",
+      "label": "Bundle: total price text",
+      "default": "From £810"
+    },
+    {
+      "type": "textarea",
+      "id": "bundle_total_text",
+      "label": "Bundle: total description",
+      "default": "A complete, one-of-a-kind gravel bike — built by you."
+    },
+    {
+      "type": "text",
+      "id": "bundle_cta_label",
+      "label": "Bundle button label",
+      "default": "Add the component pack"
+    },
+    {
+      "type": "url",
+      "id": "bundle_url",
+      "label": "Bundle button link"
+    },
+    {
+      "type": "textarea",
+      "id": "bundle_foot",
+      "label": "Bundle footnote",
+      "default": "Prefer to choose your own parts? Skip the pack — the frame works with any standard groupset, and we'll advise."
+    },
+    {
+      "type": "header",
+      "content": "What you'll need at home"
+    },
+    {
+      "type": "text",
+      "id": "need_eyebrow",
+      "label": "Need eyebrow",
+      "default": "Before you order"
+    },
+    {
+      "type": "text",
+      "id": "need_heading",
+      "label": "Need heading",
+      "default": "what you'll need at home."
+    },
+    {
+      "type": "header",
+      "content": "Build steps"
+    },
+    {
+      "type": "text",
+      "id": "steps_eyebrow",
+      "label": "Steps eyebrow",
+      "default": "How you'll build it"
+    },
+    {
+      "type": "text",
+      "id": "steps_heading",
+      "label": "Steps heading",
+      "default": "four stages, across a few weekends."
+    },
+    {
+      "type": "header",
+      "content": "Why bamboo (split)"
+    },
+    {
+      "type": "text",
+      "id": "why_eyebrow",
+      "label": "Why eyebrow",
+      "default": "Why bamboo"
+    },
+    {
+      "type": "text",
+      "id": "why_heading",
+      "label": "Why heading",
+      "default": "a smoother, more compliant ride."
+    },
+    {
+      "type": "textarea",
+      "id": "why_body",
+      "label": "Why body",
+      "default": "Bamboo's natural vibration damping takes the edge off rough trails — ideal for bikepacking. Frames are compatible with all major groupsets and can be built around Shimano GRX or Rohloff geared hubs."
+    },
+    {
+      "type": "textarea",
+      "id": "why_quote",
+      "label": "Why pull-quote",
+      "default": "The current trend is for carbon frames that lack environmental credentials. Bamboo is easy to grow, offsets its carbon footprint, and — combined with flax and bio-composites — offers a viable alternative."
+    },
+    {
+      "type": "text",
+      "id": "why_quote_cite",
+      "label": "Why quote attribution"
+    },
+    {
+      "type": "image_picker",
+      "id": "why_image",
+      "label": "Why image"
+    },
+    {
+      "type": "text",
+      "id": "why_image_alt",
+      "label": "Why image alt text",
+      "default": "Close detail of a hand-wrapped bamboo frame joint"
+    },
+    {
+      "type": "text",
+      "id": "why_fallback",
+      "label": "Why image fallback filename",
+      "default": "bbc-rd-bamboo-tubes.jpg",
+      "info": "Bundled asset used until a real image is set."
+    },
+    {
+      "type": "header",
+      "content": "In-kit / not-in-kit"
+    },
+    {
+      "type": "text",
+      "id": "inkit_heading",
+      "label": "In-the-kit heading",
+      "default": "in the kit"
+    },
+    {
+      "type": "textarea",
+      "id": "inkit_body",
+      "label": "In-the-kit body",
+      "default": "Heat-treated Moso bamboo tubes (with spares), a full-size frame blueprint, a plywood alignment jig, the CNC metal parts that the steering, cranks and wheels bolt to (head tube, bottom-bracket shell and dropouts), carbon-fibre tow (the reinforcing fibre you wrap each joint with), two-part epoxy resin, and an illustrated manual plus 15+ hours of step-by-step video tutorials."
+    },
+    {
+      "type": "text",
+      "id": "notkit_heading",
+      "label": "Not-in-the-kit heading",
+      "default": "you'll add"
+    },
+    {
+      "type": "textarea",
+      "id": "notkit_body",
+      "label": "Not-in-the-kit body",
+      "default": "Fork, wheels, groupset, handlebars, saddle and finishing components. Grab a complete component pack from us, or source parts from any bike shop."
+    },
+    {
+      "type": "header",
+      "content": "Reviews"
+    },
+    {
+      "type": "text",
+      "id": "reviews_eyebrow",
+      "label": "Reviews eyebrow",
+      "default": "Builder reviews"
+    },
+    {
+      "type": "text",
+      "id": "reviews_heading",
+      "label": "Reviews heading (FLAG: confirm rating)",
+      "default": "rated by the builders who made one",
+      "info": "Design said 'Rated 4.8 from 214 builders' — not verified."
+    },
+    {
+      "type": "text",
+      "id": "reviews_subline",
+      "label": "Reviews sub-line",
+      "info": "Optional. Blank by default (the heading already covers it). Use a real, verifiable line only — e.g. a true average rating."
+    },
+    {
+      "type": "text",
+      "id": "stories_heading",
+      "label": "Builder-stories heading",
+      "default": "built by people like you"
+    },
+    {
+      "type": "header",
+      "content": "Build video"
+    },
+    {
+      "type": "text",
+      "id": "build_video_id",
+      "label": "YouTube video ID",
+      "default": "ckCwJXJGKD0",
+      "info": "Per-kit build video. Defaults to the general frame-build film — set a kit-specific YouTube ID (the part after watch?v=) for each kit if you have one."
+    },
+    {
+      "type": "header",
+      "content": "FAQ"
+    },
+    {
+      "type": "text",
+      "id": "faq_eyebrow",
+      "label": "FAQ eyebrow",
+      "default": "Common questions"
+    },
+    {
+      "type": "text",
+      "id": "faq_heading",
+      "label": "FAQ heading",
+      "default": "before you build."
+    },
+    {
+      "type": "header",
+      "content": "Related kits"
+    },
+    {
+      "type": "text",
+      "id": "related_heading",
+      "label": "Related heading",
+      "default": "more kits to build"
+    },
+    {
+      "type": "text",
+      "id": "related_cta_label",
+      "label": "Related button label",
+      "default": "All frame kits"
+    },
+    {
+      "type": "url",
+      "id": "related_cta_url",
+      "label": "Related button link"
+    },
+    {
+      "type": "header",
+      "content": "Press (standard block)"
+    },
+    {
+      "type": "textarea",
+      "id": "press_quote",
+      "label": "Press quote under the build film (blank hides)",
+      "default": "Si meets with Emily Chappell, the creator of this amazing bamboo bike, to hear why your next bike should be made from bamboo."
+    },
+    {
+      "type": "text",
+      "id": "press_cite",
+      "label": "Attribution",
+      "default": "Global Cycling Network"
+    }
   ],
   "blocks": [
     {
       "type": "geometry",
       "name": "Geometry row",
       "settings": [
-        { "type": "text", "id": "label", "label": "Measurement", "default": "Reach" },
-        { "type": "text", "id": "value", "label": "Value(s)", "default": "388 / 393 / 402 / 412 mm (S/M/L/XL)" }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Measurement",
+          "default": "Reach"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value(s)",
+          "default": "388 / 393 / 402 / 412 mm (S/M/L/XL)"
+        }
       ]
     },
     {
       "type": "highlight",
       "name": "Highlight",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "heading", "label": "Headline", "default": "No welding, no workshop" },
-        { "type": "textarea", "id": "body", "label": "Body", "default": "Build the whole frame on your kitchen table with basic hand tools — everything else is in the kit." },
-        { "type": "text", "id": "fallback", "label": "Fallback image filename", "default": "bbc-rd-bamboo-tubes.jpg" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Headline",
+          "default": "no welding, no workshop"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Build the whole frame on your kitchen table with basic hand tools — everything else is in the kit."
+        },
+        {
+          "type": "text",
+          "id": "fallback",
+          "label": "Fallback image filename",
+          "default": "bbc-rd-bamboo-tubes.jpg"
+        }
       ]
     },
     {
       "type": "perk",
       "name": "Buy-box perk",
       "settings": [
-        { "type": "text", "id": "text", "label": "Perk text", "default": "No power tools required — just basic hand tools" }
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Perk text",
+          "default": "No power tools required — just basic hand tools"
+        }
       ]
     },
     {
       "type": "need",
       "name": "What you need card",
       "settings": [
-        { "type": "text", "id": "title", "label": "Card title", "default": "Basic hand tools" },
-        { "type": "textarea", "id": "description", "label": "Card description", "default": "A hacksaw, files, sandpaper, a measuring tape — no power tools. Everything else is in the kit." }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card title",
+          "default": "basic hand tools"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Card description",
+          "default": "A hacksaw, files, sandpaper, a measuring tape — no power tools. Everything else is in the kit."
+        }
       ]
     },
     {
       "type": "spec",
       "name": "Spec item",
       "settings": [
-        { "type": "text", "id": "label", "label": "Spec label", "default": "Build time" },
-        { "type": "text", "id": "value", "label": "Spec value", "default": "25–35 hrs" }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Spec label",
+          "default": "Build time"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Spec value",
+          "default": "25–35 hrs"
+        }
       ]
     },
     {
       "type": "step",
       "name": "Build step",
       "settings": [
-        { "type": "text", "id": "title", "label": "Step title", "default": "Set the geometry" },
-        { "type": "textarea", "id": "description", "label": "Step description", "default": "Lock gravel geometry on the jig — wider clearance and a slacker head angle than road." }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step title",
+          "default": "set the geometry"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Step description",
+          "default": "Lock gravel geometry on the jig — wider clearance and a slacker head angle than road."
+        }
       ]
     },
     {
       "type": "review",
       "name": "Review",
       "settings": [
-        { "type": "textarea", "id": "quote", "label": "Quote", "default": "A really comfortable ride — smooth but not too flexy, a bit like steel. And there are advantages in having built the bike myself." },
-        { "type": "text", "id": "cite", "label": "Attribution", "default": "— Kate Rawles, before her 8,288-mile Andes expedition" }
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "A really comfortable ride — smooth but not too flexy, a bit like steel. And there are advantages in having built the bike myself."
+        },
+        {
+          "type": "text",
+          "id": "cite",
+          "label": "Attribution",
+          "default": "— Kate Rawles, before her 8,288-mile Andes expedition"
+        }
       ]
     },
     {
       "type": "stat",
       "name": "Trust stat",
       "settings": [
-        { "type": "text", "id": "number", "label": "Stat number", "default": "<1%" },
-        { "type": "text", "id": "label", "label": "Stat label", "default": "failure rate across builds" },
-        { "type": "text", "id": "source", "label": "Stat source", "default": "4,000+ builds since 2012" }
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Stat number",
+          "default": "<1%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Stat label",
+          "default": "failure rate across builds"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Stat source",
+          "default": "4,000+ builders since 2012"
+        }
       ]
     },
     {
       "type": "faq",
       "name": "FAQ item",
       "settings": [
-        { "type": "text", "id": "question", "label": "Question", "default": "Do I need power tools?" },
-        { "type": "textarea", "id": "answer", "label": "Answer", "default": "No. Just basic hand tools — a hacksaw, files, sandpaper, a measuring tape and a work surface. Everything else is in the kit." }
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Do I need power tools?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "No. Just basic hand tools — a hacksaw, files, sandpaper, a measuring tape and a work surface. Everything else is in the kit."
+        }
       ]
     },
     {
       "type": "related",
       "name": "Related kit",
       "settings": [
-        { "type": "text", "id": "title", "label": "Kit title", "default": "Road Lugged Kit" },
-        { "type": "text", "id": "price", "label": "Price text (optional)" },
-        { "type": "url", "id": "url", "label": "Kit link" },
-        { "type": "image_picker", "id": "image", "label": "Kit image" },
-        { "type": "text", "id": "fallback", "label": "Image fallback filename", "default": "bbc-rd-prod-flax.jpg" }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Kit title",
+          "default": "road lugged kit"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price text (optional)"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Kit link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Kit image"
+        },
+        {
+          "type": "text",
+          "id": "fallback",
+          "label": "Image fallback filename",
+          "default": "bbc-rd-prod-flax.jpg"
+        }
       ]
     }
   ],
@@ -916,44 +1541,227 @@
     {
       "name": "Kit page 2026 (new)",
       "blocks": [
-        { "type": "perk", "settings": { "text": "No power tools required — just basic hand tools" } },
-        { "type": "perk", "settings": { "text": "Illustrated manual + 15+ hours of step-by-step video" } },
-        { "type": "perk", "settings": { "text": "Lifetime community of 4,000+ builders for support" } },
-        { "type": "perk", "settings": { "text": "Cycle to Work accepted — save through salary sacrifice" } },
-
-        { "type": "need", "settings": { "title": "Basic hand tools", "description": "A hacksaw, files, sandpaper, a measuring tape — no power tools. Everything else is in the kit." } },
-        { "type": "need", "settings": { "title": "A bit of space", "description": "A sturdy table around 1200 × 600 mm and a spot the frame can sit undisturbed while joints cure." } },
-        { "type": "need", "settings": { "title": "A few weekends", "description": "25–35 hours across multiple sessions. No rush — bamboo is forgiving and most mistakes are fixable." } },
-
-        { "type": "spec", "settings": { "label": "Build time", "value": "25–35 hrs" } },
-        { "type": "spec", "settings": { "label": "Construction", "value": "Flax & carbon, by hand" } },
-        { "type": "spec", "settings": { "label": "Strength", "value": "High strength-to-weight" } },
-        { "type": "spec", "settings": { "label": "Usage", "value": "Gravel · touring · bikepacking" } },
-
-        { "type": "step", "settings": { "title": "Set the geometry", "description": "Lock gravel geometry on the jig — wider clearance and a slacker head angle than road." } },
-        { "type": "step", "settings": { "title": "Join & wrap", "description": "Bond the tubes with epoxy and wrap each joint with carbon-fibre tow." } },
-        { "type": "step", "settings": { "title": "Cure", "description": "Leave it for a full cure — that's where maximum joint strength comes from." } },
-        { "type": "step", "settings": { "title": "Sand, seal & ride", "description": "Sand smooth, seal the bamboo, fit headset and BB. Adventure awaits." } },
-
-        { "type": "review", "settings": { "quote": "Woody made the full 8,288 miles with virtually no mechanical issues at all. All bikes are like magicians — but a bamboo bike multiplies that a hundredfold.", "cite": "— Kate Rawles, author of 'The Life Cycle' (Icon Books)" } },
-        { "type": "review", "settings": { "quote": "Reading the stories assured me that building a bamboo gravel bike is definitely possible. Now my hands are itching to build a second.", "cite": "— Tim, gravel kit build, Netherlands" } },
-
-        { "type": "stat", "settings": { "number": "<1%", "label": "failure rate across builds", "source": "4,000+ builds since 2012" } },
-        { "type": "stat", "settings": { "number": "Swansea", "label": "University tested", "source": "independent testing" } },
-        { "type": "stat", "settings": { "number": "8–12 yrs", "label": "frame life with care", "source": "2012 builds still ridden" } },
-        { "type": "stat", "settings": { "number": "~2×/wk", "label": "shipped from London", "source": "full tracking" } },
-
-        { "type": "faq", "settings": { "question": "Do I need power tools?", "answer": "No. Just basic hand tools — a hacksaw, files, sandpaper, a measuring tape and a work surface (a table around 1200 × 600 mm). Everything else is in the kit." } },
-        { "type": "faq", "settings": { "question": "What if I make a mistake?", "answer": "Most mistakes are fixable. Epoxy can be sanded back and re-applied, and bamboo is forgiving. If you're stuck, our community has seen every problem — someone will have the answer within hours." } },
-        { "type": "faq", "settings": { "question": "How strong is it really?", "answer": "Very strong for its weight. Bamboo is a light, hollow natural composite and every joint is reinforced with carbon-fibre, giving a high strength-to-weight ratio. Our bamboo is independently tested at Swansea University. Builders ride these frames daily and tour continents — with proper care they last for years." } },
-        { "type": "faq", "settings": { "question": "Is it weatherproof?", "answer": "Yes. Finished frames are sealed with epoxy resin. Dry your bike after wet rides and store it indoors, and it'll last 8–12 years with proper care." } },
-        { "type": "faq", "settings": { "question": "Not sure which size?", "answer": "Send us your height and inside-leg measurement and we'll recommend the perfect fit — or choose a Custom frame, made to your measurements." } },
-        { "type": "faq", "settings": { "question": "Can I use Cycle to Work?", "answer": "Yes — build your bamboo bike through the government's Cycle to Work scheme and save hundreds through salary sacrifice." } },
-
-        { "type": "related", "settings": { "title": "Road Lugged Kit", "price": "", "fallback": "bbc-rd-prod-flax.jpg" } },
-        { "type": "related", "settings": { "title": "MTB Frame Kit", "price": "", "fallback": "bbc-rd-prod-build.jpg" } },
-        { "type": "related", "settings": { "title": "Balance Bike Kit", "price": "From £165", "fallback": "bbc-rd-prod-balance.jpg" } },
-        { "type": "related", "settings": { "title": "Custom Frame Kit", "price": "Request a quote", "fallback": "bbc-rd-road-charlie.jpg" } }
+        {
+          "type": "perk",
+          "settings": {
+            "text": "No power tools required — just basic hand tools"
+          }
+        },
+        {
+          "type": "perk",
+          "settings": {
+            "text": "Illustrated manual + 15+ hours of step-by-step video"
+          }
+        },
+        {
+          "type": "perk",
+          "settings": {
+            "text": "Lifetime community of 4,000+ builders for support"
+          }
+        },
+        {
+          "type": "perk",
+          "settings": {
+            "text": "Cycle to Work accepted — save through salary sacrifice"
+          }
+        },
+        {
+          "type": "need",
+          "settings": {
+            "title": "Basic hand tools",
+            "description": "A hacksaw, files, sandpaper, a measuring tape — no power tools. Everything else is in the kit."
+          }
+        },
+        {
+          "type": "need",
+          "settings": {
+            "title": "A bit of space",
+            "description": "A sturdy table around 1200 × 600 mm and a spot the frame can sit undisturbed while joints cure."
+          }
+        },
+        {
+          "type": "need",
+          "settings": {
+            "title": "A few weekends",
+            "description": "25–35 hours across multiple sessions. No rush — bamboo is forgiving and most mistakes are fixable."
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Build time",
+            "value": "25–35 hrs"
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Construction",
+            "value": "Flax & carbon, by hand"
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Strength",
+            "value": "High strength-to-weight"
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Usage",
+            "value": "Gravel · touring · bikepacking"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Set the geometry",
+            "description": "Lock gravel geometry on the jig — wider clearance and a slacker head angle than road."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Join & wrap",
+            "description": "Bond the tubes with epoxy and wrap each joint with carbon-fibre tow."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Cure",
+            "description": "Leave it for a full cure — that's where maximum joint strength comes from."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Sand, seal & ride",
+            "description": "Sand smooth, seal the bamboo, fit headset and BB. Adventure awaits."
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "quote": "Woody made the full 8,288 miles with virtually no mechanical issues at all. All bikes are like magicians — but a bamboo bike multiplies that a hundredfold.",
+            "cite": "— Kate Rawles, author of 'The Life Cycle' (Icon Books)"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "quote": "Reading the stories assured me that building a bamboo gravel bike is definitely possible. Now my hands are itching to build a second.",
+            "cite": "— Tim, gravel kit build, Netherlands"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "<1%",
+            "label": "failure rate across builds",
+            "source": "4,000+ builders since 2012"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "Swansea",
+            "label": "University tested",
+            "source": "independent testing"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "8–12 yrs",
+            "label": "frame life with care",
+            "source": "2012 builds still ridden"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "~2×/wk",
+            "label": "shipped from London",
+            "source": "full tracking"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need power tools?",
+            "answer": "No. Just basic hand tools — a hacksaw, files, sandpaper, a measuring tape and a work surface (a table around 1200 × 600 mm). Everything else is in the kit."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What if I make a mistake?",
+            "answer": "Most mistakes are fixable. Epoxy can be sanded back and re-applied, and bamboo is forgiving. If you're stuck, our community has seen every problem — someone will have the answer within hours."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How strong is it really?",
+            "answer": "Very strong for its weight. Bamboo is a light, hollow natural composite and every joint is reinforced with carbon-fibre, giving a high strength-to-weight ratio. Our bamboo is independently tested at Swansea University. Builders ride these frames daily and tour continents — with proper care they last for years."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Is it weatherproof?",
+            "answer": "Yes. Finished frames are sealed with epoxy resin. Dry your bike after wet rides and store it indoors, and it'll last 8–12 years with proper care."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Not sure which size?",
+            "answer": "Send us your height and inside-leg measurement and we'll recommend the perfect fit — or choose a Custom frame, made to your measurements."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Can I use Cycle to Work?",
+            "answer": "Yes — build your bamboo bike through the government's Cycle to Work scheme and save hundreds through salary sacrifice."
+          }
+        },
+        {
+          "type": "related",
+          "settings": {
+            "title": "Road Lugged Kit",
+            "price": "",
+            "fallback": "bbc-rd-prod-flax.jpg"
+          }
+        },
+        {
+          "type": "related",
+          "settings": {
+            "title": "MTB Frame Kit",
+            "price": "",
+            "fallback": "bbc-rd-prod-build.jpg"
+          }
+        },
+        {
+          "type": "related",
+          "settings": {
+            "title": "Balance Bike Kit",
+            "price": "From £165",
+            "fallback": "bbc-rd-prod-balance.jpg"
+          }
+        },
+        {
+          "type": "related",
+          "settings": {
+            "title": "Custom Frame Kit",
+            "price": "Request a quote",
+            "fallback": "bbc-rd-road-charlie.jpg"
+          }
+        }
       ]
     }
   ]

@@ -8,7 +8,7 @@
   <section class="rd-pad-sm rd-paper">
     <div class="rd-wrap rd-coll-head">
       <span class="rd-eyebrow">Search</span>
-      <h1>{% if search.performed and search.terms != blank %}Results for &ldquo;{{ search.terms }}&rdquo;{% else %}Search{% endif %}</h1>
+      <h1>{% if search.performed and search.terms != blank %}Results for &ldquo;{{ search.terms | escape }}&rdquo;{% else %}Search{% endif %}</h1>
       <form class="rd-search rd-search-center rd-cmp-79852" action="{{ routes.search_url }}" method="get" role="search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
         <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search kits, workshops, news…" aria-label="Search the site">
@@ -24,7 +24,7 @@
           <div class="rd-grid rd-g3">
             {%- for item in search.results -%}
               {%- assign img = item.featured_image | default: item.image -%}
-              <a class="rd-card rd-stamp" href="{{ item.url }}">
+              <a class="rd-reveal rd-card rd-stamp" href="{{ item.url }}">
                 <div class="rd-ph">
                   {%- if img -%}
                     <img src="{{ img | image_url: width: 800 }}" alt="{{ item.title | escape }}" width="{{ img.width }}" height="{{ img.height }}" loading="lazy">
@@ -34,9 +34,9 @@
                   <span class="rd-tag rd-lime rd-cardtag">{{ item.object_type }}</span>
                 </div>
                 <div class="rd-body">
-                  <h2 class="rd-fs-18px">{{ item.title }}</h2>
+                  <h2 class="rd-reveal rd-fs-18px">{{ item.title }}</h2>
                   {%- if item.object_type == 'product' -%}
-                    <div class="rd-price">{% if item.price_varies %}From {% endif %}{{ item.price | money }}</div>
+                    <div class="rd-price">{% if item.price_varies %}From {% endif %}{{ item.price | money_without_trailing_zeros }}</div>
                   {%- else -%}
                     <p class="rd-excerpt">{{ item.content | strip_html | truncatewords: 18 }}</p>
                   {%- endif -%}

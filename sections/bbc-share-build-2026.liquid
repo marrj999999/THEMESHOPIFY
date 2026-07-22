@@ -1,0 +1,86 @@
+{%- comment -%}
+  BBC New Design (2026) — SHARE YOUR BUILD band (gallery page + reusable).
+  Benchmark: Prusa's community "share your make" mechanic (2026-07-06 research).
+  Email + Instagram routes; featured builds go to the gallery and newsletter.
+{%- endcomment -%}
+
+<div class="bbc-rd bbc-rd-sharebuild">
+  <section class="rd-pad rd-paper rd-center">
+    <div class="rd-wrap rd-mw-680px">
+      {%- if section.settings.eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal rd-mw-20ch rd-mx-auto">{{ section.settings.title }}</h2>
+      {%- if section.settings.body != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.body }}</p>{%- endif -%}
+      <div class="rd-flex rd-mt3 rd-jc-center">
+        <a class="rd-btn rd-lime" href="mailto:{{ section.settings.email | default: 'info@bamboobicycleclub.org' }}?subject={{ section.settings.email_subject | default: 'My bamboo build' | url_encode }}">{{ section.settings.cta1_label }} <span class="rd-arrow">&rarr;</span></a>
+        <a class="rd-btn rd-ghost" href="{{ section.settings.ig_url | default: 'https://www.instagram.com/bamboobicycleclub/' }}" target="_blank" rel="noopener">{{ section.settings.cta2_label }}</a>
+      </div>
+      {%- if section.settings.note != blank -%}<p class="rd-ship-note rd-mt3">{{ section.settings.note }}</p>{%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Share Your Build 2026",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Built one?"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "show us what you made."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Every month we feature builds from the community — 4,000+ builders across 36 countries and counting. Send us two or three photos and a line about your build, or tag us on Instagram."
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email address",
+      "default": "info@bamboobicycleclub.org"
+    },
+    {
+      "type": "text",
+      "id": "email_subject",
+      "label": "Email subject line",
+      "default": "My bamboo build"
+    },
+    {
+      "type": "text",
+      "id": "cta1_label",
+      "label": "Email CTA label",
+      "default": "Email your build"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "Instagram CTA label",
+      "default": "Tag @bamboobicycleclub"
+    },
+    {
+      "type": "url",
+      "id": "ig_url",
+      "label": "Instagram link"
+    },
+    {
+      "type": "textarea",
+      "id": "note",
+      "label": "Footnote",
+      "default": "By sending photos you're happy for us to feature them on the gallery and in the newsletter — say the word and we'll credit your name or keep it anonymous."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Share Your Build 2026"
+    }
+  ]
+}
+{% endschema %}

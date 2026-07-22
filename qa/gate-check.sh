@@ -12,12 +12,19 @@ for f in "${FILES[@]}"; do
   case "$f" in *.json) python3 -c "import json;json.load(open('$f'))" || { echo "✗ invalid JSON: $f"; FAIL=1; };; esac
   case "$f" in *.liquid)
     python3 - "$f" <<'PY' || FAIL=1
-import json,sys
+import json,sys,re
 s=open(sys.argv[1]).read()
-i=s.find('{% schema %}')
-if i>=0:
-    try: json.loads(s[i+12:s.find('{% endschema %}')])
-    except Exception as e: print('✗ schema JSON invalid:',sys.argv[1],e); sys.exit(1)
+# Use the LAST schema..endschema pair (files may mention "{% schema %}" in prose/comments),
+# and tolerate whitespace-control tags ({%- schema -%}).
+me=None
+for m in re.finditer(r'\{%-?\s*endschema\s*-?%\}', s): me=m
+if me:
+    body=s[:me.start()]
+    ms=None
+    for m in re.finditer(r'\{%-?\s*schema\s*-?%\}', body): ms=m
+    if ms:
+        try: json.loads(body[ms.end():])
+        except Exception as e: print('✗ schema JSON invalid:',sys.argv[1],e); sys.exit(1)
 PY
   ;; esac
 done

@@ -67,6 +67,41 @@
     </div>
   </header>
 
+  {%- comment -%} ---------- BOOK A DISCOVERY CALL (primary CTA) ----------
+     Moved above the fold 2026-07-20 per Chris Barrett: this is now the page's main
+     call to action. ONE dominant action only (Unbounce / Mighty Ally: "one main course,
+     not five competing entrees") — the three routes below are secondary TEXT links,
+     deliberately not competing buttons. Routes to the contact form with a
+     discovery-call subject until a booking tool exists. ---------- {%- endcomment -%}
+  <section class="rd-pad rd-steel" id="book-a-call">
+    <div class="rd-wrap">
+      <div class="rd-center rd-cmp-84401">
+        {%- if section.settings.help_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.help_eyebrow }}</span>{%- endif -%}
+        <h2 class="rd-reveal">{{ section.settings.help_title }}</h2>
+        {%- if section.settings.help_intro != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.help_intro }}</p>{%- endif -%}
+        <div class="rd-mt3">
+          <a class="rd-btn rd-lime" href="{{ section.settings.help_cta_url | default: '/pages/contact-us?subject=discovery-call' }}">{{ section.settings.help_cta_label | default: 'book a discovery call' }} <span class="rd-arrow">&rarr;</span></a>
+        </div>
+      </div>
+      {%- assign helps = section.blocks | where: "type", "help" -%}
+      {%- if helps.size > 0 -%}
+      <div class="rd-grid rd-g3 rd-mt4">
+        {%- for block in helps -%}
+          {%- assign help_url = block.settings.link_url | default: '/pages/contact-us' -%}
+          <div class="rd-card rd-stamp rd-reveal" {{ block.shopify_attributes }}>
+            <div class="rd-body">
+              {%- if block.settings.tag != blank -%}<span class="rd-tag rd-lime">{{ block.settings.tag }}</span>{%- endif -%}
+              <h3 class="rd-mt2 rd-fs-21px">{{ block.settings.title }}</h3>
+              <p>{{ block.settings.body }}</p>
+              {%- if block.settings.link_label != blank -%}<a class="rd-textlink" href="{{ help_url }}">{{ block.settings.link_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+    </div>
+  </section>
+
   {%- comment -%} ---------- STATS (dark) ---------- {%- endcomment -%}
   <section class="rd-pad-sm rd-dark rd-band--stats">
     <div class="rd-wrap">
@@ -75,7 +110,7 @@
       <div class="rd-stats">
         {%- for block in section.blocks -%}{%- if block.type == 'stat' and block.settings.source != blank -%}
           <div class="rd-stat rd-reveal" {{ block.shopify_attributes }}>
-            <div class="rd-num">{{ block.settings.number }}</div>
+            <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
             <div class="rd-lbl">{{ block.settings.label }}</div>
             <div class="rd-src">{{ block.settings.source }}</div>
             {%- if block.settings.comparator != blank -%}<div class="rd-comparator">{{ block.settings.comparator }}</div>{%- endif -%}
@@ -93,7 +128,7 @@
     <div class="rd-wrap">
       <div class="rd-center">
         {%- if section.settings.arms_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.arms_eyebrow }}</span>{%- endif -%}
-        <h2 class="rd-mw-26ch rd-mx-auto">{{ section.settings.arms_title }}</h2>
+        <h2 class="rd-reveal rd-mw-26ch rd-mx-auto">{{ section.settings.arms_title }}</h2>
       </div>
       {%- if section.settings.frame_info_enable -%}
       <div class="rd-frameinfo rd-reveal" aria-hidden="false"><svg class="rd-frame-info" viewBox="0 0 960 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="One frame, two triangles: the schools pathway on the front triangle, the prisons pathway on the rear — both meeting at the saddle: a way forward.">
@@ -186,7 +221,7 @@
   <section class="rd-pad rd-band--workshop">
     <div class="rd-wrap rd-mw-820px">
       {%- if section.settings.story_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.story_eyebrow }}</span>{%- endif -%}
-      <h2>{{ section.settings.story_title }}</h2>
+      <h2 class="rd-reveal">{{ section.settings.story_title }}</h2>
       {%- if section.settings.story_body_1 != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.story_body_1 }}</p>{%- endif -%}
       {%- if section.settings.story_body_2 != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.story_body_2 }}</p>{%- endif -%}
     </div>
@@ -194,7 +229,7 @@
 
   {%- comment -%} ---------- BUILD TO BOND FEATURE (split, dark) ---------- {%- endcomment -%}
   <section class="rd-split rd-dark">
-    <div class="rd-media">
+    <div class="rd-reveal rd-media">
       {%- if section.settings.b2b_image != blank -%}
         <img src="{{ section.settings.b2b_image | image_url: width: 1400 }}" alt="{{ section.settings.b2b_image_alt | default: 'Inside a Bamboo Bicycle Club workshop' | escape }}" width="{{ section.settings.b2b_image.width }}" height="{{ section.settings.b2b_image.height }}">
       {%- else -%}
@@ -203,11 +238,11 @@
     </div>
     <div class="rd-txt">
       {%- if section.settings.b2b_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.b2b_eyebrow }}</span>{%- endif -%}
-      <h2>{{ section.settings.b2b_title }}</h2>
+      <h2 class="rd-reveal">{{ section.settings.b2b_title }}</h2>
       {%- if section.settings.b2b_body_1 != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.b2b_body_1 }}</p>{%- endif -%}
       {%- if section.settings.b2b_body_2 != blank -%}<p class="rd-mt2">{{ section.settings.b2b_body_2 }}</p>{%- endif -%}
       {%- if section.settings.b2b_quote != blank -%}
-        <div class="rd-pull rd-mt3">
+        <div class="rd-reveal rd-pull rd-mt3">
           <p class="rd-q">{{ section.settings.b2b_quote }}</p>
           {%- if section.settings.b2b_cite != blank -%}<cite>{{ section.settings.b2b_cite }}</cite>{%- endif -%}
         </div>
@@ -226,12 +261,12 @@
     <div class="rd-wrap">
       <div class="rd-center">
         {%- if section.settings.policy_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.policy_eyebrow }}</span>{%- endif -%}
-        <h2 class="rd-mw-22ch">{{ section.settings.policy_title }}</h2>
+        <h2 class="rd-reveal rd-mw-22ch">{{ section.settings.policy_title }}</h2>
       </div>
       <div class="rd-policy rd-mt4">
         {%- for block in section.blocks -%}{%- if block.type == 'policy' -%}
           <div class="rd-stat rd-reveal" {{ block.shopify_attributes }}>
-            <div class="rd-num">{{ block.settings.number }}</div>
+            <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
             <div class="rd-lbl">{{ block.settings.label }}</div>
             {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
           </div>
@@ -245,7 +280,7 @@
   <section class="rd-pad-sm">
     <div class="rd-wrap rd-mw-820px">
       <div class="rd-csgrid rd-csgrid-1">
-        <a class="rd-cscard" href="{{ section.settings.cs_url | default: '/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2' }}">
+        <a class="rd-reveal rd-cscard" href="{{ section.settings.cs_url | default: '/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2' }}">
           <div class="rd-cscard__media"><img src="{{ section.settings.cs_image | default: 'bbc-rd-prison-empty.jpg' | asset_url }}" alt="Inside the Build to Bond workshop at HMP Lowdham Grange" loading="lazy" width="600" height="375"><span class="rd-cscard__kind">{{ section.settings.cs_kind | default: 'Case study' }}</span></div>
           <div class="rd-cscard__body">
             <p class="rd-cscard__quote">{{ section.settings.cs_quote }}</p>
@@ -267,16 +302,23 @@
   <section class="rd-pad-sm">
     <div class="rd-wrap">
       {%- if section.settings.stories_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.stories_eyebrow }}</span>{%- endif -%}
-      <h2 class="rd-mw-20ch">{{ section.settings.stories_title }}</h2>
+      <h2 class="rd-reveal rd-mw-20ch">{{ section.settings.stories_title }}</h2>
       {%- if section.settings.stories_lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.stories_lede }}</p>{%- endif -%}
       <div class="rd-csgrid rd-mt4">
         {%- for block in section.blocks -%}{%- if block.type == 'story' -%}
-          {%- if block.settings.image_pic != blank -%}{%- assign cimg = block.settings.image_pic | image_url: width: 600 -%}{%- else -%}{%- assign cimg = block.settings.image | default: 'bbc-rd-cohort.jpg' -%}{%- endif -%}
-          {%- assign vid = block.settings.video -%}
-          <a class="rd-cscard{% if vid != blank %} rd-cscard--video{% endif %}" href="{% if vid != blank %}https://www.youtube.com/watch?v={{ vid }}{% else %}{{ block.settings.url | default: '/blogs/impact' }}{% endif %}"{% if vid != blank %} data-yt="{{ vid }}"{% endif %} {{ block.shopify_attributes }}>
-            <div class="rd-cscard__media"><img src="{% if cimg contains '//' %}{{ cimg }}{% else %}{{ cimg | asset_url }}{% endif %}" alt="{{ block.settings.title | escape }}" loading="lazy" width="600" height="375">{%- if block.settings.kind != blank -%}<span class="rd-cscard__kind">{{ block.settings.kind }}</span>{%- endif -%}{%- if vid != blank -%}<span class="rd-cscard__play" aria-hidden="true"></span>{%- endif -%}</div>
-            <div class="rd-cscard__body"><p class="rd-cscard__ctx">{{ block.settings.blurb }}</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">{{ block.settings.title }}</span><span class="rd-cscard__more">{% if vid != blank %}Watch the film{% else %}Read the story{% endif %} <span class="rd-arrow">&rarr;</span></span></div></div>
+          {%- assign vurl = block.settings.video_url | default: block.settings.video -%}
+          {%- if vurl != blank or block.settings.video_file != blank -%}
+          <div class="rd-reveal rd-cscard rd-cscard--video" {{ block.shopify_attributes }}>
+            <div class="rd-cscard__media">{%- render "bbc-media", image: block.settings.image_pic, src: block.settings.image, video: block.settings.video_file, youtube: vurl, alt: block.settings.title -%}{%- if block.settings.kind != blank -%}<span class="rd-cscard__kind">{{ block.settings.kind }}</span>{%- endif -%}</div>
+            <div class="rd-cscard__body"><p class="rd-cscard__ctx">{{ block.settings.blurb }}</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">{{ block.settings.title }}</span>{%- if block.settings.url != blank -%}<a class="rd-cscard__more" href="{{ block.settings.url }}">Read the story <span class="rd-arrow">&rarr;</span></a>{%- endif -%}</div></div>
+          </div>
+          {%- else -%}
+          {%- if block.settings.image_pic != blank -%}{%- assign cimg = block.settings.image_pic | image_url: width: 600 -%}{%- else -%}{%- assign cimg = block.settings.image | default: "bbc-rd-cohort.jpg" -%}{%- endif -%}
+          <a class="rd-reveal rd-cscard" href="{{ block.settings.url | default: "/blogs/impact" }}" {{ block.shopify_attributes }}>
+            <div class="rd-cscard__media"><img src="{% if cimg contains "//" %}{{ cimg }}{% else %}{{ cimg | asset_url }}{% endif %}" alt="{{ block.settings.title | escape }}" loading="lazy" width="600" height="375">{%- if block.settings.kind != blank -%}<span class="rd-cscard__kind">{{ block.settings.kind }}</span>{%- endif -%}</div>
+            <div class="rd-cscard__body"><p class="rd-cscard__ctx">{{ block.settings.blurb }}</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">{{ block.settings.title }}</span><span class="rd-cscard__more">Read the story <span class="rd-arrow">&rarr;</span></span></div></div>
           </a>
+          {%- endif -%}
         {%- endif -%}{%- endfor -%}
       </div>
       <div class="rd-mt4"><a class="rd-btn rd-ghost" href="{{ section.settings.stories_all_url | default: '/blogs/impact' }}">{{ section.settings.stories_all_label | default: 'See all impact stories' }} <span class="rd-arrow">&rarr;</span></a></div>
@@ -347,10 +389,10 @@
   <section class="rd-pad">
     <div class="rd-wrap">
       {%- if section.settings.path_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.path_eyebrow }}</span>{%- endif -%}
-      <h2 class="rd-mw-20ch">{{ section.settings.path_title }}</h2>
+      <h2 class="rd-reveal rd-mw-20ch">{{ section.settings.path_title }}</h2>
       <div class="rd-grid rd-g3 rd-mt4">
         {%- for block in section.blocks -%}{%- if block.type == 'pathway' -%}
-          <div class="rd-card" {{ block.shopify_attributes }}>
+          <div class="rd-reveal rd-card" {{ block.shopify_attributes }}>
             <div class="rd-body">
               <h3 class="rd-fs-21px">{{ block.settings.title }}</h3>
               <p>{{ block.settings.body }}</p>
@@ -359,7 +401,7 @@
         {%- endif -%}{%- endfor -%}
       </div>
       {%- if section.settings.path_quote != blank -%}
-        <div class="rd-pull rd-mt4 rd-mw-60ch">
+        <div class="rd-reveal rd-pull rd-mt4 rd-mw-60ch">
           <p class="rd-q">{{ section.settings.path_quote }}</p>
           {%- if section.settings.path_cite != blank -%}<cite>{{ section.settings.path_cite }}</cite>{%- endif -%}
         </div>
@@ -373,7 +415,7 @@
   <section class="rd-pad-sm rd-paper rd-center">
     <div class="rd-wrap rd-mw-820px">
       {%- if section.settings.sites_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.sites_eyebrow }}</span>{%- endif -%}
-      <h2 class="rd-mw-22ch rd-mx-auto">{{ section.settings.sites_title }}</h2>
+      <h2 class="rd-reveal rd-mw-22ch rd-mx-auto">{{ section.settings.sites_title }}</h2>
       {%- if section.settings.sites_body != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.sites_body }}</p>{%- endif -%}
       {%- if section.settings.sites_list != blank -%}<div class="rd-sitenames rd-mt3">{{ section.settings.sites_list }}</div>{%- endif -%}
     </div>
@@ -422,8 +464,38 @@
     <div class="rd-wrap" style="position:relative;">
       <span class="rd-seal" aria-hidden="true">{{ section.settings.seal_text | default: "OCN accredited · CIC · since 2012" }}</span>
       {%- if section.settings.cred_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.cred_eyebrow }}</span>{%- endif -%}
-      {%- if section.settings.cred_heading != blank -%}<h2 class="rd-mw-22ch">{{ section.settings.cred_heading }}</h2>{%- endif -%}
+      {%- if section.settings.cred_heading != blank -%}<h2 class="rd-reveal rd-mw-22ch">{{ section.settings.cred_heading }}</h2>{%- endif -%}
       {%- if section.settings.cred_sub != blank -%}<p class="rd-lede rd-mt1">{{ section.settings.cred_sub }}</p>{%- endif -%}
+
+      {%- comment -%} ministerial endorsement (verbatim, attributable) — restored 2026-07-22;
+         it previously only GATED this band without ever rendering (audit footgun) {%- endcomment -%}
+      <blockquote class="rd-pull rd-mt3 rd-reveal">
+        <p class="rd-q">{{ section.settings.cred_quote1 }}</p>
+        {%- if section.settings.cred_attr1 != blank -%}<cite>{{ section.settings.cred_attr1 }}</cite>{%- endif -%}
+      </blockquote>
+
+      {%- comment -%} WHO WE WORK WITH — customer segment + benefit + route.
+        Added per Chris Barrett feedback (2026-07): "show who our customer is and how
+        they benefit". Pattern borrowed from Bounce Back — address each segment as
+        THEIR OWN QUESTION, answer with the benefit, then route. Copy is vault-sourced
+        (Education MOC / Corporate MOC / Sales Pitches) — do not invent offers or prices.
+      {%- endcomment -%}
+      {%- assign segs = section.blocks | where: "type", "segment" -%}
+      {%- if segs.size > 0 -%}
+      <div class="rd-grid rd-g2 rd-mt4">
+        {%- for block in segs -%}
+          <div class="rd-card rd-stamp rd-reveal" {{ block.shopify_attributes }}>
+            <div class="rd-body">
+              {%- if block.settings.tag != blank -%}<span class="rd-tag rd-lime">{{ block.settings.tag }}</span>{%- endif -%}
+              <h3 class="rd-mt2 rd-fs-21px">{{ block.settings.question }}</h3>
+              {%- if block.settings.benefit != blank -%}<p>{{ block.settings.benefit }}</p>{%- endif -%}
+              {%- if block.settings.link_label != blank -%}<a class="rd-textlink" href="{{ block.settings.link_url | default: '/pages/contact-us' }}">{{ block.settings.link_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+
       {%- if section.settings.promise1 != blank -%}
       <div class="rd-callout-steel rd-mt3" style="text-align:left;">
         <ul class="rd-promises" role="list">
@@ -437,7 +509,7 @@
       </div>
       {%- elsif section.settings.cred_mech != blank -%}<div class="rd-callout-steel rd-mt3" style="text-align:left;"><p>{{ section.settings.cred_mech }}</p></div>{%- endif -%}
       {%- if section.settings.report_card_title != blank -%}
-      <div class="rd-dlcard rd-mt3">
+      <div class="rd-reveal rd-dlcard rd-mt3">
         <span class="rd-dlcard__badge">report</span>
         <div class="rd-dlcard__body">
           <p class="rd-dlcard__title">{{ section.settings.report_card_title }}</p>
@@ -447,18 +519,15 @@
       </div>
       {%- endif -%}
 
-      {%- comment -%} real press logos (assets) + funder credit line {%- endcomment -%}
+      {%- comment -%} press strip — THE standard block (2026-07-22, qa/PRESS-BLOCK.md);
+         quiet style here (the pull-quote above already carries the voice) {%- endcomment -%}
       <div class="rd-center">
-        <p class="rd-partnerlabel rd-mt4">{{ section.settings.press_label | default: 'As featured in' }}</p>
-        <div class="rd-logogrid rd-mt2">
-          <span class="rd-logocell"><img width="318" height="402" class="rd-logoimg" src="{{ 'logo-financial-times.svg' | asset_url }}" alt="Financial Times" loading="lazy"></span>
-          <span class="rd-logocell"><img width="295" height="97" class="rd-logoimg" src="{{ 'logo-guardian.svg' | asset_url }}" alt="The Guardian" loading="lazy"></span>
-          <span class="rd-logocell"><img width="430" height="70" class="rd-logoimg" src="{{ 'logo-telegraph.svg' | asset_url }}" alt="The Telegraph" loading="lazy"></span>
-          <span class="rd-logocell"><img width="1000" height="476" class="rd-logoimg" src="{{ 'logo-cnn.svg' | asset_url }}" alt="CNN" loading="lazy"></span>
-          
-          
-        </div>
-        {%- if section.settings.press_more != blank -%}<p class="rd-ship-note rd-mt3"><a href="{{ section.settings.press_more_url | default: '/pages/media-page' }}">{{ section.settings.press_more }}</a></p>{%- endif -%}
+        {%- render 'bbc-press',
+            style: 'quiet',
+            preset: 'national',
+            label: section.settings.press_label,
+            more_label: section.settings.press_more,
+            more_url: section.settings.press_more_url -%}
         {%- if section.settings.awards_line != blank -%}<p class="rd-partnerlabel rd-mt3">{{ section.settings.awards_line }}</p>{%- endif -%}
         {%- if section.settings.funder_line != blank -%}<p class="rd-ship-note{% if section.settings.funder_logo != blank %} rd-mt1{% else %} rd-mt3{% endif %}">{{ section.settings.funder_line }}</p>{%- endif -%}
         {%- assign backers = section.blocks | where: "type", "backer" -%}
@@ -484,44 +553,9 @@
   {%- endif -%}
 
   
-  {%- comment -%} ---------- WHAT'S NEXT (forward band, A2 — funder question: what does new money do?) ---------- {%- endcomment -%}
-  {%- if section.settings.next_title != blank -%}
-  <section class="rd-pad rd-band--next">
-    <div class="rd-wrap rd-rail">
-      {%- if section.settings.next_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.next_eyebrow }}</span>{%- endif -%}
-      <h2>{{ section.settings.next_title }}</h2>
-      {%- if section.settings.next_lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.next_lede }}</p>{%- endif -%}
-      {%- assign nx = section.settings.next_flow | split: '|' -%}
-      <div class="rd-flow rd-mt3">{%- for st in nx -%}<span class="rd-flow__step">{{ st | strip }}</span>{%- endfor -%}</div>
-    </div>
-  </section>
-  {%- endif -%}
-
-  {%- comment -%} ---------- GET INVOLVED: three ways (3 CTA cards) ---------- {%- endcomment -%}
-  <section class="rd-pad rd-steel">
-    <div class="rd-wrap">
-      <div class="rd-center rd-cmp-84401">
-        {%- if section.settings.help_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.help_eyebrow }}</span>{%- endif -%}
-        <h2>{{ section.settings.help_title }}</h2>
-        {%- if section.settings.help_intro != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.help_intro }}</p>{%- endif -%}
-      </div>
-      <div class="rd-grid rd-g3">
-        {%- for block in section.blocks -%}{%- if block.type == 'help' -%}
-          {%- if block.settings.lime -%}{%- assign stamp = 'rd-card rd-stamp rd-lime' -%}{%- else -%}{%- assign stamp = 'rd-card rd-stamp' -%}{%- endif -%}
-          {%- if block.settings.tag_lime -%}{%- assign tagcls = 'rd-tag rd-lime' -%}{%- else -%}{%- assign tagcls = 'rd-tag' -%}{%- endif -%}
-          {%- assign help_url = block.settings.link_url | default: '/pages/contact-us' -%}
-          <div class="{{ stamp }}" {{ block.shopify_attributes }}>
-            <div class="rd-body">
-              {%- if block.settings.tag != blank -%}<span class="{{ tagcls }}">{{ block.settings.tag }}</span>{%- endif -%}
-              <h3 class="rd-mt2 rd-fs-21px">{{ block.settings.title }}</h3>
-              <p>{{ block.settings.body }}</p>
-              {%- if block.settings.link_label != blank -%}<a class="rd-btn rd-lime rd-mt3" href="{{ help_url }}">{{ block.settings.link_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
-            </div>
-          </div>
-        {%- endif -%}{%- endfor -%}
-      </div>
-    </div>
-  </section>
+  {%- comment -%} WHAT'S NEXT band REMOVED 2026-07-20 (Chris Barrett feedback: cut to reduce
+     page length). Its settings (next_*) are retained in the schema but no longer rendered.
+     The primary CTA now lives directly under the hero — see BOOK A DISCOVERY CALL. {%- endcomment -%}
 
   {% schema %}
 {
@@ -560,7 +594,7 @@
       "type": "text",
       "id": "hero_title",
       "label": "Headline",
-      "default": "Building bikes. Rebuilding lives."
+      "default": "building bikes. rebuilding lives."
     },
     {
       "type": "textarea",
@@ -590,9 +624,24 @@
       "id": "hero_cta2_url",
       "label": "Secondary CTA link (defaults to the contact page)"
     },
-    { "type": "text", "id": "quotes_label", "label": "Quotes band label", "default": "builders say" },
-    { "type": "text", "id": "ghost_stat", "label": "Ghost numeral behind stats", "default": "2012" },
-    { "type": "text", "id": "seal_text", "label": "Rotated seal text (recognised-by)", "default": "OCN accredited · CIC · since 2012" },
+    {
+      "type": "text",
+      "id": "quotes_label",
+      "label": "Quotes band label",
+      "default": "builders say"
+    },
+    {
+      "type": "text",
+      "id": "ghost_stat",
+      "label": "Ghost numeral behind stats",
+      "default": "2012"
+    },
+    {
+      "type": "text",
+      "id": "seal_text",
+      "label": "Rotated seal text (recognised-by)",
+      "default": "OCN accredited · CIC · since 2012"
+    },
     {
       "type": "text",
       "id": "stats_label",
@@ -630,7 +679,7 @@
       "type": "text",
       "id": "arms_title",
       "label": "Heading (blank to hide)",
-      "default": "Skills before exclusion. Skills after."
+      "default": "skills before exclusion. skills after."
     },
     {
       "type": "text",
@@ -648,7 +697,7 @@
       "type": "text",
       "id": "arm1_title",
       "label": "Arm 1 title",
-      "default": "Before exclusion"
+      "default": "before exclusion"
     },
     {
       "type": "textarea",
@@ -672,7 +721,7 @@
       "type": "text",
       "id": "arm2_title",
       "label": "Arm 2 title",
-      "default": "After the system missed them"
+      "default": "after the system missed them"
     },
     {
       "type": "textarea",
@@ -686,25 +735,111 @@
       "label": "Arm 2 pathway (| separated)",
       "default": "Course | OCN accreditation | Family bond | Peer instructor | Link to work on release"
     },
-    { "type": "image_picker", "id": "arm1_image", "label": "Pathway 1 image (schools)" },
-    { "type": "text", "id": "arm1_image_alt", "label": "Pathway 1 image alt" },
-    { "type": "image_picker", "id": "arm2_image", "label": "Pathway 2 image (workshop space only — no identifiable people)" },
-    { "type": "text", "id": "arm2_image_alt", "label": "Pathway 2 image alt" },
-    { "type": "checkbox", "id": "frame_info_enable", "label": "Use the bike-frame infographic (replaces the fork)", "default": true },
-    { "type": "text", "id": "frame_info_caption", "label": "Frame infographic caption" },
-    { "type": "text", "id": "fork_label", "label": "Fork label", "default": "one mission, two pathways" },
-    { "type": "text", "id": "arm1_chip", "label": "Pathway 1 chip", "default": "in schools · before exclusion" },
-    { "type": "text", "id": "arm1_name", "label": "Pathway 1 name", "default": "make engineers" },
-    { "type": "textarea", "id": "arm1_who", "label": "Pathway 1 — who it's for" },
-    { "type": "text", "id": "arm1_cta_label", "label": "Pathway 1 CTA label", "default": "bring it to your school →" },
-    { "type": "url", "id": "arm1_cta_url", "label": "Pathway 1 CTA link" },
-    { "type": "text", "id": "arm2_chip", "label": "Pathway 2 chip", "default": "in prisons · after" },
-    { "type": "text", "id": "arm2_name", "label": "Pathway 2 name", "default": "build to bond" },
-    { "type": "textarea", "id": "arm2_who", "label": "Pathway 2 — who it's for" },
-    { "type": "text", "id": "arm2_cta_label", "label": "Pathway 2 CTA label", "default": "commission a programme →" },
-    { "type": "url", "id": "arm2_cta_url", "label": "Pathway 2 CTA link" },
-    { "type": "text", "id": "converge_title", "label": "Convergence strip title", "default": "both pathways end in the same place ✱ a way forward." },
-    { "type": "textarea", "id": "converge_note", "label": "Convergence footnote", "default": "✱ the same hands-on engineering course in both settings — built around a bike the maker keeps." },
+    {
+      "type": "image_picker",
+      "id": "arm1_image",
+      "label": "Pathway 1 image (schools)"
+    },
+    {
+      "type": "text",
+      "id": "arm1_image_alt",
+      "label": "Pathway 1 image alt"
+    },
+    {
+      "type": "image_picker",
+      "id": "arm2_image",
+      "label": "Pathway 2 image (workshop space only — no identifiable people)"
+    },
+    {
+      "type": "text",
+      "id": "arm2_image_alt",
+      "label": "Pathway 2 image alt"
+    },
+    {
+      "type": "checkbox",
+      "id": "frame_info_enable",
+      "label": "Use the bike-frame infographic (replaces the fork)",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "frame_info_caption",
+      "label": "Frame infographic caption"
+    },
+    {
+      "type": "text",
+      "id": "fork_label",
+      "label": "Fork label",
+      "default": "one mission, two pathways"
+    },
+    {
+      "type": "text",
+      "id": "arm1_chip",
+      "label": "Pathway 1 chip",
+      "default": "in schools · before exclusion"
+    },
+    {
+      "type": "text",
+      "id": "arm1_name",
+      "label": "Pathway 1 name",
+      "default": "make engineers"
+    },
+    {
+      "type": "textarea",
+      "id": "arm1_who",
+      "label": "Pathway 1 — who it's for"
+    },
+    {
+      "type": "text",
+      "id": "arm1_cta_label",
+      "label": "Pathway 1 CTA label",
+      "default": "bring it to your school →"
+    },
+    {
+      "type": "url",
+      "id": "arm1_cta_url",
+      "label": "Pathway 1 CTA link"
+    },
+    {
+      "type": "text",
+      "id": "arm2_chip",
+      "label": "Pathway 2 chip",
+      "default": "in prisons · after"
+    },
+    {
+      "type": "text",
+      "id": "arm2_name",
+      "label": "Pathway 2 name",
+      "default": "build to bond"
+    },
+    {
+      "type": "textarea",
+      "id": "arm2_who",
+      "label": "Pathway 2 — who it's for"
+    },
+    {
+      "type": "text",
+      "id": "arm2_cta_label",
+      "label": "Pathway 2 CTA label",
+      "default": "commission a programme →"
+    },
+    {
+      "type": "url",
+      "id": "arm2_cta_url",
+      "label": "Pathway 2 CTA link"
+    },
+    {
+      "type": "text",
+      "id": "converge_title",
+      "label": "Convergence strip title",
+      "default": "both pathways end in the same place ✱ a way forward."
+    },
+    {
+      "type": "textarea",
+      "id": "converge_note",
+      "label": "Convergence footnote",
+      "default": "✱ the same hands-on engineering course in both settings — built around a bike the maker keeps."
+    },
     {
       "type": "header",
       "content": "Why now (policy backdrop)"
@@ -719,7 +854,7 @@
       "type": "text",
       "id": "policy_title",
       "label": "Heading (blank to hide)",
-      "default": "Both arms sit on live national priorities."
+      "default": "both arms sit on live national priorities."
     },
     {
       "type": "header",
@@ -736,7 +871,7 @@
       "type": "text",
       "id": "cred_heading",
       "label": "Heading (optional)",
-      "default": "Reported and backed"
+      "default": "reported and backed"
     },
     {
       "type": "textarea",
@@ -785,7 +920,11 @@
       "label": "Where-we-operate 'full picture' link label",
       "default": "the full picture →"
     },
-    { "type": "url", "id": "ops_more_url", "label": "Full picture link target" },
+    {
+      "type": "url",
+      "id": "ops_more_url",
+      "label": "Full picture link target"
+    },
     {
       "type": "checkbox",
       "id": "map_enable",
@@ -809,19 +948,72 @@
       "label": "World map caption",
       "default": "✱ kits built in 45 countries · standing programmes marked in lime, past programmes and partnerships ringed"
     },
-    { "type": "text", "id": "next_eyebrow", "label": "What's-next eyebrow", "default": "what's next" },
-    { "type": "text", "id": "next_title", "label": "What's-next heading" },
-    { "type": "text", "id": "next_lede", "label": "What's-next lede (one sentence)" },
-    { "type": "textarea", "id": "next_flow", "label": "What's-next ambitions, | separated" },
-    { "type": "text", "id": "promise1", "label": "Promise 1" },
-    { "type": "url", "id": "promise1_url", "label": "Promise 1 proof link" },
-    { "type": "text", "id": "promise2", "label": "Promise 2" },
-    { "type": "url", "id": "promise2_url", "label": "Promise 2 proof link" },
-    { "type": "text", "id": "promise3", "label": "Promise 3" },
-    { "type": "url", "id": "promise3_url", "label": "Promise 3 proof link" },
-    { "type": "text", "id": "report_card_title", "label": "Report card title" },
-    { "type": "text", "id": "report_card_meta", "label": "Report card meta line" },
-    { "type": "url", "id": "report_card_url", "label": "Report card link" },
+    {
+      "type": "text",
+      "id": "next_eyebrow",
+      "label": "What's-next eyebrow",
+      "default": "what's next"
+    },
+    {
+      "type": "text",
+      "id": "next_title",
+      "label": "What's-next heading"
+    },
+    {
+      "type": "text",
+      "id": "next_lede",
+      "label": "What's-next lede (one sentence)"
+    },
+    {
+      "type": "textarea",
+      "id": "next_flow",
+      "label": "What's-next ambitions, | separated"
+    },
+    {
+      "type": "text",
+      "id": "promise1",
+      "label": "Promise 1"
+    },
+    {
+      "type": "url",
+      "id": "promise1_url",
+      "label": "Promise 1 proof link"
+    },
+    {
+      "type": "text",
+      "id": "promise2",
+      "label": "Promise 2"
+    },
+    {
+      "type": "url",
+      "id": "promise2_url",
+      "label": "Promise 2 proof link"
+    },
+    {
+      "type": "text",
+      "id": "promise3",
+      "label": "Promise 3"
+    },
+    {
+      "type": "url",
+      "id": "promise3_url",
+      "label": "Promise 3 proof link"
+    },
+    {
+      "type": "text",
+      "id": "report_card_title",
+      "label": "Report card title"
+    },
+    {
+      "type": "text",
+      "id": "report_card_meta",
+      "label": "Report card meta line"
+    },
+    {
+      "type": "url",
+      "id": "report_card_url",
+      "label": "Report card link"
+    },
     {
       "type": "textarea",
       "id": "cred_mech",
@@ -896,7 +1088,7 @@
       "type": "text",
       "id": "sites_title",
       "label": "Heading (blank to hide section)",
-      "default": "Accredited programmes across four active prison sites."
+      "default": "accredited programmes across four active prison sites."
     },
     {
       "type": "textarea",
@@ -981,7 +1173,7 @@
       "type": "text",
       "id": "stories_title",
       "label": "Heading (blank to hide grid)",
-      "default": "From prisons to Patagonia."
+      "default": "from prisons to patagonia."
     },
     {
       "type": "textarea",
@@ -999,7 +1191,7 @@
       "type": "text",
       "id": "st1_title",
       "label": "Card 1 title",
-      "default": "8,288 miles to Patagonia"
+      "default": "8,288 miles to patagonia"
     },
     {
       "type": "textarea",
@@ -1028,7 +1220,7 @@
       "type": "text",
       "id": "st2_title",
       "label": "Card 2 title",
-      "default": "The Macallan — masters of their craft"
+      "default": "the macallan — masters of their craft"
     },
     {
       "type": "textarea",
@@ -1057,7 +1249,7 @@
       "type": "text",
       "id": "st3_title",
       "label": "Card 3 title",
-      "default": "UK Bamboo Summit, Coventry"
+      "default": "UK bamboo summit, coventry"
     },
     {
       "type": "textarea",
@@ -1086,7 +1278,7 @@
       "type": "text",
       "id": "st4_title",
       "label": "Card 4 title",
-      "default": "Teaching Kenya to build"
+      "default": "teaching kenya to build"
     },
     {
       "type": "textarea",
@@ -1135,7 +1327,7 @@
       "type": "text",
       "id": "story_title",
       "label": "Heading",
-      "default": "A real workshop, inside."
+      "default": "a real workshop, inside."
     },
     {
       "type": "textarea",
@@ -1180,7 +1372,7 @@
       "type": "text",
       "id": "b2b_title",
       "label": "Heading",
-      "default": "A bike that goes home."
+      "default": "a bike that goes home."
     },
     {
       "type": "textarea",
@@ -1231,7 +1423,7 @@
       "type": "text",
       "id": "path_title",
       "label": "Heading",
-      "default": "More than a bike — a pathway."
+      "default": "more than a bike — a pathway."
     },
     {
       "type": "textarea",
@@ -1259,13 +1451,24 @@
       "type": "text",
       "id": "help_title",
       "label": "Heading",
-      "default": "Three ways to be part of it."
+      "default": "three ways to be part of it."
     },
     {
       "type": "textarea",
       "id": "help_intro",
       "label": "Intro",
       "default": "Every route — buying, partnering or funding — creates measurable change."
+    },
+    {
+      "type": "text",
+      "id": "help_cta_label",
+      "label": "Primary CTA label",
+      "default": "book a discovery call"
+    },
+    {
+      "type": "url",
+      "id": "help_cta_url",
+      "label": "Primary CTA link (defaults to contact form, discovery-call subject)"
     },
     {
       "type": "header",
@@ -1281,7 +1484,7 @@
       "type": "text",
       "id": "cta_title",
       "label": "Heading",
-      "default": "Help us build a more inclusive, skilled future."
+      "default": "help us build a more inclusive, skilled future."
     },
     {
       "type": "textarea",
@@ -1316,7 +1519,12 @@
     {
       "type": "story",
       "name": "Impact story card",
-      "settings": [{ "type": "image_picker", "id": "image_pic", "label": "Image (upload or pick)" }, 
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_pic",
+          "label": "Image (upload or pick)"
+        },
         {
           "type": "text",
           "id": "kind",
@@ -1342,6 +1550,8 @@
           "id": "video",
           "label": "YouTube video ID (optional — adds a play button, plays in-page)"
         },
+        { "type": "url", "id": "video_url", "label": "Video URL (YouTube/Vimeo — plays inline)" },
+        { "type": "video", "id": "video_file", "label": "Or upload a video (plays inline)" },
         {
           "type": "url",
           "id": "url",
@@ -1386,7 +1596,7 @@
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "Education"
+          "default": "education"
         },
         {
           "type": "textarea",
@@ -1394,6 +1604,17 @@
           "label": "Body",
           "default": "OCN Level 2 — Sustainable Design & Manufacturing: a nationally recognised qualification, earned hands-on."
         }
+      ]
+    },
+    {
+      "type": "segment",
+      "name": "Customer segment",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Tag", "default": "Schools" },
+        { "type": "text", "id": "question", "label": "Their question", "default": "running a school or college?" },
+        { "type": "textarea", "id": "benefit", "label": "What they get", "default": "Real engineering in your classroom. Start with the free Speaker build, add OCN Level 1 when your students want more." },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "see the schools programme" },
+        { "type": "url", "id": "link_url", "label": "Link" }
       ]
     },
     {
@@ -1416,7 +1637,7 @@
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "Build or own a bike"
+          "default": "build or own a bike"
         },
         {
           "type": "textarea",
@@ -1447,27 +1668,63 @@
       "type": "opgroup",
       "name": "Where-we-operate group",
       "settings": [
-        { "type": "text", "id": "count", "label": "Count badge (e.g. 4)" },
-        { "type": "text", "id": "title", "label": "Group title (verb-honest: we run / we've taught in)" },
-        { "type": "textarea", "id": "items", "label": "Names, · separated" }
+        {
+          "type": "text",
+          "id": "count",
+          "label": "Count badge (e.g. 4)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Group title (verb-honest: we run / we've taught in)"
+        },
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "Names, · separated"
+        }
       ]
     },
     {
       "type": "scrollquote",
       "name": "Scrolling quote",
       "settings": [
-        { "type": "textarea", "id": "text", "label": "Quote" },
-        { "type": "text", "id": "attr", "label": "Attribution (name — context)" },
-        { "type": "text", "id": "source", "label": "Source tag (e.g. Inside Time, Nov 2025)" }
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Quote"
+        },
+        {
+          "type": "text",
+          "id": "attr",
+          "label": "Attribution (name — context)"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source tag (e.g. Inside Time, Nov 2025)"
+        }
       ]
     },
     {
       "type": "backer",
       "name": "Backed-by logo/chip",
       "settings": [
-        { "type": "text", "id": "logo", "label": "Logo asset filename (assets/, optional)" },
-        { "type": "text", "id": "label", "label": "Name (alt text, or text chip if no logo)" },
-        { "type": "url", "id": "url", "label": "Link (optional)" }
+        {
+          "type": "text",
+          "id": "logo",
+          "label": "Logo asset filename (assets/, optional)"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Name (alt text, or text chip if no logo)"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link (optional)"
+        }
       ]
     },
     {

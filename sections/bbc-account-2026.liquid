@@ -19,7 +19,7 @@
     <section class="rd-pad-sm rd-paper">
       <div class="rd-wrap rd-coll-head rd-mw-680px">
         <span class="rd-eyebrow">{{ section.settings.login_eyebrow | default: 'Your account' }}</span>
-        <h1>{{ section.settings.login_heading | default: 'Sign in' }}</h1>
+        <h1>{{ section.settings.login_heading | default: 'sign in' }}</h1>
         {%- if section.settings.login_intro != blank -%}
           <div class="rd-lede rd-mt2 rd-mw-60ch">{{ section.settings.login_intro }}</div>
         {%- endif -%}
@@ -56,7 +56,7 @@
         {%- endform -%}
 
         <div id="rd-recover" class="rd-mt4">
-          <h2 class="rd-fs-21px rd-mb-8px">Reset your password</h2>
+          <h2 class="rd-reveal rd-fs-21px rd-mb-8px">reset your password</h2>
           <p class="rd-lede rd-mb-24px rd-mw-60ch">Enter your email and we will send you a link to set a new password.</p>
           {%- form 'recover_customer_password' -%}
             {%- if form.posted_successfully? -%}
@@ -85,7 +85,7 @@
     <section class="rd-pad-sm rd-paper">
       <div class="rd-wrap rd-coll-head rd-mw-680px">
         <span class="rd-eyebrow">{{ section.settings.register_eyebrow | default: 'Join us' }}</span>
-        <h1>{{ section.settings.register_heading | default: 'Create an account' }}</h1>
+        <h1>{{ section.settings.register_heading | default: 'create an account' }}</h1>
         {%- if section.settings.register_intro != blank -%}
           <div class="rd-lede rd-mt2 rd-mw-60ch">{{ section.settings.register_intro }}</div>
         {%- endif -%}
@@ -148,7 +148,7 @@
 
     <section class="rd-pad">
       <div class="rd-wrap">
-        <h2 class="rd-fs-21px rd-mb-24px">Order history</h2>
+        <h2 class="rd-reveal rd-fs-21px rd-mb-24px">order history</h2>
         {%- if customer.orders.size > 0 -%}
           {%- paginate customer.orders by 20 -%}
             <table class="rd-acc-table">
@@ -206,7 +206,7 @@
             <div class="rd-form-note rd-err rd-mt2" role="status">This order was cancelled on {{ order.cancelled_at | date: '%-d %B %Y' }}.{% if order.cancel_reason %} Reason: {{ order.cancel_reason_label }}.{% endif %}</div>
           {%- endif -%}
         {%- else -%}
-          <h1>Order</h1>
+          <h1>order</h1>
         {%- endif -%}
         <p class="rd-mt3"><a class="rd-btn rd-text" href="{{ routes.account_url }}">&larr; Back to your account</a></p>
       </div>
@@ -276,9 +276,9 @@
           </table>
 
           <div class="rd-grid rd-g2 rd-mt4">
-            <div class="rd-card rd-stamp">
+            <div class="rd-reveal rd-card rd-stamp">
               <div class="rd-body">
-                <h2 class="rd-fs-18px rd-mb-8px">Shipping address</h2>
+                <h2 class="rd-reveal rd-fs-18px rd-mb-8px">shipping address</h2>
                 {%- if order.shipping_address -%}
                   <div class="rd-acc-addr">{{ order.shipping_address | format_address }}</div>
                 {%- else -%}
@@ -286,9 +286,9 @@
                 {%- endif -%}
               </div>
             </div>
-            <div class="rd-card rd-stamp">
+            <div class="rd-reveal rd-card rd-stamp">
               <div class="rd-body">
-                <h2 class="rd-fs-18px rd-mb-8px">Billing address</h2>
+                <h2 class="rd-reveal rd-fs-18px rd-mb-8px">billing address</h2>
                 {%- if order.billing_address -%}
                   <div class="rd-acc-addr">{{ order.billing_address | format_address }}</div>
                 {%- else -%}
@@ -309,7 +309,7 @@
     <section class="rd-pad-sm rd-paper">
       <div class="rd-wrap rd-coll-head">
         <span class="rd-eyebrow">Your account</span>
-        <h1>Your addresses</h1>
+        <h1>your addresses</h1>
         <p class="rd-mt3"><a class="rd-btn rd-text" href="{{ routes.account_url }}">&larr; Back to your account</a></p>
       </div>
     </section>
@@ -385,7 +385,7 @@
           {%- paginate customer.addresses by 10 -%}
             <div class="rd-grid rd-g2">
               {%- for address in customer.addresses -%}
-                <div class="rd-card rd-stamp">
+                <div class="rd-reveal rd-card rd-stamp">
                   <div class="rd-body">
                     {%- if address == customer.default_address -%}<span class="rd-tag rd-lime">Default</span>{%- endif -%}
                     <div class="rd-acc-addr rd-mt2">{{ address | format_address }}</div>
@@ -484,7 +484,7 @@
     <section class="rd-pad-sm rd-paper">
       <div class="rd-wrap rd-coll-head rd-mw-680px">
         <span class="rd-eyebrow">Your account</span>
-        <h1>Choose a new password</h1>
+        <h1>choose a new password</h1>
         <div class="rd-lede rd-mt2 rd-mw-60ch">Enter a new password for your account below.</div>
       </div>
     </section>
@@ -517,7 +517,7 @@
     <section class="rd-pad-sm rd-paper">
       <div class="rd-wrap rd-coll-head rd-mw-680px">
         <span class="rd-eyebrow">Your account</span>
-        <h1>Activate your account</h1>
+        <h1>activate your account</h1>
         <div class="rd-lede rd-mt2 rd-mw-60ch">Create a password to activate your account and finish setting up.</div>
       </div>
     </section>
@@ -551,7 +551,7 @@
     <section class="rd-pad-sm rd-paper">
       <div class="rd-wrap rd-coll-head">
         <span class="rd-eyebrow">Your account</span>
-        <h1>Your account</h1>
+        <h1>your account</h1>
         <p class="rd-mt3"><a class="rd-btn rd-lime" href="{{ routes.account_url }}">Go to your account</a></p>
       </div>
     </section>
@@ -618,19 +618,75 @@
   "tag": "section",
   "class": "bbc-rd-account-section",
   "settings": [
-    { "type": "header", "content": "Sign in" },
-    { "type": "text", "id": "login_eyebrow", "label": "Login eyebrow", "default": "Your account" },
-    { "type": "text", "id": "login_heading", "label": "Login heading", "default": "Sign in" },
-    { "type": "textarea", "id": "login_intro", "label": "Login intro" },
-    { "type": "text", "id": "login_submit", "label": "Login button label", "default": "Sign in" },
-    { "type": "header", "content": "Register" },
-    { "type": "text", "id": "register_eyebrow", "label": "Register eyebrow", "default": "Join us" },
-    { "type": "text", "id": "register_heading", "label": "Register heading", "default": "Create an account" },
-    { "type": "textarea", "id": "register_intro", "label": "Register intro" },
-    { "type": "text", "id": "register_submit", "label": "Register button label", "default": "Create account" },
-    { "type": "header", "content": "Account" },
-    { "type": "text", "id": "account_eyebrow", "label": "Account eyebrow", "default": "Your account" }
+    {
+      "type": "header",
+      "content": "Sign in"
+    },
+    {
+      "type": "text",
+      "id": "login_eyebrow",
+      "label": "Login eyebrow",
+      "default": "Your account"
+    },
+    {
+      "type": "text",
+      "id": "login_heading",
+      "label": "Login heading",
+      "default": "sign in"
+    },
+    {
+      "type": "textarea",
+      "id": "login_intro",
+      "label": "Login intro"
+    },
+    {
+      "type": "text",
+      "id": "login_submit",
+      "label": "Login button label",
+      "default": "Sign in"
+    },
+    {
+      "type": "header",
+      "content": "Register"
+    },
+    {
+      "type": "text",
+      "id": "register_eyebrow",
+      "label": "Register eyebrow",
+      "default": "Join us"
+    },
+    {
+      "type": "text",
+      "id": "register_heading",
+      "label": "Register heading",
+      "default": "create an account"
+    },
+    {
+      "type": "textarea",
+      "id": "register_intro",
+      "label": "Register intro"
+    },
+    {
+      "type": "text",
+      "id": "register_submit",
+      "label": "Register button label",
+      "default": "Create account"
+    },
+    {
+      "type": "header",
+      "content": "Account"
+    },
+    {
+      "type": "text",
+      "id": "account_eyebrow",
+      "label": "Account eyebrow",
+      "default": "Your account"
+    }
   ],
-  "presets": [ { "name": "Account 2026 (new)" } ]
+  "presets": [
+    {
+      "name": "Account 2026 (new)"
+    }
+  ]
 }
 {% endschema %}

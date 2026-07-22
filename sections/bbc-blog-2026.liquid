@@ -11,7 +11,7 @@
   <section class="rd-pad-sm rd-paper">
     <div class="rd-wrap rd-coll-head">
       <span class="rd-eyebrow">{{ section.settings.eyebrow | default: 'Club news' }}</span>
-      <h1>{{ blog.title | default: section.settings.fallback_title | default: 'News' }}</h1>
+      <h1>{{ blog.title | default: section.settings.fallback_title | default: 'news' }}</h1>
       {%- if section.settings.intro != blank -%}<div class="rd-lede rd-mt2 rd-mw-62ch">{{ section.settings.intro }}</div>{%- endif -%}
     </div>
   </section>
@@ -44,7 +44,7 @@
           {%- assign blog_fallbacks = "bbc-rd-gal-meadow.jpg,bbc-rd-story-road.jpg,bbc-rd-gal-rider.jpg,bbc-rd-gal-gravel.jpg,bbc-rd-frame-build.jpg,bbc-rd-detail.jpg" | split: "," -%}
           <div class="rd-grid rd-g3">
             {%- for article in blog.articles -%}
-              <a class="rd-card rd-stamp" href="{{ article.url }}">
+              <article class="rd-reveal rd-card rd-stamp rd-cardlink">
                 <div class="rd-ph">
                   {%- if article.image -%}
                     <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | escape | default: article.title }}" width="{{ article.image.width }}" height="{{ article.image.height }}" loading="lazy">
@@ -52,14 +52,14 @@
                     {%- assign fb_i = forloop.index0 | modulo: blog_fallbacks.size -%}
                     <img src="{{ blog_fallbacks[fb_i] | asset_url }}" alt="{{ article.title | escape }}" width="1300" height="1300" loading="lazy">
                   {%- endif -%}
-                  {%- if article.tags.size > 0 -%}<span class="rd-tag rd-lime rd-cardtag">{{ article.tags.first }}</span>{%- endif -%}
+                  {%- assign card_tag = blank -%}{%- for t in article.tags -%}{%- assign t_num = t | plus: 0 -%}{%- if t_num == 0 and card_tag == blank -%}{%- assign card_tag = t -%}{%- endif -%}{%- endfor -%}{%- if card_tag != blank -%}<span class="rd-tag rd-lime rd-cardtag">{{ card_tag }}</span>{%- endif -%}
                 </div>
                 <div class="rd-body">
-                  <div class="rd-meta">{{ article.published_at | date: '%-d %b %Y' }}{% if article.author != blank %} · {{ article.author }}{% endif %}</div>
-                  <h2 class="rd-fs-21px">{{ article.title }}</h2>
+                  <div class="rd-meta rd-cardmeta">{% if card_tag != blank %}{{ card_tag }}{% else %}From the workshop{% endif %} · {% render 'reading-time', article: article %}</div>
+                  <h2 class="rd-reveal rd-fs-21px"><a href="{{ article.url }}">{{ article.title }}</a></h2>
                   <p class="rd-excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
                 </div>
-              </a>
+              </article>
             {%- else -%}
               <p class="rd-lede">No posts yet.</p>
             {%- endfor -%}
@@ -87,12 +87,45 @@
   "tag": "div",
   "class": "bbc-rd-blog-section",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Club news" },
-    { "type": "text", "id": "fallback_title", "label": "Title (used off a blog page)", "default": "News" },
-    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Impact, builds, how-tos and press from the workshop and beyond." },
-    { "type": "text", "id": "category_tags", "label": "Category tabs (comma-separated tag names)", "info": "Only these tags show as category tabs (must match an article tag exactly). Leave blank to list every tag.", "default": "Bamboo Build, Build to Bond, adventure, business, award" },
-    { "type": "range", "id": "per_page", "label": "Posts per page", "min": 6, "max": 24, "step": 3, "default": 9 }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Club news"
+    },
+    {
+      "type": "text",
+      "id": "fallback_title",
+      "label": "Title (used off a blog page)",
+      "default": "news"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro",
+      "default": "Impact, builds, how-tos and press from the workshop."
+    },
+    {
+      "type": "text",
+      "id": "category_tags",
+      "label": "Category tabs (comma-separated tag names)",
+      "info": "Only these tags show as category tabs (must match an article tag exactly). Leave blank to list every tag.",
+      "default": "Bamboo Build, Build to Bond, adventure, business, award"
+    },
+    {
+      "type": "range",
+      "id": "per_page",
+      "label": "Posts per page",
+      "min": 6,
+      "max": 24,
+      "step": 3,
+      "default": 9
+    }
   ],
-  "presets": [ { "name": "Blog 2026 (new)" } ]
+  "presets": [
+    {
+      "name": "Blog 2026 (new)"
+    }
+  ]
 }
 {% endschema %}

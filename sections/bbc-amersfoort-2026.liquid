@@ -39,7 +39,7 @@
         <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/pages/workshops">Workshops</a><span class="rd-sep">/</span><span class="rd-here">Amersfoort</span></nav>
         {%- if section.settings.hero_eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>{%- endif -%}
         <h1 class="rd-mt2 rd-mw-14ch">{{ section.settings.hero_title }}</h1>
-        <p class="rd-lede">{{ section.settings.hero_lede }}</p>
+        <div class="rd-lede">{{ section.settings.hero_lede }}</div>
         <div class="rd-cta-row">
           {%- if section.settings.hero_cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ hero_c1 }}">{{ section.settings.hero_cta1_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
           {%- if section.settings.hero_cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ hero_c2 }}">{{ section.settings.hero_cta2_label }}</a>{%- endif -%}
@@ -53,15 +53,11 @@
     <div class="rd-wrap">
       <div class="rd-split rd-tight rd-gap48-as">
         <div class="rd-ph">
-          {%- if section.settings.tim_image != blank -%}
-            <img src="{{ section.settings.tim_image | image_url: width: 1100 }}" alt="{{ section.settings.tim_image_alt | escape }}" width="{{ section.settings.tim_image.width }}" height="{{ section.settings.tim_image.height }}">
-          {%- else -%}
-            <img src="{{ section.settings.tim_fallback | default: 'bbc-rd-tim-gravel.jpg' | asset_url }}" alt="{{ section.settings.tim_image_alt | escape }}" width="1024" height="1024">
-          {%- endif -%}
+          {%- render "bbc-media", image: section.settings.tim_image, src: section.settings.tim_fallback, fallback: "bbc-rd-tim-gravel.jpg", video: section.settings.video_file, youtube: section.settings.video_url, alt: section.settings.tim_image_alt -%}
         </div>
         <div>
           <span class="rd-eyebrow">{{ section.settings.tim_eyebrow }}</span>
-          <h2>{{ section.settings.tim_title }}</h2>
+          <h2 class="rd-reveal">{{ section.settings.tim_title }}</h2>
           {%- assign tim_paras = section.settings.tim_body | split: '|' -%}
           {%- for p in tim_paras -%}<p class="rd-lede rd-mt2">{{ p | strip }}</p>{%- endfor -%}
           {%- if section.settings.tim_quote != blank -%}
@@ -80,7 +76,7 @@
   <section class="rd-pad-sm rd-paper" id="book">
     <div class="rd-wrap">
       <span class="rd-eyebrow">{{ section.settings.build_eyebrow }}</span>
-      <h2>{{ section.settings.build_title }}</h2>
+      <h2 class="rd-reveal">{{ section.settings.build_title }}</h2>
       {%- if section.settings.build_body != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.build_body }}</p>{%- endif -%}
       <div class="rd-flex rd-mt3">
         {%- if section.settings.tag1 != blank -%}<span class="rd-tag rd-lime">{{ section.settings.tag1 }}</span>{%- endif -%}
@@ -97,7 +93,7 @@
       <div class="rd-split rd-tight rd-gap48-as">
         <div>
           <span class="rd-eyebrow">{{ section.settings.bk_eyebrow }}</span>
-          <h2>{{ section.settings.bk_title }}</h2>
+          <h2 class="rd-reveal">{{ section.settings.bk_title }}</h2>
           <p class="rd-lede rd-mt2">{{ section.settings.bk_lede }}</p>
           {%- if section.settings.book_cta_label != blank -%}<a class="rd-btn rd-lime rd-mt3" href="{{ book_cta }}">{{ section.settings.book_cta_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
           {%- if section.settings.bk_note != blank -%}<p class="rd-src rd-mt2">{{ section.settings.bk_note }}</p>{%- endif -%}
@@ -116,7 +112,7 @@
   <section class="rd-pad rd-dark rd-center">
     <div class="rd-wrap rd-mw-760px">
       {%- if section.settings.cta_kicker != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.cta_kicker }}</span>{%- endif -%}
-      <h2>{{ section.settings.cta_title }}</h2>
+      <h2 class="rd-reveal">{{ section.settings.cta_title }}</h2>
       <p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.cta_lede }}</p>
       <div class="rd-flex rd-mt3 rd-jc-center">
         {%- if section.settings.cta_label != blank -%}<a class="rd-btn rd-lime" href="{{ final_c }}">{{ section.settings.cta_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
@@ -132,64 +128,310 @@
   "tag": "section",
   "class": "section bbc-amersfoort-2026-wrap",
   "settings": [
-    { "type": "header", "content": "Hero" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero background image" },
-    { "type": "text", "id": "hero_fallback", "label": "Default hero photo filename", "default": "bbc-rd-ws-amersfoort.jpg" },
-    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt text", "default": "Builders making bamboo bike frames at the Amersfoort workshop" },
-    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Workshops · Amersfoort, Netherlands" },
-    { "type": "text", "id": "hero_title", "label": "Headline", "default": "Build your bamboo bike in Amersfoort" },
-    { "type": "textarea", "id": "hero_lede", "label": "Lede", "default": "Our Netherlands workshop, run by Tim — a BBC builder who made his own bamboo gravel bike and now helps others do the same. Two to three days, all materials and tools included, no experience needed." },
-    { "type": "text", "id": "hero_cta1_label", "label": "Primary CTA label", "default": "Email Tim to book" },
-    { "type": "url", "id": "hero_cta1_url", "label": "Primary CTA link (defaults to #book)" },
-    { "type": "text", "id": "hero_cta2_label", "label": "Secondary CTA label", "default": "Meet Tim" },
-    { "type": "url", "id": "hero_cta2_url", "label": "Secondary CTA link (defaults to #tim)" },
-
-    { "type": "header", "content": "Meet Tim" },
-    { "type": "image_picker", "id": "tim_image", "label": "Photo (ideally a photo of Tim)" },
-    { "type": "text", "id": "tim_fallback", "label": "Default photo filename", "default": "bbc-rd-tim-gravel.jpg" },
-    { "type": "text", "id": "tim_image_alt", "label": "Photo alt text", "default": "Tim's home-built bamboo gravel bike leaning against a tree" },
-    { "type": "text", "id": "tim_eyebrow", "label": "Eyebrow", "default": "Meet your host" },
-    { "type": "text", "id": "tim_title", "label": "Title", "default": "Tim — builder first, teacher second" },
-    { "type": "textarea", "id": "tim_body", "label": "Story (separate paragraphs with | )", "default": "Tim came to bamboo the way a lot of our builders do. He'd recycled old race bikes into singlespeeds and even learned to build his own wheels — and he wanted to build a complete bicycle from scratch. Welding a steel frame was out, but bamboo was workable with hand tools, sustainable, and available. | He built his own bamboo gravel bike with us, worked through every challenge along the way, and got hooked. Now he runs our Amersfoort workshop, guiding first-time builders through exactly the same journey — at a relaxed pace, in English or Dutch." },
-    { "type": "text", "id": "tim_quote", "label": "Quote (from Tim's build)", "default": "Now that the bicycle is finished and riding perfect, my hands are itching to build a second." },
-    { "type": "text", "id": "tim_attrib", "label": "Quote attribution", "default": "Tim · Amersfoort, on his own bamboo gravel build" },
-    { "type": "text", "id": "tim_link_label", "label": "Story link label", "default": "Read Tim's build story" },
-    { "type": "url", "id": "tim_link_url", "label": "Story link (defaults to Tim's blog post)" },
-
-    { "type": "header", "content": "What you'll build" },
-    { "type": "text", "id": "build_eyebrow", "label": "Eyebrow", "default": "What you'll build" },
-    { "type": "text", "id": "build_title", "label": "Title", "default": "Your frame, your geometry" },
-    { "type": "textarea", "id": "build_body", "label": "Body", "default": "Over two to three days you'll build a complete bamboo frame, tailored to your measurements — road, gravel or mountain. All materials, tools and expert tuition are included, and you leave with a frame ready for components." },
-    { "type": "text", "id": "tag1", "label": "Tag 1", "default": "Road · 2 days" },
-    { "type": "text", "id": "tag2", "label": "Tag 2", "default": "Gravel · 2–3 days" },
-    { "type": "text", "id": "tag3", "label": "Tag 3", "default": "MTB · 3 days" },
-    { "type": "textarea", "id": "serving_note", "label": "Serving note", "default": "Easy to reach from across the Netherlands, Belgium and Germany. Email Tim for current dates and pricing." },
-
-    { "type": "header", "content": "How booking works" },
-    { "type": "text", "id": "bk_eyebrow", "label": "Eyebrow", "default": "How booking works" },
-    { "type": "text", "id": "bk_title", "label": "Title", "default": "Reserve your place with Tim" },
-    { "type": "textarea", "id": "bk_lede", "label": "Lede", "default": "There's no instant checkout — every frame is built to your measurements, so Tim books you in personally. Email us and we'll take it from there." },
-    { "type": "text", "id": "book_cta_label", "label": "Email CTA label", "default": "Email Tim to book" },
-    { "type": "url", "id": "book_cta_url", "label": "Email CTA link (defaults to info@bamboobicycleclub.org)" },
-    { "type": "textarea", "id": "bk_note", "label": "Note under CTA", "default": "Every price includes all materials, tools, expert tuition and refreshments." },
-    { "type": "text", "id": "s1_title", "label": "Step 1 title", "default": "Email us for dates" },
-    { "type": "textarea", "id": "s1_body", "label": "Step 1 body", "default": "Tell Tim which frame type you'd like, and he'll send you the available dates in Amersfoort." },
-    { "type": "text", "id": "s2_title", "label": "Step 2 title", "default": "We book you in" },
-    { "type": "textarea", "id": "s2_body", "label": "Step 2 body", "default": "Once a date suits you, we'll confirm your place and reserve your spot in the workshop." },
-    { "type": "text", "id": "s3_title", "label": "Step 3 title", "default": "Complete our online form" },
-    { "type": "textarea", "id": "s3_body", "label": "Step 3 body", "default": "We'll send a short online form for your measurements and design preferences, so your frame is tailored to you." },
-    { "type": "text", "id": "s4_title", "label": "Step 4 title", "default": "We arrange a call" },
-    { "type": "textarea", "id": "s4_body", "label": "Step 4 body", "default": "Before your build, Tim will have a quick call with you to talk through your design and answer any questions." },
-
-    { "type": "header", "content": "Final CTA" },
-    { "type": "text", "id": "cta_kicker", "label": "Kicker", "default": "Your build starts with an email" },
-    { "type": "text", "id": "cta_title", "label": "Title", "default": "Build a bike you'll never forget — in Amersfoort." },
-    { "type": "textarea", "id": "cta_lede", "label": "Lede", "default": "Tell Tim your frame type and we'll send the available dates. Most builders ride away after two days." },
-    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Email Tim to book" },
-    { "type": "url", "id": "cta_url", "label": "CTA link (defaults to info@bamboobicycleclub.org)" }
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero background image"
+    },
+    {
+      "type": "text",
+      "id": "hero_fallback",
+      "label": "Default hero photo filename",
+      "default": "bbc-rd-ws-amersfoort.jpg"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero image alt text",
+      "default": "Builders making bamboo bike frames at the Amersfoort workshop"
+    },
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Eyebrow",
+      "default": "Workshops · Amersfoort, Netherlands"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Headline",
+      "default": "build your bamboo bike in amersfoort"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_lede",
+      "label": "Lede",
+      "default": "Our Netherlands workshop, run by Tim — a BBC builder who made his own bamboo gravel bike and now helps others do the same. Two to three days, all materials and tools included, no experience needed."
+    },
+    {
+      "type": "text",
+      "id": "hero_cta1_label",
+      "label": "Primary CTA label",
+      "default": "Email Tim to book"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta1_url",
+      "label": "Primary CTA link (defaults to #book)"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta2_label",
+      "label": "Secondary CTA label",
+      "default": "Meet Tim"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta2_url",
+      "label": "Secondary CTA link (defaults to #tim)"
+    },
+    {
+      "type": "header",
+      "content": "Meet Tim"
+    },
+    {
+      "type": "image_picker",
+      "id": "tim_image",
+      "label": "Photo (ideally a photo of Tim)"
+    },
+    {
+      "type": "text",
+      "id": "tim_fallback",
+      "label": "Default photo filename",
+      "default": "bbc-rd-tim-gravel.jpg"
+    },
+    {
+      "type": "text",
+      "id": "tim_image_alt",
+      "label": "Photo alt text",
+      "default": "Tim's home-built bamboo gravel bike leaning against a tree"
+    },
+    {
+      "type": "text",
+      "id": "tim_eyebrow",
+      "label": "Eyebrow",
+      "default": "Meet your host"
+    },
+    {
+      "type": "text",
+      "id": "tim_title",
+      "label": "Title",
+      "default": "tim — builder first, teacher second"
+    },
+    {
+      "type": "textarea",
+      "id": "tim_body",
+      "label": "Story (separate paragraphs with | )",
+      "default": "Tim came to bamboo the way a lot of our builders do. He'd recycled old race bikes into singlespeeds and even learned to build his own wheels — and he wanted to build a complete bicycle from scratch. Welding a steel frame was out, but bamboo was workable with hand tools, sustainable, and available. | He built his own bamboo gravel bike with us, worked through every challenge along the way, and got hooked. Now he runs our Amersfoort workshop, guiding first-time builders through exactly the same journey — at a relaxed pace, in English or Dutch."
+    },
+    {
+      "type": "text",
+      "id": "tim_quote",
+      "label": "Quote (from Tim's build)",
+      "default": "Now that the bicycle is finished and riding perfect, my hands are itching to build a second."
+    },
+    {
+      "type": "text",
+      "id": "tim_attrib",
+      "label": "Quote attribution",
+      "default": "Tim · Amersfoort, on his own bamboo gravel build"
+    },
+    {
+      "type": "text",
+      "id": "tim_link_label",
+      "label": "Story link label",
+      "default": "Read Tim's build story"
+    },
+    {
+      "type": "url",
+      "id": "tim_link_url",
+      "label": "Story link (defaults to Tim's blog post)"
+    },
+    {
+      "type": "header",
+      "content": "What you'll build"
+    },
+    {
+      "type": "text",
+      "id": "build_eyebrow",
+      "label": "Eyebrow",
+      "default": "What you'll build"
+    },
+    {
+      "type": "text",
+      "id": "build_title",
+      "label": "Title",
+      "default": "your frame, your geometry"
+    },
+    {
+      "type": "textarea",
+      "id": "build_body",
+      "label": "Body",
+      "default": "Over two to three days you'll build a complete bamboo frame, tailored to your measurements — road, gravel or mountain. All materials, tools and expert tuition are included, and you leave with a frame ready for components."
+    },
+    {
+      "type": "text",
+      "id": "tag1",
+      "label": "Tag 1",
+      "default": "Road · 2 days"
+    },
+    {
+      "type": "text",
+      "id": "tag2",
+      "label": "Tag 2",
+      "default": "Gravel · 2–3 days"
+    },
+    {
+      "type": "text",
+      "id": "tag3",
+      "label": "Tag 3",
+      "default": "MTB · 3 days"
+    },
+    {
+      "type": "textarea",
+      "id": "serving_note",
+      "label": "Serving note",
+      "default": "Easy to reach from across the Netherlands, Belgium and Germany. Email Tim for current dates and pricing."
+    },
+    {
+      "type": "header",
+      "content": "How booking works"
+    },
+    {
+      "type": "text",
+      "id": "bk_eyebrow",
+      "label": "Eyebrow",
+      "default": "How booking works"
+    },
+    {
+      "type": "text",
+      "id": "bk_title",
+      "label": "Title",
+      "default": "reserve your place with tim"
+    },
+    {
+      "type": "textarea",
+      "id": "bk_lede",
+      "label": "Lede",
+      "default": "There's no instant checkout — every frame is built to your measurements, so Tim books you in personally. Email us and we'll take it from there."
+    },
+    {
+      "type": "text",
+      "id": "book_cta_label",
+      "label": "Email CTA label",
+      "default": "Email Tim to book"
+    },
+    {
+      "type": "url",
+      "id": "book_cta_url",
+      "label": "Email CTA link (defaults to info@bamboobicycleclub.org)"
+    },
+    {
+      "type": "textarea",
+      "id": "bk_note",
+      "label": "Note under CTA",
+      "default": "Every price includes all materials, tools, expert tuition and refreshments."
+    },
+    {
+      "type": "text",
+      "id": "s1_title",
+      "label": "Step 1 title",
+      "default": "email us for dates"
+    },
+    {
+      "type": "textarea",
+      "id": "s1_body",
+      "label": "Step 1 body",
+      "default": "Tell Tim which frame type you'd like, and he'll send you the available dates in Amersfoort."
+    },
+    {
+      "type": "text",
+      "id": "s2_title",
+      "label": "Step 2 title",
+      "default": "we book you in"
+    },
+    {
+      "type": "textarea",
+      "id": "s2_body",
+      "label": "Step 2 body",
+      "default": "Once a date suits you, we'll confirm your place and reserve your spot in the workshop."
+    },
+    {
+      "type": "text",
+      "id": "s3_title",
+      "label": "Step 3 title",
+      "default": "complete our online form"
+    },
+    {
+      "type": "textarea",
+      "id": "s3_body",
+      "label": "Step 3 body",
+      "default": "We'll send a short online form for your measurements and design preferences, so your frame is tailored to you."
+    },
+    {
+      "type": "text",
+      "id": "s4_title",
+      "label": "Step 4 title",
+      "default": "we arrange a call"
+    },
+    {
+      "type": "textarea",
+      "id": "s4_body",
+      "label": "Step 4 body",
+      "default": "Before your build, Tim will have a quick call with you to talk through your design and answer any questions."
+    },
+    {
+      "type": "header",
+      "content": "Final CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_kicker",
+      "label": "Kicker",
+      "default": "Your build starts with an email"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Title",
+      "default": "build a bike you'll never forget — in amersfoort."
+    },
+    {
+      "type": "textarea",
+      "id": "cta_lede",
+      "label": "Lede",
+      "default": "Tell Tim your frame type and we'll send the available dates. Most builders ride away after two days."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Email Tim to book"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA link (defaults to info@bamboobicycleclub.org)"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video URL (YouTube/Vimeo — plays inline)"
+    },
+    {
+      "type": "video",
+      "id": "video_file",
+      "label": "Or upload a video (plays inline)"
+    }
   ],
   "presets": [
-    { "name": "Amersfoort 2026 (new)" }
+    {
+      "name": "Amersfoort 2026 (new)"
+    }
   ]
 }
 {% endschema %}

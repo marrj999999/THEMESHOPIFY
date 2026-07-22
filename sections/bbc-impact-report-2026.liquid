@@ -1,0 +1,528 @@
+{%- comment -%}
+  BBC New Design (2026) — IMPACT REPORT page (/pages/impact-report).
+  Benchmark: Redemption Roasters "Social Impact Report" + Fine Cell Work
+  "Annual Report" pattern (2026-07-06 research). VERIFIED CONTENT ONLY — every
+  figure from the stats canon or a cited national source. Honest-measurement
+  framing throughout; impact = contribution, never attribution.
+  Structure: header → year in numbers → the problem (sourced) → two arms →
+  where we work → recognition quotes → what we measure → the year ahead → CTA.
+{%- endcomment -%}
+
+{%- liquid
+  assign cta1 = section.settings.cta1_url | default: '/pages/support-mission'
+  assign cta2 = section.settings.cta2_url | default: '/pages/prisons'
+-%}
+
+<div class="bbc-rd bbc-rd-report">
+
+  <section class="rd-pad rd-paper">
+    <div class="rd-wrap rd-mw-820px">
+      <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/pages/impact">Impact</a><span class="rd-sep">/</span><span class="rd-here">Impact report</span></nav>
+      {%- if section.settings.eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h1 class="rd-mt2 rd-mw-16ch">{{ section.settings.title }}</h1>
+      {%- if section.settings.lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.lede }}</p>{%- endif -%}
+      {%- if section.settings.pdf_url != blank -%}<div class="rd-cta-row"><a class="rd-btn rd-lime" href="{{ section.settings.pdf_url }}">{{ section.settings.pdf_label | default: 'Download the PDF' }} <span class="rd-arrow">&rarr;</span></a></div>{%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- YEAR IN NUMBERS ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-dark">
+    <div class="rd-wrap">
+      {%- if section.settings.numbers_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.numbers_eyebrow }}</span>{%- endif -%}
+      <div class="rd-stats rd-mt3">
+        {%- for block in section.blocks -%}{%- if block.type == 'stat' -%}
+          <div class="rd-reveal rd-stat" {{ block.shopify_attributes }}>
+            <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
+            <div class="rd-lbl">{{ block.settings.label }}</div>
+            {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- THE PROBLEM ---------- {%- endcomment -%}
+  {%- if section.settings.problem_title != blank -%}
+  <section class="rd-pad">
+    <div class="rd-wrap rd-mw-820px">
+      {%- if section.settings.problem_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.problem_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal">{{ section.settings.problem_title }}</h2>
+      {%- if section.settings.problem_body != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.problem_body }}</p>{%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- TWO ARMS ---------- {%- endcomment -%}
+  <section class="rd-pad rd-paper">
+    <div class="rd-wrap">
+      {%- if section.settings.arms_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.arms_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal rd-mw-20ch">{{ section.settings.arms_title }}</h2>
+      <div class="rd-grid rd-g2 rd-mt4">
+        {%- for block in section.blocks -%}{%- if block.type == 'arm' -%}
+          <div class="rd-reveal rd-card rd-stamp" {{ block.shopify_attributes }}>
+            <div class="rd-body">
+              {%- if block.settings.tag != blank -%}<span class="rd-tag rd-lime">{{ block.settings.tag }}</span>{%- endif -%}
+              <h3 class="rd-mt2 rd-fs-21px">{{ block.settings.title }}</h3>
+              <p>{{ block.settings.body }}</p>
+            </div>
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+      {%- if section.settings.sites_line != blank -%}<div class="rd-sitenames rd-mt4">{{ section.settings.sites_line }}</div>{%- endif -%}
+      {%- if section.settings.partner_line != blank -%}<p class="rd-frame-label rd-mt2">{{ section.settings.partner_line }}</p>{%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- RECOGNITION ---------- {%- endcomment -%}
+  {%- if section.settings.rec_title != blank -%}
+  <section class="rd-pad-sm">
+    <div class="rd-wrap">
+      {%- if section.settings.rec_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.rec_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal rd-mw-22ch">{{ section.settings.rec_title }}</h2>
+      <div class="rd-grid rd-g2 rd-mt3">
+        {%- for block in section.blocks -%}{%- if block.type == 'quote' -%}
+          <blockquote class="rd-reveal rd-card rd-stamp rd-cred-card" {{ block.shopify_attributes }}>
+            <p class="rd-cred-q">&ldquo;{{ block.settings.quote }}&rdquo;</p>
+            <cite class="rd-cred-cite"><b>{{ block.settings.attr }}</b>{%- if block.settings.src != blank -%}<span> &middot; {{ block.settings.src }}</span>{%- endif -%}</cite>
+          </blockquote>
+        {%- endif -%}{%- endfor -%}
+      </div>
+      {%- if section.settings.funder_line != blank -%}
+      <div class="rd-center rd-mt4">
+        {%- if section.settings.funder_logo != blank -%}<img src="{{ section.settings.funder_logo | asset_url }}" alt="The National Lottery Community Fund" loading="lazy" style="height:52px !important;width:auto !important;object-fit:contain;">{%- endif -%}
+        <p class="rd-ship-note rd-mt1">{{ section.settings.funder_line }}</p>
+      </div>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- WHAT WE MEASURE ---------- {%- endcomment -%}
+  {%- if section.settings.measure_title != blank -%}
+  <section class="rd-pad-sm rd-paper">
+    <div class="rd-wrap rd-mw-820px">
+      {%- if section.settings.measure_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.measure_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal">{{ section.settings.measure_title }}</h2>
+      {%- if section.settings.measure_body != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.measure_body }}</p>{%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- THE YEAR AHEAD ---------- {%- endcomment -%}
+  {%- if section.settings.ahead_title != blank -%}
+  <section class="rd-pad">
+    <div class="rd-wrap rd-mw-820px">
+      {%- if section.settings.ahead_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.ahead_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal">{{ section.settings.ahead_title }}</h2>
+      <ol class="rd-steps rd-mt4">
+        {%- for block in section.blocks -%}{%- if block.type == 'plan' -%}
+          <li {{ block.shopify_attributes }}>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.body }}</p>
+          </li>
+        {%- endif -%}{%- endfor -%}
+      </ol>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- CTA ---------- {%- endcomment -%}
+  <section class="rd-pad rd-dark rd-center">
+    <div class="rd-wrap rd-mw-680px">
+      <h2 class="rd-reveal">{{ section.settings.cta_title }}</h2>
+      {%- if section.settings.cta_lede != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.cta_lede }}</p>{%- endif -%}
+      <div class="rd-flex rd-mt3 rd-jc-center">
+        {%- if section.settings.cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ cta1 }}">{{ section.settings.cta1_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ cta2 }}">{{ section.settings.cta2_label }}</a>{%- endif -%}
+      </div>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Impact Report 2026",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Impact Report · July 2026"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Headline",
+      "default": "what a year of building changed."
+    },
+    {
+      "type": "textarea",
+      "id": "lede",
+      "label": "Lede",
+      "default": "Bamboo Mobility Project CIC is the social-enterprise arm of Bamboo Bicycle Club: accredited hands-on engineering in schools, youth settings and prisons, funded by the bikes our community builds. This is an honest interim account of where the work stands — what we can evidence, what we're building, and what we don't claim."
+    },
+    {
+      "type": "text",
+      "id": "pdf_label",
+      "label": "PDF button label",
+      "default": "Download the PDF"
+    },
+    {
+      "type": "url",
+      "id": "pdf_url",
+      "label": "PDF link (blank to hide button)"
+    },
+    {
+      "type": "header",
+      "content": "Year in numbers"
+    },
+    {
+      "type": "text",
+      "id": "numbers_eyebrow",
+      "label": "Eyebrow",
+      "default": "The numbers we stand behind"
+    },
+    {
+      "type": "header",
+      "content": "The problem"
+    },
+    {
+      "type": "text",
+      "id": "problem_eyebrow",
+      "label": "Eyebrow",
+      "default": "Why it matters"
+    },
+    {
+      "type": "text",
+      "id": "problem_title",
+      "label": "Heading (blank to hide)",
+      "default": "the national picture we work against."
+    },
+    {
+      "type": "textarea",
+      "id": "problem_body",
+      "label": "Body",
+      "default": "Nationally, just 20% of prison-leavers are in work six weeks after release (MoJ offender employment outcomes, 2024–25), and the proven reoffending rate is almost 30% (MoJ, 2024). The strongest published levers are employment and family ties — people in prison who maintain family relationships are 39% less likely to reoffend (Lord Farmer Review, 2017). Both of our programmes are built around that evidence."
+    },
+    {
+      "type": "header",
+      "content": "Two arms"
+    },
+    {
+      "type": "text",
+      "id": "arms_eyebrow",
+      "label": "Eyebrow",
+      "default": "The work"
+    },
+    {
+      "type": "text",
+      "id": "arms_title",
+      "label": "Heading",
+      "default": "one craft, two arms."
+    },
+    {
+      "type": "text",
+      "id": "sites_line",
+      "label": "Named sites line (HTML allowed)",
+      "default": "HMP Lowdham Grange &middot; HMP Foston Hall &middot; HMP Lindholme &middot; HMYOI Feltham"
+    },
+    {
+      "type": "text",
+      "id": "partner_line",
+      "label": "Partner line",
+      "default": "In partnership with HM Prison &amp; Probation Service"
+    },
+    {
+      "type": "header",
+      "content": "Recognition"
+    },
+    {
+      "type": "text",
+      "id": "rec_eyebrow",
+      "label": "Eyebrow",
+      "default": "Recognition"
+    },
+    {
+      "type": "text",
+      "id": "rec_title",
+      "label": "Heading (blank to hide)",
+      "default": "what others say about the work."
+    },
+    {
+      "type": "text",
+      "id": "funder_logo",
+      "label": "Funder logo asset",
+      "default": "logo-nlcf.svg"
+    },
+    {
+      "type": "textarea",
+      "id": "funder_line",
+      "label": "Funder line",
+      "default": "Build to Bond is supported by The National Lottery Community Fund. Bamboo Bicycle Club is an Investec Beyond Business 2025 winner."
+    },
+    {
+      "type": "header",
+      "content": "What we measure"
+    },
+    {
+      "type": "text",
+      "id": "measure_eyebrow",
+      "label": "Eyebrow",
+      "default": "Honest measurement"
+    },
+    {
+      "type": "text",
+      "id": "measure_title",
+      "label": "Heading (blank to hide)",
+      "default": "what we measure — and what we don't claim."
+    },
+    {
+      "type": "textarea",
+      "id": "measure_body",
+      "label": "Body",
+      "default": "We track course completion (90%, BBC programme records) and accredited qualifications for every cohort — OCN Level 2 (Sustainable Design & Manufacturing) in prisons, OCN Level 1 Award (Practical Manufacturing Skills) in schools. We do not publish outcome claims we cannot evidence: no return-on-investment figures, no reoffending attribution. Where our numbers improve on the national picture, we say so with sources; where we don't yet know, we say that too."
+    },
+    {
+      "type": "header",
+      "content": "The year ahead"
+    },
+    {
+      "type": "text",
+      "id": "ahead_eyebrow",
+      "label": "Eyebrow",
+      "default": "The year ahead"
+    },
+    {
+      "type": "text",
+      "id": "ahead_title",
+      "label": "Heading (blank to hide)",
+      "default": "what we're building next."
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Heading",
+      "default": "help write next year's report."
+    },
+    {
+      "type": "textarea",
+      "id": "cta_lede",
+      "label": "Lede",
+      "default": "Fund a cohort, commission the programme, or build a bike that funds a Maker's place."
+    },
+    {
+      "type": "text",
+      "id": "cta1_label",
+      "label": "CTA 1 label",
+      "default": "Back the mission"
+    },
+    {
+      "type": "url",
+      "id": "cta1_url",
+      "label": "CTA 1 link"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "CTA 2 label",
+      "default": "For prisons & commissioners"
+    },
+    {
+      "type": "url",
+      "id": "cta2_url",
+      "label": "CTA 2 link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "90%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "prison course completion"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source",
+          "default": "BBC programme records"
+        }
+      ]
+    },
+    {
+      "type": "arm",
+      "name": "Programme arm",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "default": "Rehabilitation"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "build to bond"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Six-week accredited bike-building inside prison workshops."
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "name": "Recognition quote",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Innovative projects, such as Build to Bond, support rehabilitation and help cut reoffending."
+        },
+        {
+          "type": "text",
+          "id": "attr",
+          "label": "Attribution",
+          "default": "Lord Timpson, Prisons Minister"
+        },
+        {
+          "type": "text",
+          "id": "src",
+          "label": "Source"
+        }
+      ]
+    },
+    {
+      "type": "plan",
+      "name": "Year-ahead item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "codify delivery"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Turn the programme into a turnkey kit."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Impact Report 2026",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "90%",
+            "label": "prison course completion",
+            "source": "BBC programme records"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "4",
+            "label": "active prison sites",
+            "source": "with HMPPS"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "1,500+",
+            "label": "young people reached",
+            "source": "builds, tasters & talks"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "4,000+",
+            "label": "builders worldwide since 2012",
+            "source": "36 countries"
+          }
+        },
+        {
+          "type": "arm",
+          "settings": {
+            "tag": "Rehabilitation",
+            "title": "Build to Bond — prisons",
+            "body": "A six-week bamboo bike-building course inside prison workshops. Makers earn an OCN Level 2 in Sustainable Design & Manufacturing and finish by presenting the balance bike they built to their own child on family visit day. Live at HMP Lowdham Grange, HMP Foston Hall, HMP Lindholme and HMYOI Feltham, on a self-delivery model that trains staff and peer instructors to run the workshop."
+          }
+        },
+        {
+          "type": "arm",
+          "settings": {
+            "tag": "Prevention",
+            "title": "Make Engineers — schools & youth",
+            "body": "Curriculum-mapped engineering programmes for ages 11–19, from a free bamboo-speaker taster to a rideable bamboo gravel frame — with an optional OCN Level 1 Award in Practical Manufacturing Skills. 1,500+ young people reached to date through builds, tasters and talks."
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "Innovative projects, such as Build to Bond, support rehabilitation and help cut reoffending.",
+            "attr": "Lord Timpson, Prisons Minister"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "A truly inspiring cohort, delivering meaningful impact in the community.",
+            "attr": "Ruth Leas, CEO, Investec Bank",
+            "src": "Investec Beyond Business 2025"
+          }
+        },
+        {
+          "type": "plan",
+          "settings": {
+            "title": "Codify delivery",
+            "body": "Turn Build to Bond into a fully documented, turnkey programme — session plans, worksheets and instructor training — so new sites can run it without us in the room."
+          }
+        },
+        {
+          "type": "plan",
+          "settings": {
+            "title": "Measure what matters",
+            "body": "Introduce a simple pre/post participant measure across both arms, so next year's report can show change in confidence and skills — not just completion."
+          }
+        },
+        {
+          "type": "plan",
+          "settings": {
+            "title": "Follow Makers beyond the gate",
+            "body": "Build the follow-up that tells us what happens after release and after school — progression into work, education and training."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -12,7 +12,6 @@
 
 {%- comment -%} Unified redesign stylesheet — loaded ONCE here (the header is on every page via the header group); all other bbc-*-2026 sections rely on this. Primary fonts preloaded (woff2, crossorigin) for faster first paint. {%- endcomment -%}
 {{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
-{{ 'bbc-type-scale.css' | asset_url | stylesheet_tag }}
 {{ 'AtkinsonHyperlegible-Regular.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
 {{ 'AtkinsonHyperlegible-Bold.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
 

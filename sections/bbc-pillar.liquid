@@ -1,0 +1,201 @@
+{%- comment -%}
+  BBC Pillar SECTION — a tall editorial "beat": numbered kicker, very large headline,
+  short body, one quote (academic citation OR rider voice), a CTA link, and a full-height
+  image on one side. Reversible + selectable background (paper / forest / steel).
+  Styling is the site-wide .bbcpl-* component in bbc-statement.css (the standard sheet),
+  shared with .bbcst-* — one accent system (forest on light / lime on dark), lowercase
+  kickers, 18px body, AAA.
+{%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+{{ 'bbc-statement.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg = section.settings.background | default: 'paper'
+  case bg
+    when 'forest'
+      assign bg_cls = 'is-forest'
+    when 'steel'
+      assign bg_cls = 'is-steel'
+    else
+      assign bg_cls = 'is-paper'
+  endcase
+  assign fallback = section.settings.image_fallback | default: 'bbc-rd-gravel-sunset.jpg'
+  assign qkind = section.settings.quote_kind | default: 'rider'
+-%}
+
+<div class="bbc-rd bbcpl-wrap">
+  <section class="bbcpl {{ bg_cls }}{% if section.settings.reverse %} is-rev{% endif %}">
+    <div class="bbcpl-media">
+      {%- render "bbc-media", image: section.settings.image, src: section.settings.image_fallback, fallback: "bbc-rd-gravel-sunset.jpg", video: section.settings.video_file, youtube: section.settings.video_url, alt: section.settings.image_alt -%}
+    </div>
+    <div class="bbcpl-txt">
+      <div class="bbcpl-inner">
+        {%- if section.settings.index != blank or section.settings.kicker != blank -%}
+          <p class="bbcpl-idx"><span class="bbcpl-rule"></span>{% if section.settings.index != blank %}<span class="bbcpl-num">{{ section.settings.index }}</span>{% endif %}{{ section.settings.kicker }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}<h2 class="rd-reveal bbcpl-title">{{ section.settings.title }}</h2>{%- endif -%}
+        {%- if section.settings.body != blank -%}<p class="bbcpl-body">{{ section.settings.body }}</p>{%- endif -%}
+        {%- if section.settings.quote != blank -%}
+          <figure class="bbcpl-quote{% if qkind == 'academic' %} is-academic{% endif %}">
+            <blockquote>{{ section.settings.quote }}</blockquote>
+            {%- if section.settings.cite != blank -%}
+              <figcaption>{% if qkind == 'academic' %}<span class="bbcpl-qtag">peer-reviewed</span>{% endif %}{{ section.settings.cite }}{% if section.settings.cite_context != blank %} &middot; {{ section.settings.cite_context }}{% endif %}</figcaption>
+            {%- endif -%}
+          </figure>
+        {%- endif -%}
+        {%- if section.settings.cta_label != blank -%}
+          <a class="bbcpl-cta" href="{{ section.settings.cta_url | default: '#' }}">{{ section.settings.cta_label }} <span class="rd-arrow">&rarr;</span></a>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "BBC Pillar",
+  "tag": "section",
+  "class": "bbc-pillar-wrap",
+  "settings": [
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "default": "paper",
+      "options": [
+        {
+          "value": "paper",
+          "label": "Paper (light)"
+        },
+        {
+          "value": "forest",
+          "label": "Forest (dark green)"
+        },
+        {
+          "value": "steel",
+          "label": "Steel (grey-blue)"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "reverse",
+      "label": "Image on the right",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "index",
+      "label": "Index number (e.g. 01)",
+      "default": "01"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker (lowercase)",
+      "default": "the science"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Headline (large)",
+      "default": "a ride you can feel"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body (short — 1 to 2 lines)",
+      "default": "Bamboo's fibres turn road buzz into a trace of heat, so less of the rough road reaches your hands."
+    },
+    {
+      "type": "header",
+      "content": "Quote (academic citation or rider voice)"
+    },
+    {
+      "type": "select",
+      "id": "quote_kind",
+      "label": "Quote type",
+      "default": "rider",
+      "options": [
+        {
+          "value": "rider",
+          "label": "Rider / builder voice"
+        },
+        {
+          "value": "academic",
+          "label": "Academic (adds a Peer-reviewed tag)"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote"
+    },
+    {
+      "type": "text",
+      "id": "cite",
+      "label": "Attribution / citation"
+    },
+    {
+      "type": "text",
+      "id": "cite_context",
+      "label": "Context (institution / journal)"
+    },
+    {
+      "type": "header",
+      "content": "Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_fallback",
+      "label": "Fallback asset filename",
+      "default": "bbc-rd-gravel-sunset.jpg"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "A hand-built bamboo bicycle"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video URL (plays inline)"
+    },
+    {
+      "type": "video",
+      "id": "video_file",
+      "label": "Or upload a video (plays inline)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Pillar"
+    }
+  ]
+}
+{% endschema %}
