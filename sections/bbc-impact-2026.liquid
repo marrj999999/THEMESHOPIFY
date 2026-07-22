@@ -275,23 +275,40 @@
     </div>
   </section>
   {%- endif -%}
-{%- comment -%} ---------- CASE STUDY CARD → full Build to Bond story ---------- {%- endcomment -%}
-  {%- if section.settings.cs_quote != blank -%}
+{%- comment -%} ---------- CASE STUDY CARD → full Build to Bond story ----------
+   Gates on blurb OR quote — a cleared quote alone must not suppress the flagship
+   (the Timpson-band gating bug, same family; fixed 2026-07-22). {%- endcomment -%}
+  {%- if section.settings.cs_blurb != blank or section.settings.cs_quote != blank -%}
   <section class="rd-pad-sm">
     <div class="rd-wrap rd-mw-820px">
       <div class="rd-csgrid rd-csgrid-1">
         <a class="rd-reveal rd-cscard" href="{{ section.settings.cs_url | default: '/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2' }}">
           <div class="rd-cscard__media"><img src="{{ section.settings.cs_image | default: 'bbc-rd-prison-empty.jpg' | asset_url }}" alt="Inside the Build to Bond workshop at HMP Lowdham Grange" loading="lazy" width="600" height="375"><span class="rd-cscard__kind">{{ section.settings.cs_kind | default: 'Case study' }}</span></div>
           <div class="rd-cscard__body">
-            <p class="rd-cscard__quote">{{ section.settings.cs_quote }}</p>
-            {%- if section.settings.cs_attr != blank -%}<p class="rd-cscard__attr">{{ section.settings.cs_attr }}</p>{%- endif -%}
+            {%- if section.settings.cs_quote != blank -%}<p class="rd-cscard__quote">{{ section.settings.cs_quote }}</p>{%- endif -%}
+            {%- if section.settings.cs_quote != blank and section.settings.cs_attr != blank -%}<p class="rd-cscard__attr">{{ section.settings.cs_attr }}</p>{%- endif -%}
             {%- if section.settings.cs_blurb != blank -%}<p class="rd-cscard__ctx">{{ section.settings.cs_blurb }}</p>{%- endif -%}
+            {%- comment -%} outcome row — story+number = evidence (Redemption Roasters live-data pattern) {%- endcomment -%}
+            {%- assign _outs = section.settings.cs_outcomes | default: '6 weeks × 18 hours|OCN Level 2|26% measured confidence uplift|3 Makers → peer instructors' -%}
+            {%- if _outs != blank -%}
+            <ul class="rd-cscard__outs" role="list">
+              {%- assign _oitems = _outs | split: '|' -%}
+              {%- for o in _oitems -%}<li>{{ o | strip }}</li>{%- endfor -%}
+            </ul>
+            {%- endif -%}
             <div class="rd-cscard__foot">
               <span class="rd-cscard__inst">{{ section.settings.cs_site | default: 'Build to Bond · HMP Lowdham Grange' }}</span>
               <span class="rd-cscard__more">{{ section.settings.cs_link_label | default: 'Read the full story' }} <span class="rd-arrow">&rarr;</span></span>
             </div>
           </div>
         </a>
+        {%- if section.settings.cs_show_prov != false -%}
+        {%- comment -%} provenance chips — every claim points somewhere checkable (charity:water proof move) {%- endcomment -%}
+        <p class="rd-cscard__prov">as reported in
+          <a href="https://www.ft.com/content/6ebe2eba-b832-4289-9924-2e9f948d5f98?ref=impact-evidence" target="_blank" rel="noopener">Financial Times</a> ·
+          <a href="/blogs/news/inside-time-bamboozling-way-to-build-bikes-bamboo-bicycle-club-at-lowdham-grange?ref=impact-evidence">Inside Time</a> ·
+          <a href="/blogs/news/bamboo-bicycle-club-wins-investec-beyond-business-2025?ref=impact-evidence">Investec Beyond Business</a></p>
+        {%- endif -%}
       </div>
     </div>
   </section>
@@ -304,20 +321,49 @@
       {%- if section.settings.stories_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.stories_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal rd-mw-20ch">{{ section.settings.stories_title }}</h2>
       {%- if section.settings.stories_lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.stories_lede }}</p>{%- endif -%}
-      <div class="rd-csgrid rd-mt4">
+      {%- comment -%} filter tabs built from the kinds present (Redemption tabbed-programmes / WaterAid filter pattern); no-JS = all visible {%- endcomment -%}
+      {%- assign _kinds = '' -%}
+      {%- for block in section.blocks -%}{%- if block.type == 'story' and block.settings.kind != blank -%}
+        {%- assign _k = block.settings.kind | downcase | strip -%}
+        {%- unless _kinds contains _k -%}{%- assign _kinds = _kinds | append: _k | append: ',' -%}{%- endunless -%}
+      {%- endif -%}{%- endfor -%}
+      {%- assign _kindlist = _kinds | split: ',' -%}
+      {%- if _kindlist.size > 1 -%}
+      <div class="rd-evfilter rd-mt3" role="group" aria-label="Filter the evidence by programme">
+        <button type="button" class="rd-evfilter__tab is-on" data-kind="all" aria-pressed="true">all</button>
+        {%- for k in _kindlist -%}<button type="button" class="rd-evfilter__tab" data-kind="{{ k }}" aria-pressed="false">{{ k }}</button>{%- endfor -%}
+      </div>
+      {%- endif -%}
+      <div class="rd-csgrid rd-mt4" data-evwall>
         {%- for block in section.blocks -%}{%- if block.type == 'story' -%}
           {%- assign vurl = block.settings.video_url | default: block.settings.video -%}
+          {%- assign _bk = block.settings.kind | downcase | strip -%}
+          {%- capture evmeta -%}
+            {%- if block.settings.outcome != blank -%}<p class="rd-cscard__out">{{ block.settings.outcome }}</p>{%- endif -%}
+          {%- endcapture -%}
+          {%- capture evproof -%}
+            {%- if block.settings.quote != blank -%}<blockquote class="rd-cscard__evq">&ldquo;{{ block.settings.quote }}&rdquo;{%- if block.settings.cite != blank -%} <cite>{{ block.settings.cite }}</cite>{%- endif -%}</blockquote>{%- endif -%}
+            {%- if block.settings.date != blank or block.settings.source_label != blank -%}
+            <p class="rd-cscard__meta">
+              {%- if block.settings.date != blank -%}<span>{{ block.settings.date }}</span>{%- endif -%}
+              {%- if block.settings.date != blank and block.settings.source_label != blank -%}<span class="rd-cscard__dot">·</span>{%- endif -%}
+              {%- if block.settings.source_label != blank -%}{%- if block.settings.source_url != blank -%}<a href="{{ block.settings.source_url }}{% if block.settings.source_url contains '?' %}&{% else %}?{% endif %}ref=impact-evidence"{% if block.settings.source_url contains '//' %} target="_blank" rel="noopener"{% endif %}>{{ block.settings.source_label }}</a>{%- else -%}<span>{{ block.settings.source_label }}</span>{%- endif -%}{%- endif -%}
+            </p>
+            {%- endif -%}
+          {%- endcapture -%}
           {%- if vurl != blank or block.settings.video_file != blank -%}
-          <div class="rd-reveal rd-cscard rd-cscard--video" {{ block.shopify_attributes }}>
+          <div class="rd-reveal rd-cscard rd-cscard--video" data-kind="{{ _bk }}" {{ block.shopify_attributes }}>
             <div class="rd-cscard__media">{%- render "bbc-media", image: block.settings.image_pic, src: block.settings.image, video: block.settings.video_file, youtube: vurl, alt: block.settings.title -%}{%- if block.settings.kind != blank -%}<span class="rd-cscard__kind">{{ block.settings.kind }}</span>{%- endif -%}</div>
-            <div class="rd-cscard__body"><p class="rd-cscard__ctx">{{ block.settings.blurb }}</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">{{ block.settings.title }}</span>{%- if block.settings.url != blank -%}<a class="rd-cscard__more" href="{{ block.settings.url }}">Read the story <span class="rd-arrow">&rarr;</span></a>{%- endif -%}</div></div>
+            <div class="rd-cscard__body">{{ evmeta }}<p class="rd-cscard__ctx">{{ block.settings.blurb }}</p>{{ evproof }}<div class="rd-cscard__foot"><span class="rd-cscard__inst">{{ block.settings.title }}</span>{%- if block.settings.url != blank -%}<a class="rd-cscard__more" href="{{ block.settings.url }}">Read the story <span class="rd-arrow">&rarr;</span></a>{%- endif -%}</div></div>
           </div>
           {%- else -%}
           {%- if block.settings.image_pic != blank -%}{%- assign cimg = block.settings.image_pic | image_url: width: 600 -%}{%- else -%}{%- assign cimg = block.settings.image | default: "bbc-rd-cohort.jpg" -%}{%- endif -%}
-          <a class="rd-reveal rd-cscard" href="{{ block.settings.url | default: "/blogs/impact" }}" {{ block.shopify_attributes }}>
+          {%- comment -%} div + stretched-link, NOT an <a> wrapper — the source link inside
+             would nest anchors and the parser shatters the card (caught 2026-07-22) {%- endcomment -%}
+          <div class="rd-reveal rd-cscard rd-cscard--ev" data-kind="{{ _bk }}" {{ block.shopify_attributes }}>
             <div class="rd-cscard__media"><img src="{% if cimg contains "//" %}{{ cimg }}{% else %}{{ cimg | asset_url }}{% endif %}" alt="{{ block.settings.title | escape }}" loading="lazy" width="600" height="375">{%- if block.settings.kind != blank -%}<span class="rd-cscard__kind">{{ block.settings.kind }}</span>{%- endif -%}</div>
-            <div class="rd-cscard__body"><p class="rd-cscard__ctx">{{ block.settings.blurb }}</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">{{ block.settings.title }}</span><span class="rd-cscard__more">Read the story <span class="rd-arrow">&rarr;</span></span></div></div>
-          </a>
+            <div class="rd-cscard__body">{{ evmeta }}<p class="rd-cscard__ctx">{{ block.settings.blurb }}</p>{{ evproof }}<div class="rd-cscard__foot"><span class="rd-cscard__inst">{{ block.settings.title }}</span><a class="rd-cscard__more rd-cscard__stretch" href="{{ block.settings.url | default: "/blogs/impact" }}">Read the story <span class="rd-arrow">&rarr;</span></a></div></div>
+          </div>
           {%- endif -%}
         {%- endif -%}{%- endfor -%}
       </div>
@@ -556,6 +602,52 @@
   {%- comment -%} WHAT'S NEXT band REMOVED 2026-07-20 (Chris Barrett feedback: cut to reduce
      page length). Its settings (next_*) are retained in the schema but no longer rendered.
      The primary CTA now lives directly under the hero — see BOOK A DISCOVERY CALL. {%- endcomment -%}
+
+{% stylesheet %}
+/* ---- evidence system (2026-07-22, visual tour: Redemption/Switchback/charity:water/Fine Cell) ---- */
+/* flagship outcome chips — the number leads (tabular via universal) */
+.rd-cscard__outs{list-style:none;display:flex;flex-wrap:wrap;gap:8px 10px;margin:16px 0 0;padding:0}
+.rd-cscard__outs li{font-size:14px;font-weight:800;letter-spacing:.01em;padding:6px 12px;border:2px solid currentColor;border-radius:999px;white-space:nowrap}
+.rd-cscard__prov{margin:14px 2px 0;font-size:13px;font-weight:700;opacity:.85}
+.rd-cscard__prov a{text-decoration:underline;text-underline-offset:3px;font-weight:800}
+/* evidence-wall card anatomy: outcome line leads the body */
+.rd-cscard__out{margin:0 0 8px;font-size:18px;line-height:1.35;font-weight:800}
+.rd-cscard__evq{margin:10px 0 0;padding:0;border:0;font-size:15px;line-height:1.5;font-style:italic}
+.rd-cscard__evq cite{display:block;margin-top:4px;font-style:normal;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.rd-cscard__meta{margin:10px 0 0;font-size:13px;font-weight:700;opacity:.8}
+.rd-cscard__meta .rd-cscard__dot{margin:0 6px}
+.rd-cscard__meta a{text-decoration:underline;text-underline-offset:3px}
+/* filter tabs — quiet pills, lime = active (one accent per band rule) */
+.rd-evfilter{display:flex;flex-wrap:wrap;gap:10px}
+.rd-evfilter__tab{font:inherit;font-size:14px;font-weight:800;letter-spacing:.02em;text-transform:lowercase;padding:8px 16px;border:2px solid currentColor;border-radius:999px;background:transparent;color:inherit;cursor:pointer}
+.rd-evfilter__tab.is-on{background:var(--lime);border-color:var(--ink);color:var(--ink)}
+.rd-evfilter__tab:focus-visible{outline:3px solid var(--lime-aaa);outline-offset:2px}
+[data-evwall] [data-kind][hidden]{display:none}
+/* stretched-link: whole evidence card clickable via the foot link; inner source/quote links stay above */
+.rd-cscard--ev{position:relative}
+.rd-cscard--ev .rd-cscard__stretch::after{content:"";position:absolute;inset:0}
+.rd-cscard--ev .rd-cscard__meta a,.rd-cscard--ev .rd-cscard__evq cite{position:relative;z-index:1}
+{% endstylesheet %}
+
+{% javascript %}
+document.addEventListener('click', function (e) {
+  var tab = e.target.closest('.rd-evfilter__tab');
+  if (!tab) return;
+  var band = tab.closest('section');
+  var wall = band && band.querySelector('[data-evwall]');
+  if (!wall) return;
+  band.querySelectorAll('.rd-evfilter__tab').forEach(function (t) {
+    var on = t === tab;
+    t.classList.toggle('is-on', on);
+    t.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+  var kind = tab.getAttribute('data-kind');
+  wall.querySelectorAll(':scope > [data-kind]').forEach(function (card) {
+    if (kind === 'all' || card.getAttribute('data-kind') === kind) card.removeAttribute('hidden');
+    else card.setAttribute('hidden', '');
+  });
+});
+{% endjavascript %}
 
   {% schema %}
 {
@@ -1160,6 +1252,19 @@
       "default": "Read the full story"
     },
     {
+      "type": "text",
+      "id": "cs_outcomes",
+      "label": "Outcome chips (pipe-separated)",
+      "info": "Verified figures only. Blank = the built-in verified set.",
+      "default": "6 weeks × 18 hours|OCN Level 2|26% measured confidence uplift|3 Makers → peer instructors"
+    },
+    {
+      "type": "checkbox",
+      "id": "cs_show_prov",
+      "label": "Show 'as reported in' provenance links (FT · Inside Time · Investec)",
+      "default": true
+    },
+    {
       "type": "header",
       "content": "Impact stories grid (one per pillar)"
     },
@@ -1539,6 +1644,36 @@
           "type": "textarea",
           "id": "blurb",
           "label": "Short text"
+        },
+        {
+          "type": "text",
+          "id": "outcome",
+          "label": "Outcome line (the number/result — leads the card)"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Verified quote (verbatim only — no quote marks)"
+        },
+        {
+          "type": "text",
+          "id": "cite",
+          "label": "Quote attribution"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date (e.g. 2024)"
+        },
+        {
+          "type": "text",
+          "id": "source_label",
+          "label": "Source label (e.g. Inside Time)"
+        },
+        {
+          "type": "text",
+          "id": "source_url",
+          "label": "Source URL"
         },
         {
           "type": "text",

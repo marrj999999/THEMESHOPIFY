@@ -84,3 +84,28 @@ Sources: thinknpc.org (good impact reporting, user-voice) · switchback.org.uk �
 bigissue.com impact + BII report PDF · lightful.com / reliantcreative.org / orangewoodfoundation.org
 (ethical storytelling) · vault: Grants/Case Study Signposts.md · Business/Case Studies/Verified 2026 ·
 Marketing/Story Bank · qa/DESIGN-RESEARCH.md lanes 2–3.
+
+## 7 · VISUAL tour (10+ examples, fetched 2026-07-22) → what got built
+
+| # | Site | Visual pattern taken |
+|---|---|---|
+| 1 | charity:water /our-work | image → headline → "read their story" uniform cards; proof-linking |
+| 2 | Switchback | oversized stat + baseline comparison ("56% vs 10% nationally"); first-name-only story cards |
+| 3 | Fine Cell Work | first-name dated story cards; mission↔product alternating rhythm |
+| 4 | Redemption Roasters | **"live impact data" grid with the comparison on the stat**; tabbed programmes; candid workplace photography |
+| 5 | Big Issue impact | bold numeric callouts; dated report-download cards; 4-card news anatomy |
+| 6 | Who Gives A Crap impact | named individuals + before/after specifics; photo credits; playful↔credible alternation |
+| 7 | Hiut Denim | story-pause rhythm in commerce; portrait + role overlay ("Amy Dury – Painter") |
+| 8 | The Clink (thin fetch) | web summary → Impact Report PDF pattern confirmed |
+| 9–11 | Banked board (fetched in Phase R): Tony's mission-interrupt band · Patagonia story-adjacent-to-product · Bounce Back audience-question segments | already live on the page |
+
+### Built into the theme (2026-07-22, deployed to draft + verified)
+1. **Flagship outcome row** (Redemption live-data pattern): 4 bordered chips — 6 weeks × 18 hours · OCN Level 2 · 26% measured confidence uplift · 3 Makers → peer instructors (editable `cs_outcomes`, pipe-separated).
+2. **Provenance line** (charity:water proof move): "as reported in FT · Inside Time · Investec Beyond Business" — each → checkable URL with ?ref=impact-evidence.
+3. **Evidence wall**: story block schema grew outcome/quote/cite/date/source fields; card anatomy = kind chip → **bold outcome line** → context → verified italic quote + cite → date · source link → stretched-link foot. 6 cards live: UCL (education) · Brixton team-day (community, video) · Kenya (global) · **Investec** (prisons, their published rationale verbatim) · **Rwanda/Urumuri** (education, "24 young people + 4 trainers — Urumuri's figure") · **Soraya** (community, her verified quote, 2019).
+4. **Filter tabs** (Redemption/WaterAid): all · education · community · global · prisons — lime active pill, aria-pressed, no-JS = all visible. Verified: prisons → exactly the Investec card.
+5. Flagship un-suppressed: gating moved from cs_quote to blurb-or-quote (same bug family as the Timpson band); dangling attribution gated on its quote.
+
+**Defect caught by the loop:** first wall version wrapped cards in `<a>` while the new source link was also an `<a>` — nested anchors made the parser shatter cards (orphan text survived filtering). Rebuilt as div + stretched-link. Verified: 6 direct children, 0 strays, filter exact.
+
+**Flagged for James (store content, live-shared):** ⛔ GM Motors team-build article is still live on the news blog (do-not-cite canon — unpublish?) · a live article is titled "4,000 across 36 countries" (canon is 45) · three duplicate Investec articles want de-dup (I linked the news one).

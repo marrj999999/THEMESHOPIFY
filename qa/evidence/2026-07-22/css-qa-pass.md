@@ -286,3 +286,7 @@ absorb bbc-aaa-2026 (3.6KB, live link/focus/btn systems + stale type vars) into 
 - Favicon: none was set → roundel fallback added in theme.liquid (settings.favicon still wins if James sets one). ✓
 - Structured data: PDPs already had Product ✓; added sitewide Organization (mission-locked description); articles now Article. All parse in-browser. ✓
 - Web vitals (desktop, measured): LCP 604–708ms · CLS 0–0.002 · TTFB ~460ms · weights: home 1.5MB / PDP 2.0MB / collection 2.9MB (1.15MB grid imagery). All well inside Google "good".
+
+## IMPACT EVIDENCE SYSTEM (visual-tour build, end of day)
+Shots: ev-flagship-1280, ev-wall-1280, ev-wall-filtered-fixed (prisons→1 card), ev-wall-all-lower, ev-wall-390.
+Verified: 4 outcome chips + 3 provenance links render; 6 evidence cards (3 new: Investec/Rwanda/Soraya — all content verbatim from Grants/Case Study Signposts.md ✅ set); filter tabs exact; nested-anchor shatter fixed (div+stretched-link); mobile 390 zero overflow. Section pushed before template (schema race). Sally Allsopp FT misattribution fixed earlier this session.
