@@ -1,6 +1,50 @@
 # QA Log — CUSTOMTHEME20262 redesign
 *Defects, fixes, verdicts. Newest first.*
 
+## 2026-07-24 (evening) — CLAIMS ACCURACY + nine gates that were reporting success while doing nothing
+
+**Root cause of the day, one sentence:** a gate that cannot fail still shows a green tick, and
+nine separate checks were in that state. Full register with root causes and the checks added:
+`qa/ESCAPES.md`.
+
+**Content defects fixed on DRAFT 196820238710 (live untouched):**
+- **Wrong OCN course title in 14 places, correct title in 0.** Vault `System/Claims Register.md`
+  (canonical) gives "Workshop Skills and Sustainable Manufacturing", course ID 1130735, not
+  Ofqual-regulated. The theme published "Sustainable Design & Manufacturing". `CLAUDE.md`
+  carried the same error — the propagation source, now corrected. Fixed across 6 sections +
+  5 templates; renders correctly in 9 places.
+- **"nationally recognised" was rendering on two draft pages** (`/pages/build-to-bond`,
+  `/pages/theory-of-change`) — the `06b9ada` fix was committed locally in the morning and never
+  deployed anywhere. Now 0 across 8 pages checked.
+- **Three stale local files would have REGRESSED the draft if pushed**: `bbc-build-to-bond`
+  ("prisoners"), `bbc-impact-mission` ("Level 1 & 2" + "Guaranteed interview on release"),
+  `bbc-social-impact` (alt text "prisoners"). The draft already held the better wording; git
+  mtimes said "local is newer" and misled. Reconciled from the draft, not pushed.
+
+**Method notes worth keeping:**
+- The 6-file audit was too narrow. A full 608-file checksum audit (the Admin API exposes MD5s,
+  so it costs one request) found 34 differing, 4 of them draft-newer — pushing those would have
+  reverted draft work. 28 remain quarantined pending a per-file content diff.
+- Every lint hit was **fixed, not waived**. The ALLOW list covers only rule-statements, the
+  MoJ/Farmer Review framing the Claims Register approves verbatim, and third-party press quotes.
+- `/pages/impact`'s "prisoners" occurrences are a verbatim *Inside Time* quote, that paper's own
+  self-description, and an attributed ministerial quote — deliberately untouched. The voice rule
+  governs how we describe our Makers, not how cited sources describe theirs.
+
+**Gate work:** purchase path (add-to-cart + checkout) genuinely tested for the first time —
+8/8, after fixing three test-side defects. Visual net moved off `maxDiffPixelRatio` (height was
+buying a 225,734-pixel free pass) and gained a text-fingerprint partner for copy changes, which
+pixel diffing cannot see. Screenshots left git history (~120MB/run of near-duplicates).
+
+**First free finding from fingerprints:** `/pages/impact` renders EIGHT body-text sizes
+(14/16/17/18/22/30/35.2/42px) and three h2 sizes against FORMULA §1's "ONE size per role" — the
+B1 consistency inventory, on day one.
+
+**Still open for James:** live `/pages/impact` renders "nationally recognised" (stored in live's
+`page.impact.json`; MAIN writes permission-blocked, so admin Code editor); schools Level 1 OCN
+evidence pointer; `assets/bbc-tokens.css` is cited as the type contract by TYPE-SCALE.md and the
+tracker but exists nowhere (404 local/draft/live).
+
 ## 2026-07-13 — FRAME INFOGRAPHIC: DROPPED (tested fully, evidence-based)
 Three attempts, all failed the quality bar BEFORE reaching the page: (1) hand-coded SVG shipped blind — James rejected; (2) Recraft round 1: beautiful bike illustration, zero infographic elements; (3) Recraft round 2 (schematic prompt): hex codes as literal text + AI-soup. Decision: the pathway story is carried by the journey cards + duotone imagery; the frame-metaphor idea is parked (revisit only with a human designer or if James supplies a sketch). Map callouts also dropped — clean choropleth + cards stands. ~4 Recraft credits spent.
 

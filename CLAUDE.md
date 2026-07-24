@@ -23,7 +23,8 @@ Preview: https://bamboobicycleclub.org/?preview_theme_id=195991470454 (sandbox �
 
 **What:** Dawn 15.4.1 rebuild of Bamboo Bicycle Club's Shopify theme
 **⚠️ PUBLISHED THEME: `196739727734` "Copy of CUSTOM THEME 2026"** (verified via Admin API role:main, 7 Jul 2026). Every push to it is customer-facing. ⚠️ Theme IDs have silently changed twice — ALWAYS verify with `shopify theme list` (role:main) before any push; never trust a hardcoded ID, including this one.
-**Dead theme IDs (no longer exist on the store, 7 Jul 2026):** `196398383478` (previous live) · `191768756598` (pre-redesign) · `195991470454` (old sandbox). If any doc mentions them, it is stale.
+**Dead theme IDs (no longer exist on the store, 7 Jul 2026):** `196398383478` (previous live) · `191768756598` (pre-redesign). If any doc mentions them, it is stale.
+**Correction 2026-07-24:** `195991470454` was listed here as dead but is still on the store, unpublished, named "BBC Redesign 2026 (WIP - do not publish)" — verified against `themes.json`. Do not push to it; the working draft is `196820238710` "CUSTOMTHEME20262".
 **Store:** bamboo-bicycle-club-london-uk.myshopify.com
 **Live site:** bamboobicycleclub.org
 
@@ -227,9 +228,9 @@ shopify theme info
 - 4,000+ builders trained
 - 4 active prison sites (2026-07): HMP Lowdham Grange · HMP Foston Hall · HMP Lindholme · HMYOI Feltham (never "three prisons"/"rolling out")
 - Mission (LOCKED 2026-07-06, verbatim): "We use bamboo bike-building to give practical skills and a way forward to people locked out of education — in schools before exclusion, and in prisons after." Tagline: "Build bikes. Build skills. Build futures."
-- 36+ countries
+- 45 countries (James-approved 2026-07-07 from customer records; supersedes the old "36+")
 - Since 2012
-- 90%+ prison-course completion · OCN-accredited (prisons: "OCN Level 2 — Sustainable Design & Manufacturing"; schools: "OCN Level 1 Award — Practical Manufacturing Skills"; NEVER "Level 1 & 2" mushed)
+- 90%+ prison-course completion · OCN-accredited. **Prisons — exact title: "OCN London bespoke Level 2, Workshop Skills and Sustainable Manufacturing" (centre course ID 1130735, 120 GLH / 192 TQT, NOT Ofqual-regulated).** Corrected 2026-07-24: this file previously said "Sustainable Design & Manufacturing", which is not the course's name — that error had propagated into 14 places across the theme. Canonical source is the vault `System/Claims Register.md`, which overrides this file if they ever disagree. Schools: "OCN Level 1 Award — Practical Manufacturing Skills" (approved by James 2026-07-24; OCN evidence pointer still to be attached). NEVER "Level 1 & 2" mushed, and never "nationally recognised".
 
 **⛔ BANNED — never use in any copy or defaults:** "28,000 PSI" / "stronger than steel" (false — tested tensile ≈ 84 MPa; say "comparable to mild steel, tested to BS ISO 22157 at Swansea University") · "56.7% lower carbon than aluminium" (no named LCA — greenwashing risk; use qualitative "grown not mined, regrows in 3–5 years") · "£11.41 SROI" (no traceable study) · "£280 per learner" (confidential contract pricing) · "100% completion" (use 90%+). Run `scripts/claim-lint.sh` before every push.
 
