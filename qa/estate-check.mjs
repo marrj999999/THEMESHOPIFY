@@ -11,6 +11,11 @@ const P = 'preview_theme_id=196820238710';
 const BASE = 'https://bamboobicycleclub.org';
 const DATE = new Date().toISOString().slice(0, 10);
 const DIR = `qa/evidence/${DATE}`;
+// FORMULA §1 type-role conformance (B1). Ships observational so the first run inventories the
+// real drift instead of blocking every push on day one; flip with TYPE_ROLES_BLOCKING=1 once the
+// queue is drained. Findings land in qa/evidence/<date>/type-drift.txt either way.
+const TYPE_ROLES_BLOCKING = process.env.TYPE_ROLES_BLOCKING === '1';
+const typeDrift = [];
 const SHOTS = `${DIR}/estate-shots`;
 fs.mkdirSync(SHOTS, { recursive: true });
 
@@ -106,6 +111,36 @@ if (runTier(1)) {
             footerFp: footer ? footer.innerText.replace(/\s+/g, ' ').slice(0, 200) : 'none',
             title: !!d.title, metaDesc: !!d.querySelector('meta[name="description"]'), canonical: !!d.querySelector('link[rel="canonical"]'), og: !!d.querySelector('meta[property="og:image"]'),
             ldOk: [...d.querySelectorAll('script[type="application/ld+json"]')].every(s => { try { JSON.parse(s.textContent); return true; } catch (e) { return false; } }),
+            // FORMULA §1 — "ONE size per role, no exceptions" (B1, 2026-07-24).
+            // Measured per breakpoint because the scale is clamp()-based and therefore
+            // viewport-dependent BY DESIGN: comparing sizes across widths would be meaningless.
+            // Roles are keyed on band-grammar classes where they exist, so a card h3 and a
+            // pathway h3 (different roles in FORMULA §1) are not wrongly conflated.
+            // Sizes rounded to 0.5px — sub-pixel rounding is not a design defect.
+            typeRoles: (() => {
+              const round = v => Math.round(parseFloat(v) * 2) / 2;
+              const painted = e => {
+                if (e.checkVisibility && !e.checkVisibility({ checkVisibilityCSS: true, checkOpacity: false })) return false;
+                const r = e.getBoundingClientRect();
+                return r.height > 4 && r.width > 20 && getComputedStyle(e).visibility === 'visible';
+              };
+              const roles = {
+                display: 'h1.ew-h1, .rd-hero h1, h1',
+                h2: '.bbc-rd h2, h2',
+                'card-title': '.rd-cscard h3, .rd-card h3',
+                lede: '.rd-lede',
+                eyebrow: '.rd-eyebrow',
+                label: '.rd-lbl',
+                button: '.rd-btn, .rd-cta',
+              };
+              const out = {};
+              for (const [role, sel] of Object.entries(roles)) {
+                const sizes = [...new Set([...d.querySelectorAll(sel)].filter(painted)
+                  .map(e => round(getComputedStyle(e).fontSize)))].sort((a, b) => a - b);
+                if (sizes.length) out[role] = sizes;
+              }
+              return out;
+            })(),
           };
         }, BANNED.map(b => ({ src: b.source, flags: b.flags })));
         const is404Probe = false;
@@ -117,6 +152,16 @@ if (runTier(1)) {
         add(1, path + '@' + label, 'imgs have alt', r.noAlt === 0, r.noAlt + ' missing');
         add(1, path + '@' + label, 'no banned claims rendered', r.bannedHits.length === 0, r.bannedHits.join('|'));
         add(1, path + '@' + label, 'crumbs visible', r.crumbBad === 0, r.crumbBad + ' invisible');
+        // FORMULA §1 conformance. NON-BLOCKING while the inventory is triaged with James
+        // (TYPE_ROLES_BLOCKING=1 to enforce) — a check that instantly blocks every push is a
+        // check people learn to route around. The inventory it produces IS the work queue.
+        {
+          const offenders = Object.entries(r.typeRoles || {}).filter(([, sizes]) => sizes.length > 1);
+          const detail = offenders.map(([role, s]) => `${role}:${s.join('/')}`).join(' ');
+          const ok = offenders.length === 0;
+          if (TYPE_ROLES_BLOCKING) add(1, path + '@' + label, 'FORMULA §1 one size per role', ok, detail);
+          else if (!ok) typeDrift.push(`${path}@${label} · ${detail}`);
+        }
         add(1, path + '@' + label, 'in-page anchors resolve', r.anchorsMissing === 0, r.anchorsMissing + ' dead');
         add(1, path + '@' + label, 'meta layer (title/desc/canonical/og)', r.title && r.metaDesc && r.canonical && r.og, `t:${r.title} d:${r.metaDesc} c:${r.canonical} og:${r.og}`);
         add(1, path + '@' + label, 'JSON-LD parses', r.ldOk, '');
@@ -321,5 +366,15 @@ for (const [k, v] of Object.entries(byClass)) out += `CLASS: ${k} (${v.length})\
 out += 'PASS detail suppressed — full rows in estate-check.json\n';
 fs.writeFileSync(`${DIR}/estate-check.txt`, out);
 fs.writeFileSync(`${DIR}/estate-check.json`, JSON.stringify(rows, null, 1));
+
+// FORMULA §1 inventory — the consistency work queue, written even when non-blocking.
+if (typeDrift.length) {
+  const header = `FORMULA §1 — ONE SIZE PER ROLE · ${DATE}\n` +
+    `${typeDrift.length} page/width combinations render more than one size for a role.\n` +
+    `Observational (set TYPE_ROLES_BLOCKING=1 to enforce). Measured per breakpoint because the\n` +
+    `scale is clamp()-based; comparing across widths would be meaningless.\n\n`;
+  fs.writeFileSync(`${DIR}/type-drift.txt`, header + typeDrift.join('\n') + '\n');
+  console.log(`\nFORMULA §1: ${typeDrift.length} role-drift findings → ${DIR}/type-drift.txt (observational)`);
+}
 console.log(`\n${rows.length - fails.length}/${rows.length} — ${fails.length} fails in ${Object.keys(byClass).length} classes → ${DIR}/estate-check.txt`);
 process.exit(fails.length ? 1 : 0);
