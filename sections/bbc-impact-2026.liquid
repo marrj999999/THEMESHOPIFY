@@ -334,7 +334,7 @@
         {%- for k in _kindlist -%}<button type="button" class="rd-evfilter__tab" data-kind="{{ k }}" aria-pressed="false">{{ k }}</button>{%- endfor -%}
       </div>
       {%- endif -%}
-      <div class="rd-csgrid rd-mt4" data-evwall>
+      <div class="rd-csgrid rd-mt4 rd-stagger" data-evwall>
         {%- for block in section.blocks -%}{%- if block.type == 'story' -%}
           {%- assign vurl = block.settings.video_url | default: block.settings.video -%}
           {%- assign _bk = block.settings.kind | downcase | strip -%}
@@ -352,7 +352,7 @@
             {%- endif -%}
           {%- endcapture -%}
           {%- if vurl != blank or block.settings.video_file != blank -%}
-          <div class="rd-reveal rd-cscard rd-cscard--video" data-kind="{{ _bk }}" {{ block.shopify_attributes }}>
+          <div class="rd-cscard rd-cscard--video" data-kind="{{ _bk }}" {{ block.shopify_attributes }}>
             <div class="rd-cscard__media">{%- render "bbc-media", image: block.settings.image_pic, src: block.settings.image, video: block.settings.video_file, youtube: vurl, alt: block.settings.title -%}{%- if block.settings.kind != blank -%}<span class="rd-cscard__kind">{{ block.settings.kind }}</span>{%- endif -%}</div>
             <div class="rd-cscard__body">{{ evmeta }}<p class="rd-cscard__ctx">{{ block.settings.blurb }}</p>{{ evproof }}<div class="rd-cscard__foot"><span class="rd-cscard__inst">{{ block.settings.title }}</span>{%- if block.settings.url != blank -%}<a class="rd-cscard__more" href="{{ block.settings.url }}">Read the story <span class="rd-arrow">&rarr;</span></a>{%- endif -%}</div></div>
           </div>
@@ -360,7 +360,7 @@
           {%- if block.settings.image_pic != blank -%}{%- assign cimg = block.settings.image_pic | image_url: width: 600 -%}{%- else -%}{%- assign cimg = block.settings.image | default: "bbc-rd-cohort.jpg" -%}{%- endif -%}
           {%- comment -%} div + stretched-link, NOT an <a> wrapper — the source link inside
              would nest anchors and the parser shatters the card (caught 2026-07-22) {%- endcomment -%}
-          <div class="rd-reveal rd-cscard rd-cscard--ev" data-kind="{{ _bk }}" {{ block.shopify_attributes }}>
+          <div class="rd-cscard rd-cscard--ev" data-kind="{{ _bk }}" {{ block.shopify_attributes }}>
             <div class="rd-cscard__media"><img src="{% if cimg contains "//" %}{{ cimg }}{% else %}{{ cimg | asset_url }}{% endif %}" alt="{{ block.settings.title | escape }}" loading="lazy" width="600" height="375">{%- if block.settings.kind != blank -%}<span class="rd-cscard__kind">{{ block.settings.kind }}</span>{%- endif -%}</div>
             <div class="rd-cscard__body">{{ evmeta }}<p class="rd-cscard__ctx">{{ block.settings.blurb }}</p>{{ evproof }}<div class="rd-cscard__foot"><span class="rd-cscard__inst">{{ block.settings.title }}</span><a class="rd-cscard__more rd-cscard__stretch" href="{{ block.settings.url | default: "/blogs/impact" }}">Read the story <span class="rd-arrow">&rarr;</span></a></div></div>
           </div>
@@ -637,27 +637,9 @@
 .rd-mech{font-size:17px;font-weight:800;letter-spacing:.01em;max-width:56ch}
 /* under-wall proof line — the archive statement (editable) */
 .rd-evproof-line{margin:26px 0 0;font-size:14px;font-weight:800;letter-spacing:.02em;opacity:.75}
-/* ---- evidence motion (2026-07-22) — every rule inert under reduced-motion ----
-   Chips use the same scroll-driven idiom as .rd-reveal (bbc-statement): pure CSS,
-   @supports-guarded — unsupported browsers and reduced-motion just see the chips.
-   (First version keyed on a .rd-in class that this reveal system never adds.) */
-@media (prefers-reduced-motion: no-preference){
-  @supports (animation-timeline: view()){
-    .rd-cscard__outs li{animation:rd-chip-in both;animation-timeline:view();animation-range:entry 0% entry 40%}
-    .rd-cscard__outs li:nth-child(2){animation-range:entry 8% entry 48%}
-    .rd-cscard__outs li:nth-child(3){animation-range:entry 16% entry 56%}
-    .rd-cscard__outs li:nth-child(4){animation-range:entry 24% entry 64%}
-  }
-  @keyframes rd-chip-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-  /* card hover lift (pointer devices) */
-  .rd-cscard--ev{transition:transform .22s ease,box-shadow .22s ease}
-  @media (hover:hover){
-    .rd-cscard--ev:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(14,26,23,.12)}
-  }
-  /* filter change: surviving cards rise in */
-  @keyframes rd-evin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-  .rd-evin{animation:rd-evin .28s ease both}
-}
+/* evidence motion PROMOTED to bbc-universal.css §11 (2026-07-24) — chip stagger,
+   .rd-evin filter rise and the card hover grammar are now sitewide vocabulary.
+   Contract: qa/MOTION.md. No motion keyframes may live in this section. */
 {% endstylesheet %}
 
 {% javascript %}

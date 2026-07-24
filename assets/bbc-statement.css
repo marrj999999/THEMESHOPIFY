@@ -369,7 +369,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 /* ---- Duotone image treatment (Brand Guidelines recipe: B&W +
    FOREST block on EXCLUSION + 80% black gradient on MULTIPLY).
    Wrap any <img> in .rd-duotone. Mission-page imagery only. */
-.rd-duotone{ position:relative; isolation:isolate; overflow:hidden; display:block; }
+.rd-duotone{ position:relative; isolation:isolate; overflow:clip; display:block; } /* clip: hosts a scroll-driven img (universal §11) */
 .rd-duotone>img{ display:block; width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.06); }
 .rd-duotone::before{ content:""; position:absolute; inset:0; background:var(--forest,#003C32); mix-blend-mode:exclusion; pointer-events:none; }
 .rd-duotone::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.8) 100%); mix-blend-mode:multiply; pointer-events:none; }
@@ -711,7 +711,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
   .bbc-rd-impact .rd-path:hover{ transform:translateY(-4px); }
   .bbc-rd-impact .rd-path--schools:hover{ box-shadow:8px 8px 0 var(--lime-700,#9BC02E); }
   .bbc-rd-impact .rd-path--prisons:hover{ box-shadow:8px 8px 0 var(--forest-700,#002A23); }
-  .bbc-rd-impact .rd-path__media{ overflow:hidden; }
+  .bbc-rd-impact .rd-path__media{ overflow:clip; } /* clip: duotone img inside is scroll-driven (MOTION.md r4) */
   .bbc-rd-impact .rd-path__media img{ transition:transform .35s ease; }
   .bbc-rd-impact .rd-path:hover .rd-path__media img{ transform:scale(1.04); }
   .bbc-rd-impact .rd-ops__cell, .bbc-rd-impact .rd-dlcard{ transition:transform .18s ease; }

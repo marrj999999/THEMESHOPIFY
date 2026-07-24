@@ -33,3 +33,10 @@ charity:water · Who Gives A Crap · Change Please · Elvis & Kresse (+ banked T
 | (page-level) | footer newsletter = owned audience ✓ | Change Please/E&K close with capture | ✓ via footer |
 | (gap) | no dated report artifact | Big Issue dated PDF | ✗ still blocker #7 (needs commissioning) |
 | (lede claim) | cred lede "employment after release reduces reoffending significantly" unlabelled | caveat-on-page (NPC) | ⚠ recommend "(MoJ evidence)" tag — James's copy |
+
+## THE MOTION SYSTEM — built, verified, looped (plan executed in full)
+- Research: caniuse (view(): Chrome/Edge 115+, Safari/iOS 26, Firefox 155+, ~84%) · Kowalski (<300ms, ease-out, transform/opacity) · MDN recipes (ranges, stagger, compositor list incl. filter) · WCAG 2.2 §2.3.3. All in MOTION.md.
+- Built: universal §11 (tokens --mo-*, promoted rd-chip-in/rd-evin, NEW .rd-stagger cascade + wordmark rise + duotone develop, unified hover grammar) · orphaned .rd-in reveal DELETED (was permanently hiding all .rd-reveal content on non-view() browsers) · nav micro-motions tokenised · SEVEN more hidden→clip scroll-container kills fixed (rd-hero, rd-card, rd-door, rd-video, rd-cscard__media, rd-path__media, .bbc-wordmark).
+- Feedback loop: qa/motion-check.mjs (35 assertions × 2 contexts incl. reducedMotion:'reduce'; Firefox-blank static guard; jank longtask counter; writes evidence table) + WORKFLOW.md step 4.5. FINAL: 35/35 PASS.
+- Loop caught during its own build: fake-failing synthetic probe (theme hides stray body-end divs — probe was display:none since inception), collection reveals dead inside .rd-card containers, duotone dead inside .rd-path__media, wordmark page-end range edge. All fixed, all now asserted.
+- Numeric motion proof: chip stagger mid-flight [1,1,1,0] · wall cascade [0.89,0.28,0.49,0] · duotone brightness .73→1.0 · wordmark 1.0 at page end · reduce contexts fully inert+visible.

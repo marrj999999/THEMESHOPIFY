@@ -77,7 +77,7 @@
 .bbc-rd .rd-center{ text-align:center; }
 
 /* hero */
-.bbc-rd .rd-hero{ position:relative; min-height:88vh; display:flex; align-items:flex-end; color:var(--bone); overflow:hidden; background:var(--forest); }
+.bbc-rd .rd-hero{ position:relative; min-height:88vh; display:flex; align-items:flex-end; color:var(--bone); overflow:clip; background:var(--forest); }
 .bbc-rd .rd-hero .rd-bg{ position:absolute; inset:0; z-index:0; }
 .bbc-rd .rd-hero .rd-bg img{ width:100%; height:100%; object-fit:cover; }
 .bbc-rd .rd-hero .rd-scrim{ position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(0,28,23,.55) 0%, rgba(0,28,23,.34) 42%, rgba(0,28,23,.90) 100%); }
@@ -116,7 +116,8 @@
 @media(max-width:620px){ .bbc-rd .rd-g2,.bbc-rd .rd-g3,.bbc-rd .rd-g4{ grid-template-columns:1fr; } }
 
 /* cards */
-.bbc-rd .rd-card{ background:var(--paper); border-radius:12px; overflow:hidden; border:1.5px solid transparent; }
+/* container croppers use clip NOT hidden — hidden makes them scroll containers and kills any scroll-driven timeline inside (qa/MOTION.md rule 4, 2026-07-24) */
+.bbc-rd .rd-card{ background:var(--paper); border-radius:12px; overflow:clip; border:1.5px solid transparent; }
 .bbc-rd .rd-card.rd-stamp{ background:var(--bone); border:2.5px solid var(--ink); border-radius:6px; box-shadow:5px 5px 0 var(--ink); }
 .bbc-rd .rd-card.rd-stamp.rd-lime{ box-shadow:5px 5px 0 var(--lime-700); }
 .bbc-rd .rd-card.rd-card-free{ background:#f3fbe3; box-shadow:5px 5px 0 var(--lime-700); }  /* education advert: the FREE Speaker card is the hero offer */
@@ -139,7 +140,7 @@
   .bbc-rd a.rd-cscard:hover .rd-cscard__more{ gap:11px; }
 }
 .bbc-rd a.rd-cscard:focus-visible{ outline:3px solid var(--forest); outline-offset:3px; }
-.bbc-rd .rd-cscard__media{ position:relative; aspect-ratio:16/10; overflow:hidden; background:var(--forest); border-bottom:2.5px solid var(--ink); }
+.bbc-rd .rd-cscard__media{ position:relative; aspect-ratio:16/10; overflow:clip; background:var(--forest); border-bottom:2.5px solid var(--ink); }
 .bbc-rd .rd-cscard__media img{ width:100%; height:100%; object-fit:cover; transition:transform .45s ease; }
 .bbc-rd .rd-cscard__kind{ position:absolute; top:13px; left:13px; background:var(--lime); color:var(--forest); border:1.5px solid var(--ink); font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; padding:5px 11px; border-radius:999px; }
 .bbc-rd .rd-cscard__body{ display:flex; flex-direction:column; padding:22px 22px 20px; flex:1 1 auto; }
@@ -188,7 +189,7 @@
 .bbc-rd .rd-card .rd-ph img{ width:100%; height:100%; object-fit:cover; }
 
 /* audience door cards */
-.bbc-rd .rd-door{ position:relative; border-radius:14px; overflow:hidden; min-height:300px; display:flex; align-items:flex-end; color:var(--bone); border:2.5px solid var(--ink); }
+.bbc-rd .rd-door{ position:relative; border-radius:14px; overflow:clip; min-height:300px; display:flex; align-items:flex-end; color:var(--bone); border:2.5px solid var(--ink); }
 .bbc-rd .rd-door img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
 .bbc-rd .rd-door .rd-ov{ position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(0,40,33,.15), rgba(0,40,33,.86)); }
 .bbc-rd .rd-door .rd-c{ position:relative; z-index:2; padding:28px; }
@@ -233,10 +234,11 @@
 .bbc-rd .rd-flex{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
 .bbc-rd .rd-between{ justify-content:space-between; align-items:flex-end; }
 
-/* reveal-on-scroll (progressive; safe without JS) */
-.bbc-rd .rd-reveal{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
-.bbc-rd .rd-reveal.rd-in{ opacity:1; transform:none; }
-@media(prefers-reduced-motion:reduce){ .bbc-rd .rd-reveal{ opacity:1; transform:none; } }
+/* reveal-on-scroll REMOVED 2026-07-24: this legacy block waited for a .rd-in class
+   that no code has ever added (verified across git history) — on browsers without
+   animation-timeline support it left every .rd-reveal element permanently invisible.
+   The sole reveal engine is bbc-statement's @supports-gated scroll-driven system;
+   base state everywhere is VISIBLE. Contract: qa/MOTION.md. */
 
 /* ===== Shared components for inner pages (About / Impact / Education / Workshops) ===== */
 
@@ -279,7 +281,7 @@
 .bbc-rd .rd-dark .rd-list li::before{ color:var(--lime); }
 
 /* video cover (Workshops watch-a-build) */
-.bbc-rd .rd-video{ position:relative; border-radius:14px; overflow:hidden; border:2.5px solid var(--ink); min-height:340px; display:flex; align-items:center; justify-content:center; }
+.bbc-rd .rd-video{ position:relative; border-radius:14px; overflow:clip; border:2.5px solid var(--ink); min-height:340px; display:flex; align-items:center; justify-content:center; }
 .bbc-rd .rd-video:has(.rd-video-el){ display:block; min-height:0; background:var(--ink); }
 .bbc-rd .rd-video .rd-video-el{ display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; background:#000; }
 .bbc-rd .rd-video img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
@@ -885,7 +887,7 @@
 .bbc-rd .rd-drop a:hover{ padding-left:18px; }
 .bbc-rd .rd-drop a:hover::before{ height:58%; }
 .bbc-rd .rd-has-drop:hover .rd-drop a,
-.bbc-rd .rd-drop-open > .rd-drop a{ animation:rdItemIn .3s both; }
+.bbc-rd .rd-drop-open > .rd-drop a{ animation:rdItemIn var(--mo-base,.22s) both; }
 .bbc-rd .rd-drop a:nth-child(1){ animation-delay:.02s; }
 .bbc-rd .rd-drop a:nth-child(2){ animation-delay:.05s; }
 .bbc-rd .rd-drop a:nth-child(3){ animation-delay:.08s; }
@@ -910,7 +912,7 @@
 .bbc-rd .rd-caret{ transition:transform .22s cubic-bezier(.34,1.4,.5,1), opacity .18s ease; }
 
 /* Mobile drawer links: soft stagger as the drawer opens. */
-.bbc-rd.rd-header.rd-open .rd-mwrap > a{ animation:rdItemIn .32s both; }
+.bbc-rd.rd-header.rd-open .rd-mwrap > a{ animation:rdItemIn var(--mo-base,.22s) both; }
 .bbc-rd.rd-header.rd-open .rd-mwrap > a:nth-of-type(2){ animation-delay:.03s; }
 .bbc-rd.rd-header.rd-open .rd-mwrap > a:nth-of-type(3){ animation-delay:.06s; }
 .bbc-rd.rd-header.rd-open .rd-mwrap > a:nth-of-type(4){ animation-delay:.09s; }

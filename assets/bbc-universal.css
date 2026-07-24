@@ -222,11 +222,11 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
 
 /* Giant footer wordmark — type-as-poster (genre staple: PP/Rudnick/fashion).
    One full-bleed lowercase line; clamps to the container; decorative. */
-.bbc-wordmark{ display:block; width:100%; overflow:hidden; padding:28px 0 6px;
+.bbc-wordmark{ display:block; width:100%; overflow:clip; /* clip not hidden — hosts an animated child (§11) */ padding:28px 0 6px;
   font-family:var(--rd-sans); font-weight:800; letter-spacing:-.03em; line-height:.9;
   font-size:clamp(2.6rem,9.4vw,9rem); white-space:nowrap; text-align:center;
   color:var(--bone); opacity:.92; user-select:none; }
-.bbc-wordmark a{ color:inherit !important; text-decoration:none !important; }
+.bbc-wordmark a{ color:inherit !important; text-decoration:none !important; display:inline-block; }
 
 /* ============================================================
    §9 GLOBAL POLISH + A11Y (new, 2026-07-22)
@@ -264,3 +264,65 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
 .bbc-rd-home .ew-stamp,
 .bbc-rd-home .ew-ink{ display:none !important; }  /* clean video hero */
 .bbc-rd-home .ew{ min-height:92svh; }             /* hero fills the fold */
+
+/* ============================================================================
+   §11 THE MOTION SYSTEM (2026-07-24) — contract: qa/MOTION.md
+   One tokenised vocabulary for all BBC motion. Research: Kowalski (UI <300ms,
+   ease-out entrances), MDN scroll-driven recipes, WCAG 2.2 §2.3.3, support
+   caniuse 2026-06 (view(): Chrome/Edge 115+, Safari/iOS 26, Firefox 155+, ~84%).
+   HARD RULES: evidence/credibility/prices never move · reduced-motion = inert ·
+   no view() support = fully visible static page (no opacity:0 outside @supports)
+   · crop-wrappers that host animated children use overflow:clip, NEVER hidden
+   (hidden creates a scroll container and silently kills every timeline inside —
+   the bug that muted the whole site until 2026-07-24) · new keyframes live HERE.
+   ============================================================================ */
+:root{
+  --mo-fast:.15s;        /* hover feedback, micro-interactions */
+  --mo-base:.22s;        /* menus, filters, small entrances */
+  --mo-entrance:.45s;    /* card/chip content entrances */
+  --mo-reveal:.6s;       /* band-level reveals (statement equivalents) */
+  --mo-ease:cubic-bezier(.2,.7,.2,1);       /* out — entrances + hovers */
+  --mo-ease-io:cubic-bezier(.45,0,.25,1);   /* in-out — positional moves */
+  --mo-rise:14px; --mo-rise-sm:8px;
+}
+
+@media (prefers-reduced-motion: no-preference){
+
+  /* ---- scroll-driven vocabulary (all @supports-gated; static page otherwise) ---- */
+  @supports (animation-timeline: view()){
+    /* chip/outcome stagger (promoted from bbc-impact 2026-07-24; classes unchanged) */
+    .rd-cscard__outs li{ animation:rd-chip-in both; animation-timeline:view(); animation-range:entry 0% entry 40%; }
+    .rd-cscard__outs li:nth-child(2){ animation-range:entry 8% entry 48%; }
+    .rd-cscard__outs li:nth-child(3){ animation-range:entry 16% entry 56%; }
+    .rd-cscard__outs li:nth-child(4){ animation-range:entry 24% entry 64%; }
+
+    /* .rd-stagger — grid children cascade in reading order (MDN range-offset recipe) */
+    .rd-stagger > *{ animation:rd-chip-in both; animation-timeline:view(); animation-range:entry 0% entry 45%; }
+    .rd-stagger > :nth-child(2){ animation-range:entry 6% entry 51%; }
+    .rd-stagger > :nth-child(3){ animation-range:entry 12% entry 57%; }
+    .rd-stagger > :nth-child(4){ animation-range:entry 18% entry 63%; }
+    .rd-stagger > :nth-child(5){ animation-range:entry 24% entry 69%; }
+    .rd-stagger > :nth-child(n+6){ animation-range:entry 30% entry 75%; }
+
+    /* footer wordmark rise — the signature close */
+    .bbc-wordmark a{ animation:rd-wordmark-rise both; animation-timeline:view(); animation-range:entry 0% entry 18%; } /* completes within minimal entry — page-end subjects never traverse a full entry range */
+
+    /* duotone develop — image resolves INTO the brand treatment (never out of it) */
+    .rd-duotone > img{ animation:rd-duotone-develop both; animation-timeline:view(); animation-range:entry 0% entry 60%; }
+  }
+
+  @keyframes rd-chip-in{ from{ opacity:0; transform:translateY(var(--mo-rise-sm,8px)); } to{ opacity:1; transform:none; } }
+  @keyframes rd-wordmark-rise{ from{ opacity:.35; transform:translateY(22%); } to{ opacity:1; transform:none; } }
+  /* from = the utility's own filter + darkened: develops INTO grayscale(1) contrast(1.06) */
+  @keyframes rd-duotone-develop{ from{ filter:grayscale(1) contrast(1.06) brightness(.55); } to{ filter:grayscale(1) contrast(1.06) brightness(1); } }
+
+  /* ---- time-based vocabulary ---- */
+  @keyframes rd-evin{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+  .rd-evin{ animation:rd-evin var(--mo-base) var(--mo-ease) both; }
+
+  /* ---- hover grammar (pointer devices): cards lift 4, buttons 2, always --mo-fast ---- */
+  @media (hover:hover){
+    .rd-cscard--ev{ transition:transform var(--mo-fast) var(--mo-ease), box-shadow var(--mo-fast) var(--mo-ease); }
+    .rd-cscard--ev:hover{ transform:translateY(-4px); box-shadow:0 10px 24px rgba(14,26,23,.12); }
+  }
+}
