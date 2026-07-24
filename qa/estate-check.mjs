@@ -126,7 +126,13 @@ if (runTier(1)) {
             // Sizes rounded to 0.5px — sub-pixel rounding is not a design defect.
             typeRoles: (() => {
               const round = v => Math.round(parseFloat(v) * 2) / 2;
+              // Third-party UI we neither own nor style must not be measured against OUR contract.
+              // Shopify's consent banner renders an <h2>"Cookie consent" at 21.5px, which alone
+              // produced 22 of 69 first-run findings — a gate that reports someone else's markup
+              // as our defect is a gate people stop reading (see ESCAPES #10).
+              const THIRD_PARTY = '#shopify-pc__banner, .shopify-pc__banner, #insta-feed, [id^="PBar"], .shopify-payment-button';
               const painted = e => {
+                if (e.closest(THIRD_PARTY)) return false;
                 if (e.checkVisibility && !e.checkVisibility({ checkVisibilityCSS: true, checkOpacity: false })) return false;
                 const r = e.getBoundingClientRect();
                 return r.height > 4 && r.width > 20 && getComputedStyle(e).visibility === 'visible';
@@ -165,7 +171,14 @@ if (runTier(1)) {
         // (TYPE_ROLES_BLOCKING=1 to enforce) — a check that instantly blocks every push is a
         // check people learn to route around. The inventory it produces IS the work queue.
         {
-          const offenders = Object.entries(r.typeRoles || {}).filter(([, sizes]) => sizes.length > 1);
+          // Named exception, not a silent pass: ROLLOUT-TRACKER Tier 3 is explicitly
+          // "commerce: type/buttons pass, KEEP DENSITY". Forcing a related-products strip
+          // heading to the 94.5px band-h2 would dominate a PDP and work against the page's job.
+          // Scoped to product/collection/cart URLs and to h2 only — everything else still asserts.
+          const commerceDensity = /^\/(products|collections|cart)/.test(path);
+          const offenders = Object.entries(r.typeRoles || {})
+            .filter(([role]) => !(commerceDensity && role === 'h2'))
+            .filter(([, sizes]) => sizes.length > 1);
           const detail = offenders.map(([role, s]) => `${role}:${s.join('/')}`).join(' ');
           const ok = offenders.length === 0;
           if (TYPE_ROLES_BLOCKING) add(1, path + '@' + label, 'FORMULA §1 one size per role', ok, detail);

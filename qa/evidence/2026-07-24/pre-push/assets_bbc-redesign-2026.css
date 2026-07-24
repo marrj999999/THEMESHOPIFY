@@ -959,15 +959,3 @@
   .bbc-rd .rd-highlight:nth-child(even) .rd-highlight__media{ order:0; }
 }
 
-
-/* ── B1 · FORMULA §1 conformance (2026-07-24) ─────────────────────────────────
-   Found by the new type-role assertion in qa/estate-check.mjs. The raw first run
-   reported 69 findings; excluding third-party UI (Shopify's consent banner renders
-   an <h2> at 21.5px) collapsed that to 4 real ones — measure cleanly before fixing.
-
-   .rd-statlbl — the unit label under a big figure in a stat/budget card ("per kit",
-   "per cohort"). These were marked up as <h3>, which injects "per kit" into the
-   document outline as a heading; they are labels, not headings. Swapped to <p> and
-   this class carries the EXACT previously-computed styling so the swap is visually
-   identical: weight 800, 18px, line-height 18.72/18 = 1.04, margin 10px 0.       */
-.bbc-rd .rd-statlbl{ font-size:18px !important; font-weight:800 !important; line-height:1.04 !important; margin:10px 0 !important; }

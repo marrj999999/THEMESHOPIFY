@@ -1,0 +1,74 @@
+FORMULA §1 — ONE SIZE PER ROLE · 2026-07-24
+69 page/width combinations render more than one size for a role.
+Observational (set TYPE_ROLES_BLOCKING=1 to enforce). Measured per breakpoint because the
+scale is clamp()-based; comparing across widths would be meaningless.
+
+/@1280 · h2:21.5/94.5
+/pages/impact@1280 · h2:21.5/94.5
+/pages/programmes@1280 · h2:21.5/94.5 card-title:18/21
+/pages/workshops@1280 · h2:21.5/94.5
+/pages/schools@1280 · h2:21.5/94.5
+/pages/why-bamboo@1280 · h2:21.5/94.5
+/pages/bicycleteambuilding@1280 · h2:21.5/94.5
+/pages/contact-us@1280 · h2:21/21.5/94.5
+/pages/support-mission@1280 · h2:21.5/94.5
+/pages/which-kit@1280 · h2:21.5/94.5
+/pages/gallery@1280 · h2:21.5/94.5
+/pages/our-story-2@1280 · h2:21.5/94.5
+/pages/build-to-bond@1280 · h2:21.5/94.5
+/pages/prisons@1280 · h2:21.5/94.5 card-title:18/21
+/pages/theory-of-change@1280 · h2:21.5/94.5
+/pages/impact-report@1280 · h2:21.5/94.5
+/pages/bicycle-frame-building-workshop@1280 · h2:21.5/94.5
+/pages/media-page@1280 · h2:21.5/94.5
+/pages/support-centre@1280 · h2:21.5/29
+/pages/team-building@1280 · h2:21.5/94.5
+/pages/frequently-asked-questions@1280 · h2:21.5/29
+/pages/size-guide@1280 · h2:19/29
+/pages/privacy-policy@1280 · h2:21.5/29
+/pages/bamboo-bike-stem-lesson@1280 · h2:21.5/29
+/pages/bamboo-frame-nea-project@1280 · h2:21.5/29
+/pages/free-bamboo-speaker-workshop@1280 · h2:21.5/29
+/collections@1280 · h2:18/21.5
+/collections/home-build-kits@1280 · h2:18/21.5
+/collections/component-packs@1280 · h2:18/21.5
+/collections/maker-shop@1280 · h2:18/21.5
+/collections/clothing@1280 · h2:18/21.5
+/collections/road@1280 · h2:18/21.5
+/collections/gravel-adventure@1280 · h2:18/21.5
+/collections/mtb@1280 · h2:18/21.5
+/collections/balance-bikes@1280 · h2:18/21.5
+/collections/gift@1280 · h2:18/21.5
+/products/gravel-frame-build-kit@1280 · h2:21.5/32/94.5 card-title:18/21
+/products/bamboo-bike-road-kit@1280 · h2:21.5/32/94.5 card-title:18/21
+/products/road-carbon-frame-build-kit@1280 · h2:21.5/32/94.5 card-title:18/21
+/products/gravel-lugged-build-kit@1280 · h2:21.5/32/94.5 card-title:18/21
+/products/29er-frame-build-kit@1280 · h2:21.5/32/94.5 card-title:18/21
+/products/city-bike-frame-kit@1280 · h2:21.5/32/94.5 card-title:18/21
+/products/fatbike-home-build-kit@1280 · h2:21.5/32/94.5 card-title:18/21
+/products/custom-frame@1280 · h2:21.5/32/94.5 card-title:18/21
+/products/balance-bike-lugged-kit-1@1280 · h2:21.5/32/94.5 card-title:18/21
+/products/balance-bike-flax-kit-with-resins@1280 · h2:21.5/32/94.5 card-title:18/21
+/products/bottom-bracket-68mm@1280 · h2:21.5/94.5
+/products/single-speed-component-pack@1280 · h2:21.5/94.5
+/products/bamboo-bicycle-club-gift-card@1280 · h2:21.5/94.5
+/products/bamboo-bicycle-club-beanie@1280 · h2:21.5/94.5
+/search?q=bamboo@1280 · h2:18/21.5
+/blogs/news@1280 · h2:21/21.5
+/blogs/news/project-zero-impact-case-study@1280 · h2:21/21.5/29/94.5
+/@390 · h2:24/35/47
+/pages/programmes@390 · card-title:18/21
+/pages/why-bamboo@390 · h2:43/47
+/pages/contact-us@390 · h2:21/43
+/pages/prisons@390 · card-title:18/21
+/products/gravel-frame-build-kit@390 · h2:26/43 card-title:18/21
+/products/bamboo-bike-road-kit@390 · h2:26/43 card-title:18/21
+/products/road-carbon-frame-build-kit@390 · h2:26/43 card-title:18/21
+/products/gravel-lugged-build-kit@390 · h2:26/43 card-title:18/21
+/products/29er-frame-build-kit@390 · h2:26/43 card-title:18/21
+/products/city-bike-frame-kit@390 · h2:26/43 card-title:18/21
+/products/fatbike-home-build-kit@390 · h2:26/43 card-title:18/21
+/products/custom-frame@390 · h2:26/43 card-title:18/21
+/products/balance-bike-lugged-kit-1@390 · h2:26/43 card-title:18/21
+/products/balance-bike-flax-kit-with-resins@390 · h2:26/43 card-title:18/21
+/blogs/news/project-zero-impact-case-study@390 · h2:21/43

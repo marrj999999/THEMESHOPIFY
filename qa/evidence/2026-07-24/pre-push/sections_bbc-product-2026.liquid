@@ -392,7 +392,7 @@
           {%- for block in steps -%}
             <div class="rd-card rd-stamp" {{ block.shopify_attributes }}><div class="rd-body">
               <span class="rd-tag rd-lime">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
-              <h3 class="rd-mt2 rd-fs-21px">{{ block.settings.title }}</h3>
+              <h3 class="rd-mt2 rd-fs-18px">{{ block.settings.title }}</h3>
               <p class="rd-mt1">{{ block.settings.description }}</p>
             </div></div>
           {%- endfor -%}
@@ -633,7 +633,7 @@
                 {%- endif -%}
               </div>
               <div class="rd-body">
-                <h3 class="rd-fs-21px">{{ block.settings.title }}</h3>
+                <h3 class="rd-fs-18px">{{ block.settings.title }}</h3>
                 {%- if block.settings.price != blank -%}
                   <p class="rd-cmp-83298">{{ block.settings.price }}</p>
                 {%- endif -%}
