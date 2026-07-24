@@ -63,3 +63,19 @@ web-page version until the PDF exists).
 MEASURED: 17.2→15.2 viewports @1280 · 22.6→20.7 @390 · 11→9 bands · 0 empty h2 · chapters+anchors
 intact · overflow 0 · motion-check 35/35. Schema clash caught (report_label already existed — reused
 not duplicated); 70-char label limit hit + fixed.
+
+## WIDE-VIEWPORT AUDIT (James's Chrome session, 1568/1634px — "it is a mess")
+Root discovery: the estate was only ever tested at 1280+390 — James's screen width was a blind spot.
+FOUND+FIXED (all verified in HIS browser):
+1. **Header nav flush at wide widths** — .rd-quicklinks had ZERO css rules (unstyled block, raw inline
+   anchors); .rd-nav-link pads 1px. Fix: explicit flex+gap 28px on quicklinks + 20px on rd-nav-links →
+   [28,28,28] at every width 1280–1920.
+2. **Flagship band off-axis at wide widths** ("now inside prison is misaligned") — its rd-mw-820px wrap
+   auto-centred, drifting off the left axis. Fix: #proof .rd-mw-820px{margin-left:0} → axis 217=217 exact.
+3. **Placeholder-grade copy defaults replaced** (James rewording welcome, both editable):
+   arms_title "using bicycles for engagement and pathways to vocational skills" → "real skills, taught
+   through bike-building" (SE mechanism-sentence pattern); converge_title "working to have a key impact
+   across key sectors…" → "vocational skills and pathways into careers — built through hands-on engineering".
+Wide sweep 6 pages × 1440/1680/1920: everything else clean (wraps cap 1200, h1 caps 124, no overflow;
+1920 full-bleed heroes >1800px = by design). LOOP HARDENED: motion-check gains a 1568 context
+(nav gaps + overflow + flagship axis) → 37/37 PASS.

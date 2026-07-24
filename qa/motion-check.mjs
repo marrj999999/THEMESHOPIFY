@@ -146,6 +146,28 @@ for (const [label, url] of PAGES) {
   await ctx.close();
 }
 
+// ---------- Context 1.5: wide viewport (1568 — James's screen; the width the estate
+// was never tested at until the unstyled-nav miss of 2026-07-24) ----------
+{
+  const ctx = await browser.newContext({ viewport: { width: 1568, height: 900 } });
+  const page = await ctx.newPage();
+  try {
+    await page.goto(PAGES[1][1], { waitUntil: 'load', timeout: 40000 });
+    await page.waitForTimeout(800);
+    const r = await page.evaluate(() => {
+      const q = document.querySelector('.rd-quicklinks');
+      const gaps = [];
+      if (q) { const l = [...q.querySelectorAll(':scope > a')]; for (let i = 1; i < l.length; i++) gaps.push(Math.round(l[i].getBoundingClientRect().left - l[i-1].getBoundingClientRect().right)); }
+      const wrap = document.querySelector('#book-a-call .rd-wrap');
+      const proof = document.querySelector('#proof .rd-mw-820px');
+      return { overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, gaps, axisOk: wrap && proof ? Math.abs(wrap.getBoundingClientRect().left - proof.getBoundingClientRect().left) < 4 : true };
+    });
+    add('impact @1568', 'nav gaps >= 8px', r.gaps.length === 0 || r.gaps.every(g => g >= 8), `[${r.gaps}]`);
+    add('impact @1568', 'overflow 0 + flagship on axis', r.overflow === 0 && r.axisOk, `ovf=${r.overflow} axis=${r.axisOk}`);
+  } catch (e) { add('impact @1568', 'LOAD', false, e.message.slice(0, 60)); }
+  await ctx.close();
+}
+
 // ---------- Context 2: reduced motion ----------
 for (const [label, url] of PAGES.slice(0, 2)) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 }, reducedMotion: 'reduce' });

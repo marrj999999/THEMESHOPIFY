@@ -41,6 +41,12 @@
   .rd-logo-img{ height:46px; width:auto; display:block; max-width:210px; }
   @media (max-width:749px){ .rd-logo-img{ height:40px; } }
 
+  /* quicklinks container was completely unstyled — links rendered flush at wide
+     viewports (caught in James's 1634px Chrome, 2026-07-24; audits only covered
+     1280/390). Explicit flex+gap = same spacing at every width. */
+  .rd-quicklinks{ display:flex; align-items:center; gap:28px; }
+  .rd-nav-links{ display:flex; align-items:center; gap:20px; }
+
   /* Compact mega-menu: one "Menu" trigger that expands the full nav on hover OR click (button focus) */
   .rd-megamenu{ position:relative; }
   .rd-menu-trigger{ display:inline-flex; align-items:center; gap:10px; font:inherit; font-weight:700; font-size:16px; color:var(--charcoal); background:transparent; border:0; cursor:pointer; padding:9px 6px; line-height:1; border-radius:8px; }
