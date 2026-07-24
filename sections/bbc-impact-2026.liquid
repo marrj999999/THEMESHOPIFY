@@ -291,7 +291,7 @@
     <div class="rd-wrap"><div class="rd-mw-820px">
       <div class="rd-csgrid rd-csgrid-1">
         <a class="rd-reveal rd-cscard" href="{{ section.settings.cs_url | default: '/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2' }}">
-          <div class="rd-cscard__media"><img src="{{ section.settings.cs_image | default: 'bbc-rd-prison-empty.jpg' | asset_url }}" alt="Inside the Build to Bond workshop at HMP Lowdham Grange" loading="lazy" width="600" height="375"><span class="rd-cscard__kind">{{ section.settings.cs_kind | default: 'Case study' }}</span></div>
+          <div class="rd-cscard__media">{%- if section.settings.cs_image_pic != blank -%}<img src="{{ section.settings.cs_image_pic | image_url: width: 1200 }}" srcset="{{ section.settings.cs_image_pic | image_url: width: 600 }} 600w, {{ section.settings.cs_image_pic | image_url: width: 1200 }} 1200w, {{ section.settings.cs_image_pic | image_url: width: 1800 }} 1800w" sizes="(max-width: 749px) 100vw, 820px" alt="Inside the Build to Bond workshop at HMP Lowdham Grange" loading="lazy" width="{{ section.settings.cs_image_pic.width }}" height="{{ section.settings.cs_image_pic.height }}">{%- else -%}<img src="{{ section.settings.cs_image | default: 'bbc-rd-prison-empty.jpg' | asset_url }}" alt="Inside the Build to Bond workshop at HMP Lowdham Grange" loading="lazy" width="1400" height="875">{%- endif -%}<span class="rd-cscard__kind">{{ section.settings.cs_kind | default: 'Case study' }}</span></div>
           <div class="rd-cscard__body">
             {%- if section.settings.cs_quote != blank -%}<p class="rd-cscard__quote">{{ section.settings.cs_quote }}</p>{%- endif -%}
             {%- if section.settings.cs_quote != blank and section.settings.cs_attr != blank -%}<p class="rd-cscard__attr">{{ section.settings.cs_attr }}</p>{%- endif -%}
@@ -370,7 +370,7 @@
           {%- comment -%} div + stretched-link, NOT an <a> wrapper — the source link inside
              would nest anchors and the parser shatters the card (caught 2026-07-22) {%- endcomment -%}
           <div class="rd-cscard rd-cscard--ev" data-kind="{{ _bk }}" {{ block.shopify_attributes }}>
-            <div class="rd-cscard__media"><img src="{% if cimg contains "//" %}{{ cimg }}{% else %}{{ cimg | asset_url }}{% endif %}" alt="{{ block.settings.title | escape }}" loading="lazy" width="600" height="375">{%- if block.settings.kind != blank -%}<span class="rd-cscard__kind">{{ block.settings.kind }}</span>{%- endif -%}</div>
+            <div class="rd-cscard__media">{%- if cimg contains "//" -%}<img src="{{ cimg }}&width=800" srcset="{{ cimg }}&width=480 480w, {{ cimg }}&width=800 800w, {{ cimg }}&width=1200 1200w" sizes="(max-width: 749px) 100vw, (max-width: 980px) 50vw, 33vw" alt="{{ block.settings.title | escape }}" loading="lazy" width="800" height="500">{%- else -%}<img src="{{ cimg | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy" width="600" height="375">{%- endif -%}{%- if block.settings.kind != blank -%}<span class="rd-cscard__kind">{{ block.settings.kind }}</span>{%- endif -%}</div>
             <div class="rd-cscard__body">{{ evmeta }}<p class="rd-cscard__ctx">{{ block.settings.blurb }}</p>{{ evproof }}<div class="rd-cscard__foot"><span class="rd-cscard__inst">{{ block.settings.title }}</span><a class="rd-cscard__more rd-cscard__stretch" href="{{ block.settings.url | default: "/blogs/impact" }}">Read the story <span class="rd-arrow">&rarr;</span></a></div></div>
           </div>
           {%- endif -%}
@@ -1262,6 +1262,11 @@ document.addEventListener('click', function (e) {
       "id": "cs_kind",
       "label": "Card tag",
       "default": "Case study"
+    },
+    {
+      "type": "image_picker",
+      "id": "cs_image_pic",
+      "label": "Case-study image (upload/pick — responsive)"
     },
     {
       "type": "text",

@@ -107,3 +107,16 @@ see content — the wall void).
 RESULT: text axis spread across ALL bands = **0px** at 1568 · posters render (361×226 frames) ·
 uniform 64 rhythm after the opening · LOOP: +2 assertions (one-axis ≤6px · wall frames ≥100px,
 frame-based so lazy-load can't false-positive) → **motion-check 40/40**.
+
+## IMAGE RESOLUTION + RESPONSIVE IMAGES (James: "case study different resolution, content not responsive — why missed")
+WHY MISSED (honest): no audit ever compared an image's NATURAL pixels to its RENDERED size — width
+matrices and alignment maths can all pass while an image upscales soft. New audit (res-audit, DPR2,
+4 widths incl. the never-tested tablet band 768/1024) found: hero asset ceiling 1600px (×1.96 deficit
+at 1568 retina); case-study/wall images all SINGLE-SRC (no srcset anywhere = the non-responsive
+content); the SVG "deficits" (map ×7.2, FT logo) are vector false-positives.
+FIXES: flagship gains a cs_image_pic picker with full srcset (600/1200/1800) + fallback dims fixed;
+wall cards' CDN images now serve responsive variants via width params (480/800/1200 + sizes); tablet
+band checked clean (0 overflow, no fixed-width leaks 768/1024). Hero: srcset pipeline already existed
+— the template just has no hero_image set; Files holds no higher-res version of the current scene
+(closest big: SRW08823 3738px, a different scene) → JAMES picks a hero in the editor for true retina
+sharpness. LOOP: raster-deficit assertion (≤1.35, svg-exempt, full-page prescroll) → motion-check 41/41.

@@ -154,7 +154,7 @@ for (const [label, url] of PAGES) {
   try {
     await page.goto(PAGES[1][1], { waitUntil: 'load', timeout: 40000 });
     await page.waitForTimeout(800);
-    const r = await page.evaluate(() => {
+    const r = await page.evaluate(async () => {
       const q = document.querySelector('.rd-quicklinks');
       const gaps = [];
       if (q) { const l = [...q.querySelectorAll(':scope > a')]; for (let i = 1; i < l.length; i++) gaps.push(Math.round(l[i].getBoundingClientRect().left - l[i-1].getBoundingClientRect().right)); }
@@ -170,16 +170,28 @@ for (const [label, url] of PAGES) {
       if (evid) evid.scrollIntoView({behavior:'instant'});
       // measure the FRAME (aspect-derived, load-independent) — imgs lazy-load and false-positive
       const posterZero = [...document.querySelectorAll('#evidence .rd-cscard__media')].filter(f => f.querySelector('.bbc-media') && f.getBoundingClientRect().height < 100).length;
+      // raster image resolution: displayed×DPR must not exceed natural×1.35 (svg = vector, skip)
+      window.scrollTo({top: document.documentElement.scrollHeight, behavior: 'instant'});
+      await new Promise(r => setTimeout(r, 900));
+      window.scrollTo({top: 0, behavior: 'instant'});
+      await new Promise(r => setTimeout(r, 400));
+      const soft = [...document.querySelectorAll('.bbc-rd-impact img')].filter(i => {
+        const src = i.currentSrc || i.src;
+        if (/\.svg/.test(src) || !i.naturalWidth) return false;
+        const b = i.getBoundingClientRect();
+        return b.width > 120 && (b.width * devicePixelRatio) / i.naturalWidth > 1.35;
+      }).map(i => (i.currentSrc||i.src).split('/').pop().split('?')[0].slice(0,26));
       const media = document.querySelector('#proof .rd-cscard__media');
       const card = document.querySelector('#proof .rd-cscard');
       const mediaOk = media && card ? Math.abs(media.getBoundingClientRect().width - card.getBoundingClientRect().width) < 6 && media.getBoundingClientRect().height < media.getBoundingClientRect().width : true;
-      return { overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, gaps, mediaOk, axisSpread, posterZero, axisOk: wrap && proof ? Math.abs(wrap.getBoundingClientRect().left - proof.getBoundingClientRect().left) < 4 : true };
+      return { overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, gaps, mediaOk, axisSpread, posterZero, soft, axisOk: wrap && proof ? Math.abs(wrap.getBoundingClientRect().left - proof.getBoundingClientRect().left) < 4 : true };
     });
     add('impact @1568', 'nav gaps >= 8px', r.gaps.length === 0 || r.gaps.every(g => g >= 8), `[${r.gaps}]`);
     add('impact @1568', 'overflow 0 + flagship on axis', r.overflow === 0 && r.axisOk, `ovf=${r.overflow} axis=${r.axisOk}`);
     add('impact @1568', 'flagship media spans card, landscape (the narrow-strip bug)', r.mediaOk, `mediaOk=${r.mediaOk}`);
     add('impact @1568', 'one text axis across bands (spread ≤ 6px)', r.axisSpread <= 6, `spread=${r.axisSpread}px`);
     add('impact @1568', 'wall video posters have height', r.posterZero === 0, `${r.posterZero} collapsed`);
+    add('impact @1568', 'no soft raster images (deficit ≤1.35, svg-exempt)', r.soft.length <= 1, r.soft.slice(0,3).join('|') || 'all sharp');
   } catch (e) { add('impact @1568', 'LOAD', false, e.message.slice(0, 60)); }
   await ctx.close();
 }
