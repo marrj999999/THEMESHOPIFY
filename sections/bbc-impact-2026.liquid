@@ -83,19 +83,14 @@
           <a class="rd-btn rd-lime" href="{{ section.settings.help_cta_url | default: '/pages/contact-us?subject=discovery-call' }}">{{ section.settings.help_cta_label | default: 'book a discovery call' }} <span class="rd-arrow">&rarr;</span></a>
         </div>
       </div>
+      {%- comment -%} routes are secondary TEXT links, not competing cards — the original
+         Chris/Unbounce spec ("one main course"), restored 2026-07-24; blocks unchanged {%- endcomment -%}
       {%- assign helps = section.blocks | where: "type", "help" -%}
       {%- if helps.size > 0 -%}
-      <div class="rd-grid rd-g3 rd-mt4">
+      <div class="rd-helplinks rd-mt3">
         {%- for block in helps -%}
           {%- assign help_url = block.settings.link_url | default: '/pages/contact-us' -%}
-          <div class="rd-card rd-stamp rd-reveal" {{ block.shopify_attributes }}>
-            <div class="rd-body">
-              {%- if block.settings.tag != blank -%}<span class="rd-tag rd-lime">{{ block.settings.tag }}</span>{%- endif -%}
-              <h3 class="rd-mt2 rd-fs-21px">{{ block.settings.title }}</h3>
-              <p>{{ block.settings.body }}</p>
-              {%- if block.settings.link_label != blank -%}<a class="rd-textlink" href="{{ help_url }}">{{ block.settings.link_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
-            </div>
-          </div>
+          <a class="rd-textlink" href="{{ help_url }}" {{ block.shopify_attributes }}>{{ block.settings.title }} <span class="rd-arrow">&rarr;</span></a>
         {%- endfor -%}
       </div>
       {%- endif -%}
@@ -121,6 +116,7 @@
         {%- endif -%}{%- endfor -%}
       </div>
       {%- if section.settings.data_as_of != blank -%}<p class="rd-dataasof rd-on-dark">{{ section.settings.data_as_of }}</p>{%- endif -%}
+      {%- if section.settings.report_label != blank -%}<p class="rd-mt2"><a class="rd-textlink rd-reportlink" href="{{ section.settings.report_url | default: '/pages/impact-report' }}">{{ section.settings.report_label }} <span class="rd-arrow">&rarr;</span></a></p>{%- endif -%}
       {%- if section.settings.report_label != blank -%}<div class="rd-mt3"><a class="rd-btn rd-on-dark" href="{{ section.settings.report_url | default: '/pages/impact-report' }}">{{ section.settings.report_label }} <span class="rd-arrow">&rarr;</span></a></div>{%- endif -%}
     </div>
   </section>
@@ -220,7 +216,10 @@
   </section>
   {%- endif -%}
 
-  {%- comment -%} ---------- THE STORY: a real workshop, inside ---------- {%- endcomment -%}
+  {%- comment -%} ---------- THE STORY: a real workshop, inside ----------
+     Gated on the title (2026-07-24): with story_title cleared it rendered a 176px
+     empty dark shell — the third member of the gating-bug family. {%- endcomment -%}
+  {%- if section.settings.story_title != blank -%}
   <section class="rd-pad rd-band--workshop">
     <div class="rd-wrap rd-mw-820px">
       {%- if section.settings.story_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.story_eyebrow }}</span>{%- endif -%}
@@ -229,8 +228,13 @@
       {%- if section.settings.story_body_2 != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.story_body_2 }}</p>{%- endif -%}
     </div>
   </section>
+  {%- endif -%}
 
-  {%- comment -%} ---------- BUILD TO BOND FEATURE (split, dark) ---------- {%- endcomment -%}
+  {%- comment -%} ---------- BUILD TO BOND FEATURE (split, dark) ----------
+     Behind show_b2b (2026-07-24 genre alignment): its story duplicated the flagship
+     #proof card directly below; the Allsopp voice moved onto the flagship. One
+     checkbox restores the band — all its settings are preserved. {%- endcomment -%}
+  {%- if section.settings.show_b2b != false -%}
   <section class="rd-split rd-dark">
     <div class="rd-reveal rd-media">
       {%- if section.settings.b2b_image != blank -%}
@@ -257,6 +261,7 @@
       {%- endif -%}
     </div>
   </section>
+  {%- endif -%}
 
   {%- comment -%} ---------- WHY NOW (policy backdrop, sourced) ---------- {%- endcomment -%}
   {%- if section.settings.policy_title != blank -%}
@@ -639,6 +644,7 @@
 .rd-cscard--ev .rd-cscard__meta a,.rd-cscard--ev .rd-cscard__evq cite{position:relative;z-index:1}
 /* mechanism sentence — bold single line, the funder contract */
 .rd-mech{font-size:17px;font-weight:800;letter-spacing:.01em;max-width:56ch}
+.rd-helplinks{display:flex;flex-wrap:wrap;gap:10px 26px}
 /* under-wall proof line — the archive statement (editable) */
 .rd-evproof-line{margin:26px 0 0;font-size:14px;font-weight:800;letter-spacing:.02em;opacity:.75}
 /* evidence motion PROMOTED to bbc-universal.css §11 (2026-07-24) — chip stagger,
@@ -1328,6 +1334,12 @@ document.addEventListener('click', function (e) {
       "id": "chapters",
       "label": "Chapters (label~#anchor pairs, separated by |)",
       "default": "the proof~#proof|the evidence~#evidence|where we work~#map|who backs it~#backers"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_b2b",
+      "label": "Show the Build to Bond split band",
+      "default": true
     },
     {
       "type": "header",

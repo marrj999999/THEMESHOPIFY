@@ -49,3 +49,17 @@ evidence ↓" deep-links (schema+template, schema-propagation race hit + resolve
 4 anchors verified server-side), hashchange filter+scroll handler. Verified: chapter jump 24px exact,
 prisons click-through → filtered wall in view, overflow 0 both widths, motion-check 35/35 (final),
 shots lay-chapters-1280/390. Open for James: page-length outlier, dated-PDF artifact (blocker #7).
+
+## GENRE ALIGNMENT CUTS (James: "choose what to cut, improve, align")
+CUT (all reversible): ① empty 176px dark shell (workshop-story band rendered with cleared title —
+gated on story_title now, 3rd gating-bug family member) ② Build to Bond split band (duplicated the
+flagship #proof card directly below; hidden via new show_b2b checkbox — ALL its settings preserved;
+its Allsopp pull-quote MOVED onto the flagship card, cs_quote/cs_attr) ③ the 3 route CARDS in the
+discovery band → one row of secondary TEXT links (restores the original Chris/Unbounce "one main
+course" spec; help blocks untouched).
+IMPROVED/ALIGNED: report artifact link in the stats band ("Read the 2026 impact report" →
+/pages/impact-report, reusing the existing report_label/report_url settings — the genre's #1 device,
+web-page version until the PDF exists).
+MEASURED: 17.2→15.2 viewports @1280 · 22.6→20.7 @390 · 11→9 bands · 0 empty h2 · chapters+anchors
+intact · overflow 0 · motion-check 35/35. Schema clash caught (report_label already existed — reused
+not duplicated); 70-char label limit hit + fixed.
