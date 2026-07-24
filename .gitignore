@@ -11,3 +11,12 @@ Thumbs.db
 test-results/
 playwright-report/
 .claude/worktrees/
+
+# Screenshot artefacts — deliberately NOT versioned (2026-07-24).
+# PNGs don't delta-compress, so every run writes full new blobs: estate-check captures 134
+# full-page shots (~120MB) per run, and one commit measured 64 of 83 changed shots as
+# sub-3KB render noise. That is the bulk of a 476MB .git, for images nobody reviews.
+# Change detection belongs to the pixel-diff net (which reports only what moved) and to the
+# text fingerprints; these stay as local run artefacts for triage.
+qa/visual-baselines/
+qa/evidence/*/estate-shots/

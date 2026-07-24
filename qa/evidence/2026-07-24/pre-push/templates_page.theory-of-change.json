@@ -1,0 +1,108 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-toc-2026",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "20%",
+            "label": "of prison-leavers are in work six weeks after release",
+            "source": "MoJ offender employment outcomes, 2024–25"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "~30%",
+            "label": "national proven reoffending rate",
+            "source": "MoJ proven reoffending statistics, 2024"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "39%",
+            "label": "lower reoffending when family ties are maintained",
+            "source": "MoJ research · Lord Farmer Review, 2017"
+          }
+        },
+        "arm_1": {
+          "type": "arm",
+          "settings": {
+            "tag": "Prevention",
+            "title": "make engineers — schools & youth",
+            "body": "Curriculum-mapped, OCN-accredited engineering programmes for ages 11–19: from a working bamboo speaker to a rideable bamboo bike. Real making that reaches young people — including those the system is failing — before the justice system does.",
+            "link_label": "For schools",
+            "link_url": "\/pages\/schools"
+          }
+        },
+        "arm_2": {
+          "type": "arm",
+          "settings": {
+            "tag": "Rehabilitation",
+            "title": "build to bond — prisons",
+            "body": "A six-week bamboo bike-building course inside prison workshops. Makers earn an OCN Level 2 in Sustainable Design & Manufacturing and finish by giving the bike they built to their own child on family visit day.",
+            "link_label": "For prisons & commissioners",
+            "link_url": "\/pages\/prisons"
+          }
+        },
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "input",
+            "body": "A workshop, bamboo, tools and a trained instructor — in a school, a community space or a prison industries workshop. Funded by kit and workshop sales, grants and partners."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "activity",
+            "body": "Hands-on building: measuring, mitring, bonding and finishing a real bamboo frame. No prior experience — the craft is the teacher."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "output",
+            "body": "A finished bike, a portfolio of work, and a nationally recognised OCN qualification — Level 1 Award (Practical Manufacturing Skills) in schools, Level 2 (Sustainable Design & Manufacturing) in prisons."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "outcome",
+            "body": "Skills that map to real trades, confidence built by making something that works — and, inside prison, a family bond strengthened when the bike goes home with a Maker's child."
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "title": "impact",
+            "body": "Better routes into work, education and training — and a contribution to the two levers the evidence says matter most on release: employment and family ties. We contribute to these outcomes; we don't claim them alone."
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "arm_1",
+        "arm_2",
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5"
+      ],
+      "settings": {
+        "cta1_url": "\/pages\/support-mission",
+        "cta2_url": "\/pages\/prisons",
+        "cta3_url": "\/pages\/schools"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

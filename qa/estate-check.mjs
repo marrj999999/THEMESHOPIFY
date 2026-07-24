@@ -40,7 +40,15 @@ const ALL_PAGES = [
 const DEEP12 = ['/', '/pages/impact', '/pages/programmes', '/pages/workshops', '/pages/schools',
   '/pages/why-bamboo', '/pages/bicycleteambuilding', '/pages/our-story-2', '/pages/which-kit',
   '/collections/home-build-kits', '/products/gravel-frame-build-kit', '/products/bottom-bracket-68mm'];
-const BANNED = [/28,?000\s*PSI/i, /stronger than steel/i, /56\.7%/, /£11\.41/, /£280 per learner/i, /\b36\+? countries/i, /100% completion/i];
+// Keep in sync with scripts/claim-lint.sh PATTERNS. claim-lint scans SOURCE, this scans RENDERED
+// pages — a pattern in one but not the other is how "nationally recognised" sat live on two draft
+// pages under two green gates (2026-07-24). Authority: vault System/Claims Register.md.
+const BANNED = [/28,?000\s*PSI/i, /stronger than steel/i, /56\.7%/, /£11\.41/, /£280 per learner/i, /\b36\+? countries/i, /100% completion/i,
+  /nationally recognised/i,          // OCN bespoke courses are not Ofqual-regulated
+  /Level 1 ?& ?2/i,                  // per-arm naming only; never the mushed form
+  /14,?765/,                         // BS EN 14765 withdrawn — no external standard is claimed
+  /guaranteed interview/i,           // unverifiable promise
+  /Sustainable Design (&|and) Manufacturing/i]; // wrong OCN title; canonical = "Workshop Skills and Sustainable Manufacturing"
 
 // NAMED WAIVERS — real findings owned outside the theme; reported as WAIVED, not FAIL.
 const WAIVERS = [

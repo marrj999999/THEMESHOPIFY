@@ -23,6 +23,13 @@ PATTERNS=(
   'lifecycle analysis \(2024\)'
   '14765'
   '[Nn]ationally recognised'
+  # Added 2026-07-24 — each of these was found live in the theme while every gate reported
+  # green, because the pattern existed in neither list. Authority: vault System/Claims Register.md.
+  # Keep in sync with the BANNED array in qa/estate-check.mjs (source vs rendered).
+  '[Ll]evel 1 ?& ?2'                             # per-arm naming only, never the mushed form
+  '[Gg]uaranteed interview'                      # unverifiable promise
+  'Sustainable Design (&(amp;)?|and) Manufacturing'  # wrong OCN title; canonical = "Workshop Skills and Sustainable Manufacturing"
+  '\b[Pp]risoners\b'                             # voice rule: "Makers"; "people in prison" stays legal
   "don'?t hesitate"
   '[Kk]ind regards'
   'hope this (email )?finds you well'
@@ -31,9 +38,20 @@ PATTERNS=(
   "we'?re excited to announce"
 )
 
+# NAMED ALLOWANCES (2026-07-24) — legitimate uses that must not be reported as violations.
+# Each is justified, not a convenience: narrowing a pattern to go green is how banned claims
+# survive. Anything not listed here is a real defect and must be fixed, never appended below.
+#   1. The house rule itself — lines that STATE the ban (' never "prisoners" ') are the guard.
+#   2. External research framing approved verbatim in vault System/Claims Register.md:
+#      "prisoners who receive family visits are 39% less likely to reoffend" (MoJ/Farmer Review).
+#      The register approves this wording with mandatory context; the voice rule governs how we
+#      describe OUR Makers, not how cited research describes its own population.
+#   3. Verbatim third-party press quotes — altering a quotation would misrepresent the source.
+ALLOW='never "prisoners"|"prisoners"/"offenders"|No "guaranteed interview"|Farmer Review|39% less likely|of prisoners lose family contact|many prisoners lose contact|Inside Time|prisoners at Lowdham Grange'
+
 FAIL=0
 for pat in "${PATTERNS[@]}"; do
-  hits=$(grep -rn -E "$pat" --exclude='*.svg' "${TARGETS[@]}" 2>/dev/null | grep -v -E '\.bak|node_modules|scripts/claim-lint')
+  hits=$(grep -rn -E "$pat" --exclude='*.svg' "${TARGETS[@]}" 2>/dev/null | grep -v -E '\.bak|node_modules|scripts/claim-lint' | grep -v -E "$ALLOW")
   if [ -n "$hits" ]; then
     echo "✗ BANNED PATTERN: $pat"
     echo "$hits" | head -10
