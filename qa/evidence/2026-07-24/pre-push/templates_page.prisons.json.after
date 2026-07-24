@@ -1,0 +1,220 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-commissioners-2026",
+      "blocks": {
+        "fact_1": {
+          "type": "fact",
+          "settings": {
+            "number": "90%",
+            "label": "course completion — BBC programme records"
+          }
+        },
+        "fact_2": {
+          "type": "fact",
+          "settings": {
+            "number": "OCN Level 2",
+            "label": "Workshop Skills and Sustainable Manufacturing"
+          }
+        },
+        "fact_3": {
+          "type": "fact",
+          "settings": {
+            "number": "Self-delivery",
+            "label": "your staff, trained by us — no ongoing fees"
+          }
+        },
+        "fact_4": {
+          "type": "fact",
+          "settings": {
+            "number": "6 Makers",
+            "label": "per cohort — six weeks, 18 hours a week"
+          }
+        },
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "scope",
+            "body": "A site visit with your industries or education team: workshop space (Lowdham runs in 2,000 sq ft), security and tool-control requirements, cohort size — typically six Makers."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "set up",
+            "body": "Jigs, tooling and materials installed — a one-time setup, typically £7–10k depending on your workshop."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "train your team",
+            "body": "We train your instructors and workshop staff to deliver the course themselves — at HMP Lowdham Grange three Makers have been trained as peer instructors. The capability stays in-house, with no ongoing fees."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "deliver & accredit",
+            "body": "Repeatable six-week cohorts, budgeted around £8,500 each including materials and OCN Level 2 accreditation."
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "title": "family visit day",
+            "body": "Each cohort ends with Makers presenting the balance bikes they built to their own children — the bike goes home."
+          }
+        },
+        "budget_1": {
+          "type": "budget",
+          "settings": {
+            "figure": "~£180",
+            "title": "per kit",
+            "body": "One balance-bike kit — the build each Maker completes and gives away."
+          }
+        },
+        "budget_2": {
+          "type": "budget",
+          "settings": {
+            "figure": "~£8,500",
+            "title": "per cohort",
+            "body": "Materials, delivery support and accreditation for one six-week cohort."
+          }
+        },
+        "budget_3": {
+          "type": "budget",
+          "settings": {
+            "figure": "£7–10k",
+            "title": "workshop setup",
+            "body": "One-time capex: jigs, tooling and workshop fit-out, scoped to your space."
+          }
+        },
+        "budget_4": {
+          "type": "budget",
+          "settings": {
+            "figure": "~£45k",
+            "title": "full site-year",
+            "body": "A year of cohorts at one site — the envelope a funder or governor can plan around."
+          }
+        },
+        "check_1": {
+          "type": "check",
+          "settings": {
+            "text": "Enhanced-DBS facilitators, vetted for prison delivery"
+          }
+        },
+        "check_2": {
+          "type": "check",
+          "settings": {
+            "text": "Designed around prison workshop security and tool-control requirements"
+          }
+        },
+        "check_3": {
+          "type": "check",
+          "settings": {
+            "text": "Safeguarding-first: participants are never identified in our materials"
+          }
+        },
+        "check_4": {
+          "type": "check",
+          "settings": {
+            "text": "Public-liability insured"
+          }
+        },
+        "check_5": {
+          "type": "check",
+          "settings": {
+            "text": "OCN London accredited course, with portfolio evidence for every Maker"
+          }
+        },
+        "route_1": {
+          "type": "route",
+          "settings": {
+            "tag": "Direct",
+            "title": "commission directly",
+            "body": "For Learning & Skills Managers and Heads of Reducing Reoffending: a conversation and a site visit is the usual start."
+          }
+        },
+        "route_2": {
+          "type": "route",
+          "settings": {
+            "tag": "Via your provider",
+            "title": "through your education prime",
+            "body": "We deliver alongside prison education providers — bring us in under your existing provision."
+          }
+        },
+        "route_3": {
+          "type": "route",
+          "settings": {
+            "tag": "Funded",
+            "title": "with a funder",
+            "body": "Cohorts at existing sites have been grant-funded. We'll help you build the funding case for yours."
+          }
+        },
+        "plogo_1": {
+          "type": "plogo",
+          "settings": {
+            "asset": "logo-new-futures-network.png",
+            "alt": "New Futures Network"
+          }
+        },
+        "plogo_2": {
+          "type": "plogo",
+          "settings": {
+            "asset": "",
+            "alt": "HM Prison & Probation Service"
+          }
+        },
+        "plogo_3": {
+          "type": "plogo",
+          "settings": {
+            "asset": "",
+            "alt": "Ministry of Justice"
+          }
+        },
+        "plogo_4": {
+          "type": "plogo",
+          "settings": {
+            "asset": "",
+            "alt": "HMP Lowdham Grange"
+          }
+        }
+      },
+      "block_order": [
+        "fact_1",
+        "fact_2",
+        "fact_3",
+        "fact_4",
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5",
+        "budget_1",
+        "budget_2",
+        "budget_3",
+        "budget_4",
+        "check_1",
+        "check_2",
+        "check_3",
+        "check_4",
+        "check_5",
+        "route_1",
+        "route_2",
+        "route_3",
+        "plogo_1",
+        "plogo_2",
+        "plogo_3",
+        "plogo_4"
+      ],
+      "settings": {
+        "model_lede": "Nationally, just 20% of prison-leavers are in work six weeks after release, and the proven reoffending rate is almost 30% (MoJ, 2024–25). Practical, accredited skills change those odds. Built for prison industries and education teams: we install the workshop, train your staff to deliver the course, and support your first cohorts — then the capability stays in-house.",
+        "budget_lede": "Reoffending costs the public purse £40,000+ per person per year (MoJ). Against that, the numbers below are small — and cohorts at existing sites have been grant-funded in full or in part. We'll help you make the case."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
