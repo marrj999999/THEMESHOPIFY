@@ -205,6 +205,9 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
 }
 .bbc-rd a.rd-textlink:hover{ color:var(--forest-700) !important; }
 .bbc-rd .rd-dark a.rd-textlink{ color:var(--bone) !important; }
+/* redesign's a{color:inherit!important} out-ranks per-anchor rules — so dark bands set
+   the PARENT colour and anchors inherit it (the report-link invisibility, 2026-07-24) */
+.bbc-rd .rd-dark, .bbc-rd .rd-on-dark{ color:var(--bone); }
 
 /* width utility used by the homepage video band (was missing — wrap fell back to 1200px) */
 .bbc-rd .rd-mw-980px,

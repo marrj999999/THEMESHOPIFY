@@ -5,7 +5,9 @@ set -e
 cd "$(dirname "$0")/.."
 FILES=("$@")
 FAIL=0
-echo "— claim-lint"
+echo "— token-lint ratchet
+bash qa/stylelint-ratchet.sh || exit 1
+echo "— claim-lint""
 bash scripts/claim-lint.sh "${FILES[@]:-}" || FAIL=1
 echo "— JSON validation"
 for f in "${FILES[@]}"; do

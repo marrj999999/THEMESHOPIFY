@@ -116,7 +116,7 @@
         {%- endif -%}{%- endfor -%}
       </div>
       {%- if section.settings.data_as_of != blank -%}<p class="rd-dataasof rd-on-dark">{{ section.settings.data_as_of }}</p>{%- endif -%}
-      {%- if section.settings.report_label != blank -%}<p class="rd-mt2"><a class="rd-textlink rd-reportlink" href="{{ section.settings.report_url | default: '/pages/impact-report' }}">{{ section.settings.report_label }} <span class="rd-arrow">&rarr;</span></a></p>{%- endif -%}
+      {%- if section.settings.report_label != blank -%}<p class="rd-mt2 rd-on-dark"><a class="rd-textlink rd-reportlink" href="{{ section.settings.report_url | default: '/pages/impact-report' }}">{{ section.settings.report_label }} <span class="rd-arrow">&rarr;</span></a></p>{%- endif -%}
       {%- if section.settings.report_label != blank -%}<div class="rd-mt3"><a class="rd-btn rd-on-dark" href="{{ section.settings.report_url | default: '/pages/impact-report' }}">{{ section.settings.report_label }} <span class="rd-arrow">&rarr;</span></a></div>{%- endif -%}
     </div>
   </section>
