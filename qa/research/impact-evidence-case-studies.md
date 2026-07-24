@@ -148,3 +148,48 @@ Band-by-band (deployed order), each band's job in the evidence architecture:
 
 ### Media verification (this session)
 6/6 card images load (HEAD 200, lazy-load confirmed) · 3/3 films mount the youtube-nocookie iframe on click (Brixton xv0x13KNCBw · UCL iB2iHTzT2oQ e-cargo · Kenya EBmY4QpSHo0 NTV) · filter exact per kind · deep-link #evidence-<kind> works (after fixing a handler-order bug) · chip stagger rebuilt in the bbc-statement scroll-driven idiom (first version keyed a class the system never adds — caught because chips went invisible) · hover lift + filter rise-in, all reduced-motion-inert · mobile 390 zero overflow.
+
+## 9 · IMPACT-PAGE LAYOUT GENRE (8-site tour, 2026-07-24) + measured audit + what got built
+
+### Measured audit of ours (Playwright, before build)
+17.2 viewports @1280 / 22.6 @390 · 11 measured bands + hero · anchors: 2 usable (#book-a-call, #evidence)
+· h2 density 0.35–0.47/viewport · first CTA at 589px ✓ · 23 imgs (21 lazy) + 6 films.
+**Gaps: no in-page wayfinding; page length is a genre outlier (tour norm = medium, ≈ Switchback's
+~4k-word longform at most).**
+
+### Layout tour (fixed extraction prompt; URL per row)
+| Site | Chapters | In-page nav | Report artifact | Length |
+|---|---|---|---|---|
+| charity:water /about | 7 linear | #donate anchor only — NO sticky | outbound financials | med-long |
+| Big Issue group-impact | 6 | none (breadcrumb) | download ×2 + archive section | medium |
+| Redemption social-impact | 6 | TWO TAB GROUPS (the sectioning device) | below hero + collapsible archive | mod-long |
+| Switchback what-we-do | 7 | anchor links, no sticky | 2 PDFs mid-page | long (~4k words) |
+| Switchback Reshape Release | campaign | #action/#signup anchors, sticky HEADER only | policy PDF in hero | medium |
+| GOV.UK design system (authority) | — | plain "on this page" anchor list on its own long pages | — | — |
+| Tony's FAIR report hub | archive list | none — pure linear | THE page IS the artifact archive | moderate |
+| NPC resource hub | cards | search+tag filters, no ToC | per-card | — |
+
+### The quality gates fired: STICKY CHAPTER RAIL REFUTED
+0/8 toured pages use a sticky rail/ToC (threshold requires ≥3). Counter-evidence: the genre keeps
+impact pages medium + linear and spends prominence on the REPORT ARTIFACT instead. What passed the
+threshold: plain anchor wayfinding (charity:water · Reshape · GOV.UK authority) and prominent
+artifact placement (Big Issue ·  Redemption · Switchback · Tony's — ours still blocked on #7, the PDF).
+
+### Built (additive, per gates)
+1. **"On this page" anchor list** — bbc-chapter-list snippet (GOV.UK pattern, NOT sticky, no JS,
+   `~`/`|` parsing, nav landmark) rendered in the discovery band; new band ids #proof/#map/#backers
+   joining #evidence/#book-a-call; scroll-margin-top on all targets; smooth-scroll gated to
+   no-preference. Editable: show_chapters / chapters_label / chapters.
+2. **Segment evidence links** — each audience card gains an optional "see the evidence ↓" secondary
+   textlink → its pre-filtered #evidence-<kind> (schema evidence_label/evidence_anchor; template
+   wired schools→education, prisons→prisons, corporate→community, individual→global). Chris's
+   one-primary-CTA rule untouched.
+3. **hashchange handler** — in-page #evidence-<kind> clicks now filter AND scroll (the load-only
+   deep-link ignored in-page clicks; caught by click-through verification). Deploy race note:
+   template values silently stripped until the section schema propagated — the wait-then-push
+   discipline re-confirmed, verified server-side (4× evidence_anchor persisted).
+
+### Same-ruler after: wayfinding 2→10 anchors (4 chapter + 4 segment + 2 existing), page length
+unchanged (additive only), motion-check 35/35 holds, overflow 0 both widths, chapter jump lands at
+exactly the 24px scroll-margin, prisons click-through → 1 card. **For James:** the page-length
+outlier + the missing dated PDF remain the genre gaps additive scope can't fix — both need his call.

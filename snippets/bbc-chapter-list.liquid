@@ -1,0 +1,23 @@
+{%- comment -%}
+  bbc-chapter-list — quiet "on this page" anchor list for long pages (2026-07-24).
+  GOV.UK-pattern wayfinding: plain anchor links, NOT sticky — the 8-site impact-page
+  layout tour found zero sticky rails in the genre; anchors passed the ≥3-site
+  threshold (charity:water #donate · Switchback Reshape #action · GOV.UK long pages).
+  Usage: {% render 'bbc-chapter-list', chapters: 'the ask~#book-a-call|the proof~#proof', label: 'on this page' %}
+  Pairs split on '|', label/anchor on '~' (commas in labels stay safe — press-canon lesson).
+  No JS, no sticky, no active state. Targets need scroll-margin-top (universal §9).
+{%- endcomment -%}
+{%- if chapters != blank -%}
+<nav class="bbc-chapters" aria-label="On this page">
+  {%- if label != blank -%}<span class="bbc-chapters__label">{{ label }}</span>{%- endif -%}
+  <ul class="bbc-chapters__list" role="list">
+    {%- assign _pairs = chapters | split: '|' -%}
+    {%- for pair in _pairs -%}
+      {%- assign _p = pair | split: '~' -%}
+      {%- if _p[1] != blank -%}
+      <li><a href="{{ _p[1] | strip }}">{{ _p[0] | strip }}</a></li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</nav>
+{%- endif -%}

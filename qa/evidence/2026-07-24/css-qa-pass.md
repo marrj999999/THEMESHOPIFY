@@ -40,3 +40,12 @@ charity:water · Who Gives A Crap · Change Please · Elvis & Kresse (+ banked T
 - Feedback loop: qa/motion-check.mjs (35 assertions × 2 contexts incl. reducedMotion:'reduce'; Firefox-blank static guard; jank longtask counter; writes evidence table) + WORKFLOW.md step 4.5. FINAL: 35/35 PASS.
 - Loop caught during its own build: fake-failing synthetic probe (theme hides stray body-end divs — probe was display:none since inception), collection reveals dead inside .rd-card containers, duotone dead inside .rd-path__media, wordmark page-end range edge. All fixed, all now asserted.
 - Numeric motion proof: chip stagger mid-flight [1,1,1,0] · wall cascade [0.89,0.28,0.49,0] · duotone brightness .73→1.0 · wordmark 1.0 at page end · reduce contexts fully inert+visible.
+
+## IMPACT LAYOUT PASS (plan 2026-07-24b executed)
+Measured audit (17.2/22.6 viewports, 2 anchors, h2 0.35-0.47/vp) → 8-site layout tour → STICKY RAIL
+REFUTED by own quality gates (0/8) → built the genre-true set instead: on-this-page anchor list
+(discovery band, GOV.UK pattern), #proof/#map/#backers ids + scroll-margins, segment "see the
+evidence ↓" deep-links (schema+template, schema-propagation race hit + resolved with wait-loop,
+4 anchors verified server-side), hashchange filter+scroll handler. Verified: chapter jump 24px exact,
+prisons click-through → filtered wall in view, overflow 0 both widths, motion-check 35/35 (final),
+shots lay-chapters-1280/390. Open for James: page-length outlier, dated-PDF artifact (blocker #7).

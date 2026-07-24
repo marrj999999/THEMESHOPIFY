@@ -99,6 +99,9 @@
         {%- endfor -%}
       </div>
       {%- endif -%}
+      {%- if section.settings.show_chapters != false -%}
+      {%- render 'bbc-chapter-list', chapters: section.settings.chapters, label: section.settings.chapters_label -%}
+      {%- endif -%}
     </div>
   </section>
 
@@ -279,7 +282,7 @@
    Gates on blurb OR quote — a cleared quote alone must not suppress the flagship
    (the Timpson-band gating bug, same family; fixed 2026-07-22). {%- endcomment -%}
   {%- if section.settings.cs_blurb != blank or section.settings.cs_quote != blank -%}
-  <section class="rd-pad-sm">
+  <section class="rd-pad-sm" id="proof">
     <div class="rd-wrap rd-mw-820px">
       <div class="rd-csgrid rd-csgrid-1">
         <a class="rd-reveal rd-cscard" href="{{ section.settings.cs_url | default: '/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2' }}">
@@ -459,7 +462,7 @@
 
   {%- comment -%} ---------- WHERE WE WORK (named prison sites) ---------- {%- endcomment -%}
   {%- if section.settings.sites_title != blank -%}
-  <section class="rd-pad-sm rd-paper rd-center">
+  <section class="rd-pad-sm rd-paper rd-center" id="map">
     <div class="rd-wrap rd-mw-820px">
       {%- if section.settings.sites_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.sites_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal rd-mw-22ch rd-mx-auto">{{ section.settings.sites_title }}</h2>
@@ -507,7 +510,7 @@
 
   {%- comment -%} ---------- RECOGNISED BY (credibility quotes) ---------- {%- endcomment -%}
   {%- if section.settings.cred_quote1 != blank -%}
-  <section class="rd-pad-sm rd-paper bbc-impact-cred">
+  <section class="rd-pad-sm rd-paper bbc-impact-cred" id="backers">
     <div class="rd-wrap" style="position:relative;">
       <span class="rd-seal" aria-hidden="true">{{ section.settings.seal_text | default: "OCN accredited · CIC · since 2012" }}</span>
       {%- if section.settings.cred_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.cred_eyebrow }}</span>{%- endif -%}
@@ -542,6 +545,7 @@
               <h3 class="rd-mt2 rd-fs-21px">{{ block.settings.question }}</h3>
               {%- if block.settings.benefit != blank -%}<p>{{ block.settings.benefit }}</p>{%- endif -%}
               {%- if block.settings.link_label != blank -%}<a class="rd-textlink" href="{{ block.settings.link_url | default: '/pages/contact-us' }}">{{ block.settings.link_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+              {%- if block.settings.evidence_anchor != blank -%}<a class="rd-textlink rd-seg-ev" href="{{ block.settings.evidence_anchor }}">{{ block.settings.evidence_label | default: 'see the evidence' }} <span class="rd-arrow">&darr;</span></a>{%- endif -%}
             </div>
           </div>
         {%- endfor -%}
@@ -663,13 +667,22 @@ document.addEventListener('click', function (e) {
     } else card.setAttribute('hidden', '');
   });
 });
-/* deep link: /pages/impact#evidence-prisons pre-filters the wall (runs AFTER the
-   click handler is registered — first version clicked into the void) */
+/* deep link: #evidence-<kind> pre-filters the wall. Runs at load AND on hashchange
+   (in-page chapter/segment links) — hash-only anchors have no element, so we also
+   scroll to the wall ourselves. Registered AFTER the click handler (order matters). */
 (function () {
-  var m = location.hash.match(/^#evidence-([a-z]+)$/);
-  if (!m) return;
-  var tab = document.querySelector('.rd-evfilter__tab[data-kind="' + m[1] + '"]');
-  if (tab) tab.click();
+  function applyEvidenceHash(scroll) {
+    var m = location.hash.match(/^#evidence-([a-z]+)$/);
+    if (!m) return;
+    var tab = document.querySelector('.rd-evfilter__tab[data-kind="' + m[1] + '"]');
+    if (tab) tab.click();
+    if (scroll) {
+      var wall = document.getElementById('evidence');
+      if (wall) wall.scrollIntoView();
+    }
+  }
+  applyEvidenceHash(false);
+  window.addEventListener('hashchange', function () { applyEvidenceHash(true); });
 })();
 {% endjavascript %}
 
@@ -1296,6 +1309,28 @@ document.addEventListener('click', function (e) {
     },
     {
       "type": "header",
+      "content": "On this page (chapter links)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_chapters",
+      "label": "Show the on-this-page links in the discovery band",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "chapters_label",
+      "label": "Chapters label",
+      "default": "on this page"
+    },
+    {
+      "type": "text",
+      "id": "chapters",
+      "label": "Chapters (label~#anchor pairs, separated by |)",
+      "default": "the proof~#proof|the evidence~#evidence|where we work~#map|who backs it~#backers"
+    },
+    {
+      "type": "header",
       "content": "Impact stories grid (one per pillar)"
     },
     {
@@ -1785,7 +1820,18 @@ document.addEventListener('click', function (e) {
         { "type": "text", "id": "question", "label": "Their question", "default": "running a school or college?" },
         { "type": "textarea", "id": "benefit", "label": "What they get", "default": "Real engineering in your classroom. Start with the free Speaker build, add OCN Level 1 when your students want more." },
         { "type": "text", "id": "link_label", "label": "Link label", "default": "see the schools programme" },
-        { "type": "url", "id": "link_url", "label": "Link" }
+        { "type": "url", "id": "link_url", "label": "Link" },
+        {
+          "type": "text",
+          "id": "evidence_label",
+          "label": "Evidence link label",
+          "default": "see the evidence"
+        },
+        {
+          "type": "text",
+          "id": "evidence_anchor",
+          "label": "Evidence anchor (e.g. #evidence-prisons)"
+        }
       ]
     },
     {

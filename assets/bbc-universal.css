@@ -326,3 +326,14 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
     .rd-cscard--ev:hover{ transform:translateY(-4px); box-shadow:0 10px 24px rgba(14,26,23,.12); }
   }
 }
+
+/* "on this page" chapter list (bbc-chapter-list snippet) — GOV.UK-pattern anchors,
+   NOT sticky (8-site impact-layout tour 2026-07-24: zero sticky rails in the genre).
+   Targets get scroll-margin so anchors never land flush to the top edge. */
+.bbc-chapters{ margin-top:26px; font-size:15px; }
+.bbc-chapters__label{ display:block; font-size:13px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; opacity:.7; margin-bottom:8px; }
+.bbc-chapters__list{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px 18px; }
+.bbc-chapters__list a{ font-weight:700; text-decoration:underline; text-underline-offset:4px; }
+[id="proof"],[id="evidence"],[id="map"],[id="backers"],[id="book-a-call"]{ scroll-margin-top:24px; }
+.rd-seg-ev{ display:inline-block; margin-left:18px; opacity:.85; }
+@media (prefers-reduced-motion: no-preference){ html{ scroll-behavior:smooth; } }
