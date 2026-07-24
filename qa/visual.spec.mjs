@@ -12,9 +12,14 @@ const PAGES = [
 ];
 const WIDTHS = [[390, 844], [768, 1024], [1280, 800], [1568, 900]];
 // mask volatile regions: marquees, videos, maps, count-ups settle variance
+// #shopify-pc__banner = the cookie-consent overlay. It is fixed-position, so display:none
+// cannot shift layout — and it MUST go: its visibility depends on cookie state, so leaving
+// it in bakes a 239px overlay into the reference and every later run diffs on consent state.
+// Hidden for the screenshot only; no consent is granted either way.
 const MASK_CSS = `
   .bbc-press__track, .rd-qtrack { animation: none !important; transform: none !important; }
   .bbc-media, video, iframe, .rd-mapwide { visibility: hidden !important; }
+  #shopify-pc__banner { display: none !important; }
 `;
 for (const [name, path] of PAGES) {
   for (const [w, h] of WIDTHS) {
@@ -28,7 +33,7 @@ for (const [name, path] of PAGES) {
         window.scrollTo({ top: 0, behavior: 'instant' });
         await new Promise(r => setTimeout(r, 600));
       });
-      await expect(page).toHaveScreenshot(`${name}-${w}`, { fullPage: true });
+      await expect(page).toHaveScreenshot(`${name}-${w}.png`, { fullPage: true });
     });
   }
 }
