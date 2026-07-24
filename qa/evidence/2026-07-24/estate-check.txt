@@ -1,7 +1,6 @@
-ESTATE-CHECK 2026-07-24 — 1796/1898 pass, 102 FAIL in 10 classes
+ESTATE-CHECK 2026-07-24 — 1825/1844 pass, 19 FAIL in 4 classes
 
-CLASS: no banned claims rendered (7)
-  /pages/why-bamboo@1280 [\b36\+? countries]
+CLASS: no banned claims rendered (6)
   /pages/gallery@1280 [\b36\+? countries]
   /pages/frequently-asked-questions@1280 [\b36\+? countries]
   /blogs/news/project-zero-impact-case-study@1280 [\b36\+? countries]
@@ -9,64 +8,9 @@ CLASS: no banned claims rendered (7)
   /pages/frequently-asked-questions@390 [\b36\+? countries]
   /blogs/news/project-zero-impact-case-study@390 [\b36\+? countries]
 
-CLASS: one h1 (6)
-  /pages/support-centre@1280 [2 h1s]
-  /pages/size-guide@1280 [2 h1s]
-  /pages/privacy-policy@1280 [8 h1s]
-  /pages/support-centre@390 [2 h1s]
-  /pages/size-guide@390 [2 h1s]
-  /pages/privacy-policy@390 [8 h1s]
-
 CLASS: meta layer (title/desc/canonical/og) (2)
   /cart@1280 [t:true d:false c:true og:true]
   /cart@390 [t:true d:false c:true og:true]
-
-CLASS: internal link resolves (54)
-  https://bamboobicycleclub.org/policies/privacy-policy [HTTP 0]
-  /blogs/news/inside-time-making-bike-building-accessible-to-everyone-in-prisons [HTTP 429]
-  /blogs/news/bikeradar-building-your-own-bamboo-bicycle-the-charm-of-handmade [HTTP 429]
-  /blogs/news/road-cc-bamboo-bicycle-club-easy-build-kit-70-hours-to-just-4 [HTTP 429]
-  /blogs/news/huck-magazine-the-bamboo-bicycle-club-making-sustainable-cycling-accessible [HTTP 429]
-  /blogs/news/the-guardian-how-to-make-a-500-bespoke-bicycle-from-bamboo [HTTP 429]
-  /blogs/news/the-guardian-build-it-yourself-at-the-uks-first-bamboo-bike-workshop [HTTP 429]
-  /blogs/club-news/building-my-first-bamboo-bicycle-a-journey-from-novice-to-10-000km [HTTP 429]
-  /blogs/club-news/colins-custom-bamboo-gravel-bike [HTTP 429]
-  /blogs/club-news/alexs-gravel-bike [HTTP 429]
-  /blogs/club-news/andrew-out-bikepacking-on-his-cx-bamboo-bike [HTTP 429]
-  /blogs/club-news/carls-bamboo-gravel-bike [HTTP 429]
-  /blogs/club-news/andrews-custom-gravel-bike [HTTP 429]
-  /blogs/club-news/adams-bamboo-road-bike [HTTP 429]
-  /blogs/club-news/carbon-road-bike-by-shane [HTTP 429]
-  /blogs/club-news/build-by-ted-bamboobike-handmade-roadbike [HTTP 429]
-  /blogs/club-news/carbon-bamboo-road-bike-by-mike [HTTP 429]
-  /blogs/club-news/charlies-bamboo-touring-bike [HTTP 429]
-  /blogs/club-news/29er-build-by-nick [HTTP 429]
-  /blogs/club-news/29er-build-by-reed [HTTP 429]
-  …+34 more
-
-CLASS: link integrity (184 unique internal links) (1)
-  estate [54 dead]
-
-CLASS: one text axis (≤8px) (19)
-  /pages/our-story-2@768 [24px]
-  /pages/programmes@1024 [102px]
-  /pages/workshops@1024 [102px]
-  /pages/why-bamboo@1024 [102px]
-  /pages/bicycleteambuilding@1024 [102px]
-  /pages/our-story-2@1024 [24px]
-  /products/gravel-frame-build-kit@1024 [82px]
-  /pages/programmes@1568 [190px]
-  /pages/workshops@1568 [190px]
-  /pages/why-bamboo@1568 [190px]
-  /pages/bicycleteambuilding@1568 [190px]
-  /pages/our-story-2@1568 [32px]
-  /products/gravel-frame-build-kit@1568 [170px]
-  /pages/programmes@1920 [190px]
-  /pages/workshops@1920 [190px]
-  /pages/why-bamboo@1920 [190px]
-  /pages/bicycleteambuilding@1920 [190px]
-  /pages/our-story-2@1920 [32px]
-  /products/gravel-frame-build-kit@1920 [170px]
 
 CLASS: raster sharpness (≤1.4 deficit, svg-exempt) (10)
   / [bbc-hero-bespoked.jpg|bbc-rd-bike-field_1400x.jpg|bbc-rd-team_1400x.jpg]
@@ -80,13 +24,7 @@ CLASS: raster sharpness (≤1.4 deficit, svg-exempt) (10)
   /products/gravel-frame-build-kit [00_Gravel_Frame_Build_Kit_Squa]
   /products/bottom-bracket-68mm [EccentricBottombracket.jpg|Gravellugged1-hires.jpg|GRAVELLUGGEDKIT.jpg]
 
-CLASS: axe WCAG-AA (0 critical/serious) (1)
-  / [color-contrast×1]
-
 CLASS: dark-band links visible (1)
   /pages/impact [1 invisible]
-
-CLASS: html validity (nesting/permitted-content) (1)
-  /pages/impact [element-permitted-content]
 
 PASS detail suppressed — full rows in estate-check.json

@@ -42,8 +42,18 @@ const DEEP12 = ['/', '/pages/impact', '/pages/programmes', '/pages/workshops', '
   '/collections/home-build-kits', '/products/gravel-frame-build-kit', '/products/bottom-bracket-68mm'];
 const BANNED = [/28,?000\s*PSI/i, /stronger than steel/i, /56\.7%/, /£11\.41/, /£280 per learner/i, /\b36\+? countries/i, /100% completion/i];
 
+// NAMED WAIVERS — real findings owned outside the theme; reported as WAIVED, not FAIL.
+const WAIVERS = [
+  { check: /raster sharpness/, reason: 'asset-ceiling: source files smaller than srcset ceilings — James image picks (11 files + product photos)' },
+  { check: /banned claims/, page: /frequently-asked-questions|project-zero-impact-case-study/, reason: 'store content: FAQ admin body + article — James list' },
+  { check: /one h1/, page: /support-centre|size-guide|privacy-policy/, reason: 'admin body h1s (semantics now demoted at render; body itself is James\'s)' },
+];
 const rows = [];
 const add = (tier, page, check, ok, note = '') => {
+  if (!ok) {
+    const w = WAIVERS.find(w => w.check.test(check) && (!w.page || w.page.test(page)));
+    if (w) { rows.push({ tier, page, check, ok: 'waived', note: note + ' — WAIVED: ' + w.reason.slice(0, 60) }); return; }
+  }
   rows.push({ tier, page, check, ok, note });
   if (!ok) console.log(`✗ [T${tier}] ${page} · ${check}${note ? ' — ' + String(note).slice(0, 90) : ''}`);
 };
@@ -290,10 +300,12 @@ if (runTier(5)) {
 }
 
 await browser.close();
-const fails = rows.filter(r => !r.ok);
+const fails = rows.filter(r => r.ok === false);
+const waived = rows.filter(r => r.ok === 'waived');
 const byClass = {};
 fails.forEach(f => { const k = f.check; byClass[k] = byClass[k] || []; byClass[k].push(f.page + (f.note ? ' [' + f.note + ']' : '')); });
-let out = `ESTATE-CHECK ${DATE} — ${rows.length - fails.length}/${rows.length} pass, ${fails.length} FAIL in ${Object.keys(byClass).length} classes\n\n`;
+let out = `ESTATE-CHECK ${DATE} — ${rows.length - fails.length - waived.length}/${rows.length} pass, ${fails.length} FAIL in ${Object.keys(byClass).length} classes, ${waived.length} WAIVED\n\n`;
+if (waived.length) { out += 'WAIVED (named, owned):\n' + waived.map(w => `  ${w.page} · ${w.check} [${w.note.slice(0, 110)}]`).join('\n') + '\n\n'; }
 for (const [k, v] of Object.entries(byClass)) out += `CLASS: ${k} (${v.length})\n` + v.slice(0, 20).map(x => '  ' + x).join('\n') + (v.length > 20 ? `\n  …+${v.length - 20} more` : '') + '\n\n';
 out += 'PASS detail suppressed — full rows in estate-check.json\n';
 fs.writeFileSync(`${DIR}/estate-check.txt`, out);

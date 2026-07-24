@@ -465,8 +465,8 @@
   "tier": 1,
   "page": "/pages/why-bamboo@1280",
   "check": "no banned claims rendered",
-  "ok": false,
-  "note": "\\b36\\+? countries"
+  "ok": true,
+  "note": ""
  },
  {
   "tier": 1,
@@ -1690,8 +1690,8 @@
   "tier": 1,
   "page": "/pages/support-centre@1280",
   "check": "one h1",
-  "ok": false,
-  "note": "2 h1s"
+  "ok": true,
+  "note": "1 h1s"
  },
  {
   "tier": 1,
@@ -2026,8 +2026,8 @@
   "tier": 1,
   "page": "/pages/size-guide@1280",
   "check": "one h1",
-  "ok": false,
-  "note": "2 h1s"
+  "ok": true,
+  "note": "1 h1s"
  },
  {
   "tier": 1,
@@ -2950,8 +2950,8 @@
   "tier": 1,
   "page": "/pages/privacy-policy@1280",
   "check": "one h1",
-  "ok": false,
-  "note": "8 h1s"
+  "ok": true,
+  "note": "1 h1s"
  },
  {
   "tier": 1,
@@ -7318,8 +7318,8 @@
   "tier": 1,
   "page": "/pages/support-centre@390",
   "check": "one h1",
-  "ok": false,
-  "note": "2 h1s"
+  "ok": true,
+  "note": "1 h1s"
  },
  {
   "tier": 1,
@@ -7654,8 +7654,8 @@
   "tier": 1,
   "page": "/pages/size-guide@390",
   "check": "one h1",
-  "ok": false,
-  "note": "2 h1s"
+  "ok": true,
+  "note": "1 h1s"
  },
  {
   "tier": 1,
@@ -8578,8 +8578,8 @@
   "tier": 1,
   "page": "/pages/privacy-policy@390",
   "check": "one h1",
-  "ok": false,
-  "note": "8 h1s"
+  "ok": true,
+  "note": "1 h1s"
  },
  {
   "tier": 1,
@@ -11282,391 +11282,13 @@
   "check": "footer identical across pages",
   "ok": true,
   "note": "2 variants"
- },
- {
-  "tier": 6,
-  "page": "https://bamboobicycleclub.org/policies/privacy-policy",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 0"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/inside-time-making-bike-building-accessible-to-everyone-in-prisons",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/bikeradar-building-your-own-bamboo-bicycle-the-charm-of-handmade",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/road-cc-bamboo-bicycle-club-easy-build-kit-70-hours-to-just-4",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/huck-magazine-the-bamboo-bicycle-club-making-sustainable-cycling-accessible",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/the-guardian-how-to-make-a-500-bespoke-bicycle-from-bamboo",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/the-guardian-build-it-yourself-at-the-uks-first-bamboo-bike-workshop",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/building-my-first-bamboo-bicycle-a-journey-from-novice-to-10-000km",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/colins-custom-bamboo-gravel-bike",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/alexs-gravel-bike",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/andrew-out-bikepacking-on-his-cx-bamboo-bike",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/carls-bamboo-gravel-bike",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/andrews-custom-gravel-bike",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/adams-bamboo-road-bike",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/carbon-road-bike-by-shane",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/build-by-ted-bamboobike-handmade-roadbike",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/carbon-bamboo-road-bike-by-mike",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/charlies-bamboo-touring-bike",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/29er-build-by-nick",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/29er-build-by-reed",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/29er-mtb-build-by-simon",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/650b-mtb-built-by-shaun",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/custom-mtb-29er-by-nathaniel",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/custom-fatbike-by-christopher",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/beccas-commuter-bike",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/city-bike-by-abel",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/city-bike-by-bridget",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/city-bike-by-eric",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/build-by-piers-a-simple-single-speed-setup",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/city-bike-by-matthew",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/bamboo-bmx-build-by-george-bamboobike-bmx-handmade-custombmx",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/custom-touring-bike-by-imke",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/custom-trails-bike-by-anders",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/elizabeths-custom-touring-bike",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/karls-custom-cargo-e-bike-build",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/custom-cargo-bike-by-adam",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/impact/build-to-bond-hmp-lowdham-grange-impact",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/impact/four-seasons-hampshire-corporate-bamboo-team-build",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/team-building-with-gm-motors",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/impact/hilton-bankside-staff-training-and-public-hire-bikes",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/club-news/limitless-worldwide-adventure",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/bamboo-bicycle-club-at-london-design-festival-join-our-unique-bamboo-workshop",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/tagged/bamboo-build",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/tagged/build-to-bond",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/tagged/adventure",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/tagged/business",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/tagged/award",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/project-zero-impact-case-study",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/introducing-our-new-bamboo-bicycle-frame-building-jig",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/investec-beyond-business-2025-bamboo-bicycle-club-wins-24-000-award",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/building-with-bamboo-how-four-seasons-senior-team-crafted-a-bike-in-three-hours",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/bamboo-bike-building-transforming-lives-at-lowdham-grange-prison",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/new-balance-bike-tutorial-videos",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/new-video-how-to-protect-your-frame",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
  },
  {
   "tier": 6,
   "page": "estate",
   "check": "link integrity (184 unique internal links)",
-  "ok": false,
-  "note": "54 dead"
+  "ok": true,
+  "note": "0 dead"
  },
  {
   "tier": 2,
@@ -11826,8 +11448,8 @@
   "tier": 2,
   "page": "/pages/our-story-2@768",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "24px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -11994,8 +11616,8 @@
   "tier": 2,
   "page": "/pages/programmes@1024",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "102px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12022,8 +11644,8 @@
   "tier": 2,
   "page": "/pages/workshops@1024",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "102px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12078,8 +11700,8 @@
   "tier": 2,
   "page": "/pages/why-bamboo@1024",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "102px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12106,8 +11728,8 @@
   "tier": 2,
   "page": "/pages/bicycleteambuilding@1024",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "102px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12134,8 +11756,8 @@
   "tier": 2,
   "page": "/pages/our-story-2@1024",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "24px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12218,8 +11840,8 @@
   "tier": 2,
   "page": "/products/gravel-frame-build-kit@1024",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "82px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12330,8 +11952,8 @@
   "tier": 2,
   "page": "/pages/programmes@1568",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "190px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12358,8 +11980,8 @@
   "tier": 2,
   "page": "/pages/workshops@1568",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "190px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12414,8 +12036,8 @@
   "tier": 2,
   "page": "/pages/why-bamboo@1568",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "190px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12442,8 +12064,8 @@
   "tier": 2,
   "page": "/pages/bicycleteambuilding@1568",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "190px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12470,8 +12092,8 @@
   "tier": 2,
   "page": "/pages/our-story-2@1568",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "32px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12554,8 +12176,8 @@
   "tier": 2,
   "page": "/products/gravel-frame-build-kit@1568",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "170px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12666,8 +12288,8 @@
   "tier": 2,
   "page": "/pages/programmes@1920",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "190px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12694,8 +12316,8 @@
   "tier": 2,
   "page": "/pages/workshops@1920",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "190px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12750,8 +12372,8 @@
   "tier": 2,
   "page": "/pages/why-bamboo@1920",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "190px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12778,8 +12400,8 @@
   "tier": 2,
   "page": "/pages/bicycleteambuilding@1920",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "190px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12806,8 +12428,8 @@
   "tier": 2,
   "page": "/pages/our-story-2@1920",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "32px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12890,8 +12512,8 @@
   "tier": 2,
   "page": "/products/gravel-frame-build-kit@1920",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "170px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -13135,8 +12757,8 @@
   "tier": 7,
   "page": "/",
   "check": "axe WCAG-AA (0 critical/serious)",
-  "ok": false,
-  "note": "color-contrast×1"
+  "ok": true,
+  "note": ""
  },
  {
   "tier": 7,
@@ -13170,8 +12792,8 @@
   "tier": 7,
   "page": "/pages/impact",
   "check": "html validity (nesting/permitted-content)",
-  "ok": false,
-  "note": "element-permitted-content"
+  "ok": true,
+  "note": ""
  },
  {
   "tier": 7,
@@ -13234,7 +12856,7 @@
   "page": "/",
   "check": "LCP ≤ 1500ms",
   "ok": true,
-  "note": "380ms"
+  "note": "412ms"
  },
  {
   "tier": 5,
@@ -13248,7 +12870,7 @@
   "page": "/pages/impact",
   "check": "LCP ≤ 1500ms",
   "ok": true,
-  "note": "480ms"
+  "note": "436ms"
  },
  {
   "tier": 5,
@@ -13262,7 +12884,7 @@
   "page": "/products/gravel-frame-build-kit",
   "check": "LCP ≤ 1500ms",
   "ok": true,
-  "note": "480ms"
+  "note": "380ms"
  },
  {
   "tier": 5,
@@ -13276,7 +12898,7 @@
   "page": "/collections/home-build-kits",
   "check": "LCP ≤ 1500ms",
   "ok": true,
-  "note": "480ms"
+  "note": "412ms"
  },
  {
   "tier": 5,

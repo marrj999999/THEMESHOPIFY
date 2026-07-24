@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
+    {%- if template.name == 'cart' and page_description == blank -%}
+      <meta name="description" content="Your Bamboo Bicycle Club basket — bamboo bike frame kits, component packs and workshop bookings, shipped worldwide from London.">
+    {%- endif -%}
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">

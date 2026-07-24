@@ -204,11 +204,16 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
   text-underline-offset:4px; text-decoration-thickness:2px;
 }
 .bbc-rd a.rd-textlink:hover{ color:var(--forest-700) !important; }
-.bbc-rd .rd-dark a.rd-textlink{ color:var(--bone) !important; }
+.bbc-rd .rd-dark a.rd-textlink:not(#_),
+.bbc-rd .rd-on-dark a.rd-textlink:not(#_){ color:var(--bone) !important; -webkit-text-fill-color:var(--bone) !important; }
+.bbc-rd .rd-dark a.rd-textlink:not(#_):hover{ color:#fff !important; -webkit-text-fill-color:#fff !important; }
+/* ^ §6's base uses a :not(#_) ID-specificity hack — the dark override must carry the
+   same tier or it silently loses (the report-link, THREE fixes deep: inherit chain →
+   text-fill paint → ID-tier. 2026-07-24) */
 /* redesign's a{color:inherit!important} out-ranks per-anchor rules — so dark bands set
    the PARENT colour and anchors inherit it (the report-link invisibility, 2026-07-24) */
 .bbc-rd .rd-dark, .bbc-rd .rd-on-dark{ color:var(--bone); }
-.bbc-rd .rd-dark p.rd-on-dark{ color:var(--bone) !important; } /* the report-link parent — a band-level rule was still winning */
+.bbc-rd .rd-dark p.rd-on-dark, .bbc-rd .rd-dark p.rd-on-dark a{ color:var(--bone) !important; -webkit-text-fill-color:var(--bone) !important; } /* the report-link parent — a band-level rule was still winning */
 
 /* width utility used by the homepage video band (was missing — wrap fell back to 1200px) */
 .bbc-rd .rd-mw-980px,
