@@ -160,10 +160,14 @@ for (const [label, url] of PAGES) {
       if (q) { const l = [...q.querySelectorAll(':scope > a')]; for (let i = 1; i < l.length; i++) gaps.push(Math.round(l[i].getBoundingClientRect().left - l[i-1].getBoundingClientRect().right)); }
       const wrap = document.querySelector('#book-a-call .rd-wrap');
       const proof = document.querySelector('#proof .rd-mw-820px');
-      return { overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, gaps, axisOk: wrap && proof ? Math.abs(wrap.getBoundingClientRect().left - proof.getBoundingClientRect().left) < 4 : true };
+      const media = document.querySelector('#proof .rd-cscard__media');
+      const card = document.querySelector('#proof .rd-cscard');
+      const mediaOk = media && card ? Math.abs(media.getBoundingClientRect().width - card.getBoundingClientRect().width) < 6 && media.getBoundingClientRect().height < media.getBoundingClientRect().width : true;
+      return { overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, gaps, mediaOk, axisOk: wrap && proof ? Math.abs(wrap.getBoundingClientRect().left - proof.getBoundingClientRect().left) < 4 : true };
     });
     add('impact @1568', 'nav gaps >= 8px', r.gaps.length === 0 || r.gaps.every(g => g >= 8), `[${r.gaps}]`);
     add('impact @1568', 'overflow 0 + flagship on axis', r.overflow === 0 && r.axisOk, `ovf=${r.overflow} axis=${r.axisOk}`);
+    add('impact @1568', 'flagship media spans card, landscape (the narrow-strip bug)', r.mediaOk, `mediaOk=${r.mediaOk}`);
   } catch (e) { add('impact @1568', 'LOAD', false, e.message.slice(0, 60)); }
   await ctx.close();
 }

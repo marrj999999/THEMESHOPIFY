@@ -79,3 +79,17 @@ FOUND+FIXED (all verified in HIS browser):
 Wide sweep 6 pages × 1440/1680/1920: everything else clean (wraps cap 1200, h1 caps 124, no overflow;
 1920 full-bleed heroes >1800px = by design). LOOP HARDENED: motion-check gains a 1568 context
 (nav gaps + overflow + flagship axis) → 37/37 PASS.
+
+## FLAGSHIP NARROW-STRIP BUG (James's screenshot — "not fixed, why is it being missed")
+WHY IT WAS MISSED: my verification measured NUMBERS (left-edge 217=217 "aligned") without LOOKING at
+the render — and the D1 full-bleed had never actually worked since the borderless redesign (the card
+inherited redesign's centred minmax(0,460px) single-card column + its own overflow clipped the 100vw
+media to a 460px slice; at 1280 the slice masqueraded as a normal image, so every 1280 screenshot
+looked fine). Two first-run probes also read the pre-push CDN cache, reporting stale values as fresh.
+ROOT FIXES: ① #proof id-scoped grid → 1fr span (out-ranks redesign's late-loading 460px rule)
+② card overflow:visible in the csgrid-1 context ③ the 100vw escape REMOVED — its calc assumes a
+centred parent and mis-lands on the left-axis layout; media now spans the card at 21/9 (the honest
+"photo IS the band"), coherent at 390/1280/1568/1920 — verified by LOOKED-AT screenshots this time.
+Zoom note: James's corner-render capture was his 48% page zoom (dpr 0.5); wrap centring verified
+CENTRED at 1568/1920/2560 (184/360/680 equal margins).
+LOOP: motion-check gains the exact-bug assertion (flagship media spans card + landscape) → 38/38.
