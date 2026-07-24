@@ -469,6 +469,14 @@
   {{ 'bbc-statement.css' | asset_url | stylesheet_tag }}
   {%- comment -%} BBC design tokens — single source of truth, MUST load last so its :root wins (Phase 1, 2026-07-12; see qa/DESIGN-BRIEF.md) {%- endcomment -%}
   {{ 'bbc-universal.css' | asset_url | stylesheet_tag }}
+  {%- comment -%}
+    THE type contract (qa/TYPE-SCALE.md). Loads last so its :root wins, which is what that doc
+    has claimed since 22 Jul — the file itself did not exist until 2026-07-24 (404 local/draft/live)
+    while three competing scales ran at once. Defines --type-* only: zero collisions with any
+    existing token, so its arrival is provably a no-op on rendering. Sections repoint at it
+    incrementally; estate-check measures conformance to FORMULA §1 (ONE size per role).
+  {%- endcomment -%}
+  {{ 'bbc-tokens.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">

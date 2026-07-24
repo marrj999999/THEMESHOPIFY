@@ -24,7 +24,20 @@ irrelevant to our genre; the oversized-editorial ceiling is ~100–140px. We tak
 step beyond every documented system ceiling, distinctly "masthead", while long heroes (Programmes) still
 wrap ≤5 lines at desktop.
 
-## THE SCALE (canonical values — tokens in bbc-tokens.css)
+> **2026-07-24 correction.** This document has described `assets/bbc-tokens.css` as the contract
+> ("loads last, wins") since 22 Jul, and the tracker recorded it deployed — **but the file did not
+> exist** (404 on local, draft and live). Three scales were running at once: this doc, a set of
+> stale orphan `--fs-*` tokens in `bbc-universal.css` that *nothing consumed* and that disagreed
+> with the doc, and hardcoded `!important` rules that actually won.
+> The good news from the audit: **the rules that win already match this doc** — h1 measures
+> 115.2px (9vw @1280) and h2 94.72px (7.4vw) on home/impact/programmes/workshops. The canon was
+> right; only its plumbing was fiction.
+> The file now exists and loads last, defining a `--type-*` namespace that collides with nothing —
+> verified a visual no-op (48/48). Sections repoint at it incrementally rather than in one blind
+> pass. The legacy `--fs-hero/--fs-h1/--fs-h2/--fs-lede` tokens are dead (0 consumers) and should
+> be deleted once nothing references them; `--fs-h3` still has 1 consumer.
+
+## THE SCALE (canonical values — tokens in bbc-tokens.css, `--type-*` namespace)
 | Role | Value | @1280 | Notes |
 |---|---|---|---|
 | Display (hero h1) | `clamp(3.4rem, 9vw, 7.75rem)` | **115px** (cap 124) | lh .95 · tracking -0.025em |
