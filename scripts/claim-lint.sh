@@ -30,6 +30,9 @@ PATTERNS=(
   '[Gg]uaranteed interview'                      # unverifiable promise
   'Sustainable Design (&(amp;)?|and) Manufacturing'  # wrong OCN title; canonical = "Workshop Skills and Sustainable Manufacturing"
   '\b[Pp]risoners\b'                             # voice rule: "Makers"; "people in prison" stays legal
+  '\b36\+? countries'                            # superseded by 45 (James 2026-07-07). Found by
+                                                 # qa/canary.mjs: estate-check rejected this and
+                                                 # claim-lint did not — the escape #6 shape again.
   "don'?t hesitate"
   '[Kk]ind regards'
   'hope this (email )?finds you well'
