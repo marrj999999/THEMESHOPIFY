@@ -111,6 +111,13 @@ if (runTier(1)) {
             footerFp: footer ? footer.innerText.replace(/\s+/g, ' ').slice(0, 200) : 'none',
             title: !!d.title, metaDesc: !!d.querySelector('meta[name="description"]'), canonical: !!d.querySelector('link[rel="canonical"]'), og: !!d.querySelector('meta[property="og:image"]'),
             ldOk: [...d.querySelectorAll('script[type="application/ld+json"]')].every(s => { try { JSON.parse(s.textContent); return true; } catch (e) { return false; } }),
+            // B3 cross-cutting sweeps (2026-07-24) — tracker rows that per-page work keeps missing.
+            // Logo SVGs without a viewBox render as floating ~300px boxes (known recurring defect).
+            logoNoViewBox: [...d.querySelectorAll('.rd-logocell svg, .rd-logowall svg, .bbc-press svg')]
+              .filter(s => !s.getAttribute('viewBox')).length,
+            // Contact address canon: info@ / james@ only. bamboobicycleclub@gmail.com is the
+            // read/login account and must never appear as a public contact route.
+            gmailLeak: (d.body.innerText.match(/bamboobicycleclub@gmail\.com/gi) || []).length,
             // FORMULA §1 — "ONE size per role, no exceptions" (B1, 2026-07-24).
             // Measured per breakpoint because the scale is clamp()-based and therefore
             // viewport-dependent BY DESIGN: comparing sizes across widths would be meaningless.
@@ -152,6 +159,8 @@ if (runTier(1)) {
         add(1, path + '@' + label, 'imgs have alt', r.noAlt === 0, r.noAlt + ' missing');
         add(1, path + '@' + label, 'no banned claims rendered', r.bannedHits.length === 0, r.bannedHits.join('|'));
         add(1, path + '@' + label, 'crumbs visible', r.crumbBad === 0, r.crumbBad + ' invisible');
+        add(1, path + '@' + label, 'logo SVGs have viewBox', r.logoNoViewBox === 0, r.logoNoViewBox + ' missing');
+        add(1, path + '@' + label, 'no gmail contact leak', r.gmailLeak === 0, r.gmailLeak + ' found');
         // FORMULA §1 conformance. NON-BLOCKING while the inventory is triaged with James
         // (TYPE_ROLES_BLOCKING=1 to enforce) — a check that instantly blocks every push is a
         // check people learn to route around. The inventory it produces IS the work queue.
@@ -300,8 +309,16 @@ if (runTier(7)) {
     }));
     add(7, 'PDP', 'add-to-cart works (drawer/notification/cart-page)', cart.drawer || cart.onCartPage || cart.count.trim() !== '', JSON.stringify(cart));
   } catch (e) { add(7, 'PDP', 'add-to-cart opens drawer', false, e.message.slice(0, 60)); }
-  // dark-band link visibility + fonts + axe on key 4
-  for (const path of ['/', '/pages/impact', '/products/gravel-frame-build-kit', '/collections/home-build-kits']) {
+  // dark-band link visibility + fonts + axe.
+  // WIDENED 2026-07-24 (B3): was 4 pages of 72 — so 68 pages, including contact, cart, search,
+  // 404 and every geometry page, had NEVER been accessibility-tested. For a CIC delivering
+  // education and prison programmes that is a UX and compliance exposure, and axe was already
+  // wired: it only needed the loop opening up. AXE_PAGES=key4 restores the fast set when
+  // iterating on something else.
+  const A11Y_PAGES = process.env.AXE_PAGES === 'key4'
+    ? ['/', '/pages/impact', '/products/gravel-frame-build-kit', '/collections/home-build-kits']
+    : ALL_PAGES;
+  for (const path of A11Y_PAGES) {
     try {
       const fontReqs = [];
       page.on('response', resp => { if (/Atkinson.*woff2/.test(resp.url())) fontReqs.push(resp.status()); });
@@ -335,8 +352,13 @@ if (runTier(7)) {
 
 // ---------- T5: vitals fence ----------
 if (runTier(5)) {
-  for (const path of ['/', '/pages/impact', '/products/gravel-frame-build-kit', '/collections/home-build-kits']) {
-    const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  // WIDENED 2026-07-24 (B3): was 4 paths at desktop only. Mobile is where the users are and where
+  // the numbers are worse, so the fence now runs at 390 as well as 1280 across the deep set —
+  // a desktop-only performance gate measures the easy case.
+  const VITALS_PAGES = ['/', '/pages/impact', '/pages/programmes', '/pages/workshops', '/pages/schools',
+    '/pages/why-bamboo', '/products/gravel-frame-build-kit', '/collections/home-build-kits'];
+  for (const [path, vw] of VITALS_PAGES.flatMap(p => [[p, 1280], [p, 390]])) {
+    const ctx = await browser.newContext({ viewport: { width: vw, height: vw === 390 ? 844 : 800 } });
     const page = await ctx.newPage();
     await page.addInitScript(() => {
       window.__v = { lcp: 0, cls: 0 };
@@ -347,9 +369,12 @@ if (runTier(5)) {
       await page.goto(BASE + path + (path.includes('?') ? '&' : '?') + P + '&t5=1', { waitUntil: 'load', timeout: 40000 });
       await page.waitForTimeout(2200);
       const v = await page.evaluate(() => window.__v);
-      add(5, path, 'LCP ≤ 1500ms', v.lcp <= 1500, Math.round(v.lcp) + 'ms');
-      add(5, path, 'CLS ≤ 0.02', v.cls <= 0.02, v.cls.toFixed(3));
-    } catch (e) { add(5, path, 'LOAD', false, e.message.slice(0, 60)); }
+      // Mobile gets a realistic budget: the same 1500ms fence at 390 would fail on physics,
+      // not on defects, and a gate that always fails is one people switch off.
+      const lcpFence = vw === 390 ? 2500 : 1500;
+      add(5, `${path}@${vw}`, `LCP ≤ ${lcpFence}ms`, v.lcp <= lcpFence, Math.round(v.lcp) + 'ms');
+      add(5, `${path}@${vw}`, 'CLS ≤ 0.02', v.cls <= 0.02, v.cls.toFixed(3));
+    } catch (e) { add(5, `${path}@${vw}`, 'LOAD', false, e.message.slice(0, 60)); }
     await ctx.close();
   }
   log('T5 done');
