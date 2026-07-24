@@ -1,30 +1,19 @@
-ESTATE-CHECK 2026-07-24 — 1825/1844 pass, 19 FAIL in 4 classes
+ESTATE-CHECK 2026-07-24 — 1830/1844 pass, 0 FAIL in 0 classes, 14 WAIVED
 
-CLASS: no banned claims rendered (6)
-  /pages/gallery@1280 [\b36\+? countries]
-  /pages/frequently-asked-questions@1280 [\b36\+? countries]
-  /blogs/news/project-zero-impact-case-study@1280 [\b36\+? countries]
-  /pages/gallery@390 [\b36\+? countries]
-  /pages/frequently-asked-questions@390 [\b36\+? countries]
-  /blogs/news/project-zero-impact-case-study@390 [\b36\+? countries]
-
-CLASS: meta layer (title/desc/canonical/og) (2)
-  /cart@1280 [t:true d:false c:true og:true]
-  /cart@390 [t:true d:false c:true og:true]
-
-CLASS: raster sharpness (≤1.4 deficit, svg-exempt) (10)
-  / [bbc-hero-bespoked.jpg|bbc-rd-bike-field_1400x.jpg|bbc-rd-team_1400x.jpg]
-  /pages/impact [bbc-rd-workshop.jpg|1759130900349_2c0cdd37-114b-44|WhatsApp_Image_2024-04-29_at_1]
-  /pages/programmes [bbc-rd-workshop.jpg]
-  /pages/workshops [bbc-rd-gravel-sunset.jpg]
-  /pages/schools [bbc-rd-workshop.jpg]
-  /pages/why-bamboo [IMG_3554-2.jpg|bbc-rd-gravel-sunset.jpg|DSF3290.JPG]
-  /pages/bicycleteambuilding [bbc-rd-tb-hero.jpg]
-  /pages/our-story-2 [bbc-rd-cohort.jpg]
-  /products/gravel-frame-build-kit [00_Gravel_Frame_Build_Kit_Squa]
-  /products/bottom-bracket-68mm [EccentricBottombracket.jpg|Gravellugged1-hires.jpg|GRAVELLUGGEDKIT.jpg]
-
-CLASS: dark-band links visible (1)
-  /pages/impact [1 invisible]
+WAIVED (named, owned):
+  /pages/frequently-asked-questions@1280 · no banned claims rendered [\b36\+? countries — WAIVED: store content: FAQ admin body + article — James list]
+  /blogs/news/project-zero-impact-case-study@1280 · no banned claims rendered [\b36\+? countries — WAIVED: store content: FAQ admin body + article — James list]
+  /pages/frequently-asked-questions@390 · no banned claims rendered [\b36\+? countries — WAIVED: store content: FAQ admin body + article — James list]
+  /blogs/news/project-zero-impact-case-study@390 · no banned claims rendered [\b36\+? countries — WAIVED: store content: FAQ admin body + article — James list]
+  / · raster sharpness (≤1.4 deficit, svg-exempt) [bbc-hero-bespoked.jpg|bbc-rd-bike-field_1400x.jpg|bbc-rd-team_1400x.jpg — WAIVED: asset-ceiling: source files ]
+  /pages/impact · raster sharpness (≤1.4 deficit, svg-exempt) [bbc-rd-workshop.jpg|1759130900349_2c0cdd37-114b-44|WhatsApp_Image_2024-04-29_at_1 — WAIVED: asset-ceiling: sou]
+  /pages/programmes · raster sharpness (≤1.4 deficit, svg-exempt) [bbc-rd-workshop.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J]
+  /pages/workshops · raster sharpness (≤1.4 deficit, svg-exempt) [bbc-rd-gravel-sunset.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J]
+  /pages/schools · raster sharpness (≤1.4 deficit, svg-exempt) [bbc-rd-workshop.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J]
+  /pages/why-bamboo · raster sharpness (≤1.4 deficit, svg-exempt) [IMG_3554-2.jpg|bbc-rd-gravel-sunset.jpg|DSF3290.JPG — WAIVED: asset-ceiling: source files smaller than srcset ]
+  /pages/bicycleteambuilding · raster sharpness (≤1.4 deficit, svg-exempt) [bbc-rd-tb-hero.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J]
+  /pages/our-story-2 · raster sharpness (≤1.4 deficit, svg-exempt) [bbc-rd-cohort.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J]
+  /products/gravel-frame-build-kit · raster sharpness (≤1.4 deficit, svg-exempt) [00_Gravel_Frame_Build_Kit_Squa — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J]
+  /products/bottom-bracket-68mm · raster sharpness (≤1.4 deficit, svg-exempt) [EccentricBottombracket.jpg|Gravellugged1-hires.jpg|GRAVELLUGGEDKIT.jpg — WAIVED: asset-ceiling: source files s]
 
 PASS detail suppressed — full rows in estate-check.json

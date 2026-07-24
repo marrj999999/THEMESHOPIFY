@@ -885,40 +885,40 @@
   "tier": 1,
   "page": "/pages/gallery@1280",
   "check": "no banned claims rendered",
-  "ok": false,
-  "note": "\\b36\\+? countries"
- },
- {
-  "tier": 1,
-  "page": "/pages/gallery@1280",
-  "check": "crumbs visible",
-  "ok": true,
-  "note": "0 invisible"
- },
- {
-  "tier": 1,
-  "page": "/pages/gallery@1280",
-  "check": "in-page anchors resolve",
-  "ok": true,
-  "note": "0 dead"
- },
- {
-  "tier": 1,
-  "page": "/pages/gallery@1280",
-  "check": "meta layer (title/desc/canonical/og)",
-  "ok": true,
-  "note": "t:true d:true c:true og:true"
- },
- {
-  "tier": 1,
-  "page": "/pages/gallery@1280",
-  "check": "JSON-LD parses",
   "ok": true,
   "note": ""
  },
  {
   "tier": 1,
   "page": "/pages/gallery@1280",
+  "check": "crumbs visible",
+  "ok": true,
+  "note": "0 invisible"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/gallery@1280",
+  "check": "in-page anchors resolve",
+  "ok": true,
+  "note": "0 dead"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/gallery@1280",
+  "check": "meta layer (title/desc/canonical/og)",
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/gallery@1280",
+  "check": "JSON-LD parses",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/gallery@1280",
   "check": "zero JS errors",
   "ok": true,
   "note": ""
@@ -1893,8 +1893,8 @@
   "tier": 1,
   "page": "/pages/frequently-asked-questions@1280",
   "check": "no banned claims rendered",
-  "ok": false,
-  "note": "\\b36\\+? countries"
+  "ok": "waived",
+  "note": "\\b36\\+? countries — WAIVED: store content: FAQ admin body + article — James list"
  },
  {
   "tier": 1,
@@ -5358,8 +5358,8 @@
   "tier": 1,
   "page": "/cart@1280",
   "check": "meta layer (title/desc/canonical/og)",
-  "ok": false,
-  "note": "t:true d:false c:true og:true"
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
  },
  {
   "tier": 1,
@@ -5589,8 +5589,8 @@
   "tier": 1,
   "page": "/blogs/news/project-zero-impact-case-study@1280",
   "check": "no banned claims rendered",
-  "ok": false,
-  "note": "\\b36\\+? countries"
+  "ok": "waived",
+  "note": "\\b36\\+? countries — WAIVED: store content: FAQ admin body + article — James list"
  },
  {
   "tier": 1,
@@ -6513,8 +6513,8 @@
   "tier": 1,
   "page": "/pages/gallery@390",
   "check": "no banned claims rendered",
-  "ok": false,
-  "note": "\\b36\\+? countries"
+  "ok": true,
+  "note": ""
  },
  {
   "tier": 1,
@@ -7521,8 +7521,8 @@
   "tier": 1,
   "page": "/pages/frequently-asked-questions@390",
   "check": "no banned claims rendered",
-  "ok": false,
-  "note": "\\b36\\+? countries"
+  "ok": "waived",
+  "note": "\\b36\\+? countries — WAIVED: store content: FAQ admin body + article — James list"
  },
  {
   "tier": 1,
@@ -10986,8 +10986,8 @@
   "tier": 1,
   "page": "/cart@390",
   "check": "meta layer (title/desc/canonical/og)",
-  "ok": false,
-  "note": "t:true d:false c:true og:true"
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
  },
  {
   "tier": 1,
@@ -11217,8 +11217,8 @@
   "tier": 1,
   "page": "/blogs/news/project-zero-impact-case-study@390",
   "check": "no banned claims rendered",
-  "ok": false,
-  "note": "\\b36\\+? countries"
+  "ok": "waived",
+  "note": "\\b36\\+? countries — WAIVED: store content: FAQ admin body + article — James list"
  },
  {
   "tier": 1,
@@ -12554,8 +12554,8 @@
   "tier": 3,
   "page": "/",
   "check": "raster sharpness (≤1.4 deficit, svg-exempt)",
-  "ok": false,
-  "note": "bbc-hero-bespoked.jpg|bbc-rd-bike-field_1400x.jpg|bbc-rd-team_1400x.jpg"
+  "ok": "waived",
+  "note": "bbc-hero-bespoked.jpg|bbc-rd-bike-field_1400x.jpg|bbc-rd-team_1400x.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J"
  },
  {
   "tier": 3,
@@ -12568,8 +12568,8 @@
   "tier": 3,
   "page": "/pages/impact",
   "check": "raster sharpness (≤1.4 deficit, svg-exempt)",
-  "ok": false,
-  "note": "bbc-rd-workshop.jpg|1759130900349_2c0cdd37-114b-44|WhatsApp_Image_2024-04-29_at_1"
+  "ok": "waived",
+  "note": "bbc-rd-workshop.jpg|1759130900349_2c0cdd37-114b-44|WhatsApp_Image_2024-04-29_at_1 — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J"
  },
  {
   "tier": 3,
@@ -12582,8 +12582,8 @@
   "tier": 3,
   "page": "/pages/programmes",
   "check": "raster sharpness (≤1.4 deficit, svg-exempt)",
-  "ok": false,
-  "note": "bbc-rd-workshop.jpg"
+  "ok": "waived",
+  "note": "bbc-rd-workshop.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J"
  },
  {
   "tier": 3,
@@ -12596,8 +12596,8 @@
   "tier": 3,
   "page": "/pages/workshops",
   "check": "raster sharpness (≤1.4 deficit, svg-exempt)",
-  "ok": false,
-  "note": "bbc-rd-gravel-sunset.jpg"
+  "ok": "waived",
+  "note": "bbc-rd-gravel-sunset.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J"
  },
  {
   "tier": 3,
@@ -12610,8 +12610,8 @@
   "tier": 3,
   "page": "/pages/schools",
   "check": "raster sharpness (≤1.4 deficit, svg-exempt)",
-  "ok": false,
-  "note": "bbc-rd-workshop.jpg"
+  "ok": "waived",
+  "note": "bbc-rd-workshop.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J"
  },
  {
   "tier": 3,
@@ -12624,8 +12624,8 @@
   "tier": 3,
   "page": "/pages/why-bamboo",
   "check": "raster sharpness (≤1.4 deficit, svg-exempt)",
-  "ok": false,
-  "note": "IMG_3554-2.jpg|bbc-rd-gravel-sunset.jpg|DSF3290.JPG"
+  "ok": "waived",
+  "note": "IMG_3554-2.jpg|bbc-rd-gravel-sunset.jpg|DSF3290.JPG — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J"
  },
  {
   "tier": 3,
@@ -12638,8 +12638,8 @@
   "tier": 3,
   "page": "/pages/bicycleteambuilding",
   "check": "raster sharpness (≤1.4 deficit, svg-exempt)",
-  "ok": false,
-  "note": "bbc-rd-tb-hero.jpg"
+  "ok": "waived",
+  "note": "bbc-rd-tb-hero.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J"
  },
  {
   "tier": 3,
@@ -12652,8 +12652,8 @@
   "tier": 3,
   "page": "/pages/our-story-2",
   "check": "raster sharpness (≤1.4 deficit, svg-exempt)",
-  "ok": false,
-  "note": "bbc-rd-cohort.jpg"
+  "ok": "waived",
+  "note": "bbc-rd-cohort.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J"
  },
  {
   "tier": 3,
@@ -12694,8 +12694,8 @@
   "tier": 3,
   "page": "/products/gravel-frame-build-kit",
   "check": "raster sharpness (≤1.4 deficit, svg-exempt)",
-  "ok": false,
-  "note": "00_Gravel_Frame_Build_Kit_Squa"
+  "ok": "waived",
+  "note": "00_Gravel_Frame_Build_Kit_Squa — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J"
  },
  {
   "tier": 3,
@@ -12708,8 +12708,8 @@
   "tier": 3,
   "page": "/products/bottom-bracket-68mm",
   "check": "raster sharpness (≤1.4 deficit, svg-exempt)",
-  "ok": false,
-  "note": "EccentricBottombracket.jpg|Gravellugged1-hires.jpg|GRAVELLUGGEDKIT.jpg"
+  "ok": "waived",
+  "note": "EccentricBottombracket.jpg|Gravellugged1-hires.jpg|GRAVELLUGGEDKIT.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J"
  },
  {
   "tier": 3,
@@ -12771,8 +12771,8 @@
   "tier": 7,
   "page": "/pages/impact",
   "check": "dark-band links visible",
-  "ok": false,
-  "note": "1 invisible"
+  "ok": true,
+  "note": "0 invisible"
  },
  {
   "tier": 7,
@@ -12856,7 +12856,7 @@
   "page": "/",
   "check": "LCP ≤ 1500ms",
   "ok": true,
-  "note": "412ms"
+  "note": "512ms"
  },
  {
   "tier": 5,
@@ -12870,7 +12870,7 @@
   "page": "/pages/impact",
   "check": "LCP ≤ 1500ms",
   "ok": true,
-  "note": "436ms"
+  "note": "468ms"
  },
  {
   "tier": 5,
@@ -12884,7 +12884,7 @@
   "page": "/products/gravel-frame-build-kit",
   "check": "LCP ≤ 1500ms",
   "ok": true,
-  "note": "380ms"
+  "note": "504ms"
  },
  {
   "tier": 5,
@@ -12898,7 +12898,7 @@
   "page": "/collections/home-build-kits",
   "check": "LCP ≤ 1500ms",
   "ok": true,
-  "note": "412ms"
+  "note": "372ms"
  },
  {
   "tier": 5,
