@@ -21,6 +21,8 @@ PATTERNS=(
   '£280[^0-9]'
   '100% completion'
   'lifecycle analysis \(2024\)'
+  '14765'
+  '[Nn]ationally recognised'
   "don'?t hesitate"
   '[Kk]ind regards'
   'hope this (email )?finds you well'
