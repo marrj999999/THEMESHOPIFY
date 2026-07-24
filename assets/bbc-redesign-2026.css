@@ -131,7 +131,7 @@
 .bbc-rd .rd-csgrid.rd-csgrid-1{ grid-template-columns:minmax(0,460px); justify-content:center; }
 /* Impact — named prison sites line */
 .bbc-rd .rd-sitenames{ font-weight:800; font-size:clamp(18px,2.4vw,26px); color:var(--forest); letter-spacing:-.01em; line-height:1.4; }
-.bbc-rd a.rd-cscard{ display:flex; flex-direction:column; background:var(--bone); border:2.5px solid var(--ink); border-radius:10px; overflow:hidden; box-shadow:5px 5px 0 var(--ink); text-decoration:none; color:var(--ink); transition:transform .18s ease, box-shadow .18s ease; }
+.bbc-rd a.rd-cscard{ display:flex; flex-direction:column; background:var(--bone); border:2.5px solid var(--ink); border-radius:10px; overflow:clip; /* clip not hidden — hidden makes the card a scroll container and kills scroll-driven timelines inside (chip stagger), 2026-07-24 */ box-shadow:5px 5px 0 var(--ink); text-decoration:none; color:var(--ink); transition:transform .18s ease, box-shadow .18s ease; }
 .bbc-rd a.rd-cscard, .bbc-rd a.rd-cscard *{ text-decoration:none !important; }  /* card is one link — kill legacy per-line underlines */
 @media (hover:hover){
   .bbc-rd a.rd-cscard:hover{ transform:translate(-3px,-3px); box-shadow:9px 9px 0 var(--lime-700); }

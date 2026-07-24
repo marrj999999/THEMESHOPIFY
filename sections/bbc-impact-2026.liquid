@@ -513,6 +513,11 @@
       {%- if section.settings.cred_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.cred_eyebrow }}</span>{%- endif -%}
       {%- if section.settings.cred_heading != blank -%}<h2 class="rd-reveal rd-mw-22ch">{{ section.settings.cred_heading }}</h2>{%- endif -%}
       {%- if section.settings.cred_sub != blank -%}<p class="rd-lede rd-mt1">{{ section.settings.cred_sub }}</p>{%- endif -%}
+      {%- comment -%} the mechanism sentence — the one content block every benchmarked social
+         enterprise states in one line (Change Please/charity:water/Elvis & Kresse tour,
+         2026-07-24) and this page previously never did {%- endcomment -%}
+      {%- assign _mech = section.settings.cred_mechanism | default: 'Kit and workshop revenue covers our costs — funder money goes straight to programme delivery.' -%}
+      {%- if _mech != blank -%}<p class="rd-mech rd-mt2">{{ _mech }}</p>{%- endif -%}
 
       {%- comment -%} ministerial endorsement (verbatim, attributable) — restored 2026-07-22;
          it previously only GATED this band without ever rendering (audit footgun) {%- endcomment -%}
@@ -628,6 +633,8 @@
 .rd-cscard--ev{position:relative}
 .rd-cscard--ev .rd-cscard__stretch::after{content:"";position:absolute;inset:0}
 .rd-cscard--ev .rd-cscard__meta a,.rd-cscard--ev .rd-cscard__evq cite{position:relative;z-index:1}
+/* mechanism sentence — bold single line, the funder contract */
+.rd-mech{font-size:17px;font-weight:800;letter-spacing:.01em;max-width:56ch}
 /* under-wall proof line — the archive statement (editable) */
 .rd-evproof-line{margin:26px 0 0;font-size:14px;font-weight:800;letter-spacing:.02em;opacity:.75}
 /* ---- evidence motion (2026-07-22) — every rule inert under reduced-motion ----
@@ -1152,6 +1159,12 @@ document.addEventListener('click', function (e) {
       "id": "cred_sub",
       "label": "Credibility subline (longevity anchor)",
       "default": "14 years. 4,000+ people trained. 3,500+ bikes across 45 countries."
+    },
+    {
+      "type": "text",
+      "id": "cred_mechanism",
+      "label": "Mechanism sentence (how the money works)",
+      "default": "Kit and workshop revenue covers our costs — funder money goes straight to programme delivery."
     },
     {
       "type": "textarea",

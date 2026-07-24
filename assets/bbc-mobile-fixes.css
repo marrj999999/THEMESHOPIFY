@@ -287,9 +287,15 @@
    4. OVERFLOW FIX — Prevent horizontal scroll
    ============================================================================= */
 
-/* Global overflow prevention */
+/* Global overflow prevention.
+   `clip` NOT `hidden` (2026-07-22): overflow-x:hidden turns html/body and every
+   .shopify-section into a scroll container, which makes ALL scroll-driven
+   animation timelines (view()/scroll() — the whole .rd-reveal system) resolve to
+   a non-scrolling ancestor and go inactive: every reveal silently rendered its
+   end state and the site had no motion. clip clips identically but creates no
+   scroll container, so the timelines drive again. */
 html, body {
-  overflow-x: hidden !important;
+  overflow-x: clip !important;
   max-width: 100vw !important;
 }
 
@@ -300,7 +306,7 @@ main,
 #MainContent,
 .shopify-section {
   max-width: 100% !important;
-  overflow-x: hidden !important;
+  overflow-x: clip !important;
 }
 
 /* Images */
