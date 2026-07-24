@@ -208,6 +208,7 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
 /* redesign's a{color:inherit!important} out-ranks per-anchor rules — so dark bands set
    the PARENT colour and anchors inherit it (the report-link invisibility, 2026-07-24) */
 .bbc-rd .rd-dark, .bbc-rd .rd-on-dark{ color:var(--bone); }
+.bbc-rd .rd-dark p.rd-on-dark{ color:var(--bone) !important; } /* the report-link parent — a band-level rule was still winning */
 
 /* width utility used by the homepage video band (was missing — wrap fell back to 1200px) */
 .bbc-rd .rd-mw-980px,
@@ -244,6 +245,11 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
 .rd-num,.rd-fact-n,.rd-yr{ font-variant-numeric:tabular-nums; }
 /* normalise emphasis weight */
 .bbc-rd b,.bbc-rd strong{ font-weight:700; }
+/* measure-capped wraps sit on the page axis, not centred — the proof-band class
+   found estate-wide (programmes/workshops/why-bamboo/teambuilding at 1024+): a
+   .rd-wrap.rd-mw-* centres itself, indenting whole bands +190px off the axis.
+   Explicit centring opts out via .rd-mx-auto / .rd-center. */
+.bbc-rd .rd-wrap[class*="rd-mw-"]:not(.rd-mx-auto):not(.rd-center){ margin-left:max(calc((100vw - 1200px) / 2), 0px); margin-right:0; }
 /* breadcrumbs follow their surface — bbc-redesign-2026.css hardcoded the dark-hero
    recipe (paper links + lime current) on EVERY .rd-crumb, invisible on light heroes
    (caught on /pages/which-kit + PDP, 2026-07-22). Default = inherit the band colour;
@@ -340,3 +346,6 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
 [id="proof"],[id="evidence"],[id="map"],[id="backers"],[id="book-a-call"]{ scroll-margin-top:24px; }
 .rd-seg-ev{ display:inline-block; margin-left:18px; opacity:.85; }
 @media (prefers-reduced-motion: no-preference){ html{ scroll-behavior:smooth; } }
+
+/* hero folio index: was #5e7355 on forest (2.39:1, axe) — mist passes AAA-large */
+.bbc-rd-home .ew-folio{ color:var(--mist) !important; }

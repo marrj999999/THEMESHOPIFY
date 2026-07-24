@@ -234,8 +234,8 @@
   "tier": 1,
   "page": "/pages/programmes@1280",
   "check": "meta layer (title/desc/canonical/og)",
-  "ok": false,
-  "note": "t:true d:false c:true og:true"
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
  },
  {
   "tier": 1,
@@ -318,8 +318,8 @@
   "tier": 1,
   "page": "/pages/workshops@1280",
   "check": "meta layer (title/desc/canonical/og)",
-  "ok": false,
-  "note": "t:true d:false c:true og:true"
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
  },
  {
   "tier": 1,
@@ -738,8 +738,8 @@
   "tier": 1,
   "page": "/pages/support-mission@1280",
   "check": "meta layer (title/desc/canonical/og)",
-  "ok": false,
-  "note": "t:true d:false c:true og:true"
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
  },
  {
   "tier": 1,
@@ -1305,8 +1305,8 @@
   "tier": 1,
   "page": "/pages/impact-report@1280",
   "check": "no banned claims rendered",
-  "ok": false,
-  "note": "\\b36\\+? countries"
+  "ok": true,
+  "note": ""
  },
  {
   "tier": 1,
@@ -1662,8 +1662,8 @@
   "tier": 1,
   "page": "/pages/club-news@1280",
   "check": "meta layer (title/desc/canonical/og)",
-  "ok": false,
-  "note": "t:true d:false c:true og:true"
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
  },
  {
   "tier": 1,
@@ -5862,8 +5862,8 @@
   "tier": 1,
   "page": "/pages/programmes@390",
   "check": "meta layer (title/desc/canonical/og)",
-  "ok": false,
-  "note": "t:true d:false c:true og:true"
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
  },
  {
   "tier": 1,
@@ -5946,8 +5946,8 @@
   "tier": 1,
   "page": "/pages/workshops@390",
   "check": "meta layer (title/desc/canonical/og)",
-  "ok": false,
-  "note": "t:true d:false c:true og:true"
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
  },
  {
   "tier": 1,
@@ -6093,40 +6093,40 @@
   "tier": 1,
   "page": "/pages/why-bamboo@390",
   "check": "no banned claims rendered",
-  "ok": false,
-  "note": "\\b36\\+? countries"
- },
- {
-  "tier": 1,
-  "page": "/pages/why-bamboo@390",
-  "check": "crumbs visible",
-  "ok": true,
-  "note": "0 invisible"
- },
- {
-  "tier": 1,
-  "page": "/pages/why-bamboo@390",
-  "check": "in-page anchors resolve",
-  "ok": true,
-  "note": "0 dead"
- },
- {
-  "tier": 1,
-  "page": "/pages/why-bamboo@390",
-  "check": "meta layer (title/desc/canonical/og)",
-  "ok": true,
-  "note": "t:true d:true c:true og:true"
- },
- {
-  "tier": 1,
-  "page": "/pages/why-bamboo@390",
-  "check": "JSON-LD parses",
   "ok": true,
   "note": ""
  },
  {
   "tier": 1,
   "page": "/pages/why-bamboo@390",
+  "check": "crumbs visible",
+  "ok": true,
+  "note": "0 invisible"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/why-bamboo@390",
+  "check": "in-page anchors resolve",
+  "ok": true,
+  "note": "0 dead"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/why-bamboo@390",
+  "check": "meta layer (title/desc/canonical/og)",
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/why-bamboo@390",
+  "check": "JSON-LD parses",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/why-bamboo@390",
   "check": "zero JS errors",
   "ok": true,
   "note": ""
@@ -6366,8 +6366,8 @@
   "tier": 1,
   "page": "/pages/support-mission@390",
   "check": "meta layer (title/desc/canonical/og)",
-  "ok": false,
-  "note": "t:true d:false c:true og:true"
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
  },
  {
   "tier": 1,
@@ -6512,432 +6512,432 @@
  {
   "tier": 1,
   "page": "/pages/gallery@390",
-  "check": "no banned claims rendered",
-  "ok": false,
-  "note": "\\b36\\+? countries"
- },
- {
-  "tier": 1,
-  "page": "/pages/gallery@390",
-  "check": "crumbs visible",
-  "ok": true,
-  "note": "0 invisible"
- },
- {
-  "tier": 1,
-  "page": "/pages/gallery@390",
-  "check": "in-page anchors resolve",
-  "ok": true,
-  "note": "0 dead"
- },
- {
-  "tier": 1,
-  "page": "/pages/gallery@390",
-  "check": "meta layer (title/desc/canonical/og)",
-  "ok": true,
-  "note": "t:true d:true c:true og:true"
- },
- {
-  "tier": 1,
-  "page": "/pages/gallery@390",
-  "check": "JSON-LD parses",
-  "ok": true,
-  "note": ""
- },
- {
-  "tier": 1,
-  "page": "/pages/gallery@390",
-  "check": "zero JS errors",
-  "ok": true,
-  "note": ""
- },
- {
-  "tier": 1,
-  "page": "/pages/our-story-2@390",
-  "check": "HTTP ok",
-  "ok": true,
-  "note": 200
- },
- {
-  "tier": 1,
-  "page": "/pages/our-story-2@390",
-  "check": "one h1",
-  "ok": true,
-  "note": "1 h1s"
- },
- {
-  "tier": 1,
-  "page": "/pages/our-story-2@390",
-  "check": "Atkinson body",
-  "ok": true,
-  "note": "\"Atkinson Hyperlegible\""
- },
- {
-  "tier": 1,
-  "page": "/pages/our-story-2@390",
-  "check": "no Jakarta leaks",
-  "ok": true,
-  "note": 0
- },
- {
-  "tier": 1,
-  "page": "/pages/our-story-2@390",
-  "check": "overflow 0",
-  "ok": true,
-  "note": "0px"
- },
- {
-  "tier": 1,
-  "page": "/pages/our-story-2@390",
-  "check": "imgs have alt",
-  "ok": true,
-  "note": "0 missing"
- },
- {
-  "tier": 1,
-  "page": "/pages/our-story-2@390",
-  "check": "no banned claims rendered",
-  "ok": true,
-  "note": ""
- },
- {
-  "tier": 1,
-  "page": "/pages/our-story-2@390",
-  "check": "crumbs visible",
-  "ok": true,
-  "note": "0 invisible"
- },
- {
-  "tier": 1,
-  "page": "/pages/our-story-2@390",
-  "check": "in-page anchors resolve",
-  "ok": true,
-  "note": "0 dead"
- },
- {
-  "tier": 1,
-  "page": "/pages/our-story-2@390",
-  "check": "meta layer (title/desc/canonical/og)",
-  "ok": true,
-  "note": "t:true d:true c:true og:true"
- },
- {
-  "tier": 1,
-  "page": "/pages/our-story-2@390",
-  "check": "JSON-LD parses",
-  "ok": true,
-  "note": ""
- },
- {
-  "tier": 1,
-  "page": "/pages/our-story-2@390",
-  "check": "zero JS errors",
-  "ok": true,
-  "note": ""
- },
- {
-  "tier": 1,
-  "page": "/pages/build-to-bond@390",
-  "check": "HTTP ok",
-  "ok": true,
-  "note": 200
- },
- {
-  "tier": 1,
-  "page": "/pages/build-to-bond@390",
-  "check": "one h1",
-  "ok": true,
-  "note": "1 h1s"
- },
- {
-  "tier": 1,
-  "page": "/pages/build-to-bond@390",
-  "check": "Atkinson body",
-  "ok": true,
-  "note": "\"Atkinson Hyperlegible\""
- },
- {
-  "tier": 1,
-  "page": "/pages/build-to-bond@390",
-  "check": "no Jakarta leaks",
-  "ok": true,
-  "note": 0
- },
- {
-  "tier": 1,
-  "page": "/pages/build-to-bond@390",
-  "check": "overflow 0",
-  "ok": true,
-  "note": "0px"
- },
- {
-  "tier": 1,
-  "page": "/pages/build-to-bond@390",
-  "check": "imgs have alt",
-  "ok": true,
-  "note": "0 missing"
- },
- {
-  "tier": 1,
-  "page": "/pages/build-to-bond@390",
-  "check": "no banned claims rendered",
-  "ok": true,
-  "note": ""
- },
- {
-  "tier": 1,
-  "page": "/pages/build-to-bond@390",
-  "check": "crumbs visible",
-  "ok": true,
-  "note": "0 invisible"
- },
- {
-  "tier": 1,
-  "page": "/pages/build-to-bond@390",
-  "check": "in-page anchors resolve",
-  "ok": true,
-  "note": "0 dead"
- },
- {
-  "tier": 1,
-  "page": "/pages/build-to-bond@390",
-  "check": "meta layer (title/desc/canonical/og)",
-  "ok": true,
-  "note": "t:true d:true c:true og:true"
- },
- {
-  "tier": 1,
-  "page": "/pages/build-to-bond@390",
-  "check": "JSON-LD parses",
-  "ok": true,
-  "note": ""
- },
- {
-  "tier": 1,
-  "page": "/pages/build-to-bond@390",
-  "check": "zero JS errors",
-  "ok": true,
-  "note": ""
- },
- {
-  "tier": 1,
-  "page": "/pages/prisons@390",
-  "check": "HTTP ok",
-  "ok": true,
-  "note": 200
- },
- {
-  "tier": 1,
-  "page": "/pages/prisons@390",
-  "check": "one h1",
-  "ok": true,
-  "note": "1 h1s"
- },
- {
-  "tier": 1,
-  "page": "/pages/prisons@390",
-  "check": "Atkinson body",
-  "ok": true,
-  "note": "\"Atkinson Hyperlegible\""
- },
- {
-  "tier": 1,
-  "page": "/pages/prisons@390",
-  "check": "no Jakarta leaks",
-  "ok": true,
-  "note": 0
- },
- {
-  "tier": 1,
-  "page": "/pages/prisons@390",
-  "check": "overflow 0",
-  "ok": true,
-  "note": "0px"
- },
- {
-  "tier": 1,
-  "page": "/pages/prisons@390",
-  "check": "imgs have alt",
-  "ok": true,
-  "note": "0 missing"
- },
- {
-  "tier": 1,
-  "page": "/pages/prisons@390",
-  "check": "no banned claims rendered",
-  "ok": true,
-  "note": ""
- },
- {
-  "tier": 1,
-  "page": "/pages/prisons@390",
-  "check": "crumbs visible",
-  "ok": true,
-  "note": "0 invisible"
- },
- {
-  "tier": 1,
-  "page": "/pages/prisons@390",
-  "check": "in-page anchors resolve",
-  "ok": true,
-  "note": "0 dead"
- },
- {
-  "tier": 1,
-  "page": "/pages/prisons@390",
-  "check": "meta layer (title/desc/canonical/og)",
-  "ok": true,
-  "note": "t:true d:true c:true og:true"
- },
- {
-  "tier": 1,
-  "page": "/pages/prisons@390",
-  "check": "JSON-LD parses",
-  "ok": true,
-  "note": ""
- },
- {
-  "tier": 1,
-  "page": "/pages/prisons@390",
-  "check": "zero JS errors",
-  "ok": true,
-  "note": ""
- },
- {
-  "tier": 1,
-  "page": "/pages/theory-of-change@390",
-  "check": "HTTP ok",
-  "ok": true,
-  "note": 200
- },
- {
-  "tier": 1,
-  "page": "/pages/theory-of-change@390",
-  "check": "one h1",
-  "ok": true,
-  "note": "1 h1s"
- },
- {
-  "tier": 1,
-  "page": "/pages/theory-of-change@390",
-  "check": "Atkinson body",
-  "ok": true,
-  "note": "\"Atkinson Hyperlegible\""
- },
- {
-  "tier": 1,
-  "page": "/pages/theory-of-change@390",
-  "check": "no Jakarta leaks",
-  "ok": true,
-  "note": 0
- },
- {
-  "tier": 1,
-  "page": "/pages/theory-of-change@390",
-  "check": "overflow 0",
-  "ok": true,
-  "note": "0px"
- },
- {
-  "tier": 1,
-  "page": "/pages/theory-of-change@390",
-  "check": "imgs have alt",
-  "ok": true,
-  "note": "0 missing"
- },
- {
-  "tier": 1,
-  "page": "/pages/theory-of-change@390",
-  "check": "no banned claims rendered",
-  "ok": true,
-  "note": ""
- },
- {
-  "tier": 1,
-  "page": "/pages/theory-of-change@390",
-  "check": "crumbs visible",
-  "ok": true,
-  "note": "0 invisible"
- },
- {
-  "tier": 1,
-  "page": "/pages/theory-of-change@390",
-  "check": "in-page anchors resolve",
-  "ok": true,
-  "note": "0 dead"
- },
- {
-  "tier": 1,
-  "page": "/pages/theory-of-change@390",
-  "check": "meta layer (title/desc/canonical/og)",
-  "ok": true,
-  "note": "t:true d:true c:true og:true"
- },
- {
-  "tier": 1,
-  "page": "/pages/theory-of-change@390",
-  "check": "JSON-LD parses",
-  "ok": true,
-  "note": ""
- },
- {
-  "tier": 1,
-  "page": "/pages/theory-of-change@390",
-  "check": "zero JS errors",
-  "ok": true,
-  "note": ""
- },
- {
-  "tier": 1,
-  "page": "/pages/impact-report@390",
-  "check": "HTTP ok",
-  "ok": true,
-  "note": 200
- },
- {
-  "tier": 1,
-  "page": "/pages/impact-report@390",
-  "check": "one h1",
-  "ok": true,
-  "note": "1 h1s"
- },
- {
-  "tier": 1,
-  "page": "/pages/impact-report@390",
-  "check": "Atkinson body",
-  "ok": true,
-  "note": "\"Atkinson Hyperlegible\""
- },
- {
-  "tier": 1,
-  "page": "/pages/impact-report@390",
-  "check": "no Jakarta leaks",
-  "ok": true,
-  "note": 0
- },
- {
-  "tier": 1,
-  "page": "/pages/impact-report@390",
-  "check": "overflow 0",
-  "ok": true,
-  "note": "0px"
- },
- {
-  "tier": 1,
-  "page": "/pages/impact-report@390",
-  "check": "imgs have alt",
-  "ok": true,
-  "note": "0 missing"
- },
- {
-  "tier": 1,
-  "page": "/pages/impact-report@390",
   "check": "no banned claims rendered",
   "ok": false,
   "note": "\\b36\\+? countries"
  },
  {
   "tier": 1,
+  "page": "/pages/gallery@390",
+  "check": "crumbs visible",
+  "ok": true,
+  "note": "0 invisible"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/gallery@390",
+  "check": "in-page anchors resolve",
+  "ok": true,
+  "note": "0 dead"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/gallery@390",
+  "check": "meta layer (title/desc/canonical/og)",
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/gallery@390",
+  "check": "JSON-LD parses",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/gallery@390",
+  "check": "zero JS errors",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/our-story-2@390",
+  "check": "HTTP ok",
+  "ok": true,
+  "note": 200
+ },
+ {
+  "tier": 1,
+  "page": "/pages/our-story-2@390",
+  "check": "one h1",
+  "ok": true,
+  "note": "1 h1s"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/our-story-2@390",
+  "check": "Atkinson body",
+  "ok": true,
+  "note": "\"Atkinson Hyperlegible\""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/our-story-2@390",
+  "check": "no Jakarta leaks",
+  "ok": true,
+  "note": 0
+ },
+ {
+  "tier": 1,
+  "page": "/pages/our-story-2@390",
+  "check": "overflow 0",
+  "ok": true,
+  "note": "0px"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/our-story-2@390",
+  "check": "imgs have alt",
+  "ok": true,
+  "note": "0 missing"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/our-story-2@390",
+  "check": "no banned claims rendered",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/our-story-2@390",
+  "check": "crumbs visible",
+  "ok": true,
+  "note": "0 invisible"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/our-story-2@390",
+  "check": "in-page anchors resolve",
+  "ok": true,
+  "note": "0 dead"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/our-story-2@390",
+  "check": "meta layer (title/desc/canonical/og)",
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/our-story-2@390",
+  "check": "JSON-LD parses",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/our-story-2@390",
+  "check": "zero JS errors",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/build-to-bond@390",
+  "check": "HTTP ok",
+  "ok": true,
+  "note": 200
+ },
+ {
+  "tier": 1,
+  "page": "/pages/build-to-bond@390",
+  "check": "one h1",
+  "ok": true,
+  "note": "1 h1s"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/build-to-bond@390",
+  "check": "Atkinson body",
+  "ok": true,
+  "note": "\"Atkinson Hyperlegible\""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/build-to-bond@390",
+  "check": "no Jakarta leaks",
+  "ok": true,
+  "note": 0
+ },
+ {
+  "tier": 1,
+  "page": "/pages/build-to-bond@390",
+  "check": "overflow 0",
+  "ok": true,
+  "note": "0px"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/build-to-bond@390",
+  "check": "imgs have alt",
+  "ok": true,
+  "note": "0 missing"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/build-to-bond@390",
+  "check": "no banned claims rendered",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/build-to-bond@390",
+  "check": "crumbs visible",
+  "ok": true,
+  "note": "0 invisible"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/build-to-bond@390",
+  "check": "in-page anchors resolve",
+  "ok": true,
+  "note": "0 dead"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/build-to-bond@390",
+  "check": "meta layer (title/desc/canonical/og)",
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/build-to-bond@390",
+  "check": "JSON-LD parses",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/build-to-bond@390",
+  "check": "zero JS errors",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/prisons@390",
+  "check": "HTTP ok",
+  "ok": true,
+  "note": 200
+ },
+ {
+  "tier": 1,
+  "page": "/pages/prisons@390",
+  "check": "one h1",
+  "ok": true,
+  "note": "1 h1s"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/prisons@390",
+  "check": "Atkinson body",
+  "ok": true,
+  "note": "\"Atkinson Hyperlegible\""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/prisons@390",
+  "check": "no Jakarta leaks",
+  "ok": true,
+  "note": 0
+ },
+ {
+  "tier": 1,
+  "page": "/pages/prisons@390",
+  "check": "overflow 0",
+  "ok": true,
+  "note": "0px"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/prisons@390",
+  "check": "imgs have alt",
+  "ok": true,
+  "note": "0 missing"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/prisons@390",
+  "check": "no banned claims rendered",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/prisons@390",
+  "check": "crumbs visible",
+  "ok": true,
+  "note": "0 invisible"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/prisons@390",
+  "check": "in-page anchors resolve",
+  "ok": true,
+  "note": "0 dead"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/prisons@390",
+  "check": "meta layer (title/desc/canonical/og)",
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/prisons@390",
+  "check": "JSON-LD parses",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/prisons@390",
+  "check": "zero JS errors",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/theory-of-change@390",
+  "check": "HTTP ok",
+  "ok": true,
+  "note": 200
+ },
+ {
+  "tier": 1,
+  "page": "/pages/theory-of-change@390",
+  "check": "one h1",
+  "ok": true,
+  "note": "1 h1s"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/theory-of-change@390",
+  "check": "Atkinson body",
+  "ok": true,
+  "note": "\"Atkinson Hyperlegible\""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/theory-of-change@390",
+  "check": "no Jakarta leaks",
+  "ok": true,
+  "note": 0
+ },
+ {
+  "tier": 1,
+  "page": "/pages/theory-of-change@390",
+  "check": "overflow 0",
+  "ok": true,
+  "note": "0px"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/theory-of-change@390",
+  "check": "imgs have alt",
+  "ok": true,
+  "note": "0 missing"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/theory-of-change@390",
+  "check": "no banned claims rendered",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/theory-of-change@390",
+  "check": "crumbs visible",
+  "ok": true,
+  "note": "0 invisible"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/theory-of-change@390",
+  "check": "in-page anchors resolve",
+  "ok": true,
+  "note": "0 dead"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/theory-of-change@390",
+  "check": "meta layer (title/desc/canonical/og)",
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/theory-of-change@390",
+  "check": "JSON-LD parses",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/theory-of-change@390",
+  "check": "zero JS errors",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/impact-report@390",
+  "check": "HTTP ok",
+  "ok": true,
+  "note": 200
+ },
+ {
+  "tier": 1,
+  "page": "/pages/impact-report@390",
+  "check": "one h1",
+  "ok": true,
+  "note": "1 h1s"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/impact-report@390",
+  "check": "Atkinson body",
+  "ok": true,
+  "note": "\"Atkinson Hyperlegible\""
+ },
+ {
+  "tier": 1,
+  "page": "/pages/impact-report@390",
+  "check": "no Jakarta leaks",
+  "ok": true,
+  "note": 0
+ },
+ {
+  "tier": 1,
+  "page": "/pages/impact-report@390",
+  "check": "overflow 0",
+  "ok": true,
+  "note": "0px"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/impact-report@390",
+  "check": "imgs have alt",
+  "ok": true,
+  "note": "0 missing"
+ },
+ {
+  "tier": 1,
+  "page": "/pages/impact-report@390",
+  "check": "no banned claims rendered",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 1,
   "page": "/pages/impact-report@390",
   "check": "crumbs visible",
   "ok": true,
@@ -7290,8 +7290,8 @@
   "tier": 1,
   "page": "/pages/club-news@390",
   "check": "meta layer (title/desc/canonical/og)",
-  "ok": false,
-  "note": "t:true d:false c:true og:true"
+  "ok": true,
+  "note": "t:true d:true c:true og:true"
  },
  {
   "tier": 1,
@@ -11292,41 +11292,6 @@
  },
  {
   "tier": 6,
-  "page": "/blogs/news/designboom-build-your-own-sustainable-commute",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/bikerumor-the-worlds-most-advanced-bamboo-bicycle",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/inside-time-bamboozling-way-to-build-bikes",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/huck-magazine-knowledge-sharing-over-profit-making",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/blogs/news/the-guardian-hands-down-one-of-the-best-things-i-have-ever-done",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
   "page": "/blogs/news/inside-time-making-bike-building-accessible-to-everyone-in-prisons",
   "check": "internal link resolves",
   "ok": false,
@@ -11363,118 +11328,6 @@
  {
   "tier": 6,
   "page": "/blogs/news/the-guardian-build-it-yourself-at-the-uks-first-bamboo-bike-workshop",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/products/permabond-et5429-1-x-50ml-cartridge",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/products/tool-pack-for-carbon-kit",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/products/flat-mount-adapter-is-fm",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/products/frame-building-tool-kit",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/products/thru-axle-ends",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/products/bamboo-bicycle-club-logo-t-shirt-1",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/products/unisex-organic-cotton-t-shirt-2",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/products/unisex-organic-cotton-t-shirt-1",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/products/unisex-organic-cotton-t-shirt",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/products/enamel-mug-2",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/products/organic-cotton-bamboo-bicycle-club-logo-hat",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/products/white-glossy-mug",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/products/organic-cotton-apron",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/products/bamboo-bicycle-club-beanie",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/products/organic-bamboo-bicycle-club-tote-bag",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
-  "page": "/products/bamboo-bicycle-club-gift-card",
   "check": "internal link resolves",
   "ok": false,
   "note": "HTTP 429"
@@ -11712,13 +11565,6 @@
  },
  {
   "tier": 6,
-  "page": "/products/bamboo",
-  "check": "internal link resolves",
-  "ok": false,
-  "note": "HTTP 429"
- },
- {
-  "tier": 6,
   "page": "/blogs/club-news/limitless-worldwide-adventure",
   "check": "internal link resolves",
   "ok": false,
@@ -11820,7 +11666,7 @@
   "page": "estate",
   "check": "link integrity (184 unique internal links)",
   "ok": false,
-  "note": "76 dead"
+  "note": "54 dead"
  },
  {
   "tier": 2,
@@ -11832,16 +11678,9 @@
  {
   "tier": 2,
   "page": "/@768",
-  "check": "nav gaps ≥8",
-  "ok": false,
-  "note": "[0,0,0]"
- },
- {
-  "tier": 2,
-  "page": "/@768",
   "check": "one text axis (≤8px)",
   "ok": true,
-  "note": "6px"
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -11860,13 +11699,6 @@
  {
   "tier": 2,
   "page": "/pages/impact@768",
-  "check": "nav gaps ≥8",
-  "ok": false,
-  "note": "[0,0,0]"
- },
- {
-  "tier": 2,
-  "page": "/pages/impact@768",
   "check": "one text axis (≤8px)",
   "ok": true,
   "note": "0px"
@@ -11888,13 +11720,6 @@
  {
   "tier": 2,
   "page": "/pages/programmes@768",
-  "check": "nav gaps ≥8",
-  "ok": false,
-  "note": "[0,0,0]"
- },
- {
-  "tier": 2,
-  "page": "/pages/programmes@768",
   "check": "one text axis (≤8px)",
   "ok": true,
   "note": "0px"
@@ -11916,13 +11741,6 @@
  {
   "tier": 2,
   "page": "/pages/workshops@768",
-  "check": "nav gaps ≥8",
-  "ok": false,
-  "note": "[0,0,0]"
- },
- {
-  "tier": 2,
-  "page": "/pages/workshops@768",
   "check": "one text axis (≤8px)",
   "ok": true,
   "note": "0px"
@@ -11944,13 +11762,6 @@
  {
   "tier": 2,
   "page": "/pages/schools@768",
-  "check": "nav gaps ≥8",
-  "ok": false,
-  "note": "[0,0,0]"
- },
- {
-  "tier": 2,
-  "page": "/pages/schools@768",
   "check": "one text axis (≤8px)",
   "ok": true,
   "note": "0px"
@@ -11972,16 +11783,9 @@
  {
   "tier": 2,
   "page": "/pages/why-bamboo@768",
-  "check": "nav gaps ≥8",
-  "ok": false,
-  "note": "[0,0,0]"
- },
- {
-  "tier": 2,
-  "page": "/pages/why-bamboo@768",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "14px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -11996,13 +11800,6 @@
   "check": "overflow 0",
   "ok": true,
   "note": "0px"
- },
- {
-  "tier": 2,
-  "page": "/pages/bicycleteambuilding@768",
-  "check": "nav gaps ≥8",
-  "ok": false,
-  "note": "[0,0,0]"
  },
  {
   "tier": 2,
@@ -12024,13 +11821,6 @@
   "check": "overflow 0",
   "ok": true,
   "note": "0px"
- },
- {
-  "tier": 2,
-  "page": "/pages/our-story-2@768",
-  "check": "nav gaps ≥8",
-  "ok": false,
-  "note": "[0,0,0]"
  },
  {
   "tier": 2,
@@ -12056,13 +11846,6 @@
  {
   "tier": 2,
   "page": "/pages/which-kit@768",
-  "check": "nav gaps ≥8",
-  "ok": false,
-  "note": "[0,0,0]"
- },
- {
-  "tier": 2,
-  "page": "/pages/which-kit@768",
   "check": "one text axis (≤8px)",
   "ok": true,
   "note": "0px"
@@ -12084,16 +11867,9 @@
  {
   "tier": 2,
   "page": "/collections/home-build-kits@768",
-  "check": "nav gaps ≥8",
-  "ok": false,
-  "note": "[0,0,0]"
- },
- {
-  "tier": 2,
-  "page": "/collections/home-build-kits@768",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "390px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12108,13 +11884,6 @@
   "check": "overflow 0",
   "ok": true,
   "note": "0px"
- },
- {
-  "tier": 2,
-  "page": "/products/gravel-frame-build-kit@768",
-  "check": "nav gaps ≥8",
-  "ok": false,
-  "note": "[0,0,0]"
  },
  {
   "tier": 2,
@@ -12136,13 +11905,6 @@
   "check": "overflow 0",
   "ok": true,
   "note": "0px"
- },
- {
-  "tier": 2,
-  "page": "/products/bottom-bracket-68mm@768",
-  "check": "nav gaps ≥8",
-  "ok": false,
-  "note": "[0,0,0]"
  },
  {
   "tier": 2,
@@ -12176,8 +11938,8 @@
   "tier": 2,
   "page": "/@1024",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "552px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12317,7 +12079,7 @@
   "page": "/pages/why-bamboo@1024",
   "check": "one text axis (≤8px)",
   "ok": false,
-  "note": "541px"
+  "note": "102px"
  },
  {
   "tier": 2,
@@ -12373,7 +12135,7 @@
   "page": "/pages/our-story-2@1024",
   "check": "one text axis (≤8px)",
   "ok": false,
-  "note": "40px"
+  "note": "24px"
  },
  {
   "tier": 2,
@@ -12428,8 +12190,8 @@
   "tier": 2,
   "page": "/collections/home-build-kits@1024",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "682px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12512,8 +12274,8 @@
   "tier": 2,
   "page": "/@1568",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "778px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12653,7 +12415,7 @@
   "page": "/pages/why-bamboo@1568",
   "check": "one text axis (≤8px)",
   "ok": false,
-  "note": "800px"
+  "note": "190px"
  },
  {
   "tier": 2,
@@ -12709,7 +12471,7 @@
   "page": "/pages/our-story-2@1568",
   "check": "one text axis (≤8px)",
   "ok": false,
-  "note": "176px"
+  "note": "32px"
  },
  {
   "tier": 2,
@@ -12764,8 +12526,8 @@
   "tier": 2,
   "page": "/collections/home-build-kits@1568",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "799px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12793,7 +12555,7 @@
   "page": "/products/gravel-frame-build-kit@1568",
   "check": "one text axis (≤8px)",
   "ok": false,
-  "note": "314px"
+  "note": "170px"
  },
  {
   "tier": 2,
@@ -12848,8 +12610,8 @@
   "tier": 2,
   "page": "/@1920",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "942px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -12989,7 +12751,7 @@
   "page": "/pages/why-bamboo@1920",
   "check": "one text axis (≤8px)",
   "ok": false,
-  "note": "985px"
+  "note": "190px"
  },
  {
   "tier": 2,
@@ -13045,7 +12807,7 @@
   "page": "/pages/our-story-2@1920",
   "check": "one text axis (≤8px)",
   "ok": false,
-  "note": "352px"
+  "note": "32px"
  },
  {
   "tier": 2,
@@ -13100,8 +12862,8 @@
   "tier": 2,
   "page": "/collections/home-build-kits@1920",
   "check": "one text axis (≤8px)",
-  "ok": false,
-  "note": "799px"
+  "ok": true,
+  "note": "0px"
  },
  {
   "tier": 2,
@@ -13129,7 +12891,7 @@
   "page": "/products/gravel-frame-build-kit@1920",
   "check": "one text axis (≤8px)",
   "ok": false,
-  "note": "490px"
+  "note": "170px"
  },
  {
   "tier": 2,
@@ -13241,14 +13003,14 @@
   "page": "/pages/why-bamboo",
   "check": "raster sharpness (≤1.4 deficit, svg-exempt)",
   "ok": false,
-  "note": "IMG_3554-2.jpg|DSF3290.JPG|IMG_3554-2.jpg"
+  "note": "IMG_3554-2.jpg|bbc-rd-gravel-sunset.jpg|DSF3290.JPG"
  },
  {
   "tier": 3,
   "page": "/pages/why-bamboo",
   "check": "no collapsed media frames",
-  "ok": false,
-  "note": "3 collapsed"
+  "ok": true,
+  "note": "0 collapsed"
  },
  {
   "tier": 3,
@@ -13351,16 +13113,16 @@
  {
   "tier": 7,
   "page": "PDP",
-  "check": "add-to-cart opens drawer",
-  "ok": false,
-  "note": ""
+  "check": "add-to-cart works (drawer/notification/cart-page)",
+  "ok": true,
+  "note": "{\"drawer\":false,\"onCartPage\":true,\"count\":\"\"}"
  },
  {
   "tier": 7,
   "page": "/",
   "check": "dark-band links visible",
-  "ok": false,
-  "note": "2 invisible"
+  "ok": true,
+  "note": "0 invisible"
  },
  {
   "tier": 7,
@@ -13374,21 +13136,21 @@
   "page": "/",
   "check": "axe WCAG-AA (0 critical/serious)",
   "ok": false,
-  "note": "aria-hidden-focus×1|button-name×1|color-contrast×2|frame-title×1"
+  "note": "color-contrast×1"
  },
  {
   "tier": 7,
   "page": "/",
   "check": "html validity (nesting/permitted-content)",
-  "ok": false,
-  "note": "element-permitted-content|element-permitted-content"
+  "ok": true,
+  "note": ""
  },
  {
   "tier": 7,
   "page": "/pages/impact",
   "check": "dark-band links visible",
   "ok": false,
-  "note": "2 invisible"
+  "note": "1 invisible"
  },
  {
   "tier": 7,
@@ -13401,53 +13163,53 @@
   "tier": 7,
   "page": "/pages/impact",
   "check": "axe WCAG-AA (0 critical/serious)",
-  "ok": false,
-  "note": "button-name×1|color-contrast×102|frame-title×1"
+  "ok": true,
+  "note": ""
  },
  {
   "tier": 7,
   "page": "/pages/impact",
   "check": "html validity (nesting/permitted-content)",
   "ok": false,
-  "note": "element-permitted-content|element-permitted-content"
+  "note": "element-permitted-content"
  },
  {
   "tier": 7,
   "page": "/products/gravel-frame-build-kit",
-  "check": "dark-band links visible",
-  "ok": true,
-  "note": "0 invisible"
- },
- {
-  "tier": 7,
-  "page": "/products/gravel-frame-build-kit",
-  "check": "Atkinson woff2 loads",
-  "ok": true,
-  "note": "200,200,200,200,200,200"
- },
- {
-  "tier": 7,
-  "page": "/products/gravel-frame-build-kit",
-  "check": "axe WCAG-AA (0 critical/serious)",
-  "ok": false,
-  "note": "button-name×1|color-contrast×1|frame-title×1"
- },
- {
-  "tier": 7,
-  "page": "/products/gravel-frame-build-kit",
-  "check": "html validity (nesting/permitted-content)",
-  "ok": false,
-  "note": "element-permitted-content|element-permitted-content"
- },
- {
-  "tier": 7,
-  "page": "/collections/home-build-kits",
   "check": "dark-band links visible",
   "ok": true,
   "note": "0 invisible"
  },
  {
   "tier": 7,
+  "page": "/products/gravel-frame-build-kit",
+  "check": "Atkinson woff2 loads",
+  "ok": true,
+  "note": "200,200,200,200,200,200"
+ },
+ {
+  "tier": 7,
+  "page": "/products/gravel-frame-build-kit",
+  "check": "axe WCAG-AA (0 critical/serious)",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 7,
+  "page": "/products/gravel-frame-build-kit",
+  "check": "html validity (nesting/permitted-content)",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "tier": 7,
+  "page": "/collections/home-build-kits",
+  "check": "dark-band links visible",
+  "ok": true,
+  "note": "0 invisible"
+ },
+ {
+  "tier": 7,
   "page": "/collections/home-build-kits",
   "check": "Atkinson woff2 loads",
   "ok": true,
@@ -13457,22 +13219,22 @@
   "tier": 7,
   "page": "/collections/home-build-kits",
   "check": "axe WCAG-AA (0 critical/serious)",
-  "ok": false,
-  "note": "button-name×1|color-contrast×5|frame-title×1"
+  "ok": true,
+  "note": ""
  },
  {
   "tier": 7,
   "page": "/collections/home-build-kits",
   "check": "html validity (nesting/permitted-content)",
-  "ok": false,
-  "note": "element-permitted-content|element-permitted-content"
+  "ok": true,
+  "note": ""
  },
  {
   "tier": 5,
   "page": "/",
   "check": "LCP ≤ 1500ms",
   "ok": true,
-  "note": "524ms"
+  "note": "380ms"
  },
  {
   "tier": 5,
@@ -13486,7 +13248,7 @@
   "page": "/pages/impact",
   "check": "LCP ≤ 1500ms",
   "ok": true,
-  "note": "440ms"
+  "note": "480ms"
  },
  {
   "tier": 5,
@@ -13500,7 +13262,7 @@
   "page": "/products/gravel-frame-build-kit",
   "check": "LCP ≤ 1500ms",
   "ok": true,
-  "note": "368ms"
+  "note": "480ms"
  },
  {
   "tier": 5,
@@ -13514,7 +13276,7 @@
   "page": "/collections/home-build-kits",
   "check": "LCP ≤ 1500ms",
   "ok": true,
-  "note": "440ms"
+  "note": "480ms"
  },
  {
   "tier": 5,

@@ -27,7 +27,9 @@
     <section class="rd-pad">
       <div class="rd-wrap rd-mw-820px">
         {%- if page.content != blank -%}
-          <div class="rd-prose">{{ page.content }}</div>
+          {%- comment -%} admin-typed h1s demote to h2 at render — the hero already provides the
+   page's single h1; keeps James's admin body untouched (estate battery, one-h1 class) {%- endcomment -%}
+<div class="rd-prose">{{ page.content | replace: '<h1>', '<h2>' | replace: '<h1 ', '<h2 ' | replace: '</h1>', '</h2>' }}</div>
         {%- else -%}
           <p class="rd-lede">This page has no content yet. Add some in Online Store &rarr; Pages.</p>
         {%- endif -%}

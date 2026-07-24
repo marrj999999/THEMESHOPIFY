@@ -135,15 +135,15 @@ if (runTier(6)) {
   const pg = await ctx.newPage();
   let dead = 0, checked = 0;
   const tryUrl = async (h) => {
-    let resp = await pg.request.head(BASE + h + (h.includes('?') ? '&' : '?') + P).catch(() => null);
+    const url = h.startsWith('http') ? h : BASE + h + (h.includes('?') ? '&' : '?') + P; // absolute passthrough (double-BASE bug)
+    let resp = await pg.request.get(url).catch(() => null);
     let st = resp ? resp.status() : 0;
-    if (st === 405 || st === 0) { resp = await pg.request.get(BASE + h + (h.includes('?') ? '&' : '?') + P).catch(() => null); st = resp ? resp.status() : 0; }
-    if (st === 429) { await new Promise(r => setTimeout(r, 2000)); resp = await pg.request.get(BASE + h).catch(() => null); st = resp ? resp.status() : 0; }
+    for (let i = 0; i < 2 && st === 429; i++) { await new Promise(r => setTimeout(r, 4000 * (i + 1))); resp = await pg.request.get(url).catch(() => null); st = resp ? resp.status() : 0; }
     return st;
   };
   for (const h of [...hrefs].slice(0, 400)) {
     if (/^\/(cart|checkout|account|cdn|admin|password)/.test(h) || h === '') continue;
-    await new Promise(r => setTimeout(r, 250)); // stay under Shopify rate limits (429 flood class)
+    await new Promise(r => setTimeout(r, 800)); // Shopify storefront throttles hard — slow beats flaky
     try {
       const st = await tryUrl(h);
       checked++;
