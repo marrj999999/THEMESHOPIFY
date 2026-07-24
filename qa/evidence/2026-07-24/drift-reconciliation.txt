@@ -1,0 +1,63 @@
+DRIFT RECONCILIATION — 2026-07-24
+27 files differ from draft 196820238710
+  DRAFT-NEW: 3
+  REVIEW: 24
+
+BLOCKED = local reintroduces banned wording the draft already removed. PULL, never push.
+DRAFT-NEW = draft newer than last local commit; pushing would revert work.
+REVIEW = real content difference, human decision. TRIVIAL = whitespace only.
+
+DRAFT-NEW  assets/bbc-foundation.css
+           draft 2026-07-07T22:00 · local commit 2026-07-07T16:39
+DRAFT-NEW  assets/bbc-unified-styles.css
+           draft 2026-07-07T22:00 · local commit 2026-07-07T16:39
+DRAFT-NEW  sections/header-group.json
+           draft 2026-07-08T10:22 · local commit 2026-07-07T16:39
+REVIEW     assets/bbc-practical-spacing.css
+           draft 2026-07-05T14:18 · local commit 2026-07-07T16:39
+REVIEW     sections/bbc-carbon-calculator.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-12T00:27
+REVIEW     sections/bbc-carbon-compare.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-12T00:27
+REVIEW     sections/bbc-comparison-table.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-07T16:39
+REVIEW     sections/bbc-footer.liquid
+           draft 2026-07-06T10:29 · local commit 2026-07-07T16:39
+REVIEW     sections/bbc-impact-funder-cta.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-12T00:27
+REVIEW     sections/bbc-journeys.liquid
+           draft 2026-07-06T13:11 · local commit 2026-07-07T16:39
+REVIEW     sections/bbc-kit-complete.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-12T00:27
+REVIEW     sections/bbc-problem-statement.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-12T00:27
+REVIEW     sections/bbc-product-durability.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-12T00:27
+REVIEW     sections/bbc-rd-video-embed.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-07T16:39
+REVIEW     sections/bbc-schools-impact.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-12T00:27
+REVIEW     sections/bbc-stats-section.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-12T00:27
+REVIEW     sections/bbc-trust-stats.liquid
+           draft 2026-07-07T18:54 · local commit 2026-07-12T00:27
+REVIEW     sections/bbc-why-bamboo-hero.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-07T16:39
+REVIEW     sections/bbc-why-bamboo-v2.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-12T00:27
+REVIEW     sections/bbc-workshop-booking.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-07T16:39
+REVIEW     sections/footer-group.json
+           draft 2026-07-05T14:26 · local commit 2026-07-07T16:39
+REVIEW     sections/main-impact-international.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-24T20:38
+REVIEW     snippets/bbc-stats-bar.liquid
+           draft 2026-07-07T18:54 · local commit 2026-07-12T00:27
+REVIEW     snippets/bbc-trust-bar.liquid
+           draft 2026-07-07T18:54 · local commit 2026-07-12T00:27
+REVIEW     snippets/meta-tags.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-07T16:39
+REVIEW     snippets/price.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-07T16:39
+REVIEW     snippets/social-meta-enhanced.liquid
+           draft 2026-07-05T14:26 · local commit 2026-07-07T16:39
