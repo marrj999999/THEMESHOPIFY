@@ -103,6 +103,16 @@ const claimLint = dir => runs('bash', ['scripts/claim-lint.sh', dir]);
   } finally { rmSync(dir, { recursive: true, force: true }); }
 }
 
+// ── E2 · the vault Claims Register must be fully covered ────────────────────────────────────
+// Escape #8: the register named a course title no gate encoded, so 14 wrong titles shipped.
+// This asserts every "Do not publish" term in James's register maps to a BANNED pattern.
+{
+  const r = runs('node', ['qa/claims-register-sync.mjs', '--quiet']);
+  record('vault Claims Register fully covered by gate patterns', r.code === 0,
+    r.code === 2 ? 'register not found — vault unavailable' :
+      r.code === 0 ? 'every prohibited term has a pattern' : 'UNCOVERED terms — see claims-register-sync output');
+}
+
 // ── F · gate-check must reject malformed section schema JSON ────────────────────────────────
 {
   const f = 'sections/__canary-bad-schema.liquid';

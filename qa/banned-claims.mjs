@@ -24,6 +24,14 @@ export const BANNED = [
   /14,?765/,                                     // BS EN 14765 withdrawn — no external standard claimed
   /guaranteed interview/i,                       // unverifiable promise
   /Sustainable Design (&|and) Manufacturing/i,   // wrong OCN title; canonical below
+  // Added 2026-07-24 by qa/claims-register-sync.mjs, which found these prohibited in the vault
+  // register with NO gate covering them:
+  /39% reduction in reoffending/i,               // claiming MoJ context as a BBC-measured outcome.
+                                                 // The APPROVED framing — "prisoners who receive
+                                                 // family visits are 39% less likely to reoffend" —
+                                                 // deliberately does not match this pattern.
+  /LSBU Innovation Hub/i,                        // no counter-signed agreement on file
+  /£70,000\s*(equipment|investment)/i,           // ditto — proposed terms, not mutual execution
 ];
 
 // Every string here MUST be rejected by BOTH gates. Add a row whenever a claim escapes —

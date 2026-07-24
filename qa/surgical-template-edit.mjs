@@ -50,6 +50,20 @@ const EDITS = [
   ['templates/page.prisons.json', [
     ['"label": "Sustainable Design & Manufacturing"', '"label": "Workshop Skills and Sustainable Manufacturing"'],
   ]],
+  // LSBU claims — added 2026-07-24 after qa/claims-register-sync.mjs found them prohibited in the
+  // vault register with no gate covering them. The register records a 5 Aug 2025 agreement signed
+  // by James but with BLANK LSBU signature/name/date fields, and no counter-signed agreement,
+  // asset schedule, valuation, invoice or funding award found — so "£70,000 equipment partnership"
+  // and "LSBU Innovation Hub" assert more than the evidence supports about a named third party.
+  // "£70,000 equipment partnership" was RENDERING publicly on /pages/support-mission.
+  // Replacement derives from the register's own approved framing ("access to a room with jigs in
+  // LSBU's engineering labs in late 2025"). James may want to word this himself.
+  ['templates/page.support-mission.json', [
+    ['£70,000 equipment partnership', 'Engineering lab access, 2025'],
+  ]],
+  ['templates/page.impact.json', [
+    ['"label": "LSBU Innovation Hub"', '"label": "London South Bank University"'],
+  ]],
 ];
 
 const changedLines = (a, b) => {
@@ -65,19 +79,29 @@ for (const [key, subs] of EDITS) {
   const live = await getAsset(DRAFT, key);
   if (live === null) { console.error(`✗ ${key}: not found on draft`); failed = true; continue; }
 
-  // Snapshot on first run so a rollback artefact always exists before any write.
+  // The rollback artefact is the state immediately BEFORE this run's write. Keep the original
+  // pre-pass snapshot if one exists (it is the older, more useful restore point) and additionally
+  // stash the current bytes, so a re-run never edits something it has not captured first.
   if (!existsSync(backupPath)) writeFileSync(backupPath, live);
-  const before = readFileSync(backupPath, 'utf8');
-  if (live !== before) { console.error(`✗ ${key}: draft has changed since snapshot — re-snapshot before editing`); failed = true; continue; }
+  writeFileSync(`${backupPath}.prerun`, live);
+  const before = live;
 
-  let after = before, applied = 0, abort = false;
+  // Idempotent: a substitution whose `from` is gone and whose `to` is already present has been
+  // applied by an earlier run. Skipping it (rather than aborting) lets this script be re-run
+  // safely as new edits are appended — which is how it is actually used.
+  let after = before, applied = 0, skipped = 0, abort = false;
   for (const [from, to] of subs) {
     const hits = after.split(from).length - 1;
-    if (hits === 0) { console.error(`✗ ${key}: source string not found — aborting\n    "${from.slice(0, 100)}"`); abort = true; break; }
+    if (hits === 0) {
+      if (after.includes(to)) { skipped++; continue; }
+      console.error(`✗ ${key}: source string not found and replacement not present — aborting\n    "${from.slice(0, 100)}"`);
+      abort = true; break;
+    }
     after = after.split(from).join(to);
     applied += hits;
   }
   if (abort) { failed = true; continue; }
+  if (applied === 0) { console.log(`· ${key}: already up to date (${skipped} edit(s) previously applied)`); continue; }
 
   const lines = changedLines(before, after);
   if (lines > subs.length) { console.error(`✗ ${key}: ${lines} lines changed, expected ≤${subs.length} — aborting`); failed = true; continue; }
