@@ -26,6 +26,16 @@ That shape is now the thing to hunt for, not any individual bug.
 | 8 | **Wrong OCN course title in 14 places, correct title in 0.** Vault Claims Register says "Workshop Skills and Sustainable Manufacturing"; the theme said "Sustainable Design & Manufacturing". `CLAUDE.md` carried the error, which is how it propagated. | **Reading the vault** (WORKFLOW 1.5, mandated but only ever done for one page) | no gate encoded the register | Pattern added to both lists; `CLAUDE.md` corrected. **Durable fix pending: generate the lists FROM `System/Claims Register.md`** so a register update propagates automatically |
 | 9 | **Visual net blind to copy changes.** Predicted a diff on `/pages/impact` after the OCN edit; got 48/48 clean. The change was real (forced rewrite → different md5). `maxDiffPixelRatio: 0.015` on a 1280×11757 page allowed **225,734** differing pixels, ~19× the changed label. Even absolute 2,500 px missed a short label at the reveal system's 0.3 opacity. | **Making a falsifiable prediction and having it fail** | the visual net | `maxDiffPixels: 2500` absolute (height no longer buys a free pass) **+ `qa/fingerprint.mjs`** — text/type-role fingerprints, the right instrument for copy |
 
+### 10 — the inverse failure: a gate crying wolf
+
+| Escape | Found by | Check added |
+|---|---|---|
+| **16 false "dead link" FAILs.** The estate run reported 16 broken internal links (plus an aggregate "16 dead" row) — all HTTP 503. Re-fetched directly: **16/16 returned 200.** Shopify sheds load with 503 while the crawl runs alongside other traffic; the crawler retried 429 only. | Re-fetching every flagged URL instead of accepting the FAIL | Retry widened to 503 and 0, 3 attempts, longer backoff |
+
+Worth its own row because it is the *opposite* of escapes 1–9 and just as corrosive: a gate
+that cries wolf trains you to skim past FAIL lines — which is precisely how nine real gate
+defects survived. **A false FAIL is a defect in the gate, not noise to tolerate.**
+
 ### Also found, not strictly escapes — checks that were never real
 
 | Item | Detail |

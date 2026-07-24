@@ -11285,10 +11285,122 @@
  },
  {
   "tier": 6,
+  "page": "/blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike",
+  "check": "internal link resolves",
+  "ok": false,
+  "note": "HTTP 503"
+ },
+ {
+  "tier": 6,
+  "page": "/blogs/news/financial-times-how-bamboo-bicycle-club-is-helping-to-break-the-prison-cycle",
+  "check": "internal link resolves",
+  "ok": false,
+  "note": "HTTP 503"
+ },
+ {
+  "tier": 6,
+  "page": "/blogs/news/cnn-money-how-bamboo-bicycle-club-sells-build-your-own-bikes-to-the-world",
+  "check": "internal link resolves",
+  "ok": false,
+  "note": "HTTP 503"
+ },
+ {
+  "tier": 6,
+  "page": "/blogs/news/bbc-news-kate-strong-rides-3-000-miles-around-britain-on-a-bamboo-bike",
+  "check": "internal link resolves",
+  "ok": false,
+  "note": "HTTP 503"
+ },
+ {
+  "tier": 6,
+  "page": "/blogs/news/bamboo-testing-with-swansea-university",
+  "check": "internal link resolves",
+  "ok": false,
+  "note": "HTTP 503"
+ },
+ {
+  "tier": 6,
+  "page": "/blogs/club-news/a-family-ride-like-no-other-the-swiss-bamboo-tandem",
+  "check": "internal link resolves",
+  "ok": false,
+  "note": "HTTP 503"
+ },
+ {
+  "tier": 6,
+  "page": "/blogs/club-news/gravel-bike-by-tim",
+  "check": "internal link resolves",
+  "ok": false,
+  "note": "HTTP 503"
+ },
+ {
+  "tier": 6,
+  "page": "/products/bamboo-bike-road-kit",
+  "check": "internal link resolves",
+  "ok": false,
+  "note": "HTTP 503"
+ },
+ {
+  "tier": 6,
+  "page": "/blogs/news/fast-company-this-custom-200-bike-frame-could-be-3-d-printed-in-your-living-room",
+  "check": "internal link resolves",
+  "ok": false,
+  "note": "HTTP 503"
+ },
+ {
+  "tier": 6,
+  "page": "/blogs/news/designboom-bamboo-urban-mini-velo-with-mccloy-muchemwa",
+  "check": "internal link resolves",
+  "ok": false,
+  "note": "HTTP 503"
+ },
+ {
+  "tier": 6,
+  "page": "/products/copy-of-road-component-pack-105-groupset",
+  "check": "internal link resolves",
+  "ok": false,
+  "note": "HTTP 503"
+ },
+ {
+  "tier": 6,
+  "page": "/blogs/club-news/city-bike-by-matthew",
+  "check": "internal link resolves",
+  "ok": false,
+  "note": "HTTP 503"
+ },
+ {
+  "tier": 6,
+  "page": "/blogs/news/project-zero-impact-case-study",
+  "check": "internal link resolves",
+  "ok": false,
+  "note": "HTTP 503"
+ },
+ {
+  "tier": 6,
+  "page": "/blogs/news/investec-beyond-business-2025-bamboo-bicycle-club-wins-24-000-award",
+  "check": "internal link resolves",
+  "ok": false,
+  "note": "HTTP 503"
+ },
+ {
+  "tier": 6,
+  "page": "/blogs/news/new-balance-bike-tutorial-videos",
+  "check": "internal link resolves",
+  "ok": false,
+  "note": "HTTP 503"
+ },
+ {
+  "tier": 6,
+  "page": "/blogs/news/new-video-how-to-protect-your-frame",
+  "check": "internal link resolves",
+  "ok": false,
+  "note": "HTTP 503"
+ },
+ {
+  "tier": 6,
   "page": "estate",
   "check": "link integrity (184 unique internal links)",
-  "ok": true,
-  "note": "0 dead"
+  "ok": false,
+  "note": "16 dead"
  },
  {
   "tier": 2,
@@ -12856,7 +12968,7 @@
   "page": "/",
   "check": "LCP ≤ 1500ms",
   "ok": true,
-  "note": "512ms"
+  "note": "680ms"
  },
  {
   "tier": 5,
@@ -12870,7 +12982,7 @@
   "page": "/pages/impact",
   "check": "LCP ≤ 1500ms",
   "ok": true,
-  "note": "468ms"
+  "note": "408ms"
  },
  {
   "tier": 5,
@@ -12884,7 +12996,7 @@
   "page": "/products/gravel-frame-build-kit",
   "check": "LCP ≤ 1500ms",
   "ok": true,
-  "note": "504ms"
+  "note": "332ms"
  },
  {
   "tier": 5,
@@ -12898,7 +13010,7 @@
   "page": "/collections/home-build-kits",
   "check": "LCP ≤ 1500ms",
   "ok": true,
-  "note": "372ms"
+  "note": "432ms"
  },
  {
   "tier": 5,

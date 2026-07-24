@@ -1,4 +1,4 @@
-ESTATE-CHECK 2026-07-24 — 1830/1844 pass, 0 FAIL in 0 classes, 14 WAIVED
+ESTATE-CHECK 2026-07-24 — 1829/1860 pass, 17 FAIL in 2 classes, 14 WAIVED
 
 WAIVED (named, owned):
   /pages/frequently-asked-questions@1280 · no banned claims rendered [\b36\+? countries — WAIVED: store content: FAQ admin body + article — James list]
@@ -16,4 +16,48 @@ WAIVED (named, owned):
   /products/gravel-frame-build-kit · raster sharpness (≤1.4 deficit, svg-exempt) [00_Gravel_Frame_Build_Kit_Squa — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J]
   /products/bottom-bracket-68mm · raster sharpness (≤1.4 deficit, svg-exempt) [EccentricBottombracket.jpg|Gravellugged1-hires.jpg|GRAVELLUGGEDKIT.jpg — WAIVED: asset-ceiling: source files s]
 
+CLASS: internal link resolves (16)
+  /blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike [HTTP 503]
+  /blogs/news/financial-times-how-bamboo-bicycle-club-is-helping-to-break-the-prison-cycle [HTTP 503]
+  /blogs/news/cnn-money-how-bamboo-bicycle-club-sells-build-your-own-bikes-to-the-world [HTTP 503]
+  /blogs/news/bbc-news-kate-strong-rides-3-000-miles-around-britain-on-a-bamboo-bike [HTTP 503]
+  /blogs/news/bamboo-testing-with-swansea-university [HTTP 503]
+  /blogs/club-news/a-family-ride-like-no-other-the-swiss-bamboo-tandem [HTTP 503]
+  /blogs/club-news/gravel-bike-by-tim [HTTP 503]
+  /products/bamboo-bike-road-kit [HTTP 503]
+  /blogs/news/fast-company-this-custom-200-bike-frame-could-be-3-d-printed-in-your-living-room [HTTP 503]
+  /blogs/news/designboom-bamboo-urban-mini-velo-with-mccloy-muchemwa [HTTP 503]
+  /products/copy-of-road-component-pack-105-groupset [HTTP 503]
+  /blogs/club-news/city-bike-by-matthew [HTTP 503]
+  /blogs/news/project-zero-impact-case-study [HTTP 503]
+  /blogs/news/investec-beyond-business-2025-bamboo-bicycle-club-wins-24-000-award [HTTP 503]
+  /blogs/news/new-balance-bike-tutorial-videos [HTTP 503]
+  /blogs/news/new-video-how-to-protect-your-frame [HTTP 503]
+
+CLASS: link integrity (184 unique internal links) (1)
+  estate [16 dead]
+
 PASS detail suppressed — full rows in estate-check.json
+
+────────────────────────────────────────────────────────────────────────
+POST-RUN VERIFICATION (2026-07-24, appended after triage)
+
+Both FAIL classes are ONE root cause: Shopify shed load with HTTP 503 during the
+link crawl, while this session was also driving heavy API + browser traffic.
+The crawler retried 429 but not 503, so throttled responses were recorded as dead links.
+
+All 16 flagged URLs were re-fetched directly: 16/16 returned HTTP 200.
+ZERO genuinely broken links. The "link integrity — 16 dead" row is the aggregate
+of the same 16, not an independent finding.
+
+TRUE RESULT: 1829/1860 pass · 0 real failures · 14 WAIVED (unchanged — not grown,
+which is the rule: waivers ratchet DOWN or the 0-FAIL number stops meaning anything).
+
+The banned-claims FAIL class is GONE: "nationally recognised" and the wrong OCN
+course title no longer render anywhere on the draft. The 14 waivers are the same
+named/owned set as this morning (FAQ/article store content + asset-ceiling images).
+
+FIXED IN THE CRAWLER (this run predates it): retry now covers 503 and 0 as well as
+429, 3 attempts with longer backoff. False FAILs are worse than a slow gate — they
+train you to skim past FAIL lines, which is how nine real gate defects survived today.
+Re-run the link tier when the store is not under load to confirm clean.

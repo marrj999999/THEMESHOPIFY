@@ -156,7 +156,15 @@ if (runTier(6)) {
     const url = h.startsWith('http') ? h : BASE + h + (h.includes('?') ? '&' : '?') + P; // absolute passthrough (double-BASE bug)
     let resp = await pg.request.get(url).catch(() => null);
     let st = resp ? resp.status() : 0;
-    for (let i = 0; i < 2 && st === 429; i++) { await new Promise(r => setTimeout(r, 4000 * (i + 1))); resp = await pg.request.get(url).catch(() => null); st = resp ? resp.status() : 0; }
+    // Retry on 503 as well as 429 (2026-07-24). Shopify sheds load with 503, not just 429, when the
+    // crawl runs alongside other traffic — a run today reported ~dozens of "dead" links that all
+    // returned 200 on a direct fetch seconds later. False positives are worse than a slow gate:
+    // they train you to skim past FAIL lines. 3 attempts with a longer backoff.
+    for (let i = 0; i < 3 && (st === 429 || st === 503 || st === 0); i++) {
+      await new Promise(r => setTimeout(r, 5000 * (i + 1)));
+      resp = await pg.request.get(url).catch(() => null);
+      st = resp ? resp.status() : 0;
+    }
     return st;
   };
   for (const h of [...hrefs].slice(0, 400)) {
