@@ -1,4 +1,4 @@
-MOTION-CHECK 2026-07-24 — 38/38 pass
+MOTION-CHECK 2026-07-24 — 40/40 pass
 PASS  estate               no opacity:0 initial state outside @supports (Firefox-blank guard)
 PASS  home                 view() timeline drives (synthetic probe holds from-state)  [opacity=0.13]
 PASS  home                 reveal entry→in  [pre=0 post=1 [ViewTimeline/0]]
@@ -10,7 +10,7 @@ PASS  home                 zero JS errors
 PASS  home                 overflow-x 0 @390  [0px]
 PASS  impact               view() timeline drives (synthetic probe holds from-state)  [opacity=0.13]
 PASS  impact               reveal entry→in  [pre=0.3 post=1 [ViewTimeline/0]]
-PASS  impact               stagger entry→in  [pre=0 post=1]
+PASS  impact               stagger entry→in  [pre=0.25 post=1]
 PASS  impact               marquee running + pausable  [{"running":"running","pausable":true}]
 PASS  impact               overflow-x 0 @1280  [0px]
 PASS  impact               scroll jank (longtasks ≤ 6)  [0]
@@ -35,5 +35,7 @@ PASS  collection           overflow-x 0 @390  [0px]
 PASS  impact @1568         nav gaps >= 8px  [[28,28,28]]
 PASS  impact @1568         overflow 0 + flagship on axis  [ovf=0 axis=true]
 PASS  impact @1568         flagship media spans card, landscape (the narrow-strip bug)  [mediaOk=true]
+PASS  impact @1568         one text axis across bands (spread ≤ 6px)  [spread=0px]
+PASS  impact @1568         wall video posters have height  [0 collapsed]
 PASS  home [reduce]        fully inert + fully visible
 PASS  impact [reduce]      fully inert + fully visible

@@ -797,7 +797,8 @@ cart-drawer.animate .drawer{ visibility:visible; }
    span, and the card may not clip its full-bleed child. */
 #proof .rd-csgrid.rd-csgrid-1{ grid-template-columns:1fr; justify-content:stretch; } /* id out-ranks redesign's centred minmax(0,460px) single-card rule, which loads later */
 #proof .rd-csgrid-1 .rd-cscard{ overflow:visible; }
-.bbc-rd-impact .rd-csgrid-1 .rd-cscard__media{ width:100%; aspect-ratio:21/9; border-radius:0; overflow:clip; }
+#proof .rd-csgrid-1 .rd-cscard__body{ padding-left:0; padding-right:0; } /* borderless card: invisible body pad floated text 22px off the 216 axis */
+.bbc-rd-impact .rd-csgrid-1 .rd-cscard__media{ width:100%; aspect-ratio:16/10; border-radius:0; overflow:clip; } /* 16/10 = the one card-media ratio across the page (alignment audit 2026-07-24) */
 /* (the old 100vw escape assumed a centred parent — on the left-axis layout it
    overshot one edge and gapped the other; wrap-width cinematic 21/9 is the honest
    version of "the photo IS the band" and holds at every width, 2026-07-24) */

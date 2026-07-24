@@ -123,7 +123,7 @@
 
   {%- comment -%} ---------- ONE CRAFT, TWO ARMS (infographic) ---------- {%- endcomment -%}
   {%- if section.settings.arms_title != blank -%}
-  <section class="rd-pad rd-paper">
+  <section class="rd-pad-sm rd-paper">
     <div class="rd-wrap">
       <div class="rd-center">
         {%- if section.settings.arms_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.arms_eyebrow }}</span>{%- endif -%}
@@ -265,7 +265,7 @@
 
   {%- comment -%} ---------- WHY NOW (policy backdrop, sourced) ---------- {%- endcomment -%}
   {%- if section.settings.policy_title != blank -%}
-  <section class="rd-pad rd-dark rd-band--policy">
+  <section class="rd-pad-sm rd-dark rd-band--policy">
     <div class="rd-wrap">
       <div class="rd-center">
         {%- if section.settings.policy_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.policy_eyebrow }}</span>{%- endif -%}
@@ -288,7 +288,7 @@
    (the Timpson-band gating bug, same family; fixed 2026-07-22). {%- endcomment -%}
   {%- if section.settings.cs_blurb != blank or section.settings.cs_quote != blank -%}
   <section class="rd-pad-sm" id="proof">
-    <div class="rd-wrap rd-mw-820px">
+    <div class="rd-wrap"><div class="rd-mw-820px">
       <div class="rd-csgrid rd-csgrid-1">
         <a class="rd-reveal rd-cscard" href="{{ section.settings.cs_url | default: '/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2' }}">
           <div class="rd-cscard__media"><img src="{{ section.settings.cs_image | default: 'bbc-rd-prison-empty.jpg' | asset_url }}" alt="Inside the Build to Bond workshop at HMP Lowdham Grange" loading="lazy" width="600" height="375"><span class="rd-cscard__kind">{{ section.settings.cs_kind | default: 'Case study' }}</span></div>
@@ -317,6 +317,7 @@
           <a href="/blogs/news/inside-time-bamboozling-way-to-build-bikes-bamboo-bicycle-club-at-lowdham-grange?ref=impact-evidence">Inside Time</a> ·
           <a href="/blogs/news/bamboo-bicycle-club-wins-investec-beyond-business-2025?ref=impact-evidence">Investec Beyond Business</a></p>
         {%- endif -%}
+      </div>
       </div>
     </div>
   </section>
@@ -467,7 +468,7 @@
 
   {%- comment -%} ---------- WHERE WE WORK (named prison sites) ---------- {%- endcomment -%}
   {%- if section.settings.sites_title != blank -%}
-  <section class="rd-pad-sm rd-paper rd-center" id="map">
+  <section class="rd-pad-sm rd-paper" id="map">
     <div class="rd-wrap rd-mw-820px">
       {%- if section.settings.sites_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.sites_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal rd-mw-22ch rd-mx-auto">{{ section.settings.sites_title }}</h2>

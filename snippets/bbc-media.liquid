@@ -85,6 +85,10 @@
 .bbc-media--ar43{aspect-ratio:4/3}
 .bbc-media--ar169{aspect-ratio:16/9}
 .bbc-media__img{display:block;width:100%;height:100%;object-fit:cover}
+/* inside a case-card media frame the player absolute-fills the frame's aspect box —
+   without this the block collapses to 0 height (wall video posters vanished at 1568,
+   caught by the 2026-07-24 alignment audit) */
+.rd-cscard__media > .bbc-media{position:absolute;inset:0;width:100%;height:100%}
 .bbc-media--playable{cursor:pointer}
 /* duotone poster (forest wash) that resolves to colour on hover/focus */
 .bbc-media--playable .bbc-media__img{filter:grayscale(1) contrast(1.06) brightness(.9);transition:filter .45s ease}

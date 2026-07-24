@@ -311,7 +311,7 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
     .rd-duotone > img{ animation:rd-duotone-develop both; animation-timeline:view(); animation-range:entry 0% entry 60%; }
   }
 
-  @keyframes rd-chip-in{ from{ opacity:0; transform:translateY(var(--mo-rise-sm,8px)); } to{ opacity:1; transform:none; } }
+  @keyframes rd-chip-in{ from{ opacity:.25; transform:translateY(var(--mo-rise-sm,8px)); } to{ opacity:1; transform:none; } } /* .25 floor, not 0 — fast scrolls must always see content (rd-rise-safe doctrine; the wall void James caught) */
   @keyframes rd-wordmark-rise{ from{ opacity:.35; transform:translateY(22%); } to{ opacity:1; transform:none; } }
   /* from = the utility's own filter + darkened: develops INTO grayscale(1) contrast(1.06) */
   @keyframes rd-duotone-develop{ from{ filter:grayscale(1) contrast(1.06) brightness(.55); } to{ filter:grayscale(1) contrast(1.06) brightness(1); } }

@@ -93,3 +93,17 @@ centred parent and mis-lands on the left-axis layout; media now spans the card a
 Zoom note: James's corner-render capture was his 48% page zoom (dpr 0.5); wrap centring verified
 CENTRED at 1568/1920/2560 (184/360/680 equal margins).
 LOOP: motion-check gains the exact-bug assertion (flagship media spans card + landscape) → 38/38.
+
+## WHOLE-PAGE ALIGNMENT NORMALISATION (James: "visuals don't align across the page")
+Measured every band at 1568 (align-audit.mjs): found ① #proof text 22px off-axis (borderless card's
+invisible body padding) ② map band centring text inside a left-pinned 820 column ③ wall VIDEO posters
+at 0 height (frames with no aspect chain for the absolute player) ④ image ratios scattered
+(21/9 declared vs 1.6 actual on flagship) ⑤ pad rhythm 88/64 mixed mid-page.
+FIXES: proof body pad zeroed + standard wrap nesting → text on axis; map rd-center removed → joins
+the left grammar; `.rd-cscard__media > .bbc-media{position:absolute;inset:0}` → posters fill their
+16/10 frames at every width; flagship media declared 16/10 = ONE card-media ratio family (hero keeps
+its 2.35 cinematic role); mid-page bands uniform rd-pad-sm; stagger floor .25 (fast scrolls always
+see content — the wall void).
+RESULT: text axis spread across ALL bands = **0px** at 1568 · posters render (361×226 frames) ·
+uniform 64 rhythm after the opening · LOOP: +2 assertions (one-axis ≤6px · wall frames ≥100px,
+frame-based so lazy-load can't false-positive) → **motion-check 40/40**.

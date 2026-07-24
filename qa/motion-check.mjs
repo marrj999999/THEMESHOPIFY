@@ -158,16 +158,28 @@ for (const [label, url] of PAGES) {
       const q = document.querySelector('.rd-quicklinks');
       const gaps = [];
       if (q) { const l = [...q.querySelectorAll(':scope > a')]; for (let i = 1; i < l.length; i++) gaps.push(Math.round(l[i].getBoundingClientRect().left - l[i-1].getBoundingClientRect().right)); }
-      const wrap = document.querySelector('#book-a-call .rd-wrap');
-      const proof = document.querySelector('#proof .rd-mw-820px');
+      const wrap = document.querySelector('#book-a-call h2');
+      const proof = document.querySelector('#proof .rd-cscard__body p');
+      // axis: every visible eyebrow/head on the 216 line (tolerance 6)
+      const anchorsX = [...document.querySelectorAll('.bbc-rd-impact section .rd-eyebrow, .bbc-rd-impact section h2')]
+        .filter(e => e.getBoundingClientRect().width > 0)
+        .map(e => Math.round(e.getBoundingClientRect().left));
+      const axisSpread = anchorsX.length ? Math.max(...anchorsX) - Math.min(...anchorsX) : 0;
+      // wall posters must have height once scrolled (guards the 0-height frame bug)
+      const evid = document.getElementById('evidence');
+      if (evid) evid.scrollIntoView({behavior:'instant'});
+      // measure the FRAME (aspect-derived, load-independent) — imgs lazy-load and false-positive
+      const posterZero = [...document.querySelectorAll('#evidence .rd-cscard__media')].filter(f => f.querySelector('.bbc-media') && f.getBoundingClientRect().height < 100).length;
       const media = document.querySelector('#proof .rd-cscard__media');
       const card = document.querySelector('#proof .rd-cscard');
       const mediaOk = media && card ? Math.abs(media.getBoundingClientRect().width - card.getBoundingClientRect().width) < 6 && media.getBoundingClientRect().height < media.getBoundingClientRect().width : true;
-      return { overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, gaps, mediaOk, axisOk: wrap && proof ? Math.abs(wrap.getBoundingClientRect().left - proof.getBoundingClientRect().left) < 4 : true };
+      return { overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, gaps, mediaOk, axisSpread, posterZero, axisOk: wrap && proof ? Math.abs(wrap.getBoundingClientRect().left - proof.getBoundingClientRect().left) < 4 : true };
     });
     add('impact @1568', 'nav gaps >= 8px', r.gaps.length === 0 || r.gaps.every(g => g >= 8), `[${r.gaps}]`);
     add('impact @1568', 'overflow 0 + flagship on axis', r.overflow === 0 && r.axisOk, `ovf=${r.overflow} axis=${r.axisOk}`);
     add('impact @1568', 'flagship media spans card, landscape (the narrow-strip bug)', r.mediaOk, `mediaOk=${r.mediaOk}`);
+    add('impact @1568', 'one text axis across bands (spread ≤ 6px)', r.axisSpread <= 6, `spread=${r.axisSpread}px`);
+    add('impact @1568', 'wall video posters have height', r.posterZero === 0, `${r.posterZero} collapsed`);
   } catch (e) { add('impact @1568', 'LOAD', false, e.message.slice(0, 60)); }
   await ctx.close();
 }
