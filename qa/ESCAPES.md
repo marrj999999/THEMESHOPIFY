@@ -36,6 +36,29 @@ Worth its own row because it is the *opposite* of escapes 1–9 and just as corr
 that cries wolf trains you to skim past FAIL lines — which is precisely how nine real gate
 defects survived. **A false FAIL is a defect in the gate, not noise to tolerate.**
 
+---
+
+## 2026-07-27 — the measurement-quality batch
+
+Five findings in one day were **artefacts of crude proxies, not real defects.** Each would have
+led to changing something that was working.
+
+| # | The "finding" | What it really was |
+|---|---|---|
+| 11 | Type-role spread 8 vs median 6 — "body scale undisciplined" | Four of five body sizes were legitimate documented roles (caption 13, footnote 14, body 18, lede 22); the fifth is FORMULA's own step/list 16. Counting *sizes* conflates "roles used correctly" with "sizes used at random". Replaced by `type-drift-audit.mjs`: does the SAME class render at different sizes? → 5 real drifts in 168 classes, now fixed, 98.8% consistent |
+| 12 | 9 classes drifting | 4 were behaviour/colour modifiers (`rd-reveal`, `rd-lime`, `rd-on-dark`, `bbc-counted`) applied across many sizes by design. Excluded |
+| 13 | Homepage scores zero-knowledge 0/2 | The proxy read the first 700 chars of `body.innerText` — consent banner, cart drawer, nav. The real hero explains who/what/for-whom in its sub-line |
+| 14 | Only 2 of 18 quotes attributed | Regex expected "— Firstname Lastname"; BBC attributes with publication names. **8 of 8 verified attributed** |
+| 15 | Estate reports 16 dead links | All 16 returned 200 on direct fetch — Shopify shedding load with 503. Crawler retried 429 only (fixed) |
+
+**The rule this establishes:** *verify a finding before acting on it — most urgently when the fix
+would be satisfying.* Four of these five would have produced a confident commit "fixing" healthy
+code. The verification that settled each was cheap: read the actual element, fetch the actual URL,
+compare the actual screenshots.
+
+A corollary for the tools: **a proxy is a hypothesis, not a result.** Any new metric ships with at
+least one hand-verified example before its numbers are quoted anywhere.
+
 ### Also found, not strictly escapes — checks that were never real
 
 | Item | Detail |

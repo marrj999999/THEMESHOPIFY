@@ -22,6 +22,21 @@ would flatter us.
 | LCP | **512ms** | 596 | 240 | 3,504 | ✓ better than median |
 | CTAs | 8 | 6.5 | 2 | 15 | ~ mid-field |
 
+> ### ⚠ CORRECTION (2026-07-27, same day)
+> The "type-role spread" reading below **overstated the problem**, and I nearly refactored a
+> working system on the strength of it. Investigating the five body sizes found **four are
+> legitimate documented roles** — caption 13, footnote 14, body 18, lede 22 — and the fifth (16px)
+> is FORMULA §1's own step/list role. Counting sizes conflates *"five roles used correctly"* with
+> *"five sizes used at random"*.
+>
+> The **ranking stands** (all 21 sites were measured the same crude way) but the **interpretation
+> was wrong**. The honest metric is: *does the same class render at different sizes?*
+> `qa/type-drift-audit.mjs` answers it — and found **5 real drifts in 168 classes**, now fixed.
+> The estate is **98.8% internally consistent**, not 19th-of-21 chaotic.
+>
+> Keep both numbers in mind: the peer comparison is still useful for *page length, accessibility
+> and evidence density*, where the measures are unambiguous.
+
 ## The finding that matters most
 
 **Type-role spread — we rank 19th of 21.** This is the objective proxy for design-system
