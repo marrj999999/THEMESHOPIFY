@@ -261,8 +261,21 @@ for (const [name, url] of targets) {
         })(),
         mainWords: (() => {
           const wc = t => (t || '').split(/\s+/).filter(Boolean).length;
+          // CAROUSEL CLONES (2026-07-27). Sliders duplicate their slides for infinite scroll, so
+          // the same testimony is counted two or three times. On our impact page the quotes band
+          // measured 214 words from 12 slide elements of which only SIX were unique — 187 words
+          // of pure DOM artefact, inflating a "2.5x too long" verdict that partly chased clones.
+          // Subtract text that appears more than once inside a slider.
+          const cloneWords = [...document.querySelectorAll('[class*="slide" i], [class*="carousel" i], [class*="track" i], [class*="marquee" i]')]
+            .reduce((n, band) => {
+              const blocks = [...band.querySelectorAll('li, figure, blockquote, [class*="slide" i]')]
+                .map(e => (e.innerText || '').replace(/\s+/g, ' ').trim()).filter(t => t.length > 20);
+              if (blocks.length < 2) return n;
+              const uniq = [...new Set(blocks)];
+              return n + (blocks.reduce((a, t) => a + wc(t), 0) - uniq.reduce((a, t) => a + wc(t), 0));
+            }, 0);
           const main = document.querySelector('main, #MainContent, [role=main]');
-          if (main) return wc(main.innerText);
+          if (main) return Math.max(0, wc(main.innerText) - cloneWords);
           // Fallback for sites with no <main>: total minus chrome, floored at 0.
           const els = [...document.querySelectorAll('header, nav, footer, [role=banner], [role=contentinfo]')];
           const top = els.filter(e => !els.some(o => o !== e && o.contains(e)));
