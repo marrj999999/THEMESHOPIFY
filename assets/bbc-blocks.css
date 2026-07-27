@@ -1,0 +1,93 @@
+/* ==========================================================================
+   BBC BLOCK LIBRARY — the reusable beats every page composes from.
+   Created 2026-07-27. Spec: qa/research/block-library-spec.md
+
+   WHY THIS EXISTS
+   The estate is built from monolith sections, so every page invented its own
+   version of the same beat. That is the mechanism behind the inconsistency —
+   not carelessness, just no shared part to reach for.
+
+   THREE RULES BAKED IN, not left to discipline:
+
+   1. NO BORDERED CARDS. Device D6 (borderless / ruled) is the default; a full
+      3-sided box is opt-in and capped at one band per page by FORMULA §8.
+      Measured on the impact page: 1 true box, 14 ruled elements — the ruled
+      treatment is what already works, so it is the default here.
+
+   2. ASYMMETRIC SPLITS. 7/3 and 8/4, never 50/50. The even split is the model
+      default and reads as template; the off-balance one reads as designed.
+
+   3. TOKENS ONLY. Every size comes from --type-* in bbc-tokens.css. No raw
+      font-size or colour literals, so qa/stylelint-ratchet.sh keeps falling
+      from its 163 baseline instead of creeping up.
+
+   All spacing uses a small local scale so blocks stack predictably wherever
+   they are dropped.
+   ========================================================================== */
+
+.bbc-rd .bl {
+  --bl-gap: 28px;
+  --bl-pad: 64px;
+  --bl-rule: rgba(255, 255, 255, .18);
+  --bl-rule-light: rgba(0, 60, 50, .16);
+}
+
+/* Bands sit on the shared 1200 axis the estate already uses. */
+.bbc-rd .bl__wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.bbc-rd .bl--pad { padding: var(--bl-pad) 0; }
+.bbc-rd .bl--pad-sm { padding: calc(var(--bl-pad) * .6) 0; }
+
+.bbc-rd .bl__eyebrow {
+  font-size: var(--type-eyebrow); font-weight: var(--type-eyebrow-weight);
+  letter-spacing: .08em; text-transform: lowercase; margin: 0 0 12px;
+}
+.bbc-rd .bl__head { font-size: var(--type-h2); line-height: var(--type-h2-lh); margin: 0 0 16px; }
+.bbc-rd .bl__lede { font-size: var(--type-lede); line-height: var(--type-lede-lh); max-width: 52ch; margin: 0 0 8px; }
+.bbc-rd .bl__body { font-size: var(--type-body); line-height: var(--type-body-lh); max-width: 52ch; }
+
+/* ── proof-strip ─────────────────────────────────────────────────────────────
+   Isolated figures. The whole point is that the NUMBER is the visual unit —
+   the presentation audit found our figures written into sentences while peers
+   set them alone, and our first figure sat four screens down. */
+.bbc-rd .bl-proof { list-style: none; display: flex; flex-wrap: wrap; gap: 40px; margin: 0; padding: 0; }
+.bbc-rd .bl-proof li { display: flex; flex-direction: column; }
+.bbc-rd .bl-proof b { font-size: var(--type-h2); line-height: 1; font-weight: 800; }
+.bbc-rd .bl-proof span { font-size: var(--type-caption); margin-top: 6px; opacity: .85; max-width: 18ch; }
+.bbc-rd .bl-proof cite { font-size: var(--type-caption); opacity: .6; font-style: normal; margin-top: 2px; }
+
+/* ── steps — device D3, the numeral leaves the stack into a margin rail ────── */
+.bbc-rd .bl-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--bl-gap); }
+.bbc-rd .bl-steps li { display: grid; grid-template-columns: 3fr 7fr; gap: 24px; align-items: start;
+  padding-top: 20px; border-top: 1px solid var(--bl-rule-light); }
+.bbc-rd .bl--on-dark .bl-steps li { border-top-color: var(--bl-rule); }
+.bbc-rd .bl-steps .bl-steps__n { font-size: var(--type-h2); line-height: .9; font-weight: 800; opacity: .28; }
+.bbc-rd .bl-steps h3 { font-size: var(--type-h3); line-height: var(--type-h3-lh); margin: 0 0 6px; }
+.bbc-rd .bl-steps p { font-size: var(--type-body); line-height: var(--type-body-lh); margin: 0; max-width: 46ch; }
+
+/* ── quote — device D10, de-boxed. Resolves the rd-q 22/28/42px drift by
+   giving testimony ONE size wherever it appears. ─────────────────────────── */
+.bbc-rd .bl-quote { display: grid; grid-template-columns: 8fr 4fr; gap: 40px; align-items: end; }
+.bbc-rd .bl-quote blockquote { margin: 0; font-size: var(--type-h3); line-height: 1.3; }
+.bbc-rd .bl-quote figcaption { font-size: var(--type-caption); opacity: .8; }
+.bbc-rd .bl-quote figcaption b { display: block; font-size: var(--type-body); opacity: 1; }
+
+/* ── evidence-card — ruled, never boxed ──────────────────────────────────── */
+.bbc-rd .bl-ev { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--bl-gap);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.bbc-rd .bl-ev li { padding-top: 18px; border-top: 2px solid var(--bl-rule-light); }
+.bbc-rd .bl--on-dark .bl-ev li { border-top-color: var(--bl-rule); }
+.bbc-rd .bl-ev b { display: block; font-size: var(--type-h3); line-height: 1.1; margin-bottom: 8px; }
+.bbc-rd .bl-ev p { font-size: var(--type-body); line-height: var(--type-body-lh); margin: 0 0 8px; }
+.bbc-rd .bl-ev cite { font-size: var(--type-caption); font-style: normal; opacity: .7; }
+
+/* ── cta-band ────────────────────────────────────────────────────────────── */
+.bbc-rd .bl-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 20px; }
+
+@media (max-width: 749px) {
+  .bbc-rd .bl { --bl-pad: 44px; }
+  .bbc-rd .bl-steps li,
+  .bbc-rd .bl-quote { grid-template-columns: 1fr; gap: 12px; }
+  .bbc-rd .bl-proof { gap: 24px; }
+  /* Keep the step numeral inline on small screens rather than orphaning a rail. */
+  .bbc-rd .bl-steps .bl-steps__n { font-size: var(--type-h3); opacity: .4; }
+}

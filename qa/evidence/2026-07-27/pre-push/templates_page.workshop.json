@@ -1,0 +1,220 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-workshops-2026",
+      "settings": {},
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "95%",
+            "label": "had never built before"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "2–3 days",
+            "label": "to build a complete frame"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "All-in",
+            "label": "materials, tools & tuition included"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "number": "25–39%",
+            "label": "typical saving via Cycle to Work"
+          }
+        },
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "select & cut your bamboo",
+            "body": "Choose your culms and mitre them to your personalised frame drawing."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "set the jig",
+            "body": "Lock the geometry — tailored to your body measurements, taken in advance."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "lash & bond the joints",
+            "body": "Wrap the joints in natural fibre and high-strength bio-resin."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "finish & ride away",
+            "body": "Final inspection, a celebration, and a frame ready for components."
+          }
+        },
+        "how_tag_1": {
+          "type": "how_tag",
+          "settings": {
+            "label": "Tools provided"
+          }
+        },
+        "how_tag_2": {
+          "type": "how_tag",
+          "settings": {
+            "label": "Lunch & coffee"
+          }
+        },
+        "how_tag_3": {
+          "type": "how_tag",
+          "settings": {
+            "label": "Expert 1:1 guidance"
+          }
+        },
+        "how_tag_4": {
+          "type": "how_tag",
+          "settings": {
+            "label": "Group discounts 3+"
+          }
+        },
+        "location_1": {
+          "type": "location",
+          "settings": {
+            "fallback": "bbc-rd-gravel-fence.jpg",
+            "image_alt": "A finished bamboo gravel bike",
+            "title": "london e8",
+            "body": "Our home workshop in Hackney. Weekends & weekdays, year-round.",
+            "link_label": "Book London"
+          }
+        },
+        "location_2": {
+          "type": "location",
+          "settings": {
+            "fallback": "bbc-rd-redbar.jpg",
+            "image_alt": "A finished bamboo bike with red flat bars",
+            "title": "amersfoort, NL",
+            "body": "Our European hub, serving the Netherlands, Belgium and Germany.",
+            "link_label": "Book Amersfoort"
+          }
+        },
+        "location_3": {
+          "type": "location",
+          "settings": {
+            "fallback": "bbc-rd-cargo.jpg",
+            "image_alt": "A bamboo cargo bike on a city street",
+            "title": "toulouse, FR",
+            "body": "Serving southern France and Spain.",
+            "link_label": "Book Toulouse"
+          }
+        },
+        "frame_tag_1": {
+          "type": "frame_tag",
+          "settings": {
+            "label": "Road · 2 days",
+            "lime": true
+          }
+        },
+        "frame_tag_2": {
+          "type": "frame_tag",
+          "settings": {
+            "label": "Gravel · 2–3 days",
+            "lime": false
+          }
+        },
+        "frame_tag_3": {
+          "type": "frame_tag",
+          "settings": {
+            "label": "MTB · 3 days",
+            "lime": false
+          }
+        },
+        "frame_tag_4": {
+          "type": "frame_tag",
+          "settings": {
+            "label": "City & tourer",
+            "lime": false
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need any experience?",
+            "answer": "None at all. Around 95% of participants have never built anything like this before — we guide you through every step."
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I come with someone?",
+            "answer": "Yes — many people book with partners or friends. Group discounts are available for 3 or more."
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I use Cycle to Work?",
+            "answer": "Yes — we're registered with four schemes (Cyclescheme, Cycle Solutions, Evans and Halfords), so you can typically save 25–39%."
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "What do I leave with?",
+            "answer": "A complete frame ready for components. We can advise on, or supply, a groupset to finish the build."
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "What should I bring?",
+            "answer": "Just yourself and old clothes you don't mind getting epoxy on. Tools, materials, safety kit, lunch, tea and coffee are all provided."
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "How long will the frame last?",
+            "answer": "With proper care, bamboo frames ride for years — we still have frames from our earliest workshops going strong. Our support doesn't end when you leave."
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "how_tag_1",
+        "how_tag_2",
+        "how_tag_3",
+        "how_tag_4",
+        "location_1",
+        "location_2",
+        "location_3",
+        "frame_tag_1",
+        "frame_tag_2",
+        "frame_tag_3",
+        "frame_tag_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
