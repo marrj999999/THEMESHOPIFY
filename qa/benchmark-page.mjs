@@ -217,7 +217,29 @@ for (const [name, url] of targets) {
       return {
         pageHeight: document.documentElement.scrollHeight,
         viewports: +(document.documentElement.scrollHeight / 900).toFixed(1),
+        // MAIN-CONTENT SPLIT (R1, 2026-07-27). Counting document.body.innerText conflates page
+        // copy with navigation: our header carries 813 words and 54 links in a hidden mega-menu on
+        // every page, which made us look 2.9-4.7x the field on "words" when programmes is actually
+        // mid-field on main content. Peers carry 105-150 words of chrome; we carry ~1,000. Compare
+        // on `mainWords` — `words` is kept so older runs stay readable.
         words: text.split(/\s+/).filter(Boolean).length,
+        chromeWords: (() => {
+          const wc = t => (t || '').split(/\s+/).filter(Boolean).length;
+          const els = [...document.querySelectorAll('header, nav, footer, [role=banner], [role=contentinfo]')]
+            .filter(e => !e.closest('main'));
+          // de-dupe nested matches so a nav inside a header is not counted twice
+          const top = els.filter(e => !els.some(o => o !== e && o.contains(e)));
+          return top.reduce((n, e) => n + wc(e.innerText), 0);
+        })(),
+        mainWords: (() => {
+          const wc = t => (t || '').split(/\s+/).filter(Boolean).length;
+          const main = document.querySelector('main, #MainContent, [role=main]');
+          if (main) return wc(main.innerText);
+          // Fallback for sites with no <main>: total minus chrome, floored at 0.
+          const els = [...document.querySelectorAll('header, nav, footer, [role=banner], [role=contentinfo]')];
+          const top = els.filter(e => !els.some(o => o !== e && o.contains(e)));
+          return Math.max(0, wc(document.body.innerText) - top.reduce((n, e) => n + wc(e.innerText), 0));
+        })(),
         images: [...document.querySelectorAll('img')].filter(painted).length,
         imagesAboveFold: [...document.querySelectorAll('img')].filter(e =>
           painted(e) && e.getBoundingClientRect().top < fold).length,
@@ -240,7 +262,7 @@ for (const [name, url] of targets) {
   // Marking it invalid keeps it out of every median rather than silently dragging one down.
   if (!rec.error && (rec.words ?? 0) < 120) rec.invalid = `only ${rec.words} words — page did not load usefully`;
   results.push(rec);
-  console.log(`${rec.error ? '✗' : '✓'} ${name.padEnd(20)} ${rec.error || `${rec.viewports}vp · ${rec.words}w · ATC y${rec.addToCartY}${rec.addToCartAboveFold ? ' (fold✓)' : ''} · price ${rec.priceSize}px y${rec.priceY} · imgs ${rec.imagesAboveFold}/${rec.images} · mission ${rec.missionWords}`}`);
+  console.log(`${rec.error ? '✗' : '✓'} ${name.padEnd(20)} ${rec.error || `${rec.viewports}vp · ${rec.mainWords}w main (${rec.words} total, ${rec.chromeWords} chrome) · ATC y${rec.addToCartY}${rec.addToCartAboveFold ? ' (fold✓)' : ''} · price ${rec.priceSize}px y${rec.priceY} · imgs ${rec.imagesAboveFold}/${rec.images} · mission ${rec.missionWords}`}`);
   await ctx.close();
 }
 await browser.close();

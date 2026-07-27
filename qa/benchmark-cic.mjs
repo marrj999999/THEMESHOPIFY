@@ -94,7 +94,29 @@ async function measure(page, name, url) {
         h1Sizes: h1, h2Sizes: h2, h3Sizes: h3, bodySizes: body,
         h1Max: h1.length ? Math.max(...h1) : null,
         bodyMain: body.length ? body[Math.floor(body.length / 2)] : null,
+        // MAIN-CONTENT SPLIT (R1, 2026-07-27). Counting document.body.innerText conflates page
+        // copy with navigation: our header carries 813 words and 54 links in a hidden mega-menu on
+        // every page, which made us look 2.9-4.7x the field on "words" when programmes is actually
+        // mid-field on main content. Peers carry 105-150 words of chrome; we carry ~1,000. Compare
+        // on `mainWords` — `words` is kept so older runs stay readable.
         words: text.split(/\s+/).filter(Boolean).length,
+        chromeWords: (() => {
+          const wc = t => (t || '').split(/\s+/).filter(Boolean).length;
+          const els = [...document.querySelectorAll('header, nav, footer, [role=banner], [role=contentinfo]')]
+            .filter(e => !e.closest('main'));
+          // de-dupe nested matches so a nav inside a header is not counted twice
+          const top = els.filter(e => !els.some(o => o !== e && o.contains(e)));
+          return top.reduce((n, e) => n + wc(e.innerText), 0);
+        })(),
+        mainWords: (() => {
+          const wc = t => (t || '').split(/\s+/).filter(Boolean).length;
+          const main = document.querySelector('main, #MainContent, [role=main]');
+          if (main) return wc(main.innerText);
+          // Fallback for sites with no <main>: total minus chrome, floored at 0.
+          const els = [...document.querySelectorAll('header, nav, footer, [role=banner], [role=contentinfo]')];
+          const top = els.filter(e => !els.some(o => o !== e && o.contains(e)));
+          return Math.max(0, wc(document.body.innerText) - top.reduce((n, e) => n + wc(e.innerText), 0));
+        })(),
         images: document.querySelectorAll('img').length,
         links: document.querySelectorAll('a[href]').length,
         // Buttons/links styled as primary actions, a rough CTA-density proxy.
