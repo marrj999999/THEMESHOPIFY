@@ -127,6 +127,32 @@ const SETS = {
       ['RSA Pupil Design', 'https://www.thersa.org/', /schools|education|design-awards/i, /news|blog|events/i],
     ],
   },
+  // Workshops — now the #1 page (revenue-driven order, 2026-07-27). Comparators are PAID,
+  // hands-on, multi-day course/booking pages — not social-enterprise shops, because the job of
+  // this page is to sell a £595-695 experience to an individual. The Bicycle Academy is the
+  // closest analogue that exists: framebuilding courses, same price bracket, same "you will build
+  // your own bike" promise.
+  workshops: {
+    label: 'Workshop / paid hands-on course booking page',
+    ours: ['BBC workshops', 'https://bamboobicycleclub.org/pages/workshops?preview_theme_id=196820238710'],
+    discover: [
+      // FRAMEBUILDING COURSES — the true analogue: multi-day, build-your-own-frame, £600-1,650.
+      // Found by search and status-checked (200), not guessed. My first attempt at this set
+      // GUESSED domains: thebicycleacademy.cc does not resolve, and goodlifecentre.com turned out
+      // to be an unrelated US legal-complaint site. Guessing a domain is the same error as
+      // guessing a path — it just fails less visibly.
+      ['Ellis Briggs Cycles', 'https://www.ellisbriggscycles.co.uk/framebuilding-course/', null],
+      ['Stayer Cycles', 'https://www.stayercycles.com/courses/', null],
+      ['Scottish Framebuilders', 'http://rothaircycles.com/scottishframebuildersworkshop-com/', null],
+      ['West Dean College', 'https://www.westdean.ac.uk/', /short-course|course|study/i, /blog|news|shop|garden/i],
+      ['Obby', 'https://obby.co.uk/', /class|course|workshop/i, /blog|gift|voucher|teacher/i],
+      ['London Sculpture Workshop', 'https://www.londonsculptureworkshop.org/', /course|workshop|class/i, /blog|news|hire/i],
+      ['Turning Earth', 'https://turningearth.uk/', /course|class|membership/i, /blog|news|shop/i],
+      ['The Silver Workshop', 'https://www.thesilverworkshop.co.uk/', /course|class|workshop/i, /blog|news|shop|gift/i],
+      ['Makerversity', 'https://makerversity.org/', /course|workshop|programme|learn/i, /blog|news|member/i],
+      ['Bristol Bike Project', 'https://www.thebristolbikeproject.org/', /course|workshop|learn|earn-a-bike/i, /blog|news|shop|donate/i],
+    ],
+  },
 };
 const setArg = (process.argv.find(a => a.startsWith('--set=')) || '--set=pdp').split('=')[1];
 const SET = SETS[setArg];
@@ -175,7 +201,9 @@ const targets = [SET.ours];
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, userAgent:
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36' });
   for (const [name, browseUrl, pattern, reject] of SET.discover) {
-    const url = await discover(ctx, browseUrl, pattern, reject);
+    // A null pattern means the URL IS the page under test — used where a search returned the
+    // real course page directly and it has been status-checked. Still never a guessed URL.
+    const url = pattern === null ? browseUrl : await discover(ctx, browseUrl, pattern, reject);
     if (url) { targets.push([name, url]); console.log(`  discovered ${name}: ${url.slice(0, 90)}`); }
     else console.log(`  ✗ ${name}: no product link found on ${browseUrl}`);
   }
