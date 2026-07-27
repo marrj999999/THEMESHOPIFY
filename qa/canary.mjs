@@ -162,11 +162,21 @@ const claimLint = dir => runs('bash', ['scripts/claim-lint.sh', dir]);
 // ── H · visual net threshold sensitivity (browser; escape #9) ───────────────────────────────
 if (!process.argv.includes('--skip-visual')) {
   const r = runs('npx', ['playwright', 'test', '--config=playwright.config.canary.mjs', '--reporter=line']);
-  const firstRun = /canary-impact\.png.*(writing actual|is re-generated)/i.test(r.out || '');
+  const out = r.out || '';
+  const firstRun = /canary-impact\.png.*(writing actual|is re-generated)/i.test(out);
+  // Distinguish the two ways this run can fail. The canary asserts detection at STEP 3, but it
+  // first confirms its own baseline at STEP 1 — so a legitimate design change to /pages/impact
+  // fails at step 1, long before the threshold is ever exercised. Reporting that as
+  // "THRESHOLD TOO LOOSE" sends you tuning maxDiffPixels to fix a stale PNG (2026-07-27: it
+  // nearly did). Only step 3 emits "VISUAL GATE IS BLIND", so that string is what separates them.
+  const blind = /VISUAL GATE IS BLIND/.test(out);
   record('visual gate detects a small text change', r.code === 0,
     r.code === 0 ? 'injected label change tripped the comparison'
       : firstRun ? 'baseline just written — re-run to assert detection'
-        : 'THRESHOLD TOO LOOSE — raise sensitivity in playwright.config.mjs (maxDiffPixels)');
+        : blind ? 'THRESHOLD TOO LOOSE — raise sensitivity in playwright.config.mjs (maxDiffPixels)'
+          : 'STALE CANARY BASELINE (not a blind gate) — /pages/impact changed by design. ' +
+            'Delete qa/visual-baselines/canary/canary-impact.png and re-run to reseed. ' +
+            'Do NOT use --update-snapshots: it bakes the injected "CANARY" text into the baseline.');
 } else {
   console.log('· skipped visual canary (--skip-visual)');
 }

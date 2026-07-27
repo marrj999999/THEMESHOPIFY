@@ -1,0 +1,47 @@
+ESTATE-CHECK 2026-07-27 — 2416/2452 pass, 22 FAIL in 3 classes, 14 WAIVED
+
+WAIVED (named, owned):
+  /pages/frequently-asked-questions@1280 · no banned claims rendered [\b36\+? countries — WAIVED: store content: FAQ admin body + article — James list]
+  /blogs/news/project-zero-impact-case-study@1280 · no banned claims rendered [\b36\+? countries — WAIVED: store content: FAQ admin body + article — James list]
+  /pages/frequently-asked-questions@390 · no banned claims rendered [\b36\+? countries — WAIVED: store content: FAQ admin body + article — James list]
+  /blogs/news/project-zero-impact-case-study@390 · no banned claims rendered [\b36\+? countries — WAIVED: store content: FAQ admin body + article — James list]
+  / · raster sharpness (≤1.4 deficit, svg-exempt) [bbc-hero-bespoked.jpg|bbc-rd-bike-field_1400x.jpg|bbc-rd-team_1400x.jpg — WAIVED: asset-ceiling: source files ]
+  /pages/impact · raster sharpness (≤1.4 deficit, svg-exempt) [bbc-rd-workshop.jpg|1759130900349_2c0cdd37-114b-44|WhatsApp_Image_2024-04-29_at_1 — WAIVED: asset-ceiling: sou]
+  /pages/programmes · raster sharpness (≤1.4 deficit, svg-exempt) [bbc-rd-workshop.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J]
+  /pages/workshops · raster sharpness (≤1.4 deficit, svg-exempt) [bbc-rd-gravel-sunset.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J]
+  /pages/schools · raster sharpness (≤1.4 deficit, svg-exempt) [bbc-rd-workshop.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J]
+  /pages/why-bamboo · raster sharpness (≤1.4 deficit, svg-exempt) [IMG_3554-2.jpg|bbc-rd-gravel-sunset.jpg|DSF3290.JPG — WAIVED: asset-ceiling: source files smaller than srcset ]
+  /pages/bicycleteambuilding · raster sharpness (≤1.4 deficit, svg-exempt) [bbc-rd-tb-hero.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J]
+  /pages/our-story-2 · raster sharpness (≤1.4 deficit, svg-exempt) [bbc-rd-cohort.jpg — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J]
+  /products/gravel-frame-build-kit · raster sharpness (≤1.4 deficit, svg-exempt) [00_Gravel_Frame_Build_Kit_Squa — WAIVED: asset-ceiling: source files smaller than srcset ceilings — J]
+  /products/bottom-bracket-68mm · raster sharpness (≤1.4 deficit, svg-exempt) [EccentricBottombracket.jpg|Gravellugged1-hires.jpg|GRAVELLUGGEDKIT.jpg — WAIVED: asset-ceiling: source files s]
+
+CLASS: meta layer (title/desc/canonical/og) (4)
+  /account/login@1280 [t:true d:false c:true og:true]
+  /account/register@1280 [t:true d:false c:true og:true]
+  /account/login@390 [t:true d:false c:true og:true]
+  /account/register@390 [t:true d:false c:true og:true]
+
+CLASS: axe WCAG-AA (0 critical/serious) (8)
+  /pages/why-bamboo [color-contrast×1]
+  /pages/impact-report [color-contrast×2]
+  /pages/size-guide [color-contrast×1|label×5]
+  /pages/university-papers [button-name×5]
+  /products/single-speed-component-pack [meta-refresh×1]
+  /products/bamboo-bicycle-club-gift-card [meta-refresh×1]
+  /products/bamboo-bicycle-club-beanie [meta-refresh×1]
+  /blogs/news/project-zero-impact-case-study [color-contrast×1]
+
+CLASS: html validity (nesting/permitted-content) (10)
+  /pages/support-centre [element-permitted-content]
+  /pages/size-guide [element-permitted-content|element-permitted-content]
+  /pages/university-papers [element-permitted-content]
+  /pages/geometry [no-deprecated-attr|no-deprecated-attr]
+  /pages/gravel-geometry [no-deprecated-attr|no-deprecated-attr]
+  /pages/road-bike-geometry [no-deprecated-attr|no-deprecated-attr]
+  /pages/easy-build-geometry [no-deprecated-attr|no-deprecated-attr]
+  /pages/whats-in-the-box [no-deprecated-attr]
+  /pages/gravel-frame-comparison [no-deprecated-attr|element-permitted-content]
+  /pages/privacy-policy [element-permitted-content]
+
+PASS detail suppressed — full rows in estate-check.json
