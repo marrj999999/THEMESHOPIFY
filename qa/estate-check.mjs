@@ -176,12 +176,22 @@ if (runTier(1)) {
           // heading to the 94.5px band-h2 would dominate a PDP and work against the page's job.
           // Scoped to product/collection/cart URLs and to h2 only — everything else still asserts.
           const commerceDensity = /^\/(products|collections|cart)/.test(path);
-          const offenders = Object.entries(r.typeRoles || {})
+          const consistency = Object.entries(r.typeRoles || {})
             .filter(([role]) => !(commerceDensity && role === 'h2'))
             .filter(([, sizes]) => sizes.length > 1);
-          const detail = offenders.map(([role, s]) => `${role}:${s.join('/')}`).join(' ');
-          const ok = offenders.length === 0;
-          if (TYPE_ROLES_BLOCKING) add(1, path + '@' + label, 'FORMULA §1 one size per role', ok, detail);
+          // CONFORMANCE, added 2026-07-27 after the CIC benchmark exposed the gap: asserting
+          // "one size per role" does NOT assert the RIGHT size. The homepage rendered a
+          // consistent 16px body while qa/TYPE-SCALE.md specifies 18px "brief-locked" — a page
+          // could be perfectly self-consistent and still silently contradict the contract.
+          // Canonical values from TYPE-SCALE "THE SCALE" / assets/bbc-tokens.css --type-*.
+          const CANON = { lede: 22, button: 15, eyebrow: 14, 'card-title': 21 };
+          const wrongSize = Object.entries(r.typeRoles || {})
+            .filter(([role, sizes]) => CANON[role] && sizes.length === 1 && sizes[0] !== CANON[role])
+            .map(([role, sizes]) => `${role}:${sizes[0]}≠${CANON[role]}`);
+          const offenders = consistency;
+          const detail = [...offenders.map(([role, s]) => `${role}:${s.join('/')}`), ...wrongSize].join(' ');
+          const ok = offenders.length === 0 && wrongSize.length === 0;
+          if (TYPE_ROLES_BLOCKING) add(1, path + '@' + label, 'FORMULA §1 role size + conformance', ok, detail);
           else if (!ok) typeDrift.push(`${path}@${label} · ${detail}`);
         }
         add(1, path + '@' + label, 'in-page anchors resolve', r.anchorsMissing === 0, r.anchorsMissing + ' dead');
