@@ -40,6 +40,10 @@ const ALL_PAGES = [
   '/products/balance-bike-flax-kit-with-resins', '/products/bottom-bracket-68mm',
   '/products/single-speed-component-pack', '/products/bamboo-bicycle-club-gift-card',
   '/products/bamboo-bicycle-club-beanie', '/cart', '/search?q=bamboo', '/blogs/news',
+  // Account routes — added 2026-07-27. These were NOT in the battery, and the gap cost us: the
+  // login/register/account/addresses pages all fell through to a stub with no form at all, on
+  // LIVE, and no check ever looked. A page nobody tests is a page nobody notices breaking.
+  '/account/login', '/account/register',
   '/blogs/news/project-zero-impact-case-study',
 ];
 const DEEP12 = ['/', '/pages/impact', '/pages/programmes', '/pages/workshops', '/pages/schools',

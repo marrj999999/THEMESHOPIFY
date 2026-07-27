@@ -45,11 +45,6 @@
     .bbc-rd-home .ew-btn.is-lime:hover{ transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--shadow-green); }
     .bbc-rd-home .ew-btn.is-ghost{ background:transparent; border-color:var(--bone); color:var(--bone); }
     .bbc-rd-home .ew-btn.is-ghost:hover{ background:rgba(230,220,200,.12); }
-    /* Proof row — isolated figures, not numbers inside sentences (2026-07-27 presentation audit) */
-    .bbc-rd-home .ew-proof{ list-style:none; display:flex; flex-wrap:wrap; gap:28px; margin:22px 0 0; padding:0; }
-    .bbc-rd-home .ew-proof li{ display:flex; flex-direction:column; }
-    .bbc-rd-home .ew-proof b{ font-family:var(--rd-sans),sans-serif; font-size:var(--type-h3); font-weight:800; line-height:1; color:var(--bbc-lime,#D4FD62); }
-    .bbc-rd-home .ew-proof span{ font-family:var(--rd-sans),sans-serif; font-size:var(--type-caption); letter-spacing:.02em; color:#BFCDC5; margin-top:4px; }
     .bbc-rd-home .ew-cred{ font-family:var(--rd-sans),sans-serif; font-size:12.5px; letter-spacing:.02em; color:#BFCDC5; margin:26px 0 0; }
     .bbc-rd-home .ew-folio{ position:absolute; left:clamp(40px,5.5vw,92px); bottom:18px; z-index:3; font-family:var(--rd-sans),sans-serif;
       font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--moss); }
@@ -188,26 +183,11 @@
       {%- if section.settings.hero_eyebrow != blank -%}<p class="ew-eyebrow" style="--d:0s">{{ section.settings.hero_eyebrow }}</p>{%- endif -%}
       <h1 class="ew-h1"><span class="wd" style="--d:.1s">more</span> <span class="wd" style="--d:.2s">than</span> <span class="wd" style="--d:.3s">a</span> <span class="wd" style="--d:.4s">bike.</span><span class="ew-fwd"><span class="wd" style="--d:.55s">a</span> <span class="wd" style="--d:.65s">way</span> <span class="wd" style="--d:.75s">forward.</span></span></h1>
       {%- if section.settings.hero_lede != blank -%}<p class="ew-lede">{{ section.settings.hero_lede }}</p>{%- endif -%}
-{%- comment -%}
-        Proof row (2026-07-27). The presentation audit measured our first figure at y3897 —
-        about four screens down, and 5x later than the next-latest peer, with ZERO figures above
-        the fold. Peers that do this well (Recycling Lives "132 / people into paid employment",
-        Belu at 96px) ISOLATE the number so the eye catches it before the sentence. We had the
-        same facts written into prose — "Shipped worldwide to 45 countries" reads as a sentence,
-        not as proof. Every default below is Claims-Register approved wording.
-      {%- endcomment -%}
-      {%- if section.settings.hero_proof_on -%}
-        <ul class="ew-proof" aria-label="Bamboo Bicycle Club in numbers">
-          <li><b>{{ section.settings.hero_proof1_num | default: '4,000+' }}</b><span>{{ section.settings.hero_proof1_label | default: 'builders trained' }}</span></li>
-          <li><b>{{ section.settings.hero_proof2_num | default: '45' }}</b><span>{{ section.settings.hero_proof2_label | default: 'countries' }}</span></li>
-          <li><b>{{ section.settings.hero_proof3_num | default: '2012' }}</b><span>{{ section.settings.hero_proof3_label | default: 'building since' }}</span></li>
-        </ul>
-      {%- endif -%}
       <div class="ew-cta">
         {%- if section.settings.hero_cta1_label != blank -%}<a class="ew-btn is-lime" href="{{ hero_cta1 }}">{{ section.settings.hero_cta1_label }} &rarr;</a>{%- endif -%}
         {%- if section.settings.hero_cta2_label != blank -%}<a class="ew-btn is-ghost" href="{{ hero_cta2 }}" style="color:#EDE6D6 !important;border-color:#EDE6D6 !important;">{{ section.settings.hero_cta2_label }}</a>{%- endif -%}
       </div>
-            <p class="ew-cred">A social enterprise CIC &middot; enhanced-DBS facilitators &middot; public-liability insured</p>
+      <p class="ew-cred">A social enterprise CIC &middot; enhanced-DBS facilitators &middot; public-liability insured</p>
     </div>
 
     <div class="ew-media{% if section.settings.hero_video_on %} has-video{% endif %}">
@@ -756,14 +736,6 @@
       "label": "Secondary CTA label",
       "default": "See our impact"
     },
-    { "type": "header", "content": "Hero proof row" },
-    { "type": "checkbox", "id": "hero_proof_on", "label": "Show proof figures in hero", "default": true },
-    { "type": "text", "id": "hero_proof1_num", "label": "Figure 1", "default": "4,000+" },
-    { "type": "text", "id": "hero_proof1_label", "label": "Figure 1 label", "default": "builders trained" },
-    { "type": "text", "id": "hero_proof2_num", "label": "Figure 2", "default": "45" },
-    { "type": "text", "id": "hero_proof2_label", "label": "Figure 2 label", "default": "countries" },
-    { "type": "text", "id": "hero_proof3_num", "label": "Figure 3", "default": "2012" },
-    { "type": "text", "id": "hero_proof3_label", "label": "Figure 3 label", "default": "building since" },
     {
       "type": "url",
       "id": "hero_cta2_url",

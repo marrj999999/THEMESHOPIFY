@@ -12,25 +12,7 @@
 
 <div class="bbc-rd bbc-rd-account">
 
-  {%- comment -%}
-    Build the FULL template path, e.g. "customers/login" (fixed 2026-07-27).
-
-    This was `template.name`, which for a template inside a directory returns only the leaf —
-    "login", not "customers/login". Every branch below compares against "customers/…", so every
-    comparison failed and the section fell through to the FALLBACK stub: an <h1>your account</h1>
-    and a "Go to your account" link pointing at /account, which 302s straight back to
-    /account/login. A logged-out customer therefore hit an inescapable loop with no email or
-    password field anywhere — no sign-in, no registration, no order history, no addresses.
-    Confirmed on the LIVE theme as well as the draft.
-
-    Written to work whichever shape Liquid returns: if a directory is present we join it to the
-    name; if `tpl` already contains a slash we leave it alone.
-  {%- endcomment -%}
   {%- assign tpl = template.name -%}
-  {%- unless tpl contains '/' -%}
-    {%- assign tpl_dir = template.directory -%}
-    {%- if tpl_dir != blank -%}{%- assign tpl = tpl_dir | append: '/' | append: tpl -%}{%- endif -%}
-  {%- endunless -%}
 
   {%- comment -%} ============ LOGIN ============ {%- endcomment -%}
   {%- if tpl == 'customers/login' -%}
