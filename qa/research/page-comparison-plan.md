@@ -40,55 +40,74 @@ Not a taste call; taken from what the runs actually produced:
 That is roughly 7 Tier-A studies, 6 Tier-B, and none for the ~12 Tier-C pages — a real programme,
 not an infinite one.
 
-## Coverage now — 4 page types compared
+## Coverage now — 6 page types compared
 
 | Page type | Valid peers | Meets 8–12 bar? |
 |---|---|---|
 | Homepage | 20–21 | ✓ |
-| **Impact** | **9** | ✓ |
+| Impact | 9 | ✓ |
+| Programmes | 9 | ✓ |
 | PDP | 7 | ✗ marginal |
 | Collection | 7 | ✗ marginal |
-| Programmes / workshops / schools | 0 | not started |
+| Schools | 7 | ✗ marginal, mixed quality |
+| Workshops | 0 | Tier A, not started |
 | Tier B (6 pages) | 0 | not started |
 
-Two discovery bugs were fixed along the way, both of which would have put fiction into a median:
+Six of seven Tier-A types done. Three clear the bar; three are usable as direction.
 
-- **Hardcoded URLs → 7 of 10 were 404s.** Replaced with discovery from a browse page.
-- **Discovery wandered off-domain** — the Big Issue homepage yielded a **ted.com privacy policy**,
-  which would have entered the table as "The Big Issue's impact page". Now same-host only, with
-  PDF/asset paths and sub-120-word pages rejected so a failed load cannot drag a median.
+**Programmes and schools needed hand-picked comparators** — there is no cohort of "prison
+bike-building programme pages" to discover. Programmes was matched against UK justice and
+employability providers (Switchback, Bounce Back, The Clink, Onward Lives, Emmaus, Key4Life,
+StandOut, Working Chance, Spark Inside, Groundwork). Schools was matched against hands-on STEM
+providers, with **Greenpower** the closest analogue — school teams *build an electric car*, so
+their page has to sell a hands-on build programme to teachers exactly as ours does. Both peer
+lists are named openly so the sample can be argued with.
 
-## What the four page types say together
+## THE FINDING — length, across every page type we sell on
 
-| Page type | Our length | Field median | Ratio |
-|---|---|---|---|
-| PDP | 15.8 vp · 2,354 w | 4.9 vp · 741 w | **3.2× on both** |
-| Impact | 12.8 vp · 2,333 w | 7.8 vp · 729 w | 1.6× / **3.2×** |
-| Homepage | 13.1 vp · 1,962 w | 8.2 vp · 669 w | 1.6× / **2.9×** |
-| Collection | 4.4 vp · 1,201 w | 6.2 vp · 861 w | **0.7×** / 1.4× |
+| Page type | Peers | Our viewports | Median | Ratio | Our words | Median | **Ratio** |
+|---|---|---|---|---|---|---|---|
+| PDP | 7 | 15.8 | 4.9 | 3.2× | 2,354 | 741 | **3.2×** |
+| Schools | 7 | 10.1 | 3.3 | 3.1× | 1,639 | 352 | **4.7×** |
+| Programmes | 9 | 10.5 | 4.6 | 2.3× | 1,847 | 547 | **3.4×** |
+| Impact | 9 | 12.8 | 7.8 | 1.6× | 2,333 | 729 | **3.2×** |
+| Homepage | 20 | 13.1 | 8.2 | 1.6× | 1,962 | 669 | **2.9×** |
+| **Collection** | 7 | **4.4** | 6.2 | **0.7×** | 1,201 | 861 | 1.4× |
 
-**Length is a house pattern, not a page problem.** Three of four page types run ~3× the field on
-word count. This is the same finding QA-LOG D12 raised for the impact page in July — the
-benchmark shows it is systemic, and it is the single most consistent gap between us and the field.
+**Five of six page types run 2.9–4.7× the field on word count.** This is no longer an impression
+or a single page's problem: it is measured, consistent, and the clearest gap between us and every
+comparable organisation. QA-LOG D12 raised it for the impact page in July; it is house-wide.
 
-**Collection is the exception and the proof it is fixable.** It is *shorter* than the median
-(0.7×) and reads well. Whatever discipline produced that page is the discipline the others need.
+**Collection is the exception and the existence proof.** It is *shorter* than its field median and
+reads well. The discipline that produced it is what the other five need.
 
-**Where we lead:** mission language on the impact page (42 mission-words against a next-best 27 —
-the highest in the set), and price presentation on the PDP (32px vs peers' 14–20px).
+### Why this matters more than it looks
 
-**A shared weakness:** images above the fold. Collection shows 4 of 26 against a median of 8 —
-on a page whose entire job is showing products. PDP shows 6 of 32, impact 2 of 26.
+Every peer in the programmes set — organisations doing work as complex as ours, explaining prison
+and employability programmes to commissioners — does it in a median of **547 words**. We use
+1,847. Greenpower sells a full school build-programme in 290. The argument that "our work needs
+more explaining" does not survive contact with the people who have the same explaining to do.
 
-## Honest status against my own bar
+## Where we lead
 
-I set 8–12 comparable peers per page type. **Only homepage and impact clear it.** PDP and
-collection sit at 7 valid peers — usable as direction, not as verdict. Three Tier-A types
-(programmes, workshops, schools) and all six Tier-B pages have not been started.
+- **Mission language**: impact page carries 42 mission-words, highest in its set (next 27).
+- **Price presentation**: PDP price at 32px against peers' 14–20px.
+- **Speed**: 512ms LCP against a 596ms field median.
+- **Quotes**: 18 on the homepage, all sourced; 15 of 20 peers show none.
 
-Peer discovery for mission-programme pages is the hard part: there is no "prison bike-building
-programme page" cohort to compare against, so those will need hand-picked comparators
-(training providers, employability charities) rather than automated discovery.
+## Shared weakness: images above the fold
+
+Collection shows 4 of 26 above the fold against a peer median of 8 — on a page whose entire job
+is showing products. PDP 6 of 32, impact 2 of 26, schools 2 of 12.
+
+## Method caveats
+
+- Schools peer quality is the weakest: discovery returned a masters-course page for the Design
+  Museum and a single event page for STEM Learning. Two sites reported 1.0 viewport, which is a
+  measurement artefact on their scroll containers, not a real page height — it drags that median
+  down, so treat the schools ratio as indicative.
+- Two schools peers failed entirely (Young Enterprise cert error, Nuffield/RSA discovery).
+- Every number is one run, desktop 1280, consent dismissed where a standard control existed.
 
 ## First result: PDP vs 7 social-enterprise product pages
 

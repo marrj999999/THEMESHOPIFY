@@ -87,6 +87,46 @@ const SETS = {
       ["Tony's Chocolonely", 'https://tonyschocolonely.com/uk/en/', /\/(our-chocolate-bars|shop)/, /gift/i],
     ],
   },
+  // Hand-picked comparators, not discovered — there is no natural cohort of "prison
+  // bike-building programme pages". These are UK justice/employability organisations that run
+  // structured training programmes and publish a programme page: the closest real analogue to
+  // what /pages/programmes has to do. Named openly so the sample can be argued with.
+  programmes: {
+    label: 'Programme page — justice / employability training providers',
+    ours: ['BBC programmes', 'https://bamboobicycleclub.org/pages/programmes?preview_theme_id=196820238710'],
+    discover: [
+      ['Switchback', 'https://switchback.org.uk/', /what-we-do|our-programme|the-programme/i, /blog|news|donate/i],
+      ['Bounce Back', 'https://bouncebackproject.com/', /training|what-we-do|academy|our-work/i, /blog|news|donate/i],
+      ['The Clink Charity', 'https://theclinkcharity.org/', /training|our-work|restaurant|programme/i, /blog|news|donate/i],
+      ['Onward Lives', 'https://onwardlives.org/', /programme|our-programmes|what-we-do/i, /blog|news|donate/i],
+      ['Emmaus UK', 'https://emmaus.org.uk/', /what-we-do|companion|support/i, /blog|news|shop|donate/i],
+      ['Key4Life', 'https://key4life.org.uk/', /programme|our-work|what-we-do/i, /blog|news|donate/i],
+      ['StandOut', 'https://standout.org.uk/', /what-we-do|programme|our-work/i, /blog|news|donate/i],
+      ['Working Chance', 'https://workingchance.org/', /what-we-do|our-work|support|programme/i, /blog|news|donate/i],
+      ['Spark Inside', 'https://sparkinside.org/', /programme|what-we-do|our-work/i, /blog|news|donate/i],
+      ['Groundwork', 'https://www.groundwork.org.uk/', /what-we-do|programme|employment/i, /blog|news|donate/i],
+    ],
+  },
+
+  // Schools/education programme pages. Greenpower is the standout analogue — school teams BUILD
+  // an electric car, so the page has to sell a hands-on build programme to teachers, exactly as
+  // ours must.
+  schools: {
+    label: 'Schools / education programme page — hands-on STEM providers',
+    ours: ['BBC schools', 'https://bamboobicycleclub.org/pages/schools?preview_theme_id=196820238710'],
+    discover: [
+      ['Greenpower', 'https://www.greenpower.co.uk/', /schools|get-involved|kit-car|race-series/i, /news|shop|donate/i],
+      ['Young Enterprise', 'https://www.young-enterprise.org.uk/', /schools|programmes|teachers/i, /news|blog|donate/i],
+      ['STEM Learning', 'https://www.stem.org.uk/', /schools|programmes|enrichment/i, /news|blog/i],
+      ["The King's Trust", 'https://www.kingstrust.org.uk/', /young-people|programmes|education/i, /news|blog|donate/i],
+      ['Bikeability', 'https://www.bikeability.org.uk/', /schools|training|providers/i, /news|blog/i],
+      ['Sustrans', 'https://www.sustrans.org.uk/', /schools|education|our-work/i, /news|blog|donate/i],
+      ['Design Museum', 'https://designmuseum.org/', /schools|learning|education/i, /news|shop|whats-on/i],
+      ['Nuffield Research', 'https://www.nuffieldresearchplacements.org/', /schools|students|about/i, /news|blog/i],
+      ['Engineering UK', 'https://www.engineeringuk.com/', /schools|programmes|tomorrows-engineers/i, /news|blog/i],
+      ['RSA Pupil Design', 'https://www.thersa.org/', /schools|education|design-awards/i, /news|blog|events/i],
+    ],
+  },
 };
 const setArg = (process.argv.find(a => a.startsWith('--set=')) || '--set=pdp').split('=')[1];
 const SET = SETS[setArg];
