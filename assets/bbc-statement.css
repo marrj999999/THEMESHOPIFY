@@ -515,16 +515,27 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-fork__drop.is-a::after{ background:var(--lime,#D4FD62); }
 .bbc-rd-impact .rd-fork__drop.is-b::after{ background:var(--steel,#DEE6F0); }
 
-/* pathway panels — device D6 (borderless/ruled), the two arms treated IDENTICALLY.
-   Schools and prisons are two halves of one mission, so the only thing that
-   distinguishes them is the chip label and the words, never the chrome.
-   Peer evidence (8 sites, 17 sibling card groups): 16/17 treat siblings
-   identically, 13/17 unfilled. The band's single filled surface is .rd-converge
-   below, which keeps FORMULA §8's one-accent-box-per-page rule intact. */
+/* pathway panels — IDENTICAL TREATMENT, MEANINGFUL FILL (option B, James 2026-07-27).
+   Settles a live contradiction between two design decisions:
+     PATHWAYS-SPEC.md (12 Jul) — James: the twin cards "read as one thing said
+       twice"; answer was light = schools/daylight, dark = prisons/inside.
+     B1 anti-blocky pass      — de-boxed .rd-path, but re-filled prisons only,
+       leaving one arm a card and the other nothing. That broken middle state is
+       what James objected to on 27 Jul.
+   Both complaints are satisfied by separating TREATMENT from FILL: border width,
+   style, radius, padding and shadow geometry are identical across the two arms —
+   which is what the peer set actually shows (16 of 17 sibling groups) — while the
+   surface colour still carries the daylight/inside meaning.
+   FORMULA §8 holds: this is the page's ONE bordered-card band, 3 true boxes vs a
+   cap of 6. Mobile is the deciding case — stacked at 390px the centre fork is
+   suppressed, so fill is the only thing left to tell the two arms apart. */
 .bbc-rd-impact .rd-paths{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3vw,36px); align-items:stretch; }
 .bbc-rd-impact .rd-path{
-  padding-block:clamp(24px,3vw,38px); display:flex; flex-direction:column;
+  border:2.5px solid var(--ink,#0E1A17); border-radius:6px;
+  padding:clamp(24px,3vw,38px); display:flex; flex-direction:column;
 }
+.bbc-rd-impact .rd-path--schools{ background:var(--paper,#F1E9D8); box-shadow:5px 5px 0 var(--lime-700,#9BC02E); }
+.bbc-rd-impact .rd-path--prisons{ background:var(--forest,#003C32); border-color:var(--forest-700,#002A23); box-shadow:5px 5px 0 var(--forest-700,#002A23); }
 /* track chip */
 .bbc-rd-impact .rd-path__chip{
   align-self:flex-start; font-size:13px; font-weight:800; letter-spacing:.06em;
@@ -545,7 +556,14 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-path .rd-flow__step::before{ width:30px; height:30px; font-size:15px; top:5px; }
 .bbc-rd-impact .rd-path .rd-flow__step::after{ left:14px; top:37px; }
 .bbc-rd-impact .rd-path .rd-flow{ margin-top:18px; }
-/* (dark-surface overrides removed 2026-07-27 — both arms now sit on paper) */
+/* dark-surface overrides — required by the forest fill, not a treatment difference.
+   The spec's track colours: lime = schools, steel = prisons. */
+.bbc-rd-impact .rd-path--prisons h3.rd-path__name{ color:var(--bone,#E6DCC8); }
+.bbc-rd-impact .rd-path--prisons p.rd-path__who{ color:var(--bone,#E6DCC8); opacity:.85; }
+.bbc-rd-impact .rd-path--prisons .rd-flow__step{ color:var(--bone,#E6DCC8); }
+.bbc-rd-impact .rd-path--prisons .rd-flow__step::before{
+  background:var(--bone,#E6DCC8); color:var(--forest,#003C32); border-color:var(--lime,#D4FD62);
+}
 /* per-pathway CTA — standard pill buttons (BLOCK-SYSTEM: forest fill
    on light, lime fill on dark). Filled buttons sidestep the global
    link-underline/colour rules that broke the underlined version. */
@@ -556,6 +574,10 @@ cart-drawer.animate .drawer{ visibility:visible; }
   font-size:15px; font-weight:700; line-height:1;
   background:var(--forest,#003C32); color:var(--bone,#E6DCC8) !important;
   text-decoration:none !important; border:none;
+}
+.bbc-rd-impact .rd-path--prisons .rd-path__cta,
+.bbc-rd-impact .rd-path--prisons a.rd-path__cta:not(#_){
+  background:var(--lime,#D4FD62); color:var(--forest,#003C32) !important;
 }
 .bbc-rd-impact .rd-path__cta:hover{ opacity:.85; }
 
@@ -675,9 +697,9 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-backers__label{ display:block; font-size:13px; font-weight:800; letter-spacing:.14em; text-transform:lowercase; color:#17553a; margin:26px 0 10px; text-align:left; }
 
 /* J3: pathway media — hard-crop duotone bleed to card edges, name overlaps it */
-/* no negative bleed: with the panels de-boxed there is no card edge to bleed to,
-   and a negative inline margin would push the image outside its column. */
-.bbc-rd-impact .rd-path__media{ display:block; aspect-ratio:16/7; margin:0; border-radius:3px 3px 0 0; }
+/* the panels are cards again, so the media bleeds to the card edge — applied to
+   BOTH arms (it used to bleed on prisons only, part of the same asymmetry). */
+.bbc-rd-impact .rd-path__media{ display:block; aspect-ratio:16/7; margin:calc(-1*clamp(24px,3vw,38px)) calc(-1*clamp(24px,3vw,38px)) 0; border-radius:3px 3px 0 0; }
 .bbc-rd-impact .rd-path__media img{ border-radius:3px 3px 0 0; }
 .bbc-rd-impact .rd-path__chip{ margin-top:18px; }
 .bbc-rd-impact h3.rd-path__name{ margin-top:12px; }
@@ -691,9 +713,13 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-path .rd-flow{ position:relative; }
 .bbc-rd-impact .rd-path .rd-flow__step{ padding:12px 0 12px 56px; transition:transform .18s ease; }
 .bbc-rd-impact .rd-path .rd-flow__step::after{ width:4px; left:15px; opacity:1; background:var(--lime,#D4FD62); }
+.bbc-rd-impact .rd-path--prisons .rd-flow__step::after{ background:var(--steel,#DEE6F0); opacity:1; }
 .bbc-rd-impact .rd-path .rd-flow__step::before{ width:34px; height:34px; font-size:16px; box-shadow:0 0 0 4px var(--paper,#F1E9D8); transition:transform .18s ease; }
+/* the node's halo must match the surface it sits on, or it reads as a ring */
+.bbc-rd-impact .rd-path--prisons .rd-flow__step::before{ box-shadow:0 0 0 4px var(--forest,#003C32); }
 .bbc-rd-impact .rd-flow__step b{ display:block; font-size:16px; }
 .bbc-rd-impact .rd-flow__step small{ display:block; font-size:13.5px; font-weight:400; color:#3a443f; margin-top:2px; }
+.bbc-rd-impact .rd-path--prisons .rd-flow__step small{ color:var(--bone,#E6DCC8); opacity:.82; }
 @media (hover:hover){
   .bbc-rd-impact .rd-flow__step:hover{ transform:translateX(4px); }
   .bbc-rd-impact .rd-flow__step:hover::before{ transform:scale(1.15); }

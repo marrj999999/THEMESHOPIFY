@@ -94,3 +94,17 @@ blind — only a deliberate known-bad input would have exposed that.
 
 14 named waivers today. If waivers grow freely, "0 FAIL" stops meaning anything — you can
 waive your way to green. A waiver is a deferred defect with an owner, not a pass.
+
+---
+
+## 2026-07-27 — measurement-quality, second batch
+
+| # | The "finding" | What it really was |
+|---|---|---|
+| 19 | **"97 rows below the band genuinely differ — not a uniform shift."** Nearly stopped the option-B re-baseline. | A too-strict row test. It declared a row "different" if any sampled pixel moved by >6 on any channel — a threshold that **glyph antialiasing trips every time** across two browser sessions. Sweeping candidate offsets settled it: −37px scored **0.19% / 0.35% / 0.44%** of pixels over an 80-delta in three regions, against 1.4–6.8% at −36 or −38. The shift *is* uniform; the residual is sub-pixel text rasterisation. **Rule: a pixel comparison across browser sessions needs an antialiasing-tolerant threshold, and "is it a shift?" is answered by sweeping offsets, not by testing one.** |
+| 20 | **"The impact page height is unstable run-to-run (11804 / 11818 / 11841)."** Would have discredited the visual gate on this page. | My measurement omitted the spec's own MASK (which hides video, iframes and the map). Under the gate's actual conditions the page is **11804 on 4 consecutive runs, variance 0px**. The instability was in the instrument, not the page. |
+| 21 | Band audit showed bands 4–9 growing 23→57→278→230px after a change scoped to `.rd-path` — implying wide collateral damage | Same cause as #20: unmasked runs let late-loading media resize bands. Verified structurally instead — `.rd-path` occurs **0 times outside band 3**, and bands 0–2 never moved, so only band 3's height can change. |
+
+**The through-line for all three:** when a measurement contradicts a structural argument, suspect the
+measurement first. The structural fact here (a selector scoped to one band cannot move another) was
+knowable in one query and outranked three increasingly elaborate pixel analyses.

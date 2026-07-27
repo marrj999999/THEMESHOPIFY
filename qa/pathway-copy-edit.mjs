@@ -97,6 +97,15 @@ console.log(`\ndiff guard: only the ${applied} intended settings changed`);
 
 if (DRY) { console.log('\n--dry-run — nothing written'); process.exit(0); }
 
+// --emit writes the merged document locally and stops, for upload by another tool.
+// Same guarantees as the direct path: the diff guard above has already run.
+if (process.argv.includes('--emit')) {
+  const out = `${BK}/page.impact.json.reframed`;
+  writeFileSync(out, JSON.stringify(doc, null, 2));
+  console.log(`\n--emit → ${out}`);
+  process.exit(0);
+}
+
 await putAsset(DRAFT, KEY, JSON.stringify(doc, null, 2));
 console.log('pushed to DRAFT');
 
