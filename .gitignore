@@ -24,3 +24,4 @@ qa/evidence/*/estate-shots/
 # Benchmark screenshots — third-party sites, large, regenerable via qa/benchmark-presentation.mjs.
 # Same reasoning as estate-shots: PNGs do not delta-compress and nobody diffs them.
 qa/research/presentation-shots/
+qa/research/page-shots/
