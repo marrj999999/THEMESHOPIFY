@@ -35,22 +35,59 @@ const SETS = {
   pdp: {
     label: 'Product detail page — social-enterprise / craft goods',
     ours: ['BBC gravel kit', 'https://bamboobicycleclub.org/products/gravel-frame-build-kit?preview_theme_id=196820238710'],
-    // [name, browse page, regex matching a product URL on that site]
+    // [name, browse page, product-URL pattern, reject pattern]
+    // The reject pattern matters: "first product link" kept returning gift vouchers, donations and
+    // workshop bookings, which are not comparable to a physical kit.
     discover: [
-      ['Elvis & Kresse', 'https://www.elvisandkresse.com/collections/all', /\/products\//],
-      ['Hiut Denim', 'https://hiutdenim.co.uk/collections/all', /\/products\//],
-      ['Toast Brewing', 'https://www.toastbrewing.com/collections/all', /\/products\//],
-      ["Tony's Chocolonely", 'https://tonyschocolonely.com/uk/en/our-chocolate-bars', /chocolate-bars\/[a-z0-9-]{4,}/],
-      ['Who Gives A Crap', 'https://uk.whogivesacrap.org/collections/all', /\/products\//],
-      ['Divine Chocolate', 'https://www.divinechocolate.com/collections/all', /\/products\//],
-      ['Fine Cell Work', 'https://finecellwork.co.uk/collections/all', /\/products\//],
-      ['Belu', 'https://belu.org/collections/all', /\/products\//],
-      ['Riverford', 'https://www.riverford.co.uk/organic-vegetable-boxes', /\/(vegetable|fruit|recipe)-box|\/product/],
-      ['Patagonia', 'https://eu.patagonia.com/gb/en/shop/mens', /\/product\//],
+      ['Elvis & Kresse', 'https://www.elvisandkresse.com/collections/all', /\/products\//, /voucher|gift-card|donat|workshop/i],
+      ['Hiut Denim', 'https://hiutdenim.co.uk/collections/all', /\/products\//, /voucher|gift-card|donat/i],
+      ['Who Gives A Crap', 'https://uk.whogivesacrap.org/collections/all', /\/products\//, /voucher|gift-card|donat/i],
+      ['Divine Chocolate', 'https://www.divinechocolate.com/collections/all', /\/products\//, /voucher|gift-card|donat/i],
+      ['Fine Cell Work', 'https://finecellwork.co.uk/collections/all', /\/products\//, /voucher|gift-card|donat|membership/i],
+      ['Belu', 'https://belu.org/collections/all', /\/products\//, /voucher|gift-card|donat/i],
+      ['Toast Brewing', 'https://www.toastbrewing.com/collections/beer', /\/products\//, /voucher|gift-card|donat/i],
+      ["Tony's Chocolonely", 'https://tonyschocolonely.com/uk/en/our-chocolate-bars', /\/(our-chocolate-bars|products)\/[a-z0-9-]{5,}/, /voucher|gift-card/i],
+      ['Riverford', 'https://www.riverford.co.uk/organic-vegetable-boxes', /\/(vegetable|fruit|veg)-box|\/product/, /voucher|gift-card/i],
+      ['Patagonia', 'https://eu.patagonia.com/gb/en/shop/mens', /\/product\//, /gift-card/i],
+    ],
+  },
+
+  impact: {
+    label: 'Impact / our-impact page — social enterprises and charities',
+    ours: ['BBC impact', 'https://bamboobicycleclub.org/pages/impact?preview_theme_id=196820238710'],
+    discover: [
+      ['Switchback', 'https://switchback.org.uk/', /impact|results|outcomes/i, /blog|news/i],
+      ['Fine Cell Work', 'https://finecellwork.co.uk/', /impact|our-work|what-we-do/i, /blog|news|shop/i],
+      ['The Clink Charity', 'https://theclinkcharity.org/', /impact|our-work|results/i, /blog|news/i],
+      ['Bounce Back', 'https://bouncebackproject.com/', /impact|our-work|what-we-do/i, /blog|news/i],
+      ['Recycling Lives', 'https://recyclinglives.org/', /impact|our-work/i, /blog|news/i],
+      ['Emmaus UK', 'https://emmaus.org.uk/', /impact|our-work|what-we-do/i, /blog|news|shop/i],
+      ['Change Please', 'https://changeplease.org/', /impact|our-work/i, /blog|news|shop/i],
+      ['The Big Issue', 'https://www.bigissue.com/', /impact|about/i, /blog|news|subscri/i],
+      ['Who Gives A Crap', 'https://uk.whogivesacrap.org/', /impact|our-impact|giving/i, /blog|shop|product/i],
+      ["Tony's Chocolonely", 'https://tonyschocolonely.com/uk/en/', /mission|impact|annual-fair-report/i, /shop|product|bars/i],
+      ['Divine Chocolate', 'https://www.divinechocolate.com/', /impact|farmer|our-story/i, /shop|product/i],
+      ['Belu', 'https://belu.org/', /impact|our-purpose|what-we-do/i, /shop|product/i],
+    ],
+  },
+
+  collection: {
+    label: 'Collection / shop listing page',
+    ours: ['BBC home-build kits', 'https://bamboobicycleclub.org/collections/home-build-kits?preview_theme_id=196820238710'],
+    discover: [
+      ['Elvis & Kresse', 'https://www.elvisandkresse.com/', /\/collections\/[a-z0-9-]{3,}/, /all$|policies/i],
+      ['Hiut Denim', 'https://hiutdenim.co.uk/', /\/collections\/[a-z0-9-]{3,}/, /all$|policies/i],
+      ['Who Gives A Crap', 'https://uk.whogivesacrap.org/', /\/collections\/[a-z0-9-]{3,}/, /all$|policies/i],
+      ['Divine Chocolate', 'https://www.divinechocolate.com/', /\/collections\/[a-z0-9-]{3,}/, /all$|policies/i],
+      ['Fine Cell Work', 'https://finecellwork.co.uk/', /\/collections\/[a-z0-9-]{3,}/, /all$|policies/i],
+      ['Belu', 'https://belu.org/', /\/collections\/[a-z0-9-]{3,}/, /all$|policies/i],
+      ['Toast Brewing', 'https://www.toastbrewing.com/', /\/collections\/[a-z0-9-]{3,}/, /all$|policies/i],
+      ['Riverford', 'https://www.riverford.co.uk/', /\/(shop|organic)[a-z0-9-\/]*/, /policies|account/i],
+      ['Patagonia', 'https://eu.patagonia.com/gb/en/home/', /\/shop\/[a-z0-9-]{3,}/, /gift-card/i],
+      ["Tony's Chocolonely", 'https://tonyschocolonely.com/uk/en/', /\/(our-chocolate-bars|shop)/, /gift/i],
     ],
   },
 };
-
 const setArg = (process.argv.find(a => a.startsWith('--set=')) || '--set=pdp').split('=')[1];
 const SET = SETS[setArg];
 if (!SET) { console.error(`unknown set "${setArg}". Available: ${Object.keys(SETS).join(', ')}`); process.exit(1); }
@@ -61,7 +98,7 @@ const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const results = [];
 
 // Resolve each peer's real product URL from its browse page.
-async function discover(ctx, browseUrl, pattern) {
+async function discover(ctx, browseUrl, pattern, reject) {
   const p = await ctx.newPage();
   try {
     await p.goto(browseUrl, { waitUntil: 'load', timeout: 45000 });
@@ -70,13 +107,25 @@ async function discover(ctx, browseUrl, pattern) {
       try { const b = p.getByRole('button', { name: label }).first();
         if (await b.isVisible({ timeout: 600 })) { await b.click({ timeout: 1200 }); await p.waitForTimeout(500); break; } } catch {}
     }
-    const href = await p.evaluate(re => {
-      const rx = new RegExp(re);
+    // SAME-HOST ONLY. Without this, discovery follows whatever matches the pattern anywhere on the
+    // page: the Big Issue homepage yielded a ted.com privacy policy, which would have entered the
+    // benchmark as "The Big Issue's impact page". Also reject obvious non-pages (PDF/asset paths).
+    const href = await p.evaluate(([re, rj]) => {
+      const rx = new RegExp(re, 'i');
+      const rej = rj ? new RegExp(rj, 'i') : null;
+      const host = location.hostname.replace(/^www\./, '');
       const a = [...document.querySelectorAll('a[href]')]
         .map(a => a.href)
-        .filter(h => rx.test(h) && !/\/collections\/[^/]+$/.test(h));
+        .filter(h => {
+          let u; try { u = new URL(h); } catch { return false; }
+          const sameHost = u.hostname.replace(/^www\./, '').endsWith(host.split('.').slice(-2).join('.'));
+          if (!sameHost) return false;
+          if (/\.(pdf|jpe?g|png|zip|docx?)$/i.test(u.pathname)) return false;
+          if (/wp-content|\/uploads\//i.test(u.pathname)) return false;
+          return rx.test(h) && !(rej && rej.test(h));
+        });
       return a[0] || null;
-    }, pattern.source);
+    }, [pattern.source, reject ? reject.source : null]);
     return href;
   } catch { return null; } finally { await p.close(); }
 }
@@ -85,8 +134,8 @@ const targets = [SET.ours];
 {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, userAgent:
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36' });
-  for (const [name, browseUrl, pattern] of SET.discover) {
-    const url = await discover(ctx, browseUrl, pattern);
+  for (const [name, browseUrl, pattern, reject] of SET.discover) {
+    const url = await discover(ctx, browseUrl, pattern, reject);
     if (url) { targets.push([name, url]); console.log(`  discovered ${name}: ${url.slice(0, 90)}`); }
     else console.log(`  ✗ ${name}: no product link found on ${browseUrl}`);
   }
@@ -147,6 +196,9 @@ for (const [name, url] of targets) {
     }));
     await page.screenshot({ path: `${SHOTS}/${name.replace(/[^a-z0-9]+/gi, '-')}-fold.png` });
   } catch (e) { rec.error = String(e.message).slice(0, 80); }
+  // A page with almost no text did not really load (consent wall, JS-only render, redirect stub).
+  // Marking it invalid keeps it out of every median rather than silently dragging one down.
+  if (!rec.error && (rec.words ?? 0) < 120) rec.invalid = `only ${rec.words} words — page did not load usefully`;
   results.push(rec);
   console.log(`${rec.error ? '✗' : '✓'} ${name.padEnd(20)} ${rec.error || `${rec.viewports}vp · ${rec.words}w · ATC y${rec.addToCartY}${rec.addToCartAboveFold ? ' (fold✓)' : ''} · price ${rec.priceSize}px y${rec.priceY} · imgs ${rec.imagesAboveFold}/${rec.images} · mission ${rec.missionWords}`}`);
   await ctx.close();

@@ -40,6 +40,56 @@ Not a taste call; taken from what the runs actually produced:
 That is roughly 7 Tier-A studies, 6 Tier-B, and none for the ~12 Tier-C pages — a real programme,
 not an infinite one.
 
+## Coverage now — 4 page types compared
+
+| Page type | Valid peers | Meets 8–12 bar? |
+|---|---|---|
+| Homepage | 20–21 | ✓ |
+| **Impact** | **9** | ✓ |
+| PDP | 7 | ✗ marginal |
+| Collection | 7 | ✗ marginal |
+| Programmes / workshops / schools | 0 | not started |
+| Tier B (6 pages) | 0 | not started |
+
+Two discovery bugs were fixed along the way, both of which would have put fiction into a median:
+
+- **Hardcoded URLs → 7 of 10 were 404s.** Replaced with discovery from a browse page.
+- **Discovery wandered off-domain** — the Big Issue homepage yielded a **ted.com privacy policy**,
+  which would have entered the table as "The Big Issue's impact page". Now same-host only, with
+  PDF/asset paths and sub-120-word pages rejected so a failed load cannot drag a median.
+
+## What the four page types say together
+
+| Page type | Our length | Field median | Ratio |
+|---|---|---|---|
+| PDP | 15.8 vp · 2,354 w | 4.9 vp · 741 w | **3.2× on both** |
+| Impact | 12.8 vp · 2,333 w | 7.8 vp · 729 w | 1.6× / **3.2×** |
+| Homepage | 13.1 vp · 1,962 w | 8.2 vp · 669 w | 1.6× / **2.9×** |
+| Collection | 4.4 vp · 1,201 w | 6.2 vp · 861 w | **0.7×** / 1.4× |
+
+**Length is a house pattern, not a page problem.** Three of four page types run ~3× the field on
+word count. This is the same finding QA-LOG D12 raised for the impact page in July — the
+benchmark shows it is systemic, and it is the single most consistent gap between us and the field.
+
+**Collection is the exception and the proof it is fixable.** It is *shorter* than the median
+(0.7×) and reads well. Whatever discipline produced that page is the discipline the others need.
+
+**Where we lead:** mission language on the impact page (42 mission-words against a next-best 27 —
+the highest in the set), and price presentation on the PDP (32px vs peers' 14–20px).
+
+**A shared weakness:** images above the fold. Collection shows 4 of 26 against a median of 8 —
+on a page whose entire job is showing products. PDP shows 6 of 32, impact 2 of 26.
+
+## Honest status against my own bar
+
+I set 8–12 comparable peers per page type. **Only homepage and impact clear it.** PDP and
+collection sit at 7 valid peers — usable as direction, not as verdict. Three Tier-A types
+(programmes, workshops, schools) and all six Tier-B pages have not been started.
+
+Peer discovery for mission-programme pages is the hard part: there is no "prison bike-building
+programme page" cohort to compare against, so those will need hand-picked comparators
+(training providers, employability charities) rather than automated discovery.
+
 ## First result: PDP vs 7 social-enterprise product pages
 
 `node qa/benchmark-page.mjs --set=pdp`
