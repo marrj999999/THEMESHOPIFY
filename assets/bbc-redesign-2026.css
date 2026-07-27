@@ -971,3 +971,13 @@
    this class carries the EXACT previously-computed styling so the swap is visually
    identical: weight 800, 18px, line-height 18.72/18 = 1.04, margin 10px 0.       */
 .bbc-rd .rd-statlbl{ font-size:18px !important; font-weight:800 !important; line-height:1.04 !important; margin:10px 0 !important; }
+
+/* Account link separator (2026-07-27, found by looking at the mobile render).
+   "Forgotten your password? · Create an account" sits on one line at desktop. At 390px the two
+   links wrap onto separate lines and the "·" is left stranded on a line of its own — a visible
+   defect no assertion would catch, because the markup is perfectly valid. Hidden once the links
+   stack; it is aria-hidden already, so nothing is lost to a screen reader. */
+@media (max-width: 480px) {
+  .bbc-rd .rd-cmp-67002 .rd-sep { display: none; }
+  .bbc-rd .rd-cmp-67002 { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+}
