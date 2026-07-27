@@ -59,6 +59,9 @@ compare the actual screenshots.
 A corollary for the tools: **a proxy is a hypothesis, not a result.** Any new metric ships with at
 least one hand-verified example before its numbers are quoted anywhere.
 
+| 16 | Impact page has "8 bordered boxes vs a cap of 6" — a FORMULA §8 violation needing band redesign | Reading the flagged elements' actual computed styles | Detector counted any border-top, radius or background as a box. The 5 flagged in the evidence wall were `rd-cscard__foot` — a **border-top rule**, which IS device D6, the pattern the research prescribes. True boxes (3+ sides): **1**. The page was already compliant, and the "fix" would have degraded it |
+| 17 | Impact page is 2.5× too long, cut ~500 words | Checking where the words were | The quotes band measured 214 words from 12 slide elements, only 6 unique — 187 words of carousel clones. Real figure 1,158 not 1,336; ratio 2.1× not 2.5×. Both benchmark harnesses now subtract slider clones |
+
 ### Also found, not strictly escapes — checks that were never real
 
 | Item | Detail |

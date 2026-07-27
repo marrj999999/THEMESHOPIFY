@@ -80,6 +80,33 @@ invent one. What the *measured* findings support:
 That is enough to build the blocks. It is not enough to prescribe a band order per page type, and
 that gap is named in the next step below.
 
+
+## Defining "bordered box" — before FORMULA §8 is automated
+
+The §8 rule *"max ONE bordered-card band per page; page-wide bordered-box count ≤ 6"* is about to
+become an assertion. Getting its definition wrong would make it worse than useless, and my first
+attempt did exactly that.
+
+I counted any element with a border-top, a radius, or a background as a "box". On the impact page
+that returned **8 boxes against a cap of 6** — a violation, and I was one step from converting
+bands to different devices to fix it.
+
+The five in the evidence wall were `rd-cscard__foot`: elements whose only border is a
+**`border-top` rule**. That is device **D6 — borderless/ruled**, the treatment the anti-blocky
+research *prescribes*. I had built a detector that flags the recommended pattern as the defect.
+
+**Correct definition, now measured:** a box has a border on **3+ sides** — a full enclosure.
+One or two sides is a rule, which is D6 and is good.
+
+| Impact page | Count | Verdict |
+|---|---|---|
+| True bordered boxes (3+ sides) | **1** (`rd-converge`) | well inside the cap of 6 |
+| Ruled elements (1–2 sides, device D6) | 14 | the prescribed pattern, working |
+
+**The impact page does not violate FORMULA §8.** It is already following the device library. When
+the §8 assertion is built, it must use the 3+ sides definition, and its canary must include a
+ruled element that it is required *not* to flag.
+
 ## Next
 
 1. **Read the peer screenshots visually** for the three Tier-A page types — the reliable path to a
