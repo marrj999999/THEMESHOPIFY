@@ -59,22 +59,6 @@
         {%- if section.settings.hero_eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>{%- endif -%}
         <h1 class="rd-mt2 rd-mw-15ch">{{ section.settings.hero_title }}</h1>
         <div class="rd-lede">{{ section.settings.hero_lede }}</div>
-        {%- comment -%}
-          Proof strip (2026-07-27). Same device as the homepage hero, for the same measured reason:
-          the presentation audit found our first figure at y3897 — about four screens down and 5x
-          later than any peer — with ZERO figures above the fold. The stats band on this page sits
-          below the hero, so a funder or commissioner sees the claim before any evidence of it.
-          Peers who do this well (Recycling Lives "132 / people into paid employment", Belu at 96px)
-          ISOLATE the number so the eye catches it before the sentence. Every default below is
-          Claims-Register approved wording; all are editable in the theme editor.
-        {%- endcomment -%}
-        {%- if section.settings.hero_proof_on -%}
-          <ul class="rd-heroproof" aria-label="Impact in numbers">
-            <li><b>{{ section.settings.hero_proof1_num | default: '4,000+' }}</b><span>{{ section.settings.hero_proof1_label | default: 'people trained' }}</span></li>
-            <li><b>{{ section.settings.hero_proof2_num | default: '90%+' }}</b><span>{{ section.settings.hero_proof2_label | default: 'prison-course completion' }}</span></li>
-            <li><b>{{ section.settings.hero_proof3_num | default: '2012' }}</b><span>{{ section.settings.hero_proof3_label | default: 'delivering since' }}</span></li>
-          </ul>
-        {%- endif -%}
         <div class="rd-cta-row">
           {%- if section.settings.hero_cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ hero_cta1 }}">{{ section.settings.hero_cta1_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
           {%- if section.settings.hero_cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ hero_cta2 }}">{{ section.settings.hero_cta2_label }}</a>{%- endif -%}
@@ -757,14 +741,6 @@ document.addEventListener('click', function (e) {
       "label": "Lede",
       "default": "Inside prisons and schools, the same craft that builds a bike builds skills, confidence and the family ties that help people not return."
     },
-    { "type": "header", "content": "Hero proof strip" },
-    { "type": "checkbox", "id": "hero_proof_on", "label": "Show proof figures in hero", "default": true },
-    { "type": "text", "id": "hero_proof1_num", "label": "Figure 1", "default": "4,000+" },
-    { "type": "text", "id": "hero_proof1_label", "label": "Figure 1 label", "default": "people trained" },
-    { "type": "text", "id": "hero_proof2_num", "label": "Figure 2", "default": "90%+" },
-    { "type": "text", "id": "hero_proof2_label", "label": "Figure 2 label", "default": "prison-course completion" },
-    { "type": "text", "id": "hero_proof3_num", "label": "Figure 3", "default": "2012" },
-    { "type": "text", "id": "hero_proof3_label", "label": "Figure 3 label", "default": "delivering since" },
     {
       "type": "text",
       "id": "hero_cta1_label",

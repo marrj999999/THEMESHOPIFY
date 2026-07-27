@@ -37,6 +37,10 @@ const SETS = {
     ['StandOut', 'https://www.standout.org.uk/standout-programme'],
     ['Spark Inside', 'https://www.sparkinside.org/our-work'],
   ],
+  ours: [
+    ['BBC homepage', 'https://bamboobicycleclub.org/?preview_theme_id=196820238710'],
+    ['BBC impact', 'https://bamboobicycleclub.org/pages/impact?preview_theme_id=196820238710'],
+  ],
   impact: [
     ['BBC impact', 'https://bamboobicycleclub.org/pages/impact?preview_theme_id=196820238710'],
     ['Switchback', 'https://switchback.org.uk/what-we-do/#impact'],

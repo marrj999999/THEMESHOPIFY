@@ -124,6 +124,23 @@ const claimLint = dir => runs('bash', ['scripts/claim-lint.sh', dir]);
   } finally { try { unlinkSync(f); } catch {} }
 }
 
+// ── F2 · gate-check must reject SEMANTICALLY invalid schema (valid JSON, invalid to Shopify) ──
+// Added 2026-07-27 after a real escape: a malformed insert produced a setting with a duplicate
+// "type" key. JSON parsing keeps the last duplicate, so the object was syntactically fine and the
+// gate passed it — then Shopify rejected the push with "type is required". The gate now checks
+// what the platform checks; this canary proves it still can.
+{
+  const f = 'sections/__canary-semantic-schema.liquid';
+  try {
+    writeFileSync(f, '<div>x</div>\n{% schema %}\n' +
+      JSON.stringify({ name: 'canary', settings: [{ id: 'no_type_here', label: 'missing type' }] }) +
+      '\n{% endschema %}\n');
+    const r = runs('bash', ['qa/gate-check.sh', f]);
+    record('gate-check rejects schema with a setting missing "type"', r.code !== 0,
+      r.code === 0 ? 'accepted a setting with no type — Shopify would reject this on push' : 'blocked as required');
+  } finally { try { unlinkSync(f); } catch {} }
+}
+
 // ── G · token ratchet must reject a new raw literal ─────────────────────────────────────────
 {
   const f = 'assets/bbc-__canary.css';

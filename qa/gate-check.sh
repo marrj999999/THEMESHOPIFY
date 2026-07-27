@@ -25,8 +25,28 @@ if me:
     ms=None
     for m in re.finditer(r'\{%-?\s*schema\s*-?%\}', body): ms=m
     if ms:
-        try: json.loads(body[ms.end():])
+        try: sc=json.loads(body[ms.end():])
         except Exception as e: print('✗ schema JSON invalid:',sys.argv[1],e); sys.exit(1)
+        # SEMANTIC schema rules, added 2026-07-27. Syntactic JSON validity is not enough:
+        # a malformed insert produced {"type":"text","id":"x","type":"checkbox"} which parses
+        # fine (JSON keeps the last duplicate key) and was accepted here, then REJECTED by
+        # Shopify on push with "type is required". The gate should catch what the platform
+        # catches, before the push, not after.
+        errs=[]
+        for grp in ('settings','blocks'):
+            for item in (sc.get(grp) or []):
+                if not isinstance(item,dict): continue
+                if grp=='settings':
+                    if 'type' not in item: errs.append(f"setting id={item.get('id','?')} has no 'type'")
+                    if item.get('type') not in ('header','paragraph') and 'id' not in item:
+                        errs.append(f"setting type={item.get('type')} has no 'id'")
+                for sub in (item.get('settings') or []):
+                    if isinstance(sub,dict) and 'type' not in sub:
+                        errs.append(f"block setting id={sub.get('id','?')} has no 'type'")
+        ids=[x.get('id') for x in (sc.get('settings') or []) if isinstance(x,dict) and x.get('id')]
+        for d in {i for i in ids if ids.count(i)>1}: errs.append(f"duplicate setting id: {d}")
+        if errs:
+            print('✗ schema invalid:',sys.argv[1]); [print('   ',e) for e in errs]; sys.exit(1)
 PY
   ;; esac
 done

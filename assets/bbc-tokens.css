@@ -117,3 +117,13 @@
 .bbc-rd .rd-frame-label   { font-size: var(--type-caption) !important; }
 .bbc-rd .rd-ship-note,
 .bbc-rd p.rd-body         { font-size: var(--type-body) !important; }
+
+/* Hero proof strip — shared by the homepage and impact heroes (2026-07-27).
+   One rule, two pages: the presentation audit found our first figure at y3897, four screens down
+   and 5x later than any peer, with zero figures above the fold. Peers isolate the number so the
+   eye catches it before the sentence; we wrote ours into prose. Tokens only, so the ratchet
+   keeps falling. Lime figure reads on the dark hero surfaces both pages use. */
+.bbc-rd .rd-heroproof{ list-style:none; display:flex; flex-wrap:wrap; gap:28px; margin:22px 0 0; padding:0; }
+.bbc-rd .rd-heroproof li{ display:flex; flex-direction:column; }
+.bbc-rd .rd-heroproof b{ font-size:var(--type-h3); font-weight:800; line-height:1; color:var(--bbc-lime,#D4FD62); }
+.bbc-rd .rd-heroproof span{ font-size:var(--type-caption); letter-spacing:.02em; opacity:.85; margin-top:4px; }

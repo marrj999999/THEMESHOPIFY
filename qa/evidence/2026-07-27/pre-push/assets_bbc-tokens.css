@@ -14,12 +14,14 @@
    FORMULA.md §1. Where the two agree, they agree; TYPE-SCALE is the newer
    audit (2026-07-22) and wins on the display/h2 caps.
 
-   THIS FILE ONLY DEFINES TOKENS — it applies nothing and changes no rendering.
-   That is deliberate: ripping 271 declarations out in one pass would be a
-   blind refactor of a customer-facing estate. Sections are repointed at these
-   tokens incrementally, with qa/estate-check.mjs measuring conformance
-   (FORMULA §1: ONE size per role) and the stylelint ratchet preventing new
-   raw literals from being added.
+   Originally definitions only, deliberately: ripping 271 declarations out in one
+   pass would be a blind refactor of a customer-facing estate. Sections are
+   repointed incrementally, with qa/estate-check.mjs measuring conformance
+   (FORMULA §1) and the stylelint ratchet preventing new raw literals.
+   As of 2026-07-27 it also carries a small ROLE APPLICATION block at the bottom —
+   the tokens' first real consumers, added to fix five classes that rendered at
+   more than one size across the estate. Every future addition there should
+   likewise be driven by a measured finding, not by tidying instinct.
 
    WHAT THE AUDIT ACTUALLY FOUND (measured, not assumed):
 
@@ -96,3 +98,22 @@
     "Never introduce a new font-size — use the roles above."
     A new literal anywhere in assets/bbc-*.css trips the stylelint ratchet
     (qa/stylelint-ratchet.sh, baseline down-only), so the count can only fall.  */
+
+/* ── ROLE APPLICATION (2026-07-27) ────────────────────────────────────────────
+   The tokens above were defined but unconsumed. These are their first real
+   consumers, and they exist because qa/type-drift-audit.mjs found five classes
+   rendering at more than one size across the estate — the honest drift metric
+   (same class, different size), as opposed to merely counting how many sizes a
+   page uses, which mistakes a working design system for an inconsistent one.
+
+   Each of these classes was styled only in a specific context (e.g.
+   `.bbc-rd .rd-stat .rd-src`), so outside that context it inherited whatever was
+   nearby. A base role size makes the component mean the same thing everywhere.
+
+   Also fixes a contract violation: .rd-src rendered 12px on 12 pages, and
+   qa/TYPE-SCALE.md says captions are "never below 13".
+   Using tokens rather than literals keeps the stylelint ratchet falling.        */
+.bbc-rd .rd-src,
+.bbc-rd .rd-frame-label   { font-size: var(--type-caption) !important; }
+.bbc-rd .rd-ship-note,
+.bbc-rd p.rd-body         { font-size: var(--type-body) !important; }
