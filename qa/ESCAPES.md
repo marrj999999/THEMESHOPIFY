@@ -108,3 +108,19 @@ waive your way to green. A waiver is a deferred defect with an owner, not a pass
 **The through-line for all three:** when a measurement contradicts a structural argument, suspect the
 measurement first. The structural fact here (a selector scoped to one band cannot move another) was
 knowable in one query and outranked three increasingly elaborate pixel analyses.
+
+---
+
+## 2026-07-28 — the gate that passed a change I could see
+
+| # | Escape | Found by | Check needed |
+|---|---|---|---|
+| 22 | **Visual net passed 48/48 on a change visible to the naked eye.** The `.rd-lumen` bloom + dot-grid treatment was added to a dark band and the suite reported clean. Measured against the pre-change baseline: **39,274 pixels differ by >2, 20,408 by >8 — but only 544 exceed the ~26 per-channel delta that `threshold: 0.1` counts**, and 544 is under `maxDiffPixels: 800`. The gate behaved exactly as configured; it is simply **blind to large-area, low-contrast change** — which is precisely what any background, gradient, scrim or atmosphere treatment is. | Not trusting a green tick on a change I had just looked at | The full-page net cannot police this class. Backgrounds need either an **element-level screenshot with a tighter threshold**, or a computed-style assertion that the treatment is present (e.g. `.rd-lumen::after` has a non-`none` background-image). Recorded, not yet built. |
+
+This is escape #9's twin. #9 was the net missing a small high-contrast change (a short text label
+on a tall page); this is the net missing a **large low-contrast** one. Both come from a single
+global threshold pair trying to police two very different kinds of difference.
+
+**Standing consequence: a green visual run is evidence only for changes in the band the threshold
+can see.** For anything atmospheric, look at the render — the screenshot is the instrument, the
+diff is not.

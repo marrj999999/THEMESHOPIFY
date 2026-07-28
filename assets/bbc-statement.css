@@ -790,6 +790,47 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-band--stats .rd-ghost{ position:absolute; right:-2%; top:50%; transform:translateY(-52%); font-size:clamp(9rem,24vw,20rem); line-height:.8; font-weight:800; letter-spacing:-.04em; color:var(--lime,#D4FD62); opacity:.07; pointer-events:none; }
 @media (max-width:600px){ .bbc-rd-impact .rd-band--stats .rd-ghost{ display:none; } }
 
+/* ── .rd-lumen — light-bloom + blueprint dot grid for FLAT DARK bands ──────────
+   Added 2026-07-28. James liked the look of reactbits.dev's hero; this is that
+   effect rebuilt in ~20 lines of CSS with no React, no WebGL and no JS at all.
+   Two ideas from their catalogue (`light-pillar`/`side-rays` and `dot-grid`),
+   recoloured to our palette — their purple bloom is the generic SaaS default,
+   whereas lime-on-forest reads as ours, and a fine dot grid is a blueprint cue
+   that actually means something for a fabrication brand.
+
+   Static by design: nothing animates, so there is no motion to disable and
+   MOTION.md's reduced-motion rule is satisfied trivially.
+
+   Colours come through color-mix on existing tokens, so the stylelint ratchet
+   sees no new raw literals. Decorative only — the pseudo-elements sit behind
+   content and are pointer-events:none, so nothing here reaches the a11y tree.
+
+   Apply to any flat dark band: class="rd-pad-sm rd-dark rd-lumen".
+   Do NOT apply over a photographic band — it needs a flat surface to read. */
+.bbc-rd .rd-lumen{ position:relative; isolation:isolate; overflow:clip; }
+.bbc-rd .rd-lumen > *{ position:relative; z-index:1; }
+.bbc-rd .rd-lumen::before,
+.bbc-rd .rd-lumen::after{ content:""; position:absolute; pointer-events:none; }
+/* blueprint grid, faded out towards the band edges so it never forms a hard box */
+.bbc-rd .rd-lumen::before{
+  inset:0; z-index:0;
+  background-image:radial-gradient(circle, color-mix(in srgb, var(--bone,#E6DCC8) 14%, transparent) 1px, transparent 1px);
+  background-size:26px 26px;
+  -webkit-mask-image:radial-gradient(120% 85% at 50% 0%, #000 35%, transparent 80%);
+  mask-image:radial-gradient(120% 85% at 50% 0%, #000 35%, transparent 80%);
+}
+/* the bloom — two offset pools of light, deliberately asymmetric (FORMULA: never 50/50) */
+.bbc-rd .rd-lumen::after{
+  inset:-30% -12% auto; height:150%; z-index:0;
+  background:
+    radial-gradient(58% 52% at 20% 6%, color-mix(in srgb, var(--lime,#D4FD62) 20%, transparent), transparent 62%),
+    radial-gradient(44% 38% at 80% 0%, color-mix(in srgb, var(--steel,#DEE6F0) 12%, transparent), transparent 66%);
+}
+@media (max-width:749px){
+  .bbc-rd .rd-lumen::before{ background-size:20px 20px; }
+  .bbc-rd .rd-lumen::after{ inset:-20% -20% auto; }
+}
+
 /* B1 · D6 borderless pathways: hairline fork instead of twin boxes.
    The base .rd-path rule above is now borderless outright, so this no longer
    needs an !important de-boxing pass — and the prisons-only re-fill that used
