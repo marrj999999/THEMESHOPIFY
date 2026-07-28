@@ -326,8 +326,38 @@
 .bbc-rd a:focus-visible,.bbc-rd button:focus-visible,.bbc-rd summary:focus-visible,.bbc-rd input:focus-visible,.bbc-rd .rd-door:focus-visible,.bbc-rd label:focus-within{ outline:3px solid var(--ink); outline-offset:2px; }
 .bbc-rd .rd-dark a:focus-visible,.bbc-rd .rd-dark button:focus-visible,.bbc-rd .rd-dark summary:focus-visible,.bbc-rd .rd-hero a:focus-visible,.bbc-rd .rd-hero button:focus-visible,.bbc-rd .rd-btn.rd-on-dark:focus-visible{ outline-color:var(--lime); }
 
-/* depth on dark sections — subtle top glow instead of a flat fill */
-.bbc-rd .rd-dark{ background:var(--forest) radial-gradient(135% 90% at 50% -15%, rgba(31,102,85,.40), transparent 58%); }
+/* depth on dark sections — light-bloom + blueprint dot grid (2026-07-28).
+   Replaces the old single centred glow, which was symmetric (the shape FORMULA
+   warns against) and did little work. This is the reactbits.dev hero effect James
+   liked, rebuilt in CSS and recoloured lime-on-forest — their purple is the generic
+   SaaS default; the dot grid is a blueprint cue that means something for a
+   fabrication brand.
+
+   Deliberately done with LAYERED BACKGROUNDS, not pseudo-elements: .rd-dark is used
+   by 22 bands across 10 pages, several of which have absolutely-positioned children
+   (e.g. .rd-ghost). Adding position:relative or ::before estate-wide risked moving
+   them or colliding with existing pseudo-elements. Backgrounds change no layout at all.
+
+   Layer order (first = topmost):
+     1-2  the bloom: two offset pools, asymmetric on purpose (never 50/50)
+     3    a forest-to-transparent wash that FADES the grid out lower down, so it
+          never reads as a hard-edged box — the job a mask would do, but a mask
+          would also mask the band's text
+     4    the dot grid itself
+     5    the original centred glow, kept for depth
+   Static: nothing animates, so MOTION.md's reduced-motion rule needs no guard.
+   color-mix on existing tokens keeps the stylelint ratchet at 161. */
+.bbc-rd .rd-dark{
+  background:
+    radial-gradient(58% 50% at 18% 4%, color-mix(in srgb, var(--lime,#D4FD62) 15%, transparent), transparent 60%),
+    radial-gradient(42% 36% at 82% 0%, color-mix(in srgb, var(--steel,#DEE6F0) 9%, transparent), transparent 64%),
+    linear-gradient(to bottom, transparent 30%, var(--forest) 88%),
+    radial-gradient(circle, color-mix(in srgb, var(--bone,#E6DCC8) 11%, transparent) 1px, transparent 1px) 0 0 / 26px 26px,
+    var(--forest) radial-gradient(135% 90% at 50% -15%, rgba(31,102,85,.40), transparent 58%);
+}
+@media (max-width:749px){
+  .bbc-rd .rd-dark{ background-size:auto,auto,auto,20px 20px,auto; }
+}
 .bbc-rd .rd-darker{ background:var(--forest-700) radial-gradient(135% 90% at 50% -15%, rgba(31,102,85,.30), transparent 58%); }
 
 /* hover transitions (effects gated below) */
