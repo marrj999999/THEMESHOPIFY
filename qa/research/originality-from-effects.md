@@ -53,3 +53,52 @@ Ranked by *how impossible they are for a competitor to copy*, not by how good th
 
 **The ordering matters.** Effects on top of repetitive band grammar produce a decorated template.
 Fixing the grammar first means the effects land on something already distinctive.
+
+---
+
+# R2a RESULT (2026-07-28) — the premise was wrong
+
+`qa/sameness.mjs`, run over BBC's 5 Tier-A pages and 20 peers. 24 of 25 segmented; Patagonia
+excluded (1 band — not trustworthy, so not averaged in).
+
+| Metric | BBC median | Peer median | Who leads |
+|---|---|---|---|
+| Template repetition (% of bands in the single commonest shape) | **30** | **63** | **BBC by 2×** |
+| Device diversity (distinct shapes ÷ bands) | **0.70** | **0.40** | **BBC** |
+| Adjacency violations (neighbouring bands sharing a shape) | **0** | **3** | **BBC** |
+| Max density run | **2** | **4** | **BBC** |
+| Bordered-box bands (%) | **25** | **0** | **peers — 16 of 20 have ZERO** |
+| Symmetric (50/50) splits (%) | **100** | **83.5** | peers |
+
+**"Every band is eyebrow → big heading → grid of bordered cards" is not supported by the data.**
+BBC leads on four of six metrics and is *half* as repetitive as the field. The redesign already
+fixed the thing it was built to fix; the remaining gap is narrower and more specific than the
+original verdict implied.
+
+## The two real gaps
+
+1. **Boxes — D6.** The peer field essentially does not box: median 0%, and **16 of 20 peers have no
+   boxed band at all**. We sit at 25%, concentrated in **workshops (50%) and programmes (40%)**.
+   Impact is already fine at 10%. So D6 should be applied *there*, not estate-wide.
+2. **Symmetry — D4.** 100% of our two-column splits are 50/50 against a peer median of 83.5%.
+   Asymmetric 7/3 and 8/4 splits are the fix, and they are cheap.
+
+## Two measurement corrections this run (both caught before reporting)
+
+- **Segmentation v1 was broken.** It walked every element keeping the "deepest" per position and
+  returned 3–4 bands on pages known to have 10, with coverage 1.9 (double-counting wrappers).
+  Rewritten to find the *band parent* and take its direct children — validated against
+  `/pages/impact`, whose true count of 10 was established by an independent earlier audit.
+- **The box detector was counting buttons.** First pass gave BBC **70%** vs a field median of
+  **14%** — a five-fold gap that was pure artefact. The "boxes" were cookie-banner buttons, a
+  hidden cart drawer, a hidden nav mega-panel and every CTA pill; Switchback's "5 boxes" were all
+  `<input>`s. Excluding interactive controls, hidden chrome and pill-sized elements gives the real
+  figures above. **This is ESCAPES #16 recurring in a new tool** — the same trap, caught the same
+  way, by listing what was actually counted.
+
+## Revised priority
+
+Not "apply D1–D12". The measurement says apply **two** devices where the gaps are:
+**D6 to workshops and programmes**, and **D4 wherever a 50/50 split exists**. The other ten devices
+have no measured deficit behind them, and applying them for completeness would be change without
+evidence.
