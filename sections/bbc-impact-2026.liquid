@@ -49,7 +49,19 @@
       {%- if section.settings.hero_image != blank -%}
         <img src="{{ section.settings.hero_image | image_url: width: 1600 }}" srcset="{{ section.settings.hero_image | image_url: width: 800 }} 800w, {{ section.settings.hero_image | image_url: width: 1200 }} 1200w, {{ section.settings.hero_image | image_url: width: 1600 }} 1600w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w, {{ section.settings.hero_image | image_url: width: 2600 }} 2600w" sizes="100vw" alt="{{ section.settings.hero_image_alt | default: 'Inside a Bamboo Bicycle Club workshop' | escape }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" fetchpriority="high" loading="eager">
       {%- else -%}
-        <img src="{{ section.settings.hero_fallback | default: 'bbc-rd-workshop.jpg' | asset_url }}" alt="{{ section.settings.hero_image_alt | default: 'Inside a Bamboo Bicycle Club workshop' | escape }}" width="1500" height="999" fetchpriority="high" loading="eager">
+        {%- comment -%}
+          The theme-asset fallback is what actually renders until an editor picks a hero
+          image — and it had NO srcset, so every visitor got the full 1600px/436KB file.
+          On a 390px phone that is the LCP element and ~2x more pixels than the screen can
+          use. Theme assets are CDN-resizable with &width= (verified 2026-07-28: 600w =
+          105KB vs 436KB), and asset_url always returns a ?v= versioned URL, so &width
+          appends safely. Mirrors the srcset the hero_image branch above already has.
+        {%- endcomment -%}
+        {%- assign hero_fb = section.settings.hero_fallback | default: 'bbc-rd-workshop.jpg' | asset_url -%}
+        <img src="{{ hero_fb }}&width=1600"
+             srcset="{{ hero_fb }}&width=600 600w, {{ hero_fb }}&width=900 900w, {{ hero_fb }}&width=1200 1200w, {{ hero_fb }}&width=1600 1600w"
+             sizes="100vw"
+             alt="{{ section.settings.hero_image_alt | default: 'Inside a Bamboo Bicycle Club workshop' | escape }}" width="1600" height="1066" fetchpriority="high" loading="eager">
       {%- endif -%}
     </div>
     <div class="rd-scrim"></div>

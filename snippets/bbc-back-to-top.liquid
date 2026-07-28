@@ -9,7 +9,18 @@
         id="bbc-back-to-top"
         aria-label="Back to top"
         title="Back to top">
-  <span class="material-symbols-outlined" aria-hidden="true">keyboard_arrow_up</span>
+  {%- comment -%}
+    Inline SVG, not the Material Symbols font. This one hidden chevron was the ONLY
+    element on the estate still using that font-family — and a browser downloads a
+    @font-face as soon as any rendered element references it, so it cost 414 KB of
+    unsubset .ttf on EVERY page to draw a glyph nobody sees until they scroll.
+    Measured 2026-07-28 across impact / home / product / workshops / schools:
+    1 element each, 0 of them visible. bbc-icons.liquid is already inline SVG
+    ("No external font dependencies") — this brings the last straggler into line.
+  {%- endcomment -%}
+  <svg class="bbc-back-to-top__icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+       stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+       aria-hidden="true" focusable="false"><polyline points="18 15 12 9 6 15"></polyline></svg>
 </button>
 
 <style>
@@ -51,8 +62,9 @@
   outline-offset: 2px;
 }
 
-.bbc-back-to-top .material-symbols-outlined {
-  font-size: 28px;
+.bbc-back-to-top__icon {
+  width: 28px;
+  height: 28px;
 }
 
 /* Adjust position when sticky cart is visible */
@@ -69,8 +81,9 @@ body:has(.bbc-sticky-cart.is-visible) .bbc-back-to-top {
     height: 44px;
   }
   
-  .bbc-back-to-top .material-symbols-outlined {
-    font-size: 24px;
+  .bbc-back-to-top__icon {
+    width: 24px;
+    height: 24px;
   }
   
   /* Mobile: higher when sticky cart visible */
