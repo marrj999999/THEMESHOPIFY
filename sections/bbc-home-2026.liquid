@@ -220,9 +220,38 @@
       {%- if section.settings.hero_video_on -%}
         {%- assign hv = 'bbc-rd-home-teaser.mp4' -%}
         {%- if section.settings.hero_video_style == 'duotone' -%}{%- assign hv = 'bbc-hero-film-duotone.mp4' -%}{%- endif -%}
-        <video class="ew-video" style="position:absolute !important;inset:0 !important;width:100% !important;height:100% !important;object-fit:cover !important;" autoplay muted loop playsinline preload="metadata" poster="{{ 'bbc-rd-home-poster.jpg' | asset_url }}" aria-label="{{ section.settings.hero_image_alt | default: 'Bamboo bikes built and ridden — a Bamboo Bicycle Club film' | escape }}">
-          <source src="{{ hv | asset_url }}" type="video/mp4">
-        </video>
+        {%- comment -%}
+          The hero film is 7 MB and was set to `autoplay preload="metadata"`. autoplay
+          OVERRIDES preload — the browser fetches the whole file regardless — so mobile
+          visitors downloaded 7 MB, 79% of the homepage payload, over whatever connection
+          they had. Measured 2026-07-29 at 390px on throttled 4G: 8,857 KB total, of which
+          7,016 KB was this one file.
+
+          It also autoplayed under prefers-reduced-motion, which MOTION.md hard rule 2
+          forbids ("reduced-motion = fully inert"). One fix closes both.
+
+          Now: no autoplay attribute and preload="none", so nothing downloads by default and
+          the poster carries the hero. A tiny script opts in ONLY where the film earns its
+          bytes — a wide viewport, motion allowed, and not on a metered/slow connection per
+          the Network Information API. Everyone else keeps the poster, which is 54 KB.
+        {%- endcomment -%}
+        <video class="ew-video" style="position:absolute !important;inset:0 !important;width:100% !important;height:100% !important;object-fit:cover !important;" muted loop playsinline preload="none" data-src="{{ hv | asset_url }}" poster="{{ 'bbc-rd-home-poster.jpg' | asset_url }}" aria-label="{{ section.settings.hero_image_alt | default: 'Bamboo bikes built and ridden — a Bamboo Bicycle Club film' | escape }}"></video>
+        <script>
+          (function () {
+            var v = document.currentScript.previousElementSibling;
+            if (!v || v.tagName !== 'VIDEO') return;
+            var wideEnough = window.matchMedia('(min-width: 750px)').matches;
+            var motionOK = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+            var c = navigator.connection || {};
+            var goodConnection = !c.saveData && !/2g/.test(c.effectiveType || '');
+            if (!(wideEnough && motionOK && goodConnection)) return;   // poster stands
+            var s = document.createElement('source');
+            s.src = v.dataset.src; s.type = 'video/mp4';
+            v.appendChild(s);
+            v.preload = 'auto';
+            v.play().catch(function () { /* autoplay refused — poster stands, no error surfaced */ });
+          })();
+        </script>
       {%- endif -%}
 
       <svg class="ew-ink" viewBox="125 502 1796 1044" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
