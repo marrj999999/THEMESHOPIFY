@@ -81,3 +81,26 @@ Created 2026-07-11 (Phase 0). Update on every state change.*
 
 ## QA log
 See `qa/QA-LOG.md` (defects, fixes, James verdicts).
+
+---
+
+## 2026-07-28/29 — measurement-led pass (reactbits question → perf → D6 → footer)
+
+| Item | Status | Notes |
+|---|---|---|
+| **R2a — sameness metrics validated vs 20 peers** | ✅ | `qa/sameness.mjs`. **Overturned the premise.** BBC leads on 4 of 6 metrics: repetition 30% vs peers 63%, diversity 0.70 vs 0.40, adjacency 0 vs 3, density-run 2 vs 4. "Every band is eyebrow → heading → bordered cards" is **not** supported. Real gaps are only **boxes** (20% vs peer median 0%) and **symmetry** (100% of splits are 50/50 vs 83.5%) |
+| D6 — de-box the shared steps primitive | ✅ | `.rd-steps li` (9 sections) was a 4-sided bordered card = 17 of 39 boxed elements. Now a single top rule. workshops 50%→20%, programmes 40%→20% boxed bands |
+| D4 — asymmetric splits | ⬜ | The second measured gap. 100% of two-column splits are 50/50 |
+| D1–D3, D5, D7–D12 | ⛔ not doing | **No measured deficit behind them.** Applying for completeness would be change without evidence, on pages already beating the field |
+| reactbits.dev assessment | ✅ | MIT + Commons Clause, so licence is fine — but every component needs React 19 + a JSX bundler (React 19 dropped UMD), ~97 KB gzip minimum, and reduced-motion is guarded in only 4 of 139. **Not adopted.** The hero look James liked was rebuilt as `.rd-dark` bloom + blueprint grid in ~20 lines of CSS |
+| Icon font eliminated | ✅ | 414 KB unsubset `.ttf` on EVERY page, for ONE hidden back-to-top chevron — `bbc-icons.liquid` was already inline SVG. Now 0 KB; page fonts 628 KB → ~190 KB |
+| Impact hero LCP | ✅ | Fallback branch had no srcset, serving 1600px/436 KB to a 390px phone. **LCP 6072 ms → 4532 ms**, hero 129 KB |
+| Footer — press logos invisible | ✅ | Dark-ink SVGs at luminance 19–27 on a 28.6 background. Now white at .72 |
+| Footer — badges stretched to 144px | ✅ | `.rd-tag` blockified as a flex item + parent `align-items:stretch`. Fixed with `align-self:center` |
+| Footer — tap targets | ✅ | 19 of 24 links under 24px (WCAG 2.5.8) → **0 failures** |
+| Footer — mobile height | ✅ | **2809 → 1949px (−31%)**; single-column collapse below 520px was stacking 23 links in a 1647px run |
+| Footer — clipped wordmark | ✅ | Rendered "bamboo bicycle c" on mobile; clamp FLOOR was the cause. Also clipped ≥1568px (pre-existing) |
+| Footer — ragged columns | ⬜ **James** | BUILD 7 · MISSION 7 · HELP 3 · COMPANY 3 leaves dead space. Fix = merge HELP+COMPANY or move links — a navigation/IA call |
+| `rd-card.rd-stamp` de-box | ⬜ **James** | The remaining boxes. Data says de-box; the offset stamp is brand character across 18 sections — aesthetic call |
+
+**Gate hardening this pass:** ESCAPES #19–23. Most consequential is **#23 — a failing gate still allowed a push** (piped into `tail`, so `&&` read tail's exit code; and the pass-token survived an early `exit 1`). `gate-check.sh` now clears the token before any check runs; proven blocked.
