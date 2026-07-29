@@ -433,16 +433,15 @@
       <link rel="stylesheet" href="{{ 'component-discounts.css' | asset_url }}" media="print" onload="this.media='all'">
     {%- endif -%}
 
-    {%- unless settings.type_body_font.system? -%}
-      {% comment %}theme-check-disable AssetPreload{% endcomment %}
-      <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
-      {% comment %}theme-check-enable AssetPreload{% endcomment %}
-    {%- endunless -%}
-    {%- unless settings.type_header_font.system? -%}
-      {% comment %}theme-check-disable AssetPreload{% endcomment %}
-      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
-      {% comment %}theme-check-enable AssetPreload{% endcomment %}
-    {%- endunless -%}
+    {%- comment -%}
+      Dawn's picker-font preloads REMOVED 2026-07-29. bbc-universal.css sets
+      font-family:var(--rd-sans) (Atkinson Hyperlegible) on body and every heading, so the
+      picker fonts are overridden everywhere. Measured on the homepage: the ONLY font-family
+      rendered by any visible element is "Atkinson Hyperlegible", yet Plus Jakarta Sans n4+n7
+      were still preloaded and downloaded — 26.4 KB fetched and never painted.
+      Leaving these in also kept the template at 5 preload hints against Shopify's documented
+      maximum of 2, which is why theme-check had been silenced around them rather than fixed.
+    {%- endcomment -%}
 
     {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
       {{ 'component-localization-form.css' | asset_url | stylesheet_tag: preload: true }}

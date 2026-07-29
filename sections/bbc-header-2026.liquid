@@ -12,8 +12,16 @@
 
 {%- comment -%} Unified redesign stylesheet — loaded ONCE here (the header is on every page via the header group); all other bbc-*-2026 sections rely on this. Primary fonts preloaded (woff2, crossorigin) for faster first paint. {%- endcomment -%}
 {{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
-{{ 'AtkinsonHyperlegible-Regular.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
-{{ 'AtkinsonHyperlegible-Bold.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
+{%- comment -%}
+  Atkinson preloads REMOVED 2026-07-29. They never matched: preload_tag emits a VERSIONED
+  asset_url (…woff2?v=5584…) while the @font-face in bbc-universal.css requests the plain
+  relative url('AtkinsonHyperlegible-Regular.woff2'). Different URL = different cache entry,
+  so the preload was never used AND the browser downloaded each face twice — measured 5
+  requests for 3 faces, 45.7 KB wasted per page. Removing them also brings the template back
+  under Shopify's documented cap of 2 preload hints per template (it was at 5).
+  If preloading is wanted later, the @font-face must be emitted from Liquid with asset_url so
+  both URLs match exactly; a preload that misses is worse than none.
+{%- endcomment -%}
 
 <style>
   .rd-vh{position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
@@ -123,7 +131,20 @@
       {%- if section.settings.logo -%}
         <img class="rd-logo-img" src="{{ section.settings.logo | image_url: width: 480 }}" alt="{{ section.settings.brand_text | default: shop.name }}" width="{{ section.settings.logo.width }}" height="{{ section.settings.logo.height }}" fetchpriority="high">
       {%- else -%}
-        <img class="rd-logo-img" src="{{ 'bbc-rd-logo.png' | asset_url }}" alt="Bamboo Bicycle Club" width="600" height="277" fetchpriority="high">
+        {%- comment -%}
+          The logo renders at ~100 CSS px but was served at its full 600px intrinsic width —
+          51 KB on EVERY page for a slot needing 200px at DPR2 (20.8 KB). Measured 2026-07-29:
+          natural 600 vs CSS 100, a 6x overshoot, the worst offender in the estate.
+          Theme assets are CDN-resizable with &width=, and asset_url returns a ?v= versioned
+          URL so &width appends safely. width/height stay at the intrinsic ratio so the box is
+          reserved before load (CLS), while sizes tells the browser the real slot.
+        {%- endcomment -%}
+        {%- assign logo_src = 'bbc-rd-logo.png' | asset_url -%}
+        <img class="rd-logo-img"
+             src="{{ logo_src }}&width=200"
+             srcset="{{ logo_src }}&width=100 100w, {{ logo_src }}&width=200 200w, {{ logo_src }}&width=300 300w"
+             sizes="100px"
+             alt="Bamboo Bicycle Club" width="600" height="277" fetchpriority="high">
       {%- endif -%}
     </a>
 

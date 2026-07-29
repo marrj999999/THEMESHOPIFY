@@ -55,9 +55,30 @@
               <a class="rd-reveal rd-card rd-stamp" href="{{ product.url }}">
                 <div class="rd-ph">
                   {%- if product.featured_image -%}
-                    <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.featured_image.alt | escape | default: product.title }}" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}" loading="lazy">
+                    {%- comment -%}
+                      Product cards had NO srcset — a single hardcoded 800px served to a 359px
+                      slot at every DPR, on every card, on every collection page. Measured
+                      2026-07-29 at both DPR1 and DPR2: served 800, CSS 359, srcset absent.
+                      Shopify's responsive-image pattern is image_url with width candidates plus
+                      sizes; the grid is 3-up above 990px, 2-up on tablet, 1-up on mobile, which
+                      is what the sizes expression below describes. Tuned to 28vw after measuring: 33vw
+                      overstates the real 359px slot at 1280, which made DPR2 jump to the 1200w
+                      candidate. 28vw resolves to ~358 CSS px, so DPR2 lands on 800w.
+                    {%- endcomment -%}
+                    <img src="{{ product.featured_image | image_url: width: 800 }}"
+                         srcset="{{ product.featured_image | image_url: width: 200 }} 200w,
+                                 {{ product.featured_image | image_url: width: 400 }} 400w,
+                                 {{ product.featured_image | image_url: width: 600 }} 600w,
+                                 {{ product.featured_image | image_url: width: 800 }} 800w,
+                                 {{ product.featured_image | image_url: width: 1200 }} 1200w"
+                         sizes="(min-width: 990px) 28vw, (min-width: 750px) 45vw, 92vw"
+                         alt="{{ product.featured_image.alt | escape | default: product.title }}"
+                         width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}" loading="lazy">
                     {%- if product.images[1] -%}
-                      <img class="rd-ph-alt" src="{{ product.images[1] | image_url: width: 800 }}" alt="" aria-hidden="true" width="{{ product.images[1].width }}" height="{{ product.images[1].height }}" loading="lazy">
+                      <img class="rd-ph-alt" src="{{ product.images[1] | image_url: width: 800 }}"
+                           srcset="{{ product.images[1] | image_url: width: 400 }} 400w, {{ product.images[1] | image_url: width: 600 }} 600w, {{ product.images[1] | image_url: width: 800 }} 800w"
+                           sizes="(min-width: 990px) 28vw, (min-width: 750px) 45vw, 92vw"
+                           alt="" aria-hidden="true" width="{{ product.images[1].width }}" height="{{ product.images[1].height }}" loading="lazy">
                     {%- endif -%}
                   {%- else -%}
                     <img src="{{ 'bbc-rd-prod-gravel.jpg' | asset_url }}" alt="{{ product.title | escape }}" width="1000" height="1000" loading="lazy">
