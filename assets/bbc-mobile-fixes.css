@@ -211,9 +211,9 @@
   .cart-item__name.break,
   .cart-item__name.h4,
   a.cart-item__name {
-    word-break: normal !important;
+    word-break: normal;
     overflow-wrap: break-word !important;
-    white-space: normal !important;
+    white-space: normal;
     display: block !important;
     font-size: 14px !important;
     line-height: 1.3 !important;
@@ -222,9 +222,9 @@
   /* Product options (size, color, etc) */
   .product-option,
   .cart-item__details .product-option {
-    word-break: normal !important;
+    word-break: normal;
     overflow-wrap: break-word !important;
-    white-space: normal !important;
+    white-space: normal;
     font-size: 12px !important;
   }
   
@@ -258,12 +258,12 @@
     line-height: 1.35 !important;
     /* Allow 2 lines before truncating */
     display: -webkit-box !important;
-    -webkit-line-clamp: 2 !important;
-    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    white-space: normal !important;
-    word-break: break-word !important;
+    white-space: normal;
+    word-break: break-word;
     max-height: 2.7em !important; /* 2 lines at 1.35 line-height */
   }
   
@@ -273,13 +273,13 @@
   .price__regular,
   .price__sale {
     font-size: 14px !important;
-    white-space: nowrap !important;
+    white-space: nowrap;
   }
   
   /* "From" prefix should not wrap */
   .price .price-item--regular::before,
   .price--on-sale .price-item--regular::before {
-    white-space: nowrap !important;
+    white-space: nowrap;
   }
 }
 
@@ -342,7 +342,7 @@ object {
   /* Hardware acceleration for smooth scrolling */
   transform: translateZ(0) !important;
   -webkit-transform: translateZ(0) !important;
-  will-change: transform !important;
+  will-change: transform;
   backface-visibility: hidden !important;
   -webkit-backface-visibility: hidden !important;
 }
@@ -415,10 +415,10 @@ object {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+    scroll-behavior: auto;
   }
   
   .sticky,
@@ -471,7 +471,7 @@ object {
 img[loading="lazy"],
 iframe[loading="lazy"] {
   content-visibility: auto !important;
-  contain-intrinsic-size: 300px !important;
+  contain-intrinsic-size: 300px;
 }
 
 /* =============================================================================

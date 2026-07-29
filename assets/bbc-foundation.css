@@ -66,9 +66,9 @@ main#MainContent,
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
   }
 }
 
@@ -1577,7 +1577,7 @@ mark {
    When background is green (forest), all text is white except highlights in gold
    ============================================================================= */
 
-/* Base rule: all text white on green backgrounds — FORCE WITH !important */
+/* Base rule: all text white on green backgrounds — FORCE WITH */
 .bbc-section--forest,
 .bbc-section--forest *,
 [data-color-scheme="green"],

@@ -94,7 +94,7 @@
   --rd-container:1200px;
 
   /* ---- Dawn global style variables → brand (best practice: set Dawn's
-     own vars so every Dawn button/input matches Impact, no !important) ---- */
+     own vars so every Dawn button/input matches Impact, no) ---- */
   --buttons-radius:999px;
   --buttons-radius-outset:999px;
 }
@@ -107,7 +107,7 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
 
 /* ============================================================
    2026 CONSOLIDATION — buttons unified via Dawn's own variables
-   (best practice: no !important, no settings_data.json).
+   (best practice: no, no settings_data.json).
    Dawn's .button reads --buttons-radius; setting it here makes every
    Dawn button a pill matching Impact's .rd-btn. Legacy .bbc-btn is a
    custom class (doesn't read Dawn vars) so it gets ONE clean rule that
@@ -284,7 +284,7 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
    specificity and are NOT carried:
    ============================================================ */
 .bbc-rd-home .ew-stamp,
-.bbc-rd-home .ew-ink{ display:none !important; }  /* clean video hero */
+.bbc-rd-home .ew-ink{ display:none; }  /* clean video hero */
 .bbc-rd-home .ew{ min-height:92svh; }             /* hero fills the fold */
 
 /* ============================================================================

@@ -436,8 +436,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
    BLOCK-SYSTEM Tier-2: heads go statement-scale/lowercase/LEFT.
    ============================================================ */
 /* Section heads: statement scale, lowercase (h2 set audited — no
-   proper nouns), left rag, tight leading. Mobile needs its own
-   !important clamp to beat bbc-mobile-fixes (documented gotcha). */
+   proper nouns), left rag, tight leading. Mobile needs its own clamp to beat bbc-mobile-fixes (documented gotcha). */
 .bbc-rd-impact h2{
   font-size:clamp(2.8rem,7vw,5.4rem) !important;
   line-height:.97 !important; letter-spacing:-.02em;
@@ -635,7 +634,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-backers__chip{ display:inline-block; font-weight:700; font-size:14px; padding:8px 14px; border:2px solid var(--lime,#D4FD62); border-radius:999px; white-space:normal; text-align:center; max-width:100%; }
 /* eyebrow dash must never touch the label */
 .bbc-rd-impact .rd-eyebrow::before{ margin-right:10px; }
-/* eyebrows: lowercase wins over the section-inline uppercase (caps war — one central !important, per replan) */
+/* eyebrows: lowercase wins over the section-inline uppercase (caps war — one central, per replan) */
 .bbc-rd-impact .rd-eyebrow{ text-transform:lowercase !important; }
 .bbc-rd-impact .rd-frame-label, .bbc-rd-impact .rd-partnerlabel{ text-transform:none !important; letter-spacing:.06em; }
 /* where-we-operate groups (FORMULA: 18px titles, 16px items, count chip) */
@@ -816,7 +815,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 
 /* B1 · D6 borderless pathways: hairline fork instead of twin boxes.
    The base .rd-path rule above is now borderless outright, so this no longer
-   needs an !important de-boxing pass — and the prisons-only re-fill that used
+   needs an de-boxing pass — and the prisons-only re-fill that used
    to live here (the reason the two arms rendered as different blocks) is gone. */
 .bbc-rd-impact .rd-paths{ gap:clamp(32px,5vw,72px); position:relative; }
 @media (min-width:760px){ .bbc-rd-impact .rd-paths::before{ content:"\2731"; position:absolute; left:50%; top:0; bottom:0; transform:translateX(-50%); border-left:2px solid var(--mist,#CFC5B0); width:0; color:var(--forest,#003C32); font-size:18px; line-height:1; padding-top:2px; } }
