@@ -55,22 +55,24 @@
         "left": 40,
         "right": 40,
         "width": 1200,
-        "y": 9888
+        "y": 10056
       }
     ],
     "justify": [],
     "centring": [],
     "rhythm": {
       "bandPaddingTop": {
-        "0px": 3,
+        "0px": 2,
         "88px": 6,
         "64px": 2,
+        "56px": 1,
         "89.6px": 1
       },
       "bandPaddingBottom": {
-        "0px": 3,
+        "0px": 2,
         "88px": 6,
         "64px": 2,
+        "56px": 1,
         "89.6px": 1
       },
       "gap": {
@@ -142,8 +144,8 @@
       },
       {
         "sheet": "bbc-practical-spacing.css",
-        "rules": 20,
-        "important": 33
+        "rules": 18,
+        "important": 29
       },
       {
         "sheet": "bbc-accessibility.css",
@@ -299,7 +301,7 @@
       {
         "sheet": "bbc-redesign-2026.css",
         "rules": 646,
-        "important": 279
+        "important": 207
       },
       {
         "sheet": "inline",
@@ -324,7 +326,7 @@
       {
         "sheet": "bbc-redesign-2026.css",
         "rules": 646,
-        "important": 279
+        "important": 207
       },
       {
         "sheet": "bbc-statement.css",
@@ -337,7 +339,7 @@
         "important": 0
       }
     ],
-    "importantTotal": 2244,
+    "importantTotal": 2096,
     "duplicateSelectors": [
       {
         "sel": ":root",
@@ -654,7 +656,7 @@
         "left": 40,
         "right": 40,
         "width": 1200,
-        "y": 10866
+        "y": 10922
       }
     ],
     "justify": [],
@@ -764,7 +766,7 @@
         "left": 40,
         "right": 40,
         "width": 1200,
-        "y": 6578
+        "y": 6634
       }
     ],
     "justify": [],
@@ -849,26 +851,27 @@
         "left": 40,
         "right": 40,
         "width": 1200,
-        "y": 7018
+        "y": 7130
       },
       {
         "cls": "rd-foot-wrap",
         "left": 40,
         "right": 40,
         "width": 1200,
-        "y": 8120
+        "y": 8344
       }
     ],
     "justify": [],
     "centring": [],
     "rhythm": {
       "bandPaddingTop": {
-        "0px": 2,
+        "0px": 1,
         "64px": 5,
-        "88px": 3
+        "88px": 3,
+        "56px": 1
       },
       "bandPaddingBottom": {
-        "0px": 2,
+        "56px": 2,
         "64px": 5,
         "88px": 3
       },
@@ -937,7 +940,7 @@
         "left": 40,
         "right": 40,
         "width": 1200,
-        "y": 8510
+        "y": 8622
       }
     ],
     "justify": [],
@@ -988,56 +991,58 @@
         "left": 40,
         "right": 40,
         "width": 1200,
-        "y": 926
+        "y": 1038
       },
       {
         "cls": "rd-wrap ",
         "left": 40,
         "right": 40,
         "width": 1200,
-        "y": 2710
+        "y": 3158
       },
       {
         "cls": "rd-wrap",
         "left": 40,
         "right": 40,
         "width": 1200,
-        "y": 4845
+        "y": 5517
       },
       {
         "cls": "rd-wrap rd-center",
         "left": 40,
         "right": 40,
         "width": 1200,
-        "y": 6192
+        "y": 6976
       },
       {
         "cls": "rd-wrap ",
         "left": 40,
         "right": 40,
         "width": 1200,
-        "y": 8010
+        "y": 9130
       },
       {
         "cls": "rd-foot-wrap",
         "left": 40,
         "right": 40,
         "width": 1200,
-        "y": 11167
+        "y": 12623
       }
     ],
     "justify": [],
     "centring": [],
     "rhythm": {
       "bandPaddingTop": {
-        "0px": 16,
+        "0px": 4,
+        "56px": 12,
         "64px": 2,
         "88px": 6,
         "89.6px": 1
       },
       "bandPaddingBottom": {
-        "0px": 16,
+        "56px": 13,
         "64px": 2,
+        "0px": 3,
         "88px": 6,
         "89.6px": 1
       },
@@ -1087,7 +1092,7 @@
         "left": 40,
         "right": 40,
         "width": 1200,
-        "y": 6560
+        "y": 6672
       }
     ],
     "justify": [],
@@ -1161,7 +1166,7 @@
         "left": 40,
         "right": 40,
         "width": 1200,
-        "y": 6038
+        "y": 6094
       }
     ],
     "justify": [],
@@ -1220,7 +1225,7 @@
         "left": 40,
         "right": 40,
         "width": 1200,
-        "y": 2802
+        "y": 2914
       }
     ],
     "justify": [],
@@ -1366,7 +1371,7 @@
         "left": 40,
         "right": 40,
         "width": 1200,
-        "y": 13273
+        "y": 13329
       }
     ],
     "justify": [],
