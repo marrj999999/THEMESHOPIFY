@@ -685,7 +685,7 @@
    the source values, not these by hand.
    ============================================================ */
 .bbc-rd .rd-cmp-77472{ font-size:clamp(28px,4vw,42px) !important; margin-top:8px !important; font-weight:800 !important; letter-spacing:-.02em !important; }
-.bbc-rd .rd-jc-center{ justify-content:center !important; }
+.bbc-rd .rd-jc-center{ justify-content:center; }
 .bbc-rd .rd-c-lime{ color:var(--lime) !important; }
 .bbc-rd .rd-mw-18ch{ max-width:18ch !important; }
 .bbc-rd .rd-mw-820px{ max-width:820px !important; }
@@ -696,14 +696,14 @@
 .bbc-rd .rd-mx-auto{ margin-left:auto !important; margin-right:auto !important; }
 .bbc-rd .rd-mh-auto{ min-height:auto !important; }
 .bbc-rd .rd-pt-56{ padding-top:56px !important; }
-.bbc-rd .rd-cmp-28057{ display:flex !important; justify-content:space-between !important; flex-wrap:wrap !important; gap:14px !important; border-top:1.5px solid var(--mist) !important; padding-top:24px !important; }
+.bbc-rd .rd-cmp-28057{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; border-top:1.5px solid var(--mist) !important; padding-top:24px !important; }
 .bbc-rd .rd-mw-62ch{ max-width:62ch !important; }
 .bbc-rd .rd-cmp-29312{ font-size:clamp(30px,4vw,46px) !important; font-weight:800 !important; letter-spacing:-.02em !important; margin:0 0 32px !important; }
-.bbc-rd .rd-ta-right-strike{ text-align:right !important; text-decoration:line-through !important; }
-.bbc-rd .rd-ib-mt22{ display:inline-block !important; margin-top:22px !important; }
+.bbc-rd .rd-ta-right-strike{ text-align:right; text-decoration:line-through !important; }
+.bbc-rd .rd-ib-mt22{ display:inline-block; margin-top:22px !important; }
 .bbc-rd .rd-c-lime700{ color:var(--forest) !important; } /* AAA: was lime-700, unreadable on light */
 .bbc-rd .rd-cmp-86504{ font-size:14px !important; color:var(--subtle) !important; margin:0 0 14px !important; }
-.bbc-rd .rd-w-full-jc{ width:100% !important; justify-content:center !important; }
+.bbc-rd .rd-w-full-jc{ width:100% !important; justify-content:center; }
 .bbc-rd .rd-cmp-67002{ margin:16px 0 0 !important; font-size:14px !important; }
 .bbc-rd .rd-mw-60ch{ max-width:60ch !important; }
 .bbc-rd .rd-mb-52px{ margin-bottom:52px !important; }
@@ -712,17 +712,17 @@
 .bbc-rd .rd-mb-8px{ margin-bottom:8px !important; }
 .bbc-rd .rd-mb-24px{ margin-bottom:24px !important; }
 .bbc-rd .rd-mh-70{ min-height:70vh !important; }
-.bbc-rd .rd-gap48-ac{ gap:48px !important; align-items:center !important; }
+.bbc-rd .rd-gap48-ac{ gap:48px; align-items:center; }
 .bbc-rd .rd-ar-43{ aspect-ratio:4/3 !important; }
 .bbc-rd .rd-cmp-35205{ font-weight:700 !important; color:var(--ink) !important; font-size:18px !important; }
 .bbc-rd .rd-mt-10px{ margin-top:10px !important; }
 .bbc-rd .rd-mt-12px{ margin-top:12px !important; }
-.bbc-rd .rd-cmp-88744{ display:flex !important; gap:10px !important; flex-wrap:wrap !important; }
-.bbc-rd .rd-gap-24{ gap:24px !important; }
+.bbc-rd .rd-cmp-88744{ display:flex; gap:10px; flex-wrap:wrap; }
+.bbc-rd .rd-gap-24{ gap:24px; }
 .bbc-rd .rd-mw-16ch{ max-width:16ch !important; }
 .bbc-rd .rd-m-0{ margin:0 !important; }
 .bbc-rd .rd-cmp-20294{ max-width:60ch !important; margin:0 auto 44px !important; }
-.bbc-rd .rd-gap-18{ gap:18px !important; }
+.bbc-rd .rd-gap-18{ gap:18px; }
 .bbc-rd .rd-fs-18px{ font-size:18px !important; }
 .bbc-rd .rd-cmp-81369{ color:var(--charcoal) !important; font-size:16px !important; margin-top:4px !important; }
 .bbc-rd .rd-mb-36px{ margin-bottom:36px !important; }
@@ -735,44 +735,44 @@
 .bbc-rd .rd-cmp-61169{ color:var(--subtle) !important; margin-bottom:22px !important; }
 .bbc-rd .rd-c-subtle-o1{ color:var(--subtle) !important; opacity:1 !important; }
 .bbc-rd .rd-c-ink{ color:var(--ink) !important; }
-.bbc-rd .rd-cmp-45496{ grid-template-columns:1.1fr 0.9fr !important; gap:48px !important; align-items:start !important; }
-.bbc-rd .rd-cmp-22077{ border:2.5px solid var(--ink) !important; border-radius:14px !important; overflow:hidden !important; background:var(--paper) !important; aspect-ratio:1/1 !important; }
+.bbc-rd .rd-cmp-45496{ grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:start; }
+.bbc-rd .rd-cmp-22077{ border:2.5px solid var(--ink) !important; border-radius:14px !important; overflow:hidden; background:var(--paper) !important; aspect-ratio:1/1 !important; }
 .bbc-rd .rd-img-cover{ width:100% !important; height:100% !important; object-fit:cover !important; }
 /* Restore object-fit fill on redesign images — the global img{height:auto!important} in bbc-mobile-fixes.css otherwise defeats cover, leaving empty bands (worst on mobile heroes). */
 .bbc-rd .rd-hero .rd-bg img,.bbc-rd .rd-card .rd-ph img,.bbc-rd .rd-door img,.bbc-rd .rd-split .rd-media img,.bbc-rd .rd-video img{ height:100% !important; }
-.bbc-rd .rd-cmp-31841{ display:grid !important; grid-template-columns:repeat(4,1fr) !important; gap:12px !important; margin-top:12px !important; }
-.bbc-rd .rd-cmp-02745{ position:sticky !important; top:96px !important; }
+.bbc-rd .rd-cmp-31841{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:12px !important; }
+.bbc-rd .rd-cmp-02745{ position:sticky; top:96px !important; }
 .bbc-rd .rd-mb-14px{ margin-bottom:14px !important; }
 .bbc-rd .rd-cmp-62520{ font-size:clamp(30px,4vw,42px) !important; letter-spacing:-.02em !important; line-height:1.04 !important; margin:0 !important; }
-.bbc-rd .rd-cmp-08680{ gap:8px !important; margin-top:12px !important; align-items:center !important; }
+.bbc-rd .rd-cmp-08680{ gap:8px; margin-top:12px !important; align-items:center; }
 .bbc-rd .rd-cmp-99447{ color:var(--gold) !important; letter-spacing:1px !important; font-size:18px !important; }
 .bbc-rd .rd-fw-800{ font-weight:800 !important; }
 .bbc-rd .rd-cmp-53515{ color:var(--subtle) !important; font-size:14px !important; }
 .bbc-rd .rd-cmp-09075{ color:var(--forest) !important; font-size:14px !important; font-weight:700 !important; }
 .bbc-rd .rd-mt-18px{ margin-top:18px !important; }
-.bbc-rd .rd-cmp-24279{ margin-top:22px !important; display:flex !important; align-items:baseline !important; gap:12px !important; flex-wrap:wrap !important; }
+.bbc-rd .rd-cmp-24279{ margin-top:22px !important; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; }
 .bbc-rd .rd-cmp-99566{ font-size:32px !important; font-weight:800 !important; letter-spacing:-.02em !important; color:var(--forest) !important; }
 .bbc-rd .rd-was-price{ font-size:18px !important; color:var(--subtle) !important; text-decoration:line-through !important; }
-.bbc-rd .rd-cmp-15126{ gap:9px !important; margin-top:12px !important; font-size:14px !important; font-weight:600 !important; color:var(--charcoal) !important; align-items:center !important; }
-.bbc-rd .rd-cmp-93984{ width:9px !important; height:9px !important; border-radius:50% !important; background:var(--teal) !important; flex:0 0 9px !important; box-shadow:0 0 0 3px rgba(63,139,102,.2) !important; }
-.bbc-rd .rd-cmp-04367{ display:block !important; margin:24px 0 10px !important; }
-.bbc-rd .rd-cmp-30367{ display:flex !important; flex-wrap:wrap !important; gap:8px !important; }
+.bbc-rd .rd-cmp-15126{ gap:9px; margin-top:12px !important; font-size:14px !important; font-weight:600 !important; color:var(--charcoal) !important; align-items:center; }
+.bbc-rd .rd-cmp-93984{ width:9px !important; height:9px !important; border-radius:50% !important; background:var(--teal) !important; flex:0 0 9px; box-shadow:0 0 0 3px rgba(63,139,102,.2) !important; }
+.bbc-rd .rd-cmp-04367{ display:block; margin:24px 0 10px !important; }
+.bbc-rd .rd-cmp-30367{ display:flex; flex-wrap:wrap; gap:8px; }
 .bbc-rd .rd-ac-forest{ accent-color:var(--forest) !important; }
-.bbc-rd .rd-cmp-21769{ display:block !important; margin:22px 0 10px !important; }
-.bbc-rd .rd-cmp-88753{ width:84px !important; height:46px !important; text-align:center !important; border:2px solid var(--ink) !important; border-radius:8px !important; font-size:16px !important; font-weight:700 !important; font-family:var(--rd-sans) !important; }
-.bbc-rd .rd-cmp-44006{ gap:12px !important; margin-top:22px !important; }
-.bbc-rd .rd-flex1-jc{ flex:1 !important; justify-content:center !important; }
+.bbc-rd .rd-cmp-21769{ display:block; margin:22px 0 10px !important; }
+.bbc-rd .rd-cmp-88753{ width:84px !important; height:46px !important; text-align:center; border:2px solid var(--ink) !important; border-radius:8px !important; font-size:16px !important; font-weight:700 !important; font-family:var(--rd-sans) !important; }
+.bbc-rd .rd-cmp-44006{ gap:12px; margin-top:22px !important; }
+.bbc-rd .rd-flex1-jc{ flex:1; justify-content:center; }
 .bbc-rd .rd-cmp-86881{ font-size:14px !important; color:var(--subtle) !important; margin:14px 0 0 !important; font-weight:600 !important; }
-.bbc-rd .rd-cmp-58136{ display:flex !important; gap:10px !important; align-items:flex-start !important; background:var(--lime) !important; border:2.5px solid var(--ink) !important; border-radius:8px !important; padding:12px 14px !important; margin-top:18px !important; font-size:14px !important; font-weight:600 !important; color:var(--forest) !important; }
+.bbc-rd .rd-cmp-58136{ display:flex; gap:10px; align-items:flex-start; background:var(--lime) !important; border:2.5px solid var(--ink) !important; border-radius:8px !important; padding:12px 14px !important; margin-top:18px !important; font-size:14px !important; font-weight:600 !important; color:var(--forest) !important; }
 .bbc-rd .rd-m-14pxauto0{ margin:14px auto 0 !important; }
 .bbc-rd .rd-cmp-97576{ max-width:26ch !important; margin:0 auto !important; }
-.bbc-rd .rd-cmp-00502{ display:grid !important; grid-template-columns:1fr 32px 1fr 32px 1.2fr !important; align-items:stretch !important; gap:0 !important; }
+.bbc-rd .rd-cmp-00502{ display:grid; grid-template-columns:1fr 32px 1fr 32px 1.2fr; align-items:stretch; gap:0; }
 .bbc-rd .rd-cmp-57334{ font-size:26px !important; font-weight:800 !important; color:var(--forest) !important; margin:4px 0 6px !important; letter-spacing:-.02em !important; }
-.bbc-rd .rd-cmp-76373{ display:flex !important; align-items:center !important; justify-content:center !important; font-size:26px !important; font-weight:800 !important; color:var(--forest) !important; }
+.bbc-rd .rd-cmp-76373{ display:flex; align-items:center; justify-content:center; font-size:26px !important; font-weight:800 !important; color:var(--forest) !important; }
 .bbc-rd .rd-cmp-64793{ font-size:14px !important; color:var(--subtle) !important; }
 .bbc-rd .rd-mw-22ch{ max-width:22ch !important; }
 .bbc-rd .rd-cmp-43552{ font-size:18px !important; font-weight:800 !important; margin-top:6px !important; color:var(--ink) !important; }
-.bbc-rd .rd-ta-right{ text-align:right !important; }
+.bbc-rd .rd-ta-right{ text-align:right; }
 .bbc-rd .rd-cmp-18720{ color:var(--gold) !important; font-size:26px !important; letter-spacing:2px !important; }
 .bbc-rd .rd-cmp-33678{ color:#BCC8C2 !important; font-size:14px !important; }
 .bbc-rd .rd-fs-clamp18px2vw22{ font-size:clamp(18px,2vw,22px) !important; }
@@ -780,14 +780,14 @@
 .bbc-rd .rd-mb-28px{ margin-bottom:28px !important; }
 .bbc-rd .rd-fs-clamp26px3vw32{ font-size:clamp(26px,3vw,32px) !important; }
 .bbc-rd .rd-cmp-83298{ font-weight:800 !important; color:var(--forest) !important; margin-top:6px !important; }
-.bbc-rd .rd-cmp-47707{ padding:12px 32px !important; display:flex !important; align-items:center !important; gap:18px !important; }
+.bbc-rd .rd-cmp-47707{ padding:12px 32px !important; display:flex; align-items:center; gap:18px; }
 .bbc-rd .rd-c-lime-b{ color:var(--lime) !important; font-weight:800 !important; }
 .bbc-rd .rd-ml-auto{ margin-left:auto !important; }
 .bbc-rd .rd-p-11px22px{ padding:11px 22px !important; }
 .bbc-rd .rd-cmp-79852{ margin:24px 0 0 !important; max-width:440px !important; }
 .bbc-rd .rd-mw-14ch{ max-width:14ch !important; }
-.bbc-rd .rd-gap48-as{ gap:48px !important; align-items:start !important; }
-.bbc-rd .rd-gap40-ac{ gap:40px !important; align-items:center !important; }
+.bbc-rd .rd-gap48-as{ gap:48px; align-items:start; }
+.bbc-rd .rd-gap40-ac{ gap:40px; align-items:center; }
 .bbc-rd .rd-fs-clamp22px3vw32{ font-size:clamp(22px,3vw,32px) !important; }
 .bbc-rd .rd-mt-24px{ margin-top:24px !important; }
 
@@ -919,26 +919,26 @@
    surface that didn't collapse on phones; plus global spacing.
    ============================================================ */
 @media(max-width:820px){
-  .bbc-rd .rd-cmp-45496{ grid-template-columns:1fr !important; gap:32px !important; } /* product: image | buy-box stacks */
-  .bbc-rd .rd-cmp-02745{ position:static !important; top:auto !important; }            /* un-stick buy box once stacked */
+  .bbc-rd .rd-cmp-45496{ grid-template-columns:1fr; gap:32px; } /* product: image | buy-box stacks */
+  .bbc-rd .rd-cmp-02745{ position:static; top:auto !important; }            /* un-stick buy box once stacked */
 }
 @media(max-width:680px){
-  .bbc-rd .rd-spectable{ grid-template-columns:1fr !important; }                       /* product spec strip stacks */
+  .bbc-rd .rd-spectable{ grid-template-columns:1fr; }                       /* product spec strip stacks */
   .bbc-rd .rd-spectable > .rd-spec-cell:not(:last-child){ border-right:none; border-bottom:2px solid var(--ink); }
 }
 @media(max-width:620px){
-  .bbc-rd .rd-cmp-00502{ grid-template-columns:1fr !important; gap:14px !important; }  /* carbon-comparison stacks */
+  .bbc-rd .rd-cmp-00502{ grid-template-columns:1fr; gap:14px; }  /* carbon-comparison stacks */
   .bbc-rd .rd-cmp-76373{ transform:rotate(90deg); }
   .bbc-rd .rd-pad{ padding:52px 0; }                                                   /* 88px was never reduced on mobile */
   .bbc-rd .rd-pad-sm{ padding:40px 0; }
 }
 @media(max-width:520px){ .bbc-rd .rd-wrap{ padding:0 18px; } }                         /* 32px gutters ate 18% of a 360px screen */
-@media(max-width:480px){ .bbc-rd .rd-cmp-31841{ gap:8px !important; } }                /* product thumb row */
+@media(max-width:480px){ .bbc-rd .rd-cmp-31841{ gap:8px; } }                /* product thumb row */
 @media(max-width:600px){
   /* Sticky buy-bar on phones: a long product title wrapped to 4 lines and
      squeezed "Add to cart" into a 3-line stack (verified in 390px harness).
      Truncate the title to one line, keep price + CTA intact, tighten padding. */
-  .bbc-rd .rd-cmp-47707{ padding:10px 16px !important; gap:10px !important; }
+  .bbc-rd .rd-cmp-47707{ padding:10px 16px !important; gap:10px; }
   .bbc-rd #bbc-rd-stickybar .rd-fw-800{ min-width:0; flex:1 1 auto; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .bbc-rd #bbc-rd-stickybar .rd-c-lime-b{ flex:0 0 auto; white-space:nowrap; }
   .bbc-rd #bbc-rd-stickybar .rd-ml-auto{ display:none; }                /* title now flexes, spacer redundant */
@@ -953,7 +953,7 @@
 .bbc-rd .rd-cred-q{ font-size:20px; line-height:1.45; font-weight:700; color:var(--ink); margin:0; }
 .bbc-rd .rd-cred-cite{ font-style:normal; font-size:14px; color:var(--forest); margin-top:auto; }
 .bbc-rd .rd-cred-cite span{ color:#5a6b62; font-weight:500; }
-@media(max-width:760px){ .bbc-rd .bbc-impact-cred .rd-g2{ grid-template-columns:1fr !important; } }
+@media(max-width:760px){ .bbc-rd .bbc-impact-cred .rd-g2{ grid-template-columns:1fr; } }
 
 .bbc-rd .rd-product-mission{ margin-top:14px; padding:13px 16px; border-radius:12px;
   background:rgba(7,62,39,.06); border:1.5px solid rgba(7,62,39,.18);
@@ -1055,7 +1055,7 @@
   .bbc-rd .rd-nav-cta, .bbc-rd .rd-cart, .bbc-rd .rd-cart .rd-cart-count,
   .bbc-rd .rd-caret, .bbc-rd .rd-botbar a, .bbc-rd .rd-botbar button,
   .bbc-rd.rd-header.rd-open .rd-mwrap > a{
-    transition:none !important; animation:none !important;
+    transition:none; animation:none;
   }
 }
 
@@ -1066,8 +1066,8 @@
    label. Hide it unless the button is genuinely loading.
    ============================================================ */
 .bbc-rd .rd-btn .loading__spinner,
-.bbc-rd .loading__spinner{ display:none !important; }
-.bbc-rd .rd-btn.loading .loading__spinner{ display:block !important; }
+.bbc-rd .loading__spinner{ display:none; }
+.bbc-rd .rd-btn.loading .loading__spinner{ display:block; }
 /* keep the CTA label centred and on one line */
 .bbc-rd .rd-btn.rd-lime.rd-flex1-jc{ white-space:nowrap; }
 

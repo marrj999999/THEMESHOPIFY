@@ -154,3 +154,24 @@ exactly the cards I meant to change, and they looked right.
 **Corollary for shared primitives:** before editing one, list where it actually renders. A grep of
 section files gives the sections; only the rendered estate gives the *contexts*. "18 sections use
 `.rd-stamp`" hid the fact that one of those contexts was the entire shop.
+
+---
+
+## 2026-07-29 — CSS refactor safety, and a baseline that went stale
+
+Removing `!important` is the right thing and the dangerous thing: a load-bearing one looks
+identical to a decorative one until something reflows three pages away. `qa/css-fingerprint.mjs`
+makes the browser the authority — capture every element's computed style, change, re-capture,
+and demand **zero** movement.
+
+| # | Escape | Found by | Fix |
+|---|---|---|---|
+| 25 | **Desktop-only evidence nearly certified a mobile-only stylesheet.** The first fingerprint captured 1280px only. `bbc-mobile-fixes.css` carries 146 `!important` that a desktop capture never exercises — a clean diff would have "proved" a change safe while never rendering the rules it touched. | Noticing the file was mobile-scoped before trusting the result | Fingerprint now captures 1280 **and** 390 — 10,324 elements across 26 page/viewport combos |
+| 26 | **A "successful" multi-file push silently pushed nothing.** `push-theme.mjs` crashed partway through 8 files; the surrounding shell reported the earlier gate PASS, and the subsequent diff showed only 21 moved values — which read as "the change was safe" when in fact **not one file had reached the draft**. The 21 was the noise floor. | Verifying local-vs-draft byte equality instead of trusting the push output | Push one file at a time and confirm sync. A diff is only meaningful once the change is provably live |
+| 27 | **A baseline captured 40 minutes earlier had gone stale.** After fully reverting a batch, the estate still showed 4,310 moved values against that older baseline — with every file byte-identical to git HEAD. Two consecutive captures then showed **0**. The site itself drifts (app content, lazily-injected sections), so an old baseline manufactures phantom regressions. | Re-measuring the noise floor rather than hunting a bug that was not in the CSS | **Capture the baseline immediately before the change**, never once at the start of a long session |
+
+**Result of the refactor itself:** 72 `!important` removed from `bbc-redesign-2026.css`
+(289 → 217) with **0 of 166,980 property values moved** — proven decorative. A wider 8-file batch
+moved 5,333 values, so it was reverted rather than shipped: the knock-on effects (stripping one
+`!important` lets a different rule win, which changes padding, which changes height) mean each
+file needs its own bisect cycle, not a single sweep.
