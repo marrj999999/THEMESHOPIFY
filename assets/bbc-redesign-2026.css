@@ -88,7 +88,13 @@
 
 /* funding loop */
 .bbc-rd .rd-loop{ display:grid; grid-template-columns:1fr auto 1fr auto 1fr; align-items:stretch; gap:0; max-width:760px; margin-left:auto; margin-right:auto; }
-.bbc-rd .rd-loop .rd-step{ text-align:center; padding:18px 16px; border:2px solid currentColor; background:rgba(255,255,255,.06); }
+/* D6 — the last real FORMULA §8 breach (2026-07-29). §8 allows ONE bordered-card band per
+   page; workshops had TWO — this 3-up grid AND the bordered .rd-video frame. Measured
+   estate-wide: home 0 boxed bands, impact 1, programmes 1, workshops 2.
+   The grid loses its box (it is the "grid of bordered cards" the research names) and keeps
+   a top rule; the video keeps its border, where an edge reads as a frame around media
+   rather than as a card. Dropping the rgba fill also takes a raw literal out of the sheet. */
+.bbc-rd .rd-loop .rd-step{ text-align:center; padding:20px 12px 0; border-top:2px solid currentColor; }
 .bbc-rd .rd-loop .rd-step:first-child{ border-radius:12px 0 0 12px; }
 .bbc-rd .rd-loop .rd-step:last-child{ border-radius:0 12px 12px 0; background:var(--lime); color:var(--forest); border-color:var(--lime); }
 .bbc-rd .rd-loop .rd-step .rd-big{ font-weight:800; font-size:21px; line-height:1; }
@@ -118,8 +124,33 @@
 /* cards */
 /* container croppers use clip NOT hidden — hidden makes them scroll containers and kills any scroll-driven timeline inside (qa/MOTION.md rule 4, 2026-07-24) */
 .bbc-rd .rd-card{ background:var(--paper); border-radius:12px; overflow:clip; border:1.5px solid transparent; }
-.bbc-rd .rd-card.rd-stamp{ background:var(--bone); border:2.5px solid var(--ink); border-radius:6px; box-shadow:5px 5px 0 var(--ink); }
-.bbc-rd .rd-card.rd-stamp.rd-lime{ box-shadow:5px 5px 0 var(--lime-700); }
+/* The stamp, de-boxed but not de-charactered (2026-07-29).
+   Measured: .rd-card.rd-stamp appears in TWO separate bands on both schools (y1669 + y2610)
+   and programmes (y5223 + y6763), so it — not the steps — was the last real FORMULA §8
+   breach (§8 allows ONE bordered-card band per page).
+   The stamp's character was never the enclosure; it was the OFFSET. So the 4-sided border,
+   the fill and the radius go, and an L-shaped corner rule stays. Two sides is a RULE, which
+   is device D6 and what the anti-blocky research prescribes — a full box is 3+ sides.
+   Hover keeps the offset motion, now expressed by the rule shifting rather than a shadow. */
+.bbc-rd .rd-card.rd-stamp{
+  background:transparent; border:0; border-radius:0; box-shadow:none;
+  border-left:2.5px solid var(--ink); border-bottom:2.5px solid var(--ink);
+  padding-left:clamp(14px,1.6vw,20px); padding-bottom:clamp(14px,1.6vw,20px);
+}
+.bbc-rd .rd-card.rd-stamp.rd-lime{ border-color:var(--lime-700); }
+
+/* Card-as-link: the whole card is an <a class="rd-cardlink">, so the estate's global
+   link rule was underlining EVERY line inside it — heading, body paragraph and all.
+   text-decoration propagates from the anchor and a descendant cannot cancel it, which is
+   why the inner <p> computes "none" and still renders underlined. !important is needed
+   because the global rule is the high-specificity a:not(...) one (see memory note on the
+   global link rule). The affordance moves to the card's own heading on hover. */
+.bbc-rd a.rd-cardlink,
+.bbc-rd a.rd-cardlink *{ text-decoration:none !important; }
+@media (hover:hover){
+  .bbc-rd a.rd-cardlink:hover .rd-h3,
+  .bbc-rd a.rd-cardlink:hover h3{ text-decoration:underline !important; text-underline-offset:3px; }
+}
 .bbc-rd .rd-card.rd-card-free{ background:#f3fbe3; box-shadow:5px 5px 0 var(--lime-700); }  /* education advert: the FREE Speaker card is the hero offer */
 .bbc-rd a.rd-lg-link{ text-decoration:none; cursor:pointer; transition:opacity .15s; }  /* education: clickable press wordmarks */
 .bbc-rd a.rd-lg-link:hover,.bbc-rd a.rd-lg-link:focus-visible{ opacity:.6; text-decoration:underline; text-underline-offset:4px; }
@@ -394,8 +425,8 @@
   .bbc-rd .rd-door:hover img{ transform:scale(1.045); }
   .bbc-rd a.rd-card:hover{ transform:translateY(-3px); box-shadow:0 14px 30px rgba(14,26,23,.16); }
   .bbc-rd .rd-card:hover .rd-ph img{ transform:scale(1.05); }
-  .bbc-rd .rd-card.rd-stamp:hover{ transform:translate(-2px,-2px); box-shadow:8px 8px 0 var(--ink); }
-  .bbc-rd .rd-card.rd-stamp.rd-lime:hover{ box-shadow:8px 8px 0 var(--lime-700); }
+  /* the lift stays; the shadow it used to grow no longer exists (see the de-box above) */
+  .bbc-rd .rd-card.rd-stamp:hover{ transform:translate(-2px,-2px); }
 
   /* one orchestrated page-load moment: hero content rises in, staggered */
   .bbc-rd .rd-hero .rd-wrap > *{ animation:rd-rise .7s cubic-bezier(.2,.7,.2,1) both; }
@@ -490,6 +521,21 @@
 .bbc-rd.rd-footer .rd-tagline{ font-size:16px; color:#cfd8d2; max-width:34ch; margin:14px 0 0; }
 .bbc-rd.rd-footer .rd-foot-bottom{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-top:44px; padding-top:22px; border-top:1.5px solid rgba(244,239,230,.16); font-size:14px; color:#BCC8C2; }
 .bbc-rd.rd-footer .rd-foot-bottom .rd-tag{ background:transparent; color:#cfd8d2; border-color:rgba(244,239,230,.3); }
+/* Ragged columns (fixed 2026-07-29). BUILD 7 links · MISSION 7 · HELP 3 · COMPANY 3 left
+   a large dead area under the right-hand pair. Rebalanced with grid placement only — no
+   change to James's navigation menus or the block markup.
+   The trick is the row span: the brand and the two TALL columns span both rows, so they do
+   not dictate row 1's height. Row 1 is then sized by HELP alone, and COMPANY starts
+   immediately beneath it instead of dropping to the bottom of a 330px row. Four columns
+   of roughly equal depth instead of two long and two stumpy. */
+@media(min-width:821px){
+  .bbc-rd.rd-footer .rd-foot-top{ grid-template-columns:1.7fr 1fr 1fr 1fr; grid-template-rows:auto auto; align-items:start; }
+  .bbc-rd.rd-footer .rd-foot-top > *:nth-child(1),
+  .bbc-rd.rd-footer .rd-foot-top > *:nth-child(2),
+  .bbc-rd.rd-footer .rd-foot-top > *:nth-child(3){ grid-row:1 / -1; }
+  .bbc-rd.rd-footer .rd-foot-top > *:nth-child(4){ grid-column:4; grid-row:1; }
+  .bbc-rd.rd-footer .rd-foot-top > *:nth-child(5){ grid-column:4; grid-row:2; }
+}
 @media(max-width:820px){ .bbc-rd.rd-footer .rd-foot-top{ grid-template-columns:1fr 1fr; } }
 /* Below 520px this used to collapse to ONE column, stacking all 23 links in a single
    1,647px run. Keeping two columns for the nav lists (with the brand block spanning the
