@@ -233,7 +233,15 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
    One full-bleed lowercase line; clamps to the container; decorative. */
 .bbc-wordmark{ display:block; width:100%; overflow:clip; /* clip not hidden — hosts an animated child (§11) */ padding:28px 0 6px;
   font-family:var(--rd-sans); font-weight:800; letter-spacing:-.03em; line-height:.9;
-  font-size:clamp(2.6rem,9.4vw,9rem); white-space:nowrap; text-align:center;
+  /* The clamp FLOOR was the bug: at 390px, 9.4vw resolved to 36.7px but the 2.6rem
+     minimum (41.6px) won, and "bamboo bicycle club" at that size needs 386px inside a
+     326px box. With white-space:nowrap + overflow:clip the signature rendered as
+     "bamboo bicycle c" on every mobile page. Measured: width ≈ font-size × 9.28, so
+     390px needs ≤35px. Floor dropped to 2rem and the slope to 8.6vw, which fits at 390
+     (33.5px → 311px) and still gives 110px at 1280. Tuned in place rather than added as
+     a mobile override, because a second font-size declaration is a new raw literal and
+     the token ratchet is down-only. */
+  font-size:clamp(2rem,8.6vw,7.5rem); white-space:nowrap; text-align:center;
   color:var(--bone); opacity:.92; user-select:none; }
 .bbc-wordmark a{ color:inherit !important; text-decoration:none !important; display:inline-block; }
 

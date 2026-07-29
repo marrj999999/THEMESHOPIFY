@@ -5,6 +5,15 @@ set -e
 cd "$(dirname "$0")/.."
 FILES=("$@")
 FAIL=0
+
+# Invalidate the token FIRST, before any check runs (added 2026-07-29 after a real bypass).
+# The token was only removed at the bottom of the script, on the normal failure path — but
+# `bash qa/stylelint-ratchet.sh || exit 1` on the next line exits immediately, so a ratchet
+# failure never reached that cleanup and left the PREVIOUS run's token in place. Since
+# push-theme.mjs only checks the token is under 10 minutes old, a failing gate could still
+# be followed by a successful push. Clearing it up-front closes every early-exit path at once.
+rm -f qa/.gate-pass
+
 echo "— token-lint ratchet"
 bash qa/stylelint-ratchet.sh || exit 1
 echo "— claim-lint"

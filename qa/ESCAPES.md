@@ -124,3 +124,16 @@ global threshold pair trying to police two very different kinds of difference.
 **Standing consequence: a green visual run is evidence only for changes in the band the threshold
 can see.** For anything atmospheric, look at the render — the screenshot is the instrument, the
 diff is not.
+
+---
+
+## 2026-07-29 — a failing gate that still allowed a push
+
+| # | Escape | Found by | Check added |
+|---|---|---|---|
+| 23 | **The token ratchet FAILED and the push went through anyway.** Two independent faults lined up. (a) I invoked the gate as `bash qa/gate-check.sh … \| tail -3 && node qa/push-theme.mjs …` — piping into `tail` means `&&` sees **tail's** exit code, always 0, so a failing gate never stopped the chain. (b) `gate-check.sh` only deleted its `.gate-pass` token on the *normal* failure path at the bottom of the script, but line 9's `bash qa/stylelint-ratchet.sh \|\| exit 1` exits immediately — so a ratchet failure never reached the cleanup and left the **previous** run's token in place. `push-theme.mjs` only asks whether the token is under 10 minutes old, so it accepted it. | Reading the gate output instead of trusting that `&&` had guarded the push | `gate-check.sh` now does `rm -f qa/.gate-pass` **first, before any check runs**, which closes every early-exit path at once. Proven: forced a ratchet failure → gate exit 1 → token removed → `push-theme.mjs` refused with "BLOCKED". |
+
+Two lessons, and the second is the general one:
+
+1. **Never pipe a gate into anything.** `set -o pipefail` would also fix it, but the habit is simpler: run the gate, capture its exit code, *then* decide.
+2. **A guard that cleans up only on its expected failure path is not a guard.** `exit 1` anywhere above the cleanup silently preserves stale state. Invalidate first, validate second — the same shape as ESCAPES #1, where a gate reported success while executing nothing.
