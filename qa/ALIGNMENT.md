@@ -58,7 +58,8 @@ on the home, about, sharebuild and kitpicker scopes, still centre everywhere els
 - **C · centring** — no block with both gutters > 4px may have them differ by > 2px
 - **B · justification** — zero `text-align:justify`; zero centred paragraphs wider than 60ch; zero bands mixing alignments
 
-Wired into `qa/gate-check.sh`, so a push fails if the estate drifts back.
+Run as a POST-push check (see "How it is enforced in practice" below) — it measures the rendered
+draft, so it cannot run before the change is on the theme.
 
 ## The standing lesson
 
