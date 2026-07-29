@@ -212,7 +212,14 @@
 .bbc-rd .rd-dark .rd-pull cite{ color:#BCC8C2; }
 
 /* tags */
-.bbc-rd .rd-tag{ font-size:14px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 13px; border-radius:999px; border:1.5px solid var(--border-strong); color:var(--charcoal); background:#fff; display:inline-block; }
+/* align-self:center is load-bearing, not cosmetic (fixed 2026-07-29).
+   `display:inline-block` is blockified the moment a .rd-tag becomes a flex item, and a flex
+   container defaults to align-items:stretch — so in the footer, where the tags sit in an
+   auto-generated .rd-cmp-* flex wrapper that sets no alignment, every pill stretched to the
+   TALLEST item's height: 144px instead of 34px. That is why the footer trust badges rendered
+   as big empty capsules with their labels stranded above them. Pinning align-self here fixes
+   it wherever a tag is dropped, without having to chase every generated wrapper class. */
+.bbc-rd .rd-tag{ font-size:14px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 13px; border-radius:999px; border:1.5px solid var(--border-strong); color:var(--charcoal); background:#fff; display:inline-block; align-self:center; }
 .bbc-rd .rd-tag.rd-lime{ background:var(--lime); color:var(--forest); border-color:var(--ink); }
 
 /* press logo wall (typographic wordmarks) */

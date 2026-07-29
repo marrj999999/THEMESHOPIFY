@@ -297,8 +297,23 @@ cart-drawer.animate .drawer{ visibility:visible; }
 
 /* ---- F17/F46/F57/F72 · footer press wall: uniform cap height instead
    of the shared 205x300 portrait box (FT lockup was ~300px tall). */
-.bbc-rd .rd-foot-press{ display:flex; align-items:center; flex-wrap:wrap; gap:28px clamp(24px,4vw,48px); }
-.bbc-rd .rd-foot-press img{ height:34px !important; width:auto !important; max-width:170px !important; object-fit:contain; }
+/* The press row and the sign-off line sat at EXACTLY the same y (row bottom 11141,
+   tagline top 11141 — measured, zero gap), so the tagline read as colliding with the
+   logos. Neither had vertical margin; this gives the row its own breathing space. */
+.bbc-rd .rd-foot-press{ display:flex; align-items:center; flex-wrap:wrap; gap:28px clamp(24px,4vw,48px); margin:clamp(28px,4vw,44px) 0 0; }
+.bbc-rd .rd-foot-signoff{ margin-top:clamp(16px,2vw,22px); }
+/* The press logos are dark-ink SVGs sitting on the forest footer. Sampled 2026-07-29:
+   mean luminance 19-27 against a background of 28.6 — i.e. DARKER than the surface they
+   sit on, so the row read as empty. Knocking them to flat white is the standard press-wall
+   treatment and satisfies FORMULA §3's one-height-per-row rule at the same time. */
+.bbc-rd .rd-foot-press img{
+  height:34px !important; width:auto !important; max-width:170px !important; object-fit:contain;
+  filter:brightness(0) invert(1); opacity:.72;
+}
+@media (hover:hover){
+  .bbc-rd .rd-foot-press img{ transition:opacity .18s ease; }
+  .bbc-rd .rd-foot-press img:hover{ opacity:1; }
+}
 
 /* ---- F75 · parts variant selected state (was white-on-cream) +
    F66 parts ATC pill */
