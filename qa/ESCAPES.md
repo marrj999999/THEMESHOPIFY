@@ -137,3 +137,20 @@ Two lessons, and the second is the general one:
 
 1. **Never pipe a gate into anything.** `set -o pipefail` would also fix it, but the habit is simpler: run the gate, capture its exit code, *then* decide.
 2. **A guard that cleans up only on its expected failure path is not a guard.** `exit 1` anywhere above the cleanup silently preserves stale state. Invalidate first, validate second — the same shape as ESCAPES #1, where a gate reported success while executing nothing.
+
+---
+
+## 2026-07-29 — a shared primitive with a bigger blast radius than it looked
+
+| # | Escape | Found by | Check added |
+|---|---|---|---|
+| 24 | **De-boxing `.rd-card.rd-stamp` silently rebuilt the shop grid.** The class reads as "the editorial stamp card" from schools and programmes, where it holds pricing and pathway cards — and it is *also* every product card on every collection page (12 on `/collections/all`). The de-box replaced their enclosure with an L-rule, which does not enclose a product image, so the rule ran beside the photo and the grid read as broken. On a revenue page. No gate caught it: contrast passed, the ratchet passed, axe passed, and the visual net failed *every* page anyway because the footer had changed in the same pass — so 42 failures said nothing. | **A CONTROL PAGE.** `collection` has no steps and no editorial cards, so its only diff should have been the footer. Its first differing row was y810 against a footer starting at y2738 — a 1,900px gap that had no business existing | De-box scoped to `.rd-grid .rd-card.rd-stamp:not([href*="/products/"])`. Verified by class, not by eye: collection 12/12 boxed, programmes 9/9 ruled, schools 5 ruled + 1 boxed |
+
+**The transferable lesson: when a change is estate-wide, check a page that should NOT have
+changed.** Every page failing tells you nothing; one page failing *where it shouldn't* tells you
+everything. Re-reading the pages I had edited would never have found this — I was looking at
+exactly the cards I meant to change, and they looked right.
+
+**Corollary for shared primitives:** before editing one, list where it actually renders. A grep of
+section files gives the sections; only the rendered estate gives the *contexts*. "18 sections use
+`.rd-stamp`" hid the fact that one of those contexts was the entire shop.
