@@ -51,13 +51,6 @@
         "y": 7908
       },
       {
-        "cls": "rd-wrap rd-mw-760px",
-        "left": 40,
-        "right": 480,
-        "width": 760,
-        "y": 8655
-      },
-      {
         "cls": "rd-foot-wrap",
         "left": 40,
         "right": 40,
@@ -66,78 +59,7 @@
       }
     ],
     "justify": [],
-    "centring": [
-      {
-        "cls": "acc-card",
-        "y": 4082,
-        "leftGap": 291,
-        "rightGap": 582,
-        "off": -291
-      },
-      {
-        "cls": "acc-card",
-        "y": 4082,
-        "leftGap": 582,
-        "rightGap": 291,
-        "off": 291
-      },
-      {
-        "cls": "rd-reveal rd-card",
-        "y": 6100,
-        "leftGap": 290,
-        "rightGap": 580,
-        "off": -290
-      },
-      {
-        "cls": "rd-reveal rd-card",
-        "y": 6100,
-        "leftGap": 580,
-        "rightGap": 290,
-        "off": 290
-      },
-      {
-        "cls": "bbc-press__q",
-        "y": 7948,
-        "leftGap": 458,
-        "rightGap": 148,
-        "off": 310
-      },
-      {
-        "cls": "bbc-press__q",
-        "y": 8078,
-        "leftGap": 455,
-        "rightGap": 151,
-        "off": 304
-      },
-      {
-        "cls": "bbc-press__q",
-        "y": 8183,
-        "leftGap": 458,
-        "rightGap": 148,
-        "off": 310
-      },
-      {
-        "cls": "bbc-press__q",
-        "y": 8338,
-        "leftGap": 458,
-        "rightGap": 148,
-        "off": 310
-      },
-      {
-        "cls": "rd-btn rd-on-dark",
-        "y": 8966,
-        "leftGap": 423,
-        "rightGap": 51,
-        "off": 372
-      },
-      {
-        "cls": "DIV",
-        "y": 9888,
-        "leftGap": 408,
-        "rightGap": 505,
-        "off": -97
-      }
-    ],
+    "centring": [],
     "rhythm": {
       "bandPaddingTop": {
         "0px": 3,
@@ -300,8 +222,8 @@
       },
       {
         "sheet": "bbc-statement.css",
-        "rules": 428,
-        "important": 164
+        "rules": 423,
+        "important": 158
       },
       {
         "sheet": "bbc-universal.css",
@@ -312,6 +234,11 @@
         "sheet": "bbc-tokens.css",
         "rules": 7,
         "important": 2
+      },
+      {
+        "sheet": "bbc-align.css",
+        "rules": 6,
+        "important": 3
       },
       {
         "sheet": "inline",
@@ -401,8 +328,8 @@
       },
       {
         "sheet": "bbc-statement.css",
-        "rules": 428,
-        "important": 164
+        "rules": 423,
+        "important": 158
       },
       {
         "sheet": "inline",
@@ -410,7 +337,7 @@
         "important": 0
       }
     ],
-    "importantTotal": 2253,
+    "importantTotal": 2244,
     "duplicateSelectors": [
       {
         "sel": ":root",
@@ -715,20 +642,6 @@
         "y": 7547
       },
       {
-        "cls": "rd-wrap rd-mw-820px",
-        "left": 40,
-        "right": 420,
-        "width": 820,
-        "y": 8036
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "left": 40,
-        "right": 420,
-        "width": 820,
-        "y": 8850
-      },
-      {
         "cls": "rd-wrap",
         "left": 40,
         "right": 40,
@@ -744,50 +657,7 @@
       }
     ],
     "justify": [],
-    "centring": [
-      {
-        "cls": "rd-stat rd-reveal",
-        "y": 1601,
-        "leftGap": 290,
-        "rightGap": 580,
-        "off": -290
-      },
-      {
-        "cls": "rd-stat rd-reveal",
-        "y": 1601,
-        "leftGap": 580,
-        "rightGap": 290,
-        "off": 290
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "y": 8036,
-        "leftGap": 40,
-        "rightGap": 420,
-        "off": -380
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "y": 8850,
-        "leftGap": 40,
-        "rightGap": 420,
-        "off": -380
-      },
-      {
-        "cls": "rd-dlcard__body",
-        "y": 10432,
-        "leftGap": 87,
-        "rightGap": 140,
-        "off": -53
-      },
-      {
-        "cls": "DIV",
-        "y": 10866,
-        "leftGap": 408,
-        "rightGap": 505,
-        "off": -97
-      }
-    ],
+    "centring": [],
     "rhythm": {
       "bandPaddingTop": {
         "0px": 1,
@@ -875,13 +745,6 @@
         "y": 2503
       },
       {
-        "cls": "rd-wrap rd-mw-760px",
-        "left": 40,
-        "right": 480,
-        "width": 760,
-        "y": 2827
-      },
-      {
         "cls": "rd-wrap",
         "left": 40,
         "right": 40,
@@ -894,20 +757,6 @@
         "right": 40,
         "width": 1200,
         "y": 4383
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "left": 40,
-        "right": 420,
-        "width": 820,
-        "y": 5162
-      },
-      {
-        "cls": "rd-wrap rd-mw-760px",
-        "left": 40,
-        "right": 480,
-        "width": 760,
-        "y": 5903
       },
       {
         "cls": "rd-foot-wrap",
@@ -956,67 +805,9 @@
             "txt": "To get one of these bamboo bea"
           }
         ]
-      },
-      {
-        "band": "rd-pad rd-dark rd-center",
-        "y": 5815,
-        "aligns": [
-          "center"
-        ],
-        "justifyCount": 0,
-        "wideCentredParas": 1,
-        "mixedInsideOneBand": false,
-        "sample": [
-          {
-            "tag": "H2",
-            "align": "center",
-            "txt": "build a bike you'll never forg"
-          },
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "Tell us your frame type and th"
-          }
-        ]
       }
     ],
-    "centring": [
-      {
-        "cls": "rd-reveal rd-stat",
-        "y": 967,
-        "leftGap": 290,
-        "rightGap": 580,
-        "off": -290
-      },
-      {
-        "cls": "rd-reveal rd-stat",
-        "y": 967,
-        "leftGap": 580,
-        "rightGap": 290,
-        "off": 290
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "y": 5162,
-        "leftGap": 40,
-        "rightGap": 420,
-        "off": -380
-      },
-      {
-        "cls": "rd-btn rd-lime",
-        "y": 6376,
-        "leftGap": 140,
-        "rightGap": 334,
-        "off": -194
-      },
-      {
-        "cls": "DIV",
-        "y": 6578,
-        "leftGap": 408,
-        "rightGap": 505,
-        "off": -97
-      }
-    ],
+    "centring": [],
     "rhythm": {
       "bandPaddingTop": {
         "0px": 1,
@@ -1086,32 +877,11 @@
         "y": 2406
       },
       {
-        "cls": "rd-wrap rd-mw-820px",
-        "left": 40,
-        "right": 420,
-        "width": 820,
-        "y": 3615
-      },
-      {
-        "cls": "rd-wrap rd-mw-680px",
-        "left": 40,
-        "right": 560,
-        "width": 680,
-        "y": 4626
-      },
-      {
         "cls": "rd-wrap",
         "left": 40,
         "right": 40,
         "width": 1200,
         "y": 5494
-      },
-      {
-        "cls": "rd-wrap rd-mw-680px",
-        "left": 40,
-        "right": 560,
-        "width": 680,
-        "y": 6081
       },
       {
         "cls": "rd-wrap",
@@ -1128,81 +898,8 @@
         "y": 8120
       }
     ],
-    "justify": [
-      {
-        "band": "rd-pad-sm rd-paper rd-center",
-        "y": 3551,
-        "aligns": [
-          "center"
-        ],
-        "justifyCount": 0,
-        "wideCentredParas": 1,
-        "mixedInsideOneBand": false,
-        "sample": [
-          {
-            "tag": "H2",
-            "align": "center",
-            "txt": "watch the free speaker build, "
-          },
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "A complete STEM project on cam"
-          }
-        ]
-      }
-    ],
-    "centring": [
-      {
-        "cls": "rd-btn rd-on-dark",
-        "y": 676,
-        "leftGap": 325,
-        "rightGap": 485,
-        "off": -160
-      },
-      {
-        "cls": "rd-reveal rd-stat",
-        "y": 854,
-        "leftGap": 290,
-        "rightGap": 580,
-        "off": -290
-      },
-      {
-        "cls": "rd-reveal rd-stat",
-        "y": 854,
-        "leftGap": 580,
-        "rightGap": 290,
-        "off": 290
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "y": 3615,
-        "leftGap": 40,
-        "rightGap": 420,
-        "off": -380
-      },
-      {
-        "cls": "rd-btn rd-lime",
-        "y": 6808,
-        "leftGap": 39,
-        "rightGap": 266,
-        "off": -227
-      },
-      {
-        "cls": "rd-btn rd-on-dark",
-        "y": 6809,
-        "leftGap": 364,
-        "rightGap": 39,
-        "off": 325
-      },
-      {
-        "cls": "DIV",
-        "y": 8120,
-        "leftGap": 408,
-        "rightGap": 505,
-        "off": -97
-      }
-    ],
+    "justify": [],
+    "centring": [],
     "rhythm": {
       "bandPaddingTop": {
         "0px": 2,
@@ -1261,20 +958,6 @@
         "y": 1310
       },
       {
-        "cls": "rd-wrap rd-mw-820px",
-        "left": 40,
-        "right": 420,
-        "width": 820,
-        "y": 2112
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "left": 40,
-        "right": 420,
-        "width": 820,
-        "y": 3515
-      },
-      {
         "cls": "rd-wrap",
         "left": 40,
         "right": 40,
@@ -1282,32 +965,11 @@
         "y": 4879
       },
       {
-        "cls": "rd-wrap rd-mw-820px",
-        "left": 40,
-        "right": 420,
-        "width": 820,
-        "y": 5787
-      },
-      {
         "cls": "rd-wrap",
         "left": 40,
         "right": 40,
         "width": 1200,
         "y": 6591
-      },
-      {
-        "cls": "rd-wrap rd-mw-680px",
-        "left": 40,
-        "right": 560,
-        "width": 680,
-        "y": 7242
-      },
-      {
-        "cls": "rd-wrap rd-mw-680px",
-        "left": 40,
-        "right": 560,
-        "width": 680,
-        "y": 7800
       },
       {
         "cls": "rd-foot-wrap",
@@ -1322,18 +984,13 @@
         "band": "rd-pad rd-paper",
         "y": 1222,
         "aligns": [
-          "center",
-          "start"
+          "left",
+          "center"
         ],
         "justifyCount": 0,
         "wideCentredParas": 1,
         "mixedInsideOneBand": true,
         "sample": [
-          {
-            "tag": "H2",
-            "align": "center",
-            "txt": "prevention in schools, rehabil"
-          },
           {
             "tag": "P",
             "align": "center",
@@ -1346,7 +1003,7 @@
         "y": 6503,
         "aligns": [
           "center",
-          "start"
+          "left"
         ],
         "justifyCount": 0,
         "wideCentredParas": 1,
@@ -1363,81 +1020,9 @@
             "txt": "Whichever route fits your site"
           }
         ]
-      },
-      {
-        "band": "rd-pad-sm rd-paper rd-center",
-        "y": 7178,
-        "aligns": [
-          "center"
-        ],
-        "justifyCount": 0,
-        "wideCentredParas": 1,
-        "mixedInsideOneBand": false,
-        "sample": [
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "Innovative projects, such as B"
-          },
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "Build to Bond is supported by "
-          }
-        ]
       }
     ],
-    "centring": [
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "y": 2112,
-        "leftGap": 40,
-        "rightGap": 420,
-        "off": -380
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "y": 3515,
-        "leftGap": 40,
-        "rightGap": 420,
-        "off": -380
-      },
-      {
-        "cls": "rd-card rd-stamp",
-        "y": 5241,
-        "leftGap": 290,
-        "rightGap": 580,
-        "off": -290
-      },
-      {
-        "cls": "rd-card rd-stamp",
-        "y": 5241,
-        "leftGap": 580,
-        "rightGap": 290,
-        "off": 290
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "y": 5787,
-        "leftGap": 40,
-        "rightGap": 420,
-        "off": -380
-      },
-      {
-        "cls": "rd-btn rd-lime",
-        "y": 8308,
-        "leftGap": 113,
-        "rightGap": 255,
-        "off": -143
-      },
-      {
-        "cls": "DIV",
-        "y": 8510,
-        "leftGap": 408,
-        "rightGap": 505,
-        "off": -97
-      }
-    ],
+    "centring": [],
     "rhythm": {
       "bandPaddingTop": {
         "64px": 2,
@@ -1494,13 +1079,6 @@
         "y": 2710
       },
       {
-        "cls": "rd-wrap rd-mw-820px",
-        "left": 40,
-        "right": 420,
-        "width": 820,
-        "y": 4011
-      },
-      {
         "cls": "rd-wrap",
         "left": 40,
         "right": 40,
@@ -1520,20 +1098,6 @@
         "right": 40,
         "width": 1200,
         "y": 8010
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "left": 40,
-        "right": 420,
-        "width": 820,
-        "y": 9727
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "left": 40,
-        "right": 420,
-        "width": 820,
-        "y": 10660
       },
       {
         "cls": "rd-foot-wrap",
@@ -1593,7 +1157,7 @@
         "y": 7922,
         "aligns": [
           "center",
-          "start"
+          "left"
         ],
         "justifyCount": 0,
         "wideCentredParas": 1,
@@ -1618,7 +1182,7 @@
           "center"
         ],
         "justifyCount": 0,
-        "wideCentredParas": 2,
+        "wideCentredParas": 1,
         "mixedInsideOneBand": false,
         "sample": [
           {
@@ -1639,106 +1203,7 @@
         ]
       }
     ],
-    "centring": [
-      {
-        "cls": "rd-stat",
-        "y": 926,
-        "leftGap": 290,
-        "rightGap": 580,
-        "off": -290
-      },
-      {
-        "cls": "rd-stat",
-        "y": 926,
-        "leftGap": 580,
-        "rightGap": 290,
-        "off": 290
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "y": 4011,
-        "leftGap": 40,
-        "rightGap": 420,
-        "off": -380
-      },
-      {
-        "cls": "STRONG",
-        "y": 4528,
-        "leftGap": 149,
-        "rightGap": 11,
-        "off": 138
-      },
-      {
-        "cls": "wbx-tile",
-        "y": 5191,
-        "leftGap": 285,
-        "rightGap": 569,
-        "off": -284
-      },
-      {
-        "cls": "wbx-tile",
-        "y": 5191,
-        "leftGap": 569,
-        "rightGap": 285,
-        "off": 284
-      },
-      {
-        "cls": "TH",
-        "y": 5551,
-        "leftGap": 528,
-        "rightGap": 384,
-        "off": 144
-      },
-      {
-        "cls": "TD",
-        "y": 5593,
-        "leftGap": 528,
-        "rightGap": 384,
-        "off": 144
-      },
-      {
-        "cls": "TD",
-        "y": 5640,
-        "leftGap": 528,
-        "rightGap": 384,
-        "off": 144
-      },
-      {
-        "cls": "TD",
-        "y": 5686,
-        "leftGap": 528,
-        "rightGap": 384,
-        "off": 144
-      },
-      {
-        "cls": "TD",
-        "y": 5732,
-        "leftGap": 528,
-        "rightGap": 384,
-        "off": 144
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "y": 9727,
-        "leftGap": 40,
-        "rightGap": 420,
-        "off": -380
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "y": 10660,
-        "leftGap": 40,
-        "rightGap": 420,
-        "off": -380
-      },
-      {
-        "cls": "DIV",
-        "y": 11167,
-        "leftGap": 408,
-        "rightGap": 505,
-        "off": -97
-      }
-    ],
+    "centring": [],
     "rhythm": {
       "bandPaddingTop": {
         "0px": 16,
@@ -1794,48 +1259,6 @@
         "y": 841
       },
       {
-        "cls": "rd-wrap rd-mw-820px",
-        "left": 40,
-        "right": 420,
-        "width": 820,
-        "y": 1115
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "left": 40,
-        "right": 420,
-        "width": 820,
-        "y": 3213
-      },
-      {
-        "cls": "rd-wrap rd-mw-680px",
-        "left": 40,
-        "right": 560,
-        "width": 680,
-        "y": 4170
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "left": 40,
-        "right": 420,
-        "width": 820,
-        "y": 4456
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "left": 40,
-        "right": 420,
-        "width": 820,
-        "y": 5112
-      },
-      {
-        "cls": "rd-wrap rd-mw-680px",
-        "left": 40,
-        "right": 560,
-        "width": 680,
-        "y": 5850
-      },
-      {
         "cls": "rd-foot-wrap",
         "left": 40,
         "right": 40,
@@ -1843,93 +1266,8 @@
         "y": 6560
       }
     ],
-    "justify": [
-      {
-        "band": "rd-pad-sm rd-center",
-        "y": 4392,
-        "aligns": [
-          "center"
-        ],
-        "justifyCount": 0,
-        "wideCentredParas": 2,
-        "mixedInsideOneBand": false,
-        "sample": [
-          {
-            "tag": "H2",
-            "align": "center",
-            "txt": "live now — and growing."
-          },
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "Live delivery at HMP Lowdham G"
-          },
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "In partnership with HM Prison "
-          }
-        ]
-      }
-    ],
-    "centring": [
-      {
-        "cls": "rd-reveal rd-stat",
-        "y": 841,
-        "leftGap": 290,
-        "rightGap": 580,
-        "off": -290
-      },
-      {
-        "cls": "rd-reveal rd-stat",
-        "y": 841,
-        "leftGap": 580,
-        "rightGap": 290,
-        "off": 290
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "y": 1115,
-        "leftGap": 40,
-        "rightGap": 420,
-        "off": -380
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "y": 3213,
-        "leftGap": 40,
-        "rightGap": 420,
-        "off": -380
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "y": 4456,
-        "leftGap": 40,
-        "rightGap": 420,
-        "off": -380
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "y": 5112,
-        "leftGap": 40,
-        "rightGap": 420,
-        "off": -380
-      },
-      {
-        "cls": "rd-btn rd-lime",
-        "y": 6358,
-        "leftGap": 57,
-        "rightGap": 240,
-        "off": -183
-      },
-      {
-        "cls": "DIV",
-        "y": 6560,
-        "leftGap": 408,
-        "rightGap": 505,
-        "off": -97
-      }
-    ],
+    "justify": [],
+    "centring": [],
     "rhythm": {
       "bandPaddingTop": {
         "64px": 4,
@@ -1974,13 +1312,6 @@
         "y": 337
       },
       {
-        "cls": "rd-wrap rd-mw-820px",
-        "left": 40,
-        "right": 420,
-        "width": 820,
-        "y": 991
-      },
-      {
         "cls": "rd-wrap",
         "left": 40,
         "right": 40,
@@ -2000,13 +1331,6 @@
         "right": 40,
         "width": 1200,
         "y": 4961
-      },
-      {
-        "cls": "rd-wrap rd-mw-680px",
-        "left": 40,
-        "right": 560,
-        "width": 680,
-        "y": 5490
       },
       {
         "cls": "rd-foot-wrap",
@@ -2035,36 +1359,7 @@
         ]
       }
     ],
-    "centring": [
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "y": 991,
-        "leftGap": 40,
-        "rightGap": 420,
-        "off": -380
-      },
-      {
-        "cls": "rd-stat rd-reveal",
-        "y": 5234,
-        "leftGap": 290,
-        "rightGap": 580,
-        "off": -290
-      },
-      {
-        "cls": "rd-stat rd-reveal",
-        "y": 5234,
-        "leftGap": 580,
-        "rightGap": 290,
-        "off": 290
-      },
-      {
-        "cls": "DIV",
-        "y": 6038,
-        "leftGap": 408,
-        "rightGap": 505,
-        "off": -97
-      }
-    ],
+    "centring": [],
     "rhythm": {
       "bandPaddingTop": {
         "0px": 2,
@@ -2123,15 +1418,7 @@
       }
     ],
     "justify": [],
-    "centring": [
-      {
-        "cls": "DIV",
-        "y": 2802,
-        "leftGap": 408,
-        "rightGap": 505,
-        "off": -97
-      }
-    ],
+    "centring": [],
     "rhythm": {
       "bandPaddingTop": {
         "64px": 1,
@@ -2234,13 +1521,6 @@
         "y": 8389
       },
       {
-        "cls": "rd-wrap rd-mw-820px",
-        "left": 40,
-        "right": 420,
-        "width": 820,
-        "y": 8767
-      },
-      {
         "cls": "rd-wrap",
         "left": 40,
         "right": 40,
@@ -2253,13 +1533,6 @@
         "right": 40,
         "width": 1200,
         "y": 10527
-      },
-      {
-        "cls": "rd-wrap rd-mw-860px",
-        "left": 40,
-        "right": 380,
-        "width": 860,
-        "y": 10783
       },
       {
         "cls": "rd-wrap",
@@ -2295,7 +1568,7 @@
         "band": "rd-section rd-pad-sm",
         "y": 111,
         "aligns": [
-          "start",
+          "left",
           "center"
         ],
         "justifyCount": 0,
@@ -2308,170 +1581,9 @@
             "txt": "1-year kit warranty · 14-day r"
           }
         ]
-      },
-      {
-        "band": "rd-pad-sm rd-dark rd-center",
-        "y": 8703,
-        "aligns": [
-          "center"
-        ],
-        "justifyCount": 0,
-        "wideCentredParas": 1,
-        "mixedInsideOneBand": false,
-        "sample": [
-          {
-            "tag": "H2",
-            "align": "center",
-            "txt": "See a frame come together."
-          },
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "The same hand-build every kit "
-          },
-          {
-            "tag": "BLOCKQUOTE",
-            "align": "center",
-            "txt": "Si meets with Emily Chappell, "
-          }
-        ]
       }
     ],
-    "centring": [
-      {
-        "cls": "TH",
-        "y": 2063,
-        "leftGap": 164,
-        "rightGap": 189,
-        "off": -25
-      },
-      {
-        "cls": "TD",
-        "y": 2106,
-        "leftGap": 164,
-        "rightGap": 189,
-        "off": -25
-      },
-      {
-        "cls": "TD",
-        "y": 2154,
-        "leftGap": 164,
-        "rightGap": 189,
-        "off": -25
-      },
-      {
-        "cls": "TD",
-        "y": 2203,
-        "leftGap": 164,
-        "rightGap": 189,
-        "off": -25
-      },
-      {
-        "cls": "TD",
-        "y": 2252,
-        "leftGap": 164,
-        "rightGap": 189,
-        "off": -25
-      },
-      {
-        "cls": "TD",
-        "y": 2301,
-        "leftGap": 164,
-        "rightGap": 189,
-        "off": -25
-      },
-      {
-        "cls": "TD",
-        "y": 2350,
-        "leftGap": 164,
-        "rightGap": 189,
-        "off": -25
-      },
-      {
-        "cls": "rd-card rd-stamp",
-        "y": 4052,
-        "leftGap": 367,
-        "rightGap": 434,
-        "off": -67
-      },
-      {
-        "cls": "rd-spec-cell",
-        "y": 4975,
-        "leftGap": 285,
-        "rightGap": 568,
-        "off": -283
-      },
-      {
-        "cls": "rd-spec-cell",
-        "y": 4975,
-        "leftGap": 568,
-        "rightGap": 285,
-        "off": 283
-      },
-      {
-        "cls": "rd-card rd-stamp",
-        "y": 5522,
-        "leftGap": 290,
-        "rightGap": 580,
-        "off": -290
-      },
-      {
-        "cls": "rd-card rd-stamp",
-        "y": 5522,
-        "leftGap": 580,
-        "rightGap": 290,
-        "off": 290
-      },
-      {
-        "cls": "rd-wrap rd-mw-820px",
-        "y": 8767,
-        "leftGap": 40,
-        "rightGap": 420,
-        "off": -380
-      },
-      {
-        "cls": "rd-stat",
-        "y": 10527,
-        "leftGap": 290,
-        "rightGap": 580,
-        "off": -290
-      },
-      {
-        "cls": "rd-stat",
-        "y": 10527,
-        "leftGap": 580,
-        "rightGap": 290,
-        "off": 290
-      },
-      {
-        "cls": "rd-wrap rd-mw-860px",
-        "y": 10783,
-        "leftGap": 40,
-        "rightGap": 380,
-        "off": -340
-      },
-      {
-        "cls": "rd-card",
-        "y": 12772,
-        "leftGap": 290,
-        "rightGap": 580,
-        "off": -290
-      },
-      {
-        "cls": "rd-card",
-        "y": 12772,
-        "leftGap": 580,
-        "rightGap": 290,
-        "off": 290
-      },
-      {
-        "cls": "DIV",
-        "y": 13273,
-        "leftGap": 408,
-        "rightGap": 505,
-        "off": -97
-      }
-    ],
+    "centring": [],
     "rhythm": {
       "bandPaddingTop": {
         "0px": 2,

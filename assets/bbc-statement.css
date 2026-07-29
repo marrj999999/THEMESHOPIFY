@@ -704,7 +704,8 @@ cart-drawer.animate .drawer{ visibility:visible; }
 
 /* CRIT r4 mechanical closures */
 /* one left axis: kill centred heading boxes (rd-mx-auto) inside impact */
-.bbc-rd-impact .rd-mx-auto{ margin-inline:0 !important; }
+/* superseded by the alignment contract (assets/bbc-align.css, qa/ALIGNMENT.md):
+   .rd-mx-auto MEANS auto margins; forcing it to 0 is what left measure blocks 420px off-centre. */
 /* mission glyph AAA on paper: forest + >=18px everywhere it appears */
 .bbc-rd-impact .rd-promises__star, .bbc-rd-impact .bbcst-star,
 .bbc-rd-impact .rd-converge__title .bbcst-star{ color:var(--forest,#003C32) !important; font-size:19px; }
@@ -723,7 +724,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-fork__label{ font-size:16px; }
 
 /* CRIT-final root fixes + James hover/journey pass (2026-07-13) */
-.bbc-rd-impact [class*="rd-cmp-"]{ margin-inline:0 !important; } /* generated wrapper centring (band 8) */
+/* superseded by the alignment contract — generated wrappers now centre like every other box. */
 /* JOURNEY TIMELINE: thick coloured rail, stations with title+detail, hover life */
 .bbc-rd-impact .rd-path .rd-flow{ position:relative; }
 .bbc-rd-impact .rd-path .rd-flow__step{ padding:12px 0 12px 56px; transition:transform .18s ease; }
@@ -756,9 +757,9 @@ cart-drawer.animate .drawer{ visibility:visible; }
 
 /* FULL-REVIEW closures (2026-07-13) — file:line-located defects */
 /* workshop band 820px wrap centred (redesign-2026:563) → one axis */
-.bbc-rd-impact .rd-mw-820px{ margin-inline:0 !important; }
+/* superseded by the alignment contract — a measure block is a centred column. */
 /* generated rd-cmp wrapper sits OUTSIDE the scope div → :has() reach */
-.shopify-section:has(.bbc-rd-impact) [class*="rd-cmp-"]{ margin-inline:0 !important; }
+/* superseded by the alignment contract. */
 /* logo rows: ONE mobile height (FORMULA 34px) for press + backers */
 @media (max-width:759px){
   .bbc-rd-impact .rd-logoimg{ height:34px !important; }
@@ -891,7 +892,8 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-flow__step small{ font-size:14.5px; }
 /* SIGN-OFF CRIT closures (2026-07-13) */
 /* 820px wraps join the page axis (was flush-left after the margin-0 fix) */
-.bbc-rd-impact .rd-wrap.rd-mw-820px{ margin-left:max(0px, calc((100vw - 1200px) / 2)) !important; margin-right:auto !important; }
+/* superseded by the alignment contract — this rule out-specified bbc-align.css and kept the
+   impact page's 820px measure pinned to the left axis with a 420px gap on the right. */
 /* lazy imgs must never blank during fast scroll on this page */
 .bbc-rd-impact img[loading="lazy"]{ content-visibility:visible !important; }
 /* seal: keep inside the mobile viewport */

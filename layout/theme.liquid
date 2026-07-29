@@ -477,6 +477,15 @@
     incrementally; estate-check measures conformance to FORMULA §1 (ONE size per role).
   {%- endcomment -%}
   {{ 'bbc-tokens.css' | asset_url | stylesheet_tag }}
+
+  {%- comment -%}
+    THE ALIGNMENT CONTRACT — must load LAST of all stylesheets.
+    One rule: a block's box alignment and its text alignment must agree. It settles
+    the margin-inline:0 !important overrides that left measure blocks sitting 420px
+    off-centre while their text stayed centred. Contract: qa/ALIGNMENT.md,
+    asserted by qa/layout-audit.mjs. Do not add stylesheets below this line.
+  {%- endcomment -%}
+  {{ 'bbc-align.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">

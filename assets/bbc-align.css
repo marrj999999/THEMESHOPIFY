@@ -1,0 +1,80 @@
+/* ==========================================================================
+   THE ALIGNMENT CONTRACT — loaded LAST so it settles every disagreement.
+   Contract: qa/ALIGNMENT.md · Asserted by: qa/layout-audit.mjs
+
+   ONE RULE:
+     A block's BOX alignment and its TEXT alignment must agree.
+     A centred box may hold centred text. An axis-aligned box holds left text.
+     Centred text inside an off-centre box is always a defect.
+
+   This file exists because the estate had drifted into holding BOTH positions at
+   once. An earlier axis pass forced margin-inline:0 !important onto .rd-mx-auto
+   (a class whose name means auto margins), [class*="rd-cmp-"] and .rd-mw-820px,
+   which moved the boxes to the axis — while the text-align inside them stayed
+   centred. Result: a centred-looking column sitting 420px off-centre, on nine
+   bands across eight pages.
+
+   Deliberately NOT changed: the 1200 axis (measured clean — all 10 pages, every
+   band at 40px, zero off-axis), and the footer wordmark / masthead signature.
+   ========================================================================== */
+
+/* ── 2 · MEASURE BOXES ARE CENTRED BOXES ──────────────────────────────────────
+   A narrower column on the same centre line, never a left-hugging one. This is
+   the rule that undoes the margin-inline:0 !important overrides; it has to carry
+   !important of its own to out-rank them, and it loads last so it wins on order
+   as well as weight. */
+.bbc-rd .rd-wrap,
+.bbc-rd [class*="rd-mw-"],
+.bbc-rd .rd-mx-auto,
+.bbc-rd [class*="rd-cmp-"]{
+  margin-inline:auto !important;
+}
+
+/* ── 3 · TEXT DEFAULTS TO LEFT — SET ONCE, THEN INHERITED ─────────────────────
+   Applied at the WRAP, not on every p/li. That distinction is the whole trick.
+   The first version of this file set text-align:left on every p and li, and
+   re-centred only the DIRECT children of .rd-center — so inside a centred band
+   the heading stayed centred while a nested paragraph went left, and the audit's
+   MIXED count went UP, not down. Alignment has to cascade, or a band ends up
+   holding two of them. Set it once at the top of the subtree and let it inherit. */
+.bbc-rd .rd-wrap,
+.bbc-rd [class*="rd-mw-"]{
+  text-align:left;
+}
+
+/* ── 4 · CENTRING IS OPT-IN, AND CENTRES THE WHOLE SUBTREE ────────────────────
+   .rd-center now means one thing everywhere: this box is centred AND everything
+   inside it is centred. It had drifted into meaning text-align:left on the home,
+   about, sharebuild and kitpicker scopes and centre elsewhere — one class, two
+   opposite meanings, which is what "the css is clashing" looked like.
+   No descendant overrides here: rule 7 (one alignment per band) outranks any
+   wish to left-align something inside a centred band. */
+.bbc-rd .rd-center{
+  margin-inline:auto !important;
+  text-align:center;
+}
+
+/* ── 5 · LONG COPY GETS A MEASURE, NOT A SECOND ALIGNMENT ─────────────────────
+   A centred band holding a long paragraph is a CONTENT decision (that band should
+   not be centred), and the audit reports it as `wide-centred` for a human to
+   settle. CSS must not silently half-fix it by flipping that one paragraph to
+   left — that is precisely how a band ends up mixed. So the measure is capped and
+   the alignment is left alone. */
+.bbc-rd .rd-center p,
+.bbc-rd .rd-center li{
+  max-width:60ch;
+  margin-inline:auto;
+}
+
+/* ── 6 · NEVER JUSTIFY ────────────────────────────────────────────────────────
+   No hyphenation engine on the web, so justified text opens rivers. */
+.bbc-rd [style*="text-align: justify"],
+.bbc-rd [style*="text-align:justify"],
+.bbc-rd .rd-justify{
+  text-align:left !important;
+}
+
+/* ── the signature exceptions (rule 4: short display copy) ────────────────────
+   The footer wordmark and the masthead are deliberate centred display moments.
+   Listed explicitly so they read as decisions rather than survivors. */
+.bbc-wordmark{ text-align:center; }

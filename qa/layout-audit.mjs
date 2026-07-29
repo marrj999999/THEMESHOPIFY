@@ -26,7 +26,11 @@
 import { chromium } from 'playwright';
 import { writeFileSync, mkdirSync } from 'fs';
 
-const PAGES = process.argv.slice(2).length ? process.argv.slice(2) : [
+// Flags must not be mistaken for page paths. They were: `--assert` became a URL, every page
+// errored, and the assertion — which skips errored pages — reported "contract holds" on ZERO
+// measurements. A gate that passes when it measured nothing is ESCAPES #1 all over again.
+const ARGS = process.argv.slice(2).filter(a => !a.startsWith('--'));
+const PAGES = ARGS.length ? ARGS : [
   '/', '/pages/impact', '/pages/workshops', '/pages/schools', '/pages/programmes',
   '/pages/why-bamboo', '/pages/build-to-bond', '/pages/our-story-2', '/collections/all',
   '/products/gravel-frame-build-kit',
@@ -42,8 +46,16 @@ function audit() {
 
   // ── A · AXIS ────────────────────────────────────────────────────────────────────────────
   // The content wrapper inside each band should share one left edge.
+  // Only FULL-WIDTH wraps share the axis. A narrow measure (.rd-mw-*) is a centred column on
+  // the same centre line, so its left edge is legitimately different — flagging it as "off-axis"
+  // reported the contract WORKING as a breach.
   const wraps = [...document.querySelectorAll('.rd-wrap, .bl__wrap, .rd-foot-wrap, main > * > .page-width')]
-    .filter(e => { const r = R(e); return r.width > 200 && r.height > 40; });
+    .filter(e => {
+      const r = R(e);
+      if (r.width < 200 || r.height < 40) return false;
+      if (/rd-mw-/.test((e.className || '').toString())) return false;
+      return true;
+    });
   for (const w of wraps) {
     const r = R(w);
     out.axis.push({
@@ -100,6 +112,13 @@ function audit() {
     const r = R(e), p = e.parentElement && R(e.parentElement);
     if (!p || r.width < 200 || r.height < 40) continue;
     const pcs = getComputedStyle(e.parentElement);
+    // A grid/flex child is positioned by its track, not by its margins — two columns sitting
+    // side by side are each "off-centre" relative to the parent by design. Only children of a
+    // normal block container can meaningfully be margin-centred.
+    if (/grid|flex/.test(pcs.display)) continue;
+    // Table cells are placed by the table algorithm, not by margins — same false positive.
+    if (/^(TABLE|THEAD|TBODY|TFOOT|TR|TH|TD|CAPTION|COLGROUP|COL)$/.test(e.tagName)) continue;
+    if (/table/.test(getComputedStyle(e).display)) continue;
     const padL = parseFloat(pcs.paddingLeft) || 0;
     const padR = parseFloat(pcs.paddingRight) || 0;
     const gapL = (r.left - p.left) - padL;
@@ -251,3 +270,40 @@ if (c) {
     .forEach(d => console.log(`     ×${String(d.times).padStart(2)} ${pad(d.sel, 52)} ${d.sheets.join(', ')}`));
 }
 console.log('\n→ qa/evidence/2026-07-29/layout-audit.json');
+
+// ── --assert · the gate mode ──────────────────────────────────────────────────────────────
+// Only HARD contract breaches fail a push. `wide-centred` is reported but never fails: it is a
+// content decision (that band should not be centred), and qa/ALIGNMENT.md is explicit that CSS
+// must not silently half-fix it by flipping one paragraph — that is how a band ends up mixed.
+if (process.argv.includes('--assert')) {
+  const breaches = [];
+  // Proof-of-life: refuse to pass on nothing. If pages failed to load or produced no bands,
+  // that is a broken run, not a clean estate.
+  const measured = Object.entries(report).filter(([k, v]) => !k.startsWith('__') && !v.error && v.axis?.length);
+  if (measured.length < PAGES.length) {
+    const bad = Object.entries(report).filter(([k, v]) => !k.startsWith('__') && (v.error || !v.axis?.length));
+    console.log(`\n✗ AUDIT DID NOT MEASURE ${bad.length}/${PAGES.length} PAGES — cannot certify anything:`);
+    bad.forEach(([k, v]) => console.log(`   ${k}: ${v.error || 'no bands found'}`));
+    process.exit(1);
+  }
+  for (const [path, r] of Object.entries(report)) {
+    if (path.startsWith('__') || r.error) continue;
+    // axis: every band on one left edge
+    const lefts = {}; r.axis.forEach(a => lefts[a.left] = (lefts[a.left] || 0) + 1);
+    const dom = Object.entries(lefts).sort((a, b) => b[1] - a[1])[0];
+    const offAxis = r.axis.filter(a => String(a.left) !== dom?.[0]);
+    if (offAxis.length) breaches.push(`${path}: ${offAxis.length} band(s) off the ${dom[0]}px axis`);
+    // justify is never allowed
+    const j = r.justify.reduce((a, x) => a + (x.justifyCount || 0), 0);
+    if (j) breaches.push(`${path}: ${j} element(s) using text-align:justify`);
+    // a box inset on both sides must be inset EQUALLY
+    const off = r.centring.filter(c => Math.abs(c.off) > 2);
+    if (off.length) breaches.push(`${path}: ${off.length} block(s) inset on both sides but not centred`);
+  }
+  if (breaches.length) {
+    console.log('\n✗ ALIGNMENT CONTRACT BREACHED (qa/ALIGNMENT.md):');
+    breaches.forEach(b => console.log('   ' + b));
+    process.exit(1);
+  }
+  console.log('\n✓ alignment contract holds across all pages');
+}
