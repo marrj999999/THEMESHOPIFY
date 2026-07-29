@@ -88,6 +88,16 @@ async function capture(label) {
     try {
       await page.goto(`${BASE}${path}?${PREVIEW}`, { waitUntil: 'load', timeout: 45000 });
       await page.waitForTimeout(1600);
+      // EXACTLY the visual spec's mask (ESCAPES #28). The fingerprint once certified "0 moved"
+      // while the visual net failed 48/48 — both correct, measuring different pages, because
+      // visual.spec.mjs hides video/iframe/map and this did not. Hiding an element changes what
+      // the surrounding layout resolves to, so an equivalence test run without the mask cannot
+      // certify anything the masked gate will later judge. Kept byte-identical to visual.spec.mjs.
+      await page.addStyleTag({ content: `
+        .bbc-press__track, .rd-qtrack { animation: none !important; transform: none !important; }
+        .bbc-media, video, iframe, .rd-mapwide { visibility: hidden !important; }
+        #shopify-pc__banner { display: none !important; }
+      ` });
       await page.evaluate(async () => {
         document.querySelectorAll('.rd-reveal').forEach(e => { e.style.opacity = 1; e.style.transform = 'none'; });
         document.querySelector('#shopify-pc__banner')?.remove();
