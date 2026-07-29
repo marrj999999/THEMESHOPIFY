@@ -175,3 +175,32 @@ and demand **zero** movement.
 moved 5,333 values, so it was reverted rather than shipped: the knock-on effects (stripping one
 `!important` lets a different rule win, which changes padding, which changes height) mean each
 file needs its own bisect cycle, not a single sweep.
+
+### 28 — the fingerprint measured under different conditions than the gate it was defending
+
+`qa/css-fingerprint.mjs` reported **0 of 166,980 property values moved** after removing 72
+`!important`. The visual net then failed **48/48**, with the homepage 224px taller than baseline.
+
+Both instruments were working. They were measuring **different pages**:
+
+| | conditions |
+|---|---|
+| visual net (`visual.spec.mjs`) | applies a MASK — `visibility:hidden` on `.bbc-media, video, iframe, .rd-mapwide` |
+| fingerprint | no mask; only the cookie banner removed |
+
+A change can be equivalent unmasked and not equivalent masked, because hiding an element changes
+what the surrounding layout resolves to. **An equivalence test only certifies the conditions it
+actually rendered.**
+
+**But the strip was not the cause.** Bisecting settled it: restoring the pre-strip file (289
+`!important`) and re-running gave **3 failed** on the same pages. Every file was byte-identical to
+HEAD, and the page height was stable across three consecutive runs (11,115px each). The baselines
+had gone stale against a site that had moved underneath them — the same phenomenon as #27, over a
+longer interval.
+
+**Two corrections this leaves:**
+1. The fingerprint must replicate the visual spec's mask before it can certify anything the visual
+   net will later judge. Until it does, "0 moved" means less than it appears.
+2. **Never diagnose from one instrument when a second disagrees.** The contradiction was the
+   finding — chasing either number alone would have led to reverting a safe change (or shipping an
+   unsafe one) for the wrong reason.
