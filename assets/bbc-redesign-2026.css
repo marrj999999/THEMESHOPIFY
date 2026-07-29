@@ -268,8 +268,22 @@
 
 /* numbered steps (Workshops how-it-works) */
 .bbc-rd .rd-steps{ counter-reset:s; list-style:none; padding:0; margin:0; display:grid; gap:14px; }
-.bbc-rd .rd-steps li{ counter-increment:s; position:relative; padding:18px 20px 18px 70px; background:var(--bone); border:2px solid var(--ink); border-radius:8px; }
-.bbc-rd .rd-steps li::before{ content:counter(s); position:absolute; left:16px; top:16px; width:38px; height:38px; border-radius:6px; background:var(--forest); color:var(--lime); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:18px; }
+/* D6 — ruled, not boxed (2026-07-28, on the R2a measurement).
+   This single primitive was the estate's biggest source of bordered cards: 8 boxed
+   steps on workshops and 9 on programmes, 17 of the 39 boxed elements across both.
+   R2a put us at 25% boxed bands against a peer median of 0% — 16 of 20 peers have
+   no boxed band at all — and the concentration was here.
+   A border on 3+ sides is a box; one side is a RULE, which IS device D6 and the
+   pattern the anti-blocky research prescribes. So the enclosure and the bone fill go,
+   and a single top rule stays. The forest numeral chip is untouched — it still marks
+   each step, now reading as a margin rail against the page rather than a card badge. */
+.bbc-rd .rd-steps li{
+  counter-increment:s; position:relative; padding:20px 0 20px 70px;
+  border-top:2px solid color-mix(in srgb, var(--ink,#0E1A17) 15%, transparent);
+}
+/* on forest bands the rule has to come up out of the dark, not sink into it */
+.bbc-rd .rd-dark .rd-steps li{ border-top-color:color-mix(in srgb, var(--bone,#E6DCC8) 24%, transparent); }
+.bbc-rd .rd-steps li::before{ content:counter(s); position:absolute; left:0; top:20px; width:38px; height:38px; border-radius:6px; background:var(--forest); color:var(--lime); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:18px; }
 .bbc-rd .rd-steps li h3{ font-size:18px; margin-bottom:3px; }
 .bbc-rd .rd-steps li p{ font-size:16px; color:var(--charcoal); margin:0; }
 

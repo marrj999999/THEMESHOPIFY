@@ -62,9 +62,18 @@ function analyse() {
     return 0.299 * +m[0] + 0.587 * +m[1] + 0.114 * +m[2]; };
 
   // A box is a FULL ENCLOSURE — 3+ bordered sides (ESCAPES #16). 1-2 sides is device D6.
+  // A side only counts if it is VISIBLE. `.rd-card` ships `border:1.5px solid transparent`
+  // (a layout spacer, not an enclosure) and the first version counted all four sides of it —
+  // inflating our box ratio with borders nobody can see.
   const boxSides = e => { const c = getComputedStyle(e); let n = 0;
-    for (const s of ['Top', 'Right', 'Bottom', 'Left'])
-      if (parseFloat(c[`border${s}Width`]) > 0.5 && c[`border${s}Style`] !== 'none') n++;
+    for (const s of ['Top', 'Right', 'Bottom', 'Left']) {
+      if (parseFloat(c[`border${s}Width`]) <= 0.5) continue;
+      if (c[`border${s}Style`] === 'none') continue;
+      const col = c[`border${s}Color`] || '';
+      const a = col.match(/rgba?\([^)]*?,\s*([\d.]+)\s*\)/);
+      if (col === 'transparent' || (a && +a[1] < 0.15)) continue;   // invisible = not a box side
+      n++;
+    }
     return n; };
 
   // SEGMENTATION — find the BAND PARENT, then take its direct children.
