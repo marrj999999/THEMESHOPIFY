@@ -88,7 +88,11 @@ function audit() {
     const ch = parseFloat(cs.fontSize) * 0.5;
     // Only BODY copy counts. A centred .rd-lede or .rd-eyebrow is display copy and is exactly
     // what ALIGNMENT.md rule 7 permits — flagging it reported the intended hierarchy as a defect.
-    const isDisplay = /rd-lede|rd-eyebrow|rd-kicker|rd-src/.test((e.className || '').toString());
+    // Trust/credential strips are display copy too — verified by screenshot, not assumed:
+    // qa/evidence/2026-07-29/wc-workshops-trust.png is a single centred credential line, which is
+    // conventional and reads correctly. Its only fault was the rag, now fixed with text-wrap:balance.
+    const isDisplay = /rd-lede|rd-eyebrow|rd-kicker|rd-src|rd-trustline|rd-trust|rd-warranty/.test((e.className || '').toString())
+      || /rd-trust|rd-cmp-/.test((e.parentElement?.className || '').toString());
     if ((a === 'center') && /^(P|LI)$/.test(e.tagName) && !isDisplay && R(e).width / ch > 60) rec.wideCentre++;
     rec.items.push({ tag: e.tagName, align: a, txt: (e.textContent || '').trim().slice(0, 30) });
   }

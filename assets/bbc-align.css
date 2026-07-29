@@ -75,6 +75,23 @@
    keeps the attribution visually attached to what it supports */
 .bbc-rd .rd-center .rd-src{ max-width:70ch; margin-inline:auto; }
 
+/* ── 8 · CENTRED COPY GETS A BALANCED RAG ─────────────────────────────────────
+   Centring is only as good as the line breaks. The workshops trust strip wrapped
+   "…public-" / "liability insured", leaving a stranded second line — the classic
+   uneven look that centring gets blamed for when the real fault is the rag.
+   text-wrap:balance evens the line lengths; text-wrap:pretty stops single-word
+   orphans on the longer body measures. Both degrade silently where unsupported. */
+.bbc-rd .rd-center h1,
+.bbc-rd .rd-center h2,
+.bbc-rd .rd-center h3,
+.bbc-rd .rd-center .rd-lede,
+.bbc-rd .rd-center .rd-eyebrow,
+.bbc-rd .rd-trustline,
+.bbc-rd h1, .bbc-rd h2, .bbc-rd h3{
+  text-wrap:balance;
+}
+.bbc-rd p, .bbc-rd li{ text-wrap:pretty; }
+
 /* ── 6 · NEVER JUSTIFY ────────────────────────────────────────────────────────
    No hyphenation engine on the web, so justified text opens rivers. */
 .bbc-rd [style*="text-align: justify"],

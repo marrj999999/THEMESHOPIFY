@@ -399,7 +399,7 @@
 
    Deliberately done with LAYERED BACKGROUNDS, not pseudo-elements: .rd-dark is used
    by 22 bands across 10 pages, several of which have absolutely-positioned children
-   (e.g. .rd-ghost). Adding position:relative or ::before estate-wide risked moving
+   (e.g. .rd-ghostnum). Adding position:relative or ::before estate-wide risked moving
    them or colliding with existing pseudo-elements. Backgrounds change no layout at all.
 
    Layer order (first = topmost):

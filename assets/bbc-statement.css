@@ -803,8 +803,12 @@ cart-drawer.animate .drawer{ visibility:visible; }
    ============================================================ */
 /* B0 · D2 ghost numeral: 2012 as architecture behind the stats */
 .bbc-rd-impact .rd-band--stats{ position:relative; overflow:clip; }
-.bbc-rd-impact .rd-band--stats .rd-ghost{ position:absolute; right:-2%; top:50%; transform:translateY(-52%); font-size:clamp(9rem,24vw,20rem); line-height:.8; font-weight:800; letter-spacing:-.04em; color:var(--lime,#D4FD62); opacity:.07; pointer-events:none; }
-@media (max-width:600px){ .bbc-rd-impact .rd-band--stats .rd-ghost{ display:none; } }
+/* renamed from .rd-ghost 2026-07-29 — that name was ALSO the ghost/outline button
+   (.rd-btn.rd-ghost), two unrelated components on one class. Nothing rendered wrong,
+   because the CSS only ever targeted the compound selector, but any future bare
+   .rd-ghost rule would have hit a 15px pill and a 307px numeral at once. */
+.bbc-rd-impact .rd-band--stats .rd-ghostnum{ position:absolute; right:-2%; top:50%; transform:translateY(-52%); font-size:clamp(9rem,24vw,20rem); line-height:.8; font-weight:800; letter-spacing:-.04em; color:var(--lime,#D4FD62); opacity:.07; pointer-events:none; }
+@media (max-width:600px){ .bbc-rd-impact .rd-band--stats .rd-ghostnum{ display:none; } }
 
 /* .rd-lumen was folded into .rd-dark (bbc-redesign-2026.css) on 2026-07-28 so every
    dark band gets the treatment estate-wide — 22 bands across 10 pages — rather than

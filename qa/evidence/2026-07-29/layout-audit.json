@@ -237,7 +237,7 @@
       },
       {
         "sheet": "bbc-align.css",
-        "rules": 7,
+        "rules": 9,
         "important": 3
       },
       {
@@ -477,6 +477,16 @@
         ]
       },
       {
+        "sel": ".bbc-rd h2",
+        "times": 8,
+        "sheets": [
+          "bbc-layout.css",
+          "bbc-universal.css",
+          "bbc-align.css",
+          "bbc-redesign-2026.css"
+        ]
+      },
+      {
         "sel": ".bbc-rd-impact h3.rd-ops__title",
         "times": 8,
         "sheets": [
@@ -561,15 +571,6 @@
           "bbc-unified-styles.css",
           "bbc-mobile-fixes.css",
           "bbc-universal.css"
-        ]
-      },
-      {
-        "sel": ".bbc-rd h2",
-        "times": 7,
-        "sheets": [
-          "bbc-layout.css",
-          "bbc-universal.css",
-          "bbc-redesign-2026.css"
         ]
       },
       {
@@ -766,25 +767,7 @@
         "y": 6578
       }
     ],
-    "justify": [
-      {
-        "band": "rd-trustband",
-        "y": 1109,
-        "aligns": [
-          "center"
-        ],
-        "justifyCount": 0,
-        "wideCentredParas": 1,
-        "mixedInsideOneBand": false,
-        "sample": [
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "Run by Bamboo Mobility Project"
-          }
-        ]
-      }
-    ],
+    "justify": [],
     "centring": [],
     "rhythm": {
       "bandPaddingTop": {
@@ -1386,26 +1369,7 @@
         "y": 13273
       }
     ],
-    "justify": [
-      {
-        "band": "rd-section rd-pad-sm",
-        "y": 111,
-        "aligns": [
-          "left",
-          "center"
-        ],
-        "justifyCount": 0,
-        "wideCentredParas": 1,
-        "mixedInsideOneBand": false,
-        "sample": [
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "1-year kit warranty · 14-day r"
-          }
-        ]
-      }
-    ],
+    "justify": [],
     "centring": [],
     "rhythm": {
       "bandPaddingTop": {

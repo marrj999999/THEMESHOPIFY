@@ -131,7 +131,7 @@
   {%- comment -%} ---------- STATS (dark) ---------- {%- endcomment -%}
   <section class="rd-pad-sm rd-dark rd-band--stats">
     <div class="rd-wrap">
-      <span class="rd-ghost" aria-hidden="true">{{ section.settings.ghost_stat | default: "2012" }}</span>
+      <span class="rd-ghostnum" aria-hidden="true">{{ section.settings.ghost_stat | default: "2012" }}</span>
       {%- if section.settings.stats_label != blank -%}<span class="rd-eyebrow">{{ section.settings.stats_label }}</span>{%- endif -%}
       <div class="rd-stats">
         {%- for block in section.blocks -%}{%- if block.type == 'stat' and block.settings.source != blank -%}
