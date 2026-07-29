@@ -132,12 +132,24 @@
    the fill and the radius go, and an L-shaped corner rule stays. Two sides is a RULE, which
    is device D6 and what the anti-blocky research prescribes — a full box is 3+ sides.
    Hover keeps the offset motion, now expressed by the rule shifting rather than a shadow. */
-.bbc-rd .rd-card.rd-stamp{
+.bbc-rd .rd-card.rd-stamp{ background:var(--bone); border:2.5px solid var(--ink); border-radius:6px; box-shadow:5px 5px 0 var(--ink); }
+.bbc-rd .rd-card.rd-stamp.rd-lime{ box-shadow:5px 5px 0 var(--lime-700); }
+
+/* D6 de-box, SCOPED to editorial cards — NOT the shop grid (corrected 2026-07-29).
+   First attempt de-boxed .rd-card.rd-stamp globally, which was too wide a blast radius:
+   the collection page carries 12 of them as PRODUCT cards, and an L-rule there does not
+   enclose the product image — it read as broken on a revenue page. Product cards want
+   containment; that is the convention and it is correct.
+   The §8 breach was only ever on the editorial pages (schools y1669+y2610, programmes
+   y5223+y6763), so the de-box is scoped to cards that sit inside a content grid rather
+   than the product grid. The stamp's character was never the enclosure but the OFFSET,
+   so an L-shaped corner rule keeps it; two sides is a rule (D6), three or more is a box. */
+.bbc-rd .rd-grid .rd-card.rd-stamp:not(.rd-prodcard):not([href*="/products/"]){
   background:transparent; border:0; border-radius:0; box-shadow:none;
   border-left:2.5px solid var(--ink); border-bottom:2.5px solid var(--ink);
   padding-left:clamp(14px,1.6vw,20px); padding-bottom:clamp(14px,1.6vw,20px);
 }
-.bbc-rd .rd-card.rd-stamp.rd-lime{ border-color:var(--lime-700); }
+.bbc-rd .rd-grid .rd-card.rd-stamp.rd-lime:not(.rd-prodcard):not([href*="/products/"]){ border-color:var(--lime-700); }
 
 /* Card-as-link: the whole card is an <a class="rd-cardlink">, so the estate's global
    link rule was underlining EVERY line inside it — heading, body paragraph and all.
@@ -425,8 +437,10 @@
   .bbc-rd .rd-door:hover img{ transform:scale(1.045); }
   .bbc-rd a.rd-card:hover{ transform:translateY(-3px); box-shadow:0 14px 30px rgba(14,26,23,.16); }
   .bbc-rd .rd-card:hover .rd-ph img{ transform:scale(1.05); }
-  /* the lift stays; the shadow it used to grow no longer exists (see the de-box above) */
-  .bbc-rd .rd-card.rd-stamp:hover{ transform:translate(-2px,-2px); }
+  .bbc-rd .rd-card.rd-stamp:hover{ transform:translate(-2px,-2px); box-shadow:8px 8px 0 var(--ink); }
+  .bbc-rd .rd-card.rd-stamp.rd-lime:hover{ box-shadow:8px 8px 0 var(--lime-700); }
+  /* de-boxed editorial cards keep the lift but have no shadow to grow */
+  .bbc-rd .rd-grid .rd-card.rd-stamp:not(.rd-prodcard):not([href*="/products/"]):hover{ box-shadow:none; }
 
   /* one orchestrated page-load moment: hero content rises in, staggered */
   .bbc-rd .rd-hero .rd-wrap > *{ animation:rd-rise .7s cubic-bezier(.2,.7,.2,1) both; }
