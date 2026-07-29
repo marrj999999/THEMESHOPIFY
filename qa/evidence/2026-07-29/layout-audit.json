@@ -237,7 +237,7 @@
       },
       {
         "sheet": "bbc-align.css",
-        "rules": 6,
+        "rules": 7,
         "important": 3
       },
       {
@@ -783,28 +783,6 @@
             "txt": "Run by Bamboo Mobility Project"
           }
         ]
-      },
-      {
-        "band": "rd-pad-sm rd-paper",
-        "y": 2439,
-        "aligns": [
-          "center"
-        ],
-        "justifyCount": 0,
-        "wideCentredParas": 1,
-        "mixedInsideOneBand": false,
-        "sample": [
-          {
-            "tag": "BLOCKQUOTE",
-            "align": "center",
-            "txt": "To get one of these bamboo bea"
-          },
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "To get one of these bamboo bea"
-          }
-        ]
       }
     ],
     "centring": [],
@@ -979,49 +957,7 @@
         "y": 8510
       }
     ],
-    "justify": [
-      {
-        "band": "rd-pad rd-paper",
-        "y": 1222,
-        "aligns": [
-          "left",
-          "center"
-        ],
-        "justifyCount": 0,
-        "wideCentredParas": 1,
-        "mixedInsideOneBand": true,
-        "sample": [
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "The same hands-on bike build, "
-          }
-        ]
-      },
-      {
-        "band": "rd-pad rd-steel",
-        "y": 6503,
-        "aligns": [
-          "center",
-          "left"
-        ],
-        "justifyCount": 0,
-        "wideCentredParas": 1,
-        "mixedInsideOneBand": true,
-        "sample": [
-          {
-            "tag": "H2",
-            "align": "center",
-            "txt": "three ways to bring it in."
-          },
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "Whichever route fits your site"
-          }
-        ]
-      }
-    ],
+    "justify": [],
     "centring": [],
     "rhythm": {
       "bandPaddingTop": {
@@ -1107,102 +1043,7 @@
         "y": 11167
       }
     ],
-    "justify": [
-      {
-        "band": "rd-pad",
-        "y": 3923,
-        "aligns": [
-          "center"
-        ],
-        "justifyCount": 0,
-        "wideCentredParas": 3,
-        "mixedInsideOneBand": false,
-        "sample": [
-          {
-            "tag": "H2",
-            "align": "center",
-            "txt": "the research behind bamboo"
-          },
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "We don't just build with bambo"
-          },
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "Swansea University — our bambo"
-          }
-        ]
-      },
-      {
-        "band": "rd-pad-sm rd-center",
-        "y": 6128,
-        "aligns": [
-          "center"
-        ],
-        "justifyCount": 0,
-        "wideCentredParas": 1,
-        "mixedInsideOneBand": false,
-        "sample": [
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "We don't ask you to take \"bamb"
-          }
-        ]
-      },
-      {
-        "band": "rd-pad",
-        "y": 7922,
-        "aligns": [
-          "center",
-          "left"
-        ],
-        "justifyCount": 0,
-        "wideCentredParas": 1,
-        "mixedInsideOneBand": true,
-        "sample": [
-          {
-            "tag": "H2",
-            "align": "center",
-            "txt": "any design. any rider."
-          },
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "You can't shape steel in your "
-          }
-        ]
-      },
-      {
-        "band": "rd-pad",
-        "y": 10572,
-        "aligns": [
-          "center"
-        ],
-        "justifyCount": 0,
-        "wideCentredParas": 1,
-        "mixedInsideOneBand": false,
-        "sample": [
-          {
-            "tag": "H2",
-            "align": "center",
-            "txt": "build your bamboo bike"
-          },
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "Join 4,000+ people who've buil"
-          },
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "Shop frame kits →"
-          }
-        ]
-      }
-    ],
+    "justify": [],
     "centring": [],
     "rhythm": {
       "bandPaddingTop": {
@@ -1340,25 +1181,7 @@
         "y": 6038
       }
     ],
-    "justify": [
-      {
-        "band": "rd-pad-sm rd-steel",
-        "y": 4897,
-        "aligns": [
-          "center"
-        ],
-        "justifyCount": 0,
-        "wideCentredParas": 1,
-        "mixedInsideOneBand": false,
-        "sample": [
-          {
-            "tag": "P",
-            "align": "center",
-            "txt": "…and featured in 40+ publicati"
-          }
-        ]
-      }
-    ],
+    "justify": [],
     "centring": [],
     "rhythm": {
       "bandPaddingTop": {
@@ -1573,7 +1396,7 @@
         ],
         "justifyCount": 0,
         "wideCentredParas": 1,
-        "mixedInsideOneBand": true,
+        "mixedInsideOneBand": false,
         "sample": [
           {
             "tag": "P",

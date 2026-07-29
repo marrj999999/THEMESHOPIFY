@@ -43,7 +43,7 @@ on the home, about, sharebuild and kitpicker scopes, still centre everywhere els
 | **4 · Centring is opt-in and short** | `.rd-center` centres box *and* text. Permitted only for **display copy ≤ 40ch** — an eyebrow, a band heading, a short lede, a CTA row. |
 | **5 · Never centre** | Body paragraphs over ~60ch, lists, citations, tables, form labels, anything an assessor reads for detail. Centred long copy has a ragged left edge and no anchor for the eye. |
 | **6 · Never `justify`** | No hyphenation engine on the web, so justified text opens rivers. |
-| **7 · One alignment per band** | A band does not mix centred and left blocks. Pick one per band. |
+| **7 · Hierarchy, not uniformity** | Inside a centred band, DISPLAY copy (heading, eyebrow, lede) stays centred and BODY copy goes left with a 60ch measure, centred as a block. That is a hierarchy and it is the convention. **Corrected 2026-07-29** — this rule originally said "one alignment per band", which is wrong: enforcing it forced short ledes left alongside their headings and made the estate look worse, not better. Measured: `.rd-center` blocks hold paragraphs from 66ch to 486ch; the 66ch lede should centre, the 486ch citation list must not. |
 
 ## What this deliberately does NOT change
 

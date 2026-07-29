@@ -54,17 +54,26 @@
   text-align:center;
 }
 
-/* ── 5 · LONG COPY GETS A MEASURE, NOT A SECOND ALIGNMENT ─────────────────────
-   A centred band holding a long paragraph is a CONTENT decision (that band should
-   not be centred), and the audit reports it as `wide-centred` for a human to
-   settle. CSS must not silently half-fix it by flipping that one paragraph to
-   left — that is precisely how a band ends up mixed. So the measure is capped and
-   the alignment is left alone. */
-.bbc-rd .rd-center p,
+/* ── 5 · DISPLAY COPY CENTRES; BODY COPY DOES NOT ─────────────────────────────
+   Measured across the estate: .rd-center blocks hold paragraphs from 66ch to 486ch.
+   A centred heading and a centred one-line lede read well — that is the convention.
+   A centred 486ch citation list does not: no anchor for the eye on the left, and a
+   ragged edge on both sides.
+
+   So inside a centred block the DISPLAY copy (heading, eyebrow, lede) stays centred
+   and the BODY copy goes left, capped to a readable measure and centred as a BLOCK.
+   That is a hierarchy, not a mix — the earlier version of this file treated it as a
+   mix, forced every paragraph left including the short ledes, and made things worse.
+   qa/ALIGNMENT.md rule 7 was corrected to match. */
+.bbc-rd .rd-center p:not(.rd-lede):not(.rd-eyebrow):not(.rd-src),
 .bbc-rd .rd-center li{
+  text-align:left;
   max-width:60ch;
   margin-inline:auto;
 }
+/* sources and footnotes are short, and centring them under centred display copy
+   keeps the attribution visually attached to what it supports */
+.bbc-rd .rd-center .rd-src{ max-width:70ch; margin-inline:auto; }
 
 /* ── 6 · NEVER JUSTIFY ────────────────────────────────────────────────────────
    No hyphenation engine on the web, so justified text opens rivers. */

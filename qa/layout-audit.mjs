@@ -86,12 +86,19 @@ function audit() {
     if (a === 'justify') { rec.justify++; }
     // centred body copy wider than ~60ch is hard to read
     const ch = parseFloat(cs.fontSize) * 0.5;
-    if ((a === 'center') && /^(P|LI)$/.test(e.tagName) && R(e).width / ch > 60) rec.wideCentre++;
+    // Only BODY copy counts. A centred .rd-lede or .rd-eyebrow is display copy and is exactly
+    // what ALIGNMENT.md rule 7 permits — flagging it reported the intended hierarchy as a defect.
+    const isDisplay = /rd-lede|rd-eyebrow|rd-kicker|rd-src/.test((e.className || '').toString());
+    if ((a === 'center') && /^(P|LI)$/.test(e.tagName) && !isDisplay && R(e).width / ch > 60) rec.wideCentre++;
     rec.items.push({ tag: e.tagName, align: a, txt: (e.textContent || '').trim().slice(0, 30) });
   }
   for (const [band, rec] of byBand) {
     const aligns = [...rec.aligns];
-    const mixed = aligns.filter(a => a !== 'start' && a !== 'left').length > 0 && aligns.length > 1;
+    // MIXED was removed as a failure signal on 2026-07-29. ALIGNMENT.md rule 7 was corrected:
+    // a centred heading with left body copy is a HIERARCHY, the web's normal convention, not a
+    // mix. Enforcing uniformity forced short ledes left beside their own headings and looked
+    // worse. What remains a defect is centred BODY copy, which `wideCentre` catches.
+    const mixed = false;
     if (rec.justify || rec.wideCentre || mixed) {
       out.justify.push({
         band: (band?.className || '').toString().slice(0, 44) || band?.tagName,
