@@ -518,15 +518,7 @@
   {%- comment -%} ---------- WHY BAMBOO (4-up pillar band) ---------- {%- endcomment -%}
   {%- assign why_url = section.settings.why_link_url | default: '/pages/why-bamboo' -%}
   <style>
-    {%- comment -%} Surface must come from the colour grammar. This band was the ONLY place in
-      the 2026 estate painting a band with --bbc-cream (#faf7f0) — a fifth light tone next to
-      the canonical four Impact uses (paper #F1E9D8, bone #E6DCC8, forest, steel). Measured
-      2026-08-03: the homepage rendered 6 distinct band surfaces against Impact's 4, and this
-      was the odd one. It was fragile as well as off-palette — --bbc-cream is declared twice
-      with different values (#faf7f0 in bbc-aaa-2026.css, #f8fafc in bbc-foundation.css), so
-      the band's colour depended on which sheet won. --paper is the documented light surface.
-    {%- endcomment -%}
-    .bbc-rd-home .acc{ background:var(--paper,#F1E9D8); }
+    .bbc-rd-home .acc{ background:var(--bbc-cream,#faf7f0); }
     .bbc-rd-home .acc-head{ max-width:60ch; }
     .bbc-rd-home .acc-title{ font-family:var(--rd-sans),sans-serif; font-weight:800;
       font-size:clamp(30px,4.4vw,48px); line-height:1.04; letter-spacing:-.02em; color:var(--bbc-forest,#003C32); margin:.5rem 0 0; text-align:left; text-wrap:balance; }

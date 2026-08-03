@@ -159,7 +159,16 @@ for (const [label, url] of PAGES) {
       const gaps = [];
       if (q) { const l = [...q.querySelectorAll(':scope > a')]; for (let i = 1; i < l.length; i++) gaps.push(Math.round(l[i].getBoundingClientRect().left - l[i-1].getBoundingClientRect().right)); }
       const wrap = document.querySelector('#book-a-call h2');
-      const proof = document.querySelector('#proof .rd-cscard__body p');
+      // Was `#proof .rd-cscard__body p`. That paragraph was on the page's left axis when the
+      // flagship was a single-column card, so "is the body text on the axis" and "is the card
+      // on the axis" were the same question. The flagship became the standard two-column
+      // bbc-cscard on 2026-08-01 (media left, text right), which puts the paragraph in the
+      // RIGHT column by design — measured 989px against the axis at 383px, a 606px "failure"
+      // that is exactly one column plus the gap. This assertion has been red since that
+      // conversion, and a permanently-red gate is how real FAIL lines get skimmed past
+      // (ESCAPES #10). Measure the CARD, which is what "flagship on axis" actually means and
+      // still catches the flagship drifting off the page axis. (2026-08-03)
+      const proof = document.querySelector('#proof .rd-cscard');
       // axis: every visible eyebrow/head on the 216 line (tolerance 6)
       const anchorsX = [...document.querySelectorAll('.bbc-rd-impact section .rd-eyebrow, .bbc-rd-impact section h2')]
         .filter(e => e.getBoundingClientRect().width > 0)
@@ -183,7 +192,15 @@ for (const [label, url] of PAGES) {
       }).map(i => (i.currentSrc||i.src).split('/').pop().split('?')[0].slice(0,26));
       const media = document.querySelector('#proof .rd-cscard__media');
       const card = document.querySelector('#proof .rd-cscard');
-      const mediaOk = media && card ? Math.abs(media.getBoundingClientRect().width - card.getBoundingClientRect().width) < 6 && media.getBoundingClientRect().height < media.getBoundingClientRect().width : true;
+      // Same 2026-08-01 conversion, same stale expectation. "Media spans the card" was how you
+      // detected the narrow-strip bug on a SINGLE-column flagship. On the two-column card the
+      // media legitimately fills one column — measured 552px inside a 1136px card — so
+      // demanding width parity fails a correct layout. Assert what the check was actually
+      // defending: the media must still be landscape and must still FILL ITS COLUMN rather than
+      // collapsing to a sliver. A genuine narrow strip lands far below 40% and is still caught.
+      const mb = media && media.getBoundingClientRect();
+      const cb = card && card.getBoundingClientRect();
+      const mediaOk = media && card ? (mb.width >= cb.width * 0.4) && (mb.height < mb.width) : true;
       return { overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, gaps, mediaOk, axisSpread, posterZero, soft, axisOk: wrap && proof ? Math.abs(wrap.getBoundingClientRect().left - proof.getBoundingClientRect().left) < 4 : true };
     });
     add('impact @1568', 'nav gaps >= 8px', r.gaps.length === 0 || r.gaps.every(g => g >= 8), `[${r.gaps}]`);

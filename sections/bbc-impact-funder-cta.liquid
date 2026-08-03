@@ -7,6 +7,7 @@
 
 {%- style -%}
 .bbc-funder-cta {
+  --bbc-white:#ffffff; --bbc-gold:#ffa900; --bbc-forest:#073e27; --bbc-teal:#3f8b66; --bbc-ink:#14211c;
   padding: {{ section.settings.padding_top }}px 24px {{ section.settings.padding_bottom }}px;
   background: {{ section.settings.background_color }};
 }
@@ -26,14 +27,14 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--bbc-teal, var(--bbc-teal));
+  color: var(--bbc-teal, #3f8b66);
   margin-bottom: 16px;
 }
 
 .bbc-funder-cta__heading {
   font-size: clamp(1.75rem, 3.5vw, 2.5rem);
   font-weight: 800;
-  color: var(--bbc-forest, var(--bbc-forest));
+  color: var(--bbc-forest, #073e27);
   line-height: 1.1;
   letter-spacing: -0.02em;
   margin-bottom: 16px;
@@ -55,7 +56,7 @@
 }
 
 .bbc-funder-cta__card {
-  background: var(--color-background, var(--bbc-white));
+  background: var(--color-background, var(--bbc-white, #ffffff));
   border: 1px solid rgba(7, 62, 39, 0.1);
   padding: 36px 32px;
   position: relative;
@@ -66,7 +67,7 @@
 }
 
 .bbc-funder-cta__card:hover {
-  border-color: var(--bbc-teal, var(--bbc-teal));
+  border-color: var(--bbc-teal, #3f8b66);
   box-shadow: 0 4px 20px rgba(7, 62, 39, 0.08);
 }
 
@@ -84,21 +85,21 @@
 .bbc-funder-cta__card-icon svg {
   width: 24px;
   height: 24px;
-  stroke: var(--bbc-teal, var(--bbc-teal));
+  stroke: var(--bbc-teal, #3f8b66);
 }
 
 .bbc-funder-cta__card-audience {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--bbc-teal, var(--bbc-teal));
+  color: #38453f;
 }
 
 .bbc-funder-cta__card-title {
   font-size: 20px;
   font-weight: 800;
-  color: var(--bbc-forest, var(--bbc-forest));
+  color: var(--bbc-forest, #073e27);
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
@@ -116,17 +117,17 @@
   gap: 6px;
   font-size: 14px;
   font-weight: 700;
-  color: var(--bbc-forest, var(--bbc-forest));
+  color: var(--bbc-forest, #073e27);
   text-decoration: none;
   margin-top: 8px;
-  border-bottom: 2px solid var(--bbc-gold, var(--bbc-gold));
+  border-bottom: 2px solid var(--bbc-gold, #ffa900);
   padding-bottom: 2px;
   align-self: flex-start;
   transition: color 0.2s ease;
 }
 
 .bbc-funder-cta__card-link:hover {
-  color: var(--bbc-teal, var(--bbc-teal));
+  color: var(--bbc-teal, #3f8b66);
 }
 
 .bbc-funder-cta__card-link svg {
@@ -141,8 +142,8 @@
 
 /* Primary card emphasis */
 .bbc-funder-cta__card--primary {
-  background: var(--bbc-forest, var(--bbc-forest));
-  border-color: var(--bbc-forest, var(--bbc-forest));
+  background: var(--bbc-forest, #073e27);
+  border-color: var(--bbc-forest, #073e27);
 }
 
 .bbc-funder-cta__card--primary .bbc-funder-cta__card-icon {
@@ -150,7 +151,7 @@
 }
 
 .bbc-funder-cta__card--primary .bbc-funder-cta__card-icon svg {
-  stroke: var(--bbc-white);
+  stroke: var(--bbc-white, #ffffff);
 }
 
 .bbc-funder-cta__card--primary .bbc-funder-cta__card-audience {
@@ -158,7 +159,7 @@
 }
 
 .bbc-funder-cta__card--primary .bbc-funder-cta__card-title {
-  color: var(--bbc-white);
+  color: var(--bbc-white, #ffffff);
 }
 
 .bbc-funder-cta__card--primary .bbc-funder-cta__card-body {
@@ -166,12 +167,12 @@
 }
 
 .bbc-funder-cta__card--primary .bbc-funder-cta__card-link {
-  color: var(--bbc-gold, var(--bbc-gold));
+  color: var(--bbc-gold, #ffa900) !important;
   border-bottom-color: rgba(255, 169, 0, 0.4);
 }
 
 .bbc-funder-cta__card--primary .bbc-funder-cta__card-link:hover {
-  color: var(--bbc-white);
+  color: var(--bbc-white, #ffffff) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -193,11 +194,6 @@
 }
 {%- endstyle -%}
 
-{% comment %} Icon lookup for card icons {% endcomment %}
-{%- liquid
-  assign icons = '{"building":"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z","heart":"M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z","school":"M22 10v6M2 10l10-5 10 5-10 5z M6 12v5c3 3 9 3 12 0v-5","briefcase":"M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2","users":"M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M23 21v-2a4 4 0 0 0-3-3.87 M16 3.13a4 4 0 0 1 0 7.75","leaf":"M17 8C8 10 5.9 16.17 3.82 21.2M9.23 17.65C7.65 17.07 3 14.61 3 11.17V3l9 4 9-4v8.17c0 3.44-4.65 5.9-6.23 6.48"}'
-  assign icon_paths = icons | parse_json
--%}
 
 <section class="bbc-funder-cta">
   <div class="bbc-funder-cta__container">
@@ -418,7 +414,7 @@
             "icon": "briefcase",
             "audience": "For Funders & Corporates",
             "title": "Support Proven Rehabilitation",
-            "body": "90%+ course completion and a waiting list. Fund a programme cohort, sponsor a family handover session, or integrate Build to Bond into your CSR strategy.",
+            "body": "Fund a programme cohort, sponsor a family handover session, or integrate Build to Bond into your CSR strategy. Every pound goes into accredited skills courses.",
             "link_text": "Talk to us about funding"
           }
         }

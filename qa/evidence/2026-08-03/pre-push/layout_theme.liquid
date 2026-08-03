@@ -6,12 +6,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
-    {%- comment -%} Description fallbacks were split across two places: this cart-only block and
-      the `{% if page_description %}` further down. Any template with no page_description got no
-      description at all — estate-check flagged /account/login and /account/register at both
-      viewports on 2026-08-03 (t:true d:false c:true og:true). Consolidated into the single
-      emitter below so cart keeps its wording and the account pages stop shipping without one.
-    {%- endcomment -%}
+    {%- if template.name == 'cart' and page_description == blank -%}
+      <meta name="description" content="Your Bamboo Bicycle Club basket — bamboo bike frame kits, component packs and workshop bookings, shipped worldwide from London.">
+    {%- endif -%}
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -50,27 +47,9 @@
       {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
-    {%- liquid
-      # Match on `template` AND `template.name` joined. A `case template.name` on
-      # 'customers/login' did NOT match on the draft (verified in-browser: the account pages
-      # still rendered zero description tags), because Shopify does not report customer
-      # templates under that name consistently. `contains` over both forms is robust to
-      # whichever one this store returns, and costs nothing.
-      assign tpl = template | append: '|' | append: template.name
-      assign meta_desc = page_description
-      if meta_desc == blank
-        if tpl contains 'cart'
-          assign meta_desc = 'Your Bamboo Bicycle Club basket — bamboo bike frame kits, component packs and workshop bookings, shipped worldwide from London.'
-        elsif tpl contains 'login'
-          assign meta_desc = 'Sign in to your Bamboo Bicycle Club account to track bamboo bike frame kit orders and workshop bookings.'
-        elsif tpl contains 'register'
-          assign meta_desc = 'Create a Bamboo Bicycle Club account to track your bamboo bike frame kit orders and workshop bookings.'
-        endif
-      endif
-    -%}
-    {%- if meta_desc != blank -%}
-      <meta name="description" content="{{ meta_desc | escape }}">
-    {%- endif -%}
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
 
     {% render 'meta-tags' %}
     {% render 'social-meta-enhanced' %}
