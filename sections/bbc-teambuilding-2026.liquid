@@ -139,22 +139,27 @@
         <span class="rd-eyebrow">{{ section.settings.cs_eyebrow }}</span>
         <h2 class="rd-reveal rd-mw-16ch">{{ section.settings.cs_title }}</h2>
         {%- if section.settings.cs_lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.cs_lede }}</p>{%- endif -%}
-        <div class="rd-csgrid rd-mt4">
+        <ul class="rd-csgrid rd-mt4" role="list">
+          {%- comment -%} Renders THE standard card (snippets/bbc-cscard.liquid), 2026-07-31.
+             Was 12 lines of bespoke markup with a wrapper <a> and no heading element — the same
+             copy that had drifted apart on six pages. heading = outcome, falling back to the
+             company name so a half-filled block still produces a usable link. {%- endcomment -%}
           {%- for b in cs -%}
-            {%- assign img = b.settings.image | default: 'bbc-rd-tb-fourseasons.jpg' -%}
-            <a class="rd-reveal rd-cscard" href="{{ b.settings.url }}" {{ b.shopify_attributes }}>
-              <div class="rd-cscard__media">{%- render "bbc-media", src: img, video: b.settings.video_file, youtube: b.settings.video_url, alt: b.settings.company -%}{%- if b.settings.kind != blank -%}<span class="rd-cscard__kind">{{ b.settings.kind }}</span>{%- endif -%}</div>
-              <div class="rd-cscard__body">
-                {%- if b.settings.quote != blank -%}<p class="rd-cscard__quote">{{ b.settings.quote }}</p>{%- if b.settings.attribution != blank -%}<p class="rd-cscard__attr">{{ b.settings.attribution }}</p>{%- endif -%}{%- endif -%}
-                {%- if b.settings.blurb != blank -%}<p class="rd-cscard__ctx">{{ b.settings.blurb }}</p>{%- endif -%}
-                <div class="rd-cscard__foot">
-                  {%- if b.settings.logo_asset != blank -%}<img class="rd-cscard__logo" src="{{ b.settings.logo_asset | asset_url }}" alt="{{ b.settings.company | escape }}" loading="lazy">{%- else -%}<span class="rd-cscard__inst">{{ b.settings.company }}</span>{%- endif -%}
-                  <span class="rd-cscard__more">{{ b.settings.link_label | default: 'Read the case study' }} <span class="rd-arrow">&rarr;</span></span>
-                </div>
-              </div>
-            </a>
+            {%- assign _img = b.settings.image | default: 'bbc-rd-tb-fourseasons.jpg' -%}
+            {%- assign _head = b.settings.outcome | default: b.settings.company -%}
+            {%- render 'bbc-cscard',
+                 variant: 'grid',
+                 kind: b.settings.kind,
+                 heading: _head,
+                 url: b.settings.url,
+                 context: b.settings.blurb,
+                 attr: b.settings.company,
+                 image: _img,
+                 youtube: b.settings.video_url,
+                 video_file: b.settings.video_file,
+                 cta: b.settings.link_label -%}
           {%- endfor -%}
-        </div>
+        </ul>
       </div>
     </section>
   {%- endif -%}
@@ -507,6 +512,11 @@
           "type": "text",
           "id": "attribution",
           "label": "Attribution"
+        },
+        {
+          "type": "text",
+          "id": "outcome",
+          "label": "Outcome headline (the card's only link text)"
         },
         {
           "type": "textarea",

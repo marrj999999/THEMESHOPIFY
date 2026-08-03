@@ -212,6 +212,10 @@
     </div>
   </section>
 
+
+  {%- comment -%} Stories band — snippets/bbc-stories-band.liquid (2026-08-01). This section
+     had no `story` block type, which is why the page carried zero case-study cards. {%- endcomment -%}
+  {%- render 'bbc-stories-band', section: section -%}
 </div>
 
 {% schema %}
@@ -219,121 +223,730 @@
   "name": "Programmes 2026",
   "class": "shopify-section--bbc-programmes",
   "settings": [
-    { "type": "header", "content": "Hero" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero image (no identifiable Makers)" },
-    { "type": "text", "id": "hero_fallback", "label": "Default hero photo", "default": "bbc-rd-workshop.jpg" },
-    { "type": "text", "id": "hero_image_alt", "label": "Hero alt text", "default": "Builders at work in a bamboo bike workshop" },
-    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "our programmes" },
-    { "type": "text", "id": "hero_title", "label": "Headline", "default": "accredited bike-building programmes for schools and prisons." },
-    { "type": "textarea", "id": "hero_lede", "label": "Lede", "default": "We turn bike-building into recognised skills — a free STEM build for schools, and an OCN Level 2 course you run inside your own prison workshop. Both start with a conversation." },
-    { "type": "text", "id": "hero_cta1_label", "label": "Primary CTA", "default": "start a conversation" },
-    { "type": "text", "id": "hero_cta2_label", "label": "Jump link 1", "default": "for schools" },
-    { "type": "text", "id": "hero_cta3_label", "label": "Jump link 2", "default": "for prisons" },
-    { "type": "header", "content": "Two paths overview" },
-    { "type": "text", "id": "paths_eyebrow", "label": "Eyebrow", "default": "two ways in, one craft" },
-    { "type": "text", "id": "paths_title", "label": "Heading", "default": "prevention in schools, rehabilitation in prisons." },
-    { "type": "textarea", "id": "paths_lede", "label": "Lede", "default": "The same hands-on bike build, shaped for two audiences — reaching young people before exclusion, and adults inside on a route back to work." },
-    { "type": "text", "id": "sch_tag", "label": "Schools card tag", "default": "in schools · ages 11–19" },
-    { "type": "text", "id": "sch_card_title", "label": "Schools card title", "default": "real engineering" },
-    { "type": "textarea", "id": "sch_card_body", "label": "Schools card body", "default": "A free bamboo-speaker STEM build for schools and colleges — OCN Level 1 when you build up. Teachers run it; no engineering background needed." },
-    { "type": "text", "id": "pri_tag", "label": "Prisons card tag", "default": "in prisons · accredited" },
-    { "type": "text", "id": "pri_card_title", "label": "Prisons card title", "default": "vocational skills" },
-    { "type": "textarea", "id": "pri_card_body", "label": "Prisons card body", "default": "An OCN Level 2 accredited course you run in your own workshop — we set up and train your staff, no ongoing fees. Ends on family visit day." },
-    { "type": "header", "content": "Schools arm" },
-    { "type": "text", "id": "sch_eyebrow", "label": "Eyebrow", "default": "in schools · real engineering" },
-    { "type": "text", "id": "sch_title", "label": "Heading", "default": "start free. build up when your students ask for more." },
-    { "type": "textarea", "id": "sch_lede", "label": "Lede", "default": "The Speaker build is the front door: a complete STEM project at no cost, curriculum-linked, that any teacher can run. When students want more, it grows into an OCN Level 1 accredited programme." },
-    { "type": "text", "id": "sch_cta_label", "label": "Schools CTA", "default": "enquire for your school" },
-    { "type": "header", "content": "Prisons arm" },
-    { "type": "text", "id": "pri_eyebrow", "label": "Eyebrow", "default": "in prisons · build to bond" },
-    { "type": "text", "id": "pri_title", "label": "Heading", "default": "self-delivery: we set up, we train, you run it." },
-    { "type": "textarea", "id": "pri_lede", "label": "Lede", "default": "Built for prison industries and education teams. We install the workshop, train your staff to deliver the course, and support your first cohorts — then the capability stays in-house, with no ongoing fees." },
-    { "type": "header", "content": "Budget guide (grant framing only)" },
-    { "type": "text", "id": "budget_eyebrow", "label": "Eyebrow", "default": "budget guide" },
-    { "type": "text", "id": "budget_title", "label": "Heading (blank to hide)", "default": "what it costs — in grant-budget terms." },
-    { "type": "textarea", "id": "budget_lede", "label": "Lede", "default": "Indicative figures to build a funding case around. Cohorts at existing sites have been grant-funded in full or in part — we'll help you make the case." },
-    { "type": "textarea", "id": "budget_note", "label": "Footnote", "default": "Figures are indicative and depend on your workshop, cohort size and delivery pattern. We'll scope yours with you." },
-    { "type": "header", "content": "Security & compliance" },
-    { "type": "text", "id": "sec_eyebrow", "label": "Eyebrow", "default": "security & safeguarding" },
-    { "type": "text", "id": "sec_title", "label": "Heading (blank to hide)", "default": "built for the environment it runs in." },
-    { "type": "textarea", "id": "sec_lede", "label": "Lede", "default": "The programme has been shaped inside working prisons, with industries and security teams — not adapted afterwards." },
-    { "type": "header", "content": "Routes to commission" },
-    { "type": "text", "id": "routes_eyebrow", "label": "Eyebrow", "default": "how to commission" },
-    { "type": "text", "id": "routes_title", "label": "Heading (blank to hide)", "default": "three ways to bring it in." },
-    { "type": "textarea", "id": "routes_lede", "label": "Lede", "default": "Whichever route fits your site, it starts with a conversation and a workshop visit." },
-    { "type": "header", "content": "Credibility" },
-    { "type": "textarea", "id": "cred_quote", "label": "Quote (blank to hide)", "default": "Innovative projects, such as Build to Bond, support rehabilitation and help cut reoffending." },
-    { "type": "text", "id": "cred_cite", "label": "Attribution", "default": "— Lord Timpson, Prisons Minister" },
-    { "type": "text", "id": "sites_list", "label": "Named sites (HTML allowed)", "default": "HMP Lowdham Grange &middot; HMP Foston Hall &middot; HMP Lindholme &middot; HMYOI Feltham" },
-    { "type": "textarea", "id": "funder_line", "label": "Funder credit line", "default": "Build to Bond is supported by The National Lottery Community Fund." },
-    { "type": "text", "id": "funder_logo", "label": "Funder logo asset", "default": "logo-nlcf.svg" },
-    { "type": "text", "id": "funder_logo_alt", "label": "Funder logo alt", "default": "The National Lottery Community Fund" },
-    { "type": "text", "id": "accred_logo", "label": "Accreditation logo asset", "default": "logo-ocn-london.svg" },
-    { "type": "text", "id": "accred_logo_alt", "label": "Accreditation logo alt", "default": "OCN London" },
-    { "type": "header", "content": "Enquiry CTA" },
-    { "type": "text", "id": "cta_eyebrow", "label": "Eyebrow", "default": "next step" },
-    { "type": "text", "id": "cta_title", "label": "Heading", "default": "tell us about your school or your site." },
-    { "type": "textarea", "id": "cta_lede", "label": "Lede", "default": "A short conversation is all it takes to start. Tell us who you are and what you'd like to run, and we'll come back with a scoped plan and budget you can take to your governor, head or funder." },
-    { "type": "text", "id": "cta1_label", "label": "CTA 1 label", "default": "start a conversation" },
-    { "type": "url", "id": "contact_url", "label": "Contact link (defaults to contact page)" },
-    { "type": "text", "id": "cta2_label", "label": "CTA 2 label (email)", "default": "email us" },
-    { "type": "text", "id": "enquiry_email", "label": "Enquiry email", "default": "info@bamboobicycleclub.org" }
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image (no identifiable Makers)"
+    },
+    {
+      "type": "text",
+      "id": "hero_fallback",
+      "label": "Default hero photo",
+      "default": "bbc-rd-workshop.jpg"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero alt text",
+      "default": "Builders at work in a bamboo bike workshop"
+    },
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Eyebrow",
+      "default": "our programmes"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Headline",
+      "default": "accredited bike-building programmes for schools and prisons."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_lede",
+      "label": "Lede",
+      "default": "We turn bike-building into recognised skills — a free STEM build for schools, and an OCN Level 2 course you run inside your own prison workshop. Both start with a conversation."
+    },
+    {
+      "type": "text",
+      "id": "hero_cta1_label",
+      "label": "Primary CTA",
+      "default": "start a conversation"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta2_label",
+      "label": "Jump link 1",
+      "default": "for schools"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta3_label",
+      "label": "Jump link 2",
+      "default": "for prisons"
+    },
+    {
+      "type": "header",
+      "content": "Two paths overview"
+    },
+    {
+      "type": "text",
+      "id": "paths_eyebrow",
+      "label": "Eyebrow",
+      "default": "two ways in, one craft"
+    },
+    {
+      "type": "text",
+      "id": "paths_title",
+      "label": "Heading",
+      "default": "prevention in schools, rehabilitation in prisons."
+    },
+    {
+      "type": "textarea",
+      "id": "paths_lede",
+      "label": "Lede",
+      "default": "The same hands-on bike build, shaped for two audiences — reaching young people before exclusion, and adults inside on a route back to work."
+    },
+    {
+      "type": "text",
+      "id": "sch_tag",
+      "label": "Schools card tag",
+      "default": "in schools · ages 11–19"
+    },
+    {
+      "type": "text",
+      "id": "sch_card_title",
+      "label": "Schools card title",
+      "default": "real engineering"
+    },
+    {
+      "type": "textarea",
+      "id": "sch_card_body",
+      "label": "Schools card body",
+      "default": "A free bamboo-speaker STEM build for schools and colleges — OCN Level 1 when you build up. Teachers run it; no engineering background needed."
+    },
+    {
+      "type": "text",
+      "id": "pri_tag",
+      "label": "Prisons card tag",
+      "default": "in prisons · accredited"
+    },
+    {
+      "type": "text",
+      "id": "pri_card_title",
+      "label": "Prisons card title",
+      "default": "vocational skills"
+    },
+    {
+      "type": "textarea",
+      "id": "pri_card_body",
+      "label": "Prisons card body",
+      "default": "An OCN Level 2 accredited course you run in your own workshop — we set up and train your staff, no ongoing fees. Ends on family visit day."
+    },
+    {
+      "type": "header",
+      "content": "Schools arm"
+    },
+    {
+      "type": "text",
+      "id": "sch_eyebrow",
+      "label": "Eyebrow",
+      "default": "in schools · real engineering"
+    },
+    {
+      "type": "text",
+      "id": "sch_title",
+      "label": "Heading",
+      "default": "start free. build up when your students ask for more."
+    },
+    {
+      "type": "textarea",
+      "id": "sch_lede",
+      "label": "Lede",
+      "default": "The Speaker build is the front door: a complete STEM project at no cost, curriculum-linked, that any teacher can run. When students want more, it grows into an OCN Level 1 accredited programme."
+    },
+    {
+      "type": "text",
+      "id": "sch_cta_label",
+      "label": "Schools CTA",
+      "default": "enquire for your school"
+    },
+    {
+      "type": "header",
+      "content": "Prisons arm"
+    },
+    {
+      "type": "text",
+      "id": "pri_eyebrow",
+      "label": "Eyebrow",
+      "default": "in prisons · build to bond"
+    },
+    {
+      "type": "text",
+      "id": "pri_title",
+      "label": "Heading",
+      "default": "self-delivery: we set up, we train, you run it."
+    },
+    {
+      "type": "textarea",
+      "id": "pri_lede",
+      "label": "Lede",
+      "default": "Built for prison industries and education teams. We install the workshop, train your staff to deliver the course, and support your first cohorts — then the capability stays in-house, with no ongoing fees."
+    },
+    {
+      "type": "header",
+      "content": "Budget guide (grant framing only)"
+    },
+    {
+      "type": "text",
+      "id": "budget_eyebrow",
+      "label": "Eyebrow",
+      "default": "budget guide"
+    },
+    {
+      "type": "text",
+      "id": "budget_title",
+      "label": "Heading (blank to hide)",
+      "default": "what it costs — in grant-budget terms."
+    },
+    {
+      "type": "textarea",
+      "id": "budget_lede",
+      "label": "Lede",
+      "default": "Indicative figures to build a funding case around. Cohorts at existing sites have been grant-funded in full or in part — we'll help you make the case."
+    },
+    {
+      "type": "textarea",
+      "id": "budget_note",
+      "label": "Footnote",
+      "default": "Figures are indicative and depend on your workshop, cohort size and delivery pattern. We'll scope yours with you."
+    },
+    {
+      "type": "header",
+      "content": "Security & compliance"
+    },
+    {
+      "type": "text",
+      "id": "sec_eyebrow",
+      "label": "Eyebrow",
+      "default": "security & safeguarding"
+    },
+    {
+      "type": "text",
+      "id": "sec_title",
+      "label": "Heading (blank to hide)",
+      "default": "built for the environment it runs in."
+    },
+    {
+      "type": "textarea",
+      "id": "sec_lede",
+      "label": "Lede",
+      "default": "The programme has been shaped inside working prisons, with industries and security teams — not adapted afterwards."
+    },
+    {
+      "type": "header",
+      "content": "Routes to commission"
+    },
+    {
+      "type": "text",
+      "id": "routes_eyebrow",
+      "label": "Eyebrow",
+      "default": "how to commission"
+    },
+    {
+      "type": "text",
+      "id": "routes_title",
+      "label": "Heading (blank to hide)",
+      "default": "three ways to bring it in."
+    },
+    {
+      "type": "textarea",
+      "id": "routes_lede",
+      "label": "Lede",
+      "default": "Whichever route fits your site, it starts with a conversation and a workshop visit."
+    },
+    {
+      "type": "header",
+      "content": "Credibility"
+    },
+    {
+      "type": "textarea",
+      "id": "cred_quote",
+      "label": "Quote (blank to hide)",
+      "default": "Innovative projects, such as Build to Bond, support rehabilitation and help cut reoffending."
+    },
+    {
+      "type": "text",
+      "id": "cred_cite",
+      "label": "Attribution",
+      "default": "— Lord Timpson, Prisons Minister"
+    },
+    {
+      "type": "text",
+      "id": "sites_list",
+      "label": "Named sites (HTML allowed)",
+      "default": "HMP Lowdham Grange &middot; HMP Foston Hall &middot; HMP Lindholme &middot; HMYOI Feltham"
+    },
+    {
+      "type": "textarea",
+      "id": "funder_line",
+      "label": "Funder credit line",
+      "default": "Build to Bond is supported by The National Lottery Community Fund."
+    },
+    {
+      "type": "text",
+      "id": "funder_logo",
+      "label": "Funder logo asset",
+      "default": "logo-nlcf.svg"
+    },
+    {
+      "type": "text",
+      "id": "funder_logo_alt",
+      "label": "Funder logo alt",
+      "default": "The National Lottery Community Fund"
+    },
+    {
+      "type": "text",
+      "id": "accred_logo",
+      "label": "Accreditation logo asset",
+      "default": "logo-ocn-london.svg"
+    },
+    {
+      "type": "text",
+      "id": "accred_logo_alt",
+      "label": "Accreditation logo alt",
+      "default": "OCN London"
+    },
+    {
+      "type": "header",
+      "content": "Enquiry CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_eyebrow",
+      "label": "Eyebrow",
+      "default": "next step"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Heading",
+      "default": "tell us about your school or your site."
+    },
+    {
+      "type": "textarea",
+      "id": "cta_lede",
+      "label": "Lede",
+      "default": "A short conversation is all it takes to start. Tell us who you are and what you'd like to run, and we'll come back with a scoped plan and budget you can take to your governor, head or funder."
+    },
+    {
+      "type": "text",
+      "id": "cta1_label",
+      "label": "CTA 1 label",
+      "default": "start a conversation"
+    },
+    {
+      "type": "url",
+      "id": "contact_url",
+      "label": "Contact link (defaults to contact page)"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "CTA 2 label (email)",
+      "default": "email us"
+    },
+    {
+      "type": "text",
+      "id": "enquiry_email",
+      "label": "Enquiry email",
+      "default": "info@bamboobicycleclub.org"
+    },
+    {
+      "type": "header",
+      "content": "Stories band (add Story cards below)"
+    },
+    {
+      "type": "text",
+      "id": "stories_eyebrow",
+      "label": "Stories eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "stories_title",
+      "label": "Stories heading"
+    },
+    {
+      "type": "textarea",
+      "id": "stories_lede",
+      "label": "Stories intro"
+    },
+    {
+      "type": "text",
+      "id": "stories_all_label",
+      "label": "Read-more button label"
+    },
+    {
+      "type": "url",
+      "id": "stories_all_url",
+      "label": "Read-more button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "stories_lead",
+      "label": "Lead card (first story spans two columns)",
+      "info": "Breaks the 3-up grid so the band opens with a hero. Needs 3+ story cards.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "stories_mosaic",
+      "label": "Mosaic layout (content-aware sizes, no gaps)",
+      "info": "Card size is derived from its content: a film goes wide, long copy goes tall, no image goes flat. Gaps backfill automatically. Needs 3+ cards.",
+      "default": false
+    }
   ],
   "blocks": [
-    { "type": "fact", "name": "Fact", "settings": [
-      { "type": "text", "id": "number", "label": "Number", "default": "4,000+" },
-      { "type": "text", "id": "label", "label": "Label", "default": "people trained" }
-    ]},
-    { "type": "sstep", "name": "Schools step", "settings": [
-      { "type": "text", "id": "title", "label": "Title", "default": "the free speaker build" },
-      { "type": "textarea", "id": "body", "label": "Body", "default": "A complete STEM project at no cost — students design and build a working bamboo speaker." }
-    ]},
-    { "type": "step", "name": "Prisons step", "settings": [
-      { "type": "text", "id": "title", "label": "Title", "default": "scope" },
-      { "type": "textarea", "id": "body", "label": "Body", "default": "A site visit with your team to scope the space, security requirements and cohort size." }
-    ]},
-    { "type": "budget", "name": "Budget card", "settings": [
-      { "type": "text", "id": "figure", "label": "Figure", "default": "~£8,500" },
-      { "type": "text", "id": "title", "label": "Title", "default": "per cohort" },
-      { "type": "textarea", "id": "body", "label": "Body", "default": "Materials, delivery support and accreditation for one six-week cohort." }
-    ]},
-    { "type": "check", "name": "Compliance item", "settings": [
-      { "type": "text", "id": "text", "label": "Text", "default": "Enhanced-DBS facilitators, vetted for prison delivery" }
-    ]},
-    { "type": "route", "name": "Commissioning route", "settings": [
-      { "type": "text", "id": "tag", "label": "Tag", "default": "Direct" },
-      { "type": "text", "id": "title", "label": "Title", "default": "commission directly" },
-      { "type": "textarea", "id": "body", "label": "Body", "default": "For Learning & Skills Managers and Heads of Reducing Reoffending: a conversation and a site visit is the usual start." }
-    ]}
+    {
+      "type": "fact",
+      "name": "Fact",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "4,000+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "people trained"
+        }
+      ]
+    },
+    {
+      "type": "sstep",
+      "name": "Schools step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "the free speaker build"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "A complete STEM project at no cost — students design and build a working bamboo speaker."
+        }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Prisons step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "scope"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "A site visit with your team to scope the space, security requirements and cohort size."
+        }
+      ]
+    },
+    {
+      "type": "budget",
+      "name": "Budget card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "figure",
+          "label": "Figure",
+          "default": "~£8,500"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "per cohort"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Materials, delivery support and accreditation for one six-week cohort."
+        }
+      ]
+    },
+    {
+      "type": "check",
+      "name": "Compliance item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Enhanced-DBS facilitators, vetted for prison delivery"
+        }
+      ]
+    },
+    {
+      "type": "route",
+      "name": "Commissioning route",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "default": "Direct"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "commission directly"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "For Learning & Skills Managers and Heads of Reducing Reoffending: a conversation and a site visit is the usual start."
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "name": "Story card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "kind",
+          "label": "Tag"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "outcome",
+          "label": "Outcome headline (overrides Title on the card)",
+          "info": "The card heading is the only card-level link (WCAG 2.4.4) — it must say what you get."
+        },
+        {
+          "type": "textarea",
+          "id": "blurb",
+          "label": "Short text"
+        },
+        {
+          "type": "text",
+          "id": "image",
+          "label": "Image filename or full URL"
+        },
+        {
+          "type": "text",
+          "id": "video",
+          "label": "YouTube video ID (optional)"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL (optional)"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link to the full story"
+        }
+      ]
+    }
   ],
   "presets": [
-    { "name": "Programmes 2026", "blocks": [
-      { "type": "fact", "settings": { "number": "4,000+", "label": "people trained since 2012" }},
-      { "type": "fact", "settings": { "number": "90%", "label": "prison course completion — BBC records" }},
-      { "type": "fact", "settings": { "number": "OCN L1 & L2", "label": "accredited in schools and prisons" }},
-      { "type": "fact", "settings": { "number": "4", "label": "active prison sites" }},
-      { "type": "sstep", "settings": { "title": "the free speaker build", "body": "A complete STEM project at no cost — students design and build a working bamboo speaker, start to finish." }},
-      { "type": "sstep", "settings": { "title": "no engineering background needed", "body": "Teachers run it whether or not they've held a saw. Everything to deliver it is provided; you bring the class." }},
-      { "type": "sstep", "settings": { "title": "build up to OCN Level 1", "body": "When students want more, the free build grows into an accredited programme — recognised skills and a real qualification." }},
-      { "type": "sstep", "settings": { "title": "most schools run it fully funded", "body": "The Speaker is free so you can prove it works before you ask for a budget — and most paid programmes run on funding we help you find." }},
-      { "type": "step", "settings": { "title": "scope", "body": "A site visit with your industries or education team: workshop space, security and tool-control requirements, cohort size." }},
-      { "type": "step", "settings": { "title": "set up", "body": "Jigs, tooling and materials installed — a one-time setup, typically £7–10k depending on your workshop." }},
-      { "type": "step", "settings": { "title": "train your team", "body": "We train your instructors and workshop staff to deliver the course themselves — the capability stays in-house, with no ongoing fees." }},
-      { "type": "step", "settings": { "title": "deliver & accredit", "body": "Repeatable six-week cohorts, budgeted around £8,500 each including materials and OCN Level 2 accreditation." }},
-      { "type": "step", "settings": { "title": "family visit day", "body": "Each cohort ends with Makers presenting the balance bikes they built to their own children — the bike goes home." }},
-      { "type": "budget", "settings": { "figure": "~£180", "title": "per kit", "body": "One balance-bike kit — the build each Maker completes and gives away." }},
-      { "type": "budget", "settings": { "figure": "~£8,500", "title": "per cohort", "body": "Materials, delivery support and accreditation for one six-week cohort." }},
-      { "type": "budget", "settings": { "figure": "£7–10k", "title": "workshop setup", "body": "One-time capex: jigs, tooling and workshop fit-out, scoped to your space." }},
-      { "type": "budget", "settings": { "figure": "~£45k", "title": "full site-year", "body": "A year of cohorts at one site — the envelope a funder or governor can plan around." }},
-      { "type": "check", "settings": { "text": "Enhanced-DBS facilitators, vetted for prison delivery" }},
-      { "type": "check", "settings": { "text": "Designed around prison workshop security and tool-control requirements" }},
-      { "type": "check", "settings": { "text": "Safeguarding-first: participants are never identified in our materials" }},
-      { "type": "check", "settings": { "text": "Public-liability insured" }},
-      { "type": "check", "settings": { "text": "OCN London accredited, with portfolio evidence for every Maker" }},
-      { "type": "route", "settings": { "tag": "Direct", "title": "commission directly", "body": "For Learning & Skills Managers and Heads of Reducing Reoffending: a conversation and a site visit is the usual start." }},
-      { "type": "route", "settings": { "tag": "Via your provider", "title": "through your education prime", "body": "We deliver alongside prison education providers — bring us in under your existing provision." }},
-      { "type": "route", "settings": { "tag": "Funded", "title": "with a funder", "body": "Cohorts at existing sites have been grant-funded. We'll help you build the funding case for yours." }}
-    ]}
+    {
+      "name": "Programmes 2026",
+      "blocks": [
+        {
+          "type": "fact",
+          "settings": {
+            "number": "4,000+",
+            "label": "people trained since 2012"
+          }
+        },
+        {
+          "type": "fact",
+          "settings": {
+            "number": "90%",
+            "label": "prison course completion — BBC records"
+          }
+        },
+        {
+          "type": "fact",
+          "settings": {
+            "number": "OCN L1 & L2",
+            "label": "accredited in schools and prisons"
+          }
+        },
+        {
+          "type": "fact",
+          "settings": {
+            "number": "4",
+            "label": "active prison sites"
+          }
+        },
+        {
+          "type": "sstep",
+          "settings": {
+            "title": "the free speaker build",
+            "body": "A complete STEM project at no cost — students design and build a working bamboo speaker, start to finish."
+          }
+        },
+        {
+          "type": "sstep",
+          "settings": {
+            "title": "no engineering background needed",
+            "body": "Teachers run it whether or not they've held a saw. Everything to deliver it is provided; you bring the class."
+          }
+        },
+        {
+          "type": "sstep",
+          "settings": {
+            "title": "build up to OCN Level 1",
+            "body": "When students want more, the free build grows into an accredited programme — recognised skills and a real qualification."
+          }
+        },
+        {
+          "type": "sstep",
+          "settings": {
+            "title": "most schools run it fully funded",
+            "body": "The Speaker is free so you can prove it works before you ask for a budget — and most paid programmes run on funding we help you find."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "scope",
+            "body": "A site visit with your industries or education team: workshop space, security and tool-control requirements, cohort size."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "set up",
+            "body": "Jigs, tooling and materials installed — a one-time setup, typically £7–10k depending on your workshop."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "train your team",
+            "body": "We train your instructors and workshop staff to deliver the course themselves — the capability stays in-house, with no ongoing fees."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "deliver & accredit",
+            "body": "Repeatable six-week cohorts, budgeted around £8,500 each including materials and OCN Level 2 accreditation."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "family visit day",
+            "body": "Each cohort ends with Makers presenting the balance bikes they built to their own children — the bike goes home."
+          }
+        },
+        {
+          "type": "budget",
+          "settings": {
+            "figure": "~£180",
+            "title": "per kit",
+            "body": "One balance-bike kit — the build each Maker completes and gives away."
+          }
+        },
+        {
+          "type": "budget",
+          "settings": {
+            "figure": "~£8,500",
+            "title": "per cohort",
+            "body": "Materials, delivery support and accreditation for one six-week cohort."
+          }
+        },
+        {
+          "type": "budget",
+          "settings": {
+            "figure": "£7–10k",
+            "title": "workshop setup",
+            "body": "One-time capex: jigs, tooling and workshop fit-out, scoped to your space."
+          }
+        },
+        {
+          "type": "budget",
+          "settings": {
+            "figure": "~£45k",
+            "title": "full site-year",
+            "body": "A year of cohorts at one site — the envelope a funder or governor can plan around."
+          }
+        },
+        {
+          "type": "check",
+          "settings": {
+            "text": "Enhanced-DBS facilitators, vetted for prison delivery"
+          }
+        },
+        {
+          "type": "check",
+          "settings": {
+            "text": "Designed around prison workshop security and tool-control requirements"
+          }
+        },
+        {
+          "type": "check",
+          "settings": {
+            "text": "Safeguarding-first: participants are never identified in our materials"
+          }
+        },
+        {
+          "type": "check",
+          "settings": {
+            "text": "Public-liability insured"
+          }
+        },
+        {
+          "type": "check",
+          "settings": {
+            "text": "OCN London accredited, with portfolio evidence for every Maker"
+          }
+        },
+        {
+          "type": "route",
+          "settings": {
+            "tag": "Direct",
+            "title": "commission directly",
+            "body": "For Learning & Skills Managers and Heads of Reducing Reoffending: a conversation and a site visit is the usual start."
+          }
+        },
+        {
+          "type": "route",
+          "settings": {
+            "tag": "Via your provider",
+            "title": "through your education prime",
+            "body": "We deliver alongside prison education providers — bring us in under your existing provision."
+          }
+        },
+        {
+          "type": "route",
+          "settings": {
+            "tag": "Funded",
+            "title": "with a funder",
+            "body": "Cohorts at existing sites have been grant-funded. We'll help you build the funding case for yours."
+          }
+        }
+      ]
+    }
   ]
 }
 {% endschema %}

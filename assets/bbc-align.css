@@ -18,16 +18,49 @@
    band at 40px, zero off-axis), and the footer wordmark / masthead signature.
    ========================================================================== */
 
-/* ── 2 · MEASURE BOXES ARE CENTRED BOXES ──────────────────────────────────────
-   A narrower column on the same centre line, never a left-hugging one. This is
-   the rule that undoes the margin-inline:0 !important overrides; it has to carry
-   !important of its own to out-rank them, and it loads last so it wins on order
-   as well as weight. */
+/* ── 2 · THE 1200 CONTAINER CENTRES IN THE VIEWPORT ───────────────────────────
+   This is the page axis itself and is not in dispute. */
 .bbc-rd .rd-wrap,
-.bbc-rd [class*="rd-mw-"],
 .bbc-rd .rd-mx-auto,
 .bbc-rd [class*="rd-cmp-"]{
   margin-inline:auto !important;
+}
+
+/* ── 2a · MEASURE BOXES SIT ON THE AXIS, THEY DO NOT CENTRE ───────────────────
+   REVERSED 2026-07-31 (James: "decide the best option for optimised website").
+
+   This file previously forced [class*="rd-mw-"] to margin-inline:auto, i.e. a
+   narrow column centred on the page's centre line. That put its heading 190px
+   in from every other band heading at 1568 — and estate-check T2 (one text
+   axis, <=8px) failed 27 times across 7 pages because of it. Two rules I wrote
+   encoding opposite contracts; this is the resolution.
+
+   Why the axis wins: the indent is not constant. It is (container - measure)/2,
+   so 19px at 768, 102px at 1024, 190px at 1568+. A deliberate typographic
+   device is proportional and intentional; an indent that is merely whatever
+   space is left over reads as sloppiness at 768 and as misalignment at 1568.
+   The readability benefit of a measure box is its LINE LENGTH (WCAG 1.4.8),
+   which is independent of horizontal position — so capping the measure and
+   sitting on the axis costs nothing and restores one heading edge per page.
+
+   calc(50% - 600px) == (100% - 1200px)/2, resolved against the PARENT width.
+   Deliberately not 100vw: that includes the scrollbar, which would drift the
+   axis by ~7px — inside T2's 8px tolerance, but only just, and for no reason.
+
+   The opt-outs are load-bearing, not decoration. .rd-center and .rd-mx-auto
+   keep auto margins because their TEXT is centred too. Moving a box to the axis
+   while its text stays centred is the exact defect this whole file exists to
+   fix (see the header) — box alignment and text alignment must agree. */
+/* [class*="rd-cmp-"] added 2026-07-31. §2 above was forcing margin-inline:auto on every
+   per-component wrapper, which centred the impact page's discovery-call box 241px off the axis
+   while its text stayed left — motion-check measured the impact axis spread at 0px on 24 Jul and
+   241px after that rule landed. The .rd-center / .rd-mx-auto opt-outs are what make this safe:
+   5 of 43 cmp boxes measured estate-wide DO centre their text, and they keep auto margins. */
+.bbc-rd .rd-wrap[class*="rd-mw-"]:not(.rd-mx-auto):not(.rd-center),
+.bbc-rd [class*="rd-mw-"]:not(.rd-mx-auto):not(.rd-center),
+.bbc-rd [class*="rd-cmp-"]:not(.rd-mx-auto):not(.rd-center){
+  margin-left:max(0px, calc(50% - 600px)) !important;
+  margin-right:0 !important;
 }
 
 /* ── 3 · TEXT DEFAULTS TO LEFT — SET ONCE, THEN INHERITED ─────────────────────

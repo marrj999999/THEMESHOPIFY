@@ -73,13 +73,37 @@
       ]
     },
     {
+      "cls": "bbc-media__img",
+      "prop": "radius",
+      "variants": [
+        {
+          "v": "0px",
+          "pages": [
+            "/",
+            "/pages/impact",
+            "/pages/workshops",
+            "/pages/schools",
+            "/pages/programmes",
+            "/pages/why-bamboo",
+            "/pages/our-story-2",
+            "/products/gravel-frame-build-kit"
+          ]
+        },
+        {
+          "v": "14px",
+          "pages": [
+            "/"
+          ]
+        }
+      ]
+    },
+    {
       "cls": "rd-card",
       "prop": "radius",
       "variants": [
         {
           "v": "0px",
           "pages": [
-            "/pages/impact",
             "/pages/schools",
             "/pages/programmes",
             "/pages/our-story-2",
@@ -111,7 +135,6 @@
         {
           "v": "0px none",
           "pages": [
-            "/pages/impact",
             "/pages/schools",
             "/pages/programmes",
             "/pages/our-story-2",
@@ -144,7 +167,6 @@
           "v": "0px",
           "pages": [
             "/",
-            "/pages/impact",
             "/pages/workshops",
             "/pages/schools",
             "/collections/all",
@@ -163,58 +185,11 @@
       ]
     },
     {
-      "cls": "rd-num",
-      "prop": "textAlign",
-      "variants": [
-        {
-          "v": "left",
-          "pages": [
-            "/pages/impact",
-            "/pages/workshops",
-            "/pages/schools",
-            "/pages/programmes",
-            "/pages/why-bamboo",
-            "/pages/build-to-bond",
-            "/products/gravel-frame-build-kit"
-          ]
-        },
-        {
-          "v": "center",
-          "pages": [
-            "/pages/our-story-2"
-          ]
-        }
-      ]
-    },
-    {
-      "cls": "rd-stats",
-      "prop": "textAlign",
-      "variants": [
-        {
-          "v": "left",
-          "pages": [
-            "/pages/impact",
-            "/pages/workshops",
-            "/pages/schools",
-            "/pages/why-bamboo",
-            "/pages/build-to-bond",
-            "/products/gravel-frame-build-kit"
-          ]
-        },
-        {
-          "v": "center",
-          "pages": [
-            "/pages/our-story-2"
-          ]
-        }
-      ]
-    },
-    {
       "cls": "rd-stat",
-      "prop": "textAlign",
+      "prop": "padding",
       "variants": [
         {
-          "v": "left",
+          "v": "0px",
           "pages": [
             "/pages/impact",
             "/pages/workshops",
@@ -225,53 +200,7 @@
           ]
         },
         {
-          "v": "center",
-          "pages": [
-            "/pages/our-story-2"
-          ]
-        }
-      ]
-    },
-    {
-      "cls": "rd-lbl",
-      "prop": "textAlign",
-      "variants": [
-        {
-          "v": "left",
-          "pages": [
-            "/pages/impact",
-            "/pages/workshops",
-            "/pages/schools",
-            "/pages/why-bamboo",
-            "/pages/build-to-bond",
-            "/products/gravel-frame-build-kit"
-          ]
-        },
-        {
-          "v": "center",
-          "pages": [
-            "/pages/our-story-2"
-          ]
-        }
-      ]
-    },
-    {
-      "cls": "rd-src",
-      "prop": "textAlign",
-      "variants": [
-        {
-          "v": "left",
-          "pages": [
-            "/pages/impact",
-            "/pages/workshops",
-            "/pages/schools",
-            "/pages/why-bamboo",
-            "/pages/build-to-bond",
-            "/products/gravel-frame-build-kit"
-          ]
-        },
-        {
-          "v": "center",
+          "v": "40px 0px 0px",
           "pages": [
             "/pages/our-story-2"
           ]
@@ -302,50 +231,6 @@
       ]
     },
     {
-      "cls": "rd-q",
-      "prop": "textAlign",
-      "variants": [
-        {
-          "v": "left",
-          "pages": [
-            "/pages/impact",
-            "/pages/programmes",
-            "/pages/build-to-bond",
-            "/pages/our-story-2",
-            "/products/gravel-frame-build-kit"
-          ]
-        },
-        {
-          "v": "center",
-          "pages": [
-            "/pages/workshops"
-          ]
-        }
-      ]
-    },
-    {
-      "cls": "bbc-media__img",
-      "prop": "radius",
-      "variants": [
-        {
-          "v": "0px",
-          "pages": [
-            "/",
-            "/pages/impact",
-            "/pages/schools",
-            "/pages/why-bamboo",
-            "/products/gravel-frame-build-kit"
-          ]
-        },
-        {
-          "v": "14px",
-          "pages": [
-            "/"
-          ]
-        }
-      ]
-    },
-    {
       "cls": "bbc-press__row",
       "prop": "textAlign",
       "variants": [
@@ -367,151 +252,41 @@
       ]
     },
     {
-      "cls": "bbc-press__cell",
+      "cls": "rd-big",
       "prop": "textAlign",
       "variants": [
         {
-          "v": "left",
+          "v": "center",
           "pages": [
             "/",
-            "/pages/impact",
+            "/pages/workshops",
             "/products/gravel-frame-build-kit"
           ]
         },
         {
-          "v": "center",
+          "v": "left",
           "pages": [
-            "/pages/workshops",
             "/pages/our-story-2"
           ]
         }
       ]
     },
     {
-      "cls": "bbc-press__link",
+      "cls": "rd-sm",
       "prop": "textAlign",
       "variants": [
         {
-          "v": "left",
+          "v": "center",
           "pages": [
             "/",
-            "/pages/impact",
+            "/pages/workshops",
             "/products/gravel-frame-build-kit"
           ]
         },
-        {
-          "v": "center",
-          "pages": [
-            "/pages/workshops",
-            "/pages/our-story-2"
-          ]
-        }
-      ]
-    },
-    {
-      "cls": "bbc-press__logo",
-      "prop": "textAlign",
-      "variants": [
         {
           "v": "left",
           "pages": [
-            "/",
-            "/pages/impact",
-            "/products/gravel-frame-build-kit"
-          ]
-        },
-        {
-          "v": "center",
-          "pages": [
-            "/pages/workshops",
             "/pages/our-story-2"
-          ]
-        }
-      ]
-    },
-    {
-      "cls": "rd-step",
-      "prop": "radius",
-      "variants": [
-        {
-          "v": "12px",
-          "pages": [
-            "/",
-            "/pages/workshops",
-            "/pages/our-story-2",
-            "/products/gravel-frame-build-kit"
-          ]
-        },
-        {
-          "v": "0px",
-          "pages": [
-            "/",
-            "/pages/workshops",
-            "/pages/our-story-2",
-            "/products/gravel-frame-build-kit"
-          ]
-        }
-      ]
-    },
-    {
-      "cls": "rd-cscard__body",
-      "prop": "padding",
-      "variants": [
-        {
-          "v": "22px 22px 20px",
-          "pages": [
-            "/",
-            "/pages/impact",
-            "/pages/why-bamboo",
-            "/pages/build-to-bond"
-          ]
-        },
-        {
-          "v": "22px 0px 20px",
-          "pages": [
-            "/pages/impact"
-          ]
-        }
-      ]
-    },
-    {
-      "cls": "rd-cscard",
-      "prop": "radius",
-      "variants": [
-        {
-          "v": "10px",
-          "pages": [
-            "/",
-            "/pages/why-bamboo",
-            "/pages/build-to-bond"
-          ]
-        },
-        {
-          "v": "0px",
-          "pages": [
-            "/",
-            "/pages/impact"
-          ]
-        }
-      ]
-    },
-    {
-      "cls": "rd-cscard",
-      "prop": "border",
-      "variants": [
-        {
-          "v": "2px solid",
-          "pages": [
-            "/",
-            "/pages/why-bamboo",
-            "/pages/build-to-bond"
-          ]
-        },
-        {
-          "v": "0px none",
-          "pages": [
-            "/",
-            "/pages/impact"
           ]
         }
       ]
@@ -537,77 +312,63 @@
       ]
     },
     {
-      "cls": "rd-loop",
-      "prop": "textAlign",
+      "cls": "rd-step",
+      "prop": "padding",
       "variants": [
         {
-          "v": "left",
+          "v": "20px 12px 0px",
           "pages": [
             "/",
-            "/pages/our-story-2"
+            "/pages/workshops",
+            "/products/gravel-frame-build-kit"
           ]
         },
         {
-          "v": "center",
+          "v": "20px 12px",
           "pages": [
+            "/",
+            "/pages/workshops",
             "/products/gravel-frame-build-kit"
           ]
         }
       ]
     },
     {
-      "cls": "rd-cscard.rd-cscard--video",
+      "cls": "rd-step",
       "prop": "radius",
       "variants": [
         {
-          "v": "10px",
-          "pages": [
-            "/",
-            "/pages/why-bamboo"
-          ]
-        },
-        {
           "v": "0px",
           "pages": [
-            "/pages/impact"
-          ]
-        }
-      ]
-    },
-    {
-      "cls": "rd-cscard.rd-cscard--video",
-      "prop": "border",
-      "variants": [
-        {
-          "v": "2px solid",
-          "pages": [
             "/",
-            "/pages/why-bamboo"
+            "/pages/workshops",
+            "/products/gravel-frame-build-kit"
           ]
         },
         {
-          "v": "0px none",
+          "v": "12px",
           "pages": [
-            "/pages/impact"
+            "/",
+            "/pages/workshops",
+            "/products/gravel-frame-build-kit"
           ]
         }
       ]
     },
     {
-      "cls": "bbc-press__more",
+      "cls": "rd-loop",
       "prop": "textAlign",
       "variants": [
         {
           "v": "left",
           "pages": [
-            "/",
-            "/pages/impact"
+            "/"
           ]
         },
         {
           "v": "center",
           "pages": [
-            "/pages/our-story-2"
+            "/products/gravel-frame-build-kit"
           ]
         }
       ]

@@ -1,0 +1,75 @@
+{%- comment -%}
+  THE STORIES BAND — one band, five sections. 2026-08-01.
+
+  WHY THIS EXISTS
+  Eleven pages scored zero story cards and it read as a content gap. It was not. snippets/
+  bbc-cscard.liquid — the contract-tested standard card — was reachable from exactly SEVEN
+  sections, and those seven are precisely the pages scoring 4-5/5 against the Impact baseline.
+  bbc-commissioners / bbc-toc / bbc-workshops / bbc-product / bbc-programmes had no `story`
+  block type at all, so no amount of writing could have put a card on them.
+
+  (Second time the same trap: the About page's "4 of 7 bands carry no image" turned out to be
+  2 of 7 bands that COULD hold one. Capability gaps read exactly like content gaps from outside.)
+
+  Rather than paste the band into five sections, it lives here once. Each section gains a
+  `story` block in its schema and a single render call. The card contract is unchanged, so
+  qa/casestudy-conformance.mjs covers these pages the moment they carry cards.
+
+  USAGE
+    {%- render 'bbc-stories-band', section: section -%}
+  Section settings honoured (all optional): stories_eyebrow, stories_title, stories_lede,
+  stories_all_label, stories_all_url. Block settings: kind, title, outcome, blurb, image, url,
+  video / video_url / video_file.
+{%- endcomment -%}
+
+{%- assign story_blocks = section.blocks | where: 'type', 'story' -%}
+{%- if story_blocks.size > 0 -%}
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      {%- if section.settings.stories_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.stories_eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.stories_title != blank -%}<h2 class="rd-reveal rd-mw-20ch">{{ section.settings.stories_title }}</h2>{%- endif -%}
+      {%- if section.settings.stories_lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.stories_lede }}</p>{%- endif -%}
+      {%- comment -%} LEAD CARD (2026-08-01). Every stories band on the estate was an identical
+         3-up grid — the exact "every band is a grid of bordered cards" monotony FORMULA §8 is
+         written against. bbc-cscard already shipped a `featured` variant that nothing used.
+         The first card takes it, so each band opens with a hero and settles into a grid: one
+         extra device per page, no new component, no new CSS. Off by default via the schema so
+         a band with two cards is not forced into a lopsided layout. {%- endcomment -%}
+      {%- comment -%} Mosaic supersedes the lead-card layout: the lead card was one hand-set
+         hero, the mosaic derives every card's size from its own content and backfills holes
+         with grid-auto-flow:dense. Both settings are kept so a band can opt into either, but
+         mosaic wins if both are on — it subsumes what lead did. {%- endcomment -%}
+      {%- assign lead = section.settings.stories_lead | default: false -%}
+      {%- assign mosaic = section.settings.stories_mosaic | default: false -%}
+      {%- assign _grid = '' -%}
+      {%- if mosaic and story_blocks.size > 2 -%}{%- assign _grid = ' rd-csgrid--mosaic' -%}
+      {%- elsif lead and story_blocks.size > 2 -%}{%- assign _grid = ' rd-csgrid--lead' -%}{%- endif -%}
+      <ul class="rd-csgrid{{ _grid }} rd-mt4" role="list">
+        {%- assign _i = 0 -%}
+        {%- for block in section.blocks -%}{%- if block.type == 'story' -%}
+          {%- comment -%} Filters are NOT allowed inside render arguments — they fail silently.
+             Everything is assigned first. {%- endcomment -%}
+          {%- assign _i = _i | plus: 1 -%}
+          {%- assign _var = 'grid' -%}
+          {%- if lead and _i == 1 and story_blocks.size > 2 -%}{%- assign _var = 'featured' -%}{%- endif -%}
+          {%- assign vurl = block.settings.video_url | default: block.settings.video -%}
+          {%- assign _img = block.settings.image | default: 'bbc-rd-cohort.jpg' -%}
+          {%- assign _head = block.settings.outcome | default: block.settings.title -%}
+          {%- render 'bbc-cscard',
+               variant: _var,
+               kind: block.settings.kind,
+               heading: _head,
+               url: block.settings.url,
+               context: block.settings.blurb,
+               image: _img,
+               youtube: vurl,
+               video_file: block.settings.video_file -%}
+        {%- endif -%}{%- endfor -%}
+      </ul>
+      {% render 'bbc-video-lightbox' %}
+      {%- if section.settings.stories_all_label != blank -%}
+        <div class="rd-mt4"><a class="rd-btn rd-ghost" href="{{ section.settings.stories_all_url | default: '/blogs/impact' }}">{{ section.settings.stories_all_label }} <span class="rd-arrow">&rarr;</span></a></div>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}

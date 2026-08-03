@@ -596,15 +596,35 @@
       <span class="rd-eyebrow">Proven on the road</span>
       <h2 class="rd-reveal rd-mw-20ch">bamboo soaks up the road — riders and reviewers agree.</h2>
       <p class="rd-lede rd-mt2">Not just our word. National press, pro reviewers and ten-year riders all land on the same thing: it rides beautifully.</p>
-      <div class="rd-csgrid rd-mt4">
-        <a class="rd-reveal rd-cscard rd-cscard--video" href="https://www.youtube.com/watch?v=cQxbC-njbGQ" data-yt="cQxbC-njbGQ">
-          <div class="rd-cscard__media"><img src="{{ 'bbc-rd-gcn.jpg' | asset_url }}" alt="GCN reviews a bamboo bike on test" loading="lazy" width="600" height="338"><span class="rd-cscard__kind">GCN review</span><span class="rd-cscard__play" aria-hidden="true"></span></div>
-          <div class="rd-cscard__body"><p class="rd-cscard__ctx">Global Cycling Network puts a bamboo bike to the test: &ldquo;Are bamboo bikes actually any good?&rdquo;</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">Global Cycling Network</span><span class="rd-cscard__more">Watch the film <span class="rd-arrow">&rarr;</span></span></div></div>
-        </a>
-        <div class="rd-reveal rd-cscard"><div class="rd-cscard__body"><p class="rd-cscard__quote">Bamboo naturally dampens vibration, allowing the smoothest ride.</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">The Guardian</span></div></div></div>
-        <div class="rd-reveal rd-cscard"><div class="rd-cscard__body"><p class="rd-cscard__quote">A really, really comfortable ride &mdash; smooth but not too flexy.</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">Kate Rawles &middot; BikeRadar</span></div></div></div>
-        <a class="rd-reveal rd-cscard" href="/blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike"><div class="rd-cscard__body"><p class="rd-cscard__ctx"><strong>Taro</strong> still rides the same frame after <strong>10 years</strong> of daily commuting.</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">Builder story</span><span class="rd-cscard__more">Read his story <span class="rd-arrow">&rarr;</span></span></div></div></a>
-      </div>
+      {%- comment -%} Two component types used to share one class here, 2026-07-31. The GCN film and
+         Taro's build are case studies; the Guardian and BikeRadar lines are PRESS QUOTES — no image,
+         no link, no story behind them. Forcing a pull-quote into a case-study card would give it a
+         heading link it has no destination for, so the quotes now carry their own class and sit
+         outside the case-study contract, while the two real cards render THE standard card.
+      {%- endcomment -%}
+      <ul class="rd-csgrid rd-mt4" role="list">
+        {%- render 'bbc-cscard',
+             variant: 'grid',
+             kind: 'GCN review',
+             heading: 'Global Cycling Network puts a bamboo bike to the test.',
+             url: 'https://www.youtube.com/watch?v=cQxbC-njbGQ',
+             context: '&ldquo;Are bamboo bikes actually any good?&rdquo;',
+             image: 'bbc-rd-gcn.jpg',
+             youtube: 'https://www.youtube.com/watch?v=cQxbC-njbGQ',
+             cta: 'Watch the film' -%}
+        {%- render 'bbc-cscard',
+             variant: 'grid',
+             kind: 'builder story',
+             heading: 'Taro still rides the same frame after 10 years of daily commuting.',
+             url: '/blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike',
+             context: 'One frame, built by hand, ridden every day for a decade.',
+             image: 'bbc-rd-bike-field.jpg',
+             cta: 'Read his story' -%}
+      </ul>
+      <ul class="rd-pressquotes rd-mt3" role="list">
+        <li class="rd-pressquote rd-reveal"><p>Bamboo naturally dampens vibration, allowing the smoothest ride.</p><cite>The Guardian</cite></li>
+        <li class="rd-pressquote rd-reveal"><p>A really, really comfortable ride &mdash; smooth but not too flexy.</p><cite>Kate Rawles &middot; BikeRadar</cite></li>
+      </ul>
       {% render 'bbc-video-lightbox' %}
     </div>
   </section>

@@ -1,0 +1,16 @@
+TYPE DRIFT AUDIT — 2026-08-03
+Same class rendering different sizes across 20 pages @1280.
+Same class + different size = real drift. Different class + different size = a design system.
+
+167 design-system classes measured · 3 showing drift
+
+rd-q
+    22px on 1 page(s)  e.g. /products/gravel-frame-build-kit
+    28px on 6 page(s)  e.g. /pages/programmes, /pages/workshops, /pages/our-story-2
+    42px on 1 page(s)  e.g. /pages/impact
+rd-big
+    21px on 3 page(s)  e.g. /, /pages/workshops, /products/gravel-frame-build-kit
+    24px on 1 page(s)  e.g. /pages/our-story-2
+rd-sm
+    14px on 3 page(s)  e.g. /, /pages/workshops, /products/gravel-frame-build-kit
+    15px on 1 page(s)  e.g. /pages/our-story-2

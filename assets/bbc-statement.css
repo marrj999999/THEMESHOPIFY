@@ -96,7 +96,13 @@
 .bbc-rd .bbcpl.is-rev .bbcpl-media{ order:2; }
 .bbc-rd .bbcpl.is-paper{ background:var(--bone,#E6DCC8); }
 .bbc-rd .bbcpl.is-steel{ background:#DEE6F0; }
-.bbc-rd .bbcpl.is-forest{ background:var(--forest,#003C32); }
+/* A forest surface must declare its own text colour. Without it, descendants that
+   set no colour of their own inherit ink from .bbc-rd, and the redesign's
+   `a{color:inherit !important}` rule then resolves .bbcpl-cta to ink on forest
+   (measured 1.44:1, 2026-08-03). The .bbcst-* family got :not(#_) guards in the
+   2026-07-07 pass; .bbcpl-* got none. Setting the container colour fixes the CTA
+   and any future link in this block without another specificity hack. */
+.bbc-rd .bbcpl.is-forest{ background:var(--forest,#003C32); color:var(--bone,#E6DCC8); }
 .bbc-rd .bbcpl-media{ position:relative; min-height:0; }
 .bbc-rd .bbcpl-media img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
 .bbc-rd .bbcpl-txt{ display:flex; align-items:center; padding:clamp(40px,5vw,96px); text-align:left; }
@@ -856,6 +862,31 @@ cart-drawer.animate .drawer{ visibility:visible; }
 
 /* B6 · D7 staggered evidence grid, borderless */
 .bbc-rd-impact .rd-cscard{ border:0 !important; border-radius:0 !important; box-shadow:none !important; background:transparent !important; }
+
+/* The borderless treatment above strips the card's background but NOT the card's
+   text colour, and the two are a matched pair. bbc-redesign-2026.css:348-363 gives
+   [data-family="programme"] bone text ON a forest fill. Remove the fill here and the
+   bone text lands on the page's own bone surface: measured 1.00:1 — foreground and
+   background the exact same colour (2026-08-03, pixel-sampled, 32 nodes across both
+   viewports). The featured prison case study rendered as a completely blank column
+   next to its photo — quote, outcomes, "OCN Level 2" and the read-more link all
+   present in the DOM and all invisible.
+   Only "programme" breaks: "applied" (steel + ink) and "recognition" (paper, no
+   colour) both degrade safely to ink on bone when their fill is stripped.
+   `.bbc-rd.bbc-rd-impact` is one element, giving (0,4,0)/(0,5,0) — enough to beat the
+   family rules' (0,3,0)/(0,4,0) without adding another !important. */
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"]{ color:var(--ink,#0E1A17); }
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__heading,
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__heading .rd-cscard__link,
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__more{ color:var(--ink,#0E1A17); }
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__ctx,
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__out,
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__outs,
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__attr,
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__inst,
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__meta,
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] p{ color:var(--charcoal,#2A332F); }
+
 @media (min-width:900px){
   .bbc-rd-impact .rd-csgrid{ align-items:start; }
   .bbc-rd-impact .rd-csgrid > :nth-child(2){ margin-top:clamp(40px,6vw,80px); }

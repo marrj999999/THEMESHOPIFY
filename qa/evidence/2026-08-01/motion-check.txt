@@ -1,0 +1,42 @@
+MOTION-CHECK 2026-08-01 — 39/41 pass
+PASS  estate               no opacity:0 initial state outside @supports (Firefox-blank guard)
+PASS  home                 view() timeline drives (synthetic probe holds from-state)  [opacity=0.13]
+PASS  home                 reveal entry→in  [pre=0 post=1 [ViewTimeline/0]]
+PASS  home                 stagger  [none on page (skip)]
+PASS  home                 marquee running + pausable  [{"running":"running","pausable":true}]
+PASS  home                 overflow-x 0 @1280  [0px]
+PASS  home                 scroll jank (longtasks ≤ 6)  [0]
+PASS  home                 zero JS errors
+PASS  home                 overflow-x 0 @390  [0px]
+PASS  impact               view() timeline drives (synthetic probe holds from-state)  [opacity=0.13]
+PASS  impact               reveal entry→in  [pre=0.3 post=1 [ViewTimeline/0]]
+PASS  impact               stagger entry→in  [pre=0.3 post=1]
+PASS  impact               marquee running + pausable  [{"running":"running","pausable":true}]
+PASS  impact               overflow-x 0 @1280  [0px]
+PASS  impact               scroll jank (longtasks ≤ 6)  [0]
+PASS  impact               zero JS errors
+PASS  impact               overflow-x 0 @390  [0px]
+PASS  pdp                  view() timeline drives (synthetic probe holds from-state)  [opacity=0.13]
+PASS  pdp                  reveal entry→in  [no below-fold reveals (skip)]
+PASS  pdp                  stagger  [none on page (skip)]
+PASS  pdp                  marquee  [none (skip)]
+PASS  pdp                  overflow-x 0 @1280  [0px]
+PASS  pdp                  scroll jank (longtasks ≤ 6)  [0]
+PASS  pdp                  zero JS errors
+PASS  pdp                  overflow-x 0 @390  [0px]
+PASS  collection           view() timeline drives (synthetic probe holds from-state)  [opacity=0.13]
+PASS  collection           reveal entry→in  [pre=0 post=1 [ViewTimeline/0]]
+PASS  collection           stagger  [none on page (skip)]
+PASS  collection           marquee  [none (skip)]
+PASS  collection           overflow-x 0 @1280  [0px]
+PASS  collection           scroll jank (longtasks ≤ 6)  [0]
+PASS  collection           zero JS errors
+PASS  collection           overflow-x 0 @390  [0px]
+PASS  impact @1568         nav gaps >= 8px  [[28,28,28]]
+FAIL  impact @1568         overflow 0 + flagship on axis  [ovf=0 axis=false]
+FAIL  impact @1568         flagship media spans card, landscape (the narrow-strip bug)  [mediaOk=false]
+PASS  impact @1568         one text axis across bands (spread ≤ 6px)  [spread=0px]
+PASS  impact @1568         wall video posters have height  [0 collapsed]
+PASS  impact @1568         no soft raster images (deficit ≤1.35, svg-exempt)  [all sharp]
+PASS  home [reduce]        fully inert + fully visible
+PASS  impact [reduce]      fully inert + fully visible

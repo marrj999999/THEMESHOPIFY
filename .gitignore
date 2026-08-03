@@ -25,3 +25,6 @@ qa/evidence/*/estate-shots/
 # Same reasoning as estate-shots: PNGs do not delta-compress and nobody diffs them.
 qa/research/presentation-shots/
 qa/research/page-shots/
+
+# transient push token written by qa/gate-check.sh, valid 10 minutes
+qa/.gate-pass

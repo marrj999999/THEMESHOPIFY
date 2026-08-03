@@ -23,6 +23,15 @@ export const BANNED = [
   /Level 1 ?& ?2/i,                              // per-arm naming only; never the mushed form
   /14,?765/,                                     // BS EN 14765 withdrawn — no external standard claimed
   /guaranteed interview/i,                       // unverifiable promise
+  // Added 2026-07-31 after cross-checking the ten new case-study cards against the Shopify blog
+  // and the vault. Each of these was PUBLISHED before being caught:
+  /100\s*kg[- ]?payload/i,                        // UCL cargo bike is 150kg per the source article
+                                                 // (/blogs/impact/ucl-masters-…): "a frame designed
+                                                 // to carry a 150kg cargo load". 100kg was live on
+                                                 // /pages/impact and I propagated it to /pages/schools.
+  /rated the day 9\s*[–-]\s*10/i,                 // Project Zero: the article says ratings
+                                                 // "regularly reached" 9–10, not that all 27 rated
+                                                 // it so. Approved framing keeps "regularly".
   /Sustainable Design (&|and) Manufacturing/i,   // wrong OCN title; canonical below
   // Added 2026-07-24 by qa/claims-register-sync.mjs, which found these prohibited in the vault
   // register with NO gate covering them:

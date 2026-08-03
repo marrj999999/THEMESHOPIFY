@@ -6,16 +6,27 @@
   folded in from the existing theme sections + page.our-story-2.json.
 
   Content policy (hard rules):
-    - No prison is ever named — generic descriptors only.
+    - Prisons MAY be named (policy changed by James 2026-06-17). What is still forbidden is
+      linking a NAMED OR IDENTIFIABLE PERSON to a named prison. This matters for imagery as
+      much as copy: of the five Lowdham photos in Files, three show identifiable faces beside
+      a wall reading "HM Prison Lowdham Grange" and must never be used here. Only
+      bbc-rd-prison-empty.jpg (no people) is safe. Minors need a release — the school photos
+      in Files are close-up identifiable children and are NOT usable.
     - Only source-of-truth figures are hardcoded as defaults
       (4,000+ since 2012 · 90% prison course completion
        · 45 countries · frame kits from £375 · Bamboo Mobility Project CIC, Reg 16257348).
+      The CIC is the TRADING entity as well as the programme one; BBC London Ltd holds IP and
+      the university/R&D work (confirmed by James 2026-07-31 — the vault had this reversed).
     - Image fields fall back to bundled bbc-rd-*.jpg assets until real photos are set.
 
-  Structure: full-bleed hero → mission intro → "13 years, one through-line"
-  timeline → "a shop and a mission, one engine" model split → three values
-  cards → recognition (press logos) → final CTA. Every string/image/link/row
-  is editable via {% schema %}.
+  Structure: full-bleed hero → origin band (founder-at-work photo) → "fourteen years, one
+  through-line" culm timeline → "a shop and a mission, one engine" mitred-joint model →
+  three values (each with a real instance) → six story cards → recognition (press logos +
+  dimensioned stats) → final CTA. Every string/image/link/row is editable via {% schema %}.
+
+  The four fabrication-drawing devices (joint, dimension callout, culm, cross-section) are
+  documented at the top of their CSS block in assets/bbc-redesign-2026.css, including why
+  each is a new class or opt-in modifier rather than a restyle.
 {%- endcomment -%}
 
 
@@ -53,17 +64,40 @@
 
   {%- comment -%} ---------- MISSION INTRO ---------- {%- endcomment -%}
   <section class="rd-pad">
-    <div class="rd-wrap rd-mw-820px">
-      {%- if section.settings.intro_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.intro_eyebrow }}</span>{%- endif -%}
-      <h2 class="rd-reveal">{{ section.settings.intro_title }}</h2>
-      {%- if section.settings.intro_body_1 != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.intro_body_1 }}</p>{%- endif -%}
-      {%- if section.settings.intro_body_2 != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.intro_body_2 }}</p>{%- endif -%}
-      {%- if section.settings.intro_quote != blank -%}
-        <div class="rd-pull rd-mt4 rd-reveal">
-          <p class="rd-q">{{ section.settings.intro_quote }}</p>
-          {%- if section.settings.intro_cite != blank -%}<cite>{{ section.settings.intro_cite }}</cite>{%- endif -%}
+    <div class="rd-wrap">
+      {%- comment -%} The origin band carried 107 words and NO image — the biggest storytelling
+         gap on the page. The field research is specific here: one photo of a founder WORKING,
+         not portrait-posed, beside the origin story. Asymmetric split (1.55/1), never 50/50,
+         per FORMULA §8. {%- endcomment -%}
+      <div class="rd-origin">
+        <div>
+          {%- if section.settings.intro_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.intro_eyebrow }}</span>{%- endif -%}
+          <h2 class="rd-reveal rd-mw-18ch">{{ section.settings.intro_title }}</h2>
+          {%- if section.settings.intro_body_1 != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.intro_body_1 }}</p>{%- endif -%}
+          {%- if section.settings.intro_body_2 != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.intro_body_2 }}</p>{%- endif -%}
+          {%- if section.settings.intro_quote != blank -%}
+            <div class="rd-pull rd-mt4 rd-reveal">
+              <p class="rd-q">{{ section.settings.intro_quote }}</p>
+              {%- if section.settings.intro_cite != blank -%}<cite>{{ section.settings.intro_cite }}</cite>{%- endif -%}
+            </div>
+          {%- endif -%}
         </div>
-      {%- endif -%}
+        {%- assign _oi = section.settings.intro_image -%}
+        {%- if section.settings.intro_image_pic != blank or _oi != blank -%}
+          <figure class="rd-reveal" style="margin:0">
+            <div class="rd-origin__media">
+              {%- if section.settings.intro_image_pic != blank -%}
+                <img src="{{ section.settings.intro_image_pic | image_url: width: 900 }}" srcset="{{ section.settings.intro_image_pic | image_url: width: 480 }} 480w, {{ section.settings.intro_image_pic | image_url: width: 900 }} 900w" sizes="(max-width:840px) 92vw, 380px" alt="{{ section.settings.intro_image_alt | escape }}" loading="lazy" width="{{ section.settings.intro_image_pic.width }}" height="{{ section.settings.intro_image_pic.height }}">
+              {%- elsif _oi contains '//' -%}
+                <img src="{{ _oi }}&width=900" srcset="{{ _oi }}&width=480 480w, {{ _oi }}&width=900 900w" sizes="(max-width:840px) 92vw, 380px" alt="{{ section.settings.intro_image_alt | escape }}" loading="lazy" width="900" height="1125">
+              {%- else -%}
+                <img src="{{ _oi | asset_url }}" alt="{{ section.settings.intro_image_alt | escape }}" loading="lazy" width="900" height="1125">
+              {%- endif -%}
+            </div>
+            {%- if section.settings.intro_caption != blank -%}<figcaption class="rd-origin__cap">{{ section.settings.intro_caption }}</figcaption>{%- endif -%}
+          </figure>
+        {%- endif -%}
+      </div>
     </div>
   </section>
 
@@ -73,15 +107,40 @@
       {%- if section.settings.tl_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.tl_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal rd-mw-18ch">{{ section.settings.tl_title }}</h2>
       {%- if section.settings.tl_intro != blank -%}<p class="rd-lede rd-maxw rd-mt2">{{ section.settings.tl_intro }}</p>{%- endif -%}
-      <div class="rd-timeline rd-mt4">
+      {%- comment -%} DEVICE D — the culm. Bamboo grows in segments divided by nodes, and a node
+         is exactly what a timeline marker is. The rail sits in the existing grid gap, so no
+         track sizes change. .rd-tl is used by this section only. {%- endcomment -%}
+      <div class="rd-timeline rd-culm rd-mt4">
         {%- for block in section.blocks -%}{%- if block.type == 'milestone' -%}
           {%- if block.settings.hot -%}{%- assign tl_class = 'rd-tl rd-hot rd-reveal' -%}{%- else -%}{%- assign tl_class = 'rd-tl rd-reveal' -%}{%- endif -%}
+          {%- comment -%} The media is a SIBLING of the text, not nested inside it. Stacked, each
+             illustrated row cost text + 287px of image = 441px for 29 words, and the band grew to
+             25% of the whole page. As a grid sibling the row costs max(text, image) instead.
+             Rows with no photo span both columns so there is no dead right column (FORMULA §8 r6). {%- endcomment -%}
+          {%- if block.settings.image_pic != blank or block.settings.image != blank -%}
+            {%- assign tl_class = tl_class | append: ' rd-tl--media' -%}
+          {%- endif -%}
           <div class="{{ tl_class }}" {{ block.shopify_attributes }}>
             <div class="rd-yr">{{ block.settings.year }}</div>
-            <div>
+            <div class="rd-tl-body">
               <h3>{{ block.settings.title }}</h3>
               {%- if block.settings.body != blank -%}<p>{{ block.settings.body }}</p>{%- endif -%}
             </div>
+            {%- comment -%} Picker OR text, same convention as snippets/bbc-cscard.liquid: a
+               string containing '//' is a CDN URL, anything else is a theme asset. {%- endcomment -%}
+            {%- if block.settings.image_pic != blank -%}
+              <div class="rd-tl-media">
+                <img src="{{ block.settings.image_pic | image_url: width: 900 }}" srcset="{{ block.settings.image_pic | image_url: width: 450 }} 450w, {{ block.settings.image_pic | image_url: width: 900 }} 900w" sizes="(max-width:900px) 92vw, 320px" alt="{{ block.settings.image_alt | escape }}" loading="lazy" width="{{ block.settings.image_pic.width }}" height="{{ block.settings.image_pic.height }}">
+              </div>
+            {%- elsif block.settings.image != blank -%}
+              <div class="rd-tl-media">
+                {%- if block.settings.image contains '//' -%}
+                  <img src="{{ block.settings.image }}&width=900" srcset="{{ block.settings.image }}&width=450 450w, {{ block.settings.image }}&width=900 900w" sizes="(max-width:900px) 92vw, 320px" alt="{{ block.settings.image_alt | escape }}" loading="lazy" width="900" height="563">
+                {%- else -%}
+                  <img src="{{ block.settings.image | asset_url }}" alt="{{ block.settings.image_alt | escape }}" loading="lazy" width="900" height="563">
+                {%- endif -%}
+              </div>
+            {%- endif -%}
           </div>
         {%- endif -%}{%- endfor -%}
       </div>
@@ -101,12 +160,26 @@
       {%- if section.settings.model_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.model_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal">{{ section.settings.model_title }}</h2>
       {%- if section.settings.model_body != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.model_body }}</p>{%- endif -%}
-      <div class="rd-loop rd-mt3 rd-mw-none">
-        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s1_big }}</div><div class="rd-sm">{{ section.settings.loop_s1_sm }}</div></div>
-        <div class="rd-arr">&rarr;</div>
-        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s2_big }}</div><div class="rd-sm">{{ section.settings.loop_s2_sm }}</div></div>
-        <div class="rd-arr">&rarr;</div>
-        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s3_big }}</div><div class="rd-sm">{{ section.settings.loop_s3_sm }}</div></div>
+      {%- comment -%} DEVICE A — the mitred joint. Was .rd-loop: three boxes and two arrows, the
+         shape every template ships. A frame is made by mitring tubes so they meet at one joint,
+         so the funding model is drawn as that joint: three members, one bind. Deliberately a NEW
+         class — .rd-loop is shared with home/product/workshops and must not change. {%- endcomment -%}
+      <div class="rd-joint rd-mt3">
+        <div class="rd-jt"><span class="rd-tube" aria-hidden="true"></span>
+          <span class="rd-mono">{{ section.settings.loop_l1 | default: 'Member 01' }}</span>
+          <div class="rd-big">{{ section.settings.loop_s1_big }}</div>
+          <div class="rd-sm">{{ section.settings.loop_s1_sm }}</div>
+        </div>
+        <div class="rd-jt"><span class="rd-tube" aria-hidden="true"></span>
+          <span class="rd-mono">{{ section.settings.loop_l2 | default: 'Member 02' }}</span>
+          <div class="rd-big">{{ section.settings.loop_s2_big }}</div>
+          <div class="rd-sm">{{ section.settings.loop_s2_sm }}</div>
+        </div>
+        <div class="rd-jt"><span class="rd-tube" aria-hidden="true"></span>
+          <span class="rd-mono">{{ section.settings.loop_l3 | default: 'Member 03 · bonded' }}</span>
+          <div class="rd-big">{{ section.settings.loop_s3_big }}</div>
+          <div class="rd-sm">{{ section.settings.loop_s3_sm }}</div>
+        </div>
       </div>
       {%- if section.settings.model_reg != blank -%}<p class="rd-mt3 rd-c-charcoal">{{ section.settings.model_reg }}</p>{%- endif -%}
     </div>
@@ -123,10 +196,24 @@
         {%- for block in section.blocks -%}{%- if block.type == 'value' -%}
           {%- if block.settings.lime -%}{%- assign card_class = 'rd-card rd-stamp rd-lime rd-reveal' -%}{%- else -%}{%- assign card_class = 'rd-card rd-stamp rd-reveal' -%}{%- endif -%}
           <div class="{{ card_class }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.image_pic != blank -%}
+              <div class="rd-val-media">
+                <img src="{{ block.settings.image_pic | image_url: width: 900 }}" srcset="{{ block.settings.image_pic | image_url: width: 480 }} 480w, {{ block.settings.image_pic | image_url: width: 900 }} 900w" sizes="(max-width:900px) 92vw, 380px" alt="{{ block.settings.image_alt | escape }}" loading="lazy" width="{{ block.settings.image_pic.width }}" height="{{ block.settings.image_pic.height }}">
+              </div>
+            {%- elsif block.settings.image != blank -%}
+              <div class="rd-val-media">
+                {%- if block.settings.image contains '//' -%}
+                  <img src="{{ block.settings.image }}&width=900" srcset="{{ block.settings.image }}&width=480 480w, {{ block.settings.image }}&width=900 900w" sizes="(max-width:900px) 92vw, 380px" alt="{{ block.settings.image_alt | escape }}" loading="lazy" width="900" height="563">
+                {%- else -%}
+                  <img src="{{ block.settings.image | asset_url }}" alt="{{ block.settings.image_alt | escape }}" loading="lazy" width="900" height="563">
+                {%- endif -%}
+              </div>
+            {%- endif -%}
             <div class="rd-body">
               {%- if block.settings.tag != blank -%}<span class="rd-tag rd-lime">{{ block.settings.tag }}</span>{%- endif -%}
               <h3 class="rd-mt2 rd-fs-21px">{{ block.settings.title }}</h3>
               {%- if block.settings.body != blank -%}<p>{{ block.settings.body }}</p>{%- endif -%}
+              {%- if block.settings.evidence != blank -%}<p class="rd-val-ev">{{ block.settings.evidence }}</p>{%- endif -%}
             </div>
           </div>
         {%- endif -%}{%- endfor -%}
@@ -134,36 +221,10 @@
     </div>
   </section>
 
-  {%- comment -%} ---------- STORIES (editable cards) ---------- {%- endcomment -%}
-  {%- assign story_blocks = section.blocks | where: 'type', 'story' -%}
-  {%- if story_blocks.size > 0 -%}
-  <section class="rd-pad">
-    <div class="rd-wrap">
-      {%- if section.settings.stories_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.stories_eyebrow }}</span>{%- endif -%}
-      {%- if section.settings.stories_title != blank -%}<h2 class="rd-reveal rd-mw-20ch">{{ section.settings.stories_title }}</h2>{%- endif -%}
-      {%- if section.settings.stories_lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.stories_lede }}</p>{%- endif -%}
-      <div class="rd-csgrid rd-mt4">
-        {%- for block in story_blocks -%}
-          {%- assign vurl = block.settings.video_url | default: block.settings.video -%}
-          {%- if vurl != blank or block.settings.video_file != blank -%}
-          <div class="rd-cscard rd-cscard--video rd-reveal" {{ block.shopify_attributes }}>
-            <div class="rd-cscard__media">{%- render "bbc-media", src: block.settings.image, fallback: "bbc-rd-cohort.jpg", video: block.settings.video_file, youtube: vurl, alt: block.settings.title -%}{%- if block.settings.kind != blank -%}<span class="rd-cscard__kind">{{ block.settings.kind }}</span>{%- endif -%}</div>
-            <div class="rd-cscard__body"><p class="rd-cscard__ctx">{{ block.settings.blurb }}</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">{{ block.settings.title }}</span>{%- if block.settings.url != blank -%}<a class="rd-cscard__more" href="{{ block.settings.url }}">Read the story <span class="rd-arrow">&rarr;</span></a>{%- endif -%}</div></div>
-          </div>
-          {%- else -%}
-          {%- assign cimg = block.settings.image | default: "bbc-rd-cohort.jpg" -%}
-          <a class="rd-cscard rd-reveal" href="{{ block.settings.url | default: "/blogs/impact" }}" {{ block.shopify_attributes }}>
-            <div class="rd-cscard__media"><img src="{% if cimg contains "//" %}{{ cimg }}{% else %}{{ cimg | asset_url }}{% endif %}" alt="{{ block.settings.title | escape }}" loading="lazy" width="600" height="375">{%- if block.settings.kind != blank -%}<span class="rd-cscard__kind">{{ block.settings.kind }}</span>{%- endif -%}</div>
-            <div class="rd-cscard__body"><p class="rd-cscard__ctx">{{ block.settings.blurb }}</p><div class="rd-cscard__foot"><span class="rd-cscard__inst">{{ block.settings.title }}</span><span class="rd-cscard__more">Read the story <span class="rd-arrow">&rarr;</span></span></div></div>
-          </a>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-      {% render 'bbc-video-lightbox' %}
-      {%- if section.settings.stories_all_label != blank -%}<div class="rd-mt4"><a class="rd-btn rd-ghost" href="{{ section.settings.stories_all_url | default: '/blogs/impact' }}">{{ section.settings.stories_all_label }} <span class="rd-arrow">&rarr;</span></a></div>{%- endif -%}
-    </div>
-  </section>
-  {%- endif -%}
+  {%- comment -%} Stories band — now the shared snippet (2026-08-01). Was an inline copy;
+     moving it to snippets/bbc-stories-band.liquid means the lead-card layout and any
+     future card change reach all seven story-carrying pages at once. {%- endcomment -%}
+  {%- render 'bbc-stories-band', section: section -%}
 
   {%- comment -%} ---------- RECOGNITION (press logos + stats) ---------- {%- endcomment -%}
   <section class="rd-pad-sm rd-steel">
@@ -184,9 +245,14 @@
 
       {%- assign stat_blocks = section.blocks | where: 'type', 'stat' -%}
       {%- if stat_blocks.size > 0 -%}
-        <div class="rd-stats rd-mt4">
+        {%- comment -%} DEVICE C — dimension callouts. .rd-dim is an OPT-IN modifier because
+           .rd-stats is shared by 12 sections. It draws each figure on a dimension line with
+           extension ticks, which promotes the `source` field from small print to the datum
+           note a drawing would actually carry. {%- endcomment -%}
+        <div class="rd-stats rd-dim rd-mt4">
           {%- for block in stat_blocks -%}
             <div class="rd-stat rd-reveal" {{ block.shopify_attributes }}>
+              <span class="rd-dimt" aria-hidden="true"></span>
               <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
               <div class="rd-lbl">{{ block.settings.label }}</div>
               {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
@@ -315,6 +381,29 @@
       "default": "— James Marr, Founder"
     },
     {
+      "type": "image_picker",
+      "id": "intro_image_pic",
+      "label": "Origin photo — a founder working, not posed"
+    },
+    {
+      "type": "text",
+      "id": "intro_image",
+      "label": "…or image filename / full URL",
+      "default": "https://cdn.shopify.com/s/files/1/0502/8695/2631/files/JamesMarr.jpg?v=1701273981"
+    },
+    {
+      "type": "text",
+      "id": "intro_image_alt",
+      "label": "Origin photo alt text",
+      "default": "James Marr drilling a bamboo tube held in a jig, in the Bamboo Bicycle Club workshop"
+    },
+    {
+      "type": "text",
+      "id": "intro_caption",
+      "label": "Origin photo caption",
+      "default": "James Marr at the bench — he still teaches every cohort."
+    },
+    {
       "type": "header",
       "content": "Timeline (add rows below as Milestone blocks)"
     },
@@ -379,43 +468,61 @@
       "type": "text",
       "id": "loop_s1_big",
       "label": "Loop step 1 title",
-      "default": "You build"
+      "default": "You build a bike."
     },
     {
       "type": "text",
       "id": "loop_s1_sm",
       "label": "Loop step 1 detail",
-      "default": "a bamboo bike · from £375"
+      "default": "A frame kit from £375, built by the person who rides it. We have never sold a finished bicycle."
     },
     {
       "type": "text",
       "id": "loop_s2_big",
       "label": "Loop step 2 title",
-      "default": "Profits fund"
+      "default": "The margin funds a place."
     },
     {
       "type": "text",
       "id": "loop_s2_sm",
       "label": "Loop step 2 detail",
-      "default": "skills courses"
+      "default": "Surplus goes to accredited skills courses in prisons and schools."
     },
     {
       "type": "text",
       "id": "loop_s3_big",
       "label": "Loop step 3 title",
-      "default": "A life changes"
+      "default": "Somebody gets a way forward."
     },
     {
       "type": "text",
       "id": "loop_s3_sm",
       "label": "Loop step 3 detail",
-      "default": "skills & family"
+      "default": "90% of learners complete the course. The bike they build goes to their own child."
     },
     {
       "type": "text",
       "id": "model_reg",
       "label": "Company line",
       "default": "Bamboo Mobility Project CIC · Reg 16257348"
+    },
+    {
+      "type": "text",
+      "id": "loop_l1",
+      "label": "Joint — member 1 label",
+      "default": "Member 01"
+    },
+    {
+      "type": "text",
+      "id": "loop_l2",
+      "label": "Joint — member 2 label",
+      "default": "Member 02"
+    },
+    {
+      "type": "text",
+      "id": "loop_l3",
+      "label": "Joint — member 3 label",
+      "default": "Member 03 · bonded"
     },
     {
       "type": "header",
@@ -530,6 +637,20 @@
       "type": "url",
       "id": "cta2_url",
       "label": "Secondary CTA link (defaults to the impact page)"
+    },
+    {
+      "type": "checkbox",
+      "id": "stories_lead",
+      "label": "Lead card (first story spans two columns)",
+      "info": "Breaks the 3-up grid so the band opens with a hero. Needs 3+ story cards.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "stories_mosaic",
+      "label": "Mosaic layout (content-aware sizes, no gaps)",
+      "info": "Card size is derived from its content: a film goes wide, long copy goes tall, no image goes flat. Gaps backfill automatically. Needs 3+ cards.",
+      "default": false
     }
   ],
   "blocks": [
@@ -548,6 +669,12 @@
           "label": "Title"
         },
         {
+          "type": "text",
+          "id": "outcome",
+          "label": "Outcome headline (overrides Title on the card)",
+          "info": "The card heading is the only card-level link (WCAG 2.4.4), so it must say what you get. Matches the Impact page's story cards."
+        },
+        {
           "type": "textarea",
           "id": "blurb",
           "label": "Short text"
@@ -562,8 +689,16 @@
           "id": "video",
           "label": "YouTube video ID (optional — adds a play button, plays in-page)"
         },
-        { "type": "url", "id": "video_url", "label": "Video URL (YouTube/Vimeo — plays inline)" },
-        { "type": "video", "id": "video_file", "label": "Or upload a video (plays inline)" },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL (YouTube/Vimeo — plays inline)"
+        },
+        {
+          "type": "video",
+          "id": "video_file",
+          "label": "Or upload a video (plays inline)"
+        },
         {
           "type": "url",
           "id": "url",
@@ -598,6 +733,22 @@
           "id": "hot",
           "label": "Highlight this row (forest-green year)",
           "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "image_pic",
+          "label": "Photo (optional)",
+          "info": "A real photo from this era. Rows without one stay text-only."
+        },
+        {
+          "type": "text",
+          "id": "image",
+          "label": "…or image filename / full URL"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Photo alt text"
         }
       ]
     },
@@ -624,10 +775,31 @@
           "default": "A bike you build yourself is a bike you never throw away. We teach making, not buying."
         },
         {
+          "type": "textarea",
+          "id": "evidence",
+          "label": "Evidence — one real instance",
+          "info": "A value with no example is an aspiration. Name something BBC actually did."
+        },
+        {
           "type": "checkbox",
           "id": "lime",
           "label": "Lime stamp shadow",
           "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "image_pic",
+          "label": "Photo (optional)"
+        },
+        {
+          "type": "text",
+          "id": "image",
+          "label": "…or image filename / full URL"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Photo alt text"
         }
       ]
     },

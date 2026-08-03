@@ -13,7 +13,13 @@
         {%- for block in section.blocks -%}{%- if block.type == 'photo' -%}
           <figure class="rd-reveal rd-card" {{ block.shopify_attributes }} style="overflow:hidden;margin:0;">
             {%- render "bbc-media", image: block.settings.image, src: block.settings.asset, fallback: "bbc-rd-gal-rider.jpg", video: block.settings.video_file, youtube: block.settings.video_url, alt: block.settings.caption, class: "bbc-media--ar43" -%}
-            {%- if block.settings.caption != blank -%}<figcaption class="rd-body" style="padding:12px 16px;font-size:14px;color:var(--charcoal);">{{ block.settings.caption }}</figcaption>{%- endif -%}
+            {%- comment -%} Caption role, not body role. This was `class="rd-body"` with an inline
+              font-size:14px, which made .rd-body render 14px here and 18px in the other 171
+              places it appears estate-wide — the only real type drift the 2026-08-03 audit found
+              for that class. A figcaption is a caption; every other section already names one
+              (rd-origin__cap, rd-opsmap__cap, rd-reel-cap). Styling moves to CSS on the token so
+              it cannot drift again. {%- endcomment -%}
+            {%- if block.settings.caption != blank -%}<figcaption class="rd-gal__cap">{{ block.settings.caption }}</figcaption>{%- endif -%}
           </figure>
         {%- endif -%}{%- endfor -%}
       </div>

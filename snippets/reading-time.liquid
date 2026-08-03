@@ -1,0 +1,4 @@
+{%- comment -%} Reading time: words / 265 wpm (Medium standard), 1-min floor. {%- endcomment -%}
+{%- assign rt_words = article.content | strip_html | number_of_words -%}
+{%- assign rt_mins = rt_words | divided_by: 265 | at_least: 1 -%}
+{{ rt_mins }} min read

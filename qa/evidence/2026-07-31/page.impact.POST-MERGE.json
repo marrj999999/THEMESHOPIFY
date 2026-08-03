@@ -1,0 +1,483 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-impact-2026",
+      "blocks": {
+        "stat_completion": {
+          "type": "stat",
+          "settings": {
+            "number": "90%+",
+            "label": "prison course completion",
+            "source": "BBC programme records",
+            "comparator": ""
+          }
+        },
+        "stat_ocn": {
+          "type": "stat",
+          "settings": {
+            "number": "Level 2",
+            "label": "OCN — Workshop Skills and Sustainable Manufacturing",
+            "source": "OCN London accredited",
+            "comparator": ""
+          }
+        },
+        "stat_builders": {
+          "type": "stat",
+          "settings": {
+            "number": "4,000+",
+            "label": "people have built a bike",
+            "source": "since 2012",
+            "comparator": ""
+          }
+        },
+        "stat_countries": {
+          "type": "stat",
+          "settings": {
+            "number": "45",
+            "label": "countries reached",
+            "source": "kits shipped worldwide",
+            "comparator": ""
+          }
+        },
+        "help_buy": {
+          "type": "help",
+          "settings": {
+            "tag": "buy",
+            "tag_lime": true,
+            "title": "build or own a bike",
+            "body": "Book a workshop or buy a kit. Every purchase helps fund our prison and education programmes.",
+            "link_label": "Shop & book",
+            "link_url": "/collections/home-build-kits",
+            "lime": false
+          }
+        },
+        "help_partner": {
+          "type": "help",
+          "settings": {
+            "tag": "partner",
+            "tag_lime": true,
+            "title": "run it in your school or prison",
+            "body": "Accredited programmes for schools and prisons — OCN Level 1 in classrooms, Level 2 inside. We set up and train your staff.",
+            "link_label": "see the programmes",
+            "link_url": "/pages/programmes",
+            "lime": false
+          }
+        },
+        "help_support": {
+          "type": "help",
+          "settings": {
+            "tag": "support",
+            "tag_lime": true,
+            "title": "fund or champion",
+            "body": "Fund a cohort or champion the work. Every contribution goes into accredited skills courses in schools and prisons.",
+            "link_label": "Back the mission",
+            "link_url": "/pages/support-mission",
+            "lime": true
+          }
+        },
+        "policy_9pp": {
+          "type": "policy",
+          "settings": {
+            "number": "9pts",
+            "label": "off reoffending when education happens inside",
+            "source": "MoJ education evidence"
+          }
+        },
+        "policy_40": {
+          "type": "policy",
+          "settings": {
+            "number": "39%",
+            "label": "less likely to reoffend with family contact maintained",
+            "source": "MoJ family-contact data"
+          }
+        },
+        "backer_investec": {
+          "type": "backer",
+          "settings": {
+            "logo": "logo-investec.svg",
+            "label": "Investec Beyond Business",
+            "url": ""
+          }
+        },
+        "backer_nlcf": {
+          "type": "backer",
+          "settings": {
+            "logo": "logo-nlcf.svg",
+            "label": "The National Lottery Community Fund",
+            "url": ""
+          }
+        },
+        "backer_lsbu": {
+          "type": "backer",
+          "settings": {
+            "logo": "logo-lsbu.svg",
+            "label": "London South Bank University",
+            "url": ""
+          }
+        },
+        "backer_ocn": {
+          "type": "backer",
+          "settings": {
+            "logo": "logo-ocn-london.svg",
+            "label": "OCN London accredited",
+            "url": ""
+          }
+        },
+        "backer_hmpps": {
+          "type": "backer",
+          "settings": {
+            "logo": "logo-hmpps.png",
+            "label": "HMPPS",
+            "url": ""
+          }
+        },
+        "story_ucl": {
+          "type": "story",
+          "settings": {
+            "kind": "education",
+            "title": "masters students built a 100kg electric bamboo cargo bike.",
+            "blurb": "Real engineering in a university lab — the same craft, scaled up.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/IMAGE_2_LOAFLY_248a5253-795b-404f-adee-2fc1bd586e91.png?v=1771793521",
+            "video": "",
+            "url": "/blogs/impact/ucl-masters-bamboo-electric-cargo-bike-university",
+            "outcome": "A 100kg-payload electric cargo bike, built by masters students.",
+            "source_label": "UCL project write-up",
+            "source_url": "/blogs/impact/ucl-masters-bamboo-electric-cargo-bike-university",
+            "video_url": "https://www.youtube.com/watch?v=iB2iHTzT2oQ"
+          }
+        },
+        "story_upcycle": {
+          "type": "story",
+          "settings": {
+            "kind": "community",
+            "title": "balance bikes, built at a team day, donated to a community project.",
+            "blurb": "The commercial side funding the mission — before a bike is even finished.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/SRW08823_e2572015-b157-475c-8f9c-89decaa65462.jpg?v=1771793508",
+            "video": "",
+            "url": "/blogs/impact/corporate-team-build-upcycle-brixton-bamboo-balance-bikes",
+            "video_url": "https://www.youtube.com/watch?v=xv0x13KNCBw",
+            "outcome": "Built in one corporate team day — donated onward.",
+            "source_label": "the full story",
+            "source_url": "/blogs/impact/corporate-team-build-upcycle-brixton-bamboo-balance-bikes"
+          }
+        },
+        "story_kenya": {
+          "type": "story",
+          "settings": {
+            "kind": "global",
+            "title": "teaching kenya to build — the knowledge stays behind.",
+            "blurb": "Local people learn to make and maintain their own bikes — the knowledge stays behind.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/01-kirui-riding-bamboo-bike_dcde22a5-5ad1-4db3-b880-048d3e462e5a.jpg?v=1771793527",
+            "video": "",
+            "url": "/blogs/impact/kenya-bamboo-bicycle-building-skills-transfer",
+            "source_label": "NTV Kenya coverage",
+            "source_url": "https://www.youtube.com/watch?v=EBmY4QpSHo0",
+            "video_url": "https://www.youtube.com/watch?v=EBmY4QpSHo0",
+            "outcome": "Skills transfer, not aid."
+          }
+        },
+        "iq1": {
+          "type": "scrollquote",
+          "settings": {
+            "text": "The bike was the first thing I ever made with my own hands. When my daughter rode it on family visit day, I felt like a dad again.",
+            "attr": "Maker, Build to Bond",
+            "source": ""
+          }
+        },
+        "iq5": {
+          "type": "scrollquote",
+          "settings": {
+            "text": "Pandas eat it. Schoolchildren used to be caned with it. But now prisoners at Lowdham Grange have found a surprising new use for bamboo — making bicycles out of it.",
+            "attr": "Inside Time",
+            "source": "prisoners' national newspaper, 100k+ readers"
+          }
+        },
+        "iq6": {
+          "type": "scrollquote",
+          "settings": {
+            "text": "Bamboo bikes have that cool factor that excites them. There's maths and English in the programme — but it's built into design, creativity and bike mechanics.",
+            "attr": "James Marr, Founder",
+            "source": "in Inside Time"
+          }
+        },
+        "seg_schools": {
+          "type": "segment",
+          "settings": {
+            "tag": "Schools",
+            "question": "running a school or college?",
+            "benefit": "Real engineering in your classroom. Start with the free Speaker build, then add OCN Level 1 when your students want more.",
+            "link_label": "see the schools programme",
+            "link_url": "/pages/programmes#schools",
+            "evidence_anchor": "#evidence-education"
+          }
+        },
+        "seg_prisons": {
+          "type": "segment",
+          "settings": {
+            "tag": "Prisons",
+            "question": "commissioning for a prison?",
+            "benefit": "An OCN Level 2 course your own staff deliver. 90%+ completion, and the capability stays in-house with no ongoing fees.",
+            "link_label": "see the prison programme",
+            "link_url": "/pages/programmes#prisons",
+            "evidence_anchor": "#evidence-prisons"
+          }
+        },
+        "seg_corporate": {
+          "type": "segment",
+          "settings": {
+            "tag": "Corporate",
+            "question": "planning a team day?",
+            "benefit": "Your team builds real bamboo bikes and takes them home — and every event funds the prison programme.",
+            "link_label": "see team days",
+            "link_url": "/pages/bicycleteambuilding",
+            "evidence_anchor": "#evidence-community"
+          }
+        },
+        "seg_individual": {
+          "type": "segment",
+          "settings": {
+            "tag": "Individuals",
+            "question": "want to build your own?",
+            "benefit": "Kits and workshops for complete beginners. Most builders have never made anything before.",
+            "link_label": "browse kits",
+            "link_url": "/collections/home-build-kits",
+            "evidence_anchor": "#evidence-global"
+          }
+        },
+        "story_investec": {
+          "type": "story",
+          "settings": {
+            "kind": "prisons",
+            "title": "investec backs the excluded-learners model",
+            "blurb": "Investec’s published award rationale singled out the excluded-learners model.",
+            "quote": "reconnects excluded learners with education… pathways into further study, employment or enterprise",
+            "cite": "Investec, published award rationale",
+            "date": "2025",
+            "source_label": "the award coverage",
+            "source_url": "/blogs/news/bamboo-bicycle-club-wins-investec-beyond-business-2025",
+            "url": "/blogs/news/bamboo-bicycle-club-wins-investec-beyond-business-2025",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/1759130900349_2c0cdd37-114b-44b8-87aa-5238e9ed0d30.jpg?v=1759145108",
+            "outcome": "Beyond Business 2025 winner — one of four from 148 applicants."
+          }
+        },
+        "story_rwanda": {
+          "type": "story",
+          "settings": {
+            "kind": "education",
+            "title": "training trainers in Bugesera, Rwanda",
+            "blurb": "A partnership with Swiss association Urumuri teaching young Rwandans bicycle trades — the skills stay local.",
+            "outcome": "24 young people and 4 trainers trained — Urumuri’s figure.",
+            "date": "2024",
+            "source_label": "Partner: Urumuri",
+            "source_url": "/blogs/schools-and-education/empowering-rwanda-through-bamboo-the-bamboo-bicycle-clubs-sustainable-vision-in-partnership-with-urumuri",
+            "url": "/blogs/schools-and-education/empowering-rwanda-through-bamboo-the-bamboo-bicycle-clubs-sustainable-vision-in-partnership-with-urumuri",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/WhatsApp_Image_2024-04-29_at_14.05.19_1.jpg?v=1715093446"
+          }
+        },
+        "story_soraya": {
+          "type": "story",
+          "settings": {
+            "kind": "community",
+            "title": "soraya’s four-and-a-half-day build",
+            "blurb": "An environmental educator’s bamboo bike, built at the Canning Town workshop.",
+            "quote": "we think that building things is a mythical thing that only geniuses can do… every step was actually simple and achievable",
+            "cite": "Soraya, environmental educator",
+            "date": "2019",
+            "source_label": "her build story",
+            "source_url": "/blogs/impact/soraya-bamboo-bike-build-zero-waste-transformation",
+            "url": "/blogs/impact/soraya-bamboo-bike-build-zero-waste-transformation",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/38a376a635229978ae3e16a47b412158_6fe3982a-1f12-432d-9e91-cf287a95f7e8.jpg?v=1771793501",
+            "outcome": "‘Erica’, built in four and a half days."
+          }
+        }
+      },
+      "block_order": [
+        "stat_completion",
+        "stat_ocn",
+        "stat_builders",
+        "stat_countries",
+        "help_buy",
+        "help_partner",
+        "help_support",
+        "policy_9pp",
+        "policy_40",
+        "backer_investec",
+        "backer_nlcf",
+        "backer_lsbu",
+        "backer_ocn",
+        "backer_hmpps",
+        "seg_schools",
+        "seg_prisons",
+        "seg_corporate",
+        "seg_individual",
+        "story_ucl",
+        "story_upcycle",
+        "story_kenya",
+        "story_investec",
+        "story_rwanda",
+        "story_soraya",
+        "iq1",
+        "iq5",
+        "iq6"
+      ],
+      "settings": {
+        "hero_fallback": "bbc-rd-workshop.jpg",
+        "hero_image_alt": "Builders at work in the bamboo bicycle workshop",
+        "hero_eyebrow": "build bikes · build skills · build futures",
+        "hero_title": "building bikes. rebuilding lives.",
+        "hero_lede": "We use bamboo bike-building to give practical skills and a way forward to people locked out of education — in schools before exclusion, and in prisons after.",
+        "hero_cta1_label": "Partner with us",
+        "hero_cta1_url": "/pages/programmes",
+        "hero_cta2_label": "Back the mission",
+        "hero_cta2_url": "/pages/support-mission",
+        "quotes_label": "what the impact sounds like",
+        "ghost_stat": "2012",
+        "seal_text": "OCN accredited · CIC · since 2012",
+        "stats_label": "the record since 2012",
+        "data_as_of": "Data updated July 2026",
+        "report_label": "Read the 2026 impact report",
+        "report_url": "/pages/impact-report",
+        "arms_eyebrow": "what we do",
+        "arms_title": "real skills, taught through bike-building",
+        "arms_tagline": "",
+        "arm1_tag": "1. Prevention — Make Engineers",
+        "arm1_title": "",
+        "arm1_body": "Reaching SEND, PRU and at-risk young people before disengagement hardens into exclusion their first real, positive encounter with engineering and design.",
+        "arm1_flow": "start free :: the speaker build, 2–3 hours | choose a strand :: product, bicycle, additive or e-mobility | OCN accredited :: recognised skills, real qualifications | teachers run it :: film, session plan and curriculum map included",
+        "arm2_tag": "2. Rehabilitation — Build to Bond",
+        "arm2_title": "after the system missed them",
+        "arm2_body": "Re-engaging people inside prison with accredited skills, a strengthened family bond, and a route towards employment on release.",
+        "arm2_flow": "six-week cohort :: six Makers, 18 hours a week | OCN Level 2 accredited :: workshop skills and sustainable manufacturing | a bike for their child :: handed over on family visit day | train as a peer instructor :: teach the next cohort | a route to work on release :: employer partners",
+        "arm1_image_alt": "",
+        "arm2_image_alt": "",
+        "frame_info_enable": false,
+        "frame_info_caption": "",
+        "fork_label": "STEM Education one mission, two pathways",
+        "arm1_chip": "in schools · ages 11–19",
+        "arm1_name": "real engineering",
+        "arm1_who": "for secondary schools, sixth forms and colleges — five programmes, from a free classroom build to a rideable frame. curriculum-mapped, and built to be teacher-led.",
+        "arm1_cta_label": "bring it to your school →",
+        "arm1_cta_url": "/pages/schools",
+        "arm2_chip": "in prisons · accredited",
+        "arm2_name": "vocational skills",
+        "arm2_who": "for people inside prison earning a hands-on manufacturing qualification — six-week Build to Bond cohorts at Lowdham Grange, Foston Hall, Lindholme and Feltham.",
+        "arm2_cta_label": "bring it to your prison →",
+        "arm2_cta_url": "/pages/contact-us",
+        "converge_title": "vocational skills and pathways into careers — built through hands-on engineering",
+        "converge_note": "hands-on engineering and STEAM learning",
+        "policy_eyebrow": "Why now",
+        "policy_title": "both pathways sit on live national priorities.",
+        "cred_eyebrow": "who we work with",
+        "cred_heading": "who this is for — and who backs it.",
+        "cred_quote1": "Finding employment after release reduces the chance of reoffending significantly, which is why we are improving opportunities to help prisoners turn their lives around.",
+        "cred_attr1": "Lord Timpson, UK Prisons Minister — Inside Time",
+        "cred_src1": "2025 winner",
+        "cred_quote2": "",
+        "cred_attr2": "",
+        "cred_src2": "",
+        "press_label": "featured in",
+        "ops_more_label": "the full picture →",
+        "ops_more_url": "",
+        "map_enable": true,
+        "map_alt": "World map of Bamboo Bicycle Club locations — standing workshops and programmes in the UK, Netherlands, France and Germany; past programmes and partnerships in Sweden, the Netherlands, Kenya, Rwanda and Ethiopia; kits built in 45 countries.",
+        "map_caption": "✱ every country our kits have reached since 2012 — straight from our customer records. home in dark green.",
+        "next_eyebrow": "what's next",
+        "next_title": "what new funding builds next.",
+        "next_lede": "Three ambitions, in order — each one costed and ready to talk through.",
+        "next_flow": "more prison workshops — sites five and six | double the school cohorts we can deliver | grow the international hub network",
+        "promise1": "Kit and workshop revenue covers our running costs — funder money goes to programme delivery.",
+        "promise1_url": "/pages/impact-report",
+        "promise2": "Every course leads to a recognised qualification — OCN Level 1 accredited in schools, OCN Level 2 accredited in prisons.",
+        "promise2_url": "/pages/impact-report",
+        "promise3": "Funders get completions, OCN awards and session data each term.",
+        "promise3_url": "/pages/contact-us",
+        "report_card_title": "the 2026 impact report",
+        "report_card_meta": "Web report · the numbers, the evidence, the stories · 5-minute read",
+        "report_card_url": "/pages/impact-report",
+        "cred_mech": "",
+        "cred_sub": "",
+        "funder_line": "",
+        "funder_logo": "logo-nlcf.svg",
+        "funder_logo_alt": "The National Lottery Community Fund",
+        "accred_logo": "logo-ocn-london.svg",
+        "accred_logo_alt": "OCN London",
+        "press_more": "…and featured in 40+ publications — see all coverage →",
+        "awards_line": "",
+        "press_more_url": "",
+        "sites_eyebrow": "where we operate",
+        "sites_title": "where we work.",
+        "sites_body": "Standing programmes in UK prisons, schools and universities, monthly workshops in London, and partner hubs in Europe.",
+        "sites_list": "",
+        "sites_partner": "In partnership with HM Prison & Probation Service, Camden Council, Project Zero, LSBU",
+        "cs_kind": "prisons",
+        "cs_image": "bbc-rd-prison-empty.jpg",
+        "cs_quote": "The bamboo bike course offers more than just technical training — it provides an avenue for creativity, teamwork, and self-expression. Watching the pride on a father’s face when he presents a bike to his child is something special.",
+        "cs_attr": "Sally Allsopp, Industries Manager, HMP Lowdham Grange",
+        "cs_blurb": "How a six-week bamboo-bike course is rebuilding family ties inside HMP Lowdham Grange. Running — and oversubscribed — since late 2024.",
+        "cs_site": "Build to Bond · HMP Lowdham Grange",
+        "cs_url": "",
+        "cs_link_label": "Read the full story",
+        "stories_eyebrow": "Every kind of impact",
+        "stories_title": "real projects, real impact",
+        "stories_lede": "The same craft shows up everywhere — on epic journeys, in boardrooms, in classrooms and across the world.",
+        "st1_kind": "Epic journey",
+        "st1_title": "8,288 miles to patagonia",
+        "st1_blurb": "Kate Rawles rode a BBC-built bamboo bike the length of South America for The Life Cycle.",
+        "st1_image": "bbc-rd-gal-redroad.jpg",
+        "st1_url": "",
+        "st2_kind": "Corporate",
+        "st2_title": "the macallan — masters of their craft",
+        "st2_blurb": "A distillery team built ten bamboo bikes together — craft meeting craft.",
+        "st2_image": "bbc-rd-tb-macallan.jpg",
+        "st2_url": "",
+        "st3_kind": "Education",
+        "st3_title": "UK bamboo summit, coventry",
+        "st3_blurb": "Leading the national conversation on bamboo's future in engineering and design.",
+        "st3_image": "bbc-rd-cs-coventry.jpg",
+        "st3_url": "",
+        "st4_kind": "Global",
+        "st4_title": "teaching kenya to build",
+        "st4_blurb": "Skills that stay behind — communities building and maintaining their own bamboo bikes.",
+        "st4_image": "bbc-rd-cohort.jpg",
+        "st4_url": "",
+        "stories_all_url": "",
+        "stories_all_label": "See all impact stories",
+        "story_eyebrow": "",
+        "story_title": "",
+        "story_body_1": "",
+        "story_body_2": "",
+        "b2b_image": "shopify://shop_images/Balancebike_db6a1218-53b2-465e-8573-c891968cdff8-hires.jpg",
+        "b2b_fallback": "bbc-rd-b2b.jpg",
+        "b2b_image_alt": "The Build to Bond workshop inside HMP Lowdham Grange",
+        "b2b_eyebrow": "Build to Bond",
+        "b2b_title": "helping makers build bikes for their children",
+        "b2b_body_1": "building a children's bamboo balance bike to gift to their own son, daughter, niece or nephew.",
+        "b2b_body_2": "It's built on the strongest predictor of reduced reoffending there is: keeping family ties alive while a parent is inside.",
+        "b2b_quote": "The bamboo bike course offers more than just technical training — it provides an avenue for creativity, teamwork, and self-expression. Watching the pride on a father’s face when he presents a bike to his child is something special.",
+        "b2b_cite": "Sally Allsopp, Industries Manager, HMP Lowdham Grange",
+        "b2b_cta1_label": "Run the programme",
+        "b2b_cta1_url": "/pages/prisons",
+        "path_eyebrow": "",
+        "path_title": "",
+        "path_quote": "",
+        "path_cite": "",
+        "help_eyebrow": "start here",
+        "help_title": "book a discovery call.",
+        "help_intro": "One short call. Tell us whether it is a school, a prison, a team day or your own build, and we will point you the right way.",
+        "cta_eyebrow": "Join in",
+        "cta_title": "help us build a more inclusive, skilled future.",
+        "cta_lede": "Every bamboo bike built is a skill learned, a confidence gained, and a pathway opened.",
+        "cta1_label": "Run it in your prison",
+        "cta1_url": "/pages/prisons",
+        "cta2_label": "Back the mission",
+        "cta2_url": "/pages/support-mission",
+        "help_cta_label": "book a discovery call",
+        "help_cta_url": "/pages/contact-us?subject=discovery-call",
+        "show_b2b": false
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

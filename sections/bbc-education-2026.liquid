@@ -152,33 +152,30 @@
         <h2 class="rd-reveal rd-mw-16ch">{{ section.settings.cs_title }}</h2>
         {%- if section.settings.cs_lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.cs_lede }}</p>{%- endif -%}
 
-        <div class="rd-csgrid rd-mt4">
+        <ul class="rd-csgrid rd-mt4" role="list">
+          {%- comment -%} Renders THE standard card (snippets/bbc-cscard.liquid), 2026-07-31.
+             The old markup promoted the BLURB into .rd-cscard__quote with an rd-noq class that
+             stripped the quote marks — so one visual slot carried either a person's words or body
+             copy depending on data. That is the "quote styles fighting" problem in our own code.
+             Now: heading = outcome (fallback institution), body copy = context, quote removed as a
+             competing display element. {%- endcomment -%}
           {%- for block in cs_blocks -%}
-            {%- assign cs_img = block.settings.image | default: 'bbc-rd-frame-build.jpg' -%}
-            {%- assign vid = block.settings.video -%}
-            <a class="rd-reveal rd-cscard" href="{{ block.settings.url }}" {{ block.shopify_attributes }}>
-              <div class="rd-cscard__media">
-                {%- render "bbc-media", src: cs_img, video: block.settings.video_file, youtube: block.settings.video_url | default: block.settings.video, alt: block.settings.institution -%}
-                {%- if block.settings.kind != blank -%}<span class="rd-cscard__kind">{{ block.settings.kind }}</span>{%- endif -%}
-              </div>
-              <div class="rd-cscard__body">
-                {%- if block.settings.quote != blank -%}
-                  <p class="rd-cscard__quote">{{ block.settings.quote }}</p>
-                  {%- if block.settings.attribution != blank -%}<p class="rd-cscard__attr">{{ block.settings.attribution }}</p>{%- endif -%}
-                  {%- if block.settings.blurb != blank -%}<p class="rd-cscard__ctx">{{ block.settings.blurb }}</p>{%- endif -%}
-                {%- elsif block.settings.blurb != blank -%}
-                  <p class="rd-cscard__quote rd-noq">{{ block.settings.blurb }}</p>
-                {%- endif -%}
-                <div class="rd-cscard__foot">
-                  {%- if block.settings.logo != blank -%}<img width="{{ block.settings.logo.width }}" height="{{ block.settings.logo.height }}" class="rd-cscard__logo" src="{{ block.settings.logo | image_url: width: 240 }}" alt="{{ block.settings.institution | escape }}" loading="lazy">
-                  {%- elsif block.settings.logo_asset != blank -%}<img class="rd-cscard__logo" src="{{ block.settings.logo_asset | asset_url }}" alt="{{ block.settings.institution | escape }}" loading="lazy">
-                  {%- else -%}<span class="rd-cscard__inst">{{ block.settings.institution }}</span>{%- endif -%}
-                  <span class="rd-cscard__more">{% if vid != blank %}Watch the film{% else %}{{ block.settings.link_label | default: 'Read the case study' }}{% endif %} <span class="rd-arrow">&rarr;</span></span>
-                </div>
-              </div>
-            </a>
+            {%- assign _img = block.settings.image | default: 'bbc-rd-frame-build.jpg' -%}
+            {%- assign _yt = block.settings.video_url | default: block.settings.video -%}
+            {%- assign _head = block.settings.outcome | default: block.settings.institution -%}
+            {%- render 'bbc-cscard',
+                 variant: 'grid',
+                 kind: block.settings.kind,
+                 heading: _head,
+                 url: block.settings.url,
+                 context: block.settings.blurb,
+                 attr: block.settings.institution,
+                 image: _img,
+                 youtube: _yt,
+                 video_file: block.settings.video_file,
+                 cta: block.settings.link_label -%}
           {%- endfor -%}
-        </div>
+        </ul>
       </div>
       {% render 'bbc-video-lightbox' %}
     </section>
@@ -738,6 +735,11 @@
           "type": "text",
           "id": "attribution",
           "label": "Quote attribution (Name — Role, Institution)"
+        },
+        {
+          "type": "text",
+          "id": "outcome",
+          "label": "Outcome headline (the card's only link text)"
         },
         {
           "type": "textarea",

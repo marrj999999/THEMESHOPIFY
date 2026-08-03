@@ -146,19 +146,24 @@
   {%- if section.settings.cs_quote != blank -%}
   <section class="rd-pad-sm">
     <div class="rd-wrap rd-mw-820px">
-      <div class="rd-csgrid rd-csgrid-1">
-        <a class="rd-reveal rd-cscard" href="{{ section.settings.cs_url | default: '/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2' }}">
-          <div class="rd-cscard__media"><img src="{{ section.settings.cs_image | default: 'bbc-rd-prison-wide.jpg' | asset_url }}" alt="Inside the Build to Bond workshop" loading="lazy" width="600" height="375"><span class="rd-cscard__kind">{{ section.settings.cs_kind | default: 'The full story' }}</span></div>
-          <div class="rd-cscard__body">
-            <p class="rd-cscard__quote">{{ section.settings.cs_quote }}</p>
-            {%- if section.settings.cs_blurb != blank -%}<p class="rd-cscard__ctx">{{ section.settings.cs_blurb }}</p>{%- endif -%}
-            <div class="rd-cscard__foot">
-              <span class="rd-cscard__inst">{{ section.settings.cs_site | default: 'Build to Bond' }}</span>
-              <span class="rd-cscard__more">{{ section.settings.cs_link_label | default: 'Read the full story' }} <span class="rd-arrow">&rarr;</span></span>
-            </div>
-          </div>
-        </a>
-      </div>
+      {%- comment -%} THE standard card (snippets/bbc-cscard.liquid), 2026-07-31 — the featured
+         variant, matching the flagship on /pages/impact. Was a bespoke wrapper <a> whose `kind`
+         read "The full story" (a TYPE, not a category) and whose title sat in a non-linked span. {%- endcomment -%}
+      {%- assign _b2b_url = section.settings.cs_url | default: '/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2' -%}
+      {%- assign _b2b_head = section.settings.cs_heading | default: section.settings.cs_site -%}
+      {%- if _b2b_head == blank -%}{%- assign _b2b_head = 'Build to Bond · HMP Lowdham Grange' -%}{%- endif -%}
+      {%- assign _b2b_img = section.settings.cs_image | default: 'bbc-rd-prison-wide.jpg' -%}
+      <ul class="rd-csgrid" role="list">
+        {%- render 'bbc-cscard',
+             variant: 'featured',
+             kind: 'prisons',
+             heading: _b2b_head,
+             url: _b2b_url,
+             context: section.settings.cs_blurb,
+             attr: section.settings.cs_site,
+             image: _b2b_img,
+             cta: 'Read the full story' -%}
+      </ul>
     </div>
   </section>
   {%- endif -%}

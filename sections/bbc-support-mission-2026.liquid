@@ -101,8 +101,13 @@
     <div class="rd-wrap">
       <h2 class="rd-reveal bbc-sup__sr">Our numbers</h2>
       <div class="bbc-sup__numbers">
+        {%- comment -%} DEVICE C — dimension callouts, ported from the About page (2026-08-01).
+           A number in a plain block reads as a claim; a number on a dimension line, with
+           extension ticks and its source as a datum note, reads as something measured. That is
+           the register a funder needs on the page that asks them for money. {%- endcomment -%}
         {%- for block in section.blocks -%}{%- if block.type == 'stat' -%}
-          <div class="bbc-sup__stat" {{ block.shopify_attributes }}>
+          <div class="bbc-sup__stat bbc-sup__stat--dim" {{ block.shopify_attributes }}>
+            <span class="rd-dimt" aria-hidden="true"></span>
             <span class="bbc-sup__stat-number">{{ block.settings.number }}</span>
             <span class="bbc-sup__stat-label">{{ block.settings.label }}</span>
             {%- if block.settings.comparator != blank -%}<span class="bbc-sup__stat-comparator">{{ block.settings.comparator }}</span>{%- endif -%}
@@ -229,25 +234,18 @@
     </div>
   {%- endif -%}
 
+
+  {%- render 'bbc-stories-band', section: section -%}
 </div>
 
 <script>
-  (function(){
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    document.querySelectorAll('.bbc-sup__stat-number').forEach(function(el){
-      var m = el.textContent.trim().match(/^(\d+)(.*)$/); if(!m) return;
-      var target = +m[1], suffix = m[2];
-      var io = new IntersectionObserver(function(es){
-        es.forEach(function(e){ if(!e.isIntersecting) return; io.unobserve(el);
-          var t0 = performance.now();
-          requestAnimationFrame(function tick(t){ var p = Math.min((t - t0)/900, 1);
-            el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
-            if (p < 1) requestAnimationFrame(tick); });
-        });
-      }, {threshold: 0.6});
-      io.observe(el);
-    });
-  })();
+  /* COUNT-UP REMOVED 2026-08-01.
+     qa/MOTION.md Hard Rule 1: "Evidence, credibility numbers and prices NEVER move. No marquee,
+     no count-up, no parallax on anything an assessor reads." This band carries 90%+ course
+     completion and the live prison-site count, on the page that asks funders for money — the
+     exact case the rule exists for. A figure that animates from zero reads as a marketing
+     flourish; the dimension-callout treatment now says "measured" instead, which is the point.
+     Deliberately left as a comment, not deleted silently, so the decision is visible here. */
 </script>
 
 {% stylesheet %}
@@ -268,6 +266,16 @@
 
   .bbc-rd-support .bbc-sup__numbers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 720px; margin: 0 auto; }
   .bbc-rd-support .bbc-sup__stat { text-align: center; }
+  /* Device C — dimension callout, ported from the About page. Left-aligned so the extension
+     ticks bracket the figure the way a drawing dimensions a tube. */
+  .bbc-rd-support .bbc-sup__stat--dim { position: relative; padding-top: 40px; text-align: left; }
+  .bbc-rd-support .bbc-sup__stat--dim::before { content: ""; position: absolute; top: 16px; left: 0; right: 0; height: 1px; background: rgba(230,220,200,.45); }
+  .bbc-rd-support .bbc-sup__stat--dim .rd-dimt { position: absolute; top: 8px; left: 0; right: 0; height: 17px; pointer-events: none; }
+  .bbc-rd-support .bbc-sup__stat--dim .rd-dimt::before,
+  .bbc-rd-support .bbc-sup__stat--dim .rd-dimt::after { content: ""; position: absolute; top: 0; width: 1px; height: 17px; background: rgba(230,220,200,.45); }
+  .bbc-rd-support .bbc-sup__stat--dim .rd-dimt::before { left: 0; }
+  .bbc-rd-support .bbc-sup__stat--dim .rd-dimt::after { right: 0; }
+  .bbc-rd-support .bbc-sup__stat--dim .bbc-sup__stat-comparator { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .04em; }
   .bbc-rd-support .bbc-sup__stat-number { display: block; font-size: clamp(34px, 4.4vw, 52px); font-weight: 800; color: var(--lime, #D4FD62); }
   .bbc-rd-support .bbc-sup__stat-label { display: block; margin-top: 4px; }
   .bbc-rd-support .bbc-sup__stat-comparator { display: block; margin-top: 4px; font-size: 13px; color: #BCC8C2; }
@@ -617,6 +625,49 @@
       "id": "sticky_label",
       "label": "Sticky CTA label",
       "default": "Support the work"
+    },
+    {
+      "type": "header",
+      "content": "Stories band (add Story cards below)"
+    },
+    {
+      "type": "text",
+      "id": "stories_eyebrow",
+      "label": "Stories eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "stories_title",
+      "label": "Stories heading"
+    },
+    {
+      "type": "textarea",
+      "id": "stories_lede",
+      "label": "Stories intro"
+    },
+    {
+      "type": "text",
+      "id": "stories_all_label",
+      "label": "Read-more button label"
+    },
+    {
+      "type": "url",
+      "id": "stories_all_url",
+      "label": "Read-more button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "stories_lead",
+      "label": "Lead card (first story spans two columns)",
+      "info": "Breaks the 3-up grid so the band opens with a hero. Needs 3+ story cards.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "stories_mosaic",
+      "label": "Mosaic layout (content-aware sizes, no gaps)",
+      "info": "Card size is derived from its content: a film goes wide, long copy goes tall, no image goes flat. Gaps backfill automatically. Needs 3+ cards.",
+      "default": false
     }
   ],
   "blocks": [
@@ -780,6 +831,52 @@
           "info": "e.g. bbc-logo-investec.png — must exist in theme assets"
         }
       ]
+    },
+    {
+      "type": "story",
+      "name": "Story card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "kind",
+          "label": "Tag"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "outcome",
+          "label": "Outcome headline (overrides Title on the card)"
+        },
+        {
+          "type": "textarea",
+          "id": "blurb",
+          "label": "Short text"
+        },
+        {
+          "type": "text",
+          "id": "image",
+          "label": "Image filename or full URL"
+        },
+        {
+          "type": "text",
+          "id": "video",
+          "label": "YouTube video ID (optional)"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL (optional)"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link to the full story"
+        }
+      ]
     }
   ],
   "presets": [
@@ -824,9 +921,9 @@
         {
           "type": "stat",
           "settings": {
-            "number": "3",
+            "number": "4",
             "label": "prison sites running",
-            "comparator": "more sites onboarding with HMPPS — we count only what's live"
+            "comparator": "Lowdham Grange · Foston Hall · Lindholme · Feltham"
           }
         },
         {

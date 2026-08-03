@@ -36,6 +36,17 @@
 .bbc-rd p{ text-wrap:pretty; }
 .bbc-rd .rd-eyebrow{ display:inline-block; font-weight:700; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:var(--subtle); margin:0 0 14px; }
 .bbc-rd .rd-eyebrow.rd-on-dark{ color:var(--lime); }
+/* Eyebrows take their colour from the BAND, not from a hand-applied class. 2026-07-31: the home
+   page's impact band carried plain .rd-eyebrow on a .rd-dark surface, so it inherited
+   var(--subtle) (#384540) on #003C32 — a contrast ratio of 1.24:1, i.e. invisible. Three other
+   dark bands in the same section file remembered .rd-on-dark; this one did not. A colour that
+   depends on remembering a class will eventually be forgotten, and the only page-contextual rule
+   that would have caught it (.bbc-rd-impact .rd-dark .rd-eyebrow) is scoped to the impact PAGE,
+   so the home page's impact-themed band fell between the two mechanisms. */
+.bbc-rd .rd-dark .rd-eyebrow,
+.bbc-rd .rd-forest .rd-eyebrow{ color:var(--lime); }
+.bbc-rd .rd-dark .rd-eyebrow::before,
+.bbc-rd .rd-forest .rd-eyebrow::before{ background:var(--lime); }
 .bbc-rd .rd-lede{ font-size:clamp(18px,1.7vw,21px); line-height:1.5; color:var(--charcoal); }
 .bbc-rd .rd-frame-label{ font-weight:800; text-transform:uppercase; letter-spacing:.3em; font-size:12px; color:var(--subtle); }
 
@@ -84,23 +95,59 @@
 .bbc-rd .rd-hero .rd-inner{ position:relative; z-index:2; width:100%; padding-bottom:64px; }
 .bbc-rd .rd-hero h1{ font-size:clamp(42px,6.6vw,86px); line-height:.98; letter-spacing:-.03em; max-width:16ch; color:var(--bone); text-shadow:0 2px 28px rgba(0,18,14,.5); }
 .bbc-rd .rd-hero .rd-lede{ color:#eef3ec; max-width:48ch; margin-top:20px; text-shadow:0 1px 16px rgba(0,18,14,.45); }
-.bbc-rd .rd-hero .rd-cta-row{ display:flex; gap:14px; flex-wrap:wrap; margin-top:30px; }
+/* .rd-cta-row is a shared component but its layout was only ever declared INSIDE .rd-hero, so
+   the 12+ uses elsewhere (impact, impact-report, programmes ×2, teambuilding ×2, education,
+   commissioners, build-to-bond, support-mission ×2, amersfoort) were plain block divs: buttons
+   spaced by whatever whitespace the markup happened to contain rather than the 14px token.
+   Two tells that this was an omission and not a decision: the block-conformance audit measured
+   gap 14px on 6 pages and no gap on the 7th (2026-08-03), and
+   bbc-teambuilding-2026.liquid:130 carries `rd-cta-row rd-jc-center` — justify-content is inert
+   on a block element, so that centring has never done anything. Declaring the base makes the
+   component behave the same wherever it lands; the hero keeps only its own top margin. */
+.bbc-rd .rd-cta-row{ display:flex; gap:14px; flex-wrap:wrap; }
+.bbc-rd .rd-hero .rd-cta-row{ margin-top:30px; }
 
 /* funding loop */
-.bbc-rd .rd-loop{ display:grid; grid-template-columns:1fr auto 1fr auto 1fr; align-items:stretch; gap:0; max-width:760px; margin-left:auto; margin-right:auto; }
+/* margin-left was auto, centring the 760px row at x260 while the band's own heading, lede and
+   eyebrow sat on the axis at x72 — one band, two left edges, 188px apart. Same call as
+   ALIGNMENT.md rule 2 (2026-07-31): cap the width, do not move the box off the axis. */
+.bbc-rd .rd-loop{ display:grid; grid-template-columns:1fr auto 1fr auto 1fr; align-items:stretch; gap:0; max-width:760px; margin-left:0; margin-right:auto; }
+/* THE LOOP FOLLOWS ITS BAND. margin-left:0 above was set to fix the HOME band, where the loop sat
+   188px off its own left-aligned heading — correct there, wrong everywhere the band centres its
+   text. On the PDP (wrap carries .rd-center) and /pages/workshops (band is text-align:center) it
+   produced a centred heading above an axis-aligned infographic: the exact box-vs-text mismatch
+   ALIGNMENT.md exists to prevent, and the one James spotted by eye when every numeric gate was
+   green. Alignment is a property of the BAND, never of the component in isolation. */
+.bbc-rd .rd-center .rd-loop,
+.bbc-rd .rd-wrap.rd-center .rd-loop{ margin-inline:auto; }
 /* D6 — the last real FORMULA §8 breach (2026-07-29). §8 allows ONE bordered-card band per
    page; workshops had TWO — this 3-up grid AND the bordered .rd-video frame. Measured
    estate-wide: home 0 boxed bands, impact 1, programmes 1, workshops 2.
    The grid loses its box (it is the "grid of bordered cards" the research names) and keeps
    a top rule; the video keeps its border, where an edge reads as a frame around media
    rather than as a card. Dropping the rgba fill also takes a raw literal out of the sheet. */
+/* The de-box left two design languages fighting on one component (fixed 2026-07-31).
+   .rd-step was originally a CONNECTED PILL ROW: three joined boxes with borders on all four
+   sides, rounded at the outer ends, the last one filled lime. When it was de-boxed to a top
+   rule only, the half-radii and the fill stayed behind. A `border-top` with `border-radius:
+   12px 0 0 12px` and no side borders paints a hook curving down at the left end — clearly
+   visible on the home impact band — and the last step remained a filled box while its two
+   siblings were bare rules.
+   Resolved by making each item internally consistent rather than by redesigning the band:
+   the ruled steps carry no radius (a rule has no corners), and the final step stays a
+   deliberate filled chip with a UNIFORM radius, since it is no longer joined to anything. */
 .bbc-rd .rd-loop .rd-step{ text-align:center; padding:20px 12px 0; border-top:2px solid currentColor; }
-.bbc-rd .rd-loop .rd-step:first-child{ border-radius:12px 0 0 12px; }
-.bbc-rd .rd-loop .rd-step:last-child{ border-radius:0 12px 12px 0; background:var(--lime); color:var(--forest); border-color:var(--lime); }
+.bbc-rd .rd-loop .rd-step:first-child{ border-radius:0; }
+/* padding-bottom was 0 — right for a top-ruled item, wrong for a filled box, which is why the
+   chip's caption sat jammed against its own bottom edge. */
+.bbc-rd .rd-loop .rd-step:last-child{ border-radius:12px; padding-bottom:20px; background:var(--lime); color:var(--forest); border-color:var(--lime); }
 .bbc-rd .rd-loop .rd-step .rd-big{ font-weight:800; font-size:21px; line-height:1; }
 .bbc-rd .rd-loop .rd-step .rd-sm{ font-size:14px; opacity:.85; margin-top:6px; }
 .bbc-rd .rd-loop .rd-arr{ display:flex; align-items:center; padding:0 10px; font-size:21px; opacity:.7; }
-@media(max-width:760px){ .bbc-rd .rd-loop{ grid-template-columns:1fr; gap:8px; } .bbc-rd .rd-loop .rd-step,.bbc-rd .rd-loop .rd-step:first-child,.bbc-rd .rd-loop .rd-step:last-child{ border-radius:10px; } .bbc-rd .rd-loop .rd-arr{ transform:rotate(90deg); justify-content:center; padding:2px; } }
+/* Stacked on phones. Radius only on the filled chip — the ruled steps get none, for the same
+   reason as above: a 10px radius on an element with only a top border draws hooks, which is
+   exactly what the 390px capture showed above "You build" and "Profits fund". */
+@media(max-width:760px){ .bbc-rd .rd-loop{ grid-template-columns:1fr; gap:8px; } .bbc-rd .rd-loop .rd-step,.bbc-rd .rd-loop .rd-step:first-child{ border-radius:0; } .bbc-rd .rd-loop .rd-step:last-child{ border-radius:10px; } .bbc-rd .rd-loop .rd-arr{ transform:rotate(90deg); justify-content:center; padding:2px; } }
 
 /* stats */
 .bbc-rd .rd-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
@@ -173,6 +220,222 @@
 @media (max-width:640px){ .bbc-rd .rd-csgrid{ grid-template-columns:1fr; } }
 /* single centred case-study card (Impact "Build to Bond" story) */
 .bbc-rd .rd-csgrid.rd-csgrid-1{ grid-template-columns:minmax(0,460px); justify-content:center; }
+/* ── CONTENT-AWARE MOSAIC (2026-08-01) ─────────────────────────────────────────────────────
+   Variable size + variable colour, with no holes. Three mechanisms, in order of importance:
+
+   1. grid-auto-flow:dense — THE answer to "no blank spaces". When a wide card cannot fit the
+      remaining columns, the browser backfills the gap with the next card that does fit,
+      instead of leaving a hole. Manual ordering cannot do this; the content changes and the
+      hand-placed order stops being right.
+   2. Spans come from data-size, which the snippet DERIVES from the card's own content
+      (film → wide, long copy → tall, no image → flat). Size therefore tracks substance
+      rather than position.
+   3. Cards fill their cell: height:100%, body flex-grows, footer pinned to the bottom. This
+      is what stops a coloured block showing dead surface — the defect that only became
+      visible once cards stopped being the same colour as the page (measured 50% on the lead
+      card before this).
+
+   Below 981px everything collapses to the ordinary 1-2 column rules above: a 2-col span on a
+   2-col grid is just a full-width card, which the plain layout already gives. */
+.bbc-rd .rd-csgrid--mosaic{ grid-auto-flow:dense; align-items:stretch; }
+@media (min-width:981px){
+  .bbc-rd .rd-csgrid--mosaic{ grid-template-columns:repeat(3,1fr); grid-auto-rows:minmax(120px,auto); }
+  .bbc-rd .rd-csgrid--mosaic > [data-size="wide"]{ grid-column:span 2; }
+  .bbc-rd .rd-csgrid--mosaic > [data-size="tall"]{ grid-row:span 2; }
+  .bbc-rd .rd-csgrid--mosaic > [data-size="tall"] .rd-cscard__media{ aspect-ratio:16/10; }
+}
+/* ── MOSAIC STAGGER (2026-08-01) ───────────────────────────────────────────────────────────
+   Measured before writing anything: all six cards carried rd-rise with an IDENTICAL range, so
+   a whole band arrived at once rather than cascading. Under reduced-motion they were correctly
+   inert (animation:none, opacity:1), so the guards were already right.
+
+   No new keyframes and no second animation. `.rd-stagger` would have set animation:rd-chip-in
+   on the same <li> that .rd-reveal already animates, and which of the two won would depend on
+   stylesheet load order — fragile. Offsetting the RANGE of the animation already running gives
+   the same cascade with nothing to conflict. Offsets follow the MDN nth-child recipe that
+   .rd-stagger uses in bbc-universal §11.
+
+   Both guards are mandatory here: MOTION.md rule 3 (no opacity:0 initial state outside
+   @supports — the bug class that blanked Firefox) and rule 2 (reduced-motion fully inert). */
+@media (prefers-reduced-motion: no-preference){
+  @supports (animation-timeline: view()){
+    .bbc-rd .rd-csgrid--mosaic > li:nth-child(2){ animation-range: entry 0% entry 61%; }
+    .bbc-rd .rd-csgrid--mosaic > li:nth-child(3){ animation-range: entry 0% entry 67%; }
+    .bbc-rd .rd-csgrid--mosaic > li:nth-child(4){ animation-range: entry 0% entry 73%; }
+    .bbc-rd .rd-csgrid--mosaic > li:nth-child(5){ animation-range: entry 0% entry 79%; }
+    .bbc-rd .rd-csgrid--mosaic > li:nth-child(n+6){ animation-range: entry 0% entry 85%; }
+  }
+}
+
+/* fill the cell — the card, its body and its footer all cooperate so no surface is left blank */
+.bbc-rd .rd-csgrid--mosaic > li{ display:flex; }
+.bbc-rd .rd-csgrid--mosaic > li > .rd-cscard{ width:100%; height:100%; }
+.bbc-rd .rd-csgrid--mosaic .rd-cscard__body{ display:flex; flex-direction:column; flex:1 1 auto; }
+.bbc-rd .rd-csgrid--mosaic .rd-cscard__foot{ margin-top:auto; }
+
+/* LEAD-CARD GRID (2026-08-01) — the first card spans two columns and sits beside the second,
+   so a stories band opens with a hero instead of three identical tiles. Every band on the
+   estate was the same 3-up; this is one extra device per page for no new component.
+   Below 980px it falls back to the ordinary grid rules above — a 2-col span on a 2-col grid
+   would just be a full-width card, which is what the plain layout already gives. */
+.bbc-rd .rd-csgrid--lead{ grid-template-columns:repeat(3,1fr); }
+@media (min-width:981px){
+  /* `grid-row:span 2` was tried and broke the card apart — the <li> stretched over two rows,
+     the card's own flex column stretched with it, and the media collapsed while the copy
+     drifted into the neighbouring column. Spanning COLUMNS only keeps the card intact and
+     still gives the band a hero. Verified rendered before and after; the row-span version
+     never reached a screenshot, which is exactly how it got shipped for ten minutes. */
+  .bbc-rd .rd-csgrid--lead > li:first-child{ grid-column:span 2; }
+  /* The lead card keeps the SAME 16/10 ratio as its siblings. A 16/11 lead was tried and the
+     conformance gate rejected it: "one media aspect ratio" exists because five different
+     ratios once ragged the rows. Loosening the gate to fit the design would be re-baselining
+     to green. The hierarchy comes from the 2x2 span, which is enough. */
+}
+/* 2-up variant — the audience router on /pages/impact. Same card, fewer columns: four routes read
+   better in pairs than squeezed into the 3-up the evidence wall uses. */
+.bbc-rd .rd-csgrid.rd-csgrid-2{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+/* PRESS QUOTES are not case studies — no media, no destination, so no heading link. Kept as their
+   own component so the case-study contract does not have to make exceptions for them. */
+.bbc-rd .rd-pressquotes{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:26px; }
+.bbc-rd .rd-pressquote p{ font-size:19px; font-weight:800; line-height:1.35; margin:0 0 10px; }
+.bbc-rd .rd-pressquote cite{ font-style:normal; font-weight:800; font-size:15px; color:var(--forest); }
+@media (max-width:749px){ .bbc-rd .rd-pressquotes{ grid-template-columns:1fr; } }
+@media (max-width:749px){ .bbc-rd .rd-csgrid.rd-csgrid-2{ grid-template-columns:1fr; } }
+
+/* ══ THE STANDARD CASE-STUDY CARD (2026-07-31) ═══════════════════════════════════════════════
+   Renders snippets/bbc-cscard.liquid. One component, one slot order, three variants, ONE
+   card-level link. See the snippet header for the sources behind each rule. */
+.bbc-rd .rd-csgrid{ list-style:none; margin:0; padding:0; }        /* group is a <ul> now */
+.bbc-rd .rd-cscard-item{ display:flex; }                            /* <li> must not add a marker */
+.bbc-rd .rd-cscard-item > .rd-cscard{ flex:1 1 auto; }
+/* position:relative is what the heading link's stretched ::before anchors to. Without it the
+   overlay would size to the viewport. */
+.bbc-rd .rd-cscard{ position:relative; display:flex; flex-direction:column; }
+/* MEDIA IS ASPECT-LOCKED. The snippet header claimed this from day one but nothing enforced it:
+   the audience router's four photos (a portrait classroom shot, two landscapes and a square product
+   render) blew the band from 914px to 2,132px and left the row ragged. One ratio for every card,
+   estate-wide, so an odd source image can never dictate layout. */
+.bbc-rd .rd-cscard__media{ position:relative; aspect-ratio:16/10; overflow:clip; min-height:0; }
+/* !important is required: this theme carries a global img reset with height:auto!important, which
+   out-ranks a plain height:100% and let each source image dictate its own box — the aspect-ratio
+   above was set but never obeyed (measured ratios 0.75 / 1.00 / 1.49 against a declared 16/10). */
+.bbc-rd .rd-cscard__media img{ position:absolute; inset:0; width:100% !important; height:100% !important; max-height:none !important; object-fit:cover; display:block; }
+.bbc-rd .rd-cscard__body{ display:flex; flex-direction:column; flex:1 1 auto; }
+/* Footer pinned to the bottom so a 3-up row stays level regardless of body length. Equal height
+   by construction — never by fixed heights or line-clamp, which hide the words users scan for. */
+.bbc-rd .rd-cscard__foot{ margin-top:auto; margin-bottom:0; }
+
+/* THE ONLY card-level link. A stretched ::before gives the whole card a hit area while keeping a
+   single tab stop and a sensible accessible name — the NHS / BBC GEL / Giraudel pattern. NOT a
+   wrapper <a>, which announces the entire card as one link. */
+.bbc-rd .rd-cscard__heading{ margin:0 0 6px; }
+/* !important is needed: a global `a{text-decoration:underline}` out-ranks this by load order and
+   underlined every card heading, which reads as heavy at 3-up. The heading keeps its link
+   affordance without a permanent rule — the category chip, the media, the "Read the story" CTA,
+   the hover underline below and the focus ring all signal it. */
+.bbc-rd .rd-cscard__link{ text-decoration:none !important; color:inherit; }
+.bbc-rd .rd-cscard:has(.rd-cscard__link:hover) .rd-cscard__link{ text-decoration:underline !important; }
+.bbc-rd .rd-cscard__link::before{ content:""; position:absolute; inset:0; z-index:0; }
+.bbc-rd .rd-cscard__link:focus-visible{ outline:3px solid var(--lime); outline-offset:3px; }
+/* Hover driven from the card, not a wrapper, so the whole surface responds. */
+.bbc-rd .rd-cscard:has(.rd-cscard__link:hover) .rd-cscard__heading{ text-decoration:underline; text-underline-offset:3px; }
+
+/* The one permitted second link. Raised above the overlay and given real space around it so it
+   cannot be mis-tapped — Pickering's prescription plus Roselli's dead-space caveat. */
+.bbc-rd .rd-cscard__meta{ position:relative; z-index:1; margin:10px 0 12px; font-size:14px; }
+.bbc-rd .rd-cscard__meta a{ position:relative; z-index:1; padding:4px 2px; text-underline-offset:3px; }
+.bbc-rd .rd-cscard__dot{ margin:0 6px; opacity:.6; }
+
+/* ── FAMILY SURFACES (2026-08-01) ──────────────────────────────────────────────────────────
+   Four surfaces, derived from the card's family (snippets/bbc-cscard.liquid), not its kind —
+   17 kinds would have been 17 colours. Every pairing uses existing tokens and was measured
+   with qa/contrast-check.mjs before shipping, because assuming lime-700 would work on bone
+   cost a 1.55:1 failure earlier this week.
+     journey      bone + ink      the default; most cards, quietest
+     programme    forest + bone   the mission work reads darker, with more gravity
+     applied      steel + ink     cool and technical, matching the engineering register
+     recognition  paper + gold    a third-party voice, visibly not our own                      */
+.bbc-rd .rd-cscard[data-family="programme"]{ background:var(--forest); color:var(--bone); }
+.bbc-rd .rd-cscard[data-family="programme"] .rd-cscard__heading,
+.bbc-rd .rd-cscard[data-family="programme"] .rd-cscard__heading .rd-cscard__link,
+.bbc-rd .rd-cscard[data-family="programme"] .rd-cscard__more{ color:var(--bone); }
+/* The class is __ctx, not __context — I guessed, the override never applied, and charcoal on
+   forest measured 1.05:1. Every descendant that carries body colour is now named explicitly. */
+/* Verified against the snippet's actual class list rather than guessed: __out and __ctx, not
+   __outcome and __context. The earlier guess was a silent no-op that only the contrast gate
+   caught, and only because a `p` fallback happened to cover it. */
+.bbc-rd .rd-cscard[data-family="programme"] .rd-cscard__ctx,
+.bbc-rd .rd-cscard[data-family="programme"] .rd-cscard__out,
+.bbc-rd .rd-cscard[data-family="programme"] .rd-cscard__outs,
+.bbc-rd .rd-cscard[data-family="programme"] .rd-cscard__attr,
+.bbc-rd .rd-cscard[data-family="programme"] .rd-cscard__inst,
+.bbc-rd .rd-cscard[data-family="programme"] .rd-cscard__meta,
+.bbc-rd .rd-cscard[data-family="programme"] p{ color:rgba(230,220,200,.86); }
+.bbc-rd .rd-cscard[data-family="programme"] .rd-cscard__kind{ background:var(--lime); color:var(--forest); }
+
+.bbc-rd .rd-cscard[data-family="applied"]{ background:var(--steel); color:var(--ink); }
+.bbc-rd .rd-cscard[data-family="applied"] .rd-cscard__kind{ background:var(--forest); color:var(--lime); }
+
+.bbc-rd .rd-cscard[data-family="recognition"]{ background:var(--paper); }
+.bbc-rd .rd-cscard[data-family="recognition"]::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:4px; background:var(--gold); }
+.bbc-rd .rd-cscard[data-family="recognition"] .rd-cscard__kind{ background:var(--gold); color:var(--ink); }
+
+/* ── THE FABRICATION REGISTER ON THE CARD (2026-08-01) ─────────────────────────────────────
+   The estate gained a drawing language today — mitred joint, dimension callout, culm rail,
+   tube cross-section — and the case-study cards ignored all of it. The kind chip was a
+   border-radius:999px lime pill, which is on every "looks AI-generated" list going, while a
+   register nobody else can borrow sat one file away.
+
+   Three details connect them. Colour and geometry are untouched (both already measured AA),
+   so this changes type and shape only — no contrast risk.                                    */
+
+/* 1 · the chip becomes a drawing PART LABEL, not a pill: monospace, bracketed, squared off */
+.bbc-rd .rd-cscard__kind{ border-radius:3px; font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  font-weight:700; letter-spacing:.1em; padding:4px 9px; }
+.bbc-rd .rd-cscard__kind::before{ content:"["; margin-right:3px; opacity:.55; }
+.bbc-rd .rd-cscard__kind::after{ content:"]"; margin-left:3px; opacity:.55; }
+
+/* 2 · the outcome sits on a DIMENSION LINE — the same device now on About's stats and the
+      donation page, so a number on a card reads as measured rather than asserted */
+.bbc-rd .rd-cscard__out{ position:relative; padding-top:15px; margin-top:4px; }
+.bbc-rd .rd-cscard__out::before{ content:""; position:absolute; top:6px; left:0; right:0; height:1px;
+  background:color-mix(in srgb, currentColor 38%, transparent); }
+.bbc-rd .rd-cscard__out::after{ content:""; position:absolute; top:2px; left:0; width:1px; height:9px;
+  background:color-mix(in srgb, currentColor 38%, transparent); }
+
+/* 3 · a MITRE MARK on the wide card — the joint motif, one cut, top-right only so it never
+      collides with the chip at top-left */
+@media (min-width:981px){
+  .bbc-rd .rd-csgrid--mosaic > [data-size="wide"] .rd-cscard::before{ content:""; position:absolute;
+    top:0; right:0; width:26px; height:26px; z-index:2; pointer-events:none;
+    background:linear-gradient(225deg, var(--lime) 0 50%, transparent 50%); }
+}
+
+/* ── variants: hide slots and change scale/direction. NEVER reorder. ── */
+/* The <li> is the grid item now that the group is a <ul>, so the full-width span must sit on the
+   ITEM, not on the .rd-cscard inside it. Setting grid-column on the article did nothing and the
+   seven cards wrapped into ragged 2-and-3 rows. */
+.bbc-rd .rd-cscard-item:has(.rd-cscard--featured){ grid-column:1/-1; }
+/* FILL THE BLOCK (2026-08-01). Once cards took a coloured surface, the featured card's dead
+   space became visible: measured 258px of 513 — 50% of the card was empty forest, because the
+   grid stretched the item to the tallest row while its two short columns stayed at the top.
+   Invisible while every card was the page colour; obvious the moment it wasn't.
+   Sizing the featured card to its content is the contract-safe fix — stretching its media to
+   fill instead would change that card's aspect ratio, which is the same one-ratio rule that
+   rejected a 16/11 lead card earlier today. Any gap now falls outside the card, on the page. */
+.bbc-rd .rd-cscard-item:has(.rd-cscard--featured){ align-self:start; }
+/* Grid cards already measure 0% dead because the footer is pushed down; make that explicit so a
+   card with short copy on a coloured surface can never open a hole. */
+.bbc-rd .rd-cscard--grid .rd-cscard__body{ display:flex; flex-direction:column; flex:1 1 auto; }
+.bbc-rd .rd-cscard--grid .rd-cscard__foot{ margin-top:auto; }
+.bbc-rd .rd-cscard--featured{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:32px; align-items:start; }
+.bbc-rd .rd-cscard--featured .rd-cscard__heading{ font-size:clamp(21px,2.1vw,28px); line-height:1.25; }
+.bbc-rd .rd-cscard--grid     .rd-cscard__heading{ font-size:19px; line-height:1.3; }
+.bbc-rd .rd-cscard--compact  .rd-cscard__heading{ font-size:17px; line-height:1.35; }
+.bbc-rd .rd-cscard--compact{ padding-block:14px; border-top:1px solid var(--border-strong); }
+@media (max-width:860px){
+  .bbc-rd .rd-cscard--featured{ grid-template-columns:1fr; gap:18px; }
+}
 /* Impact — named prison sites line */
 .bbc-rd .rd-sitenames{ font-weight:800; font-size:clamp(18px,2.4vw,26px); color:var(--forest); letter-spacing:-.01em; line-height:1.4; }
 .bbc-rd a.rd-cscard{ display:flex; flex-direction:column; background:var(--bone); border:2.5px solid var(--ink); border-radius:10px; overflow:clip; /* clip not hidden — hidden makes the card a scroll container and kills scroll-driven timelines inside (chip stagger), 2026-07-24 */ box-shadow:5px 5px 0 var(--ink); text-decoration:none; color:var(--ink); transition:transform .18s ease, box-shadow .18s ease; }
@@ -316,6 +579,158 @@
 .bbc-rd .rd-dark .rd-tl.rd-hot .rd-yr{ color:var(--gold); }
 @media(max-width:620px){ .bbc-rd .rd-tl{ grid-template-columns:1fr; gap:6px; } }
 
+/* Timeline + value photography, added 2026-07-31.
+   The milestone and value blocks had NO image setting at all, so 4 of 7 About bands were
+   text-only BY CONSTRUCTION — it read as a content gap but was a schema one.
+
+   Both use the aspect-lock from .rd-cscard__media (§ line 237): absolute-fill inside a
+   ratio box. `aspect-ratio` alone loses to content height in normal flow — that cost three
+   attempts on the case-study cards, so it is not re-litigated here. */
+.bbc-rd .rd-tl-media{ position:relative; aspect-ratio:16/10; overflow:clip; min-height:0; border-radius:6px; max-width:460px; }
+/* The 2012 milestone photo is a dark B&W archival shot sitting on the dark forest band, so its
+   edges disappeared and the row read as an empty gap — I misread it as a missing image twice
+   before measuring. A hairline defines the frame whatever tone the photograph is. */
+.bbc-rd .rd-dark .rd-tl-media{ box-shadow:0 0 0 1.5px rgba(230,220,200,.30); }
+.bbc-rd .rd-tl-media img{ position:absolute; inset:0; width:100% !important; height:100% !important; max-height:none !important; object-fit:cover; display:block; }
+
+/* These cards are de-boxed in a grid (see the .rd-grid .rd-card.rd-stamp rule above): no border,
+   just a left rule. A full-bleed photo is right in a BOXED card but wrong here — it left the image
+   on x=94 while the text sat on x=118, a 24px stagger. Inset the media by the body's own padding
+   so photo and copy share one axis. */
+.bbc-rd .rd-val-media{ position:relative; aspect-ratio:16/10; overflow:clip; min-height:0; border-bottom:2.5px solid var(--ink); margin:0 24px; }
+.bbc-rd .rd-val-media img{ position:absolute; inset:0; width:100% !important; height:100% !important; max-height:none !important; object-fit:cover; display:block; }
+
+/* The evidence line under a value. Deliberately distinct from body copy: a value with no
+   instance is an aspiration, so the instance must not read as more of the same prose. */
+.bbc-rd .rd-val-ev{ margin-top:12px; padding-top:12px; border-top:1.5px solid var(--mist); font-size:15px; color:var(--charcoal); }
+
+/* ════════════════════════════════════════════════════════════════════════════════════════
+   FABRICATION-DRAWING DEVICES (About page), 2026-07-31.
+
+   Why these exist: across 27 About pages measured this week, five of eight consumer social
+   enterprises state their model in prose and never draw it, and NOT ONE uses a pie chart,
+   Sankey or org chart. So the differentiator is not a better chart — it is a drawing register
+   nobody else can borrow. BBC was founded by two design engineers and builds frames from a
+   grass, which gives it tubes, mitres, nodes and dimension lines for free. The dark bands
+   already carry a blueprint dot grid (§ below), so the vocabulary was half-present.
+
+   SCOPING — the reason these are new classes and modifiers rather than restyles:
+     · .rd-loop  is used by 4 sections (about, home, product, workshops) → Device A is a NEW
+       class .rd-joint, so the other three are untouched.
+     · .rd-stats is used by 12 sections → Device C is an OPT-IN modifier .rd-dim.
+     · .rd-tl / .rd-timeline are used by bbc-about-2026 ONLY → Device D can modify directly,
+       but still takes a .rd-culm modifier so the plain rail stays available.
+   ════════════════════════════════════════════════════════════════════════════════════════ */
+
+/* ── DEVICE A · the mitred joint — replaces "three boxes and two arrows" ───────────────── */
+.bbc-rd .rd-joint{ position:relative; max-width:640px; margin:0; }
+/* the bind: one rail the three members meet on */
+.bbc-rd .rd-joint::before{ content:""; position:absolute; left:27px; top:20px; bottom:26px; width:2px;
+  background:linear-gradient(180deg,transparent,var(--lime-700) 12%,var(--lime-700) 88%,transparent); }
+.bbc-rd .rd-jt{ position:relative; padding:0 0 0 76px; }
+/* a bamboo culm seen side-on: warm body, dark node bands at each end */
+.bbc-rd .rd-jt .rd-tube{ position:absolute; left:0; top:14px; width:56px; height:15px; border-radius:3px;
+  background:linear-gradient(180deg,#E9DCAF,#C9B77E 62%,#A8955C); box-shadow:inset 0 0 0 1.5px rgba(14,26,23,.45); }
+.bbc-rd .rd-jt .rd-tube::before,
+.bbc-rd .rd-jt .rd-tube::after{ content:""; position:absolute; top:-2px; bottom:-2px; width:5px; background:#7C6A38; border-radius:2px; }
+.bbc-rd .rd-jt .rd-tube::before{ left:7px; }
+.bbc-rd .rd-jt .rd-tube::after{ right:7px; }
+/* the bonded member — the outcome — is the one that goes lime */
+.bbc-rd .rd-jt:last-child .rd-tube{ background:linear-gradient(180deg,var(--lime),var(--lime-700)); }
+.bbc-rd .rd-jt:last-child .rd-tube::before,
+.bbc-rd .rd-jt:last-child .rd-tube::after{ background:#5F7A15; }
+/* The member label was lime-700 on both grounds. On the bone band that measured 1.55:1 against
+   a required 4.5:1 — the contrast gate caught it. The accent only carries on dark; on light the
+   label takes forest. Same rule the dark-band link work landed on earlier this week. */
+.bbc-rd .rd-jt .rd-mono{ font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--forest); }
+.bbc-rd .rd-dark .rd-jt .rd-mono{ color:var(--lime); }
+.bbc-rd .rd-jt .rd-big{ font-weight:800; font-size:clamp(19px,2.4vw,24px); letter-spacing:-.02em; line-height:1.15; margin-top:2px; }
+.bbc-rd .rd-jt .rd-sm{ font-size:15px; margin:5px 0 22px; max-width:44ch; color:var(--charcoal); }
+.bbc-rd .rd-dark .rd-jt .rd-sm{ color:var(--bone); }
+@media(max-width:620px){ .bbc-rd .rd-jt{ padding-left:66px; } }
+
+/* ── DEVICE C · dimension callouts — a number that reads as measured, not claimed ──────── */
+.bbc-rd .rd-stats.rd-dim{ gap:clamp(20px,4vw,44px); }
+.bbc-rd .rd-stats.rd-dim .rd-stat{ position:relative; padding-top:40px; text-align:left; }
+/* the dimension line itself */
+.bbc-rd .rd-stats.rd-dim .rd-stat::before{ content:""; position:absolute; top:16px; left:0; right:0; height:1px;
+  background:color-mix(in srgb, var(--charcoal) 45%, transparent); }
+.bbc-rd .rd-dark .rd-stats.rd-dim .rd-stat::before{ background:rgba(230,220,200,.45); }
+/* extension ticks + arrow terminators, drawn on one extra span so no pseudo is overloaded */
+.bbc-rd .rd-stats.rd-dim .rd-dimt{ position:absolute; top:8px; left:0; right:0; height:17px; pointer-events:none; }
+.bbc-rd .rd-stats.rd-dim .rd-dimt::before,
+.bbc-rd .rd-stats.rd-dim .rd-dimt::after{ content:""; position:absolute; top:0; width:1px; height:17px;
+  background:color-mix(in srgb, var(--charcoal) 45%, transparent); }
+.bbc-rd .rd-stats.rd-dim .rd-dimt::before{ left:0; }
+.bbc-rd .rd-stats.rd-dim .rd-dimt::after{ right:0; }
+.bbc-rd .rd-dark .rd-stats.rd-dim .rd-dimt::before,
+.bbc-rd .rd-dark .rd-stats.rd-dim .rd-dimt::after{ background:rgba(230,220,200,.45); }
+.bbc-rd .rd-stats.rd-dim .rd-src{ font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  letter-spacing:.05em; }
+
+/* ── DEVICE D · the culm — bamboo grows in segments, and a node IS a timeline marker ───── */
+/* The rail sits in the grid gap between the year column (120px) and the content column, so
+   no track sizes change and the existing .rd-tl grid is untouched. */
+.bbc-rd .rd-timeline.rd-culm{ position:relative; padding-left:0; }
+.bbc-rd .rd-timeline.rd-culm::before{ content:""; position:absolute; left:92px; top:14px; bottom:14px; width:24px;
+  border-radius:5px; background:linear-gradient(90deg,#8E7C43,#E9DCAF 38%,#C9B77E 74%,#8E7C43);
+  box-shadow:inset 0 0 0 1.5px rgba(14,26,23,.45); }
+/* the culm replaces the rule between rows */
+.bbc-rd .rd-timeline.rd-culm .rd-tl{ border-top:0; grid-template-columns:120px 1fr; }
+.bbc-rd .rd-timeline.rd-culm .rd-tl-body{ padding-left:26px; }
+
+/* LANDSCAPE ROWS (>=900px), 2026-07-31 — James: "the timeline feels very long".
+   Measured: the band was 2,339px = 25% of the whole page, and the three illustrated rows were
+   1,374px of that (59%), because a stacked photo made each row cost text PLUS 287px of image —
+   441px to carry 29 words. Laying the row out landscape makes it cost max(text, image) instead.
+   Rows with no photo span to the end so the third track never reads as a dead column. */
+@media(min-width:900px){
+  .bbc-rd .rd-timeline.rd-culm .rd-tl{ grid-template-columns:92px minmax(0,1fr) 300px; align-items:stretch; min-height:172px; }
+  .bbc-rd .rd-timeline.rd-culm .rd-tl:not(.rd-tl--media) .rd-tl-body{ grid-column:2 / -1; }
+  /* SEAMLESSNESS, 2026-07-31 — James: "very divided, dates and images aren't integrated".
+     Measured three separate causes, not one:
+       1. 129-155px of dead space under the text on every illustrated row, because the text block
+          (89-140px) floated at the top of a row whose height was set by a fixed 200px image.
+          Fixed by letting the photo STRETCH to the row instead of dictating it — the row is now
+          sized by its copy and the image fills the space as a panel.
+       2. The text measure alternated: illustrated rows ended at x864, plain rows ran to x1208,
+          so the right edge flipped every other row. A shared max-width holds one measure.
+       3. Nothing bound the three columns into a row — the original border-top was removed when
+          the culm arrived. A hairline returns, spanning the full width. */
+  .bbc-rd .rd-timeline.rd-culm .rd-tl-body{ max-width:640px; }
+  .bbc-rd .rd-timeline.rd-culm .rd-tl--media .rd-tl-media{ margin-top:0; max-width:300px; aspect-ratio:auto; align-self:stretch; }
+}
+/* the hairline that makes year + copy + photo read as one band */
+.bbc-rd .rd-timeline.rd-culm .rd-tl + .rd-tl{ border-top:1px solid rgba(230,220,200,.14); }
+/* Below 900px the row stacks, so the photo needs the spacing the removed .rd-mt2 used to give it. */
+@media(max-width:899px){
+  .bbc-rd .rd-timeline.rd-culm .rd-tl-media{ margin-top:16px; grid-column:1 / -1; }
+}
+/* the node: the dividing ring on a real culm, doubling as the year marker */
+.bbc-rd .rd-timeline.rd-culm .rd-tl::before{ content:""; position:absolute; left:90px; top:28px; width:28px; height:7px;
+  border-radius:2px; background:#6F5E2F; box-shadow:0 0 0 1.5px rgba(14,26,23,.5); }
+.bbc-rd .rd-timeline.rd-culm .rd-tl{ position:relative; }
+.bbc-rd .rd-timeline.rd-culm .rd-tl.rd-hot::before{ background:var(--lime); box-shadow:0 0 0 1.5px rgba(14,26,23,.5), 0 0 14px rgba(212,253,98,.55); }
+@media(max-width:620px){
+  .bbc-rd .rd-timeline.rd-culm::before{ left:0; width:16px; }
+  .bbc-rd .rd-timeline.rd-culm .rd-tl{ grid-template-columns:1fr; padding-left:38px; }
+  .bbc-rd .rd-timeline.rd-culm .rd-tl::before{ left:-2px; width:20px; top:26px; }
+  .bbc-rd .rd-timeline.rd-culm .rd-tl > div:last-child{ padding-left:0; }
+}
+
+/* ── the origin band gains a founder-at-work photo (asymmetric, never 50/50 — FORMULA §8) ─ */
+.bbc-rd .rd-origin{ display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,1fr); gap:clamp(28px,5vw,56px); align-items:start; }
+.bbc-rd .rd-origin__media{ position:relative; aspect-ratio:4/5; overflow:clip; min-height:0; border-radius:8px; }
+.bbc-rd .rd-origin__media img{ position:absolute; inset:0; width:100% !important; height:100% !important; max-height:none !important; object-fit:cover; display:block; }
+.bbc-rd .rd-origin__cap{ margin-top:10px; font-size:var(--type-caption); color:var(--charcoal); }
+/* Gallery photo caption. Was a `.rd-body` figcaption with an inline font-size:14px in
+   bbc-gallery-grid-2026.liquid, which is why .rd-body measured 14px on /pages/gallery and 18px
+   in all 171 other instances estate-wide (2026-08-03 type-drift audit). Same caption role as
+   .rd-origin__cap above, so same token — no new literal for the ratchet to count. */
+.bbc-rd .rd-gal__cap{ padding:12px 16px; font-size:var(--type-caption); color:var(--charcoal); }
+@media(max-width:840px){ .bbc-rd .rd-origin{ grid-template-columns:1fr; } .bbc-rd .rd-origin__media{ aspect-ratio:16/10; max-width:520px; } }
+
 /* numbered steps (Workshops how-it-works) */
 .bbc-rd .rd-steps{ counter-reset:s; list-style:none; padding:0; margin:0; display:grid; gap:14px; }
 /* D6 — ruled, not boxed (2026-07-28, on the R2a measurement).
@@ -336,6 +751,14 @@
 .bbc-rd .rd-steps li::before{ content:counter(s); position:absolute; left:0; top:20px; width:38px; height:38px; border-radius:6px; background:var(--forest); color:var(--lime); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:18px; }
 .bbc-rd .rd-steps li h3{ font-size:18px; margin-bottom:3px; }
 .bbc-rd .rd-steps li p{ font-size:16px; color:var(--charcoal); margin:0; }
+/* --charcoal (#2A332F) is a LIGHT-SURFACE colour. On a dark band it renders at 1.04:1 — the
+   five step descriptions on /pages/programmes, which explain how the prison and school
+   programmes actually run, were effectively invisible (measured 2026-07-31, confirmed by
+   screenshot). The line directly above already had a .rd-dark variant for border-top-color, so
+   the dark case was considered here and the text colour was simply missed. Same family as the
+   home impact eyebrow: a component styled for paper, dropped onto forest. */
+.bbc-rd .rd-dark .rd-steps li p,
+.bbc-rd .rd-forest .rd-steps li p{ color:var(--bone); }
 
 /* simple bullet list (Education programmes / Workshops good-to-know) */
 .bbc-rd .rd-list{ list-style:none; padding:0; margin:14px 0 0; display:grid; gap:10px; }
@@ -687,6 +1110,16 @@
 .bbc-rd .rd-cmp-77472{ font-size:clamp(28px,4vw,42px) !important; margin-top:8px !important; font-weight:800 !important; letter-spacing:-.02em !important; }
 .bbc-rd .rd-jc-center{ justify-content:center; }
 .bbc-rd .rd-c-lime{ color:var(--lime) !important; }
+/* ...but lime is a DARK-surface accent. #D4FD62 measures 1.04:1 on paper and 1.17:1 on bone —
+   invisible. The hero eyebrow carries this class in ~12 sections and is right in all of them
+   because those heroes are forest or a photo; exactly two places put it on a light surface:
+   the impact-report hero (`<section class="rd-pad rd-paper">`) and the blog article kicker
+   (the article hero sits on the article's own bone background — there is no dark article-hero
+   variant). Same conclusion this file already reached for .rd-c-lime700 fifteen lines below,
+   "AAA: was lime-700, unreadable on light". (2026-08-03, pixel-sampled, 4 nodes.)
+   (0,3,0) beats the (0,2,0) above; both are !important, so specificity decides. */
+.bbc-rd .rd-paper .rd-c-lime,
+.bbc-rd .rd-art-kicker.rd-c-lime{ color:var(--forest) !important; }
 .bbc-rd .rd-mw-18ch{ max-width:18ch !important; }
 .bbc-rd .rd-mw-820px{ max-width:820px !important; }
 .bbc-rd .rd-mw-none{ max-width:none !important; }
@@ -865,6 +1298,57 @@
 /* Links follow their context's colour instead of legacy forest
    (keeps nav links + buttons, which set their own colour). */
 .bbc-rd a:not(.rd-btn):not(.rd-nav-cta):not(.rd-nav-link):not(.rd-mcta):not(.rd-active){ color:inherit !important; -webkit-text-fill-color:currentColor !important; }
+/* Same leak, different element (2026-08-03). bbc-foundation.css:363 sets a bare
+   `p{color:var(--bbc-text)}`. An element selector matches the <p> directly, and a
+   direct match always beats an inherited value — so every <p> nested inside a
+   light-on-dark container was silently reset to ink, no matter what the container
+   set. Measured on /pages/why-bamboo: the hero lede is a <p> inside div.rd-lede;
+   the div correctly computed #eef3ec, the <p> inside it computed #14211C on the
+   #003C32 hero — 1.34:1, all but invisible. (0,1,1) beats (0,0,1), so no
+   !important is needed here. Paragraphs follow their container's colour.
+   SCOPED DELIBERATELY (revised same day): the first cut was a bare `.bbc-rd p`, which at
+   (0,1,1) outranks every single-class rule a page might set on its own paragraphs — e.g. the
+   legacy size-guide's `.hero-subtitle{color:#fff}` at (0,1,0), whose white is exactly what
+   that page's dark hero needs. Fixing dark bands must not quietly seize control of every
+   paragraph in the theme, so this now names the dark surfaces it was written for. Legacy
+   containers like size-guide's `.hero` are untouched.
+   NARROWED AGAIN (third cut, same day) — and this is the instructive one. The second cut
+   listed `.bbc-rd .rd-dark p`, which is (0,2,1)... exactly the same specificity as the
+   EXISTING and correct `.bbc-rd .rd-dark p{color:rgb(207,216,210)}` a few hundred lines
+   above. Equal specificity is broken by source order, so being later in the file my rule
+   silently replaced a good light colour with `inherit` — which then resolved to the press
+   quote's own rgba(7,62,39,.75) and put legacy forest on current forest at 1.01:1 across
+   16 product pages. A "safety" rule caused sixteen new defects; the estate sweep caught it.
+   The real defect was only ever a bare <p> nested inside a .rd-lede wrapper (the wrapper
+   takes the colour, the child element-selector resets it), so target exactly that and
+   nothing else. */
+.bbc-rd .rd-lede p{ color:inherit; }
+/* ---- Legacy page heroes (2026-08-03).
+   /pages/size-guide is one of the 15 pages still on the default page template. Its body HTML
+   ships its own hero: a dark green gradient with `color:#fff` set on .hero itself. The
+   redesign's prose rules then reach inside it and win on specificity —
+   `.bbc-rd .rd-prose p{color:var(--charcoal)}` (0,2,1) beats the page's own
+   `.hero-subtitle{color:#fff}` (0,1,0), and `.bbc-rd h2{color:var(--ink)}` (0,1,1) beats its
+   `h2{color:var(--primary)}` (0,0,1). Result: charcoal and ink text on a dark hero —
+   1.11:1, 1.39:1 and 1.62:1. Letting the hero's children inherit hands the surface back to
+   the element that actually knows what colour it is.
+   Verified safe: `.hero` appears on this page ONLY across all 15 legacy pages, and it sets
+   white on itself, so `inherit` resolves to white here and cannot affect anything else. */
+.bbc-rd .rd-prose .hero h1,
+.bbc-rd .rd-prose .hero h2,
+.bbc-rd .rd-prose .hero h3,
+.bbc-rd .rd-prose .hero p{ color:inherit; }
+/* The same page's dark CTA band, same cause: the page declares
+   `.cta p{color:rgba(255,255,255,.95)}` at (0,1,1) and `.bbc-rd .rd-prose p` at (0,2,1)
+   overrides it, leaving charcoal on a dark green band at 1.39:1. `inherit` is NOT safe here
+   because .cta sets no colour of its own, so restate the page's declared intent instead. */
+.bbc-rd .rd-prose .cta p{ color:rgba(255,255,255,.95); }
+/* Same page, its "Email Us" button: white on gold #FDBF14 is 1.66:1, and white-on-gold is a
+   banned pair in the block system's colour grammar besides. The white is inherited from the
+   dark .cta band via the `a{color:inherit !important}` rule above, so beating it needs the
+   `:not(#_)` id-level lift this file already uses for the statement buttons. Forest on gold
+   measures ~8:1. */
+.bbc-rd .rd-prose a.btn-primary:not(#_){ color:var(--forest) !important; -webkit-text-fill-color:var(--forest) !important; }
 /* Dark-filled link-buttons legacy CSS would turn forest-on-forest: force light text. */
 .bbc-rd a.rd-mcta{ color:var(--bone) !important; -webkit-text-fill-color:var(--bone) !important; }
 .bbc-rd .rd-tabs a.rd-active{ color:var(--bone) !important; -webkit-text-fill-color:var(--bone) !important; }
@@ -897,7 +1381,12 @@
 .bbc-rd-education .rd-hero .rd-scrim{ background:linear-gradient(180deg, rgba(0,24,19,.66) 0%, rgba(0,24,19,.54) 40%, rgba(0,24,19,.93) 100%), linear-gradient(90deg, rgba(0,24,19,.95) 0%, rgba(0,24,19,.84) 30%, rgba(0,24,19,.58) 58%, rgba(0,24,19,.14) 84%, rgba(0,24,19,0) 100%); }
 
 /* Workshops credibility strip (browser-audit content pass 2026-06-12). */
-.bbc-rd .rd-trustband{ background:var(--forest); padding:15px 24px; }
+/* Horizontal padding removed 2026-07-31. It was added ON TOP of .rd-wrap's own gutter, so the
+   trust band's content sat at 42px on mobile while every other band sat at 18px — a visible 24px
+   step. It survived every previous audit because at >=1280 the wrap hits its 1200px max-width and
+   the surplus is absorbed by margin:auto: content lands at 72px with or without it. Desktop-only
+   evidence could not have found this. The gutter is .rd-wrap's job; a band must not add its own. */
+.bbc-rd .rd-trustband{ background:var(--forest); padding:15px 0; }
 .bbc-rd .rd-trustband .rd-wrap{ max-width:var(--rd-container); margin:0 auto; }
 .bbc-rd .rd-trustline{ margin:0; text-align:center; color:var(--bone); font-weight:700; font-size:14px; letter-spacing:.02em; }
 
@@ -932,7 +1421,12 @@
   .bbc-rd .rd-pad{ padding:52px 0; }                                                   /* 88px was never reduced on mobile */
   .bbc-rd .rd-pad-sm{ padding:40px 0; }
 }
-@media(max-width:520px){ .bbc-rd .rd-wrap{ padding:0 18px; } }                         /* 32px gutters ate 18% of a 360px screen */
+/* .rd-foot-wrap added 2026-07-31. It is a second wrap class with the same 32px desktop gutter,
+   but it was never listed here — so on EVERY page the footer's content sat at 32px on mobile
+   while the body above it sat at 18px, a visible 14px step at the bottom of all 45 pages. Found
+   only once the axis check measured content edges rather than border boxes (both wraps are flush
+   at boxLeft 0, so the border-box test could never see it). */
+@media(max-width:520px){ .bbc-rd .rd-wrap, .bbc-rd.rd-footer .rd-foot-wrap{ padding:0 18px; } }  /* 32px gutters ate 18% of a 360px screen */
 @media(max-width:480px){ .bbc-rd .rd-cmp-31841{ gap:8px; } }                /* product thumb row */
 @media(max-width:600px){
   /* Sticky buy-bar on phones: a long product title wrapped to 4 lines and
@@ -952,7 +1446,12 @@
 .bbc-rd .bbc-impact-cred .rd-cred-card{ display:flex; flex-direction:column; gap:16px; }
 .bbc-rd .rd-cred-q{ font-size:20px; line-height:1.45; font-weight:700; color:var(--ink); margin:0; }
 .bbc-rd .rd-cred-cite{ font-style:normal; font-size:14px; color:var(--forest); margin-top:auto; }
-.bbc-rd .rd-cred-cite span{ color:#5a6b62; font-weight:500; }
+/* #5a6b62 measured 4.16:1 on bone — a near miss on the 4.5 body-text bar, and the kind that
+   survives review because it looks fine to anyone with unimpaired vision. #4d5c54 is the same
+   muted green-grey a shade darker and measures ~5.2:1, keeping headroom for the slightly
+   different light surfaces this citation appears on (bone #E6DCC8 and paper #F1E9D8).
+   (2026-08-03) */
+.bbc-rd .rd-cred-cite span{ color:#4d5c54; font-weight:500; }
 @media(max-width:760px){ .bbc-rd .bbc-impact-cred .rd-g2{ grid-template-columns:1fr; } }
 
 .bbc-rd .rd-product-mission{ margin-top:14px; padding:13px 16px; border-radius:12px;

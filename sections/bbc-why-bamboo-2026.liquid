@@ -310,25 +310,25 @@
         <span class="rd-eyebrow">{{ section.settings.builds_eyebrow }}</span>
         <h2 class="rd-reveal">{{ section.settings.builds_heading }}</h2>
         {%- if section.settings.builds_intro != blank -%}<p class="rd-lede rd-maxw rd-mt2">{{ section.settings.builds_intro }}</p>{%- endif -%}
-        <div class="rd-csgrid rd-mt3">
+        {%- comment -%} THE standard card (snippets/bbc-cscard.liquid), 2026-07-31. This grid was
+           the biggest visual outlier on the estate: bordered, rounded boxes where every other
+           page used borderless editorial cards, plus a wrapper <a> and a title in an <h3> that
+           was NOT the link. `kind` here is a bike model (Tandem / Cargo / Gravel), which is a
+           legitimate taxonomy for this page — it just was not the same one Impact used. {%- endcomment -%}
+        <ul class="rd-csgrid rd-mt3" role="list">
           {%- for b in builds -%}
-            <a class="rd-reveal rd-cscard" href="{{ b.settings.link | default: '#' }}" {{ b.shopify_attributes }}>
-              <div class="rd-cscard__media">
-                {%- if b.settings.image != blank -%}
-                  <img width="{{ b.settings.image.width }}" height="{{ b.settings.image.height }}" src="{{ b.settings.image | image_url: width: 600 }}" alt="{{ b.settings.title | escape }}" loading="lazy">
-                {%- else -%}
-                  <img width="1300" height="1300" src="{{ b.settings.image_fallback | default: 'bbc-rd-bike-field.jpg' | asset_url }}" alt="{{ b.settings.title | escape }}" loading="lazy">
-                {%- endif -%}
-                <span class="rd-cscard__kind">{{ b.settings.kind }}</span>
-              </div>
-              <div class="rd-cscard__body">
-                <h3 class="rd-cscard__inst">{{ b.settings.title }}</h3>
-                <p class="rd-cscard__ctx">{{ b.settings.body }}</p>
-                <span class="rd-cscard__more">Read the build &rarr;</span>
-              </div>
-            </a>
+            {%- assign _img = b.settings.image_fallback | default: 'bbc-rd-bike-field.jpg' -%}
+            {%- render 'bbc-cscard',
+                 variant: 'grid',
+                 kind: b.settings.kind,
+                 heading: b.settings.title,
+                 url: b.settings.link,
+                 context: b.settings.body,
+                 image_pic: b.settings.image,
+                 image: _img,
+                 cta: 'Read the build' -%}
           {%- endfor -%}
-        </div>
+        </ul>
         {%- if section.settings.builds_cta_label != blank -%}
           <p class="rd-mt3 rd-center"><a class="rd-btn rd-lime" href="{{ builds_cta }}">{{ section.settings.builds_cta_label }} <span class="rd-arrow">&rarr;</span></a></p>
         {%- endif -%}

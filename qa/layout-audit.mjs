@@ -25,16 +25,20 @@
 // Usage: node qa/layout-audit.mjs [url-path ...]
 import { chromium } from 'playwright';
 import { writeFileSync, mkdirSync } from 'fs';
+import { ALL_PAGES, previewUrl } from './estate-pages.mjs';
 
 // Flags must not be mistaken for page paths. They were: `--assert` became a URL, every page
 // errored, and the assertion — which skips errored pages — reported "contract holds" on ZERO
 // measurements. A gate that passes when it measured nothing is ESCAPES #1 all over again.
 const ARGS = process.argv.slice(2).filter(a => !a.startsWith('--'));
-const PAGES = ARGS.length ? ARGS : [
-  '/', '/pages/impact', '/pages/workshops', '/pages/schools', '/pages/programmes',
-  '/pages/why-bamboo', '/pages/build-to-bond', '/pages/our-story-2', '/collections/all',
-  '/products/gravel-frame-build-kit',
-];
+// --all runs the whole estate (69 pages). The default short list stays for a fast check, but a
+// SHORT LIST IS THE TRAP: this audit ran 10 pages at one viewport for weeks and read as "the
+// alignment contract holds across all pages", which was true only of the pages it looked at.
+const PAGES = ARGS.length ? ARGS
+  : process.argv.includes('--all') ? ALL_PAGES
+  : ['/', '/pages/impact', '/pages/workshops', '/pages/schools', '/pages/programmes',
+     '/pages/why-bamboo', '/pages/build-to-bond', '/pages/our-story-2', '/collections/all',
+     '/products/gravel-frame-build-kit'];
 const BASE = 'https://bamboobicycleclub.org';
 const PREVIEW = 'preview_theme_id=196820238710';
 
@@ -54,13 +58,28 @@ function audit() {
       const r = R(e);
       if (r.width < 200 || r.height < 40) return false;
       if (/rd-mw-/.test((e.className || '').toString())) return false;
+      // A viewport-pinned overlay is CHROME, not a content band — it does not sit on the content
+      // axis any more than the header does. Found 2026-07-31: the PDP sticky buy-bar
+      // (#bbc-rd-stickybar, position:fixed bottom:0 z-90) carries .rd-wrap, and its deliberately
+      // tightened 16px phone gutter registered as 10 PDPs "off the 18px axis". Walk ancestors,
+      // because the pinned element is usually the wrap's PARENT, not the wrap itself.
+      for (let a = e; a && a !== document.body; a = a.parentElement) {
+        if (/fixed|sticky/.test(getComputedStyle(a).position)) return false;
+      }
       return true;
     });
   for (const w of wraps) {
     const r = R(w);
+    // Measure where CONTENT starts, not the border box — which is what this check has always
+    // claimed to measure. getBoundingClientRect().left is the border edge, so a wrap with a
+    // compensating padding difference could sit on a shared border edge while its text did not.
+    // Corrected 2026-07-31 while fixing .rd-trustband, whose content was 24px off on mobile.
+    const cs = getComputedStyle(w);
+    const contentLeft = r.left + (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.borderLeftWidth) || 0);
     out.axis.push({
       cls: (w.className || '').toString().slice(0, 40),
-      left: Math.round(r.left), right: Math.round(vw - r.right), width: Math.round(r.width),
+      left: Math.round(contentLeft), boxLeft: Math.round(r.left),
+      right: Math.round(vw - r.right), width: Math.round(r.width),
       y: Math.round(r.top + scrollY),
     });
   }
@@ -130,10 +149,31 @@ function audit() {
     // Table cells are placed by the table algorithm, not by margins — same false positive.
     if (/^(TABLE|THEAD|TBODY|TFOOT|TR|TH|TD|CAPTION|COLGROUP|COL)$/.test(e.tagName)) continue;
     if (/table/.test(getComputedStyle(e).display)) continue;
+    // An inline-level box is placed by the inline formatting context — by the text around it —
+    // not by its own margins. Same false positive as a grid child, found 2026-07-31: the
+    // "Create an account" link on /account/login is an inline-flex button sitting after
+    // "Forgotten your password? · " in one paragraph, so its 278/102 gaps are the text flow,
+    // not a centring defect.
+    if (/^inline/.test(getComputedStyle(e).display)) continue;
+    // A measure box sits ON THE AXIS by contract (ALIGNMENT.md rule 2, reversed 2026-07-31):
+    // margin-left = the axis offset, margin-right = 0. It is left-aligned deliberately and does
+    // not claim to centre, so unequal gutters are the intent, not a defect. This check's stated
+    // purpose is "things that CLAIM to be centred but are not"; with margin-right:0 there is no
+    // such claim. .rd-center / .rd-mx-auto keep auto margins and stay in scope, because those
+    // genuinely do claim to centre.
+    const cls = (e.className || '').toString();
+    if (/rd-mw-/.test(cls) && !/rd-center|rd-mx-auto/.test(cls)) continue;
     const padL = parseFloat(pcs.paddingLeft) || 0;
     const padR = parseFloat(pcs.paddingRight) || 0;
-    const gapL = (r.left - p.left) - padL;
-    const gapR = (p.right - r.right) - padR;
+    // Parent BORDER must be subtracted as well as padding. getBoundingClientRect().left is the
+    // border-box edge, so a decorative left rule on the parent shifts every child inside it by
+    // the border width. Found 2026-07-31: SECTION.intro on /pages/size-guide has a 5px solid
+    // left border, which made a correctly left-aligned H2 report a 5px gap and register as
+    // "inset on both sides but not centred".
+    const bL = parseFloat(pcs.borderLeftWidth) || 0;
+    const bR = parseFloat(pcs.borderRightWidth) || 0;
+    const gapL = (r.left - p.left) - padL - bL;
+    const gapR = (p.right - r.right) - padR - bR;
     if (gapL < 4 || gapR < 4) continue;              // flush to an edge = not centred, by intent
     if (Math.abs(gapL - gapR) > 2 && Math.abs(gapL - gapR) < 400) {
       out.centring.push({
@@ -202,11 +242,15 @@ function clashAudit() {
 
 const browser = await chromium.launch({ channel: 'chrome' });
 const report = {};
-for (const path of PAGES) {
-  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce' });
+// BOTH viewports. Desktop-only was the second half of the same blind spot: the PDP's frame-size
+// table was clipped at 390px, hiding ~120px of sizing data, and a 1280 capture could never see it.
+const VIEWPORTS = process.argv.includes('--desktop-only') ? [[1280, 900, false]] : [[1280, 900, false], [390, 844, true]];
+for (const [path, vw, vh, isMobile] of PAGES.flatMap(p => VIEWPORTS.map(v => [p, ...v]))) {
+  const key = `${path}@${vw}`;
+  const ctx = await browser.newContext({ viewport: { width: vw, height: vh }, isMobile, deviceScaleFactor: isMobile ? 2 : 1, reducedMotion: 'reduce' });
   const page = await ctx.newPage();
   try {
-    await page.goto(`${BASE}${path}?${PREVIEW}`, { waitUntil: 'load', timeout: 45000 });
+    await page.goto(previewUrl(path), { waitUntil: 'load', timeout: 45000 });
     await page.waitForTimeout(1800);
     await page.evaluate(async () => {
       document.querySelectorAll('.rd-reveal').forEach(e => { e.style.opacity = 1; e.style.transform = 'none'; });
@@ -216,15 +260,20 @@ for (const path of PAGES) {
       }
       window.scrollTo({ top: 0, behavior: 'instant' }); await new Promise(r => setTimeout(r, 400));
     });
-    report[path] = await page.evaluate(audit);
+    report[key] = await page.evaluate(audit);
     if (!report.__clash) report.__clash = await page.evaluate(clashAudit);
-  } catch (e) { report[path] = { error: String(e).slice(0, 80) }; }
+  } catch (e) { report[key] = { error: String(e).slice(0, 80) }; }
   await ctx.close();
 }
 await browser.close();
 
-mkdirSync('qa/evidence/2026-07-29', { recursive: true });
-writeFileSync('qa/evidence/2026-07-29/layout-audit.json', JSON.stringify(report, null, 2));
+// Evidence day was a hardcoded literal, so every run after that date wrote back into that
+// date's folder and destroyed the previous run's evidence — and the tool could never satisfy
+// gate-check.sh step 5, which requires evidence under TODAY's date. Same bug found in
+// contrast-check.mjs, block-audit.mjs, layout-audit.mjs and sameness.mjs on 2026-08-03.
+const DAY = new Date().toISOString().slice(0, 10);
+mkdirSync(`qa/evidence/${DAY}`, { recursive: true });
+writeFileSync(`qa/evidence/${DAY}/layout-audit.json`, JSON.stringify(report, null, 2));
 
 // ── report ────────────────────────────────────────────────────────────────────────────────
 const pad = (s, n) => String(s ?? '').padEnd(n);
@@ -280,7 +329,7 @@ if (c) {
   c.duplicateSelectors.slice(0, 12)
     .forEach(d => console.log(`     ×${String(d.times).padStart(2)} ${pad(d.sel, 52)} ${d.sheets.join(', ')}`));
 }
-console.log('\n→ qa/evidence/2026-07-29/layout-audit.json');
+console.log(`\n→ qa/evidence/${DAY}/layout-audit.json`);
 
 // ── --assert · the gate mode ──────────────────────────────────────────────────────────────
 // Only HARD contract breaches fail a push. `wide-centred` is reported but never fails: it is a
@@ -291,9 +340,9 @@ if (process.argv.includes('--assert')) {
   // Proof-of-life: refuse to pass on nothing. If pages failed to load or produced no bands,
   // that is a broken run, not a clean estate.
   const measured = Object.entries(report).filter(([k, v]) => !k.startsWith('__') && !v.error && v.axis?.length);
-  if (measured.length < PAGES.length) {
+  if (measured.length < PAGES.length * VIEWPORTS.length) {
     const bad = Object.entries(report).filter(([k, v]) => !k.startsWith('__') && (v.error || !v.axis?.length));
-    console.log(`\n✗ AUDIT DID NOT MEASURE ${bad.length}/${PAGES.length} PAGES — cannot certify anything:`);
+    console.log(`\n✗ AUDIT DID NOT MEASURE ${bad.length}/${PAGES.length * VIEWPORTS.length} PAGE/VIEWPORTS — cannot certify anything:`);
     bad.forEach(([k, v]) => console.log(`   ${k}: ${v.error || 'no bands found'}`));
     process.exit(1);
   }

@@ -244,6 +244,10 @@
     </div>
   </section>
 
+
+  {%- comment -%} Stories band — snippets/bbc-stories-band.liquid (2026-08-01). This section
+     had no `story` block type, which is why the page carried zero case-study cards. {%- endcomment -%}
+  {%- render 'bbc-stories-band', section: section -%}
 </div>
 
 {% schema %}
@@ -662,6 +666,49 @@
       "id": "press_cite",
       "label": "Attribution",
       "default": "Gregor MacGregor, BikeRadar"
+    },
+    {
+      "type": "header",
+      "content": "Stories band (add Story cards below)"
+    },
+    {
+      "type": "text",
+      "id": "stories_eyebrow",
+      "label": "Stories eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "stories_title",
+      "label": "Stories heading"
+    },
+    {
+      "type": "textarea",
+      "id": "stories_lede",
+      "label": "Stories intro"
+    },
+    {
+      "type": "text",
+      "id": "stories_all_label",
+      "label": "Read-more button label"
+    },
+    {
+      "type": "url",
+      "id": "stories_all_url",
+      "label": "Read-more button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "stories_lead",
+      "label": "Lead card (first story spans two columns)",
+      "info": "Breaks the 3-up grid so the band opens with a hero. Needs 3+ story cards.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "stories_mosaic",
+      "label": "Mosaic layout (content-aware sizes, no gaps)",
+      "info": "Card size is derived from its content: a film goes wide, long copy goes tall, no image goes flat. Gaps backfill automatically. Needs 3+ cards.",
+      "default": false
     }
   ],
   "blocks": [
@@ -797,6 +844,53 @@
           "id": "answer",
           "label": "Answer",
           "default": "None at all. Around 95% of participants have never built anything like this before."
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "name": "Story card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "kind",
+          "label": "Tag"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "outcome",
+          "label": "Outcome headline (overrides Title on the card)",
+          "info": "The card heading is the only card-level link (WCAG 2.4.4) — it must say what you get."
+        },
+        {
+          "type": "textarea",
+          "id": "blurb",
+          "label": "Short text"
+        },
+        {
+          "type": "text",
+          "id": "image",
+          "label": "Image filename or full URL"
+        },
+        {
+          "type": "text",
+          "id": "video",
+          "label": "YouTube video ID (optional)"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL (optional)"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link to the full story"
         }
       ]
     }

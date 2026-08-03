@@ -90,7 +90,16 @@
    caught by the 2026-07-24 alignment audit) */
 .rd-cscard__media > .bbc-media{position:absolute;inset:0;width:100%;height:100%}
 .bbcpl-media > .bbc-media{position:absolute;inset:0;width:100%;height:100%}
-.bbcpl-media:has(> .bbc-media){aspect-ratio:16/10}
+/* `width:100%` is load-bearing, not tidiness. .bbcpl-media is a grid item that stretches
+   to the pillar row's height. With width:auto, aspect-ratio resolves the OTHER way —
+   width from height — so a tall text column made the photo wider than its track: measured
+   1137px and 1329px inside a 780px column at 1530w, overrunning the text by 357px and
+   548px (2026-08-03). The absolutely-filled image then painted under the copy, which is
+   why pixel-sampled contrast reported pillar text at 1.08:1 on a photographic background
+   while the cascade said it was ink on bone — two instruments disagreeing because the
+   defect was geometry, not colour. The reversed pillar also ran 387px past the viewport.
+   Constraining width makes aspect-ratio derive height from width, as intended. */
+.bbcpl-media:has(> .bbc-media){aspect-ratio:16/10;width:100%}
 .bbc-media--playable{cursor:pointer}
 /* duotone poster (forest wash) that resolves to colour on hover/focus */
 .bbc-media--playable .bbc-media__img{filter:grayscale(1) contrast(1.06) brightness(.9);transition:filter .45s ease}

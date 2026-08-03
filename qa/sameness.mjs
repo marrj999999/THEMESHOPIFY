@@ -231,9 +231,14 @@ if (excluded.length) {
   excluded.forEach(r => console.log(`  ${pad(r.name, 24)} ${r.error ? 'LOAD: ' + r.error : `bands=${r.bands ?? 0} coverage=${r.coverage ?? '-'}`}`));
 }
 
-mkdirSync('qa/evidence/2026-07-28', { recursive: true });
-writeFileSync('qa/evidence/2026-07-28/sameness.json', JSON.stringify({ rows, medians: {
+// Evidence day was a hardcoded literal, so every run after that date wrote back into that
+// date's folder and destroyed the previous run's evidence — and the tool could never satisfy
+// gate-check.sh step 5, which requires evidence under TODAY's date. Same bug found in
+// contrast-check.mjs, block-audit.mjs, layout-audit.mjs and sameness.mjs on 2026-08-03.
+const DAY = new Date().toISOString().slice(0, 10);
+mkdirSync(`qa/evidence/${DAY}`, { recursive: true });
+writeFileSync(`qa/evidence/${DAY}/sameness.json`, JSON.stringify({ rows, medians: {
   ours: Object.fromEntries(['bands','repetition','diversity','adjacency','boxRatio','symmetry','densityRun'].map(k => [k, med(ours, k)])),
   peers: Object.fromEntries(['bands','repetition','diversity','adjacency','boxRatio','symmetry','densityRun'].map(k => [k, med(peers, k)])),
 } }, null, 2));
-console.log('\n→ qa/evidence/2026-07-28/sameness.json');
+console.log(`\n→ qa/evidence/${DAY}/sameness.json`);

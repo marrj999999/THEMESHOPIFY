@@ -1,0 +1,33 @@
+{%- comment -%} bbc-video-lightbox: any element with [data-yt] opens that YouTube id in an in-page player. Rendered once per page. {%- endcomment -%}
+<style>
+  .rd-cscard__media{position:relative;overflow:hidden}
+  .rd-cscard__play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;transition:background .2s}
+  .rd-cscard__play::before{content:"";width:66px;height:66px;border-radius:50%;background:rgba(7,62,39,.85);box-shadow:0 6px 20px rgba(0,0,0,.35);transition:transform .2s}
+  .rd-cscard__play::after{content:"";position:absolute;width:0;height:0;border-style:solid;border-width:13px 0 13px 22px;border-color:transparent transparent transparent #c6f24e;margin-left:7px}
+  .rd-cscard--video:hover .rd-cscard__play{background:rgba(0,0,0,.12)}
+  .rd-cscard--video:hover .rd-cscard__play::before{transform:scale(1.08)}
+  .rd-vlb{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;z-index:99999;padding:24px}
+  .rd-vlb.is-open{display:flex}
+  .rd-vlb__inner{position:relative;width:min(1000px,100%);aspect-ratio:16/9}
+  .rd-vlb__inner iframe{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px;background:#000}
+  .rd-vlb__close{position:absolute;top:-46px;right:0;width:40px;height:40px;background:none;border:0;color:#fff;font-size:32px;line-height:1;cursor:pointer}
+  @media(max-width:600px){.rd-vlb{padding:14px}.rd-vlb__close{top:-42px}}
+</style>
+<div class="rd-vlb" id="rdVlb" role="dialog" aria-modal="true" aria-label="Video player" hidden>
+  <div class="rd-vlb__inner"><button class="rd-vlb__close" type="button" aria-label="Close video">&times;</button><div id="rdVlbSlot"></div></div>
+</div>
+<script>
+(function(){
+  if(window.__rdVlb)return;window.__rdVlb=1;
+  var lb=document.getElementById('rdVlb'),slot=document.getElementById('rdVlbSlot');
+  function close(){lb.classList.remove('is-open');lb.hidden=true;slot.innerHTML='';document.documentElement.style.overflow='';}
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-yt]');if(!t)return;e.preventDefault();
+    var id=t.getAttribute('data-yt');
+    slot.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1" allow="autoplay;encrypted-media;fullscreen;picture-in-picture" allowfullscreen></iframe>';
+    lb.hidden=false;lb.classList.add('is-open');document.documentElement.style.overflow='hidden';
+  });
+  lb.addEventListener('click',function(e){if(e.target===lb||e.target.closest('.rd-vlb__close'))close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
+</script>

@@ -1,0 +1,196 @@
+{%- comment -%}
+  THE case-study card. One component, one slot ORDER, three variants, one card-level link.
+  Built 2026-07-31 (James: "for casestudies we should have a standard block across all parts of
+  the website ... so the same look"). Replaces eight divergent hand-rolled copies.
+
+  WHY IT LOOKS LIKE THIS — the rules come from published design systems, not taste:
+
+  · The HEADING CONTAINS THE ONLY CARD-LEVEL LINK. Every system that documents a card requires a
+    real heading element and puts the link inside it (NHS digital service manual, USWDS Collection,
+    Nord, BBC GEL Promo, Polaris MediaCard). Our cards had NO heading at all — the title was a
+    <span class="rd-cscard__inst"> — and the link text was "Read the story" on all seven impact
+    cards pointing at seven destinations. WCAG 2.4.4 counts only the ENCLOSING paragraph/list-item
+    as programmatically determined context, so a descriptive sibling <span> does not qualify.
+    Putting the descriptive text inside the anchor fixes the failure at the root.
+
+  · NEVER wrap the card in <a>. Five of the eight old sections did; the accessible name became the
+    entire card text. BBC GEL and the NHS both reject wrapper anchors explicitly. The whole card
+    still feels clickable via a stretched ::before on the heading link — the NHS/GEL/Giraudel
+    pattern — which keeps one tab stop and one sensible accessible name.
+
+  · The footer CTA is a <span>, NOT a link. It is an affordance for the heading link. A second
+    anchor to the same destination is announced twice and takes a second tab stop.
+
+  · AT MOST ONE other link — the source. It is raised (position:relative; z-index:1) above the
+    stretched overlay and given real spacing so it cannot be mis-tapped.
+
+  · Variants may HIDE slots and change scale/direction. They may NEVER reorder them. Reordering is
+    exactly what made the old featured card (quote → attr → context) read as a different component
+    from the old grid card (outcome → context → quote).
+
+  · Metric chips capped at 2. No charity or B2B site surveyed puts metrics inside the card at all —
+    they sit in a separate band. Keeping a couple is a deliberate BBC differentiator, but a long
+    row becomes a second headline.
+
+  · Press provenance ("as reported in …") belongs OUTSIDE the card, as a sibling of the group.
+    Putting it inside either nests anchors in a card link (parser failure, hit here 2026-07-22) or
+    creates the multi-link problem above.
+
+  USAGE
+    {% render 'bbc-cscard',
+         variant: 'grid',                     featured | grid | compact
+         kind: 'prisons',                     must match a filter value exactly
+         heading: 'Sally Allsopp, HMP Lowdham Grange: "…"',
+         url: '/blogs/impact/…',
+         outcome: 'One line, the result.',
+         context: 'Two lines of why it matters.',
+         attr: 'Build to Bond · HMP Lowdham Grange',
+         chips: '6 weeks × 18 hours|OCN Level 2',   pipe-separated, first 2 used
+         date: '2025',
+         source_label: 'the award coverage',
+         source_url: '/blogs/news/…',
+         image_pic: <image object>,  image: <url or asset name>,
+         youtube: '…', video_file: <file>,
+         cta: 'Read the story',
+         anchor: 'proof'                            optional id, for deep links and #-scoped CSS
+    %}
+  Wrap calls in <ul class="rd-csgrid">…</ul>; this snippet renders its own <li>.
+{%- endcomment -%}
+
+{%- comment -%} CONTENT-AWARE SIZE (2026-08-01). The band was one shape repeated; giving cards a
+   colour then exposed a second problem — a stretched card with short copy showed 50% dead
+   surface. Size is therefore DERIVED from what a card actually holds, not set by position:
+
+     has a film            → wide   a video card earns the room, and it is the strongest thing
+                                    on the estate that nobody can currently see
+     long copy (>150 ch)   → tall   the text needs the height rather than being cramped
+     no image              → flat   nothing to reserve media space for
+     otherwise             → unit
+
+   `size` (a schema setting) overrides the derivation when an editor wants a specific card to
+   lead. The grid then uses grid-auto-flow:dense so a wide card never leaves a hole beside it —
+   that is the actual mechanism for "no blank spaces", not manual ordering. {%- endcomment -%}
+{%- assign _len = context | default: '' | size -%}
+{%- assign _auto = 'unit' -%}
+{%- if image == blank and image_pic == blank and youtube == blank -%}{%- assign _auto = 'flat' -%}
+{%- elsif youtube != blank or video_file != blank -%}{%- assign _auto = 'wide' -%}
+{%- elsif _len > 150 -%}{%- assign _auto = 'tall' -%}
+{%- endif -%}
+{%- assign _size = size | default: _auto -%}
+
+{%- assign _v = variant | default: 'grid' -%}
+{%- assign _cta = cta | default: 'Read the story' -%}
+{%- assign _kind_slug = kind | downcase | strip -%}
+
+{%- comment -%} FAMILY (2026-08-01). An audit found 17 different `kind` values across 27 cards,
+   most used once — I had invented them ad hoc while populating. Colouring by `kind` on that
+   taxonomy would give seventeen colours, which is confetti, not a system.
+
+   So the editorial label stays specific ("prisons", "expedition") and the FAMILY is derived
+   here instead. Four families, four surfaces, and `data-kind` is left untouched so the existing
+   conformance rule and any future filter keep working on the specific value.
+
+   Colour has to encode something true or it is decoration: the family tells a reader what KIND
+   OF PROOF a card carries before they read a word. {%- endcomment -%}
+{%- assign _fam = 'journey' -%}
+{%- assign _programme = 'prison,school,universit,delivery,famil,programme,bond' -%}
+{%- assign _applied  = 'livelihood,development,enterprise,material,cargo,design' -%}
+{%- assign _recog    = 'press,recognition,funder,award,coverage' -%}
+{%- assign _pl = _programme | split: ',' -%}
+{%- for w in _pl -%}{%- if _kind_slug contains w -%}{%- assign _fam = 'programme' -%}{%- endif -%}{%- endfor -%}
+{%- assign _al = _applied | split: ',' -%}
+{%- for w in _al -%}{%- if _kind_slug contains w -%}{%- assign _fam = 'applied' -%}{%- endif -%}{%- endfor -%}
+{%- assign _rl = _recog | split: ',' -%}
+{%- for w in _rl -%}{%- if _kind_slug contains w -%}{%- assign _fam = 'recognition' -%}{%- endif -%}{%- endfor -%}
+
+{%- comment -%} rd-reveal sits on the <li>, not the <article>, so the WHOLE card (media included)
+  fades in as one object. Restored 2026-07-31: standardising the markup dropped the class the old
+  hand-rolled cards carried, which left 0 of 19 case-study cards animating on pages where 21 other
+  elements did — the grids sat dead still while everything around them moved. The motion itself is
+  governed by the estate's reduced-motion rules; this only opts the card into the existing system.
+{%- endcomment -%}
+<li class="rd-cscard-item rd-reveal" data-size="{{ _size }}"{% if anchor != blank %} id="{{ anchor }}"{% endif %}>
+  <article class="rd-cscard rd-cscard--{{ _v }}{% if youtube != blank or video_file != blank %} rd-cscard--video{% endif %}"
+           data-family="{{ _fam }}"
+           {% if _kind_slug != blank %}data-kind="{{ _kind_slug }}"{% endif %}>
+
+    {%- comment -%} 1 · MEDIA — aspect-locked so a missing or odd-ratio image cannot rag the row.
+       Hidden in the compact variant. {%- endcomment -%}
+    {%- unless _v == 'compact' -%}
+      {%- if image_pic != blank or image != blank or youtube != blank or video_file != blank -%}
+      <div class="rd-cscard__media">
+        {%- if youtube != blank or video_file != blank -%}
+          {%- render 'bbc-media', image: image_pic, src: image, video: video_file, youtube: youtube, alt: heading -%}
+        {%- elsif image_pic != blank -%}
+          <img src="{{ image_pic | image_url: width: 900 }}"
+               srcset="{{ image_pic | image_url: width: 480 }} 480w, {{ image_pic | image_url: width: 900 }} 900w, {{ image_pic | image_url: width: 1200 }} 1200w"
+               sizes="{% if _v == 'featured' %}(max-width: 860px) 92vw, 560px{% else %}(max-width: 749px) 92vw, (max-width: 980px) 45vw, 30vw{% endif %}"
+               alt="" loading="lazy" width="{{ image_pic.width }}" height="{{ image_pic.height }}">
+        {%- else -%}
+          {%- if image contains '//' -%}
+            <img src="{{ image }}&width=900" srcset="{{ image }}&width=480 480w, {{ image }}&width=900 900w, {{ image }}&width=1200 1200w"
+                 sizes="{% if _v == 'featured' %}(max-width: 860px) 92vw, 560px{% else %}(max-width: 749px) 92vw, (max-width: 980px) 45vw, 30vw{% endif %}"
+                 alt="" loading="lazy" width="900" height="563">
+          {%- else -%}
+            <img src="{{ image | asset_url }}" alt="" loading="lazy" width="900" height="563">
+          {%- endif -%}
+        {%- endif -%}
+        {%- comment -%} alt="" throughout: the heading immediately below carries the same meaning,
+           so describing the image again is duplicate noise for a screen-reader user. {%- endcomment -%}
+        {%- if kind != blank -%}<span class="rd-cscard__kind">{{ kind }}</span>{%- endif -%}
+      </div>
+      {%- endif -%}
+    {%- endunless -%}
+
+    <div class="rd-cscard__body">
+
+      {%- comment -%} 2 · HEADING — required, unique, and the ONLY card-level link. {%- endcomment -%}
+      {%- if heading != blank -%}
+        <h3 class="rd-cscard__heading">
+          {%- if url != blank -%}
+            <a class="rd-cscard__link" href="{{ url }}">{{ heading }}</a>
+          {%- else -%}
+            {{ heading }}
+          {%- endif -%}
+        </h3>
+      {%- endif -%}
+
+      {%- comment -%} 3 · OUTCOME — the countable result. Hidden when compact. {%- endcomment -%}
+      {%- if outcome != blank and _v != 'compact' -%}<p class="rd-cscard__out">{{ outcome }}</p>{%- endif -%}
+
+      {%- comment -%} 4 · CONTEXT {%- endcomment -%}
+      {%- if context != blank and _v != 'compact' -%}<p class="rd-cscard__ctx">{{ context }}</p>{%- endif -%}
+
+      {%- comment -%} 5 · ATTRIBUTION {%- endcomment -%}
+      {%- if attr != blank and _v != 'compact' -%}<p class="rd-cscard__attr">{{ attr }}</p>{%- endif -%}
+
+      {%- comment -%} 6 · METRIC CHIPS — max 2, see header note. {%- endcomment -%}
+      {%- if chips != blank and _v != 'compact' -%}
+        {%- assign _chips = chips | split: '|' -%}
+        <ul class="rd-cscard__outs" role="list">
+          {%- for c in _chips limit: 2 -%}<li>{{ c | strip }}</li>{%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- comment -%} 7 · META — date · source. The only provenance inside the card, and the only
+         other permitted link. Raised above the stretched overlay in CSS. {%- endcomment -%}
+      {%- if date != blank or source_label != blank -%}
+        <p class="rd-cscard__meta">
+          {%- if date != blank -%}<span>{{ date }}</span>{%- endif -%}
+          {%- if date != blank and source_label != blank -%}<span class="rd-cscard__dot">·</span>{%- endif -%}
+          {%- if source_label != blank -%}
+            {%- if source_url != blank -%}
+              <a href="{{ source_url }}{% if source_url contains '?' %}&{% else %}?{% endif %}ref=case-study"{% if source_url contains '//' %} target="_blank" rel="noopener"{% endif %}>{{ source_label }}</a>
+            {%- else -%}<span>{{ source_label }}</span>{%- endif -%}
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+
+      {%- comment -%} 8 · FOOTER CTA — a <span>. Never a second anchor. {%- endcomment -%}
+      {%- if url != blank and _v != 'compact' -%}
+        <p class="rd-cscard__foot"><span class="rd-cscard__more">{{ _cta }} <span class="rd-arrow" aria-hidden="true">&rarr;</span></span></p>
+      {%- endif -%}
+
+    </div>
+  </article>
+</li>

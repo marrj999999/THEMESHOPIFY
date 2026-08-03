@@ -14,6 +14,18 @@ FAIL=0
 # be followed by a successful push. Clearing it up-front closes every early-exit path at once.
 rm -f qa/.gate-pass
 
+# Liquid syntax. Added 2026-07-31: an unbalanced {%- endif -%} passed this gate and was caught
+# only by the Shopify API on push — which partially succeeded, landing two files and rejecting a
+# third. A syntax error must never get as far as a half-applied deploy.
+echo "— liquid syntax"
+if ! node qa/liquid-check.mjs >/tmp/liquid-check.out 2>&1; then
+  tail -6 /tmp/liquid-check.out
+  echo "✗ gate-check FAILED (liquid syntax)"
+  rm -f qa/.gate-pass
+  exit 1
+fi
+echo "✓ liquid syntax balanced"
+
 echo "— token-lint ratchet"
 bash qa/stylelint-ratchet.sh || exit 1
 echo "— claim-lint"

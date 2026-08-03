@@ -103,7 +103,14 @@
      discovery-call subject until a booking tool exists. ---------- {%- endcomment -%}
   <section class="rd-pad rd-steel" id="book-a-call">
     <div class="rd-wrap">
-      <div class="rd-center rd-cmp-84401">
+      {%- comment -%} rd-center REMOVED 2026-07-31. This box carried .rd-center — which centres the
+         BOX — while its text computed to left, so it sat 241px off the page axis with left-aligned
+         text inside it: the exact "centred box, left text" mismatch ALIGNMENT.md exists to stop.
+         motion-check measured the impact axis spread at 0px on 24 Jul and 241px after
+         bbc-align.css began forcing margin-inline:auto on [class*="rd-cmp-"]. Fixed at the class
+         rather than in CSS: 5 of 43 cmp boxes estate-wide DO centre their text legitimately, so a
+         blanket axis rule would have broken those instead. {%- endcomment -%}
+      <div class="rd-cmp-84401">
         {%- if section.settings.help_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.help_eyebrow }}</span>{%- endif -%}
         <h2 class="rd-reveal">{{ section.settings.help_title }}</h2>
         {%- if section.settings.help_intro != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.help_intro }}</p>{%- endif -%}
@@ -311,45 +318,6 @@
     </div>
   </section>
   {%- endif -%}
-{%- comment -%} ---------- CASE STUDY CARD → full Build to Bond story ----------
-   Gates on blurb OR quote — a cleared quote alone must not suppress the flagship
-   (the Timpson-band gating bug, same family; fixed 2026-07-22). {%- endcomment -%}
-  {%- if section.settings.cs_blurb != blank or section.settings.cs_quote != blank -%}
-  <section class="rd-pad-sm" id="proof">
-    <div class="rd-wrap"><div class="rd-mw-820px">
-      <div class="rd-csgrid rd-csgrid-1">
-        <a class="rd-reveal rd-cscard" href="{{ section.settings.cs_url | default: '/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2' }}">
-          <div class="rd-cscard__media">{%- if section.settings.cs_image_pic != blank -%}<img src="{{ section.settings.cs_image_pic | image_url: width: 1200 }}" srcset="{{ section.settings.cs_image_pic | image_url: width: 600 }} 600w, {{ section.settings.cs_image_pic | image_url: width: 1200 }} 1200w, {{ section.settings.cs_image_pic | image_url: width: 1800 }} 1800w" sizes="(max-width: 749px) 100vw, 820px" alt="Inside the Build to Bond workshop at HMP Lowdham Grange" loading="lazy" width="{{ section.settings.cs_image_pic.width }}" height="{{ section.settings.cs_image_pic.height }}">{%- else -%}<img src="{{ section.settings.cs_image | default: 'bbc-rd-prison-empty.jpg' | asset_url }}" alt="Inside the Build to Bond workshop at HMP Lowdham Grange" loading="lazy" width="1400" height="875">{%- endif -%}<span class="rd-cscard__kind">{{ section.settings.cs_kind | default: 'Case study' }}</span></div>
-          <div class="rd-cscard__body">
-            {%- if section.settings.cs_quote != blank -%}<p class="rd-cscard__quote">{{ section.settings.cs_quote }}</p>{%- endif -%}
-            {%- if section.settings.cs_quote != blank and section.settings.cs_attr != blank -%}<p class="rd-cscard__attr">{{ section.settings.cs_attr }}</p>{%- endif -%}
-            {%- if section.settings.cs_blurb != blank -%}<p class="rd-cscard__ctx">{{ section.settings.cs_blurb }}</p>{%- endif -%}
-            {%- comment -%} outcome row — story+number = evidence (Redemption Roasters live-data pattern) {%- endcomment -%}
-            {%- assign _outs = section.settings.cs_outcomes | default: '6 weeks × 18 hours|OCN Level 2|26% measured confidence uplift|3 Makers → peer instructors' -%}
-            {%- if _outs != blank -%}
-            <ul class="rd-cscard__outs" role="list">
-              {%- assign _oitems = _outs | split: '|' -%}
-              {%- for o in _oitems -%}<li>{{ o | strip }}</li>{%- endfor -%}
-            </ul>
-            {%- endif -%}
-            <div class="rd-cscard__foot">
-              <span class="rd-cscard__inst">{{ section.settings.cs_site | default: 'Build to Bond · HMP Lowdham Grange' }}</span>
-              <span class="rd-cscard__more">{{ section.settings.cs_link_label | default: 'Read the full story' }} <span class="rd-arrow">&rarr;</span></span>
-            </div>
-          </div>
-        </a>
-        {%- if section.settings.cs_show_prov != false -%}
-        {%- comment -%} provenance chips — every claim points somewhere checkable (charity:water proof move) {%- endcomment -%}
-        <p class="rd-cscard__prov">as reported in
-          <a href="https://www.ft.com/content/6ebe2eba-b832-4289-9924-2e9f948d5f98?ref=impact-evidence" target="_blank" rel="noopener">Financial Times</a> ·
-          <a href="/blogs/news/inside-time-bamboozling-way-to-build-bikes-bamboo-bicycle-club-at-lowdham-grange?ref=impact-evidence">Inside Time</a> ·
-          <a href="/blogs/news/bamboo-bicycle-club-wins-investec-beyond-business-2025?ref=impact-evidence">Investec Beyond Business</a></p>
-        {%- endif -%}
-      </div>
-      </div>
-    </div>
-  </section>
-  {%- endif -%}
 
   {%- comment -%} ---------- IMPACT STORIES — one per pillar (every kind of impact) ---------- {%- endcomment -%}
   {%- if section.settings.stories_title != blank -%}
@@ -371,39 +339,73 @@
         {%- for k in _kindlist -%}<button type="button" class="rd-evfilter__tab" data-kind="{{ k }}" aria-pressed="false">{{ k }}</button>{%- endfor -%}
       </div>
       {%- endif -%}
-      <div class="rd-csgrid rd-mt4 rd-stagger" data-evwall>
+      <ul class="rd-csgrid rd-mt4 rd-stagger" data-evwall role="list">
+        {%- comment -%} FEATURED case study — the flagship, first item in the evidence wall.
+           Renders the SAME snippet as every other card; only the variant differs. Before
+           2026-07-31 this was 30 lines of bespoke markup in its own section, which is how it
+           drifted into a different slot order and a wrapper <a>. {%- endcomment -%}
+        {%- if section.settings.cs_blurb != blank or section.settings.cs_quote != blank -%}
+        {%- comment -%} Quote-as-headline: for a people-centred story the strongest heading is the
+           person's own words, in the format `Name, place: "their words"`. It also removes the
+           old conflict where a big pull-quote and a headline competed for the same slot.
+           NOT truncated — a machine-cut heading ("…creativity, teamwork, a…") loses exactly the
+           words a reader scans for. Editable via cs_heading. {%- endcomment -%}
+        {%- comment -%} Liquid FILTERS ARE NOT ALLOWED IN render ARGUMENTS. Writing
+           `url: section.settings.cs_url | default: '…'` fails silently — the argument arrives
+           blank, so the flagship card rendered with no link and no CTA at all. Resolve defaults
+           into a variable first, then pass the variable. {%- endcomment -%}
+        {%- assign _cs_url = section.settings.cs_url | default: '/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2' -%}
+        {%- assign _cs_head = section.settings.cs_heading -%}
+        {%- if _cs_head == blank -%}{%- assign _cs_head = section.settings.cs_site | default: 'Build to Bond · HMP Lowdham Grange' -%}{%- endif -%}
+        {%- render 'bbc-cscard',
+             variant: 'featured',
+             kind: section.settings.cs_kind,
+             heading: _cs_head,
+             url: _cs_url,
+             context: section.settings.cs_blurb,
+             attr: section.settings.cs_site,
+             chips: section.settings.cs_outcomes,
+             image_pic: section.settings.cs_image_pic,
+             image: section.settings.cs_image,
+             cta: section.settings.cs_link_label,
+             anchor: 'proof' -%}
+        {%- comment -%} id="proof" is load-bearing twice over: it is a deep-link target used by
+           in-page links, and bbc-statement.css scopes real layout rules to #proof. Migrating the
+           featured card to the snippet dropped the wrapper that carried it, which killed the
+           anchor silently — estate-check caught it as "1 dead in-page anchor". {%- endcomment -%}
+        {%- endif -%}
         {%- for block in section.blocks -%}{%- if block.type == 'story' -%}
-          {%- assign vurl = block.settings.video_url | default: block.settings.video -%}
-          {%- assign _bk = block.settings.kind | downcase | strip -%}
-          {%- capture evmeta -%}
-            {%- if block.settings.outcome != blank -%}<p class="rd-cscard__out">{{ block.settings.outcome }}</p>{%- endif -%}
-          {%- endcapture -%}
-          {%- capture evproof -%}
-            {%- if block.settings.quote != blank -%}<blockquote class="rd-cscard__evq">&ldquo;{{ block.settings.quote }}&rdquo;{%- if block.settings.cite != blank -%} <cite>{{ block.settings.cite }}</cite>{%- endif -%}</blockquote>{%- endif -%}
-            {%- if block.settings.date != blank or block.settings.source_label != blank -%}
-            <p class="rd-cscard__meta">
-              {%- if block.settings.date != blank -%}<span>{{ block.settings.date }}</span>{%- endif -%}
-              {%- if block.settings.date != blank and block.settings.source_label != blank -%}<span class="rd-cscard__dot">·</span>{%- endif -%}
-              {%- if block.settings.source_label != blank -%}{%- if block.settings.source_url != blank -%}<a href="{{ block.settings.source_url }}{% if block.settings.source_url contains '?' %}&{% else %}?{% endif %}ref=impact-evidence"{% if block.settings.source_url contains '//' %} target="_blank" rel="noopener"{% endif %}>{{ block.settings.source_label }}</a>{%- else -%}<span>{{ block.settings.source_label }}</span>{%- endif -%}{%- endif -%}
-            </p>
-            {%- endif -%}
-          {%- endcapture -%}
-          {%- if vurl != blank or block.settings.video_file != blank -%}
-          <div class="rd-cscard rd-cscard--video" data-kind="{{ _bk }}" {{ block.shopify_attributes }}>
-            <div class="rd-cscard__media">{%- render "bbc-media", image: block.settings.image_pic, src: block.settings.image, video: block.settings.video_file, youtube: vurl, alt: block.settings.title -%}{%- if block.settings.kind != blank -%}<span class="rd-cscard__kind">{{ block.settings.kind }}</span>{%- endif -%}</div>
-            <div class="rd-cscard__body">{{ evmeta }}<p class="rd-cscard__ctx">{{ block.settings.blurb }}</p>{{ evproof }}<div class="rd-cscard__foot"><span class="rd-cscard__inst">{{ block.settings.title }}</span>{%- if block.settings.url != blank -%}<a class="rd-cscard__more" href="{{ block.settings.url }}">Read the story <span class="rd-arrow">&rarr;</span></a>{%- endif -%}</div></div>
-          </div>
-          {%- else -%}
-          {%- if block.settings.image_pic != blank -%}{%- assign cimg = block.settings.image_pic | image_url: width: 600 -%}{%- else -%}{%- assign cimg = block.settings.image | default: "bbc-rd-cohort.jpg" -%}{%- endif -%}
-          {%- comment -%} div + stretched-link, NOT an <a> wrapper — the source link inside
-             would nest anchors and the parser shatters the card (caught 2026-07-22) {%- endcomment -%}
-          <div class="rd-cscard rd-cscard--ev" data-kind="{{ _bk }}" {{ block.shopify_attributes }}>
-            <div class="rd-cscard__media">{%- if cimg contains "//" -%}<img src="{{ cimg }}&width=800" srcset="{{ cimg }}&width=480 480w, {{ cimg }}&width=800 800w, {{ cimg }}&width=1200 1200w" sizes="(max-width: 749px) 100vw, (max-width: 980px) 50vw, 33vw" alt="{{ block.settings.title | escape }}" loading="lazy" width="800" height="500">{%- else -%}<img src="{{ cimg | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy" width="600" height="375">{%- endif -%}{%- if block.settings.kind != blank -%}<span class="rd-cscard__kind">{{ block.settings.kind }}</span>{%- endif -%}</div>
-            <div class="rd-cscard__body">{{ evmeta }}<p class="rd-cscard__ctx">{{ block.settings.blurb }}</p>{{ evproof }}<div class="rd-cscard__foot"><span class="rd-cscard__inst">{{ block.settings.title }}</span><a class="rd-cscard__more rd-cscard__stretch" href="{{ block.settings.url | default: "/blogs/impact" }}">Read the story <span class="rd-arrow">&rarr;</span></a></div></div>
-          </div>
-          {%- endif -%}
+          {%- comment -%} heading = the OUTCOME line. It is the most specific, unique sentence on
+             the card, so it makes the best link text (WCAG 2.4.4 — the descriptive text must be
+             INSIDE the anchor, not a sibling). `title` used to render as a second, near-duplicate
+             summary line under it: "A 100kg-payload electric cargo bike, built by masters
+             students." above "masters students built a 100kg electric bamboo cargo bike." One
+             line per card now; title is the fallback when a block has no outcome. {%- endcomment -%}
+          {%- assign _head = block.settings.outcome | default: block.settings.title -%}
+          {%- render 'bbc-cscard',
+               variant: 'grid',
+               kind: block.settings.kind,
+               heading: _head,
+               url: block.settings.url,
+               context: block.settings.blurb,
+               chips: block.settings.chips,
+               date: block.settings.date,
+               source_label: block.settings.source_label,
+               source_url: block.settings.source_url,
+               image_pic: block.settings.image_pic,
+               image: block.settings.image,
+               youtube: block.settings.video_url,
+               video_file: block.settings.video_file -%}
         {%- endif -%}{%- endfor -%}
-      </div>
+      </ul>
+      {%- comment -%} provenance stays a SIBLING of the card group, never inside a card: press
+         links inside a card either nest anchors in the card link or create a second tab stop. {%- endcomment -%}
+      {%- if section.settings.cs_show_prov != false -%}
+      <p class="rd-cscard__prov">as reported in
+        <a href="https://www.ft.com/content/6ebe2eba-b832-4289-9924-2e9f948d5f98?ref=impact-evidence" target="_blank" rel="noopener">Financial Times</a> &middot;
+        <a href="/blogs/news/inside-time-bamboozling-way-to-build-bikes-bamboo-bicycle-club-at-lowdham-grange?ref=impact-evidence">Inside Time</a> &middot;
+        <a href="/blogs/news/bamboo-bicycle-club-wins-investec-beyond-business-2025?ref=impact-evidence">Investec Beyond Business</a></p>
+      {%- endif -%}
       {%- if section.settings.stories_proofline != blank -%}<p class="rd-evproof-line">{{ section.settings.stories_proofline }}</p>{%- endif -%}
       <div class="rd-mt4"><a class="rd-btn rd-ghost" href="{{ section.settings.stories_all_url | default: '/blogs/impact' }}">{{ section.settings.stories_all_label | default: 'See all impact stories' }} <span class="rd-arrow">&rarr;</span></a></div>
       {% render 'bbc-video-lightbox' %}
@@ -544,9 +546,8 @@
 
   {%- comment -%} ---------- RECOGNISED BY (credibility quotes) ---------- {%- endcomment -%}
   {%- if section.settings.cred_quote1 != blank -%}
-  <section class="rd-pad-sm rd-paper bbc-impact-cred" id="backers">
-    <div class="rd-wrap" style="position:relative;">
-      <span class="rd-seal" aria-hidden="true">{{ section.settings.seal_text | default: "OCN accredited · CIC · since 2012" }}</span>
+  <section class="rd-pad-sm rd-paper bbc-impact-cred" id="who-its-for">
+    <div class="rd-wrap">
       {%- if section.settings.cred_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.cred_eyebrow }}</span>{%- endif -%}
       {%- if section.settings.cred_heading != blank -%}<h2 class="rd-reveal rd-mw-22ch">{{ section.settings.cred_heading }}</h2>{%- endif -%}
       {%- if section.settings.cred_sub != blank -%}<p class="rd-lede rd-mt1">{{ section.settings.cred_sub }}</p>{%- endif -%}
@@ -556,12 +557,7 @@
       {%- assign _mech = section.settings.cred_mechanism | default: 'Kit and workshop revenue covers our costs — funder money goes straight to programme delivery.' -%}
       {%- if _mech != blank -%}<p class="rd-mech rd-mt2">{{ _mech }}</p>{%- endif -%}
 
-      {%- comment -%} ministerial endorsement (verbatim, attributable) — restored 2026-07-22;
-         it previously only GATED this band without ever rendering (audit footgun) {%- endcomment -%}
-      <blockquote class="rd-pull rd-mt3 rd-reveal">
-        <p class="rd-q">{{ section.settings.cred_quote1 }}</p>
-        {%- if section.settings.cred_attr1 != blank -%}<cite>{{ section.settings.cred_attr1 }}</cite>{%- endif -%}
-      </blockquote>
+
 
       {%- comment -%} WHO WE WORK WITH — customer segment + benefit + route.
         Added per Chris Barrett feedback (2026-07): "show who our customer is and how
@@ -571,20 +567,48 @@
       {%- endcomment -%}
       {%- assign segs = section.blocks | where: "type", "segment" -%}
       {%- if segs.size > 0 -%}
-      <div class="rd-grid rd-g2 rd-mt4">
+      {%- comment -%} Route cards render THE standard card (snippets/bbc-cscard.liquid), 2026-07-31.
+         They were the last card system on this page with no media and two links each, which is why
+         the band read as a different component from the evidence wall above it. Mapping is direct:
+         tag → kind chip, question → heading (the single card-level link), benefit → context.
+      {%- endcomment -%}
+      <ul class="rd-csgrid rd-csgrid-2 rd-mt4" role="list">
         {%- for block in segs -%}
-          <div class="rd-card rd-stamp rd-reveal" {{ block.shopify_attributes }}>
-            <div class="rd-body">
-              {%- if block.settings.tag != blank -%}<span class="rd-tag rd-lime">{{ block.settings.tag }}</span>{%- endif -%}
-              <h3 class="rd-mt2 rd-fs-21px">{{ block.settings.question }}</h3>
-              {%- if block.settings.benefit != blank -%}<p>{{ block.settings.benefit }}</p>{%- endif -%}
-              {%- if block.settings.link_label != blank -%}<a class="rd-textlink" href="{{ block.settings.link_url | default: '/pages/contact-us' }}">{{ block.settings.link_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
-              {%- if block.settings.evidence_anchor != blank -%}<a class="rd-textlink rd-seg-ev" href="{{ block.settings.evidence_anchor }}">{{ block.settings.evidence_label | default: 'see the evidence' }} <span class="rd-arrow">&darr;</span></a>{%- endif -%}
-            </div>
-          </div>
+          {%- assign _seg_url = block.settings.link_url | default: '/pages/contact-us' -%}
+          {%- render 'bbc-cscard',
+               variant: 'grid',
+               kind: block.settings.tag,
+               heading: block.settings.question,
+               url: _seg_url,
+               context: block.settings.benefit,
+               image_pic: block.settings.image_pic,
+               image: block.settings.image,
+               cta: block.settings.link_label -%}
         {%- endfor -%}
-      </div>
+      </ul>
       {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ─────────── WHO BACKS IT — split out 2026-07-31 ───────────
+     One band was doing SEVEN jobs: heading, mechanism line, ministerial quote, a 2×2 audience
+     router, three proof lines, a report CTA and two logo walls — 1,846px, 268 words, 16 links.
+     Every other band on this page runs a single device, which is exactly why James said it "seems
+     very different to the rest of the page".
+     Split at the natural seam: ROUTING above (who this is for), CREDIBILITY below (who backs it).
+     The ministerial quote moved down with the backers — an endorsement is backing, not routing.
+  {%- endcomment -%}
+  <section class="rd-pad-sm rd-paper bbc-impact-backs" id="backers">
+    <div class="rd-wrap" style="position:relative;">
+      <span class="rd-seal" aria-hidden="true">{{ section.settings.seal_text | default: "OCN accredited · CIC · since 2012" }}</span>
+      {%- if section.settings.backs_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.backs_eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.backs_heading != blank -%}<h2 class="rd-reveal rd-mw-22ch">{{ section.settings.backs_heading }}</h2>{%- endif -%}
+      {%- comment -%} ministerial endorsement (verbatim, attributable) — restored 2026-07-22;
+         it previously only GATED this band without ever rendering (audit footgun) {%- endcomment -%}
+      <blockquote class="rd-pull rd-mt2 rd-reveal">
+        <p class="rd-q">{{ section.settings.cred_quote1 }}</p>
+        {%- if section.settings.cred_attr1 != blank -%}<cite>{{ section.settings.cred_attr1 }}</cite>{%- endif -%}
+      </blockquote>
 
       {%- if section.settings.promise1 != blank -%}
       <div class="rd-callout-steel rd-mt3" style="text-align:left;">
@@ -654,6 +678,20 @@
 .rd-cscard__outs li{font-size:14px;font-weight:800;letter-spacing:.01em;padding:6px 12px;border:2px solid currentColor;border-radius:999px;white-space:nowrap}
 .rd-cscard__prov{margin:14px 2px 0;font-size:13px;font-weight:700;opacity:.85}
 .rd-cscard__prov a{text-decoration:underline;text-underline-offset:3px;font-weight:800}
+/* FEATURED case study (2026-07-31) — the flagship spans the whole evidence wall and splits
+   media | body, so it reads as the lead item of this section rather than a second section.
+   Scoped here rather than in a shared sheet to keep the blast radius on one page. The
+   #proof-scoped rules in bbc-statement.css still apply: the id moved with the card. */
+.bbc-rd-impact .rd-csfeat{grid-column:1/-1}
+.bbc-rd-impact .rd-csfeat .rd-cscard--featured{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
+.bbc-rd-impact .rd-csfeat .rd-cscard__media{aspect-ratio:16/10;border-radius:0;overflow:clip}
+.bbc-rd-impact .rd-csfeat .rd-cscard__media img{width:100%;height:100%;object-fit:cover}
+.bbc-rd-impact .rd-csfeat .rd-cscard__body{padding:0}
+/* the featured quote is display copy and must not inherit the 3-up card's small type */
+.bbc-rd-impact .rd-csfeat .rd-cscard__quote{font-size:clamp(19px,1.7vw,23px);line-height:1.35}
+@media(max-width:860px){
+  .bbc-rd-impact .rd-csfeat .rd-cscard--featured{grid-template-columns:1fr;gap:18px}
+}
 /* evidence-wall card anatomy: outcome line leads the body */
 .rd-cscard__out{margin:0 0 8px;font-size:18px;line-height:1.35;font-weight:800}
 .rd-cscard__evq{margin:10px 0 0;padding:0;border:0;font-size:15px;line-height:1.5;font-style:italic}
@@ -769,14 +807,52 @@ document.addEventListener('click', function (e) {
       "label": "Lede",
       "default": "Inside prisons and schools, the same craft that builds a bike builds skills, confidence and the family ties that help people not return."
     },
-    { "type": "header", "content": "Hero proof strip" },
-    { "type": "checkbox", "id": "hero_proof_on", "label": "Show proof figures in hero", "default": true },
-    { "type": "text", "id": "hero_proof1_num", "label": "Figure 1", "default": "4,000+" },
-    { "type": "text", "id": "hero_proof1_label", "label": "Figure 1 label", "default": "people trained" },
-    { "type": "text", "id": "hero_proof2_num", "label": "Figure 2", "default": "90%+" },
-    { "type": "text", "id": "hero_proof2_label", "label": "Figure 2 label", "default": "prison-course completion" },
-    { "type": "text", "id": "hero_proof3_num", "label": "Figure 3", "default": "2012" },
-    { "type": "text", "id": "hero_proof3_label", "label": "Figure 3 label", "default": "delivering since" },
+    {
+      "type": "header",
+      "content": "Hero proof strip"
+    },
+    {
+      "type": "checkbox",
+      "id": "hero_proof_on",
+      "label": "Show proof figures in hero",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "hero_proof1_num",
+      "label": "Figure 1",
+      "default": "4,000+"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof1_label",
+      "label": "Figure 1 label",
+      "default": "people trained"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof2_num",
+      "label": "Figure 2",
+      "default": "90%+"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof2_label",
+      "label": "Figure 2 label",
+      "default": "prison-course completion"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof3_num",
+      "label": "Figure 3",
+      "default": "2012"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof3_label",
+      "label": "Figure 3 label",
+      "default": "delivering since"
+    },
     {
       "type": "text",
       "id": "hero_cta1_label",
@@ -1146,6 +1222,18 @@ document.addEventListener('click', function (e) {
     },
     {
       "type": "text",
+      "id": "backs_eyebrow",
+      "label": "Backers — eyebrow",
+      "default": "who backs it"
+    },
+    {
+      "type": "text",
+      "id": "backs_heading",
+      "label": "Backers — heading",
+      "default": "who backs it."
+    },
+    {
+      "type": "text",
       "id": "promise1",
       "label": "Promise 1"
     },
@@ -1392,9 +1480,15 @@ document.addEventListener('click', function (e) {
     },
     {
       "type": "text",
+      "id": "cs_heading",
+      "label": "Featured case study — heading (the card's only link)",
+      "default": "Sally Allsopp, HMP Lowdham Grange: “Watching the pride on a father’s face when he presents a bike to his child is something special.”"
+    },
+    {
+      "type": "text",
       "id": "stories_proofline",
       "label": "Under-wall proof line",
-      "default": "56 independently verifiable case studies on file — these are six."
+      "default": "56 independently verifiable case studies on file — these are seven."
     },
     {
       "type": "text",
@@ -1813,8 +1907,16 @@ document.addEventListener('click', function (e) {
           "id": "video",
           "label": "YouTube video ID (optional — adds a play button, plays in-page)"
         },
-        { "type": "url", "id": "video_url", "label": "Video URL (YouTube/Vimeo — plays inline)" },
-        { "type": "video", "id": "video_file", "label": "Or upload a video (plays inline)" },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL (YouTube/Vimeo — plays inline)"
+        },
+        {
+          "type": "video",
+          "id": "video_file",
+          "label": "Or upload a video (plays inline)"
+        },
         {
           "type": "url",
           "id": "url",
@@ -1873,11 +1975,35 @@ document.addEventListener('click', function (e) {
       "type": "segment",
       "name": "Customer segment",
       "settings": [
-        { "type": "text", "id": "tag", "label": "Tag", "default": "Schools" },
-        { "type": "text", "id": "question", "label": "Their question", "default": "running a school or college?" },
-        { "type": "textarea", "id": "benefit", "label": "What they get", "default": "Real engineering in your classroom. Start with the free Speaker build, add OCN Level 1 when your students want more." },
-        { "type": "text", "id": "link_label", "label": "Link label", "default": "see the schools programme" },
-        { "type": "url", "id": "link_url", "label": "Link" },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "default": "Schools"
+        },
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Their question",
+          "default": "running a school or college?"
+        },
+        {
+          "type": "textarea",
+          "id": "benefit",
+          "label": "What they get",
+          "default": "Real engineering in your classroom. Start with the free Speaker build, add OCN Level 1 when your students want more."
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "see the schools programme"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link"
+        },
         {
           "type": "text",
           "id": "evidence_label",
@@ -1888,6 +2014,16 @@ document.addEventListener('click', function (e) {
           "type": "text",
           "id": "evidence_anchor",
           "label": "Evidence anchor (e.g. #evidence-prisons)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_pic",
+          "label": "Card image"
+        },
+        {
+          "type": "text",
+          "id": "image",
+          "label": "Card image (asset name or CDN URL)"
         }
       ]
     },

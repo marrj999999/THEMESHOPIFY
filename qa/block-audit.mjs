@@ -21,6 +21,7 @@
 // Usage:  node qa/block-audit.mjs [--assert] [path ...]
 import { chromium } from 'playwright';
 import { writeFileSync, mkdirSync } from 'fs';
+import { previewUrl } from './estate-pages.mjs';
 
 const ARGS = process.argv.slice(2).filter(a => !a.startsWith('--'));
 const PAGES = ARGS.length ? ARGS : [
@@ -91,7 +92,7 @@ for (const path of PAGES) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce' });
   const page = await ctx.newPage();
   try {
-    await page.goto(`${BASE}${path}?${PREVIEW}`, { waitUntil: 'load', timeout: 45000 });
+    await page.goto(previewUrl(path), { waitUntil: 'load', timeout: 45000 });
     await page.waitForTimeout(1600);
     await page.evaluate(async () => {
       document.querySelectorAll('.rd-reveal').forEach(e => { e.style.opacity = 1; e.style.transform = 'none'; });
@@ -145,8 +146,13 @@ drifts.sort((a, b) => {
   return pb - pa || b.variants.length - a.variants.length;
 });
 
-mkdirSync('qa/evidence/2026-07-29', { recursive: true });
-writeFileSync('qa/evidence/2026-07-29/block-audit.json', JSON.stringify({ loaded, drifts }, null, 2));
+// Evidence day was a hardcoded literal, so every run after that date wrote back into that
+// date's folder and destroyed the previous run's evidence — and the tool could never satisfy
+// gate-check.sh step 5, which requires evidence under TODAY's date. Same bug found in
+// contrast-check.mjs, block-audit.mjs, layout-audit.mjs and sameness.mjs on 2026-08-03.
+const DAY = new Date().toISOString().slice(0, 10);
+mkdirSync(`qa/evidence/${DAY}`, { recursive: true });
+writeFileSync(`qa/evidence/${DAY}/block-audit.json`, JSON.stringify({ loaded, drifts }, null, 2));
 
 const byClass = {};
 drifts.forEach(d => (byClass[d.cls] ??= []).push(d));
@@ -173,4 +179,4 @@ if (process.argv.includes('--assert')) {
   }
   console.log('✓ every block class renders identically on every page');
 }
-console.log('→ qa/evidence/2026-07-29/block-audit.json');
+console.log(`→ qa/evidence/${DAY}/block-audit.json`);

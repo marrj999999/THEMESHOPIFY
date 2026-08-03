@@ -20,6 +20,7 @@
 // exact element and property that moved, so the batch can be narrowed rather than abandoned.
 import { chromium } from 'playwright';
 import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'fs';
+import { previewUrl } from './estate-pages.mjs';
 
 const [mode, a, b] = process.argv.slice(2);
 const DIR = 'qa/evidence/fingerprints';
@@ -86,7 +87,7 @@ async function capture(label) {
     const ctx = await browser.newContext({ viewport: { width: vw, height: vh }, isMobile, deviceScaleFactor: isMobile ? 2 : 1, reducedMotion: 'reduce' });
     const page = await ctx.newPage();
     try {
-      await page.goto(`${BASE}${path}?${PREVIEW}`, { waitUntil: 'load', timeout: 45000 });
+      await page.goto(previewUrl(path), { waitUntil: 'load', timeout: 45000 });
       await page.waitForTimeout(1600);
       // EXACTLY the visual spec's mask (ESCAPES #28). The fingerprint once certified "0 moved"
       // while the visual net failed 48/48 — both correct, measuring different pages, because

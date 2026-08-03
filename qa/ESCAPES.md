@@ -204,3 +204,385 @@ longer interval.
 2. **Never diagnose from one instrument when a second disagrees.** The contradiction was the
    finding — chasing either number alone would have led to reverting a safe change (or shipping an
    unsafe one) for the wrong reason.
+
+## 2026-07-31 — the audit that certified 10 pages and said "all pages"
+
+James: *"Do all 72."* Widening `qa/layout-audit.mjs` from its own hand-typed 10-page list at a
+hardcoded 1280 viewport to the full estate (69 pages × 1280 and 390 = 138 measurements) produced
+two real defects and four instrument defects. The instrument defects are the more important half.
+
+### 29 — a short page list reads exactly like a clean estate
+
+`layout-audit.mjs` carried a private `PAGES` array of 10 entries and `viewport:{width:1280}`, and
+on success printed **"✓ alignment contract holds across all pages"**. That sentence was true of 10
+of 69 pages at one of two viewports, and was indistinguishable from an estate-wide pass. The audit
+was never wrong; it was silent, which is worse, because silence is what a pass looks like.
+
+**Fixed:** one shared `qa/estate-pages.mjs` exporting `ALL_PAGES`; `--all` runs the estate at both
+viewports; `--assert` refuses to certify unless all 138 page/viewports produced bands.
+**Rule:** an audit must never own its page list. Import it.
+
+### 30 — two mobile-only defects that desktop evidence could not have found
+
+- `.rd-trustband{padding:15px 24px}` added a gutter **on top of** `.rd-wrap`'s own, putting its
+  content at 42px on mobile against everything else at 18px. Invisible at ≥1280 by arithmetic: the
+  wrap hits its 1200px max-width and the surplus is absorbed by `margin:auto`, so content lands at
+  72px either way. 4 pages.
+- `.rd-foot-wrap` is a **second wrap class** with the same 32px desktop gutter that was never added
+  to the `max-width:520px` rule — the footer sat 14px right of the body on **every page**. Invisible
+  to the axis check as written, because both wraps are flush at `boxLeft:0`; only measuring the
+  **content** edge (which the check's own comment always claimed it did) exposes it. 45 pages.
+
+**Rule, now ALIGNMENT.md §1a:** the side gutter belongs to `.rd-wrap` alone. A band may set
+vertical padding; it must never set horizontal.
+
+### 31 — three false positives, all the same shape, all "position not set by margins"
+
+A parent's 5px decorative **border** counted as its child's gap; an **inline-flex** link placed by
+text flow measured as if margin-positioned; a `position:fixed` **sticky buy-bar** treated as a
+content band (10 PDPs). Each is the grid/flex false positive from #3 wearing a new costume.
+
+All three fixes **widen an exemption** — the change most likely to silently switch a check off. So
+`qa/canary-alignment.mjs` now holds a genuinely off-centre block and a genuinely off-axis band
+beside the legitimate patterns, and `canary.mjs` fails the build if either stops being caught.
+**Rule:** proving a check went quiet is not proving it is right.
+
+### 32 — three harnesses silently measured the LIVE theme for one page
+
+`layout-audit`, `block-audit` and `css-fingerprint` all built ``` `${BASE}${path}?${PREVIEW}` ```.
+For the one list entry carrying its own query — `/search?q=bamboo` — that yields
+`/search?q=bamboo?preview_theme_id=…`, where the second `?` is literal and the id is swallowed into
+the value of `q`. **The draft was never previewed; the live theme was measured and reported as the
+draft.** Every past "clean" covering `/search` was a statement about live.
+
+It surfaced only because a footer fix verified on 44 pages appeared to miss exactly one — the
+asymmetry was the tell, not the failure itself. `estate-check.mjs` had always joined correctly,
+which is the whole argument for one helper instead of four copies.
+
+**Fixed:** `previewUrl()` in `qa/estate-pages.mjs`; canary asserts the **parsed** `preview_theme_id`
+via `new URL()`, not the string.
+**Rule:** a harness that quietly measures the wrong target is worse than one that crashes.
+
+### The lessons
+
+1. **Coverage is a claim.** "All pages" must name how many, at which viewports, and refuse to pass
+   unless it measured them.
+2. **A metric must measure what its comment says.** The axis check said "content" and measured
+   border boxes for weeks.
+3. **Read the summary statistic before believing it.** The visual diff's bounding box spanned the
+   full page height, implying everything had moved; the changed pixels were in fact two clusters —
+   the footer, and 105px of wordmark anti-aliasing. Acting on the bounding box would have started a
+   hunt for a regression that did not exist.
+4. **An asymmetry in a result is evidence.** 44 of 45 is not "nearly done", it is a question.
+
+### 33 — two rules in this repo encoding opposite contracts, and neither audit could see it
+
+Found by running estate-check after the alignment work: **T2 (one text axis, ≤8px) failed 27 times
+across 7 pages**, having passed with 0 fails on 27 July. A `.rd-wrap.rd-mw-820px` measure column
+was centred, putting its heading 190px in from every other band heading at 1568.
+
+The cause was mine, twice over:
+- `bbc-universal.css` already carried the correct axis rule, with a comment naming this exact
+  +190px symptom.
+- `bbc-align.css` (written this session) declared `margin-inline:auto !important` on
+  `[class*="rd-mw-"]`, out-ranking it on both weight and load order.
+
+**Neither alignment audit could have caught it.** `layout-audit.mjs` *excludes* `.rd-mw-*` from the
+axis check by design (false positive #2) and runs at 1280/390, where the indent is smallest.
+estate-check T2 runs at 768/1024/1568/1920 and does not exclude them. Two instruments, opposite
+contracts, both "passing" their own definition.
+
+**Resolved in favour of the axis** (James delegated: *"decide the best option for optimised
+website"*). The deciding fact is that the indent is `(container − measure) / 2` and therefore not
+constant — 19px at 768, 102px at 1024, 190px at 1568+. A deliberate typographic device is
+proportional; an indent that is merely leftover space reads as sloppiness at one width and
+misalignment at another. Nothing is lost: a measure box's benefit is LINE LENGTH (WCAG 1.4.8),
+independent of horizontal position.
+
+Verified: 8 pages × 4 viewports, spread 0px, measure still 820px, `text-align:left`.
+Consequence accepted and flagged to James: wide media blocks inside a measure column now sit left
+with white space to the right (34% at 1568, inside FORMULA §8's 40% dead-column limit). Per-band
+opt-out is one class — `.rd-mx-auto`.
+
+**Then the fix broke my own centring check**, which flagged 92 axis-aligned measure boxes as
+"inset on both sides but not centred". That check's stated purpose is *things that CLAIM to be
+centred but are not*; a box with `margin-right:0` makes no such claim. Exempted — narrowly, so a
+`.rd-center` measure box that genuinely fails to centre is still caught.
+
+**And the canary for that exemption reported DEAD — because the FIXTURE was wrong, not the check.**
+The "known-bad" off-centre box was `width:600` with `margin-left:200` inside a 1000px content box,
+which leaves both gutters at exactly 200: a perfectly centred box labelled broken. Had it passed
+first time, the exemption would have been "confirmed" on evidence that was itself wrong.
+
+### The lesson
+
+**When two gates disagree, do not pick the one that lets you continue.** Three times this session
+the disagreement *was* the finding: fingerprint vs visual net, layout-audit vs estate-check T2, and
+canary vs fixture. A gate that agrees with you proves nothing; a gate that contradicts you is the
+only one doing work.
+
+## 2026-07-31 (later) — "our impact block on the home page CSS is clashing, why is it being missed"
+
+James pointed at one band. It held four defects, each missed by a different mechanism, and the
+answer to *why* turned out to matter far more than the band itself.
+
+### 34 — the contrast gate went SILENT when the site changed
+
+`estate-check` asserts on `axe.violations` and discards `axe.incomplete`. The home impact band's
+eyebrow rendered `var(--subtle)` #384540 on #003C32 — **1.24:1, invisible**. axe did not miss it;
+axe *declined* it:
+
+    "Element's background color could not be determined due to a background gradient"
+
+That reason appeared the moment `.rd-dark` gained its bloom/grid gradient — **a change I made
+earlier the same session**. From then on axe could not compute the background on ANY dark band, so
+every contrast finding there moved from `violations` to `incomplete` and vanished from the gate.
+35 nodes on the home page alone sat in that blind spot.
+
+**A gate that falls silent because the site changed is worse than one that fails: it reads as an
+improvement.** Nothing went red. The number of violations went *down*.
+
+**Fixed** with `qa/contrast-check.mjs`: render the page, hide the glyphs, sample the pixels
+actually painted behind the text. axe reasons about the cascade and is right to refuse — the true
+colour behind text on a gradient is not derivable that way. Measuring the *result* instead of the
+*recipe* works for gradients, photographs, blend modes and overlays alike.
+
+### 35 — building that check took FOUR false-positive classes of my own
+
+Every one produced confident, specific, wrong findings before being caught:
+
+1. **126 nodes at exactly 1.00:1.** `color:transparent` did not hide the glyphs, because this theme
+   sets `-webkit-text-fill-color` (the report-link paint-over) which overrides it. The sampler read
+   the text as its own background. *100+ nodes at a suspiciously identical ratio is an instrument
+   fault, not a uniformly broken estate.*
+2. **White footer links "on light grey".** A `*{...!important}` stylesheet rule loses to any author
+   rule with a class, because !important ties break on specificity. Inline `setProperty(...,
+   'important')` was needed.
+3. **"builders trained" on rgb(227,227,227)** — bone text plainly legible on forest. Cause:
+   `fullPage` screenshots make Chrome resize the viewport, so every `100vh` hero reflows and the
+   coordinates measured beforehand no longer describe the image. Fixed by sampling viewport
+   captures at successive scroll offsets — measure and sample in the SAME state.
+4. **16 PDP findings inside a collapsed accordion.** Contents stay in the DOM with normal computed
+   styles; the panel clips them with `max-height:0; overflow:hidden`. Checking the element's own
+   `display`/`visibility` says "visible" for text nobody can see.
+
+### 36 — what the honest check then found
+
+14,995 text nodes across 69 pages × 2 viewports; **39 below WCAG AA**. The worst was not the
+eyebrow James spotted but `/pages/programmes`: all five "how it works" step descriptions at
+**1.04:1** — the copy explaining how the prison and school programmes run, invisible. Root cause
+one line: `.rd-steps li p{ color:var(--charcoal) }`, a light-surface colour. **The line directly
+above it already carried a `.rd-dark` variant for `border-top-color`** — the dark case was
+considered and the text colour simply missed.
+
+The other three impact-band defects were the same family of "component styled for paper, dropped
+onto forest", plus a de-box that left `border-radius` and a `background` behind on elements that
+had become bare rules.
+
+### The lessons
+
+1. **Ask what a gate does with the results it cannot judge.** `violations` vs `incomplete` is not a
+   detail; it is the difference between a check and a comfort blanket.
+2. **A gate going quieter is a finding, not a win.** Track the count of *undecidable* results, not
+   only failures.
+3. **Measuring the rendered result is harder than reading the source — and that is exactly why the
+   source-reading checks were silent.** Four false-positive classes in one script is the price;
+   paying it is not optional if the claim is "this text is readable".
+
+## 2026-07-31 (later still) — standardising the case-study card across the estate
+
+James: *"for casestudies we should have a standard block across all parts of the website … so the
+same look"*, then *"populate all the other case studies … check the thumbnail and or integrated
+video"*. Peer research (12 charity/social-enterprise sites + 6 published design systems) produced
+`snippets/bbc-cscard.liquid`. What the work exposed:
+
+### 37 — the divergence was hiding real WCAG failures, not just styling drift
+
+Eight sections rendered the same `.rd-cscard` class four different ways. Underneath that:
+
+- **No card had a heading element.** The title was `<span class="rd-cscard__inst">` in all eight.
+- **"Read the story" was the link text on all seven Impact cards**, with seven destinations. WCAG
+  2.4.4 counts only the ENCLOSING paragraph/list-item as programmatically determined context, so a
+  descriptive sibling `<span>` does not qualify. The cards failed it.
+- **Five of eight sections wrapped the whole card in `<a>`**, making the accessible name the entire
+  card body — rejected by BBC GEL, the NHS service manual and Roselli alike.
+
+The fix is the published pattern: heading contains the only card-level link; the card still feels
+clickable via a stretched `::before`; the footer CTA is a `<span>`, never a second destination.
+
+### 38 — three Shopify/Liquid traps, each of which failed SILENTLY
+
+1. **Filters are not allowed in `render` arguments.** `url: settings.cs_url | default: '…'` does not
+   error — the argument simply arrives blank. The flagship card rendered with no link and no CTA
+   at all. Resolve defaults into a variable first.
+2. **Shopify strips block settings that are not in the section schema AT SAVE TIME.** Templates
+   were pushed before the sections carrying the new `outcome` field, so all ten headlines were
+   silently dropped and every card fell back to its institution name. **Schema first, then
+   template** — always.
+3. **`gate-check.sh` does not validate Liquid syntax.** An unbalanced `{%- endif -%}` passed the
+   gate and was caught only by the Shopify API on push. A push can also partially succeed: the CSS
+   and snippet landed while the section was rejected, leaving the draft briefly mismatched.
+
+### 39 — a crude script edit closed the wrong element, on two files at once
+
+The migration searched for the FIRST `{%- endfor -%}` in each file with no start offset, so it
+closed the **logo grid** with `</ul>` instead of the case-study grid. Both pages then rendered a
+stray full-width `.rd-wrap`. Caught by the alignment audit (1 band off-axis), not by eye and not by
+the Liquid tag-balance check — which counts Liquid tags, not HTML.
+
+A follow-on trap: a naive tag-balance scanner also reports false positives, because it matches the
+words `schema`/`comment` INSIDE comment prose. The authoritative Liquid validator is the Shopify
+API itself.
+
+### 40 — "check the thumbnail" found three content defects no gate would ever catch
+
+- `/blogs/schools-and-education/southbank-utc-…` carries `lowdham-workshop-empty…` — a **prison**
+  workshop photo on a school story. Dropped from the selection.
+- **One photograph serves three case studies** (Macallan, Upcycle Brixton, Reed's School — all
+  `SRW08823_*` variants of one shoot), two of them originally adjacent in the same row. Neither
+  article has an alternative image in its body, so this needs a real picture, not a code fix.
+  Mitigated by reordering; flagged for James.
+- Reed's School's photo shows adults, not sixth-formers.
+
+**The lesson:** image *correctness* is invisible to every automated check we have. `estate-check`
+verifies an image loads; nothing verifies it shows the right thing. Any content population must
+include a human look at every thumbnail.
+
+### Status at handover — 4 of 7 pages standardised
+
+Impact, Team Building, Schools, Build-to-Bond: `<article>`, heading links, zero wrapper anchors.
+Remaining: **Why Bamboo** (its visible cards come from `build_gallery`, an instance of the generic
+`bbc-section` — the migration of `bbc-why-bamboo-2026.liquid` was real but pointed at markup the
+page does not use), **Home** (bespoke grid CSS, hardcoded cards — deferred deliberately), and
+**About** (migrated, but the page has zero `story` blocks so nothing renders).
+
+---
+
+## 2026-08-03 — estate contrast sweep: 77 sub-AA nodes, three root causes, one self-inflicted regression
+
+Full pixel-sampled sweep of 69 pages × 2 viewports: **77 below AA → 1** (and that 1 is an
+instrument artefact, below). 15,428 text nodes measured. Everything here was measured, deployed
+to draft `196820238710` through `gate-check.sh`, read back byte-identical, and re-measured.
+
+### 41 — a matched colour pair split in half: the featured prison card rendered blank
+
+`/pages/impact` had **32 nodes at 1.00:1** — foreground and background the *exact same* colour.
+The whole text column of the featured Build-to-Bond card (the Sally Allsopp quote, the outcome
+pills, "Read the full story") was invisible, at both viewports, and had been through a CRIT pass.
+
+`bbc-statement.css` strips the card fill for the Impact page's borderless grid
+(`.bbc-rd-impact .rd-cscard{background:transparent !important}`), but `[data-family="programme"]`
+in `bbc-redesign-2026.css` pairs **bone text WITH a forest fill**. Remove one half of a pair and
+the other half is left standing on the page's own bone.
+
+**The lesson:** a background and a text colour set in different files are a single unit. Any rule
+that overrides one must say what happens to the other. Only `programme` broke — `applied`
+(steel+ink) and `recognition` (paper, no colour) degrade safely — so the failure is invisible
+until exactly the wrong family lands on exactly the wrong page.
+
+### 42 — a direct element match always beats inheritance (and the fix was worse, twice)
+
+`bbc-foundation.css:363` sets a bare `p{color:var(--bbc-text)}`. A container can set light text
+on a dark band and any nested `<p>` is silently reset to ink, because a directly-matching
+selector beats an inherited value. On `/pages/why-bamboo` the hero lede is a `<p>` inside
+`div.rd-lede`: the div computed `#eef3ec`, the `<p>` inside it computed `#14211C` on `#003C32`.
+
+**Then the fix caused more damage than the bug.** Cut 1, `.bbc-rd p{color:inherit}` at (0,1,1),
+outranked every single-class rule a page sets on its own paragraphs — including the legacy
+size-guide's `.hero-subtitle{color:#fff}` at (0,1,0). Cut 2 named dark surfaces, and listed
+`.bbc-rd .rd-dark p` — **the same (0,2,1) as the existing, correct
+`.bbc-rd .rd-dark p{color:rgb(207,216,210)}`**. Equal specificity breaks on source order, so
+being later in the file it replaced a good light colour with `inherit`, which resolved to the
+press quote's own `rgba(7,62,39,.75)`: legacy forest on current forest at **1.01:1 on 16 product
+pages**. Cut 3 targets only `.bbc-rd .rd-lede p`, the actual defect.
+
+**The lesson:** when adding a defensive rule, grep for the selector you are about to write. If a
+rule with the same specificity already exists, you are not adding a safety net, you are silently
+replacing someone's decision. A broad fix for a narrow defect is a bug with better PR.
+
+### 43 — two instruments disagreed, and the defect was geometry, not colour
+
+Pillar text on `/pages/why-bamboo` read as ink-on-bone (~9:1) via the cascade and 1.08:1 on a
+*photographic* background via pixel sampling. Both were right. `.bbcpl-media` carries
+`aspect-ratio:16/10` (from `snippets/bbc-media.liquid`) and is a grid item that stretches to the
+row height — so with `width:auto` the ratio resolved **width from height**: 1137px and 1329px
+inside a 780px column, overrunning the text by 357px and 548px, with the absolutely-filled photo
+painting under the copy. The reversed pillar also ran 387px past the viewport. `width:100%` makes
+the ratio derive height from width, as intended.
+
+**The lesson:** ESCAPES #28 said never diagnose from one instrument when a second disagrees. The
+corollary: when they disagree, the disagreement itself is the finding. A colour checker and a
+layout checker contradicting each other is what a layout bug looks like from the colour side.
+
+### 44 — the gate was measuring things nobody can see (and the canary caught my fix)
+
+7 of the 17 findings after the first fix pass were false: 6 were text inside **closed
+`<details>`** — which keeps content in layout with computed `visibility:visible`, so every guard
+in `contrast-check.mjs` passed it — and 1 was a button sampled while the theme's own fixed
+`.bbc-sup__sticky` bar covered it. Proof for the last one is arithmetic:
+`rgba(255,255,255,.96)` over forest `rgb(0,60,50)` is **exactly** the `rgb(245,247,247)` reported.
+
+Both are now guarded: `checkVisibility({checkOpacity,checkVisibilityCSS})`, and a general
+fixed/sticky overlay-intersection test replacing the hard-coded 76px preview-bar strip.
+
+**But the first cut of the overlay guard matched on `position` alone**, which caught the *closed
+cart drawer* (`.drawer.is-empty`, fixed at 0,0,1280,900) — so "covered by an overlay" was true
+for all 229 nodes and the run certified **nothing**, reporting `measured 0`. `--canary` caught it
+immediately. Overlays now additionally require visibility, opacity and a non-transparent
+background.
+
+**The lesson:** every exclusion added to a gate is a chance to stop measuring. The canary is not
+ceremony — it is the only thing standing between "we fixed the estate" and "we blinded the tool
+and called it green". Run it after *every* exclusion, including the ones that look obviously safe.
+
+### 45 — FOUR audits wrote every run into a hardcoded evidence folder
+
+The scope guard (narrow run must not clobber a broad one) was in place; the **date** was the
+literal string `'2026-07-31'` at two places. So every run after 31 July silently overwrote that
+day's evidence — and the tool could never satisfy `gate-check.sh` step 5, which requires evidence
+under *today's* date. My own first sweep destroyed the 31 July file before I noticed. Now
+`new Date().toISOString().slice(0,10)`.
+
+**The lesson:** a guard against one collision axis reads as a guard against collision. The
+comment above it described the danger accurately and still missed the axis it did not name.
+
+### Known instrument limitation, still open
+
+`/pages/support-mission@390` reports the "Talk to James about funding" button at 1.27:1. Measured
+directly it is `rgb(230,220,200)` on its own `rgb(0,60,50)` fill — **~9:1, in both mobile and
+desktop emulation**. The overlay guard does not always fire for it. It is the only finding left
+in the estate and it is not a defect; do not "fix" the button.
+
+**Scope correction (same day):** this was not one tool. `contrast-check.mjs` ('2026-07-31'),
+`block-audit.mjs` ('2026-07-29'), `layout-audit.mjs` ('2026-07-29') and `sameness.mjs`
+('2026-07-28') all hardcoded their evidence day. Every run of any of them since those dates
+silently overwrote that folder — and I destroyed two historical files myself (the 31 Jul contrast
+estate file and the 29 Jul block-audit file) before spotting the pattern. All four now use
+`new Date().toISOString().slice(0,10)`. A run's evidence is now filed under the day it ran.
+
+### 46 — "14 classes drift" was mostly components doing their job
+
+The block and type audits group by ONE class name, so a component with variants reports several
+values and reads as broken. Checked properly (full class list + owning band, per instance):
+
+- `.rd-card` radius 0/12/6px = the de-boxed Impact treatment, the base card, and `.rd-stamp`.
+  Three deliberate variants.
+- `.rd-q` 22px = an explicit `.rd-fs-clamp18px2vw22` modifier on PDPs (19 instances); 28px is
+  the norm (27 instances); 42px is a page-scoped `!important` on Impact.
+- `.rd-big` 21 vs 24px and `.rd-sm` 14 vs 15px = `.rd-loop .rd-step` vs `.rd-jt` — the same
+  utility class inside two different components, which is a design system, not drift.
+- Every `textAlign` entry (rd-eyebrow, rd-lede, rd-big, rd-sm, bbc-press*, rd-loop) is a band
+  opting into centring, which ALIGNMENT rule 7 explicitly permits — "hierarchy, not uniformity",
+  itself a correction of an earlier pass that made the estate worse by enforcing uniformity.
+
+**Two were real, and both are fixed:** `.rd-body` rendered 14px on /pages/gallery and 18px in
+171 other instances, because a `<figcaption>` wore the body class with an inline font-size — it
+is a caption, now `.rd-gal__cap` on the caption token. And `.rd-cta-row` declared
+`display:flex; gap:14px` ONLY inside `.rd-hero`, so its 12+ uses elsewhere were plain block divs;
+`bbc-teambuilding-2026.liquid:130` had been asking for `rd-jc-center` on a block element, where
+justify-content is inert, so that centring had never once worked.
+
+**The lesson:** grouping by class name cannot tell a variant from a defect. Before "fixing"
+drift, print the full class list and the owning band for every instance — the modifier that
+explains it is usually right there. ESCAPES #12 learned this once already; the audits still
+report it this way, so it will keep needing to be re-learned unless they carry the modifier.
