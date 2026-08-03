@@ -47,7 +47,15 @@ function profile() {
   role('.bbc-rd section h2, .bbc-rd .rd-wrap > h2', 'band-h2');
   role('.bbc-rd .rd-lede', 'lede');
   role('.bbc-rd .rd-btn', 'button');
-  role('.bbc-rd .rd-cscard__heading, .bbc-rd .rd-card h3', 'card-title');
+  // TWO DISTINCT ROLES, not one. The first cut selected
+  // `.rd-cscard__heading, .rd-card h3` together, so Impact reported its case-study heading (29px,
+  // 12 nodes) and the PDPs reported their generic card title (21px) — and the tool called that a
+  // 55-page divergence. FORMULA §1 specifies 21px for the generic "card-title h3 (ops/help/report
+  // cards)"; the case-study heading is a different component the table does not cover. Both were
+  // correct. ESCAPES #12 and #46 are the same lesson: grouping by one name cannot tell a variant
+  // from a defect. (2026-08-03)
+  role('.bbc-rd .rd-cscard__heading', 'cscard-heading');
+  role('.bbc-rd .rd-card h3', 'card-title');
   role('.bbc-rd .rd-stat .rd-num, .bbc-rd .rd-num', 'stat-number');
 
   // band rhythm + surfaces, in document order
@@ -71,12 +79,22 @@ function profile() {
   const wrap = document.querySelector('.bbc-rd .rd-wrap');
   const wcs = wrap ? getComputedStyle(wrap) : null;
 
-  // FORMULA §8: bordered boxes (3+ sides), page-wide cap 6
+  // FORMULA §8: bordered CONTENT boxes (3+ sides), page-wide cap 6.
+  // The first cut counted any 3+-sided bordered element wider than 120px, which made every
+  // outline button and pill a "box" — .rd-btn carries a 2px border on all four sides. Impact
+  // itself scored 23 against a cap of 6, and all 65 pages "failed", which is an instrument
+  // fault, not an estate that is uniformly wrong (ESCAPES #16 caught the same detector being
+  // too loose once already). Exclude controls and chips, and require the thing to actually
+  // contain content rather than be a single line of text.
+  const CONTROL = '.rd-btn, .ew-btn, .bbcst-btn, .rd-tag, .rd-chip, .rd-pill, button, input, select, textarea, .rd-qbtn';
   const boxed = [...document.querySelectorAll('.bbc-rd *')].filter(e => {
+    if (e.matches(CONTROL) || e.closest(CONTROL)) return false;
     const cs = getComputedStyle(e);
     const sides = ['Top', 'Right', 'Bottom', 'Left'].filter(s => px(cs['border' + s + 'Width']) > 0
       && cs['border' + s + 'Style'] !== 'none').length;
-    return sides >= 3 && e.getBoundingClientRect().width > 120;
+    if (sides < 3) return false;
+    const r = e.getBoundingClientRect();
+    return r.width > 120 && r.height > 80;      // a content box, not a control or a rule
   }).length;
 
   return {
@@ -84,7 +102,8 @@ function profile() {
     bandCount: bands.length,
     distinctBandPadTop: Object.keys(padTop).map(Number).sort((a, b) => a - b),
     surfacePalette: [...new Set(surfaces.filter(Boolean))],
-    wrap: wcs ? { maxWidth: wcs.maxWidth, padLeft: px(wcs.paddingLeft) } : null,
+    wrap: wcs ? { maxWidth: wcs.maxWidth, padLeft: px(wcs.paddingLeft),
+      measureModifier: wrap ? /rd-mw-/.test(wrap.className) : false } : null,
     borderedBoxes: boxed,
   };
 }
@@ -125,12 +144,19 @@ for (const path of PAGES) {
   const diffs = [];
   for (const [role, rv] of Object.entries(ref.roles)) {
     const pv = p.roles[role];
-    if (!pv) { diffs.push(`${role}: absent (Impact ${rv.spec})`); continue; }
+    // ABSENCE IS NOT DIVERGENCE. A geometry page with no stat band, or a policy page with no
+    // eyebrow, simply does not use that component — it is not styled differently. Counting
+    // absence produced 47 "stat-number: absent" and 23 "eyebrow: absent" rows and drowned the
+    // handful of real findings. Only compare roles BOTH pages actually render. (2026-08-03)
+    if (!pv) continue;
     if (pv.spec !== rv.spec) diffs.push(`${role}: ${pv.spec} vs Impact ${rv.spec}`);
   }
   if (p.wrap && ref.wrap) {
-    if (p.wrap.maxWidth !== ref.wrap.maxWidth) diffs.push(`wrap max-width ${p.wrap.maxWidth} vs ${ref.wrap.maxWidth}`);
+    // .rd-mw-820px and friends are a deliberate reading measure on prose pages, applied to the
+    // same .rd-wrap element — so comparing raw max-width reported 25 "failures" for pages doing
+    // exactly what the design system asks. Only the GUTTER is a true global constant.
     if (p.wrap.padLeft !== ref.wrap.padLeft) diffs.push(`gutter ${p.wrap.padLeft}px vs ${ref.wrap.padLeft}px`);
+    if (p.wrap.maxWidth !== ref.wrap.maxWidth && !p.wrap.measureModifier) diffs.push(`wrap max-width ${p.wrap.maxWidth} vs ${ref.wrap.maxWidth} (no measure modifier)`);
   }
   const extraSurfaces = p.surfacePalette.filter(s => !ref.surfacePalette.includes(s));
   if (extraSurfaces.length) diffs.push(`surfaces Impact never uses: ${extraSurfaces.join(' ')}`);

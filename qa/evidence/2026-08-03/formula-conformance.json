@@ -1,0 +1,2938 @@
+{
+  "reference": {
+    "roles": {
+      "eyebrow": {
+        "spec": "14/700",
+        "n": 11,
+        "variants": 1
+      },
+      "band-h2": {
+        "spec": "95/800",
+        "n": 7,
+        "variants": 1
+      },
+      "lede": {
+        "spec": "22/400",
+        "n": 4,
+        "variants": 1
+      },
+      "button": {
+        "spec": "15/700",
+        "n": 6,
+        "variants": 1
+      },
+      "cscard-heading": {
+        "spec": "29/800",
+        "n": 12,
+        "variants": 1
+      },
+      "stat-number": {
+        "spec": "52/800",
+        "n": 6,
+        "variants": 1
+      }
+    },
+    "bandCount": 9,
+    "distinctBandPadTop": [
+      64,
+      88
+    ],
+    "surfacePalette": [
+      "rgb(222, 230, 240)",
+      "rgb(0, 60, 50)",
+      "rgb(241, 233, 216)",
+      "rgb(230, 220, 200)"
+    ],
+    "wrap": {
+      "maxWidth": "1200px",
+      "padLeft": 32,
+      "measureModifier": false
+    },
+    "borderedBoxes": 5
+  },
+  "pages": [
+    {
+      "path": "/",
+      "diffs": [
+        "surfaces Impact never uses: rgb(212, 253, 98)",
+        "8 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 9,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 9,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 5,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 9,
+            "variants": 1
+          },
+          "cscard-heading": {
+            "spec": "29/800",
+            "n": 2,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 10,
+        "distinctBandPadTop": [
+          0,
+          64,
+          88,
+          90
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)",
+          "rgb(222, 230, 240)",
+          "rgb(212, 253, 98)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 8
+      }
+    },
+    {
+      "path": "/pages/programmes",
+      "diffs": [
+        "stat-number: 18/400 vs Impact 52/800"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 8,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 8,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 9,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 8,
+            "variants": 1
+          },
+          "cscard-heading": {
+            "spec": "29/800",
+            "n": 5,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 5,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "18/400",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 10,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)",
+          "rgb(230, 220, 200)",
+          "rgb(222, 230, 240)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 5
+      }
+    },
+    {
+      "path": "/pages/workshops",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 9,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 7,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 7,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 11,
+            "variants": 1
+          },
+          "cscard-heading": {
+            "spec": "29/800",
+            "n": 5,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 3,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 11,
+        "distinctBandPadTop": [
+          15,
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(0, 60, 50)",
+          "rgb(230, 220, 200)",
+          "rgb(222, 230, 240)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 5
+      }
+    },
+    {
+      "path": "/pages/schools",
+      "diffs": [
+        "14 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 9,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 9,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 8,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 6,
+            "variants": 1
+          },
+          "cscard-heading": {
+            "spec": "29/800",
+            "n": 9,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 5,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 10,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)",
+          "rgb(230, 220, 200)",
+          "rgb(222, 230, 240)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 14
+      }
+    },
+    {
+      "path": "/pages/why-bamboo",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 7,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 10,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 7,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 4,
+            "variants": 1
+          },
+          "cscard-heading": {
+            "spec": "29/800",
+            "n": 5,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 12,
+        "distinctBandPadTop": [
+          0,
+          64,
+          88,
+          90
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(241, 233, 216)",
+          "rgb(0, 60, 50)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 3
+      }
+    },
+    {
+      "path": "/pages/bicycleteambuilding",
+      "diffs": [
+        "9 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 8,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 8,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 6,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 9,
+            "variants": 1
+          },
+          "cscard-heading": {
+            "spec": "29/800",
+            "n": 4,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 2,
+            "variants": 1
+          }
+        },
+        "bandCount": 9,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(222, 230, 240)",
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 9
+      }
+    },
+    {
+      "path": "/pages/contact-us",
+      "diffs": [
+        "band-h2: 21/800 vs Impact 95/800"
+      ],
+      "profile": {
+        "roles": {
+          "band-h2": {
+            "spec": "21/800",
+            "n": 4,
+            "variants": 2
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 2,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 5,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/pages/support-mission",
+      "diffs": [
+        "7 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 1,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 9,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 5,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 9,
+            "variants": 1
+          },
+          "cscard-heading": {
+            "spec": "29/800",
+            "n": 3,
+            "variants": 1
+          }
+        },
+        "bandCount": 9,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(0, 60, 50)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 7
+      }
+    },
+    {
+      "path": "/pages/which-kit",
+      "diffs": [
+        "7 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 2,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 2,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 2,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 3,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 9,
+            "variants": 1
+          }
+        },
+        "bandCount": 4,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(230, 220, 200)",
+          "rgb(222, 230, 240)",
+          "rgb(0, 60, 50)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 7
+      }
+    },
+    {
+      "path": "/pages/gallery",
+      "diffs": [
+        "8 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 2,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 2,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 1,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 3,
+            "variants": 1
+          }
+        },
+        "bandCount": 3,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(241, 233, 216)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 8
+      }
+    },
+    {
+      "path": "/pages/our-story-2",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 8,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 6,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 7,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 4,
+            "variants": 1
+          },
+          "cscard-heading": {
+            "spec": "29/800",
+            "n": 8,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 3,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 7,
+        "distinctBandPadTop": [
+          0,
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)",
+          "rgb(222, 230, 240)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/pages/build-to-bond",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 5,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 5,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 6,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 5,
+            "variants": 1
+          },
+          "cscard-heading": {
+            "spec": "29/800",
+            "n": 1,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 8,
+        "distinctBandPadTop": [
+          0,
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(0, 60, 50)",
+          "rgb(230, 220, 200)",
+          "rgb(241, 233, 216)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/pages/prisons",
+      "diffs": [
+        "stat-number: 18/400 vs Impact 52/800",
+        "8 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 6,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 6,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 7,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 6,
+            "variants": 1
+          },
+          "cscard-heading": {
+            "spec": "29/800",
+            "n": 5,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 3,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "18/400",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 8,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(0, 60, 50)",
+          "rgb(230, 220, 200)",
+          "rgb(241, 233, 216)",
+          "rgb(222, 230, 240)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 8
+      }
+    },
+    {
+      "path": "/pages/theory-of-change",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 7,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 5,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 3,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 7,
+            "variants": 1
+          },
+          "cscard-heading": {
+            "spec": "29/800",
+            "n": 6,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 2,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 3,
+            "variants": 1
+          }
+        },
+        "bandCount": 7,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(0, 60, 50)",
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/pages/impact-report",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 6,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 6,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 4,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 3,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 2,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 8,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(0, 60, 50)",
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/pages/toulouse-workshop",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/pages/bicycle-frame-building-workshop",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 9,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 7,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 7,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 11,
+            "variants": 1
+          },
+          "cscard-heading": {
+            "spec": "29/800",
+            "n": 5,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 3,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 11,
+        "distinctBandPadTop": [
+          15,
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(0, 60, 50)",
+          "rgb(230, 220, 200)",
+          "rgb(222, 230, 240)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 5
+      }
+    },
+    {
+      "path": "/pages/media-page",
+      "diffs": [
+        "59 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 1,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 2,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 2,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 2,
+            "variants": 1
+          }
+        },
+        "bandCount": 4,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(222, 230, 240)",
+          "rgb(0, 60, 50)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 59
+      }
+    },
+    {
+      "path": "/pages/club-news",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "lede": {
+            "spec": "22/400",
+            "n": 1,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/pages/support-centre",
+      "diffs": [
+        "band-h2: 29/700 vs Impact 95/800"
+      ],
+      "profile": {
+        "roles": {
+          "band-h2": {
+            "spec": "29/700",
+            "n": 6,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/pages/team-building",
+      "diffs": [
+        "9 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 7,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 7,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 5,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 9,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 2,
+            "variants": 1
+          }
+        },
+        "bandCount": 8,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(222, 230, 240)",
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 9
+      }
+    },
+    {
+      "path": "/pages/frequently-asked-questions",
+      "diffs": [
+        "band-h2: 29/700 vs Impact 95/800"
+      ],
+      "profile": {
+        "roles": {
+          "band-h2": {
+            "spec": "29/700",
+            "n": 3,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/pages/james-marr-founder",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/pages/size-guide",
+      "diffs": [
+        "band-h2: 29/700 vs Impact 95/800",
+        "surfaces Impact never uses: rgb(255, 255, 255)",
+        "32 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "band-h2": {
+            "spec": "29/700",
+            "n": 10,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 10,
+        "distinctBandPadTop": [
+          32,
+          48,
+          80,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(255, 255, 255)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 32
+      }
+    },
+    {
+      "path": "/pages/sustainability",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 2
+      }
+    },
+    {
+      "path": "/pages/cycle-to-work-scheme",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/pages/university-papers",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/pages/geometry",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 4
+      }
+    },
+    {
+      "path": "/pages/gravel-geometry",
+      "diffs": [
+        "47 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 47
+      }
+    },
+    {
+      "path": "/pages/road-bike-geometry",
+      "diffs": [
+        "47 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 47
+      }
+    },
+    {
+      "path": "/pages/easy-build-geometry",
+      "diffs": [
+        "28 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 28
+      }
+    },
+    {
+      "path": "/pages/mini-velo-geometry",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 2
+      }
+    },
+    {
+      "path": "/pages/whats-in-the-box",
+      "diffs": [
+        "24 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 24
+      }
+    },
+    {
+      "path": "/pages/gravel-frame-comparison",
+      "diffs": [
+        "28 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 28
+      }
+    },
+    {
+      "path": "/pages/privacy-policy",
+      "diffs": [
+        "band-h2: 29/700 vs Impact 95/800",
+        "39 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "band-h2": {
+            "spec": "29/700",
+            "n": 16,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 39
+      }
+    },
+    {
+      "path": "/pages/bamboo-bike-stem-lesson",
+      "diffs": [
+        "band-h2: 29/700 vs Impact 95/800"
+      ],
+      "profile": {
+        "roles": {
+          "band-h2": {
+            "spec": "29/700",
+            "n": 3,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/pages/bamboo-frame-nea-project",
+      "diffs": [
+        "band-h2: 29/700 vs Impact 95/800"
+      ],
+      "profile": {
+        "roles": {
+          "band-h2": {
+            "spec": "29/700",
+            "n": 3,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/pages/free-bamboo-speaker-workshop",
+      "diffs": [
+        "band-h2: 29/700 vs Impact 95/800"
+      ],
+      "profile": {
+        "roles": {
+          "band-h2": {
+            "spec": "29/700",
+            "n": 3,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 1,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "820px",
+          "padLeft": 32,
+          "measureModifier": true
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/collections",
+      "diffs": [
+        "band-h2: 18/800 vs Impact 95/800"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 1,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "18/800",
+            "n": 9,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 1,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 2,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/collections/home-build-kits",
+      "diffs": [
+        "band-h2: 18/800 vs Impact 95/800",
+        "11 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 1,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "18/800",
+            "n": 10,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 1,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 2,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 11
+      }
+    },
+    {
+      "path": "/collections/component-packs",
+      "diffs": [
+        "band-h2: 18/800 vs Impact 95/800",
+        "10 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 1,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "18/800",
+            "n": 9,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 1,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 2,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 10
+      }
+    },
+    {
+      "path": "/collections/maker-shop",
+      "diffs": [
+        "band-h2: 18/800 vs Impact 95/800",
+        "13 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 1,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "18/800",
+            "n": 12,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 1,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 2,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 13
+      }
+    },
+    {
+      "path": "/collections/clothing",
+      "diffs": [
+        "band-h2: 18/800 vs Impact 95/800",
+        "11 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 1,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "18/800",
+            "n": 10,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 1,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 2,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 11
+      }
+    },
+    {
+      "path": "/collections/road",
+      "diffs": [
+        "band-h2: 18/800 vs Impact 95/800"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 1,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "18/800",
+            "n": 3,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 1,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 2,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 4
+      }
+    },
+    {
+      "path": "/collections/gravel-adventure",
+      "diffs": [
+        "band-h2: 18/800 vs Impact 95/800"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 1,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "18/800",
+            "n": 5,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 1,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 2,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 6
+      }
+    },
+    {
+      "path": "/collections/mtb",
+      "diffs": [
+        "band-h2: 18/800 vs Impact 95/800"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 1,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "18/800",
+            "n": 3,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 1,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 2,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 4
+      }
+    },
+    {
+      "path": "/collections/balance-bikes",
+      "diffs": [
+        "band-h2: 18/800 vs Impact 95/800"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 1,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "18/800",
+            "n": 2,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 1,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 2,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 3
+      }
+    },
+    {
+      "path": "/collections/gift",
+      "diffs": [
+        "band-h2: 18/800 vs Impact 95/800"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 1,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "18/800",
+            "n": 2,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 1,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 2,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 3
+      }
+    },
+    {
+      "path": "/products/gravel-frame-build-kit",
+      "diffs": [
+        "12 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 11,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 12,
+            "variants": 2
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 5,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 8,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 24,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 17,
+        "distinctBandPadTop": [
+          0,
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)",
+          "rgb(222, 230, 240)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 12
+      }
+    },
+    {
+      "path": "/products/bamboo-bike-road-kit",
+      "diffs": [
+        "12 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 11,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 12,
+            "variants": 2
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 5,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 8,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 24,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 17,
+        "distinctBandPadTop": [
+          0,
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)",
+          "rgb(222, 230, 240)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 12
+      }
+    },
+    {
+      "path": "/products/road-carbon-frame-build-kit",
+      "diffs": [
+        "12 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 11,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 12,
+            "variants": 2
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 5,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 8,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 24,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 17,
+        "distinctBandPadTop": [
+          0,
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)",
+          "rgb(222, 230, 240)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 12
+      }
+    },
+    {
+      "path": "/products/gravel-lugged-build-kit",
+      "diffs": [
+        "12 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 11,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 12,
+            "variants": 2
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 5,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 8,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 24,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 17,
+        "distinctBandPadTop": [
+          0,
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)",
+          "rgb(222, 230, 240)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 12
+      }
+    },
+    {
+      "path": "/products/29er-frame-build-kit",
+      "diffs": [
+        "12 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 12,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 13,
+            "variants": 2
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 6,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 9,
+            "variants": 1
+          },
+          "cscard-heading": {
+            "spec": "29/800",
+            "n": 6,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 24,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 18,
+        "distinctBandPadTop": [
+          0,
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)",
+          "rgb(222, 230, 240)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 12
+      }
+    },
+    {
+      "path": "/products/city-bike-frame-kit",
+      "diffs": [
+        "12 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 11,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 12,
+            "variants": 2
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 5,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 8,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 24,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 17,
+        "distinctBandPadTop": [
+          0,
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)",
+          "rgb(222, 230, 240)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 12
+      }
+    },
+    {
+      "path": "/products/fatbike-home-build-kit",
+      "diffs": [
+        "12 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 11,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 12,
+            "variants": 2
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 5,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 8,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 24,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 17,
+        "distinctBandPadTop": [
+          0,
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)",
+          "rgb(222, 230, 240)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 12
+      }
+    },
+    {
+      "path": "/products/custom-frame",
+      "diffs": [
+        "12 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 11,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 12,
+            "variants": 2
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 5,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 8,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 24,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 17,
+        "distinctBandPadTop": [
+          0,
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)",
+          "rgb(222, 230, 240)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 12
+      }
+    },
+    {
+      "path": "/products/balance-bike-lugged-kit-1",
+      "diffs": [
+        "12 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 11,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 12,
+            "variants": 2
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 5,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 8,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 24,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 17,
+        "distinctBandPadTop": [
+          0,
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)",
+          "rgb(222, 230, 240)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 12
+      }
+    },
+    {
+      "path": "/products/balance-bike-flax-kit-with-resins",
+      "diffs": [
+        "12 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 11,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 12,
+            "variants": 2
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 5,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 8,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "21/800",
+            "n": 24,
+            "variants": 1
+          },
+          "stat-number": {
+            "spec": "52/800",
+            "n": 4,
+            "variants": 1
+          }
+        },
+        "bandCount": 17,
+        "distinctBandPadTop": [
+          0,
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)",
+          "rgb(222, 230, 240)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 12
+      }
+    },
+    {
+      "path": "/products/bottom-bracket-68mm",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 0,
+        "distinctBandPadTop": [],
+        "surfacePalette": [],
+        "wrap": null,
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/products/single-speed-component-pack",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 0,
+        "distinctBandPadTop": [],
+        "surfacePalette": [],
+        "wrap": null,
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/products/bamboo-bicycle-club-gift-card",
+      "diffs": [],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 1,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 1,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 1,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 2,
+            "variants": 1
+          }
+        },
+        "bandCount": 3,
+        "distinctBandPadTop": [
+          15,
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 3
+      }
+    },
+    {
+      "path": "/products/bamboo-bicycle-club-beanie",
+      "diffs": [
+        "15 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 1,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "95/800",
+            "n": 1,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 1,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 2,
+            "variants": 1
+          }
+        },
+        "bandCount": 3,
+        "distinctBandPadTop": [
+          15,
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(0, 60, 50)",
+          "rgb(241, 233, 216)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 15
+      }
+    },
+    {
+      "path": "/search?q=bamboo",
+      "diffs": [
+        "band-h2: 18/800 vs Impact 95/800",
+        "11 bordered boxes (§8 cap 6)"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 1,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "18/800",
+            "n": 12,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 2,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 11
+      }
+    },
+    {
+      "path": "/blogs/news",
+      "diffs": [
+        "band-h2: 21/800 vs Impact 95/800"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 1,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "21/800",
+            "n": 9,
+            "variants": 1
+          },
+          "lede": {
+            "spec": "22/400",
+            "n": 1,
+            "variants": 1
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 1,
+            "variants": 1
+          }
+        },
+        "bandCount": 2,
+        "distinctBandPadTop": [
+          64,
+          88
+        ],
+        "surfacePalette": [
+          "rgb(241, 233, 216)",
+          "rgb(230, 220, 200)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 1
+      }
+    },
+    {
+      "path": "/blogs/news/project-zero-impact-case-study",
+      "diffs": [
+        "band-h2: 29/700 vs Impact 95/800"
+      ],
+      "profile": {
+        "roles": {
+          "eyebrow": {
+            "spec": "14/700",
+            "n": 2,
+            "variants": 1
+          },
+          "band-h2": {
+            "spec": "29/700",
+            "n": 9,
+            "variants": 2
+          },
+          "button": {
+            "spec": "15/700",
+            "n": 3,
+            "variants": 1
+          },
+          "card-title": {
+            "spec": "18/800",
+            "n": 3,
+            "variants": 1
+          }
+        },
+        "bandCount": 2,
+        "distinctBandPadTop": [
+          88
+        ],
+        "surfacePalette": [
+          "rgb(230, 220, 200)",
+          "rgb(241, 233, 216)"
+        ],
+        "wrap": {
+          "maxWidth": "1200px",
+          "padLeft": 32,
+          "measureModifier": false
+        },
+        "borderedBoxes": 5
+      }
+    }
+  ]
+}
