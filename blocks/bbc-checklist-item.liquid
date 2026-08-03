@@ -1,0 +1,43 @@
+{%- comment -%}
+  BBC theme block — Checklist item (label + included?). One line of an in-kit /
+  not-in-kit list (the bbc-product-2026 "In the kit" / "You'll add" idea, broken
+  out as repeatable ticked/crossed rows). `included` = tick (forest); unticked =
+  cross (muted). Icons come from the bundled bbc-icons snippet. Render inside a
+  <ul class="bbc-checklist"> — the container/group supplies the heading + wrapper.
+{%- endcomment -%}
+<div class="bbc-checklist__item{% unless block.settings.included %} is-excluded{% endunless %}" {{ block.shopify_attributes }}>
+  <span class="bbc-checklist__ic" aria-hidden="true">
+    {%- if block.settings.included -%}
+      {% render 'bbc-icons', icon: 'check', size: 18 %}
+    {%- else -%}
+      {% render 'bbc-icons', icon: 'close', size: 18 %}
+    {%- endif -%}
+  </span>
+  <span class="bbc-checklist__t">{{ block.settings.label }}</span>
+</div>
+
+{% stylesheet %}
+  .bbc-rd ul.bbc-checklist{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+  .bbc-rd .bbc-checklist__item{ display:flex; align-items:flex-start; gap:10px; font-size:15px; line-height:1.5; color:#2a332f; }
+  .bbc-rd .bbc-checklist__ic{ flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; margin-top:1px; background:rgba(7,62,39,.08); color:var(--forest,#073e27); }
+  .bbc-rd .bbc-checklist__ic svg{ width:14px; height:14px; }
+  /* excluded rows: AAA-dark text (#38453e ≈7.7:1 on the bone card) + strike-through so "not included"
+     is conveyed by more than colour. Was #8a968d = 2.26:1 (unreadable). */
+  .bbc-rd .bbc-checklist__item.is-excluded{ color:#38453e; }
+  .bbc-rd .bbc-checklist__item.is-excluded .bbc-checklist__t{ text-decoration:line-through; text-decoration-color:rgba(56,69,62,.45); }
+  .bbc-rd .bbc-checklist__item.is-excluded .bbc-checklist__ic{ background:rgba(7,62,39,.05); color:#38453e; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Checklist item",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Heat-treated Moso bamboo tubes" },
+    { "type": "checkbox", "id": "included", "label": "Included (tick) — untick for a cross", "default": true }
+  ],
+  "presets": [
+    { "name": "BBC Checklist item" }
+  ]
+}
+{% endschema %}

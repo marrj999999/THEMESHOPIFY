@@ -1,0 +1,52 @@
+{%- comment -%}
+  BBC theme block — Material comparison ROW. One <tr> in the properties table.
+  The container section (bbc-comparison) renders the <table>, the <thead> header
+  row and the .wbx-tablewrap wrapper; this block emits a single body row.
+  Reproduces the bbc-why-bamboo-2026 markup: first cell is a <th scope="row">
+  (the property name), the Bamboo cell carries class "b" and (when highlighted)
+  a lime-tinted background. The .wbx-table th/td classes are re-declared in this
+  block's scoped stylesheet so the row is self-contained in this theme.
+{%- endcomment -%}
+<tr class="{% if block.settings.highlight %}is-hl{% endif %}" {{ block.shopify_attributes }}>
+  <th scope="row">{{ block.settings.material }}</th>
+  <td>{{ block.settings.density }}</td>
+  <td>{{ block.settings.tensile }}</td>
+  <td>{{ block.settings.stiffness }}</td>
+  <td>{{ block.settings.damping }}</td>
+  {%- if block.settings.embodied_carbon != blank -%}<td>{{ block.settings.embodied_carbon }}</td>{%- endif -%}
+  <td>{{ block.settings.buildable }}</td>
+</tr>
+
+{% stylesheet %}
+  .bbc-rd .wbx-table th,
+  .bbc-rd .wbx-table td{ text-align:right; padding:12px 14px; border-bottom:1px solid rgba(7,62,39,.14); font-size:13.5px; white-space:nowrap; }
+  .bbc-rd .wbx-table :is(th,td):first-child{ text-align:left; white-space:normal; }
+  .bbc-rd .wbx-table tbody th{ font-weight:700; color:var(--forest,#073e27); }
+  /* highlighted (Bamboo) row — lime-tinted, forest text, matches the .wbx is-hl bar */
+  .bbc-rd .wbx-table tr.is-hl th,
+  .bbc-rd .wbx-table tr.is-hl td{ background:rgba(255,169,0,.08); color:var(--forest,#073e27); font-weight:800; }
+  .bbc-rd .wbx-table tr.is-hl th[scope="row"]{ box-shadow:inset 4px 0 0 var(--lime,#D4FD62); }
+  @media(max-width:600px){
+    .bbc-rd .wbx-table th, .bbc-rd .wbx-table td{ padding:10px 11px; font-size:12.5px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Comparison row",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "material", "label": "Material (row label)", "default": "Steel (4130 / 853)" },
+    { "type": "text", "id": "density", "label": "Density (g/cm3)", "default": "7.8" },
+    { "type": "text", "id": "tensile", "label": "Tensile strength (MPa)", "default": "560-1,400" },
+    { "type": "text", "id": "stiffness", "label": "Stiffness — modulus (GPa)", "default": "205" },
+    { "type": "text", "id": "damping", "label": "Vibration damping", "default": "Very low" },
+    { "type": "text", "id": "embodied_carbon", "label": "Embodied carbon (kg CO2e/kg)", "default": "0.8-2.8" },
+    { "type": "text", "id": "buildable", "label": "Build it yourself?", "default": "Brazing / welding" },
+    { "type": "checkbox", "id": "highlight", "label": "Highlight (lime) — the Bamboo row", "default": false }
+  ],
+  "presets": [
+    { "name": "BBC Comparison row" }
+  ]
+}
+{% endschema %}

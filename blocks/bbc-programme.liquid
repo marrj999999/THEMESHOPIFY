@@ -1,0 +1,48 @@
+{%- comment -%}
+  BBC theme block — Programme advert card (NON-clickable). From the monolith
+  `programme` block in sections/bbc-education-2026.liquid. Reuses .rd-card.rd-stamp
+  (+ .rd-card-free) / .rd-flex.rd-between / .rd-frame-label.rd-c-subtle / .rd-tag(.rd-lime)
+  / .rd-fs-21px. Tag logic matches the monolith: "In development" if status=coming,
+  else a lime "Free" tag if free, else the paid value tag (no number). Pure advert —
+  no link. Sits inside a grid container (.bbc-rd .rd-grid).
+{%- endcomment -%}
+<div class="rd-card rd-stamp{% if block.settings.free %} rd-card-free{% endif %}" {{ block.shopify_attributes }}>
+  <div class="rd-body">
+    <div class="rd-flex rd-between rd-gap-24">
+      {%- if block.settings.tier != blank -%}<span class="rd-frame-label rd-c-subtle">{{ block.settings.tier }}</span>{%- endif -%}
+      {%- if block.settings.status == 'coming' -%}
+        <span class="rd-tag">In development</span>
+      {%- elsif block.settings.free -%}
+        <span class="rd-tag rd-lime">Free</span>
+      {%- else -%}
+        <span class="rd-tag">{{ block.settings.price_tag | default: 'Request a quote' }}</span>
+      {%- endif -%}
+    </div>
+    {%- if block.settings.title != blank -%}<h3 class="rd-fs-21px rd-mt2">{{ block.settings.title }}</h3>{%- endif -%}
+    {%- if block.settings.detail != blank -%}<div class="rd-c-subtle rd-mt-10px">{{ block.settings.detail }}</div>{%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "BBC Programme",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "tier", "label": "Tier label", "default": "Foundation" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Acoustic Engineering & Sustainable Product Design" },
+    { "type": "richtext", "id": "detail", "label": "Detail", "default": "<p>A working bamboo speaker, built by hand. A complete STEM project in 2-3 hours, curriculum-mapped and OCN-accredited. Ages 11-16, KS3-KS4.</p>" },
+    { "type": "checkbox", "id": "free", "label": "Free programme (shows a lime Free tag)", "default": false },
+    { "type": "text", "id": "price_tag", "label": "Paid value tag (no number)", "default": "Request a quote" },
+    {
+      "type": "select", "id": "status", "label": "Status", "default": "available",
+      "options": [
+        { "value": "available", "label": "Available now" },
+        { "value": "coming", "label": "In development" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "BBC Programme" }
+  ]
+}
+{% endschema %}

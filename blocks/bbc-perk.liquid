@@ -1,0 +1,49 @@
+{%- comment -%}
+  BBC theme block — Buy-box perk (text + optional icon). From the bbc-product-2026
+  `perk` block — a single <li> inside the buy box .rd-list. The monolith perk was
+  text-only; an optional icon (from the bundled bbc-icons snippet) may lead the line.
+  Icon values are valid bbc-icons names. Render inside a <ul class="rd-list">.
+{%- endcomment -%}
+<li class="bbc-perk{% if block.settings.icon != blank and block.settings.icon != 'none' %} bbc-perk--icon{% endif %}" {{ block.shopify_attributes }}>
+  {%- if block.settings.icon != blank and block.settings.icon != 'none' -%}
+    <span class="bbc-perk__ic" aria-hidden="true">{% render 'bbc-icons', icon: block.settings.icon, size: 18 %}</span>
+  {%- endif -%}
+  <span class="bbc-perk__t">{{ block.settings.text }}</span>
+</li>
+
+{% stylesheet %}
+  .bbc-rd li.bbc-perk--icon{ display:flex; align-items:flex-start; gap:9px; }
+  .bbc-rd .bbc-perk__ic{ flex-shrink:0; color:var(--forest,#073e27); display:inline-flex; margin-top:2px; }
+  .bbc-rd .bbc-perk__ic svg{ width:18px; height:18px; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Buy-box perk",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "text", "label": "Perk text", "default": "No power tools required — just basic hand tools" },
+    {
+      "type": "select", "id": "icon", "label": "Icon (optional)", "default": "none",
+      "options": [
+        { "value": "none", "label": "No icon" },
+        { "value": "check", "label": "Check" },
+        { "value": "check-circle", "label": "Check circle" },
+        { "value": "tools", "label": "Tools" },
+        { "value": "leaf", "label": "Leaf" },
+        { "value": "shield", "label": "Shield" },
+        { "value": "bike", "label": "Bike" },
+        { "value": "package", "label": "Package" },
+        { "value": "video", "label": "Video" },
+        { "value": "users", "label": "Users / community" },
+        { "value": "award", "label": "Award" },
+        { "value": "clock", "label": "Clock" },
+        { "value": "truck", "label": "Truck / shipping" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "BBC Buy-box perk" }
+  ]
+}
+{% endschema %}

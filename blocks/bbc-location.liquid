@@ -1,0 +1,49 @@
+{%- comment -%}
+  BBC theme block — Location card. From the monolith `location` block in
+  sections/bbc-workshops-2026.liquid. Reuses .rd-card / .rd-ph / .rd-body /
+  .rd-fs-21px and a lime .rd-btn. Image fallback = bundled asset via asset_img_url.
+  Sits inside a grid container (.bbc-rd .rd-grid).
+{%- endcomment -%}
+{%- liquid
+  assign url = block.settings.link_url | default: '/pages/contact-us'
+  assign fallback = block.settings.fallback | default: 'bbc-rd-bike-field.jpg'
+-%}
+<div class="rd-card" {{ block.shopify_attributes }}>
+  <div class="rd-ph">
+    {%- if block.settings.image != blank -%}
+      {{ block.settings.image
+        | image_url: width: 900
+        | image_tag:
+          widths: '400,600,900,1200',
+          sizes: '(max-width:749px) 92vw, 33vw',
+          alt: block.settings.image_alt,
+          loading: 'lazy' }}
+    {%- else -%}
+      <img src="{{ fallback | asset_img_url: '900x' }}" srcset="{{ fallback | asset_img_url: '400x' }} 400w, {{ fallback | asset_img_url: '600x' }} 600w, {{ fallback | asset_img_url: '900x' }} 900w, {{ fallback | asset_img_url: '1400x' }} 1400w" sizes="(max-width:749px) 92vw, 33vw" alt="{{ block.settings.image_alt | default: 'A bamboo bike built at a BBC workshop' | escape }}" width="1300" height="975" loading="lazy">
+    {%- endif -%}
+  </div>
+  <div class="rd-body">
+    {%- if block.settings.title != blank -%}<h3 class="rd-fs-21px">{{ block.settings.title }}</h3>{%- endif -%}
+    {%- if block.settings.body != blank -%}{{ block.settings.body }}{%- endif -%}
+    {%- if block.settings.link_label != blank -%}<a class="rd-btn rd-lime rd-mt3" href="{{ url }}">{{ block.settings.link_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "BBC Location",
+  "tag": null,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "fallback", "label": "Fallback asset (if no photo picked)", "default": "bbc-rd-bike-field.jpg" },
+    { "type": "text", "id": "image_alt", "label": "Photo alt text", "default": "A bamboo bike built at a BBC workshop" },
+    { "type": "text", "id": "title", "label": "Title", "default": "London E8" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Our home workshop in Hackney. Weekends and weekdays, year-round.</p>" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Book London" },
+    { "type": "url", "id": "link_url", "label": "Link (defaults to the contact page)" }
+  ],
+  "presets": [
+    { "name": "BBC Location" }
+  ]
+}
+{% endschema %}

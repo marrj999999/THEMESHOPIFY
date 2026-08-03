@@ -1,0 +1,45 @@
+{%- comment -%}
+  BBC theme block — Image (image_picker + alt + optional caption).
+  Falls back to the bundled asset the monolith used (bbc-rd-bike-field.jpg) when no image picked.
+  Sits inside a .bbc-rd container.
+{%- endcomment -%}
+<figure class="bbc-rd-image" {{ block.shopify_attributes }}>
+  <div class="rd-ph{% if block.settings.ratio == '4-3' %} rd-ar-43{% endif %}">
+    {%- if block.settings.image != blank -%}
+      {{ block.settings.image
+        | image_url: width: 1400
+        | image_tag:
+          widths: '400,600,900,1400',
+          sizes: '(max-width:749px) 92vw, 33vw',
+          alt: block.settings.image_alt,
+          loading: 'lazy' }}
+    {%- else -%}
+      <img src="{{ 'bbc-rd-bike-field.jpg' | asset_img_url: '900x' }}" srcset="{{ 'bbc-rd-bike-field.jpg' | asset_img_url: '400x' }} 400w, {{ 'bbc-rd-bike-field.jpg' | asset_img_url: '600x' }} 600w, {{ 'bbc-rd-bike-field.jpg' | asset_img_url: '900x' }} 900w, {{ 'bbc-rd-bike-field.jpg' | asset_img_url: '1400x' }} 1400w" sizes="(max-width:749px) 92vw, 33vw" alt="{{ block.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="1200" height="900" loading="lazy">
+    {%- endif -%}
+  </div>
+  {%- if block.settings.caption != blank -%}
+    <figcaption class="rd-src rd-mt1">{{ block.settings.caption }}</figcaption>
+  {%- endif -%}
+</figure>
+
+{% schema %}
+{
+  "name": "BBC Image",
+  "tag": null,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "A hand-built bamboo bicycle" },
+    { "type": "text", "id": "caption", "label": "Caption (optional)" },
+    {
+      "type": "select", "id": "ratio", "label": "Aspect ratio", "default": "16-10",
+      "options": [
+        { "value": "16-10", "label": "16:10" },
+        { "value": "4-3", "label": "4:3" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "BBC Image" }
+  ]
+}
+{% endschema %}

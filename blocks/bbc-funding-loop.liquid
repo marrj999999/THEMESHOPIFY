@@ -1,0 +1,27 @@
+{%- comment -%}
+  BBC theme block — Funding-loop step (big text + small text). From the monolith FUNDING LOOP
+  region: each step is <div class="rd-step"><div class="rd-big">…</div><div class="rd-sm">…</div></div>.
+  Reuses .rd-step / .rd-big / .rd-sm from bbc-redesign-2026.css. The connector arrows (.rd-arr)
+  and the loop grid (.rd-loop) live on the host section (sections/bbc-loop.liquid), which inserts
+  an arrow between each pair of steps to match the monolith's step / arrow / step / arrow / step grid.
+  Reusable: also used on Workshops / Our Story per the brief.
+  Sits inside a .bbc-rd .rd-loop container.
+{%- endcomment -%}
+<div class="rd-step" {{ block.shopify_attributes }}>
+  {%- if block.settings.big != blank -%}<div class="rd-big">{{ block.settings.big }}</div>{%- endif -%}
+  {%- if block.settings.small != blank -%}<div class="rd-sm">{{ block.settings.small }}</div>{%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "BBC Funding-loop step",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "big", "label": "Big text", "default": "You build" },
+    { "type": "text", "id": "small", "label": "Small text", "default": "a bamboo bike · from £375" }
+  ],
+  "presets": [
+    { "name": "BBC Funding-loop step" }
+  ]
+}
+{% endschema %}

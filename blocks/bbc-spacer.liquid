@@ -1,0 +1,22 @@
+{%- comment -%}
+  BBC theme block — Spacer. Adjustable vertical space. Self-contained.
+{%- endcomment -%}
+<div class="bbc-rd-spacer" style="--bbc-spacer-h:{{ block.settings.height }}px;height:{{ block.settings.height }}px" {{ block.shopify_attributes }}></div>
+
+{% stylesheet %}
+  .bbc-rd-spacer{ width:100%; }
+  @media(max-width:749px){ .bbc-rd-spacer{ height:max(16px, calc(var(--bbc-spacer-h, 32px) * 0.6)) !important; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Spacer",
+  "tag": null,
+  "settings": [
+    { "type": "range", "id": "height", "label": "Height", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 }
+  ],
+  "presets": [
+    { "name": "BBC Spacer" }
+  ]
+}
+{% endschema %}

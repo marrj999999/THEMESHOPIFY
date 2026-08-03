@@ -1,0 +1,63 @@
+{%- comment -%}
+  BBC theme block — Timeline milestone. From the monolith `milestone` block in
+  sections/bbc-about-2026.liquid. Reuses the vertical-timeline markup .rd-tl (+ .rd-hot
+  to highlight the year) / .rd-yr. The spec adds an optional photo, shown inside the
+  content column (the monolith milestone has none) via a small scoped style.
+  Image fallback = bundled asset via asset_img_url. MUST sit inside the
+  .rd-timeline rail rendered by sections/bbc-timeline.liquid.
+{%- endcomment -%}
+{%- liquid
+  assign fallback = block.settings.fallback | default: 'bbc-rd-workshop.jpg'
+  if block.settings.hot
+    assign tl_class = 'rd-tl rd-hot'
+  else
+    assign tl_class = 'rd-tl'
+  endif
+-%}
+<div class="{{ tl_class }}" {{ block.shopify_attributes }}>
+  <div class="rd-yr">{{ block.settings.year }}</div>
+  <div>
+    {%- if block.settings.title != blank -%}<h3>{{ block.settings.title }}</h3>{%- endif -%}
+    {%- if block.settings.body != blank -%}{{ block.settings.body }}{%- endif -%}
+    {%- if block.settings.image != blank -%}
+      <div class="rd-tl-ph rd-mt2">
+        {{ block.settings.image
+          | image_url: width: 800
+          | image_tag:
+            widths: '400,600,800',
+            sizes: '(max-width:749px) 88vw, 40vw',
+            alt: block.settings.image_alt,
+            loading: 'lazy' }}
+      </div>
+    {%- elsif block.settings.show_fallback_image -%}
+      <div class="rd-tl-ph rd-mt2">
+        <img src="{{ fallback | asset_img_url: '800x' }}" srcset="{{ fallback | asset_img_url: '400x' }} 400w, {{ fallback | asset_img_url: '600x' }} 600w, {{ fallback | asset_img_url: '800x' }} 800w" sizes="(max-width:749px) 88vw, 40vw" alt="{{ block.settings.image_alt | default: 'A moment from the Bamboo Bicycle Club story' | escape }}" width="800" height="500" loading="lazy">
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .bbc-rd .rd-timeline .rd-tl .rd-tl-ph{ border-radius:12px; overflow:hidden; max-width:460px; }
+  .bbc-rd .rd-timeline .rd-tl .rd-tl-ph img{ display:block; width:100%; height:auto; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Milestone",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "year", "label": "Year", "default": "2012" },
+    { "type": "text", "id": "title", "label": "Title", "default": "A workshop in Hackney" },
+    { "type": "richtext", "id": "body", "label": "Description", "default": "<p>James and Ian open the UK's first bamboo bike workshop. Within months, hundreds of people are building their own frames.</p>" },
+    { "type": "image_picker", "id": "image", "label": "Photo (optional)" },
+    { "type": "checkbox", "id": "show_fallback_image", "label": "Show a placeholder photo when none is picked", "default": false },
+    { "type": "text", "id": "fallback", "label": "Fallback asset (if placeholder enabled)", "default": "bbc-rd-workshop.jpg" },
+    { "type": "text", "id": "image_alt", "label": "Photo alt text", "default": "A moment from the Bamboo Bicycle Club story" },
+    { "type": "checkbox", "id": "hot", "label": "Highlight this row (forest-green year)", "default": false }
+  ],
+  "presets": [
+    { "name": "BBC Milestone" }
+  ]
+}
+{% endschema %}

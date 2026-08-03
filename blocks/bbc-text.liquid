@@ -1,0 +1,33 @@
+{%- comment -%}
+  BBC theme block — Rich text body. Reuses .rd-lede for the BBC body scale.
+  Sits inside a .bbc-rd container.
+{%- endcomment -%}
+{%- liquid
+  assign lede = block.settings.lede
+-%}
+<div class="bbc-rd-text{% if block.settings.align == 'center' %} rd-center{% endif %}" {{ block.shopify_attributes }}>
+  {%- if block.settings.text != blank -%}
+    <div class="{% if lede %}rd-lede {% endif %}rd-maxw{% if block.settings.align == 'center' %} rd-mx-auto{% endif %}">{{ block.settings.text }}</div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "BBC Text",
+  "tag": null,
+  "settings": [
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Bamboo is a natural composite — grown, not manufactured. It earns its place four ways.</p>" },
+    { "type": "checkbox", "id": "lede", "label": "Use larger lede size", "default": true },
+    {
+      "type": "select", "id": "align", "label": "Alignment", "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centered" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "BBC Text" }
+  ]
+}
+{% endschema %}

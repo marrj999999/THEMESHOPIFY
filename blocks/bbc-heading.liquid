@@ -1,0 +1,65 @@
+{%- comment -%}
+  BBC theme block — Heading (eyebrow + heading + lede), reproducing the two homepage
+  header treatments from bbc-home-2026.liquid so spacing/parity is exact:
+    style = "center"  -> <div class="rd-center rd-cmp-20294"> (max 60ch, centered, 44px below)
+                          eyebrow + h2 + lede.rd-mt2   [the DOORS intro]
+    style = "row"     -> <div class="rd-flex rd-between rd-mb-36px"> (36px below) with the
+                          eyebrow+h2 on the left and an optional ghost action link on the right
+                          [the KITS / STORIES headers]
+    style = "plain"   -> bare heading, no enforced margin (generic use).
+  All classes (.rd-cmp-20294 / .rd-mb-36px / .rd-flex / .rd-between / .rd-eyebrow / .rd-lede /
+  .rd-btn.rd-ghost) come from bbc-redesign-2026.css. Sits inside a .bbc-rd container.
+{%- endcomment -%}
+{%- liquid
+  assign style = block.settings.style | default: 'plain'
+  assign on_dark = block.settings.on_dark
+-%}
+{%- if style == 'row' -%}
+  <div class="rd-flex rd-between rd-mb-36px" {{ block.shopify_attributes }}>
+    <div>
+      {%- if block.settings.eyebrow != blank -%}<span class="rd-eyebrow{% if on_dark %} rd-on-dark{% endif %}">{{ block.settings.eyebrow }}</span>{%- endif -%}
+      {%- if block.settings.heading != blank -%}<h2>{{ block.settings.heading }}</h2>{%- endif -%}
+    </div>
+    {%- if block.settings.action_label != blank -%}
+      <a class="rd-btn rd-ghost" href="{{ block.settings.action_url | default: '#' }}">{{ block.settings.action_label }}</a>
+    {%- endif -%}
+  </div>
+{%- elsif style == 'center' -%}
+  <div class="rd-center rd-cmp-20294" {{ block.shopify_attributes }}>
+    {%- if block.settings.eyebrow != blank -%}<span class="rd-eyebrow{% if on_dark %} rd-on-dark{% endif %}">{{ block.settings.eyebrow }}</span>{%- endif -%}
+    {%- if block.settings.heading != blank -%}<h2>{{ block.settings.heading }}</h2>{%- endif -%}
+    {%- if block.settings.lede != blank -%}<p class="rd-lede rd-mt2">{{ block.settings.lede | remove: '<p>' | remove: '</p>' }}</p>{%- endif -%}
+  </div>
+{%- else -%}
+  <div class="bbc-rd-heading" {{ block.shopify_attributes }}>
+    {%- if block.settings.eyebrow != blank -%}<span class="rd-eyebrow{% if on_dark %} rd-on-dark{% endif %}">{{ block.settings.eyebrow }}</span>{%- endif -%}
+    {%- if block.settings.heading != blank -%}<h2>{{ block.settings.heading }}</h2>{%- endif -%}
+    {%- if block.settings.lede != blank -%}<p class="rd-lede rd-mt2">{{ block.settings.lede | remove: '<p>' | remove: '</p>' }}</p>{%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "BBC Heading",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "However you've arrived" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "One club, many ways in." },
+    { "type": "richtext", "id": "lede", "label": "Lede (centered & plain styles only)" },
+    {
+      "type": "select", "id": "style", "label": "Header style", "default": "plain",
+      "options": [
+        { "value": "plain", "label": "Plain (no enforced spacing)" },
+        { "value": "center", "label": "Centered intro (60ch, 44px below) — Doors style" },
+        { "value": "row", "label": "Row + action link (Kits / Stories)" }
+      ]
+    },
+    { "type": "text", "id": "action_label", "label": "Action link label (row style only)" },
+    { "type": "url", "id": "action_url", "label": "Action link URL (row style only)" },
+    { "type": "checkbox", "id": "on_dark", "label": "On a dark background (lime eyebrow)", "default": false }
+  ],
+  "presets": [
+    { "name": "BBC Heading" }
+  ]
+}
+{% endschema %}

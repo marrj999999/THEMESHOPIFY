@@ -1,0 +1,68 @@
+{%- comment -%}
+  BBC theme block — Group. Nestable layout container that accepts @theme children.
+  Adapted from skeleton-theme/blocks/group.liquid, BBC-styled. Layout modes:
+    stack / row  -> flex; grid-2 / grid-3 / grid-4 -> reuse .rd-grid + .rd-g2/.rd-g3/.rd-g4
+  so nested cards inherit the exact homepage grid behaviour (and its responsive collapse).
+{%- endcomment -%}
+{%- liquid
+  assign layout = block.settings.layout | default: 'stack'
+  case layout
+    when 'grid-2'
+      assign cls = 'bbc-rd-group is-grid rd-grid rd-g2'
+    when 'grid-3'
+      assign cls = 'bbc-rd-group is-grid rd-grid rd-g3'
+    when 'grid-4'
+      assign cls = 'bbc-rd-group is-grid rd-grid rd-g4'
+    when 'row'
+      assign cls = 'bbc-rd-group is-row'
+    else
+      assign cls = 'bbc-rd-group is-stack'
+  endcase
+-%}
+<div
+  class="{{ cls }}"
+  style="--bbc-group-gap:{{ block.settings.gap }}px; --bbc-group-align:{{ block.settings.align }};"
+  {{ block.shopify_attributes }}
+>
+  {% content_for 'blocks' %}
+</div>
+
+{% stylesheet %}
+  .bbc-rd-group.is-stack{ display:flex; flex-direction:column; gap:var(--bbc-group-gap,24px); align-items:var(--bbc-group-align,stretch); }
+  .bbc-rd-group.is-row{ display:flex; flex-direction:row; flex-wrap:wrap; gap:var(--bbc-group-gap,24px); align-items:var(--bbc-group-align,center); }
+  .bbc-rd-group.is-grid{ gap:var(--bbc-group-gap,24px); }
+  @media(max-width:620px){ .bbc-rd-group.is-row{ flex-direction:column; align-items:stretch; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Group",
+  "tag": null,
+  "blocks": [{ "type": "@theme" }],
+  "settings": [
+    {
+      "type": "select", "id": "layout", "label": "Layout", "default": "stack",
+      "options": [
+        { "value": "stack", "label": "Stack (vertical)" },
+        { "value": "row", "label": "Row (horizontal)" },
+        { "value": "grid-2", "label": "Grid — 2 up" },
+        { "value": "grid-3", "label": "Grid — 3 up" },
+        { "value": "grid-4", "label": "Grid — 4 up" }
+      ]
+    },
+    { "type": "range", "id": "gap", "label": "Gap", "min": 0, "max": 64, "step": 2, "unit": "px", "default": 24 },
+    {
+      "type": "select", "id": "align", "label": "Cross-axis alignment", "default": "stretch",
+      "options": [
+        { "value": "stretch", "label": "Stretch" },
+        { "value": "flex-start", "label": "Start" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "End" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "BBC Group" }
+  ]
+}
+{% endschema %}

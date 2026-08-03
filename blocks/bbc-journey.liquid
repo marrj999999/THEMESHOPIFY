@@ -1,0 +1,76 @@
+{%- comment -%}
+  BBC theme block — Epic journey card. Re-homes the monolith `journey` block
+  (sections/bbc-epic-journeys.liquid) onto the 2026 design system: instead of the
+  legacy .bbc-epic-journeys__* gold-on-forest CSS, it reuses the shared rd-cscard
+  card family (a.rd-cscard / __media / __kind / __body / __foot / __inst / __more)
+  so it matches every other card in bbc-redesign-2026.css. Journey-specific bits —
+  the distance/route meta line, the rider quote, and the "featured" highlight — are
+  added in a small scoped {% stylesheet %}. Image fallback = bundled asset via
+  asset_img_url. Sits inside a grid container (.bbc-rd .rd-csgrid).
+{%- endcomment -%}
+{%- liquid
+  assign url = block.settings.link_url | default: '/blogs/club-news'
+  assign fallback = block.settings.fallback | default: 'bbc-rd-gal-redroad.jpg'
+  if block.settings.featured
+    assign card_class = 'rd-cscard rd-journey is-featured'
+  else
+    assign card_class = 'rd-cscard rd-journey'
+  endif
+-%}
+<a class="{{ card_class }}" href="{{ url }}" {{ block.shopify_attributes }}>
+  <div class="rd-cscard__media">
+    {%- if block.settings.image != blank -%}
+      {{ block.settings.image
+        | image_url: width: 900
+        | image_tag:
+          widths: '400,600,900,1200',
+          sizes: '(max-width:749px) 92vw, 33vw',
+          alt: block.settings.image_alt,
+          loading: 'lazy' }}
+    {%- else -%}
+      <img src="{{ fallback | asset_img_url: '600x' }}" srcset="{{ fallback | asset_img_url: '400x' }} 400w, {{ fallback | asset_img_url: '600x' }} 600w, {{ fallback | asset_img_url: '900x' }} 900w, {{ fallback | asset_img_url: '1200x' }} 1200w" sizes="(max-width:749px) 92vw, 33vw" alt="{{ block.settings.image_alt | default: 'A bamboo bike on an epic journey' | escape }}" width="600" height="375" loading="lazy">
+    {%- endif -%}
+    {%- if block.settings.distance != blank -%}<span class="rd-cscard__kind">{{ block.settings.distance }}</span>{%- endif -%}
+  </div>
+  <div class="rd-cscard__body">
+    {%- if block.settings.title != blank -%}<h3 class="rd-journey__title">{{ block.settings.title }}</h3>{%- endif -%}
+    {%- if block.settings.route != blank -%}<p class="rd-journey__route">{{ block.settings.route }}</p>{%- endif -%}
+    {%- if block.settings.description != blank -%}<div class="rd-cscard__ctx">{{ block.settings.description }}</div>{%- endif -%}
+    {%- if block.settings.quote != blank -%}<div class="rd-journey__quote">{{ block.settings.quote }}</div>{%- endif -%}
+    <div class="rd-cscard__foot">
+      {%- if block.settings.author != blank -%}<span class="rd-cscard__inst">{{ block.settings.author }}</span>{%- endif -%}
+      <span class="rd-cscard__more">Read the journey <span class="rd-arrow">&rarr;</span></span>
+    </div>
+  </div>
+</a>
+
+{% stylesheet %}
+  .bbc-rd .rd-journey.is-featured{ outline:3px solid var(--lime); outline-offset:-3px; }
+  .bbc-rd .rd-journey__title{ font-weight:800; font-size:18px; color:var(--forest); margin:0 0 4px; letter-spacing:-.01em; }
+  .bbc-rd .rd-journey__route{ font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:#38453e; margin:0 0 10px; }
+  .bbc-rd .rd-journey__quote{ margin:12px 0 0; padding-left:14px; border-left:3px solid var(--lime); font-style:italic; font-size:14.5px; line-height:1.5; color:#2a332f; }
+  .bbc-rd .rd-journey__quote p{ margin:0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Journey",
+  "tag": null,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "fallback", "label": "Fallback asset (if no photo picked)", "default": "bbc-rd-gal-redroad.jpg" },
+    { "type": "text", "id": "image_alt", "label": "Photo alt text", "default": "A bamboo bike on an epic journey" },
+    { "type": "text", "id": "distance", "label": "Distance tag", "default": "8,288 miles" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Colombia to Tierra del Fuego" },
+    { "type": "text", "id": "route", "label": "Route", "default": "The Andes · 6 months" },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Kate Rawles rode a BBC-built bamboo bike the length of South America for The Life Cycle.</p>" },
+    { "type": "richtext", "id": "quote", "label": "Rider quote (optional)", "default": "<p>Woody turned out to be the most reliable bike I've ever owned.</p>" },
+    { "type": "text", "id": "author", "label": "Author / rider", "default": "Kate Rawles" },
+    { "type": "url", "id": "link_url", "label": "Link" },
+    { "type": "checkbox", "id": "featured", "label": "Featured (lime outline)", "default": false }
+  ],
+  "presets": [
+    { "name": "BBC Journey" }
+  ]
+}
+{% endschema %}

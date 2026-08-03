@@ -1,0 +1,59 @@
+{%- comment -%}
+  BBC theme block — Press item (coverage card). Re-homes the monolith `press_item`
+  block (sections/bbc-press-wall.liquid) onto the 2026 design system: publication
+  eyebrow, headline, excerpt, and a footer with the date + an optional "Read" link.
+  Built on the shared .rd-card surface plus a small scoped {% stylesheet %} for the
+  press specifics and the "featured" lime offset shadow (the legacy
+  .bbc-press-card__* CSS is not revived). Sits inside a grid container
+  (.bbc-rd .rd-grid).
+{%- endcomment -%}
+{%- liquid
+  if block.settings.featured
+    assign card_class = 'rd-card rd-pressitem is-featured'
+  else
+    assign card_class = 'rd-card rd-pressitem'
+  endif
+-%}
+<article class="{{ card_class }}" {{ block.shopify_attributes }}>
+  <div class="rd-body rd-pressitem__body">
+    {%- if block.settings.publication != blank -%}<span class="rd-pressitem__pub">{{ block.settings.publication }}</span>{%- endif -%}
+    {%- if block.settings.title != blank -%}<h3 class="rd-pressitem__title">{{ block.settings.title }}</h3>{%- endif -%}
+    {%- if block.settings.excerpt != blank -%}<div class="rd-pressitem__excerpt">{{ block.settings.excerpt }}</div>{%- endif -%}
+    <div class="rd-pressitem__foot">
+      {%- if block.settings.date != blank -%}<time class="rd-pressitem__date">{{ block.settings.date }}</time>{%- endif -%}
+      {%- if block.settings.link_url != blank -%}<a class="rd-pressitem__link" href="{{ block.settings.link_url }}" target="_blank" rel="noopener">Read <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+    </div>
+  </div>
+</article>
+
+{% stylesheet %}
+  .bbc-rd .rd-pressitem.is-featured{ box-shadow:8px 8px 0 var(--lime); }
+  .bbc-rd .rd-pressitem .rd-pressitem__body{ display:flex; flex-direction:column; height:100%; }
+  .bbc-rd .rd-pressitem__pub{ font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:#0e5038; margin:0 0 10px; }
+  .bbc-rd .rd-pressitem__title{ font-weight:800; font-size:18px; line-height:1.3; color:var(--forest); margin:0 0 10px; letter-spacing:-.01em; }
+  .bbc-rd .rd-pressitem__excerpt{ font-size:14.5px; font-style:italic; line-height:1.55; color:#2a332f; flex:1; }
+  .bbc-rd .rd-pressitem__excerpt p{ margin:0; }
+  .bbc-rd .rd-pressitem__foot{ display:flex; justify-content:space-between; align-items:center; gap:14px;
+    margin-top:18px; padding-top:14px; border-top:1px solid rgba(7,62,39,.1); }
+  .bbc-rd .rd-pressitem__date{ font-size:13px; color:#38453e; }
+  .bbc-rd .rd-pressitem__link{ font-size:13px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--forest); text-decoration:none; }
+  .bbc-rd .rd-pressitem__link:hover{ color:#0e5038; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Press item",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "publication", "label": "Publication", "default": "Financial Times" },
+    { "type": "text", "id": "title", "label": "Article title", "default": "How Bamboo Bicycle Club is helping break the prison cycle" },
+    { "type": "richtext", "id": "excerpt", "label": "Excerpt / quote", "default": "<p>Taps into the extra affection people reserve for objects they put together themselves.</p>" },
+    { "type": "text", "id": "date", "label": "Date", "default": "September 2025" },
+    { "type": "url", "id": "link_url", "label": "Article link" },
+    { "type": "checkbox", "id": "featured", "label": "Featured (lime offset shadow)", "default": false }
+  ],
+  "presets": [
+    { "name": "BBC Press item" }
+  ]
+}
+{% endschema %}
