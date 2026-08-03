@@ -1,0 +1,54 @@
+{%- comment -%}
+  BBC Stat band SECTION — the homepage stats region.
+  Reproduces the monolith STATS markup: <section class="rd-pad-sm rd-paper"> > .rd-wrap > .rd-stats
+  hosting bbc-stat theme blocks. (.rd-stats is a 4-up grid in bbc-redesign-2026.css that collapses
+  to 2-up under 720px.) Background is selectable so the band can also be dark (lime numbers).
+{%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg = section.settings.background | default: 'paper'
+  if bg == 'dark'
+    assign bg_cls = 'rd-dark'
+  else
+    assign bg_cls = 'rd-paper'
+  endif
+-%}
+<div class="bbc-rd {{ bg_cls }}">
+  <section class="rd-pad-sm">
+    <div class="rd-wrap">
+      <div class="rd-stats">
+        {% content_for 'blocks' %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "BBC Stat band",
+  "tag": "section",
+  "class": "bbc-statband-wrap",
+  "blocks": [{ "type": "bbc-stat" }],
+  "settings": [
+    {
+      "type": "select", "id": "background", "label": "Background", "default": "paper",
+      "options": [
+        { "value": "paper", "label": "Paper (light)" },
+        { "value": "dark", "label": "Dark (lime numbers)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Stat band",
+      "blocks": [
+        { "type": "bbc-stat" },
+        { "type": "bbc-stat" },
+        { "type": "bbc-stat" },
+        { "type": "bbc-stat" }
+      ]
+    }
+  ]
+}
+{% endschema %}
