@@ -495,8 +495,14 @@
     </div>
   </section>
 
-  {%- comment -%} ---------- FUNDING LOOP ---------- {%- endcomment -%}
-  <section class="rd-dark rd-pad-sm">
+  {%- comment -%} ---------- FUNDING LOOP ----------
+    rd-steel, not rd-dark: the IMPACT FEATURE band directly above is dark, so the homepage ran two
+    dark bands back to back — PAGE-STANDARD S3. Steel rather than paper because the two bands
+    BELOW are both paper, and paper here would turn one repeat into a three-band run. Safe to
+    move: .rd-loop draws its borders with currentColor and its final step carries its own
+    lime-on-forest, so the component takes colour from whatever surface it sits on. (2026-08-04)
+  {%- endcomment -%}
+  <section class="rd-steel rd-pad-sm">
     <div class="rd-wrap">
       <div class="rd-flex rd-between rd-gap-24">
         <div>

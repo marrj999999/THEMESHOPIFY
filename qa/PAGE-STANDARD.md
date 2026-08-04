@@ -59,6 +59,36 @@ between Impact and Why Bamboo.
 
 ---
 
+## Site-wide, 2026-08-04 — all 66 pages, not the nine-page default
+
+Running `--all` for the first time changed the picture, and two of the changes were in the
+instrument rather than the estate.
+
+**The estate splits in two.** 28 pages are in the 2026 band system. The other 38 are legacy or
+simple templates — size-guide, the geometry pages, privacy-policy, most collections — which
+render their whole body inside one `.rd-pad` wrapper. They measure as one band with no eyebrow
+and score 0%, which produced "53 of 66 outside the standard": true arithmetic, false picture.
+`page-standard.mjs` now reports them separately and does not score them.
+
+**Of the 28 in the system, the kit PDPs were the single biggest inconsistency** — and all 10 were
+identical, because they share `sections/bbc-product-2026.liquid`. Its spec strip sat between two
+bone bands (a three-band flat run, the longest anywhere) and its reviews band sat directly under
+the dark video band. Spec strip → paper, reviews → steel: **repeats 5 → 2, adjacent darks 1 → 0,
+across ten pages from one file.**
+
+**S3 on the remaining pages is one recurring shape.** `/pages/schools`, `/pages/programmes`,
+`/pages/prisons` and `/pages/build-to-bond` all put a dark stat band immediately under the dark
+hero — the exact case the "Why the obvious fix is wrong" section below describes. Each needs a
+light breather band inserted, which is a content decision. The homepage was different (two
+mid-page dark bands) and is fixed: funding loop → steel, **repeats 2 → 1, adjacent darks 1 → 0.**
+
+**The homepage's S4 = 3 is not a defect.** It is the three-door signpost — *Book a build · Work
+with us · Support the mission* — which FORMULA §1 records as approved (James, 2026-07-13). The
+checker flags it because the three CTAs are loose rather than in cards; read this note, not the
+number.
+
+---
+
 ## Where the estate stands against it
 
 Measured across the nine 2026 pages, same run:
