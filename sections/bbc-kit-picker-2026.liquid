@@ -19,6 +19,7 @@
   {%- comment -%} ---------- QUICK GUIDE CARDS ---------- {%- endcomment -%}
   <section class="rd-pad-sm">
     <div class="rd-wrap">
+      {%- if section.settings.picks_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.picks_eyebrow }}</span>{%- endif -%}
       <div class="rd-grid rd-g3 rd-mt2">
         {%- for block in section.blocks -%}{%- if block.type == 'pick' -%}
           <a class="rd-reveal rd-card rd-stamp" href="{{ block.settings.url }}" {{ block.shopify_attributes }} style="text-decoration:none;">
@@ -57,6 +58,7 @@
   {%- comment -%} ---------- CTA ---------- {%- endcomment -%}
   <section class="rd-pad rd-dark rd-center">
     <div class="rd-wrap rd-mw-680px">
+      {%- if section.settings.cta_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.cta_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal">{{ section.settings.cta_title }}</h2>
       {%- if section.settings.cta_lede != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.cta_lede }}</p>{%- endif -%}
       <div class="rd-flex rd-mt3 rd-jc-center">
@@ -72,6 +74,18 @@
 {
   "name": "Which Kit 2026",
   "settings": [
+    {
+      "type": "text",
+      "id": "picks_eyebrow",
+      "label": "Kit grid eyebrow",
+      "default": "Choose your build"
+    },
+    {
+      "type": "text",
+      "id": "cta_eyebrow",
+      "label": "Kit-picker CTA eyebrow",
+      "default": "Talk to us"
+    },
     {
       "type": "header",
       "content": "Header"

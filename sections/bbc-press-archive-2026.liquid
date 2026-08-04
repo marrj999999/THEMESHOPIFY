@@ -55,6 +55,7 @@
   {%- if items.size > 0 -%}
   <section class="rd-pad">
     <div class="rd-wrap">
+      {%- if section.settings.list_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.list_eyebrow }}</span>{%- endif -%}
       {%- if section.settings.list_heading != blank -%}<h2 class="rd-reveal rd-mw-18ch">{{ section.settings.list_heading }}</h2>{%- endif -%}
       <div class="rd-presslist">
         {%- for block in items -%}
@@ -119,6 +120,7 @@
   {%- comment -%} ---------- CTA ---------- {%- endcomment -%}
   <section class="rd-pad rd-dark rd-center">
     <div class="rd-wrap rd-mw-680px">
+      {%- if section.settings.cta_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.cta_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal">{{ section.settings.cta_title | default: 'writing about bamboo, craft or rehabilitation?' }}</h2>
       {%- if section.settings.cta_lede != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.cta_lede }}</p>{%- endif -%}
       <div class="rd-flex rd-mt3 rd-jc-center"><a class="rd-btn rd-lime" href="{{ section.settings.cta_url | default: '/pages/contact-us' }}">{{ section.settings.cta_label | default: 'Get in touch' }} <span class="rd-arrow">&rarr;</span></a></div>
@@ -132,6 +134,18 @@
   "tag": "section",
   "class": "section bbc-press-archive-wrap",
   "settings": [
+    {
+      "type": "text",
+      "id": "list_eyebrow",
+      "label": "Archive list eyebrow",
+      "default": "The archive"
+    },
+    {
+      "type": "text",
+      "id": "cta_eyebrow",
+      "label": "Press CTA eyebrow",
+      "default": "For journalists"
+    },
     {
       "type": "text",
       "id": "crumb",
