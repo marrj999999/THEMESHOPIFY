@@ -59,6 +59,33 @@ between Impact and Why Bamboo.
 
 ---
 
+## Where it ended, 2026-08-04
+
+**22 of 28 in-system pages now conform. S3 is 0 across every page in the estate, and no page
+carries more surface repeats than Impact itself.**
+
+| | start of day | end |
+|---|---|---|
+| pages outside the standard | 19 of 28 | **6 of 28** |
+| adjacent dark bands, estate-wide | 5 pages | **0** |
+| pages with >2 surface repeats | 11 | **0** |
+| estate contrast findings | 1 (artefact) | **1 (same artefact)** |
+
+The six that remain, and why none of them is a styling bug:
+
+| page | flag | what it actually is |
+|---|---|---|
+| `/pages/build-to-bond` | S1 63% | two headingless strips + one card band |
+| `/pages/gallery` · `/pages/media-page` · `/pages/prisons` | S1 67–75% | headingless strips — a gallery grid, a press logo wall. An eyebrow on a strip is noise |
+| `/` | S4 3 | the approved three-door signpost (FORMULA §1, James 2026-07-13) |
+| `/pages/theory-of-change` | S4 3 | not yet reviewed — the one genuine open question |
+
+**The honest ceiling is not 100%.** Bands without a heading — spec strips, logo walls, gallery
+grids — should not carry an eyebrow, so several pages top out in the 60s–80s by design. Chasing
+those numbers would make the pages worse.
+
+---
+
 ## Site-wide, 2026-08-04 — all 66 pages, not the nine-page default
 
 Running `--all` for the first time changed the picture, and two of the changes were in the
