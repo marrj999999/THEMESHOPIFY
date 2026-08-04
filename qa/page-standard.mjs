@@ -57,7 +57,13 @@ function scan() {
       bg,
       padTop: px(getComputedStyle(x).paddingTop),
       eyebrow: !!x.querySelector('.rd-eyebrow'),
-      ctas: x.querySelectorAll('.rd-btn').length,
+      // S4 counts LOOSE CTAs only. A CTA inside its own card is part of that card, not a
+      // competing ask — FORMULA §1 already carves out "deliberate equal-doors card grids".
+      // Counting every .rd-btn flagged support-mission's funding ladder at 4, where each rung is
+      // a funding tier with its own button. The rule was wrong, not the page. (2026-08-04)
+      ctas: [...x.querySelectorAll('.rd-btn')].filter(btn =>
+        !btn.closest('.rd-card, .rd-cscard, article, .bbc-sup__rung, .rd-door, .rd-step')).length,
+      ctasTotal: x.querySelectorAll('.rd-btn').length,
       stat: [...x.querySelectorAll('.rd-num')].some(e => px(getComputedStyle(e).fontSize) >= 24),
       ghost: !!x.querySelector('.rd-ghostnum'),
     });

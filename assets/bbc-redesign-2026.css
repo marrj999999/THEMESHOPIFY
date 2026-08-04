@@ -85,6 +85,27 @@
 .bbc-rd .rd-dark h2,.bbc-rd .rd-dark h3{ color:var(--bone); }
 .bbc-rd .rd-paper{ background:var(--paper); }
 .bbc-rd .rd-steel{ background:#DEE6F0; }
+/* SURFACE CLASSES MUST ALSO WORK ON .bbc-rd ITSELF (2026-08-04).
+   Every surface rule above is a DESCENDANT selector, so it only matches when the class sits
+   INSIDE .bbc-rd. But sections/bbc-section.liquid — and every generic band built on it — renders
+   its root as `<div class="bbc-rd rd-paper">`, both classes on ONE element, where a descendant
+   selector cannot match. `.bbc-rd{background:var(--bone)}` therefore won, and **`paper` has never
+   rendered anywhere on the site**: every band set to "Paper (light)" in the theme editor came out
+   bone, visually identical to setting nothing at all.
+   Found while alternating /pages/why-bamboo's surfaces — six background settings were changed in
+   the template and the page still measured as an unbroken run of bone. That is also a large part
+   of why the estate reads as flat: one of the four canonical surfaces was silently missing.
+   These compound selectors carry the same specificity (0,2,0) as the descendant pair, and sit
+   after them, so they win only where the descendant form cannot apply. */
+.bbc-rd.rd-paper{ background:var(--paper); }
+.bbc-rd.rd-steel{ background:var(--steel); }
+.bbc-rd.rd-dark{ background:var(--forest); color:var(--bone); }
+/* var(--bone), not the #cfd8d2 the descendant rule uses: the ratchet correctly refused a fifth
+   ad-hoc "dimmed bone" literal (the estate already carries #cfd8d2, #cfe0d7 and #c9d8d0 for the
+   same job). Both rules are needed — without them `p{color:var(--bbc-text)}` and
+   `.bbc-rd h2{color:var(--ink)}` win over inheritance and put ink on forest. */
+.bbc-rd.rd-dark p{ color:var(--bone); }
+.bbc-rd.rd-dark h2,.bbc-rd.rd-dark h3{ color:var(--bone); }
 .bbc-rd .rd-center{ text-align:center; }
 
 /* hero */

@@ -65,7 +65,6 @@
   {%- comment -%} ---------- BAND 2 · THE PROBLEM ---------- {%- endcomment -%}
   <section class="rd-pad-sm">
     <div class="rd-wrap rd-mw-70ch">
-      {%- if section.settings.problem_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.problem_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal bbc-sup__sr">The problem we work on</h2>
       <p class="bbc-sup__problem">{{ section.settings.problem_body }}</p>
       {%- if section.settings.problem_stat != blank -%}
@@ -75,9 +74,8 @@
   </section>
 
   {%- comment -%} ---------- BAND 3 · THEORY OF CHANGE PILLARS ---------- {%- endcomment -%}
-  <section class="rd-pad rd-paper" id="how-it-works">
+  <section class="rd-pad" id="how-it-works">
     <div class="rd-wrap">
-      {%- if section.settings.toc_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.toc_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal">{{ section.settings.toc_title | default: 'one build. three things change.' }}</h2>
       <p class="rd-lede rd-mw-70ch">{{ section.settings.toc_lede }}</p>
       <div class="bbc-sup__pillars">
@@ -101,7 +99,6 @@
   {%- comment -%} ---------- BAND 4 · DATED NUMBERS ---------- {%- endcomment -%}
   <section class="rd-pad-sm rd-dark">
     <div class="rd-wrap">
-      {%- if section.settings.numbers_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.numbers_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal bbc-sup__sr">Our numbers</h2>
       <div class="bbc-sup__numbers">
         {%- comment -%} DEVICE C — dimension callouts, ported from the About page (2026-08-01).
@@ -127,7 +124,6 @@
   {%- if section.settings.maker_quote != blank -%}
   <section class="rd-pad">
     <div class="rd-wrap rd-mw-70ch">
-      {%- if section.settings.story_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.story_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal bbc-sup__sr">One Maker's story</h2>
       <figure class="bbc-sup__quote">
         <blockquote><p>&ldquo;{{ section.settings.maker_quote }}&rdquo;</p></blockquote>
@@ -141,9 +137,8 @@
   {%- endif -%}
 
   {%- comment -%} ---------- BAND 6 · WHERE THE MONEY GOES ---------- {%- endcomment -%}
-  <section class="rd-pad rd-paper bbc-sup__money">
+  <section class="rd-pad bbc-sup__money">
     <div class="rd-wrap">
-      {%- if section.settings.money_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.money_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal">{{ section.settings.money_title | default: 'where the money goes' }}</h2>
       <div class="bbc-sup__flow" role="group" aria-label="How Bamboo Bicycle Club is structured: the Ltd company gives {{ section.settings.flow_pledge | default: '10% of profits' }} to the CIC">
         <div class="bbc-sup__flow-box">
@@ -174,7 +169,6 @@
   {%- comment -%} ---------- BAND 7 · THE GIVING LADDER ---------- {%- endcomment -%}
   <section class="rd-pad rd-dark" id="{{ anchor_id }}">
     <div class="rd-wrap">
-      {%- if section.settings.ladder_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.ladder_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal">{{ section.settings.ladder_title | default: 'fund the work' }}</h2>
       <p class="rd-lede rd-mw-70ch">{{ section.settings.ladder_lede }}</p>
       <div class="bbc-sup__ladder">
@@ -197,7 +191,6 @@
   {%- comment -%} ---------- BAND 8 · TRUST STRIP ---------- {%- endcomment -%}
   <section class="rd-pad">
     <div class="rd-wrap">
-      {%- if section.settings.backers_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.backers_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal bbc-sup__sr">{{ section.settings.backers_label | default: 'Backing and coverage' }}</h2>
       {%- if section.settings.endorsement_quote != blank -%}
       <figure class="bbc-sup__endorsement">
@@ -221,9 +214,8 @@
   </section>
 
   {%- comment -%} ---------- BAND 9 · CLOSING ASK ---------- {%- endcomment -%}
-  <section class="rd-pad-sm rd-paper bbc-sup__close">
+  <section class="rd-pad-sm bbc-sup__close">
     <div class="rd-wrap">
-      {%- if section.settings.close_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.close_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal">{{ section.settings.close_title | default: 'start a conversation' }}</h2>
       <p class="rd-lede rd-mw-70ch">{{ section.settings.close_body }}</p>
       <div class="rd-cta-row">
@@ -357,14 +349,6 @@
     ]
   },
   "settings": [
-    { "type": "text", "id": "problem_eyebrow", "label": "Eyebrow — problem", "default": "the problem" },
-    { "type": "text", "id": "toc_eyebrow", "label": "Eyebrow — toc", "default": "how it works" },
-    { "type": "text", "id": "numbers_eyebrow", "label": "Eyebrow — numbers", "default": "the record" },
-    { "type": "text", "id": "story_eyebrow", "label": "Eyebrow — story", "default": "a maker’s story" },
-    { "type": "text", "id": "money_eyebrow", "label": "Eyebrow — money", "default": "the money" },
-    { "type": "text", "id": "ladder_eyebrow", "label": "Eyebrow — ladder", "default": "ways to fund it" },
-    { "type": "text", "id": "backers_eyebrow", "label": "Eyebrow — backers", "default": "who backs it" },
-    { "type": "text", "id": "close_eyebrow", "label": "Eyebrow — close", "default": "get in touch" },
     {
       "type": "header",
       "content": "Hero"

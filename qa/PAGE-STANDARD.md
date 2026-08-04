@@ -18,12 +18,20 @@ treated as the second exemplar.
 | S1 | **Every non-hero band opens with an eyebrow** | 100% | 100% |
 | S2 | **No two adjacent bands share a surface** | 2 repeats (the paper tail) | **0** |
 | S3 | **No two adjacent dark bands** — a light band always separates them | 0 | 0 |
-| S4 | **One CTA per band**, hero excluded (it may carry 2) | **1** | 2 |
+| S4 | **One LOOSE CTA per band**, hero excluded — a CTA inside its own card does not count | **1** | 2 |
 | S5 | **Surfaces come from four** — forest, paper, bone, steel — plus at most one lime moment | 4 | 4 |
 | S6 | **Band padding is 64px, 88px for the opening band** | 64 / 88 | 64 / 88 |
 
-S4 is the rule Impact holds most strictly: **every non-hero band on it carries exactly one CTA
-or none.** Three pages break it.
+S4 is the rule Impact holds most strictly: **every non-hero band on it carries exactly one loose
+CTA or none.**
+
+**The equal-doors carve-out (added 2026-08-04).** The first cut of S4 counted every `.rd-btn` in a
+band, which flagged `/pages/support-mission` at 4 — its funding ladder, where each rung is a
+funding tier with its own CTA. FORMULA §1 already carries exactly this exception: *"max one
+primary per band — EXCEPT deliberate equal-doors card grids (James 2026-07-13: get-involved
+3-CTA, homepage signpost)"*. A CTA inside its own card is part of that card, not a competing ask.
+S4 now counts only **loose** CTAs — those not inside a card, article or rung. The defect was in
+the rule, not the page.
 
 ### The dark-band rhythm
 

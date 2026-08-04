@@ -57,7 +57,7 @@
    PRIMARY .rd-btn.rd-lime · SECONDARY .rd-btn/.rd-ghost (fills on hover)
    ON-DARK .rd-btn.rd-on-dark · TERTIARY .rd-btn.rd-text
    SIZES .rd-btn-sm(40)/default(48)/.rd-btn-lg(56)/.rd-btn-block · STATES hover/focus/active/disabled */
-.bbc-rd .rd-btn{ display:inline-flex; align-items:center; justify-content:center; gap:9px; font-weight:700; font-size:16px; line-height:1; min-height:48px; padding:14px 26px; border-radius:8px; border:2.5px solid var(--ink); background:#fff; color:var(--ink); cursor:pointer; text-align:center; transition:transform .15s, box-shadow .15s, background .15s, color .15s; }
+.bbc-rd .rd-btn{ display:inline-flex; align-items:center; justify-content:center; gap:9px; font-weight:700; font-size:16px; line-height:1; min-height:48px; padding:14px 26px; border-radius:8px; border:2.5px solid var(--ink); background:#fff; color:var(--ink); cursor:pointer; text-align:center; transition:transform var(--mo-fast), box-shadow var(--mo-fast), background var(--mo-fast), color var(--mo-fast); }
 .bbc-rd .rd-btn:hover{ transform:translateY(-1px); background:var(--bone); }
 .bbc-rd .rd-btn:active{ transform:translateY(0); }
 .bbc-rd .rd-btn[disabled],.bbc-rd .rd-btn.rd-disabled{ opacity:.45; pointer-events:none; box-shadow:none; }
@@ -211,7 +211,7 @@
   .bbc-rd a.rd-cardlink:hover h3{ text-decoration:underline !important; text-underline-offset:3px; }
 }
 .bbc-rd .rd-card.rd-card-free{ background:#f3fbe3; box-shadow:5px 5px 0 var(--lime-700); }  /* education advert: the FREE Speaker card is the hero offer */
-.bbc-rd a.rd-lg-link{ text-decoration:none; cursor:pointer; transition:opacity .15s; }  /* education: clickable press wordmarks */
+.bbc-rd a.rd-lg-link{ text-decoration:none; cursor:pointer; transition:opacity var(--mo-fast); }  /* education: clickable press wordmarks */
 .bbc-rd a.rd-lg-link:hover,.bbc-rd a.rd-lg-link:focus-visible{ opacity:.6; text-decoration:underline; text-underline-offset:4px; }
 /* ===== Education case-study cards (redesign 2026-06-12): image-led, standout
    quote, institution wordmark/logo. One consistent structure for every card. ===== */
@@ -447,7 +447,7 @@
 }
 .bbc-rd a.rd-cscard:focus-visible{ outline:3px solid var(--forest); outline-offset:3px; }
 .bbc-rd .rd-cscard__media{ position:relative; aspect-ratio:16/10; overflow:clip; background:var(--forest); border-bottom:2.5px solid var(--ink); }
-.bbc-rd .rd-cscard__media img{ width:100%; height:100%; object-fit:cover; transition:transform .45s ease; }
+.bbc-rd .rd-cscard__media img{ width:100%; height:100%; object-fit:cover; transition:transform var(--mo-entrance) ease; }
 .bbc-rd .rd-cscard__kind{ position:absolute; top:13px; left:13px; background:var(--lime); color:var(--forest); border:1.5px solid var(--ink); font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; padding:5px 11px; border-radius:999px; }
 .bbc-rd .rd-cscard__body{ display:flex; flex-direction:column; padding:22px 22px 20px; flex:1 1 auto; }
 .bbc-rd .rd-cscard__quote{ position:relative; margin:0 0 12px; font-size:18.5px; line-height:1.36; font-weight:800; color:var(--ink); letter-spacing:-.012em; }
@@ -464,7 +464,7 @@
 .bbc-rd .rd-partnerlabel{ text-align:center; font-size:12.5px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--charcoal); opacity:.78; margin:0; }
 .bbc-rd .rd-partnerwall{ display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:14px 32px; margin:0 auto; max-width:1040px; }
 .bbc-rd .rd-partner{ font-weight:800; font-size:17px; color:var(--forest); letter-spacing:-.01em; opacity:.92; white-space:nowrap; }
-.bbc-rd a.rd-partner{ text-decoration:none !important; transition:opacity .15s; }
+.bbc-rd a.rd-partner{ text-decoration:none !important; transition:opacity var(--mo-fast); }
 .bbc-rd a.rd-partner:hover,.bbc-rd a.rd-partner:focus-visible{ opacity:.55; text-decoration:underline !important; text-underline-offset:4px; }
 /* "As taught at" institution logo grid (real logos in clean white cells) */
 .bbc-rd .rd-logogrid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; max-width:1020px; margin:0 auto; }
@@ -530,7 +530,7 @@
 
 /* press logo wall (typographic wordmarks) */
 .bbc-rd .rd-logobar{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:20px 34px; }
-.bbc-rd .rd-logobar .rd-lg{ display:inline-flex; align-items:center; color:#0a2533; line-height:1; opacity:.85; transition:opacity .2s; }
+.bbc-rd .rd-logobar .rd-lg{ display:inline-flex; align-items:center; color:#0a2533; line-height:1; opacity:.85; transition:opacity var(--mo-base); }
 .bbc-rd .rd-logobar .rd-lg:hover{ opacity:1; }
 .bbc-rd .rd-lg-ft{ background:#F7C9A3; color:#231f1c; font-family:Georgia,'Times New Roman',serif; font-weight:700; font-size:16px; letter-spacing:.01em; padding:7px 12px; border-radius:2px; }
 .bbc-rd .rd-lg-serif{ font-family:Georgia,'Times New Roman',serif; font-weight:700; font-size:21px; letter-spacing:-.01em; color:#0a2533; }
@@ -850,7 +850,7 @@
 /* hover transitions (effects gated below) */
 .bbc-rd .rd-door{ transition:transform .22s cubic-bezier(.2,.7,.2,1), box-shadow .22s; }
 .bbc-rd .rd-door img{ transition:transform .55s cubic-bezier(.2,.7,.2,1); }
-.bbc-rd a.rd-card{ transition:transform .2s, box-shadow .2s; }
+.bbc-rd a.rd-card{ transition:transform var(--mo-base), box-shadow var(--mo-base); }
 .bbc-rd .rd-card .rd-ph img{ transition:transform .55s cubic-bezier(.2,.7,.2,1); }
 .bbc-rd .rd-card.rd-stamp{ transition:transform .18s, box-shadow .18s; }
 
@@ -901,7 +901,7 @@
 .bbc-rd .rd-nav-cta:hover{ background:var(--forest-700); border-color:var(--forest-700); }
 .bbc-rd .rd-menu-btn{ display:none; margin-left:auto; height:44px; padding:0 14px; border:1.5px solid var(--border-strong); border-radius:9px; background:#fff; cursor:pointer; align-items:center; gap:9px; color:var(--forest); font:inherit; font-weight:800; font-size:14px; }
 .bbc-rd .rd-menu-btn .rd-bars{ display:flex; flex-direction:column; gap:5px; width:20px; }
-.bbc-rd .rd-menu-btn .rd-bars span{ width:20px; height:2.5px; background:var(--forest); border-radius:2px; transition:.2s; }
+.bbc-rd .rd-menu-btn .rd-bars span{ width:20px; height:2.5px; background:var(--forest); border-radius:2px; transition:var(--mo-base); }
 .bbc-rd .rd-menu-btn[aria-expanded="true"] .rd-bars span:nth-child(1){ transform:translateY(7.5px) rotate(45deg); }
 .bbc-rd .rd-menu-btn[aria-expanded="true"] .rd-bars span:nth-child(2){ opacity:0; }
 .bbc-rd .rd-menu-btn[aria-expanded="true"] .rd-bars span:nth-child(3){ transform:translateY(-7.5px) rotate(-45deg); }
@@ -995,7 +995,7 @@
 
 /* visible search (desktop sits in the nav row; mobile sits in the drawer) */
 .bbc-rd .rd-search-wrap{ position:relative; }
-.bbc-rd .rd-search{ display:flex; align-items:center; gap:7px; background:#fff; border:1.5px solid var(--border-strong); border-radius:9px; padding:7px 11px; width:150px; transition:width .22s ease, border-color .15s; }
+.bbc-rd .rd-search{ display:flex; align-items:center; gap:7px; background:#fff; border:1.5px solid var(--border-strong); border-radius:9px; padding:7px 11px; width:150px; transition:width .22s ease, border-color var(--mo-fast); }
 .bbc-rd .rd-search:focus-within{ width:210px; border-color:var(--forest); }
 .bbc-rd .rd-search svg{ width:16px; height:16px; flex:0 0 16px; color:var(--subtle); }
 .bbc-rd .rd-search input{ border:none; outline:none; background:transparent; font:inherit; font-size:14px; font-weight:600; width:100%; color:var(--ink); }
@@ -1250,7 +1250,7 @@
    Footer additions — social, newsletter, trust strip, policy links
    ============================================================ */
 .bbc-rd.rd-footer .rd-foot-social{ display:flex; gap:10px; margin-top:18px; }
-.bbc-rd.rd-footer .rd-foot-social a{ width:40px; height:40px; border:1.5px solid rgba(244,239,230,.28); border-radius:50%; display:inline-flex; align-items:center; justify-content:center; color:var(--bone); transition:background .15s,color .15s,border-color .15s; }
+.bbc-rd.rd-footer .rd-foot-social a{ width:40px; height:40px; border:1.5px solid rgba(244,239,230,.28); border-radius:50%; display:inline-flex; align-items:center; justify-content:center; color:var(--bone); transition:background var(--mo-fast),color var(--mo-fast),border-color var(--mo-fast); }
 .bbc-rd.rd-footer .rd-foot-social a:hover{ background:var(--lime); color:var(--forest); border-color:var(--lime); }
 .bbc-rd.rd-footer .rd-foot-social svg{ width:19px; height:19px; fill:currentColor; }
 .bbc-rd.rd-footer .rd-foot-news{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px 40px; margin-top:40px; padding-top:32px; border-top:1.5px solid rgba(244,239,230,.16); }
@@ -1494,7 +1494,7 @@
 .bbc-rd .rd-drop{
   transform-origin:top center;
   transform:translateX(-50%) translateY(8px) scale(.98);
-  transition:opacity .2s ease, visibility .2s, transform .26s cubic-bezier(.34,1.32,.5,1);
+  transition:opacity var(--mo-base) ease, visibility var(--mo-base), transform .26s cubic-bezier(.34,1.32,.5,1);
 }
 .bbc-rd .rd-has-drop:hover .rd-drop,
 .bbc-rd .rd-has-drop:focus-within .rd-drop,
@@ -1503,7 +1503,7 @@
 /* Dropdown items: lime accent bar grows on the left + a small slide-in.
    Items also stagger-fade as the menu opens. */
 .bbc-rd .rd-drop a{
-  position:relative; transition:background .15s ease, color .15s ease, padding-left .18s cubic-bezier(.4,0,.2,1);
+  position:relative; transition:background var(--mo-fast) ease, color var(--mo-fast) ease, padding-left .18s cubic-bezier(.4,0,.2,1);
 }
 .bbc-rd .rd-drop a::before{
   content:""; position:absolute; left:6px; top:50%; width:3px; height:0; border-radius:3px;
@@ -1530,7 +1530,7 @@
 /* Cart: lifts with the count badge giving a tiny spring pop. */
 .bbc-rd .rd-cart{ transition:transform .18s ease; }
 .bbc-rd .rd-cart:hover{ transform:translateY(-1.5px); }
-.bbc-rd .rd-cart .rd-cart-count{ transition:transform .2s cubic-bezier(.34,1.56,.64,1), background .18s ease; }
+.bbc-rd .rd-cart .rd-cart-count{ transition:transform var(--mo-base) cubic-bezier(.34,1.56,.64,1), background .18s ease; }
 .bbc-rd .rd-cart:hover .rd-cart-count{ transform:scale(1.12); background:var(--gold); }
 
 /* Caret rotates with a touch of spring (base rule handles the flip). */
@@ -1544,7 +1544,7 @@
 .bbc-rd.rd-header.rd-open .rd-mwrap > a:nth-of-type(n+5){ animation-delay:.12s; }
 
 /* Bottom tab bar: active/press feedback in the thumb zone. */
-.bbc-rd .rd-botbar a, .bbc-rd .rd-botbar button{ transition:transform .15s ease, color .15s ease; }
+.bbc-rd .rd-botbar a, .bbc-rd .rd-botbar button{ transition:transform var(--mo-fast) ease, color var(--mo-fast) ease; }
 .bbc-rd .rd-botbar a:active, .bbc-rd .rd-botbar button:active{ transform:scale(.92); }
 
 /* Respect reduced-motion: kill transforms/animation, keep states usable. */
