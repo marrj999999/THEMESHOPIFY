@@ -72,8 +72,9 @@ Measured across the nine 2026 pages, same run:
 | / (home) | 11 | 90% | 2 | 1 | **3** | — |
 | /pages/workshops | 12 | 82% | 1 | **0** | **3** | **light** |
 | /pages/programmes | 11 | 80% | 1 | 1 | 2 | — |
-| **/pages/why-bamboo** | 13 | **50%** | 2 | **0** | **1** | **light** |
+| **/pages/why-bamboo** | 13 | 83% | 2 | **0** | **1** | **light** |
 | **/pages/support-mission** | 10 | **100%** | **0** | **0** | **1** | — |
+| / (home) | 11 | **100%** | 2 | 1 | 3 | — |
 
 No off-palette surfaces remain anywhere (S5 clean) — the homepage cream band was the last one.
 
@@ -97,8 +98,19 @@ Its sequence now:
 forest(hero) → paper → steel → bone → bone → paper → steel → paper → forest → bone → bone → paper → forest
 ```
 
-**What is still genuinely wrong with why-bamboo** is S1 — eyebrows on half its bands — and the
-light stat band. Those are content decisions, not cascade bugs.
+**S1 was measured wrong, and this file published the wrong number.** The check tested only for
+`.rd-eyebrow`. `bbc-pillar` and `bbc-statement` render an eyebrow under their own component
+class — `.bbcpl-idx` is the "— 01 the science" rule+number+kicker line, `.bbcst-eyebrow` the
+statement equivalent. Four why-bamboo bands were scored as failures while visibly displaying an
+eyebrow; a screenshot of one is what exposed it. **why-bamboo is 83%, not 50%. Home is 100%,
+not 90%.** Fixed in `page-standard.mjs` on 2026-08-04.
+
+**What is still genuinely wrong with why-bamboo** is two bands with no eyebrow at all — its stat
+band (`bbc-stat-band` has no eyebrow setting) and its final CTA (the setting exists and is
+empty) — plus the light stat band. Those are content decisions, not cascade bugs.
+
+On every other measured axis why-bamboo now matches Impact: 2 repeats vs 2, 0 adjacent darks vs
+0, 1 loose CTA vs 1.
 
 ---
 

@@ -652,3 +652,34 @@ the element after `scrollIntoViewIfNeeded()` plus a settle wait. This is the thi
 scroll-position artefact has produced a false defect report (see the stuck-reveal false positive
 of 2026-08-03); the difference this time is that it was checked against the DOM before anything
 was "fixed".
+
+---
+
+## #43 — My own conformance check invented the gap it was measuring (2026-08-04)
+
+**Escape.** `page-standard.mjs` scored rule S1 ("every non-hero band opens with an eyebrow") by
+testing `querySelector('.rd-eyebrow')`. `bbc-pillar` and `bbc-statement` render an eyebrow under
+their own component class — `.bbcpl-idx` (the "— 01 the science" rule + number + kicker line) and
+`.bbcst-eyebrow`. Four bands on `/pages/why-bamboo` were scored as failures while displaying an
+eyebrow on screen.
+
+**What it cost.** `/pages/why-bamboo` was published as **S1 50%** in `PAGE-STANDARD.md` and
+`SITE-SYSTEM.md`. Its real figure is **83%**. Home was published at 90%; it is 100%. Worse, both
+documents used "opens only half its bands with an eyebrow" as evidence that the page's assembled
+architecture was the problem, and cited that as justification for migrating its content into a
+bespoke section. A false measurement was the load-bearing argument for a large piece of work.
+
+**How it was caught.** By accident, and only because of an unrelated task: an in-view screenshot
+taken to check something else clearly showed "— 01 the science" in a band the report called
+eyebrow-less. Nothing in the QA system would have found it — the check was self-consistent, ran
+clean, and produced a plausible number every time.
+
+**The generalisable rule, and it is the same one as #41 one level up.** #41 said: when measured
+output contradicts source that reads correctly, suspect the selector. This is that rule applied
+to *our own instruments*. A conformance check that hard-codes one class name is not measuring the
+design rule, it is measuring a naming convention — and a design system with per-component classes
+will fail it silently and forever.
+
+**Concretely:** any check asserting a *design* property must enumerate every class that satisfies
+it, and should be spot-checked against a rendering before its number is published anywhere. Two
+of the last three false conclusions in this project came from trusting a number over an image.

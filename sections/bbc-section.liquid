@@ -1,0 +1,134 @@
+{%- comment -%}
+  BBC generic container SECTION — hosts @theme blocks and renders {% content_for 'blocks' %}.
+  Reproduces the homepage region wrappers from bbc-home-2026.liquid:
+    background  -> .rd-paper / .rd-dark / .rd-steel / lime / none  (region backgrounds)
+    padding     -> .rd-pad / .rd-pad-sm (or custom px)
+    width       -> .rd-wrap (1200) container + optional narrower max
+    layout      -> stack | grid-2 | grid-3 | grid-4  (reuses .rd-grid + .rd-g2/3/4)
+  Loads bbc-redesign-2026.css once and wraps everything in .bbc-rd so the scoped classes apply.
+{%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg = section.settings.background | default: 'paper'
+  case bg
+    when 'dark'
+      assign bg_cls = 'rd-dark'
+    when 'steel'
+      assign bg_cls = 'rd-steel'
+    when 'lime'
+      assign bg_cls = 'bbc-bg-lime'
+    when 'none'
+      assign bg_cls = ''
+    else
+      assign bg_cls = 'rd-paper'
+  endcase
+
+  assign pad = section.settings.padding | default: 'pad'
+  case pad
+    when 'sm'
+      assign pad_cls = 'rd-pad-sm'
+    when 'none'
+      assign pad_cls = ''
+    else
+      assign pad_cls = 'rd-pad'
+  endcase
+
+  assign layout = section.settings.layout | default: 'stack'
+  case layout
+    when 'grid-2'
+      assign inner_cls = 'rd-grid rd-g2'
+    when 'grid-3'
+      assign inner_cls = 'rd-grid rd-g3'
+    when 'grid-4'
+      assign inner_cls = 'rd-grid rd-g4'
+    else
+      assign inner_cls = 'bbc-section-stack'
+  endcase
+
+  assign maxw = section.settings.max_width | default: 'container'
+  case maxw
+    when 'narrow'
+      assign maxw_cls = 'rd-mw-760px'
+    when 'medium'
+      assign maxw_cls = 'rd-mw-820px'
+    else
+      assign maxw_cls = ''
+  endcase
+-%}
+
+<div{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handle }}"{% endif %} class="bbc-rd {{ bg_cls }}{% if section.settings.center %} rd-center{% endif %}">
+  <section class="{{ pad_cls }}">
+    <div class="rd-wrap {{ maxw_cls }}">
+      <div class="{{ inner_cls }}" style="--bbc-stack-gap:{{ section.settings.item_gap }}px">
+        {% content_for 'blocks' %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% stylesheet %}
+  .bbc-rd.bbc-bg-lime{ background:var(--lime); }
+  /* Stack: gap is author-controlled (default 0) so a child heading's own bottom margin
+     (e.g. the Doors 44px / Kits 36px header) drives spacing for exact parity. */
+  .bbc-rd .bbc-section-stack{ display:flex; flex-direction:column; gap:var(--bbc-stack-gap,0px); }
+  .bbc-rd .rd-grid > .bbc-rd-heading{ grid-column:1 / -1; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Section",
+  "tag": "section",
+  "class": "bbc-section-wrap",
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "settings": [
+    {
+      "type": "select", "id": "background", "label": "Background", "default": "paper",
+      "options": [
+        { "value": "paper", "label": "Paper (light)" },
+        { "value": "dark", "label": "Dark (forest green)" },
+        { "value": "steel", "label": "Steel (cool grey-blue)" },
+        { "value": "lime", "label": "Lime" },
+        { "value": "none", "label": "None / transparent" }
+      ]
+    },
+    {
+      "type": "select", "id": "padding", "label": "Vertical padding", "default": "pad",
+      "options": [
+        { "value": "pad", "label": "Standard (88px)" },
+        { "value": "sm", "label": "Small (64px)" },
+        { "value": "none", "label": "None" }
+      ]
+    },
+    {
+      "type": "select", "id": "max_width", "label": "Content max width", "default": "container",
+      "options": [
+        { "value": "container", "label": "Container (1200px)" },
+        { "value": "medium", "label": "Medium (820px)" },
+        { "value": "narrow", "label": "Narrow (760px)" }
+      ]
+    },
+    {
+      "type": "select", "id": "layout", "label": "Layout", "default": "stack",
+      "options": [
+        { "value": "stack", "label": "Stack (vertical)" },
+        { "value": "grid-2", "label": "Grid — 2 up" },
+        { "value": "grid-3", "label": "Grid — 3 up" },
+        { "value": "grid-4", "label": "Grid — 4 up" }
+      ]
+    },
+    { "type": "checkbox", "id": "center", "label": "Center-align contents", "default": false },
+    { "type": "range", "id": "item_gap", "label": "Gap between stacked blocks", "min": 0, "max": 64, "step": 4, "unit": "px", "default": 0 },
+    { "type": "text", "id": "anchor", "label": "Anchor id (lets #links scroll here, optional)" }
+  ],
+  "presets": [
+    {
+      "name": "BBC Section",
+      "blocks": [
+        { "type": "bbc-heading" },
+        { "type": "bbc-text" }
+      ]
+    }
+  ]
+}
+{% endschema %}

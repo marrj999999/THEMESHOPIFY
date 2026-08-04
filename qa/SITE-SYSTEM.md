@@ -48,9 +48,13 @@ eyebrow, while Impact opens all of them.
 > compound selectors took why-bamboo from 7 surface repeats to 2 and adjacent-darks to 0, with no
 > template or architecture change at all (`ESCAPES.md` #41).
 >
-> What remains genuinely attributable to the assembled architecture is the eyebrow gap (S1 50%)
-> and nobody owning the stat band. Those are real but much smaller than this file first claimed —
-> weigh the migration in item 2 below against that reduced scope, not the original one.
+> The eyebrow gap this file cited was also overstated. S1 tested only for `.rd-eyebrow`, and
+> `bbc-pillar` / `bbc-statement` render theirs under `.bbcpl-idx` / `.bbcst-eyebrow` — visibly
+> present, scored as missing. **Why Bamboo is S1 83%, not 50%.**
+>
+> What actually remains: two bands with no eyebrow (its stat band and its final CTA) and a light
+> stat band. On repeats, adjacent darks and CTA count it now equals Impact exactly. **Weigh the
+> migration in item 2 below against that — it is a much smaller case than this file first made.**
 
 ---
 

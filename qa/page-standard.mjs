@@ -56,7 +56,15 @@ function scan() {
     out.push({
       bg,
       padTop: px(getComputedStyle(x).paddingTop),
-      eyebrow: !!x.querySelector('.rd-eyebrow'),
+      // S1 asks "does this band OPEN with an eyebrow", which is a design question, not a
+      // class-name question. Checking only `.rd-eyebrow` scored every bbc-pillar and
+      // bbc-statement band as a failure — they render one, under their own component class
+      // (`.bbcpl-idx` is the "— 01 the science" rule+number+kicker line; `.bbcst-eyebrow` is
+      // the statement equivalent). That false negative put /pages/why-bamboo at 50% in
+      // PAGE-STANDARD.md and SITE-SYSTEM.md when its true figure is 83%, and the two docs then
+      // used the bogus gap as evidence for a content migration. Corrected 2026-08-04 after a
+      // screenshot showed the eyebrow this check said was missing.
+      eyebrow: !!x.querySelector('.rd-eyebrow, .bbcpl-idx, .bbcst-eyebrow'),
       // S4 counts LOOSE CTAs only. A CTA inside its own card is part of that card, not a
       // competing ask — FORMULA §1 already carves out "deliberate equal-doors card grids".
       // Counting every .rd-btn flagged support-mission's funding ladder at 4, where each rung is
