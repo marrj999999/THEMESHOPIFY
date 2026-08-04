@@ -1,6 +1,72 @@
 # QA Log — CUSTOMTHEME20262 redesign
 *Defects, fixes, verdicts. Newest first.*
 
+## 2026-08-03/04 — estate contrast to zero, the standard written down, and 22 sessions read back
+
+**Root cause of the two days, one sentence:** the estate was measurably fine on type and
+measurably undefined on everything else, so every session re-invented "consistent" — the fix was
+to write the standard down and make it checkable, not to restyle anything.
+
+**Defects fixed on DRAFT 196820238710 (live untouched):**
+- **`/pages/impact` rendered 32 nodes at 1.00:1** — foreground and background the *same* colour.
+  The featured Build-to-Bond card was a blank column beside its photo. `bbc-statement.css` strips
+  the card fill for the borderless grid while `[data-family="programme"]` keeps the bone text that
+  fill was for. A background and a text colour set in different files are one unit (ESCAPES #41).
+- **A bare `p{color:var(--bbc-text)}`** in bbc-foundation beat inheritance, so any `<p>` nested in
+  a light-on-dark container reset to ink. Hero lede on why-bamboo measured 1.34:1.
+- **Pillar photos were 1137px and 1329px inside a 780px column** — `aspect-ratio` on a stretched
+  grid item resolves *width from height*. The photo painted under the copy, which is why the
+  cascade and the pixel sampler disagreed: the defect was geometry, not colour. Also removed
+  387px of horizontal overflow.
+- `.rd-body` 14px on /pages/gallery vs 18px in 171 other instances (a figcaption wearing the body
+  class); `.rd-cta-row` declared `display:flex` only inside `.rd-hero`, so its 12+ other uses were
+  plain block divs — `bbc-teambuilding-2026:130` had been asking for `rd-jc-center` on a block
+  element, where justify-content is inert, so that centring had never once worked.
+- Homepage `.acc` band painted with `--bbc-cream` (#faf7f0), a fifth light surface used nowhere
+  else, and declared twice with different values so it depended on which sheet won.
+- `/account/login` and `/account/register` shipped **no meta description at all**.
+
+**Estate contrast: 77 sub-AA nodes → 1**, and that one is an instrument artefact (a fixed sticky
+bar sampled over a button; rgba(255,255,255,.96) over forest is *exactly* the rgb(245,247,247)
+reported). 15,428 nodes measured across 69 pages × 2 viewports.
+
+**Motion:** `--mo-base` moved .22s → .2s to match what the theme already did (.2s appeared 218
+times, .22s eight), then 68 durations migrated to tokens across the six worst files. Adherence
+2.7% → 21.5%. **Proven equivalent: 395,955 property values compared, 0 moved** — after first
+fixing `css-fingerprint.mjs`, which captured layout, colour and type but *not* timing and was
+therefore structurally blind to the change it was being asked to certify.
+
+**Blocks:** all 32 recovered into git (the repo tracked **one**); 8 of the 9 live blocks gained
+`.rd-reveal` — blocks previously did not animate at all, so a block snapped in while its band
+revealed. `bbc-case-study` left alone: it already reveals via `bbc-cscard`.
+
+**Gates corrected:** four audits (contrast-check, block-audit, layout-audit, sameness) hardcoded
+their evidence date and had been overwriting a fixed folder — each day's run destroying the
+previous day's. contrast-check now also skips text inside closed `<details>` and under fixed
+overlays (7 of 17 findings were unseeable text). Two motion assertions had been red for three days
+because they encoded the pre-2026-08-01 single-column flagship; corrected, and **proven still able
+to fail** (a planted 80px narrow strip and a planted 60px off-axis card are both caught).
+
+**Instruments that lied, and were caught before acting (seven):** block-audit's modifier trap;
+formula-conformance reporting 0/65 pages matching Impact (three separate faults); my own contrast
+probe's alpha-compositing bug; a blank fullPage screenshot; 31 "broken" images that were all HTTP
+200; two stale motion assertions; and a stuck-invisible reveal check that measured elements
+outside their `entry` range and reported 18 broken pages that were fine.
+
+**One regression I caused and fixed the same session:** a `.bbc-rd p{color:inherit}` rule at the
+same specificity as an existing correct rule replaced a good light colour with `inherit`, which
+resolved to legacy forest on current forest — 1.01:1 across **16 product pages**. Narrowed to
+`.rd-lede p`.
+
+**Written down for the first time:** `qa/PAGE-STANDARD.md` (six rules derived by measuring
+Impact), `qa/BLOCK-STANDARD.md` (blocks + motion), `qa/THEME-WORKFLOW.md` (the session loop),
+`qa/WHY-IT-CIRCLES.md` (22 sessions read back — the same four requests recur 6–8 times each, and
+13 regressions of which **nine are one pattern: a fix whose blast radius exceeded its intent**).
+
+**Awaiting James:** support-mission needs eyebrow copy on 8 bands; why-bamboo needs a light
+breather band before its stat band (structural + content). Both are content decisions, not effort.
+
+
 ## 2026-07-24 (evening) — CLAIMS ACCURACY + nine gates that were reporting success while doing nothing
 
 **Root cause of the day, one sentence:** a gate that cannot fail still shows a green tick, and
