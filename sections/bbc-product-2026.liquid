@@ -443,6 +443,7 @@
   {%- comment -%} ============== IN-KIT / NOT-IN-KIT (2 cards) ============== {%- endcomment -%}
   <section class="rd-section rd-pad">
     <div class="rd-wrap">
+      {%- if section.settings.inkit_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.inkit_eyebrow }}</span>{%- endif -%}
       <div class="rd-grid rd-g2">
         <div class="rd-card rd-stamp"><div class="rd-body">
           <h3 class="rd-fs-21px">{{ section.settings.inkit_heading }}</h3>
@@ -493,6 +494,7 @@
   {%- if section.settings.care_body != blank or section.settings.policy_text != blank -%}
     <section class="rd-section rd-pad-sm">
       <div class="rd-wrap">
+        {%- if section.settings.care_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.care_eyebrow }}</span>{%- endif -%}
         <div class="rd-grid rd-g2">
           {%- if section.settings.care_body != blank -%}
             <div class="rd-card rd-stamp"><div class="rd-body">
@@ -625,6 +627,7 @@
   {%- if related.size > 0 -%}
     <section class="rd-section rd-pad-sm rd-paper">
       <div class="rd-wrap">
+        {%- if section.settings.related_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.related_eyebrow }}</span>{%- endif -%}
         <div class="rd-flex rd-between rd-mb-28px">
           <h2 class="rd-fs-clamp26px3vw32">{{ section.settings.related_heading }}</h2>
           {%- if section.settings.related_cta_label != blank -%}
@@ -1313,6 +1316,24 @@
     {
       "type": "header",
       "content": "Related kits"
+    },
+    {
+      "type": "text",
+      "id": "inkit_eyebrow",
+      "label": "In-kit / not-in-kit eyebrow",
+      "default": "What's in the box"
+    },
+    {
+      "id": "care_eyebrow",
+      "label": "Care + policy eyebrow",
+      "type": "text",
+      "default": "After the build"
+    },
+    {
+      "id": "related_eyebrow",
+      "label": "Related kits eyebrow",
+      "type": "text",
+      "default": "Keep building"
     },
     {
       "type": "text",
