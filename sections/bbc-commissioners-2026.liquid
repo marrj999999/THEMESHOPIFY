@@ -50,17 +50,6 @@
     </div>
   </header>
 
-  {%- comment -%} ---------- FACTS STRIP ---------- {%- endcomment -%}
-  <section class="rd-pad-sm rd-dark">
-    <div class="rd-wrap">
-      <div class="rd-facts">
-        {%- for block in section.blocks -%}{%- if block.type == 'fact' -%}
-          <div class="rd-reveal rd-fact" {{ block.shopify_attributes }}><span class="rd-reveal rd-fact-n">{{ block.settings.number }}</span><span class="rd-reveal rd-fact-l">{{ block.settings.label }}</span></div>
-        {%- endif -%}{%- endfor -%}
-      </div>
-    </div>
-  </section>
-
   {%- comment -%} ---------- THE DELIVERY MODEL (numbered steps) ---------- {%- endcomment -%}
   <section class="rd-pad">
     <div class="rd-wrap rd-mw-820px">
@@ -75,6 +64,22 @@
           </li>
         {%- endif -%}{%- endfor -%}
       </ol>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- FACTS STRIP ----------
+    Moved below THE DELIVERY MODEL (was directly under the hero). Hero and facts strip are both
+    dark, so the page opened with two dark bands run together — PAGE-STANDARD S3. Impact's order
+    is hero -> light band -> dark stats, and that light band is what lets the stat band stay
+    dark, which is what keeps the figures lime. Reordered, not recoloured. (2026-08-04)
+  {%- endcomment -%}
+  <section class="rd-pad-sm rd-dark">
+    <div class="rd-wrap">
+      <div class="rd-facts">
+        {%- for block in section.blocks -%}{%- if block.type == 'fact' -%}
+          <div class="rd-reveal rd-fact" {{ block.shopify_attributes }}><span class="rd-reveal rd-fact-n">{{ block.settings.number }}</span><span class="rd-reveal rd-fact-l">{{ block.settings.label }}</span></div>
+        {%- endif -%}{%- endfor -%}
+      </div>
     </div>
   </section>
 

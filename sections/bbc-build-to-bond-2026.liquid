@@ -51,21 +51,6 @@
     </div>
   </header>
 
-  {%- comment -%} ---------- STATS (dark) ---------- {%- endcomment -%}
-  <section class="rd-pad-sm rd-dark">
-    <div class="rd-wrap">
-      <div class="rd-stats">
-        {%- for block in section.blocks -%}{%- if block.type == 'stat' -%}
-          <div class="rd-reveal rd-stat" {{ block.shopify_attributes }}>
-            <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
-            <div class="rd-lbl">{{ block.settings.label }}</div>
-            {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
-          </div>
-        {%- endif -%}{%- endfor -%}
-      </div>
-    </div>
-  </section>
-
   {%- comment -%} ---------- WHAT HAPPENS IN THE WORKSHOP ---------- {%- endcomment -%}
   <section class="rd-pad">
     <div class="rd-wrap rd-mw-820px">
@@ -116,6 +101,30 @@
     </div>
   </section>
   {%- endif -%}
+
+  {%- comment -%} ---------- STATS (dark) ----------
+    Moved below HOW IT WORKS (was directly under the hero). Hero and stats are both dark, so the
+    page opened with two dark bands run together — PAGE-STANDARD S3.
+
+    Moved TWO bands rather than one, unlike the other three pages: WHY IT WORKS is also dark, so
+    parking the stats directly after WHAT HAPPENS would only have relocated the collision. From
+    here the page alternates cleanly — hero dark, workshop light, why-it-works dark, how-it-works
+    light, stats dark, staff quote paper. Reordered, not recoloured, so nothing styled for a dark
+    surface has to change. (2026-08-04)
+  {%- endcomment -%}
+  <section class="rd-pad-sm rd-dark">
+    <div class="rd-wrap">
+      <div class="rd-stats">
+        {%- for block in section.blocks -%}{%- if block.type == 'stat' -%}
+          <div class="rd-reveal rd-stat" {{ block.shopify_attributes }}>
+            <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
+            <div class="rd-lbl">{{ block.settings.label }}</div>
+            {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
 
   {%- comment -%} ---------- STAFF QUOTE (paper, centred) ---------- {%- endcomment -%}
   {%- if section.settings.staff_quote != blank -%}

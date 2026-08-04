@@ -47,17 +47,6 @@
     </div>
   </header>
 
-  {%- comment -%} ---------- FACTS STRIP (shared proof) ---------- {%- endcomment -%}
-  <section class="rd-pad-sm rd-dark">
-    <div class="rd-wrap">
-      <div class="rd-facts">
-        {%- for block in section.blocks -%}{%- if block.type == 'fact' -%}
-          <div class="rd-fact" {{ block.shopify_attributes }}><span class="rd-fact-n bbc-counted">{{ block.settings.number }}</span><span class="rd-fact-l">{{ block.settings.label }}</span></div>
-        {%- endif -%}{%- endfor -%}
-      </div>
-    </div>
-  </section>
-
   {%- comment -%} ---------- TWO PATHS (overview — the fork) ---------- {%- endcomment -%}
   <section class="rd-pad rd-paper">
     <div class="rd-wrap">
@@ -83,6 +72,23 @@
             <span class="rd-arrow-link">for prisons &amp; commissioners <span class="rd-arrow">&rarr;</span></span>
           </div>
         </a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- FACTS STRIP (shared proof) ----------
+    Moved below TWO PATHS (was directly under the hero). Hero and facts strip are both dark, so
+    the page opened with two dark bands run together — PAGE-STANDARD S3. Impact's order is
+    hero -> light band -> dark stats, and that light band is what lets the stat band stay dark,
+    which is what keeps the figures lime. Reordered, not recoloured: no content changed.
+    (2026-08-04)
+  {%- endcomment -%}
+  <section class="rd-pad-sm rd-dark">
+    <div class="rd-wrap">
+      <div class="rd-facts">
+        {%- for block in section.blocks -%}{%- if block.type == 'fact' -%}
+          <div class="rd-fact" {{ block.shopify_attributes }}><span class="rd-fact-n bbc-counted">{{ block.settings.number }}</span><span class="rd-fact-l">{{ block.settings.label }}</span></div>
+        {%- endif -%}{%- endfor -%}
       </div>
     </div>
   </section>

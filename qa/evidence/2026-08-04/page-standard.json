@@ -1,15 +1,51 @@
 [
   {
-    "path": "/",
+    "path": "/pages/schools",
     "bands": 11,
-    "eyebrowPct": 100,
-    "repeats": 1,
+    "eyebrowPct": 90,
+    "repeats": 0,
     "adjDark": 0,
-    "maxCTA": 3,
+    "maxCTA": 2,
+    "offPalette": [],
+    "statDark": true,
+    "statGhost": false,
+    "seq": "forest → paper → forest → bone → steel → bone → paper → bone → paper → forest → paper"
+  },
+  {
+    "path": "/pages/programmes",
+    "bands": 11,
+    "eyebrowPct": 80,
+    "repeats": 0,
+    "adjDark": 0,
+    "maxCTA": 2,
     "offPalette": [],
     "statDark": null,
     "statGhost": null,
-    "seq": "forest → bone → forest → steel → paper → paper → bone → forest → steel → forest → lime"
+    "seq": "forest → paper → forest → bone → forest → paper → bone → steel → paper → forest → bone"
+  },
+  {
+    "path": "/pages/prisons",
+    "bands": 9,
+    "eyebrowPct": 75,
+    "repeats": 0,
+    "adjDark": 0,
+    "maxCTA": 2,
+    "offPalette": [],
+    "statDark": null,
+    "statGhost": null,
+    "seq": "forest → bone → forest → paper → bone → steel → paper → forest → bone"
+  },
+  {
+    "path": "/pages/build-to-bond",
+    "bands": 9,
+    "eyebrowPct": 63,
+    "repeats": 1,
+    "adjDark": 0,
+    "maxCTA": 2,
+    "offPalette": [],
+    "statDark": true,
+    "statGhost": false,
+    "seq": "forest → bone → forest → bone → forest → paper → bone → bone → forest"
   },
   {
     "path": "/pages/impact",
