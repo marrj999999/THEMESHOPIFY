@@ -586,3 +586,69 @@ justify-content is inert, so that centring had never once worked.
 drift, print the full class list and the owning band for every instance — the modifier that
 explains it is usually right there. ESCAPES #12 learned this once already; the audits still
 report it this way, so it will keep needing to be re-learned unless they carry the modifier.
+
+---
+
+## #41 — A surface system that has never once rendered (2026-08-04)
+
+**Escape.** `.rd-paper`, `.rd-steel`, `.rd-dark` and `.rd-forest` were written as descendant
+selectors — `.bbc-rd .rd-paper { background: var(--paper) }`. `bbc-section.liquid` emits both
+classes on the **same element**: `<div class="bbc-rd rd-paper">`. A descendant selector cannot
+match a single element, so those bands never received a paper, steel or dark background. Every
+one fell through to `.bbc-rd { background: var(--bone) }`.
+
+**Scope — measured, not assumed.** This hit only pages assembled from **generic** band sections.
+Bespoke `bbc-<page>-2026` sections nest their bands inside the wrapper, so the descendant
+selector matches and they were always correct:
+
+```
+/pages/impact      surface on the .bbc-rd element: 0   nested inside it: 8   → always worked
+/pages/why-bamboo  surface on the .bbc-rd element: 6   nested inside it: 1   → 6 of 7 flat
+```
+
+That is the whole explanation for "why does Why Bamboo look different from Impact". Not type,
+not tokens, not spacing — Impact's bands were nested and Why Bamboo's were not.
+
+**How long.** Since the rules were written. Not a regression — it never worked.
+
+**What it cost.** `/pages/why-bamboo` measured seven repeated surfaces against Impact's two, and
+the fix looked like a template job. It was not: the template already alternated correctly. Every
+session that "fixed the alternation" by editing template JSON changed a value that the CSS then
+threw away. This is the single largest contributor to the sense that the work was going in
+circles — the page genuinely did not change, no matter what was edited.
+
+**Why nothing caught it.** Every check we own asks *does this node meet contrast* or *is this
+type role consistent*. Bone passes contrast. Bone is on-palette. `page-standard.mjs` counted the
+repeats and reported them accurately for two days; nobody asked **why** a template that
+alternates renders flat, because the template was the obvious suspect and it reads correctly.
+
+**The generalisable rule.** When measured output contradicts source that reads correctly,
+suspect the selector, not the content. Specifically: **a class the section emits as a sibling of
+`.bbc-rd` must be styled with a compound selector.** Before writing `.bbc-rd .x`, check whether
+`.x` is ever emitted on the `.bbc-rd` element itself.
+
+**Canary.** `qa/page-standard.mjs` samples the *computed* background of every band, so it fails
+the moment a surface stops resolving. It reported `rd-paper -> rgb(230,220,200)` before the fix
+and `rgb(241,233,216)` after — the same probe that found this is the one that guards it.
+
+---
+
+## #42 — I reported empty bands that were my own screenshot artefact (2026-08-04)
+
+**Near-escape, caught before any edit.** A full-page capture of `/pages/why-bamboo` showed
+several bands as near-black rectangles with large blank areas, which read as failed images and
+missing headings. It was about to become a bug report.
+
+The page is fine. `fullPage: true` stitches a scrolled capture, and the reveal animations use
+`animation-timeline: view()`. Elements outside their entry range paint at their start state —
+opacity 0, translated. Scrolling the page first to force lazy images to load makes it *worse*,
+because every element is then behind its trigger.
+
+**Confirmed by DOM before acting:** images `complete`, `naturalWidth` 1500, headings present.
+An in-view element screenshot showed a correct, well-built pillar.
+
+**Rule.** `fullPage` is unusable as evidence on any page with scroll-driven reveals. Screenshot
+the element after `scrollIntoViewIfNeeded()` plus a settle wait. This is the third time a
+scroll-position artefact has produced a false defect report (see the stuck-reveal false positive
+of 2026-08-03); the difference this time is that it was checked against the DOM before anything
+was "fixed".

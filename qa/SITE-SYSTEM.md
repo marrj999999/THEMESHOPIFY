@@ -35,8 +35,22 @@ Why Bamboo  13 sections  bbc-hero-band, bbc-stat-band, bbc-pillar ×3, bbc-secti
 
 A bespoke section is *composed* — one author controls where the dark bands fall, what opens each
 band, what the stat band carries. Assembled generic bands are *stacked* — each carries its own
-defaults and nobody owns the sequence. That is why Why Bamboo runs five consecutive bone bands
-and opens only half its bands with an eyebrow, while Impact alternates and opens all of them.
+defaults and nobody owns the sequence. That is why Why Bamboo opens only half its bands with an
+eyebrow, while Impact opens all of them.
+
+> **Correction, 2026-08-04.** This section originally also blamed the architecture for Why
+> Bamboo's five consecutive bone bands. That was wrong, and the error mattered: it made a
+> content migration look necessary when the defect was four lines of CSS.
+>
+> The template alternated correctly the whole time. `.rd-paper` / `.rd-steel` / `.rd-dark` were
+> descendant selectors (`.bbc-rd .rd-paper`) against markup that puts both classes on one element,
+> so **every band on the site painted bone** regardless of what any template said. Adding the
+> compound selectors took why-bamboo from 7 surface repeats to 2 and adjacent-darks to 0, with no
+> template or architecture change at all (`ESCAPES.md` #41).
+>
+> What remains genuinely attributable to the assembled architecture is the eyebrow gap (S1 50%)
+> and nobody owning the stat band. Those are real but much smaller than this file first claimed —
+> weigh the migration in item 2 below against that reduced scope, not the original one.
 
 ---
 

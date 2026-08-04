@@ -265,9 +265,11 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd .rd-btn.rd-ghost{ background:transparent !important; color:var(--forest,#003C32) !important; border:2px solid var(--forest,#003C32) !important; }
 .bbc-rd .rd-btn.rd-ghost:hover{ background:rgba(0,60,50,.08) !important; }
 .bbc-rd .rd-dark .rd-btn.rd-ghost,
-.bbc-rd .rd-hero .rd-btn.rd-ghost{ color:var(--bone,#E6DCC8) !important; border-color:var(--bone,#E6DCC8) !important; }
+.bbc-rd .rd-hero .rd-btn.rd-ghost,
+.bbc-rd.rd-dark .rd-btn.rd-ghost{ color:var(--bone,#E6DCC8) !important; border-color:var(--bone,#E6DCC8) !important; }
 .bbc-rd .rd-dark .rd-btn.rd-ghost:hover,
-.bbc-rd .rd-hero .rd-btn.rd-ghost:hover{ background:rgba(230,220,200,.14) !important; }
+.bbc-rd .rd-hero .rd-btn.rd-ghost:hover,
+.bbc-rd.rd-dark .rd-btn.rd-ghost:hover{ background:rgba(230,220,200,.14) !important; }
 
 /* ---- F24/F53/F68 · colour grammar: lime fill is reserved for DARK
    surfaces; on light surfaces the filled primary is forest + bone. */
@@ -276,7 +278,8 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd .rd-dark .rd-btn.rd-lime,
 .bbc-rd .rd-hero .rd-btn.rd-lime,
 .bbc-rd.rd-footer .rd-btn.rd-lime,
-#bbc-rd-stickybar .rd-btn.rd-lime{ background:var(--lime,#D4FD62) !important; color:var(--forest,#003C32) !important; border-color:var(--lime,#D4FD62) !important; }
+#bbc-rd-stickybar .rd-btn.rd-lime,
+.bbc-rd.rd-dark .rd-btn.rd-lime{ background:var(--lime,#D4FD62) !important; color:var(--forest,#003C32) !important; border-color:var(--lime,#D4FD62) !important; }
 
 /* ---- F13 · home door-card row had 3 adjacent lime pills (+3 lime
    chips). One lime primary (first door); the rest demote to bone

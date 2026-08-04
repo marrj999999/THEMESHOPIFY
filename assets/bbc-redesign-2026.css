@@ -44,9 +44,13 @@
    that would have caught it (.bbc-rd-impact .rd-dark .rd-eyebrow) is scoped to the impact PAGE,
    so the home page's impact-themed band fell between the two mechanisms. */
 .bbc-rd .rd-dark .rd-eyebrow,
-.bbc-rd .rd-forest .rd-eyebrow{ color:var(--lime); }
+.bbc-rd .rd-forest .rd-eyebrow,
+.bbc-rd.rd-dark .rd-eyebrow,
+.bbc-rd.rd-forest .rd-eyebrow{ color:var(--lime); }
 .bbc-rd .rd-dark .rd-eyebrow::before,
-.bbc-rd .rd-forest .rd-eyebrow::before{ background:var(--lime); }
+.bbc-rd .rd-forest .rd-eyebrow::before,
+.bbc-rd.rd-dark .rd-eyebrow::before,
+.bbc-rd.rd-forest .rd-eyebrow::before{ background:var(--lime); }
 .bbc-rd .rd-lede{ font-size:clamp(18px,1.7vw,21px); line-height:1.5; color:var(--charcoal); }
 .bbc-rd .rd-frame-label{ font-weight:800; text-transform:uppercase; letter-spacing:.3em; font-size:12px; color:var(--subtle); }
 
@@ -70,7 +74,8 @@
 .bbc-rd .rd-btn.rd-on-dark:hover{ background:#fff; color:var(--forest); }
 .bbc-rd .rd-btn.rd-text{ background:none; border:none; min-height:44px; padding:10px 8px; color:var(--forest); box-shadow:none; }
 .bbc-rd .rd-btn.rd-text:hover{ background:none; transform:none; text-decoration:underline; text-underline-offset:3px; }
-.bbc-rd .rd-dark .rd-btn.rd-text,.bbc-rd .rd-hero .rd-btn.rd-text{ color:var(--lime); }
+.bbc-rd .rd-dark .rd-btn.rd-text,.bbc-rd .rd-hero .rd-btn.rd-text,
+.bbc-rd.rd-dark .rd-btn.rd-text{ color:var(--lime); }
 .bbc-rd .rd-btn-sm{ min-height:40px; padding:9px 18px; font-size:14px; gap:7px; }
 .bbc-rd .rd-btn-lg{ min-height:56px; padding:18px 34px; font-size:17px; }
 .bbc-rd .rd-btn-block{ width:100%; }
@@ -176,9 +181,12 @@
 .bbc-rd .rd-stat .rd-lbl{ font-size:14px; line-height:1.3; margin-top:8px; color:var(--charcoal); }
 .bbc-rd .rd-stat .rd-src{ font-size:var(--type-caption); text-transform:uppercase; letter-spacing:.06em; color:var(--subtle); margin-top:6px; }
 /* stats placed on a dark section: forest/charcoal text would be invisible — lighten it */
-.bbc-rd .rd-dark .rd-stat .rd-num{ color:var(--lime); }
-.bbc-rd .rd-dark .rd-stat .rd-lbl{ color:var(--bone); }
-.bbc-rd .rd-dark .rd-stat .rd-src{ color:#BCC8C2; }
+.bbc-rd .rd-dark .rd-stat .rd-num,
+.bbc-rd.rd-dark .rd-stat .rd-num{ color:var(--lime); }
+.bbc-rd .rd-dark .rd-stat .rd-lbl,
+.bbc-rd.rd-dark .rd-stat .rd-lbl{ color:var(--bone); }
+.bbc-rd .rd-dark .rd-stat .rd-src,
+.bbc-rd.rd-dark .rd-stat .rd-src{ color:#BCC8C2; }
 @media(max-width:720px){ .bbc-rd .rd-stats{ grid-template-columns:1fr 1fr; gap:28px 18px; } }
 
 /* grids */
@@ -535,8 +543,10 @@
 .bbc-rd .rd-pull{ border-left:4px solid var(--lime-700); padding:6px 0 6px 24px; }
 .bbc-rd .rd-pull .rd-q{ font-size:clamp(20px,2.3vw,28px); font-weight:700; line-height:1.3; letter-spacing:-.01em; }
 .bbc-rd .rd-pull cite{ display:block; font-style:normal; font-size:14px; color:var(--subtle); margin-top:14px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; }
-.bbc-rd .rd-dark .rd-pull{ border-color:var(--lime); }
-.bbc-rd .rd-dark .rd-pull cite{ color:#BCC8C2; }
+.bbc-rd .rd-dark .rd-pull,
+.bbc-rd.rd-dark .rd-pull{ border-color:var(--lime); }
+.bbc-rd .rd-dark .rd-pull cite,
+.bbc-rd.rd-dark .rd-pull cite{ color:#BCC8C2; }
 
 /* tags */
 /* align-self:center is load-bearing, not cosmetic (fixed 2026-07-29).
@@ -582,22 +592,40 @@
 .bbc-rd .rd-maxw{ max-width:62ch; }
 .bbc-rd .rd-split.rd-tight .rd-txt{ padding:56px; }
 .bbc-rd .rd-rule{ height:5px; width:60px; background:var(--lime); border-radius:3px; }
-.bbc-rd .rd-darker{ background:var(--forest-700); color:var(--bone); }
+.bbc-rd .rd-darker,
+.bbc-rd.rd-darker{ background:var(--forest-700); color:var(--bone); }
 /* A3: headings/body on the dark band were inheriting --ink (dark-on-dark, fails WCAG). Mirror .rd-dark overrides. */
-.bbc-rd .rd-darker h1,.bbc-rd .rd-darker h2,.bbc-rd .rd-darker h3,.bbc-rd .rd-darker h4{ color:var(--bone); }
-.bbc-rd .rd-darker p,.bbc-rd .rd-darker .rd-lede{ color:#cfd8d2; }
+.bbc-rd .rd-darker h1,.bbc-rd .rd-darker h2,.bbc-rd .rd-darker h3,.bbc-rd .rd-darker h4,
+.bbc-rd.rd-darker h1,
+.bbc-rd.rd-darker h2,
+.bbc-rd.rd-darker h3,
+.bbc-rd.rd-darker h4{ color:var(--bone); }
+.bbc-rd .rd-darker p,.bbc-rd .rd-darker .rd-lede,
+.bbc-rd.rd-darker p,
+.bbc-rd.rd-darker .rd-lede{ color:#cfd8d2; }
+
+/* `.rd-darker` had a lede variant; `.rd-dark` and `.rd-forest` never did, because until the
+   compound-selector fix (ESCAPES #41) no band ever actually painted dark — `.rd-lede`'s
+   var(--charcoal) sat on bone and read fine. The moment dark bands started rendering, every
+   lede on one became charcoal-on-forest at 1.05:1. Measured on /pages/why-bamboo, where a bare
+   "Shop frame kits" link inherits the lede colour and disappeared entirely. */
+.bbc-rd .rd-dark .rd-lede,.bbc-rd.rd-dark .rd-lede,
+.bbc-rd .rd-forest .rd-lede,.bbc-rd.rd-forest .rd-lede{ color:var(--bone); }
 
 /* timeline (About) */
 .bbc-rd .rd-timeline{ position:relative; }
 .bbc-rd .rd-tl{ display:grid; grid-template-columns:120px 1fr; gap:24px; padding:22px 0; border-top:1.5px solid rgba(244,239,230,.2); }
 .bbc-rd:not(.rd-on-light) .rd-tl{ border-top-color:var(--mist); }
-.bbc-rd .rd-dark .rd-tl{ border-top-color:rgba(244,239,230,.18); }
+.bbc-rd .rd-dark .rd-tl,
+.bbc-rd.rd-dark .rd-tl{ border-top-color:rgba(244,239,230,.18); }
 .bbc-rd .rd-tl .rd-yr{ font-weight:800; font-size:26px; color:var(--lime-700); letter-spacing:-.02em; }
-.bbc-rd .rd-dark .rd-tl .rd-yr{ color:var(--lime); }
+.bbc-rd .rd-dark .rd-tl .rd-yr,
+.bbc-rd.rd-dark .rd-tl .rd-yr{ color:var(--lime); }
 .bbc-rd .rd-tl h3{ font-size:21px; margin-bottom:6px; }
 .bbc-rd .rd-tl p{ font-size:16px; margin:0; }
 .bbc-rd .rd-tl.rd-hot .rd-yr{ color:var(--forest); }
-.bbc-rd .rd-dark .rd-tl.rd-hot .rd-yr{ color:var(--gold); }
+.bbc-rd .rd-dark .rd-tl.rd-hot .rd-yr,
+.bbc-rd.rd-dark .rd-tl.rd-hot .rd-yr{ color:var(--gold); }
 @media(max-width:620px){ .bbc-rd .rd-tl{ grid-template-columns:1fr; gap:6px; } }
 
 /* Timeline + value photography, added 2026-07-31.
@@ -611,7 +639,8 @@
 /* The 2012 milestone photo is a dark B&W archival shot sitting on the dark forest band, so its
    edges disappeared and the row read as an empty gap — I misread it as a missing image twice
    before measuring. A hairline defines the frame whatever tone the photograph is. */
-.bbc-rd .rd-dark .rd-tl-media{ box-shadow:0 0 0 1.5px rgba(230,220,200,.30); }
+.bbc-rd .rd-dark .rd-tl-media,
+.bbc-rd.rd-dark .rd-tl-media{ box-shadow:0 0 0 1.5px rgba(230,220,200,.30); }
 .bbc-rd .rd-tl-media img{ position:absolute; inset:0; width:100% !important; height:100% !important; max-height:none !important; object-fit:cover; display:block; }
 
 /* These cards are de-boxed in a grid (see the .rd-grid .rd-card.rd-stamp rule above): no border,
@@ -665,10 +694,12 @@
    label takes forest. Same rule the dark-band link work landed on earlier this week. */
 .bbc-rd .rd-jt .rd-mono{ font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
   font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--forest); }
-.bbc-rd .rd-dark .rd-jt .rd-mono{ color:var(--lime); }
+.bbc-rd .rd-dark .rd-jt .rd-mono,
+.bbc-rd.rd-dark .rd-jt .rd-mono{ color:var(--lime); }
 .bbc-rd .rd-jt .rd-big{ font-weight:800; font-size:clamp(19px,2.4vw,24px); letter-spacing:-.02em; line-height:1.15; margin-top:2px; }
 .bbc-rd .rd-jt .rd-sm{ font-size:15px; margin:5px 0 22px; max-width:44ch; color:var(--charcoal); }
-.bbc-rd .rd-dark .rd-jt .rd-sm{ color:var(--bone); }
+.bbc-rd .rd-dark .rd-jt .rd-sm,
+.bbc-rd.rd-dark .rd-jt .rd-sm{ color:var(--bone); }
 @media(max-width:620px){ .bbc-rd .rd-jt{ padding-left:66px; } }
 
 /* ── DEVICE C · dimension callouts — a number that reads as measured, not claimed ──────── */
@@ -677,7 +708,8 @@
 /* the dimension line itself */
 .bbc-rd .rd-stats.rd-dim .rd-stat::before{ content:""; position:absolute; top:16px; left:0; right:0; height:1px;
   background:color-mix(in srgb, var(--charcoal) 45%, transparent); }
-.bbc-rd .rd-dark .rd-stats.rd-dim .rd-stat::before{ background:rgba(230,220,200,.45); }
+.bbc-rd .rd-dark .rd-stats.rd-dim .rd-stat::before,
+.bbc-rd.rd-dark .rd-stats.rd-dim .rd-stat::before{ background:rgba(230,220,200,.45); }
 /* extension ticks + arrow terminators, drawn on one extra span so no pseudo is overloaded */
 .bbc-rd .rd-stats.rd-dim .rd-dimt{ position:absolute; top:8px; left:0; right:0; height:17px; pointer-events:none; }
 .bbc-rd .rd-stats.rd-dim .rd-dimt::before,
@@ -686,7 +718,9 @@
 .bbc-rd .rd-stats.rd-dim .rd-dimt::before{ left:0; }
 .bbc-rd .rd-stats.rd-dim .rd-dimt::after{ right:0; }
 .bbc-rd .rd-dark .rd-stats.rd-dim .rd-dimt::before,
-.bbc-rd .rd-dark .rd-stats.rd-dim .rd-dimt::after{ background:rgba(230,220,200,.45); }
+.bbc-rd .rd-dark .rd-stats.rd-dim .rd-dimt::after,
+.bbc-rd.rd-dark .rd-stats.rd-dim .rd-dimt::before,
+.bbc-rd.rd-dark .rd-stats.rd-dim .rd-dimt::after{ background:rgba(230,220,200,.45); }
 .bbc-rd .rd-stats.rd-dim .rd-src{ font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
   letter-spacing:.05em; }
 
@@ -768,7 +802,8 @@
   border-top:2px solid color-mix(in srgb, var(--ink,#0E1A17) 15%, transparent);
 }
 /* on forest bands the rule has to come up out of the dark, not sink into it */
-.bbc-rd .rd-dark .rd-steps li{ border-top-color:color-mix(in srgb, var(--bone,#E6DCC8) 24%, transparent); }
+.bbc-rd .rd-dark .rd-steps li,
+.bbc-rd.rd-dark .rd-steps li{ border-top-color:color-mix(in srgb, var(--bone,#E6DCC8) 24%, transparent); }
 .bbc-rd .rd-steps li::before{ content:counter(s); position:absolute; left:0; top:20px; width:38px; height:38px; border-radius:6px; background:var(--forest); color:var(--lime); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:18px; }
 .bbc-rd .rd-steps li h3{ font-size:18px; margin-bottom:3px; }
 .bbc-rd .rd-steps li p{ font-size:16px; color:var(--charcoal); margin:0; }
@@ -779,14 +814,18 @@
    the dark case was considered here and the text colour was simply missed. Same family as the
    home impact eyebrow: a component styled for paper, dropped onto forest. */
 .bbc-rd .rd-dark .rd-steps li p,
-.bbc-rd .rd-forest .rd-steps li p{ color:var(--bone); }
+.bbc-rd .rd-forest .rd-steps li p,
+.bbc-rd.rd-dark .rd-steps li p,
+.bbc-rd.rd-forest .rd-steps li p{ color:var(--bone); }
 
 /* simple bullet list (Education programmes / Workshops good-to-know) */
 .bbc-rd .rd-list{ list-style:none; padding:0; margin:14px 0 0; display:grid; gap:10px; }
 .bbc-rd .rd-list li{ position:relative; padding-left:28px; font-size:16px; color:var(--charcoal); }
-.bbc-rd .rd-dark .rd-list li{ color:#cfd8d2; }
+.bbc-rd .rd-dark .rd-list li,
+.bbc-rd.rd-dark .rd-list li{ color:#cfd8d2; }
 .bbc-rd .rd-list li::before{ content:"✓"; position:absolute; left:0; top:0; font-weight:800; color:var(--forest); }
-.bbc-rd .rd-dark .rd-list li::before{ color:var(--lime); }
+.bbc-rd .rd-dark .rd-list li::before,
+.bbc-rd.rd-dark .rd-list li::before{ color:var(--lime); }
 
 /* video cover (Workshops watch-a-build) */
 .bbc-rd .rd-video{ position:relative; border-radius:14px; overflow:clip; border:2.5px solid var(--ink); min-height:340px; display:flex; align-items:center; justify-content:center; }
@@ -832,7 +871,10 @@
 
 /* visible keyboard focus (accessibility) */
 .bbc-rd a:focus-visible,.bbc-rd button:focus-visible,.bbc-rd summary:focus-visible,.bbc-rd input:focus-visible,.bbc-rd .rd-door:focus-visible,.bbc-rd label:focus-within{ outline:3px solid var(--ink); outline-offset:2px; }
-.bbc-rd .rd-dark a:focus-visible,.bbc-rd .rd-dark button:focus-visible,.bbc-rd .rd-dark summary:focus-visible,.bbc-rd .rd-hero a:focus-visible,.bbc-rd .rd-hero button:focus-visible,.bbc-rd .rd-btn.rd-on-dark:focus-visible{ outline-color:var(--lime); }
+.bbc-rd .rd-dark a:focus-visible,.bbc-rd .rd-dark button:focus-visible,.bbc-rd .rd-dark summary:focus-visible,.bbc-rd .rd-hero a:focus-visible,.bbc-rd .rd-hero button:focus-visible,.bbc-rd .rd-btn.rd-on-dark:focus-visible,
+.bbc-rd.rd-dark a:focus-visible,
+.bbc-rd.rd-dark button:focus-visible,
+.bbc-rd.rd-dark summary:focus-visible{ outline-color:var(--lime); }
 
 /* depth on dark sections — light-bloom + blueprint dot grid (2026-07-28).
    Replaces the old single centred glow, which was symmetric (the shape FORMULA
@@ -866,7 +908,8 @@
 @media (max-width:749px){
   .bbc-rd .rd-dark{ background-size:auto,auto,auto,20px 20px,auto; }
 }
-.bbc-rd .rd-darker{ background:var(--forest-700) radial-gradient(135% 90% at 50% -15%, rgba(31,102,85,.30), transparent 58%); }
+.bbc-rd .rd-darker,
+.bbc-rd.rd-darker{ background:var(--forest-700) radial-gradient(135% 90% at 50% -15%, rgba(31,102,85,.30), transparent 58%); }
 
 /* hover transitions (effects gated below) */
 .bbc-rd .rd-door{ transition:transform .22s cubic-bezier(.2,.7,.2,1), box-shadow .22s; }
@@ -1335,7 +1378,11 @@
    containers like size-guide's `.hero` are untouched.
    NARROWED AGAIN (third cut, same day) — and this is the instructive one. The second cut
    listed `.bbc-rd .rd-dark p`, which is (0,2,1)... exactly the same specificity as the
-   EXISTING and correct `.bbc-rd .rd-dark p{color:rgb(207,216,210)}` a few hundred lines
+   EXISTING and correct `.bbc-rd .rd-dark p,
+   same day) — and this is the instructive one. The second cut
+   listed `.bbc-rd.rd-dark p`,
+   1)... exactly the same specificity as the
+   EXISTING and correct `.bbc-rd.rd-dark p{color:rgb(207,216,210)}` a few hundred lines
    above. Equal specificity is broken by source order, so being later in the file my rule
    silently replaced a good light colour with `inherit` — which then resolved to the press
    quote's own rgba(7,62,39,.75) and put legacy forest on current forest at 1.01:1 across

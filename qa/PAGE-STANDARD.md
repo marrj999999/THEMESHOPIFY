@@ -72,25 +72,33 @@ Measured across the nine 2026 pages, same run:
 | / (home) | 11 | 90% | 2 | 1 | **3** | — |
 | /pages/workshops | 12 | 82% | 1 | **0** | **3** | **light** |
 | /pages/programmes | 11 | 80% | 1 | 1 | 2 | — |
-| **/pages/why-bamboo** | 13 | **50%** | **7** | 1 | 1 | **light** |
-| **/pages/support-mission** | 10 | **11%** | 4 | **0** | **4** | — |
+| **/pages/why-bamboo** | 13 | **50%** | 2 | **0** | **1** | **light** |
+| **/pages/support-mission** | 10 | **100%** | **0** | **0** | **1** | — |
 
 No off-palette surfaces remain anywhere (S5 clean) — the homepage cream band was the last one.
 
-Two pages are genuinely off-standard; the rest are within a band or two of it.
+**Re-measured 2026-08-04, after the surface fix.** The two rows above changed materially and the
+reason matters more than the numbers.
 
-**`/pages/support-mission` — 1 eyebrow in 9 bands, and one band carries 4 CTAs.**
-It reads as a different site. Fixing S1 alone would do most of the work.
+**`/pages/support-mission` was 11% / 4 repeats / 4 CTAs.** Eight eyebrows and three paper bands
+took it to 100% / 0 / 1. Two of those "4 CTAs" were the rule's fault, not the page's — see the
+equal-doors carve-out above.
 
-**`/pages/why-bamboo` — 7 repeated surfaces, including FIVE consecutive bone bands** after the
-hero, and eyebrows on only half its bands. Its sequence is:
+**`/pages/why-bamboo` was 7 repeats, including five consecutive bone bands.** It is now 2 and 0.
+The five-bone run was **never in the template** — the template alternated correctly all along.
+`.rd-paper`, `.rd-steel` and `.rd-dark` were written as descendant selectors (`.bbc-rd .rd-paper`)
+while `bbc-section` emits both classes on one element (`<div class="bbc-rd rd-paper">`), so every
+band on the site fell through to `.bbc-rd{background:var(--bone)}` and painted bone. The surface
+system had never rendered. Full post-mortem: `ESCAPES.md` #41.
+
+Its sequence now:
 
 ```
-forest(hero) → bone → bone → bone → bone → bone → paper → bone → forest → forest → bone → bone → bone
+forest(hero) → paper → steel → bone → bone → paper → steel → paper → forest → bone → bone → paper → forest
 ```
 
-against Impact's alternation. This is the page that looks least like the site, and the stat-band
-colour difference is a symptom of it rather than the cause.
+**What is still genuinely wrong with why-bamboo** is S1 — eyebrows on half its bands — and the
+light stat band. Those are content decisions, not cascade bugs.
 
 ---
 
@@ -101,13 +109,17 @@ the stat band immediately after the dark hero, where Impact inserts the steel br
 
 ```
 Impact        forest(hero) → steel → forest★     ✓
-why-bamboo    forest(hero) → bone★               → make it dark and you get forest → forest ✗
+why-bamboo    forest(hero) → paper★              → make it dark and you get forest → forest ✗
 workshops     forest(hero) → paper★ → forest     → make it dark and you get three darks in a row ✗
 ```
 
 So the change is **insert a light breather, then make the stat band dark** — a band-structure
-change, not a colour swap. On Why Bamboo it also breaks up the five-bone run, so one edit serves
-two rules.
+change, not a colour swap.
+
+*(Updated 2026-08-04: why-bamboo's second band reads `paper` rather than `bone` now that the
+surface selectors resolve — but it is still the band directly after the dark hero, so the
+conclusion is unchanged. The five-bone run this paragraph also used to cite was a cascade bug,
+now fixed; the breather argument stands on its own.)*
 
 ---
 
