@@ -114,6 +114,80 @@ same period. Theme work is one of several claims on the same attention and the s
 
 ---
 
+## The steps BACKWARDS — audited separately, 2026-08-04
+
+*James: "have you audited all the sessions for the relevance of what steps backwards we have
+taken." No — the section above audits repetition. Regression is a different question. This is it.*
+
+### Rework, measured
+
+Commits per file since 7 Jul, excluding baselines and evidence:
+
+| file | commits |
+|---|---|
+| `sections/bbc-impact-2026.liquid` | **50** |
+| `assets/bbc-statement.css` | **47** |
+| `templates/page.impact.json` | **29** |
+| `assets/bbc-redesign-2026.css` | 15 |
+| `assets/bbc-universal.css` | 12 |
+
+**The Impact page alone accounts for ~126 commits.** One page, rebuilt fifty times. That is the
+circling, quantified.
+
+### Thirteen confirmed steps backwards
+
+| # | What went backwards | When found | Cause |
+|---|---|---|---|
+| 1 | **Every animation on the site died silently.** `overflow-x:hidden` on html/body/.shopify-section turned them into scroll containers, so every `view()`/`scroll()` timeline went inactive and the whole `.rd-reveal` system rendered its **end state**. The site had no motion. | 24 Jul, by **James** ("we've lost animatiions") — not by any gate | a mobile fix with sitewide blast radius |
+| 2 | **The visual-regression harness had never run.** "Make the visual-regression harness actually run (it never had)". Every visual verification before this date was worthless. | 24 Jul | gate broken since creation |
+| 3 | Both infographic attempts shipped unverified, page **restored to last-good state** | 12 Jul | "process breach logged" |
+| 4 | **Alignment rule 7 made the estate worse.** "One alignment per band" enforced uniformity; corrected to "hierarchy, not uniformity" | 29 Jul | a rule written without measuring its effect |
+| 5 | **De-boxing `.rd-card.rd-stamp` broke the shop grid** — "too wide a blast radius"; the grid had to be restored | 29 Jul | fix scoped globally, applied locally |
+| 6 | 2 files **reverted** during the `!important` removal | 29 Jul | equivalence test failed, correctly |
+| 7 | `.rd-in` regression caught mid-pass | 22 Jul | — |
+| 8 | **The Sally Allsopp quote was misattributed to the Financial Times on the LIVE template** | 22 Jul | claims defect that reached production |
+| 9 | The world map was trapped in the 820px text measure — **"never a CSS issue"**; sessions had been fixing CSS | 13 Jul | wrong diagnosis, repeatedly |
+| 10 | **A working mosaic layout was reverted** because element screenshots showed blank images that were fine | 1 Aug | the instrument lied |
+| 11 | Stale local files would have **regressed the draft** with banned wording; `bbc-impact-funder-cta` held a self-referential `var()` that had already been fixed on the theme | 24 Jul / 3 Aug | repo ≠ rendered artefact |
+| 12 | Four audits **overwrote their own evidence** — hardcoded dates destroyed prior runs | 3 Aug | — |
+| 13 | **My own `.bbc-rd p` rule caused 16 new defects** on the PDPs, replacing a correct light colour with `inherit` | 3 Aug, this session | same specificity as an existing rule; too broad |
+
+### The pattern — and it is one pattern, not thirteen
+
+**Nine of the thirteen are a fix whose blast radius exceeded its intent.** `overflow-x:hidden` for
+mobile killed motion everywhere. De-boxing one card broke the shop grid. Alignment rule 7 enforced
+uniformity across an estate that needed hierarchy. My paragraph rule seized every `<p>` in the
+theme. Each was a *correct local fix* applied at the wrong scope.
+
+**Four ran silently because the gate that should have caught them was itself broken.** The visual
+harness had never executed. The contrast gate went quiet the moment `.rd-dark` gained a gradient.
+The alignment audit owned a private 10-page list while printing "all pages". The motion assertions
+sat red for three days and were stale, not real.
+
+**The most expensive one was found by James, not by any gate.** The site had no motion at all,
+and the way that surfaced was him typing "we've lost animatiions".
+
+### Verified today: the big ones have NOT come back
+
+| regression | status |
+|---|---|
+| animations killed by `overflow-x:hidden` | **holding.** The only `overflow-x:hidden` on a layout ancestor is `bbc-mobile-menu.css:24`, which applies to the mobile **drawer panel** (`translateX(-100%)`, `z-index:1002`) — not html/body/.shopify-section. `motion-check` 41/41 today, reveals transitioning 0→1. |
+| visual harness not running | **holding.** 48 tests execute; 32 currently fail against pre-change baselines, which is the correct signal. |
+| stamp de-box blast radius | **holding.** Scoped to editorial cards; shop grid intact. |
+| the `.bbc-rd p` regression I caused | **fixed same session**, narrowed to `.rd-lede p`, PDPs verified clean. |
+
+### What this changes about the plan
+
+The break-out list in the next section is right, but it needs one addition ahead of everything
+else:
+
+> **B0 · No fix ships at a wider scope than the defect it fixes.** Before writing a rule, grep for
+> the selector you are about to write. If a rule with the same specificity already exists, you are
+> not adding a safety net — you are silently replacing someone's decision. Nine of the thirteen
+> steps backwards would not have happened under that one rule.
+
+---
+
 ## What actually shipped — it is not nothing
 
 99 commits since 14 Jul; 27 of them touch CSS, alignment, consistency, standards or motion. Real,
