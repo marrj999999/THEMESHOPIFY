@@ -365,7 +365,13 @@
   {%- comment -%} ============== SPEC STRIP (4) ============== {%- endcomment -%}
   {%- assign specs = section.blocks | where: 'type', 'spec' -%}
   {%- if specs.size > 0 -%}
-    <section class="rd-section rd-pad-sm">
+    {%- comment -%}
+      rd-paper, not the default bone: this band sat between "what you'll need" and "build steps",
+      both bone, making a three-band flat run — the largest surface repeat on any 2026 page and
+      identical across all 10 kit PDPs, since they share this section. PAGE-STANDARD S2.
+      A spec table is the natural place to change texture. (2026-08-04)
+    {%- endcomment -%}
+    <section class="rd-section rd-pad-sm rd-paper">
       <div class="rd-wrap">
         <div class="rd-spectable" style="grid-template-columns:repeat({{ specs.size }},1fr);">
           {%- for block in specs -%}
@@ -531,12 +537,21 @@
   {%- comment -%} ============== REVIEWS ============== {%- endcomment -%}
   {%- assign reviews = section.blocks | where: 'type', 'review' -%}
   {%- if reviews.size > 0 -%}
-    <section class="rd-section rd-pad-sm rd-dark" id="bbc-rd-reviews">
+    {%- comment -%}
+      rd-steel, not rd-dark: the video band directly above is dark, so two dark bands ran back to
+      back — PAGE-STANDARD S3, the one rule Impact never breaks. Steel keeps the reviews visually
+      distinct from the paper band that follows, where paper would just create a new repeat.
+      (2026-08-04)
+    {%- endcomment -%}
+    <section class="rd-section rd-pad-sm rd-steel" id="bbc-rd-reviews">
       <div class="rd-wrap">
         <div class="rd-flex rd-between rd-mb-24px">
           <div>
             {%- if section.settings.reviews_eyebrow != blank -%}
-              <span class="rd-eyebrow rd-on-dark">{{ section.settings.reviews_eyebrow }}</span>
+              {%- comment -%} rd-on-dark dropped with this band's move to steel: it forces light
+                text, which on a light surface is invisible — the same failure the surface change
+                exposed elsewhere today (ESCAPES #41). {%- endcomment -%}
+              <span class="rd-eyebrow">{{ section.settings.reviews_eyebrow }}</span>
             {%- endif -%}
             <h2 class="rd-m-0">{{ section.settings.reviews_heading }}</h2>
           </div>

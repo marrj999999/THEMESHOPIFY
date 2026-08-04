@@ -64,7 +64,15 @@ function scan() {
       // PAGE-STANDARD.md and SITE-SYSTEM.md when its true figure is 83%, and the two docs then
       // used the bogus gap as evidence for a content migration. Corrected 2026-08-04 after a
       // screenshot showed the eyebrow this check said was missing.
-      eyebrow: !!x.querySelector('.rd-eyebrow, .bbcpl-idx, .bbcst-eyebrow'),
+      // The FULL set, enumerated by sweeping every class the theme emits (not by inspecting the
+      // two components that happened to fail): rd-eyebrow (154 uses, the norm), bbcpl-idx (the
+      // "— 01 the science" rule+number+kicker on bbc-pillar), bbcst-eyebrow (bbc-statement),
+      // bbc-section-eyebrow ("The Workshop Experience" on bbc-workshop-complete/-blocks) and
+      // ew-eyebrow (the homepage .ew component). The first pass at this fix caught only three
+      // and would have left /pages/workshops undercounted — which is exactly the mistake
+      // ESCAPES #43 is about, repeated inside the fix for #43.
+      eyebrow: !!x.querySelector(
+        '.rd-eyebrow, .bbcpl-idx, .bbcst-eyebrow, .bbc-section-eyebrow, .ew-eyebrow'),
       // S4 counts LOOSE CTAs only. A CTA inside its own card is part of that card, not a
       // competing ask — FORMULA §1 already carves out "deliberate equal-doors card grids".
       // Counting every .rd-btn flagged support-mission's funding ladder at 4, where each rung is
@@ -123,6 +131,18 @@ for (const r of rows) {
     String(r.eyebrowPct + '%').padStart(12) + String(r.repeats).padStart(12) +
     String(r.adjDark).padStart(12) + String(r.maxCTA).padStart(11) + '  ' + stat);
 }
+// A page that was never built as bands cannot "drift from the band standard". Legacy templates
+// (size-guide, the geometry pages, privacy-policy, most collections) render their whole body
+// inside a single .rd-pad wrapper, so they measure as 1 content band with no eyebrow and score
+// 0%. Reporting those alongside genuine 2026 pages produced "53 of 66 outside the standard",
+// which is true of the arithmetic and false of the site. Split them. (2026-08-04)
+const inSystem = r => !r.err && (r.bands >= 4 || /rd-(dark|paper|steel|forest)/.test(r.seq || ''));
+const sys = rows.filter(inSystem), legacy = rows.filter(r => !r.err && !inSystem(r));
+const drift = sys.filter(r => r.eyebrowPct < 80 || r.repeats > 2 || r.adjDark > 0 || r.maxCTA > 2);
+console.log(`\n── ${sys.length} pages in the 2026 band system · ${drift.length} outside the standard`);
+console.log(`── ${legacy.length} legacy/simple templates — never built as bands, not scored`);
+if (legacy.length) console.log('   ' + legacy.map(r => r.path).join(', '));
+
 const off = rows.filter(r => r.offPalette && r.offPalette.length);
 if (off.length) {
   console.log('\noff-palette surfaces (S5):');
