@@ -7,7 +7,7 @@
   a lime-tinted background. The .wbx-table th/td classes are re-declared in this
   block's scoped stylesheet so the row is self-contained in this theme.
 {%- endcomment -%}
-<tr class="rd-reveal {% if block.settings.highlight %}is-hl{% endif %}" {{ block.shopify_attributes }}>
+<tr class="{% if block.settings.highlight %}is-hl{% endif %}" {{ block.shopify_attributes }}>
   <th scope="row">{{ block.settings.material }}</th>
   <td>{{ block.settings.density }}</td>
   <td>{{ block.settings.tensile }}</td>

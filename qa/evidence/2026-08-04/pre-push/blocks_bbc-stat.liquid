@@ -2,7 +2,7 @@
   BBC theme block — Stat (number + label + source). From the monolith `stat` block.
   Reuses .rd-stat / .rd-num / .rd-lbl / .rd-src. Sits inside the stat band (.bbc-rd .rd-stats grid).
 {%- endcomment -%}
-<div class="rd-reveal rd-stat" {{ block.shopify_attributes }}>
+<div class="rd-stat" {{ block.shopify_attributes }}>
   <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
   <div class="rd-lbl">{{ block.settings.label }}</div>
   {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}

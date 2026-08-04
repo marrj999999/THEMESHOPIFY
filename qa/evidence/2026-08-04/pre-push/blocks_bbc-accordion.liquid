@@ -5,7 +5,7 @@
   <details>/<summary> = open/close with no JavaScript. Sits inside the .rd-faq
   wrapper rendered by sections/bbc-faq-section.liquid.
 {%- endcomment -%}
-<details class="rd-reveal" {{ block.shopify_attributes }}>
+<details {{ block.shopify_attributes }}>
   <summary>{{ block.settings.question }}</summary>
   <div class="rd-a">{{ block.settings.answer }}</div>
 </details>

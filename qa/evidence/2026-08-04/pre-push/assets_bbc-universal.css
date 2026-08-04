@@ -300,13 +300,7 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
    ============================================================================ */
 :root{
   --mo-fast:.15s;        /* hover feedback, micro-interactions */
-  --mo-base:.2s;         /* menus, filters, small entrances.
-                            WAS .22s — changed 2026-08-04 to match what the theme already does.
-                            .2s appears 218 times in the source, more than every documented token
-                            combined by a factor of twenty; .22s appeared 8 times. The contract
-                            was describing an intention nobody implemented. Moving the token to
-                            the de-facto value lets those 218 sites migrate to var(--mo-base)
-                            with ZERO computed change — one 20ms edit instead of 218 of them. */
+  --mo-base:.22s;        /* menus, filters, small entrances */
   --mo-entrance:.45s;    /* card/chip content entrances */
   --mo-reveal:.6s;       /* band-level reveals (statement equivalents) */
   --mo-ease:cubic-bezier(.2,.7,.2,1);       /* out — entrances + hovers */

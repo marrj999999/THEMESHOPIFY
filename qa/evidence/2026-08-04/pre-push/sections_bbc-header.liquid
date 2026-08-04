@@ -351,7 +351,7 @@
   border: none;
   cursor: pointer;
   border-radius: 4px;
-  transition: background var(--mo-fast), box-shadow var(--mo-base) ease, color var(--mo-fast);
+  transition: background 0.15s, box-shadow 0.2s ease, color 0.15s;
 }
 
 .bbc-header__nav-link:hover {
@@ -362,7 +362,7 @@
 
 .bbc-header__nav-arrow {
   opacity: 0.6;
-  transition: transform var(--mo-base);
+  transition: transform 0.2s;
 }
 
 .bbc-header__nav-item:hover .bbc-header__nav-arrow {
@@ -405,7 +405,7 @@
   height: 2px;
   background: currentColor;
   border-radius: 1px;
-  transition: transform 0.3s ease, opacity var(--mo-base) ease;
+  transition: transform 0.3s ease, opacity 0.2s ease;
 }
 
 .bbc-hamburger__bar--top { transform: translateY(-6px); }
@@ -434,7 +434,7 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity var(--mo-base) ease, visibility var(--mo-base) ease;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
   min-width: 400px;
   padding-top: 8px; /* Bridge gap for hover */
   z-index: 100;
@@ -494,7 +494,7 @@
   color: var(--bbc-gray-900);
   text-decoration: none;
   border-radius: 4px;
-  transition: color var(--mo-fast), background var(--mo-fast), box-shadow var(--mo-fast);
+  transition: color 0.15s, background 0.15s, box-shadow 0.15s;
 }
 
 .bbc-header__dropdown-col a:hover,
@@ -523,7 +523,7 @@
   border-radius: 4px;
   cursor: pointer;
   color: var(--bbc-white);
-  transition: background var(--mo-fast);
+  transition: background 0.15s;
 }
 
 .bbc-header__action:hover {

@@ -39,7 +39,7 @@
 
 /* actions — primary + secondary buttons */
 .bbc-rd .bbcst-actions{ display:flex; flex-wrap:wrap; gap:14px; margin-top:clamp(28px,3.4vw,44px); }
-.bbc-rd .bbcst-btn{ display:inline-block; font-weight:800; font-size:16px; letter-spacing:.01em; text-decoration:none; padding:15px 30px; border-radius:999px; border:2px solid transparent; transition:transform .1s ease, opacity var(--mo-fast) ease; }
+.bbc-rd .bbcst-btn{ display:inline-block; font-weight:800; font-size:16px; letter-spacing:.01em; text-decoration:none; padding:15px 30px; border-radius:999px; border:2px solid transparent; transition:transform .1s ease, opacity .15s ease; }
 .bbc-rd .bbcst-btn:active{ transform:scale(.985); }
 .bbc-rd .bbcst-btn.is-primary{ background:var(--forest,#003C32); color:var(--bone,#E6DCC8); border-color:var(--forest,#003C32); }
 .bbc-rd .bbcst-btn.is-primary:hover{ opacity:.9; }
@@ -744,7 +744,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 @media (hover:hover){
   .bbc-rd-impact .rd-flow__step:hover{ transform:translateX(4px); }
   .bbc-rd-impact .rd-flow__step:hover::before{ transform:scale(1.15); }
-  .bbc-rd-impact .rd-path{ transition:transform var(--mo-base) ease, box-shadow var(--mo-base) ease; }
+  .bbc-rd-impact .rd-path{ transition:transform .2s ease, box-shadow .2s ease; }
   .bbc-rd-impact .rd-path:hover{ transform:translateY(-4px); }
   .bbc-rd-impact .rd-path__media{ overflow:clip; } /* clip: duotone img inside is scroll-driven (MOTION.md r4) */
   .bbc-rd-impact .rd-path__media img{ transition:transform .35s ease; }

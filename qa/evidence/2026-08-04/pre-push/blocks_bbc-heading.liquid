@@ -15,7 +15,7 @@
   assign on_dark = block.settings.on_dark
 -%}
 {%- if style == 'row' -%}
-  <div class="rd-reveal rd-flex rd-between rd-mb-36px" {{ block.shopify_attributes }}>
+  <div class="rd-flex rd-between rd-mb-36px" {{ block.shopify_attributes }}>
     <div>
       {%- if block.settings.eyebrow != blank -%}<span class="rd-eyebrow{% if on_dark %} rd-on-dark{% endif %}">{{ block.settings.eyebrow }}</span>{%- endif -%}
       {%- if block.settings.heading != blank -%}<h2>{{ block.settings.heading }}</h2>{%- endif -%}
@@ -25,13 +25,13 @@
     {%- endif -%}
   </div>
 {%- elsif style == 'center' -%}
-  <div class="rd-reveal rd-center rd-cmp-20294" {{ block.shopify_attributes }}>
+  <div class="rd-center rd-cmp-20294" {{ block.shopify_attributes }}>
     {%- if block.settings.eyebrow != blank -%}<span class="rd-eyebrow{% if on_dark %} rd-on-dark{% endif %}">{{ block.settings.eyebrow }}</span>{%- endif -%}
     {%- if block.settings.heading != blank -%}<h2>{{ block.settings.heading }}</h2>{%- endif -%}
     {%- if block.settings.lede != blank -%}<p class="rd-lede rd-mt2">{{ block.settings.lede | remove: '<p>' | remove: '</p>' }}</p>{%- endif -%}
   </div>
 {%- else -%}
-  <div class="rd-reveal bbc-rd-heading" {{ block.shopify_attributes }}>
+  <div class="bbc-rd-heading" {{ block.shopify_attributes }}>
     {%- if block.settings.eyebrow != blank -%}<span class="rd-eyebrow{% if on_dark %} rd-on-dark{% endif %}">{{ block.settings.eyebrow }}</span>{%- endif -%}
     {%- if block.settings.heading != blank -%}<h2>{{ block.settings.heading }}</h2>{%- endif -%}
     {%- if block.settings.lede != blank -%}<p class="rd-lede rd-mt2">{{ block.settings.lede | remove: '<p>' | remove: '</p>' }}</p>{%- endif -%}

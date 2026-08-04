@@ -12,7 +12,7 @@
     assign poster = block.settings.poster | image_url: width: 1600
   endif
 -%}
-<div class="rd-reveal bbc-rd bbc-rd-videoblock" {{ block.shopify_attributes }}>
+<div class="bbc-rd bbc-rd-videoblock" {{ block.shopify_attributes }}>
   {%- if block.settings.eyebrow != blank -%}<span class="rd-eyebrow{% if dark %} rd-on-dark{% endif %}">{{ block.settings.eyebrow }}</span>{%- endif -%}
   {%- if block.settings.heading != blank -%}<h2 class="rd-mt2">{{ block.settings.heading }}</h2>{%- endif -%}
   <div class="rd-video rd-mt3">

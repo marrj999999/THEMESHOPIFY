@@ -260,7 +260,7 @@
   text-decoration: none;
   border-bottom: 2px solid var(--wb-gold);
   padding-bottom: 2px;
-  transition: color var(--mo-base) ease;
+  transition: color 0.2s ease;
 }
 
 .bbc-wb-content-block__link:hover {
@@ -502,7 +502,7 @@
   align-items: center;
   justify-content: center;
   z-index: 10;
-  transition: background var(--mo-base), border-color var(--mo-base);
+  transition: background 0.2s, border-color 0.2s;
 }
 
 .bbc-wb-video-section__playbtn:hover {
@@ -656,7 +656,7 @@
   font-size: 0.95rem;
   font-weight: 700;
   text-decoration: none;
-  transition: background var(--mo-base), color var(--mo-base), border-color var(--mo-base);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
   border: 2px solid transparent;
 }
 
@@ -786,7 +786,7 @@
   text-decoration: none;
   border-bottom: 1px solid var(--wb-gold);
   padding-bottom: 1px;
-  transition: color var(--mo-fast);
+  transition: color 0.15s;
 }
 
 .bbc-wb-quote__link:hover {
@@ -810,7 +810,7 @@
   font-size: 1rem;
   font-weight: 700;
   text-decoration: none;
-  transition: background var(--mo-base), color var(--mo-base), border-color var(--mo-base);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
   cursor: pointer;
 }
 
@@ -1056,7 +1056,7 @@
   font-size: 0.95rem;
   font-weight: 700;
   text-decoration: none !important;
-  transition: background var(--mo-base) ease, color var(--mo-base) ease, border-color var(--mo-base) ease;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   cursor: pointer;
   border: 2px solid transparent;
   white-space: nowrap;

@@ -40,6 +40,13 @@ const PROPS = [
   'textAlign', 'textDecorationLine', 'textTransform', 'opacity', 'gap', 'gridTemplateColumns',
   'flexDirection', 'alignItems', 'justifyContent', 'maxWidth', 'minHeight', 'zIndex', 'overflow',
   'boxShadow', 'transform',
+  // MOTION (added 2026-08-04). This net was built for the !important strip and captured only
+  // layout, colour and type — so it was structurally blind to timing. That matters now the motion
+  // tokens are being migrated: a green fingerprint would have "certified" a duration change it
+  // could not see, which is the exact failure shape ESCAPES keeps recording. Capturing the
+  // resolved duration/easing means a token migration can be PROVEN equivalent rather than argued.
+  'transitionDuration', 'transitionTimingFunction', 'transitionProperty',
+  'animationDuration', 'animationTimingFunction',
 ];
 
 function snapshot(props) {

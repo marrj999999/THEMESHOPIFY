@@ -30,9 +30,9 @@
   {%- endif -%}
 {%- endcapture -%}
 {%- if block.settings.url != blank -%}
-  <a class="rd-reveal rd-lg-link" href="{{ block.settings.url }}" target="_blank" rel="noopener" aria-label="{{ block.settings.text | escape }}" {{ block.shopify_attributes }}>{{ mark }}</a>
+  <a class="rd-lg-link" href="{{ block.settings.url }}" target="_blank" rel="noopener" aria-label="{{ block.settings.text | escape }}" {{ block.shopify_attributes }}>{{ mark }}</a>
 {%- else -%}
-  <span class="rd-reveal rd-lg-wrap" {{ block.shopify_attributes }}>{{ mark }}</span>
+  <span class="rd-lg-wrap" {{ block.shopify_attributes }}>{{ mark }}</span>
 {%- endif -%}
 
 {% stylesheet %}
