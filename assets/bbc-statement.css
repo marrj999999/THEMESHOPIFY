@@ -18,9 +18,17 @@
 .bbc-rd.bbcst-wrap.is-lime{ background:var(--lime,#D4FD62); }
 .bbc-rd.bbcst-wrap.is-steel{ background:#DEE6F0; }
 
-.bbc-rd .bbcst{ position:relative; padding:clamp(48px,7vw,120px) clamp(24px,5vw,90px); min-height:82vh; display:flex; flex-direction:column; justify-content:center; }
-.bbc-rd .bbcst.is-compact{ min-height:0; padding:clamp(44px,6vw,84px) clamp(24px,5vw,90px); }
-.bbc-rd .bbcst-inner{ position:relative; z-index:2; width:100%; text-align:left; }
+.bbc-rd .bbcst{ position:relative; padding:clamp(48px,7vw,120px) 0; min-height:82vh; display:flex; flex-direction:column; justify-content:center; }
+.bbc-rd .bbcst.is-compact{ min-height:0; padding:clamp(44px,6vw,84px) 0; }
+/* The statement band used its own full-bleed padding — clamp(24px,5vw,90px), which is 64px at
+   1280 — while every other band on the site is .rd-wrap: a 1200px box centred with 32px padding,
+   landing content at 72px. An 8px step, left-aligned, against the band directly above it. Too
+   small to read as a deliberate full-bleed break and too big to look accidental-free; it just
+   looks misaligned. Horizontal padding moves to this inner wrapper using .rd-wrap's exact
+   formula, so the band keeps its full-bleed background and its content tracks the page axis at
+   every width. (2026-08-05) */
+.bbc-rd .bbcst-inner{ position:relative; z-index:2; width:100%; text-align:left;
+  max-width:var(--rd-container); margin-inline:auto; padding-inline:32px; box-sizing:border-box; }
 
 /* eyebrow — lowercase label */
 .bbc-rd .bbcst-eyebrow{ display:block; font-size:15px; font-weight:800; letter-spacing:.01em; color:var(--forest,#003C32); margin:0 0 clamp(16px,2vw,26px); }
