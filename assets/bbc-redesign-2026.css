@@ -79,7 +79,14 @@
 .bbc-rd .rd-btn-sm{ min-height:40px; padding:9px 18px; font-size:14px; gap:7px; }
 .bbc-rd .rd-btn-lg{ min-height:56px; padding:18px 34px; font-size:17px; }
 .bbc-rd .rd-btn-block{ width:100%; }
-.bbc-rd .rd-btn .rd-arrow{ font-size:18px; }
+/* line-height:0 so the arrow draws at 18px but contributes NO height to the button's flex line.
+   Without it the 18px glyph sits in an 18px line box inside a 15px button, and the button grows
+   past its min-height: 50px with an arrow, 48px without. Put two side by side — every dark CTA
+   band on schools, workshops, programmes, our-story-2 and teambuilding does — and they are 2px
+   different heights. Fixing it here rather than raising min-height covers .rd-btn-sm (40px) and
+   .rd-btn-lg (56px) too, which have the same defect. The glyph stays 18px and flex centring is
+   unaffected. (2026-08-05) */
+.bbc-rd .rd-btn .rd-arrow{ font-size:18px; line-height:0; }
 
 /* sections / backgrounds */
 .bbc-rd .rd-section{ position:relative; }

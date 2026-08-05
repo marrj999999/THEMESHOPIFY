@@ -151,7 +151,11 @@
         {%- endif -%}{%- endfor -%}
       </div>
       {%- if section.settings.data_as_of != blank -%}<p class="rd-dataasof rd-on-dark">{{ section.settings.data_as_of }}</p>{%- endif -%}
-      {%- if section.settings.report_label != blank -%}<p class="rd-mt2 rd-on-dark"><a class="rd-textlink rd-reportlink" href="{{ section.settings.report_url | default: '/pages/impact-report' }}">{{ section.settings.report_label }} <span class="rd-arrow">&rarr;</span></a></p>{%- endif -%}
+    {%- comment -%} The underlined text link that used to sit here was a DUPLICATE: same
+      report_label condition, same report_url, same text as the pill button below, so the
+      stat band always rendered the identical CTA twice. PAGE-STANDARD's stat-band recipe is
+      eyebrow -> ghost numeral -> figures -> ONE CTA. S4 never caught it because S4 counts
+      .rd-btn only and this was a .rd-textlink. Removed 2026-08-05. {%- endcomment -%}
       {%- if section.settings.report_label != blank -%}<div class="rd-mt3"><a class="rd-btn rd-on-dark" href="{{ section.settings.report_url | default: '/pages/impact-report' }}">{{ section.settings.report_label }} <span class="rd-arrow">&rarr;</span></a></div>{%- endif -%}
     </div>
   </section>
