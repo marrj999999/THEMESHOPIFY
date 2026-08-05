@@ -77,6 +77,15 @@
 {%- elsif _len > 150 -%}{%- assign _auto = 'tall' -%}
 {%- endif -%}
 {%- assign _size = size | default: _auto -%}
+{%- comment -%}
+  item_tag: the grid-cell wrapper. Defaults to `li` so every existing caller is untouched —
+  bbc-stories-band renders these inside <ul role="list">, which is correct. But theme BLOCKS
+  (blocks/bbc-case-study.liquid) render into whatever container the editor built, and on
+  /pages/why-bamboo that is a bbc-group <div>. An <li> with no list parent loses its listitem
+  role, which axe reports as serious (listitem x5, found 2026-08-05). The block path passes
+  'div'; the card inside is already an <article>, so no semantics are lost.
+{%- endcomment -%}
+{%- assign _tag = item_tag | default: 'li' -%}
 
 {%- assign _v = variant | default: 'grid' -%}
 {%- assign _cta = cta | default: 'Read the story' -%}
@@ -109,7 +118,7 @@
   elements did — the grids sat dead still while everything around them moved. The motion itself is
   governed by the estate's reduced-motion rules; this only opts the card into the existing system.
 {%- endcomment -%}
-<li class="rd-cscard-item rd-reveal" data-size="{{ _size }}"{% if anchor != blank %} id="{{ anchor }}"{% endif %}>
+<{{ _tag }} class="rd-cscard-item rd-reveal" data-size="{{ _size }}"{% if anchor != blank %} id="{{ anchor }}"{% endif %}>
   <article class="rd-cscard rd-cscard--{{ _v }}{% if youtube != blank or video_file != blank %} rd-cscard--video{% endif %}"
            data-family="{{ _fam }}"
            {% if _kind_slug != blank %}data-kind="{{ _kind_slug }}"{% endif %}>
@@ -193,4 +202,4 @@
 
     </div>
   </article>
-</li>
+</{{ _tag }}>

@@ -47,13 +47,20 @@
   <div class="bbc-press__reel" data-bbc-reel>
     <button class="bbc-press__pause" type="button" aria-pressed="false" aria-label="Pause the press quotes">&#10073;&#10073;</button>
     <div class="bbc-press__track">
+      {%- comment -%}
+        Pass 2 is the marquee's duplicate set — it exists only so the strip scrolls seamlessly.
+        It carried aria-hidden="true" but its eight links stayed in the tab order, so keyboard
+        users tabbed into content screen readers had been told to ignore (axe aria-hidden-focus,
+        found 2026-08-05). `inert` removes it from focus AND the a11y tree; tabindex="-1" is the
+        fallback for anything without inert support.
+      {%- endcomment -%}
       {%- for pass in (1..2) -%}
-      <div class="bbc-press__set"{% if pass == 2 %} aria-hidden="true"{% endif %}>
+      <div class="bbc-press__set"{% if pass == 2 %} aria-hidden="true" inert{% endif %}>
         {%- for q in _reelq -%}
           {%- assign f = q | split: '~' -%}
           <figure class="bbc-press__q">
             <blockquote>&ldquo;{{ f[0] | strip }}&rdquo;</blockquote>
-            <figcaption><a href="{{ f[2] | strip }}{% if f[2] contains '?' %}&{% else %}?{% endif %}ref=press-block"{% if f[2] contains '//' %} target="_blank" rel="noopener"{% endif %}>{{ f[1] | strip }}</a></figcaption>
+            <figcaption><a href="{{ f[2] | strip }}{% if f[2] contains '?' %}&{% else %}?{% endif %}ref=press-block"{% if f[2] contains '//' %} target="_blank" rel="noopener"{% endif %}{% if pass == 2 %} tabindex="-1"{% endif %}>{{ f[1] | strip }}</a></figcaption>
           </figure>
         {%- endfor -%}
       </div>
