@@ -46,9 +46,18 @@ Two things to copy:
 1. **A light breather sits between the dark hero and the next dark band.** On Impact that is the
    steel band. It is why the stat band can be dark at all without breaking S3 — and it is the
    single mechanism the other pages are missing.
-2. **The stat band is dark**, which is what turns the figures lime. The figures themselves are
-   identical sitewide (52px/800, Atkinson, ls −1.04px); only the surface under them differs, and
-   the colour follows the surface automatically.
+2. **The stat band is dark**, which is what turns the figures lime.
+
+   ⚠️ **"The figures are identical sitewide" was wrong — corrected 2026-08-05.** That held on the
+   draft and was measured there. On the **live** theme `/pages/why-bamboo` renders no `.rd-num`
+   at all: its largest figures are `.wbx-num` at **32px/800 forest**, a one-off class belonging to
+   `bbc-comparison.liquid` that never joined the `rd-*` system. Impact's are `.rd-num` at
+   **52px/800 lime**. So on live it is not just the surface underneath — it is a different
+   component at a different size in a different colour, which is exactly what James kept seeing.
+
+   The draft already closes most of this: why-bamboo's stat band now renders `.rd-num` at
+   52px/800, matching Impact. What remains there is only the colour — still forest rather than
+   lime, because the band is paper rather than dark, which is the breather-band decision below.
 
 ### The stat band recipe
 
