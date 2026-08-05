@@ -153,5 +153,10 @@ rows.filter(r => !r.err).forEach(r => console.log(`  ${r.path}\n     ${r.seq}`))
 
 const DAY = new Date().toISOString().slice(0, 10);
 mkdirSync(`qa/evidence/${DAY}`, { recursive: true });
-writeFileSync(`qa/evidence/${DAY}/page-standard.json`, JSON.stringify(rows, null, 2));
-console.log(`\n→ qa/evidence/${DAY}/page-standard.json`);
+// Scope the filename. A 2-page spot-check was overwriting the 66-page sweep's evidence, so the
+// estate record silently became whatever ran last — and reading it back later reported "2 pages
+// in the band system". Same family as the four audits that overwrote their own evidence via a
+// hardcoded date (2026-08-03). Full sweeps keep the canonical name. (2026-08-05)
+const SCOPE = PAGES.length >= ALL_PAGES.length - 4 ? '' : `-partial-${PAGES.length}p`;
+writeFileSync(`qa/evidence/${DAY}/page-standard${SCOPE}.json`, JSON.stringify(rows, null, 2));
+console.log(`\n→ qa/evidence/${DAY}/page-standard${SCOPE}.json`);
