@@ -51,6 +51,8 @@
     
     {%- if section.settings.show_collection_info -%}
     <div class="collection-info">
+{%- comment -%} LAW 9 (CONSISTENCY-SPEC 2026-08-07): breadcrumb on collection pages {%- endcomment -%}
+<nav class="rd-crumb rd-crumb--onlight" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep" aria-hidden="true">/</span><span aria-current="page">{{ collection.title | escape }}</span></nav>
       <h1 class="collection-title">
         {{ collection.title | default: page_title }}
       </h1>

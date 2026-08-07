@@ -147,6 +147,8 @@
 
   <div class="collection-banner__content page-width">
     {%- if section.settings.show_title -%}
+{%- comment -%} LAW 9 (CONSISTENCY-SPEC 2026-08-07): breadcrumb on collection pages {%- endcomment -%}
+<nav class="rd-crumb rd-crumb--onlight" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep" aria-hidden="true">/</span><span aria-current="page">{{ collection.title | escape }}</span></nav>
       <h1 class="collection-banner__title">
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
         {{- banner_title | escape -}}
@@ -207,13 +209,13 @@
       "type": "color",
       "id": "overlay_color",
       "label": "Overlay color",
-      "default": "#073e27"
+      "default": "#003C32"
     },
     {
       "type": "color",
       "id": "fallback_background",
       "label": "Background (no image)",
-      "default": "#073e27",
+      "default": "#003C32",
       "info": "Used when no image is set"
     },
     {

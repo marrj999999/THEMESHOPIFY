@@ -1,0 +1,38 @@
+/* ============================================================================
+   BBC CONSISTENCY LAYER — qa/CONSISTENCY-SPEC.md made executable (2026-08-07)
+   Loaded LAST from theme.liquid so the laws win the cascade.
+   Each rule cites its law. Keep this sheet small: when a law can be fixed at
+   source (as Law 1 was, in bbc-redesign-2026.css), fix it there instead.
+   ========================================================================== */
+
+/* LAW 2 — buttons are pills; the header CTA joins the system */
+.rd-nav-cta { border-radius: 999px !important; }
+
+/* LAW 2 — pills never carry underlines (underline = tertiary link signifier) */
+.bbc-rd .rd-btn, .rd-btn, .rd-btn:link, .rd-btn:visited { text-decoration: none !important; }
+
+/* LAW 3 — chips are tags: one case, everywhere (uppercase never breaks proper nouns) */
+/* !important: section inline <style> blocks load after this sheet and win otherwise.
+   Uppercase never breaks proper nouns, so the blast radius is safe. */
+.bbc-rd [class*="chip"], [class*="__chip"], .ew-tag, .rd-path__chip, .rd-dlcard__badge {
+  text-transform: uppercase !important; letter-spacing: .06em; }
+.bbcpl-qtag { text-transform: uppercase; letter-spacing: .05em; margin-right: 8px; }
+
+/* LAW 3 — gold is retired: legacy gold badge re-pointed to the 2026 palette */
+.bbc-badge--gold {
+  background: var(--lime, #D4FD62) !important;
+  color: #0B2B24 !important;
+  border-color: #0B2B24 !important;
+}
+
+/* LAW 4 — legacy quote card de-rounded (sustainability et al) */
+.bbc-quote { border-radius: 0 !important; }
+
+/* LAW 9 — breadcrumb usable outside .bbc-rd scope (Dawn collection/blog pages) */
+.rd-crumb { display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 700; margin-bottom: 14px; }
+.rd-crumb .rd-sep { opacity: .5; }
+.rd-crumb--onlight, .rd-crumb--onlight a { color: var(--ink, #0E1A17); }
+.rd-crumb--onlight a { opacity: .75; text-decoration: none; }
+.rd-crumb--onlight a:hover, .rd-crumb--onlight a:focus-visible { opacity: 1; text-decoration: underline; }
+.rd-crumb--onlight { margin: 18px 0 4px; }

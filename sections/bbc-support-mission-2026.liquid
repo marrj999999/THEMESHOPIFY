@@ -131,7 +131,7 @@
       <h2 class="rd-reveal bbc-sup__sr">One Maker's story</h2>
       <figure class="bbc-sup__quote">
         <blockquote><p>&ldquo;{{ section.settings.maker_quote }}&rdquo;</p></blockquote>
-        <figcaption>&mdash; {{ section.settings.maker_attribution | default: 'A Build to Bond Maker' }}</figcaption>
+        <figcaption>{{ section.settings.maker_attribution | default: 'Maker · Build to Bond' }}</figcaption>
       </figure>
       {%- if section.settings.maker_note != blank -%}
         <p class="bbc-sup__quote-note">{{ section.settings.maker_note }}</p>
@@ -495,7 +495,7 @@
       "id": "maker_attribution",
       "label": "Attribution",
       "info": "Programme-level only, e.g. 'A Build to Bond Maker' — never a name.",
-      "default": "A Build to Bond Maker"
+      "default": "Maker · Build to Bond"
     },
     {
       "type": "text",

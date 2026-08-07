@@ -96,7 +96,7 @@
           <input type="hidden" name="contact[tags]" value="newsletter">
           <div class="rd-news-form">
             <input type="email" name="contact[email]" aria-label="Email address" placeholder="{{ section.settings.news_placeholder | default: 'you@email.com' }}" required>
-            <button type="submit" class="rd-btn rd-lime rd-btn-sm" name="commit">{{ section.settings.news_cta | default: 'Subscribe' }}</button>
+            <button type="submit" class="rd-btn rd-lime rd-btn-sm" name="commit">{{ section.settings.news_cta | default: 'subscribe' }}</button>
             {%- if form.posted_successfully? -%}<p class="rd-news-ok">Thanks — you're on the list.</p>{%- endif -%}
           </div>
         {%- endform -%}
@@ -222,7 +222,7 @@
       "type": "text",
       "id": "news_cta",
       "label": "Button label",
-      "default": "Subscribe"
+      "default": "subscribe"
     },
     {
       "type": "header",

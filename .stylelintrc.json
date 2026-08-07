@@ -6,7 +6,7 @@
       {
         "ignoreValues": ["inherit", "transparent", "currentColor", "currentcolor", "initial", "unset", "revert", "0", "auto", "none", "/var\\(/", "/^1[0-9]px$/", "/^[0-9.]+r?em$/", "/clamp/", "/^#fff$/i", "/^#000$/i"],
         "disableFix": true,
-        "severity": "warning"
+        "severity": "error"
       }
     ]
   }

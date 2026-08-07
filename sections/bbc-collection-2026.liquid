@@ -12,11 +12,15 @@
     <div class="rd-wrap rd-coll-head">
       <span class="rd-eyebrow">{%- if section.settings.eyebrow != blank -%}{% if collection.handle == 'home-build-kits' or collection.handle == 'road' or collection.handle == 'gravel-adventure' or collection.handle == 'mtb' or collection.handle == 'balance-bikes' %}{{ section.settings.eyebrow }}{% else %}Everything we make{% endif %}{%- elsif collection.handle == 'gift' -%}Give a build{%- elsif collection.handle == 'maker-shop' -%}From our workshop{%- else -%}Build at home{%- endif -%}</span>
       {%- if collection -%}
+{%- comment -%} LAW 9 (CONSISTENCY-SPEC 2026-08-07): breadcrumb {%- endcomment -%}
+<nav class="rd-crumb rd-crumb--onlight" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep" aria-hidden="true">/</span><span aria-current="page">{{ collection.title | escape }}</span></nav>
         <h1>{{ collection.title }}</h1>
         {%- if collection.description != blank -%}
           <div class="rd-lede rd-mt2 rd-mw-62ch">{{ collection.description }}</div>
         {%- endif -%}
       {%- else -%}
+{%- comment -%} LAW 9 (CONSISTENCY-SPEC 2026-08-07): breadcrumb {%- endcomment -%}
+<nav class="rd-crumb rd-crumb--onlight" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep" aria-hidden="true">/</span><span aria-current="page">{{ collection.title | escape }}</span></nav>
         <h1>{{ section.settings.fallback_title | default: 'frame kits' }}</h1>
       {%- endif -%}
     </div>

@@ -18,6 +18,8 @@
 
 {%- paginate blog.articles by 6 -%}
   <div class="main-blog page-width section-{{ section.id }}-padding">
+{%- comment -%} LAW 9 (CONSISTENCY-SPEC 2026-08-07): breadcrumb on blog pages {%- endcomment -%}
+<nav class="rd-crumb rd-crumb--onlight" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep" aria-hidden="true">/</span><span aria-current="page">{{ blog.title | escape }}</span></nav>
     <h1 class="title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       {{ blog.title | escape }}
     </h1>

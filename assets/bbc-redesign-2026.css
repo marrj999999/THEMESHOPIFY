@@ -34,7 +34,7 @@
 .bbc-rd h2{ font-size:clamp(30px,4vw,46px); }
 .bbc-rd h3{ font-size:clamp(22px,2.4vw,30px); letter-spacing:-.01em; }
 .bbc-rd p{ text-wrap:pretty; }
-.bbc-rd .rd-eyebrow{ display:inline-block; font-weight:700; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:var(--subtle); margin:0 0 14px; }
+.bbc-rd .rd-eyebrow{ display:inline-block; font-weight:700; font-size:14px; letter-spacing:.14em; text-transform:lowercase; /* LAW 1 (CONSISTENCY-SPEC 2026-08-07): central lowercase — ends the caps war */ color:var(--subtle); margin:0 0 14px; }
 .bbc-rd .rd-eyebrow.rd-on-dark{ color:var(--lime); }
 /* Eyebrows take their colour from the BAND, not from a hand-applied class. 2026-07-31: the home
    page's impact band carried plain .rd-eyebrow on a .rd-dark surface, so it inherited

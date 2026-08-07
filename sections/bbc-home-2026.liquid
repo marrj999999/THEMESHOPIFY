@@ -24,7 +24,7 @@
     {%- comment -%} ---------- HERO — Editorial Workbench: masked paint-on draw -> photo resolve (2026-06-12) ---------- {%- endcomment -%}
 
   <style>
-    .bbc-rd-home .ew{ --citron:#B9E84A; --shadow-green:#06231C; --pine:#0E4E40; --moss:#5E7355;
+    .bbc-rd-home .ew{ --citron:var(--lime,#D4FD62); /* LAW 8: private citron retired → lime */ --shadow-green:#06231C; --pine:#0E4E40; --moss:#5E7355;
       position:relative; display:grid; grid-template-columns:0.82fr 1fr; min-height:90vh; min-height:90svh;
       background:var(--forest); overflow:hidden; isolation:isolate; }
     .bbc-rd-home .ew-copy{ position:relative; z-index:3; display:flex; flex-direction:column; justify-content:flex-end;
@@ -36,7 +36,7 @@
       font-size:clamp(46px,6.6vw,92px); line-height:.95; letter-spacing:-.025em; color:var(--bone); margin:0; text-wrap:balance; }
     .bbc-rd-home .ew-fwd{ display:block; font-style:italic; font-weight:700; color:var(--citron); }
     .bbc-rd-home .ew-lede{ font-family:'Atkinson Hyperlegible',var(--rd-sans),sans-serif; font-size:clamp(17px,1.4vw,20px);
-      line-height:1.5; color:#EFEAD8; max-width:42ch; margin:24px 0 0; }
+      line-height:1.5; color:var(--bone,#E6DCC8); max-width:42ch; margin:24px 0 0; }
     .bbc-rd-home .ew-cta{ display:flex; gap:14px; flex-wrap:wrap; margin:34px 0 0; }
     .bbc-rd-home .ew-btn{ font-family:var(--rd-sans),sans-serif; display:inline-flex; align-items:center;
       justify-content:center; gap:9px; font-weight:800; font-size:16px; line-height:1; min-height:52px; padding:0 26px;
@@ -633,7 +633,7 @@
              url: '/blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike',
              context: 'One frame, built by hand, ridden every day for a decade.',
              image: 'bbc-rd-bike-field.jpg',
-             cta: 'Read his story' -%}
+             cta: 'read the story' -%}
       </ul>
       <ul class="rd-pressquotes rd-mt3" role="list">
         <li class="rd-pressquote rd-reveal"><p>Bamboo naturally dampens vibration, allowing the smoothest ride.</p><cite>The Guardian</cite></li>

@@ -11,6 +11,8 @@
   <section class="rd-pad-sm rd-paper">
     <div class="rd-wrap rd-coll-head">
       <span class="rd-eyebrow">{{ section.settings.eyebrow | default: 'Club news' }}</span>
+{%- comment -%} LAW 9 (CONSISTENCY-SPEC 2026-08-07): breadcrumb {%- endcomment -%}
+<nav class="rd-crumb rd-crumb--onlight" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep" aria-hidden="true">/</span><span aria-current="page">{{ blog.title | escape }}</span></nav>
       <h1>{{ blog.title | default: section.settings.fallback_title | default: 'news' }}</h1>
       {%- if section.settings.intro != blank -%}<div class="rd-lede rd-mt2 rd-mw-62ch">{{ section.settings.intro }}</div>{%- endif -%}
     </div>

@@ -5,7 +5,9 @@
   "scripts": {
     "test": "playwright test",
     "test:headed": "playwright test --headed",
-    "test:ui": "playwright test --ui"
+    "test:ui": "playwright test --ui",
+    "lint:css": "stylelint 'assets/**/*.css'",
+    "check:consistency": "node qa/consistency-check.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
