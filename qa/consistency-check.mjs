@@ -15,7 +15,7 @@ const PAGES = ['/', '/pages/impact', '/pages/workshops', '/pages/schools',
 const b = await chromium.launch({ channel: 'chrome' });
 const page = await (await b.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce' })).newPage();
 
-const R = { kickersCaps: [], pillRadius: [], pillUnderline: [], retiredGreen: [],
+const R = { kickersCaps: [], pillRadius: [], pillUnderline: [], cardAnchorUnderline: [], retiredGreen: [],
   chipCaseMix: [], attrDash: [], attrMidDash: [], actionChips: [], qtagRunon: [], statNoSource: [], crumbMissing: [], fontLeak: [] };
 
 for (const path of PAGES) {
@@ -44,6 +44,11 @@ for (const path of PAGES) {
           const r = parseFloat(c.borderRadius); if (r < 60) out.pillRadius.push((e.textContent || '').trim().slice(0, 24));
           if (c.textDecorationLine.includes('underline')) out.pillUnderline++;
         }
+      });
+      // LAW 2b: card anchors must not draw ancestor underlines through children
+      document.querySelectorAll('a.rd-door, a.rd-path, a.rd-cscard, a.rd-logocell').forEach(a => {
+        if (!vis(a)) return;
+        if (cs(a).textDecorationLine.includes('underline')) out.cardAnchorUnderline = (out.cardAnchorUnderline || 0) + 1;
       });
       document.querySelectorAll('[class*="chip"], .rd-tag, .bbcpl-qtag').forEach(e => {
         if (!vis(e) || !(e.textContent || '').trim()) return;
@@ -74,6 +79,7 @@ for (const path of PAGES) {
     if (d.kickersCaps) R.kickersCaps.push(`${path} ×${d.kickersCaps}`);
     if (d.pillRadius.length) R.pillRadius.push(`${path}: ${d.pillRadius.join('|')}`);
     if (d.pillUnderline) R.pillUnderline.push(`${path} ×${d.pillUnderline}`);
+    if (d.cardAnchorUnderline) R.cardAnchorUnderline.push(`${path} ×${d.cardAnchorUnderline}`);
     if (d.retiredGreen) R.retiredGreen.push(`${path} ×${d.retiredGreen}`);
     if (d.chipCases.length > 1) R.chipCaseMix.push(`${path}: ${d.chipCases.join('+')}`);
     if (d.attrDash.length) R.attrDash.push(`${path}: ${d.attrDash.join('|')}`);
@@ -92,6 +98,7 @@ const HARD = [
   ['LAW 1 · kickers render lowercase', R.kickersCaps],
   ['LAW 2 · filled CTAs are pills (radius ≥60)', R.pillRadius],
   ['LAW 2 · no underlines inside pills', R.pillUnderline],
+  ['LAW 2b · card anchors carry no ancestor underline', R.cardAnchorUnderline],
   ['LAW 4 · no leading-dash attributions', R.attrDash],
   ['LAW 3 · chips are tags, not actions', R.actionChips],
   ['LAW 4 · peer-reviewed tag not run-on', R.qtagRunon],

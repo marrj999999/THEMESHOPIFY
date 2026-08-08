@@ -205,3 +205,34 @@
 /* Legacy .faq-item (size-guide) joins the accordion canon: bordered stamped card,
    radius trio 6px (was borderless 8px). Holds until the Tier-R rebuild replaces the page. */
 .faq-item{ border:2px solid var(--ink,#0E1A17) !important; border-radius:6px !important; }
+
+/* ==================================================================
+   MOBILE-REALITY PASS — 2026-08-08, from James's iPhone screenshots.
+   Five defects the instruments baselined as "approved state" or that
+   only reproduce on iOS. Each rule notes its defect.
+   ================================================================== */
+/* iOS Safari font boosting inflated stat values unevenly (ragged
+   hero numbers on home/impact/PDP). Kill boosting globally. */
+html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+/* Card anchors drew link underlines through every child (titles, body,
+   even pill labels) — ancestor-propagated decoration that per-child
+   `none` cannot remove, so it must die on the anchor itself. */
+.bbc-rd a.rd-door, .bbc-rd a.rd-door *,
+.bbc-rd a.rd-path, .bbc-rd a.rd-path *,
+.bbc-rd a.rd-cscard, .bbc-rd a.rd-cscard *,
+.bbc-rd a.rd-logocell, .bbc-rd a.rd-logocell *,
+.bbc-rd-home a.rd-door, .bbc-rd-home a.rd-door *{ text-decoration:none !important; }
+/* Hover feedback keeps its underline on the TITLE only. */
+.bbc-rd a.rd-cscard:hover .rd-cscard__title,
+.bbc-rd a.rd-door:hover h3, .bbc-rd a.rd-path:hover h3{ text-decoration:underline !important; text-decoration-thickness:2px !important; text-underline-offset:3px !important; }
+/* Hero proof rows: top-align values, stop the third stat orphan-wrapping
+   at phone widths (impact's "2012" wrapped below the row). */
+.bbc-rd .rd-heroproof, .bbc-rd-home .ew-proof{ align-items:flex-start !important; }
+.bbc-rd .rd-heroproof li span, .bbc-rd-home .ew-proof li span{ max-width:14ch; }
+@media(max-width:480px){
+  .bbc-rd .rd-heroproof{ gap:10px 18px !important; }
+  .bbc-rd-home .ew-proof{ gap:10px 18px !important; }
+}
+/* Stat source micro-line was ink-on-forest (~1.4:1) on dark heroes. */
+.bbc-rd-home .rd-stat-src, .bbc-rd .rd-dark .rd-stat-src, .bbc-rd.rd-dark .rd-stat-src,
+.bbc-rd .rd-hero .rd-stat-src{ color:var(--bone,#E6DCC8) !important; }
