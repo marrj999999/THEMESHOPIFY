@@ -2,15 +2,9 @@
  {
   "kickers": [
    {
-    "size": 12,
+    "size": 13,
     "lower": true,
     "dash": false,
-    "w": 800
-   },
-   {
-    "size": 14,
-    "lower": true,
-    "dash": true,
     "w": 700
    },
    {
@@ -62,10 +56,16 @@
     "w": 700
    },
    {
-    "size": 15,
+    "size": 14,
+    "lower": true,
+    "dash": true,
+    "w": 700
+   },
+   {
+    "size": 14,
     "lower": true,
     "dash": false,
-    "w": 800
+    "w": 700
    }
   ],
   "buttons": [
@@ -1550,10 +1550,10 @@
     "w": 700
    },
    {
-    "size": 15,
+    "size": 14,
     "lower": true,
     "dash": false,
-    "w": 800
+    "w": 700
    },
    {
     "size": 14,
@@ -4509,215 +4509,6 @@
   "path": "/pages/size-guide"
  },
  {
-  "kickers": [
-   {
-    "size": 14,
-    "lower": true,
-    "dash": true,
-    "w": 700
-   },
-   {
-    "size": 14,
-    "lower": true,
-    "dash": true,
-    "w": 700
-   },
-   {
-    "size": 14,
-    "lower": true,
-    "dash": true,
-    "w": 700
-   },
-   {
-    "size": 14,
-    "lower": true,
-    "dash": true,
-    "w": 700
-   },
-   {
-    "size": 14,
-    "lower": true,
-    "dash": true,
-    "w": 700
-   },
-   {
-    "size": 15,
-    "lower": true,
-    "dash": false,
-    "w": 800
-   },
-   {
-    "size": 14,
-    "lower": true,
-    "dash": true,
-    "w": 700
-   },
-   {
-    "size": 14,
-    "lower": true,
-    "dash": true,
-    "w": 700
-   }
-  ],
-  "buttons": [
-   {
-    "pill": true,
-    "w700": true,
-    "fill": true,
-    "shadowOk": false
-   },
-   {
-    "pill": true,
-    "w700": true,
-    "fill": true,
-    "shadowOk": true
-   },
-   {
-    "pill": true,
-    "w700": true,
-    "fill": false,
-    "shadowOk": true
-   },
-   {
-    "pill": true,
-    "w700": true,
-    "fill": false,
-    "shadowOk": true
-   },
-   {
-    "pill": true,
-    "w700": true,
-    "fill": true,
-    "shadowOk": true
-   }
-  ],
-  "chips": [
-   {
-    "caps": true,
-    "w": 700,
-    "size": 12,
-    "pill": true
-   },
-   {
-    "caps": true,
-    "w": 700,
-    "size": 14,
-    "pill": true
-   },
-   {
-    "caps": true,
-    "w": 700,
-    "size": 12,
-    "pill": true
-   },
-   {
-    "caps": true,
-    "w": 700,
-    "size": 12,
-    "pill": true
-   },
-   {
-    "caps": true,
-    "w": 700,
-    "size": 12,
-    "pill": true
-   },
-   {
-    "caps": true,
-    "w": 700,
-    "size": 12,
-    "pill": true
-   },
-   {
-    "caps": true,
-    "w": 700,
-    "size": 14,
-    "pill": true
-   },
-   {
-    "caps": true,
-    "w": 700,
-    "size": 14,
-    "pill": true
-   },
-   {
-    "caps": true,
-    "w": 700,
-    "size": 14,
-    "pill": true
-   },
-   {
-    "caps": true,
-    "w": 700,
-    "size": 14,
-    "pill": true
-   }
-  ],
-  "quotes": [
-   {
-    "hasAttr": true,
-    "grammarOk": true,
-    "typedMarks": false
-   },
-   {
-    "hasAttr": true,
-    "grammarOk": true,
-    "typedMarks": false
-   },
-   {
-    "hasAttr": true,
-    "grammarOk": true,
-    "typedMarks": false
-   }
-  ],
-  "doors": [],
-  "steps": [],
-  "accs": [
-   {
-    "bordered": true,
-    "plusGlyph": true
-   },
-   {
-    "bordered": true,
-    "plusGlyph": true
-   },
-   {
-    "bordered": true,
-    "plusGlyph": true
-   },
-   {
-    "bordered": true,
-    "plusGlyph": true
-   },
-   {
-    "bordered": true,
-    "plusGlyph": true
-   },
-   {
-    "bordered": true,
-    "plusGlyph": true
-   }
-  ],
-  "inputs": [
-   {
-    "stamped": true
-   }
-  ],
-  "crumb": {
-   "sep": true,
-   "current": true,
-   "links": 1
-  },
-  "logocells": [],
-  "media": [
-   {
-    "poster": true,
-    "chipCaps": true
-   }
-  ],
-  "path": "/pages/sustainability"
- },
- {
   "kickers": [],
   "buttons": [
    {
@@ -6682,8 +6473,8 @@
   ],
   "quotes": [
    {
-    "hasAttr": false,
-    "grammarOk": false,
+    "hasAttr": true,
+    "grammarOk": true,
     "typedMarks": false
    },
    {
@@ -6932,8 +6723,8 @@
   ],
   "quotes": [
    {
-    "hasAttr": false,
-    "grammarOk": false,
+    "hasAttr": true,
+    "grammarOk": true,
     "typedMarks": false
    },
    {
@@ -6943,7 +6734,7 @@
    },
    {
     "hasAttr": true,
-    "grammarOk": false,
+    "grammarOk": true,
     "typedMarks": false
    },
    {
@@ -7178,8 +6969,8 @@
   ],
   "quotes": [
    {
-    "hasAttr": false,
-    "grammarOk": false,
+    "hasAttr": true,
+    "grammarOk": true,
     "typedMarks": false
    },
    {
@@ -7424,8 +7215,8 @@
   ],
   "quotes": [
    {
-    "hasAttr": false,
-    "grammarOk": false,
+    "hasAttr": true,
+    "grammarOk": true,
     "typedMarks": false
    },
    {
@@ -7736,8 +7527,8 @@
   ],
   "quotes": [
    {
-    "hasAttr": false,
-    "grammarOk": false,
+    "hasAttr": true,
+    "grammarOk": true,
     "typedMarks": false
    },
    {
@@ -7998,8 +7789,8 @@
   ],
   "quotes": [
    {
-    "hasAttr": false,
-    "grammarOk": false,
+    "hasAttr": true,
+    "grammarOk": true,
     "typedMarks": false
    },
    {
@@ -8249,8 +8040,8 @@
   ],
   "quotes": [
    {
-    "hasAttr": false,
-    "grammarOk": false,
+    "hasAttr": true,
+    "grammarOk": true,
     "typedMarks": false
    },
    {
@@ -8495,8 +8286,8 @@
   ],
   "quotes": [
    {
-    "hasAttr": false,
-    "grammarOk": false,
+    "hasAttr": true,
+    "grammarOk": true,
     "typedMarks": false
    },
    {
@@ -8741,8 +8532,8 @@
   ],
   "quotes": [
    {
-    "hasAttr": false,
-    "grammarOk": false,
+    "hasAttr": true,
+    "grammarOk": true,
     "typedMarks": false
    },
    {
@@ -8982,8 +8773,8 @@
   ],
   "quotes": [
    {
-    "hasAttr": false,
-    "grammarOk": false,
+    "hasAttr": true,
+    "grammarOk": true,
     "typedMarks": false
    },
    {
@@ -9837,10 +9628,10 @@
  {
   "kickers": [
    {
-    "size": 18,
-    "lower": false,
+    "size": 14,
+    "lower": true,
     "dash": false,
-    "w": 400
+    "w": 700
    },
    {
     "size": 14,

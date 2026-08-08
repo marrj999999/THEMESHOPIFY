@@ -124,3 +124,6 @@
 .bbc-rd form input[type="text"], .bbc-rd form input[type="email"],
 .bbc-rd form input[type="tel"], .bbc-rd form textarea, .bbc-rd form select {
   border-width: 2px !important; border-radius: 6px !important; }
+
+/* article kicker joins the kicker DNA (was 18px/400 sentence-case lime) */
+.bbc-rd .rd-art-kicker{ font-size:14px !important; font-weight:700 !important; text-transform:lowercase !important; letter-spacing:.14em !important; }

@@ -13,7 +13,7 @@ export const ALL_PAGES = [
   '/pages/impact-report', '/pages/toulouse-workshop', '/pages/bicycle-frame-building-workshop',
   '/pages/media-page', '/pages/club-news', '/pages/support-centre',
   '/pages/team-building', '/pages/frequently-asked-questions', '/pages/james-marr-founder',
-  '/pages/size-guide', '/pages/sustainability', '/pages/cycle-to-work-scheme',
+  '/pages/size-guide', '/pages/cycle-to-work-scheme',
   '/pages/university-papers', '/pages/geometry', '/pages/gravel-geometry',
   '/pages/road-bike-geometry', '/pages/easy-build-geometry', '/pages/mini-velo-geometry',
   '/pages/whats-in-the-box', '/pages/gravel-frame-comparison', '/pages/privacy-policy',

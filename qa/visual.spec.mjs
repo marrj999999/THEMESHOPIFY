@@ -37,7 +37,6 @@ const PAGES = [
   ['pages-frequently-asked-questions', '/pages/frequently-asked-questions'],
   ['pages-james-marr-founder', '/pages/james-marr-founder'],
   ['pages-size-guide', '/pages/size-guide'],
-  ['pages-sustainability', '/pages/sustainability'],
   ['pages-cycle-to-work-scheme', '/pages/cycle-to-work-scheme'],
   ['pages-university-papers', '/pages/university-papers'],
   ['pages-geometry', '/pages/geometry'],
