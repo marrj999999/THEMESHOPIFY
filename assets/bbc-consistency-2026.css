@@ -204,4 +204,4 @@
 
 /* Legacy .faq-item (size-guide) joins the accordion canon: bordered stamped card,
    radius trio 6px (was borderless 8px). Holds until the Tier-R rebuild replaces the page. */
-.faq-item{ border:1.5px solid var(--ink,#0E1A17) !important; border-radius:6px !important; }
+.faq-item{ border:2px solid var(--ink,#0E1A17) !important; border-radius:6px !important; }
