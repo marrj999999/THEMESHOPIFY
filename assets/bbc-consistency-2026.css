@@ -108,3 +108,7 @@
 
 /* Legacy breadcrumb current-page colour normalised (FAQ lime one-off) */
 .bbc-rd [class*="breadcrumb"] [aria-current], .bbc-rd [class*="breadcrumb"] > span { color: inherit !important; }
+
+/* LAW: logos render in colour (locked brief) — styles.css (theme-only, not in repo)
+   greys them at rest (grayscale(1) + opacity .62). Overridden here, at-rest AND hover. */
+.bbc-rd .rd-logocell .rd-logoimg { filter: none !important; opacity: 1 !important; }
