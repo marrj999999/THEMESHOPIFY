@@ -174,7 +174,7 @@
 
               <div class="rd-flex rd-cmp-44006">
                 <button type="submit" name="add" class="rd-btn rd-lime rd-flex1-jc" {% unless product.available %}disabled{% endunless %}>
-                  {%- if product.available -%}Add to cart{%- else -%}Sold out{%- endif -%}
+                  {%- if product.available -%}Add to cart — <span data-atc-price>{{ cv.price | money_without_trailing_zeros | strip_html }}</span>{%- else -%}Sold out{%- endif -%}
                 </button>
                 {%- if section.settings.secondary_label != blank -%}
                   <a class="rd-btn rd-ghost" href="{{ section.settings.secondary_url | default: '/pages/bicycle-frame-building-workshop' }}">{{ section.settings.secondary_label }}</a>
@@ -583,7 +583,7 @@
   {%- if stats.size > 0 -%}
     <section class="rd-section rd-pad-sm rd-paper">
       <div class="rd-wrap">
-        <div class="rd-stats">
+        <div class="rd-stats rd-dim">
           {%- for block in stats -%}
             <div class="rd-stat" {{ block.shopify_attributes }}>
               <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
@@ -740,6 +740,19 @@
   })();
 </script>
 {%- endif -%}
+
+{%- comment -%} R2: live price in the ATC button (evaluated winner: parts' price-in-button) {%- endcomment -%}
+<script>
+  (function(){
+    var map = { {% for v in product.variants %}"{{ v.id }}":"{{ v.price | money_without_trailing_zeros | strip_html }}"{% unless forloop.last %},{% endunless %}{% endfor %} };
+    window.atcPriceMap = map;
+    document.addEventListener('change', function(e){
+      if (e.target && e.target.name === 'id' && map[e.target.value]) {
+        document.querySelectorAll('[data-atc-price]').forEach(function(el){ el.textContent = map[e.target.value]; });
+      }
+    });
+  })();
+</script>
 
 {% schema %}
 {

@@ -109,3 +109,8 @@ Never: white-on-lime, gold anywhere near lime, bone body text on paper, two fill
 3. our-story-2, build-to-bond, teambuilding, support-mission, remaining Tier 2
 4. Tier 3 buttons/type pass (one shared block)
 5. Retire page.about.json; archive dead sections
+
+## Named band variants (Rollout R2, 2026-08-08)
+- **mission-loop** — the You build → Profits fund → A life changes band, forest/display form (95px heading). Point-of-sale contexts: kit PDPs.
+- **mission-loop--compact** — steel/compact form (32px heading). Post-sell contexts: workshops. Both are official; anything else is drift.
+- Stat bands on paper take the **.rd-dim** dimension-tick modifier (the signature); dark hero rows stay clean.

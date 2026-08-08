@@ -86,3 +86,25 @@
 /* Home's private ew-btn hover joins the estate lift grammar */
 .ew-btn { transition: transform .18s ease, opacity .18s ease; }
 .ew-btn:hover { transform: translateY(-2px); opacity: 1; }
+
+/* ===== ROLLOUT R2 — markup-level winners ===== */
+
+/* Parts accordion joins the bordered +card canon */
+.bbc-accordion__item { border: 2px solid var(--ink, #0E1A17) !important; background: var(--paper2, #EDE5D4);
+  margin: 0 0 10px; border-radius: 0; }
+.bbc-accordion__trigger { display: flex; align-items: center; gap: 10px; width: 100%; padding: 14px 18px; }
+.bbc-accordion__glyph { margin-left: auto; font-weight: 700; }
+.bbc-accordion__glyph::before { content: "+"; }
+.bbc-accordion__trigger[aria-expanded="true"] .bbc-accordion__glyph::before { content: "\2212"; }
+
+/* Dimension-tick canon (rd-dim) aliased onto the why-bamboo band's acc-stats anatomy */
+.acc-stats { gap: clamp(20px, 4vw, 44px); }
+.acc-stats li { position: relative; padding-top: 18px; border: 0; }
+.acc-stats li::before { content: ""; position: absolute; top: 4px; left: 0; right: 0; height: 1px;
+  background: currentColor; opacity: .45; }
+.acc-stats li::after { content: ""; position: absolute; top: 0; left: 0; width: 1px; height: 9px;
+  background: currentColor; opacity: .45; box-shadow: calc(100%) 0; }
+.acc-stats li > b { display: block; }
+
+/* Legacy breadcrumb current-page colour normalised (FAQ lime one-off) */
+.bbc-rd [class*="breadcrumb"] [aria-current], .bbc-rd [class*="breadcrumb"] > span { color: inherit !important; }

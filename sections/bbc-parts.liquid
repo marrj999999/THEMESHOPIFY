@@ -66,11 +66,7 @@
     <div class="bbc-parts__info">
       
       {%- comment -%} Breadcrumb {%- endcomment -%}
-      <nav class="bbc-parts__breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Home</a> / 
-        <a href="/collections/maker-shop">Parts</a> / 
-        {{ product.title }}
-      </nav>
+      <nav class="rd-crumb rd-crumb--onlight" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep" aria-hidden="true">/</span><a href="/collections/maker-shop">Parts</a><span class="rd-sep" aria-hidden="true">/</span><span aria-current="page">{{ product.title }}</span></nav>
       
       {%- comment -%} Title {%- endcomment -%}
       <h1 class="bbc-parts__title">{{ product.title }}</h1>
@@ -200,9 +196,8 @@
         {%- comment -%} Compatibility {%- endcomment -%}
         <div class="bbc-accordion__item">
           <button type="button" class="bbc-accordion__trigger" aria-expanded="false">
-            {% render 'bbc-icons', icon: 'wrench', size: 20 %}
             <span>Compatibility</span>
-            {% render 'bbc-icons', icon: 'chevron-down', size: 20 %}
+            <span class="bbc-accordion__glyph" aria-hidden="true"></span>
           </button>
           <div class="bbc-accordion__content">
             <div class="bbc-accordion__content-inner">
@@ -216,7 +211,7 @@
           <button type="button" class="bbc-accordion__trigger" aria-expanded="false">
             {% render 'bbc-icons', icon: 'truck', size: 20 %}
             <span>Shipping & Returns</span>
-            {% render 'bbc-icons', icon: 'chevron-down', size: 20 %}
+            <span class="bbc-accordion__glyph" aria-hidden="true"></span>
           </button>
           <div class="bbc-accordion__content">
             <div class="bbc-accordion__content-inner">
@@ -230,9 +225,8 @@
         {%- comment -%} Need Help {%- endcomment -%}
         <div class="bbc-accordion__item">
           <button type="button" class="bbc-accordion__trigger" aria-expanded="false">
-            {% render 'bbc-icons', icon: 'help', size: 20 %}
             <span>Need Help?</span>
-            {% render 'bbc-icons', icon: 'chevron-down', size: 20 %}
+            <span class="bbc-accordion__glyph" aria-hidden="true"></span>
           </button>
           <div class="bbc-accordion__content">
             <div class="bbc-accordion__content-inner">
