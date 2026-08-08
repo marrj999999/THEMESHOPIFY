@@ -112,3 +112,9 @@
 /* LAW: logos render in colour (locked brief) — styles.css (theme-only, not in repo)
    greys them at rest (grayscale(1) + opacity .62). Overridden here, at-rest AND hover. */
 .bbc-rd .rd-logocell .rd-logoimg { filter: none !important; opacity: 1 !important; }
+
+/* ===== BASELINE CONFORMANCE fixes (instance-vs-baseline audit 2026-08-08) ===== */
+/* acc-stats joins the rd-stats 52px value tier */
+.acc-stats li > b { font-size: 52px; }
+/* parts h1 joins the commerce-hero tier (42px, was 30) */
+.bbc-parts__title { font-size: 42px !important; }
