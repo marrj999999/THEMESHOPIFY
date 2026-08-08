@@ -40,3 +40,7 @@
 /* LAW 6 — stat rows carry their source (Claims Register-backed only) */
 .rd-stat-src { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
   opacity: .65; margin: 10px 0 0; }
+
+/* LAW 7 — pasted page content cannot import fonts (the Calibri-on-sustainability case).
+   code/pre keep their monospace. */
+.rte *:not(code):not(pre):not(kbd) { font-family: inherit !important; }

@@ -104,3 +104,18 @@ See `qa/QA-LOG.md` (defects, fixes, James verdicts).
 | `rd-card.rd-stamp` de-box | ⬜ **James** | The remaining boxes. Data says de-box; the offset stamp is brand character across 18 sections — aesthetic call |
 
 **Gate hardening this pass:** ESCAPES #19–23. Most consequential is **#23 — a failing gate still allowed a push** (piped into `tail`, so `&&` read tail's exit code; and the pass-token survived an early `exit 1`). `gate-check.sh` now clears the token before any check runs; proven blocked.
+
+## Pages (Tier R — rogue pages, added 2026-08-08 from the consistency audit)
+*Off-system pages found by the 69-screen census (vault: Reports/Website Consistency Audit 2026-08-07).
+Treatment per page: Tier-3 recipe (buttons + eyebrow + 18px body, keep density) or fold & retire.*
+
+| Page | Today | Recommended treatment | Status |
+|---|---|---|---|
+| /pages/sustainability | legacy sections; Calibri via pasted content (CSS-neutralised 2026-08-08); embedded `<footer>` inside page body | fold into /pages/why-bamboo, 301 | ⬜ |
+| /pages/size-guide | legacy; gold chip (restyled 2026-08-07); feeds the three-size-systems problem | rebuild on bbc-page-2026 once PDP size truth is settled | ⬜ |
+| /pages/support-centre | Dawn rich-text, numbered Title headings | rebuild with 2026 FAQ/contact patterns | ⬜ |
+| /pages/privacy-policy | 115px display hero on legal text | Tier-3 recipe — density, no display hero | ⬜ |
+| /pages/club-news | H1 inherits ALL-CAPS page title | rename page title "Club news" (admin) + Tier-3 pass | ⬜ |
+| /pages/frequently-asked-questions | legacy bbc-faq + bbc-page-hero | re-point at 2026 FAQ pattern | ⬜ |
+| /pages/gallery | Tier-4 legacy sections (bbc-testimonials, bbc-page-hero) | re-point template at 2026 sections; retire legacy | ⬜ |
+| geometry pages ×5 (geometry, road, gravel, easy-build, mini-velo) | legacy small Title heroes | Tier-3 recipe; keep dense spec tables | ⬜ |

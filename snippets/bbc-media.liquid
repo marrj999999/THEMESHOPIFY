@@ -64,6 +64,14 @@
     <img class="bbc-media__img" src="{% if src contains '//' %}{{ src }}{% else %}{{ src | asset_url }}{% endif %}" alt="{{ alt | escape }}" loading="{{ loading | default: 'lazy' }}">
   {%- elsif fallback != blank -%}
     <img class="bbc-media__img" src="{{ fallback | asset_url }}" alt="{{ alt | escape }}" loading="{{ loading | default: 'lazy' }}">
+  {%- elsif _hasfile and video.preview_image != blank -%}
+    {%- comment -%} zero-config poster for uploaded files: the video's own preview frame.
+       Was the black-box case — file videos rendered no poster at all (2026-08-08). {%- endcomment -%}
+    <img class="bbc-media__img" src="{{ video.preview_image | image_url: width: 1400 }}"
+      srcset="{{ video.preview_image | image_url: width: 700 }} 700w, {{ video.preview_image | image_url: width: 1400 }} 1400w"
+      sizes="{{ sizes | default: '(max-width:749px) 100vw, 50vw' }}"
+      alt="{{ alt | escape }}" loading="{{ loading | default: 'lazy' }}"
+      width="{{ video.preview_image.width }}" height="{{ video.preview_image.height }}">
   {%- elsif _kind == 'youtube' and _vid != blank -%}
     {%- comment -%} zero-config poster: YouTube's own thumbnail {%- endcomment -%}
     <img class="bbc-media__img" src="https://i.ytimg.com/vi/{{ _vid | escape }}/maxresdefault.jpg" alt="{{ alt | escape }}" loading="{{ loading | default: 'lazy' }}" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://i.ytimg.com/vi/{{ _vid | escape }}/hqdefault.jpg'}">
