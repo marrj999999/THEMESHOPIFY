@@ -33,7 +33,7 @@
   font-size: 14px; font-weight: 700; margin-bottom: 14px; }
 .rd-crumb .rd-sep { opacity: .5; }
 .rd-crumb--onlight, .rd-crumb--onlight a { color: var(--ink, #0E1A17); }
-.rd-crumb--onlight a { opacity: .75; text-decoration: none; }
+.rd-crumb--onlight a { opacity: .75; text-decoration: underline; text-underline-offset: 2px; }
 .rd-crumb--onlight a:hover, .rd-crumb--onlight a:focus-visible { opacity: 1; text-decoration: underline; }
 .rd-crumb--onlight { margin: 18px 0 4px; }
 
