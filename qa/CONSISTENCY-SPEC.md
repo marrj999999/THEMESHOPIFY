@@ -25,3 +25,18 @@ until James amends it.*
 - Retired green `#073E27` still renders via Dawn button settings (2 buttons/page sitewide) + 5 schema defaults.
 - Same quote, two anatomies: Timpson (impact vs impact-report) · Maker quote (impact vs support-mission) — consolidation targets.
 - Census data + 69 full-page renders: session scratchpad `census/` (capture: Playwright, scroll-settled, preview URL).
+
+## Styling DNA (measured 2026-08-08, computed-style census over 12 pages)
+
+The fine-grain layer under the ten laws — normalised centrally in `bbc-consistency-2026.css`:
+
+| Property | The DNA | Was |
+|---|---|---|
+| Font weights | **400/700 only** — the loaded Atkinson faces. Declared 800 = browser-synthesised fake bold | 97 headings + 58 chips rendered synthetic 800 |
+| Hard offset shadow | size-scaled: 3px (small) · **4px (buttons)** · 5px (cards), ink or lime-700; **primary fills carry it, ghosts don't** | consistent — documented, not changed |
+| Corner radius | **0 (sharp) · 6px (stamped) · 999 (pill)** + the 8px rotated film-sticker exception | strays at 12/14px (doors, acc-cards) → 6px |
+| Kickers | lowercase · **.14em** tracking sitewide | home ran a private .04em |
+| Link underlines | **2px stroke / 3px offset** | 2px:1px split 81:14 |
+| Chip scales | two named sizes: tag **14px** · card-kind **11.5px**, both 700 | kind chips were 800 |
+| Hover grammar | pills: lift + (bg ghosts / shadow fills). Open: home `ew-btn` opacity-only dialect · clickable doors/cards give no hover feedback — pick a treatment |
+| Focus rings | 12 measured rings still retired-green `#073e27` via Dawn colour settings — **fixed by the same Settings → Colors change on James's list** |

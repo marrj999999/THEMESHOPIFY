@@ -48,3 +48,18 @@
 /* LAW 7 — Word-paste inline fonts (found outside .rte on legacy pages): the attribute
    selector out-specifies the inline style's font via !important. */
 [style*="font-family"]:not(code):not(pre) { font-family: inherit !important; }
+
+/* ===== STYLING DNA (2026-08-08 styling census) =====
+   Measured drift, normalised centrally. See qa/CONSISTENCY-SPEC.md §DNA. */
+
+/* No synthetic bold: only 400/700 Atkinson faces exist — declared 800 was
+   browser-faked (97 headings + 58 chips measured). */
+.bbc-rd h1, .bbc-rd h2, .bbc-rd h3, [class*="chip"], .rd-cscard__kind, .rd-tag {
+  font-weight: 700 !important; }
+
+/* Card radius trio is {0 sharp, 6 stamped, 999 pill}: strays normalised */
+.rd-door, .acc-card { border-radius: 6px !important; }
+
+/* One underline: 2px stroke, 3px offset (measured 81:14 majority) */
+.bbc-rd main a:not(.rd-btn):not(.rd-nav-cta):not([class*="card"]) {
+  text-decoration-thickness: 2px; text-underline-offset: 3px; }

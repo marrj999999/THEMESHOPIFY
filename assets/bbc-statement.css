@@ -172,7 +172,7 @@
   text-align:left;
 }
 /* eyebrows lowercase to match bbcst kickers */
-.bbc-rd.bbc-rd-home .rd-eyebrow{ text-transform:lowercase; letter-spacing:.04em; }
+.bbc-rd.bbc-rd-home .rd-eyebrow{ text-transform:lowercase; letter-spacing:.14em; }
 /* centered bands go left, per the standard */
 .bbc-rd.bbc-rd-home .rd-center{ text-align:left; }
 .bbc-rd.bbc-rd-home .rd-center h2{ margin-left:0; margin-right:0; }
@@ -186,7 +186,7 @@
 .bbc-rd.bbc-rd-home .rd-center [class*="rd-mw-"]{ margin-left:0; margin-right:auto; }
 /* the generated rd-cmp-* wrappers centre with !important — match it to pin left */
 .bbc-rd.bbc-rd-home .rd-center[class*="rd-cmp-"]{ margin-left:0 !important; margin-right:auto !important; }
-.bbc-rd.bbc-rd-home .ew-eyebrow{ text-transform:lowercase; letter-spacing:.04em; }
+.bbc-rd.bbc-rd-home .ew-eyebrow{ text-transform:lowercase; letter-spacing:.14em; }
 
 /* ============================================================
    REFINEMENT PASS 2026-07-07 — optimum sizes, one button
