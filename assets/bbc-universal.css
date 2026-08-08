@@ -60,7 +60,7 @@
 
   /* ---- Colour canon (2026 system; hex lives HERE only) ---- */
   --forest:#003C32; --forest-700:#002A23; --forest-300:#1F6655;
-  --teal:#3F8B66; --gold:#FFA900;
+  --teal:#3F8B66; --gold:#FFA900; /* retired — do not use */
   --lime:#D4FD62; --lime-700:#9BC02E; --lime-aaa:#c6f24e;
   --bone:#E6DCC8;            /* block-system "paper" surface */
   --paper:#F1E9D8;           /* rd in-page paper (kept, matches .bbc-rd) */
@@ -145,7 +145,7 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
    must read as a document, not eight mastheads (caught by the 2026-07-22 audit). */
 .bbc-rd .rd-prose h1,
 .bbc-rd .rd-prose h2{ font-size:clamp(21px,2.3vw,29px) !important; line-height:1.2 !important; letter-spacing:0 !important; font-weight:700; }
-.bbc-rd .rd-prose h3{ font-size:21px !important; line-height:1.25 !important; }
+.bbc-rd .rd-prose h3{ font-size:var(--fs-21) !important; line-height:1.25 !important; }
 
 /* ARTICLE HEADLINE role (blog posts — long editorial titles can run 8–12 words, so
    masthead display would wrap 6+ lines; audit 2026-07-22 found articles falling to
@@ -283,7 +283,7 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
 .bbc-rd .rd-hero nav.rd-crumb,.bbc-rd .rd-dark nav.rd-crumb,
 .bbc-rd .rd-hero nav.rd-crumb a,.bbc-rd .rd-dark nav.rd-crumb a,
 .bbc-rd.rd-dark nav.rd-crumb,
-.bbc-rd.rd-dark nav.rd-crumb a{ color:#e9efe7; }
+.bbc-rd.rd-dark nav.rd-crumb a{ color:var(--drift-e9efe7); }
 .bbc-rd .rd-hero nav.rd-crumb .rd-here,.bbc-rd .rd-dark nav.rd-crumb .rd-here,
 .bbc-rd.rd-dark nav.rd-crumb .rd-here{ color:var(--lime); opacity:1; }
 

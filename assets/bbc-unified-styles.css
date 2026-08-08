@@ -208,7 +208,7 @@
 }
 
 .collection .price--sale .price-item--sale {
-  color: #dc2626;
+  color: var(--drift-dc2626);
 }
 
 /* Card badges */
@@ -499,7 +499,7 @@ input[aria-invalid="true"] {
 }
 
 .field__message--error {
-  color: #dc2626;
+  color: var(--drift-dc2626);
   font-size: var(--bbc-text-xs);
   margin-top: var(--bbc-space-1);
 }

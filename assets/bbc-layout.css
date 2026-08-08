@@ -16,7 +16,7 @@ input,button,select,textarea,optgroup{
 /* 2) Kill the white band above the footer on every page: paint the page
    background brand shadow-green so browser-default white never shows in
    unpainted gaps (all sections paint their own background over this). */
-html,body{ background-color:#002A23 !important; }
+html,body{ background-color:var(--forest-700) !important; }
 /* 3) Mobile tap targets >= ~44px for nav + footer links */
 @media (max-width:749px){
   footer a, .rd-foot a{ display:inline-block; padding:9px 2px; }
@@ -27,7 +27,7 @@ html,body{ background-color:#002A23 !important; }
 /* 4) HOME-scoped fixes (kept here to avoid re-uploading the 56KB section).
    :not(#_a) lifts specificity above the .bbc-rd a:not(...){color:inherit!important}
    link-reset in bbc-redesign-2026.css. */
-.bbc-rd-home a.ew-btn.is-ghost:not(#_a){ color:#EDE6D6 !important; border-color:#EDE6D6 !important; }
+.bbc-rd-home a.ew-btn.is-ghost:not(#_a){ color:var(--drift-ede6d6) !important; border-color:#EDE6D6 !important; }
 .bbc-rd-home a.rd-card:not(#_a), .bbc-rd-home a.rd-card:not(#_a) *{ text-decoration:none !important; }
 .bbc-rd-home .rd-ph.rd-ar-43{ aspect-ratio:4 / 3; overflow:hidden; }
 .bbc-rd-home .rd-ph.rd-ar-43 > img{ width:100% !important; height:100% !important; object-fit:cover !important; display:block; }

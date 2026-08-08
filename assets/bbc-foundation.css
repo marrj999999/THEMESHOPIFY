@@ -76,7 +76,7 @@ body {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
   font-size: 1.125rem;
   line-height: 1.6;
-  color: #1e293b;
+  color: var(--drift-1e293b);
   background: #ffffff;
   min-height: 100vh;
 }
@@ -97,7 +97,7 @@ input, button, textarea, select {
 
 :root {
   /* Brand Colors */
-  --bbc-forest: #073e27;
+  --bbc-forest: #003C32; /* migrated from retired #073e27, 2026-08-08 */
   --bbc-forest-dark: #052e1d;
   --bbc-forest-light: #e8f0eb;
   --bbc-teal: #3f8b66;
@@ -276,7 +276,7 @@ input, button, textarea, select {
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;
+  font-size: var(--fs-24);
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
@@ -294,7 +294,7 @@ input, button, textarea, select {
   font-family: 'Material Symbols Rounded';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;
+  font-size: var(--fs-24);
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
@@ -312,13 +312,13 @@ input, button, textarea, select {
 .material-symbols-rounded.icon-sm { font-size: 18px; }
 
 .material-symbols-outlined.icon-md,
-.material-symbols-rounded.icon-md { font-size: 24px; }
+.material-symbols-rounded.icon-md { font-size: var(--fs-24); }
 
 .material-symbols-outlined.icon-lg,
-.material-symbols-rounded.icon-lg { font-size: 32px; }
+.material-symbols-rounded.icon-lg { font-size: var(--fs-32); }
 
 .material-symbols-outlined.icon-xl,
-.material-symbols-rounded.icon-xl { font-size: 48px; }
+.material-symbols-rounded.icon-xl { font-size: var(--fs-48); }
 
 /* =============================================================================
    3. TYPOGRAPHY
@@ -406,13 +406,13 @@ a:hover {
 .bbc-header__nav a,
 .bbc-header__actions a,
 .bbc-header__logo a {
-  color: #ffffff !important;
+  color: var(--white) !important;
   text-decoration: none;
 }
 
 .bbc-header__nav-link:hover,
 .bbc-header__nav a:hover {
-  color: #ffffff !important;
+  color: var(--white) !important;
   opacity: 0.9;
 }
 
@@ -422,29 +422,29 @@ a:hover {
 .bbc-header__mobile-nav a,
 .bbc-header__mobile-section a,
 .bbc-header__mobile-section summary {
-  color: #073e27 !important; /* Dark green on white */
+  color: var(--forest) !important; /* Dark green on white */
   text-decoration: none;
 }
 
 .bbc-header__mobile-section ul a {
-  color: #555555 !important; /* Slightly lighter for sub-items */
+  color: var(--drift-555555) !important; /* Slightly lighter for sub-items */
 }
 
 .bbc-header__mobile-menu a:hover,
 .bbc-header__mobile-link:hover {
-  color: #3f8b66 !important; /* BBC Teal on hover */
+  color: var(--teal) !important; /* BBC Teal on hover */
 }
 
 /* Mobile menu header (dark green bar at top) */
 .bbc-header__mobile-menu-header,
 .bbc-header__mobile-menu-header * {
-  color: #ffffff !important;
+  color: var(--white) !important;
 }
 
 /* Dawn mobile drawer (fallback) */
 .menu-drawer a,
 .menu-drawer__menu-item {
-  color: #073e27 !important;
+  color: var(--forest) !important;
 }
 
 /* Footer - all links white or gold */
@@ -461,13 +461,13 @@ a:hover {
 .bbc-footer a:hover,
 .bbc-footer__nav-list a:hover,
 .bbc-footer__contact-item a:hover {
-  color: #ffa900 !important; /* BBC Gold on hover */
+  color: var(--drift-ffa900) !important; /* BBC Gold on hover */
 }
 
 /* Announcement bar */
 .bbc-header__announcement a,
 .announcement-bar a {
-  color: #ffa900 !important; /* BBC Gold */
+  color: var(--drift-ffa900) !important; /* BBC Gold */
 }
 
 /* Dark section containers - generic override */
@@ -476,7 +476,7 @@ a:hover {
 [style*="background: var(--bbc-forest)"] a,
 .section--dark a,
 .bg-forest a {
-  color: #ffffff !important;
+  color: var(--white) !important;
 }
 
 /* Common dark BBC sections */
@@ -496,7 +496,7 @@ a:hover {
 .bbc-social-impact a,
 .bbc-trust-bar a,
 .bbc-video-hero a {
-  color: #ffffff !important;
+  color: var(--white) !important;
 }
 
 /* Hero sections with dark overlays */
@@ -506,7 +506,7 @@ a:hover {
 .bbc-hero-v2 a,
 .bbc-kit-hero a,
 .bbc-page-hero a {
-  color: #ffffff !important;
+  color: var(--white) !important;
 }
 
 /* Buttons in dark sections should stay as designed */
@@ -521,7 +521,7 @@ a:hover {
 .bbc-header__dropdown-simple a,
 .mega-menu a,
 .header__submenu a {
-  color: #333333 !important; /* Dark text on white dropdown */
+  color: var(--drift-333333) !important; /* Dark text on white dropdown */
 }
 
 .bbc-header__dropdown a:hover,
@@ -1347,7 +1347,7 @@ mark {
 
 .badge-success {
   background: var(--bbc-success-bg);
-  color: #047857;
+  color: var(--drift-047857);
 }
 
 /* =============================================================================
@@ -1372,22 +1372,22 @@ mark {
 
 .alert-info {
   background: var(--bbc-info-bg);
-  color: #1e40af;
+  color: var(--drift-1e40af);
 }
 
 .alert-success {
   background: var(--bbc-success-bg);
-  color: #047857;
+  color: var(--drift-047857);
 }
 
 .alert-warning {
   background: var(--bbc-warning-bg);
-  color: #92400e;
+  color: var(--drift-92400e);
 }
 
 .alert-error {
   background: var(--bbc-error-bg);
-  color: #b91c1c;
+  color: var(--drift-b91c1c);
 }
 
 /* =============================================================================
@@ -1542,7 +1542,7 @@ mark {
 
 @media print {
   body {
-    font-size: 12pt;
+    font-size: var(--fs-12pt);
     color: #000;
     background: #fff;
   }
@@ -1644,7 +1644,7 @@ mark {
 [data-color-scheme="green"] .highlight,
 [data-color-scheme="green"] .accent,
 [data-color-scheme="green"] .text-gold {
-  color: #ffa900 !important;
+  color: var(--drift-ffa900) !important;
 }
 
 /* Links on green - white with gold hover */
@@ -1763,7 +1763,7 @@ mark {
 .bbc-section--forest [class*="stat-number"],
 [data-color-scheme="green"] .stat-number,
 [data-color-scheme="green"] .bbc-stat__number {
-  color: #ffa900 !important;
+  color: var(--drift-ffa900) !important;
 }
 
 /* Stats labels stay white */

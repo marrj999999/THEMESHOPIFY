@@ -106,7 +106,7 @@
 
 .collection .price__sale .price-item--regular {
   font-size: 13px !important;
-  color: #888 !important;
+  color: var(--drift-888888) !important;
   font-weight: 400 !important;
 }
 

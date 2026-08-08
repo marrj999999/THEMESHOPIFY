@@ -16,7 +16,7 @@
   height: 100%;
   height: 100dvh; /* Dynamic viewport height for mobile */
   background: #ffffff !important;
-  background-color: #ffffff !important;
+  background-color: var(--white) !important;
   transform: translateX(-100%);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1002;
@@ -52,7 +52,7 @@
   justify-content: space-between;
   padding: 12px 16px;
   background: var(--bbc-forest);
-  color: #ffffff;
+  color: var(--white);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -64,7 +64,7 @@
   font-weight: 600;
   letter-spacing: 0.02em;
   margin: 0;
-  color: #ffffff !important;
+  color: var(--white) !important;
 }
 
 /* Close button — 44px minimum touch target */
@@ -77,7 +77,7 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  color: #ffffff !important;
+  color: var(--white) !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -206,7 +206,7 @@
 .bbc-header__mobile-chevron {
   width: 20px;
   height: 20px;
-  color: #888888;
+  color: var(--drift-888888);
   transition: transform 0.25s ease;
   flex-shrink: 0;
 }
@@ -218,9 +218,9 @@
 /* Plus/minus indicator (alternative to chevron) */
 .bbc-header__mobile-section > summary::after {
   content: '+';
-  font-size: 22px;
+  font-size: var(--fs-22);
   font-weight: 300;
-  color: #888888;
+  color: var(--drift-888888);
   margin-left: auto;
   transition: transform 0.2s ease;
 }
@@ -267,7 +267,7 @@
   padding: 10px 0 10px 16px;
   font-size: 15px;
   font-weight: 500;
-  color: #555555 !important;
+  color: var(--drift-555555) !important;
   text-decoration: none !important;
   transition: color 0.2s ease, padding-left 0.2s ease;
   -webkit-tap-highlight-color: transparent;
@@ -324,7 +324,7 @@
 .bbc-header__mobile-footer a:visited,
 .bbc-header__mobile-footer a:hover,
 .bbc-header__mobile-footer a:active {
-  color: #ffffff !important;
+  color: var(--white) !important;
   text-decoration: none !important;
   background: var(--bbc-forest) !important;
   display: inline-flex;
@@ -420,7 +420,7 @@
 .menu-drawer__submenu .menu-drawer__menu-item {
   font-size: 15px;
   font-weight: 500;
-  color: #555555 !important;
+  color: var(--drift-555555) !important;
   padding-left: 40px;
 }
 

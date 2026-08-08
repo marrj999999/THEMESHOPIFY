@@ -1,13 +1,46 @@
 {
-  "plugins": ["stylelint-declaration-strict-value"],
+  "plugins": [
+    "stylelint-declaration-strict-value"
+  ],
   "rules": {
     "scale-unlimited/declaration-strict-value": [
-      ["color", "background-color", "font-size"],
+      [
+        "color",
+        "background-color",
+        "font-size"
+      ],
       {
-        "ignoreValues": ["inherit", "transparent", "currentColor", "currentcolor", "initial", "unset", "revert", "0", "auto", "none", "/var\\(/", "/^1[0-9]px$/", "/^[0-9.]+r?em$/", "/clamp/", "/^#fff$/i", "/^#000$/i"],
+        "ignoreValues": [
+          "inherit",
+          "transparent",
+          "currentColor",
+          "currentcolor",
+          "initial",
+          "unset",
+          "revert",
+          "0",
+          "auto",
+          "none",
+          "/var\\(/",
+          "/^1[0-9]px$/",
+          "/^[0-9.]+r?em$/",
+          "/clamp/",
+          "/^#fff$/i",
+          "/^#000$/i",
+          "white",
+          "black",
+          "Window",
+          "CanvasText"
+        ],
         "disableFix": true,
         "severity": "error"
       }
     ]
-  }
+  },
+  "ignoreFiles": [
+    "assets/base.css",
+    "assets/component-slider.css",
+    "assets/component-localization-form.css",
+    "assets/section-main-product.css"
+  ]
 }

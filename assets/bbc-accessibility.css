@@ -20,8 +20,8 @@
 
 /* High-visibility focus ring using BBC brand colors */
 :root {
-  --bbc-focus-color: #ffa900; /* BBC Gold for visibility on dark backgrounds */
-  --bbc-focus-color-dark: #073e27; /* BBC Forest for light backgrounds */
+  --bbc-focus-color: var(--lime, #D4FD62); /* lime — gold retired 2026-08; high-vis on dark */
+  --bbc-focus-color-dark: var(--forest, #003C32); /* forest for light backgrounds */
   --bbc-focus-width: 3px;
   --bbc-focus-offset: 2px;
 }
@@ -188,7 +188,7 @@ textarea:focus-visible {
 
 /* Ensure body text has sufficient contrast */
 body {
-  color: #1e293b; /* Dark slate - 12.6:1 on white */
+  color: var(--drift-1e293b); /* Dark slate - 12.6:1 on white */
 }
 
 /* Muted text - ensure it still meets 4.5:1 */
@@ -197,12 +197,12 @@ body {
 .small,
 .product__tax,
 .product__inventory {
-  color: #475569; /* Gray-600 - 6.5:1 on white */
+  color: var(--drift-475569); /* Gray-600 - 6.5:1 on white */
 }
 
 /* Placeholder text - should be 4.5:1 minimum */
 ::placeholder {
-  color: #64748b; /* Gray-400 - 4.6:1 on white */
+  color: var(--drift-64748b); /* Gray-400 - 4.6:1 on white */
   opacity: 1; /* Firefox fix */
 }
 
@@ -223,15 +223,15 @@ a:not(.button):not(.btn):hover {
 /* Sale badge - red on white needs sufficient contrast */
 .badge--sale,
 .badge[class*="sale"] {
-  background-color: #dc2626; /* Red-600 */
-  color: #ffffff;
+  background-color: var(--drift-dc2626); /* Red-600 */
+  color: var(--white);
 }
 
 /* Error states - ensure visibility */
 .form__message--error,
 .field__message--error,
 [role="alert"] {
-  color: #dc2626; /* Red-600 - 4.7:1 on white */
+  color: var(--drift-dc2626); /* Red-600 - 4.7:1 on white */
   font-weight: 600;
 }
 
@@ -430,7 +430,7 @@ textarea {
 .field__label[data-required]::after,
 label[data-required]::after {
   content: " *";
-  color: #dc2626;
+  color: var(--drift-dc2626);
   font-weight: 700;
 }
 
@@ -446,7 +446,7 @@ textarea[aria-invalid="true"] {
 
 /* Error message styling */
 .field__message--error {
-  color: #dc2626;
+  color: var(--drift-dc2626);
   font-size: 14px;
   font-weight: 600;
   margin-top: 4px;
@@ -525,7 +525,7 @@ img:not([alt]) {
 
 /* Ensure announcement bar is readable */
 .bbc-header__announcement {
-  color: #ffffff;
+  color: var(--white);
   font-size: 14px;
   font-weight: 500;
 }
@@ -538,18 +538,18 @@ img:not([alt]) {
 
 .bbc-header__announcement a:hover,
 .bbc-header__announcement a:focus {
-  color: #ffbd3d;
+  color: var(--lime, #D4FD62);
 }
 
 /* Navigation text contrast on dark header */
 .bbc-header__nav-link {
-  color: #ffffff; /* White on var(--bbc-forest) = 11.2:1 contrast */
+  color: var(--white); /* White on var(--bbc-forest) = 11.2:1 contrast */
 }
 
 /* Cart count badge - ensure readable */
 .bbc-header__cart-count {
   background: var(--bbc-gold);
-  color: #000000;
+  color: var(--black);
   font-weight: 700;
   font-size: 12px;
   min-width: 20px;
@@ -576,11 +576,11 @@ img:not([alt]) {
 /* Price - ensure readable */
 .price-item--regular {
   font-weight: 600;
-  color: #1e293b;
+  color: var(--drift-1e293b);
 }
 
 .price-item--sale {
-  color: #dc2626;
+  color: var(--drift-dc2626);
   font-weight: 700;
 }
 
@@ -637,7 +637,7 @@ img:not([alt]) {
 
 .footer a:not(.button):hover,
 .footer a:not(.button):focus {
-  color: #ffffff;
+  color: var(--white);
   text-decoration: underline;
 }
 

@@ -221,7 +221,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: rgb(var(--color-background));
-  font-size: 9px;
+  font-size: var(--fs-9);
   font-weight: 600;
 }
 

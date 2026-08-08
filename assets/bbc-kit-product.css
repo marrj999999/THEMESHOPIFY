@@ -18,7 +18,7 @@
 .product .product__text[class*="subtitle"] {
   font-size: 0.88rem !important;
   line-height: 1.5 !important;
-  color: #666 !important;
+  color: var(--drift-666666) !important;
   margin-top: 0;
   margin-bottom: 8px !important;
 }
@@ -39,7 +39,7 @@
 /* "Shipping calculated at checkout" */
 .product .product__tax {
   font-size: 0.78rem !important;
-  color: #888 !important;
+  color: var(--drift-888888) !important;
 }
 
 /* Pay-in-3 / Shop Pay installments */
@@ -57,7 +57,7 @@
   font-weight: 600 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.06em !important;
-  color: #333 !important;
+  color: var(--drift-333333) !important;
   margin-bottom: 8px !important;
 }
 
@@ -171,7 +171,7 @@
 
 .bbc-kit-box__subtitle {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--drift-666666);
   margin: 0;
   line-height: 1.5;
 }
@@ -222,7 +222,7 @@
 
 .bbc-kit-box__item-desc {
   font-size: 0.8rem;
-  color: #666;
+  color: var(--drift-666666);
   line-height: 1.5;
   margin: 0;
 }
@@ -257,7 +257,7 @@
 
 .bbc-kit-journey__subtitle {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--drift-666666);
   margin: 0;
 }
 
@@ -335,7 +335,7 @@
 
 .bbc-kit-journey__step-desc {
   font-size: 0.85rem;
-  color: #555;
+  color: var(--drift-555555);
   line-height: 1.5;
   margin: 0;
 }

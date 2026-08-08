@@ -81,14 +81,14 @@
    ───────────────────────────────────────────────────────────── */
 .bbc-btn--secondary {
   background: var(--bbc-forest);
-  color: #ffffff;
+  color: var(--white);
   border-color: var(--bbc-forest);
 }
 
 .bbc-btn--secondary:hover {
   background: #0a5234;
   border-color: #0a5234;
-  color: #ffffff;
+  color: var(--white);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(7, 62, 39, 0.3);
 }
@@ -136,14 +136,14 @@
 /* Outline on dark backgrounds (light variant) */
 .bbc-btn--outline-light {
   background: transparent;
-  color: #ffffff;
+  color: var(--white);
   border-color: rgba(255, 255, 255, 0.6);
 }
 
 .bbc-btn--outline-light:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: #ffffff;
-  color: #ffffff;
+  color: var(--white);
   transform: translateY(-1px);
 }
 

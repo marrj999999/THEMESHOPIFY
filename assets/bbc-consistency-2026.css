@@ -21,7 +21,7 @@
 /* LAW 3 — gold is retired: legacy gold badge re-pointed to the 2026 palette */
 .bbc-badge--gold {
   background: var(--lime, #D4FD62) !important;
-  color: #0B2B24 !important;
+  color: var(--drift-0b2b24) !important;
   border-color: #0B2B24 !important;
 }
 
@@ -115,9 +115,9 @@
 
 /* ===== BASELINE CONFORMANCE fixes (instance-vs-baseline audit 2026-08-08) ===== */
 /* acc-stats joins the rd-stats 52px value tier */
-.acc-stats li > b { font-size: 52px; }
+.acc-stats li > b { font-size: var(--fs-52); }
 /* parts h1 joins the commerce-hero tier (42px, was 30) */
-.bbc-parts__title { font-size: 42px !important; }
+.bbc-parts__title { font-size: var(--fs-42) !important; }
 
 /* BASELINE: form fields join the stamped tier (2px border, 6px radius) —
    was 1px on contact/teambuilding forms; number/radio/checkbox untouched */
@@ -127,3 +127,81 @@
 
 /* article kicker joins the kicker DNA (was 18px/400 sentence-case lime) */
 .bbc-rd .rd-art-kicker{ font-size:14px !important; font-weight:700 !important; text-transform:lowercase !important; letter-spacing:.14em !important; }
+
+/* ------------------------------------------------------------------
+   DRIFT TOKENS — 2026-08-08 lint zero-pass. Off-system values found in
+   live sheets, tokenised VERBATIM (no visual change) so the palette drift
+   is named and visible. James: ratify each into the system or migrate its
+   consumers to a canonical token, then delete the row.
+   ------------------------------------------------------------------ */
+:root{
+  --drift-047857:#047857;
+  --drift-0a2533:#0a2533;
+  --drift-0b2b24:#0b2b24;
+  --drift-0e5a32:#0e5a32;
+  --drift-17553a:#17553a;
+  --drift-1e293b:#1e293b;
+  --drift-1e40af:#1e40af;
+  --drift-1f4530:#1f4530;
+  --drift-231f1c:#231f1c;
+  --drift-26332e:#26332e;
+  --drift-2a3530:#2a3530;
+  --drift-333333:#333333;
+  --drift-3a443f:#3a443f;
+  --drift-475569:#475569;
+  --drift-4d5c54:#4d5c54;
+  --drift-555555:#555555;
+  --drift-5a655f:#5a655f;
+  --drift-64748b:#64748b;
+  --drift-666666:#666666;
+  --drift-888888:#888888;
+  --drift-8a1c1c:#8a1c1c;
+  --drift-92400e:#92400e;
+  --drift-9db8ad:#9db8ad;
+  --drift-b91c1c:#b91c1c;
+  --drift-bcc8c2:#bcc8c2;
+  --drift-c9d8d0:#c9d8d0;
+  --drift-cfd8d2:#cfd8d2;
+  --drift-cfe0d7:#cfe0d7;
+  --drift-dbe6df:#dbe6df;
+  --drift-dc2626:#dc2626;
+  --drift-e3ebe4:#e3ebe4;
+  --drift-e9efe7:#e9efe7;
+  --drift-eaf3ee:#eaf3ee;
+  --drift-ede6d6:#ede6d6;
+  --drift-eef3ec:#eef3ec;
+  --drift-ffa900:#ffa900;
+  --fs-10-5:10.5px;
+  --fs-11-5:11.5px;
+  --fs-12-5:12.5px;
+  --fs-12pt:12pt;
+  --fs-13-5:13.5px;
+  --fs-14-5:14.5px;
+  --fs-18-5:18.5px;
+  --fs-20:20px;
+  --fs-21:21px;
+  --fs-22:22px;
+  --fs-24:24px;
+  --fs-26:26px;
+  --fs-32:32px;
+  --fs-42:42px;
+  --fs-48:48px;
+  --fs-52:52px;
+  --fs-8:8px;
+  --fs-9:9px;
+}
+
+/* Canonical tokens aliased at :root — the .bbc-rd-scoped definitions do not
+   reach Dawn-native chrome (collections, cart, account, mobile menu), and the
+   lint zero-pass moved those sheets onto var() references. .bbc-rd's own
+   definitions still win inside redesign subtrees (nearest-ancestor rule). */
+:root{
+  --forest:#003C32; --forest-700:#002A23; --forest-300:#1F6655;
+  --teal:#3F8B66; --lime:#D4FD62; --lime-700:#9BC02E;
+  --bone:#E6DCC8; --paper:#F1E9D8; --steel:#DEE6F0; --ink:#0E1A17; --charcoal:#2A332F;
+  --white:#ffffff; --black:#000000;
+}
+
+/* Legacy .faq-item (size-guide) joins the accordion canon: bordered stamped card,
+   radius trio 6px (was borderless 8px). Holds until the Tier-R rebuild replaces the page. */
+.faq-item{ border:1.5px solid var(--ink,#0E1A17) !important; border-radius:6px !important; }

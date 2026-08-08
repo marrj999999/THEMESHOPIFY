@@ -44,7 +44,7 @@
     .bbc-rd-whybamboo .wb-pull p{ font-size:clamp(24px,2vw+1rem,40px); line-height:1.18; font-weight:800; letter-spacing:-.01em; color:var(--forest,#003C32); max-width:22ch; margin:0 auto; text-align:center; }
     .bbc-rd-whybamboo .wb-pull cite{ display:block; margin-top:20px; font-style:normal; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:#5a6b60; text-align:center; }
     /* comparison (wbx) */
-    .bbc-rd-whybamboo .wbx{ --wf:var(--forest,#003C32); --wg:#ffa900; --wt:#3f8b66; --wm:#5a6b60; }
+    .bbc-rd-whybamboo .wbx{ --wf:var(--forest,#003C32); --wg:var(--lime,#D4FD62); --wt:#3f8b66; --wm:#5a6b60; }
     .bbc-rd-whybamboo .wbx-tiles{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(0,60,50,.14); border:1px solid rgba(0,60,50,.14); border-radius:12px; overflow:hidden; }
     .bbc-rd-whybamboo .wbx-tile{ background:#fff; padding:24px 20px; }
     .bbc-rd-whybamboo .wbx-num{ font-weight:800; font-size:clamp(1.7rem,1.1rem + 1.4vw,2.3rem); color:var(--wf); line-height:1.05; font-variant-numeric:lining-nums tabular-nums; }
@@ -268,7 +268,7 @@
       <span class="rd-eyebrow">Design versatility</span>
       <h2>Any design. Any rider.</h2>
       <div class="rd-csgrid rd-mt3">
-        {%- assign builds = 'Tandem|Swiss Family Tandem|Three-person tandem for the school run|bbc-rd-bike-field.jpg|/blogs/club-news/a-family-ride-like-no-other-the-swiss-bamboo-tandem;;Cargo|Adam''s Cargo Bike|Long-tail cargo, built in a London flat|bbc-rd-cargo.jpg|/blogs/club-news/custom-cargo-bike-by-adam;;Aero Road|Adrian''s Aero Build|Custom aero profile, internal cabling|bbc-rd-redbar.jpg|/blogs/club-news/adrians-aero-bamboo-bike;;Gravel|Tim''s Gravel Explorer|First-time builder, the Netherlands|bbc-rd-gravel-fence.jpg|/blogs/club-news/gravel-bike-by-tim;;10-Year Rider|Taro''s Daily Commuter|Still his daily bike after a decade|bbc-rd-gal-rider.jpg|/blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike' | split: ';;' -%}
+        {%- assign builds = 'Tandem|Swiss Family Tandem|Three-person tandem for the school run|bbc-rd-bike-field.jpg|/blogs/club-news/a-family-ride-like-no-other-the-swiss-bamboo-tandem;;Cargo|Adam’s Cargo Bike|Long-tail cargo, built in a London flat|bbc-rd-cargo.jpg|/blogs/club-news/custom-cargo-bike-by-adam;;Aero Road|Adrian''s Aero Build|Custom aero profile, internal cabling|bbc-rd-redbar.jpg|/blogs/club-news/adrians-aero-bamboo-bike;;Gravel|Tim''s Gravel Explorer|First-time builder, the Netherlands|bbc-rd-gravel-fence.jpg|/blogs/club-news/gravel-bike-by-tim;;10-Year Rider|Taro''s Daily Commuter|Still his daily bike after a decade|bbc-rd-gal-rider.jpg|/blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike' | split: ';;' -%}
         {%- for b in builds -%}
           {%- assign f = b | split: '|' -%}
           <a class="rd-cscard" href="{{ f[4] }}">

@@ -38,8 +38,8 @@
 
 /* supporting text — standard 18px body + footnote, left, below the headline */
 .bbc-rd .bbcst-support{ margin-top:clamp(26px,3.4vw,46px); max-width:62ch; }
-.bbc-rd .bbcst-body{ font-size:18px; line-height:1.6; margin:0; color:#26332e; }
-.bbc-rd .bbcst-note{ font-size:14px; line-height:1.6; margin:12px 0 0; color:#3a443f; }
+.bbc-rd .bbcst-body{ font-size:18px; line-height:1.6; margin:0; color:var(--drift-26332e); }
+.bbc-rd .bbcst-note{ font-size:14px; line-height:1.6; margin:12px 0 0; color:var(--drift-3a443f); }
 
 /* image — below the headline (device / editorial) */
 .bbc-rd .bbcst-figure{ margin:clamp(26px,3.4vw,48px) 0 0; max-width:1000px; }
@@ -60,7 +60,7 @@
 .bbc-rd .bbcst-link:hover{ opacity:.6; }
 
 /* lime background — dark accents keep, just the muted note needs lifting */
-.bbc-rd.bbcst-wrap.is-lime .bbcst-note{ color:#1f4530; }
+.bbc-rd.bbcst-wrap.is-lime .bbcst-note{ color:var(--drift-1f4530); }
 
 /* dark backgrounds (forest + background-image) — lime accent, light text */
 .bbc-rd.bbcst-wrap.is-forest .bbcst-head,
@@ -70,9 +70,9 @@
 .bbc-rd.bbcst-wrap.is-forest .bbcst-star,
 .bbc-rd.bbcst-wrap.has-bg .bbcst-star{ color:var(--lime,#D4FD62); }
 .bbc-rd.bbcst-wrap.is-forest .bbcst-body,
-.bbc-rd.bbcst-wrap.has-bg .bbcst-body{ color:#cfe0d7; }
-.bbc-rd.bbcst-wrap.is-forest .bbcst-note{ color:#c9d8d0; }
-.bbc-rd.bbcst-wrap.has-bg .bbcst-note{ color:#dbe6df; }
+.bbc-rd.bbcst-wrap.has-bg .bbcst-body{ color:var(--drift-cfe0d7); }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-note{ color:var(--drift-c9d8d0); }
+.bbc-rd.bbcst-wrap.has-bg .bbcst-note{ color:var(--drift-dbe6df); }
 .bbc-rd.bbcst-wrap.is-forest .bbcst-link,
 .bbc-rd.bbcst-wrap.has-bg .bbcst-link{ color:var(--bone,#E6DCC8); border-bottom-color:var(--lime,#D4FD62); }
 .bbc-rd.bbcst-wrap.is-forest .bbcst-btn.is-primary,
@@ -122,11 +122,11 @@
 /* headline */
 .bbc-rd .bbcpl-title{ font-size:clamp(3rem,7.2vw,7rem); line-height:.94; letter-spacing:-.02em; font-weight:800; margin:0; color:var(--forest,#003C32); text-wrap:balance; }
 /* body 18px standard */
-.bbc-rd .bbcpl-body{ font-size:18px; line-height:1.6; margin:clamp(20px,2vw,28px) 0 0; max-width:46ch; color:#26332e; }
+.bbc-rd .bbcpl-body{ font-size:18px; line-height:1.6; margin:clamp(20px,2vw,28px) 0 0; max-width:46ch; color:var(--drift-26332e); }
 /* quote */
 .bbc-rd .bbcpl-quote{ margin:clamp(22px,2.4vw,34px) 0 0; padding:0 0 0 20px; border-left:3px solid var(--forest,#003C32); }
 .bbc-rd .bbcpl-quote blockquote{ margin:0; font-size:19px; line-height:1.45; font-style:italic; color:var(--forest,#003C32); }
-.bbc-rd .bbcpl-quote figcaption{ margin-top:12px; font-size:13px; letter-spacing:.01em; color:#3a443f; font-style:normal; }
+.bbc-rd .bbcpl-quote figcaption{ margin-top:12px; font-size:13px; letter-spacing:.01em; color:var(--drift-3a443f); font-style:normal; }
 .bbc-rd .bbcpl-qtag{ display:inline-block; background:rgba(0,60,50,.1); color:var(--forest,#003C32); font-weight:800; padding:2px 8px; border-radius:4px; margin-right:8px; }
 /* cta link (matches statement link) */
 .bbc-rd .bbcpl-cta{ display:inline-block; margin-top:clamp(22px,2.4vw,32px); font-size:15px; font-weight:700; text-decoration:none; color:var(--forest,#003C32); border-bottom:2px solid var(--forest,#003C32); padding-bottom:2px; }
@@ -135,10 +135,10 @@
 .bbc-rd .bbcpl.is-forest .bbcpl-title{ color:var(--bone,#E6DCC8); }
 .bbc-rd .bbcpl.is-forest .bbcpl-idx{ color:var(--lime,#D4FD62); }
 .bbc-rd .bbcpl.is-forest .bbcpl-rule{ background:var(--lime,#D4FD62); }
-.bbc-rd .bbcpl.is-forest .bbcpl-body{ color:#cfe0d7; }
+.bbc-rd .bbcpl.is-forest .bbcpl-body{ color:var(--drift-cfe0d7); }
 .bbc-rd .bbcpl.is-forest .bbcpl-quote{ border-left-color:var(--lime,#D4FD62); }
-.bbc-rd .bbcpl.is-forest .bbcpl-quote blockquote{ color:#eaf3ee; }
-.bbc-rd .bbcpl.is-forest .bbcpl-quote figcaption{ color:#c9d8d0; }
+.bbc-rd .bbcpl.is-forest .bbcpl-quote blockquote{ color:var(--drift-eaf3ee); }
+.bbc-rd .bbcpl.is-forest .bbcpl-quote figcaption{ color:var(--drift-c9d8d0); }
 .bbc-rd .bbcpl.is-forest .bbcpl-qtag{ background:rgba(212,253,98,.16); color:var(--lime,#D4FD62); }
 .bbc-rd .bbcpl.is-forest .bbcpl-cta{ color:var(--bone,#E6DCC8); border-bottom-color:var(--lime,#D4FD62); }
 @media(max-width:900px){
@@ -395,8 +395,8 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .rd-callout-steel h3, .rd-callout-steel .rd-callout-head{
   color:var(--ink,#0E1A17); margin:0 0 8px;
 }
-.rd-callout-steel p{ color:#2a3530; margin:0; max-width:var(--measure,66ch); }
-.rd-callout-steel .rd-eyebrow{ color:#17553a; }
+.rd-callout-steel p{ color:var(--drift-2a3530); margin:0; max-width:var(--measure,66ch); }
+.rd-callout-steel .rd-eyebrow{ color:var(--drift-17553a); }
 
 /* ---- Duotone image treatment (Brand Guidelines recipe: B&W +
    FOREST block on EXCLUSION + 80% black gradient on MULTIPLY).
@@ -521,7 +521,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
   position:absolute; left:50%; top:0; transform:translateX(-50%);
   width:44px; height:44px; border-radius:50%; background:var(--forest,#003C32);
   color:var(--lime,#D4FD62); display:grid; place-items:center;
-  font-size:26px; font-weight:800; line-height:1; z-index:1;
+  font-size:var(--fs-26); font-weight:800; line-height:1; z-index:1;
 }
 .bbc-rd-impact .rd-fork__label{
   position:absolute; left:calc(50% + 34px); top:10px;
@@ -580,7 +580,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
   font-size:clamp(2.1rem,3.6vw,2.9rem) !important; line-height:.97; letter-spacing:-.02em;
   font-weight:800; text-transform:lowercase; margin:16px 0 0; color:var(--ink,#0E1A17);
 }
-.bbc-rd-impact .rd-path p.rd-path__who{ font-size:17px !important; line-height:1.55; margin:10px 0 0; max-width:34em; color:#3a443f; }
+.bbc-rd-impact .rd-path p.rd-path__who{ font-size:17px !important; line-height:1.55; margin:10px 0 0; max-width:34em; color:var(--drift-3a443f); }
 
 /* hierarchy lock: steps + body must stay clearly below the name */
 .bbc-rd-impact .rd-path .rd-flow__step{ font-size:16px !important; line-height:1.45; padding:8px 0 8px 46px; }
@@ -624,7 +624,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
   font-weight:800; text-transform:lowercase; margin:0; color:var(--forest,#003C32);
 }
 .bbc-rd-impact .rd-converge__title .bbcst-star{ color:var(--forest,#003C32); }
-.bbc-rd-impact .rd-converge__note{ font-size:14px; line-height:1.6; margin:14px 0 0; color:#3a443f; max-width:66ch; }
+.bbc-rd-impact .rd-converge__note{ font-size:14px; line-height:1.6; margin:14px 0 0; color:var(--drift-3a443f); max-width:66ch; }
 
 /* mobile: simple static stack — no absolute geometry (the rail/label
    version collided; simpler wins) */
@@ -658,8 +658,8 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-ops{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; list-style:none; margin:0; padding:0; text-align:left; }
 .bbc-rd-impact .rd-ops__cell{ border:2.5px solid var(--ink,#0E1A17); border-radius:6px; background:var(--paper,#F1E9D8); padding:20px 22px; position:relative; }
 .bbc-rd-impact .rd-ops__count{ position:absolute; top:-14px; right:16px; min-width:34px; height:28px; padding:0 10px; border-radius:999px; background:var(--lime,#D4FD62); color:var(--forest,#003C32); border:2px solid var(--ink,#0E1A17); font-weight:800; font-size:15px; display:inline-flex; align-items:center; justify-content:center; }
-.bbc-rd-impact h3.rd-ops__title{ font-size:21px !important; font-weight:800; margin:0 0 6px; text-transform:none; }
-.bbc-rd-impact .rd-ops__items{ font-size:16px !important; line-height:1.5; margin:0; color:#3a443f; }
+.bbc-rd-impact h3.rd-ops__title{ font-size:var(--fs-21) !important; font-weight:800; margin:0 0 6px; text-transform:none; }
+.bbc-rd-impact .rd-ops__items{ font-size:16px !important; line-height:1.5; margin:0; color:var(--drift-3a443f); }
 /* where-we-operate world map (J2) — breaks out of the 820px wrap, centred on the viewport;
    marker pulse lives inside the SVG itself (renders via <img>) with its own reduced-motion guard */
 
@@ -688,16 +688,16 @@ cart-drawer.animate .drawer{ visibility:visible; }
 /* A4 promises + A3 download card (final pass) */
 .bbc-rd-impact .rd-promises{ list-style:none; margin:0; padding:0; }
 .bbc-rd-impact .rd-promises__row{ font-size:17px; line-height:1.5; padding:8px 0; }
-.bbc-rd-impact .rd-promises__row a{ font-weight:700; color:#17553a; }
-.bbc-rd-impact .rd-promises__star{ color:#17553a; font-weight:800; margin-right:8px; }
+.bbc-rd-impact .rd-promises__row a{ font-weight:700; color:var(--drift-17553a); }
+.bbc-rd-impact .rd-promises__star{ color:var(--drift-17553a); font-weight:800; margin-right:8px; }
 .bbc-rd-impact .rd-dlcard{ display:flex; align-items:center; gap:18px; border:2.5px solid var(--ink,#0E1A17); border-radius:6px; background:var(--paper,#F1E9D8); padding:18px 22px; text-align:left; box-shadow:5px 5px 0 var(--lime-700,#9BC02E); flex-wrap:wrap; }
 .bbc-rd-impact .rd-dlcard__badge{ background:var(--forest,#003C32); color:var(--lime,#D4FD62); font-weight:800; font-size:13px; padding:6px 12px; border-radius:4px; text-transform:lowercase; }
 .bbc-rd-impact .rd-dlcard__body{ flex:1; min-width:180px; }
 .bbc-rd-impact p.rd-dlcard__title{ font-weight:800; font-size:18px !important; margin:0; }
-.bbc-rd-impact p.rd-dlcard__meta{ font-size:14px !important; margin:2px 0 0; color:#3a443f; }
+.bbc-rd-impact p.rd-dlcard__meta{ font-size:14px !important; margin:2px 0 0; color:var(--drift-3a443f); }
 
 /* unify card-title role at 21px (help/get-involved cards) + chips lowercase at source only */
-.bbc-rd-impact .rd-steel h3, .bbc-rd-impact .rd-card h3:not(.rd-path__name){ font-size:21px !important; }
+.bbc-rd-impact .rd-steel h3, .bbc-rd-impact .rd-card h3:not(.rd-path__name){ font-size:var(--fs-21) !important; }
 
 /* CRIT r2 closures */
 .bbc-rd-impact .rd-eyebrow{ font-weight:800; }
@@ -726,7 +726,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-promises__star, .bbc-rd-impact .bbcst-star,
 .bbc-rd-impact .rd-converge__title .bbcst-star{ color:var(--forest,#003C32) !important; font-size:19px; }
 /* backers group label */
-.bbc-rd-impact .rd-backers__label{ display:block; font-size:13px; font-weight:800; letter-spacing:.14em; text-transform:lowercase; color:#17553a; margin:26px 0 10px; text-align:left; }
+.bbc-rd-impact .rd-backers__label{ display:block; font-size:13px; font-weight:800; letter-spacing:.14em; text-transform:lowercase; color:var(--drift-17553a); margin:26px 0 10px; text-align:left; }
 
 /* J3: pathway media — hard-crop duotone bleed to card edges, name overlaps it */
 /* the panels are cards again, so the media bleeds to the card edge — applied to
@@ -736,7 +736,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-path__chip{ margin-top:18px; }
 .bbc-rd-impact h3.rd-path__name{ margin-top:12px; }
 /* bigger fork moment */
-.bbc-rd-impact .rd-fork__node{ width:56px; height:56px; font-size:32px; }
+.bbc-rd-impact .rd-fork__node{ width:56px; height:56px; font-size:var(--fs-32); }
 .bbc-rd-impact .rd-fork__label{ font-size:16px; }
 
 /* CRIT-final root fixes + James hover/journey pass (2026-07-13) */
@@ -750,7 +750,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 /* the node's halo must match the surface it sits on, or it reads as a ring */
 .bbc-rd-impact .rd-path--prisons .rd-flow__step::before{ box-shadow:0 0 0 4px var(--forest,#003C32); }
 .bbc-rd-impact .rd-flow__step b{ display:block; font-size:16px; }
-.bbc-rd-impact .rd-flow__step small{ display:block; font-size:13.5px; font-weight:400; color:#3a443f; margin-top:2px; }
+.bbc-rd-impact .rd-flow__step small{ display:block; font-size:var(--fs-13-5); font-weight:400; color:var(--drift-3a443f); margin-top:2px; }
 .bbc-rd-impact .rd-path--prisons .rd-flow__step small{ color:var(--bone,#E6DCC8); opacity:.82; }
 @media (hover:hover){
   .bbc-rd-impact .rd-flow__step:hover{ transform:translateX(4px); }
@@ -787,8 +787,8 @@ cart-drawer.animate .drawer{ visibility:visible; }
 /* BIKE-FRAME INFOGRAPHIC (James-approved concept) */
 .bbc-rd-impact .rd-frameinfo{ margin-top:clamp(22px,3vw,40px); text-align:left; }
 .bbc-rd-impact .rd-frame-info{ width:100%; max-width:880px; height:auto; display:block; font-family:inherit; }
-.bbc-rd-impact .rd-frameinfo__caption{ font-size:14px; color:#3a443f; margin:10px 0 0; max-width:66ch; }
-@media (max-width:759px){ .bbc-rd-impact .rd-fi__labels{ display:none; } .bbc-rd-impact .rd-frameinfo__caption{ font-size:13.5px; } }
+.bbc-rd-impact .rd-frameinfo__caption{ font-size:14px; color:var(--drift-3a443f); margin:10px 0 0; max-width:66ch; }
+@media (max-width:759px){ .bbc-rd-impact .rd-fi__labels{ display:none; } .bbc-rd-impact .rd-frameinfo__caption{ font-size:var(--fs-13-5); } }
 @media (prefers-reduced-motion: no-preference){
   .bbc-rd-impact .rd-fi__route{ stroke-dasharray:1200; stroke-dashoffset:1200; animation:rd-ride 2.2s ease-out forwards; }
   .bbc-rd-impact .rd-fi__route--b{ animation-delay:.5s; }
@@ -796,7 +796,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 }
 /* STATS ON THE MAP: region callouts over the figure */
 
-.bbc-rd-impact .rd-mapcall{ position:absolute; background:var(--paper,#F1E9D8); border:2px solid var(--ink,#0E1A17); border-radius:6px; padding:8px 12px; font-size:13.5px; font-weight:700; line-height:1.35; box-shadow:3px 3px 0 var(--ink,#0E1A17); max-width:220px; text-align:left; }
+.bbc-rd-impact .rd-mapcall{ position:absolute; background:var(--paper,#F1E9D8); border:2px solid var(--ink,#0E1A17); border-radius:6px; padding:8px 12px; font-size:var(--fs-13-5); font-weight:700; line-height:1.35; box-shadow:3px 3px 0 var(--ink,#0E1A17); max-width:220px; text-align:left; }
 .bbc-rd-impact .rd-mapcall::before{ content:""; position:absolute; width:10px; height:10px; border-radius:50%; background:var(--lime,#D4FD62); border:2px solid var(--ink,#0E1A17); }
 .bbc-rd-impact .rd-mapcall--uk{ left:31%; top:2%; } .bbc-rd-impact .rd-mapcall--uk::before{ left:76%; bottom:-26px; }
 .bbc-rd-impact .rd-mapcall--eu{ left:56%; top:34%; } .bbc-rd-impact .rd-mapcall--eu::before{ left:-22px; top:8px; }
@@ -919,7 +919,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 
 /* B9 · D9 rotated seal + de-boxed proof */
 .bbc-rd-impact .rd-seal{ display:inline-grid; place-items:center; width:clamp(92px,11vw,128px); aspect-ratio:1; border:2.5px solid var(--ink,#0E1A17); border-radius:999px; transform:rotate(-6deg); font-weight:800; text-transform:lowercase; letter-spacing:.04em; font-size:12px; text-align:center; background:var(--lime,#D4FD62); color:var(--forest,#003C32); position:absolute; right:0; top:-18px; padding:10px; z-index:2; }
-@media (max-width:600px){ .bbc-rd-impact .rd-seal{ width:84px; font-size:10.5px; top:-10px; } }
+@media (max-width:600px){ .bbc-rd-impact .rd-seal{ width:84px; font-size:var(--fs-10-5); top:-10px; } }
 .bbc-rd-impact .rd-callout-steel{ background:transparent; border-left:0; padding:0; }
 .bbc-rd-impact .rd-promises__row{ border-top:2px solid var(--mist,#CFC5B0); }
 .bbc-rd-impact .rd-dlcard{ border:0; box-shadow:none; background:transparent; border-top:2px solid var(--ink,#0E1A17); border-radius:0; padding-inline:0; }
@@ -934,7 +934,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .bbc-impact-cred .rd-card.rd-stamp{ background:transparent !important; border:0 !important; box-shadow:none !important; padding:0 !important; }
 /* type bridge (James): ledes carry the jump to display heads; station details legible on mobile */
 .bbc-rd-impact .rd-lede{ font-size:clamp(19px,1.9vw,22px) !important; line-height:1.5; }
-.bbc-rd-impact .rd-flow__step small{ font-size:14.5px; }
+.bbc-rd-impact .rd-flow__step small{ font-size:var(--fs-14-5); }
 /* SIGN-OFF CRIT closures (2026-07-13) */
 /* 820px wraps join the page axis (was flush-left after the margin-0 fix) */
 /* superseded by the alignment contract — this rule out-specified bbc-align.css and kept the
@@ -951,8 +951,8 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-qscroll{ display:flex; gap:clamp(28px,4vw,64px); overflow-x:auto; scroll-snap-type:x mandatory; padding:18px max(32px, calc((100vw - 1200px)/2 + 32px)) 26px; -webkit-overflow-scrolling:touch; scrollbar-width:thin; scrollbar-color:var(--forest,#003C32) transparent; }
 .bbc-rd-impact .rd-qscroll__item{ scroll-snap-align:start; flex:0 0 auto; width:min(78vw,520px); margin:0; }
 .bbc-rd-impact .rd-qscroll__q{ font-size:clamp(24px,3vw,38px); line-height:1.15; font-weight:800; letter-spacing:-.02em; margin:0; border:0; padding:0; }
-.bbc-rd-impact .rd-qscroll__q::before{ content:"\2731"; color:#17553a; font-size:.6em; margin-right:10px; }
-.bbc-rd-impact .rd-qscroll__a{ margin-top:12px; font-size:14px; font-weight:700; color:#3a443f; }
+.bbc-rd-impact .rd-qscroll__q::before{ content:"\2731"; color:var(--drift-17553a); font-size:.6em; margin-right:10px; }
+.bbc-rd-impact .rd-qscroll__a{ margin-top:12px; font-size:14px; font-weight:700; color:var(--drift-3a443f); }
 /* mobile single axis: the split band + mw-680 wrap carry 32px vs the page's 18 — unify */
 @media (max-width:899px){
   .bbc-rd-impact .rd-split .rd-wrap, .bbc-rd-impact .rd-split > div,
@@ -968,7 +968,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-qbtn:hover{ background:var(--lime,#D4FD62); }
 .bbc-rd-impact .rd-qbtn[disabled]{ opacity:.3; cursor:default; background:transparent; }
 .bbc-rd-impact .rd-qcount{ font-size:14px; font-weight:800; color:var(--forest,#003C32); font-variant-numeric:tabular-nums; }
-.bbc-rd-impact .rd-qsrc{ font-weight:400; color:#5a655f; }
+.bbc-rd-impact .rd-qsrc{ font-weight:400; color:var(--drift-5a655f); }
 /* IMPACT VOICES — rolling reel on forest (James: fun, key proof) */
 .bbc-rd-impact .rd-band--quotes{ overflow:clip; }
 .bbc-rd-impact .rd-band--quotes .rd-qhead{ justify-content:flex-start; gap:20px; flex-direction:row-reverse; justify-content:flex-end; margin-bottom:14px; }
@@ -987,9 +987,9 @@ cart-drawer.animate .drawer{ visibility:visible; }
 /* type worked: quote bold statement, attribution bold name + light source */
 .bbc-rd-impact .rd-band--quotes .rd-qscroll__q{ color:var(--bone,#E6DCC8); font-size:clamp(22px,2.6vw,34px); line-height:1.18; font-weight:800; letter-spacing:-.015em; }
 .bbc-rd-impact .rd-band--quotes .rd-qscroll__q::before{ color:var(--lime,#D4FD62); }
-.bbc-rd-impact .rd-band--quotes .rd-qscroll__a{ color:#cfe0d7; font-weight:400; font-size:14px; margin-top:10px; }
+.bbc-rd-impact .rd-band--quotes .rd-qscroll__a{ color:var(--drift-cfe0d7); font-weight:400; font-size:14px; margin-top:10px; }
 .bbc-rd-impact .rd-band--quotes .rd-qscroll__a b{ color:var(--bone,#E6DCC8); font-weight:800; }
-.bbc-rd-impact .rd-band--quotes .rd-qsrc{ color:#9db8ad; }
+.bbc-rd-impact .rd-band--quotes .rd-qsrc{ color:var(--drift-9db8ad); }
 .bbc-rd-impact .rd-band--quotes .rd-qbtn{ border-color:var(--bone,#E6DCC8); color:var(--bone,#E6DCC8); }
 .bbc-rd-impact .rd-band--quotes .rd-qbtn:hover{ background:var(--lime,#D4FD62); color:var(--forest,#003C32); }
 /* world map: align figure + caption to the page left axis (was centred in the wrap) */
@@ -1042,7 +1042,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-ops__cell::after{ display:none !important; }
 
 .bbc-rd-impact h3.rd-ops__title{ font-size:15px !important; font-weight:800; text-transform:lowercase; margin:8px 0 0; text-align:center; }
-.bbc-rd-impact .rd-ops__items{ font-size:13px !important; line-height:1.45; color:#5a655f; margin:6px auto 0; max-width:26ch; text-align:center; }
+.bbc-rd-impact .rd-ops__items{ font-size:13px !important; line-height:1.45; color:var(--drift-5a655f); margin:6px auto 0; max-width:26ch; text-align:center; }
 @media (max-width:759px){ .bbc-rd-impact .rd-ops{ grid-template-columns:repeat(2,1fr); gap:24px 18px; } }
 /* map: clean + centred */
 

@@ -902,7 +902,7 @@
 .bbc-wb-spec__tiles { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: rgba(7,62,39,.14); border: 1px solid rgba(7,62,39,.14); border-radius: 10px; overflow: hidden; margin-bottom: clamp(30px,3.6vw,46px); }
 .bbc-wb-spec__tile { background: #fff; padding: 22px 20px; }
 .bbc-wb-spec__tile-num { font-size: clamp(1.4rem,1.1rem + 1vw,1.9rem); font-weight: 800; color: var(--wb-forest); line-height: 1.05; font-variant-numeric: lining-nums tabular-nums; }
-.bbc-wb-spec__tile-unit { font-size: 12.5px; font-weight: 700; color: var(--wb-accent-green); margin-top: 3px; }
+.bbc-wb-spec__tile-unit { font-size: var(--fs-12-5); font-weight: 700; color: var(--wb-accent-green); margin-top: 3px; }
 .bbc-wb-spec__tile-label { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--wb-text-muted); margin-top: 9px; line-height: 1.35; }
 
 /* density bars */
@@ -918,7 +918,7 @@
 /* hairline comparison table */
 .bbc-wb-spec__table-wrap { overflow-x: auto; }
 .bbc-wb-spec__table { width: 100%; border-collapse: collapse; font-variant-numeric: lining-nums tabular-nums; }
-.bbc-wb-spec__table th, .bbc-wb-spec__table td { text-align: right; padding: 12px 14px; border-bottom: 1px solid rgba(7,62,39,.14); font-size: 13.5px; white-space: nowrap; }
+.bbc-wb-spec__table th, .bbc-wb-spec__table td { text-align: right; padding: 12px 14px; border-bottom: 1px solid rgba(7,62,39,.14); font-size: var(--fs-13-5); white-space: nowrap; }
 .bbc-wb-spec__table th:first-child, .bbc-wb-spec__table td:first-child { text-align: left; white-space: normal; }
 .bbc-wb-spec__table thead th { font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--wb-text-muted); font-weight: 700; border-bottom-width: 2px; }
 .bbc-wb-spec__table tbody th { font-weight: 700; color: var(--wb-forest); }
