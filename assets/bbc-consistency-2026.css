@@ -118,3 +118,9 @@
 .acc-stats li > b { font-size: 52px; }
 /* parts h1 joins the commerce-hero tier (42px, was 30) */
 .bbc-parts__title { font-size: 42px !important; }
+
+/* BASELINE: form fields join the stamped tier (2px border, 6px radius) —
+   was 1px on contact/teambuilding forms; number/radio/checkbox untouched */
+.bbc-rd form input[type="text"], .bbc-rd form input[type="email"],
+.bbc-rd form input[type="tel"], .bbc-rd form textarea, .bbc-rd form select {
+  border-width: 2px !important; border-radius: 6px !important; }
