@@ -525,7 +525,7 @@
       {%- comment -%} standard player (2026-07-22): facade + auto YouTube thumbnail — no iframe until click {%- endcomment -%}
       <div class="rd-mt3" style="border-radius:14px;overflow:hidden;">
         {%- assign bv = section.settings.build_video_id | default: 'ckCwJXJGKD0' -%}
-        {%- render 'bbc-media', youtube: bv, label: 'watch the build film', alt: 'Bamboo Bicycle Club — frame build film', class: 'bbc-media--ar169', sizes: '(max-width:749px) 100vw, 900px' -%}
+        {%- render 'bbc-media', youtube: bv, label: 'film', alt: 'Bamboo Bicycle Club — frame build film', class: 'bbc-media--ar169', sizes: '(max-width:749px) 100vw, 900px' -%}
       </div>
       {%- comment -%} press proof in the PDP mid-page zone (qa/PRESS-BLOCK.md) {%- endcomment -%}
       {%- if section.settings.press_quote != blank -%}
@@ -1540,7 +1540,7 @@
           "type": "text",
           "id": "cite",
           "label": "Attribution",
-          "default": "— Kate Rawles, before her 8,288-mile Andes expedition"
+          "default": "Kate Rawles · before her 8,288-mile Andes expedition"
         }
       ]
     },
@@ -1776,7 +1776,7 @@
           "type": "review",
           "settings": {
             "quote": "Woody made the full 8,288 miles with virtually no mechanical issues at all. All bikes are like magicians — but a bamboo bike multiplies that a hundredfold.",
-            "cite": "— Kate Rawles, author of 'The Life Cycle' (Icon Books)"
+            "cite": "Kate Rawles · author of 'The Life Cycle' (Icon Books)"
           }
         },
         {
