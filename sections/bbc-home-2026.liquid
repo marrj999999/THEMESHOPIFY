@@ -198,7 +198,7 @@
       {%- endcomment -%}
       {%- if section.settings.hero_proof_on -%}
         <ul class="ew-proof" aria-label="Bamboo Bicycle Club in numbers">
-          <li><b>{{ section.settings.hero_proof1_num | default: '4,000+' }}</b><span>{{ section.settings.hero_proof1_label | default: 'builders trained' }}</span></li>
+          <li><b>{{ section.settings.hero_proof1_num | default: '4,000+' }}</b><span>{{ section.settings.hero_proof1_label | default: 'people trained' }}</span></li>
           <li><b>{{ section.settings.hero_proof2_num | default: '45' }}</b><span>{{ section.settings.hero_proof2_label | default: 'countries' }}</span></li>
           <li><b>{{ section.settings.hero_proof3_num | default: '2012' }}</b><span>{{ section.settings.hero_proof3_label | default: 'building since' }}</span></li>
         </ul>
@@ -572,9 +572,9 @@
         <p class="acc-lede">{{ section.settings.why_lede | default: 'Bamboo frames go together with a few hand tools, a jig and a weekend — and most builders have never made anything before.' }}</p>
       </div>
       <ul class="acc-stats">
-        <li><b>{{ section.settings.why_stat1_num | default: '4,000+' }}</b><span>{{ section.settings.why_stat1_label | default: 'builders trained' }}</span></li>
+        <li><b>{{ section.settings.why_stat1_num | default: '4,000+' }}</b><span>{{ section.settings.why_stat1_label | default: 'people trained' }}</span></li>
         <li><b>{{ section.settings.why_stat2_num | default: '45' }}</b><span>{{ section.settings.why_stat2_label | default: 'countries' }}</span></li>
-        <li><b>{{ section.settings.why_stat3_num | default: '80%' }}</b><span>{{ section.settings.why_stat3_label | default: 'built outside the UK' }}</span></li>
+        <li><b>{{ section.settings.why_stat3_num | default: '3,500+' }}</b><span>{{ section.settings.why_stat3_label | default: 'frames built at home' }}</span></li>
       </ul>
       <ul class="acc-cards">
         <li class="acc-card"><a href="{{ section.settings.why_card1_url | default: '/pages/workshops' }}">
@@ -823,7 +823,7 @@
     { "type": "header", "content": "Hero proof row" },
     { "type": "checkbox", "id": "hero_proof_on", "label": "Show proof figures in hero", "default": true },
     { "type": "text", "id": "hero_proof1_num", "label": "Figure 1", "default": "4,000+" },
-    { "type": "text", "id": "hero_proof1_label", "label": "Figure 1 label", "default": "builders trained" },
+    { "type": "text", "id": "hero_proof1_label", "label": "Figure 1 label", "default": "people trained" },
     { "type": "text", "id": "hero_proof2_num", "label": "Figure 2", "default": "45" },
     { "type": "text", "id": "hero_proof2_label", "label": "Figure 2 label", "default": "countries" },
     { "type": "text", "id": "hero_proof3_num", "label": "Figure 3", "default": "2012" },
