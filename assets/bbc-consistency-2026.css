@@ -44,3 +44,7 @@
 /* LAW 7 — pasted page content cannot import fonts (the Calibri-on-sustainability case).
    code/pre keep their monospace. */
 .rte *:not(code):not(pre):not(kbd) { font-family: inherit !important; }
+
+/* LAW 7 — Word-paste inline fonts (found outside .rte on legacy pages): the attribute
+   selector out-specifies the inline style's font via !important. */
+[style*="font-family"]:not(code):not(pre) { font-family: inherit !important; }
