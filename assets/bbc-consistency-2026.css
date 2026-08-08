@@ -63,3 +63,26 @@
 /* One underline: 2px stroke, 3px offset (measured 81:14 majority) */
 .bbc-rd main a:not(.rd-btn):not(.rd-nav-cta):not([class*="card"]) {
   text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+/* ===== ROLLOUT R1 — evaluated winners (Block Consistency Rollout workstream, 2026-08-08) ===== */
+
+/* WINNER step chips: square (stamped DNA) — impact/schools flow circles conform */
+.rd-flow__step::before { border-radius: 6px !important; }
+
+/* WINNER accordion: bordered +card — support-mission's bare FAQ conforms visually */
+.bbc-sup__faq { border: 2px solid var(--ink, #0E1A17); background: var(--paper2, #EDE5D4);
+  padding: 14px 18px; margin: 10px 0; }
+
+/* WINNER input fields: stamped square (2px border, 6px radius) — newsletter aligns to contact/teambuilding */
+.rd-footer input[type="email"], footer input[type="email"], .rd-news input[type="email"] {
+  border-radius: 6px !important; border: 2px solid var(--ink, #0E1A17) !important; }
+
+/* Clickable cards get hover feedback (the measured gap): stamp-lift grammar,
+   guarded by the global prefers-reduced-motion reset */
+.rd-cscard, .rd-door, .rd-path, .rd-dlcard { transition: transform .18s ease, box-shadow .18s ease; }
+.rd-cscard:hover, .rd-door:hover, .rd-path:hover, .rd-dlcard:hover { transform: translate(-2px, -2px); }
+.rd-card.rd-stamp:hover { box-shadow: 7px 7px 0 var(--ink, #0E1A17); }
+
+/* Home's private ew-btn hover joins the estate lift grammar */
+.ew-btn { transition: transform .18s ease, opacity .18s ease; }
+.ew-btn:hover { transform: translateY(-2px); opacity: 1; }
