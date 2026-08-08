@@ -7,7 +7,11 @@
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "lint:css": "stylelint 'assets/**/*.css'",
-    "check:consistency": "node qa/consistency-check.mjs"
+    "check:consistency": "node qa/consistency-check.mjs",
+    "census": "node qa/estate-census.mjs",
+    "check:anatomy": "node qa/anatomy-conformance.mjs",
+    "check:bands": "node qa/band-grammar.mjs",
+    "smoke:webkit": "npx playwright test --config=playwright.config.webkit.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",

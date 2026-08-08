@@ -3,7 +3,7 @@
 // the legacy theme-smoke suite, otherwise wins config resolution.)
 export default {
   testDir: 'qa',
-  testMatch: 'visual.spec.mjs',
+  testMatch: ['visual.spec.mjs', 'hover.spec.mjs'],
   timeout: 60000,
   retries: 1,
   workers: 3,
