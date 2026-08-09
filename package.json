@@ -12,7 +12,8 @@
     "check:anatomy": "node qa/anatomy-conformance.mjs",
     "check:bands": "node qa/band-grammar.mjs",
     "smoke:webkit": "npx playwright test --config=playwright.config.webkit.mjs",
-    "smoke:firefox": "npx playwright test --config=playwright.config.firefox.mjs"
+    "smoke:firefox": "npx playwright test --config=playwright.config.firefox.mjs",
+    "test:motion": "npx playwright test --config=playwright.config.motion.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",

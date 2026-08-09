@@ -45,6 +45,9 @@ Verification tool: `qa/motion-check.mjs` (the feedback loop — run after ANY mo
 | hover imagery zoom | transition | universal §11b | door/card/cscard/path images scale 1.035 on hover, `--mo-base` |
 | count-up (rows) | JS | bbc-stat-countup.js | EXTENDED 2026-08-09 to `.ew-proof b`, `.rd-heroproof b`, `.acc-stats li > b` per owner instruction |
 | `.rd-stagger` rollout | (existing) | markup | now on: home doors grid · acc-cards · kit grid · impact rd-paths · PDP rd-g4 ×2 (design-dimmed children — loop arrows, logo strips — excluded: motion-check reduce-context rule) |
+| acc-stats tick draw · kicker dash draw · culm-node draw | scroll-driven | universal §11b | rd-tick-draw reused on `.acc-stats li::before`, `.rd-eyebrow::before`, `.rd-timeline.rd-culm .rd-tl::before` |
+| footer counting ribbon | JS count-up | bbc-footer-2026 `count_ribbon` setting | Register-approved figure, blank = off |
+| **motion-smoke** | test suite | qa/motion-smoke.spec.mjs (`npm run test:motion`) | live-behaviour assertions both contexts; caught the dead-bar timeline (rule-4 violation) on first run |
 
 ## HARD RULES
 1. **Evidence, credibility numbers and prices NEVER move** — AMENDED 2026-08-09 by owner instruction (James: motion on stats): stat ROWS may count-up (settling on the exact figure, reduced-motion inert); **pre-marked `.bbc-counted` record bands, MOJ-sourced figures and all prices stay instant**. No marquee or parallax on anything an assessor reads.

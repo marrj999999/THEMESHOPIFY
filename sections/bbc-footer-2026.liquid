@@ -104,6 +104,7 @@
     {%- endif -%}
 
 
+    {%- if section.settings.count_ribbon != blank -%}<p class="rd-foot-count">{{ section.settings.count_ribbon }}</p>{%- endif -%}
     <div class="rd-foot-press" aria-label="As featured in">
       {%- assign flogos = "logo-ft.svg,logo-guardian.svg,logo-roadcc.svg,logo-design-museum.svg,logo-inside-time.svg" | split: "," -%}{%- assign fnames = "Financial Times,The Guardian,road.cc,Design Museum,Inside Time" | split: "," -%}
       {%- for lg in flogos -%}<img src="{{ lg | asset_url }}" alt="Featured in {{ fnames[forloop.index0] }}" height="20" loading="lazy">{%- endfor -%}
@@ -138,6 +139,7 @@
   "tag": "div",
   "class": "bbc-footer-2026-section",
   "settings": [
+    { "type": "text", "id": "count_ribbon", "label": "Counting ribbon (blank = off)", "default": "<b class=\"rd-num\">3,500+</b> frames built at kitchen tables — and counting" },
     {
       "type": "header",
       "content": "Brand"

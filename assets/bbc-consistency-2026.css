@@ -310,3 +310,7 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 /* Footer payment icons: a global svg reset stacked them one per line. Row. */
 .bbc-rd .rd-foot-pay{ display:flex !important; flex-wrap:wrap; gap:6px; align-items:center; }
 .bbc-rd .rd-foot-pay .rd-payicon, .bbc-rd .rd-foot-pay svg{ display:inline-block !important; height:24px; width:auto; }
+
+/* footer counting ribbon — engagement stat above the wordmark; .rd-num counts up */
+.bbc-rd .rd-foot-count{ margin:26px 0 0; font-size:15px; color:var(--bone,#E6DCC8); opacity:.85; }
+.bbc-rd .rd-foot-count .rd-num{ font-size:22px; font-weight:700; color:var(--lime,#D4FD62); margin-right:4px; }

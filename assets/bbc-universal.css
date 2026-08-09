@@ -379,14 +379,27 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
     .rd-stats.rd-dim .rd-stat:nth-child(2)::before{ animation-range:entry 8% entry 46%; }
     .rd-stats.rd-dim .rd-stat:nth-child(3)::before{ animation-range:entry 16% entry 54%; }
     .rd-stats.rd-dim .rd-stat:nth-child(4)::before{ animation-range:entry 24% entry 62%; }
-    /* comparison bars grow to their value (why-bamboo material charts) */
-    .bbc-rd .wbx-bf{ animation:rd-bar-grow both; animation-timeline:view(); animation-range:entry 0% entry 55%; transform-origin:left center; }
-    .bbc-rd .wbx-bar:nth-child(2) .wbx-bf{ animation-range:entry 8% entry 63%; }
-    .bbc-rd .wbx-bar:nth-child(3) .wbx-bf{ animation-range:entry 16% entry 71%; }
+    /* comparison bars grow to their value (why-bamboo material charts).
+       Named timeline on the BAND — the fill's own view() sat inactive inside
+       its 10px clipped track (caught live by motion-smoke, 2026-08-09). */
+    .bbc-rd .wbx{ view-timeline:--wbx block; }
+    /* the band is ~1.4 viewports tall — tight entry ranges so bars finish
+       growing while they are still mid-viewport */
+    .bbc-rd .wbx-bf{ animation:rd-bar-grow both; animation-timeline:--wbx; animation-range:entry 3% entry 20%; transform-origin:left center; }
+    .bbc-rd .wbx-bar:nth-of-type(2) .wbx-bf{ animation-range:entry 7% entry 24%; }
+    .bbc-rd .wbx-bar:nth-of-type(3) .wbx-bf{ animation-range:entry 11% entry 28%; }
     /* impact frame diagram: the two pathway routes draw themselves
        (dasharray lives HERE so non-supporting engines get the full stroke) */
     .rd-fi__route path{ stroke-dasharray:1 1; stroke-dashoffset:1; animation:rd-path-draw both; animation-timeline:view(); animation-range:entry 5% entry 60%; }
     .rd-fi__route--b path{ animation-range:entry 20% entry 75%; }
+    /* home why-band stat ticks (acc-stats alias) draw like the .rd-dim bands */
+    .acc-stats li::before{ animation:rd-tick-draw both; animation-timeline:view(); animation-range:entry 0% entry 38%; transform-origin:left center; }
+    .acc-stats li:nth-child(2)::before{ animation-range:entry 8% entry 46%; }
+    .acc-stats li:nth-child(3)::before{ animation-range:entry 16% entry 54%; }
+    /* kicker dashes draw in — the smallest signature in the system */
+    .bbc-rd .rd-eyebrow::before{ animation:rd-tick-draw both; animation-timeline:view(); animation-range:entry 0% entry 26%; transform-origin:left center; }
+    /* our-story bamboo culm nodes tick in with their entries */
+    .rd-timeline.rd-culm .rd-tl::before{ animation:rd-tick-draw both; animation-timeline:view(); animation-range:entry 0% entry 32%; transform-origin:left center; }
   }
   @keyframes rd-tick-draw{ from{ transform:scaleX(.08); opacity:.35; } to{ transform:scaleX(1); opacity:1; } }
   @keyframes rd-bar-grow{ from{ transform:scaleX(.12); } to{ transform:scaleX(1); } }

@@ -91,7 +91,7 @@
   .bbc-rd .wbx-cap{ font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--wm); margin:0 0 14px; }
   .bbc-rd .wbx-bar{ display:grid; grid-template-columns:140px 1fr 52px; align-items:center; gap:14px; margin-bottom:11px; }
   .bbc-rd .wbx-bn{ font-size:13px; font-weight:700; color:var(--wf); }
-  .bbc-rd .wbx-bt{ height:14px; background:rgba(7,62,39,.08); border-radius:7px; overflow:hidden; }
+  .bbc-rd .wbx-bt{ height:14px; background:rgba(7,62,39,.08); border-radius:7px; overflow:hidden; overflow:clip /* clip not hidden — hosts the rd-bar-grow timeline (MOTION.md rule 4); hidden fallback = engines without clip lack view() anyway */; }
   .bbc-rd .wbx-bf{ display:block; height:100%; background:var(--wt); border-radius:7px; }
   .bbc-rd .wbx-bar.is-hl .wbx-bf{ background:var(--wg); }
   .bbc-rd .wbx-bv{ font-size:13px; font-weight:700; color:var(--wm); text-align:right; font-variant-numeric:lining-nums tabular-nums; }
