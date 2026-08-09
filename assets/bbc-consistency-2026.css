@@ -221,9 +221,11 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 .bbc-rd a.rd-path, .bbc-rd a.rd-path *,
 .bbc-rd a.rd-cscard, .bbc-rd a.rd-cscard *,
 .bbc-rd a.rd-logocell, .bbc-rd a.rd-logocell *,
-.bbc-rd-home a.rd-door, .bbc-rd-home a.rd-door *{ text-decoration:none !important; }
+.bbc-rd-home a.rd-door, .bbc-rd-home a.rd-door *,
+.bbc-rd a.rd-card, .bbc-rd a.rd-card *{ text-decoration:none !important; }
 /* Hover feedback keeps its underline on the TITLE only. */
 .bbc-rd a.rd-cscard:hover .rd-cscard__title,
+.bbc-rd a.rd-card:hover h3, .bbc-rd a.rd-card:hover [class*="title"],
 .bbc-rd a.rd-door:hover h3, .bbc-rd a.rd-path:hover h3{ text-decoration:underline !important; text-decoration-thickness:2px !important; text-underline-offset:3px !important; }
 /* Hero proof rows: top-align values, stop the third stat orphan-wrapping
    at phone widths (impact's "2012" wrapped below the row). */
@@ -234,5 +236,77 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
   .bbc-rd-home .ew-proof{ gap:10px 18px !important; }
 }
 /* Stat source micro-line was ink-on-forest (~1.4:1) on dark heroes. */
-.bbc-rd-home .rd-stat-src, .bbc-rd .rd-dark .rd-stat-src, .bbc-rd.rd-dark .rd-stat-src,
+.bbc-rd-home .ew .rd-stat-src, .bbc-rd .rd-dark .rd-stat-src, .bbc-rd.rd-dark .rd-stat-src,
 .bbc-rd .rd-hero .rd-stat-src{ color:var(--bone,#E6DCC8) !important; }
+/* (scope repair 2026-08-09: the first selector was .bbc-rd-home .rd-stat-src — page-wide —
+   which turned the PAPER why-band source line bone-on-paper. Hero (.ew) only.) */
+
+/* ==================================================================
+   EYEBALL SWEEP — 2026-08-09. Defects found by reading WebKit@390
+   slices like a design review; several invisible to every instrument.
+   ================================================================== */
+/* Impact path-card images: WebKit resolved the wrapper aspect-ratio +
+   img height:100% chain to a 770px empty void (Chromium: 233px).
+   Deterministic sizing on the img itself, engine-proof. */
+.bbc-rd-impact .rd-path__media > img,
+.bbc-rd-impact .rd-path__media .rd-duotone > img{ height:auto !important; aspect-ratio:16/7 !important; object-fit:cover !important; }
+/* acc-stats: the between-item divider (border-left + 16px inset) followed
+   item 3 onto its wrapped row — an indented orphan divider. No dividers
+   once the row wraps. */
+@media(max-width:640px){
+  .bbc-rd .acc-stats li{ border-left:0 !important; padding-left:0 !important; }
+  .bbc-rd .acc-stats{ row-gap:22px !important; column-gap:30px !important; }
+}
+/* Footer press strip: mixed logo geometries fought height:34 + max-width:170
+   (FT capped smaller than Guardian etc.) — uniform 26px cap height, free widths. */
+.bbc-rd .rd-foot-press img{ height:26px !important; max-width:none !important; }
+/* optical compensation: FT + Design Museum artwork sits padded inside its viewBox */
+.bbc-rd .rd-foot-press img[src*="logo-ft"]{ height:31px !important; }
+.bbc-rd .rd-foot-press img[src*="design-museum"]{ height:34px !important; }
+.bbc-rd .rd-foot-press{ gap:20px 30px !important; }
+/* Door pills: never orphan the arrow on its own line; tighten at phone width. */
+@media(max-width:420px){
+  .bbc-rd-home .ew-btn, .bbc-rd-home .rd-door .rd-btn{ font-size:13px; letter-spacing:.02em; }
+}
+/* Law 2 (spec): CTA labels lowercase, proper nouns keep caps. Home's CTAs
+   mixed Watch/All/Book/See with lowercase siblings on one page — enforce the
+   written law; no home CTA label contains a proper noun. James can veto. */
+/* ============ PUNCH RESTORATION — 2026-08-09 (James: "site has gone
+   backwards — solve and compare"). Before/after comparison verdict:
+   structure hugely improved; voice flattened. These restore the punch. */
+/* CTA case — comparison verdict (2026-08-09): the before deliberately ran a
+   TWO-TIER voice: hero/band primary pills sentence case, card-level CTAs
+   lowercase. My lowercase law flattened it; the ::first-letter repair cannot
+   work on flex buttons. Case now comes from CONTENT (typed values), law
+   documented as two-tier in the spec. No transform.
+/* the hero photo sticker — the signature element the rebuild dropped; DNA's
+   8px rotated sticker exception, lime (gold stays retired) */
+.bbc-rd-home .ew-sticker{ position:absolute; right:28px; top:clamp(480px,74vh,760px); bottom:auto; z-index:9;
+  background:var(--lime,#D4FD62); color:var(--ink,#0E1A17); font-weight:700; font-size:12.5px;
+  text-transform:uppercase; letter-spacing:.09em; padding:9px 14px; border-radius:8px;
+  transform:rotate(-2.5deg); box-shadow:3px 3px 0 rgba(0,0,0,.28); max-width:min(70%,340px);
+  text-align:center; pointer-events:none; }
+@media(max-width:749px){ .bbc-rd-home .ew-sticker{ display:none; } } /* stacked mobile hero: photo band too short for a sticker */
+/* mobile stat presence: clamp minimums lost the boosted size iOS used to fake */
+@media(max-width:640px){
+  .bbc-rd .rd-heroproof b, .bbc-rd-home .ew-proof b{ font-size:26px !important; line-height:1.05 !important; }
+}
+/* hero source micro-line: keep the claims law, lose the shout */
+.bbc-rd-home .ew .rd-stat-src, .bbc-rd .rd-hero .rd-stat-src{ font-size:10px; opacity:.5; }
+
+/* Long pill labels clipped at card edges on phones (PDP fit-note ghost).
+   Pills may wrap to two centred lines at phone width — never clip. */
+@media(max-width:480px){
+  .bbc-rd .rd-btn{ white-space:normal !important; text-align:center; line-height:1.25; max-width:100%; }
+}
+/* PDP stock dot: flex-wrap let WebKit drop the text node below the dot —
+   nowrap keeps dot + text side-by-side (the text block wraps internally). */
+.bbc-rd .rd-cmp-15126{ flex-wrap:nowrap !important; align-items:flex-start !important; }
+.bbc-rd .rd-cmp-93984{ margin-top:4px; }
+
+/* Press strip (home + impact, bbc-press snippet): logos rendered at intrinsic
+   SVG sizes — Independent tiny, Guardian huge. Uniform optical height. */
+.bbc-rd .bbc-press__logo{ height:24px !important; width:auto !important; max-width:150px; object-fit:contain; }
+/* Footer payment icons: a global svg reset stacked them one per line. Row. */
+.bbc-rd .rd-foot-pay{ display:flex !important; flex-wrap:wrap; gap:6px; align-items:center; }
+.bbc-rd .rd-foot-pay .rd-payicon, .bbc-rd .rd-foot-pay svg{ display:inline-block !important; height:24px; width:auto; }

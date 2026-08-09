@@ -205,13 +205,14 @@
         <p class="rd-stat-src">{{ section.settings.hero_proof_src | default: 'BBC training & customer records' }}</p>
       {%- endif -%}
       <div class="ew-cta">
-        {%- if section.settings.hero_cta1_label != blank -%}<a class="ew-btn is-lime" href="{{ hero_cta1 }}">{{ section.settings.hero_cta1_label }} &rarr;</a>{%- endif -%}
+        {%- if section.settings.hero_cta1_label != blank -%}<a class="ew-btn is-lime" href="{{ hero_cta1 }}">{{ section.settings.hero_cta1_label }}&nbsp;&rarr;</a>{%- endif -%}
         {%- if section.settings.hero_cta2_label != blank -%}<a class="ew-btn is-ghost" href="{{ hero_cta2 }}" style="color:#EDE6D6 !important;border-color:#EDE6D6 !important;">{{ section.settings.hero_cta2_label }}</a>{%- endif -%}
       </div>
             <p class="ew-cred">A social enterprise CIC &middot; enhanced-DBS facilitators &middot; public-liability insured</p>
     </div>
 
     <div class="ew-media{% if section.settings.hero_video_on %} has-video{% endif %}">
+      {%- if section.settings.hero_sticker != blank -%}<span class="ew-sticker">{{ section.settings.hero_sticker }}</span>{%- endif -%}
       {%- if section.settings.hero_image != blank -%}
         <img class="ew-photo" src="{{ section.settings.hero_image | image_url: width: 1600 }}" srcset="{{ section.settings.hero_image | image_url: width: 800 }} 800w, {{ section.settings.hero_image | image_url: width: 1200 }} 1200w, {{ section.settings.hero_image | image_url: width: 1600 }} 1600w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w, {{ section.settings.hero_image | image_url: width: 2600 }} 2600w" sizes="(max-width:749px) 100vw, 56vw" alt="{{ section.settings.hero_image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" fetchpriority="high" loading="eager">
       {%- else -%}
@@ -462,7 +463,7 @@
               {%- if block.settings.tag != blank -%}<span class="rd-tag rd-lime">{{ block.settings.tag }}</span>{%- endif -%}
               <h3 class="rd-mt2">{{ block.settings.title }}</h3>
               <p>{{ block.settings.body }}</p>
-              {%- if block.settings.link_label != blank -%}<span class="rd-btn rd-lime">{{ block.settings.link_label }}</span>{%- endif -%}
+              {%- if block.settings.link_label != blank -%}<span class="rd-btn rd-lime">{{ block.settings.link_label | replace: " →", " →" }}</span>{%- endif -%}
             </div>
           </a>
         {%- endif -%}{%- endfor -%}
@@ -600,7 +601,7 @@
         </a></li>
       </ul>
       <div class="acc-cta">
-        <a class="ew-btn is-lime" href="{{ section.settings.why_cta_url | default: '/pages/workshops' }}">{{ section.settings.why_cta_label | default: 'See how a build works &rarr;' }}</a>
+        <a class="ew-btn is-lime" href="{{ section.settings.why_cta_url | default: '/pages/workshops' }}">{{ section.settings.why_cta_label | default: 'See how a build works&nbsp;&rarr;' }}</a>
       </div>
     </div>
   </section>
@@ -627,7 +628,7 @@
              context: '&ldquo;Are bamboo bikes actually any good?&rdquo;',
              image: 'bbc-rd-gcn.jpg',
              youtube: 'https://www.youtube.com/watch?v=cQxbC-njbGQ',
-             cta: 'Watch the film' -%}
+             cta: 'watch the film' -%}
         {%- render 'bbc-cscard',
              variant: 'grid',
              kind: 'builder story',
@@ -824,6 +825,7 @@
     { "type": "header", "content": "Hero proof row" },
     { "type": "checkbox", "id": "hero_proof_on", "label": "Show proof figures in hero", "default": true },
     { "type": "text", "id": "hero_proof1_num", "label": "Figure 1", "default": "4,000+" },
+    { "type": "text", "id": "hero_sticker", "label": "Photo sticker (blank = off)", "default": "hand-built bamboo · lugged by hand" },
     { "type": "text", "id": "hero_proof1_label", "label": "Figure 1 label", "default": "people trained" },
     { "type": "text", "id": "hero_proof2_num", "label": "Figure 2", "default": "45" },
     { "type": "text", "id": "hero_proof2_label", "label": "Figure 2 label", "default": "countries" },

@@ -31,7 +31,7 @@
   max-width:var(--rd-container); margin-inline:auto; padding-inline:32px; box-sizing:border-box; }
 
 /* eyebrow — lowercase label */
-.bbc-rd .bbcst-eyebrow{ display:block; font-size:14px; font-weight:700; letter-spacing:.14em; color:var(--forest,#003C32); margin:0 0 clamp(16px,2vw,26px); }
+.bbc-rd .bbcst-eyebrow{ display:block; font-size:15px; font-weight:700; letter-spacing:.05em; /* statement dialect: designed tight voice, restored 2026-08-09 */ color:var(--forest,#003C32); margin:0 0 clamp(16px,2vw,26px); }
 /* headline — the content */
 .bbc-rd .bbcst-head{ font-size:clamp(3rem,10.5vw,10.5rem); line-height:.9; letter-spacing:-.04em; font-weight:800; margin:0; color:var(--forest,#003C32); text-wrap:balance; max-width:none; }
 .bbc-rd .bbcst-star{ font-size:.3em; font-weight:800; vertical-align:super; color:var(--forest,#003C32); line-height:0; }

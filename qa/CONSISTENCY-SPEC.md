@@ -8,7 +8,7 @@ until James amends it.*
 | # | Component | The law |
 |---|---|---|
 | 1 | **Kickers** | dash + lowercase, 13–14px letter-spaced; lime on dark, soft-ink on light. No other eyebrow exists. *(Census: 267 CAPS vs 23 lowercase — flip the global transform.)* |
-| 2 | **Buttons** | pill (999) only: primary filled · secondary outline · tertiary underlined link with →. Lowercase labels (proper nouns keep caps). No arrows or underlines on pills. Max one primary per band. Header "Make a bike." joins the pill system. |
+| 2 | **Buttons** | pill (999) only: primary filled · secondary outline · tertiary underlined link with →. **Two-tier case (amended 2026-08-09 from the before/after comparison):** hero/band primary pills SENTENCE case; card-level CTAs and tertiary links lowercase; proper nouns keep caps everywhere. Case lives in content, never in a transform. No arrows or underlines on pills. Max one primary per band. Header "Make a bike." joins the pill system. |
 | 3 | **Chips** | tags, never actions. CAPS 12px letter-spaced. Lime = category · ghost = on imagery · white = fact meta · `[ BRACKETS ]` = story-card tags. Gold is retired. "watch the film" becomes a tertiary link. |
 | 4 | **Quotes** | two patterns only: **Pull** (no marks, caps micro-attribution) · **Quote card** (CSS curly marks + attribution). Grammar: **Name, Role · Source**. No leading dashes, no typed quote marks. Peer-reviewed chip pattern stays (fix its spacing). |
 | 5 | **Case-study cards** | rd-cscard everywhere; lowercase titles; CTAs `read the story →` / `watch the film →` only; meta line = `year · source`; quotes never wear cards. |

@@ -46,7 +46,7 @@ for (const path of PAGES) {
         }
       });
       // LAW 2b: card anchors must not draw ancestor underlines through children
-      document.querySelectorAll('a.rd-door, a.rd-path, a.rd-cscard, a.rd-logocell').forEach(a => {
+      document.querySelectorAll('a.rd-door, a.rd-path, a.rd-cscard, a.rd-logocell, a.rd-card').forEach(a => {
         if (!vis(a)) return;
         if (cs(a).textDecorationLine.includes('underline')) out.cardAnchorUnderline = (out.cardAnchorUnderline || 0) + 1;
       });
