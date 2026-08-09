@@ -1,6 +1,9 @@
 // LAYER-1 VISUAL REGRESSION — committed baselines; any pixel drift fails.
 // Baselines: npx playwright test qa/visual.spec.mjs --update-snapshots (only after an eyeball).
 import { test, expect } from '@playwright/test';
+// capture under reduced-motion: the MOTION.md contract guarantees inert = final
+// state, so every animation (incl. JS count-ups) renders settled and deterministic.
+test.use({ contextOptions: { reducedMotion: 'reduce' } });
 const P = 'preview_theme_id=196820238710';
 const BASE = 'https://bamboobicycleclub.org';
 // Widened 2026-08-05 from 12 pages to every page the 2026 band system governs, plus the

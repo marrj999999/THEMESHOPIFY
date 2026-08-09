@@ -449,7 +449,7 @@
         <h2 class="rd-reveal">{{ section.settings.doors_title }}</h2>
         <p class="rd-lede rd-mt2">{{ section.settings.doors_intro }}</p>
       </div>
-      <div class="rd-grid rd-g3">
+      <div class="rd-grid rd-g3 rd-stagger">
         {%- for block in section.blocks -%}{%- if block.type == 'door' -%}
           {%- assign door_url = block.settings.link_url | default: '/' -%}
           <a class="rd-door" href="{{ door_url }}" {{ block.shopify_attributes }}>
@@ -578,7 +578,7 @@
         <li><b>{{ section.settings.why_stat3_num | default: '3,500+' }}</b><span>{{ section.settings.why_stat3_label | default: 'frames built at home' }}</span></li>
       </ul>
       <p class="rd-stat-src">{{ section.settings.why_stat_src | default: 'BBC training & customer records' }}</p>
-      <ul class="acc-cards">
+      <ul class="acc-cards rd-stagger">
         <li class="acc-card"><a href="{{ section.settings.why_card1_url | default: '/pages/workshops' }}">
           {%- render "bbc-media", image: section.settings.why_card1_img, fallback: "bbc-rd-wb-kit.jpg", video: section.settings.why_card1_video_file, youtube: section.settings.why_card1_video_url, alt: section.settings.why_card1_alt -%}
           <h3>{{ section.settings.why_card1_title | default: 'simple hand tools' }}</h3>
@@ -653,7 +653,7 @@
         <div><span class="rd-eyebrow">{{ section.settings.kits_kicker }}</span><h2 class="rd-reveal">{{ section.settings.kits_title }}</h2></div>
         {%- if section.settings.kits_link_label != blank -%}<a class="rd-btn rd-ghost" href="{{ kits_url }}">{{ section.settings.kits_link_label }}</a>{%- endif -%}
       </div>
-      <div class="rd-grid rd-g4">
+      <div class="rd-grid rd-g4 rd-stagger">
         {%- for block in section.blocks -%}{%- if block.type == 'kit' -%}
           {%- assign kit_link = block.settings.link_url | default: kits_url -%}
           <a class="rd-reveal rd-card" href="{{ kit_link }}" {{ block.shopify_attributes }}>

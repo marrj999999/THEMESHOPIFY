@@ -39,9 +39,15 @@ Verification tool: `qa/motion-check.mjs` (the feedback loop — run after ANY mo
 | `bbcm-breathe/spin` | player affordance | bbc-media snippet | signature player (grandfathered snippet-local) |
 | count-up | JS | bbc-stat-countup.js | stats — **credibility/funder numbers render instant** (Impact lesson); reduced-motion aware |
 | Dawn `scroll-trigger` | IO-based | animations.js (Dawn stock) | Dawn commerce sections — leave alone |
+| `rd-tick-draw` | scroll-driven tick draw | universal §11b | `.rd-dim` stat-band dimension ticks — engineering-drawing draw, nth-child stagger |
+| `rd-bar-grow` | scroll-driven bar growth | universal §11b | why-bamboo comparison bars grow to value, origin left |
+| `rd-path-draw` | scroll-driven SVG route draw | universal §11b | impact frame diagram — the two pathway routes draw themselves (dasharray inside @supports so no-support = full stroke) |
+| hover imagery zoom | transition | universal §11b | door/card/cscard/path images scale 1.035 on hover, `--mo-base` |
+| count-up (rows) | JS | bbc-stat-countup.js | EXTENDED 2026-08-09 to `.ew-proof b`, `.rd-heroproof b`, `.acc-stats li > b` per owner instruction |
+| `.rd-stagger` rollout | (existing) | markup | now on: home doors grid · acc-cards · kit grid · impact rd-paths · PDP rd-g4 ×2 (design-dimmed children — loop arrows, logo strips — excluded: motion-check reduce-context rule) |
 
 ## HARD RULES
-1. **Evidence, credibility numbers and prices NEVER move.** No marquee, no count-up, no parallax on anything an assessor reads.
+1. **Evidence, credibility numbers and prices NEVER move** — AMENDED 2026-08-09 by owner instruction (James: motion on stats): stat ROWS may count-up (settling on the exact figure, reduced-motion inert); **pre-marked `.bbc-counted` record bands, MOJ-sourced figures and all prices stay instant**. No marquee or parallax on anything an assessor reads.
 2. **Reduced-motion = fully inert.** Every animation lives inside `@media (prefers-reduced-motion: no-preference)`.
 3. **No support = complete page.** No `opacity:0`/hidden initial state outside `@supports (animation-timeline: view())` — the class of bug that blanked Firefox. motion-check enforces mechanically.
 4. **Crop-wrappers hosting animated children use `overflow: clip`, never `hidden`** — hidden creates a scroll container and silently kills every timeline inside.

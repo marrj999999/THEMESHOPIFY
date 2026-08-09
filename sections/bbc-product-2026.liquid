@@ -394,7 +394,7 @@
           <span class="rd-eyebrow">{{ section.settings.steps_eyebrow }}</span>
         {%- endif -%}
         <h2 class="rd-mw-18ch">{{ section.settings.steps_heading }}</h2>
-        <div class="rd-grid rd-g4 rd-mt4">
+        <div class="rd-grid rd-g4 rd-mt4 rd-stagger">
           {%- for block in steps -%}
             <div class="rd-card rd-stamp" {{ block.shopify_attributes }}><div class="rd-body">
               <span class="rd-tag rd-lime">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
@@ -634,7 +634,7 @@
             <a class="rd-btn rd-ghost" href="{{ section.settings.related_cta_url | default: '/collections/home-build-kits' }}">{{ section.settings.related_cta_label }} <span class="rd-arrow" aria-hidden="true">&#8594;</span></a>
           {%- endif -%}
         </div>
-        <div class="rd-grid rd-g4">
+        <div class="rd-grid rd-g4 rd-stagger">
           {%- for block in related -%}
             {%- assign rel_url = block.settings.url | default: '/collections/home-build-kits' -%}
             <a class="rd-card" href="{{ rel_url }}" {{ block.shopify_attributes }}>

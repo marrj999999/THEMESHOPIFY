@@ -365,6 +365,39 @@ h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
   }
 }
 
+/* ============================================================================
+   §11b MOTION EXPANSION (2026-08-09) — James: "animations and movement,
+   especially stats and numbers, press reels, infographics — more feel and
+   engagement." Same contract, same guards, same tokens. New vocabulary rows
+   in qa/MOTION.md. Rule-1 amendment (owner instruction): stat ROWS may
+   count-up; pre-marked .bbc-counted record bands and all prices stay instant.
+   ============================================================================ */
+@media (prefers-reduced-motion: no-preference){
+  @supports (animation-timeline: view()){
+    /* dimension ticks draw like an engineering drawing (stat bands, .rd-dim) */
+    .rd-stats.rd-dim .rd-stat::before{ animation:rd-tick-draw both; animation-timeline:view(); animation-range:entry 0% entry 38%; transform-origin:left center; }
+    .rd-stats.rd-dim .rd-stat:nth-child(2)::before{ animation-range:entry 8% entry 46%; }
+    .rd-stats.rd-dim .rd-stat:nth-child(3)::before{ animation-range:entry 16% entry 54%; }
+    .rd-stats.rd-dim .rd-stat:nth-child(4)::before{ animation-range:entry 24% entry 62%; }
+    /* comparison bars grow to their value (why-bamboo material charts) */
+    .bbc-rd .wbx-bf{ animation:rd-bar-grow both; animation-timeline:view(); animation-range:entry 0% entry 55%; transform-origin:left center; }
+    .bbc-rd .wbx-bar:nth-child(2) .wbx-bf{ animation-range:entry 8% entry 63%; }
+    .bbc-rd .wbx-bar:nth-child(3) .wbx-bf{ animation-range:entry 16% entry 71%; }
+    /* impact frame diagram: the two pathway routes draw themselves
+       (dasharray lives HERE so non-supporting engines get the full stroke) */
+    .rd-fi__route path{ stroke-dasharray:1 1; stroke-dashoffset:1; animation:rd-path-draw both; animation-timeline:view(); animation-range:entry 5% entry 60%; }
+    .rd-fi__route--b path{ animation-range:entry 20% entry 75%; }
+  }
+  @keyframes rd-tick-draw{ from{ transform:scaleX(.08); opacity:.35; } to{ transform:scaleX(1); opacity:1; } }
+  @keyframes rd-bar-grow{ from{ transform:scaleX(.12); } to{ transform:scaleX(1); } }
+  @keyframes rd-path-draw{ from{ stroke-dashoffset:1; } to{ stroke-dashoffset:0; } }
+  /* hover grammar addition: card imagery breathes (clip-safe engagement zoom) */
+  @media (hover:hover){
+    .bbc-rd .rd-door img, .bbc-rd a.rd-card img, .bbc-rd .rd-cscard img, .bbc-rd .rd-path__media img{ transition:transform var(--mo-base) var(--mo-ease); }
+    .bbc-rd .rd-door:hover img, .bbc-rd a.rd-card:hover img, .bbc-rd .rd-cscard:hover img, .bbc-rd .rd-path:hover .rd-path__media img{ transform:scale(1.035); }
+  }
+}
+
 /* "on this page" chapter list (bbc-chapter-list snippet) — GOV.UK-pattern anchors,
    NOT sticky (8-site impact-layout tour 2026-07-24: zero sticky rails in the genre).
    Targets get scroll-margin so anchors never land flush to the top edge. */

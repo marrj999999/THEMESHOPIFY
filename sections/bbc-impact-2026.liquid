@@ -174,17 +174,17 @@
     <circle cx="203" cy="430" r="184"/><circle cx="758" cy="430" r="184"/>
   </g>
   <g fill="none" stroke="var(--forest,#003C32)" stroke-width="5" stroke-linecap="round">
-    <path d="M340,135 L640,150"/> <path d="M640,150 L667,228"/>
-    <path d="M430,430 L667,228"/> <path d="M430,430 L340,135"/>
+    <path d="M340,135 L640,150" pathLength="1"/> <path d="M640,150 L667,228" pathLength="1"/>
+    <path d="M430,430 L667,228" pathLength="1"/> <path d="M430,430 L340,135" pathLength="1"/>
     <path d="M667,228 L758,430" stroke-width="3.5"/>
-    <path d="M430,430 L203,430"/> <path d="M203,430 L340,135"/>
+    <path d="M430,430 L203,430" pathLength="1"/> <path d="M203,430 L340,135" pathLength="1"/>
     <path d="M306,109 l60,-6" stroke-width="7"/>
   </g>
   <g class="rd-fi__route rd-fi__route--a" stroke="var(--lime,#D4FD62)" stroke-width="7" fill="none" stroke-linecap="round" opacity=".85">
-    <path d="M430,430 L667,228 L640,150 L340,135"/>
+    <path d="M430,430 L667,228 L640,150 L340,135" pathLength="1"/>
   </g>
   <g class="rd-fi__route rd-fi__route--b" stroke="var(--steel,#DEE6F0)" stroke-width="7" fill="none" stroke-linecap="round" opacity=".9">
-    <path d="M430,430 L203,430 L340,135"/>
+    <path d="M430,430 L203,430 L340,135" pathLength="1"/>
   </g>
   <g class="rd-fi__nodes" font-family="inherit" font-weight="800" font-size="17" text-anchor="middle">
     <circle cx="560" cy="319" r="17" fill="var(--lime,#D4FD62)" stroke="var(--forest,#003C32)" stroke-width="2.5"/>
@@ -217,7 +217,7 @@
       {%- else -%}
       {%- if section.settings.fork_label != blank -%}<span class="rd-eyebrow rd-mt3">{{ section.settings.fork_label }}</span>{%- endif -%}
       {%- endif -%}
-      <div class="rd-paths">
+      <div class="rd-paths rd-stagger">
         <div class="rd-path rd-path--schools rd-reveal">
           <span class="rd-duotone rd-path__media">
             <img src="{% if section.settings.arm1_image != blank %}{{ section.settings.arm1_image | image_url: width: 900 }}{% else %}{{ 'bbc-rd-wb-group.jpg' | asset_url }}{% endif %}" alt="{{ section.settings.arm1_image_alt | default: 'A school group with the bamboo bike frame they built' | escape }}" loading="lazy" width="900" height="500">

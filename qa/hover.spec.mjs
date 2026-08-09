@@ -1,6 +1,9 @@
 // HOVER-STATE baselines — the interaction layer the full-page net cannot see.
 // Canonical interactive components, hovered, element-screenshot pixel-diffed.
 import { test, expect } from '@playwright/test';
+// capture under reduced-motion: the MOTION.md contract guarantees inert = final
+// state, so every animation (incl. JS count-ups) renders settled and deterministic.
+test.use({ contextOptions: { reducedMotion: 'reduce' } });
 const P = 'preview_theme_id=196820238710';
 const BASE = 'https://bamboobicycleclub.org';
 const TARGETS = [

@@ -6,7 +6,10 @@
 (function () {
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduced || !('IntersectionObserver' in window)) return;
-  var SEL = '.rd-num, .bbc-trust-bar__stat, .bbc-trust-stats__value, .bbc-problem__stat-number, .bbc-impact-stats__number';
+  var SEL = '.rd-num, .bbc-trust-bar__stat, .bbc-trust-stats__value, .bbc-problem__stat-number, .bbc-impact-stats__number, .ew-proof b, .rd-heroproof b, .acc-stats li > b';
+  /* 2026-08-09 (owner instruction): stat ROWS join the count-up — hero proof,
+     why-band trios. Years, values <10 and pre-marked .bbc-counted record
+     bands still render instant; prices are never in these selectors. */
   var els = document.querySelectorAll(SEL);
   if (!els.length) return;
 
