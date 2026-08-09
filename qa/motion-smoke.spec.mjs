@@ -52,33 +52,6 @@ test.describe('motion runs (no-preference)', () => {
     expect(settled, 'settled bar is full').toBeGreaterThan(0.99);
   });
 
-  test('impact pathway routes draw (diagram enabled)', async ({ page }) => {
-    await page.goto(`${BASE}/pages/impact?${P}`, { waitUntil: 'load' });
-    await page.evaluate(() => document.querySelector('#shopify-pc__banner')?.remove());
-    // settle lazy media first — positions measured pre-load drift by ~1000px
-      await page.evaluate(async () => {
-      for (let y = 0; y < document.body.scrollHeight; y += 900) { scrollTo(0, y); await new Promise(r => setTimeout(r, 60)); }
-      scrollTo(0, 0); await new Promise(r => setTimeout(r, 300));
-    });
-    const info = await page.evaluate(() => {
-      const p = document.querySelector('.rd-fi__route--a path');
-      if (!p) return null;
-      const y = p.closest('svg').getBoundingClientRect().top + scrollY;
-      return y;
-    });
-    expect(info, 'frame diagram renders').not.toBeNull();
-    await page.evaluate((v) => scrollTo(0, v), info - 840);
-    await page.waitForTimeout(250);
-    const midOffset = await page.evaluate(() =>
-      parseFloat(getComputedStyle(document.querySelector('.rd-fi__route--a path')).strokeDashoffset));
-    await page.evaluate((v) => scrollTo(0, v), info - 200);
-    await page.waitForTimeout(250);
-    const settledOffset = await page.evaluate(() =>
-      parseFloat(getComputedStyle(document.querySelector('.rd-fi__route--a path')).strokeDashoffset));
-    expect(midOffset, 'mid-entry route partially drawn').toBeGreaterThan(0.01);
-    expect(settledOffset, 'settled route fully drawn').toBeLessThan(0.02);
-  });
-
   test('door grid cascades (later children lag earlier ones mid-entry)', async ({ page }) => {
     await page.goto(`${BASE}/?${P}`, { waitUntil: 'load' });
     await page.evaluate(() => document.querySelector('#shopify-pc__banner')?.remove());

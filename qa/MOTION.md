@@ -34,7 +34,7 @@ Verification tool: `qa/motion-check.mjs` (the feedback loop — run after ANY mo
 | `.rd-evin` (rd-evin) | time-based filter rise | universal §11 | evidence-wall filter changes (JS adds class) |
 | hover grammar | transition | universal §11 (+ legacy equivalents in redesign/statement) | cards lift −4px, buttons −2px, always `--mo-fast` |
 | `rd-roll` / `bbcpr-scroll` | marquees | statement / bbc-press | quote reel + press reel ONLY — one marquee per page, always with a pause control |
-| `rd-ride` | route draw | statement | impact map |
+| ~~`rd-ride`~~ · ~~`rd-path-draw`~~ | — | removed | **SVG animations vetoed by James 2026-08-09 ("no svg animations")** — the frame diagram is also toggled back off |
 | `rdItemIn`, `rd-macc-in` | nav/accordion micro | redesign / header section | tokenised `--mo-base` |
 | `bbcm-breathe/spin` | player affordance | bbc-media snippet | signature player (grandfathered snippet-local) |
 | count-up | JS | bbc-stat-countup.js | stats — **credibility/funder numbers render instant** (Impact lesson); reduced-motion aware |
@@ -57,7 +57,8 @@ Verification tool: `qa/motion-check.mjs` (the feedback loop — run after ANY mo
 5. **Compositor-only:** animate transform / opacity / filter. Nothing that triggers layout.
 6. **One marquee per page maximum**, always pausable.
 7. **New keyframes live in universal §11 only** (snippet-local micro-motions are grandfathered and listed above). motion-check flags violations.
-8. **Heroes render instantly** — no load-gated entrance on above-the-fold content; scroll-triggered only.
+8. **No SVG path/diagram animations** — owner veto 2026-08-09. Motion lives on HTML elements (ticks, bars, chips, counts), never on drawn SVG artwork.
+9. **Heroes render instantly** — no load-gated entrance on above-the-fold content; scroll-triggered only.
 
 ## Adding a new animation — the checklist
 1. Does it serve comprehension (reading order, affordance, place) — or is it decoration? Decoration needs a signature-moment argument (max ~1 new per page).

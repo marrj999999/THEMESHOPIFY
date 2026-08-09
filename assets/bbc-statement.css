@@ -789,11 +789,7 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd-impact .rd-frame-info{ width:100%; max-width:880px; height:auto; display:block; font-family:inherit; }
 .bbc-rd-impact .rd-frameinfo__caption{ font-size:14px; color:var(--drift-3a443f); margin:10px 0 0; max-width:66ch; }
 @media (max-width:759px){ .bbc-rd-impact .rd-fi__labels{ display:none; } .bbc-rd-impact .rd-frameinfo__caption{ font-size:var(--fs-13-5); } }
-@media (prefers-reduced-motion: no-preference){
-  .bbc-rd-impact .rd-fi__route{ stroke-dasharray:1200; stroke-dashoffset:1200; animation:rd-ride 2.2s ease-out forwards; }
-  .bbc-rd-impact .rd-fi__route--b{ animation-delay:.5s; }
-  @keyframes rd-ride{ to{ stroke-dashoffset:0; } }
-}
+/* rd-ride removed 2026-08-09 — owner veto: no SVG animations */
 /* STATS ON THE MAP: region callouts over the figure */
 
 .bbc-rd-impact .rd-mapcall{ position:absolute; background:var(--paper,#F1E9D8); border:2px solid var(--ink,#0E1A17); border-radius:6px; padding:8px 12px; font-size:var(--fs-13-5); font-weight:700; line-height:1.35; box-shadow:3px 3px 0 var(--ink,#0E1A17); max-width:220px; text-align:left; }
