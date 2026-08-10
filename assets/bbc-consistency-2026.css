@@ -325,3 +325,15 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
   right:auto !important; width:100% !important; height:1px !important; background:currentColor !important; opacity:.35 !important; }
 .bbc-rd .acc-stats li::after{ content:"" !important; position:absolute !important; top:-4px !important; left:0 !important;
   width:1px !important; height:9px !important; background:currentColor !important; opacity:.35 !important; }
+
+/* Flagship hero joins the page axis (768 geometry-sweep catch): the ew-copy's
+   own clamp inset ran 22/42/70px while the estate axis runs 18/32/72 — a
+   4/10/2px disagreement that reads as accidental. Left edge now uses the
+   wrap's exact formula; vertical rhythm and right inset keep the hero clamp. */
+.bbc-rd-home .ew-copy{ padding-left:calc(max((100vw - 1200px)/2, 0px) + 32px) !important; }
+@media(max-width:520px){ .bbc-rd-home .ew-copy{ padding-left:18px !important; } }
+
+/* two 2px axis strays from the 768 sweep: press__more carried a stray
+   fractional em-margin; the report ship-note sat 2px off its column */
+.bbc-rd .bbc-press__more{ margin-left:0 !important; }
+.bbc-rd .rd-ship-note{ margin-left:0 !important; padding-left:0 !important; }
