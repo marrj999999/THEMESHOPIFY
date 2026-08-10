@@ -15,7 +15,7 @@ import { chromium } from 'playwright';
 import { writeFileSync, mkdirSync } from 'fs';
 import { previewUrl, ALL_PAGES } from './estate-pages.mjs';
 
-const WIDTHS = [390, 1280];
+const WIDTHS = [390, 768, 1280]; // 768 added 2026-08-10 — the 10-PDP pill clip lived ONLY at tablet width
 const browser = await chromium.launch();
 const report = [];
 
@@ -79,6 +79,13 @@ for (const width of WIDTHS) {
             const off = blocks.filter((el) => Math.round(el.getBoundingClientRect().left) !== min).slice(0, 2).map(tag);
             out.push({ k: 'AXIS-RAG', el: tag(sec), spread, off });
           }
+        }
+
+        // ---- pills/CTAs exceeding their parent box ----
+        for (const btn of document.querySelectorAll('[class*="btn"], .rd-cta')) {
+          if (!vis(btn)) continue;
+          const r = btn.getBoundingClientRect(); const p = btn.parentElement.getBoundingClientRect();
+          if (p.width > 40 && r.right - p.right > 3) out.push({ k: 'PILL-CLIP', el: tag(btn), by: Math.round(r.right - p.right), text: (btn.textContent || '').trim().slice(0, 28) });
         }
 
         // ---- row rag in grids/card rows ----

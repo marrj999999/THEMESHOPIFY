@@ -1,1 +1,62 @@
-[]
+[
+ {
+  "page": "/",
+  "width": 768,
+  "issues": [
+   {
+    "k": "AXIS-RAG",
+    "el": "shopify-section.section",
+    "spread": 10,
+    "off": [
+     "ew-eyebrow",
+     "ew-h1"
+    ]
+   },
+   {
+    "k": "AXIS-RAG",
+    "el": "bbc-rd.bbc-rd-home",
+    "spread": 10,
+    "off": [
+     "ew-eyebrow",
+     "ew-h1"
+    ]
+   }
+  ]
+ },
+ {
+  "page": "/pages/impact",
+  "width": 768,
+  "issues": [
+   {
+    "k": "AXIS-RAG",
+    "el": "rd-pad-sm.rd-paper",
+    "spread": 2,
+    "off": [
+     "bbc-press__more"
+    ]
+   }
+  ]
+ },
+ {
+  "page": "/pages/impact-report",
+  "width": 768,
+  "issues": [
+   {
+    "k": "AXIS-RAG",
+    "el": "bbc-rd.bbc-rd-report",
+    "spread": 2,
+    "off": [
+     "rd-ship-note.rd-mt1"
+    ]
+   },
+   {
+    "k": "AXIS-RAG",
+    "el": "rd-pad-sm",
+    "spread": 2,
+    "off": [
+     "rd-ship-note.rd-mt1"
+    ]
+   }
+  ]
+ }
+]

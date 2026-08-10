@@ -286,11 +286,11 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 /* hero source micro-line: keep the claims law, lose the shout */
 .bbc-rd-home .ew .rd-stat-src, .bbc-rd .rd-hero .rd-stat-src{ font-size:10px; opacity:.5; }
 
-/* Long pill labels clipped at card edges on phones (PDP fit-note ghost).
-   Pills may wrap to two centred lines at phone width — never clip. */
-@media(max-width:480px){
-  .bbc-rd .rd-btn{ white-space:normal !important; text-align:center; line-height:1.25; max-width:100%; }
-}
+/* Long pill labels must NEVER exceed their container — at any width.
+   (Originally ≤480px for the phone clip; widened to all widths as strictly
+   safer — wrapping only engages when a pill would otherwise overflow, and
+   verified at 1280 the fit-note pill stays one line with room to spare.) */
+.bbc-rd .rd-btn{ white-space:normal !important; text-align:center; line-height:1.25; max-width:100%; }
 /* PDP stock dot: flex-wrap let WebKit drop the text node below the dot —
    nowrap keeps dot + text side-by-side (the text block wraps internally). */
 .bbc-rd .rd-cmp-15126{ flex-wrap:nowrap !important; align-items:flex-start !important; }
