@@ -66,7 +66,7 @@
     <div class="bbc-parts__info">
       
       {%- comment -%} Breadcrumb {%- endcomment -%}
-      <nav class="rd-crumb rd-crumb--onlight" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep" aria-hidden="true">/</span><a href="/collections/maker-shop">Parts</a><span class="rd-sep" aria-hidden="true">/</span><span aria-current="page">{{ product.title }}</span></nav>
+      <nav class="rd-crumb rd-crumb--onlight" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep" aria-hidden="true">/</span><a href="{{ section.settings.url_collections_maker_shop | default: '/collections/maker-shop' }}">Parts</a><span class="rd-sep" aria-hidden="true">/</span><span aria-current="page">{{ product.title }}</span></nav>
       
       {%- comment -%} Title {%- endcomment -%}
       <h1 class="bbc-parts__title">{{ product.title }}</h1>
@@ -184,7 +184,7 @@
       
       {%- comment -%} Description {%- endcomment -%}
       {%- if product.description != blank -%}
-        <h2 class="bbc-parts__h2">Details &amp; specs</h2>
+        <h2 class="bbc-parts__h2">{{ section.settings.tx_details_specs | default: "Details &amp; specs" }}</h2>
         <div class="bbc-parts__description">
           {{ product.description }}
         </div>
@@ -196,7 +196,7 @@
         {%- comment -%} Compatibility {%- endcomment -%}
         <div class="bbc-accordion__item">
           <button type="button" class="bbc-accordion__trigger" aria-expanded="false">
-            <span>Compatibility</span>
+            <span>{{ section.settings.tx_compatibility | default: "Compatibility" }}</span>
             <span class="bbc-accordion__glyph" aria-hidden="true"></span>
           </button>
           <div class="bbc-accordion__content">
@@ -209,14 +209,14 @@
         {%- comment -%} Shipping {%- endcomment -%}
         <div class="bbc-accordion__item">
           <button type="button" class="bbc-accordion__trigger" aria-expanded="false">
-                        <span>Shipping & Returns</span>
+                        <span>{{ section.settings.tx_shipping_returns | default: "Shipping & Returns" }}</span>
             <span class="bbc-accordion__glyph" aria-hidden="true"></span>
           </button>
           <div class="bbc-accordion__content">
             <div class="bbc-accordion__content-inner">
               <p><strong>UK:</strong> £12 · <strong>Europe:</strong> £25 · <strong>USA:</strong> £45 · <strong>Rest of world:</strong> £75.</p>
-              <p>Tracked delivery, dispatched from our London workshop.</p>
-              <p>14-day returns on unused items in their original packaging.</p>
+              <p>{{ section.settings.tx_tracked_delivery_dispatched | default: "Tracked delivery, dispatched from our London workshop." }}</p>
+              <p>{{ section.settings.tx_14_day_returns_on_unused_ite | default: "14-day returns on unused items in their original packaging." }}</p>
             </div>
           </div>
         </div>
@@ -224,14 +224,14 @@
         {%- comment -%} Need Help {%- endcomment -%}
         <div class="bbc-accordion__item">
           <button type="button" class="bbc-accordion__trigger" aria-expanded="false">
-            <span>Need Help?</span>
+            <span>{{ section.settings.tx_need_help | default: "Need Help?" }}</span>
             <span class="bbc-accordion__glyph" aria-hidden="true"></span>
           </button>
           <div class="bbc-accordion__content">
             <div class="bbc-accordion__content-inner">
-              <p>Not sure if this part is right for your build?</p>
-              <p><strong>Email:</strong> <a href="mailto:info@bamboobicycleclub.org">info@bamboobicycleclub.org</a></p>
-              <p><strong>Facebook Group:</strong> <a href="https://facebook.com/groups/bamboobicycleclub" target="_blank">Join 4,000+ builders</a></p>
+              <p>{{ section.settings.tx_not_sure_if_this_part_is_rig | default: "Not sure if this part is right for your build?" }}</p>
+              <p><strong>Email:</strong> <a href="mailto:info@bamboobicycleclub.org">{{ section.settings.tx_info_bamboobicycleclub_org | default: "info@bamboobicycleclub.org" }}</a></p>
+              <p><strong>Facebook Group:</strong> <a href="https://facebook.com/groups/bamboobicycleclub" target="_blank">{{ section.settings.tx_join_4_000_builders | default: "Join 4,000+ builders" }}</a></p>
             </div>
           </div>
         </div>
@@ -566,6 +566,17 @@ document.addEventListener('DOMContentLoaded', function() {
 {
   "name": "BBC Parts",
   "settings": [
+    { "type": "header", "content": "Editability pass 2026-08-10" },
+    { "type": "text", "id": "tx_details_specs", "label": "Details &amp; specs", "default": "Details &amp; specs" },
+    { "type": "text", "id": "tx_compatibility", "label": "Compatibility", "default": "Compatibility" },
+    { "type": "text", "id": "tx_shipping_returns", "label": "Shipping & Returns", "default": "Shipping & Returns" },
+    { "type": "text", "id": "tx_tracked_delivery_dispatched", "label": "Tracked delivery, dispatched from ou", "default": "Tracked delivery, dispatched from our London workshop." },
+    { "type": "text", "id": "tx_14_day_returns_on_unused_ite", "label": "14-day returns on unused items in th", "default": "14-day returns on unused items in their original packaging." },
+    { "type": "text", "id": "tx_need_help", "label": "Need Help?", "default": "Need Help?" },
+    { "type": "text", "id": "tx_not_sure_if_this_part_is_rig", "label": "Not sure if this part is right for y", "default": "Not sure if this part is right for your build?" },
+    { "type": "text", "id": "tx_info_bamboobicycleclub_org", "label": "info@bamboobicycleclub.org", "default": "info@bamboobicycleclub.org" },
+    { "type": "text", "id": "tx_join_4_000_builders", "label": "Join 4,000+ builders", "default": "Join 4,000+ builders" },
+    { "type": "url", "id": "url_collections_maker_shop", "label": "Link: /collections/maker-shop" },
     {
       "type": "richtext",
       "id": "compatibility_content",

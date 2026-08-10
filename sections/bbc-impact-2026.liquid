@@ -406,9 +406,9 @@
          links inside a card either nest anchors in the card link or create a second tab stop. {%- endcomment -%}
       {%- if section.settings.cs_show_prov != false -%}
       <p class="rd-cscard__prov">as reported in
-        <a href="https://www.ft.com/content/6ebe2eba-b832-4289-9924-2e9f948d5f98?ref=impact-evidence" target="_blank" rel="noopener">Financial Times</a> &middot;
-        <a href="/blogs/news/inside-time-bamboozling-way-to-build-bikes-bamboo-bicycle-club-at-lowdham-grange?ref=impact-evidence">Inside Time</a> &middot;
-        <a href="/blogs/news/bamboo-bicycle-club-wins-investec-beyond-business-2025?ref=impact-evidence">Investec Beyond Business</a></p>
+        <a href="https://www.ft.com/content/6ebe2eba-b832-4289-9924-2e9f948d5f98?ref=impact-evidence" target="_blank" rel="noopener">{{ section.settings.tx_financial_times | default: "Financial Times" }}</a> &middot;
+        <a href="/blogs/news/inside-time-bamboozling-way-to-build-bikes-bamboo-bicycle-club-at-lowdham-grange?ref=impact-evidence">{{ section.settings.tx_inside_time | default: "Inside Time" }}</a> &middot;
+        <a href="/blogs/news/bamboo-bicycle-club-wins-investec-beyond-business-2025?ref=impact-evidence">{{ section.settings.tx_investec_beyond_business | default: "Investec Beyond Business" }}</a></p>
       {%- endif -%}
       {%- if section.settings.stories_proofline != blank -%}<p class="rd-evproof-line">{{ section.settings.stories_proofline }}</p>{%- endif -%}
       <div class="rd-mt4"><a class="rd-btn rd-ghost" href="{{ section.settings.stories_all_url | default: '/blogs/impact' }}">{{ section.settings.stories_all_label | default: 'See all impact stories' }} <span class="rd-arrow">&rarr;</span></a></div>
@@ -772,6 +772,20 @@ document.addEventListener('click', function (e) {
   "tag": "section",
   "class": "section bbc-impact-2026-wrap",
   "settings": [
+    { "type": "header", "content": "Editability pass 2026-08-10" },
+    { "type": "text", "id": "tx_financial_times", "label": "Financial Times", "default": "Financial Times" },
+    { "type": "text", "id": "tx_inside_time", "label": "Inside Time", "default": "Inside Time" },
+    { "type": "text", "id": "tx_investec_beyond_business", "label": "Investec Beyond Business", "default": "Investec Beyond Business" },
+    { "type": "header", "content": "Map stats (editability pass 2026-08-10)" },
+    { "type": "text", "id": "mstat1_num", "label": "Map stat 1 number", "default": "4" },
+    { "type": "text", "id": "mstat1_lbl", "label": "Map stat 1 label", "default": "active prison sites" },
+    { "type": "text", "id": "mstat2_num", "label": "Map stat 2 number", "default": "10" },
+    { "type": "text", "id": "mstat2_lbl", "label": "Map stat 2 label", "default": "schools & universities" },
+    { "type": "text", "id": "mstat3_num", "label": "Map stat 3 number", "default": "3" },
+    { "type": "text", "id": "mstat3_lbl", "label": "Map stat 3 label", "default": "international hubs" },
+    { "type": "text", "id": "mstat4_num", "label": "Map stat 4 number", "default": "45" },
+    { "type": "text", "id": "mstat4_lbl", "label": "Map stat 4 label", "default": "countries reached" },
+    { "type": "text", "id": "backers_label", "label": "Backers wall label", "default": "backed by & accredited by" },
     {
       "type": "header",
       "content": "Hero"
@@ -1896,6 +1910,7 @@ document.addEventListener('click', function (e) {
           "id": "source_label",
           "label": "Source label (e.g. Inside Time)"
         },
+          { "type": "text", "id": "chips", "label": "Card chips (comma-separated)" },
         {
           "type": "text",
           "id": "source_url",

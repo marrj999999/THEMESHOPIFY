@@ -17,7 +17,7 @@
 
   <section class="rd-pad rd-paper">
     <div class="rd-wrap rd-mw-820px">
-      <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/pages/impact">Impact</a><span class="rd-sep">/</span><span class="rd-here">Impact report</span></nav>
+      <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="{{ section.settings.url_pages_impact | default: '/pages/impact' }}">Impact</a><span class="rd-sep">/</span><span class="rd-here">{{ section.settings.tx_impact_report | default: "Impact report" }}</span></nav>
       {%- if section.settings.eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.eyebrow }}</span>{%- endif -%}
       <h1 class="rd-mt2 rd-mw-16ch">{{ section.settings.title }}</h1>
       {%- if section.settings.lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.lede }}</p>{%- endif -%}
@@ -144,6 +144,9 @@
 {
   "name": "Impact Report 2026",
   "settings": [
+    { "type": "header", "content": "Editability pass 2026-08-10" },
+    { "type": "text", "id": "tx_impact_report", "label": "Impact report", "default": "Impact report" },
+    { "type": "url", "id": "url_pages_impact", "label": "Link: /pages/impact" },
     {
       "type": "header",
       "content": "Header"

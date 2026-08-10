@@ -55,7 +55,7 @@
         <nav class="rd-crumb rd-cmp-61169" aria-label="Breadcrumb">
           <a class="rd-c-subtle-o1" href="{{ crumb_home }}">Home</a>
           <span class="rd-sep">/</span>
-          <a class="rd-c-subtle-o1" href="{{ crumb_kits }}">Frame Kits</a>
+          <a class="rd-c-subtle-o1" href="{{ crumb_kits }}">{{ section.settings.tx_crumb_kits | default: "Frame Kits" }}</a>
           <span class="rd-sep">/</span>
           <span class="rd-here rd-c-ink">{{ product.title }}</span>
         </nav>
@@ -155,7 +155,7 @@
             {%- comment -%} ---------- ADD TO CART (JS-free) ---------- {%- endcomment -%}
             {% form 'product', product, id: 'bbc-buy-form' %}
               {%- if product.has_only_default_variant == false -%}
-                <span class="rd-frame-label rd-cmp-04367">Choose your size / option</span>
+                <span class="rd-frame-label rd-cmp-04367">{{ section.settings.tx_size_label | default: "Choose your size / option" }}</span>
                 <div class="rd-cmp-30367">
                   {%- for v in product.variants -%}
                     <label class="rd-vbtn{% if v == cv %} rd-sel{% endif %}{% unless v.available %} rd-oos{% endunless %}">
@@ -519,9 +519,9 @@
   {%- comment -%} ============== WATCH THE BUILD (video) ============== {%- endcomment -%}
   <section class="rd-pad-sm rd-dark rd-center">
     <div class="rd-wrap rd-mw-820px">
-      <span class="rd-eyebrow rd-on-dark">Watch the build</span>
-      <h2 class="rd-mt2">See a frame come together.</h2>
-      <p class="rd-lede rd-mt2">The same hand-build every kit follows — start to finish, on camera.</p>
+      <span class="rd-eyebrow rd-on-dark">{{ section.settings.tx_watch_build | default: "Watch the build" }}</span>
+      <h2 class="rd-mt2">{{ section.settings.tx_film_h2 | default: "See a frame come together." }}</h2>
+      <p class="rd-lede rd-mt2">{{ section.settings.tx_film_p | default: "The same hand-build every kit follows — start to finish, on camera." }}</p>
       {%- comment -%} standard player (2026-07-22): facade + auto YouTube thumbnail — no iframe until click {%- endcomment -%}
       <div class="rd-mt3" style="border-radius:14px;overflow:hidden;">
         {%- assign bv = section.settings.build_video_id | default: 'ckCwJXJGKD0' -%}
@@ -760,6 +760,12 @@
   "tag": "section",
   "class": "bbc-rd-product-section",
   "settings": [
+    { "type": "header", "content": "Editability pass 2026-08-10" },
+    { "type": "text", "id": "tx_crumb_kits", "label": "Frame Kits", "default": "Frame Kits" },
+    { "type": "text", "id": "tx_size_label", "label": "Choose your size / option", "default": "Choose your size / option" },
+    { "type": "text", "id": "tx_watch_build", "label": "Watch the build", "default": "Watch the build" },
+    { "type": "text", "id": "tx_film_h2", "label": "See a frame come together.", "default": "See a frame come together." },
+    { "type": "textarea", "id": "tx_film_p", "label": "Film band body", "default": "The same hand-build every kit follows \u2014 start to finish, on camera." },
     {
       "type": "header",
       "content": "Buy box"

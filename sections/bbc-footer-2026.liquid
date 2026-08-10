@@ -97,7 +97,7 @@
           <div class="rd-news-form">
             <input type="email" name="contact[email]" aria-label="Email address" placeholder="{{ section.settings.news_placeholder | default: 'you@email.com' }}" required>
             <button type="submit" class="rd-btn rd-lime rd-btn-sm" name="commit">{{ section.settings.news_cta | default: 'subscribe' }}</button>
-            {%- if form.posted_successfully? -%}<p class="rd-news-ok">Thanks — you're on the list.</p>{%- endif -%}
+            {%- if form.posted_successfully? -%}<p class="rd-news-ok">{{ section.settings.tx_thanks_you_re_on_the_list | default: "Thanks — you're on the list." }}</p>{%- endif -%}
           </div>
         {%- endform -%}
       </div>
@@ -114,7 +114,7 @@
     {%- comment -%} giant wordmark — type-as-poster close (masthead research 2026-07-22,
        qa/TYPE-SCALE.md). Decorative link home; screen readers get the plain label. {%- endcomment -%}
     {%- if section.settings.show_wordmark != false -%}
-    <span class="bbc-wordmark" aria-hidden="true"><a href="{{ routes.root_url }}" tabindex="-1">bamboo bicycle club</a></span>
+    <span class="bbc-wordmark" aria-hidden="true"><a href="{{ routes.root_url }}" tabindex="-1">{{ section.settings.tx_bamboo_bicycle_club | default: "bamboo bicycle club" }}</a></span>
     {%- endif -%}
 
     <div class="rd-foot-bottom">
@@ -139,6 +139,9 @@
   "tag": "div",
   "class": "bbc-footer-2026-section",
   "settings": [
+    { "type": "header", "content": "Editability pass 2026-08-10" },
+    { "type": "text", "id": "tx_thanks_you_re_on_the_list", "label": "Thanks \u2014 you're on the list.", "default": "Thanks \u2014 you're on the list." },
+    { "type": "text", "id": "tx_bamboo_bicycle_club", "label": "bamboo bicycle club", "default": "bamboo bicycle club" },
     { "type": "text", "id": "count_ribbon", "label": "Counting ribbon (blank = off)", "default": "<b class=\"rd-num\">3,500+</b> frames built at kitchen tables — and counting" },
     {
       "type": "header",

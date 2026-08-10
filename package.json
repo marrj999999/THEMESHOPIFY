@@ -14,7 +14,8 @@
     "smoke:webkit": "npx playwright test --config=playwright.config.webkit.mjs",
     "smoke:firefox": "npx playwright test --config=playwright.config.firefox.mjs",
     "test:motion": "npx playwright test --config=playwright.config.motion.mjs",
-    "check:geometry": "node qa/geometry-check.mjs"
+    "check:geometry": "node qa/geometry-check.mjs",
+    "check:editability": "node qa/editability-check.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",

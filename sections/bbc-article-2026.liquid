@@ -78,7 +78,7 @@
       {%- endif -%}
       <div class="rd-art-hero__inner">
         <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="{{ blog.url }}">{{ blog.title }}</a></nav>
-        {%- if is_case -%}<span class="rd-tag rd-lime rd-art-kicker">Impact story</span>
+        {%- if is_case -%}<span class="rd-tag rd-lime rd-art-kicker">{{ section.settings.tx_impact_story | default: "Impact story" }}</span>
         {%- elsif article.tags.size > 0 -%}<span class="rd-art-kicker rd-c-lime">{{ article.tags.first | capitalize }}</span>{%- endif -%}
         <h1>{{ article.title }}</h1>
         {%- if article.excerpt != blank -%}<p class="rd-art-dek">{{ article.excerpt | replace: '>', '> ' | strip_html | strip | truncatewords: 34 }}</p>{%- endif -%}
@@ -137,7 +137,7 @@
     {%- if is_case -%}
       <div class="rd-steel rd-art-cta">
         <div class="rd-art-col rd-center">
-          <span class="rd-eyebrow">Back the mission</span>
+          <span class="rd-eyebrow">{{ section.settings.tx_back_the_mission | default: "Back the mission" }}</span>
           <h2 class="rd-reveal">{{ section.settings.impact_cta_title | default: 'every bike we sell funds a place on the programme.' }}</h2>
           <p class="rd-lede">{{ section.settings.impact_cta_body | default: 'Fund a cohort, offer placements, or partner with us. This is how stories like this one keep happening.' }}</p>
           <a class="rd-btn rd-lime rd-btn-lg" href="{{ section.settings.impact_cta_url | default: '/pages/support-mission' }}">{{ section.settings.impact_cta_label | default: 'Support the mission →' }}</a>
@@ -191,7 +191,7 @@
     {%- if count > 0 -%}
     <section class="rd-pad rd-paper rd-art-next">
       <div class="rd-wrap">
-        <span class="rd-eyebrow">Read next</span>
+        <span class="rd-eyebrow">{{ section.settings.tx_read_next | default: "Read next" }}</span>
         <h2 class="rd-reveal rd-mw-18ch">More from {{ blog.title | downcase }}</h2>
         <div class="rd-grid rd-g3 rd-mt4">
           {%- for a in blog.articles limit: 50 -%}
@@ -225,6 +225,10 @@
   "tag": "section",
   "class": "bbc-rd-article-section",
   "settings": [
+    { "type": "header", "content": "Editability pass 2026-08-10" },
+    { "type": "text", "id": "tx_impact_story", "label": "Impact story", "default": "Impact story" },
+    { "type": "text", "id": "tx_back_the_mission", "label": "Back the mission", "default": "Back the mission" },
+    { "type": "text", "id": "tx_read_next", "label": "Read next", "default": "Read next" },
     {
       "type": "header",
       "content": "Case-study stats band (impact posts only)"

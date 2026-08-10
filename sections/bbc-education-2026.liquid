@@ -108,7 +108,7 @@
               <div class="rd-flex rd-between rd-gap-24">
                 <span class="rd-frame-label rd-c-subtle">{{ block.settings.tier }}</span>
                 {%- if block.settings.status == 'coming' -%}
-                  <span class="rd-tag">In development</span>
+                  <span class="rd-tag">{{ section.settings.tx_in_development | default: "In development" }}</span>
                 {%- elsif block.settings.free -%}
                   <span class="rd-tag rd-lime">Free</span>
                 {%- else -%}
@@ -268,6 +268,8 @@
   "tag": "section",
   "class": "section bbc-education-2026-wrap",
   "settings": [
+    { "type": "header", "content": "Editability pass 2026-08-10" },
+    { "type": "text", "id": "tx_in_development", "label": "In development", "default": "In development" },
     {
       "type": "header",
       "content": "Enquiry destinations (no app links)"

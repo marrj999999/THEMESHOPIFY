@@ -237,7 +237,7 @@
           bytes — a wide viewport, motion allowed, and not on a metered/slow connection per
           the Network Information API. Everyone else keeps the poster, which is 54 KB.
         {%- endcomment -%}
-        <video class="ew-video" style="position:absolute !important;inset:0 !important;width:100% !important;height:100% !important;object-fit:cover !important;" muted loop playsinline preload="none" data-src="{{ hv | asset_url }}" poster="{{ 'bbc-rd-home-poster.jpg' | asset_url }}" aria-label="{{ section.settings.hero_image_alt | default: 'Bamboo bikes built and ridden — a Bamboo Bicycle Club film' | escape }}"></video>
+        <video class="ew-video" style="position:absolute !important;inset:0 !important;width:100% !important;height:100% !important;object-fit:cover !important;" muted loop playsinline preload="none" data-src="{{ hv | asset_url }}" poster="{{ section.settings.video_poster_fallback | default: 'bbc-rd-home-poster.jpg' | asset_url }}" aria-label="{{ section.settings.hero_image_alt | default: 'Bamboo bikes built and ridden — a Bamboo Bicycle Club film' | escape }}"></video>
         <script>
           (function () {
             var v = document.currentScript.previousElementSibling;
@@ -310,11 +310,11 @@
       <div class="ew-stamp" aria-hidden="true">
         <svg class="tick"><rect width="100%" height="100%" pathLength="1"/></svg>
         <img src="https://cdn.shopify.com/s/files/1/0502/8695/2631/files/bbc-frame-line.svg?v=1781292517" alt="" loading="lazy" width="148" height="86">
-        <div class="cap"><span>Drg N&#186;1</span><span>Est. 2012</span></div>
+        <div class="cap"><span>{{ section.settings.tx_drg_n_186_1 | default: "Drg N&#186;1" }}</span><span>{{ section.settings.tx_est_2012 | default: "Est. 2012" }}</span></div>
       </div>
-      <span class="ew-tag">Hand-built bamboo &middot; lugged by hand</span>
+      <span class="ew-tag">{{ section.settings.tx_hand_built_bamboo_lugged_by | default: "Hand-built bamboo &middot; lugged by hand" }}</span>
     </div>
-    <span class="ew-folio">Bamboo Bicycle Club &middot; Est. 2012 &middot; London</span>
+    <span class="ew-folio">{{ section.settings.tx_bamboo_bicycle_club_est_2012 | default: "Bamboo Bicycle Club &middot; Est. 2012 &middot; London" }}</span>
   </header>
 
   <script>
@@ -474,10 +474,10 @@
   {%- comment -%} ---------- IMPACT FEATURE ---------- {%- endcomment -%}
   <section class="rd-split rd-dark">
     <div class="rd-reveal rd-media">
-      {%- if section.settings.impact_image != blank -%}
-        <img src="{{ section.settings.impact_image | image_url: width: 1400 }}" srcset="{{ section.settings.impact_image | image_url: width: 600 }} 600w, {{ section.settings.impact_image | image_url: width: 900 }} 900w, {{ section.settings.impact_image | image_url: width: 1400 }} 1400w, {{ section.settings.impact_image | image_url: width: 1800 }} 1800w" sizes="(max-width:749px) 100vw, 50vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="{{ section.settings.impact_image.width }}" height="{{ section.settings.impact_image.height }}" loading="lazy">
+      {%- if section.settings.impact_band_image != blank -%}
+        <img src="{{ section.settings.impact_band_image | image_url: width: 1400 }}" srcset="{{ section.settings.impact_band_image | image_url: width: 600 }} 600w, {{ section.settings.impact_band_image | image_url: width: 900 }} 900w, {{ section.settings.impact_band_image | image_url: width: 1400 }} 1400w, {{ section.settings.impact_band_image | image_url: width: 1800 }} 1800w" sizes="(max-width:749px) 100vw, 50vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="{{ section.settings.impact_band_image.width }}" height="{{ section.settings.impact_band_image.height }}" loading="lazy">
       {%- else -%}
-        <img src="{{ 'bbc-rd-cohort.jpg' | asset_img_url: '900x' }}" srcset="{{ 'bbc-rd-cohort.jpg' | asset_img_url: '400x' }} 400w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '600x' }} 600w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '900x' }} 900w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '1400x' }} 1400w" sizes="(max-width:749px) 92vw, 42vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="1400" height="933">
+        {%- if section.settings.impact_band_image != blank -%}<img src="{{ section.settings.impact_band_image | image_url: width: 900 }}" srcset="{{ section.settings.impact_band_image | image_url: width: 400 }} 400w, {{ section.settings.impact_band_image | image_url: width: 600 }} 600w, {{ section.settings.impact_band_image | image_url: width: 900 }} 900w, {{ section.settings.impact_band_image | image_url: width: 1400 }} 1400w" sizes="(max-width:749px) 92vw, 42vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="{{ section.settings.impact_band_image.width }}" height="{{ section.settings.impact_band_image.height }}">{%- else -%}<img src="{{ 'bbc-rd-cohort.jpg' | asset_img_url: '900x' }}" srcset="{{ 'bbc-rd-cohort.jpg' | asset_img_url: '400x' }} 400w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '600x' }} 600w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '900x' }} 900w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '1400x' }} 1400w" sizes="(max-width:749px) 92vw, 42vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="1400" height="933">{%- endif -%}
       {%- endif -%}
     </div>
     <div class="rd-txt">
@@ -610,9 +610,9 @@
   {%- comment -%} ---------- PROVEN RIDE (comfort + press, GCN video) ---------- {%- endcomment -%}
   <section class="rd-pad rd-paper">
     <div class="rd-wrap">
-      <span class="rd-eyebrow">Proven on the road</span>
-      <h2 class="rd-reveal rd-mw-20ch">bamboo soaks up the road — riders and reviewers agree.</h2>
-      <p class="rd-lede rd-mt2">Not just our word. National press, pro reviewers and ten-year riders all land on the same thing: it rides beautifully.</p>
+      <span class="rd-eyebrow">{{ section.settings.tx_proven_on_the_road | default: "Proven on the road" }}</span>
+      <h2 class="rd-reveal rd-mw-20ch">{{ section.settings.tx_bamboo_soaks_up_the_road_rid | default: "bamboo soaks up the road — riders and reviewers agree." }}</h2>
+      <p class="rd-lede rd-mt2">{{ section.settings.tx_not_just_our_word_national_p | default: "Not just our word. National press, pro reviewers and ten-year riders all land on the same thing: it rides beautifully." }}</p>
       {%- comment -%} Two component types used to share one class here, 2026-07-31. The GCN film and
          Taro's build are case studies; the Guardian and BikeRadar lines are PRESS QUOTES — no image,
          no link, no story behind them. Forcing a pull-quote into a case-study card would give it a
@@ -639,8 +639,8 @@
              cta: 'read the story' -%}
       </ul>
       <ul class="rd-pressquotes rd-mt3" role="list">
-        <li class="rd-pressquote rd-reveal"><p>Bamboo naturally dampens vibration, allowing the smoothest ride.</p><cite>The Guardian</cite></li>
-        <li class="rd-pressquote rd-reveal"><p>A really, really comfortable ride &mdash; smooth but not too flexy.</p><cite>Kate Rawles &middot; BikeRadar</cite></li>
+        <li class="rd-pressquote rd-reveal"><p>{{ section.settings.tx_bamboo_naturally_dampens_vib | default: "Bamboo naturally dampens vibration, allowing the smoothest ride." }}</p><cite>{{ section.settings.tx_the_guardian | default: "The Guardian" }}</cite></li>
+        <li class="rd-pressquote rd-reveal"><p>{{ section.settings.tx_a_really_really_comfortable | default: "A really, really comfortable ride &mdash; smooth but not too flexy." }}</p><cite>{{ section.settings.tx_kate_rawles_bikeradar | default: "Kate Rawles &middot; BikeRadar" }}</cite></li>
       </ul>
       {% render 'bbc-video-lightbox' %}
     </div>
@@ -750,6 +750,20 @@
   "tag": "section",
   "class": "section bbc-home-2026-wrap",
   "settings": [
+    { "type": "image_picker", "id": "impact_band_image", "label": "Impact band image (blank = built-in cohort photo)" },
+    { "type": "header", "content": "Editability pass 2026-08-10" },
+    { "type": "text", "id": "tx_drg_n_186_1", "label": "Drg N&#186;1", "default": "Drg N&#186;1" },
+    { "type": "text", "id": "tx_est_2012", "label": "Est. 2012", "default": "Est. 2012" },
+    { "type": "text", "id": "tx_hand_built_bamboo_lugged_by", "label": "Hand-built bamboo &middot; lugged by", "default": "Hand-built bamboo &middot; lugged by hand" },
+    { "type": "text", "id": "tx_bamboo_bicycle_club_est_2012", "label": "Bamboo Bicycle Club &middot; Est. 20", "default": "Bamboo Bicycle Club &middot; Est. 2012 &middot; London" },
+    { "type": "text", "id": "tx_proven_on_the_road", "label": "Proven on the road", "default": "Proven on the road" },
+    { "type": "text", "id": "tx_bamboo_soaks_up_the_road_rid", "label": "bamboo soaks up the road \u2014 riders an", "default": "bamboo soaks up the road \u2014 riders and reviewers agree." },
+    { "type": "textarea", "id": "tx_not_just_our_word_national_p", "label": "Not just our word. National press, p", "default": "Not just our word. National press, pro reviewers and ten-year riders all land on the same thing: it rides beautifully." },
+    { "type": "text", "id": "tx_bamboo_naturally_dampens_vib", "label": "Bamboo naturally dampens vibration, ", "default": "Bamboo naturally dampens vibration, allowing the smoothest ride." },
+    { "type": "text", "id": "tx_the_guardian", "label": "The Guardian", "default": "The Guardian" },
+    { "type": "text", "id": "tx_a_really_really_comfortable", "label": "A really, really comfortable ride &m", "default": "A really, really comfortable ride &mdash; smooth but not too flexy." },
+    { "type": "text", "id": "tx_kate_rawles_bikeradar", "label": "Kate Rawles &middot; BikeRadar", "default": "Kate Rawles &middot; BikeRadar" },
+    { "type": "text", "id": "why_stat_src", "label": "Why-band stat source line", "default": "BBC training & customer records" },
     {
       "type": "header",
       "content": "Hero"

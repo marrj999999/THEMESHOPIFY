@@ -87,7 +87,7 @@
   @keyframes rd-macc-in{ from{ opacity:0; transform:translateY(-4px); } to{ opacity:1; transform:none; } }
 </style>
 
-<a class="rd-skip" href="#MainContent">Skip to content</a>
+<a class="rd-skip" href="#MainContent">{{ section.settings.tx_skip_to_content | default: "Skip to content" }}</a>
 <header class="bbc-rd rd-header" id="rd-header2026">
 
   {%- comment -%}
@@ -99,7 +99,7 @@
   <div class="rd-util-bar">
     <div class="rd-util-wrap">
       <div class="rd-util-left">
-        <span class="rd-util-note">Shipped worldwide to 45 countries &middot; tracked delivery</span>
+        <span class="rd-util-note">{{ section.settings.tx_shipped_worldwide_to_45_coun | default: "Shipped worldwide to 45 countries &middot; tracked delivery" }}</span>
         {%- if localization.available_countries.size > 1 -%}
           {%- form 'localization', id: 'rd-loc-d', class: 'rd-loc-form rd-util-loc' -%}
             <label for="rd-loc-d-sel" class="rd-vh">Country and currency</label>
@@ -112,7 +112,7 @@
         {%- endif -%}
       </div>
       <div class="rd-util-right">
-        <a class="rd-help-link rd-util-help" href="/pages/support-centre">Help</a>
+        <a class="rd-help-link rd-util-help" href="{{ section.settings.url_support | default: '/pages/support-centre' }}">Help</a>
         <div class="rd-search-wrap rd-util-search">
           <form class="rd-search" action="{{ routes.search_url }}" method="get" role="search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
@@ -208,7 +208,7 @@
           <a href="{{ link.url }}">{{ link.title }}</a>
         {%- endif -%}
       {%- endfor -%}
-      <a class="rd-sub" href="/pages/support-centre">Help &amp; support</a>
+      <a class="rd-sub" href="{{ section.settings.url_support | default: '/pages/support-centre' }}">Help &amp; support</a>
       <p class="rd-ship-note">We ship worldwide &mdash; 45 countries.</p>
       {%- if localization.available_countries.size > 1 -%}
         {%- form 'localization', id: 'rd-loc-m', class: 'rd-loc-form' -%}
@@ -233,7 +233,7 @@
   <div class="bbc-rd">
     <nav class="rd-botbar" aria-label="Primary (mobile)">
       <a href="{{ routes.collections_url }}/home-build-kits"{% if rdp contains '/products/' or rdp contains 'kit' or rdp contains '/collections' %} class="rd-active"{% endif %}><svg viewBox="0 0 24 24"><circle cx="6" cy="16.5" r="3.3"/><circle cx="18" cy="16.5" r="3.3"/><path d="M6 16.5l4.5-7.5H16l-3.5 7.5M10.5 9h4"/></svg><span>Kits</span></a>
-      <a href="/pages/bicycle-frame-building-workshop"{% if rdp contains 'workshop' %} class="rd-active"{% endif %}><svg viewBox="0 0 24 24"><path d="M14.7 6.3a3.6 3.6 0 0 0-4.8 4.3l-5.2 5.2a1.7 1.7 0 0 0 2.4 2.4l5.2-5.2a3.6 3.6 0 0 0 4.3-4.8l-2.3 2.3-1.9-1.9 2.3-2.3z"/></svg><span>Workshops</span></a>
+      <a href="{{ section.settings.url_pages_bicycle_frame_building | default: '/pages/bicycle-frame-building-workshop' }}"{% if rdp contains 'workshop' %} class="rd-active"{% endif %}><svg viewBox="0 0 24 24"><path d="M14.7 6.3a3.6 3.6 0 0 0-4.8 4.3l-5.2 5.2a1.7 1.7 0 0 0 2.4 2.4l5.2-5.2a3.6 3.6 0 0 0 4.3-4.8l-2.3 2.3-1.9-1.9 2.3-2.3z"/></svg><span>{{ section.settings.tx_workshops | default: "Workshops" }}</span></a>
       <a href="{{ routes.cart_url }}"{% if rdp contains 'cart' %} class="rd-active"{% endif %}><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><span>Basket{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</span></a>
       <button type="button" id="rd-botmenu" aria-label="Open menu"><svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg><span>Menu</span></button>
     </nav>
@@ -260,6 +260,12 @@
   "tag": "div",
   "class": "bbc-rd-header-section",
   "settings": [
+    { "type": "url", "id": "url_support", "label": "Help link" },
+    { "type": "header", "content": "Editability pass 2026-08-10" },
+    { "type": "text", "id": "tx_skip_to_content", "label": "Skip to content", "default": "Skip to content" },
+    { "type": "text", "id": "tx_shipped_worldwide_to_45_coun", "label": "Shipped worldwide to 45 countries &m", "default": "Shipped worldwide to 45 countries &middot; tracked delivery" },
+    { "type": "text", "id": "tx_workshops", "label": "Workshops", "default": "Workshops" },
+    { "type": "url", "id": "url_pages_bicycle_frame_building", "label": "Link: /pages/bicycle-frame-buildin" },
     {
       "type": "image_picker",
       "id": "logo",
