@@ -211,6 +211,7 @@
             <p class="ew-cred">A social enterprise CIC &middot; enhanced-DBS facilitators &middot; public-liability insured</p>
     </div>
 
+    {%- if section.settings.hero_video_on -%}<link rel="preload" as="image" href="{{ section.settings.video_poster_fallback | default: 'bbc-rd-home-poster.jpg' | asset_url }}" fetchpriority="high">{%- endif -%}
     <div class="ew-media{% if section.settings.hero_video_on %} has-video{% endif %}">
       {%- if section.settings.hero_sticker != blank -%}<span class="ew-sticker">{{ section.settings.hero_sticker }}</span>{%- endif -%}
       {%- if section.settings.hero_image != blank -%}
