@@ -1151,7 +1151,7 @@
 .bbc-rd .rd-prose p{ font-size:18px; line-height:1.7; color:var(--charcoal); }
 .bbc-rd .rd-prose h2{ font-size:clamp(24px,3vw,32px); margin-top:1.6em; }
 .bbc-rd .rd-prose h3{ font-size:var(--fs-21); margin-top:1.4em; }
-.bbc-rd .rd-prose img{ max-width:100%; height:auto; border-radius:10px; border:2px solid var(--ink); margin:1.4em 0; }
+.bbc-rd .rd-prose img{ max-width:100%; height:auto; object-fit:cover; /* RTE galleries force square crops inline — cover crops instead of stretching (geometry-check 2026-08-10) */ border-radius:10px; border:2px solid var(--ink); margin:1.4em 0; }
 .bbc-rd .rd-prose ul,.bbc-rd .rd-prose ol{ padding-left:1.3em; color:var(--charcoal); font-size:18px; line-height:1.6; }
 .bbc-rd .rd-prose li + li{ margin-top:.4em; }
 .bbc-rd .rd-prose blockquote{ border-left:4px solid var(--lime-700); padding:6px 0 6px 22px; margin:1.4em 0; font-size:clamp(20px,2.3vw,26px); font-weight:700; line-height:1.35; color:var(--ink); }

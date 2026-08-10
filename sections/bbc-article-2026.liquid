@@ -115,6 +115,13 @@
     <section class="rd-pad">
       <div class="rd-art-col">
         <div class="rd-prose rd-art-prose">{{ article.content }}</div>
+        <script>
+          /* hide 404'd RTE images instead of rendering broken squares (geometry-check 2026-08-10) */
+          document.currentScript.previousElementSibling.querySelectorAll('img').forEach(function(i){
+            if (i.complete && i.naturalWidth === 0) i.style.display = 'none';
+            i.addEventListener('error', function(){ this.style.display = 'none'; });
+          });
+        </script>
 
         {%- comment -%} share (inline, at point of satisfaction) {%- endcomment -%}
         <div class="rd-art-share">
