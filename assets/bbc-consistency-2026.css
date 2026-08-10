@@ -278,7 +278,7 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
   text-transform:uppercase; letter-spacing:.09em; padding:9px 14px; border-radius:8px;
   transform:rotate(-2.5deg); box-shadow:3px 3px 0 rgba(0,0,0,.28); max-width:min(70%,340px);
   text-align:center; pointer-events:none; }
-@media(max-width:749px){ .bbc-rd-home .ew-sticker{ display:none; } } /* stacked mobile hero: photo band too short for a sticker */
+/* mobile: the sticker lands as a badge row between photo and headline — read in the 390 crop, kept (an earlier hide rule assumed it would not fit; it does) */
 /* mobile stat presence: clamp minimums lost the boosted size iOS used to fake */
 @media(max-width:640px){
   .bbc-rd .rd-heroproof b, .bbc-rd-home .ew-proof b{ font-size:26px !important; line-height:1.05 !important; }
@@ -330,7 +330,12 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
    own clamp inset ran 22/42/70px while the estate axis runs 18/32/72 — a
    4/10/2px disagreement that reads as accidental. Left edge now uses the
    wrap's exact formula; vertical rhythm and right inset keep the hero clamp. */
-.bbc-rd-home .ew-copy{ padding-left:calc(max((100vw - 1200px)/2, 0px) + 32px) !important; }
+/* v2 2026-08-10: the viewport-axis formula inside the hero's PARTIAL-WIDTH
+   column collapsed the headline to one word per line at >=1400 (caught live
+   in James's Chrome). The 10px mismatch only ever mattered in the tablet
+   range — pin the axis there; the designed clamp keeps every other width
+   (2px at 1280 is imperceptible; 18px at phone matches the estate). */
+@media(min-width:750px) and (max-width:1023px){ .bbc-rd-home .ew-copy{ padding-left:32px !important; } }
 @media(max-width:520px){ .bbc-rd-home .ew-copy{ padding-left:18px !important; } }
 
 /* two 2px axis strays from the 768 sweep: press__more carried a stray

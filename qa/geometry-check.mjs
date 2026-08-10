@@ -15,7 +15,7 @@ import { chromium } from 'playwright';
 import { writeFileSync, mkdirSync } from 'fs';
 import { previewUrl, ALL_PAGES } from './estate-pages.mjs';
 
-const WIDTHS = [390, 768, 1280]; // 768 added 2026-08-10 — the 10-PDP pill clip lived ONLY at tablet width
+const WIDTHS = [390, 768, 1280, 1568]; // 768 added for the 10-PDP pill clip; 1568 after the hero-crush lived only >=1400
 const browser = await chromium.launch();
 const report = [];
 
@@ -79,6 +79,16 @@ for (const width of WIDTHS) {
             const off = blocks.filter((el) => Math.round(el.getBoundingClientRect().left) !== min).slice(0, 2).map(tag);
             out.push({ k: 'AXIS-RAG', el: tag(sec), spread, off });
           }
+        }
+
+        // ---- crushed display headings (the 1568 hero incident: column collapsed
+        //      to ~1.5x font size). Poster-style narrow columns run 3.5-5x and are
+        //      designed; a11y-hidden headings are 1px by design. ----
+        for (const h of document.querySelectorAll('h1, h2')) {
+          if (!vis(h) || a11yHidden(h)) continue;
+          const r = h.getBoundingClientRect(); const fs = parseFloat(getComputedStyle(h).fontSize);
+          const words = (h.textContent || '').trim().split(/\s+/).length;
+          if (words >= 3 && fs >= 34 && r.width < fs * 3) out.push({ k: 'HEADING-CRUSHED', el: tag(h), w: Math.round(r.width), fs: Math.round(fs) });
         }
 
         // ---- pills/CTAs exceeding their parent box ----
