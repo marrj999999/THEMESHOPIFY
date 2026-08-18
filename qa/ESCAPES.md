@@ -716,3 +716,35 @@ a claim about the script, not the page.
 "fix" to `bbc-media` for a bug that does not exist — which would have shipped real risk to every
 image on the estate to solve an imaginary one. Fourth scroll/paint artefact in this project
 (2026-08-03, #42, and a stuck-reveal false positive before it).
+
+---
+
+## #45 — block-audit reports 22 "drifting" classes and none of them is drift (2026-08-18)
+
+**A gate that cries wolf, found while answering "are all pages on the correct blocks?"**
+`block-audit.mjs` measured 288 classes across 11 pages and reported **22 drifting on a layout
+property**. Every structural one was traced to source. All six are deliberate:
+
+| reported "drift" | what it actually is |
+|---|---|
+| `rd-card` radius 0/6/12px, border none/2.5px/1.5px | three documented variants: base card, `.rd-stamp`, and `.rd-grid .rd-card.rd-stamp` de-boxed in grids. The CSS comment at bbc-redesign-2026.css:222 records that de-boxing `.rd-stamp` *globally* was tried and rejected as "too wide a blast radius" — the narrow rule is the fix, not the bug |
+| `rd-step` padding + radius | `.rd-loop .rd-step:last-child` is the lime payoff step ("You build → Profits fund → **A life changes**") |
+| `rd-stagger` gap 24 vs 28px | the gap comes from the container — `.rd-grid` vs `.acc-cards`. `rd-stagger` is a motion utility, it sets no gap |
+| `rd-stat` padding 0 vs 40px 0 0 | `.rd-stats.rd-dim` is the tick-marked variant; the padding makes room for the tick rule |
+| `bbc-media__img` radius 0 vs 14px | media inside `.acc-cards` is rounded to match the card |
+| `textAlign` centre vs left (most of the 22) | the per-band `align` setting. A band is allowed to be centred |
+
+**Why this is the same defect as #43, pointing the other way.** #43 was a check that measured a
+class name and *invented* a gap. This one measures a class name and invents *drift* — because
+`.rd-card` is not a component, it is a shared root class that three components extend. Grouping by
+class name conflates them by construction, so the number can never go to zero and nobody will ever
+read the report. A gate whose output is 100% false positives is off, whatever it prints.
+
+**Rule.** A conformance check must group by the **full class signature** an element carries (or
+explicitly enumerate the variant modifiers it expects), not by one class in the list. Until
+block-audit does that, treat its count as a list of *places to look*, never as defects — and do
+not "fix" anything it reports without first tracing the rule that produces the value.
+
+**What the estate actually scores**, measured the same afternoon: census 69/69 OK · anatomy
+conformance all OK · editability 0 findings across 25 sections · band-grammar OK · page-standard
+0 pages outside the standard. The pages are on the correct blocks. One gate just says otherwise.

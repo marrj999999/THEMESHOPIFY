@@ -2,6 +2,172 @@
  {
   "kickers": [
    {
+    "size": 14,
+    "lower": true,
+    "dash": true,
+    "w": 700
+   },
+   {
+    "size": 14,
+    "lower": true,
+    "dash": true,
+    "w": 700
+   },
+   {
+    "size": 14,
+    "lower": true,
+    "dash": true,
+    "w": 700
+   },
+   {
+    "size": 14,
+    "lower": true,
+    "dash": true,
+    "w": 700
+   },
+   {
+    "size": 14,
+    "lower": true,
+    "dash": true,
+    "w": 700
+   },
+   {
+    "size": 14,
+    "lower": true,
+    "dash": true,
+    "w": 700
+   }
+  ],
+  "buttons": [
+   {
+    "pill": true,
+    "w700": true,
+    "fill": true,
+    "shadowOk": false
+   },
+   {
+    "pill": true,
+    "w700": true,
+    "fill": true,
+    "shadowOk": true
+   },
+   {
+    "pill": true,
+    "w700": true,
+    "fill": false,
+    "shadowOk": true
+   },
+   {
+    "pill": true,
+    "w700": true,
+    "fill": true,
+    "shadowOk": true
+   },
+   {
+    "pill": true,
+    "w700": true,
+    "fill": true,
+    "shadowOk": true
+   },
+   {
+    "pill": true,
+    "w700": true,
+    "fill": false,
+    "shadowOk": true
+   },
+   {
+    "pill": true,
+    "w700": true,
+    "fill": true,
+    "shadowOk": true
+   }
+  ],
+  "chips": [
+   {
+    "caps": true,
+    "w": 700,
+    "size": 14,
+    "pill": true
+   },
+   {
+    "caps": true,
+    "w": 700,
+    "size": 14,
+    "pill": true
+   },
+   {
+    "caps": true,
+    "w": 700,
+    "size": 14,
+    "pill": true
+   },
+   {
+    "caps": true,
+    "w": 700,
+    "size": 14,
+    "pill": true
+   },
+   {
+    "caps": true,
+    "w": 700,
+    "size": 14,
+    "pill": true
+   },
+   {
+    "caps": true,
+    "w": 700,
+    "size": 14,
+    "pill": true
+   },
+   {
+    "caps": true,
+    "w": 700,
+    "size": 14,
+    "pill": true
+   }
+  ],
+  "quotes": [
+   {
+    "hasAttr": true,
+    "grammarOk": true,
+    "typedMarks": true
+   }
+  ],
+  "doors": [
+   {
+    "cls": "door",
+    "h": 29,
+    "lower": true,
+    "chipCaps": true
+   },
+   {
+    "cls": "door",
+    "h": 29,
+    "lower": true,
+    "chipCaps": true
+   },
+   {
+    "cls": "door",
+    "h": 29,
+    "lower": true,
+    "chipCaps": true
+   }
+  ],
+  "steps": [],
+  "accs": [],
+  "inputs": [
+   {
+    "stamped": true
+   }
+  ],
+  "crumb": null,
+  "logocells": [],
+  "media": [],
+  "path": "/pages/band-lab"
+ },
+ {
+  "kickers": [
+   {
     "size": 13,
     "lower": true,
     "dash": false,
@@ -56,13 +222,7 @@
     "w": 700
    },
    {
-    "size": 14,
-    "lower": true,
-    "dash": true,
-    "w": 700
-   },
-   {
-    "size": 14,
+    "size": 15,
     "lower": true,
     "dash": false,
     "w": 700
@@ -91,12 +251,6 @@
     "pill": true,
     "w700": true,
     "fill": true,
-    "shadowOk": true
-   },
-   {
-    "pill": true,
-    "w700": true,
-    "fill": true,
     "shadowOk": false
    },
    {
@@ -109,18 +263,6 @@
     "pill": true,
     "w700": true,
     "fill": true,
-    "shadowOk": true
-   },
-   {
-    "pill": true,
-    "w700": true,
-    "fill": false,
-    "shadowOk": true
-   },
-   {
-    "pill": true,
-    "w700": true,
-    "fill": false,
     "shadowOk": true
    },
    {
@@ -158,19 +300,19 @@
    {
     "caps": true,
     "w": 700,
-    "size": 12,
-    "pill": true
-   },
-   {
-    "caps": true,
-    "w": 700,
-    "size": 12,
-    "pill": true
-   },
-   {
-    "caps": true,
-    "w": 700,
     "size": 14,
+    "pill": true
+   },
+   {
+    "caps": true,
+    "w": 700,
+    "size": 12,
+    "pill": true
+   },
+   {
+    "caps": true,
+    "w": 700,
+    "size": 12,
     "pill": true
    },
    {
@@ -217,37 +359,7 @@
    {
     "hasAttr": true,
     "grammarOk": true,
-    "typedMarks": true
-   },
-   {
-    "hasAttr": true,
-    "grammarOk": true,
-    "typedMarks": true
-   },
-   {
-    "hasAttr": true,
-    "grammarOk": true,
-    "typedMarks": true
-   },
-   {
-    "hasAttr": true,
-    "grammarOk": true,
-    "typedMarks": true
-   },
-   {
-    "hasAttr": true,
-    "grammarOk": true,
-    "typedMarks": true
-   },
-   {
-    "hasAttr": true,
-    "grammarOk": true,
-    "typedMarks": true
-   },
-   {
-    "hasAttr": true,
-    "grammarOk": true,
-    "typedMarks": true
+    "typedMarks": false
    }
   ],
   "doors": [
@@ -352,12 +464,6 @@
     "lower": true,
     "dash": true,
     "w": 700
-   },
-   {
-    "size": 14,
-    "lower": true,
-    "dash": true,
-    "w": 700
    }
   ],
   "buttons": [
@@ -377,12 +483,6 @@
     "pill": true,
     "w700": true,
     "fill": false,
-    "shadowOk": true
-   },
-   {
-    "pill": true,
-    "w700": true,
-    "fill": true,
     "shadowOk": true
    },
    {
@@ -969,12 +1069,6 @@
    {
     "pill": true,
     "w700": true,
-    "fill": false,
-    "shadowOk": true
-   },
-   {
-    "pill": true,
-    "w700": true,
     "fill": true,
     "shadowOk": true
    },
@@ -994,18 +1088,6 @@
     "pill": true,
     "w700": true,
     "fill": true,
-    "shadowOk": true
-   },
-   {
-    "pill": true,
-    "w700": true,
-    "fill": true,
-    "shadowOk": true
-   },
-   {
-    "pill": true,
-    "w700": true,
-    "fill": false,
     "shadowOk": true
    },
    {
@@ -1552,7 +1634,19 @@
    {
     "size": 14,
     "lower": true,
+    "dash": true,
+    "w": 700
+   },
+   {
+    "size": 15,
+    "lower": true,
     "dash": false,
+    "w": 700
+   },
+   {
+    "size": 14,
+    "lower": true,
+    "dash": true,
     "w": 700
    },
    {
@@ -1591,6 +1685,12 @@
     "pill": true,
     "w700": true,
     "fill": false,
+    "shadowOk": true
+   },
+   {
+    "pill": true,
+    "w700": true,
+    "fill": true,
     "shadowOk": true
    },
    {
@@ -3002,6 +3102,12 @@
    {
     "caps": true,
     "w": 700,
+    "size": 12,
+    "pill": true
+   },
+   {
+    "caps": true,
+    "w": 700,
     "size": 14,
     "pill": true
    },
@@ -3591,12 +3697,6 @@
    {
     "pill": true,
     "w700": true,
-    "fill": false,
-    "shadowOk": true
-   },
-   {
-    "pill": true,
-    "w700": true,
     "fill": true,
     "shadowOk": true
    },
@@ -3616,18 +3716,6 @@
     "pill": true,
     "w700": true,
     "fill": true,
-    "shadowOk": true
-   },
-   {
-    "pill": true,
-    "w700": true,
-    "fill": true,
-    "shadowOk": true
-   },
-   {
-    "pill": true,
-    "w700": true,
-    "fill": false,
     "shadowOk": true
    },
    {
@@ -4474,23 +4562,23 @@
   "steps": [],
   "accs": [
    {
-    "bordered": false,
+    "bordered": true,
     "plusGlyph": false
    },
    {
-    "bordered": false,
+    "bordered": true,
     "plusGlyph": false
    },
    {
-    "bordered": false,
+    "bordered": true,
     "plusGlyph": false
    },
    {
-    "bordered": false,
+    "bordered": true,
     "plusGlyph": false
    },
    {
-    "bordered": false,
+    "bordered": true,
     "plusGlyph": false
    }
   ],

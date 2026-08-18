@@ -12,6 +12,23 @@
 TARGETS=("$@")
 [ ${#TARGETS[@]} -eq 0 ] && TARGETS=(sections snippets blocks assets layout)
 
+# Drop qa/ markdown from an explicit target list (2026-08-18). The default targets are
+# deployable surfaces only, which is right — but passing a changed-file list to
+# qa/gate-check.sh can include qa/ESCAPES.md, and that file QUOTES every banned string by
+# design: it is the register of what escaped, so "28,000 PSI" and "nationally recognised"
+# appear in it as evidence. Linting it reports the documentation as the violation and blocks
+# a push that never touches the theme. Same principle as NAMED ALLOWANCE 1 below — the lines
+# that state the ban are the guard, not a breach.
+if [ ${#TARGETS[@]} -gt 0 ]; then
+  FILTERED=()
+  for t in "${TARGETS[@]}"; do
+    case "$t" in qa/*.md|qa/*/*.md) continue;; esac
+    FILTERED+=("$t")
+  done
+  TARGETS=("${FILTERED[@]}")
+  [ ${#TARGETS[@]} -eq 0 ] && { echo "✓ claim-lint: no deployable files in target list"; exit 0; }
+fi
+
 PATTERNS=(
   '28,?000 ?PSI'
   '[Ss]tronger than steel'
