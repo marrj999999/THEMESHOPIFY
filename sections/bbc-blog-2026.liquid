@@ -25,11 +25,42 @@
           <nav class="rd-tabs" aria-label="Categories">
             <a href="{{ blog.url }}"{% if current_tags == blank %} class="rd-active"{% endif %}>All</a>
             {%- comment -%} Curated category tabs (avoids dumping all 100+ blog tags). Falls back to all tags if unset. {%- endcomment -%}
-            {%- if section.settings.category_tags != blank -%}
-              {%- assign cat_list = section.settings.category_tags | split: ',' -%}
+            {%- comment -%} PER-BLOG CATEGORIES. One template serves all four blogs, and their tag
+              vocabularies do not overlap — news is press/kit/tutorials, club-news is
+              Journeys/stories/gravel, schools is education/stem. A single shared list therefore
+              shows every blog three or four dead categories that return nothing on it.
+              Syntax: `handle: tag, tag | handle: tag, tag`. A chunk with no `handle:` prefix is
+              the fallback for any blog without its own group, so the old plain-list value still
+              works unchanged. {%- endcomment -%}
+            {%- assign _cats = '' -%}
+            {%- assign _fallback = '' -%}
+            {%- assign _groups = section.settings.category_tags | split: '|' -%}
+            {%- for g in _groups -%}
+              {%- if g contains ':' -%}
+                {%- assign _pair = g | split: ':' -%}
+                {%- assign _h = _pair[0] | strip -%}
+                {%- if _h == blog.handle -%}{%- assign _cats = _pair[1] -%}{%- endif -%}
+              {%- else -%}
+                {%- assign _fallback = g -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if _cats == blank -%}{%- assign _cats = _fallback -%}{%- endif -%}
+            {%- if _cats != blank -%}
+              {%- assign cat_list = _cats | split: ',' -%}
+              {%- comment -%} No `blog.all_tags contains` guard (removed 2026-08-18). It was meant to
+                hide a category the blog has no posts for, but it SILENTLY DROPS WORKING ONES:
+                on /blogs/schools-and-education the tag `education` has 13 published posts and
+                /tagged/education returns 9 cards on page one, yet all_tags does not report it, so
+                the biggest category on that blog had no pill at all. `stem` (6 posts) the same,
+                while `kit` — one single post — rendered fine. Whatever all_tags is doing, it is not
+                a reliable index of what filters.
+                The curated list is derived from measured tag counts, so every entry is known to
+                return posts; the guard added no safety and cost real categories. A typo in the
+                setting now shows an empty category rather than vanishing — visible beats silent.
+                {%- endcomment -%}
               {%- for cat in cat_list -%}
                 {%- assign cat_t = cat | strip -%}
-                {%- if blog.all_tags contains cat_t -%}
+                {%- if cat_t != blank -%}
                   <a href="{{ blog.url }}/tagged/{{ cat_t | handle }}"{% if current_tags contains cat_t %} class="rd-active"{% endif %}>{{ cat_t }}</a>
                 {%- endif -%}
               {%- endfor -%}
@@ -110,9 +141,9 @@
     {
       "type": "text",
       "id": "category_tags",
-      "label": "Category tabs (comma-separated tag names)",
-      "info": "Only these tags show as category tabs (must match an article tag exactly). Leave blank to list every tag.",
-      "default": "Bamboo Build, Build to Bond, adventure, business, award"
+      "label": "Category tabs — `handle: tag, tag | handle: tag, tag`",
+      "info": "Prefix with a blog handle to scope a list to that blog. No prefix = used by any blog without its own group.",
+      "default": "news: press, Build to Bond, kit, Workshop Wednesdays, Tutorials, adventure, sustainability | club-news: Journeys, stories, gravel, Road, mtb, Build reviews | impact: impact, Social Enterprise, corporate, Build to Bond, adventure | schools-and-education: education, stem, case-study, sustainability, university"
     },
     {
       "type": "range",
