@@ -457,10 +457,14 @@
   ---------- {%- endcomment -%}
   <section class="rd-pad-sm rd-steel">
     <div class="rd-wrap">
+      {%- comment -%} reel:false 2026-08-18 (James: "opening press layout looks poor") —
+      the ticker clipped long quotes mid-sentence at position 2. Contract default form
+      instead: ONE static anchor quote + real logo row. Centred: the proof strip is a
+      full-width trust moment, not axis text. {%- endcomment -%}
       {%- render 'bbc-press',
           style: 'bar',
           align: 'left',
-          reel: true,
+          reel: false,
           preset: 'national',
           label: section.settings.press_kicker,
           quote: section.settings.press_quote,
