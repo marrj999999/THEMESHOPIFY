@@ -208,7 +208,8 @@
         {%- if section.settings.hero_cta1_label != blank -%}<a class="ew-btn is-lime" href="{{ hero_cta1 }}">{{ section.settings.hero_cta1_label }}&nbsp;&rarr;</a>{%- endif -%}
         {%- if section.settings.hero_cta2_label != blank -%}<a class="ew-btn is-ghost" href="{{ hero_cta2 }}" style="color:#EDE6D6 !important;border-color:#EDE6D6 !important;">{{ section.settings.hero_cta2_label }}</a>{%- endif -%}
       </div>
-            <p class="ew-cred">A social enterprise CIC &middot; enhanced-DBS facilitators &middot; public-liability insured</p>
+            {%- assign _cred = section.settings.hero_cred | default: 'Enhanced-DBS facilitators &middot; public-liability insured' -%}
+            {%- if _cred != blank -%}<p class="ew-cred">{{ _cred }}</p>{%- endif -%}
     </div>
 
     <div class="ew-media{% if section.settings.hero_video_on %} has-video{% endif %}">
@@ -1669,6 +1670,12 @@ adjacency (PAGE-STANDARD S3 kept; loop band documents its own moveability). {%- 
       "id": "fab_impact_callout",
       "label": "Impact image callout",
       "default": "cohort · frames ride home"
+    },
+    {
+      "type": "text",
+      "id": "hero_cred",
+      "label": "Hero trust line (blank hides)",
+      "default": "Enhanced-DBS facilitators · public-liability insured"
     }
   ],
   "blocks": [
