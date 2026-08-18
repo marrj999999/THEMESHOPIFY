@@ -15,7 +15,9 @@ test.describe('motion runs (no-preference)', () => {
     const samples = await page.evaluate(async () => {
       const grab = () => document.querySelector('.ew-proof li b')?.textContent.trim() ?? '';
       const vals = [];
-      for (let i = 0; i < 18; i++) { vals.push(grab()); await new Promise(r => setTimeout(r, 120)); }
+      // 28 x 120ms = 3.4s window: the count-up runs 2400ms since 2026-08-12 (slowed at
+      // James's request) — the old 2.16s window ended mid-count and failed "stable at the end"
+      for (let i = 0; i < 28; i++) { vals.push(grab()); await new Promise(r => setTimeout(r, 120)); }
       return vals;
     });
     const distinct = new Set(samples.filter(Boolean));

@@ -355,3 +355,40 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 .bbc-rd .rd-door:not(:first-of-type) .rd-tag.rd-lime{ background:rgba(0,26,21,.55) !important; }
 .bbc-rd .rd-door .rd-btn.rd-lime:not(:first-of-type .rd-btn){}
 .bbc-rd .rd-grid .rd-door:not(:first-of-type) .rd-btn.rd-lime{ background:rgba(0,26,21,.45) !important; }
+
+/* ==================================================================
+   §F FABRICATION-DRAWING IDENTITY (Claude Design v2, James 2026-08-18)
+   The homepage reads as a workshop drawing: graph-paper on paper
+   surfaces, node-marked band seams, leader-line callouts on imagery,
+   spec micro-lines, an engineering titleblock on the hero media.
+   Scoped .bbc-rd-home. Case lives in content, never transforms.
+   ================================================================== */
+.bbc-rd.bbc-rd-home .rd-paper{
+  background-color:var(--paper,#F1E9D8) !important;
+  /* !important: redesign-css sets `background:var(--paper)` shorthand later in the
+     cascade, which silently wipes the graph-paper image (caught live 2026-08-18) */
+  background-image:linear-gradient(rgba(0,60,50,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,60,50,.055) 1px,transparent 1px),linear-gradient(rgba(0,60,50,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,60,50,.03) 1px,transparent 1px) !important;
+  background-size:96px 96px,96px 96px,24px 24px,24px 24px !important;
+}
+.bbc-rd-home .rd-nodediv{ height:0; border-top:1.5px solid rgba(14,26,23,.28); position:relative; max-width:1100px; margin:0 auto; }
+.bbc-rd-home .rd-nodediv i{ position:absolute; top:-7px; width:2px; height:13px; background:rgba(14,26,23,.4); }
+.bbc-rd-home .rd-nodediv i:nth-child(1){ left:18%; } .bbc-rd-home .rd-nodediv i:nth-child(2){ left:19.2%; }
+.bbc-rd-home .rd-nodediv i:nth-child(3){ left:57%; } .bbc-rd-home .rd-nodediv i:nth-child(4){ left:58.4%; }
+.bbc-rd-home .rd-nodediv i:nth-child(5){ left:86%; }
+.bbc-rd-home section > .rd-nodediv{ margin-top:0; transform:translateY(calc(-1 * var(--rd-pad-y, 96px) + 28px)); }
+.bbc-rd-home .rd-specline{ font-size:11px; letter-spacing:.14em; opacity:.55; margin:10px 0 0; }
+.bbc-rd-home .rd-dimwrap{ position:relative; }
+.bbc-rd-home .rd-dim-callout{ position:absolute; left:14px; top:14px; background:var(--paper,#F1E9D8); color:var(--forest,#003C32); border:1.5px solid var(--forest,#003C32); border-radius:3px; font-size:10.5px; font-weight:700; letter-spacing:.08em; padding:4px 9px; z-index:3; }
+.bbc-rd-home .rd-dim-callout::after{ content:""; position:absolute; left:18px; top:100%; width:1px; height:26px; background:var(--forest,#003C32); }
+.bbc-rd-home .rd-dim-callout::before{ content:""; position:absolute; left:15px; top:calc(100% + 24px); width:7px; height:7px; border-radius:50%; border:1.5px solid var(--forest,#003C32); background:transparent; }
+.bbc-rd-home .rd-titleblock{ position:absolute; left:22px; bottom:22px; display:grid; grid-template-columns:auto auto; border:1.5px solid rgba(230,220,200,.55); font-size:10px; letter-spacing:.1em; color:rgba(230,220,200,.9); z-index:5; background:rgba(0,42,35,.55); backdrop-filter:blur(2px); }
+.bbc-rd-home .rd-titleblock span{ padding:5px 10px; border-bottom:1px solid rgba(230,220,200,.3); }
+.bbc-rd-home .rd-titleblock span:nth-last-child(-n+2){ border-bottom:0; }
+.bbc-rd-home .rd-titleblock span:nth-child(odd){ border-right:1px solid rgba(230,220,200,.3); opacity:.7; }
+@media (max-width:749px){
+  .bbc-rd-home .rd-titleblock{ display:none; } /* hero real estate is scarce on phones */
+  .bbc-rd-home .rd-dim-callout{ font-size:9.5px; }
+}
+@media (prefers-reduced-motion: no-preference){
+  .bbc-rd-home .rd-titleblock{ transition:opacity .3s ease; }
+}

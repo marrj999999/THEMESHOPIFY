@@ -212,6 +212,14 @@
     </div>
 
     <div class="ew-media{% if section.settings.hero_video_on %} has-video{% endif %}">
+      {%- if section.settings.fab_titleblock != false -%}
+      <div class="rd-titleblock" aria-hidden="true">
+        <span>{{ section.settings.fab_tb_k1 | default: 'drawing' }}</span><span>{{ section.settings.fab_tb_v1 | default: '№ 1 — the club' }}</span>
+        <span>{{ section.settings.fab_tb_k2 | default: 'material' }}</span><span>{{ section.settings.fab_tb_v2 | default: 'bamboo · flax · lugs' }}</span>
+        <span>{{ section.settings.fab_tb_k3 | default: 'est.' }}</span><span>{{ section.settings.fab_tb_v3 | default: '2012 · london' }}</span>
+        <span>{{ section.settings.fab_tb_k4 | default: 'drawn' }}</span><span>{{ section.settings.fab_tb_v4 | default: 'by hand' }}</span>
+      </div>
+      {%- endif -%}
       {%- if section.settings.hero_sticker != blank -%}<span class="ew-sticker">{{ section.settings.hero_sticker }}</span>{%- endif -%}
       {%- if section.settings.hero_image != blank -%}
         <img class="ew-photo" src="{{ section.settings.hero_image | image_url: width: 1600 }}" srcset="{{ section.settings.hero_image | image_url: width: 800 }} 800w, {{ section.settings.hero_image | image_url: width: 1200 }} 1200w, {{ section.settings.hero_image | image_url: width: 1600 }} 1600w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w, {{ section.settings.hero_image | image_url: width: 2600 }} 2600w" sizes="(max-width:749px) 100vw, 56vw" alt="{{ section.settings.hero_image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" fetchpriority="high" loading="eager">
@@ -441,7 +449,31 @@
   {%- comment -%} ---------- STATS ---------- {%- endcomment -%}
   
 
-  {%- comment -%} ---------- DOORS ---------- {%- endcomment -%}
+
+  {%- comment -%} ---------- PRESS (standard block, 2026-07-22) ----------
+     Rendered via snippets/bbc-press.liquid — the sitewide standard
+     (research: quote-anchored logo bar; contract in qa/PRESS-BLOCK.md).
+     Styled-text fake logos REMOVED (real logos only, house rule).
+  ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-steel">
+    <div class="rd-wrap">
+      {%- render 'bbc-press',
+          style: 'bar',
+          align: 'left',
+          reel: true,
+          preset: 'national',
+          label: section.settings.press_kicker,
+          quote: section.settings.press_quote,
+          cite: section.settings.press_cite,
+          more_label: section.settings.press_more_label,
+          more_url: section.settings.press_more_url -%}
+    </div>
+  </section>
+  {%- comment -%} Band order v1 (Claude Design reorder, James approved 2026-08-18):
+hero > press > doors > why-bamboo(paper) > kits > film > reviews(steel) > impact > loop > cta.
+Surface sequence dark,steel,base,paper,base,dark,steel,dark,steel,dark - no same-surface
+adjacency (PAGE-STANDARD S3 kept; loop band documents its own moveability). {%- endcomment -%}
+{%- comment -%} ---------- DOORS ---------- {%- endcomment -%}
   <section class="rd-pad">
     <div class="rd-wrap">
       <div class="rd-center rd-cmp-20294">
@@ -467,58 +499,6 @@
             </div>
           </a>
         {%- endif -%}{%- endfor -%}
-      </div>
-    </div>
-  </section>
-
-  {%- comment -%} ---------- IMPACT FEATURE ---------- {%- endcomment -%}
-  <section class="rd-split rd-dark">
-    <div class="rd-reveal rd-media">
-      {%- if section.settings.impact_band_image != blank -%}
-        <img src="{{ section.settings.impact_band_image | image_url: width: 1400 }}" srcset="{{ section.settings.impact_band_image | image_url: width: 600 }} 600w, {{ section.settings.impact_band_image | image_url: width: 900 }} 900w, {{ section.settings.impact_band_image | image_url: width: 1400 }} 1400w, {{ section.settings.impact_band_image | image_url: width: 1800 }} 1800w" sizes="(max-width:749px) 100vw, 50vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="{{ section.settings.impact_band_image.width }}" height="{{ section.settings.impact_band_image.height }}" loading="lazy">
-      {%- else -%}
-        {%- if section.settings.impact_band_image != blank -%}<img src="{{ section.settings.impact_band_image | image_url: width: 900 }}" srcset="{{ section.settings.impact_band_image | image_url: width: 400 }} 400w, {{ section.settings.impact_band_image | image_url: width: 600 }} 600w, {{ section.settings.impact_band_image | image_url: width: 900 }} 900w, {{ section.settings.impact_band_image | image_url: width: 1400 }} 1400w" sizes="(max-width:749px) 92vw, 42vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="{{ section.settings.impact_band_image.width }}" height="{{ section.settings.impact_band_image.height }}">{%- else -%}<img src="{{ 'bbc-rd-cohort.jpg' | asset_img_url: '900x' }}" srcset="{{ 'bbc-rd-cohort.jpg' | asset_img_url: '400x' }} 400w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '600x' }} 600w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '900x' }} 900w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '1400x' }} 1400w" sizes="(max-width:749px) 92vw, 42vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="1400" height="933">{%- endif -%}
-      {%- endif -%}
-    </div>
-    <div class="rd-txt">
-      <span class="rd-eyebrow rd-on-dark">{{ section.settings.impact_kicker }}</span>
-      <h2 class="rd-reveal">{{ section.settings.impact_title }}</h2>
-      <p class="rd-lede rd-mt2">{{ section.settings.impact_body }}</p>
-      {%- if section.settings.impact_quote != blank -%}
-        <div class="rd-reveal rd-pull rd-mt3">
-          <p class="rd-q">{{ section.settings.impact_quote }}</p>
-          {%- if section.settings.impact_cite != blank -%}<cite>{{ section.settings.impact_cite }}</cite>{%- endif -%}
-        </div>
-      {%- endif -%}
-      <div class="rd-flex rd-mt3">
-        {%- if section.settings.impact_cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ feat_cta1 }}">{{ section.settings.impact_cta1_label }}</a>{%- endif -%}
-        {%- if section.settings.impact_cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ feat_cta2 }}">{{ section.settings.impact_cta2_label }}</a>{%- endif -%}
-      </div>
-    </div>
-  </section>
-
-  {%- comment -%} ---------- FUNDING LOOP ----------
-    rd-steel, not rd-dark: the IMPACT FEATURE band directly above is dark, so the homepage ran two
-    dark bands back to back — PAGE-STANDARD S3. Steel rather than paper because the two bands
-    BELOW are both paper, and paper here would turn one repeat into a three-band run. Safe to
-    move: .rd-loop draws its borders with currentColor and its final step carries its own
-    lime-on-forest, so the component takes colour from whatever surface it sits on. (2026-08-04)
-  {%- endcomment -%}
-  <section class="rd-steel rd-pad-sm">
-    <div class="rd-wrap">
-      <div class="rd-flex rd-between rd-gap-24">
-        <div>
-          <span class="rd-eyebrow">{{ section.settings.loop_kicker }}</span>
-          <h2 class="rd-reveal rd-mw-16ch">{{ section.settings.loop_heading }}</h2>
-        </div>
-        <p class="rd-maxw-s rd-m-0">{{ section.settings.loop_intro }}</p>
-      </div>
-      <div class="rd-loop rd-mt3">
-        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s1_big }}</div><div class="rd-sm">{{ section.settings.loop_s1_sm }}</div></div>
-        <div class="rd-arr">&rarr;</div>
-        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s2_big }}</div><div class="rd-sm">{{ section.settings.loop_s2_sm }}</div></div>
-        <div class="rd-arr">&rarr;</div>
-        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s3_big }}</div><div class="rd-sm">{{ section.settings.loop_s3_sm }}</div></div>
       </div>
     </div>
   </section>
@@ -565,12 +545,14 @@
     .bbc-rd-home .rd-csgrid > :first-child{ grid-row:span 3; }
     @media (max-width:749px){ .bbc-rd-home .rd-csgrid{ grid-template-columns:1fr; } .bbc-rd-home .rd-csgrid > :first-child{ grid-row:auto; } }
   </style>
-  <section class="rd-pad acc" id="why-bamboo">
+  <section class="rd-pad rd-paper acc" id="why-bamboo">
+    <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     <div class="rd-wrap">
       <div class="acc-head">
         <span class="rd-eyebrow">{{ section.settings.why_kicker | default: 'Built by anyone' }}</span>
         <h2 class="rd-reveal acc-title">{{ section.settings.why_title | default: 'no workshop. no welding. no experience needed.' }}</h2>
         <p class="acc-lede">{{ section.settings.why_lede | default: 'Bamboo frames go together with a few hand tools, a jig and a weekend — and most builders have never made anything before.' }}</p>
+        <p class="rd-specline">{{ section.settings.fab_why_spec | default: 'spec — BS ISO 22157:2019 · tensile 84.3 MPa · Swansea University' }}</p>
       </div>
       <ul class="acc-stats">
         <li><b>{{ section.settings.why_stat1_num | default: '4,000+' }}</b><span>{{ section.settings.why_stat1_label | default: 'people trained' }}</span></li>
@@ -606,51 +588,12 @@
     </div>
   </section>
 
-
-  {%- comment -%} ---------- PROVEN RIDE (comfort + press, GCN video) ---------- {%- endcomment -%}
-  <section class="rd-pad rd-paper">
-    <div class="rd-wrap">
-      <span class="rd-eyebrow">{{ section.settings.tx_proven_on_the_road | default: "Proven on the road" }}</span>
-      <h2 class="rd-reveal rd-mw-20ch">{{ section.settings.tx_bamboo_soaks_up_the_road_rid | default: "bamboo soaks up the road — riders and reviewers agree." }}</h2>
-      <p class="rd-lede rd-mt2">{{ section.settings.tx_not_just_our_word_national_p | default: "Not just our word. National press, pro reviewers and ten-year riders all land on the same thing: it rides beautifully." }}</p>
-      {%- comment -%} Two component types used to share one class here, 2026-07-31. The GCN film and
-         Taro's build are case studies; the Guardian and BikeRadar lines are PRESS QUOTES — no image,
-         no link, no story behind them. Forcing a pull-quote into a case-study card would give it a
-         heading link it has no destination for, so the quotes now carry their own class and sit
-         outside the case-study contract, while the two real cards render THE standard card.
-      {%- endcomment -%}
-      <ul class="rd-csgrid rd-mt4" role="list">
-        {%- render 'bbc-cscard',
-             variant: 'grid',
-             kind: 'GCN review',
-             heading: 'Global Cycling Network puts a bamboo bike to the test.',
-             url: 'https://www.youtube.com/watch?v=cQxbC-njbGQ',
-             context: '&ldquo;Are bamboo bikes actually any good?&rdquo;',
-             image: 'bbc-rd-gcn.jpg',
-             youtube: 'https://www.youtube.com/watch?v=cQxbC-njbGQ',
-             cta: 'watch the film' -%}
-        {%- render 'bbc-cscard',
-             variant: 'grid',
-             kind: 'builder story',
-             heading: 'Taro still rides the same frame after 10 years of daily commuting.',
-             url: '/blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike',
-             context: 'One frame, built by hand, ridden every day for a decade.',
-             image: 'bbc-rd-bike-field.jpg',
-             cta: 'read the story' -%}
-      </ul>
-      <ul class="rd-pressquotes rd-mt3" role="list">
-        <li class="rd-pressquote rd-reveal"><p>{{ section.settings.tx_bamboo_naturally_dampens_vib | default: "Bamboo naturally dampens vibration, allowing the smoothest ride." }}</p><cite>{{ section.settings.tx_the_guardian | default: "The Guardian" }}</cite></li>
-        <li class="rd-pressquote rd-reveal"><p>{{ section.settings.tx_a_really_really_comfortable | default: "A really, really comfortable ride &mdash; smooth but not too flexy." }}</p><cite>{{ section.settings.tx_kate_rawles_bikeradar | default: "Kate Rawles &middot; BikeRadar" }}</cite></li>
-      </ul>
-      {% render 'bbc-video-lightbox' %}
-    </div>
-  </section>
-
   {%- comment -%} ---------- KITS ---------- {%- endcomment -%}
   <section class="rd-pad">
     <div class="rd-wrap">
       <div class="rd-flex rd-between rd-mb-36px">
         <div><span class="rd-eyebrow">{{ section.settings.kits_kicker }}</span><h2 class="rd-reveal">{{ section.settings.kits_title }}</h2></div>
+      <p class="rd-specline">{{ section.settings.fab_kits_spec | default: 'contents — tubes · lugs · jig · blueprint · video course' }}</p>
         {%- if section.settings.kits_link_label != blank -%}<a class="rd-btn rd-ghost" href="{{ kits_url }}">{{ section.settings.kits_link_label }}</a>{%- endif -%}
       </div>
       <div class="rd-grid rd-g4 rd-stagger">
@@ -708,23 +651,98 @@
   </section>
   {%- endif -%}
 
-  {%- comment -%} ---------- PRESS (standard block, 2026-07-22) ----------
-     Rendered via snippets/bbc-press.liquid — the sitewide standard
-     (research: quote-anchored logo bar; contract in qa/PRESS-BLOCK.md).
-     Styled-text fake logos REMOVED (real logos only, house rule).
-  ---------- {%- endcomment -%}
-  <section class="rd-pad-sm rd-steel">
+
+  {%- comment -%} ---------- PROVEN RIDE (comfort + press, GCN video) ---------- {%- endcomment -%}
+  <section class="rd-pad rd-steel">
+    <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     <div class="rd-wrap">
-      {%- render 'bbc-press',
-          style: 'bar',
-          align: 'left',
-          reel: true,
-          preset: 'national',
-          label: section.settings.press_kicker,
-          quote: section.settings.press_quote,
-          cite: section.settings.press_cite,
-          more_label: section.settings.press_more_label,
-          more_url: section.settings.press_more_url -%}
+      <span class="rd-eyebrow">{{ section.settings.tx_proven_on_the_road | default: "Proven on the road" }}</span>
+      <h2 class="rd-reveal rd-mw-20ch">{{ section.settings.tx_bamboo_soaks_up_the_road_rid | default: "bamboo soaks up the road — riders and reviewers agree." }}</h2>
+      <p class="rd-lede rd-mt2">{{ section.settings.tx_not_just_our_word_national_p | default: "Not just our word. National press, pro reviewers and ten-year riders all land on the same thing: it rides beautifully." }}</p>
+      {%- comment -%} Two component types used to share one class here, 2026-07-31. The GCN film and
+         Taro's build are case studies; the Guardian and BikeRadar lines are PRESS QUOTES — no image,
+         no link, no story behind them. Forcing a pull-quote into a case-study card would give it a
+         heading link it has no destination for, so the quotes now carry their own class and sit
+         outside the case-study contract, while the two real cards render THE standard card.
+      {%- endcomment -%}
+      <ul class="rd-csgrid rd-mt4" role="list">
+        {%- render 'bbc-cscard',
+             variant: 'grid',
+             kind: 'GCN review',
+             heading: 'Global Cycling Network puts a bamboo bike to the test.',
+             url: 'https://www.youtube.com/watch?v=cQxbC-njbGQ',
+             context: '&ldquo;Are bamboo bikes actually any good?&rdquo;',
+             image: 'bbc-rd-gcn.jpg',
+             youtube: 'https://www.youtube.com/watch?v=cQxbC-njbGQ',
+             cta: 'watch the film' -%}
+        {%- render 'bbc-cscard',
+             variant: 'grid',
+             kind: 'builder story',
+             heading: 'Taro still rides the same frame after 10 years of daily commuting.',
+             url: '/blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike',
+             context: 'One frame, built by hand, ridden every day for a decade.',
+             image: 'bbc-rd-bike-field.jpg',
+             cta: 'read the story' -%}
+      </ul>
+      <ul class="rd-pressquotes rd-mt3" role="list">
+        <li class="rd-pressquote rd-reveal"><p>{{ section.settings.tx_bamboo_naturally_dampens_vib | default: "Bamboo naturally dampens vibration, allowing the smoothest ride." }}</p><cite>{{ section.settings.tx_the_guardian | default: "The Guardian" }}</cite></li>
+        <li class="rd-pressquote rd-reveal"><p>{{ section.settings.tx_a_really_really_comfortable | default: "A really, really comfortable ride &mdash; smooth but not too flexy." }}</p><cite>{{ section.settings.tx_kate_rawles_bikeradar | default: "Kate Rawles &middot; BikeRadar" }}</cite></li>
+      </ul>
+      {% render 'bbc-video-lightbox' %}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- IMPACT FEATURE ---------- {%- endcomment -%}
+  <section class="rd-split rd-dark">
+    <div class="rd-reveal rd-media rd-dimwrap">
+      <span class="rd-dim-callout">{{ section.settings.fab_impact_callout | default: 'cohort · frames ride home' }}</span>
+      {%- if section.settings.impact_band_image != blank -%}
+        <img src="{{ section.settings.impact_band_image | image_url: width: 1400 }}" srcset="{{ section.settings.impact_band_image | image_url: width: 600 }} 600w, {{ section.settings.impact_band_image | image_url: width: 900 }} 900w, {{ section.settings.impact_band_image | image_url: width: 1400 }} 1400w, {{ section.settings.impact_band_image | image_url: width: 1800 }} 1800w" sizes="(max-width:749px) 100vw, 50vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="{{ section.settings.impact_band_image.width }}" height="{{ section.settings.impact_band_image.height }}" loading="lazy">
+      {%- else -%}
+        {%- if section.settings.impact_band_image != blank -%}<img src="{{ section.settings.impact_band_image | image_url: width: 900 }}" srcset="{{ section.settings.impact_band_image | image_url: width: 400 }} 400w, {{ section.settings.impact_band_image | image_url: width: 600 }} 600w, {{ section.settings.impact_band_image | image_url: width: 900 }} 900w, {{ section.settings.impact_band_image | image_url: width: 1400 }} 1400w" sizes="(max-width:749px) 92vw, 42vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="{{ section.settings.impact_band_image.width }}" height="{{ section.settings.impact_band_image.height }}">{%- else -%}<img src="{{ 'bbc-rd-cohort.jpg' | asset_img_url: '900x' }}" srcset="{{ 'bbc-rd-cohort.jpg' | asset_img_url: '400x' }} 400w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '600x' }} 600w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '900x' }} 900w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '1400x' }} 1400w" sizes="(max-width:749px) 92vw, 42vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="1400" height="933">{%- endif -%}
+      {%- endif -%}
+    </div>
+    <div class="rd-txt">
+      <span class="rd-eyebrow rd-on-dark">{{ section.settings.impact_kicker }}</span>
+      <h2 class="rd-reveal">{{ section.settings.impact_title }}</h2>
+      <p class="rd-lede rd-mt2">{{ section.settings.impact_body }}</p>
+      {%- if section.settings.impact_quote != blank -%}
+        <div class="rd-reveal rd-pull rd-mt3">
+          <p class="rd-q">{{ section.settings.impact_quote }}</p>
+          {%- if section.settings.impact_cite != blank -%}<cite>{{ section.settings.impact_cite }}</cite>{%- endif -%}
+        </div>
+      {%- endif -%}
+      <div class="rd-flex rd-mt3">
+        {%- if section.settings.impact_cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ feat_cta1 }}">{{ section.settings.impact_cta1_label }}</a>{%- endif -%}
+        {%- if section.settings.impact_cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ feat_cta2 }}">{{ section.settings.impact_cta2_label }}</a>{%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- FUNDING LOOP ----------
+    rd-steel, not rd-dark: the IMPACT FEATURE band directly above is dark, so the homepage ran two
+    dark bands back to back — PAGE-STANDARD S3. Steel rather than paper because the two bands
+    BELOW are both paper, and paper here would turn one repeat into a three-band run. Safe to
+    move: .rd-loop draws its borders with currentColor and its final step carries its own
+    lime-on-forest, so the component takes colour from whatever surface it sits on. (2026-08-04)
+  {%- endcomment -%}
+  <section class="rd-steel rd-pad-sm">
+    <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="rd-wrap">
+      <div class="rd-flex rd-between rd-gap-24">
+        <div>
+          <span class="rd-eyebrow">{{ section.settings.loop_kicker }}</span>
+          <h2 class="rd-reveal rd-mw-16ch">{{ section.settings.loop_heading }}</h2>
+        </div>
+        <p class="rd-maxw-s rd-m-0">{{ section.settings.loop_intro }}</p>
+      </div>
+      <div class="rd-loop rd-mt3">
+        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s1_big }}</div><div class="rd-sm">{{ section.settings.loop_s1_sm }}</div></div>
+        <div class="rd-arr">&rarr;</div>
+        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s2_big }}</div><div class="rd-sm">{{ section.settings.loop_s2_sm }}</div></div>
+        <div class="rd-arr">&rarr;</div>
+        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s3_big }}</div><div class="rd-sm">{{ section.settings.loop_s3_sm }}</div></div>
+      </div>
     </div>
   </section>
 
@@ -750,20 +768,87 @@
   "tag": "section",
   "class": "section bbc-home-2026-wrap",
   "settings": [
-    { "type": "image_picker", "id": "impact_band_image", "label": "Impact band image (blank = built-in cohort photo)" },
-    { "type": "header", "content": "Editability pass 2026-08-10" },
-    { "type": "text", "id": "tx_drg_n_186_1", "label": "Drg N&#186;1", "default": "Drg N&#186;1" },
-    { "type": "text", "id": "tx_est_2012", "label": "Est. 2012", "default": "Est. 2012" },
-    { "type": "text", "id": "tx_hand_built_bamboo_lugged_by", "label": "Hand-built bamboo &middot; lugged by", "default": "Hand-built bamboo &middot; lugged by hand" },
-    { "type": "text", "id": "tx_bamboo_bicycle_club_est_2012", "label": "Bamboo Bicycle Club &middot; Est. 20", "default": "Bamboo Bicycle Club &middot; Est. 2012 &middot; London" },
-    { "type": "text", "id": "tx_proven_on_the_road", "label": "Proven on the road", "default": "Proven on the road" },
-    { "type": "text", "id": "tx_bamboo_soaks_up_the_road_rid", "label": "bamboo soaks up the road \u2014 riders an", "default": "bamboo soaks up the road \u2014 riders and reviewers agree." },
-    { "type": "textarea", "id": "tx_not_just_our_word_national_p", "label": "Not just our word. National press, p", "default": "Not just our word. National press, pro reviewers and ten-year riders all land on the same thing: it rides beautifully." },
-    { "type": "text", "id": "tx_bamboo_naturally_dampens_vib", "label": "Bamboo naturally dampens vibration, ", "default": "Bamboo naturally dampens vibration, allowing the smoothest ride." },
-    { "type": "text", "id": "tx_the_guardian", "label": "The Guardian", "default": "The Guardian" },
-    { "type": "text", "id": "tx_a_really_really_comfortable", "label": "A really, really comfortable ride &m", "default": "A really, really comfortable ride &mdash; smooth but not too flexy." },
-    { "type": "text", "id": "tx_kate_rawles_bikeradar", "label": "Kate Rawles &middot; BikeRadar", "default": "Kate Rawles &middot; BikeRadar" },
-    { "type": "text", "id": "why_stat_src", "label": "Why-band stat source line", "default": "BBC training & customer records" },
+    {
+      "type": "image_picker",
+      "id": "impact_band_image",
+      "label": "Impact band image (blank = built-in cohort photo)"
+    },
+    {
+      "type": "header",
+      "content": "Editability pass 2026-08-10"
+    },
+    {
+      "type": "text",
+      "id": "tx_drg_n_186_1",
+      "label": "Drg N&#186;1",
+      "default": "Drg N&#186;1"
+    },
+    {
+      "type": "text",
+      "id": "tx_est_2012",
+      "label": "Est. 2012",
+      "default": "Est. 2012"
+    },
+    {
+      "type": "text",
+      "id": "tx_hand_built_bamboo_lugged_by",
+      "label": "Hand-built bamboo &middot; lugged by",
+      "default": "Hand-built bamboo &middot; lugged by hand"
+    },
+    {
+      "type": "text",
+      "id": "tx_bamboo_bicycle_club_est_2012",
+      "label": "Bamboo Bicycle Club &middot; Est. 20",
+      "default": "Bamboo Bicycle Club &middot; Est. 2012 &middot; London"
+    },
+    {
+      "type": "text",
+      "id": "tx_proven_on_the_road",
+      "label": "Proven on the road",
+      "default": "Proven on the road"
+    },
+    {
+      "type": "text",
+      "id": "tx_bamboo_soaks_up_the_road_rid",
+      "label": "bamboo soaks up the road — riders an",
+      "default": "bamboo soaks up the road — riders and reviewers agree."
+    },
+    {
+      "type": "textarea",
+      "id": "tx_not_just_our_word_national_p",
+      "label": "Not just our word. National press, p",
+      "default": "Not just our word. National press, pro reviewers and ten-year riders all land on the same thing: it rides beautifully."
+    },
+    {
+      "type": "text",
+      "id": "tx_bamboo_naturally_dampens_vib",
+      "label": "Bamboo naturally dampens vibration, ",
+      "default": "Bamboo naturally dampens vibration, allowing the smoothest ride."
+    },
+    {
+      "type": "text",
+      "id": "tx_the_guardian",
+      "label": "The Guardian",
+      "default": "The Guardian"
+    },
+    {
+      "type": "text",
+      "id": "tx_a_really_really_comfortable",
+      "label": "A really, really comfortable ride &m",
+      "default": "A really, really comfortable ride &mdash; smooth but not too flexy."
+    },
+    {
+      "type": "text",
+      "id": "tx_kate_rawles_bikeradar",
+      "label": "Kate Rawles &middot; BikeRadar",
+      "default": "Kate Rawles &middot; BikeRadar"
+    },
+    {
+      "type": "text",
+      "id": "why_stat_src",
+      "label": "Why-band stat source line",
+      "default": "BBC training & customer records"
+    },
     {
       "type": "header",
       "content": "Hero"
@@ -836,16 +921,64 @@
       "label": "Secondary CTA label",
       "default": "See our impact"
     },
-    { "type": "header", "content": "Hero proof row" },
-    { "type": "checkbox", "id": "hero_proof_on", "label": "Show proof figures in hero", "default": true },
-    { "type": "text", "id": "hero_proof1_num", "label": "Figure 1", "default": "4,000+" },
-    { "type": "text", "id": "hero_sticker", "label": "Photo sticker (blank = off)", "default": "hand-built bamboo · lugged by hand" },
-    { "type": "text", "id": "hero_proof1_label", "label": "Figure 1 label", "default": "people trained" },
-    { "type": "text", "id": "hero_proof2_num", "label": "Figure 2", "default": "45" },
-    { "type": "text", "id": "hero_proof2_label", "label": "Figure 2 label", "default": "countries" },
-    { "type": "text", "id": "hero_proof3_num", "label": "Figure 3", "default": "2012" },
-    { "type": "text", "id": "hero_proof3_label", "label": "Figure 3 label", "default": "building since" },
-    { "type": "text", "id": "hero_proof_src", "label": "Stats source line (Law 6)", "default": "BBC training & customer records" },
+    {
+      "type": "header",
+      "content": "Hero proof row"
+    },
+    {
+      "type": "checkbox",
+      "id": "hero_proof_on",
+      "label": "Show proof figures in hero",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "hero_proof1_num",
+      "label": "Figure 1",
+      "default": "4,000+"
+    },
+    {
+      "type": "text",
+      "id": "hero_sticker",
+      "label": "Photo sticker (blank = off)",
+      "default": "hand-built bamboo · lugged by hand"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof1_label",
+      "label": "Figure 1 label",
+      "default": "people trained"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof2_num",
+      "label": "Figure 2",
+      "default": "45"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof2_label",
+      "label": "Figure 2 label",
+      "default": "countries"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof3_num",
+      "label": "Figure 3",
+      "default": "2012"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof3_label",
+      "label": "Figure 3 label",
+      "default": "building since"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof_src",
+      "label": "Stats source line (Law 6)",
+      "default": "BBC training & customer records"
+    },
     {
       "type": "url",
       "id": "hero_cta2_url",
@@ -1460,6 +1593,78 @@
       "type": "video",
       "id": "why_card3_video_file",
       "label": "Or upload a video (plays inline)"
+    },
+    {
+      "type": "checkbox",
+      "id": "fab_titleblock",
+      "label": "Hero titleblock",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "fab_tb_k1",
+      "label": "Titleblock row 1 label",
+      "default": "drawing"
+    },
+    {
+      "type": "text",
+      "id": "fab_tb_v1",
+      "label": "Titleblock row 1 value",
+      "default": "№ 1 — the club"
+    },
+    {
+      "type": "text",
+      "id": "fab_tb_k2",
+      "label": "Titleblock row 2 label",
+      "default": "material"
+    },
+    {
+      "type": "text",
+      "id": "fab_tb_v2",
+      "label": "Titleblock row 2 value",
+      "default": "bamboo · flax · lugs"
+    },
+    {
+      "type": "text",
+      "id": "fab_tb_k3",
+      "label": "Titleblock row 3 label",
+      "default": "est."
+    },
+    {
+      "type": "text",
+      "id": "fab_tb_v3",
+      "label": "Titleblock row 3 value",
+      "default": "2012 · london"
+    },
+    {
+      "type": "text",
+      "id": "fab_tb_k4",
+      "label": "Titleblock row 4 label",
+      "default": "drawn"
+    },
+    {
+      "type": "text",
+      "id": "fab_tb_v4",
+      "label": "Titleblock row 4 value",
+      "default": "by hand"
+    },
+    {
+      "type": "text",
+      "id": "fab_why_spec",
+      "label": "Why-bamboo spec line",
+      "default": "spec — BS ISO 22157:2019 · tensile 84.3 MPa · Swansea University"
+    },
+    {
+      "type": "text",
+      "id": "fab_kits_spec",
+      "label": "Kits spec line",
+      "default": "contents — tubes · lugs · jig · blueprint · video course"
+    },
+    {
+      "type": "text",
+      "id": "fab_impact_callout",
+      "label": "Impact image callout",
+      "default": "cohort · frames ride home"
     }
   ],
   "blocks": [
