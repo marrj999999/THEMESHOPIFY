@@ -7,19 +7,19 @@
 <div class="bbc-product-trust-bar">
   <div class="bbc-product-trust-bar__item">
     {% render 'bbc-icons', icon: 'local_shipping' %}
-    <span>Free UK Shipping</span>
+    <span>{{ settings.bbc_ptb1 | default: "Free UK Shipping" }}</span>
   </div>
   <div class="bbc-product-trust-bar__item">
     {% render 'bbc-icons', icon: 'verified' %}
-    <span>OCN Accredited</span>
+    <span>{{ settings.bbc_ptb2 | default: "OCN Accredited" }}</span>
   </div>
   <div class="bbc-product-trust-bar__item">
     {% render 'bbc-icons', icon: 'support_agent' %}
-    <span>Expert Support</span>
+    <span>{{ settings.bbc_ptb3 | default: "Expert Support" }}</span>
   </div>
   <div class="bbc-product-trust-bar__item">
     {% render 'bbc-icons', icon: 'eco' %}
-    <span>50% Less CO₂</span>
+    <span>{{ settings.bbc_ptb4 | default: "50% Less CO₂" }}</span>
   </div>
 </div>
 

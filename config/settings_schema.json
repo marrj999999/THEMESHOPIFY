@@ -1451,5 +1451,280 @@
         "default": "scheme-1"
       }
     ]
+  },
+  {
+    "name": "BBC standing text",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Trust bar"
+      },
+      {
+        "type": "text",
+        "id": "bbc_tb_stat1",
+        "label": "Stat 1",
+        "default": "4,000+"
+      },
+      {
+        "type": "text",
+        "id": "bbc_tb_lbl1",
+        "label": "Label 1",
+        "default": "Bikes Built"
+      },
+      {
+        "type": "text",
+        "id": "bbc_tb_stat2",
+        "label": "Stat 2",
+        "default": "45"
+      },
+      {
+        "type": "text",
+        "id": "bbc_tb_lbl2",
+        "label": "Label 2",
+        "default": "Countries"
+      },
+      {
+        "type": "text",
+        "id": "bbc_tb_stat3",
+        "label": "Stat 3",
+        "default": "Since 2012"
+      },
+      {
+        "type": "text",
+        "id": "bbc_tb_lbl3",
+        "label": "Label 3",
+        "default": "Established"
+      },
+      {
+        "type": "text",
+        "id": "bbc_tb_lbl4",
+        "label": "Label 4",
+        "default": "cohort to cohort"
+      },
+      {
+        "type": "header",
+        "content": "Trust badges"
+      },
+      {
+        "type": "text",
+        "id": "bbc_bdg1",
+        "label": "Badge 1",
+        "default": "Free UK Shipping"
+      },
+      {
+        "type": "text",
+        "id": "bbc_bdg2",
+        "label": "Badge 2",
+        "default": "OCN Accredited"
+      },
+      {
+        "type": "text",
+        "id": "bbc_bdg3",
+        "label": "Badge 3",
+        "default": "14-Day Returns"
+      },
+      {
+        "type": "text",
+        "id": "bbc_bdg4",
+        "label": "Badge 4",
+        "default": "50% Less CO₂"
+      },
+      {
+        "type": "header",
+        "content": "Product trust bar"
+      },
+      {
+        "type": "text",
+        "id": "bbc_ptb1",
+        "label": "Item 1",
+        "default": "Free UK Shipping"
+      },
+      {
+        "type": "text",
+        "id": "bbc_ptb2",
+        "label": "Item 2",
+        "default": "OCN Accredited"
+      },
+      {
+        "type": "text",
+        "id": "bbc_ptb3",
+        "label": "Item 3",
+        "default": "Expert Support"
+      },
+      {
+        "type": "text",
+        "id": "bbc_ptb4",
+        "label": "Item 4",
+        "default": "50% Less CO₂"
+      },
+      {
+        "type": "header",
+        "content": "Stats bar labels"
+      },
+      {
+        "type": "text",
+        "id": "bbc_sb_lbl1",
+        "label": "Label 1",
+        "default": "bikes built"
+      },
+      {
+        "type": "text",
+        "id": "bbc_sb_lbl2",
+        "label": "Label 2",
+        "default": "Since 2012"
+      },
+      {
+        "type": "text",
+        "id": "bbc_sb_lbl3",
+        "label": "Label 3",
+        "default": "course completion"
+      },
+      {
+        "type": "header",
+        "content": "Misc"
+      },
+      {
+        "type": "text",
+        "id": "bbc_press_label",
+        "label": "Press logos label",
+        "default": "As Featured In"
+      },
+      {
+        "type": "text",
+        "id": "bbc_nospam",
+        "label": "Exit popup no-spam line",
+        "default": "No spam, ever. Unsubscribe anytime."
+      },
+      {
+        "type": "text",
+        "id": "bbc_newsletter_note",
+        "label": "Newsletter note",
+        "default": "Build tips, new products & workshop dates. No spam, unsubscribe anytime."
+      },
+      {
+        "type": "header",
+        "content": "Press quotes (register-verbatim — edit with care)"
+      },
+      {
+        "type": "textarea",
+        "id": "bbc_pq1_text",
+        "label": "Quote 1"
+      },
+      {
+        "type": "text",
+        "id": "bbc_pq1_cite",
+        "label": "Quote 1 source"
+      },
+      {
+        "type": "text",
+        "id": "bbc_pq1_url",
+        "label": "Quote 1 link"
+      },
+      {
+        "type": "textarea",
+        "id": "bbc_pq2_text",
+        "label": "Quote 2"
+      },
+      {
+        "type": "text",
+        "id": "bbc_pq2_cite",
+        "label": "Quote 2 source"
+      },
+      {
+        "type": "text",
+        "id": "bbc_pq2_url",
+        "label": "Quote 2 link"
+      },
+      {
+        "type": "textarea",
+        "id": "bbc_pq3_text",
+        "label": "Quote 3"
+      },
+      {
+        "type": "text",
+        "id": "bbc_pq3_cite",
+        "label": "Quote 3 source"
+      },
+      {
+        "type": "text",
+        "id": "bbc_pq3_url",
+        "label": "Quote 3 link"
+      },
+      {
+        "type": "textarea",
+        "id": "bbc_pq4_text",
+        "label": "Quote 4"
+      },
+      {
+        "type": "text",
+        "id": "bbc_pq4_cite",
+        "label": "Quote 4 source"
+      },
+      {
+        "type": "text",
+        "id": "bbc_pq4_url",
+        "label": "Quote 4 link"
+      },
+      {
+        "type": "textarea",
+        "id": "bbc_pq5_text",
+        "label": "Quote 5"
+      },
+      {
+        "type": "text",
+        "id": "bbc_pq5_cite",
+        "label": "Quote 5 source"
+      },
+      {
+        "type": "text",
+        "id": "bbc_pq5_url",
+        "label": "Quote 5 link"
+      },
+      {
+        "type": "textarea",
+        "id": "bbc_pq6_text",
+        "label": "Quote 6"
+      },
+      {
+        "type": "text",
+        "id": "bbc_pq6_cite",
+        "label": "Quote 6 source"
+      },
+      {
+        "type": "text",
+        "id": "bbc_pq6_url",
+        "label": "Quote 6 link"
+      },
+      {
+        "type": "textarea",
+        "id": "bbc_pq7_text",
+        "label": "Quote 7"
+      },
+      {
+        "type": "text",
+        "id": "bbc_pq7_cite",
+        "label": "Quote 7 source"
+      },
+      {
+        "type": "text",
+        "id": "bbc_pq7_url",
+        "label": "Quote 7 link"
+      },
+      {
+        "type": "textarea",
+        "id": "bbc_pq8_text",
+        "label": "Quote 8"
+      },
+      {
+        "type": "text",
+        "id": "bbc_pq8_cite",
+        "label": "Quote 8 source"
+      },
+      {
+        "type": "text",
+        "id": "bbc_pq8_url",
+        "label": "Quote 8 link"
+      }
+    ]
   }
 ]

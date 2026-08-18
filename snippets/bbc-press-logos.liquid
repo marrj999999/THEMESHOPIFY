@@ -4,7 +4,7 @@
 {% endcomment %}
 
 <div class="bbc-press-logos" role="region" aria-label="Featured in media">
-  <p class="bbc-press-logos__label">As Featured In</p>
+  <p class="bbc-press-logos__label">{{ settings.bbc_press_label | default: "As Featured In" }}</p>
   <div class="bbc-press-logos__grid">
     
     {%- comment -%} Financial Times - Sep 2025 Build to Bond coverage {%- endcomment -%}

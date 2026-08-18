@@ -12,8 +12,8 @@
           <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
         </svg>
       </span>
-      <span class="bbc-trust-bar__stat">4,000+</span>
-      <span class="bbc-trust-bar__label">Bikes Built</span>
+      <span class="bbc-trust-bar__stat">{{ settings.bbc_tb_stat1 | default: "4,000+" }}</span>
+      <span class="bbc-trust-bar__label">{{ settings.bbc_tb_lbl1 | default: "Bikes Built" }}</span>
     </div>
     <div class="bbc-trust-bar__item">
       <span class="bbc-trust-bar__icon" aria-hidden="true">
@@ -23,8 +23,8 @@
           <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
         </svg>
       </span>
-      <span class="bbc-trust-bar__stat">45</span>
-      <span class="bbc-trust-bar__label">Countries</span>
+      <span class="bbc-trust-bar__stat">{{ settings.bbc_tb_stat2 | default: "45" }}</span>
+      <span class="bbc-trust-bar__label">{{ settings.bbc_tb_lbl2 | default: "Countries" }}</span>
     </div>
     <div class="bbc-trust-bar__item">
       <span class="bbc-trust-bar__icon" aria-hidden="true">
@@ -35,8 +35,8 @@
           <line x1="3" y1="10" x2="21" y2="10"/>
         </svg>
       </span>
-      <span class="bbc-trust-bar__stat">Since 2012</span>
-      <span class="bbc-trust-bar__label visually-hidden">Established</span>
+      <span class="bbc-trust-bar__stat">{{ settings.bbc_tb_stat3 | default: "Since 2012" }}</span>
+      <span class="bbc-trust-bar__label visually-hidden">{{ settings.bbc_tb_lbl3 | default: "Established" }}</span>
     </div>
     <div class="bbc-trust-bar__item">
       <span class="bbc-trust-bar__icon" aria-hidden="true">
@@ -46,7 +46,7 @@
         </svg>
       </span>
       <span class="bbc-trust-bar__stat">Reused</span>
-      <span class="bbc-trust-bar__label">cohort to cohort</span>
+      <span class="bbc-trust-bar__label">{{ settings.bbc_tb_lbl4 | default: "cohort to cohort" }}</span>
     </div>
   </div>
 </div>

@@ -15,19 +15,19 @@
 <div class="bbc-trust-badges">
   <div class="bbc-trust-badges__item">
     {%- render 'bbc-icons', icon: 'shipping' -%}
-    <span>Free UK Shipping</span>
+    <span>{{ settings.bbc_bdg1 | default: "Free UK Shipping" }}</span>
   </div>
   <div class="bbc-trust-badges__item">
     {%- render 'bbc-icons', icon: 'verified' -%}
-    <span>OCN Accredited</span>
+    <span>{{ settings.bbc_bdg2 | default: "OCN Accredited" }}</span>
   </div>
   <div class="bbc-trust-badges__item">
     {%- render 'bbc-icons', icon: 'shield' -%}
-    <span>14-Day Returns</span>
+    <span>{{ settings.bbc_bdg3 | default: "14-Day Returns" }}</span>
   </div>
   <div class="bbc-trust-badges__item">
     {%- render 'bbc-icons', icon: 'leaf' -%}
-    <span>50% Less CO₂</span>
+    <span>{{ settings.bbc_bdg4 | default: "50% Less CO₂" }}</span>
   </div>
 </div>
 

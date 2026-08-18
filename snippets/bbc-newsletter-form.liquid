@@ -49,9 +49,7 @@
     </button>
   </div>
   
-  <p id="bbc-newsletter-hint" class="bbc-newsletter__hint">
-    Build tips, new products &amp; workshop dates. No spam, unsubscribe anytime.
-  </p>
+  <p id="bbc-newsletter-hint" class="bbc-newsletter__hint">{{ settings.bbc_newsletter_note | default: "Build tips, new products &amp; workshop dates. No spam, unsubscribe anytime." }}</p>
 </form>
 
 <style>
