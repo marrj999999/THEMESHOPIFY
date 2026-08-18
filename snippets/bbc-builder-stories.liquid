@@ -43,7 +43,7 @@
   <div class="bbc-rd bbc-rd-builderstories">
     <section class="rd-section rd-pad-sm rd-paper">
       <div class="rd-wrap">
-        <span class="rd-eyebrow">Real builds</span>
+        <span class="rd-eyebrow">{{ settings.bbc_stories_heading | default: "Real builds" }}</span>
         <h2 class="rd-mw-22ch">{{ section.settings.stories_heading | default: 'Built by people like you' }}</h2>
         <div class="rd-grid rd-g3 rd-mt3">
           {%- for title in st_titles -%}
