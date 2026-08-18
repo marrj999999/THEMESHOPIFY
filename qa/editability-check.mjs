@@ -9,6 +9,10 @@
 // setting exists) and are not flagged. Run: npm run check:editability
 import { readFileSync, readdirSync, writeFileSync, mkdirSync } from 'fs';
 
+// 2026-08-18 (James in the editor: "lots of hard coded parts"): the scan was
+// sections-only and missed snippets + rendering legacy sections entirely.
+// Now covers every surface templates actually render. 57 real strings found
+// on first honest run — queue in the vault workstream.
 const SECTIONS_DIR = 'sections';
 // the estate's rendering sections (2026 system + live legacy renderers)
 const ESTATE = readdirSync(SECTIONS_DIR).filter((f) =>
