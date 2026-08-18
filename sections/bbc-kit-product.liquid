@@ -1,0 +1,359 @@
+{%- comment -%}
+  BBC Custom Theme 2026 — KIT PRODUCT (BUY BOX). Standalone main-product section.
+
+  This is the COMMERCE section: breadcrumb + media gallery + buy box (title, badge,
+  subtitle, rating, price, stock line, variant picker, quantity, add-to-cart /
+  buy-buttons, mission line, perks). The buy-box markup is carried over VERBATIM from
+  the live monolith sections/bbc-product-2026.liquid so the existing behaviour keeps
+  working unchanged:
+
+    - native, JS-free  {% form 'product', product, id: 'bbc-buy-form' %}
+    - radio variant picker  <input type="radio" name="id" value="{{ v.id }}">
+    - quantity  <input type="number" name="quantity">
+    - submit  <button type="submit" name="add">
+    - optional dynamic-checkout buy buttons  {{ form | payment_button }}
+    - gallery main image  id="bbc-rd-main-img"  + thumbnails  id="bbc-rd-thumbs"
+    - sticky buy bar  id="bbc-rd-stickybar"  anchoring to  #bbc-buy-form
+    - the inline progressive-enhancement script (thumbnails + sticky bar)
+
+  The CONTENT regions that used to live below the buy box in the monolith
+  (needs / specs / steps / why-bamboo / in-kit / reviews / stats / geometry / faq /
+  related / highlights / funding loop / video) are NOT here — they are rebuilt from
+  the theme-block library in the product template (templates/product.kit-*.json).
+
+  Buy-box copy (badge, subtitle, rating, stock line, mission line, perks) is
+  settings-driven; perks are the only blocks ({type:perk} + {type:@app} for review apps).
+  The product form itself is intentionally NOT decomposed into blocks.
+{%- endcomment -%}
+
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign crumb_home  = section.settings.crumb_home_url | default: '/'
+  assign crumb_kits  = section.settings.crumb_kits_url | default: '/collections/home-build-kits'
+  assign reviews_url = section.settings.reviews_url | default: '#bbc-rd-reviews'
+-%}
+
+<div class="bbc-rd bbc-rd-product">
+  <div class="rd-buildline" aria-hidden="true"></div>
+
+  {%- comment -%} ============== TOP: BREADCRUMB + GALLERY/BUYBOX ============== {%- endcomment -%}
+  {%- if product -%}
+    {%- assign cv = product.selected_or_first_available_variant -%}
+    <section class="rd-section rd-pad-sm">
+      <div class="rd-wrap">
+
+        <nav class="rd-crumb rd-cmp-61169" aria-label="Breadcrumb">
+          <a class="rd-c-subtle-o1" href="{{ crumb_home }}">Home</a>
+          <span class="rd-sep">/</span>
+          <a class="rd-c-subtle-o1" href="{{ crumb_kits }}">Frame Kits</a>
+          <span class="rd-sep">/</span>
+          <span class="rd-here rd-c-ink">{{ product.title }}</span>
+        </nav>
+
+        <div class="rd-grid rd-cmp-45496">
+
+          {%- comment -%} ---------- GALLERY ---------- {%- endcomment -%}
+          <div>
+            <div class="rd-cmp-22077">
+              {%- if product.featured_image -%}
+                <img class="rd-img-cover" id="bbc-rd-main-img"
+                     src="{{ product.featured_image | image_url: width: 1200 }}"
+                     srcset="{{ product.featured_image | image_url: width: 400 }} 400w, {{ product.featured_image | image_url: width: 600 }} 600w, {{ product.featured_image | image_url: width: 800 }} 800w, {{ product.featured_image | image_url: width: 1200 }} 1200w, {{ product.featured_image | image_url: width: 1600 }} 1600w"
+                     sizes="(min-width: 750px) 50vw, 100vw"
+                     alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                     width="{{ product.featured_image.width }}"
+                     height="{{ product.featured_image.height }}"
+                     fetchpriority="high" loading="eager">
+              {%- else -%}
+                <img class="rd-img-cover" id="bbc-rd-main-img"
+                     src="{{ section.settings.gallery_fallback | default: 'bbc-rd-prod-gravel.jpg' | asset_url }}"
+                     alt="{{ product.title | escape }}"
+                     width="1000" height="1000"
+                     fetchpriority="high" loading="eager">
+              {%- endif -%}
+            </div>
+
+            {%- if product.images.size > 1 -%}
+              <div class="rd-cmp-31841" id="bbc-rd-thumbs">
+                {%- for image in product.images limit: 8 -%}
+                  <button type="button"
+                          data-bbc-src="{{ image | image_url: width: 1200 }}"
+                          aria-label="View image {{ forloop.index }}"
+                          class="rd-thumb-btn{% if forloop.first %} rd-sel{% endif %}">
+                    <img class="rd-img-cover" src="{{ image | image_url: width: 240 }}"
+                         alt="{{ image.alt | default: product.title | escape }}"
+                         width="{{ image.width }}" height="{{ image.height }}"
+                         loading="lazy">
+                  </button>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </div>
+
+          {%- comment -%} ---------- BUY BOX ---------- {%- endcomment -%}
+          <div class="rd-cmp-02745">
+            {%- if section.settings.product_badge != blank -%}
+              <span class="rd-tag rd-lime rd-mb-14px">{{ section.settings.product_badge }}</span>
+            {%- endif -%}
+
+            <h1 class="rd-cmp-62520">{{ product.title }}</h1>
+
+            {%- if section.settings.difficulty_label != blank or section.settings.build_time_label != blank -%}
+              <div class="rd-flex rd-mt-18px" style="gap:8px;flex-wrap:wrap;">
+                {%- if section.settings.difficulty_label != blank -%}<span class="rd-tag">{{ section.settings.difficulty_label }}</span>{%- endif -%}
+                {%- if section.settings.build_time_label != blank -%}<span class="rd-tag">{{ section.settings.build_time_label }}</span>{%- endif -%}
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.rating_value != blank -%}
+            <div class="rd-flex rd-cmp-08680">
+              <span class="rd-cmp-99447" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <b class="rd-fw-800">{{ section.settings.rating_value }}</b>
+              <a class="rd-cmp-53515" href="{{ reviews_url }}">· {{ section.settings.review_count }} builder reviews</a>
+            </div>
+            {%- else -%}
+            <div class="rd-flex rd-cmp-08680">
+              <a class="rd-cmp-09075" href="{{ reviews_url }}">Builder reviews &rarr;</a>
+            </div>
+            {%- endif -%}
+
+            {%- if section.settings.product_subtitle != blank -%}
+              <p class="rd-lede rd-mt-18px">{{ section.settings.product_subtitle }}</p>
+            {%- endif -%}
+
+            <div class="rd-cmp-24279">
+              <span class="rd-cmp-99566">
+                {%- if product.price_varies -%}
+                  From {{ product.price_min | money }}
+                {%- else -%}
+                  {{ cv.price | money }}
+                {%- endif -%}
+              </span>
+              {%- if cv.compare_at_price and cv.compare_at_price > cv.price -%}
+                <span class="rd-was-price">{{ cv.compare_at_price | money }}</span>
+              {%- endif -%}
+            </div>
+
+            {%- comment -%} Gate the in-stock line on real availability (was hardcoded "in stock" for everything). {%- endcomment -%}
+            {%- if product.available -%}
+              <div class="rd-flex rd-cmp-15126">
+                <span class="rd-cmp-93984"></span>
+                {{ section.settings.stock_line }}
+              </div>
+            {%- else -%}
+              <div class="rd-flex rd-cmp-15126" style="opacity:.85">
+                {{ section.settings.sold_out_line | default: 'Currently out of stock — check back soon' }}
+              </div>
+            {%- endif -%}
+
+            {%- comment -%} ---------- ADD TO CART (native {% form 'product' %}, JS-free) ---------- {%- endcomment -%}
+            {% form 'product', product, id: 'bbc-buy-form' %}
+              {%- if product.has_only_default_variant == false -%}
+                <span class="rd-frame-label rd-cmp-04367">Choose your size / option</span>
+                <div class="rd-cmp-30367">
+                  {%- for v in product.variants -%}
+                    <label class="rd-vbtn{% if v == cv %} rd-sel{% endif %}{% unless v.available %} rd-oos{% endunless %}">
+                      <input class="rd-ac-forest" type="radio" name="id" value="{{ v.id }}" {% if v == cv %}checked{% endif %} {% unless v.available %}disabled{% endunless %}>
+                      {{ v.title }}&nbsp;—&nbsp;{{ v.price | money }}
+                    </label>
+                  {%- endfor -%}
+                </div>
+              {%- else -%}
+                <input type="hidden" name="id" value="{{ cv.id }}">
+              {%- endif -%}
+
+              <span class="rd-frame-label rd-cmp-21769">Quantity</span>
+              <input class="rd-cmp-88753" type="number" name="quantity" value="1" min="1" aria-label="Quantity">
+
+              <div class="rd-flex rd-cmp-44006">
+                <button type="submit" name="add" class="rd-btn rd-lime rd-flex1-jc" {% unless product.available %}disabled{% endunless %}>
+                  {%- if product.available -%}Add to cart{%- else -%}Sold out{%- endif -%}
+                </button>
+                {%- if section.settings.secondary_label != blank -%}
+                  <a class="rd-btn rd-ghost" href="{{ section.settings.secondary_url | default: '/pages/bicycle-frame-building-workshop' }}">{{ section.settings.secondary_label }}</a>
+                {%- endif -%}
+              </div>
+
+              {%- comment -%} Dynamic-checkout (Shop Pay / express) buttons — shown only when enabled for the store. {%- endcomment -%}
+              {%- if section.settings.show_dynamic_checkout and product.available -%}
+                <div class="rd-mt-18px">{{ form | payment_button }}</div>
+              {%- endif -%}
+            {% endform %}
+
+            {%- if section.settings.reassure_line != blank -%}
+              <p class="rd-center rd-cmp-86881">{{ section.settings.reassure_line }}</p>
+            {%- endif -%}
+
+            {%- comment -%} Point-of-purchase mission line (social-value proof beside the buy button). {%- endcomment -%}
+            {%- if section.settings.mission_line != blank -%}
+              <p class="rd-product-mission">{{ section.settings.mission_line }}</p>
+            {%- endif -%}
+
+            {%- comment -%} ---------- BUILD WITH A BUDDY ---------- {%- endcomment -%}
+            {%- if section.settings.buddy_text != blank -%}
+              <div class="rd-cmp-58136">
+                <span class="rd-fw-800" aria-hidden="true">&#128101;</span>
+                <span>{{ section.settings.buddy_text }}</span>
+              </div>
+            {%- endif -%}
+
+            {%- comment -%} ---------- PERKS (blocks) ---------- {%- endcomment -%}
+            {%- assign perks = section.blocks | where: 'type', 'perk' -%}
+            {%- if perks.size > 0 -%}
+              <ul class="rd-list rd-mt-18px">
+                {%- for block in perks -%}
+                  <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+
+            {%- comment -%} ---------- APP BLOCKS (review apps etc.) ---------- {%- endcomment -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == '@app' -%}
+                <div class="rd-mt-18px" {{ block.shopify_attributes }}>{% render block %}</div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+        </div>
+      </div>
+    </section>
+  {%- else -%}
+    {%- comment -%} Non-product context (degraded): editor placeholder only. {%- endcomment -%}
+    {%- if request.design_mode -%}
+      <section class="rd-section rd-pad-sm">
+        <div class="rd-wrap rd-center">
+          <span class="rd-eyebrow">Product section</span>
+          <h2>Add this section to a product template</h2>
+          <p class="rd-lede rd-maxw rd-m-14pxauto0">The gallery and buy box render once this section is on a product page. The content below is editable now.</p>
+        </div>
+      </section>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- comment -%} ============== PRODUCT STRUCTURED DATA (JSON-LD) — no aggregateRating (ratings hidden) ============== {%- endcomment -%}
+  {%- if product -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "description": {{ product.description | strip_html | truncate: 300 | json }},
+      {%- if product.featured_image -%}"image": [{{ product.featured_image | image_url: width: 1200 | json }}],{%- endif -%}
+      "brand": { "@type": "Brand", "name": "Bamboo Bicycle Club" },
+      {%- if cv.sku != blank -%}"sku": {{ cv.sku | json }},{%- endif -%}
+      "offers": {
+        "@type": "Offer",
+        "url": {{ shop.url | append: product.url | json }},
+        "priceCurrency": {{ cart.currency.iso_code | json }},
+        "price": {{ cv.price | divided_by: 100.0 }},
+        "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
+      }
+    }
+    </script>
+    {%- comment -%} BreadcrumbList structured data (mirrors the visible breadcrumb → breadcrumb rich result) {%- endcomment -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": {{ shop.url | json }} },
+        { "@type": "ListItem", "position": 2, "name": "Frame Kits", "item": {{ shop.url | append: crumb_kits | json }} },
+        { "@type": "ListItem", "position": 3, "name": {{ product.title | json }}, "item": {{ shop.url | append: product.url | json }} }
+      ]
+    }
+    </script>
+  {%- endif -%}
+
+  {%- comment -%} ============== STICKY BUY BAR (progressive, JS-free anchor) ============== {%- endcomment -%}
+  {%- if product -%}
+    <div id="bbc-rd-stickybar" style="position:fixed; left:0; right:0; bottom:0; z-index:90; background:var(--forest); color:var(--bone); transform:translateY(110%); transition:transform .25s ease;">
+      <div class="rd-wrap rd-cmp-47707">
+        <span class="rd-fw-800">{{ product.title }}</span>
+        <span class="rd-c-lime-b">
+          {%- if product.price_varies -%}From {{ product.price_min | money }}{%- else -%}{{ cv.price | money }}{%- endif -%}
+        </span>
+        <span class="rd-ml-auto"></span>
+        <a class="rd-btn rd-lime rd-p-11px22px" href="#bbc-buy-form">Add to cart <span class="rd-arrow" aria-hidden="true">&#8594;</span></a>
+      </div>
+    </div>
+  {%- endif -%}
+
+</div>
+
+{%- comment -%}
+  Progressive enhancement only — the page is fully usable without this script:
+  thumbnails are real buttons (main image already shows), the sticky bar simply
+  stays hidden, and the form/anchors work natively. Carried over verbatim from the
+  monolith so the gallery + sticky bar behave identically.
+{%- endcomment -%}
+{%- if product -%}
+<script>
+  (function () {
+    var root = document.getElementById('bbc-rd-thumbs');
+    var main = document.getElementById('bbc-rd-main-img');
+    if (root && main) {
+      root.addEventListener('click', function (e) {
+        var btn = e.target.closest('button[data-bbc-src]');
+        if (!btn) return;
+        main.removeAttribute('srcset'); // clear responsive candidates so the chosen image wins
+        main.src = btn.getAttribute('data-bbc-src');
+        root.querySelectorAll('button').forEach(function (b) {
+          b.classList.toggle('rd-sel', b === btn);
+        });
+      });
+    }
+    var bar = document.getElementById('bbc-rd-stickybar');
+    var form = document.getElementById('bbc-buy-form');
+    if (bar && form && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          var below = en.boundingClientRect.top < 0;
+          bar.style.transform = (!en.isIntersecting && below) ? 'none' : 'translateY(110%)';
+        });
+      }, { threshold: 0 });
+      io.observe(form);
+    }
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Kit product (buy box)",
+  "tag": "section",
+  "class": "bbc-kit-product-section",
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "perk",
+      "name": "Buy-box perk",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Perk text", "default": "No power tools required — just basic hand tools" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "header", "content": "Buy box" },
+    { "type": "text", "id": "product_badge", "label": "Badge above title", "default": "Home build kit" },
+    { "type": "textarea", "id": "product_subtitle", "label": "Subtitle under title", "default": "Hand-built by you from bamboo, flax and carbon." },
+    { "type": "text", "id": "rating_value", "label": "Rating value (blank until verified)", "info": "Leave blank to hide the rating. Only fill with REAL review data — an unverified rating is a trust/legal risk." },
+    { "type": "text", "id": "review_count", "label": "Review count (blank until verified)", "info": "Shown next to the rating; leave blank until you have real numbers." },
+    { "type": "text", "id": "stock_line", "label": "In-stock / shipping line", "default": "In stock — ships ~twice a week from our London workshop, fully tracked." },
+    { "type": "text", "id": "difficulty_label", "label": "Difficulty chip", "default": "Beginner-friendly · no experience needed" },
+    { "type": "text", "id": "build_time_label", "label": "Build-time chip", "default": "~25–45 hrs · a few weekends" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary button label", "default": "Prefer a workshop?" },
+    { "type": "url", "id": "secondary_url", "label": "Secondary button link" },
+    { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show dynamic checkout (Shop Pay) buttons", "default": true },
+    { "type": "text", "id": "reassure_line", "label": "Reassurance line under buttons", "default": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks" },
+    { "type": "textarea", "id": "mission_line", "label": "Mission line (social-value proof)", "default": "Build your own — and help fund a place on our Build to Bond prison programme. Profits fund accredited skills courses inside prisons and schools." },
+    { "type": "textarea", "id": "buddy_text", "label": "Build-with-a-buddy offer", "default": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories." },
+    { "type": "image_picker", "id": "gallery_fallback", "label": "Gallery fallback image", "info": "Used only when the product has no images." },
+    { "type": "header", "content": "Breadcrumb & links" },
+    { "type": "url", "id": "crumb_home_url", "label": "Breadcrumb: Home link" },
+    { "type": "url", "id": "crumb_kits_url", "label": "Breadcrumb: Frame Kits link" },
+    { "type": "url", "id": "reviews_url", "label": "Rating link target" }
+  ]
+}
+{% endschema %}

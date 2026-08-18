@@ -1,0 +1,105 @@
+{%- comment -%}
+  BBC Frame-geometry SECTION — sizing/geometry table.
+  Renders the header band + the geometry <table> with editable size-column
+  headers (up to 4); the measurement rows are bbc-geometry-row theme blocks via
+  {% content_for 'blocks' %}. Reproduces the bbc-product-geometry table look
+  (forest header row, zebra rows). Wrapped in .bbc-rd so the .rd-* header-band
+  classes (eyebrow / h2 / lede) apply; the .bbc-geo-table styles are local.
+{%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg = section.settings.background | default: 'paper'
+  if bg == 'dark'
+    assign bg_cls = 'rd-dark'
+  elsif bg == 'steel'
+    assign bg_cls = 'rd-steel'
+  else
+    assign bg_cls = 'rd-paper'
+  endif
+-%}
+
+<div class="bbc-rd">
+  <section class="rd-pad {{ bg_cls }}">
+    <div class="rd-wrap">
+      {%- if section.settings.kicker != blank -%}
+        <span class="rd-eyebrow{% if bg == 'dark' %} rd-on-dark{% endif %}">{{ section.settings.kicker }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.lede != blank -%}<p class="rd-lede rd-maxw rd-mt2">{{ section.settings.lede }}</p>{%- endif -%}
+
+      <div class="bbc-geo-tablewrap rd-mt3">
+        <table class="bbc-geo-table">
+          <thead>
+            <tr>
+              <th scope="col">{{ section.settings.col_label }}</th>
+              {%- if section.settings.size1 != blank -%}<th scope="col">{{ section.settings.size1 }}</th>{%- endif -%}
+              {%- if section.settings.size2 != blank -%}<th scope="col">{{ section.settings.size2 }}</th>{%- endif -%}
+              {%- if section.settings.size3 != blank -%}<th scope="col">{{ section.settings.size3 }}</th>{%- endif -%}
+              {%- if section.settings.size4 != blank -%}<th scope="col">{{ section.settings.size4 }}</th>{%- endif -%}
+            </tr>
+          </thead>
+          <tbody>
+            {% content_for 'blocks' %}
+          </tbody>
+        </table>
+      </div>
+
+      {%- if section.settings.note != blank -%}
+        <p class="rd-src rd-mt2">{{ section.settings.note }}</p>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% stylesheet %}
+  .bbc-rd .bbc-geo-tablewrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:thin; }
+  .bbc-rd .bbc-geo-table{ width:100%; border-collapse:collapse; font-family:inherit; }
+  .bbc-rd .bbc-geo-table thead th{ background:var(--forest,#073e27); color:#fff; font-weight:700; font-size:11px; letter-spacing:.05em; text-transform:uppercase; padding:11px 14px; text-align:left; white-space:nowrap; }
+  .bbc-rd .bbc-geo-table thead th:first-child{ border-radius:8px 0 0 0; }
+  .bbc-rd .bbc-geo-table thead th:last-child{ border-radius:0 8px 0 0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Frame geometry",
+  "tag": "section",
+  "class": "bbc-geometry-wrap",
+  "blocks": [{ "type": "@theme" }],
+  "settings": [
+    {
+      "type": "select", "id": "background", "label": "Background", "default": "paper",
+      "options": [
+        { "value": "paper", "label": "Paper (light)" },
+        { "value": "steel", "label": "Steel (grey-blue)" },
+        { "value": "dark", "label": "Dark (forest green)" }
+      ]
+    },
+    { "type": "header", "content": "Header band" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Find your fit" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frame geometry" },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "All measurements in centimetres. Your frame's size is set on the jig you build on — pick the size that matches your fit." },
+    { "type": "header", "content": "Size column headers (leave blank to hide)" },
+    { "type": "text", "id": "col_label", "label": "First column header", "default": "Measurement" },
+    { "type": "text", "id": "size1", "label": "Size 1 header", "default": "Small" },
+    { "type": "text", "id": "size2", "label": "Size 2 header", "default": "Medium" },
+    { "type": "text", "id": "size3", "label": "Size 3 header", "default": "Large" },
+    { "type": "text", "id": "size4", "label": "Size 4 header", "default": "XL" },
+    { "type": "header", "content": "Footnote" },
+    { "type": "text", "id": "note", "label": "Note under table", "default": "Being between sizes is normal: build the smaller one." }
+  ],
+  "presets": [
+    {
+      "name": "BBC Frame geometry",
+      "blocks": [
+        { "type": "bbc-geometry-row", "settings": { "label": "Rider height", "col1": "160-170cm", "col2": "168-178cm", "col3": "178-187cm", "col4": "185-193cm" } },
+        { "type": "bbc-geometry-row", "settings": { "label": "Seat tube (C-C)", "col1": "48cm", "col2": "52cm", "col3": "56cm", "col4": "58cm" } },
+        { "type": "bbc-geometry-row", "settings": { "label": "Top tube (effective)", "col1": "52cm", "col2": "54cm", "col3": "56cm", "col4": "58cm" } },
+        { "type": "bbc-geometry-row", "settings": { "label": "Head tube", "col1": "12cm", "col2": "14cm", "col3": "17cm", "col4": "19cm" } },
+        { "type": "bbc-geometry-row", "settings": { "label": "Stack", "col1": "54cm", "col2": "56cm", "col3": "58cm", "col4": "60cm" } },
+        { "type": "bbc-geometry-row", "settings": { "label": "Reach", "col1": "37cm", "col2": "38cm", "col3": "39cm", "col4": "40cm" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

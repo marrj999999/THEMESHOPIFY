@@ -1,139 +1,222 @@
-/* ==========================================================================
-   THE ALIGNMENT CONTRACT — loaded LAST so it settles every disagreement.
-   Contract: qa/ALIGNMENT.md · Asserted by: qa/layout-audit.mjs
+/* bbc-align.css - the ONE authority for layout alignment on the 2026 redesign.
+   Full measurements, root-cause write-ups and the list of things that LOOK like bugs but
+   are not, live in the workstream doc (BBC-SITE-AUDIT.md). Keep this file ASCII-only:
+   Shopify's theme storage is not byte-transparent for non-ASCII, so a stray box-drawing
+   character in a comment breaks checksum verification on upload. */
 
-   ONE RULE:
-     A block's BOX alignment and its TEXT alignment must agree.
-     A centred box may hold centred text. An axis-aligned box holds left text.
-     Centred text inside an off-centre box is always a defect.
+/* Base: centre the content column; narrow measures handled again further down. */
+.bbc-rd .rd-wrap,.bbc-rd .rd-mx-auto,.bbc-rd [class*=rd-cmp-]{margin-inline:auto!important}.bbc-rd .rd-wrap[class*=rd-mw-]:not(.rd-mx-auto):not(.rd-center),.bbc-rd [class*=rd-mw-]:not(.rd-mx-auto):not(.rd-center),.bbc-rd [class*=rd-cmp-]:not(.rd-mx-auto):not(.rd-center){margin-left:max(0px,calc(50% - 600px))!important;margin-right:0!important}.bbc-rd .rd-wrap,.bbc-rd [class*=rd-mw-]{text-align:left}.bbc-rd .rd-center{margin-inline:auto!important;text-align:center}.bbc-rd .rd-center p:not(.rd-lede):not(.rd-eyebrow):not(.rd-src),.bbc-rd .rd-center li{text-align:left;max-width:60ch;margin-inline:auto}.bbc-rd .rd-center .rd-src{max-width:70ch;margin-inline:auto}.bbc-rd .rd-center h1,.bbc-rd .rd-center h2,.bbc-rd .rd-center h3,.bbc-rd .rd-center .rd-lede,.bbc-rd .rd-center .rd-eyebrow,.bbc-rd .rd-trustline,.bbc-rd h1,.bbc-rd h2,.bbc-rd h3{text-wrap:balance}.bbc-rd p,.bbc-rd li{text-wrap:pretty}.bbc-rd [style*="text-align: justify"],.bbc-rd [style*="text-align:justify"],.bbc-rd .rd-justify{text-align:left!important}.bbc-wordmark{text-align:center}
 
-   This file exists because the estate had drifted into holding BOTH positions at
-   once. An earlier axis pass forced margin-inline:0 !important onto .rd-mx-auto
-   (a class whose name means auto margins), [class*="rd-cmp-"] and .rd-mw-820px,
-   which moved the boxes to the axis — while the text-align inside them stayed
-   centred. Result: a centred-looking column sitting 420px off-centre, on nine
-   bands across eight pages.
+/* .rd-center did not centre: bbc-statement.css re-forces LEFT for .bbc-rd-home/-about/
+   -impact etc at (0,6,1)+!important and is linked 10x AFTER this file, so [class] is
+   repeated to reach (0,7,0) and win on specificity rather than order. */
+.bbc-rd .rd-center[class][class][class][class][class]{margin-inline:auto!important;text-align:center!important}
+.bbc-rd .rd-center[class][class][class][class][class] :is(h1,h2,h3,.rd-lede,.rd-eyebrow,[class*=rd-mw-]){margin-inline:auto!important;text-align:center!important}
 
-   Deliberately NOT changed: the 1200 axis (measured clean — all 10 pages, every
-   band at 40px, zero off-axis), and the footer wordmark / masthead signature.
-   ========================================================================== */
+/* 3-col grid holding only 2 cards left a dead third column. */
+@media(min-width:981px){.bbc-rd .rd-csgrid:not(.rd-csgrid-1):not(.rd-csgrid--mosaic):has(>:last-child:nth-child(2)){grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-/* ── 2 · THE 1200 CONTAINER CENTRES IN THE VIEWPORT ───────────────────────────
-   This is the page axis itself and is not in dispute. */
-.bbc-rd .rd-wrap,
-.bbc-rd .rd-mx-auto,
-.bbc-rd [class*="rd-cmp-"]{
-  margin-inline:auto !important;
+/* Section intros centre (eyebrow, heading, lede, source). Cards, grids and body prose stay
+   LEFT - centred multi-line prose is harder to read. Two-column bands (.rd-split, .bbcpl)
+   excluded: that is text beside an image. bbc-statement.css sets text-align:left DIRECTLY
+   on .bbc-rd-home h2, and a direct declaration beats an inherited one, so the headings
+   must be targeted themselves. */
+.bbc-rd section:not([class*=split]) > .rd-wrap > :is(.rd-eyebrow,h1,h2,h3,.rd-lede,.rd-stat-src,.rd-src,.rd-loop),
+.bbc-rd section:not([class*=split]) .acc-head,
+.bbc-rd section:not([class*=split]) .acc-head > *,
+.bbc-rd section:not([class*=split]) > .rd-wrap > div:has(>.rd-eyebrow):not(:has(>ul)):not(:has(>ol)):not(:has(>.rd-grid)):not(:has(>.rd-flex)):not(:has(>a)),
+.bbc-rd section:not([class*=split]) > .rd-wrap > div:has(>.rd-eyebrow):not(:has(>ul)):not(:has(>ol)):not(:has(>.rd-grid)):not(:has(>.rd-flex)):not(:has(>a)) :is(h1,h2,h3,.rd-lede){text-align:center!important;margin-inline:auto!important}
+
+/* title-left/button-right intro rows: stack and centre. 'our impact and who we support'
+   has no second child at all, so space-between left a dead right half. */
+.bbc-rd section:not([class*=split]) > .rd-wrap > .rd-flex.rd-between:has(> div > .rd-eyebrow){flex-direction:column;align-items:center;justify-content:center;gap:22px}
+.bbc-rd section:not([class*=split]) > .rd-wrap > .rd-flex.rd-between:has(> div > .rd-eyebrow) > div,
+.bbc-rd section:not([class*=split]) > .rd-wrap > .rd-flex.rd-between:has(> div > .rd-eyebrow) :is(h1,h2,h3,.rd-eyebrow,.rd-lede,.rd-src){text-align:center!important;margin-inline:auto!important}
+
+/* the funding-loop row carried margin-right:376px, so it sat 408px off centre. */
+.bbc-rd section:not([class*=split]) > .rd-wrap > .rd-loop{justify-content:center;justify-items:center}
+
+/* PAGE HEROES are <header class="rd-hero">, not <section>, so the rule above never reached
+   them. Breadcrumbs stay left (navigation chrome). .rd-heroproof/.rd-cta-row are flex, so
+   they need justify-content, not just text-align. */
+.bbc-rd .rd-hero .rd-wrap > :not(.rd-crumb),
+.bbc-rd .rd-hero .rd-wrap > h1[class*=rd-mw-]{text-align:center!important;margin-inline:auto!important}
+.bbc-rd .rd-hero .rd-wrap > .rd-heroproof,
+.bbc-rd .rd-hero .rd-wrap > .rd-cta-row,
+.bbc-rd .rd-hero .rd-wrap > .rd-flex{justify-content:center!important}
+
+/* EYEBROWS as a class. .rd-frame-label is display:inline and text-align does nothing to an
+   inline box - it must be block first. DO NOT give the lime ::before dash margin-inline:auto:
+   it computes to 0 and glues the dash to the text. */
+.bbc-rd .rd-eyebrow:not([class*=split] .rd-eyebrow),
+.bbc-rd .rd-frame-label:not([class*=split] .rd-frame-label){display:block;text-align:center!important;margin-inline:auto!important}
+
+/* .bbc-section-stack nests an intro deeper than the direct-child selector reaches; .bbcst is
+   the brand-statement band. NOT touched: .bbcpl pillars (two-column image+text). */
+.bbc-rd section:not([class*=split]) > .rd-wrap .bbc-section-stack > :is(h1,h2,h3,.rd-lede,.rd-eyebrow){text-align:center!important;margin-inline:auto!important}
+.bbc-rd .bbcst-inner,
+.bbc-rd .bbcst-inner :is(.bbcst-head,.bbcst-eyebrow,.bbcst-body,.bbcst-note,.bbcst-support){text-align:center!important;margin-inline:auto!important}
+.bbc-rd .bbcst-inner .bbcst-actions{justify-content:center!important}
+
+/* collection header markup order is eyebrow, breadcrumb, h1, lede - so a left breadcrumb sat
+   between two centred lines. Centre the breadcrumb only here. */
+.bbc-rd .rd-coll-head > .rd-crumb{display:block;text-align:center!important;justify-content:center!important}
+
+/* RESPONSIVE VERTICAL SCALE. Every hero dimension keyed off viewport WIDTH alone, so on a
+   wide but SHORT laptop 9vw resolved to 129px and pinned the h1 to its cap exactly where
+   vertical room is scarcest. Clamp both axes with min(Xvw,Yvh). Headline font-size is NOT
+   set here - bbc-universal.css owns the global type scale, so there is ONE authority. */
+.bbc-rd .ew{min-height:clamp(460px,78vh,700px)!important;min-height:clamp(460px,78svh,700px)!important}
+.bbc-rd .ew-copy{padding:clamp(26px,min(5.5vw,4.8vh),92px)!important;padding-bottom:clamp(30px,min(6vw,5.4vh),84px)!important}
+.bbc-rd .ew-eyebrow{margin-bottom:clamp(10px,1.8vh,20px)!important}
+.bbc-rd .ew-lede{margin-top:clamp(14px,2.2vh,24px)!important}
+.bbc-rd .ew-proof{margin-top:clamp(12px,2vh,22px)!important;gap:clamp(16px,2.2vw,28px)!important}
+.bbc-rd .ew-cred{margin-top:clamp(14px,2.4vh,26px)!important}
+.bbc-rd .rd-hero{min-height:clamp(360px,72vh,660px)!important;min-height:clamp(360px,72svh,660px)!important}
+.bbc-rd .rd-mh-74{min-height:clamp(360px,68vh,620px)!important;min-height:clamp(360px,68svh,620px)!important}
+.bbc-rd .rd-mh-70{min-height:clamp(340px,64vh,580px)!important;min-height:clamp(340px,64svh,580px)!important}
+.bbc-rd .rd-hero .rd-inner{padding-bottom:clamp(26px,4.6vh,64px)!important}
+.bbc-rd .rd-pad{padding-block:clamp(44px,min(6vw,8.6vh),88px)!important}
+.bbc-rd .rd-pad-sm{padding-block:clamp(32px,min(4.6vw,6.4vh),64px)!important}
+
+/* PRESS WALL. ~30 mastheads at different scales, weights and colours (the real FT asset is a
+   PORTRAIT mark on pink). ONE INK flattens every mark to a single colour - recognition comes
+   from the SHAPE of a masthead - and neutralises the FT pink without touching the file.
+   Marquee stopped: it auto-scrolled with no pause control (WCAG 2.2.2) and duplicated its
+   track in the DOM, so screen readers announced everything twice.
+   CORRECTION (2026-08-17): an earlier note here said "DO NOT add width:auto - these SVGs have
+   no intrinsic width and collapse to ZERO". That is NOT true of the current assets - they all
+   report natural dimensions (logo-ft 1054x86, roadcc 222x28, guardian 295x97, inside-time 41x11,
+   design-museum 51x30). The zero-width reading came from measuring them before they had loaded;
+   the press wall sits at y~12000 and the images are lazy. width:auto is correct and required. */
+.bbc-rd .rd-foot-press img{filter:grayscale(1) brightness(0) invert(1);opacity:.72;transition:opacity .18s ease}
+.bbc-rd .rd-foot-press img:hover{opacity:1}
+.bbc-rd .rd-foot-press{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:20px 44px}
+.bbc-rd .rd-foot-press img[src*="design-museum"]{max-height:34px}
+.bbc-rd .rd-marquee-on .rd-marquee-track{animation:none!important;transform:none!important;display:flex;flex-wrap:wrap;justify-content:center;gap:20px 44px}
+.bbc-rd .rd-marquee-on .rd-marquee-track[aria-hidden="true"]{display:none!important}
+.bbc-rd .rd-logobar.rd-marquee-on{overflow:visible!important}
+
+/* NARROW-MEASURE CENTRING - the reported "stats band doesn't align / things are not centred".
+   The FIRST rule in this file pins any narrow measure left with
+   margin-left:max(0px,calc(50% - 600px));margin-right:0, so at 1440 a .rd-mw-820px band
+   occupies 120..940 and its centred heading lands on x=530 while neighbours centre on x=720.
+   It only hit SOME bands because that rule carries :not(.rd-center) - whether a wrap escaped
+   was authoring luck, not design intent, which is why it looked random. Centre them all. */
+.bbc-rd .rd-wrap[class*=rd-mw-][class][class][class],
+.bbc-rd [class*=rd-mw-][class][class][class][class],
+.bbc-rd [class*=rd-cmp-][class][class][class][class]{margin-left:auto!important;margin-right:auto!important}
+
+/* /pages/impact carousel header. The global .rd-eyebrow rule gives every eyebrow
+   margin-inline:auto; inside this flex row those auto margins ate the free space and left the
+   label floating mid-row. Auto margins beat justify-content in flex, so zeroing the margin is
+   load-bearing. The global rule is (0,4,0) - its :not() argument is a COMPLEX selector - so a
+   plain .bbc-rd .rd-qhead .rd-eyebrow loses even with !important; hence [class][class].
+   DO NOT add order here: .rd-qhead is flex-direction:row-reverse, so DOM order (nav, label)
+   ALREADY paints label-left/controls-right, and order:-1 inverts it. Desktop only: at 375 the
+   row wraps to two lines and centres correctly. */
+@media(min-width:721px){
+  .bbc-rd .rd-qhead[class]{justify-content:space-between!important}
+  .bbc-rd .rd-qhead .rd-eyebrow[class][class]{margin-inline:0!important;text-align:left!important}
 }
 
-/* ── 2a · MEASURE BOXES SIT ON THE AXIS, THEY DO NOT CENTRE ───────────────────
-   REVERSED 2026-07-31 (James: "decide the best option for optimised website").
+/* EYEBROW/HEADING MISMATCH (found by looking, not measuring - the BLOCK was symmetric while
+   the TEXT inside it was not). Eyebrows centre via a CLASS rule at any depth; headings only
+   via STRUCTURAL rules needing a direct child of .rd-wrap. So a deeper-nested heading drifts
+   out of agreement with its own eyebrow - and it resolves OPPOSITE ways:
+     full-width intro (.bbc-rd-videoblock) -> centre the HEADING to match the eyebrow;
+     two-column block (.rd-origin, photo right) -> left-align the EYEBROW instead.
+   DO NOT centre the heading in .rd-origin: it would break the two-column editorial layout. */
+.bbc-rd .rd-origin .rd-eyebrow[class][class]{text-align:left!important;margin-inline:0!important}
+.bbc-rd section:not([class*=split]):not([class*=pillar]) .bbc-rd-videoblock > :is(h1,h2,h3,.rd-lede){text-align:center!important;margin-inline:auto!important}
 
-   This file previously forced [class*="rd-mw-"] to margin-inline:auto, i.e. a
-   narrow column centred on the page's centre line. That put its heading 190px
-   in from every other band heading at 1568 — and estate-check T2 (one text
-   axis, <=8px) failed 27 times across 7 pages because of it. Two rules I wrote
-   encoding opposite contracts; this is the resolution.
+/* .rd-trustline carries an INTRINSIC ch-based max-width rather than an rd-mw-* class, so the
+   [class*=rd-mw-] selector above never matched it and it sat at L152 with a 513px void. */
+.bbc-rd .rd-trustline[class][class]{margin-inline:auto!important}
 
-   Why the axis wins: the indent is not constant. It is (container - measure)/2,
-   so 19px at 768, 102px at 1024, 190px at 1568+. A deliberate typographic
-   device is proportional and intentional; an indent that is merely whatever
-   space is left over reads as sloppiness at 768 and as misalignment at 1568.
-   The readability benefit of a measure box is its LINE LENGTH (WCAG 1.4.8),
-   which is independent of horizontal position — so capping the measure and
-   sitting on the axis costs nothing and restores one heading edge per page.
+/* TARGET SIZE (WCAG 2.5.8 AA = 24x24; 44x44 is 2.5.5 AAA, not required).
+   Search input: bbc-accessibility.css already forces min-height:44px on inputs but its
+   selector list OMITS input[type=search], and bbc-redesign-2026.css then pins it to
+   min-height:0 for the 34px utility bar - it shipped at 124x21. DO NOT chase 44px here: the
+   bar is only 34px tall and that grows header chrome on every page. The form already
+   reserves 34px, so zeroing its block padding lets the input fill space that exists: 124x31
+   with the text midpoint unmoved at 17px. !important needed - this file is sheet 26,
+   bbc-redesign-2026.css is 38. */
+.bbc-rd .rd-util-search .rd-search[class]{padding-block:0!important;min-height:34px!important}
+.bbc-rd .rd-util-search .rd-search input[type=search]{align-self:stretch!important;height:auto!important;min-height:24px!important}
 
-   calc(50% - 600px) == (100% - 1200px)/2, resolved against the PARENT width.
-   Deliberately not 100vw: that includes the scrollbar, which would drift the
-   axis by ~7px — inside T2's 8px tolerance, but only just, and for no reason.
+/* Bare checkboxes in page-authored .rd-prose content (size-guide "Pre-Order Checklist").
+   min-width + flex:0 0 auto are load-bearing: the <li> is display:flex;flex-wrap:nowrap, so
+   at 375px flex-shrink squashed the box to 13x24. Size is all CSS can fix - those inputs have
+   no id, no <label> and no aria-label, which is a CONTENT fix in the Shopify page editor. */
+.bbc-rd .rd-prose input[type=checkbox]{width:24px;height:24px;min-width:24px;flex:0 0 auto;vertical-align:middle}
 
-   The opt-outs are load-bearing, not decoration. .rd-center and .rd-mx-auto
-   keep auto margins because their TEXT is centred too. Moving a box to the axis
-   while its text stays centred is the exact defect this whole file exists to
-   fix (see the header) — box alignment and text alignment must agree. */
-/* [class*="rd-cmp-"] added 2026-07-31. §2 above was forcing margin-inline:auto on every
-   per-component wrapper, which centred the impact page's discovery-call box 241px off the axis
-   while its text stayed left — motion-check measured the impact axis spread at 0px on 24 Jul and
-   241px after that rule landed. The .rd-center / .rd-mx-auto opt-outs are what make this safe:
-   5 of 43 cmp boxes measured estate-wide DO centre their text, and they keep auto margins. */
-.bbc-rd .rd-wrap[class*="rd-mw-"]:not(.rd-mx-auto):not(.rd-center),
-.bbc-rd [class*="rd-mw-"]:not(.rd-mx-auto):not(.rd-center),
-.bbc-rd [class*="rd-cmp-"]:not(.rd-mx-auto):not(.rd-center){
-  margin-left:max(0px, calc(50% - 600px)) !important;
-  margin-right:0 !important;
-}
+/* Skip link contrast. .rd-skip declares color:#fff at (0,1,0) but
+   a:not(.button):not(.btn):not([class*="bbc-btn"])... in bbc-unified-styles.css reaches
+   ~(0,5,1) and wins on specificity regardless of order, painting forest green on the link's
+   own dark green = 1.34:1 exactly when a keyboard user reveals it. */
+.bbc-rd .rd-skip,.rd-skip{color:#fff!important}
 
-/* ── 3 · TEXT DEFAULTS TO LEFT — SET ONCE, THEN INHERITED ─────────────────────
-   Applied at the WRAP, not on every p/li. That distinction is the whole trick.
-   The first version of this file set text-align:left on every p and li, and
-   re-centred only the DIRECT children of .rd-center — so inside a centred band
-   the heading stayed centred while a nested paragraph went left, and the audit's
-   MIXED count went UP, not down. Alignment has to cascade, or a band ends up
-   holding two of them. Set it once at the top of the subtree and let it inherit. */
-.bbc-rd .rd-wrap,
-.bbc-rd [class*="rd-mw-"]{
-  text-align:left;
-}
+/* Outlined tag on photo cards. bbc-statement.css has
+   .bbc-rd .rd-door:not(:first-of-type) .rd-tag.rd-lime{background:transparent!important;...}
+   so card 1 keeps the filled lime pill (10.65:1) and every later card gets an outlined bone
+   pill sitting straight on the photograph. The variant is deliberate and is kept, but with no
+   background its legibility depended on whichever photo was behind it. Measured by sampling
+   the decoded image pixels under each tag (object-fit:cover mapped to source, .rd-ov scrim
+   composited): "Prisons" min 3.85:1, "Schools" min 3.98:1, against 4.5. A 30% wash of the
+   scrim colour makes it photo-independent (~5.4:1) while staying an outlined pill.
+   ALTERNATIVE: drop the :not(:first-of-type) rule so every card gets the filled lime pill. */
+.bbc-rd .rd-door:not(:first-of-type) .rd-tag.rd-lime[class]{background:rgba(0,40,33,.30)!important}
 
-/* ── 4 · CENTRING IS OPT-IN, AND CENTRES THE WHOLE SUBTREE ────────────────────
-   .rd-center now means one thing everywhere: this box is centred AND everything
-   inside it is centred. It had drifted into meaning text-align:left on the home,
-   about, sharebuild and kitpicker scopes and centre elsewhere — one class, two
-   opposite meanings, which is what "the css is clashing" looked like.
-   No descendant overrides here: rule 7 (one alignment per band) outranks any
-   wish to left-align something inside a centred band. */
-.bbc-rd .rd-center{
-  margin-inline:auto !important;
-  text-align:center;
-}
+/* .acc-stats is a flex row at default justify-content:flex-start, so its three items packed hard
+   LEFT (152/358/460) under a CENTRED heading, leaving an 810px void. The container itself is
+   symmetric (L152 R152), which is exactly why the band-symmetry check passed it - that check
+   samples the wrapper, not the items inside it. Found only by looking at a screenshot.
+   justify-content:center alone fixes it: cluster inset 481/481, native 36px gap untouched.
+   Desktop only - below 721px the row wraps and already reads correctly. Homepage only. */
+@media(min-width:721px){.bbc-rd .acc-stats{justify-content:center!important}}
 
-/* ── 5 · DISPLAY COPY CENTRES; BODY COPY DOES NOT ─────────────────────────────
-   Measured across the estate: .rd-center blocks hold paragraphs from 66ch to 486ch.
-   A centred heading and a centred one-line lede read well — that is the convention.
-   A centred 486ch citation list does not: no anchor for the eye on the left, and a
-   ragged edge on both sides.
+/* PRESS WALL SIZING - fixes a real distortion and makes the band load-order-proof.
+   bbc-statement.css sets .rd-foot-press img{max-width:170px;height:34px} while
+   bbc-consistency-2026.css sets the SAME selector to {max-width:none;height:26px}. Equal
+   specificity (0,2,1), so SOURCE ORDER decides - and statement currently wins only because it is
+   loaded FIVE times, the last copy landing after consistency. The band's appearance is therefore
+   an accident of duplicate <link> tags, and it breaks the moment those are deduplicated.
 
-   So inside a centred block the DISPLAY copy (heading, eyebrow, lede) stays centred
-   and the BODY copy goes left, capped to a readable measure and centred as a BLOCK.
-   That is a hierarchy, not a mix — the earlier version of this file treated it as a
-   mix, forced every paragraph left including the short ledes, and made things worse.
-   qa/ALIGNMENT.md rule 7 was corrected to match. */
-.bbc-rd .rd-center p:not(.rd-lede):not(.rd-eyebrow):not(.rd-src),
-.bbc-rd .rd-center li{
-  text-align:left;
-  max-width:60ch;
-  margin-inline:auto;
-}
-/* sources and footnotes are short, and centring them under centred display copy
-   keeps the attribution visually attached to what it supports */
-.bbc-rd .rd-center .rd-src{ max-width:70ch; margin-inline:auto; }
+   It is also wrong today: a fixed height plus max-width:170px squashes any wide masthead.
+   Measured with the images actually loaded:
+       logo-ft   natural ratio 12.26 -> rendered 5.48  (squashed to 45% width)
+       logo-roadcc         7.93 -> 5.00  (63%)
+   Both are mastheads sourced specifically for this band, rendering visibly distorted.
 
-/* ── 8 · CENTRED COPY GETS A BALANCED RAG ─────────────────────────────────────
-   Centring is only as good as the line breaks. The workshops trust strip wrapped
-   "…public-" / "liability insured", leaving a stranded second line — the classic
-   uneven look that centring gets blamed for when the real fault is the rag.
-   text-wrap:balance evens the line lengths; text-wrap:pretty stops single-word
-   orphans on the longer body measures. Both degrade silently where unsupported. */
-.bbc-rd .rd-center h1,
-.bbc-rd .rd-center h2,
-.bbc-rd .rd-center h3,
-.bbc-rd .rd-center .rd-lede,
-.bbc-rd .rd-center .rd-eyebrow,
-.bbc-rd .rd-trustline,
-.bbc-rd h1, .bbc-rd h2, .bbc-rd h3{
-  text-wrap:balance;
-}
-.bbc-rd p, .bbc-rd li{ text-wrap:pretty; }
+   Fix: cap the HEIGHT, let width follow the aspect ratio, remove the width cap. Verified at 1440
+   with all five logos loaded - every ratio now matches natural exactly, total 933px inside a
+   1136px row. Height kept at 34px to preserve the current scale; this is not a design change,
+   only a de-distortion. (26px and 30px also verified correct if a smaller band is ever wanted.)
+   Declared here so bbc-align.css owns the press wall outright and neither statement nor
+   consistency-2026 can flip it.
+   SELECTOR NOTE: the bump must go on the WRAPPER, not the img. The press <img> elements carry NO
+   class attribute, so an earlier attempt at .rd-foot-press img[class] simply never matched and the
+   fix silently did nothing - statement's (0,2,1) !important then won on source order from its body
+   copies. .rd-foot-press[class][class] img is (0,4,1) and always matches. */
+.bbc-rd .rd-foot-press[class][class] img{max-width:none!important;width:auto!important;height:34px!important;max-height:34px!important}
 
-/* ── 6 · NEVER JUSTIFY ────────────────────────────────────────────────────────
-   No hyphenation engine on the web, so justified text opens rivers. */
-.bbc-rd [style*="text-align: justify"],
-.bbc-rd [style*="text-align:justify"],
-.bbc-rd .rd-justify{
-  text-align:left !important;
-}
+/* HOME closing-CTA band renders EMPTY. templates/index.json sets cta_kicker / cta_title /
+   cta_lede / cta1-3_label all to "", but the band is UNGUARDED in bbc-home-2026.liquid so it
+   still paints: .rd-pad is 88px 0, so 176px of dead vertical space carrying the full .rd-dark
+   gradient, and inside it an empty eyebrow span, an EMPTY <h2>, an empty <p> and an empty flex
+   row. The empty <h2> also sits in the heading outline, where a screen reader announces a
+   nameless heading (WCAG 2.4.6).
+   WHY IT IS EMPTY, not broken: the closing-CTA job is already done by the bbc-statement band
+   rendered immediately after it (lime, tall, "build bikes. build skills. build futures."), so
+   the copy was deliberately cleared to avoid two CTAs back to back. Clearing copy does not
+   remove an UNGUARDED band - it only empties the shell. Hiding is therefore the correct fix,
+   not inventing replacement copy.
+   SELF-HEALING: keyed to h2:empty, so putting cta_title back brings the band straight back with
+   no CSS change. Verified all three inner nodes are truly empty (textContent == ""), so :empty
+   matches; :has() is already used elsewhere in this file.
+   Cannot be fixed at source: bbc-home-2026.liquid is 89KB, past the single-emit round-trip
+   limit, so the show_* band-visibility patch used on the smaller pages cannot be applied here. */
+.bbc-rd-home section.rd-pad.rd-dark.rd-center:has(> .rd-wrap > h2:empty){display:none!important}
 
-/* ── the signature exceptions (rule 4: short display copy) ────────────────────
-   The footer wordmark and the masthead are deliberate centred display moments.
-   Listed explicitly so they read as decisions rather than survivors. */
-.bbc-wordmark{ text-align:center; }
+/*# sourceMappingURL=/cdn/shop/t/53/assets/bbc-align.css.map */

@@ -1,0 +1,142 @@
+/* ============================================================
+   BBC Design System — canonical stylesheet · Stage 1
+   Swiss-Brutalist Editorial · Atkinson Hyperlegible Next
+   Warm core (forest/bone/lime) + steel-blue support.
+   Loaded LAST in theme.liquid. Stage 1 = tokens + font +
+   supporting palette + inert component classes.
+   Reversible: remove this asset + its 2 lines in theme.liquid.
+   ============================================================ */
+
+/* ---- 1. TOKENS (global) ---------------------------------- */
+:root{
+  --forest:#003C32; --forest-dark:#002A23; --forest-light:#1F6655;
+  --lime:#D4FD62;   --lime-dark:#9BC02E;
+  --bone:#E6DCC8;   --paper:#F1E9D8;
+  --steel:#8DA4C1;  --steel-light:#DEE6F0; --steel-deep:#2E4763;
+  --teal:#3F8B66;   --gold:#FFA900;
+  --ink:#0E1A17; --charcoal:#2A332F; --subtle:#384540; --mist:#CFC5B0; --border:#B8AE9C;
+  --success:#2E7D53; --error:#B23A2E; --warning:#FFA900;
+  --sp-xs:8px; --sp-sm:16px; --sp-md:24px; --sp-lg:32px; --sp-xl:40px; --sp-xxl:48px; --sp-3xl:64px;
+  --fs-display:clamp(3rem,10.5vw,10.5rem); --fs-h1:clamp(42px,6.6vw,86px); --fs-h2:clamp(30px,4vw,46px);
+  --fs-h3:clamp(22px,2.4vw,30px); --fs-lede:clamp(18px,1.7vw,21px); --fs-body:18px;
+  --radius:8px; --pill:999px; --container:1180px; --stamp:4px 4px 0 var(--ink);
+  --font-ds:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,-apple-system,sans-serif;
+}
+
+/* ---- 2. FONT — Atkinson Next throughout (Stage 1 visible win) ----
+   Targeted font-family only (no size/weight changes here) so it applies
+   over the in-section sheets without altering layout. Fixes faux-bold. */
+body,
+.bbc-rd, .bbc-rd h1, .bbc-rd h2, .bbc-rd h3, .bbc-rd h4, .bbc-rd p, .bbc-rd a,
+.bbc-rd .rd-hero h1, .bbc-rd .bbcst-head, .bbc-rd .bbcpl-title,
+h1, h2, h3, h4, .rte, button, input, select, textarea{
+  font-family: var(--font-ds) !important;
+}
+
+/* ---- 3. COMPONENT CLASSES (inert until a section uses them) ----
+   These do nothing to existing markup; they're the API for staged
+   section migration in Stage 2+. Namespaced under .bbc-ds. */
+.bbc-ds{font-family:var(--font-ds);color:var(--ink);line-height:1.6}
+.bbc-ds *{box-sizing:border-box}
+.bbc-ds img{max-width:100%;display:block}
+.bbc-ds .bbc-wrap{max-width:var(--container);margin:0 auto;padding:0 var(--sp-lg)}
+.bbc-ds .eyebrow{display:block;font-weight:700;font-size:14px;letter-spacing:.02em;text-transform:lowercase;color:var(--forest);margin-bottom:var(--sp-md)}
+.bbc-ds .lede{font-size:var(--fs-lede);line-height:1.5;color:var(--charcoal);max-width:34em}
+.bbc-ds .body{font-size:var(--fs-body);max-width:36em}
+/* buttons — pill, one system */
+.bbc-ds .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:inherit;font-weight:700;font-size:15px;line-height:1;min-height:48px;padding:14px 28px;border-radius:var(--pill);border:2px solid transparent;cursor:pointer;text-decoration:none;transition:opacity .15s,background .15s,color .15s,transform .1s}
+.bbc-ds .btn:active{transform:scale(.985)}
+.bbc-ds .btn--sm{min-height:40px;padding:9px 18px;font-size:14px}
+.bbc-ds .btn--lg{min-height:56px;padding:18px 34px;font-size:17px}
+.bbc-ds .btn--primary{background:var(--forest);color:var(--bone);border-color:var(--forest)}
+.bbc-ds .btn--primary:hover{opacity:.9}
+.bbc-ds .btn--secondary{background:transparent;color:var(--forest);border-color:var(--forest)}
+.bbc-ds .btn--secondary:hover{background:var(--forest);color:var(--bone)}
+.bbc-ds .btn--text{min-height:44px;padding:10px 6px;border:none;background:none;border-radius:0;color:var(--forest)}
+.bbc-ds .on-dark .btn--primary{background:var(--lime);color:var(--forest);border-color:var(--lime)}
+.bbc-ds .on-dark .btn--secondary{background:transparent;color:var(--bone);border-color:var(--bone)}
+.bbc-ds .btn:focus-visible{outline:3px solid var(--forest);outline-offset:2px}
+.bbc-ds .on-dark .btn:focus-visible{outline-color:var(--lime)}
+/* statement block */
+.bbc-ds .statement{padding:clamp(48px,7vw,104px) 0}
+.bbc-ds .statement__head{font-weight:800;font-size:var(--fs-display);line-height:.9;letter-spacing:-.04em;text-transform:lowercase;text-wrap:balance;max-width:15ch;color:var(--forest)}
+.bbc-ds .statement .lede{margin-top:var(--sp-md)}
+.bbc-ds .statement__row{display:flex;gap:var(--sp-xl);flex-wrap:wrap;align-items:flex-end;margin-top:var(--sp-lg)}
+.bbc-ds .statement--forest{background:var(--forest)}
+.bbc-ds .statement--forest .eyebrow{color:var(--lime)}
+.bbc-ds .statement--forest .statement__head{color:var(--bone)}
+.bbc-ds .statement--forest .lede{color:var(--mist)}
+.bbc-ds .statement--steel{background:var(--steel-light)}
+.bbc-ds .stat .n{font-weight:800;font-size:var(--fs-h2);line-height:1;letter-spacing:-.02em;color:var(--forest)}
+.bbc-ds .stat .l{font-size:13px;color:var(--charcoal)}
+.bbc-ds .statement--forest .stat .n{color:var(--lime)}
+.bbc-ds .statement--forest .stat .l{color:var(--mist)}
+/* image + text block */
+.bbc-ds .block{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--ink);overflow:hidden;min-height:340px}
+.bbc-ds .block--rev .block__media{order:2}
+.bbc-ds .block__media{position:relative;background:var(--forest);min-height:300px}
+.bbc-ds .block__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bbc-ds .block__txt{padding:clamp(28px,4vw,64px);display:flex;flex-direction:column;justify-content:center;text-align:left;background:var(--paper)}
+.bbc-ds .block--forest .block__txt{background:var(--forest);color:var(--bone)}
+.bbc-ds .block--forest .block__txt .eyebrow{color:var(--lime)}
+.bbc-ds .block--steel .block__txt{background:var(--steel-light)}
+@media(max-width:820px){.bbc-ds .block{grid-template-columns:1fr}.bbc-ds .block--rev .block__media{order:0}.bbc-ds .block__media{min-height:240px}}
+/* card — stamp */
+.bbc-ds .card{background:var(--bone);border:2px solid var(--ink);border-radius:var(--radius);box-shadow:var(--stamp);padding:var(--sp-lg)}
+.bbc-ds .pill{display:inline-block;background:var(--lime);color:var(--forest);border:1.5px solid var(--ink);font-size:11.5px;font-weight:700;text-transform:lowercase;letter-spacing:.04em;padding:5px 11px;border-radius:var(--pill)}
+
+/* ============================================================
+   STAGE 2 — converge legacy buttons to ONE pill system
+   (interim overrides; source .bbc-btn removed in Stage 3)
+   ============================================================ */
+.bbc-btn,.ew-btn{
+  border-radius:var(--pill) !important; font-family:var(--font-ds) !important;
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  min-height:48px; padding:14px 28px !important; font-weight:700; border-width:2px !important;
+  transition:opacity .15s,background .15s,color .15s,transform .1s;
+}
+.bbc-btn:active,.ew-btn:active{ transform:scale(.985); }
+/* light-surface primary = forest (retire gold fill) */
+.bbc-btn--primary,.ew-btn{ background:var(--forest) !important; color:var(--bone) !important; border-color:var(--forest) !important; }
+.bbc-btn--primary:hover,.ew-btn:hover{ opacity:.9; background:var(--forest) !important; }
+.bbc-btn--secondary{ background:var(--forest) !important; color:var(--bone) !important; border-color:var(--forest) !important; }
+.bbc-btn--outline{ background:transparent !important; color:var(--forest) !important; border-color:var(--forest) !important; }
+.bbc-btn--outline:hover{ background:var(--forest) !important; color:var(--bone) !important; }
+/* dark-surface primary = lime */
+.rd-dark .bbc-btn--primary,.surface-forest .bbc-btn--primary,.bbcst-wrap.is-forest .bbc-btn--primary{
+  background:var(--lime) !important; color:var(--forest) !important; border-color:var(--lime) !important; }
+/* header/nav CTAs -> pill too (shape only; keep their forest colour) */
+.rd-nav-cta,.rd-mcta,.rd-sticky-cta{ border-radius:var(--pill) !important; }
+
+/* ============================================================
+   RESPONSIVE / MOBILE STRATEGY — built in, not bolted on
+   Fluid clamp() type already scales continuously (no jumps).
+   Breakpoints: 900 (3->2 col) · 820 (blocks/grids stack) · 600 (phone).
+   ============================================================ */
+/* phone: tighter gutters, thumb-friendly stacked full-width buttons, comfortable reading size */
+@media (max-width:600px){
+  .bbc-ds .bbc-wrap{ padding:0 20px; }
+  .bbc-ds .statement__row{ gap:16px; }
+  .bbc-ds .statement__row .btn{ width:100%; }
+  .bbc-ds .body,.bbc-ds .lede{ font-size:16px; }
+  .bbc-ds .statement__head{ font-size:clamp(2.4rem,12vw,3.6rem); }
+}
+/* touch targets stay >=48px on tablet/phone */
+@media (max-width:820px){ .bbc-ds .btn,.bbc-btn,.ew-btn{ min-height:48px; } }
+/* wide content tables scroll inside their own box — never force horizontal PAGE scroll */
+.bbc-rd table,.bbc-ds table{ display:block; max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+/* safety: media in the redesign never overflows the viewport width */
+.bbc-ds img,.bbc-ds video,.bbc-ds iframe{ max-width:100%; }
+
+/* ============================================================
+   Dawn colour-scheme greens -> canonical (interim override;
+   the real fix is settings_data.json, which is protected).
+   Legacy 7,62,39 -> canonical 0,60,50 (comma-RGB, Dawn format).
+   ============================================================ */
+.color-scheme-1,.color-scheme-2,.color-scheme-5{ --color-foreground:0,60,50 !important; }
+.color-scheme-1,.color-scheme-5{ --color-button:0,60,50 !important; --color-secondary-button-label:0,60,50 !important; }
+.color-scheme-3{ --color-background:0,60,50 !important; --color-button-label:0,60,50 !important; }
+.color-scheme-4{ --color-button-label:0,60,50 !important; }
+.color-scheme-1,.color-scheme-2,.color-scheme-4,.color-scheme-5{ --color-shadow:0,60,50 !important; }
+/* skip-to-content link sits above any scheme wrapper — repoint directly */
+.skip-to-content-link{ background:var(--forest) !important; color:var(--bone) !important; }

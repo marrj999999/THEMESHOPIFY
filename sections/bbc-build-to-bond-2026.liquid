@@ -28,6 +28,7 @@
 <div class="bbc-rd bbc-rd-b2b-page">
 
   {%- comment -%} ---------- HERO ---------- {%- endcomment -%}
+  {%- if section.settings.show_hero != false -%}
   <header class="rd-hero rd-mh-74">
     <div class="rd-bg">
       {%- if section.settings.hero_image != blank -%}
@@ -50,8 +51,10 @@
       </div>
     </div>
   </header>
+  {%- endif -%}
 
   {%- comment -%} ---------- WHAT HAPPENS IN THE WORKSHOP ---------- {%- endcomment -%}
+  {%- if section.settings.show_story != false -%}
   <section class="rd-pad">
     <div class="rd-wrap rd-mw-820px">
       {%- if section.settings.story_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.story_eyebrow }}</span>{%- endif -%}
@@ -60,8 +63,10 @@
       {%- if section.settings.story_body_2 != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.story_body_2 }}</p>{%- endif -%}
     </div>
   </section>
+  {%- endif -%}
 
   {%- comment -%} ---------- WHY IT WORKS (split, dark) — MoJ family-ties framing ---------- {%- endcomment -%}
+  {%- if section.settings.show_why != false -%}
   <section class="rd-split rd-dark">
     <div class="rd-reveal rd-media">
       {%- if section.settings.why_image != blank -%}
@@ -83,9 +88,10 @@
       {%- endif -%}
     </div>
   </section>
+  {%- endif -%}
 
   {%- comment -%} ---------- HOW IT WORKS (numbered steps) ---------- {%- endcomment -%}
-  {%- if section.settings.steps_title != blank -%}
+  {%- if section.settings.steps_title != blank and section.settings.show_steps != false -%}
   <section class="rd-pad">
     <div class="rd-wrap rd-mw-820px">
       {%- if section.settings.steps_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.steps_eyebrow }}</span>{%- endif -%}
@@ -112,6 +118,7 @@
     light, stats dark, staff quote paper. Reordered, not recoloured, so nothing styled for a dark
     surface has to change. (2026-08-04)
   {%- endcomment -%}
+  {%- if section.settings.show_stats != false -%}
   <section class="rd-pad-sm rd-dark">
     <div class="rd-wrap">
       <div class="rd-stats">
@@ -125,9 +132,10 @@
       </div>
     </div>
   </section>
+  {%- endif -%}
 
   {%- comment -%} ---------- STAFF QUOTE (paper, centred) ---------- {%- endcomment -%}
-  {%- if section.settings.staff_quote != blank -%}
+  {%- if section.settings.staff_quote != blank and section.settings.show_staff != false -%}
   <section class="rd-pad-sm rd-paper rd-center">
     <div class="rd-wrap rd-mw-680px">
       <div class="rd-reveal rd-pull rd-mx-auto">
@@ -139,7 +147,7 @@
   {%- endif -%}
 
   {%- comment -%} ---------- WHERE IT RUNS (named prison sites) ---------- {%- endcomment -%}
-  {%- if section.settings.sites_title != blank -%}
+  {%- if section.settings.sites_title != blank and section.settings.show_sites != false -%}
   <section class="rd-pad-sm rd-center">
     <div class="rd-wrap rd-mw-820px">
       {%- if section.settings.sites_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.sites_eyebrow }}</span>{%- endif -%}
@@ -152,7 +160,7 @@
   {%- endif -%}
 
   {%- comment -%} ---------- CASE STUDY CARD → full story ---------- {%- endcomment -%}
-  {%- if section.settings.cs_quote != blank -%}
+  {%- if section.settings.cs_quote != blank and section.settings.show_cs != false -%}
   <section class="rd-pad-sm">
     <div class="rd-wrap rd-mw-820px">
       {%- comment -%} THE standard card (snippets/bbc-cscard.liquid), 2026-07-31 — the featured
@@ -162,22 +170,25 @@
       {%- assign _b2b_head = section.settings.cs_heading | default: section.settings.cs_site -%}
       {%- if _b2b_head == blank -%}{%- assign _b2b_head = 'Build to Bond · HMP Lowdham Grange' -%}{%- endif -%}
       {%- assign _b2b_img = section.settings.cs_image | default: 'bbc-rd-prison-wide.jpg' -%}
+      {%- assign _b2b_kind = section.settings.cs_kind | default: 'prisons' -%}
+      {%- assign _b2b_cta = section.settings.cs_link_label | default: 'Read the full story' -%}
       <ul class="rd-csgrid" role="list">
         {%- render 'bbc-cscard',
              variant: 'featured',
-             kind: 'prisons',
+             kind: _b2b_kind,
              heading: _b2b_head,
              url: _b2b_url,
              context: section.settings.cs_blurb,
              attr: section.settings.cs_site,
              image: _b2b_img,
-             cta: 'Read the full story' -%}
+             cta: _b2b_cta -%}
       </ul>
     </div>
   </section>
   {%- endif -%}
 
   {%- comment -%} ---------- FINAL CTA (dark, centred) ---------- {%- endcomment -%}
+  {%- if section.settings.show_cta != false -%}
   <section class="rd-pad rd-dark rd-center">
     <div class="rd-wrap rd-mw-680px">
       {%- if section.settings.cta_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.cta_eyebrow }}</span>{%- endif -%}
@@ -189,6 +200,7 @@
       </div>
     </div>
   </section>
+  {%- endif -%}
 
 </div>
 
@@ -201,6 +213,12 @@
     {
       "type": "header",
       "content": "Hero"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hero",
+      "label": "Show this band",
+      "default": true
     },
     {
       "type": "image_picker",
@@ -264,6 +282,12 @@
       "content": "What happens in the workshop"
     },
     {
+      "type": "checkbox",
+      "id": "show_story",
+      "label": "Show this band",
+      "default": true
+    },
+    {
       "type": "text",
       "id": "story_eyebrow",
       "label": "Eyebrow",
@@ -290,6 +314,12 @@
     {
       "type": "header",
       "content": "Why it works (MoJ evidence framing)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_why",
+      "label": "Show this band",
+      "default": true
     },
     {
       "type": "image_picker",
@@ -350,6 +380,12 @@
       "content": "How it works (steps)"
     },
     {
+      "type": "checkbox",
+      "id": "show_steps",
+      "label": "Show this band",
+      "default": true
+    },
+    {
       "type": "text",
       "id": "steps_eyebrow",
       "label": "Eyebrow",
@@ -363,7 +399,23 @@
     },
     {
       "type": "header",
+      "content": "Stats"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show this band",
+      "default": true
+    },
+    {
+      "type": "header",
       "content": "Staff quote"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_staff",
+      "label": "Show this band",
+      "default": true
     },
     {
       "type": "textarea",
@@ -380,6 +432,12 @@
     {
       "type": "header",
       "content": "Where it runs"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sites",
+      "label": "Show this band",
+      "default": true
     },
     {
       "type": "text",
@@ -416,10 +474,17 @@
       "content": "Case study card"
     },
     {
+      "type": "checkbox",
+      "id": "show_cs",
+      "label": "Show this band",
+      "default": true
+    },
+    {
       "type": "text",
       "id": "cs_kind",
       "label": "Card tag",
-      "default": "The full story"
+      "info": "A category, not a type - e.g. prisons, schools.",
+      "default": "prisons"
     },
     {
       "type": "text",
@@ -430,7 +495,8 @@
     {
       "type": "textarea",
       "id": "cs_quote",
-      "label": "Card quote (blank to hide card)",
+      "label": "Card visibility gate - text NOT displayed",
+      "info": "This copy never appears on the page; it only gates the card (any text shows it, blank hides it). Use the Show this band checkbox above instead.",
       "default": "When one Maker received a balance-bike kit for his toddler, the workshop went quiet — then everyone wanted to build one."
     },
     {
@@ -459,6 +525,12 @@
     {
       "type": "header",
       "content": "Final CTA"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show this band",
+      "default": true
     },
     {
       "type": "text",

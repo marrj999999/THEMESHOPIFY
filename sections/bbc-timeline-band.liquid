@@ -1,0 +1,73 @@
+{%- comment -%}
+  BBC Timeline SECTION — hosts bbc-milestone theme blocks on the vertical timeline.
+  Reproduces the monolith TIMELINE markup from sections/bbc-about-2026.liquid:
+  <section class="rd-pad {bg}"> > .rd-wrap > (eyebrow + h2 + lede) + .rd-timeline rail
+  hosting the milestone blocks (each .rd-tl with a .rd-yr year + content). Header band
+  (kicker / heading / lede) follows the bbc-stat-band / bbc-feature-band pattern.
+  Background is selectable (the about-page timeline is dark). Loads
+  bbc-redesign-2026.css once and wraps in .bbc-rd so the scoped classes apply.
+{%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg = section.settings.background | default: 'dark'
+  case bg
+    when 'dark'
+      assign bg_cls = 'rd-dark'
+    when 'steel'
+      assign bg_cls = 'rd-steel'
+    else
+      assign bg_cls = 'rd-paper'
+  endcase
+
+  if bg == 'dark'
+    assign eyebrow_cls = 'rd-eyebrow rd-on-dark'
+  else
+    assign eyebrow_cls = 'rd-eyebrow'
+  endif
+-%}
+<div class="bbc-rd {{ bg_cls }}">
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      {%- if section.settings.kicker != blank -%}<span class="{{ eyebrow_cls }}">{{ section.settings.kicker }}</span>{%- endif -%}
+      {%- if section.settings.title != blank -%}<h2 class="rd-mw-18ch">{{ section.settings.title }}</h2>{%- endif -%}
+      {%- if section.settings.lede != blank -%}<p class="rd-lede rd-maxw rd-mt2">{{ section.settings.lede }}</p>{%- endif -%}
+      <div class="rd-timeline rd-mt4">
+        {% content_for 'blocks' %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "BBC Timeline",
+  "tag": "section",
+  "class": "bbc-timeline-wrap",
+  "blocks": [{ "type": "bbc-milestone" }],
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The journey" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Fourteen years, one through-line." },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "Every chapter widened who gets to build — and the mission grew out of the craft, not bolted on beside it." },
+    {
+      "type": "select", "id": "background", "label": "Background", "default": "dark",
+      "options": [
+        { "value": "paper", "label": "Paper (light)" },
+        { "value": "dark", "label": "Dark (forest green)" },
+        { "value": "steel", "label": "Steel (cool grey-blue)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Timeline",
+      "blocks": [
+        { "type": "bbc-milestone", "settings": { "year": "2012", "title": "A workshop in Hackney", "hot": false } },
+        { "type": "bbc-milestone", "settings": { "year": "2018", "title": "Kevin McCloud's Green Heroes", "hot": false } },
+        { "type": "bbc-milestone", "settings": { "year": "2024", "title": "A social enterprise is born", "hot": false } },
+        { "type": "bbc-milestone", "settings": { "year": "Now", "title": "One engine for change", "hot": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

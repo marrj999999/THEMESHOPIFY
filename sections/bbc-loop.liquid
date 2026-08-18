@@ -1,0 +1,74 @@
+{%- comment -%}
+  BBC Funding-loop SECTION — the homepage "How it works" funding-loop region.
+  Reproduces the monolith FUNDING LOOP markup (bbc-home-2026.liquid):
+    <section class="rd-dark rd-pad-sm"> > .rd-wrap >
+      .rd-flex.rd-between.rd-gap-24  (eyebrow + h2.rd-mw-16ch left, intro .rd-maxw-s.rd-m-0 right)
+      .rd-loop.rd-mt3  (steps with arrow connectors between them)
+  Hosts bbc-funding-loop blocks (each = .rd-step with .rd-big + .rd-sm) via {% content_for 'blocks' %}.
+
+  Arrows: the SHARED .rd-loop CSS lays out literal .rd-step / .rd-arr / .rd-step / .rd-arr / .rd-step
+  grid items. Because the steps here are dynamic editor blocks (rendered all-at-once), there are no
+  literal .rd-arr elements between them, so this section re-declares .rd-loop as a 3-up grid and draws
+  the connector arrows with a ::before pseudo-element on every step after the first — styled to match
+  the shared .rd-arr (21px, .7 opacity), and rotated on mobile exactly like the shared rule.
+  All other classes (.rd-step / .rd-big / .rd-sm / .rd-flex / .rd-between / .rd-gap-24 / .rd-mw-16ch /
+  .rd-maxw-s / .rd-m-0 / .rd-eyebrow / .rd-on-dark / .rd-mt3) come from bbc-redesign-2026.css.
+  Loads the CSS once and wraps in .bbc-rd so the scoped classes apply.
+{%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+<div class="bbc-rd rd-dark">
+  <section class="rd-pad-sm">
+    <div class="rd-wrap">
+      <div class="rd-flex rd-between rd-gap-24">
+        <div>
+          {%- if section.settings.kicker != blank -%}<span class="rd-eyebrow">{{ section.settings.kicker }}</span>{%- endif -%}
+          {%- if section.settings.heading != blank -%}<h2 class="rd-mw-16ch">{{ section.settings.heading }}</h2>{%- endif -%}
+        </div>
+        {%- if section.settings.intro != blank -%}<p class="rd-maxw-s rd-m-0">{{ section.settings.intro }}</p>{%- endif -%}
+      </div>
+      <div class="rd-loop bbc-loop-grid rd-mt3">
+        {% content_for 'blocks' %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% stylesheet %}
+  /* Dynamic-block variant of the shared .rd-loop: even number of grid columns isn't needed because
+     the arrows are drawn as ::before connectors, so use a clean 3-up (equal) grid. */
+  .bbc-rd .rd-loop.bbc-loop-grid{ grid-template-columns:repeat(3,1fr); }
+  .bbc-rd .rd-loop.bbc-loop-grid .rd-step{ position:relative; }
+  /* connector arrow between consecutive steps — matches the shared .rd-arr look */
+  .bbc-rd .rd-loop.bbc-loop-grid .rd-step + .rd-step::before{
+    content:"\2192"; position:absolute; top:50%; left:-1px; transform:translate(-50%,-50%);
+    font-size:21px; opacity:.7; pointer-events:none; }
+  @media(max-width:760px){
+    .bbc-rd .rd-loop.bbc-loop-grid{ grid-template-columns:1fr; }
+    .bbc-rd .rd-loop.bbc-loop-grid .rd-step + .rd-step::before{ top:-1px; left:50%; transform:translate(-50%,-50%) rotate(90deg); }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Funding loop",
+  "tag": "section",
+  "class": "bbc-loop-wrap",
+  "blocks": [{ "type": "bbc-funding-loop" }],
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "How it works" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "One craft. One engine for change." },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "We're not a bike shop with a charity attached. The workshops fund the mission — directly." }
+  ],
+  "presets": [
+    {
+      "name": "BBC Funding loop",
+      "blocks": [
+        { "type": "bbc-funding-loop", "settings": { "big": "You build", "small": "a bamboo bike · from £375" } },
+        { "type": "bbc-funding-loop", "settings": { "big": "Profits fund", "small": "accredited skills courses" } },
+        { "type": "bbc-funding-loop", "settings": { "big": "A life changes", "small": "skills · family · futures" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

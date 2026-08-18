@@ -1,0 +1,76 @@
+{%- comment -%}
+  BBC Feature band SECTION — the homepage "Why bamboo" 4-up pillar region.
+  Reproduces the monolith WHY BAMBOO markup: <section class="rd-pad wb2"> > .rd-wrap >
+  .wb2-head (eyebrow + .wb2-title + .wb2-lede) + <ul class="wb2-row"> hosting bbc-feature LIs
+  + .wb2-cta button. The .wb2-* LAYOUT classes were inline in the monolith (NOT in the shared
+  stylesheet), so they are re-declared here; bbc-feature.liquid declares the .wb2-pillar styling.
+{%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+<div class="bbc-rd bbc-rd-home">
+  <section class="rd-pad wb2" id="why-bamboo">
+    <div class="rd-wrap">
+      <div class="wb2-head wb2-center">
+        {%- if section.settings.kicker != blank -%}<span class="rd-eyebrow">{{ section.settings.kicker }}</span>{%- endif -%}
+        {%- if section.settings.title != blank -%}<h2 class="wb2-title">{{ section.settings.title }}</h2>{%- endif -%}
+        {%- if section.settings.lede != blank -%}<p class="wb2-lede">{{ section.settings.lede }}</p>{%- endif -%}
+      </div>
+      <ul class="wb2-pillars wb2-row">
+        {% content_for 'blocks' %}
+      </ul>
+      {%- if section.settings.link_label != blank -%}
+        <div class="wb2-cta wb2-center">
+          <a class="ew-btn is-lime" href="{{ section.settings.link_url | default: '/pages/why-bamboo' }}">{{ section.settings.link_label }}</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% stylesheet %}
+  .bbc-rd-home .wb2-center{ text-align:center; }
+  .bbc-rd-home .wb2-head{ max-width:680px; margin:0 auto; }
+  .bbc-rd-home .wb2-title{ font-family:var(--rd-sans),sans-serif; font-weight:800;
+    font-size:clamp(30px,4vw,46px); line-height:1.04; letter-spacing:-.02em; color:var(--forest); margin:.35em 0 0; text-wrap:balance; }
+  .bbc-rd-home .wb2-lede{ font-family:'Atkinson Hyperlegible',var(--rd-sans),sans-serif; font-size:clamp(16px,1.3vw,19px);
+    line-height:1.55; color:#3a4a40; max-width:48ch; margin:16px auto 0; }
+  .bbc-rd-home .wb2-row{ list-style:none; margin:clamp(36px,4.2vw,60px) 0 0; padding:0;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(22px,2.8vw,44px); }
+  .bbc-rd-home .wb2-cta{ margin-top:clamp(34px,4vw,52px); }
+  /* hero-style lime button (the .ew-btn is defined in the hero section; re-declare the lime variant
+     here so the CTA renders correctly even when the hero section is absent from a page) */
+  .bbc-rd-home .wb2-cta .ew-btn{ font-family:var(--rd-sans),sans-serif; display:inline-flex; align-items:center;
+    justify-content:center; gap:9px; font-weight:800; font-size:16px; line-height:1; min-height:52px; padding:0 26px;
+    border-radius:9px; border:2.5px solid var(--forest-700); text-decoration:none; cursor:pointer; transition:transform .15s, box-shadow .15s; }
+  .bbc-rd-home .wb2-cta .ew-btn.is-lime{ background:var(--lime-700); color:var(--forest); box-shadow:5px 5px 0 var(--forest-700); }
+  .bbc-rd-home .wb2-cta .ew-btn.is-lime:hover{ transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--forest-700); }
+  @media(max-width:899px){ .bbc-rd-home .wb2-row{ grid-template-columns:repeat(2,1fr); gap:38px 28px; } }
+  @media(max-width:479px){ .bbc-rd-home .wb2-row{ grid-template-columns:1fr; gap:30px; } .bbc-rd-home .wb2-cta .ew-btn{ width:100%; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Feature band",
+  "tag": "section",
+  "class": "bbc-featureband-wrap",
+  "blocks": [{ "type": "bbc-feature" }],
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Why bamboo" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Four reasons the material does the heavy lifting" },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "Bamboo is a natural composite — grown, not manufactured. It earns its place four ways." },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "See the full science & testing →" },
+    { "type": "url", "id": "link_url", "label": "Link (defaults to /pages/why-bamboo)" }
+  ],
+  "presets": [
+    {
+      "name": "BBC Feature band",
+      "blocks": [
+        { "type": "bbc-feature", "settings": { "icon": "shield", "title": "Steel strength, a tenth the weight", "body": "Tensile strength comparable to mild steel at a fraction of the weight — flex-tested to ISO standard at Swansea University." } },
+        { "type": "bbc-feature", "settings": { "icon": "bike", "title": "Rides smoother", "body": "Natural fibres soak up the road buzz that aluminium and steel pass straight to your hands." } },
+        { "type": "bbc-feature", "settings": { "icon": "tools", "title": "Anyone can build it", "body": "No mines or smelters — just bamboo, a jig and hand tools. Most builders start from scratch." } },
+        { "type": "bbc-feature", "settings": { "icon": "leaf", "title": "Greener by far", "body": "Bamboo regrows in 3–5 years — a rapidly renewable grass, grown not mined. Build it yourself and you can repair it too, so it lasts." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

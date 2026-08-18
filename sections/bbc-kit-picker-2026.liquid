@@ -7,6 +7,7 @@
 
 <div class="bbc-rd bbc-rd-kitpicker">
 
+  {%- if section.settings.show_header != false -%}
   <section class="rd-pad rd-paper">
     <div class="rd-wrap rd-mw-820px">
       <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/collections/home-build-kits">Frame kits</a><span class="rd-sep">/</span><span class="rd-here">Which kit?</span></nav>
@@ -15,8 +16,10 @@
       {%- if section.settings.lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.lede }}</p>{%- endif -%}
     </div>
   </section>
+  {%- endif -%}
 
   {%- comment -%} ---------- QUICK GUIDE CARDS ---------- {%- endcomment -%}
+  {%- if section.settings.show_picks != false -%}
   <section class="rd-pad-sm">
     <div class="rd-wrap">
       {%- if section.settings.picks_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.picks_eyebrow }}</span>{%- endif -%}
@@ -34,9 +37,10 @@
       </div>
     </div>
   </section>
+  {%- endif -%}
 
   {%- comment -%} ---------- LUGGED VS WRAPPED ---------- {%- endcomment -%}
-  {%- if section.settings.lug_title != blank -%}
+  {%- if section.settings.lug_title != blank and section.settings.show_lug != false -%}
   <section class="rd-pad rd-steel">
     <div class="rd-wrap rd-mw-820px">
       {%- if section.settings.lug_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.lug_eyebrow }}</span>{%- endif -%}
@@ -56,6 +60,7 @@
   {%- endif -%}
 
   {%- comment -%} ---------- CTA ---------- {%- endcomment -%}
+  {%- if section.settings.show_cta != false -%}
   <section class="rd-pad rd-dark rd-center">
     <div class="rd-wrap rd-mw-680px">
       {%- if section.settings.cta_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.cta_eyebrow }}</span>{%- endif -%}
@@ -67,6 +72,7 @@
       </div>
     </div>
   </section>
+  {%- endif -%}
 
 </div>
 
@@ -91,6 +97,12 @@
       "content": "Header"
     },
     {
+      "type": "checkbox",
+      "id": "show_header",
+      "label": "Show this band",
+      "default": true
+    },
+    {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow",
@@ -110,7 +122,23 @@
     },
     {
       "type": "header",
+      "content": "Kit grid"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_picks",
+      "label": "Show this band",
+      "default": true
+    },
+    {
+      "type": "header",
       "content": "Lugged vs wrapped"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_lug",
+      "label": "Show this band",
+      "default": true
     },
     {
       "type": "text",
@@ -151,6 +179,12 @@
     {
       "type": "header",
       "content": "CTA"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show this band",
+      "default": true
     },
     {
       "type": "text",

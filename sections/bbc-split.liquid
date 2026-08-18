@@ -1,0 +1,116 @@
+{%- comment -%}
+  BBC Split SECTION — image one side, content the other (reversible). Reproduces the monolith
+  IMPACT / MISSION split (bbc-home-2026.liquid):
+    <section class="rd-split rd-dark"> > .rd-media (img) + .rd-txt
+      ( .rd-eyebrow.rd-on-dark + h2 + p.rd-lede.rd-mt2
+        + .rd-pull.rd-mt3 ( p.rd-q + cite )
+        + .rd-flex.rd-mt3 ( primary .rd-btn.rd-lime + secondary .rd-btn.rd-on-dark ) )
+  Image picked via image_picker; falls back to the bundled asset the monolith used (bbc-rd-cohort.jpg)
+  with the EXACT monolith srcset/sizes/width/height. `reverse` adds .rd-rev (media to the right).
+  All classes (.rd-split / .rd-media / .rd-txt / .rd-pull / .rd-q / .rd-eyebrow / .rd-on-dark /
+  .rd-lede / .rd-flex / .rd-btn / .rd-lime / .rd-mt2 / .rd-mt3) come from bbc-redesign-2026.css.
+  Loads the CSS once and wraps in .bbc-rd so the scoped classes apply.
+{%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg = section.settings.background | default: 'dark'
+  case bg
+    when 'paper'
+      assign bg_cls = 'rd-paper'
+    when 'steel'
+      assign bg_cls = 'rd-steel'
+    else
+      assign bg_cls = 'rd-dark'
+  endcase
+  assign on_dark = false
+  if bg == 'dark'
+    assign on_dark = true
+  endif
+  assign split_cls = 'rd-split'
+  assign split_cls = split_cls | append: ' ' | append: bg_cls
+  if section.settings.reverse
+    assign split_cls = split_cls | append: ' rd-rev'
+  endif
+  assign fallback = section.settings.image_fallback | default: 'bbc-rd-cohort.jpg'
+-%}
+
+<div class="bbc-rd">
+  <section class="{{ split_cls }}">
+    <div class="rd-media">
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 1400 }}" srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1400 }} 1400w, {{ section.settings.image | image_url: width: 1800 }} 1800w" sizes="(max-width:749px) 100vw, 50vw" alt="{{ section.settings.image_alt | default: 'A bamboo bicycle frame taking shape on a build template' | escape }}" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" loading="lazy">
+      {%- else -%}
+        <img src="{{ fallback | asset_img_url: '900x' }}" srcset="{{ fallback | asset_img_url: '400x' }} 400w, {{ fallback | asset_img_url: '600x' }} 600w, {{ fallback | asset_img_url: '900x' }} 900w, {{ fallback | asset_img_url: '1400x' }} 1400w" sizes="(max-width:749px) 92vw, 42vw" alt="{{ section.settings.image_alt | default: 'A bamboo bicycle frame taking shape on a build template' | escape }}" width="1400" height="933" loading="lazy">
+      {%- endif -%}
+    </div>
+    <div class="rd-txt">
+      {%- if section.settings.kicker != blank -%}<span class="rd-eyebrow{% if on_dark %} rd-on-dark{% endif %}">{{ section.settings.kicker }}</span>{%- endif -%}
+      {%- if section.settings.title != blank -%}<h2>{{ section.settings.title }}</h2>{%- endif -%}
+      {%- comment -%} Body splits on "|" into separate paragraphs (single-paragraph text is unaffected). {%- endcomment -%}
+      {%- if section.settings.body != blank -%}
+        {%- assign paras = section.settings.body | strip | split: '|' -%}
+        {%- for p in paras -%}<p class="rd-lede rd-mt2">{{ p | strip }}</p>{%- endfor -%}
+      {%- endif -%}
+      {%- if section.settings.quote != blank -%}
+        <div class="rd-pull rd-mt3">
+          <p class="rd-q">{{ section.settings.quote }}</p>
+          {%- if section.settings.cite != blank -%}<cite>{{ section.settings.cite }}{% if section.settings.cite_context != blank %} &mdash; {{ section.settings.cite_context }}{% endif %}</cite>{%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- assign cta_style = section.settings.cta_style | default: 'solid' -%}
+      <div class="rd-flex rd-mt3">
+        {%- if section.settings.cta1_label != blank -%}
+          {%- if cta_style == 'text' -%}
+            <a class="rd-btn rd-text" href="{{ section.settings.cta1_url | default: '#' }}">{{ section.settings.cta1_label }} <span class="rd-arrow">&rarr;</span></a>
+          {%- else -%}
+            <a class="rd-btn rd-lime" href="{{ section.settings.cta1_url | default: '#' }}">{{ section.settings.cta1_label }}</a>
+          {%- endif -%}
+        {%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}<a class="rd-btn {% if on_dark %}rd-on-dark{% else %}rd-ghost{% endif %}" href="{{ section.settings.cta2_url | default: '#' }}">{{ section.settings.cta2_label }}</a>{%- endif -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "BBC Split",
+  "tag": "section",
+  "class": "bbc-split-wrap",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_fallback", "label": "Fallback asset (if no image picked)", "default": "bbc-rd-cohort.jpg" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "A bamboo bicycle frame taking shape on a build template" },
+    {
+      "type": "select", "id": "background", "label": "Background", "default": "dark",
+      "options": [
+        { "value": "dark", "label": "Dark (forest green)" },
+        { "value": "paper", "label": "Paper (light)" },
+        { "value": "steel", "label": "Steel (cool grey-blue)" }
+      ]
+    },
+    { "type": "checkbox", "id": "reverse", "label": "Image on the right", "default": false },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Our mission" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Building bikes. Building futures." },
+    { "type": "textarea", "id": "body", "label": "Body (separate paragraphs with | )", "default": "The same hands-on build runs in schools, with young people facing barriers, and inside prisons — turning making into real skills, confidence and green careers for people the system too often leaves out." },
+    { "type": "textarea", "id": "quote", "label": "Pull quote", "default": "The bike was the first thing I ever made with my own hands. When my daughter rode it on family visit day, I felt like a dad again." },
+    { "type": "text", "id": "cite", "label": "Quote attribution", "default": "— A Build to Bond maker" },
+    { "type": "text", "id": "cite_context", "label": "Quote context (appended after —)" },
+    {
+      "type": "select", "id": "cta_style", "label": "Primary CTA style", "default": "solid",
+      "options": [
+        { "value": "solid", "label": "Solid lime button" },
+        { "value": "text", "label": "Text link + arrow" }
+      ]
+    },
+    { "type": "text", "id": "cta1_label", "label": "Primary CTA label", "default": "Read the impact" },
+    { "type": "url", "id": "cta1_url", "label": "Primary CTA link" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary CTA label", "default": "Run the programme" },
+    { "type": "url", "id": "cta2_url", "label": "Secondary CTA link" }
+  ],
+  "presets": [
+    { "name": "BBC Split" }
+  ]
+}
+{% endschema %}

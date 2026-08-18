@@ -7,6 +7,7 @@
 <div class="bbc-rd bbc-rd-contact">
 
   {%- comment -%} ---------- HERO (photo banner, editable image) ---------- {%- endcomment -%}
+  {%- if section.settings.show_hero != false -%}
   <header class="rd-hero rd-mh-70">
     <div class="rd-bg">
       {%- if section.settings.hero_image != blank -%}
@@ -25,7 +26,9 @@
       </div>
     </div>
   </header>
+  {%- endif -%}
 
+  {%- if section.settings.show_form != false -%}
   <section class="rd-pad">
     <div class="rd-wrap">
 
@@ -68,6 +71,7 @@
       {%- endform -%}
     </div>
   </section>
+  {%- endif -%}
 </div>
 
 {% schema %}
@@ -75,6 +79,16 @@
   "name": "Contact 2026 (new)",
   "tag": "div",
   "settings": [
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hero",
+      "label": "Show this band",
+      "default": true
+    },
     {
       "type": "text",
       "id": "eyebrow",
@@ -116,6 +130,12 @@
     {
       "type": "header",
       "content": "Form & details"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_form",
+      "label": "Show this band (routes + contact form)",
+      "default": true
     },
     {
       "type": "text",

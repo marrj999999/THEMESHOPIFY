@@ -1,0 +1,116 @@
+{%- comment -%}
+  BBC Hero band SECTION — generic interior-page hero (Why Bamboo, and reusable for
+  any inner page). Reproduces the full-bleed hero from bbc-why-bamboo-2026.liquid and
+  the breadcrumb pattern shared by the interior pages (bbc-about-2026 etc.):
+    <header class="rd-hero"> > .rd-bg (img) + .rd-scrim + .rd-inner > .rd-wrap >
+      ( optional nav.rd-crumb > a + .rd-sep + .rd-here )
+      + span.rd-eyebrow.rd-on-dark + h1 + p.rd-lede
+      + optional .rd-cta-row ( .rd-btn.rd-lime + .rd-btn.rd-on-dark )
+  Image picked via image_picker; falls back to a bundled asset (the monolith's
+  bbc-rd-hero-ride.jpg) with the monolith's srcset/sizes. Background selectable
+  (paper/dark/steel/forest) tints the bare-green fallback behind the photo.
+  All classes (.rd-hero / .rd-bg / .rd-scrim / .rd-inner / .rd-wrap / .rd-crumb /
+  .rd-sep / .rd-here / .rd-eyebrow / .rd-on-dark / .rd-lede / .rd-cta-row /
+  .rd-btn / .rd-lime / .rd-on-dark / .rd-arrow) come from bbc-redesign-2026.css.
+  Only the slightly shorter interior-hero height is scoped below (the base .rd-hero
+  is 88vh for the homepage; interior pages run ~58vh like the monolith).
+{%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg = section.settings.background | default: 'forest'
+  case bg
+    when 'paper'
+      assign bg_cls = 'rd-paper'
+    when 'steel'
+      assign bg_cls = 'rd-steel'
+    when 'dark'
+      assign bg_cls = 'rd-dark'
+    else
+      assign bg_cls = ''
+  endcase
+  assign fallback = section.settings.fallback | default: 'bbc-rd-hero-ride.jpg'
+-%}
+
+<div class="bbc-rd bbc-hero-band {{ bg_cls }}">
+  <header class="rd-hero">
+    <div class="rd-bg">
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 2000 }}" srcset="{{ section.settings.image | image_url: width: 1200 }} 1200w, {{ section.settings.image | image_url: width: 2000 }} 2000w, {{ section.settings.image | image_url: width: 2600 }} 2600w" sizes="100vw" alt="{{ section.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" fetchpriority="high" loading="eager">
+      {%- else -%}
+        <img src="{{ fallback | asset_url }}" alt="{{ section.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="1600" height="900" fetchpriority="high" loading="eager">
+      {%- endif -%}
+    </div>
+    <div class="rd-scrim"></div>
+    <div class="rd-inner">
+      <div class="rd-wrap">
+        {%- if section.settings.breadcrumb_label != blank -%}
+          <nav class="rd-crumb" aria-label="Breadcrumb">
+            <a href="{{ section.settings.breadcrumb_url | default: '/' }}">Home</a>
+            <span class="rd-sep">/</span>
+            <span class="rd-here">{{ section.settings.breadcrumb_label }}</span>
+          </nav>
+        {%- endif -%}
+        {%- if section.settings.eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        {%- if section.settings.title != blank -%}<h1>{{ section.settings.title }}</h1>{%- endif -%}
+        {%- if section.settings.lede != blank -%}<div class="rd-lede">{{ section.settings.lede }}</div>{%- endif -%}
+        {%- if section.settings.cta1_label != blank or section.settings.cta2_label != blank -%}
+          <div class="rd-cta-row">
+            {%- if section.settings.cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ section.settings.cta1_url | default: '#' }}">{{ section.settings.cta1_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+            {%- if section.settings.cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ section.settings.cta2_url | default: '#' }}">{{ section.settings.cta2_label }}</a>{%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </header>
+</div>
+
+{% stylesheet %}
+  /* Interior-page hero: the base .rd-hero is 88vh (homepage). Inner pages sit shorter. */
+  .bbc-rd.bbc-hero-band .rd-hero{ min-height:58vh; }
+  .bbc-rd.bbc-hero-band .rd-hero .rd-bg img{ object-position:center 42%; }
+  @media (max-width:600px){
+    .bbc-rd.bbc-hero-band .rd-hero{ min-height:56vh; }
+    .bbc-rd.bbc-hero-band .rd-hero h1{ font-size:30px; line-height:1.08; letter-spacing:-.02em; max-width:18ch; }
+    .bbc-rd.bbc-hero-band .rd-hero .rd-lede{ font-size:15px; line-height:1.5; margin-top:12px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Hero band",
+  "tag": "section",
+  "class": "bbc-hero-band-wrap",
+  "settings": [
+    { "type": "header", "content": "Breadcrumb (optional)" },
+    { "type": "text", "id": "breadcrumb_label", "label": "Breadcrumb current label", "default": "Why Bamboo" },
+    { "type": "url", "id": "breadcrumb_url", "label": "Breadcrumb home link" },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why Bamboo?" },
+    { "type": "text", "id": "title", "label": "Headline", "default": "The only frame you can build by hand in a weekend" },
+    { "type": "richtext", "id": "lede", "label": "Lede" },
+    { "type": "header", "content": "Buttons (optional)" },
+    { "type": "text", "id": "cta1_label", "label": "Primary CTA label" },
+    { "type": "url", "id": "cta1_url", "label": "Primary CTA link" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary CTA label" },
+    { "type": "url", "id": "cta2_url", "label": "Secondary CTA link" },
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "text", "id": "fallback", "label": "Fallback asset (if no image picked)", "default": "bbc-rd-hero-ride.jpg" },
+    { "type": "text", "id": "image_alt", "label": "Hero image alt text", "default": "A bamboo gravel bike on a dramatic coastal clifftop" },
+    { "type": "header", "content": "Background" },
+    {
+      "type": "select", "id": "background", "label": "Background tint (behind photo)", "default": "forest",
+      "options": [
+        { "value": "forest", "label": "Forest green (default)" },
+        { "value": "paper", "label": "Paper (light)" },
+        { "value": "dark", "label": "Dark (forest green)" },
+        { "value": "steel", "label": "Steel (cool grey-blue)" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "BBC Hero band" }
+  ]
+}
+{% endschema %}
