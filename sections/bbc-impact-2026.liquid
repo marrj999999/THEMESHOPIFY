@@ -95,48 +95,17 @@
     </div>
   </header>
 
-  {%- comment -%} ---------- WAYS IN (three routes + chapter nav) ----------
-     Was the BOOK A DISCOVERY CALL band (added above the fold 2026-07-20 per Chris
-     Barrett as the page's main CTA). James removed the discovery call itself on
-     2026-08-18; the band stays as the routes strip, because the three route links and
-     the on-this-page nav live here and are the page's way in.
-     Removed with it: h2 "book a discovery call.", the lede "One short call. Tell us
-     whether it is a school, a prison, a team day or your own build, and we will point
-     you the right way.", and the lime CTA to /pages/contact-us?subject=discovery-call.
-     The `start here` eyebrow stays — it opens the band (PAGE-STANDARD S1) and still
-     describes the routes. The #book-a-call id is kept so any shared link still lands.
+  {%- comment -%} ---------- WAYS IN band — REMOVED 2026-08-18 (James) ----------
+     Was <section id="book-a-call">: the `start here` eyebrow, three route text links
+     (build or own a bike · run it in your school or prison · fund or champion, from the
+     `help` blocks) and the ON THIS PAGE chapter nav. It began life as the BOOK A DISCOVERY
+     CALL band, added above the fold 2026-07-20 per Chris Barrett as the page's main CTA;
+     the discovery call went earlier today and James then took the rest.
+     The hero now runs straight into the stats band, so the page's only asks above the
+     evidence are the hero's own two buttons.
+     The `help` blocks and the chapters/help_eyebrow settings are LEFT IN PLACE — they cost
+     nothing, they hold James's copy, and re-adding the band is then a markup-only change.
      ---------- {%- endcomment -%}
-  <section class="rd-pad rd-steel" id="book-a-call">
-    <div class="rd-wrap">
-      {%- comment -%} rd-center REMOVED 2026-07-31. This box carried .rd-center — which centres the
-         BOX — while its text computed to left, so it sat 241px off the page axis with left-aligned
-         text inside it: the exact "centred box, left text" mismatch ALIGNMENT.md exists to stop.
-         motion-check measured the impact axis spread at 0px on 24 Jul and 241px after
-         bbc-align.css began forcing margin-inline:auto on [class*="rd-cmp-"]. Fixed at the class
-         rather than in CSS: 5 of 43 cmp boxes estate-wide DO centre their text legitimately, so a
-         blanket axis rule would have broken those instead. {%- endcomment -%}
-      <div class="rd-cmp-84401">
-        {%- if section.settings.help_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.help_eyebrow }}</span>{%- endif -%}
-      </div>
-      {%- comment -%} Routes stay TEXT links, not cards or buttons. They were secondary to the
-         discovery CTA (Chris/Unbounce "one main course", restored 2026-07-24); with that CTA
-         removed they are now the band's content, and text links keep them equal — three doors,
-         no false hierarchy. The page's buttons are the hero pair above. Blocks unchanged.
-         {%- endcomment -%}
-      {%- assign helps = section.blocks | where: "type", "help" -%}
-      {%- if helps.size > 0 -%}
-      <div class="rd-helplinks rd-mt3">
-        {%- for block in helps -%}
-          {%- assign help_url = block.settings.link_url | default: '/pages/contact-us' -%}
-          <a class="rd-textlink" href="{{ help_url }}" {{ block.shopify_attributes }}>{{ block.settings.title }} <span class="rd-arrow">&rarr;</span></a>
-        {%- endfor -%}
-      </div>
-      {%- endif -%}
-      {%- if section.settings.show_chapters != false -%}
-      {%- render 'bbc-chapter-list', chapters: section.settings.chapters, label: section.settings.chapters_label -%}
-      {%- endif -%}
-    </div>
-  </section>
 
   {%- comment -%} ---------- STATS (dark) ---------- {%- endcomment -%}
   <section class="rd-pad-sm rd-dark rd-band--stats">

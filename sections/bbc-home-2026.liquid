@@ -557,7 +557,14 @@ adjacency (PAGE-STANDARD S3 kept; loop band documents its own moveability). {%- 
         <span class="rd-eyebrow">{{ section.settings.why_kicker | default: 'Built by anyone' }}</span>
         <h2 class="rd-reveal acc-title">{{ section.settings.why_title | default: 'no workshop. no welding. no experience needed.' }}</h2>
         <p class="acc-lede">{{ section.settings.why_lede | default: 'Bamboo frames go together with a few hand tools, a jig and a weekend — and most builders have never made anything before.' }}</p>
-        <p class="rd-specline">{{ section.settings.fab_why_spec | default: 'spec — BS ISO 22157:2019 · tensile 84.3 MPa · Swansea University' }}</p>
+        {%- comment -%} Spec micro-line. Gated on blank (2026-08-18): with `| default:` baked in,
+          clearing the setting in the editor did nothing — the hardcoded string rendered anyway.
+          Same gating-bug family as the impact story band. Blank now genuinely means blank.
+          James removed the BS ISO 22157 / 84.3 MPa / Swansea line from this band; the setting
+          stays so a new one can be typed in the editor. {%- endcomment -%}
+        {%- if section.settings.fab_why_spec != blank -%}
+          <p class="rd-specline">{{ section.settings.fab_why_spec }}</p>
+        {%- endif -%}
       </div>
       <ul class="acc-stats">
         <li><b>{{ section.settings.why_stat1_num | default: '4,000+' }}</b><span>{{ section.settings.why_stat1_label | default: 'people trained' }}</span></li>
@@ -598,7 +605,11 @@ adjacency (PAGE-STANDARD S3 kept; loop band documents its own moveability). {%- 
     <div class="rd-wrap">
       <div class="rd-flex rd-between rd-mb-36px">
         <div><span class="rd-eyebrow">{{ section.settings.kits_kicker }}</span><h2 class="rd-reveal">{{ section.settings.kits_title }}</h2></div>
-      <p class="rd-specline">{{ section.settings.fab_kits_spec | default: 'contents — tubes · lugs · jig · blueprint · video course' }}</p>
+        {%- comment -%} Same blank-gate as the why-bamboo spec line above — this one keeps its
+          text, but clearing it in the editor must actually clear it. {%- endcomment -%}
+        {%- if section.settings.fab_kits_spec != blank -%}
+          <p class="rd-specline">{{ section.settings.fab_kits_spec }}</p>
+        {%- endif -%}
         {%- if section.settings.kits_link_label != blank -%}<a class="rd-btn rd-ghost" href="{{ kits_url }}">{{ section.settings.kits_link_label }}</a>{%- endif -%}
       </div>
       <div class="rd-grid rd-g4 rd-stagger">
@@ -1656,8 +1667,7 @@ adjacency (PAGE-STANDARD S3 kept; loop band documents its own moveability). {%- 
     {
       "type": "text",
       "id": "fab_why_spec",
-      "label": "Why-bamboo spec line",
-      "default": "spec — BS ISO 22157:2019 · tensile 84.3 MPa · Swansea University"
+      "label": "Why-bamboo spec line (blank = hidden)"
     },
     {
       "type": "text",
