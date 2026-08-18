@@ -55,7 +55,7 @@
       <div class="rd-facts">
         <div class="rd-reveal rd-fact"><span class="rd-reveal rd-fact-n">5–50+</span><span class="rd-reveal rd-fact-l">people per team day</span></div>
         <div class="rd-reveal rd-fact"><span class="rd-reveal rd-fact-n">3 hrs–full day</span><span class="rd-reveal rd-fact-l">flexible format</span></div>
-        <div class="rd-reveal rd-fact"><span class="rd-reveal rd-fact-n">Your venue</span><span class="rd-reveal rd-fact-l">{{ section.settings.tx_uk_wide_or_come_to_us | default: "UK-wide, or come to us" }}</span></div>
+        <div class="rd-reveal rd-fact"><span class="rd-reveal rd-fact-n">{{ section.settings.tx_your_venue | default: "Your venue" }}</span><span class="rd-reveal rd-fact-l">{{ section.settings.tx_uk_wide_or_come_to_us | default: "UK-wide, or come to us" }}</span></div>
         <div class="rd-reveal rd-fact"><span class="rd-reveal rd-fact-n">{{ section.settings.tx_no_experience | default: "No experience" }}</span><span class="rd-reveal rd-fact-l">{{ section.settings.tx_needed_we_guide_every_step | default: "needed — we guide every step" }}</span></div>
         <div class="rd-reveal rd-fact"><span class="rd-reveal rd-fact-n">{{ section.settings.tx_indoor_outdoor | default: "Indoor / outdoor" }}</span><span class="rd-reveal rd-fact-l">{{ section.settings.tx_bring_workshop_1 | default: "we bring the workshop" }}</span></div>
         <div class="rd-reveal rd-fact"><span class="rd-reveal rd-fact-n">{{ section.settings.tx_donate_the_bikes | default: "Donate the bikes" }}</span><span class="rd-reveal rd-fact-l">{{ section.settings.tx_to_a_community_charity | default: "to a community charity" }}</span></div>
@@ -245,53 +245,285 @@
   "tag": "section",
   "class": "section bbc-teambuilding-2026-wrap",
   "settings": [
-    { "type": "text", "id": "tx_bring_workshop_1", "label": "Fact: we bring the workshop (1)", "default": "we bring the workshop" },
-    { "type": "text", "id": "tx_bring_workshop_2", "label": "Fact: we bring the workshop (2)", "default": "we bring the workshop" },
-    { "type": "header", "content": "Editability pass 2026-08-10" },
-    { "type": "text", "id": "tx_team_building", "label": "Team Building", "default": "Team Building" },
-    { "type": "text", "id": "tx_uk_wide_or_come_to_us", "label": "UK-wide, or come to us", "default": "UK-wide, or come to us" },
-    { "type": "text", "id": "tx_no_experience", "label": "No experience", "default": "No experience" },
-    { "type": "text", "id": "tx_needed_we_guide_every_step", "label": "needed \u2014 we guide every step", "default": "needed \u2014 we guide every step" },
-    { "type": "text", "id": "tx_indoor_outdoor", "label": "Indoor / outdoor", "default": "Indoor / outdoor" },
-    { "type": "text", "id": "tx_donate_the_bikes", "label": "Donate the bikes", "default": "Donate the bikes" },
-    { "type": "text", "id": "tx_to_a_community_charity", "label": "to a community charity", "default": "to a community charity" },
-    { "type": "text", "id": "tx_join_an_open_build_weekend_i", "label": "Join an open build weekend instead &", "default": "Join an open build weekend instead &rarr;" },
-    { "type": "text", "id": "tx_the_real_thing", "label": "The real thing", "default": "The real thing" },
-    { "type": "text", "id": "tx_a_real_bike_not_a_flat_pack", "label": "a real bike. not a flat-pack kit.", "default": "a real bike. not a flat-pack kit." },
-    { "type": "textarea", "id": "tx_most_build_a_bike_days_bolt", "label": "Most \u201cbuild-a-bike\u201d days bolt togeth", "default": "Most \u201cbuild-a-bike\u201d days bolt together a children\u2019s kit in an hour. On ours, your team works raw bamboo \u2014 cutting, mitring, binding and finishing \u2014 into a frame that genuinely rides." },
-    { "type": "text", "id": "tx_a_proper_hands_on_engineerin", "label": "A proper hands-on engineering challe", "default": "A proper hands-on engineering challenge that needs the whole team" },
-    { "type": "text", "id": "tx_every_step_guided_by_our_fac", "label": "Every step guided by our facilitator", "default": "Every step guided by our facilitators \u2014 no DIY skill required" },
-    { "type": "text", "id": "tx_you_finish_the_day_with_a_re", "label": "You finish the day with a real, ride", "default": "You finish the day with a real, rideable bamboo bike" },
-    { "type": "text", "id": "tx_run_it_at_your_office_an_awa", "label": "Run it at your office, an away-day v", "default": "Run it at your office, an away-day venue, or our London workshop" },
-    { "type": "text", "id": "tx_cut_mitre_bind_finish_a_fram", "label": "Cut, mitre, bind, finish \u2014 a frame m", "default": "Cut, mitre, bind, finish \u2014 a frame made by hand, by your team." },
-    { "type": "text", "id": "tx_build_it_then_give_it_away", "label": "Build it, then give it away", "default": "Build it, then give it away" },
-    { "type": "textarea", "id": "tx_the_best_team_day_youll_do_a", "label": "The best team day you\u2019ll do all year", "default": "The best team day you\u2019ll do all year \u2014 and a bike for a child who needs one." },
-    { "type": "textarea", "id": "tx_we_re_a_social_enterprise_th", "label": "We're a social enterprise: the fee f", "default": "We're a social enterprise: the fee for your day funds our accredited skills work in schools and prisons. And the bikes your team makes can be donated to a community charity \u2014 one company built balance bikes that went to Upcycle, a Brixton charity getting more children cycling." },
-    { "type": "text", "id": "tx_accountable_insured", "label": "Accountable & insured", "default": "Accountable & insured" },
-    { "type": "text", "id": "tx_a_team_day_you_can_stand_beh", "label": "a team day you can stand behind.", "default": "a team day you can stand behind." },
-    { "type": "text", "id": "tx_social_enterprise_bamboo_mob", "label": "Social enterprise \u00b7 Bamboo Mobility ", "default": "Social enterprise \u00b7 Bamboo Mobility Project CIC" },
-    { "type": "text", "id": "tx_enhanced_dbs_facilitators", "label": "Enhanced-DBS facilitators", "default": "Enhanced-DBS facilitators" },
-    { "type": "text", "id": "tx_public_liability_insured", "label": "Public-liability insured", "default": "Public-liability insured" },
-    { "type": "text", "id": "tx_investec_beyond_business_202", "label": "Investec Beyond Business 2025", "default": "Investec Beyond Business 2025" },
-    { "type": "text", "id": "tx_good_to_know", "label": "Good to know", "default": "Good to know" },
-    { "type": "text", "id": "tx_questions_teams_ask", "label": "questions teams ask.", "default": "questions teams ask." },
-    { "type": "text", "id": "tx_request_a_quote", "label": "Request a quote", "default": "Request a quote" },
-    { "type": "text", "id": "tx_tell_us_team_size_and_a_roug", "label": "tell us team size and a rough date. ", "default": "tell us team size and a rough date. we do the rest." },
-    { "type": "text", "id": "tx_tell_us_the_basics", "label": "tell us the basics", "default": "tell us the basics" },
-    { "type": "text", "id": "tx_team_size_and_a_rough_month", "label": "Team size and a rough month \u2014 nothin", "default": "Team size and a rough month \u2014 nothing else needed yet." },
-    { "type": "text", "id": "tx_quote_within_one_working_day", "label": "quote within one working day", "default": "quote within one working day" },
-    { "type": "text", "id": "tx_a_scoped_plan_and_price_you", "label": "A scoped plan and price you can forw", "default": "A scoped plan and price you can forward internally." },
-    { "type": "text", "id": "tx_your_office_an_away_day_venu", "label": "Your office, an away-day venue, or o", "default": "Your office, an away-day venue, or our London workshop." },
-    { "type": "text", "id": "tx_build_ride_hand_over", "label": "build, ride, hand over", "default": "build, ride, hand over" },
-    { "type": "text", "id": "tx_a_real_bike_your_team_made_r", "label": "A real bike your team made \u2014 ride it", "default": "A real bike your team made \u2014 ride it or donate it." },
-    { "type": "text", "id": "tx_thanks_we_ll_come_back_withi", "label": "Thanks \u2014 we'll come back within one ", "default": "Thanks \u2014 we'll come back within one working day." },
-    { "type": "text", "id": "tx_please_check_the_email_addre", "label": "Please check the email address and t", "default": "Please check the email address and try again." },
-    { "type": "text", "id": "tx_we_reply_within_one_working", "label": "We reply within one working day. No ", "default": "We reply within one working day. No obligation, no spam." },
-    { "type": "text", "id": "tx_bring_it_to_your_team", "label": "Bring it to your team", "default": "Bring it to your team" },
-    { "type": "text", "id": "tx_lets_build_something_your_te", "label": "let\u2019s build something your team will", "default": "let\u2019s build something your team will remember." },
-    { "type": "textarea", "id": "tx_tell_us_your_team_size_a_rou", "label": "Tell us your team size, a rough date", "default": "Tell us your team size, a rough date and your venue \u2014 we\u2019ll send a proper quote within one working day. Materials, facilitation and the charity handover are all included." },
-    { "type": "text", "id": "tx_email_us", "label": "Email us", "default": "Email us" },
-    { "type": "url", "id": "url_pages_bicycle_frame_building", "label": "Link: /pages/bicycle-frame-buildin" },
+    {
+      "type": "text",
+      "id": "tx_bring_workshop_1",
+      "label": "Fact: we bring the workshop (1)",
+      "default": "we bring the workshop"
+    },
+    {
+      "type": "text",
+      "id": "tx_bring_workshop_2",
+      "label": "Fact: we bring the workshop (2)",
+      "default": "we bring the workshop"
+    },
+    {
+      "type": "header",
+      "content": "Editability pass 2026-08-10"
+    },
+    {
+      "type": "text",
+      "id": "tx_team_building",
+      "label": "Team Building",
+      "default": "Team Building"
+    },
+    {
+      "type": "text",
+      "id": "tx_uk_wide_or_come_to_us",
+      "label": "UK-wide, or come to us",
+      "default": "UK-wide, or come to us"
+    },
+    {
+      "type": "text",
+      "id": "tx_no_experience",
+      "label": "No experience",
+      "default": "No experience"
+    },
+    {
+      "type": "text",
+      "id": "tx_needed_we_guide_every_step",
+      "label": "needed — we guide every step",
+      "default": "needed — we guide every step"
+    },
+    {
+      "type": "text",
+      "id": "tx_indoor_outdoor",
+      "label": "Indoor / outdoor",
+      "default": "Indoor / outdoor"
+    },
+    {
+      "type": "text",
+      "id": "tx_donate_the_bikes",
+      "label": "Donate the bikes",
+      "default": "Donate the bikes"
+    },
+    {
+      "type": "text",
+      "id": "tx_to_a_community_charity",
+      "label": "to a community charity",
+      "default": "to a community charity"
+    },
+    {
+      "type": "text",
+      "id": "tx_join_an_open_build_weekend_i",
+      "label": "Join an open build weekend instead &",
+      "default": "Join an open build weekend instead &rarr;"
+    },
+    {
+      "type": "text",
+      "id": "tx_the_real_thing",
+      "label": "The real thing",
+      "default": "The real thing"
+    },
+    {
+      "type": "text",
+      "id": "tx_a_real_bike_not_a_flat_pack",
+      "label": "a real bike. not a flat-pack kit.",
+      "default": "a real bike. not a flat-pack kit."
+    },
+    {
+      "type": "textarea",
+      "id": "tx_most_build_a_bike_days_bolt",
+      "label": "Most “build-a-bike” days bolt togeth",
+      "default": "Most “build-a-bike” days bolt together a children’s kit in an hour. On ours, your team works raw bamboo — cutting, mitring, binding and finishing — into a frame that genuinely rides."
+    },
+    {
+      "type": "text",
+      "id": "tx_a_proper_hands_on_engineerin",
+      "label": "A proper hands-on engineering challe",
+      "default": "A proper hands-on engineering challenge that needs the whole team"
+    },
+    {
+      "type": "text",
+      "id": "tx_every_step_guided_by_our_fac",
+      "label": "Every step guided by our facilitator",
+      "default": "Every step guided by our facilitators — no DIY skill required"
+    },
+    {
+      "type": "text",
+      "id": "tx_you_finish_the_day_with_a_re",
+      "label": "You finish the day with a real, ride",
+      "default": "You finish the day with a real, rideable bamboo bike"
+    },
+    {
+      "type": "text",
+      "id": "tx_run_it_at_your_office_an_awa",
+      "label": "Run it at your office, an away-day v",
+      "default": "Run it at your office, an away-day venue, or our London workshop"
+    },
+    {
+      "type": "text",
+      "id": "tx_cut_mitre_bind_finish_a_fram",
+      "label": "Cut, mitre, bind, finish — a frame m",
+      "default": "Cut, mitre, bind, finish — a frame made by hand, by your team."
+    },
+    {
+      "type": "text",
+      "id": "tx_build_it_then_give_it_away",
+      "label": "Build it, then give it away",
+      "default": "Build it, then give it away"
+    },
+    {
+      "type": "textarea",
+      "id": "tx_the_best_team_day_youll_do_a",
+      "label": "The best team day you’ll do all year",
+      "default": "The best team day you’ll do all year — and a bike for a child who needs one."
+    },
+    {
+      "type": "textarea",
+      "id": "tx_we_re_a_social_enterprise_th",
+      "label": "We're a social enterprise: the fee f",
+      "default": "We're a social enterprise: the fee for your day funds our accredited skills work in schools and prisons. And the bikes your team makes can be donated to a community charity — one company built balance bikes that went to Upcycle, a Brixton charity getting more children cycling."
+    },
+    {
+      "type": "text",
+      "id": "tx_accountable_insured",
+      "label": "Accountable & insured",
+      "default": "Accountable & insured"
+    },
+    {
+      "type": "text",
+      "id": "tx_a_team_day_you_can_stand_beh",
+      "label": "a team day you can stand behind.",
+      "default": "a team day you can stand behind."
+    },
+    {
+      "type": "text",
+      "id": "tx_social_enterprise_bamboo_mob",
+      "label": "Social enterprise · Bamboo Mobility ",
+      "default": "Social enterprise · Bamboo Mobility Project CIC"
+    },
+    {
+      "type": "text",
+      "id": "tx_enhanced_dbs_facilitators",
+      "label": "Enhanced-DBS facilitators",
+      "default": "Enhanced-DBS facilitators"
+    },
+    {
+      "type": "text",
+      "id": "tx_public_liability_insured",
+      "label": "Public-liability insured",
+      "default": "Public-liability insured"
+    },
+    {
+      "type": "text",
+      "id": "tx_investec_beyond_business_202",
+      "label": "Investec Beyond Business 2025",
+      "default": "Investec Beyond Business 2025"
+    },
+    {
+      "type": "text",
+      "id": "tx_good_to_know",
+      "label": "Good to know",
+      "default": "Good to know"
+    },
+    {
+      "type": "text",
+      "id": "tx_questions_teams_ask",
+      "label": "questions teams ask.",
+      "default": "questions teams ask."
+    },
+    {
+      "type": "text",
+      "id": "tx_request_a_quote",
+      "label": "Request a quote",
+      "default": "Request a quote"
+    },
+    {
+      "type": "text",
+      "id": "tx_tell_us_team_size_and_a_roug",
+      "label": "tell us team size and a rough date. ",
+      "default": "tell us team size and a rough date. we do the rest."
+    },
+    {
+      "type": "text",
+      "id": "tx_tell_us_the_basics",
+      "label": "tell us the basics",
+      "default": "tell us the basics"
+    },
+    {
+      "type": "text",
+      "id": "tx_team_size_and_a_rough_month",
+      "label": "Team size and a rough month — nothin",
+      "default": "Team size and a rough month — nothing else needed yet."
+    },
+    {
+      "type": "text",
+      "id": "tx_quote_within_one_working_day",
+      "label": "quote within one working day",
+      "default": "quote within one working day"
+    },
+    {
+      "type": "text",
+      "id": "tx_a_scoped_plan_and_price_you",
+      "label": "A scoped plan and price you can forw",
+      "default": "A scoped plan and price you can forward internally."
+    },
+    {
+      "type": "text",
+      "id": "tx_your_office_an_away_day_venu",
+      "label": "Your office, an away-day venue, or o",
+      "default": "Your office, an away-day venue, or our London workshop."
+    },
+    {
+      "type": "text",
+      "id": "tx_build_ride_hand_over",
+      "label": "build, ride, hand over",
+      "default": "build, ride, hand over"
+    },
+    {
+      "type": "text",
+      "id": "tx_a_real_bike_your_team_made_r",
+      "label": "A real bike your team made — ride it",
+      "default": "A real bike your team made — ride it or donate it."
+    },
+    {
+      "type": "text",
+      "id": "tx_thanks_we_ll_come_back_withi",
+      "label": "Thanks — we'll come back within one ",
+      "default": "Thanks — we'll come back within one working day."
+    },
+    {
+      "type": "text",
+      "id": "tx_please_check_the_email_addre",
+      "label": "Please check the email address and t",
+      "default": "Please check the email address and try again."
+    },
+    {
+      "type": "text",
+      "id": "tx_we_reply_within_one_working",
+      "label": "We reply within one working day. No ",
+      "default": "We reply within one working day. No obligation, no spam."
+    },
+    {
+      "type": "text",
+      "id": "tx_bring_it_to_your_team",
+      "label": "Bring it to your team",
+      "default": "Bring it to your team"
+    },
+    {
+      "type": "text",
+      "id": "tx_lets_build_something_your_te",
+      "label": "let’s build something your team will",
+      "default": "let’s build something your team will remember."
+    },
+    {
+      "type": "textarea",
+      "id": "tx_tell_us_your_team_size_a_rou",
+      "label": "Tell us your team size, a rough date",
+      "default": "Tell us your team size, a rough date and your venue — we’ll send a proper quote within one working day. Materials, facilitation and the charity handover are all included."
+    },
+    {
+      "type": "text",
+      "id": "tx_email_us",
+      "label": "Email us",
+      "default": "Email us"
+    },
+    {
+      "type": "url",
+      "id": "url_pages_bicycle_frame_building",
+      "label": "Link: /pages/bicycle-frame-buildin"
+    },
     {
       "type": "url",
       "id": "enquiry_url",
@@ -498,6 +730,12 @@
       "type": "video",
       "id": "video_file",
       "label": "Or upload a video (plays inline)"
+    },
+    {
+      "type": "text",
+      "id": "tx_your_venue",
+      "label": "Your venue",
+      "default": "Your venue"
     }
   ],
   "blocks": [

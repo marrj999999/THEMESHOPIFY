@@ -38,7 +38,7 @@
     <div class="rd-scrim"></div>
     <div class="rd-inner">
       <div class="rd-wrap">
-        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/pages/impact">Impact</a><span class="rd-sep">/</span><span class="rd-here">For prisons</span></nav>
+        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/pages/impact">Impact</a><span class="rd-sep">/</span><span class="rd-here">{{ section.settings.tx_crumb_prisons | default: "For prisons" }}</span></nav>
         {%- if section.settings.hero_eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>{%- endif -%}
         <h1 class="rd-mt2 rd-mw-16ch">{{ section.settings.hero_title }}</h1>
         <div class="rd-lede">{{ section.settings.hero_lede }}</div>
@@ -494,6 +494,12 @@
       "label": "Mosaic layout (content-aware sizes, no gaps)",
       "info": "Card size is derived from its content: a film goes wide, long copy goes tall, no image goes flat. Gaps backfill automatically. Needs 3+ cards.",
       "default": false
+    },
+    {
+      "type": "text",
+      "id": "tx_crumb_prisons",
+      "label": "For prisons",
+      "default": "For prisons"
     }
   ],
   "blocks": [

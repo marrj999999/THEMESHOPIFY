@@ -61,7 +61,7 @@
                     <li><a href="/pages/schools">Schools &amp; education</a></li>
                     <li><a href="/pages/support-mission">Back the mission</a></li>
                     <li><a href="/pages/why-bamboo">Why bamboo</a></li>
-                    <li><a href="/blogs/news">News &amp; stories</a></li>
+                    <li><a href="/blogs/news">{{ section.settings.tx_news_stories | default: "News &amp; stories" }}</a></li>
                   {%- when 'help' -%}
                     <li><a href="/pages/support-centre">Support centre</a></li>
                     <li><a href="/pages/contact-us">Contact us</a></li>
@@ -109,7 +109,7 @@
       {%- assign flogos = "logo-ft.svg,logo-guardian.svg,logo-roadcc.svg,logo-design-museum.svg,logo-inside-time.svg" | split: "," -%}{%- assign fnames = "Financial Times,The Guardian,road.cc,Design Museum,Inside Time" | split: "," -%}
       {%- for lg in flogos -%}<img src="{{ lg | asset_url }}" alt="Featured in {{ fnames[forloop.index0] }}" height="20" loading="lazy">{%- endfor -%}
     </div>
-    <p class="rd-foot-signoff">One craft. One engine for change.</p>
+    <p class="rd-foot-signoff">{{ section.settings.tx_one_craft | default: "One craft. One engine for change." }}</p>
 
     {%- comment -%} giant wordmark — type-as-poster close (masthead research 2026-07-22,
        qa/TYPE-SCALE.md). Decorative link home; screen readers get the plain label. {%- endcomment -%}
@@ -140,10 +140,28 @@
   "tag": "div",
   "class": "bbc-footer-2026-section",
   "settings": [
-    { "type": "header", "content": "Editability pass 2026-08-10" },
-    { "type": "text", "id": "tx_thanks_you_re_on_the_list", "label": "Thanks \u2014 you're on the list.", "default": "Thanks \u2014 you're on the list." },
-    { "type": "text", "id": "tx_bamboo_bicycle_club", "label": "bamboo bicycle club", "default": "bamboo bicycle club" },
-    { "type": "text", "id": "count_ribbon", "label": "Counting ribbon (blank = off)", "default": "<b class=\"rd-num\">3,500+</b> frames built at kitchen tables — and counting" },
+    {
+      "type": "header",
+      "content": "Editability pass 2026-08-10"
+    },
+    {
+      "type": "text",
+      "id": "tx_thanks_you_re_on_the_list",
+      "label": "Thanks — you're on the list.",
+      "default": "Thanks — you're on the list."
+    },
+    {
+      "type": "text",
+      "id": "tx_bamboo_bicycle_club",
+      "label": "bamboo bicycle club",
+      "default": "bamboo bicycle club"
+    },
+    {
+      "type": "text",
+      "id": "count_ribbon",
+      "label": "Counting ribbon (blank = off)",
+      "default": "<b class=\"rd-num\">3,500+</b> frames built at kitchen tables — and counting"
+    },
     {
       "type": "header",
       "content": "Brand"
@@ -251,6 +269,18 @@
       "id": "show_wordmark",
       "label": "Show the giant wordmark",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "tx_news_stories",
+      "label": "News & stories",
+      "default": "News &amp; stories"
+    },
+    {
+      "type": "text",
+      "id": "tx_one_craft",
+      "label": "One craft. One engine for change.",
+      "default": "One craft. One engine for change."
     }
   ],
   "blocks": [

@@ -43,7 +43,7 @@
                   </div>
                 </div>
               {%- endfor -%}
-              <a class="rd-nav-link rd-ib-mt22" href="{{ section.settings.empty_url | default: '/collections/home-build-kits' }}">&larr; Continue shopping</a>
+              <a class="rd-nav-link rd-ib-mt22" href="{{ section.settings.empty_url | default: '/collections/home-build-kits' }}">{{ section.settings.tx_continue | default: "&larr; Continue shopping" }}</a>
             </div>
 
             <aside class="rd-summary">
@@ -52,7 +52,7 @@
                 {%- for d in cart.cart_level_discount_applications -%}<div class="rd-row rd-c-lime700"><span>{{ d.title }}</span><span>&minus;{{ d.total_allocated_amount | money }}</span></div>{%- endfor -%}
               {%- endif -%}
               <div class="rd-total"><span>Total</span><span>{{ cart.total_price | money }}</span></div>
-              <p class="rd-cmp-86504">Taxes &amp; shipping calculated at checkout.</p>
+              <p class="rd-cmp-86504">{{ section.settings.tx_taxes | default: "Taxes &amp; shipping calculated at checkout." }}</p>
               <button type="submit" name="checkout" class="rd-btn rd-lime rd-w-full-jc">{{ section.settings.checkout_label | default: 'Checkout' }}</button>
               {%- if section.settings.cause_line != blank -%}<div class="rd-cause-bar rd-cmp-67002">{{ section.settings.cause_line }}</div>{%- endif -%}
             </aside>
@@ -109,6 +109,18 @@
       "type": "url",
       "id": "empty_url",
       "label": "Empty-cart button link (defaults to the kits collection)"
+    },
+    {
+      "type": "text",
+      "id": "tx_continue",
+      "label": "&larr; Continue shopping",
+      "default": "&larr; Continue shopping"
+    },
+    {
+      "type": "text",
+      "id": "tx_taxes",
+      "label": "Taxes & shipping calculated at che",
+      "default": "Taxes &amp; shipping calculated at checkout."
     }
   ],
   "presets": [

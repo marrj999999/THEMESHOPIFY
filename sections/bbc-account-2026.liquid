@@ -66,15 +66,15 @@
               <button type="submit" class="rd-btn rd-lime rd-btn-block">{{ section.settings.login_submit | default: 'Sign in' }}</button>
             </div>
             <p class="rd-cmp-67002">
-              <a class="rd-btn rd-text" href="#rd-recover">Forgotten your password?</a>
+              <a class="rd-btn rd-text" href="#rd-recover">{{ section.settings.tx_acc_1 | default: "Forgotten your password?" }}</a>
               <span class="rd-sep" aria-hidden="true"> · </span>
-              <a class="rd-btn rd-text" href="{{ routes.account_register_url }}">Create an account</a>
+              <a class="rd-btn rd-text" href="{{ routes.account_register_url }}">{{ section.settings.tx_acc_2 | default: "Create an account" }}</a>
             </p>
           </div>
         {%- endform -%}
 
         <div id="rd-recover" class="rd-mt4">
-          <h2 class="rd-reveal rd-fs-21px rd-mb-8px">reset your password</h2>
+          <h2 class="rd-reveal rd-fs-21px rd-mb-8px">{{ section.settings.tx_acc_3 | default: "reset your password" }}</h2>
           <p class="rd-lede rd-mb-24px rd-mw-60ch">Enter your email and we will send you a link to set a new password.</p>
           {%- form 'recover_customer_password' -%}
             {%- if form.posted_successfully? -%}
@@ -89,7 +89,7 @@
                 <input type="email" id="rd-recover-email" name="email" autocomplete="email" autocapitalize="off" autocorrect="off" required>
               </div>
               <div>
-                <button type="submit" class="rd-btn rd-ghost rd-btn-block">Send reset link</button>
+                <button type="submit" class="rd-btn rd-ghost rd-btn-block">{{ section.settings.tx_acc_5 | default: "Send reset link" }}</button>
               </div>
             </div>
           {%- endform -%}
@@ -216,7 +216,7 @@
   {%- elsif tpl == 'customers/order' -%}
     <section class="rd-pad-sm rd-paper">
       <div class="rd-wrap rd-coll-head">
-        <span class="rd-eyebrow">Your account</span>
+        <span class="rd-eyebrow">{{ section.settings.tx_acc_10 | default: "Your account" }}</span>
         {%- if order -%}
           <h1>Order {{ order.name }}</h1>
           <p class="rd-lede rd-mt2">Placed {{ order.created_at | date: '%-d %B %Y' }}</p>
@@ -296,7 +296,7 @@
           <div class="rd-grid rd-g2 rd-mt4">
             <div class="rd-reveal rd-card rd-stamp">
               <div class="rd-body">
-                <h2 class="rd-reveal rd-fs-18px rd-mb-8px">shipping address</h2>
+                <h2 class="rd-reveal rd-fs-18px rd-mb-8px">{{ section.settings.tx_acc_6 | default: "shipping address" }}</h2>
                 {%- if order.shipping_address -%}
                   <div class="rd-acc-addr">{{ order.shipping_address | format_address }}</div>
                 {%- else -%}
@@ -326,7 +326,7 @@
   {%- elsif tpl == 'customers/addresses' -%}
     <section class="rd-pad-sm rd-paper">
       <div class="rd-wrap rd-coll-head">
-        <span class="rd-eyebrow">Your account</span>
+        <span class="rd-eyebrow">{{ section.settings.tx_acc_10 | default: "Your account" }}</span>
         <h1>your addresses</h1>
         <p class="rd-mt3"><a class="rd-btn rd-text" href="{{ routes.account_url }}">&larr; Back to your account</a></p>
       </div>
@@ -391,7 +391,7 @@
                   </label>
                 </div>
                 <div>
-                  <button type="submit" class="rd-btn rd-lime">Add address</button>
+                  <button type="submit" class="rd-btn rd-lime">{{ section.settings.tx_acc_7 | default: "Add address" }}</button>
                 </div>
               </div>
             {%- endform -%}
@@ -461,7 +461,7 @@
                                 </label>
                               </div>
                               <div>
-                                <button type="submit" class="rd-btn rd-lime">Update address</button>
+                                <button type="submit" class="rd-btn rd-lime">{{ section.settings.tx_acc_8 | default: "Update address" }}</button>
                               </div>
                             </div>
                           {%- endform -%}
@@ -501,7 +501,7 @@
   {%- elsif tpl == 'customers/reset_password' -%}
     <section class="rd-pad-sm rd-paper">
       <div class="rd-wrap rd-coll-head rd-mw-680px">
-        <span class="rd-eyebrow">Your account</span>
+        <span class="rd-eyebrow">{{ section.settings.tx_acc_10 | default: "Your account" }}</span>
         <h1>choose a new password</h1>
         <div class="rd-lede rd-mt2 rd-mw-60ch">Enter a new password for your account below.</div>
       </div>
@@ -523,7 +523,7 @@
               <input type="password" id="rd-reset-confirm" name="customer[password_confirmation]" autocomplete="new-password" required>
             </div>
             <div>
-              <button type="submit" class="rd-btn rd-lime rd-btn-block">Reset password</button>
+              <button type="submit" class="rd-btn rd-lime rd-btn-block">{{ section.settings.tx_acc_9 | default: "Reset password" }}</button>
             </div>
           </div>
         {%- endform -%}
@@ -534,8 +534,8 @@
   {%- elsif tpl == 'customers/activate_account' -%}
     <section class="rd-pad-sm rd-paper">
       <div class="rd-wrap rd-coll-head rd-mw-680px">
-        <span class="rd-eyebrow">Your account</span>
-        <h1>activate your account</h1>
+        <span class="rd-eyebrow">{{ section.settings.tx_acc_10 | default: "Your account" }}</span>
+        <h1>{{ section.settings.tx_acc_11 | default: "activate your account" }}</h1>
         <div class="rd-lede rd-mt2 rd-mw-60ch">Create a password to activate your account and finish setting up.</div>
       </div>
     </section>
@@ -556,8 +556,8 @@
               <input type="password" id="rd-act-confirm" name="customer[password_confirmation]" autocomplete="new-password" required>
             </div>
             <div class="rd-flex">
-              <button type="submit" name="commit" class="rd-btn rd-lime">Activate account</button>
-              <button type="submit" name="decline" class="rd-btn rd-ghost">Decline invitation</button>
+              <button type="submit" name="commit" class="rd-btn rd-lime">{{ section.settings.tx_acc_12 | default: "Activate account" }}</button>
+              <button type="submit" name="decline" class="rd-btn rd-ghost">{{ section.settings.tx_acc_13 | default: "Decline invitation" }}</button>
             </div>
           </div>
         {%- endform -%}
@@ -568,7 +568,7 @@
   {%- else -%}
     <section class="rd-pad-sm rd-paper">
       <div class="rd-wrap rd-coll-head">
-        <span class="rd-eyebrow">Your account</span>
+        <span class="rd-eyebrow">{{ section.settings.tx_acc_10 | default: "Your account" }}</span>
         <h1>your account</h1>
         <p class="rd-mt3"><a class="rd-btn rd-lime" href="{{ routes.account_url }}">Go to your account</a></p>
       </div>
@@ -699,6 +699,78 @@
       "id": "account_eyebrow",
       "label": "Account eyebrow",
       "default": "Your account"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_1",
+      "label": "Forgotten your password?",
+      "default": "Forgotten your password?"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_2",
+      "label": "Create an account",
+      "default": "Create an account"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_3",
+      "label": "reset your password",
+      "default": "reset your password"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_5",
+      "label": "Send reset link",
+      "default": "Send reset link"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_6",
+      "label": "shipping address",
+      "default": "shipping address"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_7",
+      "label": "Add address",
+      "default": "Add address"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_8",
+      "label": "Update address",
+      "default": "Update address"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_9",
+      "label": "Reset password",
+      "default": "Reset password"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_10",
+      "label": "Your account",
+      "default": "Your account"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_11",
+      "label": "activate your account",
+      "default": "activate your account"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_12",
+      "label": "Activate account",
+      "default": "Activate account"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_13",
+      "label": "Decline invitation",
+      "default": "Decline invitation"
     }
   ],
   "presets": [

@@ -10,7 +10,7 @@
   {%- if section.settings.show_header != false -%}
   <section class="rd-pad rd-paper">
     <div class="rd-wrap rd-mw-820px">
-      <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/collections/home-build-kits">Frame kits</a><span class="rd-sep">/</span><span class="rd-here">Which kit?</span></nav>
+      <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/collections/home-build-kits">{{ section.settings.tx_crumb_kits2 | default: "Frame kits" }}</a><span class="rd-sep">/</span><span class="rd-here">{{ section.settings.tx_crumb_which | default: "Which kit?" }}</span></nav>
       {%- if section.settings.eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
       <h1 class="rd-mw-16ch">{{ section.settings.title }}</h1>
       {%- if section.settings.lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.lede }}</p>{%- endif -%}
@@ -219,6 +219,18 @@
       "type": "url",
       "id": "cta2_url",
       "label": "CTA 2 link"
+    },
+    {
+      "type": "text",
+      "id": "tx_crumb_kits2",
+      "label": "Frame kits",
+      "default": "Frame kits"
+    },
+    {
+      "type": "text",
+      "id": "tx_crumb_which",
+      "label": "Which kit?",
+      "default": "Which kit?"
     }
   ],
   "blocks": [

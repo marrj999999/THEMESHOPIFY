@@ -23,7 +23,7 @@
   {%- comment -%} ---------- HEADER ---------- {%- endcomment -%}
   <section class="rd-pad rd-paper">
     <div class="rd-wrap rd-mw-820px">
-      <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/pages/impact">Impact</a><span class="rd-sep">/</span><span class="rd-here">Theory of change</span></nav>
+      <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/pages/impact">Impact</a><span class="rd-sep">/</span><span class="rd-here">{{ section.settings.tx_crumb_toc | default: "Theory of change" }}</span></nav>
       {%- if section.settings.eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
       <h1 class="rd-mw-16ch">{{ section.settings.title }}</h1>
       {%- if section.settings.lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.lede }}</p>{%- endif -%}
@@ -293,6 +293,12 @@
       "label": "Mosaic layout (content-aware sizes, no gaps)",
       "info": "Card size is derived from its content: a film goes wide, long copy goes tall, no image goes flat. Gaps backfill automatically. Needs 3+ cards.",
       "default": false
+    },
+    {
+      "type": "text",
+      "id": "tx_crumb_toc",
+      "label": "Theory of change",
+      "default": "Theory of change"
     }
   ],
   "blocks": [

@@ -36,7 +36,7 @@
     <div class="rd-scrim"></div>
     <div class="rd-inner">
       <div class="rd-wrap">
-        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/pages/workshops">Workshops</a><span class="rd-sep">/</span><span class="rd-here">Amersfoort</span></nav>
+        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/pages/workshops">Workshops</a><span class="rd-sep">/</span><span class="rd-here">{{ section.settings.tx_crumb_amers | default: "Amersfoort" }}</span></nav>
         {%- if section.settings.hero_eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>{%- endif -%}
         <h1 class="rd-mt2 rd-mw-14ch">{{ section.settings.hero_title }}</h1>
         <div class="rd-lede">{{ section.settings.hero_lede }}</div>
@@ -426,6 +426,12 @@
       "type": "video",
       "id": "video_file",
       "label": "Or upload a video (plays inline)"
+    },
+    {
+      "type": "text",
+      "id": "tx_crumb_amers",
+      "label": "Amersfoort",
+      "default": "Amersfoort"
     }
   ],
   "presets": [

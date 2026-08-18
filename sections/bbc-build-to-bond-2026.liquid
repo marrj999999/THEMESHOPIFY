@@ -40,7 +40,7 @@
     <div class="rd-scrim"></div>
     <div class="rd-inner">
       <div class="rd-wrap">
-        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/pages/impact">Impact</a><span class="rd-sep">/</span><span class="rd-here">Build to Bond</span></nav>
+        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/pages/impact">Impact</a><span class="rd-sep">/</span><span class="rd-here">{{ section.settings.tx_crumb_b2b | default: "Build to Bond" }}</span></nav>
         {%- if section.settings.hero_eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>{%- endif -%}
         <h1 class="rd-mt2 rd-mw-15ch">{{ section.settings.hero_title }}</h1>
         <div class="rd-lede">{{ section.settings.hero_lede }}</div>
@@ -581,6 +581,12 @@
       "id": "fab_spec",
       "label": "Spec micro-line (fabrication device)",
       "default": "qualification — OCN Level 2 · Workshop Skills and Sustainable Manufacturing"
+    },
+    {
+      "type": "text",
+      "id": "tx_crumb_b2b",
+      "label": "Build to Bond",
+      "default": "Build to Bond"
     }
   ],
   "blocks": [
