@@ -418,3 +418,10 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
   background-image:linear-gradient(rgba(0,60,50,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,60,50,.055) 1px,transparent 1px),linear-gradient(rgba(0,60,50,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,60,50,.03) 1px,transparent 1px) !important;
   background-size:96px 96px,96px 96px,24px 24px,24px 24px !important;
 }
+
+/* statement headings on phones: never shear mid-word with no hyphen
+   (why-bamboo's "sustainability" at 390 — WebKit eyeball sweep 2026-08-18).
+   Real hyphenation instead; wide statements (home) never trigger it. */
+@media (max-width:480px){
+  .bbcst .bbcst-head, .bbc-rd .bbcst-head{ word-break:normal !important; overflow-wrap:normal !important; hyphens:auto; -webkit-hyphens:auto; }
+}
