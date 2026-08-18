@@ -46,7 +46,7 @@
       {%- for block in section.blocks -%}
         {%- if block.type == 'column' -%}
           <div {{ block.shopify_attributes }}>
-            <h4>{{ block.settings.heading }}</h4>
+            <h3 class="rd-foot-h rd-fs-label">{{ block.settings.heading }}</h3>
             <ul>
               {%- if block.settings.menu != blank -%}
                 {%- for l in block.settings.menu.links -%}<li><a href="{{ l.url }}">{{ l.title }}</a></li>{%- endfor -%}
@@ -89,7 +89,7 @@
     {%- if section.settings.news_show -%}
       <div class="rd-foot-news">
         <div class="rd-news-copy">
-          <h4>{{ section.settings.news_heading | default: 'join 4,000+ builders' }}</h4>
+          <h3 class="rd-foot-h rd-fs-label">{{ section.settings.news_heading | default: 'join 4,000+ builders' }}</h3>
           {%- if section.settings.news_text != blank -%}<p>{{ section.settings.news_text }}</p>{%- endif -%}
         </div>
         {%- form 'customer', id: 'rd-footer-news' -%}
@@ -132,6 +132,7 @@
     </div>
   </div>
 </footer>
+<script>(function(){var t=function(){document.querySelectorAll('iframe:not([title])').forEach(function(f){f.setAttribute('title','Third-party app content');});};t();var o=new MutationObserver(t);o.observe(document.body,{childList:true,subtree:true});setTimeout(function(){o.disconnect();},12000);})();</script>
 
 {% schema %}
 {

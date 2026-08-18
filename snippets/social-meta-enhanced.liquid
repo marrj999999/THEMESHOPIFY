@@ -109,29 +109,7 @@
   Article pages use the schema in main-article.liquid.
   Avoid duplicate/conflicting schemas.
 {%- endcomment -%}
-{%- unless request.page_type == 'product' or request.page_type == 'article' -%}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": {{ shop.name | json }},
-  "description": {{ shop.description | json }},
-  "url": {{ shop.secure_url | json }},
-  {%- if settings.logo -%}
-  "logo": "https:{{ settings.logo | image_url: width: 500 }}",
-  {%- endif -%}
-  {%- if settings.social_instagram_link != blank -%}
-  "sameAs": [
-    {{ settings.social_instagram_link | json }}
-    {%- if settings.social_facebook_link != blank -%},{{ settings.social_facebook_link | json }}{% endif -%}
-    {%- if settings.social_twitter_link != blank -%},{{ settings.social_twitter_link | json }}{% endif -%}
-    {%- if settings.social_youtube_link != blank -%},{{ settings.social_youtube_link | json }}{% endif -%}
-  ],
-  {%- endif -%}
-  "url": {{ shop.secure_url | json }}
-}
-</script>
-{%- endunless -%}
+{%- comment -%} Organization schema now lives ONCE in theme.liquid (dedup 2026-08-18) {%- endcomment -%}
 
 <!-- Instagram Specific -->
 {%- if settings.social_instagram_link != blank -%}

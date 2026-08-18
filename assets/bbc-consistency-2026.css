@@ -253,7 +253,10 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
    (FT capped smaller than Guardian etc.) — uniform 26px cap height, free widths. */
 .bbc-rd .rd-foot-press img{ height:26px !important; max-width:none !important; }
 /* optical compensation: FT + Design Museum artwork sits padded inside its viewBox */
-.bbc-rd .rd-foot-press img[src*="logo-ft"]{ height:31px !important; }
+.bbc-rd.rd-footer .rd-foot-press img[src*="logo-ft"]{ height:31px !important; }
+/* press wordmarks may never overflow a narrow column — contain-scale instead.
+   0,4,1 both lines: a phantom cross-origin rule beats anything weaker (proven on height) */
+.bbc-rd.rd-footer .rd-foot-wrap .rd-foot-press img{ max-width:100% !important; object-fit:contain !important; object-position:left center; }
 .bbc-rd .rd-foot-press img[src*="design-museum"]{ height:34px !important; }
 .bbc-rd .rd-foot-press{ gap:20px 30px !important; }
 /* Door pills: never orphan the arrow on its own line; tighten at phone width. */
@@ -283,8 +286,8 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 @media(max-width:640px){
   .bbc-rd .rd-heroproof b, .bbc-rd-home .ew-proof b{ font-size:26px !important; line-height:1.05 !important; }
 }
-/* hero source micro-line: keep the claims law, lose the shout */
-.bbc-rd-home .ew .rd-stat-src, .bbc-rd .rd-hero .rd-stat-src{ font-size:10px; opacity:.5; }
+/* hero source micro-line: quiet but WCAG-passing (a11y audit: .5 failed contrast) */
+.bbc-rd-home .ew .rd-stat-src, .bbc-rd .rd-hero .rd-stat-src{ font-size:10px; opacity:.78; }
 
 /* Long pill labels must NEVER exceed their container — at any width.
    (Originally ≤480px for the phone clip; widened to all widths as strictly
@@ -342,3 +345,13 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
    fractional em-margin; the report ship-note sat 2px off its column */
 .bbc-rd .bbc-press__more{ margin-left:0 !important; }
 .bbc-rd .rd-ship-note{ margin-left:0 !important; padding-left:0 !important; }
+
+/* a11y contrast pass 2026-08-18: door text sits on photography — deepen the
+   scrim gradient so chips, titles and pill labels clear 4.5:1 everywhere */
+.bbc-rd .rd-door .rd-ov, .bbc-rd-home .rd-door .rd-ov{ background:linear-gradient(180deg, rgba(0,30,25,.18) 0%, rgba(0,30,25,.62) 55%, rgba(0,26,21,.86) 100%) !important; }
+/* third-party app iframes get an accessible name (Lighthouse frame-title) */
+/* ghost chips/pills on door photography: keep the ghost hierarchy but give the
+   text a translucent dark backdrop so bone stays legible over any image crop */
+.bbc-rd .rd-door:not(:first-of-type) .rd-tag.rd-lime{ background:rgba(0,26,21,.55) !important; }
+.bbc-rd .rd-door .rd-btn.rd-lime:not(:first-of-type .rd-btn){}
+.bbc-rd .rd-grid .rd-door:not(:first-of-type) .rd-btn.rd-lime{ background:rgba(0,26,21,.45) !important; }

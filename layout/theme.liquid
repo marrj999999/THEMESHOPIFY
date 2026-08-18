@@ -28,7 +28,13 @@
         "name": "Bamboo Bicycle Club",
         "url": {{ shop.url | append: '/' | json }},
         "logo": {{ 'bbc-rd-logo.png' | asset_url | prepend: 'https:' | json }},
-        "description": "We use bamboo bike-building to give practical skills and a way forward to people locked out of education — in schools before exclusion, and in prisons after."
+        "description": "We use bamboo bike-building to give practical skills and a way forward to people locked out of education — in schools before exclusion, and in prisons after."{%- if settings.social_instagram_link != blank -%},
+        "sameAs": [
+          {{ settings.social_instagram_link | json }}
+          {%- if settings.social_facebook_link != blank -%},{{ settings.social_facebook_link | json }}{%- endif -%}
+          {%- if settings.social_twitter_link != blank -%},{{ settings.social_twitter_link | json }}{%- endif -%}
+          {%- if settings.social_youtube_link != blank -%},{{ settings.social_youtube_link | json }}{%- endif -%}
+        ]{%- endif %}
       }
     </script>
 

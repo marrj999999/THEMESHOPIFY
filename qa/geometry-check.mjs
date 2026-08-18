@@ -20,7 +20,9 @@ const browser = await chromium.launch();
 const report = [];
 
 for (const width of WIDTHS) {
-  const page = await browser.newPage({ viewport: { width, height: width < 500 ? 844 : 900 } });
+  // reducedMotion: MOTION.md guarantees inert = final state — measurements must never
+  // catch mid-reveal transforms (csgrid ROW-RAG=38px false positive, 2026-08-18)
+  const page = await browser.newPage({ viewport: { width, height: width < 500 ? 844 : 900 }, reducedMotion: 'reduce' });
   for (const path of ALL_PAGES) {
     try {
       await page.goto(previewUrl(path), { waitUntil: 'load', timeout: 45000 });
@@ -39,6 +41,7 @@ for (const width of WIDTHS) {
           if (!vis(img)) continue;
           const r = img.getBoundingClientRect();
           if (img.complete && img.naturalWidth === 0) { out.push({ k: 'IMG-BROKEN', el: tag(img), src: (img.currentSrc || img.src).split('/').pop().slice(0, 40) }); continue; }
+          if (!img.complete) continue; // pending lazy load — not collapsed, and 404s get hidden by the RTE hider once resolved (2026-08-18)
           if (r.width < 8 || r.height < 8) { out.push({ k: 'IMG-COLLAPSED', el: tag(img), w: Math.round(r.width), h: Math.round(r.height) }); continue; }
           const s = getComputedStyle(img);
           if (img.naturalWidth > 0 && s.objectFit === 'fill' && !img.closest('svg')) {
@@ -70,7 +73,7 @@ for (const width of WIDTHS) {
           if (!vis(sec)) continue;
           const blocks = [...sec.querySelectorAll(':scope h1, :scope h2, :scope h3, :scope p, :scope .rd-lede, :scope [class*="eyebrow"]')]
             .filter(vis).filter((el) => getComputedStyle(el).textAlign !== 'center')
-            .filter((el) => !el.closest('[class*="card"],[class*="door"],[class*="accordion"],details,li,figure,blockquote,table'));
+            .filter((el) => !el.closest('[class*="card"],[class*="door"],[class*="accordion"],[class*="rd-path"],details,li,figure,blockquote,table'));
           if (blocks.length < 2) continue;
           const lefts = blocks.map((el) => Math.round(el.getBoundingClientRect().left));
           const min = Math.min(...lefts), max = Math.max(...lefts);
@@ -104,7 +107,9 @@ for (const width of WIDTHS) {
           const kids = [...grid.children].filter(vis);
           if (kids.length < 2) continue;
           const rows = {};
-          kids.forEach((k) => { const t = k.getBoundingClientRect().top; const key = Math.round(t / 40); (rows[key] = rows[key] || []).push(t); });
+          // margin-corrected: an offset explained by the child's own margin-top is a designed
+          // editorial stagger (impact csgrid mosaic), not rag. True rag survives correction. (2026-08-18)
+          kids.forEach((k) => { const mt = parseFloat(getComputedStyle(k).marginTop) || 0; const t = k.getBoundingClientRect().top - mt; const key = Math.round(t / 40); (rows[key] = rows[key] || []).push(t); });
           for (const tops of Object.values(rows)) {
             if (tops.length < 2) continue;
             const d = Math.max(...tops) - Math.min(...tops);

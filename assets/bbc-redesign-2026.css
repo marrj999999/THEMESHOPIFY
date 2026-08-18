@@ -1014,7 +1014,7 @@
 .bbc-rd.rd-footer .rd-foot-brand{ display:flex; align-items:center; gap:11px; font-weight:800; font-size:18px; color:var(--bone); }
 .bbc-rd.rd-footer .rd-foot-brand .rd-mk{ width:34px; height:34px; border-radius:50%; background:var(--lime); display:flex; align-items:center; justify-content:center; flex:0 0 34px; overflow:hidden; }
 .bbc-rd.rd-footer .rd-foot-brand .rd-mk img{ width:22px; height:22px; }
-.bbc-rd.rd-footer h4{ font-size:14px; text-transform:uppercase; letter-spacing:.12em; color:var(--lime); margin:0 0 14px; }
+.bbc-rd.rd-footer h4, .bbc-rd.rd-footer .rd-foot-h{ font-size:14px; text-transform:uppercase; letter-spacing:.12em; color:var(--lime); margin:0 0 14px; }
 /* Footer link rhythm + tap targets (2026-07-29).
    Measured before: links were inline, so the hit area was the text box only — 19 of 24
    under 24px tall, failing WCAG 2.5.8 (24x24 minimum), worst on mobile. And the pitch was
@@ -1326,7 +1326,7 @@
 .bbc-rd.rd-footer .rd-foot-social svg{ width:19px; height:19px; fill:currentColor; }
 .bbc-rd.rd-footer .rd-foot-news{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px 40px; margin-top:40px; padding-top:32px; border-top:1.5px solid rgba(244,239,230,.16); }
 .bbc-rd.rd-footer .rd-foot-news .rd-news-copy{ max-width:42ch; }
-.bbc-rd.rd-footer .rd-foot-news h4{ color:var(--bone); font-size:18px; letter-spacing:-.01em; text-transform:none; margin:0 0 6px; }
+.bbc-rd.rd-footer .rd-foot-news h4, .bbc-rd.rd-footer .rd-foot-news .rd-foot-h{ color:var(--bone); font-size:18px; letter-spacing:-.01em; text-transform:none; margin:0 0 6px; }
 .bbc-rd.rd-footer .rd-foot-news p{ color:var(--drift-cfd8d2); font-size:14px; margin:0; }
 .bbc-rd.rd-footer .rd-news-form{ display:flex; gap:8px; flex-wrap:wrap; }
 .bbc-rd.rd-footer .rd-news-form input{ flex:1 1 220px; min-width:200px; font:inherit; font-size:16px; padding:12px 14px; border-radius:8px; border:1.5px solid var(--bone); background:#fff; color:var(--ink); }
@@ -1348,8 +1348,8 @@
 .bbc-rd.rd-footer :is(p,li,a,span,strong,em,small,time,cite,b,h1,h2,h3,h5,h6),
 .bbc-rd.rd-footer .rd-foot-brand,
 .bbc-rd.rd-footer .rd-tagline,
-.bbc-rd.rd-footer .rd-foot-news h4{ color:#fff !important; }
-.bbc-rd.rd-footer .rd-foot-top h4{ color:var(--lime) !important; }   /* column headings = lime accent */
+.bbc-rd.rd-footer .rd-foot-news h4, .bbc-rd.rd-footer .rd-foot-news .rd-foot-h{ color:#fff !important; }
+.bbc-rd.rd-footer .rd-foot-top h4, .bbc-rd.rd-footer .rd-foot-top .rd-foot-h{ color:var(--lime) !important; }   /* column headings = lime accent */
 .bbc-rd.rd-footer a:hover{ color:var(--lime) !important; }
 .bbc-rd.rd-footer .rd-foot-social a{ color:#fff !important; }
 .bbc-rd.rd-footer .rd-foot-social a:hover{ color:var(--forest) !important; }   /* icon on lime hover chip */

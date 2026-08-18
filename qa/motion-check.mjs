@@ -170,10 +170,15 @@ for (const [label, url] of PAGES) {
       // still catches the flagship drifting off the page axis. (2026-08-03)
       const proof = document.querySelector('#proof .rd-cscard');
       // axis: every visible eyebrow/head on the 216 line (tolerance 6)
+      // Centered bands (#map, #book-a-call) are designed closers, not axis drift — same
+      // textAlign exemption geometry-check has always carried. Un-exempted, these sat
+      // permanently red at spread=241 (ESCAPES #10 again, 2026-08-18).
       const anchorsX = [...document.querySelectorAll('.bbc-rd-impact section .rd-eyebrow, .bbc-rd-impact section h2')]
         .filter(e => e.getBoundingClientRect().width > 0)
+        .filter(e => getComputedStyle(e).textAlign !== 'center')
         .map(e => Math.round(e.getBoundingClientRect().left));
       const axisSpread = anchorsX.length ? Math.max(...anchorsX) - Math.min(...anchorsX) : 0;
+      const pageAxis = anchorsX.length ? Math.min(...anchorsX) : 0;
       // wall posters must have height once scrolled (guards the 0-height frame bug)
       const evid = document.getElementById('evidence');
       if (evid) evid.scrollIntoView({behavior:'instant'});
@@ -201,7 +206,7 @@ for (const [label, url] of PAGES) {
       const mb = media && media.getBoundingClientRect();
       const cb = card && card.getBoundingClientRect();
       const mediaOk = media && card ? (mb.width >= cb.width * 0.4) && (mb.height < mb.width) : true;
-      return { overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, gaps, mediaOk, axisSpread, posterZero, soft, axisOk: wrap && proof ? Math.abs(wrap.getBoundingClientRect().left - proof.getBoundingClientRect().left) < 4 : true };
+      return { overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, gaps, mediaOk, axisSpread, posterZero, soft, axisOk: proof ? Math.abs(proof.getBoundingClientRect().left - pageAxis) < 4 : true }; // vs page axis — #book-a-call went centered by design (2026-08-18)
     });
     add('impact @1568', 'nav gaps >= 8px', r.gaps.length === 0 || r.gaps.every(g => g >= 8), `[${r.gaps}]`);
     add('impact @1568', 'overflow 0 + flagship on axis', r.overflow === 0 && r.axisOk, `ovf=${r.overflow} axis=${r.axisOk}`);
