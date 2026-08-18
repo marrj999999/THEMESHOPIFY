@@ -50,7 +50,13 @@ PATTERNS=(
 #      The register approves this wording with mandatory context; the voice rule governs how we
 #      describe OUR Makers, not how cited research describes its own population.
 #   3. Verbatim third-party press quotes — altering a quotation would misrepresent the source.
-ALLOW='never "prisoners"|"prisoners"/"offenders"|No "guaranteed interview"|Farmer Review|39% less likely|of prisoners lose family contact|many prisoners lose contact|Inside Time|prisoners at Lowdham Grange'
+#   4. Verbatim quotes from named public officials, same reason as 3 (added 2026-08-18):
+#      "…help prisoners turn their lives around" — Lord Timpson, Prisons Minister, carried on
+#      /pages/impact with attribution (cred_quote1 / cred_attr1). It is his sentence, not ours.
+#      Note the boundary this pair illustrates: the same page described Inside Time in BBC's OWN
+#      words as "prisoners' national newspaper" — that IS ours, so it was rewritten to "the
+#      national newspaper for people in prison" rather than allowed. Quote it, don't adopt it.
+ALLOW='never "prisoners"|"prisoners"/"offenders"|No "guaranteed interview"|Farmer Review|39% less likely|of prisoners lose family contact|many prisoners lose contact|Inside Time|prisoners at Lowdham Grange|help prisoners turn their lives around'
 
 FAIL=0
 for pat in "${PATTERNS[@]}"; do

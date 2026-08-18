@@ -95,12 +95,17 @@
     </div>
   </header>
 
-  {%- comment -%} ---------- BOOK A DISCOVERY CALL (primary CTA) ----------
-     Moved above the fold 2026-07-20 per Chris Barrett: this is now the page's main
-     call to action. ONE dominant action only (Unbounce / Mighty Ally: "one main course,
-     not five competing entrees") — the three routes below are secondary TEXT links,
-     deliberately not competing buttons. Routes to the contact form with a
-     discovery-call subject until a booking tool exists. ---------- {%- endcomment -%}
+  {%- comment -%} ---------- WAYS IN (three routes + chapter nav) ----------
+     Was the BOOK A DISCOVERY CALL band (added above the fold 2026-07-20 per Chris
+     Barrett as the page's main CTA). James removed the discovery call itself on
+     2026-08-18; the band stays as the routes strip, because the three route links and
+     the on-this-page nav live here and are the page's way in.
+     Removed with it: h2 "book a discovery call.", the lede "One short call. Tell us
+     whether it is a school, a prison, a team day or your own build, and we will point
+     you the right way.", and the lime CTA to /pages/contact-us?subject=discovery-call.
+     The `start here` eyebrow stays — it opens the band (PAGE-STANDARD S1) and still
+     describes the routes. The #book-a-call id is kept so any shared link still lands.
+     ---------- {%- endcomment -%}
   <section class="rd-pad rd-steel" id="book-a-call">
     <div class="rd-wrap">
       {%- comment -%} rd-center REMOVED 2026-07-31. This box carried .rd-center — which centres the
@@ -112,14 +117,12 @@
          blanket axis rule would have broken those instead. {%- endcomment -%}
       <div class="rd-cmp-84401">
         {%- if section.settings.help_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.help_eyebrow }}</span>{%- endif -%}
-        <h2 class="rd-reveal">{{ section.settings.help_title }}</h2>
-        {%- if section.settings.help_intro != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.help_intro }}</p>{%- endif -%}
-        <div class="rd-mt3">
-          <a class="rd-btn rd-lime" href="{{ section.settings.help_cta_url | default: '/pages/contact-us?subject=discovery-call' }}">{{ section.settings.help_cta_label | default: 'book a discovery call' }} <span class="rd-arrow">&rarr;</span></a>
-        </div>
       </div>
-      {%- comment -%} routes are secondary TEXT links, not competing cards — the original
-         Chris/Unbounce spec ("one main course"), restored 2026-07-24; blocks unchanged {%- endcomment -%}
+      {%- comment -%} Routes stay TEXT links, not cards or buttons. They were secondary to the
+         discovery CTA (Chris/Unbounce "one main course", restored 2026-07-24); with that CTA
+         removed they are now the band's content, and text links keep them equal — three doors,
+         no false hierarchy. The page's buttons are the hero pair above. Blocks unchanged.
+         {%- endcomment -%}
       {%- assign helps = section.blocks | where: "type", "help" -%}
       {%- if helps.size > 0 -%}
       <div class="rd-helplinks rd-mt3">
@@ -1786,36 +1789,13 @@ document.addEventListener('click', function (e) {
     },
     {
       "type": "header",
-      "content": "Get involved (intro)"
+      "content": "Ways in (routes band)"
     },
     {
       "type": "text",
       "id": "help_eyebrow",
-      "label": "Eyebrow",
-      "default": "Get involved"
-    },
-    {
-      "type": "text",
-      "id": "help_title",
-      "label": "Heading",
-      "default": "three ways to be part of it."
-    },
-    {
-      "type": "textarea",
-      "id": "help_intro",
-      "label": "Intro",
-      "default": "Every route — buying, partnering or funding — creates measurable change."
-    },
-    {
-      "type": "text",
-      "id": "help_cta_label",
-      "label": "Primary CTA label",
-      "default": "book a discovery call"
-    },
-    {
-      "type": "url",
-      "id": "help_cta_url",
-      "label": "Primary CTA link (defaults to contact form, discovery-call subject)"
+      "label": "Eyebrow (opens the routes band)",
+      "default": "start here"
     },
     {
       "type": "header",
