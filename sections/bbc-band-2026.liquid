@@ -48,7 +48,11 @@
   {%- if section.settings.cta1_label != blank or section.settings.cta2_label != blank -%}
     <div class="rd-flex rd-mt3{% if centered %} rd-jc-center{% endif %}">
       {%- if section.settings.cta1_label != blank -%}
-        <a class="rd-btn {% if section.settings.cta1_style == 'ghost' %}rd-ghost{% else %}rd-lime{% endif %}" href="{{ section.settings.cta1_link | default: '/' }}">{{ section.settings.cta1_label | replace: " →", " →" }}</a>
+        {%- comment -%} Estate convention (bbc-hero-band): the PRIMARY/lime CTA carries a trailing
+          rd-arrow, the ghost secondary does not. The Band was the one section not doing it, so its
+          buttons read as foreign next to every other band on the page. Guarded so a label that
+          already ends in an arrow doesn't get a second one. {%- endcomment -%}
+        <a class="rd-btn {% if section.settings.cta1_style == 'ghost' %}rd-ghost{% else %}rd-lime{% endif %}" href="{{ section.settings.cta1_link | default: '/' }}">{{ section.settings.cta1_label | replace: " →", "" | replace: " &rarr;", "" }}{% unless section.settings.cta1_style == 'ghost' %} <span class="rd-arrow">&rarr;</span>{% endunless %}</a>
       {%- endif -%}
       {%- if section.settings.cta2_label != blank -%}
         <a class="rd-btn {% if section.settings.cta2_style == 'lime' %}rd-lime{% else %}rd-ghost{% endif %}" href="{{ section.settings.cta2_link | default: '/' }}">{{ section.settings.cta2_label | replace: " →", " →" }}</a>

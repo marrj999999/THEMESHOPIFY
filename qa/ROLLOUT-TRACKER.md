@@ -15,7 +15,7 @@ Created 2026-07-11 (Phase 0). Update on every state change.*
 ## Pages (Tier 1 — already on standard; re-verify after Phase 1 CSS unification)
 | Page | Section(s) | G1 | G2 | G3 | G4 | CRIT | G5 James | Status |
 |---|---|---|---|---|---|---|---|---|
-| /pages/why-bamboo | bbc-hero-band, bbc-stat-band, 3× bbc-pillar, bbc-statement, bbc-section, bbc-logo-wall, bbc-comparison, bbc-faq-section | | | | | | | ⬜ |
+| /pages/why-bamboo | bbc-hero-band, bbc-stat-band, 3× bbc-pillar, bbc-statement, bbc-section, bbc-logo-wall, bbc-comparison, bbc-faq-section, **bbc-band-2026** (closer) | ✅ | ✅ | ✅ | ✅ | — | ⬜ | 🟡 awaiting James |
 | Homepage (Phase 3 rebuild) | bbc-home-2026 + bbc-statement | | | | | | | ⬜ |
 
 ## Pages (Tier 2 — retrofit + content)

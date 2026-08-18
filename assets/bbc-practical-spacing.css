@@ -173,6 +173,36 @@
   padding-bottom: 0 !important;
 }
 
+/* THE SEAM FIX — 2026-08-18.
+   Every rd-system band paints its OWN surface on an inner element, while the
+   .shopify-section wrapper stays transparent. On a monolith page (impact, home)
+   that is invisible: one section, no seams. On a MODULAR page it is not — the
+   wrapper's 56px top + 56px bottom, less the -16px collapse, leaves a 96px strip
+   of the forest <body> showing BETWEEN every band.
+
+   /pages/why-bamboo is the page this broke: 13 sections = 12 dark stripes down
+   its whole length, which is why it read as "much worse than the other pages"
+   while every band on it was individually fine. Measured on draft 196820238710
+   at 1280 before the fix: 96px seam after each of the 12 non-hero sections.
+
+   Same remedy as the block above — the band owns its spacing, the wrapper owns
+   none — scoped to a direct .bbc-rd child so it covers the whole rd system
+   (band, hero-band, stat-band, pillar, statement, comparison, logo-wall, faq)
+   without touching legacy sections. */
+.shopify-section:has(> .bbc-rd) {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* ...and the seam's other half. `.shopify-section + .shopify-section` pulls each
+   section up by --bbc-space-sm (16px) to close the double-padding gap the rule
+   above used to create. With the padding now zero that margin has nothing left to
+   collapse, so it would drag each band 16px INTO the one before it and clip the
+   top of its content. Bands butt edge-to-edge instead. */
+.shopify-section:has(> .bbc-rd) + .shopify-section:has(> .bbc-rd) {
+  margin-top: 0 !important;
+}
+
 /* Header section group — header has its own internal padding via .header { }
    The global .shopify-section rule was adding 32px white space ABOVE and BELOW
    the navigation bar, creating the reported "header top/bottom white gap". */

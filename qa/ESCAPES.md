@@ -683,3 +683,36 @@ will fail it silently and forever.
 **Concretely:** any check asserting a *design* property must enumerate every class that satisfies
 it, and should be spot-checked against a rendering before its number is published anywhere. Two
 of the last three false conclusions in this project came from trusting a number over an image.
+
+---
+
+## #44 — the same artefact as #42, a different mechanism, and the fix that ends it (2026-08-18)
+
+**Near-escape, caught before any edit — but only just.** Capturing `/pages/why-bamboo` for the
+rebuild, the accessibility pillar's whole media half and every card in the build gallery came out
+as flat dark rectangles. `bbc-rd-frame-build.jpg` was about to be reported as a broken asset, and
+I had already started reasoning about a fix to `bbc-media`'s fallback branch.
+
+**It was not a broken asset.** The file is present on the theme, the CDN returns `200` with
+389 KB of valid JPEG, and it decodes to 1600×1200. What failed was my capture: the script scrolled
+the page in 700px jumps 90ms apart to force lazy images in, then screenshotted. Fast programmatic
+scrolling outruns lazy-loading — the browser never commits to fetching an image that was only
+briefly near the viewport. Reloading and scrolling at a human pace (200px steps, 260ms apart, then
+a settle) loaded it every time, and flipping `loading="eager"` on the stalled element loaded it
+instantly.
+
+**Not the same cause as #42.** #42 was reveal-animation start-state under `fullPage`. This is
+lazy-load starvation. Same symptom, same page, same wrong conclusion available — which is the
+point: "band renders black" has now had two distinct innocent causes and zero real ones.
+
+**Rule — make the capture prove it, don't trust the pixels.** Any screenshot script used as
+evidence must, before capturing: set `loading = 'eager'` on every `img`, await each one's
+`load`/`error`, and then assert that zero images have `naturalWidth === 0` — printing the list if
+any remain. `qa/`-adjacent capture scripts now do this and log `all images loaded` or a named
+list. A capture that cannot state that images loaded is not evidence, and a black band in one is
+a claim about the script, not the page.
+
+**Cost of the near-miss.** Roughly an hour of investigation, and it very nearly produced a
+"fix" to `bbc-media` for a bug that does not exist — which would have shipped real risk to every
+image on the estate to solve an imaginary one. Fourth scroll/paint artefact in this project
+(2026-08-03, #42, and a stuck-reveal false positive before it).

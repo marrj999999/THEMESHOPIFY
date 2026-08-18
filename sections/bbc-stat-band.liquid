@@ -17,6 +17,12 @@
 <div class="bbc-rd {{ bg_cls }}">
   <section class="rd-pad-sm">
     <div class="rd-wrap">
+      {%- comment -%} PAGE-STANDARD S1: every non-hero band opens with an eyebrow. This band had no
+        way to carry one, which is why /pages/why-bamboo scored 83% against impact's 100%. Blank by
+        default, so no existing placement changes. {%- endcomment -%}
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="rd-eyebrow{% if bg == 'dark' %} rd-on-dark{% endif %}">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
       <div class="rd-stats">
         {% content_for 'blocks' %}
       </div>
@@ -31,6 +37,9 @@
   "class": "bbc-statband-wrap",
   "blocks": [{ "type": "bbc-stat" }],
   "settings": [
+    {
+      "type": "text", "id": "eyebrow", "label": "Eyebrow (small label above the figures)"
+    },
     {
       "type": "select", "id": "background", "label": "Background", "default": "paper",
       "options": [
