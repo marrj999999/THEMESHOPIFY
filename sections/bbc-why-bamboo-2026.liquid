@@ -171,7 +171,8 @@
     .bbc-rd-whybamboo .wbx-frame strong{ color:var(--wf); }
     @media(max-width:749px){ .bbc-rd-whybamboo .wbx-tiles{ grid-template-columns:repeat(2,1fr); } .bbc-rd-whybamboo .wbx-bar{ grid-template-columns:84px 1fr 46px; gap:10px; } }
   </style>
-  <section class="rd-pad rd-paper wbx">
+  <section class="rd-pad rd-paper rd-graph wbx">
+  <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     <div class="rd-wrap">
       <span class="rd-eyebrow">{{ section.settings.compare_eyebrow | default: 'The engineering' }}</span>
       <h2 class="rd-reveal">{{ section.settings.compare_heading | default: 'how bamboo measures up' }}</h2>

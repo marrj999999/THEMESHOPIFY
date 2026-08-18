@@ -382,6 +382,7 @@
           {%- endfor -%}
         </div>
       </div>
+        <p class="rd-specline">{{ section.settings.fab_spec | default: 'spec — BS ISO 22157:2019 · tensile 84.3 MPa · Swansea University' }}</p>
     </section>
   {%- endif -%}
 
@@ -625,7 +626,8 @@
   {%- comment -%} ============== RELATED KITS ============== {%- endcomment -%}
   {%- assign related = section.blocks | where: 'type', 'related' -%}
   {%- if related.size > 0 -%}
-    <section class="rd-section rd-pad-sm rd-paper">
+    <section class="rd-section rd-pad-sm rd-steel">
+      <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
       <div class="rd-wrap">
         {%- if section.settings.related_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.related_eyebrow }}</span>{%- endif -%}
         <div class="rd-flex rd-between rd-mb-28px">
@@ -760,12 +762,40 @@
   "tag": "section",
   "class": "bbc-rd-product-section",
   "settings": [
-    { "type": "header", "content": "Editability pass 2026-08-10" },
-    { "type": "text", "id": "tx_crumb_kits", "label": "Frame Kits", "default": "Frame Kits" },
-    { "type": "text", "id": "tx_size_label", "label": "Choose your size / option", "default": "Choose your size / option" },
-    { "type": "text", "id": "tx_watch_build", "label": "Watch the build", "default": "Watch the build" },
-    { "type": "text", "id": "tx_film_h2", "label": "See a frame come together.", "default": "See a frame come together." },
-    { "type": "textarea", "id": "tx_film_p", "label": "Film band body", "default": "The same hand-build every kit follows \u2014 start to finish, on camera." },
+    {
+      "type": "header",
+      "content": "Editability pass 2026-08-10"
+    },
+    {
+      "type": "text",
+      "id": "tx_crumb_kits",
+      "label": "Frame Kits",
+      "default": "Frame Kits"
+    },
+    {
+      "type": "text",
+      "id": "tx_size_label",
+      "label": "Choose your size / option",
+      "default": "Choose your size / option"
+    },
+    {
+      "type": "text",
+      "id": "tx_watch_build",
+      "label": "Watch the build",
+      "default": "Watch the build"
+    },
+    {
+      "type": "text",
+      "id": "tx_film_h2",
+      "label": "See a frame come together.",
+      "default": "See a frame come together."
+    },
+    {
+      "type": "textarea",
+      "id": "tx_film_p",
+      "label": "Film band body",
+      "default": "The same hand-build every kit follows — start to finish, on camera."
+    },
     {
       "type": "header",
       "content": "Buy box"
@@ -1430,6 +1460,12 @@
       "label": "Mosaic layout (content-aware sizes, no gaps)",
       "info": "Card size is derived from its content: a film goes wide, long copy goes tall, no image goes flat. Gaps backfill automatically. Needs 3+ cards.",
       "default": false
+    },
+    {
+      "type": "text",
+      "id": "fab_spec",
+      "label": "Spec micro-line (fabrication device)",
+      "default": "spec — BS ISO 22157:2019 · tensile 84.3 MPa · Swansea University"
     }
   ],
   "blocks": [

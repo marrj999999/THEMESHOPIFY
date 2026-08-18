@@ -25,7 +25,8 @@
 -%}
 
 <div class="bbc-rd">
-  <section class="rd-pad {{ bg_cls }} wbx">
+  <section class="rd-pad {{ bg_cls }} rd-graph wbx">
+  <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     <div class="rd-wrap">
       {%- if section.settings.kicker != blank -%}
         <span class="rd-eyebrow{% if bg == 'dark' %} rd-on-dark{% endif %}">{{ section.settings.kicker }}</span>

@@ -209,7 +209,11 @@
   "name": "Build to Bond 2026",
   "class": "shopify-section--bbc-b2b-page",
   "settings": [
-    { "type": "text", "id": "cs_heading", "label": "Case-study heading override (blank = site name)" },
+    {
+      "type": "text",
+      "id": "cs_heading",
+      "label": "Case-study heading override (blank = site name)"
+    },
     {
       "type": "header",
       "content": "Hero"
@@ -571,6 +575,12 @@
       "type": "url",
       "id": "cta2_url",
       "label": "CTA 2 link (defaults to Back the mission)"
+    },
+    {
+      "type": "text",
+      "id": "fab_spec",
+      "label": "Spec micro-line (fabrication device)",
+      "default": "qualification — OCN Level 2 · Workshop Skills and Sustainable Manufacturing"
     }
   ],
   "blocks": [
@@ -686,3 +696,4 @@
   ]
 }
 {% endschema %}
+      <p class="rd-specline">{{ section.settings.fab_spec | default: 'qualification — OCN Level 2 · Workshop Skills and Sustainable Manufacturing' }}</p>

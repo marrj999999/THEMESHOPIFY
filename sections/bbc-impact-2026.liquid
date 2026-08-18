@@ -503,6 +503,7 @@
   {%- comment -%} ---------- WHERE WE WORK (named prison sites) ---------- {%- endcomment -%}
   {%- if section.settings.sites_title != blank -%}
   <section class="rd-pad-sm rd-paper" id="map">
+    <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     <div class="rd-wrap rd-mw-820px">
       {%- if section.settings.sites_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.sites_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal rd-mw-22ch rd-mx-auto">{{ section.settings.sites_title }}</h2>
@@ -550,7 +551,7 @@
 
   {%- comment -%} ---------- RECOGNISED BY (credibility quotes) ---------- {%- endcomment -%}
   {%- if section.settings.cred_quote1 != blank -%}
-  <section class="rd-pad-sm rd-paper bbc-impact-cred" id="who-its-for">
+  <section class="rd-pad-sm rd-steel bbc-impact-cred" id="who-its-for">{%- comment -%} paper->steel 2026-08-18: sat in a paper triple (map/who/backers) — S3 {%- endcomment -%}
     <div class="rd-wrap">
       {%- if section.settings.cred_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.cred_eyebrow }}</span>{%- endif -%}
       {%- if section.settings.cred_heading != blank -%}<h2 class="rd-reveal rd-mw-22ch">{{ section.settings.cred_heading }}</h2>{%- endif -%}
@@ -603,6 +604,7 @@
      The ministerial quote moved down with the backers — an endorsement is backing, not routing.
   {%- endcomment -%}
   <section class="rd-pad-sm rd-paper bbc-impact-backs" id="backers">
+    <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     <div class="rd-wrap" style="position:relative;">
       <span class="rd-seal" aria-hidden="true">{{ section.settings.seal_text | default: "OCN accredited · CIC · since 2012" }}</span>
       {%- if section.settings.backs_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.backs_eyebrow }}</span>{%- endif -%}

@@ -411,3 +411,10 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 .bbc-rd .rd-band .rd-dark .acc-stats li{ border-right-color:rgba(230,220,200,.25); }
 .bbc-rd .rd-band .rd-stat-src{ font-size:11px; font-weight:700; letter-spacing:.1em; opacity:.6; margin:14px 0 0; }
 .bbc-rd .rd-band .rd-dark .rd-stat-src{ opacity:.78; }
+
+/* opt-in graph-paper for spec/engineering bands anywhere (why-bamboo wbx first) */
+.bbc-rd .rd-graph{
+  background-color:var(--paper,#F1E9D8) !important;
+  background-image:linear-gradient(rgba(0,60,50,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,60,50,.055) 1px,transparent 1px),linear-gradient(rgba(0,60,50,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,60,50,.03) 1px,transparent 1px) !important;
+  background-size:96px 96px,96px 96px,24px 24px,24px 24px !important;
+}
