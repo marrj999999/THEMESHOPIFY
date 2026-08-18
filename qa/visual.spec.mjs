@@ -20,6 +20,7 @@ const BASE = 'https://bamboobicycleclub.org';
 // problem, add the rest then and accept the weight knowingly.
 const PAGES = [
   ['home', '/'],
+  ['band-lab', '/pages/band-lab'], // standard-block lab: all 6 bbc-band presets (2026-08-18)
   ['impact', '/pages/impact'], ['whybamboo', '/pages/why-bamboo'],
   ['programmes', '/pages/programmes'], ['schools', '/pages/schools'], ['prisons', '/pages/prisons'],
   ['workshops', '/pages/workshops'], ['workshop-frame', '/pages/bicycle-frame-building-workshop'],

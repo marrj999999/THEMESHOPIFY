@@ -5,6 +5,7 @@
 // for weeks: an audit silently scoped to a subset reads exactly like an audit that passed.
 // Any new estate-wide check should import from here rather than retype a list.
 export const ALL_PAGES = [
+  '/pages/band-lab', // standard-block lab: all 6 bbc-band presets rendered (2026-08-18)
   '/', '/pages/impact', '/pages/programmes',
   '/pages/workshops', '/pages/schools', '/pages/why-bamboo',
   '/pages/bicycleteambuilding', '/pages/contact-us', '/pages/support-mission',

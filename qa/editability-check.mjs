@@ -12,7 +12,7 @@ import { readFileSync, readdirSync, writeFileSync, mkdirSync } from 'fs';
 const SECTIONS_DIR = 'sections';
 // the estate's rendering sections (2026 system + live legacy renderers)
 const ESTATE = readdirSync(SECTIONS_DIR).filter((f) =>
-  /^bbc-(home|impact|product|about|article|blog|collection|footer|header|comparison|parts|statement|workshops?|prisons?|schools?|programmes?|build-to-bond|commissioners|education|support-mission|why-bamboo|media|testimonials|kit-reviews|product-reviews|team|contact|story)[-.]?.*2026.*\.liquid$|^bbc-(comparison|parts|statement)\.liquid$/.test(f));
+  /^bbc-(home|impact|product|about|article|blog|collection|footer|header|comparison|parts|statement|workshops?|prisons?|schools?|programmes?|build-to-bond|commissioners|education|support-mission|why-bamboo|media|testimonials|kit-reviews|product-reviews|team|contact|story|band)[-.]?.*2026.*\.liquid$|^bbc-(comparison|parts|statement)\.liquid$/.test(f));
 
 const report = [];
 for (const file of ESTATE) {

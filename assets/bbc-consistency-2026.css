@@ -277,14 +277,14 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 /* the hero photo sticker — the signature element the rebuild dropped; DNA's
    8px rotated sticker exception, lime (gold stays retired) */
 .bbc-rd-home .ew-sticker{ position:absolute; right:28px; top:clamp(480px,74vh,760px); bottom:auto; z-index:9;
-  background:var(--lime,#D4FD62); color:var(--ink,#0E1A17); font-weight:700; font-size:12.5px;
+  background:var(--lime,#D4FD62); color:var(--ink,#0E1A17); font-weight:700; font-size:clamp(12.5px,12.5px,12.5px);
   text-transform:uppercase; letter-spacing:.09em; padding:9px 14px; border-radius:8px;
   transform:rotate(-2.5deg); box-shadow:3px 3px 0 rgba(0,0,0,.28); max-width:min(70%,340px);
   text-align:center; pointer-events:none; }
 /* mobile: the sticker lands as a badge row between photo and headline — read in the 390 crop, kept (an earlier hide rule assumed it would not fit; it does) */
 /* mobile stat presence: clamp minimums lost the boosted size iOS used to fake */
 @media(max-width:640px){
-  .bbc-rd .rd-heroproof b, .bbc-rd-home .ew-proof b{ font-size:26px !important; line-height:1.05 !important; }
+  .bbc-rd .rd-heroproof b, .bbc-rd-home .ew-proof b{ font-size:clamp(26px,26px,26px) !important; line-height:1.05 !important; }
 }
 /* hero source micro-line: quiet but WCAG-passing (a11y audit: .5 failed contrast) */
 .bbc-rd-home .ew .rd-stat-src, .bbc-rd .rd-hero .rd-stat-src{ font-size:10px; opacity:.78; }
@@ -308,7 +308,7 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 
 /* footer counting ribbon — engagement stat above the wordmark; .rd-num counts up */
 .bbc-rd .rd-foot-count{ margin:26px 0 0; font-size:15px; color:var(--bone,#E6DCC8); opacity:.85; }
-.bbc-rd .rd-foot-count .rd-num{ font-size:22px; font-weight:700; color:var(--lime,#D4FD62); margin-right:4px; }
+.bbc-rd .rd-foot-count .rd-num{ font-size:clamp(22px,22px,22px); font-weight:700; color:var(--lime,#D4FD62); margin-right:4px; }
 
 /* ================================================================
    acc-stats — SINGLE OWNER (2026-08-09). Five stylesheets were
@@ -361,7 +361,7 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
    The homepage reads as a workshop drawing: graph-paper on paper
    surfaces, node-marked band seams, leader-line callouts on imagery,
    spec micro-lines, an engineering titleblock on the hero media.
-   Scoped .bbc-rd-home. Case lives in content, never transforms.
+   Devices estate-scoped .bbc-rd (band system 2026-08-18); graph-paper + titleblock stay home-scoped. Case lives in content, never transforms.
    ================================================================== */
 .bbc-rd.bbc-rd-home .rd-paper{
   background-color:var(--paper,#F1E9D8) !important;
@@ -370,25 +370,44 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
   background-image:linear-gradient(rgba(0,60,50,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,60,50,.055) 1px,transparent 1px),linear-gradient(rgba(0,60,50,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,60,50,.03) 1px,transparent 1px) !important;
   background-size:96px 96px,96px 96px,24px 24px,24px 24px !important;
 }
-.bbc-rd-home .rd-nodediv{ height:0; border-top:1.5px solid rgba(14,26,23,.28); position:relative; max-width:1100px; margin:0 auto; }
-.bbc-rd-home .rd-nodediv i{ position:absolute; top:-7px; width:2px; height:13px; background:rgba(14,26,23,.4); }
-.bbc-rd-home .rd-nodediv i:nth-child(1){ left:18%; } .bbc-rd-home .rd-nodediv i:nth-child(2){ left:19.2%; }
-.bbc-rd-home .rd-nodediv i:nth-child(3){ left:57%; } .bbc-rd-home .rd-nodediv i:nth-child(4){ left:58.4%; }
-.bbc-rd-home .rd-nodediv i:nth-child(5){ left:86%; }
-.bbc-rd-home section > .rd-nodediv{ margin-top:0; transform:translateY(calc(-1 * var(--rd-pad-y, 96px) + 28px)); }
-.bbc-rd-home .rd-specline{ font-size:11px; letter-spacing:.14em; opacity:.55; margin:10px 0 0; }
-.bbc-rd-home .rd-dimwrap{ position:relative; }
-.bbc-rd-home .rd-dim-callout{ position:absolute; left:14px; top:14px; background:var(--paper,#F1E9D8); color:var(--forest,#003C32); border:1.5px solid var(--forest,#003C32); border-radius:3px; font-size:10.5px; font-weight:700; letter-spacing:.08em; padding:4px 9px; z-index:3; }
-.bbc-rd-home .rd-dim-callout::after{ content:""; position:absolute; left:18px; top:100%; width:1px; height:26px; background:var(--forest,#003C32); }
-.bbc-rd-home .rd-dim-callout::before{ content:""; position:absolute; left:15px; top:calc(100% + 24px); width:7px; height:7px; border-radius:50%; border:1.5px solid var(--forest,#003C32); background:transparent; }
+.bbc-rd .rd-nodediv{ height:0; border-top:1.5px solid rgba(14,26,23,.28); position:relative; max-width:1100px; margin:0 auto; }
+.bbc-rd .rd-nodediv i{ position:absolute; top:-7px; width:2px; height:13px; background:rgba(14,26,23,.4); }
+.bbc-rd .rd-nodediv i:nth-child(1){ left:18%; } .bbc-rd .rd-nodediv i:nth-child(2){ left:19.2%; }
+.bbc-rd .rd-nodediv i:nth-child(3){ left:57%; } .bbc-rd .rd-nodediv i:nth-child(4){ left:58.4%; }
+.bbc-rd .rd-nodediv i:nth-child(5){ left:86%; }
+.bbc-rd section > .rd-nodediv{ margin-top:0; transform:translateY(calc(-1 * var(--rd-pad-y, 96px) + 28px)); }
+.bbc-rd .rd-specline{ font-size:11px; letter-spacing:.14em; opacity:.55; margin:10px 0 0; }
+.bbc-rd .rd-dimwrap{ position:relative; }
+.bbc-rd .rd-dim-callout{ position:absolute; left:14px; top:14px; background:var(--paper,#F1E9D8); color:var(--forest,#003C32); border:1.5px solid var(--forest,#003C32); border-radius:3px; font-size:clamp(10.5px,10.5px,10.5px); font-weight:700; letter-spacing:.08em; padding:4px 9px; z-index:3; }
+.bbc-rd .rd-dim-callout::after{ content:""; position:absolute; left:18px; top:100%; width:1px; height:26px; background:var(--forest,#003C32); }
+.bbc-rd .rd-dim-callout::before{ content:""; position:absolute; left:15px; top:calc(100% + 24px); width:7px; height:7px; border-radius:50%; border:1.5px solid var(--forest,#003C32); background:transparent; }
 .bbc-rd-home .rd-titleblock{ position:absolute; left:22px; bottom:22px; display:grid; grid-template-columns:auto auto; border:1.5px solid rgba(230,220,200,.55); font-size:10px; letter-spacing:.1em; color:rgba(230,220,200,.9); z-index:5; background:rgba(0,42,35,.55); backdrop-filter:blur(2px); }
 .bbc-rd-home .rd-titleblock span{ padding:5px 10px; border-bottom:1px solid rgba(230,220,200,.3); }
 .bbc-rd-home .rd-titleblock span:nth-last-child(-n+2){ border-bottom:0; }
 .bbc-rd-home .rd-titleblock span:nth-child(odd){ border-right:1px solid rgba(230,220,200,.3); opacity:.7; }
 @media (max-width:749px){
   .bbc-rd-home .rd-titleblock{ display:none; } /* hero real estate is scarce on phones */
-  .bbc-rd-home .rd-dim-callout{ font-size:9.5px; }
+  .bbc-rd .rd-dim-callout{ font-size:clamp(9.5px,9.5px,9.5px); }
 }
 @media (prefers-reduced-motion: no-preference){
   .bbc-rd-home .rd-titleblock{ transition:opacity .3s ease; }
 }
+
+/* ==================================================================
+   §B STANDARD BAND SYSTEM (bbc-band-2026) — glue only.
+   The band emits canon markup; components are owned elsewhere. This
+   block only gives acc-stats its base layout OUTSIDE the home page
+   (home's inline styles remain the owner there) and the centered row.
+   ================================================================== */
+.bbc-rd .rd-band .acc-stats{ list-style:none; display:flex; flex-wrap:wrap; gap:0; margin:2.2rem 0 0; padding:0; }
+.bbc-rd .rd-band .acc-stats li{ padding:0 1.6rem; border-right:1px solid rgba(7,62,39,.18); }
+.bbc-rd .rd-band .acc-stats li:first-child{ padding-left:0; }
+.bbc-rd .rd-band .acc-stats li:last-child{ border-right:0; }
+.bbc-rd .rd-band .acc-stats b{ display:block; font-weight:800; font-size:clamp(28px,3.4vw,42px); line-height:1; color:var(--forest,#003C32); }
+.bbc-rd .rd-band .acc-stats span{ font-size:.85rem; color:var(--charcoal,#2A332F); }
+.bbc-rd .rd-band .acc-stats.rd-jc-center{ justify-content:center; }
+.bbc-rd .rd-band .rd-dark .acc-stats b{ color:var(--lime,#D4FD62); }
+.bbc-rd .rd-band .rd-dark .acc-stats span{ color:var(--bone,#E6DCC8); }
+.bbc-rd .rd-band .rd-dark .acc-stats li{ border-right-color:rgba(230,220,200,.25); }
+.bbc-rd .rd-band .rd-stat-src{ font-size:11px; font-weight:700; letter-spacing:.1em; opacity:.6; margin:14px 0 0; }
+.bbc-rd .rd-band .rd-dark .rd-stat-src{ opacity:.78; }
