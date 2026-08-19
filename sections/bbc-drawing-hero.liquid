@@ -1,0 +1,121 @@
+{%- comment -%} ============================================================
+  BBC DRAWING HERO — the page opened as a fabrication drawing, not a photo
+  with type on it. Devices come from the approved Claude Design sheet
+  `preview/2026-fabrication.html` (title block · dimension callout · graph
+  paper · node divider), the same language the home v2 identity uses.
+
+  Built for /pages/why-bamboo, which is a page ABOUT a material — so the
+  material is drawn. Every string is a setting; callouts are blocks so their
+  position on the image is editable without touching code.
+  All styling lives in bbc-redesign-2026.css (design brief hard req 2).
+============================================================ {%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+<div class="bbc-rd rd-sheet">
+  <div class="rd-wrap">
+    <div class="rd-dhero">
+      <div class="rd-dhero__l">
+        {%- if section.settings.crumb_label != blank -%}
+          <nav class="rd-crumb rd-crumb--onlight" aria-label="Breadcrumb">
+            <a href="{{ routes.root_url }}">Home</a><span class="rd-sep" aria-hidden="true">/</span><span aria-current="page">{{ section.settings.crumb_label }}</span>
+          </nav>
+        {%- endif -%}
+
+        {%- if section.settings.tb_v1 != blank or section.settings.tb_v2 != blank -%}
+          <div class="rd-tblock" aria-hidden="true">
+            <span class="rd-tb-k rd-tb-r">{{ section.settings.tb_k1 }}</span><span class="rd-tb-r">{{ section.settings.tb_v1 }}</span>
+            <span class="rd-tb-k">{{ section.settings.tb_k2 }}</span><span>{{ section.settings.tb_v2 }}</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h1 class="rd-reveal">{{ section.settings.heading }}</h1>
+        {%- endif -%}
+        {%- if section.settings.lede != blank -%}
+          <p class="rd-lede rd-mt2">{{ section.settings.lede }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.cta1_label != blank or section.settings.cta2_label != blank -%}
+          <div class="rd-flex rd-mt3">
+            {%- if section.settings.cta1_label != blank -%}
+              <a class="rd-btn rd-lime" href="{{ section.settings.cta1_url | default: '#' }}">{{ section.settings.cta1_label }} <span class="rd-arrow">&rarr;</span></a>
+            {%- endif -%}
+            {%- if section.settings.cta2_label != blank -%}
+              <a class="rd-btn rd-ghost" href="{{ section.settings.cta2_url | default: '#' }}">{{ section.settings.cta2_label }}</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="rd-dhero__r rd-dimwrap">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 1400 }}"
+               srcset="{{ section.settings.image | image_url: width: 700 }} 700w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
+               sizes="(max-width:900px) 100vw, 45vw"
+               alt="{{ section.settings.image_alt | escape }}"
+               width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" fetchpriority="high">
+        {%- else -%}
+          <img src="{{ section.settings.image_fallback | default: 'bbc-rd-frame-build.jpg' | asset_url }}"
+               alt="{{ section.settings.image_alt | escape }}" width="1400" height="1050" fetchpriority="high">
+        {%- endif -%}
+
+        {%- comment -%} Callouts are blocks so each label AND its position are editable. {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'callout' and block.settings.text != blank -%}
+            <span class="rd-dim-callout rd-dim-callout--pin" style="top:{{ block.settings.top | default: 30 }}%;left:{{ block.settings.left | default: 34 }}%" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+  {%- if section.settings.show_nodediv -%}
+    <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "BBC Drawing hero",
+  "tag": "section",
+  "class": "bbc-drawing-hero-section",
+  "settings": [
+    { "type": "header", "content": "Breadcrumb" },
+    { "type": "text", "id": "crumb_label", "label": "Breadcrumb label", "default": "Why Bamboo" },
+    { "type": "header", "content": "Title block (drawing panel)" },
+    { "type": "text", "id": "tb_k1", "label": "Row 1 label", "default": "drawing" },
+    { "type": "text", "id": "tb_v1", "label": "Row 1 value", "default": "№ 02 — the material" },
+    { "type": "text", "id": "tb_k2", "label": "Row 2 label", "default": "drawn" },
+    { "type": "text", "id": "tb_v2", "label": "Row 2 value", "default": "by hand, since 2012" },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "heading", "label": "Heading (use <em> for the tinted words)", "default": "a grass that rides like steel" },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "Every workshop opens with the same question. It sounds like a gimmick — until day one is over. This is the material, measured." },
+    { "type": "text", "id": "cta1_label", "label": "Primary CTA label", "default": "read the datasheet" },
+    { "type": "url", "id": "cta1_url", "label": "Primary CTA link" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary CTA label", "default": "build one" },
+    { "type": "url", "id": "cta2_url", "label": "Secondary CTA link" },
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_fallback", "label": "Fallback asset filename", "default": "bbc-rd-frame-build.jpg" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "A bamboo bicycle frame clamped in its building jig" },
+    { "type": "header", "content": "Devices" },
+    { "type": "checkbox", "id": "show_nodediv", "label": "Node-divider seam at the base", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "callout",
+      "name": "Dimension callout",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Label", "default": "culm · 30–40 mm ø" },
+        { "type": "range", "id": "top", "label": "Position from top (%)", "min": 5, "max": 90, "step": 1, "unit": "%", "default": 30 },
+        { "type": "range", "id": "left", "label": "Position from left (%)", "min": 10, "max": 80, "step": 1, "unit": "%", "default": 34 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Drawing hero",
+      "blocks": [ { "type": "callout" }, { "type": "callout" } ]
+    }
+  ]
+}
+{% endschema %}

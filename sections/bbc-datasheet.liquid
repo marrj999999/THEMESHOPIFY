@@ -1,0 +1,111 @@
+{%- comment -%} ============================================================
+  BBC DATASHEET — measured material values, presented as a spec sheet.
+
+  The page previously published ONE of the four numbers an independent lab
+  gave us. The Claims Register (vault System/Claims Register.md, verified
+  2026-07-24) carries the full Swansea set — ultimate tensile 84.34 MPa,
+  ultimate flexural 70.96, ultimate compressive 57.7, Young's modulus
+  6,402.93 — tested to BS ISO 22157:2019.
+
+  The register's instruction is "always cite the standard at the point of
+  claim", which is why the standard and lab sit in a title block IN the band
+  rather than in a footnote further down the page. Values are blocks so a
+  re-test can be entered in the editor.
+  Styling lives in bbc-redesign-2026.css (design brief hard req 2).
+============================================================ {%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign surf = 'rd-sheet'
+  if section.settings.background == 'paper'
+    assign surf = 'rd-paper'
+  elsif section.settings.background == 'steel'
+    assign surf = 'rd-steel'
+  endif
+-%}
+
+<div class="bbc-rd {{ surf }}">
+  <section class="rd-pad"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor }}"{% endif %}>
+    <div class="rd-wrap">
+      <div class="rd-ds__head">
+        <div>
+          {%- if section.settings.eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+          {%- if section.settings.heading != blank -%}<h2 class="rd-reveal rd-mt2">{{ section.settings.heading }}</h2>{%- endif -%}
+        </div>
+        {%- if section.settings.tb_v1 != blank or section.settings.tb_v2 != blank -%}
+          <div class="rd-tblock" aria-hidden="true">
+            <span class="rd-tb-k rd-tb-r">{{ section.settings.tb_k1 }}</span><span class="rd-tb-r">{{ section.settings.tb_v1 }}</span>
+            <span class="rd-tb-k">{{ section.settings.tb_k2 }}</span><span>{{ section.settings.tb_v2 }}</span>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <dl class="rd-ds__grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'spec' -%}
+            <div class="rd-ds__cell rd-reveal" {{ block.shopify_attributes }}>
+              <dt class="rd-ds__lbl">{{ block.settings.label }}</dt>
+              <dd class="rd-ds__val">{{ block.settings.value }}{% if block.settings.unit != blank %}<small>{{ block.settings.unit }}</small>{% endif %}</dd>
+              {%- if block.settings.note != blank -%}<dd class="rd-ds__note">{{ block.settings.note }}</dd>{%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </dl>
+
+      {%- if section.settings.foot_left != blank or section.settings.foot_right != blank -%}
+        <div class="rd-ds__foot">
+          <span>{{ section.settings.foot_left }}</span>
+          {%- if section.settings.foot_right != blank -%}
+            <span>{% if section.settings.foot_url != blank %}<a href="{{ section.settings.foot_url }}">{{ section.settings.foot_right }} &rarr;</a>{% else %}{{ section.settings.foot_right }}{% endif %}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "BBC Datasheet",
+  "tag": "section",
+  "class": "bbc-datasheet-section",
+  "settings": [
+    { "type": "select", "id": "background", "label": "Background", "default": "sheet",
+      "options": [
+        { "value": "sheet", "label": "Drawing sheet (graph paper)" },
+        { "value": "paper", "label": "Paper" },
+        { "value": "steel", "label": "Steel" }
+      ] },
+    { "type": "text", "id": "anchor", "label": "Anchor id (for in-page links)", "default": "datasheet" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "tested, not asserted" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "the numbers we were given, not the ones we liked" },
+    { "type": "header", "content": "Title block — cite the standard" },
+    { "type": "text", "id": "tb_k1", "label": "Row 1 label", "default": "standard" },
+    { "type": "text", "id": "tb_v1", "label": "Row 1 value", "default": "BS ISO 22157:2019" },
+    { "type": "text", "id": "tb_k2", "label": "Row 2 label", "default": "lab" },
+    { "type": "text", "id": "tb_v2", "label": "Row 2 value", "default": "Swansea University" },
+    { "type": "header", "content": "Footnote" },
+    { "type": "text", "id": "foot_left", "label": "Left footnote", "default": "Tensile on 180 × 8 × 3 mm specimens. Our own tubing, sent to an independent lab." },
+    { "type": "text", "id": "foot_right", "label": "Right footnote (link text)", "default": "Published 23 Feb 2023 — full results" },
+    { "type": "url", "id": "foot_url", "label": "Right footnote link" }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Measured value",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Property", "default": "ultimate tensile" },
+        { "type": "text", "id": "value", "label": "Value", "default": "84.3" },
+        { "type": "text", "id": "unit", "label": "Unit", "default": "MPa" },
+        { "type": "text", "id": "note", "label": "Note", "default": "Comparable to mild steel at a fraction of the weight." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Datasheet",
+      "blocks": [ { "type": "spec" }, { "type": "spec" }, { "type": "spec" }, { "type": "spec" } ]
+    }
+  ]
+}
+{% endschema %}

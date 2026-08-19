@@ -1,56 +1,97 @@
 {
   "sections": {
     "hero": {
-      "type": "bbc-hero-band",
+      "type": "bbc-drawing-hero",
       "settings": {
-        "breadcrumb_label": "Why Bamboo",
-        "breadcrumb_url": "/",
-        "eyebrow": "Why bamboo?",
-        "title": "the material you can build — and understand — by hand",
-        "lede": "<p>Grown on six continents. Shaped with hand tools. Tested in university labs. Bamboo is the frame material you can actually understand — and understanding is what makes it sustainable.</p>",
-        "cta1_label": "See the research",
-        "cta1_url": "#research",
+        "crumb_label": "Why Bamboo",
+        "tb_k1": "drawing",
+        "tb_v1": "№ 02 — the material",
+        "tb_k2": "drawn",
+        "tb_v2": "by hand, since 2012",
+        "heading": "a grass that <em>rides like steel</em>",
+        "lede": "Every workshop opens with the same question. It sounds like a gimmick — until day one is over. This is the material, measured.",
+        "cta1_label": "read the datasheet",
+        "cta1_url": "#datasheet",
         "cta2_label": "Build one",
         "cta2_url": "shopify://collections/home-build-kits",
-        "image": "shopify://shop_images/IMG_3554-2.jpg",
-        "fallback": "bbc-rd-hero-ride.jpg",
-        "image_alt": "A bamboo gravel bike on a dramatic coastal clifftop",
-        "background": "dark"
-      }
+        "image": "",
+        "image_fallback": "bbc-rd-wb-bond.jpg",
+        "image_alt": "A gloved hand bonding a bamboo bicycle frame in its jig, flax wrap visible at the joint",
+        "show_nodediv": true
+      },
+      "blocks": {
+        "c1": {
+          "type": "callout",
+          "settings": {
+            "text": "culm · 30–40 mm ø",
+            "top": 22,
+            "left": 42
+          }
+        },
+        "c2": {
+          "type": "callout",
+          "settings": {
+            "text": "joint · flax + carbon",
+            "top": 58,
+            "left": 30
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2"
+      ]
     },
     "stat_band": {
-      "type": "bbc-stat-band",
+      "type": "bbc-datasheet",
+      "settings": {
+        "background": "sheet",
+        "eyebrow": "tested, not asserted",
+        "heading": "the numbers we were given, not the ones we liked",
+        "tb_k1": "standard",
+        "tb_v1": "BS ISO 22157:2019",
+        "tb_k2": "lab",
+        "tb_v2": "Swansea University",
+        "foot_left": "Tensile on 180 × 8 × 3 mm specimens. Our own tubing, sent to an independent lab.",
+        "foot_right": "Published 23 Feb 2023 — full results",
+        "foot_url": "/blogs/news/bamboo-testing-with-swansea-university",
+        "anchor": "datasheet"
+      },
       "blocks": {
         "s1": {
-          "type": "bbc-stat",
+          "type": "spec",
           "settings": {
-            "number": "0.7",
-            "label": "g/cm³ — a tenth the weight of steel",
-            "source": "Density"
+            "label": "ultimate tensile",
+            "value": "84.3",
+            "unit": "MPa",
+            "note": "Comparable to mild steel at a fraction of the weight."
           }
         },
         "s2": {
-          "type": "bbc-stat",
+          "type": "spec",
           "settings": {
-            "number": "84 MPa",
-            "label": "Tensile strength, tested at Swansea",
-            "source": "BS ISO 22157"
+            "label": "ultimate flexural",
+            "value": "70.9",
+            "unit": "MPa",
+            "note": "3-point bending, 300 mm span."
           }
         },
         "s3": {
-          "type": "bbc-stat",
+          "type": "spec",
           "settings": {
-            "number": "4,000+",
-            "label": "Builders trained since 2012",
-            "source": "45 countries"
+            "label": "ultimate compressive",
+            "value": "57.7",
+            "unit": "MPa",
+            "note": "The load a seat tube actually sees."
           }
         },
         "s4": {
-          "type": "bbc-stat",
+          "type": "spec",
           "settings": {
-            "number": "7",
-            "label": "University research partners",
-            "source": "Swansea · UCL · Manchester · Oxford Brookes · LSBU …"
+            "label": "young's modulus",
+            "value": "6,403",
+            "unit": "MPa",
+            "note": "Stiffness — why it damps instead of ringing."
           }
         }
       },
@@ -59,11 +100,7 @@
         "s2",
         "s3",
         "s4"
-      ],
-      "settings": {
-        "background": "dark",
-        "eyebrow": "the numbers"
-      }
+      ]
     },
     "feature_science": {
       "type": "bbc-pillar",
@@ -386,7 +423,7 @@
         "col_carbon": "",
         "col_buildable": "Build it yourself?",
         "notes": "<p>Ranges reflect species, alloy and lay-up — bamboo especially varies with species, culm and moisture, which is exactly why we test to a standard. Our 84 MPa is a real culm section tested at Swansea (BS ISO 22157). † Carbon's headline strength is measured along the fibre; a frame tube only ever sees a fraction of it. Sources: Swansea University test data; Sharma &amp; Harries (2015); Wegst &amp; Ashby (2004); MatWeb / ASM.</p>",
-        "framing": "Carbon is lighter and stiffer. Bamboo answers on damping and comfort — and it's the only one of the four you can build yourself, by hand, in a weekend."
+        "framing": ""
       }
     },
     "build_gallery": {
@@ -575,6 +612,46 @@
         "cta1_style": "lime",
         "show_nodediv": true
       }
+    },
+    "honest": {
+      "type": "bbc-honest",
+      "settings": {
+        "eyebrow": "what we won't claim",
+        "heading": "steel wins on strength",
+        "star": true,
+        "note": "And carbon wins on stiffness-to-weight. We publish the figure that lost as well as the one that won — every number above is an independent lab's, not ours."
+      },
+      "blocks": {
+        "w1": {
+          "type": "win",
+          "settings": {
+            "kicker": "where bamboo wins",
+            "lead": "Damping.",
+            "text": "It turns road buzz into heat instead of passing it to your hands."
+          }
+        },
+        "w2": {
+          "type": "win",
+          "settings": {
+            "kicker": "and wins again",
+            "lead": "Repairability.",
+            "text": "Repaired with local materials and basic skills — which is why the Kenya and Rwanda programmes teach building, not shipping."
+          }
+        },
+        "w3": {
+          "type": "win",
+          "settings": {
+            "kicker": "and the one nobody else can claim",
+            "lead": "You can build it.",
+            "text": "The only one of the four you can cut with a hand saw, in a weekend, with no factory."
+          }
+        }
+      },
+      "block_order": [
+        "w1",
+        "w2",
+        "w3"
+      ]
     }
   },
   "order": [
@@ -585,6 +662,7 @@
     "science_video",
     "research",
     "comparison",
+    "honest",
     "universities",
     "education",
     "feature_accessibility",

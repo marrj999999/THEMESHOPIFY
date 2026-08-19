@@ -485,18 +485,18 @@
   "bands": [
    {
     "top": 111,
-    "h": 648,
-    "bg": "#003C32",
+    "h": 580,
+    "bg": "#F1E9D8",
     "pt": 0,
     "pb": 0,
-    "head": "the material you can build — and underst",
-    "hsize": 86,
-    "eyebrow": true,
-    "reveal": false,
-    "cls": "bbc-rd bbc-hero-band"
+    "head": "a grass that rides like steel",
+    "hsize": 52,
+    "eyebrow": false,
+    "reveal": true,
+    "cls": "bbc-rd rd-sheet"
    },
    {
-    "top": 759,
+    "top": 691,
     "h": 756,
     "bg": "#E6DCC8",
     "pt": 0,
@@ -508,19 +508,19 @@
     "cls": "bbc-rd bbcpl-wrap"
    },
    {
-    "top": 1515,
-    "h": 275,
-    "bg": "#003C32",
+    "top": 1447,
+    "h": 808,
+    "bg": "#F1E9D8",
     "pt": 0,
     "pb": 0,
-    "head": "",
-    "hsize": 0,
+    "head": "the numbers we were given, not the ones ",
+    "hsize": 95,
     "eyebrow": true,
     "reveal": true,
-    "cls": "bbc-rd rd-dark"
+    "cls": "bbc-rd rd-sheet"
    },
    {
-    "top": 1790,
+    "top": 2256,
     "h": 799,
     "bg": "#E6DCC8",
     "pt": 0,
@@ -532,7 +532,7 @@
     "cls": "bbc-rd bbcpl-wrap"
    },
    {
-    "top": 2589,
+    "top": 3055,
     "h": 1274,
     "bg": "#F1E9D8",
     "pt": 0,
@@ -544,7 +544,7 @@
     "cls": "bbc-rd rd-paper"
    },
    {
-    "top": 3864,
+    "top": 4329,
     "h": 949,
     "bg": "#DEE6F0",
     "pt": 0,
@@ -556,8 +556,8 @@
     "cls": "bbc-rd rd-steel"
    },
    {
-    "top": 4812,
-    "h": 1362,
+    "top": 5278,
+    "h": 1248,
     "bg": "#E6DCC8",
     "pt": 0,
     "pb": 0,
@@ -568,7 +568,19 @@
     "cls": "bbc-rd"
    },
    {
-    "top": 6174,
+    "top": 6526,
+    "h": 628,
+    "bg": "#003C32",
+    "pt": 0,
+    "pb": 0,
+    "head": "steel wins on strength*",
+    "hsize": 95,
+    "eyebrow": true,
+    "reveal": true,
+    "cls": "bbc-rd rd-dark"
+   },
+   {
+    "top": 7154,
     "h": 317,
     "bg": "#DEE6F0",
     "pt": 0,
@@ -580,7 +592,7 @@
     "cls": "bbc-rd rd-steel"
    },
    {
-    "top": 6491,
+    "top": 7472,
     "h": 738,
     "bg": "#003C32",
     "pt": 0,
@@ -592,7 +604,7 @@
     "cls": "bbc-rd bbcst-wrap"
    },
    {
-    "top": 7229,
+    "top": 8210,
     "h": 756,
     "bg": "#E6DCC8",
     "pt": 0,
@@ -604,7 +616,7 @@
     "cls": "bbc-rd bbcpl-wrap"
    },
    {
-    "top": 7985,
+    "top": 8966,
     "h": 1479,
     "bg": "#F1E9D8",
     "pt": 0,
@@ -616,7 +628,7 @@
     "cls": "bbc-rd rd-paper"
    },
    {
-    "top": 9465,
+    "top": 10445,
     "h": 923,
     "bg": "#DEE6F0",
     "pt": 0,
@@ -628,7 +640,7 @@
     "cls": "bbc-rd rd-steel"
    },
    {
-    "top": 10387,
+    "top": 11367,
     "h": 544,
     "bg": "#E6DCC8",
     "pt": 0,
@@ -947,7 +959,7 @@
    },
    {
     "top": 8929,
-    "h": 520,
+    "h": 327,
     "bg": "#DEE6F0",
     "pt": 58,
     "pb": 58,
@@ -958,7 +970,7 @@
     "cls": "rd-pad-sm rd-steel"
    },
    {
-    "top": 9449,
+    "top": 9257,
     "h": 543,
     "bg": "#003C32",
     "pt": 77,
@@ -1606,19 +1618,7 @@
     "cls": "rd-section rd-pad-sm"
    },
    {
-    "top": 10388,
-    "h": 278,
-    "bg": "#F1E9D8",
-    "pt": 58,
-    "pb": 58,
-    "head": "",
-    "hsize": 0,
-    "eyebrow": false,
-    "reveal": false,
-    "cls": "rd-section rd-pad-sm"
-   },
-   {
-    "top": 11480,
+    "top": 11318,
     "h": 1077,
     "bg": "#E6DCC8",
     "pt": 0,
@@ -1630,7 +1630,7 @@
     "cls": "bbc-rd bbc-rd-builderstories"
    },
    {
-    "top": 12558,
+    "top": 12395,
     "h": 601,
     "bg": "#DEE6F0",
     "pt": 58,
@@ -1731,19 +1731,7 @@
     "cls": "rd-section rd-pad-sm"
    },
    {
-    "top": 10225,
-    "h": 278,
-    "bg": "#F1E9D8",
-    "pt": 58,
-    "pb": 58,
-    "head": "",
-    "hsize": 0,
-    "eyebrow": false,
-    "reveal": false,
-    "cls": "rd-section rd-pad-sm"
-   },
-   {
-    "top": 11273,
+    "top": 11110,
     "h": 1099,
     "bg": "#E6DCC8",
     "pt": 0,
@@ -1755,7 +1743,7 @@
     "cls": "bbc-rd bbc-rd-builderstories"
    },
    {
-    "top": 12372,
+    "top": 12210,
     "h": 601,
     "bg": "#DEE6F0",
     "pt": 58,

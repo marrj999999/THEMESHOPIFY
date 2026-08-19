@@ -748,3 +748,39 @@ not "fix" anything it reports without first tracing the rule that produces the v
 **What the estate actually scores**, measured the same afternoon: census 69/69 OK · anatomy
 conformance all OK · editability 0 findings across 25 sections · band-grammar OK · page-standard
 0 pages outside the standard. The pages are on the correct blocks. One gate just says otherwise.
+
+---
+
+## #46 — I broke three untouched pages by claiming a class name that was taken (2026-08-19)
+
+**Caught by the visual suite, not by me.** The why-bamboo "material, drawn" rebuild added a
+positioned dimension callout and I named its class `.rd-dim`:
+
+```css
+.bbc-rd .rd-dim{ position:absolute; ... }
+```
+
+`.rd-dim` was already the estate's **dimension-tick modifier for stat rows**
+(`bbc-redesign-2026.css:713`, `.bbc-rd .rd-stats.rd-dim`). Absolutely positioning it collapsed
+the stat rows on `/pages/our-story-2` and both kit PDPs — **three pages this work never touched**
+— each losing 160–380px of height. Every targeted gate stayed green: geometry 0, consistency
+15/15, contrast clean, page-standard 100%. They all check the page you are working on.
+
+**Worse: the component already existed.** `bbc-consistency-2026.css:381` has `.rd-dim-callout`
+(+ `.rd-dimwrap`), the estate's dimension callout, already used by the Band split variant. I had
+built a second one and given it a colliding name. The fix was to delete mine and add a
+positioned modifier to theirs — which is also why the callout now looks identical to every other
+callout on the site, instead of merely similar.
+
+**Rule, and it is two rules.**
+1. **Grep the class name before you claim it.** `grep -rn "\.rd-yourname\b" assets/` costs one
+   second. A new class that collides with an old one is indistinguishable from a CSS bug on
+   pages nobody is looking at.
+2. **Grep for the component before you build it.** Search the CSS for what the thing *does*
+   ("callout", "badge", "tick") — not the name you were about to give it. The estate is large
+   enough that the thing you need usually exists.
+
+**Why the gates could not have caught it.** Page-scoped checks pass by construction when the
+damage is elsewhere. The estate-wide pixel diff is the only instrument that sees it, and it only
+sees it because baselines exist for pages nobody edited that day. That is the argument for
+running the full visual suite before commit, not just the page you changed.

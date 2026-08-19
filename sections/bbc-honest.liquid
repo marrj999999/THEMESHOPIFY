@@ -1,0 +1,84 @@
+{%- comment -%} ============================================================
+  BBC HONEST BEAT — the claim we refuse, then the ones we defend.
+
+  The strongest sentence on /pages/why-bamboo was buried in 12px small print
+  at the foot of the comparison table ("Carbon is lighter and stiffer. Bamboo
+  answers on damping and comfort — and it's the only one of the four you can
+  build yourself"). This band promotes it, and pairs it with the asterisk-
+  footnote honesty the design brief asks for ("dial UP the brutalist-editorial
+  signature — asterisk-footnote honesty").
+
+  Saying plainly what bamboo LOSES at is the move no competitor makes, and it
+  is the one that makes the numbers above it believable. Wins are blocks.
+
+  Heading states the loss in OUR words ("steel wins on strength"). The first
+  draft negated the banned comparison instead, and claim-lint blocked it —
+  correctly. A negation reads fine to a human, but the prohibited phrase is
+  still sitting in the page to be screenshotted, quoted or indexed against us.
+  Never write the banned claim in order to deny it.
+  Styling lives in bbc-redesign-2026.css (design brief hard req 2).
+============================================================ {%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+<div class="bbc-rd rd-dark rd-hon">
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="rd-eyebrow rd-on-dark">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="rd-reveal rd-mt2">{{ section.settings.heading }}{% if section.settings.star %}<sup>*</sup>{% endif %}</h2>
+      {%- endif -%}
+
+      <div class="rd-hon__cols">
+        {%- if section.settings.note != blank -%}
+          <div class="rd-hon__note">
+            {%- if section.settings.star -%}<span class="rd-hon__star" aria-hidden="true">*</span>{%- else -%}<span></span>{%- endif -%}
+            <p class="rd-on-dark">{{ section.settings.note }}</p>
+          </div>
+        {%- endif -%}
+
+        {%- assign wins = section.blocks | where: 'type', 'win' -%}
+        {%- if wins.size > 0 -%}
+          <dl class="rd-hon__wins">
+            {%- for block in wins -%}
+              <dt {{ block.shopify_attributes }}>{{ block.settings.kicker }}</dt>
+              <dd>{%- if block.settings.lead != blank -%}<b>{{ block.settings.lead }}</b> {% endif %}{{ block.settings.text }}</dd>
+            {%- endfor -%}
+          </dl>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "BBC Honest beat",
+  "tag": "section",
+  "class": "bbc-honest-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "what we won't claim" },
+    { "type": "text", "id": "heading", "label": "Heading — the claim you refuse", "default": "steel wins on strength" },
+    { "type": "checkbox", "id": "star", "label": "Asterisk footnote device", "default": true },
+    { "type": "textarea", "id": "note", "label": "The footnote", "default": "And carbon wins on stiffness-to-weight. We publish the figure that lost as well as the one that won — every number above is an independent lab's, not ours." }
+  ],
+  "blocks": [
+    {
+      "type": "win",
+      "name": "Where bamboo wins",
+      "settings": [
+        { "type": "text", "id": "kicker", "label": "Kicker", "default": "where bamboo wins" },
+        { "type": "text", "id": "lead", "label": "Lead word", "default": "Damping." },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "It turns road buzz into heat instead of passing it to your hands." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Honest beat",
+      "blocks": [ { "type": "win" }, { "type": "win" }, { "type": "win" } ]
+    }
+  ]
+}
+{% endschema %}

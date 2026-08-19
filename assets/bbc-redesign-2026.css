@@ -1681,3 +1681,87 @@
   .bbc-rd .rd-cmp-67002 .rd-sep { display: none; }
   .bbc-rd .rd-cmp-67002 { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
 }
+
+/* =========================================================================
+   FABRICATION-DRAWING DEVICES — "the material, drawn" (2026-08-19)
+   -------------------------------------------------------------------------
+   The blueprint that ships in every kit, made into page language. Ported from
+   the approved Claude Design sheet `preview/2026-fabrication.html`, which the
+   home v2 identity already uses. Why Bamboo is a page ABOUT a material, so it
+   is drawn rather than described.
+   No new hex — every colour is an existing token (design brief, hard req 2).
+   ========================================================================= */
+
+/* Drawing sheet — graph paper as the page ground, not one band's decoration */
+.bbc-rd.rd-sheet, .bbc-rd .rd-sheet{
+  background:var(--paper);
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--forest) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--forest) 6%, transparent) 1px, transparent 1px);
+  background-size:24px 24px;
+  position:relative;
+}
+
+/* Title block — the drawing's identity panel */
+.bbc-rd .rd-tblock{
+  display:inline-grid; grid-template-columns:auto auto;
+  border:1.5px solid var(--forest); background:var(--paper);
+  font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--forest);
+}
+.bbc-rd .rd-tblock > span{ padding:5px 10px; }
+.bbc-rd .rd-tblock > .rd-tb-k{ border-right:1px solid var(--forest); opacity:.7; }
+.bbc-rd .rd-tblock > .rd-tb-r{ border-bottom:1px solid var(--forest); }
+
+/* Dimension callout — POSITIONED variant of the estate's existing .rd-dim-callout
+   (bbc-consistency-2026.css:381), which pins to the top-left of its media box with a
+   downward leader. The drawing hero needs callouts placed ON the subject, so this
+   modifier takes top/left inline and turns the leader to point left instead.
+
+   NOT a new class: the first cut of this used `.rd-dim`, which is already the
+   dimension-tick modifier for .rd-stats (redesign:713). Absolutely positioning it
+   collapsed the stat rows on /pages/our-story-2 and both kit PDPs — three pages this
+   work never touched. The visual suite caught it. Check a class name is free before
+   claiming it. */
+.bbc-rd .rd-dim-callout.rd-dim-callout--pin{ left:auto; top:auto; white-space:nowrap; text-transform:uppercase; }
+.bbc-rd .rd-dim-callout.rd-dim-callout--pin::after{ left:-30px; top:50%; width:30px; height:1.5px; }
+.bbc-rd .rd-dim-callout.rd-dim-callout--pin::before{ left:-33px; top:calc(50% - 2.5px); width:5px; height:5px; border-radius:50%; background:var(--forest); border:0; }
+@media (max-width:749px){ .bbc-rd .rd-dim-callout.rd-dim-callout--pin{ display:none; } } /* leader lines need room to read */
+
+/* ---- Drawing hero ---- */
+.bbc-rd .rd-dhero{ display:grid; grid-template-columns:1.15fr .85fr; min-height:560px; align-items:stretch; }
+.bbc-rd .rd-dhero__l{ padding:64px 0 56px; display:flex; flex-direction:column; justify-content:center; }
+.bbc-rd .rd-dhero h1{ margin:18px 0 0; max-width:13ch; }
+.bbc-rd .rd-dhero h1 em{ font-style:normal; color:var(--forest-300); }
+.bbc-rd .rd-dhero__r{ position:relative; overflow:hidden; border-left:1.5px solid color-mix(in srgb, var(--forest) 18%, transparent); }
+.bbc-rd .rd-dhero__r img{ width:100%; height:100%; object-fit:cover; display:block; }
+@media (max-width:900px){
+  .bbc-rd .rd-dhero{ grid-template-columns:1fr; min-height:0; }
+  .bbc-rd .rd-dhero__l{ padding:48px 0 36px; }
+  .bbc-rd .rd-dhero__r{ border-left:0; min-height:320px; }
+}
+
+/* ---- Datasheet — measured values, standard cited at the point of claim ---- */
+.bbc-rd .rd-ds__head{ display:flex; justify-content:space-between; align-items:flex-start; gap:40px; flex-wrap:wrap; }
+.bbc-rd .rd-ds__grid{
+  display:grid; grid-template-columns:repeat(4,1fr); margin-top:42px;
+  border:1.5px solid var(--forest); background:var(--paper);
+}
+.bbc-rd .rd-ds__cell{ padding:26px 22px 22px; border-right:1.5px solid color-mix(in srgb, var(--forest) 22%, transparent); }
+.bbc-rd .rd-ds__cell:last-child{ border-right:0; }
+.bbc-rd .rd-ds__lbl{ display:block; font-size:var(--fs-10-5); font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--forest-300); }
+.bbc-rd .rd-ds__val{ font-size:clamp(34px,3.6vw,46px); font-weight:800; line-height:1; letter-spacing:-.02em; margin-top:12px; font-variant-numeric:tabular-nums; }
+.bbc-rd .rd-ds__val small{ font-size:.42em; font-weight:700; letter-spacing:0; margin-left:4px; color:var(--charcoal); }
+.bbc-rd .rd-ds__note{ font-size:var(--fs-12-5); color:var(--charcoal); margin-top:8px; line-height:1.35; }
+.bbc-rd .rd-ds__foot{ display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-top:16px; font-size:var(--fs-12-5); color:var(--charcoal); }
+@media (max-width:900px){ .bbc-rd .rd-ds__grid{ grid-template-columns:repeat(2,1fr); } .bbc-rd .rd-ds__cell:nth-child(2n){ border-right:0; } .bbc-rd .rd-ds__cell:nth-child(-n+2){ border-bottom:1.5px solid color-mix(in srgb, var(--forest) 22%, transparent); } }
+@media (max-width:520px){ .bbc-rd .rd-ds__grid{ grid-template-columns:1fr; } .bbc-rd .rd-ds__cell{ border-right:0; border-bottom:1.5px solid color-mix(in srgb, var(--forest) 22%, transparent); } .bbc-rd .rd-ds__cell:last-child{ border-bottom:0; } }
+
+/* ---- Honest beat — the claim we refuse, then the ones we defend ---- */
+.bbc-rd.rd-hon .rd-hon__cols, .bbc-rd .rd-hon__cols{ display:grid; grid-template-columns:1.05fr .95fr; gap:56px; margin-top:34px; align-items:start; }
+.bbc-rd .rd-hon__note{ display:grid; grid-template-columns:26px 1fr; gap:12px; }
+.bbc-rd .rd-hon__star{ color:var(--lime); font-weight:800; font-size:var(--fs-20); line-height:1; }
+.bbc-rd .rd-hon__wins{ border-left:2px solid var(--lime); padding-left:22px; margin:0; }
+.bbc-rd .rd-hon__wins dt{ font-size:var(--fs-11-5); letter-spacing:.14em; text-transform:uppercase; color:var(--lime); font-weight:700; }
+.bbc-rd .rd-hon__wins dd{ margin:4px 0 18px; font-size:var(--fs-18-5); line-height:1.45; color:var(--bone); }
+.bbc-rd.rd-hon h2 sup, .bbc-rd .rd-hon h2 sup{ color:var(--lime); font-size:.44em; vertical-align:super; margin-left:2px; }
+@media (max-width:900px){ .bbc-rd.rd-hon .rd-hon__cols, .bbc-rd .rd-hon__cols{ grid-template-columns:1fr; gap:30px; } }
