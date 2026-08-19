@@ -523,49 +523,10 @@
 
   {%- comment -%} ---------- RECOGNISED BY (credibility quotes) ---------- {%- endcomment -%}
   {%- if section.settings.cred_quote1 != blank -%}
-  <section class="rd-pad-sm rd-steel bbc-impact-cred" id="who-its-for">{%- comment -%} paper->steel 2026-08-18: sat in a paper triple (map/who/backers) — S3 {%- endcomment -%}
-    <div class="rd-wrap">
-      {%- if section.settings.cred_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.cred_eyebrow }}</span>{%- endif -%}
-      {%- if section.settings.cred_heading != blank -%}<h2 class="rd-reveal rd-mw-22ch">{{ section.settings.cred_heading }}</h2>{%- endif -%}
-      {%- if section.settings.cred_sub != blank -%}<p class="rd-lede rd-mt1">{{ section.settings.cred_sub }}</p>{%- endif -%}
-      {%- comment -%} the mechanism sentence — the one content block every benchmarked social
-         enterprise states in one line (Change Please/charity:water/Elvis & Kresse tour,
-         2026-07-24) and this page previously never did {%- endcomment -%}
-      {%- assign _mech = section.settings.cred_mechanism | default: 'Kit and workshop revenue covers our costs — funder money goes straight to programme delivery.' -%}
-      {%- if _mech != blank -%}<p class="rd-mech rd-mt2">{{ _mech }}</p>{%- endif -%}
-
-
-
-      {%- comment -%} WHO WE WORK WITH — customer segment + benefit + route.
-        Added per Chris Barrett feedback (2026-07): "show who our customer is and how
-        they benefit". Pattern borrowed from Bounce Back — address each segment as
-        THEIR OWN QUESTION, answer with the benefit, then route. Copy is vault-sourced
-        (Education MOC / Corporate MOC / Sales Pitches) — do not invent offers or prices.
-      {%- endcomment -%}
-      {%- assign segs = section.blocks | where: "type", "segment" -%}
-      {%- if segs.size > 0 -%}
-      {%- comment -%} Route cards render THE standard card (snippets/bbc-cscard.liquid), 2026-07-31.
-         They were the last card system on this page with no media and two links each, which is why
-         the band read as a different component from the evidence wall above it. Mapping is direct:
-         tag → kind chip, question → heading (the single card-level link), benefit → context.
-      {%- endcomment -%}
-      <ul class="rd-csgrid rd-csgrid-2 rd-mt4" role="list">
-        {%- for block in segs -%}
-          {%- assign _seg_url = block.settings.link_url | default: '/pages/contact-us' -%}
-          {%- render 'bbc-cscard',
-               variant: 'grid',
-               kind: block.settings.tag,
-               heading: block.settings.question,
-               url: _seg_url,
-               context: block.settings.benefit,
-               image_pic: block.settings.image_pic,
-               image: block.settings.image,
-               cta: block.settings.link_label -%}
-        {%- endfor -%}
-      </ul>
-      {%- endif -%}
-    </div>
-  </section>
+  {%- comment -%} WHO IT'S FOR band REMOVED 2026-08-19 (James, via Telegram: remove the
+     "who it's for" section from the impact page). Its settings (cred_eyebrow/heading/sub/
+     mechanism) and the segment blocks stay in the schema but no longer render.
+     cred_quote1 still gates this region and renders in WHO BACKS IT below. {%- endcomment -%}
 
   {%- comment -%} ─────────── WHO BACKS IT — split out 2026-07-31 ───────────
      One band was doing SEVEN jobs: heading, mechanism line, ministerial quote, a 2×2 audience
