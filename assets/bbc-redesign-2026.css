@@ -1765,3 +1765,102 @@
 .bbc-rd .rd-hon__wins dd{ margin:4px 0 18px; font-size:var(--fs-18-5); line-height:1.45; color:var(--bone); }
 .bbc-rd.rd-hon h2 sup, .bbc-rd .rd-hon h2 sup{ color:var(--lime); font-size:.44em; vertical-align:super; margin-left:2px; }
 @media (max-width:900px){ .bbc-rd.rd-hon .rd-hon__cols, .bbc-rd .rd-hon__cols{ grid-template-columns:1fr; gap:30px; } }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   KIT PDP v2 — spec grid + landed-cost band            (2026-08-19)
+
+   Built for the gravel kit PDP rebuild. The archive mining ranks component
+   compatibility and shipping/customs as the top two pre-purchase questions;
+   neither had any representation on the page. Both are presented as tables
+   because that is how the question is asked — a number checked against a part
+   someone already owns, or a cost checked against a budget.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── spec grid ── */
+.bbc-rd .rd-kspec{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0;
+  border:1.5px solid var(--forest);background:var(--paper)}
+.bbc-rd .rd-kspec__cell{
+  padding:16px 18px;
+  border-right:1px solid rgba(0,60,50,.2);
+  border-bottom:1px solid rgba(0,60,50,.2)}
+.bbc-rd .rd-kspec__cell:nth-child(4n){border-right:0}
+.bbc-rd .rd-kspec__cell:nth-last-child(-n+4){border-bottom:0}
+.bbc-rd .rd-kspec__lbl{
+  font-size:var(--fs-10-5);letter-spacing:.12em;text-transform:uppercase;
+  font-weight:700;color:var(--forest-300)}
+.bbc-rd .rd-kspec__val{
+  margin:5px 0 0;font-size:var(--fs-18-5);font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.bbc-rd .rd-kspec__val small{
+  display:block;margin-top:2px;font-size:var(--fs-12-5);font-weight:400;
+  letter-spacing:0;opacity:.72}
+.bbc-rd .rd-kspec__foot{
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;
+  border:1.5px solid var(--forest);border-top:0;padding:11px 18px;
+  font-size:var(--fs-12-5);color:var(--charcoal);background:rgba(0,60,50,.04)}
+.bbc-rd .rd-kspec__foot a{color:var(--forest);font-weight:700}
+
+/* ── landed-cost band ── */
+.bbc-rd .rd-kship{display:grid;grid-template-columns:1.1fr 1fr;gap:44px;align-items:start}
+.bbc-rd .rd-kship__rates{width:100%;border-collapse:collapse;font-size:var(--fs-13-5)}
+.bbc-rd .rd-kship__rates th,
+.bbc-rd .rd-kship__rates td{
+  text-align:left;padding:11px 8px;border-bottom:1px solid rgba(230,220,200,.22)}
+.bbc-rd .rd-kship__rates th{
+  font-size:var(--fs-10-5);letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--lime)}
+.bbc-rd .rd-kship__rates td:last-child,
+.bbc-rd .rd-kship__rates th:last-child{text-align:right}
+.bbc-rd .rd-kship__panel{
+  border:1.5px solid var(--lime);border-radius:8px;padding:20px 22px;background:rgba(212,253,98,.07)}
+.bbc-rd .rd-kship__panel b{
+  display:block;color:var(--lime);font-size:var(--fs-20);letter-spacing:-.01em;margin-bottom:8px}
+.bbc-rd .rd-kship__panel p{margin:0 0 10px;font-size:var(--fs-13-5)}
+.bbc-rd .rd-kship__worked{
+  border-top:1px solid rgba(230,220,200,.25);padding-top:11px;margin-top:4px;
+  font-size:var(--fs-12-5);opacity:.9}
+.bbc-rd .rd-kship__foot{margin:22px 0 0;font-size:var(--fs-12-5);opacity:.8}
+/* The eyebrow's default forest-300 measures 1.83:1 on forest — below AA.
+   On this dark band it has to be lime (10.65:1). */
+.bbc-rd.rd-dark .bbc-kit-shipping-section .rd-eyebrow,
+.bbc-kit-shipping-section .bbc-rd.rd-dark .rd-eyebrow{color:var(--lime)}
+
+@media (max-width:1023px){
+  .bbc-rd .rd-kspec{grid-template-columns:repeat(2,1fr)}
+  .bbc-rd .rd-kspec__cell:nth-child(4n){border-right:1px solid rgba(0,60,50,.2)}
+  .bbc-rd .rd-kspec__cell:nth-child(2n){border-right:0}
+  .bbc-rd .rd-kspec__cell:nth-last-child(-n+4){border-bottom:1px solid rgba(0,60,50,.2)}
+  .bbc-rd .rd-kspec__cell:nth-last-child(-n+2){border-bottom:0}
+  .bbc-rd .rd-kship{grid-template-columns:1fr;gap:28px}
+}
+@media (max-width:479px){
+  .bbc-rd .rd-kspec{grid-template-columns:1fr}
+  .bbc-rd .rd-kspec__cell{border-right:0 !important;border-bottom:1px solid rgba(0,60,50,.2) !important}
+  .bbc-rd .rd-kspec__cell:last-child{border-bottom:0 !important}
+  .bbc-rd .rd-kship__rates{font-size:var(--fs-12-5)}
+}
+
+/* ── sticky buy bar (2026-08-19) ───────────────────────────────────────────
+   A kit PDP is a 4+ fold page and the add-to-cart sits at y≈1147 on desktop,
+   y≈1732 on mobile — so for most of the scroll there is no way to buy without
+   going back up. Standard practice for long product pages, and it costs nothing
+   when the real buy box is on screen. Hidden until the form scrolls away; the
+   button is a link back to the form rather than a second cart form, so there is
+   exactly one add-to-cart on the page and no chance of the two disagreeing. */
+.rd-stickybuy{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;
+  display:flex;align-items:center;gap:16px;
+  padding:11px 20px;background:var(--forest);border-top:1.5px solid var(--lime);
+  transform:translateY(110%);transition:transform .22s ease;
+  box-shadow:0 -6px 24px rgba(0,0,0,.18)}
+.rd-stickybuy[data-show="1"]{transform:translateY(0)}
+.rd-stickybuy__t{color:var(--bone);font-size:var(--fs-13-5);font-weight:700;line-height:1.25}
+.rd-stickybuy__t small{display:block;font-size:var(--fs-11-5);font-weight:400;opacity:.75}
+.rd-stickybuy__cta{margin-left:auto;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.rd-stickybuy{transition:none}}
+/* Price is the decision number — it stays at every width. Only the note goes. */
+.rd-stickybuy__t small b{font-weight:700;opacity:1}
+.rd-stickybuy__t small i{font-style:normal}
+@media (max-width:479px){
+  .rd-stickybuy{padding:9px 14px;gap:10px}
+  .rd-stickybuy__t small i{display:none}
+}

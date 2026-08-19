@@ -46,8 +46,17 @@
 
 <div class="bbc-rd bbc-rd-product">
 
-  {%- comment -%} ============== TOP: BREADCRUMB + GALLERY/BUYBOX ============== {%- endcomment -%}
-  {%- if product -%}
+  {%- comment -%} ============== TOP: BREADCRUMB + GALLERY/BUYBOX ==============
+    `show_buybox` exists so this section can be used TWICE on one template: once at
+    the top carrying the buy box, and once lower down carrying only content bands.
+    Every band in here is block-driven, so which bands appear is already a template
+    decision — but the buy box rendered unconditionally, which made splitting
+    impossible without a second buy box. Introduced 2026-08-19 for the gravel PDP
+    rebuild, where the two highest-ranked customer questions (compatibility and
+    landed cost) needed their own sections between the buy box and the rest.
+    Defaults to true, so every existing kit template is unaffected.
+  {%- endcomment -%}
+  {%- if product and section.settings.show_buybox != false -%}
     {%- assign cv = product.selected_or_first_available_variant -%}
     <section class="rd-section rd-pad-sm">
       <div class="rd-wrap">
@@ -214,8 +223,10 @@
       </div>
     </section>
   {%- else -%}
-    {%- comment -%} Non-product context (degraded): editor placeholder only. {%- endcomment -%}
-    {%- if request.design_mode -%}
+    {%- comment -%} Non-product context (degraded): editor placeholder only.
+      Guarded on `product` too — a second instance with show_buybox off is a
+      deliberate split, not a misplaced section, and must not be told otherwise. {%- endcomment -%}
+    {%- if request.design_mode and product == blank -%}
       <section class="rd-section rd-pad-sm">
         <div class="rd-wrap rd-center">
           <span class="rd-eyebrow">Product section</span>
@@ -225,6 +236,19 @@
       </section>
     {%- endif -%}
   {%- endif -%}
+
+  {%- comment -%} ============== CONTENT BANDS ==============
+    Everything below the buy box is wrapped in one guard so this section can be
+    split across two instances on the same template. Seven of these bands are
+    driven by settings rather than blocks, and two are unguarded entirely, so a
+    second instance would have rendered them a second time. One toggle is easier
+    to reason about than seven, and it makes each instance's job explicit:
+      top   → show_buybox true,  content_bands false
+      lower → show_buybox false, content_bands true (default)
+    Both default to true, so a single-instance template behaves exactly as before.
+  {%- endcomment -%}
+  {%- if section.settings.content_bands != false -%}
+
 
   {%- comment -%} ============== HIGHLIGHTS (image + headline + paragraph — Baymard pattern) ============== {%- endcomment -%}
   {%- assign highlights = section.blocks | where: 'type', 'highlight' -%}
@@ -705,6 +729,36 @@
   {%- comment -%} Stories band — snippets/bbc-stories-band.liquid (2026-08-01). This section
      had no `story` block type, which is why the page carried zero case-study cards. {%- endcomment -%}
   {%- render 'bbc-stories-band', section: section -%}
+  {%- endif -%}{%- comment -%} /content bands {%- endcomment -%}
+
+  {%- comment -%} ---------- STICKY BUY BAR ----------
+    Progressive enhancement only: rendered by the instance that owns the buy box,
+    revealed by IntersectionObserver once the real form leaves the viewport, and
+    it links back to that form rather than duplicating it. No JS, no bar — the
+    page is unaffected. {%- endcomment -%}
+  {%- if product and section.settings.show_buybox != false and section.settings.sticky_buy -%}
+    <div class="rd-stickybuy" data-bbc-stickybuy hidden>
+      <span class="rd-stickybuy__t">{{ product.title }}
+        <small><b>{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</b>{% if section.settings.sticky_note != blank %}<i> · {{ section.settings.sticky_note }}</i>{% endif %}</small>
+      </span>
+      <a class="rd-btn rd-lime rd-stickybuy__cta" href="#bbc-buy-form">{{ section.settings.sticky_label | default: 'Choose your size' }}</a>
+    </div>
+    <script>
+      (function(){
+        var bar=document.querySelector('[data-bbc-stickybuy]'),form=document.getElementById('bbc-buy-form');
+        if(!bar||!form||!('IntersectionObserver' in window))return;
+        bar.hidden=false;
+        new IntersectionObserver(function(e){
+          /* Show only once the form has scrolled ABOVE the viewport. Plain
+             !isIntersecting also fires at scroll 0 on mobile, where the form
+             starts below the fold — which put a buy bar over the gallery before
+             the customer had seen the product. */
+          bar.setAttribute('data-show', e[0].boundingClientRect.top < 0 ? '1' : '0');
+        },{rootMargin:'0px 0px -60px 0px'}).observe(form);
+      })();
+    </script>
+  {%- endif -%}
+
 </div>
 
 {%- comment -%}
@@ -762,6 +816,11 @@
   "tag": "section",
   "class": "bbc-rd-product-section",
   "settings": [
+    { "type": "checkbox", "id": "sticky_buy", "label": "Sticky buy bar on long pages", "default": false, "info": "On for the gravel kit while the v2 layout is in review. Turn on per template as each kit is rolled over." },
+    { "type": "text", "id": "sticky_label", "label": "Sticky bar button label", "default": "Choose your size" },
+    { "type": "text", "id": "sticky_note", "label": "Sticky bar note", "default": "delivered duty paid" },
+    { "type": "checkbox", "id": "content_bands", "label": "Show the content bands below the buy box", "default": true, "info": "Turn off on a buy-box-only instance." },
+    { "type": "checkbox", "id": "show_buybox", "label": "Show gallery + buy box", "default": true, "info": "Turn off for a second instance used only for content bands lower down the page." },
     {
       "type": "header",
       "content": "Editability pass 2026-08-10"

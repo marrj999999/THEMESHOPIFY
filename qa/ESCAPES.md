@@ -856,3 +856,85 @@ result: `JSON.stringify` drops Shopify's `\/` escapes, so nine unrelated URL lin
 been rewritten. Byte-identical semantics, but hard rule #4 is about not rewriting this file at
 all. Raw-string replacement of the two values touched 2 lines and nothing else. A guard that
 only allows the diff you predicted is worth more than one that checks the result parses.
+
+---
+
+## #49 — the page answered the brochure, not the email
+*2026-08-19 · templates/product.kit-gravel.json · the kit PDP rebuild*
+
+The gravel PDP was 14,331px on desktop and 21,418px on mobile across eleven
+full-width marketing bands. It read as a confident page. A probe with every
+accordion forced open found it carried **no** tyre clearance, **no** hub spacing,
+**no** brake standard, **no** bottom-bracket spec, **no** cable routing, **no**
+rack mounts, **no** frame weight, **no** rider-weight limit, and not one instance
+of the words customs, duty, import or VAT — on or off the page, including the
+policy pages.
+
+The vault has all of it. `Business/Sales Intelligence — Email Archive Mining.md`
+ranks 34,300 mined customer emails: shipping/delivery ~1,170, sizing ~730,
+tools ~720, price ~560, durability ~460, customs/VAT ~740 combined, and component
+compatibility "arguably the true no.1 by reading volume". About 80% of kit sales
+are international. The page over-served tools and build-time — three separate
+bands each — and omitted the top two themes entirely.
+
+**Rule.** Length is not the defect; composition is. Before adding to a long page,
+count what it already answers against what people actually ask. A page can be
+enormous and still be thin.
+
+---
+
+## #50 — a claim that passed the linter and broke the register
+*2026-08-19 · same page*
+
+The PDP carried a stat block reading **"Swansea · University tested"** and an FAQ
+saying the frames are "independently tested at Swansea University" and "with
+proper care they last for years."
+
+`System/Claims Register.md` says, in terms: *"Do not describe a home-build adult
+frame as tested, safe or compliant from historical material/frame research
+alone."* Swansea tested the bamboo **tubing** to BS ISO 22157:2019. It did not
+test a frame a customer glued together at home — and PS-001, an open incident, is
+an adult frame that separated at multiple joints on its first ride.
+
+claim-lint passed the page. It carries `stronger than steel`, `28,000 PSI`,
+`nationally recognised`, `100% completion` — a list of banned *phrases*. This
+claim used none of them. It was built from true components: the lab is real, the
+standard is real, the figure is real. What was wrong was the **subject** — a
+material result presented as a product result.
+
+Replaced with James's own wording from `Projects/FAQ Rewrite 2026-08-19.md`, plus
+the boundary the register implies: the tubing figure, then "that figure is for the
+tubing we supply, not for a finished frame: how strong your bike ends up is
+decided by your joints."
+
+**Rule.** A phrase blacklist cannot catch a true sentence about the wrong subject.
+When a claim moves from material to assembly, from one site to an organisation, or
+from a cohort to a population, the words can stay identical while the claim stops
+being supported. Those need a human read against the register, not a regex.
+
+---
+
+## #51 — three cuts that did nothing, and one that half did
+*2026-08-19 · same rebuild*
+
+Trimming the page, I blanked six settings to remove a duplicated Q&A band:
+
+```python
+for k in (...):
+    if low["settings"].get(k): low["settings"][k] = ""   # <-- silently a no-op
+```
+
+The keys were **absent** from the template — the band was rendering from its
+schema defaults. `.get(k)` returned None, the guard skipped, nothing was written,
+and the band came back 829px tall on the next render. An absent key and an empty
+key look the same in a diff of the template and behave in opposite ways: absent
+falls back to the schema default, empty suppresses. The fix was to assign
+unconditionally.
+
+The same session produced the mirror-image of this in the home hero (#48), where a
+Liquid `| default:` made an *empty* value behave like an absent one. Same root
+confusion, opposite direction.
+
+**Rule.** In Shopify templates, "blank it" and "remove it" are different
+operations with different results. Deciding which you mean is part of the edit,
+and the only proof is a re-render — not the diff.

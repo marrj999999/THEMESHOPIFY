@@ -51,6 +51,12 @@
   @media (max-width:600px){
     .bbc-rd .rd-logobar{ gap:18px 26px; }
   }
+  /* why-bamboo alignment 2026-08-19: render showed marks at wildly uneven sizes (UCL
+     dominating, Manchester near-invisible). One law: equal cap-height, greyscale at rest. */
+  .bbc-rd .rd-logobar .rd-lg-real{ filter:grayscale(1); opacity:.85; transition:opacity .15s ease; }
+  .bbc-rd .rd-logobar .rd-lg-real:hover{ opacity:1; }
+  .bbc-rd .rd-logobar img.rd-lg-img{ height:28px; width:auto; max-width:170px; object-fit:contain; }
+  .bbc-rd .rd-logobar .rd-lg-svg svg{ height:28px; width:auto; }
 {% endstylesheet %}
 
 {% schema %}

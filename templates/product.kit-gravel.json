@@ -6,76 +6,191 @@
         "b0": {
           "type": "perk",
           "settings": {
-            "text": "No power tools required — just basic hand tools"
+            "text": "Delivered duty paid — nothing to pay on arrival, anywhere we ship."
           }
         },
         "b1": {
           "type": "perk",
           "settings": {
-            "text": "Illustrated manual + 15+ hours of step-by-step video"
+            "text": "Ships in ~2 weeks, tracked. UK £12 · Europe £25 · USA £45 · rest of world £75."
           }
         },
         "b2": {
           "type": "perk",
           "settings": {
-            "text": "Lifetime community of 4,000+ builders for support"
+            "text": "1-year warranty, 14-day returns on unopened kits, split bamboo replaced free for 3 months."
           }
         },
         "b3": {
           "type": "perk",
           "settings": {
-            "text": "Cycle to Work accepted — save through salary sacrifice"
+            "text": "Cycle to Work accepted — save 32–42%. Two kits, 15% off, applied at checkout."
           }
-        },
-        "b4": {
-          "type": "need",
-          "settings": {
-            "title": "Basic hand tools",
-            "description": "A hacksaw, files, sandpaper, a measuring tape — no power tools. Everything else is in the kit."
-          }
-        },
-        "b5": {
-          "type": "need",
-          "settings": {
-            "title": "A bit of space",
-            "description": "A sturdy table around 1200 × 600 mm and a spot the frame can sit undisturbed while joints cure."
-          }
-        },
-        "b6": {
-          "type": "need",
-          "settings": {
-            "title": "A few weekends",
-            "description": "25–35 hours across multiple sessions. No rush — bamboo is forgiving and most mistakes are fixable."
-          }
-        },
-        "b7": {
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "why_fallback": "bbc-rd-ride-gravel.jpg",
+        "why_eyebrow": "Why bamboo for gravel",
+        "build_video_id": "aJ03KqMtRSA",
+        "why_image_alt": "A bamboo gravel bike on a gravel track",
+        "content_bands": false,
+        "sticky_buy": true
+      }
+    },
+    "kitspec": {
+      "type": "bbc-kit-spec",
+      "blocks": {
+        "sp0": {
           "type": "spec",
           "settings": {
-            "label": "Build time",
-            "value": "25–35 hrs"
+            "label": "tyre clearance",
+            "value": "45 mm",
+            "note": "700c"
           }
         },
-        "b8": {
+        "sp1": {
           "type": "spec",
           "settings": {
-            "label": "Construction",
-            "value": "Flax & carbon, by hand"
+            "label": "rear spacing",
+            "value": "135 / 142 mm",
+            "note": "modular dropout"
           }
         },
-        "b9": {
+        "sp2": {
           "type": "spec",
           "settings": {
-            "label": "Strength",
-            "value": "High strength-to-weight"
+            "label": "axle",
+            "value": "12 mm thru",
+            "note": "or QR · singlespeed · hub gear"
           }
         },
-        "b10": {
+        "sp3": {
           "type": "spec",
           "settings": {
-            "label": "Usage",
-            "value": "Gravel · touring · bikepacking"
+            "label": "brakes",
+            "value": "Disc",
+            "note": "post mount · flat mount with adapter"
           }
         },
+        "sp4": {
+          "type": "spec",
+          "settings": {
+            "label": "bottom bracket",
+            "value": "BSA 68 mm",
+            "note": "threaded"
+          }
+        },
+        "sp5": {
+          "type": "spec",
+          "settings": {
+            "label": "cable routing",
+            "value": "Internal",
+            "note": "mechanical or hydraulic"
+          }
+        },
+        "sp6": {
+          "type": "spec",
+          "settings": {
+            "label": "mounts",
+            "value": "Rack + mudguard",
+            "note": "bikepacking ready"
+          }
+        },
+        "sp7": {
+          "type": "spec",
+          "settings": {
+            "label": "build time",
+            "value": "25–40 hrs",
+            "note": "across 2–4 weekends"
+          }
+        }
+      },
+      "block_order": [
+        "sp0",
+        "sp1",
+        "sp2",
+        "sp3",
+        "sp4",
+        "sp5",
+        "sp6",
+        "sp7"
+      ],
+      "settings": {
+        "background": "bone",
+        "anchor": "spec",
+        "eyebrow": "fits your parts",
+        "heading": "will it take my parts?",
+        "lede": "The numbers you need to check a part you already own. The kit is the frame — fork, wheels and groupset are yours to choose.",
+        "foot_left": "Building from a donor bike? Send us its spec and we'll confirm the fit before you order.",
+        "foot_right": "Ask us about your parts",
+        "foot_url": "/pages/contact"
+      }
+    },
+    "kitship": {
+      "type": "bbc-kit-shipping",
+      "blocks": {
+        "rt0": {
+          "type": "rate",
+          "settings": {
+            "place": "United Kingdom",
+            "rate": "£12",
+            "duty": "Included"
+          }
+        },
+        "rt1": {
+          "type": "rate",
+          "settings": {
+            "place": "Europe",
+            "rate": "£25",
+            "duty": "Paid by us"
+          }
+        },
+        "rt2": {
+          "type": "rate",
+          "settings": {
+            "place": "USA & Canada",
+            "rate": "£45",
+            "duty": "Paid by us"
+          }
+        },
+        "rt3": {
+          "type": "rate",
+          "settings": {
+            "place": "Rest of world",
+            "rate": "£75",
+            "duty": "Paid by us"
+          }
+        }
+      },
+      "block_order": [
+        "rt0",
+        "rt1",
+        "rt2",
+        "rt3"
+      ],
+      "settings": {
+        "background": "forest",
+        "anchor": "shipping",
+        "eyebrow": "shipped worldwide from the London workshop",
+        "heading": "no customs bill at the door",
+        "col1": "Destination",
+        "col2": "Shipping",
+        "col3": "Duty & tax",
+        "panel_title": "Delivered duty paid",
+        "panel_body": "The price at checkout is the price the kit costs you. We pay the import duty and tax before it ships, so the courier has nothing to collect when it arrives.",
+        "worked": "Sydney, Large kit: £385 kit + £75 shipping = £460 total, and nothing further on delivery.",
+        "foot": "Packed by hand and shipped twice a week, tracked all the way. Kits have reached 45 countries."
+      }
+    },
+    "lower": {
+      "type": "bbc-product-2026",
+      "blocks": {
         "b11": {
           "type": "step",
           "settings": {
@@ -108,14 +223,14 @@
           "type": "review",
           "settings": {
             "quote": "Woody made the full 8,288 miles with virtually no mechanical issues at all. All bikes are like magicians — but a bamboo bike multiplies that a hundredfold.",
-            "cite": "— Kate Rawles, author of 'The Life Cycle'"
+            "cite": "Kate Rawles, author of 'The Life Cycle'"
           }
         },
         "b16": {
           "type": "review",
           "settings": {
             "quote": "I've got five bikes and this is my favourite — it feels stiffer, dampens vibration better, and I feel safer and more confident on it.",
-            "cite": "— Daan, gravel-touring build, Amersfoort"
+            "cite": "Daan, gravel-touring build, Amersfoort"
           }
         },
         "b17": {
@@ -129,9 +244,9 @@
         "b18": {
           "type": "stat",
           "settings": {
-            "number": "Swansea",
-            "label": "University tested",
-            "source": "independent testing"
+            "number": "84.3 MPa",
+            "label": "bamboo tubing, tested",
+            "source": "Swansea University · BS ISO 22157:2019"
           }
         },
         "b19": {
@@ -167,8 +282,8 @@
         "b23": {
           "type": "faq",
           "settings": {
-            "question": "How strong is it really?",
-            "answer": "Very strong for its weight. Bamboo is a light, hollow natural composite and every joint is reinforced with carbon-fibre, giving a high strength-to-weight ratio. Our bamboo is independently tested at Swansea University. Builders ride these frames daily and tour continents — with proper care they last for years."
+            "question": "How strong is bamboo, really?",
+            "answer": "Bamboo frame tubing tested at Swansea University to BS ISO 22157:2019 — 84.3 MPa ultimate tensile, comparable to mild steel at a fraction of the weight. That figure is for the tubing we supply, not for a finished frame: how strong your bike ends up is decided by your joints. Follow the manual, let the resin cure fully, and check the joints before every early ride — and call us if anything looks wrong."
           }
         },
         "b24": {
@@ -223,44 +338,9 @@
             "price": "Request a quote",
             "fallback": "bbc-rd-road-charlie.jpg"
           }
-        },
-        "hl1": {
-          "type": "highlight",
-          "settings": {
-            "heading": "No welding, no workshop",
-            "body": "Build the whole frame on your kitchen table with basic hand tools — everything else is in the kit.",
-            "fallback": "bbc-rd-bamboo-tubes.jpg"
-          }
-        },
-        "hl2": {
-          "type": "highlight",
-          "settings": {
-            "heading": "Everything in the box",
-            "body": "Bamboo, the jig, metal fittings, resin, fibre and 15+ hours of step-by-step video — you only add the components.",
-            "fallback": "bbc-rd-prod-build.jpg"
-          }
-        },
-        "hl3": {
-          "type": "highlight",
-          "settings": {
-            "heading": "Every kit funds learning",
-            "body": "Your build helps fund accredited skills courses in prisons and schools. You learn a skill — so does someone else.",
-            "fallback": "bbc-rd-prod-flax.jpg"
-          }
         }
       },
       "block_order": [
-        "b0",
-        "b1",
-        "b2",
-        "b3",
-        "b4",
-        "b5",
-        "b6",
-        "b7",
-        "b8",
-        "b9",
-        "b10",
         "b11",
         "b12",
         "b13",
@@ -280,31 +360,33 @@
         "b27",
         "b28",
         "b29",
-        "b30",
-        "hl1",
-        "hl2",
-        "hl3"
+        "b30"
       ],
       "settings": {
         "why_fallback": "bbc-rd-ride-gravel.jpg",
         "why_eyebrow": "Why bamboo for gravel",
         "build_video_id": "aJ03KqMtRSA",
-        "why_image_alt": "A bamboo gravel bike on a gravel track"
-      }
-    },
-    "videoband": {
-      "type": "bbc-rd-video-embed",
-      "settings": {
-        "video_youtube": "ckCwJXJGKD0",
-        "eyebrow": "Before you buy",
-        "heading": "Watch the build, start to finish",
-        "body": "Every kit ships with 15+ hours of step-by-step video. Here's a taste of what you'll do.",
-        "dark": false
+        "why_image_alt": "A bamboo gravel bike on a gravel track",
+        "show_buybox": false,
+        "content_bands": true,
+        "reversible_body": "",
+        "tools_text": "",
+        "reversible_title": "",
+        "tools_title": "",
+        "support_body": "",
+        "support_title": "",
+        "support_text": "",
+        "tools_heading": "",
+        "support_heading": "",
+        "confidence_eyebrow": "",
+        "confidence_heading": ""
       }
     }
   },
   "order": [
     "main",
-    "videoband"
+    "kitspec",
+    "kitship",
+    "lower"
   ]
 }
