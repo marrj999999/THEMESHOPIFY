@@ -398,9 +398,69 @@
         "story_new_blog_build_by_rhys_my",
         "story_photo_from_aurelian_audrey"
       ]
+    },
+    "worldmap": {
+      "type": "bbc-worldmap",
+      "blocks": {
+        "wm0": {
+          "type": "stat",
+          "settings": {
+            "number": "45",
+            "label": "countries reached",
+            "top": 8,
+            "big": true
+          }
+        },
+        "wm1": {
+          "type": "stat",
+          "settings": {
+            "number": "10",
+            "label": "schools & universities",
+            "top": 33,
+            "big": false
+          }
+        },
+        "wm2": {
+          "type": "stat",
+          "settings": {
+            "number": "4",
+            "label": "active prison sites",
+            "top": 56,
+            "big": false
+          }
+        },
+        "wm3": {
+          "type": "stat",
+          "settings": {
+            "number": "3",
+            "label": "international hubs",
+            "top": 79,
+            "big": false
+          }
+        }
+      },
+      "block_order": [
+        "wm0",
+        "wm1",
+        "wm2",
+        "wm3"
+      ],
+      "settings": {
+        "background": "paper",
+        "anchor": "map",
+        "eyebrow": "where we've reached",
+        "heading": "45 countries, one kit at a time.",
+        "lede": "Every country a Bamboo Bicycle Club kit has reached since 2012 — and the programmes we run at home.",
+        "map_alt": "World map with every country a Bamboo Bicycle Club kit has reached shaded green",
+        "caption": "✱ every country our kits have reached since 2012 — straight from our customer records. home in dark green.",
+        "show_nodediv": true,
+        "cta_label": "see the impact in full",
+        "cta_url": "/pages/impact"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "worldmap"
   ]
 }

@@ -1864,3 +1864,39 @@
   .rd-stickybuy{padding:9px 14px;gap:10px}
   .rd-stickybuy__t small i{display:none}
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   WORLD MAP — the reach figure, portable            (2026-08-19)
+
+   Lifted from the impact page's "where we work" band. Its original styles live
+   in bbc-statement.css under `.bbc-rd-impact`, so the markup would have moved to
+   Our Story and the layout would not. Re-expressed here under the section's own
+   class so it works on any template.
+
+   Stat positions come from a per-block --wm-top rather than the four fixed
+   classes (--a/--b/--c/--d) the original used: those encoded one arrangement of
+   exactly four stats, and adding a fifth had nowhere to go.
+   ══════════════════════════════════════════════════════════════════════════ */
+.bbc-worldmap .rd-wmap{width:min(1120px,calc(100% - 48px));margin-inline:auto}
+.bbc-worldmap .rd-wmap__fig{position:relative;width:100%;max-width:1080px;margin:0}
+.bbc-worldmap .rd-wmap__fig > img{display:block;width:100%;height:auto}
+.bbc-worldmap .rd-wmap__cap{margin:14px 0 0;max-width:60ch;text-align:left;font-size:var(--fs-13-5);color:var(--charcoal)}
+.bbc-worldmap .rd-wmap__stats{position:absolute;inset:0;pointer-events:none}
+.bbc-worldmap .rd-wmap__stat{position:absolute;right:2%;top:var(--wm-top,20%);text-align:right}
+.bbc-worldmap .rd-wmap__stat b{display:block;font-weight:800;line-height:.82;letter-spacing:-.03em;
+  color:var(--forest);font-size:clamp(2rem,4.6vw,4.2rem)}
+.bbc-worldmap .rd-wmap__stat span{display:block;font-size:clamp(11px,1vw,14px);font-weight:800;
+  color:var(--forest);max-width:14ch;margin:3px 0 0 auto}
+.bbc-worldmap .rd-wmap__stat.is-big b{font-size:clamp(2.6rem,6vw,5.6rem)}
+
+@media (max-width:860px){
+  /* Below this the stats cannot sit on the map without covering it — they become a
+     grid underneath, which is also where --wm-top stops meaning anything. */
+  .bbc-worldmap .rd-wmap__stats{position:static;display:grid;grid-template-columns:1fr 1fr;
+    gap:22px 20px;padding:24px 0 0;width:100%}
+  .bbc-worldmap .rd-wmap__stat{position:static;top:auto;right:auto;text-align:left}
+  .bbc-worldmap .rd-wmap__stat span{margin-left:0}
+  .bbc-worldmap .rd-wmap__stat b{font-size:clamp(2.4rem,12vw,3.4rem)}
+  .bbc-worldmap .rd-wmap__stat.is-big b{font-size:clamp(2.6rem,13vw,3.8rem)}
+  .bbc-worldmap .rd-wmap__cap{align-self:stretch}
+}
