@@ -1037,3 +1037,41 @@ decision and must not be settled by cascade order.
 break it silently. Guard layout rules with `:not([hidden])`. And assert on rendered
 geometry, not just on attributes — an element with `hidden` that still paints will pass
 every check that asks the DOM instead of the box.
+
+---
+
+## #56 — a logo wall makes a claim without words
+*2026-08-19 · sections/bbc-impact-2026.liquid · /pages/impact #backers*
+
+Five marks sat in one row under **"backed by & accredited by"**. Checked against
+`System/Claims Register.md`, only two of the five were backers:
+
+| Mark | What it is |
+|---|---|
+| Investec Beyond Business | 2025 winner, £24,000 — a funder |
+| National Lottery Community Fund | Pedal Forward, £18,000 — a funder |
+| OCN London | the awarding body — an accreditor, not a backer |
+| HMPPS | a **customer**: programmes run under direct contracts. The £120k bid is drafted, not won |
+| London South Bank University | the register allows only *"access to a room with jigs in LSBU's engineering labs in late 2025"*. The 5 Aug 2025 agreement has **blank LSBU signature fields**; no award, invoice or delivery record exists |
+
+The register already prohibits "LSBU £70,000 equipment investment", "LSBU Innovation
+Hub" and any current LSBU delivery site. A logo under "backed by & accredited by"
+asserts the same relationship without writing a sentence — so none of the wording
+gates could see it. claim-lint reads text; nothing reads a row of images against what
+each image is entitled to say.
+
+**Fix.** Each block declares its relationship and the band renders a labelled group
+per relationship: funded by / accredited by / delivered with. LSBU removed. The
+grouping is the honest fix and also the layout fix — it gives the row the structure it
+never had, and every mark now sits on a tile of identical size instead of at whatever
+dimensions its source file happened to be.
+
+**Also.** Two verified Timpson quotes exist. The band ran the general one — *"Finding
+employment after release reduces the chance of reoffending…"* — alone, four lines deep,
+under the heading "who backs it". It is verbatim and correctly attributed, but it is
+about government policy and never mentions BBC. The one that does *("Innovative
+projects such as Build to Bond…")* now leads, with the policy line beside it as
+context.
+
+**Rule.** Audit logo walls the way you audit sentences. Ask what each mark is entitled
+to claim, and label the group so the page cannot be read as claiming more.

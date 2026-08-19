@@ -96,7 +96,9 @@
           "settings": {
             "logo": "logo-investec.svg",
             "label": "Investec Beyond Business",
-            "url": ""
+            "url": "",
+            "group": "funded by",
+            "note": "2025 winner · £24,000"
           }
         },
         "backer_nlcf": {
@@ -104,15 +106,9 @@
           "settings": {
             "logo": "logo-nlcf.svg",
             "label": "The National Lottery Community Fund",
-            "url": ""
-          }
-        },
-        "backer_lsbu": {
-          "type": "backer",
-          "settings": {
-            "logo": "logo-lsbu.svg",
-            "label": "London South Bank University",
-            "url": ""
+            "url": "",
+            "group": "funded by",
+            "note": "Pedal Forward · £18,000"
           }
         },
         "backer_ocn": {
@@ -120,7 +116,9 @@
           "settings": {
             "logo": "logo-ocn-london.svg",
             "label": "OCN London accredited",
-            "url": ""
+            "url": "",
+            "group": "accredited by",
+            "note": "Bespoke Level 2 — Workshop Skills and Sustainable Manufacturing"
           }
         },
         "backer_hmpps": {
@@ -128,7 +126,9 @@
           "settings": {
             "logo": "logo-hmpps.png",
             "label": "HMPPS",
-            "url": ""
+            "url": "",
+            "group": "delivered with",
+            "note": "Programmes run under direct contracts with HMPPS and private operators"
           }
         },
         "seg_schools": {
@@ -1020,7 +1020,6 @@
         "policy_40",
         "backer_investec",
         "backer_nlcf",
-        "backer_lsbu",
         "backer_ocn",
         "backer_hmpps",
         "seg_schools",
@@ -1099,11 +1098,11 @@
         "policy_title": "",
         "cred_eyebrow": "who it's for",
         "cred_heading": "",
-        "cred_quote1": "Finding employment after release reduces the chance of reoffending significantly, which is why we are improving opportunities to help prisoners turn their lives around.",
+        "cred_quote1": "Innovative projects such as Build to Bond support rehabilitation and help people leave prison as better citizens.",
         "cred_attr1": "Lord Timpson, Prisons Minister · Inside Time",
         "cred_src1": "2025 winner",
-        "cred_quote2": "",
-        "cred_attr2": "",
+        "cred_quote2": "Finding employment after release reduces the chance of reoffending significantly, which is why we are improving opportunities to help prisoners turn their lives around.",
+        "cred_attr2": "Lord Timpson, Prisons Minister · Inside Time",
         "cred_src2": "",
         "press_label": "featured in",
         "ops_more_label": "the full picture →",
@@ -1115,7 +1114,7 @@
         "next_title": "what new funding builds next.",
         "next_lede": "Three ambitions, in order — each one costed and ready to talk through.",
         "next_flow": "more prison workshops — sites five and six | double the school cohorts we can deliver | grow the international hub network",
-        "backs_eyebrow": "who backs it",
+        "backs_eyebrow": "credibility",
         "backs_heading": "who backs it.",
         "promise1": "",
         "promise1_url": "",
@@ -1212,7 +1211,9 @@
         "cta2_url": "/pages/support-mission",
         "stories_limit": 6,
         "stories_more": true,
-        "feat_autoplay_ms": 7
+        "feat_autoplay_ms": 7,
+        "cred_ctx_label": "the policy it sits inside",
+        "backer_groups": "funded by|accredited by|delivered with"
       }
     }
   },

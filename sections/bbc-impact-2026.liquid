@@ -626,10 +626,28 @@
       {%- if section.settings.backs_heading != blank -%}<h2 class="rd-reveal rd-mw-22ch">{{ section.settings.backs_heading }}</h2>{%- endif -%}
       {%- comment -%} ministerial endorsement (verbatim, attributable) — restored 2026-07-22;
          it previously only GATED this band without ever rendering (audit footgun) {%- endcomment -%}
-      <blockquote class="rd-pull rd-mt2 rd-reveal">
-        <p class="rd-q">{{ section.settings.cred_quote1 }}</p>
-        {%- if section.settings.cred_attr1 != blank -%}<cite>{{ section.settings.cred_attr1 }}</cite>{%- endif -%}
-      </blockquote>
+      {%- comment -%} Two verified Timpson quotes exist. The band ran the general one alone,
+         four lines deep, under a heading that says "who backs it" — but that sentence is about
+         government policy and never mentions BBC. The one that does is the endorsement, so it
+         leads; the policy line becomes the context it sits inside. Both verbatim, both sourced
+         to Inside Time (Business/Case Studies/Verified 2026, checked 2026-08-19). {%- endcomment -%}
+      <div class="rd-backs__endorse rd-mt3">
+        <div>
+          <blockquote class="rd-pull rd-reveal">
+            <p class="rd-q">{{ section.settings.cred_quote1 }}</p>
+            {%- if section.settings.cred_attr1 != blank -%}<cite>{{ section.settings.cred_attr1 }}</cite>{%- endif -%}
+          </blockquote>
+        </div>
+        {%- if section.settings.cred_quote2 != blank -%}
+        <div class="rd-backs__ctx">
+          {%- if section.settings.cred_ctx_label != blank -%}<span class="rd-eyebrow">{{ section.settings.cred_ctx_label }}</span>{%- endif -%}
+          <blockquote class="rd-backs__ctxq rd-mt2">
+            <p>{{ section.settings.cred_quote2 }}</p>
+            {%- if section.settings.cred_attr2 != blank -%}<cite>{{ section.settings.cred_attr2 }}</cite>{%- endif -%}
+          </blockquote>
+        </div>
+        {%- endif -%}
+      </div>
 
       {%- if section.settings.promise1 != blank -%}
       <div class="rd-callout-steel rd-mt3" style="text-align:left;">
@@ -665,22 +683,55 @@
             more_url: section.settings.press_more_url -%}
         {%- if section.settings.awards_line != blank -%}<p class="rd-partnerlabel rd-mt3">{{ section.settings.awards_line }}</p>{%- endif -%}
         {%- if section.settings.funder_line != blank -%}<p class="rd-ship-note{% if section.settings.funder_logo != blank %} rd-mt1{% else %} rd-mt3{% endif %}">{{ section.settings.funder_line }}</p>{%- endif -%}
+        {%- comment -%} ============ GROUPED CREDENTIALS ============
+           One row labelled "backed by & accredited by" put a funder, an awarding body, a
+           customer and a university that never counter-signed under the same claim. Only two
+           of the five were backers. Each block now declares what it IS, and the band renders
+           a group per relationship — which is the honest fix and also the structure the row
+           was missing. Verified against System/Claims Register.md on 2026-08-19.
+
+           A block with no `group` falls into the first heading, so an older template that
+           never set one renders exactly as before. {%- endcomment -%}
         {%- assign backers = section.blocks | where: "type", "backer" -%}
         {%- if backers.size > 0 -%}
-        <span class="rd-backers__label">{{ section.settings.backers_label | default: 'backed by & accredited by' }}</span>
-        <ul class="rd-backers" role="list">
-          {%- for block in backers -%}
-          <li class="rd-backers__cell" {{ block.shopify_attributes }}>
-            {%- if block.settings.url != blank -%}<a href="{{ block.settings.url }}" class="rd-backers__link">{%- endif -%}
-            {%- if block.settings.logo != blank -%}
-            <img class="rd-backers__logo" src="{{ block.settings.logo | asset_url }}" alt="{{ block.settings.label | escape }}" loading="lazy">
-            {%- else -%}
-            <span class="rd-backers__chip">{{ block.settings.label }}</span>
+        {%- assign _groups = section.settings.backer_groups | default: 'funded by|accredited by|delivered with' | split: '|' -%}
+        <div class="rd-backs__groups">
+          {%- for g in _groups -%}
+            {%- assign gkey = g | strip -%}
+            {%- assign inthis = '' -%}
+            {%- for block in backers -%}
+              {%- assign bg = block.settings.group | default: _groups[0] | strip -%}
+              {%- if bg == gkey -%}{%- assign inthis = inthis | append: block.id | append: ',' -%}{%- endif -%}
+            {%- endfor -%}
+            {%- if inthis != blank -%}
+            <div class="rd-backs__grp">
+              <span class="rd-backs__k">{{ gkey }}</span>
+              <ul class="rd-backs__tiles" role="list">
+                {%- for block in backers -%}
+                  {%- assign bg = block.settings.group | default: _groups[0] | strip -%}
+                  {%- if bg == gkey -%}
+                  <li class="rd-backs__tile" {{ block.shopify_attributes }}>
+                    {%- if block.settings.url != blank -%}<a href="{{ block.settings.url }}" class="rd-backers__link">{%- endif -%}
+                    {%- if block.settings.logo != blank -%}
+                    <img class="rd-backers__logo" src="{{ block.settings.logo | asset_url }}" alt="{{ block.settings.label | escape }}" loading="lazy">
+                    {%- else -%}
+                    <span class="rd-backers__chip">{{ block.settings.label }}</span>
+                    {%- endif -%}
+                    {%- if block.settings.url != blank -%}</a>{%- endif -%}
+                  </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+              {%- for block in backers -%}
+                {%- assign bg = block.settings.group | default: _groups[0] | strip -%}
+                {%- if bg == gkey and block.settings.note != blank -%}
+                  <p class="rd-backs__note">{{ block.settings.note }}</p>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
             {%- endif -%}
-            {%- if block.settings.url != blank -%}</a>{%- endif -%}
-          </li>
           {%- endfor -%}
-        </ul>
+        </div>
         {%- endif -%}
       </div>
     </div>
@@ -771,6 +822,45 @@
 @media (max-width:600px){
   .rd-csfeat__ui{flex-wrap:wrap}
   .rd-csfeat__pause{margin-left:0}
+}
+
+/* ── who backs it: endorsement + grouped credentials (2026-08-19) ────────────
+   The old band stacked one huge quote, then a report CTA, then press, then a flat
+   logo row — four credibility devices with no hierarchy, and logos at whatever size
+   their source file happened to be (one arrived in a white box). Two columns for the
+   quote, then one bordered strip of labelled groups, each mark on a tile of the same
+   optical size. */
+.bbc-impact-backs .rd-backs__endorse{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:start}
+.bbc-impact-backs .rd-backs__ctxq{margin:0;border-left:3px solid var(--lime-700);padding:2px 0 2px 18px}
+.bbc-impact-backs .rd-backs__ctxq p{margin:0;font-size:15px;line-height:1.5}
+.bbc-impact-backs .rd-backs__ctxq cite{display:block;margin-top:10px;font-style:normal;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--forest-300)}
+
+.bbc-impact-backs .rd-backs__groups{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:38px;text-align:left;
+  border-top:1.5px solid var(--forest);border-bottom:1.5px solid var(--forest)}
+.bbc-impact-backs .rd-backs__grp{padding:22px 24px;border-right:1px solid rgba(0,60,50,.22)}
+.bbc-impact-backs .rd-backs__grp:last-child{border-right:0}
+.bbc-impact-backs .rd-backs__k{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--forest-300);margin-bottom:14px}
+.bbc-impact-backs .rd-backs__tiles{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+/* one tile size for every mark, so a padded SVG and a tight PNG carry equal weight */
+/* Fixed height, not min-height. The point of the tile is that every mark carries the same
+   optical weight; min-height let the widest logo push its own tile 8px taller than its
+   neighbour, which is the ragged row this band was rebuilt to remove. */
+.bbc-impact-backs .rd-backs__tile{flex:1 1 128px;height:72px;background:#fff;border:1.5px solid rgba(0,60,50,.2);border-radius:6px;display:grid;place-items:center;padding:10px 14px}
+/* bbc-statement.css sets `.bbc-rd-impact .rd-backers__logo{height:44px !important}` for the
+   old flat row. Inside a tile the mark must fit the tile, not dictate it — one logo at 44px
+   made its tile 74px against the others' 66px. !important is the only thing that beats
+   !important, and it is scoped to the tile so the old row is untouched. */
+.bbc-impact-backs .rd-backs__tile .rd-backers__logo{max-width:100%;max-height:40px;width:auto;height:auto !important;object-fit:contain;display:block}
+.bbc-impact-backs .rd-backs__tile .rd-backers__chip{font-size:13px;font-weight:700;color:var(--forest);text-align:center;line-height:1.15}
+/* `.rd-wrap p:not(.rd-eyebrow)` (0,2,1) out-specified the two-class version of this rule and
+   set the note to body size. Three classes takes it back without reaching for !important. */
+.bbc-impact-backs .rd-backs__grp .rd-backs__note{margin:12px 0 0;font-size:11.5px;color:var(--charcoal);opacity:.8;line-height:1.4;max-width:none}
+
+@media (max-width:900px){
+  .bbc-impact-backs .rd-backs__endorse{grid-template-columns:1fr;gap:26px}
+  .bbc-impact-backs .rd-backs__groups{grid-template-columns:1fr}
+  .bbc-impact-backs .rd-backs__grp{border-right:0;border-bottom:1px solid rgba(0,60,50,.22)}
+  .bbc-impact-backs .rd-backs__grp:last-child{border-bottom:0}
 }
 {% endstylesheet %}
 
@@ -1026,6 +1116,18 @@ document.addEventListener('DOMContentLoaded', function () {
       "id": "mstat4_lbl",
       "label": "Map stat 4 label",
       "default": "countries reached"
+    },
+    {
+      "type": "text",
+      "id": "backer_groups",
+      "label": "Relationship groups (pipe separated)",
+      "default": "funded by|accredited by|delivered with"
+    },
+    {
+      "type": "text",
+      "id": "cred_ctx_label",
+      "label": "Label above the context quote",
+      "default": "the policy it sits inside"
     },
     {
       "type": "text",
@@ -2418,6 +2520,18 @@ document.addEventListener('DOMContentLoaded', function () {
           "type": "url",
           "id": "url",
           "label": "Link (optional)"
+        },
+        {
+          "type": "text",
+          "id": "group",
+          "label": "Relationship group",
+          "default": "funded by",
+          "info": "Must match one of the group names in the section's Relationship groups setting."
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Note under the group"
         }
       ]
     },
