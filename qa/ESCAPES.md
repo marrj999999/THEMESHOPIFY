@@ -938,3 +938,47 @@ confusion, opposite direction.
 **Rule.** In Shopify templates, "blank it" and "remove it" are different
 operations with different results. Deciding which you mean is part of the edit,
 and the only proof is a re-render — not the diff.
+
+---
+
+## #52 — the featured story was also the first card under it
+*2026-08-19 · sections/bbc-impact-2026.liquid · the evidence-wall slider*
+
+Turning the flagship case study into a rotating slider meant promoting four stories
+into `feature` blocks. The stories they were promoted *from* stayed in the wall — so
+the page showed the UCL cargo-bike slide and then repeated it, same image and same
+headline, as the very first card beneath it.
+
+Nothing in the build flagged it. The slider was correct, the wall was correct, and
+each was tested on its own: four slides, six cards, all four sectors present. The
+defect only exists in the relationship between them, which is exactly what a
+component-level check cannot see. It took a screenshot of the finished region.
+
+**Fix.** The wall skips any story whose URL appears in a feature block, and the
+"show all N" count skips them too — otherwise the button promises more than it can
+reveal. Matching on URL rather than a hand-set flag means promoting or demoting a
+story in the editor keeps working with no second place to remember.
+
+**Rule.** When you promote content into a new position, the old position is now a
+duplicate until proven otherwise. Check the finished page, not the two components.
+
+---
+
+## #53 — the accessible choice was also the deterministic one
+*2026-08-19 · same slider*
+
+An auto-rotating carousel is a classic source of flaky screenshot tests: capture at
+6.9s and 7.1s and you get different pages. The impact visual baselines are full-page
+captures that take several seconds, so this looked like a test I was about to make
+unreliable.
+
+It is deterministic, and for free. `qa/visual.spec.mjs` runs with
+`reducedMotion: 'reduce'`, and the slider honours `prefers-reduced-motion` by never
+starting the timer — written for readers with vestibular sensitivity, not for the
+test suite. Verified both ways: under `reduce` the slide is unchanged after 16s and
+the pause control is hidden; under `no-preference` it advances two slides.
+
+**Rule.** Autoplay respecting the OS motion preference is not only correct for
+readers — it is what makes the component testable. If a motion feature is hard to
+screenshot deterministically, check whether it is honouring reduced-motion first.
+The bug is usually there.

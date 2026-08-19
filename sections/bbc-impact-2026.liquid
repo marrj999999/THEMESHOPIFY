@@ -315,42 +315,106 @@
         {%- for k in _kindlist -%}<button type="button" class="rd-evfilter__tab" data-kind="{{ k }}" aria-pressed="false">{{ k }}</button>{%- endfor -%}
       </div>
       {%- endif -%}
-      <ul class="rd-csgrid rd-mt4 rd-stagger" data-evwall role="list">
-        {%- comment -%} FEATURED case study — the flagship, first item in the evidence wall.
-           Renders the SAME snippet as every other card; only the variant differs. Before
-           2026-07-31 this was 30 lines of bespoke markup in its own section, which is how it
-           drifted into a different slot order and a wrapper <a>. {%- endcomment -%}
-        {%- if section.settings.cs_blurb != blank or section.settings.cs_quote != blank -%}
-        {%- comment -%} Quote-as-headline: for a people-centred story the strongest heading is the
-           person's own words, in the format `Name, place: "their words"`. It also removes the
-           old conflict where a big pull-quote and a headline competed for the same slot.
-           NOT truncated — a machine-cut heading ("…creativity, teamwork, a…") loses exactly the
-           words a reader scans for. Editable via cs_heading. {%- endcomment -%}
-        {%- comment -%} Liquid FILTERS ARE NOT ALLOWED IN render ARGUMENTS. Writing
-           `url: section.settings.cs_url | default: '…'` fails silently — the argument arrives
-           blank, so the flagship card rendered with no link and no CTA at all. Resolve defaults
-           into a variable first, then pass the variable. {%- endcomment -%}
-        {%- assign _cs_url = section.settings.cs_url | default: '/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2' -%}
-        {%- assign _cs_head = section.settings.cs_heading -%}
-        {%- if _cs_head == blank -%}{%- assign _cs_head = section.settings.cs_site | default: 'Build to Bond · HMP Lowdham Grange' -%}{%- endif -%}
-        {%- render 'bbc-cscard',
-             variant: 'featured',
-             kind: section.settings.cs_kind,
-             heading: _cs_head,
-             url: _cs_url,
-             context: section.settings.cs_blurb,
-             attr: section.settings.cs_site,
-             chips: section.settings.cs_outcomes,
-             image_pic: section.settings.cs_image_pic,
-             image: section.settings.cs_image,
-             cta: section.settings.cs_link_label,
-             anchor: 'proof' -%}
-        {%- comment -%} id="proof" is load-bearing twice over: it is a deep-link target used by
-           in-page links, and bbc-statement.css scopes real layout rules to #proof. Migrating the
-           featured card to the snippet dropped the wrapper that carried it, which killed the
-           anchor silently — estate-check caught it as "1 dead in-page anchor". {%- endcomment -%}
+      {%- comment -%} ============ FEATURED SLIDER ============
+         Was a single card sitting as the first <li> of the evidence grid. James asked
+         for the featured story to rotate, so it is now its own region above the wall,
+         built from `feature` blocks — one slide each, editable, reorderable.
+
+         BACK-COMPAT: with no feature blocks it falls back to the original cs_* settings
+         as a single slide, so every other template using this section is unchanged and
+         a slider of one is just a static card (no controls, no timer).
+
+         id="proof" MOVES WITH IT. It is a deep-link target AND bbc-statement.css scopes
+         layout rules to #proof — the 2026-07-31 migration already killed this anchor once
+         by dropping the wrapper that carried it. It now sits on the region.
+      {%- endcomment -%}
+      {%- assign _feats = section.blocks | where: 'type', 'feature' -%}
+      {%- comment -%} The editor setting is SECONDS (a range of 4–15 reads sensibly there);
+         the JS interval wants milliseconds. Converting here rather than in the schema
+         keeps the editor honest — a "7000" slider would be nonsense to set by hand. {%- endcomment -%}
+      {%- assign _automs = section.settings.feat_autoplay_ms | default: 7 | times: 1000 -%}
+      {%- if _feats.size > 0 or section.settings.cs_blurb != blank or section.settings.cs_quote != blank -%}
+      <div class="rd-csfeat rd-mt4" id="proof" data-csfeat{% if _feats.size > 1 %} data-autoplay="{{ _automs }}"{% endif %}>
+        <div class="rd-csfeat__track" data-csfeat-track>
+          {%- if _feats.size > 0 -%}
+            {%- for block in _feats -%}
+              {%- assign _fu = block.settings.url | default: '#' -%}
+              {%- assign _fh = block.settings.heading | default: block.settings.site -%}
+              <div class="rd-csfeat__slide" data-csfeat-slide role="group" aria-roledescription="slide"
+                   aria-label="{{ forloop.index }} of {{ _feats.size }}"{% unless forloop.first %} hidden{% endunless %} {{ block.shopify_attributes }}>
+                {%- render 'bbc-cscard',
+                     variant: 'featured', item_tag: 'div',
+                     kind: block.settings.kind,
+                     heading: _fh,
+                     url: _fu,
+                     context: block.settings.blurb,
+                     attr: block.settings.site,
+                     chips: block.settings.outcomes,
+                     image_pic: block.settings.image_pic,
+                     image: block.settings.image,
+                     cta: block.settings.link_label -%}
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            {%- assign _cs_url = section.settings.cs_url | default: '/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2' -%}
+            {%- assign _cs_head = section.settings.cs_heading -%}
+            {%- if _cs_head == blank -%}{%- assign _cs_head = section.settings.cs_site | default: 'Build to Bond · HMP Lowdham Grange' -%}{%- endif -%}
+            <div class="rd-csfeat__slide" data-csfeat-slide>
+              {%- render 'bbc-cscard',
+                   variant: 'featured', item_tag: 'div',
+                   kind: section.settings.cs_kind,
+                   heading: _cs_head,
+                   url: _cs_url,
+                   context: section.settings.cs_blurb,
+                   attr: section.settings.cs_site,
+                   chips: section.settings.cs_outcomes,
+                   image_pic: section.settings.cs_image_pic,
+                   image: section.settings.cs_image,
+                   cta: section.settings.cs_link_label -%}
+            </div>
+          {%- endif -%}
+        </div>
+        {%- if _feats.size > 1 -%}
+          <div class="rd-csfeat__ui">
+            <button type="button" class="rd-csfeat__arrow" data-csfeat-prev aria-label="Previous story">&larr;</button>
+            <div class="rd-csfeat__dots" role="tablist" aria-label="Choose a featured story">
+              {%- for block in _feats -%}
+                <button type="button" class="rd-csfeat__dot{% if forloop.first %} is-on{% endif %}" role="tab"
+                        data-csfeat-dot="{{ forloop.index0 }}"
+                        aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                        aria-label="Story {{ forloop.index }} of {{ _feats.size }}"></button>
+              {%- endfor -%}
+            </div>
+            <button type="button" class="rd-csfeat__arrow" data-csfeat-next aria-label="Next story">&rarr;</button>
+            <button type="button" class="rd-csfeat__pause" data-csfeat-pause aria-pressed="false" aria-label="Pause the featured story rotation">pause</button>
+          </div>
         {%- endif -%}
+      </div>
+      {%- endif -%}
+
+      {%- comment -%} ============ EVIDENCE WALL ============
+         Capped. There are 37 real case studies behind this and rendering all of them read
+         as a wall of blog posts rather than evidence. Cards past the limit are marked
+         data-overflow and start hidden, so the cap holds with JS off; "show more" and the
+         sector filter both re-apply it against whatever is currently matching.
+      {%- endcomment -%}
+      {%- assign _limit = section.settings.stories_limit | default: 6 -%}
+      {%- comment -%} A story promoted into the slider must not also sit in the wall below it.
+         The first build showed the UCL cargo-bike slide and then repeated it, same image and
+         same headline, as the very first grid card. Matching on URL rather than on a flag means
+         it keeps working when James promotes or demotes a story in the editor — there is no
+         second place to remember to update. {%- endcomment -%}
+      {%- assign _featurls = '' -%}
+      {%- for f in _feats -%}
+        {%- if f.settings.url != blank -%}{%- assign _featurls = _featurls | append: '|' | append: f.settings.url | append: '|' -%}{%- endif -%}
+      {%- endfor -%}
+      <ul class="rd-csgrid rd-mt4 rd-stagger" id="evidence-wall" data-evwall data-limit="{{ _limit }}" role="list">
+        {%- assign _shown = 0 -%}
         {%- for block in section.blocks -%}{%- if block.type == 'story' -%}
+          {%- assign _thisurl = '|' | append: block.settings.url | append: '|' -%}
+          {%- if block.settings.url != blank and _featurls contains _thisurl -%}{%- continue -%}{%- endif -%}
+          {%- assign _shown = _shown | plus: 1 -%}
+          {%- if _shown > _limit -%}{%- assign _over = 'data-overflow hidden' -%}{%- else -%}{%- assign _over = '' -%}{%- endif -%}
           {%- comment -%} heading = the OUTCOME line. It is the most specific, unique sentence on
              the card, so it makes the best link text (WCAG 2.4.4 — the descriptive text must be
              INSIDE the anchor, not a sibling). `title` used to render as a second, near-duplicate
@@ -360,6 +424,7 @@
           {%- assign _head = block.settings.outcome | default: block.settings.title -%}
           {%- render 'bbc-cscard',
                variant: 'grid',
+               item_attrs: _over,
                kind: block.settings.kind,
                heading: _head,
                url: block.settings.url,
@@ -374,6 +439,23 @@
                video_file: block.settings.video_file -%}
         {%- endif -%}{%- endfor -%}
       </ul>
+      {%- if section.settings.stories_more != false -%}
+        {%- comment -%} Count is rendered server-side so the button is honest with JS off,
+           where it simply links to the full archive instead of expanding. {%- endcomment -%}
+        {%- assign _total = 0 -%}
+        {%- for block in section.blocks -%}{%- if block.type == 'story' -%}
+          {%- assign _turl = '|' | append: block.settings.url | append: '|' -%}
+          {%- unless block.settings.url != blank and _featurls contains _turl -%}{%- assign _total = _total | plus: 1 -%}{%- endunless -%}
+        {%- endif -%}{%- endfor -%}
+        {%- if _total > _limit -%}
+          <div class="rd-evmore rd-mt3">
+            <button type="button" class="rd-evmore__btn" data-evmore
+                    data-label-more="{{ section.settings.stories_more_label | default: 'show all' }}"
+                    data-label-less="{{ section.settings.stories_less_label | default: 'show fewer' }}"
+                    aria-expanded="false" aria-controls="evidence-wall">{{ section.settings.stories_more_label | default: 'show all' }} <span data-evmore-count>{{ _total }}</span></button>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
       {%- comment -%} provenance stays a SIBLING of the card group, never inside a card: press
          links inside a card either nest anchors in the card link or create a second tab stop. {%- endcomment -%}
       {%- if section.settings.cs_show_prov != false -%}
@@ -659,6 +741,30 @@
 /* evidence motion PROMOTED to bbc-universal.css §11 (2026-07-24) — chip stagger,
    .rd-evin filter rise and the card hover grammar are now sitewide vocabulary.
    Contract: qa/MOTION.md. No motion keyframes may live in this section. */
+
+/* ── featured slider + capped wall (2026-08-19) ──────────────────────────────
+   Slides are hidden with [hidden], not translated off-canvas, so only the visible
+   slide is reachable by keyboard or screen reader. The track holds its height from
+   whichever slide is showing — no fixed height, because these cards vary. */
+.rd-csfeat{position:relative}
+.rd-csfeat__slide[hidden]{display:none}
+.rd-csfeat__ui{display:flex;align-items:center;gap:12px;margin-top:20px}
+.rd-csfeat__arrow,.rd-csfeat__pause{font:inherit;font-size:14px;font-weight:800;line-height:1;
+  border:2px solid currentColor;background:transparent;color:inherit;border-radius:999px;cursor:pointer;padding:8px 14px}
+.rd-csfeat__pause{margin-left:auto;text-transform:lowercase;letter-spacing:.02em}
+.rd-csfeat__arrow:focus-visible,.rd-csfeat__pause:focus-visible,.rd-csfeat__dot:focus-visible{outline:3px solid var(--lime-aaa);outline-offset:2px}
+.rd-csfeat__dots{display:flex;gap:8px;align-items:center}
+.rd-csfeat__dot{width:11px;height:11px;padding:0;border-radius:50%;border:2px solid currentColor;background:transparent;cursor:pointer}
+.rd-csfeat__dot.is-on{background:var(--lime);border-color:var(--ink)}
+.rd-evmore{display:flex;justify-content:center}
+.rd-evmore__btn{font:inherit;font-size:15px;font-weight:800;letter-spacing:.02em;text-transform:lowercase;
+  padding:11px 22px;border:2px solid currentColor;border-radius:999px;background:transparent;color:inherit;cursor:pointer}
+.rd-evmore__btn:focus-visible{outline:3px solid var(--lime-aaa);outline-offset:2px}
+[data-evwall] [data-overflow][hidden]{display:none}
+@media (max-width:600px){
+  .rd-csfeat__ui{flex-wrap:wrap}
+  .rd-csfeat__pause{margin-left:0}
+}
 {% endstylesheet %}
 
 {% javascript %}
@@ -674,14 +780,129 @@ document.addEventListener('click', function (e) {
     t.setAttribute('aria-pressed', on ? 'true' : 'false');
   });
   var kind = tab.getAttribute('data-kind');
+  wall.setAttribute('data-kind-on', kind);
+  var more = band.querySelector('[data-evmore]');
+  if (more) { more.setAttribute('aria-expanded', 'false'); }
+  applyEvidenceCap(wall, kind, false, more);
+});
+
+/* The cap and the filter are the same operation: show the first N cards matching the
+   active sector, hide the rest. Keeping them in one function is what stops them
+   disagreeing — the first version filtered and capped separately, so picking a sector
+   with fewer than six cards still left overflow cards from the previous sector on
+   screen. `expanded` lifts the cap without touching the filter. */
+function applyEvidenceCap(wall, kind, expanded, moreBtn) {
+  var limit = parseInt(wall.getAttribute('data-limit'), 10) || 6;
+  var shown = 0, matching = 0;
   wall.querySelectorAll(':scope > [data-kind]').forEach(function (card) {
-    if (kind === 'all' || card.getAttribute('data-kind') === kind) {
-      card.removeAttribute('hidden');
-      card.classList.add('rd-evin');
-      card.addEventListener('animationend', function () { card.classList.remove('rd-evin'); }, { once: true });
+    var hit = (kind === 'all' || card.getAttribute('data-kind') === kind);
+    if (!hit) { card.setAttribute('hidden', ''); return; }
+    matching++;
+    if (expanded || shown < limit) {
+      shown++;
+      if (card.hasAttribute('hidden')) {
+        card.removeAttribute('hidden');
+        card.classList.add('rd-evin');
+        card.addEventListener('animationend', function () { card.classList.remove('rd-evin'); }, { once: true });
+      }
     } else card.setAttribute('hidden', '');
   });
+  if (moreBtn) {
+    moreBtn.hidden = matching <= limit;
+    var lbl = expanded ? moreBtn.getAttribute('data-label-less') : moreBtn.getAttribute('data-label-more');
+    var cnt = moreBtn.querySelector('[data-evmore-count]');
+    moreBtn.childNodes[0].nodeValue = lbl + ' ';
+    if (cnt) cnt.textContent = expanded ? '' : String(matching);
+  }
+  return matching;
+}
+
+document.addEventListener('click', function (e) {
+  var btn = e.target.closest('[data-evmore]');
+  if (!btn) return;
+  var band = btn.closest('section');
+  var wall = band && band.querySelector('[data-evwall]');
+  if (!wall) return;
+  var expanded = btn.getAttribute('aria-expanded') !== 'true';
+  btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  applyEvidenceCap(wall, wall.getAttribute('data-kind-on') || 'all', expanded, btn);
 });
+
+/* Initial pass: Liquid already hid the overflow for the unfiltered view, but the
+   button's count has to be right before anyone clicks it. */
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('[data-evwall]').forEach(function (wall) {
+    var band = wall.closest('section');
+    var more = band && band.querySelector('[data-evmore]');
+    wall.setAttribute('data-kind-on', 'all');
+    applyEvidenceCap(wall, 'all', false, more);
+  });
+});
+
+/* ── featured slider ──────────────────────────────────────────────────────────
+   Slides are real DOM, hidden with [hidden] rather than transformed off-screen, so
+   an assistive tech user is never offered a link they cannot see. Autoplay stops on
+   hover, on focus inside, when the tab is hidden, and permanently once the reader
+   uses a control — a reader who has taken charge should not be fought by a timer.
+   prefers-reduced-motion disables autoplay outright (qa/MOTION.md). */
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-csfeat]').forEach(function (root) {
+    var slides = Array.prototype.slice.call(root.querySelectorAll('[data-csfeat-slide]'));
+    if (slides.length < 2) return;
+    var dots = Array.prototype.slice.call(root.querySelectorAll('[data-csfeat-dot]'));
+    var pauseBtn = root.querySelector('[data-csfeat-pause]');
+    var ms = parseInt(root.getAttribute('data-autoplay'), 10) || 7000;
+    var i = 0, timer = null, stopped = reduce;
+
+    function show(n, focusIt) {
+      i = (n + slides.length) % slides.length;
+      slides.forEach(function (s, k) {
+        if (k === i) s.removeAttribute('hidden'); else s.setAttribute('hidden', '');
+      });
+      dots.forEach(function (d, k) {
+        d.classList.toggle('is-on', k === i);
+        d.setAttribute('aria-selected', k === i ? 'true' : 'false');
+      });
+      if (focusIt) {
+        var a = slides[i].querySelector('a');
+        if (a) a.setAttribute('tabindex', '0');
+      }
+    }
+    function tick() { show(i + 1); }
+    function start() { if (stopped || timer) return; timer = setInterval(tick, ms); }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function halt() { stopped = true; stop(); if (pauseBtn) { pauseBtn.setAttribute('aria-pressed', 'true'); pauseBtn.textContent = 'play'; } }
+
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', function (e) {
+      if (!root.contains(e.relatedTarget)) start();
+    });
+    document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+
+    var prev = root.querySelector('[data-csfeat-prev]');
+    var next = root.querySelector('[data-csfeat-next]');
+    if (prev) prev.addEventListener('click', function () { halt(); show(i - 1, true); });
+    if (next) next.addEventListener('click', function () { halt(); show(i + 1, true); });
+    dots.forEach(function (d) {
+      d.addEventListener('click', function () { halt(); show(parseInt(d.getAttribute('data-csfeat-dot'), 10), true); });
+    });
+    if (pauseBtn) pauseBtn.addEventListener('click', function () {
+      if (stopped) { stopped = false; pauseBtn.setAttribute('aria-pressed', 'false'); pauseBtn.textContent = 'pause'; start(); }
+      else halt();
+    });
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { halt(); show(i - 1, true); }
+      if (e.key === 'ArrowRight') { halt(); show(i + 1, true); }
+    });
+
+    show(0);
+    if (reduce && pauseBtn) { pauseBtn.hidden = true; }
+    start();
+  });
+})();
 /* deep link: #evidence-<kind> pre-filters the wall. Runs at load AND on hashchange
    (in-page chapter/segment links) — hash-only anchors have no element, so we also
    scroll to the wall ourselves. Registered AFTER the click handler (order matters). */
@@ -707,20 +928,86 @@ document.addEventListener('click', function (e) {
   "tag": "section",
   "class": "section bbc-impact-2026-wrap",
   "settings": [
-    { "type": "header", "content": "Editability pass 2026-08-10" },
-    { "type": "text", "id": "tx_financial_times", "label": "Financial Times", "default": "Financial Times" },
-    { "type": "text", "id": "tx_inside_time", "label": "Inside Time", "default": "Inside Time" },
-    { "type": "text", "id": "tx_investec_beyond_business", "label": "Investec Beyond Business", "default": "Investec Beyond Business" },
-    { "type": "header", "content": "Map stats (editability pass 2026-08-10)" },
-    { "type": "text", "id": "mstat1_num", "label": "Map stat 1 number", "default": "4" },
-    { "type": "text", "id": "mstat1_lbl", "label": "Map stat 1 label", "default": "active prison sites" },
-    { "type": "text", "id": "mstat2_num", "label": "Map stat 2 number", "default": "10" },
-    { "type": "text", "id": "mstat2_lbl", "label": "Map stat 2 label", "default": "schools & universities" },
-    { "type": "text", "id": "mstat3_num", "label": "Map stat 3 number", "default": "3" },
-    { "type": "text", "id": "mstat3_lbl", "label": "Map stat 3 label", "default": "international hubs" },
-    { "type": "text", "id": "mstat4_num", "label": "Map stat 4 number", "default": "45" },
-    { "type": "text", "id": "mstat4_lbl", "label": "Map stat 4 label", "default": "countries reached" },
-    { "type": "text", "id": "backers_label", "label": "Backers wall label", "default": "backed by & accredited by" },
+    {
+      "type": "header",
+      "content": "Editability pass 2026-08-10"
+    },
+    {
+      "type": "text",
+      "id": "tx_financial_times",
+      "label": "Financial Times",
+      "default": "Financial Times"
+    },
+    {
+      "type": "text",
+      "id": "tx_inside_time",
+      "label": "Inside Time",
+      "default": "Inside Time"
+    },
+    {
+      "type": "text",
+      "id": "tx_investec_beyond_business",
+      "label": "Investec Beyond Business",
+      "default": "Investec Beyond Business"
+    },
+    {
+      "type": "header",
+      "content": "Map stats (editability pass 2026-08-10)"
+    },
+    {
+      "type": "text",
+      "id": "mstat1_num",
+      "label": "Map stat 1 number",
+      "default": "4"
+    },
+    {
+      "type": "text",
+      "id": "mstat1_lbl",
+      "label": "Map stat 1 label",
+      "default": "active prison sites"
+    },
+    {
+      "type": "text",
+      "id": "mstat2_num",
+      "label": "Map stat 2 number",
+      "default": "10"
+    },
+    {
+      "type": "text",
+      "id": "mstat2_lbl",
+      "label": "Map stat 2 label",
+      "default": "schools & universities"
+    },
+    {
+      "type": "text",
+      "id": "mstat3_num",
+      "label": "Map stat 3 number",
+      "default": "3"
+    },
+    {
+      "type": "text",
+      "id": "mstat3_lbl",
+      "label": "Map stat 3 label",
+      "default": "international hubs"
+    },
+    {
+      "type": "text",
+      "id": "mstat4_num",
+      "label": "Map stat 4 number",
+      "default": "45"
+    },
+    {
+      "type": "text",
+      "id": "mstat4_lbl",
+      "label": "Map stat 4 label",
+      "default": "countries reached"
+    },
+    {
+      "type": "text",
+      "id": "backers_label",
+      "label": "Backers wall label",
+      "default": "backed by & accredited by"
+    },
     {
       "type": "header",
       "content": "Hero"
@@ -1450,6 +1737,43 @@ document.addEventListener('click', function (e) {
       "default": "Every kind of impact"
     },
     {
+      "type": "range",
+      "id": "stories_limit",
+      "label": "Case studies shown at once",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "stories_more",
+      "label": "Offer a “show all” button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "stories_more_label",
+      "label": "Show-more label",
+      "default": "show all"
+    },
+    {
+      "type": "text",
+      "id": "stories_less_label",
+      "label": "Show-fewer label",
+      "default": "show fewer"
+    },
+    {
+      "type": "range",
+      "id": "feat_autoplay_ms",
+      "label": "Featured rotation (seconds)",
+      "min": 4,
+      "max": 15,
+      "step": 1,
+      "default": 7,
+      "unit": "s"
+    },
+    {
       "type": "text",
       "id": "stories_title",
       "label": "Heading (blank to hide grid)",
@@ -1822,7 +2146,11 @@ document.addEventListener('click', function (e) {
           "id": "source_label",
           "label": "Source label (e.g. Inside Time)"
         },
-          { "type": "text", "id": "chips", "label": "Card chips (comma-separated)" },
+        {
+          "type": "text",
+          "id": "chips",
+          "label": "Card chips (comma-separated)"
+        },
         {
           "type": "text",
           "id": "source_url",
@@ -2089,6 +2417,61 @@ document.addEventListener('click', function (e) {
           "id": "source",
           "label": "Source",
           "default": "Ministry of Justice"
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Featured story (slider)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading — the person's own words work best",
+          "default": "Build to Bond"
+        },
+        {
+          "type": "text",
+          "id": "site",
+          "label": "Attribution / site line",
+          "default": "HMP Lowdham Grange"
+        },
+        {
+          "type": "textarea",
+          "id": "blurb",
+          "label": "Story"
+        },
+        {
+          "type": "text",
+          "id": "outcomes",
+          "label": "Outcome chips (comma separated)"
+        },
+        {
+          "type": "text",
+          "id": "kind",
+          "label": "Sector",
+          "default": "prisons"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Read the story"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_pic",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image",
+          "label": "Image asset filename (fallback)"
         }
       ]
     }
