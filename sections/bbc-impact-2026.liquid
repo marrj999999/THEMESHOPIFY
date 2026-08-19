@@ -746,7 +746,12 @@
    Slides are hidden with [hidden], not translated off-canvas, so only the visible
    slide is reachable by keyboard or screen reader. The track holds its height from
    whichever slide is showing — no fixed height, because these cards vary. */
+/* The track reserves the height of the TALLEST slide, measured once at load, so the
+   page does not jump as the story rotates — slide 0 runs 65 words against slide 2's
+   25, which was 35px of movement every 7 seconds under the reader's eye. min-height
+   rather than height so a slide that grows (a long editor edit) is never clipped. */
 .rd-csfeat{position:relative}
+.rd-csfeat__track{min-height:var(--csfeat-h,auto)}
 .rd-csfeat__slide[hidden]{display:none}
 .rd-csfeat__ui{display:flex;align-items:center;gap:12px;margin-top:20px}
 .rd-csfeat__arrow,.rd-csfeat__pause{font:inherit;font-size:14px;font-weight:800;line-height:1;
@@ -760,7 +765,9 @@
 .rd-evmore__btn{font:inherit;font-size:15px;font-weight:800;letter-spacing:.02em;text-transform:lowercase;
   padding:11px 22px;border:2px solid currentColor;border-radius:999px;background:transparent;color:inherit;cursor:pointer}
 .rd-evmore__btn:focus-visible{outline:3px solid var(--lime-aaa);outline-offset:2px}
-[data-evwall] [data-overflow][hidden]{display:none}
+/* !important because this competes with grid/flex layout rules in a later sheet that
+   share its specificity. Whether a card is on the page is not a layout decision. */
+[data-evwall] > [data-kind][hidden]{display:none !important}
 @media (max-width:600px){
   .rd-csfeat__ui{flex-wrap:wrap}
   .rd-csfeat__pause{margin-left:0}
@@ -898,7 +905,25 @@ document.addEventListener('DOMContentLoaded', function () {
       if (e.key === 'ArrowRight') { halt(); show(i + 1, true); }
     });
 
+    /* Measure every slide once, reserve the tallest. Done after layout so images have
+       their real boxes; re-measured on resize because the cards reflow at breakpoints. */
+    function reserve() {
+      var was = slides.map(function (s) { return s.hasAttribute('hidden'); });
+      var max = 0;
+      slides.forEach(function (s) {
+        s.removeAttribute('hidden');
+        max = Math.max(max, s.getBoundingClientRect().height);
+      });
+      slides.forEach(function (s, k) { if (was[k]) s.setAttribute('hidden', ''); });
+      if (max) root.style.setProperty('--csfeat-h', Math.ceil(max) + 'px');
+    }
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(reserve, 180); });
+
     show(0);
+    reserve();
+    if (window.requestAnimationFrame) requestAnimationFrame(reserve);
+    window.addEventListener('load', reserve);
     if (reduce && pauseBtn) { pauseBtn.hidden = true; }
     start();
   });

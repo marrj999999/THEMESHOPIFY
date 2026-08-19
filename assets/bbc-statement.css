@@ -894,11 +894,31 @@ cart-drawer.animate .drawer{ visibility:visible; }
 .bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__meta,
 .bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] p{ color:var(--charcoal,#2A332F); }
 
-@media (min-width:900px){
-  .bbc-rd-impact .rd-csgrid{ align-items:start; }
-  .bbc-rd-impact .rd-csgrid > :nth-child(2){ margin-top:clamp(40px,6vw,80px); }
-  .bbc-rd-impact .rd-csgrid > :nth-child(3){ margin-top:clamp(20px,3vw,40px); }
-}
+/* The 2nd and 3rd children used to be dropped 40–80px so they cascaded away from the
+   big featured card that sat first in this grid. That featured card moved out to its
+   own slider (2026-08-19), so the rule was staggering three ordinary cards instead:
+   row one began at y3376, y3416 and y3456 — a 40px waterfall with nothing to cascade
+   from. Retired along with the premise that justified it.
+
+   align-items:start also let each card keep its natural height, so a 454px card sat
+   beside two 600px ones and the row's baseline came apart. Stretch instead, and let
+   the card fill its cell so every "read the story" lands on one line.
+
+   NOT inside a min-width query. The first version scoped these to ≥900px, which left
+   the two-up tablet grid ragged — hidden at six cards because those six happened to
+   match, and only visible once "show all" filled the rows. At one column they are inert.
+
+   :not([hidden]) is load-bearing, not tidiness. `display:flex` has the same specificity
+   as the rule that hides capped cards, and this sheet loads later, so without the guard
+   it won the cascade and re-painted all 28 hidden cards: the six-card cap silently
+   stopped working and the page went back to 14,743px. A layout rule must never be able
+   to out-rank [hidden]. */
+.bbc-rd-impact .rd-csgrid{ align-items:stretch; }
+.bbc-rd-impact .rd-csgrid > .rd-cscard-item:not([hidden]){ display:flex; height:100%; }
+.bbc-rd-impact .rd-csgrid > .rd-cscard-item:not([hidden]) > .rd-cscard{ display:flex; flex-direction:column; width:100%; }
+.bbc-rd-impact .rd-csgrid > .rd-cscard-item:not([hidden]) .rd-cscard__body{ display:flex; flex-direction:column; flex:1 1 auto; }
+.bbc-rd-impact .rd-csgrid > .rd-cscard-item:not([hidden]) .rd-cscard__more,
+.bbc-rd-impact .rd-csgrid > .rd-cscard-item:not([hidden]) a.rd-textlink{ margin-top:auto; }
 
 /* B7 · D3 marginalia rail: eyebrow leaves the stack */
 @media (min-width:900px){

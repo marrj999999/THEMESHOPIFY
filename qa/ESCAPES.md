@@ -982,3 +982,58 @@ the pause control is hidden; under `no-preference` it advances two slides.
 readers — it is what makes the component testable. If a motion feature is hard to
 screenshot deterministically, check whether it is honouring reduced-motion first.
 The bug is usually there.
+
+---
+
+## #54 — a decorative rule outlived the thing it was decorating
+*2026-08-19 · assets/bbc-statement.css · the impact evidence grid*
+
+James: "the top is changing height and the bottom is straight — align correctly."
+
+Two separate causes, neither visible in the code I had just written.
+
+**The cascade.** `bbc-statement.css` carried:
+
+```css
+.bbc-rd-impact .rd-csgrid > :nth-child(2){ margin-top:clamp(40px,6vw,80px); }
+.bbc-rd-impact .rd-csgrid > :nth-child(3){ margin-top:clamp(20px,3vw,40px); }
+```
+
+Written when the big featured card was the grid's FIRST child, so the next two dropped
+away from it in a deliberate editorial diagonal. Moving the featured card into its own
+slider left the rule staggering three ordinary cards against nothing: row one began at
+y3376, y3416, y3456. The CSS was never wrong; its premise moved out from under it, and
+the file that changed was a different one in a different language.
+
+**The stretch.** `align-items:start` let each card keep its natural height, so a 454px
+card sat beside two 600px ones. Nothing in the DOM says a row is uneven — it took
+measuring every card's top and height and grouping by row.
+
+**Rule.** When you move an element out of a container, grep the stylesheets for
+positional selectors on that container — `:nth-child`, `:first-child`, `+`, `~`. They
+encode an arrangement, and nothing warns you when the arrangement changes.
+
+---
+
+## #55 — the fix for one thing quietly disabled another
+*2026-08-19 · same edit*
+
+The alignment fix added `display:flex` to `.rd-cscard-item`. The rule that enforces the
+six-card cap is `[data-evwall] [data-overflow][hidden]{display:none}`. Both are three
+selectors of specificity; `bbc-statement.css` loads later; `display:flex` won.
+
+All 28 capped cards were painted again and the page went from 8,382px back to 14,743px
+— undoing the entire point of the change James had asked for one message earlier. The
+cards still carried `[hidden]`, so every functional check I had written kept passing:
+"shown 6" counted the attribute, not the pixels. What caught it was an unrelated number
+in an unrelated test — the page height in the slider-jump probe reading 14,743 when it
+should have read ~8,400.
+
+Fixed twice over: `:not([hidden])` on every layout rule, and the hide rule promoted to
+`display:none !important`, because whether a card is on the page is not a layout
+decision and must not be settled by cascade order.
+
+**Rule.** `[hidden]` is a contract, and any bare `display:` on the same elements can
+break it silently. Guard layout rules with `:not([hidden])`. And assert on rendered
+geometry, not just on attributes — an element with `hidden` that still paints will pass
+every check that asks the DOM instead of the box.
