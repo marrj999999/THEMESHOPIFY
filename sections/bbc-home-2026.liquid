@@ -202,14 +202,22 @@
           <li><b>{{ section.settings.hero_proof2_num | default: '45' }}</b><span>{{ section.settings.hero_proof2_label | default: 'countries' }}</span></li>
           <li><b>{{ section.settings.hero_proof3_num | default: '2012' }}</b><span>{{ section.settings.hero_proof3_label | default: 'building since' }}</span></li>
         </ul>
-        <p class="rd-stat-src">{{ section.settings.hero_proof_src | default: 'BBC training & customer records' }}</p>
+        {%- comment -%}
+          No `| default:` here on purpose. A Liquid default fires on an EMPTY string as well as a
+          missing one, so a hard-coded fallback makes the field unclearable in the editor: you blank
+          it, save, and the old line is still on the page. Blank must mean blank. The schema default
+          still populates a newly added section.
+        {%- endcomment -%}
+        {%- if section.settings.hero_proof_src != blank -%}
+          <p class="rd-stat-src">{{ section.settings.hero_proof_src }}</p>
+        {%- endif -%}
       {%- endif -%}
       <div class="ew-cta">
         {%- if section.settings.hero_cta1_label != blank -%}<a class="ew-btn is-lime" href="{{ hero_cta1 }}">{{ section.settings.hero_cta1_label }}&nbsp;&rarr;</a>{%- endif -%}
         {%- if section.settings.hero_cta2_label != blank -%}<a class="ew-btn is-ghost" href="{{ hero_cta2 }}" style="color:#EDE6D6 !important;border-color:#EDE6D6 !important;">{{ section.settings.hero_cta2_label }}</a>{%- endif -%}
       </div>
-            {%- assign _cred = section.settings.hero_cred | default: 'Enhanced-DBS facilitators &middot; public-liability insured' -%}
-            {%- if _cred != blank -%}<p class="ew-cred">{{ _cred }}</p>{%- endif -%}
+            {%- comment -%}The label promises "blank hides"; the old `| default:` broke that promise.{%- endcomment -%}
+            {%- if section.settings.hero_cred != blank -%}<p class="ew-cred">{{ section.settings.hero_cred }}</p>{%- endif -%}
     </div>
 
     <div class="ew-media{% if section.settings.hero_video_on %} has-video{% endif %}">

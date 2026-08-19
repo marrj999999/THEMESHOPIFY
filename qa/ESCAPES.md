@@ -821,3 +821,38 @@ space and its CTAs now align across every row.
 **Rule.** Never derive a layout property from a content measurement that authors change
 freely. Tie it to something the author chooses on purpose — a setting, a variant, a media
 type — or the design drifts every time somebody edits a sentence.
+
+---
+
+## #48 — a schema label that promised "blank hides", and a `| default:` that made it a lie
+*2026-08-19 · sections/bbc-home-2026.liquid*
+
+James asked for four things off the home hero: "Enhanced-DBS facilitators · public-liability
+insured" and "BBC training & customer records". Both are settings. Both looked like a
+two-field job in the theme editor. Neither could be cleared there.
+
+```liquid
+{{ section.settings.hero_proof_src | default: 'BBC training & customer records' }}
+{%- assign _cred = section.settings.hero_cred | default: 'Enhanced-DBS facilitators…' -%}
+```
+
+Liquid's `default` fires on an EMPTY string, not just a missing one. So blanking the field
+in the editor, saving, and reloading leaves the old line on the page — the fallback fills the
+hole you just made. `hero_cred`'s schema label literally read **"Hero trust line (blank
+hides)"**. It did not hide. The label documented an intention the code contradicted, which is
+worse than no label: it tells the editor the thing they just tried should have worked.
+
+**Fix.** Drop the Liquid fallback and gate on `!= blank`, so blank means blank. The schema
+`"default"` still populates a newly added section — that is the right place for a default,
+because it applies once at insert time instead of overriding the author forever.
+
+**Rule.** `| default:` on an editable setting is a value the author cannot delete. Use it only
+where empty is genuinely impossible; anywhere else put the default in the schema and let blank
+mean blank. If a label claims blank hides, that claim is a test — write it.
+
+**Also caught, by the guard rather than by me.** The first attempt cleared the values by
+parsing `templates/index.json`, editing, and re-serialising. Its own diff check refused the
+result: `JSON.stringify` drops Shopify's `\/` escapes, so nine unrelated URL lines would have
+been rewritten. Byte-identical semantics, but hard rule #4 is about not rewriting this file at
+all. Raw-string replacement of the two values touched 2 lines and nothing else. A guard that
+only allows the diff you predicted is worth more than one that checks the result parses.
