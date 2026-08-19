@@ -57,24 +57,21 @@
   Wrap calls in <ul class="rd-csgrid">…</ul>; this snippet renders its own <li>.
 {%- endcomment -%}
 
-{%- comment -%} CONTENT-AWARE SIZE (2026-08-01). The band was one shape repeated; giving cards a
-   colour then exposed a second problem — a stretched card with short copy showed 50% dead
-   surface. Size is therefore DERIVED from what a card actually holds, not set by position:
-
-     has a film            → wide   a video card earns the room, and it is the strongest thing
-                                    on the estate that nobody can currently see
-     long copy (>150 ch)   → tall   the text needs the height rather than being cramped
-     no image              → flat   nothing to reserve media space for
-     otherwise             → unit
-
-   `size` (a schema setting) overrides the derivation when an editor wants a specific card to
-   lead. The grid then uses grid-auto-flow:dense so a wide card never leaves a hole beside it —
-   that is the actual mechanism for "no blank spaces", not manual ordering. {%- endcomment -%}
-{%- assign _len = context | default: '' | size -%}
+{%- comment -%} CARD SIZE (2026-08-01, revised 2026-08-19).
+   Originally size was DERIVED from what a card held: film → wide, long copy (>150 ch) → tall,
+   no image → flat, else unit. The long-copy rule is now gone.
+   The old rule promoted any card whose context ran past 150 characters to `tall`
+   (grid-row: span 2). That made LAYOUT an accident of COPY: a 151-character blurb
+   became a double-height card and a 149-character one did not, so the mosaic bands
+   tiled into ragged rows with dead gaps beside them — visible on /pages/our-story-2,
+   where the "real people, real builds" wall had cards at 226, 314, 468, 540, 636, 663
+   and 696px in the same grid. James: "improve the consistency and layout."
+   What remains is deliberate: no media → `flat` (a card with nothing to show should not
+   pretend to a media box), video → `wide` (a film wants the width). Everything else is
+   `unit`, and an editor can still override any card via the `size` argument. {%- endcomment -%}
 {%- assign _auto = 'unit' -%}
 {%- if image == blank and image_pic == blank and youtube == blank -%}{%- assign _auto = 'flat' -%}
 {%- elsif youtube != blank or video_file != blank -%}{%- assign _auto = 'wide' -%}
-{%- elsif _len > 150 -%}{%- assign _auto = 'tall' -%}
 {%- endif -%}
 {%- assign _size = size | default: _auto -%}
 {%- comment -%}

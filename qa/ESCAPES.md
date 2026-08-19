@@ -784,3 +784,40 @@ callout on the site, instead of merely similar.
 damage is elsewhere. The estate-wide pixel diff is the only instrument that sees it, and it only
 sees it because baselines exist for pages nobody edited that day. That is the argument for
 running the full visual suite before commit, not just the page you changed.
+
+---
+
+## #47 — layout was an accident of copy length (2026-08-19)
+
+**Found by looking, prompted by James: "improve the consistency and layout"** on the
+"real people, real builds" band of /pages/our-story-2.
+
+`bbc-cscard` derived each card's grid size from its own content:
+
+```liquid
+{%- elsif _len > 150 -%}{%- assign _auto = 'tall' -%}   {# grid-row: span 2 #}
+```
+
+So a blurb of 151 characters produced a double-height card and one of 149 did not. Card
+size — a layout decision — was being made by an incidental property of the copy. The band
+was rendering cards at 226, 314, 468, 540, 636, 663 and 696px in the same three-column
+grid, with dead gaps beside the tall ones where a neighbouring card stretched to fill.
+
+Nobody wrote a bug. The rule was added deliberately (2026-08-01, "long copy needs the
+height rather than being cramped") and it reads as reasonable. It only fails at the scale
+where content varies freely, which is exactly what a blog-fed band does.
+
+**Removed the length rule.** What remains is deliberate and stable: no media → `flat`,
+video → `wide`, everything else → `unit`, with an explicit `size` override for an editor
+who wants a specific card to lead. Six pages use the mosaic (our-story-2, prisons,
+programmes, support-mission, theory-of-change, workshop) so all six get steadier rows.
+
+**Then the band itself dropped the mosaic.** Even with sizing fixed, a `wide` video card is
+two columns AND taller than its neighbour, so whatever sits beside it stretches. /pages/impact
+— the estate's other case-study wall, same component — uses the plain uniform grid and reads
+cleanly. Same job, same layout: `stories_mosaic: false`. The band lost ~1,000px of dead
+space and its CTAs now align across every row.
+
+**Rule.** Never derive a layout property from a content measurement that authors change
+freely. Tie it to something the author chooses on purpose — a setting, a variant, a media
+type — or the design drifts every time somebody edits a sentence.
