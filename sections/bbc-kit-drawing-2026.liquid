@@ -16,8 +16,11 @@
 
 {%- liquid
   assign img = section.settings.image
-  if img == blank and product and product.images.size > 1
+  if img == blank and product and product.images.size > 0
     assign idx = section.settings.product_image_index | minus: 1
+    if idx >= product.images.size
+      assign idx = product.images.size | minus: 1
+    endif
     assign img = product.images[idx]
   endif
   assign callouts = section.blocks | where: 'type', 'callout'

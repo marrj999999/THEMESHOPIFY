@@ -58,7 +58,14 @@
         "bundle_b_text": "Bars, wheels, drivetrain and finishing kit, chosen for your build.",
         "bundle_total_text": "A complete, one-of-a-kind balance bike — built by you.",
         "press_quote": "Taps into 'the IKEA effect' — that extra bit of affection people reserve for objects they put together themselves.",
-        "press_cite": "Financial Times"
+        "press_cite": "Financial Times",
+        "sheet_bg": true,
+        "pay_line": "Klarna and Shop Pay at checkout",
+        "help_lead": "Not sure it's for you?",
+        "help_label": "Book a free 10-minute call",
+        "help_url": "/pages/contact-us",
+        "stories_label": "Read the builder stories",
+        "stories_url": "/blogs/club-news"
       }
     },
     "kitship": {
@@ -170,7 +177,7 @@
         "stat_4": {
           "type": "stat",
           "settings": {
-            "number": "~2×\/wk",
+            "number": "~2×/wk",
             "label": "shipped from London",
             "source": "full tracking"
           }
@@ -211,28 +218,28 @@
           "type": "faq",
           "settings": {
             "question": "What age and size is this for?",
-            "answer": "<p>Designed for children roughly aged 2–5, as a balance (pedal-free) first bike. The right fit depends on your child's inside-leg measurement more than age — send us their height and inside leg and we'll confirm it suits them.<\/p>"
+            "answer": "<p>Designed for children roughly aged 2–5, as a balance (pedal-free) first bike. The right fit depends on your child's inside-leg measurement more than age — send us their height and inside leg and we'll confirm it suits them.</p>"
           }
         },
         "faq_2": {
           "type": "faq",
           "settings": {
             "question": "Is it light enough for a sized by inside leg to handle?",
-            "answer": "<p>Bamboo is naturally light and the balance frame is small, so it's made to be manageable for little legs. We don't want to publish a weight we haven't measured — we'll share the exact finished weight on request.<\/p>"
+            "answer": "<p>Bamboo is naturally light and the balance frame is small, so it's made to be manageable for little legs. We don't want to publish a weight we haven't measured — we'll share the exact finished weight on request.</p>"
           }
         },
         "faq_3": {
           "type": "faq",
           "settings": {
             "question": "Why no pedals?",
-            "answer": "<p>Balance bikes teach the hard part first — balancing and steering — without pedals or stabilisers. Children glide with their feet, then move straight to a pedal bike, usually skipping stabilisers altogether.<\/p>"
+            "answer": "<p>Balance bikes teach the hard part first — balancing and steering — without pedals or stabilisers. Children glide with their feet, then move straight to a pedal bike, usually skipping stabilisers altogether.</p>"
           }
         },
         "faq_4": {
           "type": "faq",
           "settings": {
             "question": "How hard is the build, and how long does it take?",
-            "answer": "<p>It's our simplest kit — fewer parts than an adult frame and around 8–12 hours, comfortably a weekend. No power tools: just basic hand tools (hacksaw, files, sandpaper, tape) and a work surface. Most builders start with zero experience, and our community can help if you get stuck.<\/p>"
+            "answer": "<p>It's our simplest kit — fewer parts than an adult frame and around 8–12 hours, comfortably a weekend. No power tools: just basic hand tools (hacksaw, files, sandpaper, tape) and a work surface. Most builders start with zero experience, and our community can help if you get stuck.</p>"
           }
         },
         "faq_5": {
@@ -293,10 +300,144 @@
         "press_quote": "Taps into 'the IKEA effect' — that extra bit of affection people reserve for objects they put together themselves.",
         "press_cite": "Financial Times"
       }
+    },
+    "kitdraw": {
+      "type": "bbc-kit-drawing-2026",
+      "settings": {
+        "anchor": "in-the-box",
+        "tb_a_key": "kit",
+        "tb_a": "№ 02 — balance bike, lugged",
+        "tb_b_key": "built",
+        "tb_b": "by you, at home",
+        "eyebrow": "what arrives",
+        "heading": "everything but the parts you already own.",
+        "lede": "The frame kit: tubes, lugs and adhesive. Wheels, saddle, bars and headset come as the balance bike components pack, shown here with the kit.",
+        "foot": "Spares included. If anything in the box is not right, we replace it.",
+        "product_image_index": 5,
+        "image_alt": "The balance bike, lugged kit laid out flat",
+        "sheet_label": "1 of 1",
+        "sticker": "it grew itself.",
+        "show_pins": true
+      },
+      "blocks": {
+        "c1": {
+          "type": "callout",
+          "settings": {
+            "label": "bamboo tubes",
+            "note": "cut to length",
+            "x": 18,
+            "y": 58
+          }
+        },
+        "c2": {
+          "type": "callout",
+          "settings": {
+            "label": "pre-formed aluminium lugs",
+            "note": "",
+            "x": 35,
+            "y": 57
+          }
+        },
+        "c3": {
+          "type": "callout",
+          "settings": {
+            "label": "bonding adhesive",
+            "note": "",
+            "x": 0,
+            "y": 0
+          }
+        },
+        "c4": {
+          "type": "callout",
+          "settings": {
+            "label": "assembly instructions",
+            "note": "and the video series",
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ]
+    },
+    "kitspec": {
+      "type": "bbc-kit-spec",
+      "settings": {
+        "background": "bone",
+        "anchor": "spec",
+        "eyebrow": "what it takes",
+        "heading": "the build, honestly.",
+        "lede": "A weekend project. Everything you cut and bond is in the box; the components pack bolts on at the end.",
+        "foot_left": "",
+        "foot_right": "",
+        "foot_url": "/pages/contact-us"
+      },
+      "blocks": {
+        "ef1": {
+          "type": "effort",
+          "settings": {
+            "label": "build time",
+            "value": "8–12 hrs",
+            "note": "a weekend"
+          }
+        },
+        "ef2": {
+          "type": "effort",
+          "settings": {
+            "label": "difficulty",
+            "value": "No experience needed",
+            "note": "a first build for many parents"
+          }
+        },
+        "ef3": {
+          "type": "effort",
+          "settings": {
+            "label": "tools",
+            "value": "Hand tools only",
+            "note": "hacksaw · sandpaper · tape"
+          }
+        },
+        "ef4": {
+          "type": "effort",
+          "settings": {
+            "label": "space",
+            "value": "A kitchen table",
+            "note": ""
+          }
+        },
+        "dc1": {
+          "type": "doc",
+          "settings": {
+            "label": "1:1 frame plan — in the box",
+            "url": ""
+          }
+        },
+        "dc2": {
+          "type": "doc",
+          "settings": {
+            "label": "Build manual and video course — with your kit",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "ef1",
+        "ef2",
+        "ef3",
+        "ef4",
+        "dc1",
+        "dc2"
+      ]
     }
   },
   "order": [
     "main",
+    "kitdraw",
+    "kitspec",
     "kitship",
     "lower"
   ]

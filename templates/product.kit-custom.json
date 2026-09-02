@@ -57,7 +57,14 @@
         "press_quote": "Bamboo naturally dampens vibration, allowing the smoothest ride.",
         "press_cite": "The Guardian",
         "sticky_buy": true,
-        "content_bands": false
+        "content_bands": false,
+        "sheet_bg": true,
+        "pay_line": "Klarna and Shop Pay at checkout · Cycle to Work accepted",
+        "help_lead": "Not sure it's for you?",
+        "help_label": "Book a free 10-minute call",
+        "help_url": "/pages/contact-us",
+        "stories_label": "Read the builder stories",
+        "stories_url": "/blogs/club-news/tagged/custom"
       }
     },
     "kitspec": {
@@ -78,7 +85,8 @@
           "settings": {
             "label": "head tube",
             "value": "44 mm",
-            "note": "tapered on request"
+            "note": "tapered on request",
+            "icon": "headtube"
           }
         },
         "sp1": {
@@ -86,7 +94,8 @@
           "settings": {
             "label": "bottom bracket",
             "value": "68 / 73 mm · T47 · eccentric",
-            "note": "chosen at checkout"
+            "note": "chosen at checkout",
+            "icon": "bb"
           }
         },
         "sp2": {
@@ -94,7 +103,8 @@
           "settings": {
             "label": "seatpost",
             "value": "27.2 or 31.6 mm",
-            "note": "chosen at checkout"
+            "note": "chosen at checkout",
+            "icon": "seatpost"
           }
         },
         "sp3": {
@@ -102,7 +112,8 @@
           "settings": {
             "label": "dropouts",
             "value": "Modular",
-            "note": "QR · horizontal · 12 mm thru · custom on request"
+            "note": "QR · horizontal · 12 mm thru · custom on request",
+            "icon": "axle"
           }
         },
         "sp4": {
@@ -110,7 +121,8 @@
           "settings": {
             "label": "geometry",
             "value": "1:1 to you",
-            "note": "built to your measurements"
+            "note": "built to your measurements",
+            "icon": "ruler"
           }
         },
         "sp5": {
@@ -118,7 +130,8 @@
           "settings": {
             "label": "other builds",
             "value": "Cargo · tandem · tall bike",
-            "note": "custom-designed"
+            "note": "custom-designed",
+            "icon": "parts"
           }
         },
         "sp6": {
@@ -126,7 +139,54 @@
           "settings": {
             "label": "build time",
             "value": "30–50 hrs",
+            "note": "depends on the design",
+            "icon": "clock"
+          }
+        },
+        "ef1": {
+          "type": "effort",
+          "settings": {
+            "label": "build time",
+            "value": "30–50 hrs",
             "note": "depends on the design"
+          }
+        },
+        "ef2": {
+          "type": "effort",
+          "settings": {
+            "label": "difficulty",
+            "value": "No experience needed",
+            "note": "most builders start from zero"
+          }
+        },
+        "ef3": {
+          "type": "effort",
+          "settings": {
+            "label": "tools",
+            "value": "Hand tools only",
+            "note": "hacksaw · files · sandpaper · tape"
+          }
+        },
+        "ef4": {
+          "type": "effort",
+          "settings": {
+            "label": "space",
+            "value": "A table",
+            "note": "about 1200 × 600 mm"
+          }
+        },
+        "dc1": {
+          "type": "doc",
+          "settings": {
+            "label": "1:1 frame plan — in the box",
+            "url": ""
+          }
+        },
+        "dc2": {
+          "type": "doc",
+          "settings": {
+            "label": "Build manual and video course — with your kit",
+            "url": ""
           }
         }
       },
@@ -137,7 +197,13 @@
         "sp3",
         "sp4",
         "sp5",
-        "sp6"
+        "sp6",
+        "ef1",
+        "ef2",
+        "ef3",
+        "ef4",
+        "dc1",
+        "dc2"
       ]
     },
     "kitship": {
@@ -387,10 +453,84 @@
         "faq_4",
         "faq_5"
       ]
+    },
+    "kitdraw": {
+      "type": "bbc-kit-drawing-2026",
+      "settings": {
+        "anchor": "in-the-box",
+        "tb_a_key": "kit",
+        "tb_a": "№ 10 — custom",
+        "tb_b_key": "built",
+        "tb_b": "by you, at home",
+        "eyebrow": "what arrives",
+        "heading": "everything but the parts you already own.",
+        "lede": "One box: graded bamboo, the metalwork, the fibre and resin, the jig, the plan and the course. Fork, wheels and groupset are yours to choose.",
+        "foot": "Spares included. If anything in the box is not right, we replace it.",
+        "product_image_index": 2,
+        "image_alt": "The custom kit laid out flat",
+        "sheet_label": "1 of 1 · 1:1 plan in the box",
+        "sticker": "it grew itself.",
+        "show_pins": true
+      },
+      "blocks": {
+        "c1": {
+          "type": "callout",
+          "settings": {
+            "label": "bamboo tubes cut for your geometry",
+            "note": "with spares",
+            "x": 18,
+            "y": 55
+          }
+        },
+        "c2": {
+          "type": "callout",
+          "settings": {
+            "label": "head tube, bottom-bracket shell and dropouts",
+            "note": "chosen at checkout",
+            "x": 66,
+            "y": 10
+          }
+        },
+        "c3": {
+          "type": "callout",
+          "settings": {
+            "label": "flax fibre and two-part epoxy resin",
+            "note": "for the joints",
+            "x": 65,
+            "y": 35
+          }
+        },
+        "c4": {
+          "type": "callout",
+          "settings": {
+            "label": "alignment jig set up for your frame",
+            "note": "and your 1:1 plan",
+            "x": 78,
+            "y": 85
+          }
+        },
+        "c5": {
+          "type": "callout",
+          "settings": {
+            "label": "illustrated manual + video course",
+            "note": "and the builder community",
+            "x": 50,
+            "y": 15
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ]
     }
   },
   "order": [
     "main",
+    "kitdraw",
     "kitspec",
     "kitship",
     "lower"

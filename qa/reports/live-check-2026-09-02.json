@@ -1,12 +1,12 @@
 {
   "date": "2026-09-02",
-  "pages": 1,
-  "fails": 1,
-  "warns": 4,
+  "pages": 2,
+  "fails": 0,
+  "warns": 6,
   "contradictions": [],
   "results": [
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
+      "page": "/products/road-carbon-frame-build-kit",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "no banned claims rendered",
@@ -14,23 +14,23 @@
       "detail": ""
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
+      "page": "/products/road-carbon-frame-build-kit",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "title not bare brand",
       "status": "OK",
-      "detail": "Bamboo Gravel Bike Frame Kit | Bamboo Bicycle Club"
+      "detail": "Bamboo Road Bike Lugged Frame Kit | Bamboo Bicycle Club"
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
+      "page": "/products/road-carbon-frame-build-kit",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "meta description length",
       "status": "OK",
-      "detail": "147 chars"
+      "detail": "145 chars"
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
+      "page": "/products/road-carbon-frame-build-kit",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "one h1",
@@ -38,7 +38,7 @@
       "detail": "1 h1"
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
+      "page": "/products/road-carbon-frame-build-kit",
       "vp": "desktop",
       "lane": "UX",
       "check": "no horizontal overflow",
@@ -46,31 +46,31 @@
       "detail": "0px"
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
+      "page": "/products/road-carbon-frame-build-kit",
       "vp": "desktop",
       "lane": "UX",
       "check": "images have alt",
       "status": "OK",
-      "detail": "0/32 missing"
+      "detail": "0/33 missing"
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
+      "page": "/products/road-carbon-frame-build-kit",
       "vp": "desktop",
       "lane": "UX",
       "check": "page weight",
       "status": "OK",
-      "detail": "3.2 MB, 13735px tall, 2416 words"
+      "detail": "2.8 MB, 12853px tall, 2381 words"
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
+      "page": "/products/road-carbon-frame-build-kit",
       "vp": "desktop",
       "lane": "CSS",
       "check": "button styles ≤ budget",
       "status": "WARN",
-      "detail": "10 distinct styles across 19 buttons"
+      "detail": "10 distinct styles across 21 buttons"
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
+      "page": "/products/road-carbon-frame-build-kit",
       "vp": "desktop",
       "lane": "CSS",
       "check": "display h2 count ≤ budget",
@@ -78,7 +78,7 @@
       "detail": "10 of 15 h2 at ≥80px"
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
+      "page": "/products/road-carbon-frame-build-kit",
       "vp": "desktop",
       "lane": "CSS",
       "check": "kicker case (lowercase spec)",
@@ -86,7 +86,7 @@
       "detail": "0/13 uppercase"
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
+      "page": "/products/road-carbon-frame-build-kit",
       "vp": "desktop",
       "lane": "CSS",
       "check": "no font leaks",
@@ -94,84 +94,108 @@
       "detail": "Atkinson Hyperlegible"
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
+      "page": "/products/road-carbon-frame-build-kit",
       "vp": "desktop",
       "lane": "CSS",
       "check": "text ≥ 12px",
       "status": "WARN",
-      "detail": "15 elements under 12px"
+      "detail": "12 elements under 12px"
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
-      "vp": "mobile",
+      "page": "/products/gravel-lugged-build-kit",
+      "vp": "desktop",
       "lane": "CONTENT",
       "check": "no banned claims rendered",
       "status": "OK",
       "detail": ""
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
-      "vp": "mobile",
+      "page": "/products/gravel-lugged-build-kit",
+      "vp": "desktop",
+      "lane": "CONTENT",
+      "check": "title not bare brand",
+      "status": "OK",
+      "detail": "Bamboo Gravel Bike Lugged Frame Kit | Bamboo Bicycle Club"
+    },
+    {
+      "page": "/products/gravel-lugged-build-kit",
+      "vp": "desktop",
+      "lane": "CONTENT",
+      "check": "meta description length",
+      "status": "OK",
+      "detail": "147 chars"
+    },
+    {
+      "page": "/products/gravel-lugged-build-kit",
+      "vp": "desktop",
+      "lane": "CONTENT",
+      "check": "one h1",
+      "status": "OK",
+      "detail": "1 h1"
+    },
+    {
+      "page": "/products/gravel-lugged-build-kit",
+      "vp": "desktop",
       "lane": "UX",
       "check": "no horizontal overflow",
       "status": "OK",
       "detail": "0px"
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
-      "vp": "mobile",
+      "page": "/products/gravel-lugged-build-kit",
+      "vp": "desktop",
       "lane": "UX",
       "check": "images have alt",
       "status": "OK",
-      "detail": "0/32 missing"
+      "detail": "0/33 missing"
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "h1 in first viewport (390)",
-      "status": "OK",
-      "detail": "h1 at 833px"
-    },
-    {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "primary CTA above the fold (390)",
-      "status": "OK",
-      "detail": "19 buttons on page"
-    },
-    {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "cookie card viewport cover",
-      "status": "FAIL",
-      "detail": "54% of viewport"
-    },
-    {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
-      "vp": "mobile",
+      "page": "/products/gravel-lugged-build-kit",
+      "vp": "desktop",
       "lane": "UX",
       "check": "page weight",
       "status": "OK",
-      "detail": "3.2 MB, 20567px tall, 1600 words"
+      "detail": "2.8 MB, 12829px tall, 2339 words"
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "largest media on phone",
+      "page": "/products/gravel-lugged-build-kit",
+      "vp": "desktop",
+      "lane": "CSS",
+      "check": "button styles ≤ budget",
+      "status": "WARN",
+      "detail": "10 distinct styles across 21 buttons"
+    },
+    {
+      "page": "/products/gravel-lugged-build-kit",
+      "vp": "desktop",
+      "lane": "CSS",
+      "check": "display h2 count ≤ budget",
+      "status": "WARN",
+      "detail": "10 of 15 h2 at ≥80px"
+    },
+    {
+      "page": "/products/gravel-lugged-build-kit",
+      "vp": "desktop",
+      "lane": "CSS",
+      "check": "kicker case (lowercase spec)",
       "status": "OK",
-      "detail": "0.2 MB https://bamboobicycleclub.org/cdn/shop/articles/ColinGravel.jpg"
+      "detail": "0/13 uppercase"
     },
     {
-      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
-      "vp": "mobile",
+      "page": "/products/gravel-lugged-build-kit",
+      "vp": "desktop",
+      "lane": "CSS",
+      "check": "no font leaks",
+      "status": "OK",
+      "detail": "Atkinson Hyperlegible"
+    },
+    {
+      "page": "/products/gravel-lugged-build-kit",
+      "vp": "desktop",
       "lane": "CSS",
       "check": "text ≥ 12px",
       "status": "WARN",
-      "detail": "15 elements under 12px"
+      "detail": "10 elements under 12px"
     }
   ]
 }

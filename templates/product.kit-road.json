@@ -57,7 +57,14 @@
         "press_quote": "The Bamboo Bicycle Club has impressively improved the accessibility of building a bamboo bicycle.",
         "press_cite": "road.cc",
         "sticky_buy": true,
-        "content_bands": false
+        "content_bands": false,
+        "sheet_bg": true,
+        "pay_line": "Klarna and Shop Pay at checkout · Cycle to Work accepted",
+        "help_lead": "Not sure it's for you?",
+        "help_label": "Book a free 10-minute call",
+        "help_url": "/pages/contact-us",
+        "stories_label": "Read the builder stories",
+        "stories_url": "/blogs/club-news/tagged/road"
       }
     },
     "kitspec": {
@@ -78,7 +85,8 @@
           "settings": {
             "label": "tyre clearance",
             "value": "38 mm",
-            "note": "700c"
+            "note": "700c",
+            "icon": "tyre"
           }
         },
         "sp1": {
@@ -86,7 +94,8 @@
           "settings": {
             "label": "rear spacing",
             "value": "135 / 142 mm",
-            "note": "modular dropout"
+            "note": "modular dropout",
+            "icon": "spacing"
           }
         },
         "sp2": {
@@ -94,7 +103,8 @@
           "settings": {
             "label": "axle",
             "value": "12 mm thru",
-            "note": "or QR · singlespeed · hub gear"
+            "note": "or QR · singlespeed · hub gear",
+            "icon": "axle"
           }
         },
         "sp3": {
@@ -102,7 +112,8 @@
           "settings": {
             "label": "brakes",
             "value": "Disc",
-            "note": "post mount · flat mount with adapter"
+            "note": "post mount · flat mount with adapter",
+            "icon": "brake"
           }
         },
         "sp4": {
@@ -110,7 +121,8 @@
           "settings": {
             "label": "bottom bracket",
             "value": "BSA 68 mm",
-            "note": "threaded"
+            "note": "threaded",
+            "icon": "bb"
           }
         },
         "sp5": {
@@ -118,7 +130,8 @@
           "settings": {
             "label": "seatpost",
             "value": "27.2 mm",
-            "note": "internal dropper routing optional"
+            "note": "internal dropper routing optional",
+            "icon": "seatpost"
           }
         },
         "sp6": {
@@ -126,7 +139,8 @@
           "settings": {
             "label": "mounts",
             "value": "Rack + mudguard",
-            "note": "braze-on front mech optional"
+            "note": "braze-on front mech optional",
+            "icon": "mounts"
           }
         },
         "sp7": {
@@ -134,7 +148,54 @@
           "settings": {
             "label": "build time",
             "value": "25–35 hrs",
+            "note": "across a few weekends",
+            "icon": "clock"
+          }
+        },
+        "ef1": {
+          "type": "effort",
+          "settings": {
+            "label": "build time",
+            "value": "25–35 hrs",
             "note": "across a few weekends"
+          }
+        },
+        "ef2": {
+          "type": "effort",
+          "settings": {
+            "label": "difficulty",
+            "value": "No experience needed",
+            "note": "most builders start from zero"
+          }
+        },
+        "ef3": {
+          "type": "effort",
+          "settings": {
+            "label": "tools",
+            "value": "Hand tools only",
+            "note": "hacksaw · files · sandpaper · tape"
+          }
+        },
+        "ef4": {
+          "type": "effort",
+          "settings": {
+            "label": "space",
+            "value": "A table",
+            "note": "about 1200 × 600 mm"
+          }
+        },
+        "dc1": {
+          "type": "doc",
+          "settings": {
+            "label": "1:1 frame plan — in the box",
+            "url": ""
+          }
+        },
+        "dc2": {
+          "type": "doc",
+          "settings": {
+            "label": "Build manual and video course — with your kit",
+            "url": ""
           }
         }
       },
@@ -146,7 +207,13 @@
         "sp4",
         "sp5",
         "sp6",
-        "sp7"
+        "sp7",
+        "ef1",
+        "ef2",
+        "ef3",
+        "ef4",
+        "dc1",
+        "dc2"
       ]
     },
     "kitship": {
@@ -396,10 +463,84 @@
         "faq_4",
         "faq_5"
       ]
+    },
+    "kitdraw": {
+      "type": "bbc-kit-drawing-2026",
+      "settings": {
+        "anchor": "in-the-box",
+        "tb_a_key": "kit",
+        "tb_a": "№ 04 — road",
+        "tb_b_key": "built",
+        "tb_b": "by you, at home",
+        "eyebrow": "what arrives",
+        "heading": "everything but the parts you already own.",
+        "lede": "One box: graded bamboo, the metalwork, the fibre and resin, the jig, the plan and the course. Fork, wheels and groupset are yours to choose.",
+        "foot": "Spares included. If anything in the box is not right, we replace it.",
+        "product_image_index": 2,
+        "image_alt": "The road kit laid out flat",
+        "sheet_label": "1 of 1 · 1:1 plan in the box",
+        "sticker": "it grew itself.",
+        "show_pins": true
+      },
+      "blocks": {
+        "c1": {
+          "type": "callout",
+          "settings": {
+            "label": "heat-treated Moso bamboo tubes",
+            "note": "pre-shaped, with spares",
+            "x": 14,
+            "y": 55
+          }
+        },
+        "c2": {
+          "type": "callout",
+          "settings": {
+            "label": "CNC head tube, bottom-bracket shell and modular dropouts",
+            "note": "",
+            "x": 82,
+            "y": 44
+          }
+        },
+        "c3": {
+          "type": "callout",
+          "settings": {
+            "label": "flax fibre and two-part epoxy resin",
+            "note": "for the joints",
+            "x": 65,
+            "y": 50
+          }
+        },
+        "c4": {
+          "type": "callout",
+          "settings": {
+            "label": "plywood alignment jig and 1:1 frame plan",
+            "note": "",
+            "x": 75,
+            "y": 88
+          }
+        },
+        "c5": {
+          "type": "callout",
+          "settings": {
+            "label": "illustrated manual + 15 hours of video",
+            "note": "and the builder community",
+            "x": 60,
+            "y": 15
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ]
     }
   },
   "order": [
     "main",
+    "kitdraw",
     "kitspec",
     "kitship",
     "lower"
