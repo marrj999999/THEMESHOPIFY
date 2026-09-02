@@ -46,7 +46,9 @@ export const BANNED = [
   // rendered on a public page that day. Authority for each: System/Claims Register.md.
   /\bFeltham\b/i,                                // not a site (Shaw Trust DD stalled, silent since 19 Jun);
                                                  // Register: never a named-sites list without a fresh check
-  /\b(5|five|three|3) (UK )?prison sites?\b/i,   // count formula only. 2026-09-02: James changed the count five→four (Register 'Prison estate footprint'); approved wording is now "four UK prison sites, at
+  /\b(5|five|three|3) (UK )?prison sites?\b/i,
+  /\b(\d+|two|three|four|five|six) (UK )?prison sites? (running|operating|live|active)\b/i,   // 2026-09-02: a count that asserts every site is running — the formula is "at different delivery stages"
+  /\b(\d+|two|three|four|five|six) (operating|running|active|live) prisons?\b/i,   // count formula only. 2026-09-02: James changed the count five→four (Register 'Prison estate footprint'); approved wording is now "four UK prison sites, at
                                                  // different delivery stages" (James, 2026-08-19)
   /\bLevel 1\b(?! ?& ?2)/,                       // no external Level 1 claim until OCN evidence is filed
   /independently tested/i,                       // Swansea tested TUBING (BS ISO 22157), never a frame;

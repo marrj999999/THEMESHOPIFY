@@ -39,28 +39,36 @@
           "type": "step",
           "settings": {
             "title": "enrol",
-            "body": "Makers join through the prison's workshops or education team. No prior experience needed."
+            "body": "Makers join through the prison's workshops or education team. No prior experience needed.",
+            "icon": "skills",
+            "note": "weeks 0 to 1 · induction and first craft"
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
             "title": "build",
-            "body": "Six weeks in the workshop: frame layout, mitring, structural bonding and finishing — real manufacturing, taught by hand."
+            "body": "Six weeks in the workshop: frame layout, mitring, structural bonding and finishing — real manufacturing, taught by hand.",
+            "icon": "tool",
+            "note": "weeks 1 to 5 · the frame"
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
             "title": "accredit",
-            "body": "Portfolio work towards OCN London’s bespoke Level 2, Workshop Skills and Sustainable Manufacturing."
+            "body": "Portfolio work towards OCN London’s bespoke Level 2, Workshop Skills and Sustainable Manufacturing.",
+            "icon": "confidence",
+            "note": "week 6 · portfolio assessed"
           }
         },
         "step_4": {
           "type": "step",
           "settings": {
             "title": "family visit day",
-            "body": "The finished balance bike is presented by the Maker to their own child — and goes home with them."
+            "body": "The finished balance bike is presented by the Maker to their own child — and goes home with them.",
+            "icon": "family",
+            "note": "the last day · the bike goes home"
           }
         },
         "stat_hours": {
@@ -111,11 +119,43 @@
         "step_4"
       ],
       "settings": {
-        "why_body_2": "Ministry of Justice research shows that people in prison who maintain family ties are 39% less likely to reoffend (Lord Farmer Review, 2017). And with just 20% of prison-leavers in work six weeks after release nationally (MoJ, 2025), the skills matter as much as the bond. Build to Bond is built around that evidence: a six-week course where the skills are real, the qualification is recognised, and the finish line is a stronger family bond.",
+        "why_body_2": "Ministry of Justice research found prisoners who receive family visits are 39% less likely to reoffend (Lord Farmer Review, 2017). And with just 20% of prison-leavers in work six weeks after release nationally (MoJ, 2024–25), the skills matter as much as the bond. Build to Bond is built around that evidence: a six-week course where the skills are real, the qualification is assessed, and the finish line is a stronger family bond.",
         "sites_title": "where it runs.",
         "sites_body": "Build to Bond is established across four UK prison sites, at different delivery stages — with a self-delivery model that trains prison staff and peer instructors to run the workshop.",
         "sites_partner": "Delivered under direct contracts with HMPPS and private operators",
-        "stats_note": "BBC programme records · updated August 2026"
+        "stats_note": "BBC programme records · updated August 2026",
+        "hero_tb_a_key": "runs in",
+        "hero_tb_a": "four UK prisons",
+        "hero_tb_b_key": "accredited",
+        "hero_tb_b": "two OCN Level 2 courses",
+        "film": "shopify://files/videos/bbc-lowdham-film-v15-subtitled-720p.mp4",
+        "film_url": "https://cdn.shopify.com/videos/c/vp/2535afe73f154df581a49436dc479a69/2535afe73f154df581a49436dc479a69.HD-720p-1.6Mbps-93316156.mp4",
+        "film_poster_asset": "bbc-rd-lowdham-poster.jpg",
+        "film_label": "watch the film · 3 min · subtitled",
+        "film_alt": "Build to Bond at HMP Lowdham Grange, the film",
+        "film_caption": "Filmed inside HMP Lowdham Grange by the prison's Inside Media Department. Subtitled. Makers are not identifiable.",
+        "steps_lede": "One cohort, six weeks, eighteen hours a week. Every Maker builds a full bamboo frame and finishes with a bike that goes home.",
+        "path1_tag": "course one · six weeks",
+        "path1_title": "Workshop Skills and Sustainable Manufacturing",
+        "path1_body": "OCN London bespoke Level 2, centre course 1130735. Measuring, mitring, bonding and finishing a full bamboo frame, with a portfolio of evidence. 108 contact hours per Maker.",
+        "path1_img": "bbc-rd-prison-plans.jpg",
+        "path1_icon": "tool",
+        "path2_tag": "course two · the bike that goes home",
+        "path2_title": "Introduction to Product Design & Manufacture (Bamboo Balance Bike)",
+        "path2_body": "OCN London bespoke Level 2, centre course 1131207. Makers design and build a child's balance bike and present it on family visit day.",
+        "path2_img": "bbc-rd-prison-bike.jpg",
+        "path2_icon": "balance",
+        "path3_tag": "what comes next",
+        "path3_title": "from Maker to peer mentor",
+        "path3_body": "More than ten Makers have gone on to help teach the next cohort, alongside the 14 prison staff we have trained as instructors.",
+        "path3_img": "bbc-rd-prison-frame-jig.jpg",
+        "path3_icon": "ladder",
+        "recog_label": "recognition",
+        "recog_a": "Financial Times, 5 September 2025",
+        "recog_b": "Inside Time, November 2025",
+        "recog_c": "National Justice Museum, Working Through It exhibition, 2026",
+        "recog_d": "Investec Beyond Business 2025 winner",
+        "cta2_url": "/pages/support-mission"
       }
     }
   },
