@@ -20,7 +20,7 @@
 
 {%- liquid
   assign hero_cta1 = section.settings.hero_cta1_url | default: '/pages/prisons'
-  assign hero_cta2 = section.settings.hero_cta2_url | default: '/pages/impact'
+  assign hero_cta2 = section.settings.hero_cta2_url | default: '/pages/support-mission'
   assign final_c1 = section.settings.cta1_url | default: '/pages/prisons'
   assign final_c2 = section.settings.cta2_url | default: '/pages/impact'
 -%}
@@ -50,7 +50,13 @@
     <div class="rd-scrim"></div>
     <div class="rd-inner">
       <div class="rd-wrap">
-        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/pages/impact">Impact</a><span class="rd-sep">/</span><span class="rd-here">{{ section.settings.tx_crumb_b2b | default: "Build to Bond" }}</span></nav>
+        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><span class="rd-here">{{ section.settings.tx_crumb_b2b | default: "Build to Bond" }}</span></nav>
+        {%- if section.settings.hero_tb_a != blank or section.settings.hero_tb_b != blank -%}
+          <div class="rd-tblock rd-tblock--hero" aria-hidden="true">
+            <span class="k r">{{ section.settings.hero_tb_a_key | default: 'runs in' }}</span><span class="r">{{ section.settings.hero_tb_a }}</span>
+            <span class="k">{{ section.settings.hero_tb_b_key | default: 'accredited' }}</span><span>{{ section.settings.hero_tb_b }}</span>
+          </div>
+        {%- endif -%}
         {%- if section.settings.hero_eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>{%- endif -%}
         <h1 class="rd-mt2 rd-mw-15ch">{{ section.settings.hero_title }}</h1>
         <div class="rd-lede">{{ section.settings.hero_lede }}</div>
@@ -82,8 +88,19 @@
       v.muted = true; v.setAttribute('muted', '');
       var started = false;
       function go() { if (started) return; started = true; var p = v.play(); if (p && p.catch) p.catch(function () { started = false; }); }
-      v.addEventListener('playing', function () { v.classList.add('evh-on'); });
-      v.addEventListener('canplay', go);
+      v.addEventListener('playing', function () { requestAnimationFrame(function () { requestAnimationFrame(function () { v.classList.add('evh-on'); }); }); });
+      /* 2026-09-02: on phones the reel waits for the first scroll or touch (largest-contentful-paint
+         stops at first input, and a timer-started film scored as the page's largest paint on impact);
+         desktop starts as before. The film still plays on mobile — James, 24 Aug. */
+      var phone = window.matchMedia && window.matchMedia('(max-width: 767px), (pointer: coarse)').matches;
+      if (phone) {
+        v.setAttribute('preload', 'none');
+        var armed = false;
+        var arm = function () { if (armed) return; armed = true; v.addEventListener('canplay', go); v.load(); };
+        ['scroll', 'touchstart', 'pointerdown', 'keydown', 'wheel'].forEach(function (ev) { window.addEventListener(ev, arm, { once: true, passive: true }); });
+      } else {
+        v.addEventListener('canplay', go);
+      }
       v.load();
       if (v.readyState >= 3) go();
       document.addEventListener('visibilitychange', function () { if (document.hidden) { v.pause(); } else if (started) { v.play().catch(function(){}); } });
@@ -134,12 +151,29 @@
   {%- comment -%} ---------- WHY IT WORKS (split, dark) — MoJ family-ties framing ---------- {%- endcomment -%}
   {%- if section.settings.show_why != false -%}
   <section class="rd-split rd-dark">
-    <div class="rd-reveal rd-media">
-      {%- if section.settings.why_image != blank -%}
-        <img src="{{ section.settings.why_image | image_url: width: 1400 }}" alt="{{ section.settings.why_image_alt | default: 'A finished bamboo balance bike' | escape }}" width="{{ section.settings.why_image.width }}" height="{{ section.settings.why_image.height }}">
+    {%- liquid
+      assign _film_poster = section.settings.film_poster_asset | default: 'bbc-rd-lowdham-poster.jpg'
+      assign _has_film = false
+      if section.settings.film != blank or section.settings.film_url != blank
+        assign _has_film = true
+      endif
+    -%}
+    <div class="rd-reveal rd-media{% if _has_film %} rd-media--film{% endif %}">
+      {%- if section.settings.film != blank -%}
+        {%- render 'bbc-media', video: section.settings.film, image: section.settings.film_poster, src: _film_poster, fallback: 'bbc-rd-lowdham-poster.jpg', label: section.settings.film_label, alt: section.settings.film_alt, class: 'bbc-media--ar169 b2b-film', sizes: '(max-width:749px) 100vw, 50vw', loading: 'lazy' -%}
+      {%- elsif section.settings.film_url != blank -%}
+        <div class="b2b-film b2b-film--plain">
+          <video class="b2b-film__video" controls playsinline preload="none" poster="{{ _film_poster | asset_url }}" aria-label="{{ section.settings.film_alt | escape }}">
+            <source src="{{ section.settings.film_url }}" type="video/mp4">
+          </video>
+        </div>
+      {%- elsif section.settings.why_image != blank -%}
+        <img src="{{ section.settings.why_image | image_url: width: 1400 }}" srcset="{{ section.settings.why_image | image_url: width: 700 }} 700w, {{ section.settings.why_image | image_url: width: 1400 }} 1400w" sizes="(max-width:749px) 100vw, 50vw" alt="{{ section.settings.why_image_alt | default: 'A finished bamboo balance bike' | escape }}" width="{{ section.settings.why_image.width }}" height="{{ section.settings.why_image.height }}" loading="lazy">
       {%- else -%}
-        <img src="{{ section.settings.why_fallback | default: 'bbc-rd-b2b.jpg' | asset_url }}" alt="{{ section.settings.why_image_alt | default: 'A finished bamboo balance bike' | escape }}" width="1400" height="933">
+        {%- assign _why_fb = section.settings.why_fallback | default: 'bbc-rd-b2b.jpg' | asset_url -%}
+        <img src="{{ _why_fb }}&width=1400" srcset="{{ _why_fb }}&width=700 700w, {{ _why_fb }}&width=1400 1400w" sizes="(max-width:749px) 100vw, 50vw" alt="{{ section.settings.why_image_alt | default: 'A finished bamboo balance bike' | escape }}" width="1400" height="933" loading="lazy">
       {%- endif -%}
+      {%- if _has_film and section.settings.film_caption != blank -%}<p class="b2b-film__cap">{{ section.settings.film_caption }}</p>{%- endif -%}
     </div>
     <div class="rd-txt">
       {%- if section.settings.why_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.why_eyebrow }}</span>{%- endif -%}
@@ -158,18 +192,38 @@
 
   {%- comment -%} ---------- HOW IT WORKS (numbered steps) ---------- {%- endcomment -%}
   {%- if section.settings.steps_title != blank and section.settings.show_steps != false -%}
-  <section class="rd-pad">
-    <div class="rd-wrap rd-mw-820px">
-      {%- if section.settings.steps_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.steps_eyebrow }}</span>{%- endif -%}
-      <h2 class="rd-reveal">{{ section.settings.steps_title }}</h2>
-      <ol class="rd-steps rd-mt4">
-        {%- for block in section.blocks -%}{%- if block.type == 'step' -%}
-          <li {{ block.shopify_attributes }}>
-            <h3>{{ block.settings.title }}</h3>
-            <p>{{ block.settings.body }}</p>
+  <section class="rd-pad-sm rd-sheet rd-stations rd-b2b-steps">
+    <div class="rd-wrap">
+      <div class="rd-stations__head">
+        <div>
+          {%- if section.settings.steps_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.steps_eyebrow }}</span>{%- endif -%}
+          <h2 class="rd-reveal rd-fs-stn">{{ section.settings.steps_title }}</h2>
+        </div>
+        {%- if section.settings.steps_lede != blank -%}<p class="rd-lede">{{ section.settings.steps_lede }}</p>{%- endif -%}
+      </div>
+      <div class="rd-stations__rail">
+        <div class="rd-stations__track" aria-hidden="true"></div>
+        <div class="rd-stations__culm" aria-hidden="true"></div>
+        <ol class="rd-stations__grid">
+          {%- for block in section.blocks -%}{%- if block.type == 'step' -%}
+          {%- assign ic = block.settings.icon | default: 'tool' -%}
+          <li class="rd-stations__item rd-reveal" {{ block.shopify_attributes }}>
+            <span class="rd-stations__dot{% if forloop.last %} rd-stations__dot--lime{% endif %}">{%- case ic -%}
+                {%- when 'tool' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 26L20 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18 8l6 6-3 3-6-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M22 4l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="7" cy="7" r="2"/></svg>
+                {%- when 'skills' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="8" y="3" width="16" height="26" rx="3" stroke="currentColor" stroke-width="2"/><path d="M12 10h8M12 15h8M12 20h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="26" cy="6" r="2"/></svg>
+                {%- when 'confidence' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4l3.5 7 7.5 1-5.5 5.3 1.3 7.7L16 21.4 9.2 25l1.3-7.7L5 12l7.5-1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle class="rd-pic__a" cx="16" cy="16" r="2"/></svg>
+                {%- when 'bike' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="8" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"/><path d="M8 22l5-10h7l4 10M13 12l-2-4h4M20 12l3-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle class="rd-pic__a" cx="23.5" cy="6.5" r="2"/></svg>
+                {%- when 'ladder' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M9 2v28M23 2v28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9 9h14M9 16h14M9 23h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="26.5" cy="5" r="2"/></svg>
+                {%- when 'balance' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="8" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"/><path d="M8 22l4-9h6l6 9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 13l-2-4h3M18 13l3-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="21.6" cy="7.4" r="1.8"/></svg>
+                {%- when 'family' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="11" cy="9" r="4" stroke="currentColor" stroke-width="2"/><circle cx="23" cy="13" r="3" stroke="currentColor" stroke-width="2"/><path d="M3 28c0-6 3.5-9 8-9s8 3 8 9M17 28c0-4 2.5-6.5 6-6.5s6 2.5 6 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="27" cy="5" r="2"/></svg>
+              {%- endcase -%}</span>
+            <h3 class="rd-stations__title">{{ block.settings.title }}</h3>
+            {%- if block.settings.body != blank -%}<p class="rd-stations__body">{{ block.settings.body }}</p>{%- endif -%}
+            {%- if block.settings.note != blank -%}<span class="rd-stations__note">{{ block.settings.note }}</span>{%- endif -%}
           </li>
-        {%- endif -%}{%- endfor -%}
-      </ol>
+          {%- endif -%}{%- endfor -%}
+        </ol>
+      </div>
     </div>
   </section>
   {%- endif -%}
@@ -191,7 +245,17 @@
           {%- assign k_tag = 'path' | append: n | append: '_tag' -%}
           {%- assign k_ttl = 'path' | append: n | append: '_title' -%}
           {%- assign k_bod = 'path' | append: n | append: '_body' -%}
+          {%- assign k_ic = 'path' | append: n | append: '_icon' -%}{%- assign ic = section.settings[k_ic] -%}
           <article class="rd-card rd-stamp spr-card rd-reveal">
+            {%- if ic != blank and ic != 'none' -%}<span class="rd-path__ic spr-ic">{%- case ic -%}
+                {%- when 'tool' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 26L20 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18 8l6 6-3 3-6-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M22 4l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="7" cy="7" r="2"/></svg>
+                {%- when 'skills' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="8" y="3" width="16" height="26" rx="3" stroke="currentColor" stroke-width="2"/><path d="M12 10h8M12 15h8M12 20h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="26" cy="6" r="2"/></svg>
+                {%- when 'confidence' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4l3.5 7 7.5 1-5.5 5.3 1.3 7.7L16 21.4 9.2 25l1.3-7.7L5 12l7.5-1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle class="rd-pic__a" cx="16" cy="16" r="2"/></svg>
+                {%- when 'bike' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="8" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"/><path d="M8 22l5-10h7l4 10M13 12l-2-4h4M20 12l3-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle class="rd-pic__a" cx="23.5" cy="6.5" r="2"/></svg>
+                {%- when 'ladder' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M9 2v28M23 2v28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9 9h14M9 16h14M9 23h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="26.5" cy="5" r="2"/></svg>
+                {%- when 'balance' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="8" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"/><path d="M8 22l4-9h6l6 9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 13l-2-4h3M18 13l3-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="21.6" cy="7.4" r="1.8"/></svg>
+                {%- when 'family' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="11" cy="9" r="4" stroke="currentColor" stroke-width="2"/><circle cx="23" cy="13" r="3" stroke="currentColor" stroke-width="2"/><path d="M3 28c0-6 3.5-9 8-9s8 3 8 9M17 28c0-4 2.5-6.5 6-6.5s6 2.5 6 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="27" cy="5" r="2"/></svg>
+              {%- endcase -%}</span>{%- endif -%}
             {%- if section.settings[k_img] != blank -%}
             <div class="spr-media"><img src="{{ section.settings[k_img] | asset_url }}&width=900"
                  srcset="{{ section.settings[k_img] | asset_url }}&width=500 500w, {{ section.settings[k_img] | asset_url }}&width=900 900w"
@@ -290,7 +354,15 @@
         <p class="rd-q">{{ section.settings.cred_quote }}</p>
         {%- if section.settings.cred_cite != blank -%}<cite>{{ section.settings.cred_cite }}</cite>{%- endif -%}
       </div>
-      {%- if section.settings.coverage_list != blank -%}<div class="rd-sitenames rd-mt4">{{ section.settings.coverage_list }}</div>{%- endif -%}
+      {%- if section.settings.recog_a != blank -%}
+      <div class="rd-recog rd-mt3 rd-reveal">
+        {%- if section.settings.recog_label != blank -%}<span class="rd-recog__k">{{ section.settings.recog_label }}</span>{%- endif -%}
+        <ul class="rd-recog__list">
+          {%- assign recogs = "recog_a,recog_b,recog_c,recog_d" | split: "," -%}
+          {%- for key in recogs -%}{%- assign v = section.settings[key] -%}{%- if v != blank -%}<li>{{ v }}</li>{%- endif -%}{%- endfor -%}
+        </ul>
+      </div>
+      {%- elsif section.settings.coverage_list != blank -%}<div class="rd-sitenames rd-mt4">{{ section.settings.coverage_list }}</div>{%- endif -%}
       {%- if section.settings.trust_line != blank -%}<p class="rd-ship-note rd-mt2">{{ section.settings.trust_line }}</p>{%- endif -%}
     </div>
   </section>
@@ -346,6 +418,237 @@
   "name": "Build to Bond 2026",
   "class": "shopify-section--bbc-b2b-page",
   "settings": [
+    {
+      "type": "header",
+      "content": "Hero titleblock (2 Sep)"
+    },
+    {
+      "type": "text",
+      "id": "hero_tb_a_key",
+      "label": "Row 1 key",
+      "default": "runs in"
+    },
+    {
+      "type": "text",
+      "id": "hero_tb_a",
+      "label": "Row 1 value (blank hides the block)"
+    },
+    {
+      "type": "text",
+      "id": "hero_tb_b_key",
+      "label": "Row 2 key",
+      "default": "accredited"
+    },
+    {
+      "type": "text",
+      "id": "hero_tb_b",
+      "label": "Row 2 value"
+    },
+    {
+      "type": "header",
+      "content": "The film (replaces the why-it-works image)"
+    },
+    {
+      "type": "video",
+      "id": "film",
+      "label": "Film (Shopify Files)"
+    },
+    {
+      "type": "text",
+      "id": "film_url",
+      "label": "…or a direct MP4 URL (fallback)"
+    },
+    {
+      "type": "image_picker",
+      "id": "film_poster",
+      "label": "Poster image"
+    },
+    {
+      "type": "text",
+      "id": "film_poster_asset",
+      "label": "…or poster asset filename",
+      "default": "bbc-rd-lowdham-poster.jpg"
+    },
+    {
+      "type": "text",
+      "id": "film_label",
+      "label": "Ticket label",
+      "default": "watch the film · 3 min · subtitled"
+    },
+    {
+      "type": "text",
+      "id": "film_alt",
+      "label": "Film alt text",
+      "default": "Build to Bond at HMP Lowdham Grange, the film"
+    },
+    {
+      "type": "textarea",
+      "id": "film_caption",
+      "label": "Caption under the player"
+    },
+    {
+      "type": "header",
+      "content": "Six weeks (culm timeline)"
+    },
+    {
+      "type": "textarea",
+      "id": "steps_lede",
+      "label": "Lede beside the steps heading"
+    },
+    {
+      "type": "header",
+      "content": "Course card pictograms"
+    },
+    {
+      "type": "select",
+      "id": "path1_icon",
+      "label": "Card 1 pictogram",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "tool",
+          "label": "Tools / build"
+        },
+        {
+          "value": "skills",
+          "label": "Course / clipboard"
+        },
+        {
+          "value": "confidence",
+          "label": "Star / accredit"
+        },
+        {
+          "value": "bike",
+          "label": "Bike / handover"
+        },
+        {
+          "value": "balance",
+          "label": "Balance bike"
+        },
+        {
+          "value": "ladder",
+          "label": "Ladder / progression"
+        },
+        {
+          "value": "family",
+          "label": "Family"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "path2_icon",
+      "label": "Card 2 pictogram",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "tool",
+          "label": "Tools / build"
+        },
+        {
+          "value": "skills",
+          "label": "Course / clipboard"
+        },
+        {
+          "value": "confidence",
+          "label": "Star / accredit"
+        },
+        {
+          "value": "bike",
+          "label": "Bike / handover"
+        },
+        {
+          "value": "balance",
+          "label": "Balance bike"
+        },
+        {
+          "value": "ladder",
+          "label": "Ladder / progression"
+        },
+        {
+          "value": "family",
+          "label": "Family"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "path3_icon",
+      "label": "Card 3 pictogram",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "tool",
+          "label": "Tools / build"
+        },
+        {
+          "value": "skills",
+          "label": "Course / clipboard"
+        },
+        {
+          "value": "confidence",
+          "label": "Star / accredit"
+        },
+        {
+          "value": "bike",
+          "label": "Bike / handover"
+        },
+        {
+          "value": "balance",
+          "label": "Balance bike"
+        },
+        {
+          "value": "ladder",
+          "label": "Ladder / progression"
+        },
+        {
+          "value": "family",
+          "label": "Family"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Recognition row (credibility band)"
+    },
+    {
+      "type": "text",
+      "id": "recog_label",
+      "label": "Label",
+      "default": "recognition"
+    },
+    {
+      "type": "text",
+      "id": "recog_a",
+      "label": "Recognition 1"
+    },
+    {
+      "type": "text",
+      "id": "recog_b",
+      "label": "Recognition 2"
+    },
+    {
+      "type": "text",
+      "id": "recog_c",
+      "label": "Recognition 3"
+    },
+    {
+      "type": "text",
+      "id": "recog_d",
+      "label": "Recognition 4"
+    },
     {
       "type": "text",
       "id": "cs_heading",
@@ -594,7 +897,7 @@
       "type": "textarea",
       "id": "sites_body",
       "label": "Body",
-      "default": "Build to Bond is established across five UK prison sites, at different delivery stages — with a self-delivery model that trains prison staff and peer instructors to run the workshop."
+      "default": "Build to Bond is established across four UK prison sites, at different delivery stages — with a self-delivery model that trains prison staff and peer instructors to run the workshop."
     },
     {
       "type": "text",
@@ -1029,6 +1332,47 @@
           "id": "body",
           "label": "Body",
           "default": "Makers join through the prison's workshops or education team. No prior experience needed."
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Note (small line)"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Pictogram",
+          "default": "tool",
+          "options": [
+            {
+              "value": "tool",
+              "label": "Tools / build"
+            },
+            {
+              "value": "skills",
+              "label": "Course / clipboard"
+            },
+            {
+              "value": "confidence",
+              "label": "Star / accredit"
+            },
+            {
+              "value": "bike",
+              "label": "Bike / handover"
+            },
+            {
+              "value": "balance",
+              "label": "Balance bike"
+            },
+            {
+              "value": "ladder",
+              "label": "Ladder"
+            },
+            {
+              "value": "family",
+              "label": "Family"
+            }
+          ]
         }
       ]
     }

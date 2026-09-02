@@ -1,12 +1,12 @@
 {
   "date": "2026-09-02",
-  "pages": 3,
-  "fails": 6,
-  "warns": 13,
+  "pages": 1,
+  "fails": 2,
+  "warns": 5,
   "contradictions": [],
   "results": [
     {
-      "page": "/pages/impact",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "no banned claims rendered",
@@ -14,343 +14,7 @@
       "detail": ""
     },
     {
-      "page": "/pages/impact",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "title not bare brand",
-      "status": "OK",
-      "detail": "Our Impact — Bikes That Fund Change | Bamboo Bicycle Club"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "meta description length",
-      "status": "OK",
-      "detail": "165 chars"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "one h1",
-      "status": "OK",
-      "detail": "1 h1"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/59 missing"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "1.4 MB, 10397px tall, 2493 words"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "button styles ≤ budget",
-      "status": "WARN",
-      "detail": "10 distinct styles across 19 buttons"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "display h2 count ≤ budget",
-      "status": "WARN",
-      "detail": "4 of 9 h2 at ≥80px"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "kicker case (lowercase spec)",
-      "status": "OK",
-      "detail": "0/10 uppercase"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "no font leaks",
-      "status": "OK",
-      "detail": "Atkinson Hyperlegible"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "47 elements under 12px"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "mobile",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/59 missing"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "h1 in first viewport (390)",
-      "status": "OK",
-      "detail": "h1 at 619px"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "primary CTA above the fold (390)",
-      "status": "OK",
-      "detail": "19 buttons on page"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "cookie card viewport cover",
-      "status": "FAIL",
-      "detail": "54% of viewport"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "1.3 MB, 18122px tall, 1684 words"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "largest media on phone",
-      "status": "OK",
-      "detail": "0.1 MB s://bamboobicycleclub.org/cdn/shop/t/53/assets/bbc-rd-prison-empty.jpg"
-    },
-    {
-      "page": "/pages/impact",
-      "vp": "mobile",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "48 elements under 12px"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "title not bare brand",
-      "status": "OK",
-      "detail": "Education – Bamboo Bicycle Club"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "meta description length",
-      "status": "WARN",
-      "detail": "194 chars"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "one h1",
-      "status": "OK",
-      "detail": "1 h1"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/30 missing"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "FAIL",
-      "detail": "11.1 MB, 16904px tall, 2608 words"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "button styles ≤ budget",
-      "status": "WARN",
-      "detail": "7 distinct styles across 14 buttons"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "display h2 count ≤ budget",
-      "status": "WARN",
-      "detail": "10 of 14 h2 at ≥80px"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "kicker case (lowercase spec)",
-      "status": "OK",
-      "detail": "0/11 uppercase"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "no font leaks",
-      "status": "OK",
-      "detail": "Atkinson Hyperlegible"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "13 elements under 12px"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "mobile",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/30 missing"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "h1 in first viewport (390)",
-      "status": "OK",
-      "detail": "h1 at 508px"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "primary CTA above the fold (390)",
-      "status": "OK",
-      "detail": "14 buttons on page"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "cookie card viewport cover",
-      "status": "FAIL",
-      "detail": "54% of viewport"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "FAIL",
-      "detail": "11.0 MB, 24498px tall, 1800 words"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "largest media on phone",
-      "status": "WARN",
-      "detail": "8.5 MB bamboobicycleclub.org/cdn/shop/t/53/assets/bbc-rd-stopmotion-build.mp4"
-    },
-    {
-      "page": "/pages/programmes",
-      "vp": "mobile",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "13 elements under 12px"
-    },
-    {
-      "page": "/pages/build-to-bond",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "title not bare brand",
@@ -358,7 +22,7 @@
       "detail": "Build to Bond – Bamboo Bicycle Club"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "meta description length",
@@ -366,7 +30,7 @@
       "detail": "139 chars"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "one h1",
@@ -374,7 +38,7 @@
       "detail": "1 h1"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "UX",
       "check": "no horizontal overflow",
@@ -382,39 +46,39 @@
       "detail": "0px"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "UX",
       "check": "images have alt",
       "status": "OK",
-      "detail": "0/10 missing"
+      "detail": "0/13 missing"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "UX",
       "check": "page weight",
       "status": "OK",
-      "detail": "5.3 MB, 9605px tall, 1825 words"
+      "detail": "5.8 MB, 9811px tall, 2022 words"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CSS",
       "check": "button styles ≤ budget",
       "status": "WARN",
-      "detail": "6 distinct styles across 9 buttons"
+      "detail": "7 distinct styles across 10 buttons"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CSS",
       "check": "display h2 count ≤ budget",
       "status": "WARN",
-      "detail": "7 of 11 h2 at ≥80px"
+      "detail": "6 of 11 h2 at ≥80px"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CSS",
       "check": "kicker case (lowercase spec)",
@@ -422,7 +86,7 @@
       "detail": "0/7 uppercase"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CSS",
       "check": "no font leaks",
@@ -430,15 +94,15 @@
       "detail": "Atkinson Hyperlegible"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CSS",
       "check": "text ≥ 12px",
-      "status": "OK",
-      "detail": "1 elements under 12px"
+      "status": "WARN",
+      "detail": "5 elements under 12px"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "CONTENT",
       "check": "no banned claims rendered",
@@ -446,7 +110,7 @@
       "detail": ""
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "UX",
       "check": "no horizontal overflow",
@@ -454,31 +118,31 @@
       "detail": "0px"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "UX",
       "check": "images have alt",
       "status": "OK",
-      "detail": "0/10 missing"
+      "detail": "0/13 missing"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "UX",
       "check": "h1 in first viewport (390)",
       "status": "OK",
-      "detail": "h1 at 189px"
+      "detail": "h1 at 263px"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "UX",
       "check": "primary CTA above the fold (390)",
       "status": "OK",
-      "detail": "9 buttons on page"
+      "detail": "10 buttons on page"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "UX",
       "check": "cookie card viewport cover",
@@ -486,28 +150,28 @@
       "detail": "54% of viewport"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "UX",
       "check": "page weight",
       "status": "FAIL",
-      "detail": "5.3 MB, 11111px tall, 1017 words"
+      "detail": "5.8 MB, 12858px tall, 1214 words"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "UX",
       "check": "largest media on phone",
       "status": "WARN",
-      "detail": "3.8 MB https://bamboobicycleclub.org/cdn/shop/t/53/assets/bbc-rd-jig-reel.mp4"
+      "detail": "3.8 MB https://bamboobicycleclub.org/cdn/shop/t/55/assets/bbc-rd-jig-reel.mp4"
     },
     {
-      "page": "/pages/build-to-bond",
+      "page": "/pages/build-to-bond?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "CSS",
       "check": "text ≥ 12px",
-      "status": "OK",
-      "detail": "1 elements under 12px"
+      "status": "WARN",
+      "detail": "5 elements under 12px"
     }
   ]
 }

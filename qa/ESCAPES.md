@@ -1094,5 +1094,6 @@ to claim, and label the group so the page cannot be read as claiming more.
 | `qa/README.md` quoted stale canon (36 countries, Level 1 Award) | repo doc | review | — docs copied the canon | README now points at the Register only |
 | "rated the day 9–10/10" | impact (Project Zero story blurb + councils flow) | review of the preview build, 2 Sep | banned-claims.mjs had the pattern since 31 Jul but live-check was never run on /pages/impact after the 27 Aug refocus | fixed on the preview template; live fix rides with the impact v2 rollout |
 | "rated the day 9–10/10" (blog excerpt) | programmes (Project Zero card pulls the article summary) | live-check after the 2 Sep push | claim-lint only reads theme files; article summaries are store content | article summary fixed via Admin API; live-check covers rendered pages |
+| Corrupted JPEG assets on the preview theme | build-to-bond preview (poster + 3 course stills) | element screenshot showed broken images | push-theme.mjs sent every file as TEXT; binaries need BASE64 | push-theme.mjs now picks BASE64 by extension; read-back should also check magic bytes for binaries |
 
 **Rule reinforced.** A pattern list only catches what someone already wrote down; the live-check contradiction lane catches the class (two pages, two answers) without needing the words in advance.

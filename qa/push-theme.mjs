@@ -49,8 +49,11 @@ const M = `mutation($themeId: ID!, $files: [OnlineStoreThemeFilesUpsertFileInput
 }`;
 
 for (const f of FILES) {
-  const content = readFileSync(join(DIR, f), 'utf8');
-  const d = await gql(M, { themeId: THEME, files: [{ filename: f, body: { type: 'TEXT', value: content } }] });
+  // 2026-09-02: binary assets (images, fonts, video) must go up as BASE64 — pushing them as TEXT
+  // corrupted four JPEGs on the preview theme (sizes doubled, not a JPEG on read-back).
+  const isBinary = /\.(jpe?g|png|gif|webp|avif|ico|woff2?|ttf|otf|eot|mp4|webm|mp3|pdf)$/i.test(f);
+  const body = isBinary ? { type: 'BASE64', value: readFileSync(join(DIR, f)).toString('base64') } : { type: 'TEXT', value: readFileSync(join(DIR, f), 'utf8') };
+  const d = await gql(M, { themeId: THEME, files: [{ filename: f, body }] });
   const r = d.themeFilesUpsert;
   if (r.userErrors.length) { console.error(f, 'ERRORS:', JSON.stringify(r.userErrors)); process.exit(1); }
   console.log('pushed:', r.upsertedThemeFiles.map(x => x.filename).join(', '));

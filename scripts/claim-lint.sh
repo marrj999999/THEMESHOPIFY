@@ -53,7 +53,7 @@ PATTERNS=(
   # Added 2026-09-02 — Site-vs-Vault review found all of these LIVE (vault: Reports/Website
   # Review vs Vault 2026-09-02). Mirrors qa/banned-claims.mjs; canary asserts both reject them.
   '\bFeltham\b'                                  # not a site; never a named-sites list (Register)
-  '\b(4|four|three|3) (UK )?prison sites?'       # count formula only: "five UK prison sites, at different delivery stages"
+  '\b(5|five|three|3) (UK )?prison sites?'       # count formula only: "five UK prison sites, at different delivery stages"
   '\bLevel 1\b'                                  # no external Level 1 claim until OCN evidence filed (Level 1 & 2 caught above)
   '[Ii]ndependently tested'                      # Swansea tested tubing, never a frame — cite the standard instead
   '[Ll]ast for years'                            # no approved service-life claim (PS-001 open)
