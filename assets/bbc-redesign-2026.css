@@ -2036,3 +2036,7 @@
 .bbc-rd .rd-ident{margin:16px 0 0;text-align:left;font-size:var(--fs-12-5);color:var(--subtle);max-width:90ch}
 @media (max-width:760px){.bbc-rd .rd-recog{grid-template-columns:1fr}}
 .bbc-rd .rd-ident--press{margin-top:8px;color:var(--charcoal)}
+/* IMPACT v3 (2 Sep): hero titleblock on the dark hero */
+.bbc-rd .rd-hero .rd-tblock--hero{border-color:var(--lime);color:var(--bone);background:transparent;margin-bottom:14px}
+.bbc-rd .rd-hero .rd-tblock--hero .k{border-right-color:var(--lime);opacity:.75}
+.bbc-rd .rd-hero .rd-tblock--hero .r{border-bottom-color:var(--lime)}

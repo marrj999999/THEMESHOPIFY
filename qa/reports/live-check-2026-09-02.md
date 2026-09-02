@@ -19,5 +19,5 @@
 |---|---|---|---|---|
 | /pages/impact?preview_theme_id=199089193334 | desktop | button styles ≤ budget | WARN | 11 distinct styles across 19 buttons |
 | /pages/impact?preview_theme_id=199089193334 | desktop | display h2 count ≤ budget | WARN | 4 of 9 h2 at ≥80px |
-| /pages/impact?preview_theme_id=199089193334 | desktop | text ≥ 12px | WARN | 43 elements under 12px |
-| /pages/impact?preview_theme_id=199089193334 | mobile | text ≥ 12px | WARN | 44 elements under 12px |
+| /pages/impact?preview_theme_id=199089193334 | desktop | text ≥ 12px | WARN | 47 elements under 12px |
+| /pages/impact?preview_theme_id=199089193334 | mobile | text ≥ 12px | WARN | 48 elements under 12px |

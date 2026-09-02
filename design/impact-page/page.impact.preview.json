@@ -729,30 +729,12 @@
             "comparator": ""
           }
         },
-        "stat_ocn": {
-          "type": "stat",
-          "settings": {
-            "number": "3,500+",
-            "label": "bikes built",
-            "source": "programme and customer records",
-            "comparator": ""
-          }
-        },
         "stat_builders": {
           "type": "stat",
           "settings": {
             "number": "4,000+",
             "label": "people trained, all programmes",
             "source": "since 2012",
-            "comparator": ""
-          }
-        },
-        "stat_countries": {
-          "type": "stat",
-          "settings": {
-            "number": "45",
-            "label": "countries reached",
-            "source": "kits shipped worldwide",
             "comparator": ""
           }
         },
@@ -897,15 +879,6 @@
             "comparator": ""
           }
         },
-        "stat_sites": {
-          "type": "stat",
-          "settings": {
-            "number": "5",
-            "label": "UK prison sites",
-            "source": "at different delivery stages",
-            "comparator": ""
-          }
-        },
         "stat_confidence": {
           "type": "stat",
           "settings": {
@@ -956,13 +929,48 @@
           "type": "station",
           "settings": {
             "title": "a way forward",
-            "body": "Routes into work and further learning; inside prison, a bike that goes home to a child. Three Makers have become peer instructors.",
+            "body": "Routes into work and further learning; inside prison, a bike that goes home to a child. More than ten Makers have become peer mentors.",
             "note": "impact · what happens next",
             "icon": "bike"
+          }
+        },
+        "stat_mentors": {
+          "type": "stat",
+          "settings": {
+            "number": "10+",
+            "label": "Makers now peer mentors",
+            "source": "programme records, September 2026",
+            "comparator": ""
+          }
+        },
+        "stat_staff": {
+          "type": "stat",
+          "settings": {
+            "number": "14",
+            "label": "prison staff trained as instructors",
+            "source": "programme records, September 2026",
+            "comparator": ""
+          }
+        },
+        "stat_bikes": {
+          "type": "stat",
+          "settings": {
+            "number": "3,500+",
+            "label": "bikes built",
+            "source": "programme and customer records",
+            "comparator": ""
           }
         }
       },
       "block_order": [
+        "stat_builders",
+        "stat_completion",
+        "stat_confidence",
+        "stat_mentors",
+        "stat_students",
+        "stat_institutions",
+        "stat_bikes",
+        "stat_staff",
         "feat_flagship",
         "feat_education",
         "feat_councils",
@@ -1016,14 +1024,6 @@
         "iq1",
         "iq5",
         "iq6",
-        "stat_builders",
-        "stat_countries",
-        "stat_students",
-        "stat_institutions",
-        "stat_completion",
-        "stat_confidence",
-        "stat_sites",
-        "stat_ocn",
         "station_1",
         "station_2",
         "station_3",
@@ -1064,7 +1064,7 @@
         "ghost_stat": "2012",
         "seal_text": "OCN accredited · CIC · since 2012",
         "stats_label": "the record since 2012 — across all three programmes",
-        "data_as_of": "Programme records · updated August 2026",
+        "data_as_of": "Programme records · updated September 2026",
         "report_label": "Read the 2026 impact report",
         "report_url": "/pages/impact-report",
         "arms_eyebrow": "where change happens",
@@ -1096,10 +1096,10 @@
         "arm2_cta_url": "/pages/programmes#community",
         "arm3_tag": "3. Justice — Build to Bond",
         "arm3_body": "Re-engaging people inside prison with accredited manufacturing skills — and a balance bike their child keeps.",
-        "arm3_flow": "90%+ :: completion across the prison programme, BBC records | 26% :: measured confidence uplift, BBC programme surveys | 2 :: OCN London Level 2 courses",
+        "arm3_flow": "90%+ :: completion across the prison programme, BBC records | 14 :: prison staff trained as instructors, programme records | 10+ :: Makers now peer mentors, programme records",
         "arm3_chip": "in prisons · accredited",
         "arm3_name": "a bond that goes home",
-        "arm3_who": "Established across five UK prison sites, at different delivery stages. We train the prison staff who run it: 13 trained as instructors in 2026, across three sites.",
+        "arm3_who": "Established across five UK prison sites, at different delivery stages. Two OCN London Level 2 courses, run by the prison staff we train.",
         "arm3_cta_label": "the prison programme →",
         "arm3_cta_url": "/pages/build-to-bond",
         "converge_title": "vocational skills and pathways built through hands-on engineering",
@@ -1159,7 +1159,7 @@
         "cs_site": "Build to Bond · HMP Lowdham Grange",
         "cs_url": "",
         "cs_link_label": "Read the full story",
-        "cs_outcomes": "6 weeks × 18 hours|OCN Level 2|26% measured confidence uplift|3 Makers → peer instructors",
+        "cs_outcomes": "6 weeks × 18 hours|OCN Level 2|26% measured confidence uplift|10+ Makers → peer mentors",
         "cs_show_prov": true,
         "show_chapters": true,
         "chapters_label": "on this page",
@@ -1232,7 +1232,7 @@
         "arm3_icon": "balance",
         "count_eyebrow": "how we count",
         "count_title": "we publish what we can evidence, and say when we can't.",
-        "count_body": "Completion and confidence figures come from our own programme records and end-of-course surveys, dated at source. We don't publish return-on-investment figures or claim a reoffending outcome of our own; the Ministry of Justice research above is quoted as context, not as our result. Cohort sizes and site names change as programmes mobilise, so we count sites, not cohorts.",
+        "count_body": "Completion and confidence figures come from our own programme records and end-of-course surveys, dated at source. We don't publish return-on-investment figures or claim a reoffending outcome of our own; the Ministry of Justice research above is quoted as context, not as our result. Cohort sizes and site names change as programmes mobilise, so we count sites, not cohorts. We do not yet track what happens after release, we publish no carbon figure until a life-cycle assessment exists, and the CIC's first accounts are due in November 2026.",
         "stations_link_label": "read the full theory of change →",
         "stations_link_url": "/pages/theory-of-change",
         "recog_label": "recognition",
@@ -1241,7 +1241,11 @@
         "recog_c": "Match: Design & Sport, Musée du Luxembourg, Paris 2024",
         "recog_d": "National Justice Museum, Working Through It exhibition, 2026",
         "ident_line": "Bamboo Mobility Project CIC — a community interest company, not a registered charity. Registered UK learning provider, UKPRN 10098630, delivering two OCN London bespoke Level 2 courses. Activity since 2012; the CIC was incorporated in 2025. Workshops in London, Amersfoort, Toulouse and Brighton.",
-        "press_line": "Press and researchers: interviews, images and a workshop visit on request — info@bamboobicycleclub.org. GCN built and reviewed one on camera; you are welcome to."
+        "press_line": "Press and researchers: interviews, images and a workshop visit on request — info@bamboobicycleclub.org. GCN built and reviewed one on camera; you are welcome to.",
+        "hero_tb_a_key": "since",
+        "hero_tb_a": "2012 · 14 years",
+        "hero_tb_b_key": "measured",
+        "hero_tb_b": "records + end-of-course surveys"
       }
     }
   },

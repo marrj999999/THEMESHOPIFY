@@ -68,6 +68,12 @@
     <div class="rd-inner">
       <div class="rd-wrap">
         <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><span class="rd-here">Impact</span></nav>
+        {%- if section.settings.hero_tb_a != blank or section.settings.hero_tb_b != blank -%}
+          <div class="rd-tblock rd-tblock--hero" aria-hidden="true">
+            <span class="k r">{{ section.settings.hero_tb_a_key | default: 'since' }}</span><span class="r">{{ section.settings.hero_tb_a }}</span>
+            <span class="k">{{ section.settings.hero_tb_b_key | default: 'measured' }}</span><span>{{ section.settings.hero_tb_b }}</span>
+          </div>
+        {%- endif -%}
         {%- if section.settings.hero_eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>{%- endif -%}
         <h1 class="rd-mt2 rd-mw-15ch">{{ section.settings.hero_title }}</h1>
         <div class="rd-lede">{{ section.settings.hero_lede }}</div>
@@ -1247,6 +1253,11 @@ document.addEventListener('DOMContentLoaded', function () {
       "label": "Backers wall label",
       "default": "backed by & accredited by"
     },
+    { "type": "header", "content": "Hero titleblock (drawing-office device)" },
+    { "type": "text", "id": "hero_tb_a_key", "label": "Row 1 key", "default": "since" },
+    { "type": "text", "id": "hero_tb_a", "label": "Row 1 value (blank hides the block)" },
+    { "type": "text", "id": "hero_tb_b_key", "label": "Row 2 key", "default": "measured" },
+    { "type": "text", "id": "hero_tb_b", "label": "Row 2 value" },
     { "type": "header", "content": "Stations — how a bike changes a life" },
     { "type": "text", "id": "stations_eyebrow", "label": "Eyebrow", "default": "how a bike changes a life" },
     { "type": "text", "id": "stations_title", "label": "Title (blank hides the band)" },
@@ -1994,7 +2005,7 @@ document.addEventListener('DOMContentLoaded', function () {
       "id": "cs_outcomes",
       "label": "Outcome chips (pipe-separated)",
       "info": "Verified figures only. Blank = the built-in verified set.",
-      "default": "6 weeks × 18 hours|OCN Level 2|26% measured confidence uplift|3 Makers → peer instructors"
+      "default": "6 weeks × 18 hours|OCN Level 2|26% measured confidence uplift|10+ Makers → peer mentors"
     },
     {
       "type": "checkbox",
