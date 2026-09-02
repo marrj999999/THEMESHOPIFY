@@ -173,6 +173,9 @@
           {%- endfor -%}
         </ol>
       </div>
+      {%- if section.settings.stations_link_label != blank and section.settings.stations_link_url != blank -%}
+      <p class="rd-stations__more"><a class="rd-link" href="{{ section.settings.stations_link_url }}">{{ section.settings.stations_link_label }}</a></p>
+      {%- endif -%}
     </div>
   </section>
   {%- endif -%}
@@ -755,6 +758,18 @@
         </div>
       </div>
       {%- endif -%}
+      {%- assign recogs = "recog_a,recog_b,recog_c,recog_d" | split: "," -%}
+      {%- if section.settings.recog_a != blank -%}
+      <div class="rd-recog rd-mt2 rd-reveal">
+        {%- if section.settings.recog_label != blank -%}<span class="rd-recog__k">{{ section.settings.recog_label }}</span>{%- endif -%}
+        <ul class="rd-recog__list">
+          {%- for key in recogs -%}{%- assign v = section.settings[key] -%}{%- if v != blank -%}<li>{{ v }}</li>{%- endif -%}{%- endfor -%}
+        </ul>
+      </div>
+      {%- endif -%}
+      {%- if section.settings.ident_line != blank -%}
+      <p class="rd-ident rd-reveal">{{ section.settings.ident_line }}</p>
+      {%- endif -%}
       {%- if section.settings.report_card_title != blank -%}
       <div class="rd-reveal rd-dlcard rd-mt3">
         <span class="rd-dlcard__badge">report</span>
@@ -1241,6 +1256,15 @@ document.addEventListener('DOMContentLoaded', function () {
     { "type": "text", "id": "count_eyebrow", "label": "Eyebrow", "default": "how we count" },
     { "type": "text", "id": "count_title", "label": "Title (blank hides the note)" },
     { "type": "textarea", "id": "count_body", "label": "Body" },
+    { "type": "text", "id": "stations_link_label", "label": "Stations link label", "default": "read the full theory of change →" },
+    { "type": "url", "id": "stations_link_url", "label": "Stations link URL" },
+    { "type": "header", "content": "Recognition + identity ledger (benchmark, 2 Sep)" },
+    { "type": "text", "id": "recog_label", "label": "Recognition label", "default": "recognition" },
+    { "type": "text", "id": "recog_a", "label": "Recognition 1" },
+    { "type": "text", "id": "recog_b", "label": "Recognition 2" },
+    { "type": "text", "id": "recog_c", "label": "Recognition 3" },
+    { "type": "text", "id": "recog_d", "label": "Recognition 4" },
+    { "type": "textarea", "id": "ident_line", "label": "Identity line (who we are, legally)" },
     {
       "type": "header",
       "content": "Hero"

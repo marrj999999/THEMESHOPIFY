@@ -2027,3 +2027,11 @@
 
 /* stations heading sits at the kit-drawing size, not the 102px display size (display-h2 budget) */
 .bbc-rd .rd-stations h2.rd-fs-stn{font-size:clamp(var(--fs-32),3.3vw,var(--fs-48)) !important;line-height:1.04 !important;overflow-wrap:normal;word-break:normal;hyphens:manual;max-width:16ch}
+/* IMPACT v2 — benchmark additions (2 Sep): theory-of-change link, recognition ledger, identity line */
+.bbc-rd .rd-stations__more{margin:28px 0 0;font-size:var(--fs-14-5)}
+.bbc-rd .rd-recog{display:grid;grid-template-columns:auto 1fr;gap:10px 26px;align-items:baseline;text-align:left;border-top:2.5px solid var(--ink);padding-top:18px}
+.bbc-rd .rd-recog__k{font-weight:700;font-size:var(--fs-12-5);letter-spacing:.14em;text-transform:lowercase;color:var(--subtle)}
+.bbc-rd .rd-recog__list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 10px}
+.bbc-rd .rd-recog__list li{font-size:var(--fs-13-5);border:2.5px solid var(--ink);border-radius:999px;padding:5px 12px;background:var(--bone)}
+.bbc-rd .rd-ident{margin:16px 0 0;text-align:left;font-size:var(--fs-12-5);color:var(--subtle);max-width:90ch}
+@media (max-width:760px){.bbc-rd .rd-recog{grid-template-columns:1fr}}

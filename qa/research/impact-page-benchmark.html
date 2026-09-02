@@ -1,0 +1,189 @@
+<title>Impact Page Benchmark</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{--bg:#f5f0e8;--panel:#fbf8f2;--ink:#14211c;--ink-2:#4a5a53;--ink-3:#7a877f;--forest:#003c32;--forest-2:#0d5446;--lime:#d4fd62;--lime-ink:#2a4a00;--gold:#ffa900;--rule:#d9d2c3;--chip:#e9e3d6;--crit:#b3261e;--crit-bg:#fbe9e7;--warn:#9a5f00;--warn-bg:#fff1d6;--ok:#2f7d4f;--ok-bg:#e3f2e8;--info:#2b5f8c;--info-bg:#e4eef7;--on-forest:#f2eee4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0f1a16;--panel:#15231e;--ink:#eae6dc;--ink-2:#b5b9b1;--ink-3:#8b928c;--forest:#0b3a30;--forest-2:#125647;--lime-ink:#d4fd62;--gold:#ffb83a;--rule:#2a3a34;--chip:#223129;--crit:#ff8a80;--crit-bg:#3a1a17;--warn:#ffcc66;--warn-bg:#3a2a0f;--ok:#8fd8a8;--ok-bg:#153524;--info:#8fc1ee;--info-bg:#162a3a}}
+:root[data-theme="dark"]{--bg:#0f1a16;--panel:#15231e;--ink:#eae6dc;--ink-2:#b5b9b1;--ink-3:#8b928c;--forest:#0b3a30;--forest-2:#125647;--lime-ink:#d4fd62;--gold:#ffb83a;--rule:#2a3a34;--chip:#223129;--crit:#ff8a80;--crit-bg:#3a1a17;--warn:#ffcc66;--warn-bg:#3a2a0f;--ok:#8fd8a8;--ok-bg:#153524;--info:#8fc1ee;--info-bg:#162a3a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-size:17px;line-height:1.55}
+h1,h2,h3{font-family:"Plus Jakarta Sans",system-ui,sans-serif;margin:0;text-wrap:balance;color:var(--ink)}
+a{color:var(--forest-2)}:root[data-theme="dark"] a{color:var(--lime)}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) a{color:var(--lime)}}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+header.top{background:var(--forest);color:var(--on-forest);padding:52px 0 40px;border-bottom:6px solid var(--lime)}
+header.top h1{color:var(--on-forest);font-size:clamp(32px,5vw,50px);font-weight:800;letter-spacing:-.01em;line-height:1.05}
+header.top .k{font-family:"Plus Jakarta Sans",sans-serif;color:var(--lime);letter-spacing:.14em;text-transform:uppercase;font-size:12px;font-weight:700;margin-bottom:16px}
+header.top p{max-width:64ch;margin:16px 0 0;color:var(--on-forest);opacity:.92;font-size:18px}
+main{padding:40px 0 80px}section{margin:0 0 52px}
+section>h2{font-size:27px;font-weight:800;margin-bottom:6px}section>.lede{color:var(--ink-2);max-width:70ch;margin:0 0 20px}
+h3.sub{font-size:19px;margin:22px 0 8px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0}
+.tile{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:16px}
+.tile .n{font-family:"Plus Jakarta Sans",sans-serif;font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}.tile .l{font-size:13px;color:var(--ink-2);margin-top:6px;line-height:1.35}
+.tile.crit .n{color:var(--crit)}.tile.warn .n{color:var(--warn)}.tile.ok .n{color:var(--ok)}
+.chip{display:inline-block;font-family:"Plus Jakarta Sans",sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.chip.crit{background:var(--crit-bg);color:var(--crit)}.chip.warn{background:var(--warn-bg);color:var(--warn)}.chip.ok{background:var(--ok-bg);color:var(--ok)}.chip.info{background:var(--info-bg);color:var(--info)}.chip.n{background:var(--chip);color:var(--ink-2)}
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--panel);margin:14px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:10px 11px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule)}
+th{font-family:"Plus Jakarta Sans",sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:700;background:var(--chip)}tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}td b{color:var(--ink)}
+.callout{background:var(--panel);border:1px solid var(--rule);border-left:5px solid var(--gold);border-radius:8px;padding:16px 18px;margin:18px 0;max-width:80ch}.callout.ok{border-left-color:var(--ok)}.callout.crit{border-left-color:var(--crit)}.callout.info{border-left-color:var(--info)}
+.callout h4{font-size:15px;margin:0 0 6px;font-family:"Plus Jakarta Sans",sans-serif}.callout p{margin:0;font-size:15.5px;color:var(--ink-2)}
+ul.tight{padding-left:20px;margin:8px 0;max-width:76ch}ul.tight li{margin:5px 0;color:var(--ink-2)}ul.tight li b{color:var(--ink)}
+ol.steps{padding-left:0;list-style:none;counter-reset:s;max-width:80ch}ol.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--rule)}
+ol.steps li::before{content:counter(s,decimal-leading-zero);font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;color:var(--lime-ink);font-size:20px;line-height:1.2}ol.steps li .t{font-weight:700}ol.steps li .b{color:var(--ink-2);font-size:15.5px}
+footer{border-top:1px solid var(--rule);padding:20px 0 40px;font-size:13px;color:var(--ink-3)}
+</style>
+
+<header class="top"><div class="wrap">
+  <div class="k">impact page · benchmarked 2 September 2026</div>
+  <h1>Impact Page Benchmark</h1>
+  <p>The Bamboo Bicycle Club impact page (live today, and the v2 build on the preview theme) scored against ten impact pages from comparable organisations, fetched live today: prison-rehabilitation social enterprises and bike charities. Every row says what the peers list, what we list, and what is left, gated against the vault's Claims Register.</p>
+</div></header>
+
+<div class="wrap"><main>
+
+<section>
+  <h2>Verdict</h2>
+  <p class="lede">The page already covers most of what the peer set lists, and it is more honest than most of them about what it can prove. The real gaps were small and cheap: four approved facts that were never put on the page, a recognition row, a line saying who we are legally, and a link to the theory of change that already exists. All of those are now on the preview. What we cannot match is the peers' headline device, a reoffending or employment rate against a national baseline, and the vault says why. The page now says why too.</p>
+  <div class="tiles">
+    <div class="tile ok"><div class="n">17 / 20</div><div class="l">content elements the preview page now lists, of 20 seen across the peer set</div></div>
+    <div class="tile warn"><div class="n">6</div><div class="l">approved facts added to the preview today that were missing from the live page</div></div>
+    <div class="tile crit"><div class="n">3</div><div class="l">peer elements we cannot publish: reoffending rate, social value in pounds, carbon tonnes</div></div>
+    <div class="tile ok"><div class="n">2 / 10</div><div class="l">peers with a "how we measure" statement; the preview page has one</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Who was measured</h2>
+  <p class="lede">Ten organisations, one impact page each, rendered in a real browser today. Six work in prisons or with prison leavers, three put bikes at the centre, one is a youth-sport charity chosen for its evidence practice. Two more (Change Please, the Timpson Foundation) were read for their governance and recognition bands only.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Organisation</th><th>Page</th><th>What the page leads with</th><th>What it does well</th></tr></thead>
+    <tbody>
+      <tr><td><b>Redemption Roasters</b> (prison barista academies, coffee shops)</td><td>/pages/social-impact</td><td>"Live impact data, August 2026": six stats, two with a national or industry comparator (1.8% known reoffending vs 38%; 87.5% stay 90 days vs 58%)</td><td>Dated data, a four-part model, an impact-report archive 2020 to 2025, a referral form</td></tr>
+      <tr><td><b>Switchback</b> (young prison leavers, London)</td><td>/what-we-do</td><td>60% reach "real, lasting change"; 91% do not reoffend within a year vs 45% nationally; 380+ trainees, 2,200+ supported in prison</td><td>A three-stage process, a 10-pathways framework, a theory of change, awards, trainee stories, a training and consultancy offer</td></tr>
+      <tr><td><b>The Clink Charity</b> (prison restaurants and gardens)</td><td>impact reports 2023 and 2025; Justice Data Lab result</td><td>A Ministry of Justice Justice Data Lab result: graduates reoffended at 16% vs a 25% comparison group, "statistically significant"</td><td>The only peer with an external, government-run reoffending analysis; annual reports; awards (Robin Corbett 2026)</td></tr>
+      <tr><td><b>Onward Lives</b> (formerly Recycling Lives; prison workshops, 12 prisons)</td><td>/our-impact</td><td>£27.1m social value in 2024/25; 132 people into paid work; reoffending under 7%; 3m meals</td><td>A seven-line list of outcomes, a sponsorship menu that maps investment to what the sponsor gets back</td></tr>
+      <tr><td><b>Key4Life</b> (young offenders, prevention)</td><td>home page</td><td>8% reoffending vs "over 50%" nationally; SROI £13.46 per £1; 62% in work vs 17%</td><td>Four outcome percentages, quotes from a governor, corporate partners and a patron</td></tr>
+      <tr><td><b>Fine Cell Work</b> (needlework in prison)</td><td>/pages/the-impact</td><td>"Since 1997": one long participant story (Frank), then links to the annual report, the theory of change and the 2025 stitcher survey</td><td>Theory of change as a document, a stitcher survey, a staff, trustees, patrons and funders page</td></tr>
+      <tr><td><b>The Bike Project</b> (refurbished bikes for refugees)</td><td>/impact</td><td>"Our Impact 2024/25": 91% cycling weekly; 210+ tonnes of carbon prevented; 1,732 bikes given</td><td>Year-labelled figures, one story, a "what's next" band with targets, "how you can help", past reports</td></tr>
+      <tr><td><b>Bikeworks</b> (inclusive cycling social enterprise, London)</td><td>/our-impact</td><td>Highlights, each with an independent evaluation by a named academic (Dr Kay Inckle) and a linked report</td><td>Named evaluator, methods described (135 easy-read surveys; 39 interviews), an SE100 award</td></tr>
+      <tr><td><b>World Bicycle Relief</b> (bikes for education, health and work)</td><td>/the-impact</td><td>Three outcome percentages, a 14.7-to-1 return figure, an IDinsight randomised trial, 2026 goals</td><td>"Measuring our impact" page, pathways to impact, where we work, goals with numbers</td></tr>
+      <tr><td><b>Greenhouse Sports</b> (youth sport in schools)</td><td>/our-impact</td><td>Up to 14 more school days a year; 77% better wellbeing; 58% improved behaviour vs 38% of peers</td><td>An Independent Research Board of 17 academics, a named Director of Impact, reports by year</td></tr>
+    </tbody></table></div>
+  <p class="lede" style="margin-top:14px">Also read: <b>Change Please</b> (governance band, "100% of profits", B Corp and award logos, charity and CIC numbers) and the <b>Timpson Foundation</b> (12% of 4,500 colleagues have a conviction; 75% stay long-term). Cycling UK and Sustrans no longer have an impact page at their old addresses.</p>
+</section>
+
+<section>
+  <h2>Scorecard</h2>
+  <p class="lede">Twenty content elements seen across the peer set. "Peers" is how many of the ten list it. Green means the page has it. Amber means it went on the preview today. Red means neither, and the last column says why or what unlocks it.</p>
+
+  <h3 class="sub">The numbers</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Element</th><th>Peers</th><th>Who does it best</th><th>Live page</th><th>Preview (v2)</th><th>What is left</th></tr></thead>
+    <tbody>
+      <tr><td><b>Headline outcome stats</b></td><td class="num">10 / 10</td><td>Redemption: six, dated</td><td><span class="chip ok">Yes</span> 8-stat record</td><td><span class="chip ok">Yes</span></td><td>Done.</td></tr>
+      <tr><td><b>Figures dated at source</b></td><td class="num">6 / 10</td><td>Redemption "live impact data, August 2026"</td><td><span class="chip ok">Yes</span> "updated August 2026"</td><td><span class="chip ok">Yes</span></td><td>Done.</td></tr>
+      <tr><td><b>Output count (bikes, meals, cups)</b></td><td class="num">8 / 10</td><td>The Bike Project 15,000 bikes; WBR 785,000</td><td><span class="chip crit">No</span> 3,500+ bikes built is approved but not on the page</td><td><span class="chip warn">Added</span> replaces the OCN-courses stat in the record; the courses stay in the prisons strand</td><td>Done on the preview.</td></tr>
+      <tr><td><b>Programme intensity (dosage)</b></td><td class="num">4 / 10</td><td>Switchback "up to 12 weeks"; Skill Mill six months paid</td><td><span class="chip crit">No</span> 108 contact hours per Maker is approved, unused</td><td><span class="chip warn">Added</span> on the hands-on-training station</td><td>Done on the preview.</td></tr>
+      <tr><td><b>Staff trained to deliver</b></td><td class="num">3 / 10</td><td>Redemption trainers in four prisons</td><td><span class="chip crit">No</span> "13 prison staff trained as instructors in 2026" is approved, unused</td><td><span class="chip warn">Added</span> in the prisons strand lede</td><td>Re-count each year; the wording is year-scoped by rule.</td></tr>
+      <tr><td><b>Comparator against a national baseline</b></td><td class="num">6 / 10</td><td>Switchback 9% vs 45%; Redemption 1.8% vs 38%</td><td><span class="chip crit">No</span></td><td><span class="chip crit">No</span></td><td>Cannot: BBC has no measured reoffending or employment outcome. The Register bans presenting the MoJ 39% as ours. See "what would unlock it".</td></tr>
+      <tr><td><b>Sample size and date on survey stats</b></td><td class="num">4 / 10</td><td>Bikeworks "135 surveys", "39 interviews"</td><td><span class="chip warn">Partly</span> 26% carries "BBC programme surveys", no n or year</td><td><span class="chip warn">Partly</span></td><td>Needs James: the n and cohort dates behind the 26% uplift, then a Register update.</td></tr>
+      <tr><td><b>Quarterly or annual figures</b></td><td class="num">7 / 10</td><td>Redemption monthly; Bike Project by year</td><td><span class="chip crit">No</span></td><td><span class="chip crit">No</span></td><td>Needs James: the Q2 2026 Investec figures (31 learners engaged, 9 staff and peer mentors trained, 44 undergraduates at two universities) are strong and dated but have no Register row yet.</td></tr>
+    </tbody></table></div>
+
+  <h3 class="sub">The evidence</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Element</th><th>Peers</th><th>Who does it best</th><th>Live page</th><th>Preview (v2)</th><th>What is left</th></tr></thead>
+    <tbody>
+      <tr><td><b>Theory of change or model diagram</b></td><td class="num">5 / 10</td><td>Switchback three stages and 10 pathways; Fine Cell Work ToC document</td><td><span class="chip crit">No</span> (a /pages/theory-of-change page exists, unlinked)</td><td><span class="chip ok">Yes</span> four stations, plus a link to the full page</td><td>Done on the preview.</td></tr>
+      <tr><td><b>"How we measure" statement</b></td><td class="num">2 / 10</td><td>WBR "Measuring our impact"; Greenhouse data collection</td><td><span class="chip crit">No</span></td><td><span class="chip ok">Yes</span> "how we count" note</td><td>Ahead of eight peers. Consider adding the two honest gaps: no carbon figure until an LCA exists; no post-release tracking yet.</td></tr>
+      <tr><td><b>Independent evaluation named</b></td><td class="num">5 / 10</td><td>Clink (Justice Data Lab); Bikeworks (Dr Inckle); Greenhouse (research board)</td><td><span class="chip crit">No</span></td><td><span class="chip crit">No</span></td><td>Needs a decision: the OCN London external quality-assurance visit (January 2026) is real but the Register limits it to "delivered Level 2 assessment quality", not Assured Status. James to decide whether it goes on as an external check with that boundary.</td></tr>
+      <tr><td><b>External research as context</b></td><td class="num">4 / 10</td><td>Clink £20bn cost of reoffending</td><td><span class="chip ok">Yes</span> MoJ 9 points and 39% with mandatory context</td><td><span class="chip ok">Yes</span></td><td>Done.</td></tr>
+      <tr><td><b>Impact report, downloadable</b></td><td class="num">8 / 10</td><td>Redemption archive 2020 to 2025</td><td><span class="chip ok">Yes</span> the 2026 web report</td><td><span class="chip ok">Yes</span></td><td>An archive builds itself from next year. Keep the report dated in its title.</td></tr>
+      <tr><td><b>Case studies with filters</b></td><td class="num">7 / 10</td><td>Switchback trainee journeys</td><td><span class="chip ok">Yes</span> 37 cards, four filters</td><td><span class="chip ok">Yes</span></td><td>The longest element on the page; peers show three to five. Consider showing 12 with "show all".</td></tr>
+      <tr><td><b>Participant voice, named</b></td><td class="num">7 / 10</td><td>Fine Cell Work "Meet Frank"</td><td><span class="chip warn">Partly</span> staff voice only</td><td><span class="chip warn">Partly</span></td><td>Deliberate: no participant quote until a consent artefact exists. Staff voice (Industries Manager) is the public voice.</td></tr>
+      <tr><td><b>Policy and endorsement quotes</b></td><td class="num">4 / 10</td><td>Switchback governor quote; Key4Life former governor</td><td><span class="chip ok">Yes</span> Timpson, dated attributions</td><td><span class="chip ok">Yes</span></td><td>Done.</td></tr>
+    </tbody></table></div>
+
+  <h3 class="sub">Trust and identity</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Element</th><th>Peers</th><th>Who does it best</th><th>Live page</th><th>Preview (v2)</th><th>What is left</th></tr></thead>
+    <tbody>
+      <tr><td><b>Awards and recognition</b></td><td class="num">5 / 10</td><td>Switchback four prizes; Change Please award logos</td><td><span class="chip crit">No</span> only Investec, as a case-study card</td><td><span class="chip warn">Added</span> recognition row: Investec Beyond Business 2025, Kevin McCloud's Green Heroes 2018, Musée du Luxembourg 2024, National Justice Museum 2026</td><td>All four are Register-approved wordings. Done on the preview.</td></tr>
+      <tr><td><b>Legal identity and where the money goes</b></td><td class="num">5 / 10</td><td>Change Please governance band; Clink charity number and regulator marks</td><td><span class="chip crit">No</span></td><td><span class="chip warn">Added</span> identity line: CIC not a charity, UKPRN 10098630, two OCN London bespoke Level 2 courses, since 2012 / CIC 2025, four workshop cities</td><td>"Where the money goes" stays off: no executed profit-transfer policy is filed (Proof Bank).</td></tr>
+      <tr><td><b>Funders and partners</b></td><td class="num">6 / 10</td><td>Key4Life corporate quotes</td><td><span class="chip ok">Yes</span> "who backs it"</td><td><span class="chip ok">Yes</span></td><td>Done.</td></tr>
+      <tr><td><b>Press strip</b></td><td class="num">3 / 10</td><td>Bikeworks Pioneers Post</td><td><span class="chip ok">Yes</span></td><td><span class="chip ok">Yes</span></td><td>Done.</td></tr>
+      <tr><td><b>Where we work</b></td><td class="num">4 / 10</td><td>WBR map; Onward "12 prisons"</td><td><span class="chip warn">Partly</span> counts only (45 countries, 22 institutions, five sites)</td><td><span class="chip ok">Yes</span> plus the four workshop cities</td><td>Prison names stay off by rule (count formula only).</td></tr>
+    </tbody></table></div>
+
+  <h3 class="sub">Action</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Element</th><th>Peers</th><th>Who does it best</th><th>Live page</th><th>Preview (v2)</th><th>What is left</th></tr></thead>
+    <tbody>
+      <tr><td><b>Route in for commissioners or referrers</b></td><td class="num">5 / 10</td><td>Redemption referral form; Skill Mill expression of interest</td><td><span class="chip ok">Yes</span> "partner with us" to the commissioner page</td><td><span class="chip ok">Yes</span></td><td>Done.</td></tr>
+      <tr><td><b>Ways to help, with costs</b></td><td class="num">6 / 10</td><td>Onward investment-to-return menu</td><td><span class="chip warn">Partly</span> "back the mission" link</td><td><span class="chip warn">Partly</span></td><td>Costs stay internal by rule ("pricing is agreed per site and cohort"). A menu without prices adds little.</td></tr>
+      <tr><td><b>Targets and what's next</b></td><td class="num">2 / 10</td><td>WBR 2026 goals; Bike Project 1,500 bikes target</td><td><span class="chip n">Removed</span></td><td><span class="chip n">Not re-added</span></td><td>Deliberate: cut on Chris Barrett's feedback in July. Only two peers do it anyway.</td></tr>
+      <tr><td><b>Environmental figure</b></td><td class="num">3 / 10</td><td>Bike Project 210 tonnes CO2 prevented</td><td><span class="chip crit">No</span></td><td><span class="chip crit">No</span></td><td>Cannot: the 56.7% carbon claim is banned and no LCA exists. Say so in the honesty note until one does.</td></tr>
+    </tbody></table></div>
+</section>
+
+<section>
+  <h2>What went on the preview today</h2>
+  <p class="lede">Six additions, every one an approved wording from the Claims Register or Proof Bank. Nothing on the live site changed.</p>
+  <ul class="tight">
+    <li><b>3,500+ bikes built</b> in the record, in place of the "2 OCN London Level 2 courses" stat, which stays in the prisons strand card.</li>
+    <li><b>108 contact hours per Maker, per course</b> as the note on the hands-on-training station.</li>
+    <li><b>"We train the prison staff who run it: 13 trained as instructors in 2026, across three sites"</b> in the prisons strand lede.</li>
+    <li><b>Recognition row</b> under the honesty note: Investec Beyond Business 2025 winner, one of four from 148 applicants; Kevin McCloud's Green Heroes, Grand Designs Live 2018; Match: Design &amp; Sport, Musée du Luxembourg, Paris 2024; National Justice Museum, Working Through It exhibition, 2026.</li>
+    <li><b>Identity line</b>: Bamboo Mobility Project CIC, a community interest company, not a registered charity; registered UK learning provider, UKPRN 10098630; two OCN London bespoke Level 2 courses; activity since 2012, CIC incorporated 2025; workshops in London, Amersfoort, Toulouse and Brighton.</li>
+    <li><b>"Read the full theory of change"</b> link under the stations, to the page that already existed but was linked from nowhere.</li>
+  </ul>
+  <div class="callout ok"><h4>Verified</h4><p>Gate passed (no raw values in the CSS, claim-lint clean), every pushed file read back identical, live-check on the preview shows zero banned claims and zero contradictions, screenshots at 1440 and 390 in the evidence folder.</p></div>
+</section>
+
+<section>
+  <h2>What needs James before it can go on</h2>
+  <ol class="steps">
+    <li><div><div class="t">A "this quarter" strip, the Redemption Roasters device</div><div class="b">Q2 2026 figures from the Investec report: 31 learners engaged across prison programmes, 9 prison staff and peer mentors trained, 44 undergraduates reached across two universities. Dated, verifiable, and the vault already marks them as candidates. Needs a Register row and your sign-off.</div></div></li>
+    <li><div><div class="t">The n and year behind the 26% confidence uplift</div><div class="b">Four peers put a sample size on their survey stats. The Register approves the figure "with attribution"; adding "n = … , cohorts … to …" needs the evaluation source opened.</div></div></li>
+    <li><div><div class="t">The OCN external quality-assurance visit as an external check</div><div class="b">January 2026, seven Lowdham learners, run 11434643. The Register allows "delivered Level 2 assessment quality" and forbids implying Assured Status. Your call whether that boundary reads well on a public page.</div></div></li>
+    <li><div><div class="t">Cohort wording (decision D2)</div><div class="b">Switchback and Redemption say how many people a cohort holds. Recommended "cohorts of up to 8" is still pending.</div></div></li>
+  </ol>
+</section>
+
+<section>
+  <h2>What we cannot list, and what would unlock it</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Peer device</th><th>Why not now</th><th>What would unlock it</th></tr></thead>
+    <tbody>
+      <tr><td><b>Reoffending rate vs national</b> (6 of 10 peers)</td><td>No BBC-measured outcome. Presenting the MoJ family-contact research as ours is banned.</td><td>A Ministry of Justice <b>Justice Data Lab</b> application, the free service The Clink used. It needs a list of participants with identifiers and a treatment group large enough for a result (the Lab asks for roughly 60). Lowdham's cohorts since late 2024 plus Lindholme may reach that within a year. A data-sharing agreement with HMPPS and the operators comes first.</td></tr>
+      <tr><td><b>Social value in pounds or SROI</b> (Key4Life £13.46; Onward £27.1m; WBR 14.7x)</td><td>The £11.41 figure is banned: no traceable study.</td><td>A commissioned SROI or cost-benefit study with a named author and method. Not cheap; only worth it once the reoffending data exists.</td></tr>
+      <tr><td><b>Post-release employment or progression</b> (Clink, Switchback, Onward)</td><td>BBC does not follow Makers after release.</td><td>A follow-up agreement with the prison operators, or a peer-instructor and employment log kept by the site. Even "three Makers now peer instructors" is the seed of this.</td></tr>
+      <tr><td><b>Carbon or waste figure</b> (Bike Project 210 t)</td><td>56.7% lower carbon is banned; no LCA exists.</td><td>A life-cycle assessment of one frame by a university partner. The UCL and Swansea relationships are the obvious route.</td></tr>
+      <tr><td><b>Named participant stories</b> (7 of 10 peers)</td><td>Consent gate: no participant quote until a consent artefact exists; no participant tied to a named prison.</td><td>A consent form and process agreed with the operator; staff voice carries the page until then.</td></tr>
+      <tr><td><b>Named prison network</b> (Onward "12 prisons")</td><td>Register: count formula only, re-checked at every use.</td><td>Decision D1 on the public count, then a pipeline check each time the page changes.</td></tr>
+    </tbody></table></div>
+</section>
+
+<section>
+  <h2>Observations from the set</h2>
+  <ul class="tight">
+    <li><b>Peers are shorter.</b> Redemption's page is about 3,500 characters of text; ours is about 15,000, mostly the 37 case-study cards. The evidence wall is a strength, but 12 cards plus "show all" would let the record, the stations and the honesty note carry more weight.</li>
+    <li><b>Peers put comparators on almost every number.</b> That is the single biggest gap, and it is an evidence gap, not a page gap. The Justice Data Lab route is how a small organisation gets one without funding a study.</li>
+    <li><b>Most peers do not say how they count.</b> Only World Bicycle Relief and Greenhouse do. The honesty note is a differentiator; keep it.</li>
+    <li><b>Half the peer set lists awards; none of ours were on the page.</b> Four approved recognitions now are.</li>
+    <li><b>Nobody in the set names participants in connection with a prison.</b> Redemption names the prisons its academies sit in but not the people; our rule is consistent with the field.</li>
+    <li><b>The Q2 report's tone is the model.</b> "The numbers are modest and we have not manufactured any" is more credible than any peer's SROI figure, and it is already the voice of the honesty note.</li>
+  </ul>
+  <div class="callout info"><h4>Preview and canvas</h4><p>Preview: bamboobicycleclub.org/pages/impact?preview_theme_id=199089193334. Design canvas: the "BBC Impact Page" artifact. Vault report: Reports/Impact Page Benchmark 2026-09-02. Nothing goes live without James's go; the template needs his authorisation.</p></div>
+</section>
+
+<section>
+  <h2>Sources</h2>
+  <ul class="tight">
+    <li>redemptionroasters.com/pages/social-impact · switchback.org.uk/what-we-do · theclinkcharity.org (2023 and 2025 impact reports; Justice Data Lab results, April 2018) · onwardlives.org/our-impact · key4life.org.uk · finecellwork.co.uk/pages/the-impact · thebikeproject.co.uk/impact · bikeworks.org.uk/our-impact · worldbicyclerelief.org/the-impact and /idinsight · greenhousesports.org/our-impact · changeplease.org/pages/about-us-1 · timpson-group.co.uk/about/timpson-foundation. All fetched 2 September 2026.</li>
+    <li>Vault: System/Claims Register (updated 24 Aug 2026) · Business/Proof Bank · Reports/Q2 2026 Impact Report, Figures · Workstreams/Justice Pages &amp; Impact Refocus 2026-08.</li>
+  </ul>
+</section>
+
+</main></div>
+<footer><div class="wrap">Bamboo Bicycle Club · impact page benchmark · 2 September 2026 · figures quoted from peer pages are theirs, not verified by BBC.</div></footer>
