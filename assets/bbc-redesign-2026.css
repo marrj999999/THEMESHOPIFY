@@ -2071,3 +2071,8 @@
 .bbc-rd .b2b-film__video{display:block;width:100%;aspect-ratio:16/9;background:var(--forest-700)}
 .bbc-rd .b2b-film__ticket{position:absolute;left:14px;top:14px;z-index:2;background:var(--lime);color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:5px 12px;font-size:var(--fs-12-5);font-weight:700;letter-spacing:.02em;text-transform:lowercase;transform:rotate(-4deg);pointer-events:none;box-shadow:2px 2px 0 var(--ink)}
 .bbc-rd .rd-split .rd-media--film .rd-reveal,.bbc-rd .rd-split .rd-media--film{opacity:1 !important;animation:none !important}
+/* B2B prison case studies — article cards with their own featured images (2 Sep) */
+.bbc-rd .rd-b2b-cs .rd-csgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.bbc-rd .rd-b2b-cs .rd-cscard-item[data-size="featured"],.bbc-rd .rd-b2b-cs .rd-cscard--featured{grid-column:1/-1}
+@media (max-width:989px){.bbc-rd .rd-b2b-cs .rd-csgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.bbc-rd .rd-b2b-cs .rd-csgrid{grid-template-columns:1fr}}

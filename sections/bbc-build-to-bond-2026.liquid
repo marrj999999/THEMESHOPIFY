@@ -378,29 +378,40 @@
   </section>
   {%- endif -%}
 
-  {%- comment -%} ---------- CASE STUDY CARD → full story ---------- {%- endcomment -%}
-  {%- if section.settings.cs_quote != blank and section.settings.show_cs != false -%}
-  <section class="rd-pad-sm">
-    <div class="rd-wrap rd-mw-820px">
-      {%- comment -%} THE standard card (snippets/bbc-cscard.liquid), 2026-07-31 — the featured
-         variant, matching the flagship on /pages/impact. Was a bespoke wrapper <a> whose `kind`
-         read "The full story" (a TYPE, not a category) and whose title sat in a non-linked span. {%- endcomment -%}
-      {%- assign _b2b_url = section.settings.cs_url | default: '/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2' -%}
-      {%- assign _b2b_head = section.settings.cs_heading | default: section.settings.cs_site -%}
-      {%- if _b2b_head == blank -%}{%- assign _b2b_head = 'Build to Bond · HMP Lowdham Grange' -%}{%- endif -%}
-      {%- assign _b2b_img = section.settings.cs_image | default: 'bbc-rd-prison-wide.jpg' -%}
-      {%- assign _b2b_kind = section.settings.cs_kind | default: 'prisons' -%}
-      {%- assign _b2b_cta = section.settings.cs_link_label | default: 'Read the full story' -%}
-      <ul class="rd-csgrid" role="list">
-        {%- render 'bbc-cscard',
-             variant: 'featured',
-             kind: _b2b_kind,
-             heading: _b2b_head,
-             url: _b2b_url,
-             context: section.settings.cs_blurb,
-             attr: section.settings.cs_site,
-             image: _b2b_img,
-             cta: _b2b_cta -%}
+  {%- comment -%} ---------- PRISON CASE STUDIES (2026-09-02, James: "get all prison case studies and make
+     sure you are using featured images") — every card is a real article rendered through the standard
+     card with the article's OWN featured image. The list is a setting (one "blog/handle" per line) so
+     the order is editorial and nothing appears that has not been face-checked. {%- endcomment -%}
+  {%- if section.settings.cs_handles != blank and section.settings.show_cs != false -%}
+  {%- assign cs_lines = section.settings.cs_handles | newline_to_br | split: '<br />' -%}
+  <section class="rd-pad-sm rd-b2b-cs">
+    <div class="rd-wrap">
+      <div class="rd-stations__head">
+        <div>
+          {%- if section.settings.cs_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.cs_eyebrow }}</span>{%- endif -%}
+          <h2 class="rd-reveal rd-fs-stn">{{ section.settings.cs_title | default: 'from the workshops.' }}</h2>
+        </div>
+        {%- if section.settings.cs_lede != blank -%}<p class="rd-lede">{{ section.settings.cs_lede }}</p>{%- endif -%}
+      </div>
+      <ul class="rd-csgrid rd-mt4" role="list">
+        {%- for line in cs_lines -%}
+          {%- assign key = line | strip -%}
+          {%- if key == blank -%}{%- continue -%}{%- endif -%}
+          {%- assign article = articles[key] -%}
+          {%- if article == blank or article.title == blank -%}{%- continue -%}{%- endif -%}
+          {%- assign _v = 'grid' -%}{%- if forloop.first and section.settings.cs_first_featured -%}{%- assign _v = 'featured' -%}{%- endif -%}
+          {%- assign _date = article.published_at | date: '%B %Y' -%}
+          {%- assign _ctx = article.excerpt_or_content | strip_html | truncatewords: 32 -%}
+          {%- render 'bbc-cscard',
+               variant: _v,
+               kind: section.settings.cs_kind,
+               heading: article.title,
+               url: article.url,
+               context: _ctx,
+               attr: _date,
+               image_pic: article.image,
+               cta: section.settings.cs_link_label -%}
+        {%- endfor -%}
       </ul>
     </div>
   </section>
@@ -428,6 +439,38 @@
   "name": "Build to Bond 2026",
   "class": "shopify-section--bbc-b2b-page",
   "settings": [
+    {
+      "type": "header",
+      "content": "Prison case studies (featured images)"
+    },
+    {
+      "type": "text",
+      "id": "cs_eyebrow",
+      "label": "Eyebrow",
+      "default": "case studies"
+    },
+    {
+      "type": "text",
+      "id": "cs_title",
+      "label": "Title",
+      "default": "from the workshops."
+    },
+    {
+      "type": "textarea",
+      "id": "cs_lede",
+      "label": "Lede"
+    },
+    {
+      "type": "textarea",
+      "id": "cs_handles",
+      "label": "Articles, one blog/handle per line (order = display order)"
+    },
+    {
+      "type": "checkbox",
+      "id": "cs_first_featured",
+      "label": "First card featured (large)",
+      "default": true
+    },
     {
       "type": "header",
       "content": "Hero titleblock (2 Sep)"
