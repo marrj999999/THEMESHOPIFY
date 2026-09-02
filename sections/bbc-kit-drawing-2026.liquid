@@ -1,0 +1,118 @@
+{%- comment -%} ============================================================
+  BBC KIT DRAWING — "the parts drawing" (2026-09-02)
+
+  From the Claude Design canvas "BBC Kit Page" (design/kit-page/Main.dc.html):
+  the kit's exploded-view photograph presented as a drawing-office sheet, with
+  numbered callouts naming what arrives in the box, a titleblock and the frame
+  sticker. It answers "what do I actually get?" — Baymard: 63% of shoppers missed
+  bundled items when there was no in-the-box image — and it is the page's one
+  distinctive device, so it sits directly under the buy box on every kit template.
+
+  Everything is an editor setting or a block. Motion is CSS on divs only and is
+  inert under prefers-reduced-motion (qa/MOTION.md). No SVG animation.
+  Styles live in bbc-redesign-2026.css (.rd-kdraw*).
+============================================================ {%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign img = section.settings.image
+  if img == blank and product and product.images.size > 1
+    assign idx = section.settings.product_image_index | minus: 1
+    assign img = product.images[idx]
+  endif
+  assign callouts = section.blocks | where: 'type', 'callout'
+-%}
+
+<div class="bbc-rd rd-sheet">
+  <section class="rd-pad rd-kdraw"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor }}"{% endif %}>
+    <div class="rd-kdraw__culm" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="rd-wrap rd-kdraw__grid">
+      <div class="rd-kdraw__copy">
+        {%- if section.settings.tb_a != blank or section.settings.tb_b != blank -%}
+          <div class="rd-tblock" aria-hidden="true">
+            <span class="k r">{{ section.settings.tb_a_key | default: 'kit' }}</span><span class="r">{{ section.settings.tb_a }}</span>
+            <span class="k">{{ section.settings.tb_b_key | default: 'built' }}</span><span>{{ section.settings.tb_b }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="rd-reveal rd-fs-kdraw">{{ section.settings.heading }}</h2>{%- endif -%}
+        {%- if section.settings.lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.lede }}</p>{%- endif -%}
+        {%- if callouts.size > 0 -%}
+          <ol class="rd-kdraw__list">
+            {%- for block in callouts -%}
+              <li class="rd-kdraw__chip rd-reveal" {{ block.shopify_attributes }}>
+                <span class="rd-kdraw__n">{{ forloop.index }}</span>
+                <span class="rd-kdraw__t">{{ block.settings.label }}{% if block.settings.note != blank %}<small>{{ block.settings.note }}</small>{% endif %}</span>
+              </li>
+            {%- endfor -%}
+          </ol>
+        {%- endif -%}
+        {%- if section.settings.foot != blank -%}<p class="rd-kdraw__foot">{{ section.settings.foot }}</p>{%- endif -%}
+      </div>
+
+      <div class="rd-kdraw__sheet">
+        <div class="rd-card rd-stamp rd-kdraw__card">
+          {%- if img != blank -%}
+            <img class="rd-kdraw__img" src="{{ img | image_url: width: 1200 }}"
+                 srcset="{{ img | image_url: width: 600 }} 600w, {{ img | image_url: width: 900 }} 900w, {{ img | image_url: width: 1200 }} 1200w"
+                 sizes="(min-width: 990px) 46vw, 92vw"
+                 alt="{{ section.settings.image_alt | default: img.alt | default: product.title | escape }}"
+                 width="{{ img.width }}" height="{{ img.height }}" loading="lazy">
+          {%- endif -%}
+          {%- if section.settings.sheet_label != blank -%}
+            <div class="rd-tblock rd-kdraw__tb" aria-hidden="true"><span class="k">sheet</span><span>{{ section.settings.sheet_label }}</span></div>
+          {%- endif -%}
+          {%- if section.settings.sticker != blank -%}
+            <span class="rd-kdraw__sticker" aria-hidden="true">{{ section.settings.sticker }}</span>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "BBC Kit drawing",
+  "tag": "section",
+  "class": "bbc-kit-drawing-section",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anchor id", "default": "in-the-box" },
+    { "type": "header", "content": "Titleblock (drawing-office device)" },
+    { "type": "text", "id": "tb_a_key", "label": "Row 1 key", "default": "kit" },
+    { "type": "text", "id": "tb_a", "label": "Row 1 value", "default": "№ 02 — road" },
+    { "type": "text", "id": "tb_b_key", "label": "Row 2 key", "default": "built" },
+    { "type": "text", "id": "tb_b", "label": "Row 2 value", "default": "by you, at home" },
+    { "type": "header", "content": "Copy" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "what arrives" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "everything but the parts you already own." },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "One box: graded bamboo, the metalwork, the fibre and resin, the jig, the plan and the course. Fork, wheels and groupset are yours to choose." },
+    { "type": "text", "id": "foot", "label": "Footnote", "default": "Spares included. If anything in the box is not right, we replace it." },
+    { "type": "header", "content": "The drawing" },
+    { "type": "image_picker", "id": "image", "label": "Exploded-view image (leave empty to use a product image)" },
+    { "type": "range", "id": "product_image_index", "label": "…or product image number", "min": 1, "max": 8, "step": 1, "default": 2, "info": "Used when no image is picked. Kit exploded views are usually image 2." },
+    { "type": "text", "id": "image_alt", "label": "Image alt text" },
+    { "type": "text", "id": "sheet_label", "label": "Sheet label", "default": "1 of 1 · 1:1 plan in the box" },
+    { "type": "text", "id": "sticker", "label": "Sticker (frame-sticker wit)", "default": "it grew itself." }
+  ],
+  "blocks": [
+    {
+      "type": "callout",
+      "name": "Callout",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Part", "default": "heat-treated Moso bamboo tubes" },
+        { "type": "text", "id": "note", "label": "Note", "default": "with spares" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "BBC Kit drawing", "blocks": [
+      { "type": "callout", "settings": { "label": "heat-treated Moso bamboo tubes", "note": "with spares" } },
+      { "type": "callout", "settings": { "label": "CNC head tube, bottom-bracket shell and modular dropouts", "note": "" } },
+      { "type": "callout", "settings": { "label": "flax fibre and two-part epoxy resin", "note": "" } },
+      { "type": "callout", "settings": { "label": "plywood alignment jig and 1:1 frame plan", "note": "" } },
+      { "type": "callout", "settings": { "label": "illustrated manual + 15 hours of video", "note": "and the builder community" } }
+    ] }
+  ]
+}
+{% endschema %}

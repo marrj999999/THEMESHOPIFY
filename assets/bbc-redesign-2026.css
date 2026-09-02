@@ -1900,3 +1900,66 @@
   .bbc-worldmap .rd-wmap__stat.is-big b{font-size:clamp(2.6rem,13vw,3.8rem)}
   .bbc-worldmap .rd-wmap__cap{align-self:stretch}
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   KIT PAGE v2 — 2026-09-02 (Claude Design canvas "BBC Kit Page" + PDP benchmark)
+   Tokens only (token-lint ratchet). Motion on divs, inert under reduced-motion.
+   ═══════════════════════════════════════════════════════════════════════════ */
+/* titleblock — the drawing-office device (shared by kit-drawing + kit sheet) */
+.bbc-rd .rd-tblock{display:inline-grid;grid-template-columns:auto auto;border:1.5px solid var(--forest);font-size:var(--fs-10-5);letter-spacing:.1em;text-transform:uppercase;color:var(--forest);background:var(--paper)}
+.bbc-rd .rd-tblock span{padding:5px 10px}
+.bbc-rd .rd-tblock .k{border-right:1px solid var(--forest);opacity:.7}
+.bbc-rd .rd-tblock .r{border-bottom:1px solid var(--forest)}
+/* the culm accent: segmented lime bar with real node spacing, grows on load */
+.bbc-rd .rd-kit-sheet{position:relative;overflow:clip}
+.bbc-rd .rd-kit-culm,.bbc-rd .rd-kdraw__culm{position:absolute;left:32px;top:40px;bottom:40px;width:8px;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+.bbc-rd .rd-kit-culm i,.bbc-rd .rd-kdraw__culm i{display:block;flex:1;background:var(--lime);border-radius:3px;position:relative}
+.bbc-rd .rd-kit-culm i::after,.bbc-rd .rd-kdraw__culm i::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:6px;background:var(--ink);border-radius:2px}
+.bbc-rd .rd-kit-culm i:last-child::after,.bbc-rd .rd-kdraw__culm i:last-child::after{display:none}
+.bbc-rd .rd-kdraw__culm i{opacity:.55}
+@media (prefers-reduced-motion:no-preference){
+  .bbc-rd .rd-kit-culm i:first-child{transform-origin:top center;animation:rd-culm-grow 1.1s cubic-bezier(.2,.7,.2,1) .3s both}
+  @keyframes rd-culm-grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+}
+@media (max-width:989px){.bbc-rd .rd-kit-culm,.bbc-rd .rd-kdraw__culm{left:6px;width:6px;top:24px;bottom:24px}}
+/* buy-box lines (benchmark: stock · payment · stories · human help) */
+.bbc-rd .rd-buy-pay{margin:6px 0 0;font-size:var(--fs-13-5);color:var(--charcoal)}
+.bbc-rd .rd-buy-help{margin:10px 0 0;font-size:var(--fs-13-5);color:var(--charcoal)}
+.bbc-rd .rd-buy-help a{color:var(--forest);font-weight:700}
+/* spec-grid pictograms */
+.bbc-rd .rd-kspec__cell{position:relative}
+.bbc-rd .rd-kspec__ic{position:absolute;top:12px;right:12px;width:26px;height:26px;color:var(--forest);opacity:.9}
+/* build-effort strip */
+.bbc-rd .rd-keffort{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.bbc-rd .rd-keffort__lbl{font-size:var(--fs-10-5);letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--forest-300)}
+.bbc-rd .rd-keffort__val{font-size:var(--fs-18-5);letter-spacing:-.01em;line-height:1.15}
+.bbc-rd .rd-keffort__note{font-size:var(--fs-12-5);color:var(--charcoal)}
+@media (max-width:760px){.bbc-rd .rd-keffort{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* documents row */
+.bbc-rd .rd-kdocs{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:18px;font-size:var(--fs-13-5);color:var(--charcoal)}
+.bbc-rd .rd-kdocs__lbl{font-weight:700;color:var(--forest)}
+.bbc-rd .rd-kdocs__link{color:var(--forest);font-weight:700}
+.bbc-rd .rd-kdocs__link--plain{font-weight:400}
+/* kit drawing band */
+.bbc-rd .rd-kdraw{position:relative;overflow:clip}
+.bbc-rd .rd-kdraw__grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.bbc-rd .rd-kdraw__copy .rd-tblock{margin-bottom:18px}
+.bbc-rd .rd-kdraw__list{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:10px}
+.bbc-rd .rd-kdraw__chip{display:flex;align-items:flex-start;gap:12px;background:var(--bone);border:2px solid var(--ink);border-radius:999px;padding:8px 16px 8px 8px;font-weight:700;font-size:var(--fs-14-5);box-shadow:3px 3px 0 var(--ink);width:fit-content;max-width:100%}
+.bbc-rd .rd-kdraw__n{flex:0 0 26px;width:26px;height:26px;border-radius:50%;background:var(--forest);color:var(--lime);display:inline-flex;align-items:center;justify-content:center;font-size:var(--fs-12-5)}
+.bbc-rd .rd-kdraw__t small{display:block;font-weight:400;font-size:var(--fs-12-5);color:var(--charcoal)}
+.bbc-rd .rd-kdraw__foot{margin:22px 0 0;font-size:var(--fs-13-5);color:var(--charcoal)}
+.bbc-rd .rd-kdraw__card{position:relative;padding:22px;background:var(--paper);overflow:visible}
+.bbc-rd .rd-kdraw__img{display:block;width:100%;height:auto;border-radius:3px;mix-blend-mode:multiply}
+.bbc-rd .rd-kdraw__tb{position:absolute;left:18px;bottom:18px}
+.bbc-rd .rd-kdraw__sticker{position:absolute;top:-16px;right:-18px;background:var(--lime);color:var(--forest);border:2.5px solid var(--ink);border-radius:999px;padding:9px 16px;font-weight:800;font-size:var(--fs-13-5);letter-spacing:.06em;text-transform:uppercase;box-shadow:3px 3px 0 var(--ink);transform:rotate(-6deg);transition:transform var(--mo-base) var(--mo-ease)}
+.bbc-rd .rd-kdraw__sticker:hover{transform:rotate(-2deg) scale(1.04)}
+@media (max-width:989px){
+  .bbc-rd .rd-kdraw__grid{grid-template-columns:1fr;gap:28px}
+  .bbc-rd .rd-kdraw__sheet{order:-1}
+  .bbc-rd .rd-kdraw__sticker{right:-6px;top:-12px;font-size:var(--fs-11-5);padding:7px 12px}
+}
+@media (prefers-reduced-motion:reduce){.bbc-rd .rd-kdraw__sticker,.bbc-rd .rd-kdraw__sticker:hover{transform:rotate(-6deg)}}
+/* kit-drawing heading: NOT a display beat — the estate display rule sized it at 102px in a 0.9fr
+   column and broke "everything" mid-word (preview screenshot, 2026-09-02). Two beats per page max. */
+.bbc-rd .rd-kdraw h2.rd-fs-kdraw{font-size:clamp(var(--fs-32),3.3vw,var(--fs-48));line-height:1.04;overflow-wrap:normal;word-break:normal;hyphens:manual;max-width:16ch}

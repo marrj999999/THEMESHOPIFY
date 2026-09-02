@@ -58,7 +58,8 @@
   {%- endcomment -%}
   {%- if product and section.settings.show_buybox != false -%}
     {%- assign cv = product.selected_or_first_available_variant -%}
-    <section class="rd-section rd-pad-sm">
+    <section class="rd-section rd-pad-sm{% if section.settings.sheet_bg %} rd-sheet rd-kit-sheet{% endif %}">
+      {%- if section.settings.sheet_bg -%}<div class="rd-kit-culm" aria-hidden="true"><i></i><i></i><i></i></div>{%- endif -%}
       <div class="rd-wrap">
 
         <nav class="rd-crumb rd-cmp-61169" aria-label="Breadcrumb">
@@ -135,7 +136,7 @@
             </div>
             {%- else -%}
             <div class="rd-flex rd-cmp-08680">
-              <a class="rd-cmp-09075" href="{{ reviews_url }}">Builder reviews &rarr;</a>
+              <a class="rd-cmp-09075" href="{{ section.settings.stories_url | default: reviews_url }}">{{ section.settings.stories_label | default: 'Builder reviews' }} &rarr;</a>
             </div>
             {%- endif -%}
 
@@ -160,6 +161,9 @@
               <span class="rd-cmp-93984"></span>
               {{ section.settings.stock_line }}
             </div>
+            {%- if section.settings.pay_line != blank -%}
+              <p class="rd-buy-pay">{{ section.settings.pay_line }}</p>
+            {%- endif -%}
 
             {%- comment -%} ---------- ADD TO CART (JS-free) ---------- {%- endcomment -%}
             {% form 'product', product, id: 'bbc-buy-form' %}
@@ -190,6 +194,10 @@
                 {%- endif -%}
               </div>
             {% endform %}
+
+            {%- if section.settings.help_label != blank -%}
+              <p class="rd-buy-help">{{ section.settings.help_lead }} <a href="{{ section.settings.help_url | default: '/pages/contact-us' }}">{{ section.settings.help_label }}</a></p>
+            {%- endif -%}
 
             {%- if section.settings.reassure_line != blank -%}
               <p class="rd-center rd-cmp-86881">{{ section.settings.reassure_line }}</p>
@@ -841,6 +849,47 @@
       "id": "stock_line",
       "label": "In-stock / shipping line",
       "default": "In stock — ships ~twice a week from our London workshop, fully tracked."
+    },
+    {
+      "type": "text",
+      "id": "pay_line",
+      "label": "Payment line under the stock line (2026-09-02)",
+      "info": "Name the ways to pay near the price — 7 of 10 bike brands do. Leave blank to hide. Confirm Cycle to Work eligibility for a kit before naming it."
+    },
+    {
+      "type": "text",
+      "id": "stories_label",
+      "label": "Builder-stories link label",
+      "info": "Replaces the generic reviews link beside the title, e.g. \"Read 12 builder stories\". Leave blank for the default."
+    },
+    {
+      "type": "url",
+      "id": "stories_url",
+      "label": "Builder-stories link"
+    },
+    {
+      "type": "text",
+      "id": "help_lead",
+      "label": "Human-help line lead-in",
+      "default": "Not sure it's for you?"
+    },
+    {
+      "type": "text",
+      "id": "help_label",
+      "label": "Human-help link label (blank hides the line)",
+      "info": "e.g. \"Book a free 10-minute call\" — a person beside the buy button, not a chat widget."
+    },
+    {
+      "type": "url",
+      "id": "help_url",
+      "label": "Human-help link"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet_bg",
+      "label": "Drawing-sheet ground + culm behind the buy box",
+      "default": false,
+      "info": "The kit-page family device from the 2026-09 design. Off keeps the previous flat ground."
     },
     {
       "type": "text",
@@ -1904,7 +1953,7 @@
           "type": "faq",
           "settings": {
             "question": "How strong is it really?",
-            "answer": "Very strong for its weight. Bamboo is a light, hollow natural composite and every joint is reinforced with carbon-fibre, giving a high strength-to-weight ratio. Our bamboo is independently tested at Swansea University. Builders ride these frames daily and tour continents — with proper care they last for years."
+            "answer": "Bamboo frame tubing tested at Swansea University to BS ISO 22157:2019 — 84.3 MPa ultimate tensile, comparable to mild steel at a fraction of the weight. That figure is for the tubing we supply, not for a finished frame: how strong your bike ends up is decided by your joints. Follow the manual, let the resin cure fully, and check the joints before every early ride — and call us if anything looks wrong."
           }
         },
         {

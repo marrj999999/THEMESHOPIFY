@@ -5,20 +5,20 @@
   (Business/Sales Intelligence — Email Archive Mining.md, 34,300 emails) puts
   component compatibility at the top by reading volume — "arguably the true
   no.1" — front derailleur, disc or rim, hub spacing, tyre clearance, donor-bike
-  reuse. The live gravel page carried NONE of it: a probe with every accordion
-  forced open found no tyre clearance, no hub spacing, no brake standard, no BB
-  shell, no cable routing, no rack mounts and no frame weight.
+  reuse. Presented as a spec grid rather than prose because that is how the
+  question is asked — people are checking a part they already own against a
+  number. Rows are blocks so a variant change is an editor edit.
 
-  Presented as a spec grid rather than prose because that is how the question is
-  asked — people are checking a part they already own against a number. Rows are
-  blocks so a variant change is an editor edit, not a code change.
-
-  NOTE ON EVIDENCE: default values come from the vault product note, which is
-  flagged `source_status: stale-catalogue-snapshot`. They must be reconciled to
-  the current variant before this goes to the live theme. Deliberately no
-  strength/lifespan value here — see bbc-kit-honest for why that is a separate,
-  claim-gated statement.
-  Styling lives in bbc-redesign-2026.css (design brief hard req 2).
+  2026-09-02 (Claude Design canvas "BBC Kit Page" + PDP benchmark):
+  · each spec row can carry a hand-drawn stroke PICTOGRAM (select per block —
+    same 32-grid, 2px-stroke family as the Education page tiers);
+  · new `effort` blocks render a 4-card BUILD-EFFORT strip under the grid
+    (Framework's "setup time · difficulty" rows — the most relevant borrow for a
+    build-it-yourself kit; the IKEA effect only holds when the build is finished);
+  · new `doc` blocks render a DOCUMENTS row (Surly / Fairlight downloads).
+  Deliberately no strength / lifespan / weight-limit row — those are claim-gated
+  (System/Claims Register, PS-001 open).
+  Styling lives in bbc-redesign-2026.css.
 ============================================================ {%- endcomment -%}
 {{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
 
@@ -31,6 +31,9 @@
   elsif section.settings.background == 'steel'
     assign surf = 'rd-steel'
   endif
+  assign rows = section.blocks | where: 'type', 'spec'
+  assign efforts = section.blocks | where: 'type', 'effort'
+  assign docs = section.blocks | where: 'type', 'doc'
 -%}
 
 <div class="bbc-rd {{ surf }}">
@@ -40,12 +43,28 @@
       {%- if section.settings.heading != blank -%}<h2 class="rd-reveal rd-mt2">{{ section.settings.heading }}</h2>{%- endif -%}
       {%- if section.settings.lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.lede }}</p>{%- endif -%}
 
-      {%- assign rows = section.blocks | where: 'type', 'spec' -%}
       {%- if rows.size > 0 -%}
         <dl class="rd-kspec rd-mt3">
           {%- for block in rows -%}
             <div class="rd-kspec__cell rd-reveal" {{ block.shopify_attributes }}>
-              <dt class="rd-kspec__lbl">{{ block.settings.label }}</dt>
+              <dt class="rd-kspec__lbl">{{ block.settings.label }}
+                {%- case block.settings.icon -%}
+                  {%- when 'tyre' -%}<svg class="rd-kspec__ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="2"/><path d="M16 4v3M16 25v3M4 16h3M25 16h3" stroke="currentColor" stroke-width="2"/></svg>
+                  {%- when 'spacing' -%}<svg class="rd-kspec__ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 6v20M26 6v20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 16h20" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/><path d="M9 13l-3 3 3 3M23 13l3 3-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  {%- when 'axle' -%}<svg class="rd-kspec__ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="3" y="13" width="26" height="6" rx="3" stroke="currentColor" stroke-width="2"/><path d="M8 13v-3M8 22v-3M24 13v-3M24 22v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  {%- when 'brake' -%}<svg class="rd-kspec__ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="3" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="8" r="1.4" fill="currentColor"/><circle cx="23" cy="12" r="1.4" fill="currentColor"/><circle cx="23" cy="20" r="1.4" fill="currentColor"/><circle cx="16" cy="24" r="1.4" fill="currentColor"/><circle cx="9" cy="20" r="1.4" fill="currentColor"/><circle cx="9" cy="12" r="1.4" fill="currentColor"/></svg>
+                  {%- when 'bb' -%}<svg class="rd-kspec__ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="4" stroke="currentColor" stroke-width="2"/><path d="M5 12h22M5 20h22" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/></svg>
+                  {%- when 'seatpost' -%}<svg class="rd-kspec__ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="12" y="3" width="8" height="26" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 14h16v5H8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16 3v6" stroke="currentColor" stroke-width="2"/></svg>
+                  {%- when 'mounts' -%}<svg class="rd-kspec__ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="9" cy="10" r="4" stroke="currentColor" stroke-width="2"/><circle cx="23" cy="10" r="4" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="23" r="4" stroke="currentColor" stroke-width="2"/><path d="M7 8l4 4M21 8l4 4M14 21l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  {%- when 'routing' -%}<svg class="rd-kspec__ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="3" y="11" width="26" height="10" rx="5" stroke="currentColor" stroke-width="2"/><path d="M3 16c5-6 9 6 14 0s6-4 12 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  {%- when 'headtube' -%}<svg class="rd-kspec__ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="11" y="4" width="10" height="24" rx="3" stroke="currentColor" stroke-width="2"/><path d="M8 9h16M8 23h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  {%- when 'lug' -%}<svg class="rd-kspec__ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 24L20 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18 6l8 8-4 4-8-8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M22 3l7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  {%- when 'wheel' -%}<svg class="rd-kspec__ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="2" fill="currentColor"/><path d="M16 4v24M4 16h24M7.5 7.5l17 17M24.5 7.5l-17 17" stroke="currentColor" stroke-width="1.5"/></svg>
+                  {%- when 'clock' -%}<svg class="rd-kspec__ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="17" r="11" stroke="currentColor" stroke-width="2"/><path d="M16 10v7l5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 3h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  {%- when 'ruler' -%}<svg class="rd-kspec__ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="3" y="11" width="26" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11v4M13 11v6M18 11v4M23 11v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  {%- when 'parts' -%}<svg class="rd-kspec__ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="4" y="6" width="24" height="20" rx="2" stroke="currentColor" stroke-width="2"/><path d="M4 12h24M12 12v14M20 12v14" stroke="currentColor" stroke-width="2"/></svg>
+                {%- endcase -%}
+              </dt>
               <dd class="rd-kspec__val">{{ block.settings.value }}
                 {%- if block.settings.note != blank -%}<small>{{ block.settings.note }}</small>{%- endif -%}
               </dd>
@@ -60,6 +79,31 @@
           {%- if section.settings.foot_right != blank -%}
             <span>{% if section.settings.foot_url != blank %}<a href="{{ section.settings.foot_url }}">{{ section.settings.foot_right }} &rarr;</a>{% else %}{{ section.settings.foot_right }}{% endif %}</span>
           {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if efforts.size > 0 -%}
+        <div class="rd-keffort rd-mt3">
+          {%- for block in efforts -%}
+            <div class="rd-fact rd-keffort__card rd-reveal" {{ block.shopify_attributes }}>
+              <span class="rd-keffort__lbl">{{ block.settings.label }}</span>
+              <b class="rd-keffort__val">{{ block.settings.value }}</b>
+              {%- if block.settings.note != blank -%}<span class="rd-keffort__note">{{ block.settings.note }}</span>{%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if docs.size > 0 -%}
+        <div class="rd-kdocs">
+          <span class="rd-kdocs__lbl">{{ section.settings.docs_label | default: 'Documents' }}</span>
+          {%- for block in docs -%}
+            {%- if block.settings.url != blank -%}
+              <a class="rd-kdocs__link" href="{{ block.settings.url }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+            {%- else -%}
+              <span class="rd-kdocs__link rd-kdocs__link--plain" {{ block.shopify_attributes }}>{{ block.settings.label }}</span>
+            {%- endif -%}
+          {%- endfor -%}
         </div>
       {%- endif -%}
     </div>
@@ -86,7 +130,9 @@
     { "type": "header", "content": "Footnote" },
     { "type": "text", "id": "foot_left", "label": "Left footnote", "default": "Building from a donor bike? Send us its spec and we'll confirm the fit before you order." },
     { "type": "text", "id": "foot_right", "label": "Right footnote (link text)", "default": "Ask us about your parts" },
-    { "type": "url", "id": "foot_url", "label": "Right footnote link" }
+    { "type": "url", "id": "foot_url", "label": "Right footnote link" },
+    { "type": "header", "content": "Documents row" },
+    { "type": "text", "id": "docs_label", "label": "Documents label", "default": "Documents" }
   ],
   "blocks": [
     {
@@ -95,7 +141,32 @@
       "settings": [
         { "type": "text", "id": "label", "label": "Property", "default": "tyre clearance" },
         { "type": "text", "id": "value", "label": "Value", "default": "45 mm" },
-        { "type": "text", "id": "note", "label": "Note", "default": "700c" }
+        { "type": "text", "id": "note", "label": "Note", "default": "700c" },
+        { "type": "select", "id": "icon", "label": "Pictogram", "default": "none",
+          "options": [
+            { "value": "none", "label": "None" }, { "value": "tyre", "label": "Tyre" }, { "value": "spacing", "label": "Rear spacing" },
+            { "value": "axle", "label": "Axle" }, { "value": "brake", "label": "Disc brake" }, { "value": "bb", "label": "Bottom bracket" },
+            { "value": "seatpost", "label": "Seatpost" }, { "value": "mounts", "label": "Mounts" }, { "value": "routing", "label": "Cable routing" },
+            { "value": "headtube", "label": "Head tube" }, { "value": "lug", "label": "Lug / joint" }, { "value": "wheel", "label": "Wheel size" },
+            { "value": "clock", "label": "Build time" }, { "value": "ruler", "label": "Geometry / size" }, { "value": "parts", "label": "Parts / groupset" }
+          ] }
+      ]
+    },
+    {
+      "type": "effort",
+      "name": "Build-effort card",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "build time" },
+        { "type": "text", "id": "value", "label": "Value", "default": "25–40 hrs" },
+        { "type": "text", "id": "note", "label": "Note", "default": "across a few weekends" }
+      ]
+    },
+    {
+      "type": "doc",
+      "name": "Document link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Build manual (PDF)" },
+        { "type": "url", "id": "url", "label": "Link (leave empty to show as plain text)" }
       ]
     }
   ],

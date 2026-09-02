@@ -20,9 +20,14 @@ function findToken(o) {
 }
 const TOKEN = findToken(cfg);
 const STORE = 'bamboo-bicycle-club-london-uk.myshopify.com';
-const THEME = 'gid://shopify/OnlineStoreTheme/196820238710';
-const DIR = process.argv[2];
-const FILES = process.argv.slice(3);
+// 2026-09-02: optional --theme=<numeric id> targets a PREVIEW duplicate instead of live.
+// The default stays the live theme so existing call sites behave as before.
+const themeArg = process.argv.find(a => a.startsWith('--theme='));
+const THEME = 'gid://shopify/OnlineStoreTheme/' + (themeArg ? themeArg.split('=')[1] : '196820238710');
+const argv = process.argv.filter(a => !a.startsWith('--theme='));
+const DIR = argv[2];
+const FILES = argv.slice(3);
+console.log('target theme:', THEME.split('/').pop(), themeArg ? '(preview override)' : '(LIVE)');
 if (!DIR || !FILES.length) { console.error('usage: push-theme.mjs <dir> <file...>'); process.exit(1); }
 
 async function gql(query, variables) {

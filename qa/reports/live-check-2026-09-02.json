@@ -1,46 +1,12 @@
 {
   "date": "2026-09-02",
-  "pages": 10,
-  "fails": 10,
-  "warns": 36,
-  "contradictions": [
-    {
-      "key": "workshop-price",
-      "values": {
-        "£385": [
-          "/products/gravel-frame-build-kit",
-          "/products/29er-frame-build-kit"
-        ],
-        "£425": [
-          "/products/gravel-frame-build-kit"
-        ],
-        "£165": [
-          "/products/gravel-frame-build-kit",
-          "/products/gravel-lugged-build-kit",
-          "/products/bamboo-bike-road-kit",
-          "/products/road-carbon-frame-build-kit",
-          "/products/city-bike-frame-kit",
-          "/products/29er-frame-build-kit",
-          "/products/custom-frame",
-          "/products/fatbike-home-build-kit",
-          "/products/balance-bike-lugged-kit-1",
-          "/products/balance-bike-flax-kit-with-resins"
-        ],
-        "£595": [
-          "/products/gravel-lugged-build-kit"
-        ],
-        "£375": [
-          "/products/bamboo-bike-road-kit"
-        ],
-        "£795": [
-          "/products/road-carbon-frame-build-kit"
-        ]
-      }
-    }
-  ],
+  "pages": 1,
+  "fails": 1,
+  "warns": 4,
+  "contradictions": [],
   "results": [
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "no banned claims rendered",
@@ -48,7 +14,7 @@
       "detail": ""
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "title not bare brand",
@@ -56,7 +22,7 @@
       "detail": "Bamboo Gravel Bike Frame Kit | Bamboo Bicycle Club"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "meta description length",
@@ -64,7 +30,7 @@
       "detail": "147 chars"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "one h1",
@@ -72,7 +38,7 @@
       "detail": "1 h1"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "UX",
       "check": "no horizontal overflow",
@@ -80,23 +46,23 @@
       "detail": "0px"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "UX",
       "check": "images have alt",
       "status": "OK",
-      "detail": "0/31 missing"
+      "detail": "0/32 missing"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "UX",
       "check": "page weight",
       "status": "OK",
-      "detail": "2.7 MB, 12059px tall, 2222 words"
+      "detail": "3.2 MB, 13735px tall, 2416 words"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CSS",
       "check": "button styles ≤ budget",
@@ -104,23 +70,23 @@
       "detail": "10 distinct styles across 19 buttons"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CSS",
       "check": "display h2 count ≤ budget",
       "status": "WARN",
-      "detail": "9 of 14 h2 at ≥80px"
+      "detail": "10 of 15 h2 at ≥80px"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CSS",
       "check": "kicker case (lowercase spec)",
       "status": "OK",
-      "detail": "0/12 uppercase"
+      "detail": "0/13 uppercase"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CSS",
       "check": "no font leaks",
@@ -128,15 +94,15 @@
       "detail": "Atkinson Hyperlegible"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CSS",
       "check": "text ≥ 12px",
       "status": "WARN",
-      "detail": "13 elements under 12px"
+      "detail": "15 elements under 12px"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "CONTENT",
       "check": "no banned claims rendered",
@@ -144,7 +110,7 @@
       "detail": ""
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "UX",
       "check": "no horizontal overflow",
@@ -152,15 +118,15 @@
       "detail": "0px"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "UX",
       "check": "images have alt",
       "status": "OK",
-      "detail": "0/31 missing"
+      "detail": "0/32 missing"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "UX",
       "check": "h1 in first viewport (390)",
@@ -168,7 +134,7 @@
       "detail": "h1 at 833px"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "UX",
       "check": "primary CTA above the fold (390)",
@@ -176,7 +142,7 @@
       "detail": "19 buttons on page"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "UX",
       "check": "cookie card viewport cover",
@@ -184,15 +150,15 @@
       "detail": "54% of viewport"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "UX",
       "check": "page weight",
       "status": "OK",
-      "detail": "2.7 MB, 18622px tall, 1406 words"
+      "detail": "3.2 MB, 20567px tall, 1600 words"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "UX",
       "check": "largest media on phone",
@@ -200,1524 +166,12 @@
       "detail": "0.2 MB https://bamboobicycleclub.org/cdn/shop/articles/ColinGravel.jpg"
     },
     {
-      "page": "/products/gravel-frame-build-kit",
+      "page": "/products/gravel-frame-build-kit?preview_theme_id=199089193334",
       "vp": "mobile",
       "lane": "CSS",
       "check": "text ≥ 12px",
       "status": "WARN",
-      "detail": "12 elements under 12px"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "title not bare brand",
-      "status": "OK",
-      "detail": "Bamboo Gravel Bike Lugged Frame Kit | Bamboo Bicycle Club"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "meta description length",
-      "status": "OK",
-      "detail": "147 chars"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "one h1",
-      "status": "OK",
-      "detail": "1 h1"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/33 missing"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "2.8 MB, 12829px tall, 2339 words"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "button styles ≤ budget",
-      "status": "WARN",
-      "detail": "10 distinct styles across 21 buttons"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "display h2 count ≤ budget",
-      "status": "WARN",
-      "detail": "10 of 15 h2 at ≥80px"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "kicker case (lowercase spec)",
-      "status": "OK",
-      "detail": "0/13 uppercase"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "no font leaks",
-      "status": "OK",
-      "detail": "Atkinson Hyperlegible"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "10 elements under 12px"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "mobile",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/33 missing"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "h1 in first viewport (390)",
-      "status": "OK",
-      "detail": "h1 at 833px"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "primary CTA above the fold (390)",
-      "status": "OK",
-      "detail": "21 buttons on page"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "cookie card viewport cover",
-      "status": "FAIL",
-      "detail": "54% of viewport"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "2.8 MB, 19816px tall, 1523 words"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "largest media on phone",
-      "status": "OK",
-      "detail": "0.2 MB https://i.ytimg.com/vi/ckCwJXJGKD0/maxresdefault.jpg"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "mobile",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "9 elements under 12px"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "title not bare brand",
-      "status": "OK",
-      "detail": "Bamboo Road Bike Frame Kit | Bamboo Bicycle Club"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "meta description length",
-      "status": "OK",
-      "detail": "145 chars"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "one h1",
-      "status": "OK",
-      "detail": "1 h1"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/33 missing"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "2.8 MB, 12835px tall, 2416 words"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "button styles ≤ budget",
-      "status": "WARN",
-      "detail": "10 distinct styles across 21 buttons"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "display h2 count ≤ budget",
-      "status": "WARN",
-      "detail": "10 of 15 h2 at ≥80px"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "kicker case (lowercase spec)",
-      "status": "OK",
-      "detail": "0/13 uppercase"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "no font leaks",
-      "status": "OK",
-      "detail": "Atkinson Hyperlegible"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "13 elements under 12px"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "mobile",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/33 missing"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "h1 in first viewport (390)",
-      "status": "OK",
-      "detail": "h1 at 833px"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "primary CTA above the fold (390)",
-      "status": "OK",
-      "detail": "21 buttons on page"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "cookie card viewport cover",
-      "status": "FAIL",
-      "detail": "54% of viewport"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "2.8 MB, 20227px tall, 1600 words"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "largest media on phone",
-      "status": "OK",
-      "detail": "0.2 MB https://i.ytimg.com/vi/ckCwJXJGKD0/maxresdefault.jpg"
-    },
-    {
-      "page": "/products/bamboo-bike-road-kit",
-      "vp": "mobile",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "12 elements under 12px"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "title not bare brand",
-      "status": "OK",
-      "detail": "Bamboo Road Bike Lugged Frame Kit | Bamboo Bicycle Club"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "meta description length",
-      "status": "OK",
-      "detail": "145 chars"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "one h1",
-      "status": "OK",
-      "detail": "1 h1"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/33 missing"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "2.8 MB, 12853px tall, 2382 words"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "button styles ≤ budget",
-      "status": "WARN",
-      "detail": "10 distinct styles across 21 buttons"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "display h2 count ≤ budget",
-      "status": "WARN",
-      "detail": "10 of 15 h2 at ≥80px"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "kicker case (lowercase spec)",
-      "status": "OK",
-      "detail": "0/13 uppercase"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "no font leaks",
-      "status": "OK",
-      "detail": "Atkinson Hyperlegible"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "12 elements under 12px"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "mobile",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/33 missing"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "h1 in first viewport (390)",
-      "status": "OK",
-      "detail": "h1 at 833px"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "primary CTA above the fold (390)",
-      "status": "OK",
-      "detail": "21 buttons on page"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "cookie card viewport cover",
-      "status": "FAIL",
-      "detail": "54% of viewport"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "2.7 MB, 20033px tall, 1566 words"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "largest media on phone",
-      "status": "OK",
-      "detail": "0.2 MB https://i.ytimg.com/vi/ckCwJXJGKD0/maxresdefault.jpg"
-    },
-    {
-      "page": "/products/road-carbon-frame-build-kit",
-      "vp": "mobile",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "11 elements under 12px"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "title not bare brand",
-      "status": "OK",
-      "detail": "Bamboo City Bike Frame Kit | Bamboo Bicycle Club"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "meta description length",
-      "status": "OK",
-      "detail": "145 chars"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "one h1",
-      "status": "OK",
-      "detail": "1 h1"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/33 missing"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "2.5 MB, 12965px tall, 2421 words"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "button styles ≤ budget",
-      "status": "WARN",
-      "detail": "10 distinct styles across 21 buttons"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "display h2 count ≤ budget",
-      "status": "WARN",
-      "detail": "10 of 15 h2 at ≥80px"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "kicker case (lowercase spec)",
-      "status": "OK",
-      "detail": "0/13 uppercase"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "no font leaks",
-      "status": "OK",
-      "detail": "Atkinson Hyperlegible"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "13 elements under 12px"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "mobile",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/33 missing"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "h1 in first viewport (390)",
-      "status": "OK",
-      "detail": "h1 at 833px"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "primary CTA above the fold (390)",
-      "status": "OK",
-      "detail": "21 buttons on page"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "cookie card viewport cover",
-      "status": "FAIL",
-      "detail": "54% of viewport"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "2.5 MB, 20247px tall, 1605 words"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "largest media on phone",
-      "status": "OK",
-      "detail": "0.2 MB https://i.ytimg.com/vi/ckCwJXJGKD0/maxresdefault.jpg"
-    },
-    {
-      "page": "/products/city-bike-frame-kit",
-      "vp": "mobile",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "12 elements under 12px"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "title not bare brand",
-      "status": "OK",
-      "detail": "Bamboo Mountain Bike Frame Kit | Bamboo Bicycle Club"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "meta description length",
-      "status": "OK",
-      "detail": "149 chars"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "one h1",
-      "status": "OK",
-      "detail": "1 h1"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/39 missing"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "3.9 MB, 14156px tall, 2492 words"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "button styles ≤ budget",
-      "status": "WARN",
-      "detail": "10 distinct styles across 26 buttons"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "display h2 count ≤ budget",
-      "status": "WARN",
-      "detail": "10 of 15 h2 at ≥80px"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "kicker case (lowercase spec)",
-      "status": "OK",
-      "detail": "0/13 uppercase"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "no font leaks",
-      "status": "OK",
-      "detail": "Atkinson Hyperlegible"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "12 elements under 12px"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "mobile",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/39 missing"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "h1 in first viewport (390)",
-      "status": "OK",
-      "detail": "h1 at 833px"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "primary CTA above the fold (390)",
-      "status": "OK",
-      "detail": "26 buttons on page"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "cookie card viewport cover",
-      "status": "FAIL",
-      "detail": "54% of viewport"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "3.8 MB, 22497px tall, 1676 words"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "largest media on phone",
-      "status": "OK",
-      "detail": "0.3 MB //cdn.shopify.com/s/files/1/0502/8695/2631/articles/OBCo73yMris-HD.jpg"
-    },
-    {
-      "page": "/products/29er-frame-build-kit",
-      "vp": "mobile",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "11 elements under 12px"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "title not bare brand",
-      "status": "OK",
-      "detail": "Bamboo Custom Bike Frame Kit | Bamboo Bicycle Club"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "meta description length",
-      "status": "OK",
-      "detail": "147 chars"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "one h1",
-      "status": "OK",
-      "detail": "1 h1"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/33 missing"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "2.7 MB, 13793px tall, 2439 words"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "button styles ≤ budget",
-      "status": "WARN",
-      "detail": "10 distinct styles across 21 buttons"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "display h2 count ≤ budget",
-      "status": "WARN",
-      "detail": "10 of 15 h2 at ≥80px"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "kicker case (lowercase spec)",
-      "status": "OK",
-      "detail": "0/13 uppercase"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "no font leaks",
-      "status": "OK",
-      "detail": "Atkinson Hyperlegible"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "12 elements under 12px"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "mobile",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/33 missing"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "h1 in first viewport (390)",
-      "status": "OK",
-      "detail": "h1 at 804px"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "primary CTA above the fold (390)",
-      "status": "OK",
-      "detail": "21 buttons on page"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "cookie card viewport cover",
-      "status": "FAIL",
-      "detail": "54% of viewport"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "2.6 MB, 20749px tall, 1623 words"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "largest media on phone",
-      "status": "OK",
-      "detail": "0.2 MB https://i.ytimg.com/vi/ckCwJXJGKD0/maxresdefault.jpg"
-    },
-    {
-      "page": "/products/custom-frame",
-      "vp": "mobile",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "11 elements under 12px"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "title not bare brand",
-      "status": "OK",
-      "detail": "Bamboo Fat Bike Frame Kit | Bamboo Bicycle Club"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "meta description length",
-      "status": "OK",
-      "detail": "144 chars"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "one h1",
-      "status": "OK",
-      "detail": "1 h1"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/33 missing"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "2.9 MB, 12664px tall, 2279 words"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "button styles ≤ budget",
-      "status": "WARN",
-      "detail": "10 distinct styles across 21 buttons"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "display h2 count ≤ budget",
-      "status": "WARN",
-      "detail": "10 of 15 h2 at ≥80px"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "kicker case (lowercase spec)",
-      "status": "OK",
-      "detail": "0/13 uppercase"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "no font leaks",
-      "status": "OK",
-      "detail": "Atkinson Hyperlegible"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "10 elements under 12px"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "mobile",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/33 missing"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "h1 in first viewport (390)",
-      "status": "OK",
-      "detail": "h1 at 833px"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "primary CTA above the fold (390)",
-      "status": "OK",
-      "detail": "21 buttons on page"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "cookie card viewport cover",
-      "status": "FAIL",
-      "detail": "54% of viewport"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "2.9 MB, 19500px tall, 1463 words"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "largest media on phone",
-      "status": "OK",
-      "detail": "0.2 MB https://i.ytimg.com/vi/ckCwJXJGKD0/maxresdefault.jpg"
-    },
-    {
-      "page": "/products/fatbike-home-build-kit",
-      "vp": "mobile",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "WARN",
-      "detail": "9 elements under 12px"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "title not bare brand",
-      "status": "OK",
-      "detail": "Bamboo Balance Bike Lugged Frame Kit | Bamboo Bicycle Club"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "meta description length",
-      "status": "OK",
-      "detail": "148 chars"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "one h1",
-      "status": "OK",
-      "detail": "1 h1"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/33 missing"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "2.8 MB, 11340px tall, 2023 words"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "button styles ≤ budget",
-      "status": "WARN",
-      "detail": "10 distinct styles across 20 buttons"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "display h2 count ≤ budget",
-      "status": "WARN",
-      "detail": "8 of 13 h2 at ≥80px"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "kicker case (lowercase spec)",
-      "status": "OK",
-      "detail": "0/11 uppercase"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "no font leaks",
-      "status": "OK",
-      "detail": "Atkinson Hyperlegible"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "OK",
-      "detail": "3 elements under 12px"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "mobile",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/33 missing"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "h1 in first viewport (390)",
-      "status": "OK",
-      "detail": "h1 at 833px"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "primary CTA above the fold (390)",
-      "status": "OK",
-      "detail": "20 buttons on page"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "cookie card viewport cover",
-      "status": "FAIL",
-      "detail": "54% of viewport"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "2.8 MB, 17116px tall, 1207 words"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "largest media on phone",
-      "status": "OK",
-      "detail": "0.5 MB tps://bamboobicycleclub.org/cdn/shop/t/53/assets/bbc-rd-prison-jig.jpg"
-    },
-    {
-      "page": "/products/balance-bike-lugged-kit-1",
-      "vp": "mobile",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "OK",
-      "detail": "2 elements under 12px"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "title not bare brand",
-      "status": "OK",
-      "detail": "Bamboo Balance Bike Frame Kit | Bamboo Bicycle Club"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "meta description length",
-      "status": "OK",
-      "detail": "148 chars"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "one h1",
-      "status": "OK",
-      "detail": "1 h1"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/25 missing"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "desktop",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "2.7 MB, 11524px tall, 2061 words"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "button styles ≤ budget",
-      "status": "WARN",
-      "detail": "8 distinct styles across 12 buttons"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "display h2 count ≤ budget",
-      "status": "WARN",
-      "detail": "8 of 13 h2 at ≥80px"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "kicker case (lowercase spec)",
-      "status": "OK",
-      "detail": "0/11 uppercase"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "no font leaks",
-      "status": "OK",
-      "detail": "Atkinson Hyperlegible"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "OK",
-      "detail": "3 elements under 12px"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "mobile",
-      "lane": "CONTENT",
-      "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "no horizontal overflow",
-      "status": "OK",
-      "detail": "0px"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "images have alt",
-      "status": "OK",
-      "detail": "0/25 missing"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "h1 in first viewport (390)",
-      "status": "OK",
-      "detail": "h1 at 648px"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "primary CTA above the fold (390)",
-      "status": "OK",
-      "detail": "12 buttons on page"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "cookie card viewport cover",
-      "status": "FAIL",
-      "detail": "54% of viewport"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "page weight",
-      "status": "OK",
-      "detail": "2.7 MB, 17107px tall, 1245 words"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "mobile",
-      "lane": "UX",
-      "check": "largest media on phone",
-      "status": "OK",
-      "detail": "0.5 MB tps://bamboobicycleclub.org/cdn/shop/t/53/assets/bbc-rd-prison-jig.jpg"
-    },
-    {
-      "page": "/products/balance-bike-flax-kit-with-resins",
-      "vp": "mobile",
-      "lane": "CSS",
-      "check": "text ≥ 12px",
-      "status": "OK",
-      "detail": "2 elements under 12px"
+      "detail": "15 elements under 12px"
     }
   ]
 }
