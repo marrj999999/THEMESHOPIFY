@@ -70,14 +70,12 @@
   v.setAttribute('loop', '');
   v.setAttribute('playsinline', '');
   v.setAttribute('webkit-playsinline', '');
-  /* OPTIMISATION 2026-09-02: the film stays off the critical path. preload=none, no poster
-     (the section's <img> already is the poster, so the 89KB thumbnail was a second download),
-     low fetch priority, and loading only starts after the window load event — Lighthouse
-     mobile measured LCP at 25s with the 3.3MB file preloading alongside the hero image. */
-  v.setAttribute('preload', 'none');
-  v.setAttribute('fetchpriority', 'low');
+  v.setAttribute('preload', 'auto');
+  v.setAttribute('poster', POSTER);
   v.setAttribute('aria-hidden', 'true');   // decorative; the <img> carries the real alt text
   v.setAttribute('tabindex', '-1');
+  v.src = SRC;
+
   bg.appendChild(v);
 
   /* play() on a fresh element can resolve while the element is still paused at
@@ -88,33 +86,10 @@
     var p = v.play();
     if (p && p.catch) p.catch(function () { /* autoplay refused — photo stays */ });
   }
-  /* Fade in two frames AFTER the first frame has painted at opacity 0: Chrome counts a
-     video's first painted frame as a largest-contentful-paint candidate, and this film is the
-     largest thing in the hero — on throttled mobile that put LCP at 25s. A frame painted at
-     opacity 0 is not a candidate, and a later opacity change does not create one. */
-  v.addEventListener('playing', function () {
-    requestAnimationFrame(function () { requestAnimationFrame(function () { v.classList.add('is-on'); }); });
-  }, { once: true });
-  function begin() {
-    v.src = SRC;
-    v.load();
-    if (v.readyState >= 3) start();
-    else v.addEventListener('canplay', start, { once: true });
-  }
-  var deferStart = function () { setTimeout(begin, 600); };
-  /* PHONES (2026-09-02): the film still plays on mobile (James, 24 Aug), but it starts on the
-     visitor's first scroll or touch rather than on a timer. Chrome counts the film's first
-     visible frame as a largest-contentful-paint candidate even when it fades in from opacity 0,
-     so any timer-started film on a slow connection is scored as a 25-second LCP. Largest
-     contentful paint stops being measured at the first user input, so an input-started film
-     costs nothing on the score and nothing before the visitor has looked at the page. */
-  var phone = window.matchMedia && window.matchMedia('(max-width: 767px), (pointer: coarse)').matches;
-  if (phone) {
-    var kicked = false;
-    var kick = function () { if (kicked) return; kicked = true; begin(); };
-    ['scroll', 'touchstart', 'pointerdown', 'keydown', 'wheel'].forEach(function (ev) { window.addEventListener(ev, kick, { once: true, passive: true }); });
-  } else if (document.readyState === 'complete') deferStart();
-  else window.addEventListener('load', deferStart, { once: true });
+  v.addEventListener('playing', function () { v.classList.add('is-on'); }, { once: true });
+  v.load();
+  if (v.readyState >= 3) start();
+  else v.addEventListener('canplay', start, { once: true });
 
   /* Stop decoding while the tab is hidden — no reason to burn battery on a background
      loop nobody is looking at. */
@@ -146,16 +121,10 @@
     var notes = [].slice.call(g.querySelectorAll('.rd-backs__note'));
     if (!tiles.length || tiles.length !== notes.length) return;
     tiles.forEach(function (tile, i) {
-      /* 2026-09-02: the wrapper is the <li> now, and the tile becomes a <div> inside it —
-         a <div> between <ul> and <li> failed the list-semantics audit (Lighthouse 'listitem'). */
-      var wrap = document.createElement('li');
+      var wrap = document.createElement('div');
       wrap.className = 'rd-backs__tilewrap';
       tile.parentNode.insertBefore(wrap, tile);
-      var tileDiv = document.createElement('div');
-      for (var a = 0; a < tile.attributes.length; a++) tileDiv.setAttribute(tile.attributes[a].name, tile.attributes[a].value);
-      while (tile.firstChild) tileDiv.appendChild(tile.firstChild);
-      tile.remove();
-      wrap.appendChild(tileDiv);
+      wrap.appendChild(tile);
       var cap = document.createElement('p');
       cap.className = 'rd-backs__cap';
       cap.textContent = notes[i].textContent.trim();

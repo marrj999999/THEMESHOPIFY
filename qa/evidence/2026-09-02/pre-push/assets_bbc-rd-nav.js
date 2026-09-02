@@ -293,7 +293,3 @@
   s.textContent = css;
   document.head.appendChild(s);
 })();
-
-/* redeploy stamp 2026-09-02: bbc-impact-hero.js changed (preload none, rAF fade, li-valid ledger) — this byte re-busts its cached copy, per the URL DERIVATION note above. */
-
-/* redeploy stamp 2026-09-02b: hero film starts on first input on phones. */
