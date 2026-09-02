@@ -134,7 +134,49 @@
 
   {%- comment -%} ---------- ONE CRAFT, TWO ARMS (infographic) ---------- {%- endcomment -%}
   {%- if section.settings.arms_title != blank -%}
-  <section class="rd-pad-sm rd-paper">
+  
+  {%- comment -%} ---------- STATIONS · how a bike changes a life (2026-09-02, Claude Design "BBC Impact Page") ----------
+       The theory of change (Company Info: training → skills → confidence → routes) as the estate's culm
+       timeline — the device the kit page uses for its build steps. Blocks of type `station`; the band
+       hides when the title is blank. Pictograms from the shared stroke set; CSS in bbc-redesign-2026.css. {%- endcomment -%}
+  {%- assign stations = section.blocks | where: 'type', 'station' -%}
+  {%- if section.settings.stations_title != blank and stations.size > 0 -%}
+  <section class="rd-pad-sm rd-sheet rd-stations">
+    <div class="rd-wrap">
+      <div class="rd-stations__head">
+        <div>
+          {%- if section.settings.stations_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.stations_eyebrow }}</span>{%- endif -%}
+          <h2 class="rd-reveal rd-fs-stn">{{ section.settings.stations_title }}</h2>
+        </div>
+        {%- if section.settings.stations_lede != blank -%}<p class="rd-lede">{{ section.settings.stations_lede }}</p>{%- endif -%}
+      </div>
+      <div class="rd-stations__rail">
+        <div class="rd-stations__track" aria-hidden="true"></div>
+        <div class="rd-stations__culm" aria-hidden="true"></div>
+        <ol class="rd-stations__grid">
+          {%- for block in stations -%}
+          {%- assign ic = block.settings.icon -%}
+          <li class="rd-stations__item rd-reveal" {{ block.shopify_attributes }}>
+            <span class="rd-stations__dot{% if forloop.last %} rd-stations__dot--lime{% endif %}">{%- case ic -%}
+            {%- when 'tool' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 26L20 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18 8l6 6-3 3-6-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M22 4l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="7" cy="7" r="2"/></svg>
+            {%- when 'skills' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="8" y="3" width="16" height="26" rx="3" stroke="currentColor" stroke-width="2"/><path d="M12 10h8M12 15h8M12 20h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="26" cy="6" r="2"/></svg>
+            {%- when 'confidence' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4l3.5 7 7.5 1-5.5 5.3 1.3 7.7L16 21.4 9.2 25l1.3-7.7L5 12l7.5-1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle class="rd-pic__a" cx="16" cy="16" r="2"/></svg>
+            {%- when 'bike' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="8" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"/><path d="M8 22l5-10h7l4 10M13 12l-2-4h4M20 12l3-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle class="rd-pic__a" cx="23.5" cy="6.5" r="2"/></svg>
+            {%- when 'speaker' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="8" y="3" width="16" height="26" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="11" r="2.4" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="21" r="4.6" stroke="currentColor" stroke-width="2"/><circle class="rd-pic__a" cx="16" cy="21" r="1.2"/></svg>
+            {%- when 'ladder' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M9 2v28M23 2v28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9 9h14M9 16h14M9 23h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="26.5" cy="5" r="2"/></svg>
+            {%- when 'balance' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="8" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"/><path d="M8 22l4-9h6l6 9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 13l-2-4h3M18 13l3-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="21.6" cy="7.4" r="1.8"/></svg>
+          {%- endcase -%}</span>
+            <h3 class="rd-stations__title">{{ block.settings.title }}</h3>
+            {%- if block.settings.body != blank -%}<p class="rd-stations__body">{{ block.settings.body }}</p>{%- endif -%}
+            {%- if block.settings.note != blank -%}<span class="rd-stations__note">{{ block.settings.note }}</span>{%- endif -%}
+          </li>
+          {%- endfor -%}
+        </ol>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+<section class="rd-pad-sm rd-paper">
     <div class="rd-wrap">
       <div class="rd-center">
         {%- if section.settings.arms_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.arms_eyebrow }}</span>{%- endif -%}
@@ -194,7 +236,15 @@
           <span class="rd-duotone rd-path__media">
             <img src="{% if section.settings.arm1_image != blank %}{{ section.settings.arm1_image | image_url: width: 900 }}{% else %}{{ 'bbc-rd-wb-group.jpg' | asset_url }}{% endif %}" alt="{{ section.settings.arm1_image_alt | default: 'A school group with the bamboo bike frame they built' | escape }}" loading="lazy" width="900" height="500">
           </span>
-          <span class="rd-path__chip">{{ section.settings.arm1_chip | default: 'in schools · before exclusion' }}</span>
+          <div class="rd-path__head"><span class="rd-path__chip">{{ section.settings.arm1_chip | default: 'in schools · before exclusion' }}</span>{%- assign ic = section.settings.arm1_icon -%}{%- if ic != blank and ic != "none" -%}<span class="rd-path__ic">{%- case ic -%}
+            {%- when 'tool' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 26L20 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18 8l6 6-3 3-6-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M22 4l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="7" cy="7" r="2"/></svg>
+            {%- when 'skills' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="8" y="3" width="16" height="26" rx="3" stroke="currentColor" stroke-width="2"/><path d="M12 10h8M12 15h8M12 20h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="26" cy="6" r="2"/></svg>
+            {%- when 'confidence' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4l3.5 7 7.5 1-5.5 5.3 1.3 7.7L16 21.4 9.2 25l1.3-7.7L5 12l7.5-1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle class="rd-pic__a" cx="16" cy="16" r="2"/></svg>
+            {%- when 'bike' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="8" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"/><path d="M8 22l5-10h7l4 10M13 12l-2-4h4M20 12l3-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle class="rd-pic__a" cx="23.5" cy="6.5" r="2"/></svg>
+            {%- when 'speaker' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="8" y="3" width="16" height="26" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="11" r="2.4" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="21" r="4.6" stroke="currentColor" stroke-width="2"/><circle class="rd-pic__a" cx="16" cy="21" r="1.2"/></svg>
+            {%- when 'ladder' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M9 2v28M23 2v28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9 9h14M9 16h14M9 23h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="26.5" cy="5" r="2"/></svg>
+            {%- when 'balance' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="8" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"/><path d="M8 22l4-9h6l6 9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 13l-2-4h3M18 13l3-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="21.6" cy="7.4" r="1.8"/></svg>
+          {%- endcase -%}</span>{%- endif -%}</div>
           <h3 class="rd-path__name">{{ section.settings.arm1_name | default: 'make engineers' }}</h3>
           <p class="rd-path__who">{{ section.settings.arm1_who | default: "for SEND, PRU and at-risk young people being pushed out of the classroom — often their first positive encounter with engineering." }}</p>
           {%- assign a1 = section.settings.arm1_flow | split: '|' -%}
@@ -207,7 +257,15 @@
           <span class="rd-duotone rd-path__media">
             <img src="{% if section.settings.arm2_image != blank %}{{ section.settings.arm2_image | image_url: width: 900 }}{% else %}{{ 'bbc-rd-prison-empty.jpg' | asset_url }}{% endif %}" alt="{{ section.settings.arm2_image_alt | default: 'Inside the Build to Bond workshop — benches, jigs and frames' | escape }}" loading="lazy" width="900" height="500">
           </span>
-          <span class="rd-path__chip">{{ section.settings.arm2_chip | default: 'in prisons · after' }}</span>
+          <div class="rd-path__head"><span class="rd-path__chip">{{ section.settings.arm2_chip | default: 'in prisons · after' }}</span>{%- assign ic = section.settings.arm2_icon -%}{%- if ic != blank and ic != "none" -%}<span class="rd-path__ic">{%- case ic -%}
+            {%- when 'tool' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 26L20 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18 8l6 6-3 3-6-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M22 4l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="7" cy="7" r="2"/></svg>
+            {%- when 'skills' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="8" y="3" width="16" height="26" rx="3" stroke="currentColor" stroke-width="2"/><path d="M12 10h8M12 15h8M12 20h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="26" cy="6" r="2"/></svg>
+            {%- when 'confidence' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4l3.5 7 7.5 1-5.5 5.3 1.3 7.7L16 21.4 9.2 25l1.3-7.7L5 12l7.5-1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle class="rd-pic__a" cx="16" cy="16" r="2"/></svg>
+            {%- when 'bike' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="8" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"/><path d="M8 22l5-10h7l4 10M13 12l-2-4h4M20 12l3-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle class="rd-pic__a" cx="23.5" cy="6.5" r="2"/></svg>
+            {%- when 'speaker' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="8" y="3" width="16" height="26" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="11" r="2.4" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="21" r="4.6" stroke="currentColor" stroke-width="2"/><circle class="rd-pic__a" cx="16" cy="21" r="1.2"/></svg>
+            {%- when 'ladder' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M9 2v28M23 2v28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9 9h14M9 16h14M9 23h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="26.5" cy="5" r="2"/></svg>
+            {%- when 'balance' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="8" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"/><path d="M8 22l4-9h6l6 9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 13l-2-4h3M18 13l3-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="21.6" cy="7.4" r="1.8"/></svg>
+          {%- endcase -%}</span>{%- endif -%}</div>
           <h3 class="rd-path__name">{{ section.settings.arm2_name | default: 'build to bond' }}</h3>
           <p class="rd-path__who">{{ section.settings.arm2_who | default: 'for people inside prison rebuilding skills, family ties and a route to work on release.' }}</p>
           {%- assign a2 = section.settings.arm2_flow | split: '|' -%}
@@ -221,7 +279,15 @@
           <span class="rd-duotone rd-path__media">
             <img src="{% if section.settings.arm3_image != blank %}{{ section.settings.arm3_image | image_url: width: 900 }}{% else %}{{ 'bbc-rd-prison-empty.jpg' | asset_url }}{% endif %}" alt="{{ section.settings.arm3_image_alt | default: 'Inside the Build to Bond workshop — benches, jigs and frames' | escape }}" loading="lazy" width="900" height="500">
           </span>
-          <span class="rd-path__chip">{{ section.settings.arm3_chip }}</span>
+          <div class="rd-path__head"><span class="rd-path__chip">{{ section.settings.arm3_chip }}</span>{%- assign ic = section.settings.arm3_icon -%}{%- if ic != blank and ic != "none" -%}<span class="rd-path__ic">{%- case ic -%}
+            {%- when 'tool' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 26L20 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18 8l6 6-3 3-6-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M22 4l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="7" cy="7" r="2"/></svg>
+            {%- when 'skills' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="8" y="3" width="16" height="26" rx="3" stroke="currentColor" stroke-width="2"/><path d="M12 10h8M12 15h8M12 20h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="26" cy="6" r="2"/></svg>
+            {%- when 'confidence' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4l3.5 7 7.5 1-5.5 5.3 1.3 7.7L16 21.4 9.2 25l1.3-7.7L5 12l7.5-1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle class="rd-pic__a" cx="16" cy="16" r="2"/></svg>
+            {%- when 'bike' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="8" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"/><path d="M8 22l5-10h7l4 10M13 12l-2-4h4M20 12l3-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle class="rd-pic__a" cx="23.5" cy="6.5" r="2"/></svg>
+            {%- when 'speaker' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="8" y="3" width="16" height="26" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="11" r="2.4" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="21" r="4.6" stroke="currentColor" stroke-width="2"/><circle class="rd-pic__a" cx="16" cy="21" r="1.2"/></svg>
+            {%- when 'ladder' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M9 2v28M23 2v28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9 9h14M9 16h14M9 23h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="26.5" cy="5" r="2"/></svg>
+            {%- when 'balance' -%}<svg class="rd-pic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="8" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"/><path d="M8 22l4-9h6l6 9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 13l-2-4h3M18 13l3-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="rd-pic__a" cx="21.6" cy="7.4" r="1.8"/></svg>
+          {%- endcase -%}</span>{%- endif -%}</div>
           <h3 class="rd-path__name">{{ section.settings.arm3_name }}</h3>
           <p class="rd-path__who">{{ section.settings.arm3_who }}</p>
           {%- assign a3 = section.settings.arm3_flow | split: '|' -%}
@@ -679,6 +745,16 @@
         </ul>
       </div>
       {%- elsif section.settings.cred_mech != blank -%}<div class="rd-callout-steel rd-mt3" style="text-align:left;"><p>{{ section.settings.cred_mech }}</p></div>{%- endif -%}
+      {%- if section.settings.count_title != blank -%}
+      <div class="rd-count rd-mt3 rd-reveal">
+        <svg class="rd-pic rd-count__ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="4" y="4" width="24" height="24" rx="3" stroke="currentColor" stroke-width="2"/><path d="M9 20l4-4 3 3 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle class="rd-pic__a" cx="23" cy="11" r="2"/></svg>
+        <div>
+          {%- if section.settings.count_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.count_eyebrow }}</span>{%- endif -%}
+          <h3 class="rd-count__title">{{ section.settings.count_title }}</h3>
+          {%- if section.settings.count_body != blank -%}<p class="rd-count__body">{{ section.settings.count_body }}</p>{%- endif -%}
+        </div>
+      </div>
+      {%- endif -%}
       {%- if section.settings.report_card_title != blank -%}
       <div class="rd-reveal rd-dlcard rd-mt3">
         <span class="rd-dlcard__badge">report</span>
@@ -1153,6 +1229,18 @@ document.addEventListener('DOMContentLoaded', function () {
       "label": "Backers wall label",
       "default": "backed by & accredited by"
     },
+    { "type": "header", "content": "Stations — how a bike changes a life" },
+    { "type": "text", "id": "stations_eyebrow", "label": "Eyebrow", "default": "how a bike changes a life" },
+    { "type": "text", "id": "stations_title", "label": "Title (blank hides the band)" },
+    { "type": "textarea", "id": "stations_lede", "label": "Lede" },
+    { "type": "header", "content": "Strand-card pictograms" },
+    { "type": "select", "id": "arm1_icon", "label": "Strand 1 pictogram", "default": "none", "options": [ { "value": "none", "label": "None" }, { "value": "tool", "label": "Tools / training" }, { "value": "skills", "label": "Skills / course" }, { "value": "confidence", "label": "Confidence" }, { "value": "bike", "label": "Bike / a way forward" }, { "value": "speaker", "label": "Speaker (schools)" }, { "value": "ladder", "label": "Ladder (community)" }, { "value": "balance", "label": "Balance bike (prisons)" } ] },
+    { "type": "select", "id": "arm2_icon", "label": "Strand 2 pictogram", "default": "none", "options": [ { "value": "none", "label": "None" }, { "value": "tool", "label": "Tools / training" }, { "value": "skills", "label": "Skills / course" }, { "value": "confidence", "label": "Confidence" }, { "value": "bike", "label": "Bike / a way forward" }, { "value": "speaker", "label": "Speaker (schools)" }, { "value": "ladder", "label": "Ladder (community)" }, { "value": "balance", "label": "Balance bike (prisons)" } ] },
+    { "type": "select", "id": "arm3_icon", "label": "Strand 3 pictogram", "default": "none", "options": [ { "value": "none", "label": "None" }, { "value": "tool", "label": "Tools / training" }, { "value": "skills", "label": "Skills / course" }, { "value": "confidence", "label": "Confidence" }, { "value": "bike", "label": "Bike / a way forward" }, { "value": "speaker", "label": "Speaker (schools)" }, { "value": "ladder", "label": "Ladder (community)" }, { "value": "balance", "label": "Balance bike (prisons)" } ] },
+    { "type": "header", "content": "How we count (beside the report card)" },
+    { "type": "text", "id": "count_eyebrow", "label": "Eyebrow", "default": "how we count" },
+    { "type": "text", "id": "count_title", "label": "Title (blank hides the note)" },
+    { "type": "textarea", "id": "count_body", "label": "Body" },
     {
       "type": "header",
       "content": "Hero"
@@ -2297,6 +2385,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   ],
   "blocks": [
+    {
+      "type": "station",
+      "name": "Station",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "hands-on training" },
+        { "type": "textarea", "id": "body", "label": "Body" },
+        { "type": "text", "id": "note", "label": "Note (input · output · outcome · impact)" },
+        { "type": "select", "id": "icon", "label": "Pictogram", "default": "tool", "options": [ { "value": "none", "label": "None" }, { "value": "tool", "label": "Tools / training" }, { "value": "skills", "label": "Skills / course" }, { "value": "confidence", "label": "Confidence" }, { "value": "bike", "label": "Bike / a way forward" }, { "value": "speaker", "label": "Speaker (schools)" }, { "value": "ladder", "label": "Ladder (community)" }, { "value": "balance", "label": "Balance bike (prisons)" } ] }
+      ]
+    },
     {
       "type": "story",
       "name": "Impact story card",

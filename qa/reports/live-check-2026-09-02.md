@@ -1,24 +1,23 @@
 # Live check — 2026-09-02
 
-2 pages · 1 viewports · **0 FAIL** · 6 WARN
+1 pages · 2 viewports · **1 FAIL** · 4 WARN
 
 ## CONTENT — 0 findings
 
 | Page | VP | Check | Status | Detail |
 |---|---|---|---|---|
 
-## UX — 0 findings
+## UX — 1 findings
 
 | Page | VP | Check | Status | Detail |
 |---|---|---|---|---|
+| /pages/impact?preview_theme_id=199089193334 | mobile | cookie card viewport cover | FAIL | 54% of viewport |
 
-## CSS — 6 findings
+## CSS — 4 findings
 
 | Page | VP | Check | Status | Detail |
 |---|---|---|---|---|
-| /products/road-carbon-frame-build-kit | desktop | button styles ≤ budget | WARN | 10 distinct styles across 21 buttons |
-| /products/road-carbon-frame-build-kit | desktop | display h2 count ≤ budget | WARN | 10 of 15 h2 at ≥80px |
-| /products/road-carbon-frame-build-kit | desktop | text ≥ 12px | WARN | 12 elements under 12px |
-| /products/gravel-lugged-build-kit | desktop | button styles ≤ budget | WARN | 10 distinct styles across 21 buttons |
-| /products/gravel-lugged-build-kit | desktop | display h2 count ≤ budget | WARN | 10 of 15 h2 at ≥80px |
-| /products/gravel-lugged-build-kit | desktop | text ≥ 12px | WARN | 10 elements under 12px |
+| /pages/impact?preview_theme_id=199089193334 | desktop | button styles ≤ budget | WARN | 11 distinct styles across 19 buttons |
+| /pages/impact?preview_theme_id=199089193334 | desktop | display h2 count ≤ budget | WARN | 4 of 9 h2 at ≥80px |
+| /pages/impact?preview_theme_id=199089193334 | desktop | text ≥ 12px | WARN | 43 elements under 12px |
+| /pages/impact?preview_theme_id=199089193334 | mobile | text ≥ 12px | WARN | 44 elements under 12px |

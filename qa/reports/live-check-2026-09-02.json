@@ -1,12 +1,12 @@
 {
   "date": "2026-09-02",
-  "pages": 2,
-  "fails": 0,
-  "warns": 6,
+  "pages": 1,
+  "fails": 1,
+  "warns": 4,
   "contradictions": [],
   "results": [
     {
-      "page": "/products/road-carbon-frame-build-kit",
+      "page": "/pages/impact?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "no banned claims rendered",
@@ -14,23 +14,23 @@
       "detail": ""
     },
     {
-      "page": "/products/road-carbon-frame-build-kit",
+      "page": "/pages/impact?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "title not bare brand",
       "status": "OK",
-      "detail": "Bamboo Road Bike Lugged Frame Kit | Bamboo Bicycle Club"
+      "detail": "Our Impact — Bikes That Fund Change | Bamboo Bicycle Club"
     },
     {
-      "page": "/products/road-carbon-frame-build-kit",
+      "page": "/pages/impact?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "meta description length",
       "status": "OK",
-      "detail": "145 chars"
+      "detail": "165 chars"
     },
     {
-      "page": "/products/road-carbon-frame-build-kit",
+      "page": "/pages/impact?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "one h1",
@@ -38,7 +38,7 @@
       "detail": "1 h1"
     },
     {
-      "page": "/products/road-carbon-frame-build-kit",
+      "page": "/pages/impact?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "UX",
       "check": "no horizontal overflow",
@@ -46,47 +46,47 @@
       "detail": "0px"
     },
     {
-      "page": "/products/road-carbon-frame-build-kit",
+      "page": "/pages/impact?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "UX",
       "check": "images have alt",
       "status": "OK",
-      "detail": "0/33 missing"
+      "detail": "0/59 missing"
     },
     {
-      "page": "/products/road-carbon-frame-build-kit",
+      "page": "/pages/impact?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "UX",
       "check": "page weight",
       "status": "OK",
-      "detail": "2.8 MB, 12853px tall, 2381 words"
+      "detail": "2.1 MB, 9884px tall, 2320 words"
     },
     {
-      "page": "/products/road-carbon-frame-build-kit",
+      "page": "/pages/impact?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CSS",
       "check": "button styles ≤ budget",
       "status": "WARN",
-      "detail": "10 distinct styles across 21 buttons"
+      "detail": "11 distinct styles across 19 buttons"
     },
     {
-      "page": "/products/road-carbon-frame-build-kit",
+      "page": "/pages/impact?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CSS",
       "check": "display h2 count ≤ budget",
       "status": "WARN",
-      "detail": "10 of 15 h2 at ≥80px"
+      "detail": "4 of 9 h2 at ≥80px"
     },
     {
-      "page": "/products/road-carbon-frame-build-kit",
+      "page": "/pages/impact?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CSS",
       "check": "kicker case (lowercase spec)",
       "status": "OK",
-      "detail": "0/13 uppercase"
+      "detail": "0/10 uppercase"
     },
     {
-      "page": "/products/road-carbon-frame-build-kit",
+      "page": "/pages/impact?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CSS",
       "check": "no font leaks",
@@ -94,108 +94,84 @@
       "detail": "Atkinson Hyperlegible"
     },
     {
-      "page": "/products/road-carbon-frame-build-kit",
+      "page": "/pages/impact?preview_theme_id=199089193334",
       "vp": "desktop",
       "lane": "CSS",
       "check": "text ≥ 12px",
       "status": "WARN",
-      "detail": "12 elements under 12px"
+      "detail": "43 elements under 12px"
     },
     {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
+      "page": "/pages/impact?preview_theme_id=199089193334",
+      "vp": "mobile",
       "lane": "CONTENT",
       "check": "no banned claims rendered",
       "status": "OK",
       "detail": ""
     },
     {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "title not bare brand",
-      "status": "OK",
-      "detail": "Bamboo Gravel Bike Lugged Frame Kit | Bamboo Bicycle Club"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "meta description length",
-      "status": "OK",
-      "detail": "147 chars"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "CONTENT",
-      "check": "one h1",
-      "status": "OK",
-      "detail": "1 h1"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
+      "page": "/pages/impact?preview_theme_id=199089193334",
+      "vp": "mobile",
       "lane": "UX",
       "check": "no horizontal overflow",
       "status": "OK",
       "detail": "0px"
     },
     {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
+      "page": "/pages/impact?preview_theme_id=199089193334",
+      "vp": "mobile",
       "lane": "UX",
       "check": "images have alt",
       "status": "OK",
-      "detail": "0/33 missing"
+      "detail": "0/59 missing"
     },
     {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
+      "page": "/pages/impact?preview_theme_id=199089193334",
+      "vp": "mobile",
+      "lane": "UX",
+      "check": "h1 in first viewport (390)",
+      "status": "OK",
+      "detail": "h1 at 528px"
+    },
+    {
+      "page": "/pages/impact?preview_theme_id=199089193334",
+      "vp": "mobile",
+      "lane": "UX",
+      "check": "primary CTA above the fold (390)",
+      "status": "OK",
+      "detail": "19 buttons on page"
+    },
+    {
+      "page": "/pages/impact?preview_theme_id=199089193334",
+      "vp": "mobile",
+      "lane": "UX",
+      "check": "cookie card viewport cover",
+      "status": "FAIL",
+      "detail": "54% of viewport"
+    },
+    {
+      "page": "/pages/impact?preview_theme_id=199089193334",
+      "vp": "mobile",
       "lane": "UX",
       "check": "page weight",
       "status": "OK",
-      "detail": "2.8 MB, 12829px tall, 2339 words"
+      "detail": "1.9 MB, 16948px tall, 1511 words"
     },
     {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "button styles ≤ budget",
-      "status": "WARN",
-      "detail": "10 distinct styles across 21 buttons"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "display h2 count ≤ budget",
-      "status": "WARN",
-      "detail": "10 of 15 h2 at ≥80px"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "kicker case (lowercase spec)",
+      "page": "/pages/impact?preview_theme_id=199089193334",
+      "vp": "mobile",
+      "lane": "UX",
+      "check": "largest media on phone",
       "status": "OK",
-      "detail": "0/13 uppercase"
+      "detail": "0.2 MB https://bamboobicycleclub.org/cdn/shop/files/bbc-ig-ig02.jpg"
     },
     {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
-      "lane": "CSS",
-      "check": "no font leaks",
-      "status": "OK",
-      "detail": "Atkinson Hyperlegible"
-    },
-    {
-      "page": "/products/gravel-lugged-build-kit",
-      "vp": "desktop",
+      "page": "/pages/impact?preview_theme_id=199089193334",
+      "vp": "mobile",
       "lane": "CSS",
       "check": "text ≥ 12px",
       "status": "WARN",
-      "detail": "10 elements under 12px"
+      "detail": "44 elements under 12px"
     }
   ]
 }

@@ -1,0 +1,11 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1440, "h": 5900, "title": "Impact · desktop 1440 · v2 in the kit-page family" },
+    { "file": "Phone.dc.html", "x": 1540, "y": 0, "w": 390, "h": 3600, "title": "Impact · phone 390" }
+  ],
+  "annotations": [
+    { "id": "brief", "x": 0, "y": -420, "w": 760, "text": "Impact page v2 — a design pass in the same family as the kit page, not a rebuild. The live page is already the strongest on the site (refocused 27 Aug).\nWHAT CHANGES: (1) hero gains the titleblock ('since 2012 · measured how') and the fading culm; (2) the record becomes 4 headline figures + 4 supporting, not 8 equals; (3) NEW 'how a bike changes a life' — the theory of change as a culm timeline with four stations and pictograms (training → skills → confidence → a way forward), which the page never had; (4) the three strand cards get a pictogram each and identical anatomy; (5) NEW 'how we count' honesty note beside the report card, mirroring the kit page's 'what we do and don't claim'; (6) case-studies heading lowercase; (7) '24 institutions' corrected to 22 (matches the education page's verified wall).\nKEPT AS LIVE: policy band, evidence wall, quotes reel, who-backs-it ledger, footer. NOT re-added: the 'what's next' band Chris cut in July.\nEvery colour, type size and border is the live theme's. Images: face-safe prison stills from Shopify Files + the education photo. Copy is Register-safe." },
+    { "id": "build", "x": 1540, "y": -300, "w": 380, "text": "Implements on the preview theme as: settings + a new small section (bbc-impact-stations-2026) between the record and the strands, pictogram slots on the strand cards, the honesty note as settings on the report card, and the stat fix. No push to live without James." }
+  ],
+  "launch": { "view": "canvas" }
+}

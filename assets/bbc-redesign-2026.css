@@ -1974,3 +1974,56 @@
   @keyframes rd-pin-pulse{0%{transform:scale(.7);opacity:.9}70%{transform:scale(1.25);opacity:0}100%{transform:scale(1.25);opacity:0}}
 }
 @media (max-width:989px){.bbc-rd .rd-kdraw__pins{inset:14px}.bbc-rd .rd-kdraw__pin{width:24px;height:24px;font-size:var(--fs-11-5)}}
+
+/* ═══ IMPACT v2 — 2026-09-02 (Claude Design "BBC Impact Page"). Tokens only. ═══ */
+.bbc-rd .rd-pic{width:32px;height:32px;color:var(--forest);flex:0 0 32px}
+.bbc-rd .rd-pic__a{fill:var(--lime-700)}
+/* stations: the theory of change as the culm timeline */
+.bbc-rd .rd-stations__head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end}
+.bbc-rd .rd-stations__head .rd-lede{margin:0}
+.bbc-rd .rd-stations__rail{position:relative;margin-top:44px}
+.bbc-rd .rd-stations__track,.bbc-rd .rd-stations__culm{position:absolute;left:0;right:0;top:26px;height:8px;border-radius:3px}
+.bbc-rd .rd-stations__track{background:color-mix(in srgb, var(--ink) 12%, transparent)}
+.bbc-rd .rd-stations__culm{background:var(--lime);transform-origin:left center}
+@media (prefers-reduced-motion:no-preference){.bbc-rd .rd-stations__culm{animation:rd-culm-x 1.2s cubic-bezier(.2,.7,.2,1) .3s both}@keyframes rd-culm-x{from{transform:scaleX(0)}to{transform:scaleX(1)}}}
+.bbc-rd .rd-stations__grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;position:relative}
+.bbc-rd .rd-stations__item{display:flex;flex-direction:column;gap:12px}
+.bbc-rd .rd-stations__dot{width:60px;height:60px;border-radius:50%;background:var(--forest);border:2.5px solid var(--ink);display:inline-flex;align-items:center;justify-content:center}
+.bbc-rd .rd-stations__dot .rd-pic{color:var(--lime)}.bbc-rd .rd-stations__dot .rd-pic__a{fill:var(--bone)}
+.bbc-rd .rd-stations__dot--lime{background:var(--lime)}.bbc-rd .rd-stations__dot--lime .rd-pic{color:var(--forest)}.bbc-rd .rd-stations__dot--lime .rd-pic__a{fill:var(--lime-700)}
+.bbc-rd .rd-stations__title{font-size:var(--fs-22);margin:0}
+.bbc-rd .rd-stations__body{margin:0;color:var(--charcoal);font-size:var(--fs-14-5)}
+.bbc-rd .rd-stations__note{font-size:var(--fs-12-5);color:var(--subtle)}
+@media (max-width:989px){
+  .bbc-rd .rd-stations__head{grid-template-columns:1fr;gap:12px}
+  .bbc-rd .rd-stations__track,.bbc-rd .rd-stations__culm{left:12px;right:auto;top:6px;bottom:6px;width:8px;height:auto}
+  .bbc-rd .rd-stations__culm{transform-origin:top center}
+  @media (prefers-reduced-motion:no-preference){.bbc-rd .rd-stations__culm{animation-name:rd-culm-y}@keyframes rd-culm-y{from{transform:scaleY(0)}to{transform:scaleY(1)}}}
+  .bbc-rd .rd-stations__grid{grid-template-columns:1fr;gap:22px;padding-left:44px}
+  .bbc-rd .rd-stations__item{position:relative}
+  .bbc-rd .rd-stations__dot{position:absolute;left:-44px;top:-4px;width:32px;height:32px}
+  .bbc-rd .rd-stations__dot .rd-pic{width:18px;height:18px;flex-basis:18px}
+}
+/* strand-card head: chip + pictogram on one row */
+.bbc-rd .rd-path__head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.bbc-rd .rd-path__ic{display:inline-flex}
+.bbc-rd .rd-path--prisons .rd-path__ic .rd-pic,.bbc-rd .rd-path--councils .rd-path__ic .rd-pic{color:var(--lime)}
+/* how we count — steel honesty note (same device as the kit page) */
+.bbc-rd .rd-count{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:start;background:var(--steel);border:2.5px solid var(--ink);border-radius:6px;box-shadow:5px 5px 0 var(--ink);padding:28px 32px;text-align:left}
+.bbc-rd .rd-count__ic{width:44px;height:44px;flex-basis:44px}
+.bbc-rd .rd-count__title{font-size:var(--fs-24);margin:0}
+.bbc-rd .rd-count__body{margin:10px 0 0;font-size:var(--fs-14-5);color:var(--charcoal);max-width:78ch}
+@media (max-width:760px){.bbc-rd .rd-count{grid-template-columns:1fr;padding:20px}}
+/* IMPACT v2 fixes (2026-09-02, preview review): the track/culm were caught by a display:none rule;
+   the count-note eyebrow inherited the report band's centred block eyebrow; the strand pictogram
+   now sits as a stamp on the photo so the chip keeps its full width. */
+.bbc-rd .rd-stations__track,.bbc-rd .rd-stations__culm{display:block !important}
+.bbc-rd .rd-count .rd-eyebrow{display:inline-block !important;text-align:left !important;margin:0 0 10px}
+.bbc-rd .rd-path{position:relative}
+.bbc-rd .rd-path__head{display:block}
+.bbc-rd .rd-path__ic{position:absolute;top:14px;right:14px;width:46px;height:46px;border-radius:50%;background:var(--bone);border:2.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);display:inline-flex;align-items:center;justify-content:center;z-index:1}
+.bbc-rd .rd-path__ic .rd-pic{width:26px;height:26px;flex-basis:26px;color:var(--forest)}
+.bbc-rd .rd-path--prisons .rd-path__ic .rd-pic,.bbc-rd .rd-path--councils .rd-path__ic .rd-pic{color:var(--forest)}
+
+/* stations heading sits at the kit-drawing size, not the 102px display size (display-h2 budget) */
+.bbc-rd .rd-stations h2.rd-fs-stn{font-size:clamp(var(--fs-32),3.3vw,var(--fs-48)) !important;line-height:1.04 !important;overflow-wrap:normal;word-break:normal;hyphens:manual;max-width:16ch}

@@ -1092,5 +1092,6 @@ to claim, and label the group so the page cannot be read as claiming more.
 | "10% of profits" | support-mission hardcoded fallback | review | claim-lint reads source — it was a `default:` in Liquid nobody grepped | pattern + fallback rewritten |
 | "BBC Education CIC" | schools | review | no pattern | `/Education CIC/` |
 | `qa/README.md` quoted stale canon (36 countries, Level 1 Award) | repo doc | review | — docs copied the canon | README now points at the Register only |
+| "rated the day 9–10/10" | impact (Project Zero story blurb + councils flow) | review of the preview build, 2 Sep | banned-claims.mjs had the pattern since 31 Jul but live-check was never run on /pages/impact after the 27 Aug refocus | fixed on the preview template; live fix rides with the impact v2 rollout |
 
 **Rule reinforced.** A pattern list only catches what someone already wrote down; the live-check contradiction lane catches the class (two pages, two answers) without needing the words in advance.
