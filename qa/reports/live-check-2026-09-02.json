@@ -1,7 +1,7 @@
 {
   "date": "2026-09-02",
   "pages": 1,
-  "fails": 5,
+  "fails": 3,
   "warns": 6,
   "contradictions": [],
   "results": [
@@ -10,8 +10,8 @@
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "no banned claims rendered",
-      "status": "FAIL",
-      "detail": "rated the day 9–10"
+      "status": "OK",
+      "detail": ""
     },
     {
       "page": "/pages/programmes",
@@ -59,7 +59,7 @@
       "lane": "UX",
       "check": "page weight",
       "status": "FAIL",
-      "detail": "11.1 MB, 16875px tall, 2607 words"
+      "detail": "11.1 MB, 16876px tall, 2608 words"
     },
     {
       "page": "/pages/programmes",
@@ -106,8 +106,8 @@
       "vp": "mobile",
       "lane": "CONTENT",
       "check": "no banned claims rendered",
-      "status": "FAIL",
-      "detail": "rated the day 9–10"
+      "status": "OK",
+      "detail": ""
     },
     {
       "page": "/pages/programmes",
@@ -155,7 +155,7 @@
       "lane": "UX",
       "check": "page weight",
       "status": "FAIL",
-      "detail": "11.0 MB, 24441px tall, 1798 words"
+      "detail": "11.0 MB, 24470px tall, 1799 words"
     },
     {
       "page": "/pages/programmes",
