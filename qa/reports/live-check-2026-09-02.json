@@ -1,36 +1,36 @@
 {
   "date": "2026-09-02",
   "pages": 1,
-  "fails": 1,
-  "warns": 4,
+  "fails": 5,
+  "warns": 6,
   "contradictions": [],
   "results": [
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "rated the day 9–10"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "title not bare brand",
       "status": "OK",
-      "detail": "Our Impact — Bikes That Fund Change | Bamboo Bicycle Club"
+      "detail": "Education – Bamboo Bicycle Club"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "meta description length",
-      "status": "OK",
-      "detail": "165 chars"
+      "status": "WARN",
+      "detail": "194 chars"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "desktop",
       "lane": "CONTENT",
       "check": "one h1",
@@ -38,7 +38,7 @@
       "detail": "1 h1"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "desktop",
       "lane": "UX",
       "check": "no horizontal overflow",
@@ -46,47 +46,47 @@
       "detail": "0px"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "desktop",
       "lane": "UX",
       "check": "images have alt",
       "status": "OK",
-      "detail": "0/59 missing"
+      "detail": "0/30 missing"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "desktop",
       "lane": "UX",
       "check": "page weight",
-      "status": "OK",
-      "detail": "2.1 MB, 10413px tall, 2493 words"
+      "status": "FAIL",
+      "detail": "11.1 MB, 16875px tall, 2607 words"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "desktop",
       "lane": "CSS",
       "check": "button styles ≤ budget",
       "status": "WARN",
-      "detail": "11 distinct styles across 19 buttons"
+      "detail": "7 distinct styles across 14 buttons"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "desktop",
       "lane": "CSS",
       "check": "display h2 count ≤ budget",
       "status": "WARN",
-      "detail": "4 of 9 h2 at ≥80px"
+      "detail": "10 of 14 h2 at ≥80px"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "desktop",
       "lane": "CSS",
       "check": "kicker case (lowercase spec)",
       "status": "OK",
-      "detail": "0/10 uppercase"
+      "detail": "0/11 uppercase"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "desktop",
       "lane": "CSS",
       "check": "no font leaks",
@@ -94,23 +94,23 @@
       "detail": "Atkinson Hyperlegible"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "desktop",
       "lane": "CSS",
       "check": "text ≥ 12px",
       "status": "WARN",
-      "detail": "47 elements under 12px"
+      "detail": "13 elements under 12px"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "mobile",
       "lane": "CONTENT",
       "check": "no banned claims rendered",
-      "status": "OK",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "rated the day 9–10"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "mobile",
       "lane": "UX",
       "check": "no horizontal overflow",
@@ -118,31 +118,31 @@
       "detail": "0px"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "mobile",
       "lane": "UX",
       "check": "images have alt",
       "status": "OK",
-      "detail": "0/59 missing"
+      "detail": "0/30 missing"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "mobile",
       "lane": "UX",
       "check": "h1 in first viewport (390)",
       "status": "OK",
-      "detail": "h1 at 598px"
+      "detail": "h1 at 508px"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "mobile",
       "lane": "UX",
       "check": "primary CTA above the fold (390)",
       "status": "OK",
-      "detail": "19 buttons on page"
+      "detail": "14 buttons on page"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "mobile",
       "lane": "UX",
       "check": "cookie card viewport cover",
@@ -150,28 +150,28 @@
       "detail": "54% of viewport"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "mobile",
       "lane": "UX",
       "check": "page weight",
-      "status": "OK",
-      "detail": "1.9 MB, 18076px tall, 1684 words"
+      "status": "FAIL",
+      "detail": "11.0 MB, 24441px tall, 1798 words"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "mobile",
       "lane": "UX",
       "check": "largest media on phone",
-      "status": "OK",
-      "detail": "0.2 MB https://bamboobicycleclub.org/cdn/shop/files/bbc-ig-ig02.jpg"
+      "status": "WARN",
+      "detail": "8.5 MB bamboobicycleclub.org/cdn/shop/t/53/assets/bbc-rd-stopmotion-build.mp4"
     },
     {
-      "page": "/pages/impact?preview_theme_id=199089193334",
+      "page": "/pages/programmes",
       "vp": "mobile",
       "lane": "CSS",
       "check": "text ≥ 12px",
       "status": "WARN",
-      "detail": "48 elements under 12px"
+      "detail": "13 elements under 12px"
     }
   ]
 }
