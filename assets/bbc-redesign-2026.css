@@ -2157,3 +2157,81 @@
 /* five ways in: station titles are anchor jumps — no resting underline, lime rule on hover/focus */
 .bbc-rd .edp-stations .rd-stations__title a,.bbc-rd .edp-stations .rd-stations__title a:visited{text-decoration:none !important;border-bottom:0 !important;box-shadow:none !important;background:none !important}
 .bbc-rd .edp-stations .rd-stations__title a:hover,.bbc-rd .edp-stations .rd-stations__title a:focus-visible{text-decoration:underline !important;text-decoration-thickness:3px;text-decoration-color:var(--lime-700);text-underline-offset:4px}
+/* ═══ EDUCATION v3 — 2 Sep 2026 (James: no repeating content, real images, films, case studies).
+   One pathway ledger on a culm rail, case studies from the blog with their own featured images,
+   a film band for the material, schools = timetable + teacher facts, councils = photo + proof. ═══ */
+@keyframes edp-culm{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.bbc-rd .edp-ledger{position:relative;margin-top:40px}
+.bbc-rd .edp-ledger__track,.bbc-rd .edp-ledger__culm{position:absolute;left:40px;top:30px;bottom:30px;width:8px;border-radius:3px;display:block !important}
+.bbc-rd .edp-ledger__track{background:color-mix(in srgb, var(--ink) 12%, transparent)}
+.bbc-rd .edp-ledger__culm{background:var(--lime);transform-origin:top center}
+@media (prefers-reduced-motion:no-preference){.bbc-rd .edp-ledger__culm{animation:edp-culm 1.2s cubic-bezier(.2,.7,.2,1) .3s both}}
+.bbc-rd .edp-ledger .edp-list{margin-top:0;position:relative}
+.bbc-rd .edp__sum{grid-template-columns:auto 84px 1fr auto}
+.bbc-rd .edp__thumb{width:84px;aspect-ratio:4/3;border:2px solid var(--ink);border-radius:4px;overflow:hidden;background:var(--paper)}
+.bbc-rd .edp__thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.bbc-rd .edp[open] .edp__thumb{display:none}
+.bbc-rd .edp[open] .edp__sum{grid-template-columns:auto 1fr auto}
+.bbc-rd .edp__media .bbc-media,.bbc-rd .edp__media .bbc-media__img{width:100%;max-width:100%}
+.bbc-rd .edp__media--film{border:0;background:transparent;aspect-ratio:auto;overflow:visible}
+.bbc-rd .edp__media--film .rd-path__ic{display:none}
+.bbc-rd .edp__seen{margin:14px 0 0;font-size:var(--fs-14-5)}
+.bbc-rd .edp__seen a{font-weight:700;color:var(--forest)}
+@media (max-width:989px){.bbc-rd .edp__sum{grid-template-columns:auto 64px 1fr}.bbc-rd .edp__thumb{width:64px}.bbc-rd .edp[open] .edp__sum{grid-template-columns:auto 1fr}.bbc-rd .edp-ledger__track,.bbc-rd .edp-ledger__culm{left:30px}}
+/* schools: timetable + teacher facts + the Head of Design's line */
+.bbc-rd .eds-grid{display:grid;grid-template-columns:7fr 5fr;gap:48px;align-items:start;margin-top:34px}
+.bbc-rd .eds-grid .edt-tt{margin-top:0;color:var(--ink)}
+.bbc-rd .eds-grid .edt-tt th{color:var(--forest)}
+.bbc-rd .eds-grid .edt-tt td{border-top-color:color-mix(in srgb, var(--forest) 22%, transparent)}
+.bbc-rd .eds-grid .edt-tt td:first-child{color:var(--ink)}
+.bbc-rd .eds-grid .edt-tt td:last-child{color:var(--forest)}
+.bbc-rd .eds-grid .edt-tt__foot{color:var(--forest)}
+@media (max-width:760px){.bbc-rd .eds-grid .edt-tt td::before{color:var(--forest-300)}.bbc-rd .eds-grid .edt-tt tr{border-top-color:color-mix(in srgb, var(--forest) 22%, transparent)}}
+.bbc-rd .eds-facts{list-style:none;margin:0;padding:0}
+.bbc-rd .eds-facts li{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:14px 0;border-top:1.5px solid color-mix(in srgb, var(--forest) 22%, transparent)}
+.bbc-rd .eds-facts li:first-child{border-top:0;padding-top:0}
+.bbc-rd .eds-facts .edp__n{width:30px;height:30px;flex-basis:30px;background:var(--forest);color:var(--lime);font-size:var(--fs-12-5)}
+.bbc-rd .eds-facts h3{margin:0;font-size:var(--fs-18-5)}
+.bbc-rd .eds-facts p{margin:3px 0 0;font-size:var(--fs-14-5);color:var(--charcoal)}
+.bbc-rd .eds-quote{margin:18px 0 0;background:var(--bone);border:2.5px solid var(--ink);border-radius:6px;box-shadow:3px 3px 0 var(--ink);padding:16px 18px}
+.bbc-rd .eds-quote p{margin:0;font-size:var(--fs-14-5);line-height:1.5}
+.bbc-rd .eds-quote cite{display:block;margin-top:8px;font-style:normal;font-size:var(--fs-10-5);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--subtle)}
+@media (max-width:989px){.bbc-rd .eds-grid{grid-template-columns:1fr;gap:28px}}
+/* why bamboo: the film band */
+.bbc-rd .edf-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.bbc-rd .edf-film{position:relative;border:2.5px solid var(--ink);border-radius:6px;box-shadow:5px 5px 0 var(--ink);overflow:hidden;background:var(--forest-700)}
+.bbc-rd .edf-film video{display:block;width:100%;aspect-ratio:16/9;background:var(--forest-700)}
+.bbc-rd .edf-list{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:12px}
+.bbc-rd .edf-list li{display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:start;font-size:var(--fs-14-5);color:var(--bone)}
+.bbc-rd .edf-list .rd-pic{color:var(--lime)}.bbc-rd .edf-list .rd-pic__a{fill:var(--bone)}
+.bbc-rd .edf-list b{color:var(--paper)}
+.bbc-rd .edf-range{margin:22px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
+.bbc-rd .edf-range li{font-size:var(--fs-13-5);border:2px solid var(--bone);border-radius:999px;padding:5px 12px;color:var(--bone)}
+.bbc-rd .edf-range li.edf-range__k{border:0;padding:0;font-size:var(--fs-12-5);font-weight:700;letter-spacing:.14em;text-transform:lowercase;color:color-mix(in srgb, var(--bone) 70%, transparent);margin-right:8px}
+@media (max-width:989px){.bbc-rd .edf-grid{grid-template-columns:1fr;gap:26px}}
+/* councils and youth services: photo + proof */
+.bbc-rd .edc-grid{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:center}
+.bbc-rd .edc-photo{border:2.5px solid var(--ink);border-radius:6px;overflow:hidden;box-shadow:5px 5px 0 var(--ink);aspect-ratio:4/5;background:var(--bone)}
+.bbc-rd .edc-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.bbc-rd .edc-proof{margin:20px 0 0;border-left:4px solid var(--lime);padding-left:14px;max-width:60ch;font-size:var(--fs-14-5)}
+.bbc-rd .edc-proof a{font-weight:700;color:var(--forest)}
+@media (max-width:989px){.bbc-rd .edc-grid{grid-template-columns:1fr;gap:24px}.bbc-rd .edc-photo{aspect-ratio:4/3}}
+/* case studies from the blog, featured first (same device as Build to Bond) */
+.bbc-rd .rd-edu-cs .rd-csgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.bbc-rd .rd-edu-cs .rd-cscard-item[data-size="featured"],.bbc-rd .rd-edu-cs .rd-cscard--featured{grid-column:1/-1}
+.bbc-rd .rd-edu-cs h2.rd-fs-stn{font-size:clamp(var(--fs-32),3.3vw,var(--fs-48)) !important;line-height:1.04 !important;max-width:16ch}
+@media (max-width:989px){.bbc-rd .rd-edu-cs .rd-csgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.bbc-rd .rd-edu-cs .rd-csgrid{grid-template-columns:1fr}}
+/* v3 small parts: ledger foot, seen-in key, lime accreditation chip */
+.bbc-rd .edp-foot{align-items:center;flex-wrap:wrap}
+.bbc-rd .edp-foot__note{margin:0;max-width:62ch}
+.bbc-rd .edp__seen-k{font-size:var(--fs-10-5);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--forest-300)}
+.bbc-rd .edp__meta .edp__chip--lime{font-size:var(--fs-12-5);border:2px solid var(--ink);border-radius:999px;padding:4px 10px;background:var(--lime);white-space:nowrap}
+/* pathway sheet: the media column carries the film/photo, the "seen in" link and the themes,
+   so the sheet lands level instead of leaving a hole under a 16:9 film */
+.bbc-rd .edp__side{display:flex;flex-direction:column;gap:14px;align-self:start}
+.bbc-rd .edp__side .edp__seen{margin:0}
+.bbc-rd .edp__side .edp__tags{margin:0}
+.bbc-rd .edp__seen a{display:inline}
+.bbc-rd .eds-quote{max-width:64ch}
+@media (min-width:990px){.bbc-rd .eds-grid > div:first-child{display:flex;flex-direction:column}}
