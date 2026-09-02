@@ -168,6 +168,98 @@
     @media(max-width:899px){ .bbc-rd-home .wb2-row{ grid-template-columns:repeat(2,1fr); gap:38px 28px; } }
     @media(max-width:479px){ .bbc-rd-home .wb2-row{ grid-template-columns:1fr; gap:30px; } .bbc-rd-home .wb2-cta .ew-btn{ width:100%; } }
   
+    /* ==========================================================================
+       HERO IDENTITY PASS (2026-08-21, James: "remove the drawing details ... unique,
+       visually stimulating, aligned with the company and distinctive brand, unique
+       animations and layout ... optimised header, sub text and use of buttons").
+       CONCEPT - bamboo is the one frame material that GROWS, so the hero ASSEMBLES
+       instead of fading: a segmented lime culm grows up the left gutter, a hairline
+       seam draws down the film edge, then the copy arrives in the existing word ladder.
+       The culm uses real bamboo node spacing (repeating-gradient joints) rather than a
+       generic accent bar, and it is the same node motif already used by .rd-nodediv on
+       the paper band, so the page reads as one system. It also REPLACES .ew-rule, an
+       element that was already there doing nothing but sit as a 60px dash.
+       OWNERSHIP - bbc-align.css owns hero LAYOUT (min-height, stacking, order, .ew-copy
+       padding) and its rules carry !important. This block is DECORATION ONLY. Do not
+       re-declare min-height / grid-template-columns / .ew-copy padding here: the two
+       files will fight and align wins, silently.
+       ========================================================================== */
+    .bbc-rd-home .ew-copy{ position:relative; }
+    /* VERTICAL BALANCE. The copy column was justify-content:flex-end, which was fine while
+       the hero was capped at 700px and the content nearly filled it. Raising the ceiling for
+       the video (bbc-align note 1) turned every new pixel into a void ABOVE the copy:
+       measured at 1440x900, 172px of dead space over the eyebrow against 49px under the
+       buttons, a 3.5:1 imbalance - and the culm then overhung the content by 136px at the
+       top, reading as a stray line rather than an anchor. Centring splits the slack evenly
+       (~110px each side) so the copy sits optically centred against a full-height film.
+       Two-column mode only; bbc-align pins flex-start in stacked mode below 1200px. */
+    @media(min-width:1200px){ .bbc-rd-home .ew-copy{ justify-content:center; } }
+    .bbc-rd-home .ew-rule{
+      position:absolute; left:clamp(14px,2.2vw,38px);
+      /* percentage insets, not a fixed clamp: with the copy centred the slack is symmetric,
+         so a symmetric inset brackets the content at any height instead of running the full
+         padding box. 14% lands within ~8px of the content top and bottom at 1440x900. */
+      top:14%; bottom:14%;
+      width:3px; height:auto; margin:0; border-radius:3px;
+      background:repeating-linear-gradient(to bottom,
+        var(--lime) 0 44px, rgba(6,35,28,.55) 44px 50px);
+      transform:scaleY(0); transform-origin:50% 100%; }
+    .bbc-rd-home .ew.is-on .ew-rule{ transform:scaleY(1);
+      transition:transform .95s cubic-bezier(.22,1,.36,1) .05s; }
+    .bbc-rd-home .ew-media::after{
+      content:""; position:absolute; left:0; top:0; bottom:0; width:2px; z-index:4;
+      pointer-events:none;
+      background:linear-gradient(to bottom, var(--lime), rgba(212,253,98,0));
+      transform:scaleY(0); transform-origin:50% 0; }
+    .bbc-rd-home .ew.is-on .ew-media::after{ transform:scaleY(1);
+      transition:transform 1.1s cubic-bezier(.22,1,.36,1) .3s; }
+    /* RHYTHM. Measured gaps ran 16 / 18 / 18 / 34px - essentially flat, so the eye got no
+       hierarchy between headline, statement and evidence. The sub-line now opens a little
+       wider under the headline and closes with its own bottom margin, which ADDS to the
+       proof row's top margin (adjacent flex items do not collapse) to separate statement
+       from figures: ~25px above, ~31px below at 1440x900. */
+    .bbc-rd-home .ew-sub{ font-family:'Atkinson Hyperlegible',var(--rd-sans),sans-serif;
+      font-size:clamp(16px,1.25vw,19px); line-height:1.5; color:#CBD8D1;
+      max-width:46ch; margin:clamp(20px,2.8vh,32px) 0 clamp(6px,1vh,12px); }
+    .bbc-rd-home .ew.will-anim .ew-sub{ opacity:0; filter:blur(4px); transform:translateY(10px); }
+    .bbc-rd-home .ew.is-on .ew-sub{ opacity:1; filter:blur(0); transform:none;
+      transition:opacity .32s ease-out, filter .32s ease-out, transform .32s ease-out;
+      transition-delay:.9s; }
+    /* BUTTONS. Hierarchy was flat - both read as equal weight against the film. The
+       primary now carries the brightest lime in the band (10.65:1 on forest text per the
+       brand guide) so there is one obvious action, the ghost stays secondary, and both
+       get a real pressed state instead of only a hover. */
+    .bbc-rd-home .ew-btn.is-lime{ background:var(--lime); }
+    .bbc-rd-home .ew-btn.is-lime:active,
+    .bbc-rd-home .ew-btn.is-ghost:active{ transform:translate(2px,2px);
+      box-shadow:2px 2px 0 var(--shadow-green); }
+    .bbc-rd-home .ew-btn.is-ghost:hover{ background:rgba(230,220,200,.16); }
+    /* The vertical culm belongs to TWO-COLUMN mode. Below 1200px the hero is stacked and the
+       copy is top-aligned, so a full-height vertical rule would overhang the bottom the same
+       way it overhung the top before this fix. The whole stacked range gets the horizontal
+       culm instead - same motif, correct axis. (Was max-width:749px, which left 750-1199px
+       with a vertical rule against top-aligned copy.) */
+    @media(max-width:1199px){
+      .bbc-rd-home .ew-rule{ display:block; position:static; width:74px; height:3px;
+        margin:0 0 15px; transform:scaleX(0); transform-origin:0 50%;
+        background:repeating-linear-gradient(to right,
+          var(--lime) 0 20px, rgba(6,35,28,.55) 20px 24px); }
+      .bbc-rd-home .ew.is-on .ew-rule{ transform:scaleX(1); }
+      .bbc-rd-home .ew-media::after{ left:0; right:0; top:auto; bottom:0;
+        width:auto; height:2px; transform:scaleX(0); transform-origin:0 50%;
+        background:linear-gradient(to right, var(--lime), rgba(212,253,98,0)); }
+      .bbc-rd-home .ew.is-on .ew-media::after{ transform:scaleX(1); }
+      /* ORDER lives in bbc-align.css with the rest of the .ew-copy run (order:5, AFTER the
+         buttons - at order:3 it pushed both mobile CTAs back under the fold). Deliberately
+         NOT set here: two files setting order on the same element is what forced the
+         [class] specificity bump in align. */
+    }
+    @media(prefers-reduced-motion:reduce){
+      .bbc-rd-home .ew-rule, .bbc-rd-home .ew-media::after{
+        transform:none !important; transition:none !important; }
+      .bbc-rd-home .ew.will-anim .ew-sub{ opacity:1; filter:none; transform:none; }
+    }
+
   .bbc-rd-home ol.rd-steps{list-style:none;padding-left:0;counter-reset:none;} .bbc-rd-home ol.rd-steps>li::before, .bbc-rd-home ol.rd-steps>li::marker{content:none!important;display:none!important;} .bbc-rd-home .rd-steps .rd-stepn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:var(--bbc-lime,#c6f24e);color:var(--bbc-forest,#003C32);font-weight:800;font-size:20px;border:2px solid var(--bbc-forest,#003C32);}
 </style>
 
@@ -187,6 +279,15 @@
       <div class="ew-rule"></div>
       {%- if section.settings.hero_eyebrow != blank -%}<p class="ew-eyebrow" style="--d:0s">{{ section.settings.hero_eyebrow }}</p>{%- endif -%}
       <h1 class="ew-h1"><span class="wd" style="--d:.1s">more</span> <span class="wd" style="--d:.2s">than</span> <span class="wd" style="--d:.3s">a</span> <span class="wd" style="--d:.4s">bike.</span><span class="ew-fwd"><span class="wd" style="--d:.55s">a</span> <span class="wd" style="--d:.65s">way</span> <span class="wd" style="--d:.75s">forward.</span></span></h1>
+      {%- comment -%} Sub-line added 2026-08-21. The hero went headline -> figures ->
+        buttons with nothing saying what BBC actually does; that is the gap in the
+        hierarchy, not the headline. hero_lede is deliberately blank in index.json and
+        "blank means blank" is a documented rule here, so this is a NEW setting whose
+        SCHEMA DEFAULT renders (index.json has no key for it) and which James can edit or
+        clear. Wording mirrors the LOCKED vault mission - "in schools before exclusion,
+        and in prisons after" - and drops "accredited" on purpose: the prison Level 2 is
+        verified but the schools accreditation evidence is still pending. {%- endcomment -%}
+      {%- if section.settings.hero_sub != blank -%}<p class="ew-sub">{{ section.settings.hero_sub }}</p>{%- endif -%}
       {%- if section.settings.hero_lede != blank -%}<p class="ew-lede">{{ section.settings.hero_lede }}</p>{%- endif -%}
 {%- comment -%}
         Proof row (2026-07-27). The presentation audit measured our first figure at y3897 —
@@ -221,14 +322,13 @@
     </div>
 
     <div class="ew-media{% if section.settings.hero_video_on %} has-video{% endif %}">
-      {%- if section.settings.fab_titleblock != false -%}
-      <div class="rd-titleblock" aria-hidden="true">
-        <span>{{ section.settings.fab_tb_k1 | default: 'drawing' }}</span><span>{{ section.settings.fab_tb_v1 | default: '№ 1 — the club' }}</span>
-        <span>{{ section.settings.fab_tb_k2 | default: 'material' }}</span><span>{{ section.settings.fab_tb_v2 | default: 'bamboo · flax · lugs' }}</span>
-        <span>{{ section.settings.fab_tb_k3 | default: 'est.' }}</span><span>{{ section.settings.fab_tb_v3 | default: '2012 · london' }}</span>
-        <span>{{ section.settings.fab_tb_k4 | default: 'drawn' }}</span><span>{{ section.settings.fab_tb_v4 | default: 'by hand' }}</span>
-      </div>
-      {%- endif -%}
+      {%- comment -%} DRAWING TITLEBLOCK REMOVED 2026-08-21 (James: "remove the drawing
+        details"). It was a faux drawing-office spec table (drawing / material / est. /
+        drawn) sitting on top of the film. Markup and its nine fab_titleblock/fab_tb_*
+        schema settings are both gone - a checkbox that no longer does anything is worse
+        than no checkbox, and index.json still carries fab_titleblock:true, so CSS-hiding
+        or gating would have left a dead control in the editor. Recoverable from git.
+      {%- endcomment -%}
       {%- if section.settings.hero_sticker != blank -%}<span class="ew-sticker">{{ section.settings.hero_sticker }}</span>{%- endif -%}
       {%- if section.settings.hero_image != blank -%}
         <img class="ew-photo" src="{{ section.settings.hero_image | image_url: width: 1600 }}" srcset="{{ section.settings.hero_image | image_url: width: 800 }} 800w, {{ section.settings.hero_image | image_url: width: 1200 }} 1200w, {{ section.settings.hero_image | image_url: width: 1600 }} 1600w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w, {{ section.settings.hero_image | image_url: width: 2600 }} 2600w" sizes="(max-width:749px) 100vw, 56vw" alt="{{ section.settings.hero_image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" fetchpriority="high" loading="eager">
@@ -237,8 +337,15 @@
       {%- endif -%}
       <div class="ew-grain"></div>
       {%- if section.settings.hero_video_on -%}
+        {%- comment -%} 2026-08-21: the "film" style option existed in the schema but was never
+             implemented in code — it silently fell back to the teaser, so the editor choice did
+             nothing and the draft hero didn't match live (which plays the film). Film/duotone
+             also use the film's own poster, unless a custom poster has been picked. {%- endcomment -%}
         {%- assign hv = 'bbc-rd-home-teaser.mp4' -%}
+        {%- assign hp = section.settings.video_poster_fallback | default: 'bbc-rd-home-poster.jpg' -%}
+        {%- if section.settings.hero_video_style == 'film' -%}{%- assign hv = 'bbc-hero-film.mp4' -%}{%- endif -%}
         {%- if section.settings.hero_video_style == 'duotone' -%}{%- assign hv = 'bbc-hero-film-duotone.mp4' -%}{%- endif -%}
+        {%- if hv != 'bbc-rd-home-teaser.mp4' and hp == 'bbc-rd-home-poster.jpg' -%}{%- assign hp = 'bbc-hero-poster.jpg' -%}{%- endif -%}
         {%- comment -%}
           The hero film is 7 MB and was set to `autoplay preload="metadata"`. autoplay
           OVERRIDES preload — the browser fetches the whole file regardless — so mobile
@@ -254,7 +361,7 @@
           bytes — a wide viewport, motion allowed, and not on a metered/slow connection per
           the Network Information API. Everyone else keeps the poster, which is 54 KB.
         {%- endcomment -%}
-        <video class="ew-video" style="position:absolute !important;inset:0 !important;width:100% !important;height:100% !important;object-fit:cover !important;" muted loop playsinline preload="none" data-src="{{ hv | asset_url }}" poster="{{ section.settings.video_poster_fallback | default: 'bbc-rd-home-poster.jpg' | asset_url }}" aria-label="{{ section.settings.hero_image_alt | default: 'Bamboo bikes built and ridden — a Bamboo Bicycle Club film' | escape }}"></video>
+        <video class="ew-video" style="position:absolute !important;inset:0 !important;width:100% !important;height:100% !important;object-fit:cover !important;" muted loop playsinline preload="none" data-src="{{ hv | asset_url }}" poster="{{ hp | asset_url }}" aria-label="{{ section.settings.hero_image_alt | default: 'Bamboo bikes built and ridden — a Bamboo Bicycle Club film' | escape }}"></video>
         <script>
           (function () {
             var v = document.currentScript.previousElementSibling;
@@ -268,7 +375,18 @@
             s.src = v.dataset.src; s.type = 'video/mp4';
             v.appendChild(s);
             v.preload = 'auto';
-            v.play().catch(function () { /* autoplay refused — poster stands, no error surfaced */ });
+            // load() + play once there is data. Appending a <source> and calling play()
+            // straight away does NOT reliably start playback: measured 2026-08-21 at
+            // 1440px, play() RESOLVED yet the element stayed paused at currentTime 0
+            // while still buffering the whole 6.6 MB film — worst case, full bandwidth
+            // spent for a static poster. load() runs resource selection against the new
+            // source; canplay guarantees play() is called with data ready.
+            v.load();
+            var start = function () {
+              v.play().catch(function () { /* autoplay refused — poster stands, no error surfaced */ });
+            };
+            if (v.readyState >= 3) { start(); }
+            else { v.addEventListener('canplay', start, { once: true }); }
           })();
         </script>
       {%- endif -%}
@@ -329,7 +447,72 @@
         <img src="https://cdn.shopify.com/s/files/1/0502/8695/2631/files/bbc-frame-line.svg?v=1781292517" alt="" loading="lazy" width="148" height="86">
         <div class="cap"><span>{{ section.settings.tx_drg_n_186_1 | default: "Drg N&#186;1" }}</span><span>{{ section.settings.tx_est_2012 | default: "Est. 2012" }}</span></div>
       </div>
-      <span class="ew-tag">{{ section.settings.tx_hand_built_bamboo_lugged_by | default: "Hand-built bamboo &middot; lugged by hand" }}</span>
+      {%- comment -%}
+        ROTATING HERO CAPTIONS (2026-08-21, James: "get rid of the hand-built lugged
+        one and build some other captions to align with the video ... work out the
+        number of captions").
+        NUMBER: bbc-hero-film.mp4 is exactly 75s. Ten captions at 7.5s each = 75s, so
+        the caption cycle restarts in step with the film loop instead of drifting
+        against it. Change the count and the timing below follows automatically - the
+        slot percentage is computed from caps.size, not hardcoded.
+        WORDING: every line was checked against the vault Claims Register
+        (System/Claims Register.md). Notes on the three that needed care:
+          - the material line cites BS ISO 22157 AND is scoped to TUBING. Swansea
+            tested bamboo tubing, never an assembled frame; see the product-safety
+            boundary and the 19 Aug 2026 control incident on the gravel PDP, where
+            "Swansea - University tested" had to be pulled for exactly this reason.
+          - "tested around the world" was requested but NOT used: it implies frame
+            testing, which is the same boundary. Reach is covered by the approved
+            45-countries figure, which already sits in the proof row.
+          - "easiest way to build a frame" was requested but NOT used as a superlative;
+            replaced with the concrete, supportable "No welding. No workshop." and
+            "Hand tools and a weekend."
+        "It grew itself." and "Grown, not mined." are the brand's own frame-sticker and
+        key-message wording (Marketing/Brand and Voice Guide).
+        A11Y: the group is aria-hidden - it auto-updates, and every claim in it also
+        appears as static text elsewhere on the page, so nothing is lost to a screen
+        reader. It pauses on hover, and prefers-reduced-motion pins it to caption 1
+        (MOTION.md hard rule 2). NOTE for review: WCAG 2.2.2 also wants a pause control
+        for auto-updating content; this file's marquee was stopped for that exact
+        reason (see bbc-align.css). Hover-pause plus reduced-motion is a mitigation,
+        not a full mechanism - flagged to James.
+      {%- endcomment -%}
+      {%- capture cap_default -%}
+It grew itself.
+No welding. No workshop.
+Hand tools and a weekend.
+Natural vibration damping.
+Tubing tested to BS ISO 22157.
+Every frame is one of one.
+Most builders start from scratch.
+Real engineering you can hold.
+Grown, not mined.
+Skills that outlast the bike.
+{%- endcapture -%}
+      {%- assign cap_src = section.settings.hero_captions | default: cap_default -%}
+      {%- assign caps = cap_src | strip | newline_to_br | split: '<br />' -%}
+      {%- assign cap_n = caps.size -%}
+      {%- assign cap_slot = 100.0 | divided_by: cap_n -%}
+      {%- assign cap_hold = cap_slot | minus: 1.2 -%}
+      {%- assign cap_dur = cap_n | times: 7.5 -%}
+      <style>
+        .bbc-rd-home .ew-tag--cycle{ display:grid; justify-items:center; align-items:center; }
+        .bbc-rd-home .ew-tag--cycle .ew-cap{ grid-area:1/1; white-space:nowrap; opacity:0;
+          animation:ewCapCycle {{ cap_dur }}s linear infinite;
+          animation-delay:calc({{ cap_dur }}s / {{ cap_n }} * var(--i,0)); }
+        .bbc-rd-home .ew-tag--cycle:hover .ew-cap{ animation-play-state:paused; }
+        @keyframes ewCapCycle{
+          0%{ opacity:0 } 1.2%{ opacity:1 } {{ cap_hold }}%{ opacity:1 }
+          {{ cap_slot }}%{ opacity:0 } 100%{ opacity:0 }
+        }
+        @media(prefers-reduced-motion:reduce){
+          .bbc-rd-home .ew-tag--cycle .ew-cap{ animation:none; opacity:0; }
+          .bbc-rd-home .ew-tag--cycle .ew-cap:first-child{ opacity:1; }
+        }
+      </style>
+      <span class="ew-tag ew-tag--cycle" aria-hidden="true">
+        {%- for c in caps -%}{%- assign ct = c | strip -%}{%- if ct != blank -%}<b class="ew-cap" style="--i:{{ forloop.index0 }}">{{ ct }}</b>{%- endif -%}{%- endfor -%}
+      </span>
     </div>
     <span class="ew-folio">{{ section.settings.tx_bamboo_bicycle_club_est_2012 | default: "Bamboo Bicycle Club &middot; Est. 2012 &middot; London" }}</span>
   </header>
@@ -575,7 +758,7 @@ adjacency (PAGE-STANDARD S3 kept; loop band documents its own moveability). {%- 
         {%- endif -%}
       </div>
       <ul class="acc-stats">
-        <li><b>{{ section.settings.why_stat1_num | default: '4,000+' }}</b><span>{{ section.settings.why_stat1_label | default: 'people trained' }}</span></li>
+        <li><b>{{ section.settings.why_stat1_num | default: '80%' }}</b><span>{{ section.settings.why_stat1_label | default: 'of kits ship beyond the UK' }}</span></li>
         <li><b>{{ section.settings.why_stat2_num | default: '45' }}</b><span>{{ section.settings.why_stat2_label | default: 'countries' }}</span></li>
         <li><b>{{ section.settings.why_stat3_num | default: '3,500+' }}</b><span>{{ section.settings.why_stat3_label | default: 'frames built at home' }}</span></li>
       </ul>
@@ -676,45 +859,9 @@ adjacency (PAGE-STANDARD S3 kept; loop band documents its own moveability). {%- 
   {%- endif -%}
 
 
-  {%- comment -%} ---------- PROVEN RIDE (comfort + press, GCN video) ---------- {%- endcomment -%}
-  <section class="rd-pad rd-steel">
-    <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="rd-wrap">
-      <span class="rd-eyebrow">{{ section.settings.tx_proven_on_the_road | default: "Proven on the road" }}</span>
-      <h2 class="rd-reveal rd-mw-20ch">{{ section.settings.tx_bamboo_soaks_up_the_road_rid | default: "bamboo soaks up the road — riders and reviewers agree." }}</h2>
-      <p class="rd-lede rd-mt2">{{ section.settings.tx_not_just_our_word_national_p | default: "Not just our word. National press, pro reviewers and ten-year riders all land on the same thing: it rides beautifully." }}</p>
-      {%- comment -%} Two component types used to share one class here, 2026-07-31. The GCN film and
-         Taro's build are case studies; the Guardian and BikeRadar lines are PRESS QUOTES — no image,
-         no link, no story behind them. Forcing a pull-quote into a case-study card would give it a
-         heading link it has no destination for, so the quotes now carry their own class and sit
-         outside the case-study contract, while the two real cards render THE standard card.
-      {%- endcomment -%}
-      <ul class="rd-csgrid rd-mt4" role="list">
-        {%- render 'bbc-cscard',
-             variant: 'grid',
-             kind: 'GCN review',
-             heading: 'Global Cycling Network puts a bamboo bike to the test.',
-             url: 'https://www.youtube.com/watch?v=cQxbC-njbGQ',
-             context: '&ldquo;Are bamboo bikes actually any good?&rdquo;',
-             image: 'bbc-rd-gcn.jpg',
-             youtube: 'https://www.youtube.com/watch?v=cQxbC-njbGQ',
-             cta: 'watch the film' -%}
-        {%- render 'bbc-cscard',
-             variant: 'grid',
-             kind: 'builder story',
-             heading: 'Taro still rides the same frame after 10 years of daily commuting.',
-             url: '/blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike',
-             context: 'One frame, built by hand, ridden every day for a decade.',
-             image: 'bbc-rd-bike-field.jpg',
-             cta: 'read the story' -%}
-      </ul>
-      <ul class="rd-pressquotes rd-mt3" role="list">
-        <li class="rd-pressquote rd-reveal"><p>{{ section.settings.tx_bamboo_naturally_dampens_vib | default: "Bamboo naturally dampens vibration, allowing the smoothest ride." }}</p><cite>{{ section.settings.tx_the_guardian | default: "The Guardian" }}</cite></li>
-        <li class="rd-pressquote rd-reveal"><p>{{ section.settings.tx_a_really_really_comfortable | default: "A really, really comfortable ride &mdash; smooth but not too flexy." }}</p><cite>{{ section.settings.tx_kate_rawles_bikeradar | default: "Kate Rawles &middot; BikeRadar" }}</cite></li>
-      </ul>
-      {% render 'bbc-video-lightbox' %}
-    </div>
-  </section>
+  {%- comment -%} PROVEN RIDE band REMOVED 2026-08-19 (James: remove from home page).
+     Its settings (tx_proven_* , press quotes, GCN/Taro cards) stay in the schema but no
+     longer render; the ride-quality proof lives on /pages/why-bamboo. {%- endcomment -%}
 
   {%- comment -%} ---------- IMPACT FEATURE ---------- {%- endcomment -%}
   <section class="rd-split rd-dark">
@@ -743,32 +890,10 @@ adjacency (PAGE-STANDARD S3 kept; loop band documents its own moveability). {%- 
     </div>
   </section>
 
-  {%- comment -%} ---------- FUNDING LOOP ----------
-    rd-steel, not rd-dark: the IMPACT FEATURE band directly above is dark, so the homepage ran two
-    dark bands back to back — PAGE-STANDARD S3. Steel rather than paper because the two bands
-    BELOW are both paper, and paper here would turn one repeat into a three-band run. Safe to
-    move: .rd-loop draws its borders with currentColor and its final step carries its own
-    lime-on-forest, so the component takes colour from whatever surface it sits on. (2026-08-04)
-  {%- endcomment -%}
-  <section class="rd-steel rd-pad-sm">
-    <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="rd-wrap">
-      <div class="rd-flex rd-between rd-gap-24">
-        <div>
-          <span class="rd-eyebrow">{{ section.settings.loop_kicker }}</span>
-          <h2 class="rd-reveal rd-mw-16ch">{{ section.settings.loop_heading }}</h2>
-        </div>
-        <p class="rd-maxw-s rd-m-0">{{ section.settings.loop_intro }}</p>
-      </div>
-      <div class="rd-loop rd-mt3">
-        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s1_big }}</div><div class="rd-sm">{{ section.settings.loop_s1_sm }}</div></div>
-        <div class="rd-arr">&rarr;</div>
-        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s2_big }}</div><div class="rd-sm">{{ section.settings.loop_s2_sm }}</div></div>
-        <div class="rd-arr">&rarr;</div>
-        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s3_big }}</div><div class="rd-sm">{{ section.settings.loop_s3_sm }}</div></div>
-      </div>
-    </div>
-  </section>
+  {%- comment -%} FUNDING LOOP band REMOVED 2026-08-19 (James: remove "how it works" from
+     home page). loop_* settings stay in the schema but no longer render; the mechanism
+     story lives on /pages/impact. NOTE: impact feature (dark) now sits directly above the
+     final CTA (dark) — flagged to James. {%- endcomment -%}
 
   {%- comment -%} ---------- FINAL CTA ---------- {%- endcomment -%}
   <section class="rd-pad rd-dark rd-center">
@@ -814,10 +939,11 @@ adjacency (PAGE-STANDARD S3 kept; loop band documents its own moveability). {%- 
       "default": "Est. 2012"
     },
     {
-      "type": "text",
-      "id": "tx_hand_built_bamboo_lugged_by",
-      "label": "Hand-built bamboo &middot; lugged by",
-      "default": "Hand-built bamboo &middot; lugged by hand"
+      "type": "textarea",
+      "id": "hero_captions",
+      "label": "Hero captions - one per line, cycles with the film",
+      "info": "10 lines x 7.5s = the 75s film loop, so the cycle stays in step. Timing follows the line count automatically. CHECK ANY FACTUAL LINE against the vault Claims Register before adding one.",
+      "default": "It grew itself.\nNo welding. No workshop.\nHand tools and a weekend.\nNatural vibration damping.\nTubing tested to BS ISO 22157.\nEvery frame is one of one.\nMost builders start from scratch.\nReal engineering you can hold.\nGrown, not mined.\nSkills that outlast the bike."
     },
     {
       "type": "text",
@@ -927,6 +1053,13 @@ adjacency (PAGE-STANDARD S3 kept; loop band documents its own moveability). {%- 
       "id": "hero_lede",
       "label": "Lede",
       "default": "Every bamboo bike built in our workshops funds accredited skills programmes — in schools, with young people, and inside prisons — opening real routes into work and further learning for people too often left out."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_sub",
+      "label": "Hero sub-line (under the headline)",
+      "info": "One line. Mirrors the locked vault mission. Blank hides it.",
+      "default": "Every bike built in our workshops funds skills programmes — in schools before exclusion, and in prisons after."
     },
     {
       "type": "text",
@@ -1387,7 +1520,7 @@ adjacency (PAGE-STANDARD S3 kept; loop band documents its own moveability). {%- 
       "type": "text",
       "id": "community_title",
       "label": "Title",
-      "default": "4,000+ builders. 4,000+ stories."
+      "default": "3,500+ frames built at home."
     },
     {
       "type": "header",
@@ -1617,60 +1750,6 @@ adjacency (PAGE-STANDARD S3 kept; loop band documents its own moveability). {%- 
       "type": "video",
       "id": "why_card3_video_file",
       "label": "Or upload a video (plays inline)"
-    },
-    {
-      "type": "checkbox",
-      "id": "fab_titleblock",
-      "label": "Hero titleblock",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "fab_tb_k1",
-      "label": "Titleblock row 1 label",
-      "default": "drawing"
-    },
-    {
-      "type": "text",
-      "id": "fab_tb_v1",
-      "label": "Titleblock row 1 value",
-      "default": "№ 1 — the club"
-    },
-    {
-      "type": "text",
-      "id": "fab_tb_k2",
-      "label": "Titleblock row 2 label",
-      "default": "material"
-    },
-    {
-      "type": "text",
-      "id": "fab_tb_v2",
-      "label": "Titleblock row 2 value",
-      "default": "bamboo · flax · lugs"
-    },
-    {
-      "type": "text",
-      "id": "fab_tb_k3",
-      "label": "Titleblock row 3 label",
-      "default": "est."
-    },
-    {
-      "type": "text",
-      "id": "fab_tb_v3",
-      "label": "Titleblock row 3 value",
-      "default": "2012 · london"
-    },
-    {
-      "type": "text",
-      "id": "fab_tb_k4",
-      "label": "Titleblock row 4 label",
-      "default": "drawn"
-    },
-    {
-      "type": "text",
-      "id": "fab_tb_v4",
-      "label": "Titleblock row 4 value",
-      "default": "by hand"
     },
     {
       "type": "text",

@@ -95,7 +95,7 @@
             {%- if block.settings.image != blank -%}
               <img src="{{ block.settings.image | image_url: width: 1200 }}" srcset="{{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 800 }} 800w, {{ block.settings.image | image_url: width: 1200 }} 1200w" sizes="(max-width:749px) 92vw, 33vw" alt="{{ block.settings.image_alt | default: 'Bamboo Bicycle Club' | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
             {%- else -%}
-              <img src="{{ 'bbc-rd-bike-field.jpg' | asset_img_url: '900x' }}" alt="{{ block.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="1200" height="900" loading="lazy">
+              <img src="{{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '900x' }}" alt="{{ block.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="1200" height="900" loading="lazy">
             {%- endif -%}
             <div class="rd-ov"></div>
             <div class="rd-c">
@@ -214,6 +214,7 @@
     { "type": "card", "name": "Card", "settings": [
       { "type": "image_picker", "id": "image", "label": "Image" },
       { "type": "text", "id": "image_alt", "label": "Image alt text" },
+      { "type": "text", "id": "fallback", "label": "Fallback theme asset (when no image picked)" },
       { "type": "text", "id": "tag", "label": "Chip label" },
       { "type": "text", "id": "title", "label": "Title", "default": "card title" },
       { "type": "textarea", "id": "text", "label": "Text" },

@@ -17,8 +17,28 @@
 </nav>
 {%- endif -%}
 
+
+{%- comment -%} in-page anchor fix 2026-08-19: root overflow-x clip + smooth scroll no-ops
+   same-document hash jumps in Chromium, so every #anchor click silently failed. Delegated
+   handler scrolls explicitly; reduced-motion gets an instant jump. {%- endcomment -%}
+<script>
+  (function(){
+    if (window.__bbcAnchorFix) return; window.__bbcAnchorFix = 1;
+    document.addEventListener('click', function(e){
+      var a = e.target.closest('a[href^="#"]');
+      if (!a || a.getAttribute('href').length < 2) return;
+      var el = document.getElementById(a.getAttribute('href').slice(1));
+      if (!el) return;
+      e.preventDefault();
+      history.pushState(null, '', a.getAttribute('href'));
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 64, left: 0, behavior: 'instant' });
+    });
+  })();
+</script>
+
 {% stylesheet %}
-  .rd-chapters{position:sticky;top:0;z-index:90;background:rgba(230,220,200,.96);border-bottom:1.5px solid rgba(14,26,23,.14)}
+  .bbc-chapters-wrap{position:sticky;top:0;z-index:90}
+  .rd-chapters{background:rgba(230,220,200,.96);border-bottom:1.5px solid rgba(14,26,23,.14)}
   .rd-chapters__wrap{max-width:1200px;margin:0 auto;padding:10px 24px;display:flex;gap:10px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
   .rd-chapters__wrap::-webkit-scrollbar{display:none}
   .rd-chapters__pill,.bbc-rd .rd-chapters__pill,a.rd-chapters__pill{flex:none;font-size:14px;font-weight:800;letter-spacing:.02em;text-transform:lowercase;padding:7px 16px;border:2px solid currentColor;border-radius:999px;color:#2A332F;text-decoration:none !important;background:transparent}

@@ -51,6 +51,17 @@ const claimLint = dir => runs('bash', ['scripts/claim-lint.sh', dir]);
       ['guaranteed interview', 'Guaranteed interview on release.'],
       ['wrong OCN title', 'OCN Level 2 — Sustainable Design & Manufacturing'],
       ['prisoners', 'Build to Bond helps prisoners build bikes.'],
+      // 2026-09-02 — the eleven live breaches from the Site-vs-Vault review
+      ['Feltham', 'Live at HMP Lindholme and HMYOI Feltham.'],
+      ['four sites', '4 prison sites running across England.'],
+      ['Level 1', 'a proposed Level 1 curriculum (OCN approval in progress)'],
+      ['independently tested', 'Our bamboo is independently tested at Swansea University.'],
+      ['last for years', 'with proper care they last for years.'],
+      ['rideable', 'You finish the day with a real, rideable bamboo bike.'],
+      ['Enhanced-DBS', 'Enhanced-DBS facilitators, vetted for prison delivery'],
+      ['six Makers', 'cohorts of six Makers'],
+      ['10% of profits', 'the Ltd gives 10% of profits to the CIC'],
+      ['Education CIC', 'BBC Education CIC formed end of 2025'],
     ]) {
       writeFileSync(join(dir, 'bad.liquid'), text);
       if (claimLint(dir).code === 0) missed.push(label);

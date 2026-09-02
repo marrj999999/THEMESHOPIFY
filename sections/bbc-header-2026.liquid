@@ -46,14 +46,53 @@
   .rd-nav-link:hover, .rd-brand:hover{ text-decoration:none !important; }
   .rd-caret{ display:inline-block; width:0; height:0; margin-left:6px; vertical-align:middle; border-left:4px solid transparent; border-right:4px solid transparent; border-top:5px solid currentColor; opacity:.6; transition:transform .15s ease, opacity .15s ease; }
   .rd-has-drop:hover .rd-caret, .rd-has-drop:focus-within .rd-caret{ transform:rotate(180deg); opacity:.95; }
-  .rd-logo-img{ height:46px; width:auto; display:block; max-width:210px; }
-  @media (max-width:749px){ .rd-logo-img{ height:40px; } }
+  /* 2026-08-21 header impact (James): logo doubled (46 -> 92px) and the header bar now
+     spans the full viewport (was locked to the 1200px page container, so it floated small
+     in the middle of wide screens). Scrolled (.rd-stuck) state compacts the logo so the
+     tall masthead doesn't eat the viewport mid-page; the <=1080px ladder protects the
+     941-1080px range where the full desktop nav has the least room.
+     Selectors are #rd-header2026-prefixed ON PURPOSE: bbc-redesign-2026.css is re-emitted
+     by ~10 later sections on a typical page (each renders its own stylesheet_tag), so the
+     base file re-asserts its rules AFTER this inline block; class-level overrides here
+     silently lose. ID specificity wins regardless of load order.
+     The LOGO rules additionally need !important + the .rd-brand hop: two legacy pins fight
+     them with !important — bbc-statement.css:248 (#rd-header2026 .rd-logo-img 46px, loads
+     after this block on the draft theme) and bbc-layout.css:58 (.rd-logo-img 44px, on live).
+     (1 id, 2 classes) + !important outranks both, in every load order. Verified 2026-08-21. */
+  .rd-logo-img{ width:auto; display:block; transition:height .28s ease; }
+  #rd-header2026 .rd-brand .rd-logo-img{ height:92px !important; max-width:420px !important; }
+  /* Gutter comes from --bbc-gutter (declared in bbc-align.css on .bbc-rd) so the LOGO
+     lands on the same left axis as the hero headline below it. Before this the header sat
+     at 46px and the hero copy at 43px while the page content ran at 113px - three edges in
+     the first two screens, which is what James saw as "everything justified left, touching
+     the edge". Fallback keeps the old value if the variable is ever missing. */
+  #rd-header2026 .rd-nav-row{ max-width:min(2400px,100%); padding:13px var(--bbc-gutter,clamp(24px,3.2vw,56px)); }
+  #rd-header2026 .rd-util-wrap{ max-width:min(2400px,100%); padding:0 var(--bbc-gutter,clamp(24px,3.2vw,56px)); }
+  @media (min-width:1081px){
+    #rd-header2026.rd-stuck .rd-brand .rd-logo-img{ height:56px !important; }
+    #rd-header2026 .rd-nav-link, #rd-header2026 .rd-menu-trigger, #rd-header2026 .rd-cart{ font-size:17px; }
+    #rd-header2026 .rd-cart svg{ width:24px; height:24px; }
+    #rd-header2026 .rd-nav-cta{ font-size:17px; padding:11px 22px; }
+    #rd-header2026 .rd-quicklinks{ gap:30px; }
+  }
+  @media (max-width:1080px){ #rd-header2026 .rd-brand .rd-logo-img{ height:64px !important; } #rd-header2026 .rd-quicklinks{ gap:18px; } #rd-header2026 .rd-nav-links{ gap:14px; } }
+  @media (max-width:749px){ #rd-header2026 .rd-brand .rd-logo-img{ height:60px !important; } }
 
   /* quicklinks container was completely unstyled — links rendered flush at wide
      viewports (caught in James's 1634px Chrome, 2026-07-24; audits only covered
      1280/390). Explicit flex+gap = same spacing at every width. */
   .rd-quicklinks{ display:flex; align-items:center; gap:28px; }
   .rd-nav-links{ display:flex; align-items:center; gap:20px; }
+
+  /* Programmes quick-link dropdown (2026-08-28, James). The second quick-link used to be a
+     direct link to one programme ("Workshops"); it is now a chooser. Reuses the .rd-megamenu
+     hover/focus machinery below — only the panel geometry differs, because the mega panel is
+     anchored right and 700px wide, and this one hangs left under a single word. */
+  .rd-qlmenu-btn{ font:inherit; font-weight:inherit; color:inherit; background:transparent; border:0; padding:0; cursor:pointer; display:inline-flex; align-items:center; line-height:inherit; }
+  .rd-qlmenu .rd-qlmenu-panel{ right:auto; left:0; width:max-content; min-width:232px; padding:14px 18px; }
+  .rd-qlmenu .rd-qlmenu-panel ul{ list-style:none; margin:0; padding:0; }
+  .rd-qlmenu .rd-qlmenu-panel li a{ display:block; padding:7px 0; font-size:14px; font-weight:600; color:var(--charcoal); line-height:1.3; white-space:nowrap; }
+  .rd-qlmenu .rd-qlmenu-panel li a:hover{ color:var(--forest); }
 
   /* Compact mega-menu: one "Menu" trigger that expands the full nav on hover OR click (button focus) */
   .rd-megamenu{ position:relative; }
@@ -129,35 +168,32 @@
     {%- comment -%} Brand: roundel + wordmark {%- endcomment -%}
     <a class="rd-brand" href="{{ routes.root_url }}" aria-label="Bamboo Bicycle Club &mdash; home"{% if request.page_type == 'index' %} aria-current="page"{% endif %}>
       {%- if section.settings.logo -%}
-        <img class="rd-logo-img" src="{{ section.settings.logo | image_url: width: 480 }}" alt="{{ section.settings.brand_text | default: shop.name }}" width="{{ section.settings.logo.width }}" height="{{ section.settings.logo.height }}" fetchpriority="high">
+        <img class="rd-logo-img" src="{{ section.settings.logo | image_url: width: 840 }}" alt="{{ section.settings.brand_text | default: shop.name }}" width="{{ section.settings.logo.width }}" height="{{ section.settings.logo.height }}" fetchpriority="high">
       {%- else -%}
         {%- comment -%}
-          The logo renders at ~100 CSS px but was served at its full 600px intrinsic width —
-          51 KB on EVERY page for a slot needing 200px at DPR2 (20.8 KB). Measured 2026-07-29:
-          natural 600 vs CSS 100, a 6x overshoot, the worst offender in the estate.
-          Theme assets are CDN-resizable with &width=, and asset_url returns a ?v= versioned
-          URL so &width appends safely. width/height stay at the intrinsic ratio so the box is
-          reserved before load (CLS), while sizes tells the browser the real slot.
+          Slot doubled 2026-08-21 (James: header wasn't impactful): ~200 CSS px wide on
+          desktop (92px tall), 139px at <=1080px, 130px mobile — sizes/srcset match that
+          ladder. Theme assets are CDN-resizable with &width=, and asset_url returns a ?v=
+          versioned URL so &width appends safely. width/height stay at the intrinsic ratio
+          so the box is reserved before load (CLS). The intrinsic asset is 600px wide, which
+          still covers the doubled slot at DPR2 (400w) and DPR3 (600w) — never upscale past 600.
         {%- endcomment -%}
         {%- assign logo_src = 'bbc-rd-logo.png' | asset_url -%}
         <img class="rd-logo-img"
-             src="{{ logo_src }}&width=200"
-             srcset="{{ logo_src }}&width=100 100w, {{ logo_src }}&width=200 200w, {{ logo_src }}&width=300 300w"
-             sizes="100px"
+             src="{{ logo_src }}&width=400"
+             srcset="{{ logo_src }}&width=200 200w, {{ logo_src }}&width=400 400w, {{ logo_src }}&width=600 600w"
+             sizes="(max-width: 749px) 130px, (max-width: 1080px) 139px, 200px"
              alt="Bamboo Bicycle Club" width="600" height="277" fetchpriority="high">
       {%- endif -%}
     </a>
 
     {%- comment -%} Desktop primary nav — compact "Menu" trigger expands the full nav (hover or click) + cart + CTA {%- endcomment -%}
     <nav class="rd-nav-links" aria-label="Primary">
-      <div class="rd-quicklinks">
-        {%- assign qlabels = "Build a bike,Workshops,Why bamboo,Impact" | split: "," -%}
-        {%- assign qurls = "/collections/home-build-kits,/pages/bicycle-frame-building-workshop,/pages/why-bamboo,/pages/impact" | split: "," -%}
-        {%- for lbl in qlabels -%}
-          {%- assign qu = qurls[forloop.index0] -%}
-          <a class="rd-nav-link rd-quicklink{% if request.path == qu %} rd-ql-active{% endif %}" href="{{ qu }}">{{ lbl }}</a>
-        {%- endfor -%}
-      </div>
+      {%- comment -%} Quick-links row lives in snippets/bbc-quicklinks.liquid (extracted 2026-08-28)
+        so it can be edited without rewriting this file. "Workshops" is now a "Programmes"
+        dropdown fed from the same menu as the mega panel. render is scope-isolated, so the
+        section object is passed explicitly. {%- endcomment -%}
+      {%- render 'bbc-quicklinks', section: section -%}
       <div class="rd-megamenu">
         <button type="button" class="rd-menu-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="rd-mega-panel">
           <span class="rd-mt-bars" aria-hidden="true"><span></span><span></span><span></span></span>Menu
@@ -303,4 +339,3 @@
   ]
 }
 {% endschema %}
-

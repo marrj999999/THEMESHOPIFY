@@ -1,16 +1,16 @@
 {%- comment -%}
   BBC New Design (2026) — PROGRAMMES page (/pages/programmes).
-  Consolidates schools (Make Engineers) + prisons (Build to Bond) into ONE
-  lead-gen page: lean up top, drives to contact; commissioner DEPTH kept on
-  demand (delivery model, budget, security, routes). Replaces the standalone
-  schools + prisons + build-to-bond pages. Impact-quality, reuses rd- system.
+  THE EDUCATION PAGE (/pages/programmes, title "Education"). Audience: schools,
+  colleges, councils and youth services. PRISONS REMOVED 2026-08-27 (James) —
+  prison commissioning lives on /pages/build-to-bond and the impact page; home
+  door_2 repointed there. The pri_*/step/budget/routes schema remains dormant.
 
   CONTENT POLICY (hard rules):
   - Prisons MAY be named. NEVER link a named/identifiable participant to a
     named prison. "Makers", never "prisoners"/"offenders".
   - Pricing = GRANT-BUDGET framing only (kit ~£180 · cohort ~£8,500 ·
     capex £7–10k · site-year ~£45k). No per-learner contract pricing.
-  - OCN: schools = Level 1, prisons = Level 2. 90% completion = BBC records only.
+  - OCN: two Level 2 courses (1130735, 1131207). No schools-award claim until OCN evidence is filed. 90%+ completion = BBC records only.
   - Every section ends in "start a conversation" → contact. Detail lives in the
     conversation, not a full advert.
 {%- endcomment -%}
@@ -22,32 +22,112 @@
 
 <div class="bbc-rd bbc-rd-programmes">
 
-  {%- comment -%} ---------- HERO (both arms) ---------- {%- endcomment -%}
-  <header class="rd-hero rd-mh-70">
+  {%- comment -%} ---------- HERO (both arms) ----------
+     FILM HERO added 2026-08-27 (James: "match the hero from other pages") — same
+     hardened pattern as .wvh/.cvh: poster first, film starts on canplay, reveals on
+     playing, pauses off-tab. Gates: prefers-reduced-motion + Save-Data honoured;
+     NO phone gate (James 2026-08-24: films must play on mobile). Film default:
+     bbc-rd-stopmotion-build.mp4 (20s frame-assembly stop-motion, no faces). {%- endcomment -%}
+  <header class="rd-hero rd-mh-70 evh">
     <div class="rd-bg">
       {%- if section.settings.hero_image != blank -%}
         <img src="{{ section.settings.hero_image | image_url: width: 1600 }}" srcset="{{ section.settings.hero_image | image_url: width: 800 }} 800w, {{ section.settings.hero_image | image_url: width: 1200 }} 1200w, {{ section.settings.hero_image | image_url: width: 1600 }} 1600w" sizes="100vw" alt="{{ section.settings.hero_image_alt | escape }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" fetchpriority="high" loading="eager">
       {%- else -%}
         <img src="{{ section.settings.hero_fallback | default: 'bbc-rd-workshop.jpg' | asset_url }}" alt="{{ section.settings.hero_image_alt | escape }}" width="1500" height="999" fetchpriority="high" loading="eager">
       {%- endif -%}
+      {%- assign _evfilm = section.settings.evh_film_url -%}
+      {%- if _evfilm == blank -%}{%- assign _evfilm = 'bbc-rd-stopmotion-build.mp4' | asset_url -%}{%- endif -%}
+      {%- if section.settings.evh_film_on -%}
+      <video class="evh-film" muted playsinline loop preload="metadata" poster="{{ section.settings.hero_fallback | default: 'bbc-rd-workshop.jpg' | asset_url }}" aria-hidden="true" tabindex="-1">
+        <source src="{{ _evfilm }}" type="video/mp4">
+      </video>
+      {%- endif -%}
     </div>
     <div class="rd-scrim"></div>
     <div class="rd-inner">
       <div class="rd-wrap">
-        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><span class="rd-here">Programmes</span></nav>
+        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><span class="rd-here">Education</span></nav>
         {%- if section.settings.hero_eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>{%- endif -%}
         <h1 class="rd-mt2 rd-mw-18ch">{{ section.settings.hero_title }}</h1>
         <div class="rd-lede">{{ section.settings.hero_lede }}</div>
+        {%- if section.settings.hero_proof_on != false -%}
+        <ul class="rd-heroproof" aria-label="Education in numbers">
+          <li><b>{{ section.settings.hero_proof1_num | default: '1,500+' }}</b><span>{{ section.settings.hero_proof1_label | default: 'students taught' }}</span></li>
+          <li><b>{{ section.settings.hero_proof2_num | default: '22' }}</b><span>{{ section.settings.hero_proof2_label | default: 'schools, colleges & universities' }}</span></li>
+          <li><b>{{ section.settings.hero_proof3_num | default: '2' }}</b><span>{{ section.settings.hero_proof3_label | default: 'OCN London Level 2 courses' }}</span></li>
+        </ul>
+        {%- endif -%}
         <div class="rd-cta-row">
           <a class="rd-btn rd-lime" href="{{ contact_url }}">{{ section.settings.hero_cta1_label | default: 'start a conversation' }} <span class="rd-arrow">&rarr;</span></a>
-          <a class="rd-btn rd-on-dark" href="#schools">{{ section.settings.hero_cta2_label | default: 'for schools' }}</a>
-          <a class="rd-btn rd-on-dark" href="#prisons">{{ section.settings.hero_cta3_label | default: 'for prisons' }}</a>
+          <a class="rd-btn rd-on-dark" href="#schools">{{ section.settings.hero_cta2_label | default: 'for schools & colleges' }}</a>
+          <a class="rd-btn rd-on-dark" href="#community">{{ section.settings.hero_cta3_label | default: 'for councils & youth services' }}</a>
         </div>
+        {%- if section.settings.hero_quote != blank -%}
+        <div class="rd-heroquote rd-mt3">
+          <p class="rd-q">{{ section.settings.hero_quote }}</p>
+          {%- if section.settings.hero_quote_cite != blank -%}<cite>{{ section.settings.hero_quote_cite }}</cite>{%- endif -%}
+        </div>
+        {%- endif -%}
       </div>
     </div>
   </header>
+  <style>
+    .evh .evh-film{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; opacity:0; transition:opacity .8s ease; }
+    .evh .evh-film.evh-on{ opacity:1; }
+    .evh .rd-bg img{ z-index:0; }
+    @media (prefers-reduced-motion: reduce){ .evh .evh-film{ display:none; } }
+    .bbc-rd-programmes .rd-hero h1,
+    .bbc-rd-programmes .rd-hero .rd-lede,
+    .bbc-rd-programmes .rd-hero .rd-heroproof,
+    .bbc-rd-programmes .rd-hero .rd-cta-row,
+    .bbc-rd-programmes .rd-hero .rd-heroquote,
+    .bbc-rd-programmes .rd-hero .rd-crumb{ text-align:left !important; margin-left:0 !important; margin-right:0 !important; }
+    .bbc-rd-programmes .rd-hero .rd-heroproof{ justify-content:flex-start !important; }
+    .bbc-rd-programmes .rd-hero .rd-cta-row{ justify-content:flex-start !important; }
+    .bbc-rd .rd-heroquote{ max-width:58ch; }
+    .bbc-rd .rd-heroquote .rd-q{ font-size:clamp(14.5px,1.3vw,17px); line-height:1.55; margin:0 0 4px; opacity:.94; color:var(--bone,#E6DCC8); }
+    .bbc-rd .rd-heroquote cite{ color:var(--bone,#E6DCC8); }
+    .bbc-rd .rd-heroquote cite{ font-style:normal; font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; opacity:.7; }
+  
+  .bbc-rd .edt-instgrp{ max-width:820px; margin-left:auto; margin-right:auto; }
+  .bbc-rd .edt-instk{ display:block; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; opacity:.55; margin-bottom:6px; }
+  .bbc-rd .edt-instnames{ font-size:15px; line-height:1.9; margin:0; }
+</style>
+  <script>
+    (function () {
+      var v = document.querySelector('.evh .evh-film');
+      if (!v) return;
+      if (navigator.connection && navigator.connection.saveData) { v.remove(); return; }
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.remove(); return; }
+      v.muted = true; v.setAttribute('muted', '');
+      var started = false;
+      function go() {
+        if (started) return; started = true;
+        var p = v.play();
+        if (p && p.catch) p.catch(function () { started = false; });
+      }
+      v.addEventListener('playing', function () { v.classList.add('evh-on'); });
+      v.addEventListener('canplay', go);
+      v.load();
+      if (v.readyState >= 3) go();
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) { v.pause(); } else if (started) { v.play().catch(function(){}); }
+      });
+    })();
+  </script>
 
   {%- comment -%} ---------- TWO PATHS (overview — the fork) ---------- {%- endcomment -%}
+  <style>
+    .edt-ic{ width:38px; height:38px; color:var(--forest,#003C32); display:block; margin:0 0 10px; }
+    .edt-ic .edt-ic-a{ color:#7aa000; }
+    .edt-media{ aspect-ratio:8/5; overflow:hidden; background:var(--forest-700,#002A23); }
+    .edt-media img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .edt-tools{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    @media (max-width:860px){ .edt-tools{ grid-template-columns:1fr; } }
+    .edt-tool{ border:2.5px solid var(--ink,#0E241E); border-radius:12px; overflow:hidden; background:#fff; }
+    .edt-tool img{ width:100%; display:block; }
+    .edt-tool figcaption{ padding:10px 14px; font-size:13.5px; font-weight:700; letter-spacing:.03em; }
+  </style>
   <section class="rd-pad rd-paper">
     <div class="rd-wrap">
       <div class="rd-center">
@@ -58,18 +138,20 @@
       <div class="rd-grid rd-g2 rd-mt4">
         <a class="rd-card rd-stamp rd-cardlink" href="#schools">
           <div class="rd-body">
+            <svg class="edt-ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="8" y="3" width="16" height="26" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="11" r="2.4" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="21" r="4.6" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="21" r="1.2" fill="currentColor" class="edt-ic-a"/></svg>
             <span class="rd-tag rd-lime">{{ section.settings.sch_tag | default: 'in schools · ages 11–19' }}</span>
             <h3 class="rd-mt2 rd-fs-21px">{{ section.settings.sch_card_title | default: 'real engineering' }}</h3>
-            <p>{{ section.settings.sch_card_body | default: "A free bamboo-speaker STEM build for schools and colleges — OCN Level 1 when you build up. Teachers run it; no engineering background needed." }}</p>
+            <p>{{ section.settings.sch_card_body | default: "A free bamboo-speaker STEM build for schools and colleges — OCN-accredited routes when you build up. Teachers run it; no engineering background needed." }}</p>
             <span class="rd-arrow-link">for schools <span class="rd-arrow">&rarr;</span></span>
           </div>
         </a>
-        <a class="rd-card rd-stamp rd-cardlink" href="#prisons">
+        <a class="rd-card rd-stamp rd-cardlink" href="#community">
           <div class="rd-body">
-            <span class="rd-tag rd-lime">{{ section.settings.pri_tag | default: 'in prisons · accredited' }}</span>
-            <h3 class="rd-mt2 rd-fs-21px">{{ section.settings.pri_card_title | default: 'vocational skills' }}</h3>
-            <p>{{ section.settings.pri_card_body | default: "An OCN Level 2 accredited course you run in your own workshop — we set up and train your staff, no ongoing fees. Ends on family visit day." }}</p>
-            <span class="rd-arrow-link">for prisons &amp; commissioners <span class="rd-arrow">&rarr;</span></span>
+            <svg class="edt-ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M9 2v28M23 2v28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9 9h14M9 16h14M9 23h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="26.5" cy="5" r="2" fill="currentColor" class="edt-ic-a"/></svg>
+            <span class="rd-tag rd-lime">{{ section.settings.comc_tag | default: 'for councils · youth services' }}</span>
+            <h3 class="rd-mt2 rd-fs-21px">{{ section.settings.comc_card_title | default: 'prevention through making' }}</h3>
+            <p>{{ section.settings.comc_card_body | default: "A five-step ladder for youth settings — free taster talks to accredited builds and enterprise skills. Delivered with Project Zero in Waltham Forest; piloted with Camden." }}</p>
+            <span class="rd-arrow-link">for councils &amp; youth services <span class="rd-arrow">&rarr;</span></span>
           </div>
         </a>
       </div>
@@ -83,21 +165,32 @@
     which is what keeps the figures lime. Reordered, not recoloured: no content changed.
     (2026-08-04)
   {%- endcomment -%}
-  <section class="rd-pad-sm rd-dark">
+  <section class="rd-pad-sm rd-dark rd-band--stats">
     <div class="rd-wrap">
-      <div class="rd-facts">
+      {%- if section.settings.ghost_stat != blank -%}<span class="rd-ghostnum" aria-hidden="true">{{ section.settings.ghost_stat }}</span>{%- endif -%}
+      {%- if section.settings.stats_label != blank -%}<span class="rd-eyebrow">{{ section.settings.stats_label }}</span>{%- endif -%}
+      <div class="rd-stats">
         {%- for block in section.blocks -%}{%- if block.type == 'fact' -%}
-          <div class="rd-fact" {{ block.shopify_attributes }}><span class="rd-fact-n bbc-counted">{{ block.settings.number }}</span><span class="rd-fact-l">{{ block.settings.label }}</span></div>
+          <div class="rd-reveal rd-stat" {{ block.shopify_attributes }}>
+            <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
+            <div class="rd-lbl">{{ block.settings.label }}</div>
+            {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
+          </div>
         {%- endif -%}{%- endfor -%}
       </div>
+      {%- if section.settings.facts_note != blank -%}<p class="rd-dataasof rd-on-dark">{{ section.settings.facts_note }}</p>{%- endif -%}
+      {%- if section.settings.facts_cta_label != blank -%}<div class="rd-mt3"><a class="rd-btn rd-on-dark" href="{{ section.settings.facts_cta_url | default: '#institutions' }}">{{ section.settings.facts_cta_label }} <span class="rd-arrow">&rarr;</span></a></div>{%- endif -%}
     </div>
   </section>
 
   {%- comment -%} ========== SCHOOLS ARM ========== {%- endcomment -%}
-  <section id="schools" class="rd-pad">
-    <div class="rd-wrap rd-mw-820px">
+  <section id="schools" class="rd-split">
+    <div class="rd-reveal rd-media">
+      <img src="{{ section.settings.sch_image | default: 'bbc-edu-class.jpg' | asset_url }}" alt="{{ section.settings.sch_image_alt | default: 'A school group learning frame-building in the Bamboo Bicycle Club workshop' | escape }}" loading="lazy" width="1063" height="1600">
+    </div>
+    <div class="rd-txt">
       {%- if section.settings.sch_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.sch_eyebrow }}</span>{%- endif -%}
-      <h2>{{ section.settings.sch_title }}</h2>
+      <h2 class="rd-reveal">{{ section.settings.sch_title }}</h2>
       {%- if section.settings.sch_lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.sch_lede }}</p>{%- endif -%}
       {%- assign ssteps = section.blocks | where: 'type', 'sstep' -%}
       {%- if ssteps.size > 0 -%}
@@ -113,19 +206,224 @@
     </div>
   </section>
 
-  {%- comment -%} ========== PRISONS ARM (commissioner depth) ========== {%- endcomment -%}
-  <section id="prisons" class="rd-pad rd-dark">
-    <div class="rd-wrap rd-mw-820px">
-      {%- if section.settings.pri_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.pri_eyebrow }}</span>{%- endif -%}
-      <h2>{{ section.settings.pri_title }}</h2>
-      {%- if section.settings.pri_lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.pri_lede }}</p>{%- endif -%}
-      <ol class="rd-steps rd-mt4">
-        {%- for block in section.blocks -%}{%- if block.type == 'step' -%}
-          <li {{ block.shopify_attributes }}><h3>{{ block.settings.title }}</h3><p>{{ block.settings.body }}</p></li>
+  {%- comment -%} ---------- THE SCHOOLS PATHWAY (5 tiered programmes) ----------
+     Merged in from the unpublished bbc-education-2026 draft (2026-08-27, James:
+     "make this the education page — analyse both and merge"). Advert cards, not
+     links — pure estate classes, block type `programme` ported verbatim from the
+     education section. Frame I updated per Claims Register: the balance-bike
+     course is OCN London Level 2 accredited (1131207, 31 Jul 2026). {%- endcomment -%}
+  {%- if section.settings.prog_title != blank -%}
+  <section class="rd-pad" id="pathway">
+    <div class="rd-wrap">
+      <span class="rd-eyebrow">{{ section.settings.prog_eyebrow }}</span>
+      <h2 class="rd-reveal rd-mw-16ch">{{ section.settings.prog_title }}</h2>
+      {%- if section.settings.prog_lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.prog_lede }}</p>{%- endif -%}
+      <div class="rd-grid rd-g3 rd-mt4">
+        {%- for block in section.blocks -%}{%- if block.type == 'programme' -%}
+          <div class="rd-reveal rd-card rd-stamp{% if block.settings.free %} rd-card-free{% endif %}" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+            <div class="edt-media"><img src="{{ block.settings.image | image_url: width: 720 }}"
+                 srcset="{{ block.settings.image | image_url: width: 480 }} 480w, {{ block.settings.image | image_url: width: 720 }} 720w"
+                 sizes="(max-width: 749px) 92vw, 30vw" alt="" loading="lazy"
+                 width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}"></div>
+            {%- endif -%}
+            <div class="rd-body">
+              {%- comment -%} tier pictograms (2026-08-27) — same hand-drawn family as the
+                 community ladder; forest stroke, lime accent class edt-ic-a {%- endcomment -%}
+              {%- case block.settings.icon -%}
+              {%- when 'speakerbox' -%}
+                <svg class="edt-ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="8" y="3" width="16" height="26" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="11" r="2.4" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="21" r="4.6" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="21" r="1.2" fill="currentColor" class="edt-ic-a"/></svg>
+              {%- when 'balance' -%}
+                <svg class="edt-ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="8" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"/><path d="M8 22l4-9h6l6 9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 13l-2-4h3M18 13l3-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="21.6" cy="7.4" r="1.8" fill="currentColor" class="edt-ic-a"/></svg>
+              {%- when 'framebike' -%}
+                <svg class="edt-ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="7" cy="22" r="5.5" stroke="currentColor" stroke-width="2"/><circle cx="25" cy="22" r="5.5" stroke="currentColor" stroke-width="2"/><path d="M7 22l5-11h9l4 11M12 11h9M16 22l-4-11M16 22l5-11" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M21 11l-1.6-4h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="edt-ic-a"/></svg>
+              {%- when 'ai3d' -%}
+                <svg class="edt-ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 12l9 4.5v9L16 30l-9-4.5v-9L16 12z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M7 16.5l9 4.5 9-4.5M16 21v9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16 2v7M12.5 5.5h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M25 3.5l.9-1.9.9 1.9 1.9.9-1.9.9-.9 1.9-.9-1.9-1.9-.9 1.9-.9z" fill="currentColor" class="edt-ic-a"/></svg>
+              {%- when 'ebike' -%}
+                <svg class="edt-ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="7" cy="23" r="5" stroke="currentColor" stroke-width="2"/><circle cx="25" cy="23" r="5" stroke="currentColor" stroke-width="2"/><path d="M7 23l5-10h8l5 10M12 13l-2-3h4" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M20 4l-4 8h5l-4 8" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" class="edt-ic-a"/></svg>
+              {%- endcase -%}
+              <div class="rd-flex rd-between rd-gap-24">
+                <span class="rd-frame-label rd-c-subtle">{{ block.settings.tier }}</span>
+                {%- if block.settings.status == 'coming' -%}
+                  <span class="rd-tag">{{ section.settings.tx_in_development | default: "In development" }}</span>
+                {%- elsif block.settings.free -%}
+                  <span class="rd-tag rd-lime">Free</span>
+                {%- else -%}
+                  <span class="rd-tag">{{ block.settings.price_tag | default: 'Request a quote' }}</span>
+                {%- endif -%}
+              </div>
+              <h3 class="rd-fs-21px rd-mt2">{{ block.settings.title }}</h3>
+              {%- if block.settings.detail != blank -%}<p class="rd-c-subtle rd-mt-10px">{{ block.settings.detail }}</p>{%- endif -%}
+            </div>
+          </div>
         {%- endif -%}{%- endfor -%}
-      </ol>
+      </div>
     </div>
   </section>
+  {%- endif -%}
+
+  {%- comment -%} ========== COMMUNITY & COUNCILS ARM ==========
+     Added 2026-08-26 from Chris's "Website" doc (Google Doc 1ppl_5413…): a five-rung
+     product ladder for the community sector — prevention work aimed at councils, VRUs,
+     youth hubs and PRUs. Design: the "culm ladder" — vertical rail on phones (same
+     family as the our-story timeline), rising baseline steps on desktop, so the
+     progression is the composition. Rung blocks are `crung` in the template; a rung
+     with `dev` ticked renders ghosted ("in development") — Chris's own "?" on rung 5.
+     COPY GATES: System/Claims Register + person-first language (TRR declaration, Chris
+     19 Aug). Camden is a PILOT — never a success story or endorsement. No outcome
+     claims beyond the published Project Zero case study. {%- endcomment -%}
+  {%- if section.settings.com_title != blank -%}
+  <section id="community" class="rd-pad">
+    <div class="rd-wrap">
+      {%- if section.settings.com_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.com_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-mw-22ch">{{ section.settings.com_title }}</h2>
+      {%- if section.settings.com_lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.com_lede }}</p>{%- endif -%}
+      {%- if section.settings.com_audiences != blank -%}
+        <ul class="cml-aud rd-mt2" role="list">
+          {%- assign _auds = section.settings.com_audiences | split: ',' -%}
+          {%- for a in _auds -%}<li>{{ a | strip }}</li>{%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- assign crungs = section.blocks | where: 'type', 'crung' -%}
+      {%- if crungs.size > 0 -%}
+      <ol class="cml-ladder rd-mt4">
+        {%- for block in crungs -%}
+          <li class="cml-rung{% if block.settings.dev %} cml-dev{% endif %}" {{ block.shopify_attributes }}>
+            <span class="cml-n" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            <div class="cml-card">
+              {%- comment -%} Hand-drawn-style pictograms (2026-08-26, James: "use symbols").
+                 Icons not photos on rungs: step/tier devices scan on symbols; photography
+                 lives in the proof card below so the ladder stays crisp. {%- endcomment -%}
+              {%- case block.settings.icon -%}
+              {%- when 'speaker' -%}
+                <svg class="cml-ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 14v6l5 1V13l-5 1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 13l13-6v18l-13-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M25 12c1.4 1 2.2 2.4 2.2 4s-.8 3-2.2 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M27.5 9.5A9 9 0 0 1 30.6 16a9 9 0 0 1-3.1 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="cml-ic-a"/></svg>
+              {%- when 'balance' -%}
+                <svg class="cml-ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="8" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"/><path d="M8 22l4-9h6l6 9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 13l-2-4h3M18 13l3-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="21.6" cy="7.4" r="1.8" fill="currentColor" class="cml-ic-a"/></svg>
+              {%- when 'enterprise' -%}
+                <svg class="cml-ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 14V6h8l14 14-8 8L5 14z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="10.5" cy="11.5" r="1.8" fill="currentColor"/><path d="M17 15l5 5M15 20l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="cml-ic-a"/></svg>
+              {%- when 'ebike' -%}
+                <svg class="cml-ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="7" cy="23" r="5" stroke="currentColor" stroke-width="2"/><circle cx="25" cy="23" r="5" stroke="currentColor" stroke-width="2"/><path d="M7 23l5-10h8l5 10M12 13l-2-3h4" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M20 4l-4 8h5l-4 8" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" class="cml-ic-a"/></svg>
+              {%- when 'ai3d' -%}
+                <svg class="cml-ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 12l9 4.5v9L16 30l-9-4.5v-9L16 12z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M7 16.5l9 4.5 9-4.5M16 21v9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16 2v7M12.5 5.5h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M25 3.5l.9-1.9.9 1.9 1.9.9-1.9.9-.9 1.9-.9-1.9-1.9-.9 1.9-.9z" fill="currentColor" class="cml-ic-a"/></svg>
+              {%- endcase -%}
+              <h3 class="cml-t">{{ block.settings.title }}{% if block.settings.dev %} <span class="cml-devtag">in development</span>{% endif %}</h3>
+              {%- if block.settings.tag != blank -%}<span class="cml-tag">[ {{ block.settings.tag }} ]</span>{%- endif -%}
+              <p class="cml-b">{{ block.settings.body }}</p>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+      {%- endif -%}
+      {%- if section.settings.com_proof != blank -%}
+        <div class="cml-proofcard rd-mt4">
+          {%- if section.settings.com_proof_image != blank -%}
+            <img class="cml-proofimg" src="{{ section.settings.com_proof_image | image_url: width: 640 }}"
+                 srcset="{{ section.settings.com_proof_image | image_url: width: 400 }} 400w, {{ section.settings.com_proof_image | image_url: width: 640 }} 640w"
+                 sizes="(max-width: 749px) 92vw, 300px" alt="{{ section.settings.com_proof_image_alt | escape }}" loading="lazy"
+                 width="{{ section.settings.com_proof_image.width }}" height="{{ section.settings.com_proof_image.height }}">
+          {%- endif -%}
+          <p class="cml-proof">{{ section.settings.com_proof }}
+            {%- if section.settings.com_proof_label != blank and section.settings.com_proof_url != blank %} <a href="{{ section.settings.com_proof_url }}">{{ section.settings.com_proof_label }} <span class="rd-arrow">&rarr;</span></a>{% endif -%}
+          </p>
+        </div>
+      {%- endif -%}
+      <div class="rd-cta-row rd-mt4">
+        <a class="rd-btn rd-ghost" href="{{ contact_url }}?subject=community">{{ section.settings.com_cta_label | default: 'start a conversation' }} <span class="rd-arrow">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+  <style>
+    /* Community culm ladder — self-owned .cml-* classes (estate cascade lesson) */
+    .cml-aud{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px; }
+    .cml-aud li{ font-size:12.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--forest,#003C32); background:rgba(0,60,50,.08); border:1.5px solid rgba(0,60,50,.25); border-radius:999px; padding:5px 12px; }
+    .cml-ladder{ list-style:none; margin:0; padding:0 0 0 46px; position:relative; }
+    .cml-ladder::before{ content:""; position:absolute; left:13px; top:8px; bottom:8px; width:4px; border-radius:2px;
+      background:repeating-linear-gradient(to bottom, var(--forest,#003C32) 0 16px, rgba(0,60,50,.16) 16px 22px); }
+    .cml-rung{ position:relative; padding:0 0 26px; }
+    .cml-rung:last-child{ padding-bottom:0; }
+    .cml-n{ position:absolute; left:-46px; top:0; width:30px; height:30px; border-radius:50%; background:var(--lime,#D4FD62); color:var(--forest,#003C32); font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 3px rgba(0,60,50,.9); }
+    .cml-t{ margin:2px 0 2px; font-size:20px; line-height:1.2; }
+    .cml-tag{ display:inline-block; font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--forest,#003C32); opacity:.65; margin:0 0 6px; }
+    .cml-b{ margin:4px 0 0; font-size:15.5px; line-height:1.55; max-width:52ch; }
+    .cml-dev .cml-card{ opacity:.62; }
+    .cml-dev .cml-n{ background:transparent; color:var(--forest,#003C32); border:2px dashed var(--forest,#003C32); box-shadow:none; }
+    .cml-devtag{ font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--forest,#003C32); background:rgba(0,60,50,.1); border-radius:999px; padding:3px 9px; vertical-align:middle; margin-left:6px; }
+    .cml-ic{ width:40px; height:40px; color:var(--forest,#003C32); display:block; margin:0 0 8px; }
+    .cml-ic .cml-ic-a{ color:inherit; }
+    .cml-rung:not(.cml-dev) .cml-ic .cml-ic-a{ color:#7aa000; }
+    .cml-proofcard{ display:flex; gap:18px; align-items:center; max-width:760px; background:rgba(0,60,50,.06); border-radius:14px; padding:14px; }
+    .cml-proofimg{ width:190px; aspect-ratio:4/3; object-fit:cover; border-radius:10px; flex:none; }
+    .cml-proof{ font-size:15.5px; max-width:64ch; border-left:4px solid var(--lime,#D4FD62); padding-left:14px; margin:0; }
+    .cml-proof a{ font-weight:700; white-space:nowrap; }
+    @media (max-width:600px){ .cml-proofcard{ flex-direction:column; align-items:stretch; } .cml-proofimg{ width:100%; } }
+    @media (min-width:900px){
+      /* rising staircase: cards share a baseline, each rung starts higher */
+      .cml-ladder{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; padding:0; align-items:start; }
+      .cml-ladder::before{ content:none; }
+      .cml-rung{ padding:0; display:flex; flex-direction:column; height:100%; }
+      .cml-rung:nth-child(1){ margin-top:120px; } .cml-rung:nth-child(2){ margin-top:90px; }
+      .cml-rung:nth-child(3){ margin-top:60px; } .cml-rung:nth-child(4){ margin-top:30px; }
+      .cml-rung:nth-child(5){ margin-top:0; }
+      .cml-n{ position:static; margin-bottom:10px; }
+      .cml-card{ border-top:3px solid var(--forest,#003C32); padding-top:10px; flex:1; }
+      .cml-dev .cml-card{ border-top-style:dashed; }
+      .cml-t{ font-size:19px; }
+      .cml-b{ font-size:14.5px; }
+    }
+    @media (min-width:900px) and (max-width:1100px){ .cml-ladder{ grid-template-columns:repeat(5,1fr); gap:10px; } .cml-t{ font-size:17px; } }
+  </style>
+  {%- endif -%}
+
+  {%- comment -%} ---------- HOW COMMISSIONING WORKS (2026-08-27) ----------
+     Stakeholder refocus (James): councils + education institutions. Steps mirror the
+     REAL Camden commissioning thread (supplier setup, RA, safeguarding + photography
+     agreed, SEND adjustments, surveys + report back) — practice claims only, no
+     framework name-drops until James/Chris confirm (Gatsby/DfE Enrichment/YEF are in
+     the workstream note as pending decisions). {%- endcomment -%}
+  {%- if section.settings.hcw_title != blank -%}
+  <section class="rd-pad-sm rd-paper" id="commissioning">
+    <div class="rd-wrap">
+      <span class="rd-eyebrow">{{ section.settings.hcw_eyebrow }}</span>
+      <h2 class="rd-mw-22ch">{{ section.settings.hcw_title }}</h2>
+      <ol class="rd-steps rd-mt4">
+        <li><h3>{{ section.settings.hcw_s1_t }}</h3><p>{{ section.settings.hcw_s1_b }}</p></li>
+        <li><h3>{{ section.settings.hcw_s2_t }}</h3><p>{{ section.settings.hcw_s2_b }}</p></li>
+        <li><h3>{{ section.settings.hcw_s3_t }}</h3><p>{{ section.settings.hcw_s3_b }}</p></li>
+        <li><h3>{{ section.settings.hcw_s4_t }}</h3><p>{{ section.settings.hcw_s4_b }}</p></li>
+      </ol>
+      {%- if section.settings.hcw_note != blank -%}<p class="rd-c-subtle rd-mt2" style="max-width:64ch;">{{ section.settings.hcw_note }}</p>{%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- THE INSTRUCTOR APP (2026-08-27, James: dashboard screenshots) ----------
+     Screens are curriculum-delivery UI from the instructor app slide decks — run-of-day,
+     safety checklist, evidence hand-in. NO learner data (lesson screens only; never
+     screenshot live cohort views). {%- endcomment -%}
+  {%- if section.settings.tools_title != blank -%}
+  <section class="rd-pad" id="tools">
+    <div class="rd-wrap">
+      <span class="rd-eyebrow">{{ section.settings.tools_eyebrow }}</span>
+      <h2 class="rd-mw-22ch">{{ section.settings.tools_title }}</h2>
+      {%- if section.settings.tools_lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.tools_lede }}</p>{%- endif -%}
+      <div class="edt-tools rd-mt4">
+        {%- for i in (1..3) -%}
+          {%- assign _img = 'tools_img' | append: i -%}
+          {%- assign _cap = 'tools_cap' | append: i -%}
+          {%- if section.settings[_img] != blank -%}
+          <figure class="edt-tool rd-reveal">
+            <img src="{{ section.settings[_img] | image_url: width: 900 }}" alt="{{ section.settings[_cap] | escape }}" loading="lazy"
+                 width="{{ section.settings[_img].width }}" height="{{ section.settings[_img].height }}">
+            {%- if section.settings[_cap] != blank -%}<figcaption>{{ section.settings[_cap] }}</figcaption>{%- endif -%}
+          </figure>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+
 
   {%- comment -%} ---------- BUDGET GUIDE (grant framing) ---------- {%- endcomment -%}
   {%- if section.settings.budget_title != blank -%}
@@ -191,7 +489,7 @@
   {%- endif -%}
 
   {%- comment -%} ---------- CREDIBILITY (quote + sites + logos) ---------- {%- endcomment -%}
-  {%- if section.settings.cred_quote != blank -%}
+  {%- if section.settings.cred_quote != blank or section.settings.sites_list != blank -%}
   <section class="rd-pad-sm rd-paper rd-center">
     <div class="rd-wrap rd-mw-680px">
       <div class="rd-pull rd-mx-auto">
@@ -201,6 +499,26 @@
       {%- if section.settings.sites_list != blank -%}<div class="rd-sitenames rd-mt4">{{ section.settings.sites_list }}</div>{%- endif -%}
       {%- if section.settings.funder_logo != blank or section.settings.accred_logo != blank -%}<div class="rd-mt3 rd-flex rd-jc-center" style="gap:32px;align-items:center;">{%- if section.settings.funder_logo != blank -%}<img src="{{ section.settings.funder_logo | asset_url }}" alt="{{ section.settings.funder_logo_alt | escape }}" loading="lazy" style="height:56px !important;width:auto !important;max-width:220px;object-fit:contain;">{%- endif -%}{%- if section.settings.accred_logo != blank -%}<img src="{{ section.settings.accred_logo | asset_url }}" alt="{{ section.settings.accred_logo_alt | escape }}" loading="lazy" style="height:48px !important;width:auto !important;max-width:180px;object-fit:contain;">{%- endif -%}</div>{%- endif -%}
       {%- if section.settings.funder_line != blank -%}<p class="rd-ship-note rd-mt1">{{ section.settings.funder_line }}</p>{%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+
+  {%- comment -%} ---------- INSTITUTIONS (track-record wall, 2026-08-27) — every name
+     evidence-verified in the email archive (orders / workshops / builds) before listing;
+     add names only with James's sign-off + archive evidence {%- endcomment -%}
+  {%- if section.settings.inst_unis != blank or section.settings.inst_schools != blank -%}
+  <section class="rd-pad-sm rd-center" id="institutions">
+    <div class="rd-wrap rd-mw-820px">
+      {%- if section.settings.inst_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.inst_eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.inst_title != blank -%}<h2 class="rd-reveal">{{ section.settings.inst_title }}</h2>{%- endif -%}
+      {%- if section.settings.inst_unis != blank -%}
+      <div class="edt-instgrp rd-mt3"><span class="edt-instk">universities</span><p class="edt-instnames">{{ section.settings.inst_unis }}</p></div>
+      {%- endif -%}
+      {%- if section.settings.inst_schools != blank -%}
+      <div class="edt-instgrp rd-mt2"><span class="edt-instk">schools &amp; colleges</span><p class="edt-instnames">{{ section.settings.inst_schools }}</p></div>
+      {%- endif -%}
+      {%- if section.settings.inst_note != blank -%}<p class="rd-ship-note rd-mt2">{{ section.settings.inst_note }}</p>{%- endif -%}
     </div>
   </section>
   {%- endif -%}
@@ -260,13 +578,13 @@
       "type": "text",
       "id": "hero_title",
       "label": "Headline",
-      "default": "accredited bike-building programmes for schools and prisons."
+      "default": "education, built by hand."
     },
     {
       "type": "textarea",
       "id": "hero_lede",
       "label": "Lede",
-      "default": "We turn bike-building into recognised skills — a free STEM build for schools, and an OCN Level 2 course you run inside your own prison workshop. Both start with a conversation."
+      "default": "Hands-on STEM and vocational learning through building real bamboo bikes — for schools, colleges, councils and youth services."
     },
     {
       "type": "text",
@@ -284,7 +602,7 @@
       "type": "text",
       "id": "hero_cta3_label",
       "label": "Jump link 2",
-      "default": "for prisons"
+      "default": "for councils & youth services"
     },
     {
       "type": "header",
@@ -300,7 +618,7 @@
       "type": "text",
       "id": "paths_title",
       "label": "Heading",
-      "default": "prevention in schools, rehabilitation in prisons."
+      "default": "one craft, built for your setting."
     },
     {
       "type": "textarea",
@@ -324,7 +642,7 @@
       "type": "textarea",
       "id": "sch_card_body",
       "label": "Schools card body",
-      "default": "A free bamboo-speaker STEM build for schools and colleges — OCN Level 1 when you build up. Teachers run it; no engineering background needed."
+      "default": "A free bamboo-speaker STEM build for schools and colleges — OCN-accredited routes when you build up. Teachers run it; no engineering background needed."
     },
     {
       "type": "text",
@@ -364,7 +682,7 @@
       "type": "textarea",
       "id": "sch_lede",
       "label": "Lede",
-      "default": "The Speaker build is the front door: a complete STEM project at no cost, curriculum-linked, that any teacher can run. When students want more, it grows into an OCN Level 1 accredited programme."
+      "default": "The Speaker build is the front door: a complete STEM project at no cost, curriculum-linked, that any teacher can run. When students want more, it grows into an OCN London accredited programme."
     },
     {
       "type": "text",
@@ -474,7 +792,7 @@
       "type": "textarea",
       "id": "cred_quote",
       "label": "Quote (blank to hide)",
-      "default": "Innovative projects, such as Build to Bond, support rehabilitation and help cut reoffending."
+      "default": "Innovative projects, such as Build to Bond, support rehabilitation and help people leave prison as better citizens, boosting the economy and keeping our streets safe."
     },
     {
       "type": "text",
@@ -486,7 +804,42 @@
       "type": "text",
       "id": "sites_list",
       "label": "Named sites (HTML allowed)",
-      "default": "HMP Lowdham Grange &middot; HMP Foston Hall &middot; HMP Lindholme &middot; HMYOI Feltham"
+      "default": "five UK prison sites, at different delivery stages"
+    },
+    {
+      "type": "text",
+      "id": "facts_note",
+      "label": "Facts band note line"
+    },
+    {
+      "type": "header",
+      "content": "Institutions wall"
+    },
+    {
+      "type": "text",
+      "id": "inst_eyebrow",
+      "label": "Institutions eyebrow",
+      "default": "track record"
+    },
+    {
+      "type": "text",
+      "id": "inst_title",
+      "label": "Institutions heading"
+    },
+    {
+      "type": "textarea",
+      "id": "inst_unis",
+      "label": "Universities (· separated)"
+    },
+    {
+      "type": "textarea",
+      "id": "inst_schools",
+      "label": "Schools and colleges (· separated)"
+    },
+    {
+      "type": "text",
+      "id": "inst_note",
+      "label": "Institutions note line"
     },
     {
       "type": "textarea",
@@ -605,9 +958,487 @@
       "label": "Mosaic layout (content-aware sizes, no gaps)",
       "info": "Card size is derived from its content: a film goes wide, long copy goes tall, no image goes flat. Gaps backfill automatically. Needs 3+ cards.",
       "default": false
+    },
+    {
+      "type": "header",
+      "content": "Community & councils arm"
+    },
+    {
+      "type": "text",
+      "id": "com_eyebrow",
+      "label": "Eyebrow",
+      "default": "community & councils"
+    },
+    {
+      "type": "text",
+      "id": "com_title",
+      "label": "Heading",
+      "default": "prevention through making."
+    },
+    {
+      "type": "textarea",
+      "id": "com_lede",
+      "label": "Lede",
+      "default": "Five programmes that climb. Start with a free taster talk in your venue, and go as far as your young people want — practical learning built for youth and community settings."
+    },
+    {
+      "type": "text",
+      "id": "com_audiences",
+      "label": "Audience chips (comma-separated)",
+      "default": "councils, violence reduction units, youth hubs, PRUs, community trusts"
+    },
+    {
+      "type": "textarea",
+      "id": "com_proof",
+      "label": "Proof line",
+      "default": "Delivered with Project Zero and Waltham Forest College — 27 young people built working bamboo bikes and rated the day 9–10 out of 10. Piloted with Camden at Euston Skills Centre."
+    },
+    {
+      "type": "text",
+      "id": "com_proof_label",
+      "label": "Proof link label",
+      "default": "read the project zero case study"
+    },
+    {
+      "type": "text",
+      "id": "com_proof_url",
+      "label": "Proof link URL",
+      "default": "/blogs/news/project-zero-impact-case-study"
+    },
+    {
+      "type": "header",
+      "content": "Hero film"
+    },
+    {
+      "type": "checkbox",
+      "id": "evh_film_on",
+      "label": "Play the hero film",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "evh_film_url",
+      "label": "Film URL (blank = stop-motion build asset)"
+    },
+    {
+      "type": "header",
+      "content": "Councils fork card"
+    },
+    {
+      "type": "text",
+      "id": "comc_tag",
+      "label": "Tag",
+      "default": "for councils · youth services"
+    },
+    {
+      "type": "text",
+      "id": "comc_card_title",
+      "label": "Title",
+      "default": "prevention through making"
+    },
+    {
+      "type": "textarea",
+      "id": "comc_card_body",
+      "label": "Body"
+    },
+    {
+      "type": "header",
+      "content": "How commissioning works"
+    },
+    {
+      "type": "text",
+      "id": "hcw_eyebrow",
+      "label": "Eyebrow",
+      "default": "working with us"
+    },
+    {
+      "type": "text",
+      "id": "hcw_title",
+      "label": "Heading",
+      "default": "how commissioning works."
+    },
+    {
+      "type": "text",
+      "id": "hcw_s1_t",
+      "label": "Step 1 title",
+      "default": "start with a conversation"
+    },
+    {
+      "type": "textarea",
+      "id": "hcw_s1_b",
+      "label": "Step 1 body",
+      "default": "Tell us your setting, cohort and outcomes — we shape the programme around them."
+    },
+    {
+      "type": "text",
+      "id": "hcw_s2_t",
+      "label": "Step 2 title",
+      "default": "see it working"
+    },
+    {
+      "type": "textarea",
+      "id": "hcw_s2_b",
+      "label": "Step 2 body",
+      "default": "A taster session or one-day pilot in your venue, with your team in the room."
+    },
+    {
+      "type": "text",
+      "id": "hcw_s3_t",
+      "label": "Step 3 title",
+      "default": "set up, properly"
+    },
+    {
+      "type": "textarea",
+      "id": "hcw_s3_b",
+      "label": "Step 3 body",
+      "default": "Supplier onboarding and purchase order; risk assessments and session plans shared in advance; safeguarding, photography and SEND adjustments agreed with your team."
+    },
+    {
+      "type": "text",
+      "id": "hcw_s4_t",
+      "label": "Step 4 title",
+      "default": "deliver and report"
+    },
+    {
+      "type": "textarea",
+      "id": "hcw_s4_b",
+      "label": "Step 4 body",
+      "default": "Baseline and end-of-course surveys, session data, and an impact report back to you."
+    },
+    {
+      "type": "textarea",
+      "id": "hcw_note",
+      "label": "Compliance note",
+      "default": "Public liability insured. Delivered by Bamboo Mobility Project CIC — registered UK learning provider, UKPRN 10098630."
+    },
+    {
+      "type": "header",
+      "content": "Instructor app band"
+    },
+    {
+      "type": "text",
+      "id": "tools_eyebrow",
+      "label": "Eyebrow",
+      "default": "the instructor app"
+    },
+    {
+      "type": "text",
+      "id": "tools_title",
+      "label": "Heading",
+      "default": "every session planned, every outcome evidenced."
+    },
+    {
+      "type": "textarea",
+      "id": "tools_lede",
+      "label": "Lede",
+      "default": "Instructors and teachers deliver from the same app — run-of-day plans, safety-first checklists, and portfolio evidence collected session by session."
+    },
+    {
+      "type": "image_picker",
+      "id": "tools_img1",
+      "label": "Screen 1"
+    },
+    {
+      "type": "text",
+      "id": "tools_cap1",
+      "label": "Caption 1",
+      "default": "run of day, timed"
+    },
+    {
+      "type": "image_picker",
+      "id": "tools_img2",
+      "label": "Screen 2"
+    },
+    {
+      "type": "text",
+      "id": "tools_cap2",
+      "label": "Caption 2",
+      "default": "safety first, every session"
+    },
+    {
+      "type": "image_picker",
+      "id": "tools_img3",
+      "label": "Screen 3"
+    },
+    {
+      "type": "text",
+      "id": "tools_cap3",
+      "label": "Caption 3",
+      "default": "evidence into the OCN portfolio"
+    },
+    {
+      "type": "header",
+      "content": "Schools pathway (5 tiered programmes)"
+    },
+    {
+      "type": "text",
+      "id": "prog_eyebrow",
+      "label": "Eyebrow",
+      "default": "the schools pathway"
+    },
+    {
+      "type": "text",
+      "id": "prog_title",
+      "label": "Heading",
+      "default": "start free. build up when your students ask for more."
+    },
+    {
+      "type": "textarea",
+      "id": "prog_lede",
+      "label": "Lede"
+    },
+    {
+      "type": "text",
+      "id": "tx_in_development",
+      "label": "'In development' tag text",
+      "default": "In development"
+    },
+    {
+      "type": "text",
+      "id": "com_cta_label",
+      "label": "CTA label",
+      "default": "start a conversation"
+    },
+    {
+      "type": "image_picker",
+      "id": "com_proof_image",
+      "label": "Proof card image"
+    },
+    {
+      "type": "text",
+      "id": "com_proof_image_alt",
+      "label": "Proof image alt text",
+      "default": "A bamboo balance bike taking shape at a Project Zero workshop"
+    },
+    {
+      "type": "text",
+      "id": "sch_image",
+      "label": "Schools band image (asset filename)",
+      "default": "bbc-edu-class.jpg"
+    },
+    {
+      "type": "text",
+      "id": "sch_image_alt",
+      "label": "Schools band image alt text"
+    },
+    {
+      "type": "checkbox",
+      "id": "hero_proof_on",
+      "label": "Show hero proof row",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "hero_proof1_num",
+      "label": "Hero proof 1 number"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof1_label",
+      "label": "Hero proof 1 label"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof2_num",
+      "label": "Hero proof 2 number"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof2_label",
+      "label": "Hero proof 2 label"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof3_num",
+      "label": "Hero proof 3 number"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof3_label",
+      "label": "Hero proof 3 label"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_quote",
+      "label": "Hero quote"
+    },
+    {
+      "type": "text",
+      "id": "hero_quote_cite",
+      "label": "Hero quote citation"
+    },
+    {
+      "type": "text",
+      "id": "ghost_stat",
+      "label": "Stat band ghost numeral",
+      "default": "2014"
+    },
+    {
+      "type": "text",
+      "id": "stats_label",
+      "label": "Stat band eyebrow",
+      "default": "the education record"
+    },
+    {
+      "type": "text",
+      "id": "facts_cta_label",
+      "label": "Stat band CTA label"
+    },
+    {
+      "type": "text",
+      "id": "facts_cta_url",
+      "label": "Stat band CTA url"
     }
   ],
   "blocks": [
+    {
+      "type": "programme",
+      "name": "Schools programme tier",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Tier image"
+        },
+        {
+          "type": "text",
+          "id": "tier",
+          "label": "Tier label",
+          "default": "Foundation"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "detail",
+          "label": "Detail line"
+        },
+        {
+          "type": "checkbox",
+          "id": "free",
+          "label": "Free programme (lime 'Free' tag)",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "price_tag",
+          "label": "Paid value tag (no number)",
+          "default": "Request a quote"
+        },
+        {
+          "type": "select",
+          "id": "status",
+          "label": "Status",
+          "default": "available",
+          "options": [
+            {
+              "value": "available",
+              "label": "Available now"
+            },
+            {
+              "value": "coming",
+              "label": "In development"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Symbol",
+          "default": "none",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "speakerbox",
+              "label": "Speaker"
+            },
+            {
+              "value": "balance",
+              "label": "Balance bike"
+            },
+            {
+              "value": "framebike",
+              "label": "Full frame"
+            },
+            {
+              "value": "ai3d",
+              "label": "3D printing"
+            },
+            {
+              "value": "ebike",
+              "label": "E-mobility bolt"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "crung",
+      "name": "Community ladder rung",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Rung title",
+          "default": "speaker session"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Bracket tag",
+          "default": "taster"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "One-liner"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Symbol",
+          "default": "none",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "speaker",
+              "label": "Speaker (megaphone)"
+            },
+            {
+              "value": "balance",
+              "label": "Balance bike"
+            },
+            {
+              "value": "enterprise",
+              "label": "Enterprise (price tag)"
+            },
+            {
+              "value": "ebike",
+              "label": "E-bike (bolt)"
+            },
+            {
+              "value": "ai3d",
+              "label": "AI & 3D printing"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "dev",
+          "label": "In development (ghosted)",
+          "default": false
+        }
+      ]
+    },
     {
       "type": "fact",
       "name": "Fact",
@@ -623,6 +1454,11 @@
           "id": "label",
           "label": "Label",
           "default": "people trained"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source line"
         }
       ]
     },
@@ -694,7 +1530,7 @@
           "type": "text",
           "id": "text",
           "label": "Text",
-          "default": "Enhanced-DBS facilitators, vetted for prison delivery"
+          "default": "Facilitators vetted for prison delivery"
         }
       ]
     },
@@ -766,6 +1602,21 @@
           "type": "url",
           "id": "url",
           "label": "Link to the full story"
+        },
+        {
+          "type": "text",
+          "id": "attr",
+          "label": "Attribution line"
+        },
+        {
+          "type": "text",
+          "id": "chips",
+          "label": "Metric chips (pipe-separated, first 2 used)"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date label"
         }
       ]
     }
@@ -819,7 +1670,7 @@
         {
           "type": "sstep",
           "settings": {
-            "title": "build up to OCN Level 1",
+            "title": "build up to OCN accreditation",
             "body": "When students want more, the free build grows into an accredited programme — recognised skills and a real qualification."
           }
         },
@@ -900,7 +1751,7 @@
         {
           "type": "check",
           "settings": {
-            "text": "Enhanced-DBS facilitators, vetted for prison delivery"
+            "text": "Facilitators vetted for prison delivery"
           }
         },
         {

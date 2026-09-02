@@ -410,60 +410,13 @@
     </section>
   {%- endif -%}
 
-  {%- comment -%} ============== BUILD STEPS (4, numbered) ============== {%- endcomment -%}
-  {%- assign steps = section.blocks | where: 'type', 'step' -%}
-  {%- if steps.size > 0 -%}
-    <section class="rd-section rd-pad">
-      <div class="rd-wrap">
-        {%- if section.settings.steps_eyebrow != blank -%}
-          <span class="rd-eyebrow">{{ section.settings.steps_eyebrow }}</span>
-        {%- endif -%}
-        <h2 class="rd-mw-18ch">{{ section.settings.steps_heading }}</h2>
-        <div class="rd-grid rd-g4 rd-mt4 rd-stagger">
-          {%- for block in steps -%}
-            <div class="rd-card rd-stamp" {{ block.shopify_attributes }}><div class="rd-body">
-              <span class="rd-tag rd-lime">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
-              <h3 class="rd-mt2 rd-fs-21px">{{ block.settings.title }}</h3>
-              <p class="rd-mt1">{{ block.settings.description }}</p>
-            </div></div>
-          {%- endfor -%}
-        </div>
-      </div>
-    </section>
-  {%- endif -%}
+  {%- comment -%} BUILD STEPS band REMOVED 2026-08-19 (James: remove from all kit product
+     pages). The step blocks stay in each kit template and the steps_* settings stay in the
+     schema, but nothing renders. Build detail lives in the manual + video course. {%- endcomment -%}
 
-  {%- comment -%} ============== WHY BAMBOO + INCLUDED (split) ============== {%- endcomment -%}
-  <section class="rd-section rd-split rd-rev rd-steel">
-    <div class="rd-media">
-      {%- if section.settings.why_image != blank -%}
-        <img src="{{ section.settings.why_image | image_url: width: 1400 }}"
-             alt="{{ section.settings.why_image_alt | escape }}"
-             width="{{ section.settings.why_image.width }}" height="{{ section.settings.why_image.height }}"
-             loading="lazy">
-      {%- else -%}
-        <img src="{{ section.settings.why_fallback | default: 'bbc-rd-bamboo-tubes.jpg' | asset_url }}"
-             alt="{{ section.settings.why_image_alt | escape }}"
-             width="1200" height="800" loading="lazy">
-      {%- endif -%}
-    </div>
-    <div class="rd-txt">
-      {%- if section.settings.why_eyebrow != blank -%}
-        <span class="rd-eyebrow">{{ section.settings.why_eyebrow }}</span>
-      {%- endif -%}
-      <h2>{{ section.settings.why_heading }}</h2>
-      {%- if section.settings.why_body != blank -%}
-        <p class="rd-lede rd-mt2">{{ section.settings.why_body }}</p>
-      {%- endif -%}
-      {%- if section.settings.why_quote != blank -%}
-        <div class="rd-pull rd-mt3">
-          <p class="rd-q">{{ section.settings.why_quote }}</p>
-          {%- if section.settings.why_quote_cite != blank -%}
-            <cite>{{ section.settings.why_quote_cite }}</cite>
-          {%- endif -%}
-        </div>
-      {%- endif -%}
-    </div>
-  </section>
+  {%- comment -%} WHY BAMBOO split band REMOVED 2026-08-19 (James: remove "a smoother, more
+     compliant ride" from all kit product pages). why_* settings stay in the schema but no
+     longer render — the material case lives on /pages/why-bamboo. {%- endcomment -%}
 
   {%- comment -%} ============== IN-KIT / NOT-IN-KIT (2 cards) ============== {%- endcomment -%}
   <section class="rd-section rd-pad">

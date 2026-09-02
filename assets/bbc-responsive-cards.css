@@ -1,0 +1,196 @@
+/* ============================================================================
+   BBC — responsive card sizing + page alignment                   2026-08-28
+   Measured on /pages/programmes and /pages/impact at 375 / 768 / 950 / 1440x780.
+
+   THE ONE BREAKPOINT SET:  mobile <=640 | tablet 641-1024 | desktop >=1025
+   Nothing in this file may introduce a fifth number.
+   ========================================================================= */
+
+/* 1 ── One set of breakpoints for the SHARED card grids ------------------- */
+@media (max-width: 1024px) {
+  .bbc-rd .rd-g3,
+  .bbc-rd .rd-g4,
+  .bbc-rd .rd-csgrid,
+  .bbc-rd .rd-csgrid--mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bbc-rd .rd-csgrid--mosaic > [data-size="wide"] { grid-column: span 2; }
+  .bbc-rd .rd-cscard__media,
+  .bbc-rd .edt-media { aspect-ratio: 16 / 9; }
+}
+
+@media (max-width: 640px) {
+  .bbc-rd .rd-g2,
+  .bbc-rd .rd-g3,
+  .bbc-rd .rd-g4,
+  .bbc-rd .rd-csgrid,
+  .bbc-rd .rd-csgrid.rd-csgrid-2,
+  .bbc-rd .rd-csgrid--mosaic { grid-template-columns: minmax(0, 1fr); }
+  .bbc-rd .rd-csgrid--mosaic > [data-size="wide"],
+  .bbc-rd .rd-csgrid--lead   > li:first-child { grid-column: auto; }
+  .bbc-rd .rd-csgrid--mosaic > [data-size="tall"] { grid-row: auto; }
+}
+
+/* 2 ── Mobile: stop one card owning the whole screen (94% -> 61%) --------- */
+@media (max-width: 640px) {
+  .bbc-rd .rd-cscard__media,
+  .bbc-rd .edt-media { aspect-ratio: 2 / 1; }
+
+  .bbc-rd .rd-grid,
+  .bbc-rd .rd-csgrid          { gap: 16px; }
+  .bbc-rd .rd-cscard__body    { padding: 16px; }
+  .bbc-rd .rd-cscard__out     { font-size: var(--type-button);   line-height: 1.4;  padding-top: 10px; margin-bottom: 6px; }
+  .bbc-rd .rd-cscard__ctx     { font-size: var(--type-eyebrow); line-height: 1.45; margin-bottom: 10px; -webkit-line-clamp: 2; line-clamp: 2; }
+  .bbc-rd .rd-cscard__attr    { font-size: var(--type-caption); line-height: 1.4;  margin-bottom: 8px; }
+  .bbc-rd .rd-cscard__foot    { font-size: var(--type-eyebrow);   padding-top: 10px; }
+
+  /* the two slots a phone reader scrolls past. Delete to keep them. */
+  .bbc-rd .rd-cscard__outs,
+  .bbc-rd .rd-cscard__meta    { display: none; }
+}
+
+/* 3 ── Even out card heights at every width ------------------------------ */
+.bbc-rd .rd-cscard__ctx {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+          line-clamp: 3;
+  overflow: hidden;
+}
+
+/* 4 ── Bias the crop away from the centre -------------------------------- */
+.bbc-rd .rd-cscard__media img,
+.bbc-rd .edt-media img { object-position: 50% 35%; }
+
+/* 5 ── Screenshots are not photographs ----------------------------------- */
+.bbc-rd .rd-cscard__media img[src*="bbc-edu-astonapp"],
+.bbc-rd .rd-cscard__media img[src*="bbc-edu-dtboard"] {
+  object-fit: contain;
+  object-position: 50% 50%;
+  background: var(--forest-700, #002A23);
+  padding: 8px;
+}
+.bbc-rd .rd-cscard__media[data-fit="contain"] img {
+  object-fit: contain;
+  object-position: 50% 50%;
+  background: var(--forest-700, #002A23);
+  padding: 8px;
+}
+
+/* 6 ── Align the page-local .edt-* / .cml-* components to the shared set -- */
+@media (max-width: 1024px) {
+  .bbc-rd .cml-ladder {
+    display: block;
+    grid-template-columns: none;
+    padding: 0 0 0 46px;
+  }
+  .bbc-rd .cml-ladder::before { content: ""; }
+  .bbc-rd .cml-ladder .cml-rung {
+    display: block;
+    height: auto;
+    padding: 0 0 26px;
+    margin-top: 0;
+  }
+  .bbc-rd .cml-ladder .cml-rung:last-child { padding-bottom: 0; }
+  .bbc-rd .cml-ladder .cml-n { position: absolute; left: -46px; top: 0; margin-bottom: 0; }
+  .bbc-rd .cml-ladder .cml-card { border-top: 0; padding-top: 0; }
+  .bbc-rd .cml-ladder .cml-t { font-size: clamp(18px, 1.45vw, 20px); }
+  .bbc-rd .cml-ladder .cml-b { font-size: var(--type-button); }
+  .bbc-rd .edt-tools { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .bbc-rd .edt-tools { grid-template-columns: minmax(0, 1fr); }
+  .bbc-rd .cml-proofcard { flex-direction: column; align-items: stretch; }
+  .bbc-rd .cml-proofimg  { width: 100%; }
+}
+
+/* 7 ── THE CARD HEADING SPECIFICITY WAR --------------------------------
+   NINE font-size rules match .rd-cscard__heading. The card's own rule asks for
+   19px, but bbc-universal.css wins with !important:
+
+     .bbc-rd h3:not([class*="rd-fs-"]):not([class*="fs-"])
+         font-size: clamp(21px, 2.3vw, 29px) !important;
+
+   Measured: 29px headings wrapping to four lines = 130px of a 784px card on a
+   780px laptop viewport.
+
+   THE PROPER FIX is the escape hatch that rule already provides: give the
+   heading an rd-fs-* class in snippets/bbc-cscard.liquid, e.g.
+       <h3 class="rd-cscard__heading rd-fs-20px">
+   and the :not() excludes it cleanly, with no !important anywhere.
+
+   EVERY branch below carries !important. A single un-flagged branch loses to
+   bbc-universal.css again: the first version set only a base size, and mobile
+   headings silently jumped 17px -> 22px. */
+.bbc-rd .rd-cscard-item .rd-cscard .rd-cscard__heading {
+  font-size: clamp(18px, 1.45vw, 20px) !important;
+  line-height: 1.25;
+}
+.bbc-rd .rd-cscard-item .rd-cscard--featured .rd-cscard__heading {
+  font-size: clamp(20px, 2vw, 27px) !important;
+  line-height: 1.2;
+}
+@media (max-width: 640px) {
+  .bbc-rd .rd-cscard-item .rd-cscard .rd-cscard__heading,
+  .bbc-rd .rd-cscard-item .rd-cscard--featured .rd-cscard__heading {
+    font-size: clamp(16.5px, 4.6vw, 17px) !important;
+    line-height: 1.25;
+  }
+}
+
+/* 8 ── Desktop card height: fit a whole card on a laptop ------------------ */
+@media (min-width: 1025px) {
+  .bbc-rd .rd-cscard__media   { aspect-ratio: 16 / 9; }
+  .bbc-rd .rd-cscard__body    { padding: 18px; }
+  .bbc-rd .rd-cscard__out     { font-size: clamp(15px, 1.2vw, 16.5px); line-height: 1.4;  padding-top: 12px; margin-bottom: 6px; }
+  .bbc-rd .rd-cscard__ctx     { font-size: clamp(15px, 1.15vw, 16px);   line-height: 1.45; margin-bottom: 10px; -webkit-line-clamp: 2; line-clamp: 2; }
+  .bbc-rd .rd-cscard__attr    { font-size: var(--type-eyebrow); line-height: 1.4;  margin-bottom: 8px; }
+  .bbc-rd .rd-cscard__meta    { font-size: var(--type-eyebrow);   margin-bottom: 8px; }
+  .bbc-rd .rd-cscard__foot    { font-size: var(--type-button);   padding-top: 12px; }
+  .bbc-rd .rd-cscard__outs li { font-size: var(--type-caption); padding: 5px 10px; }
+}
+
+/* 9 ── HERO DEPTH: a portrait asset was dictating the band height --------
+   The hero is a 2-column grid (text | media). The media column holds .rd-bg
+   IN NORMAL FLOW, and its poster is PORTRAIT — bbc-edu-hero-poster.jpg is
+   1600x2134 (0.75). At 783px wide that image computes to 1044px tall, so the
+   IMAGE set the hero's depth and the 639.6px min-height never applied:
+
+     measured before:  hero 1044px on a 780px laptop viewport = 134%
+     /pages/impact:    hero  640px = 82%
+     after:            hero  678px = 87%   (text column now sets the height)
+
+   Note for later: the <img> also carries width="1500" height="999" — a
+   LANDSCAPE ratio declared for a PORTRAIT file. That mismatch causes a layout
+   shift on load. Fixing it properly means correcting the attributes in the
+   section Liquid; this rule stops it affecting layout either way. */
+@media (min-width: 1025px) {
+  .bbc-rd .rd-hero .rd-bg { max-height: 78vh; }
+  .bbc-rd .rd-hero .rd-bg > img,
+  .bbc-rd .rd-hero .rd-bg > video {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+/* 10 ─ BAND RHYTHM: match the impact page ------------------------------
+   /pages/impact uses .rd-pad-sm throughout; /pages/programmes uses the larger
+   .rd-pad on six bands. bbc-align.css ("the alignment contract") defines both,
+   viewport-height-aware and !important:
+
+     .rd-pad     padding-block: clamp(44px, min(6vw, 8.6vh), 88px)  -> 67.08px
+     .rd-pad-sm  padding-block: clamp(32px, min(4.6vw, 6.4vh), 64px) -> 49.92px
+
+   That !important on logical properties is why a plain padding-top override
+   does nothing here — the first attempt at this rule was silently dead.
+
+   This applies the contract's OWN .rd-pad-sm value rather than inventing a
+   number, so the page stays inside the contract's design language. It is
+   scoped to this section: .rd-pad is a shared utility and other pages may
+   legitimately want the larger scale.
+
+   THE PROPER FIX is a one-word class swap in sections/bbc-programmes-2026.liquid
+   (rd-pad -> rd-pad-sm on those six bands), which needs no !important at all. */
+.shopify-section--bbc-programmes .rd-pad {
+  padding-block-start: clamp(32px, min(4.6vw, 6.4vh), 64px) !important;
+  padding-block-end:   clamp(32px, min(4.6vw, 6.4vh), 64px) !important;
+}

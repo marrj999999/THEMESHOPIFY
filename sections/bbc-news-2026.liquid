@@ -1,0 +1,81 @@
+{%- comment -%}
+  NEWS BAND — latest blog posts as case-study cards. 2026-08-25.
+  James: "add a news section to the home page that automatically updates with each
+  new blog, follow the case studies format."
+
+  HOW IT UPDATES ITSELF: the band reads blogs[...].articles at render time, newest
+  first — publish a post and it appears here on the next page load. No manual step.
+
+  FORMAT: every card renders through snippets/bbc-cscard.liquid — the contract-tested
+  standard card the impact/about stories bands use — so this band matches the
+  case-study look by construction and stays covered by qa/casestudy-conformance.mjs.
+  Cards with no featured image become `flat` per the card contract; nothing rags.
+
+  PLACEMENT: added to a page via the theme editor (Add section → "BBC News 2026").
+  Deliberately NOT wired into templates/*.json here — templates are editor-owned.
+
+  Blog fallback: if no blog is picked in the editor the band uses blogs['news'],
+  so it renders real content the moment it is added. Resource settings cannot carry
+  schema defaults, hence the Liquid-side fallback.
+{%- endcomment -%}
+
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+{%- assign b = section.settings.blog -%}
+{%- if b == blank -%}{%- assign b = blogs['news'] -%}{%- endif -%}
+
+<div class="bbc-rd bbc-rd-news">
+  <section class="rd-pad" {% if section.settings.anchor != blank %}id="{{ section.settings.anchor }}"{% endif %}>
+    <div class="rd-wrap">
+      {%- if section.settings.eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.title != blank -%}<h2 class="rd-reveal rd-mw-20ch">{{ section.settings.title }}</h2>{%- endif -%}
+      {%- if section.settings.lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.lede }}</p>{%- endif -%}
+
+      {%- if b != blank and b.articles_count > 0 -%}
+        <ul class="rd-csgrid rd-mt4" role="list">
+          {%- for article in b.articles limit: section.settings.limit -%}
+            {%- comment -%} Filters fail silently inside render arguments (see
+               bbc-stories-band) — everything is assigned first. kind is a fixed
+               editor-set label, NOT article tags: tags are an uncontrolled surface
+               and this band must never leak an unexpected chip. {%- endcomment -%}
+            {%- assign _ctx = article.excerpt | strip_html | strip -%}
+            {%- if _ctx == blank -%}{%- assign _ctx = article.content | strip_html | truncate: 150 -%}{%- endif -%}
+            {%- assign _date = article.published_at | date: "%-d %B %Y" | downcase -%}
+            {%- render 'bbc-cscard',
+                 variant: 'grid',
+                 kind: section.settings.kind_label,
+                 heading: article.title,
+                 url: article.url,
+                 context: _ctx,
+                 image_pic: article.image,
+                 date: _date -%}
+          {%- endfor -%}
+        </ul>
+        {%- if section.settings.all_label != blank -%}
+          {%- assign _all = section.settings.all_url | default: b.url -%}
+          <div class="rd-mt4"><a class="rd-btn rd-ghost" href="{{ _all }}">{{ section.settings.all_label }} <span class="rd-arrow">&rarr;</span></a></div>
+        {%- endif -%}
+      {%- elsif request.design_mode -%}
+        <p class="rd-lede rd-mt2">No posts found — pick a blog in the section settings.</p>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "BBC News 2026",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "news" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "fresh from the workshop." },
+    { "type": "textarea", "id": "lede", "label": "Lede (optional)" },
+    { "type": "blog", "id": "blog", "label": "Blog to pull from", "info": "Leave unset to use the News blog. New posts appear automatically." },
+    { "type": "range", "id": "limit", "label": "Posts to show", "min": 2, "max": 6, "step": 1, "default": 3 },
+    { "type": "text", "id": "kind_label", "label": "Card tag", "default": "news", "info": "The small label on each card. One fixed word — article tags are deliberately not used." },
+    { "type": "text", "id": "all_label", "label": "View-all button label", "default": "read all the news" },
+    { "type": "url", "id": "all_url", "label": "View-all link (optional)", "info": "Defaults to the blog itself." },
+    { "type": "text", "id": "anchor", "label": "Anchor id (optional)" }
+  ],
+  "presets": [ { "name": "BBC News 2026" } ]
+}
+{% endschema %}

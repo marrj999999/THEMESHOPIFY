@@ -50,6 +50,18 @@ PATTERNS=(
   '\b36\+? countries'                            # superseded by 45 (James 2026-07-07). Found by
                                                  # qa/canary.mjs: estate-check rejected this and
                                                  # claim-lint did not — the escape #6 shape again.
+  # Added 2026-09-02 — Site-vs-Vault review found all of these LIVE (vault: Reports/Website
+  # Review vs Vault 2026-09-02). Mirrors qa/banned-claims.mjs; canary asserts both reject them.
+  '\bFeltham\b'                                  # not a site; never a named-sites list (Register)
+  '\b(4|four|three|3) (UK )?prison sites?'       # count formula only: "five UK prison sites, at different delivery stages"
+  '\bLevel 1\b'                                  # no external Level 1 claim until OCN evidence filed (Level 1 & 2 caught above)
+  '[Ii]ndependently tested'                      # Swansea tested tubing, never a frame — cite the standard instead
+  '[Ll]ast for years'                            # no approved service-life claim (PS-001 open)
+  '\b[Rr]ideable\b'                              # product-safety gate while PS-001 open
+  '[Ee]nhanced[- ]DBS'                           # no Register row — verify per person before claiming
+  '\b([Ss]ix|6) Makers\b'                        # cohort size undecided (D2)
+  '10% of profits'                               # no executed transfer policy on file
+  'Education CIC'                                # entity is Bamboo Mobility Project CIC
   "don'?t hesitate"
   '[Kk]ind regards'
   'hope this (email )?finds you well'

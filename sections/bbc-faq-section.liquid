@@ -25,7 +25,7 @@
     assign eyebrow_cls = 'rd-eyebrow'
   endif
 -%}
-<div class="bbc-rd {{ bg_cls }}">
+<div class="bbc-rd {{ bg_cls }}"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor }}" style="scroll-margin-top:64px"{% endif %}>
   <section class="rd-pad">
     <div class="rd-wrap rd-mw-820px">
       {%- if section.settings.kicker != blank -%}<span class="{{ eyebrow_cls }}">{{ section.settings.kicker }}</span>{%- endif -%}
@@ -45,6 +45,7 @@
   "class": "bbc-faq-wrap",
   "blocks": [{ "type": "bbc-accordion" }],
   "settings": [
+    { "type": "text", "id": "anchor", "label": "Anchor id (for jump links)" },
     { "type": "text", "id": "kicker", "label": "Kicker", "default": "Good to know" },
     { "type": "text", "id": "title", "label": "Heading", "default": "Bamboo bike questions, answered" },
     { "type": "textarea", "id": "lede", "label": "Lede" },

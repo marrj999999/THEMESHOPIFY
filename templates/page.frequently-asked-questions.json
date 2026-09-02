@@ -1,302 +1,429 @@
 {
   "sections": {
     "hero": {
-      "type": "bbc-page-hero",
+      "type": "bbc-band-2026",
       "settings": {
-        "heading": "Frequently Asked Questions",
-        "subheading": "Everything you need to know about building your own bamboo bicycle",
-        "style": "light"
+        "variant": "statement",
+        "surface": "dark",
+        "align": "center",
+        "eyebrow": "support · straight answers",
+        "heading": "questions, answered.",
+        "lede": "About the kits, the workshops, and the programmes the bikes pay for. Pick your door or read the whole manual."
       }
     },
-    "faq_general": {
-      "type": "bbc-faq",
+    "doors": {
+      "type": "bbc-band-2026",
+      "settings": {
+        "variant": "cards",
+        "surface": "paper",
+        "eyebrow": "what brings you here?",
+        "heading": "pick your door.",
+        "columns": "4",
+        "lede": ""
+      },
       "blocks": {
-        "q1": {
-          "type": "question",
+        "d1": {
+          "type": "card",
           "settings": {
-            "question": "Do I need any experience to build a bamboo bicycle?",
-            "answer": "<p>None at all. 95% of our builders have never built a bike frame before \u2014 most haven't picked up a hacksaw since school. Our workshops give you hands-on guidance at every step, and our home kits come with video tutorials that walk you through the whole thing. If you can follow instructions and aren't afraid of getting your hands dirty, you can build a bike.</p>"
+            "tag": "at home",
+            "title": "building your own?",
+            "link": "\/pages\/frequently-asked-questions#kits",
+            "fallback": "bbc-rd-frame-build.jpg",
+            "image_alt": "A bamboo frame on the build jig with hand tools"
           }
         },
-        "q2": {
-          "type": "question",
+        "d2": {
+          "type": "card",
           "settings": {
-            "question": "How long does it take to build a frame?",
-            "answer": "<p><strong>In our workshop:</strong> 2 days (Saturday-Sunday, 9:30am\u20134:30pm each day). We also run 3-4 day workshops that include custom paint finishing.</p><p><strong>At home with a kit:</strong> 20-40 hours total. Most people spread this over 2-4 weekends. Pre-lugged kits are quicker \u2014 you could do one in a weekend if you're keen.</p>"
+            "tag": "schools",
+            "title": "teaching a class?",
+            "link": "\/pages\/frequently-asked-questions#schools",
+            "fallback": "bbc-rd-cs-coventry.jpg",
+            "image_alt": "Bamboo bikes at an education workshop"
           }
         },
-        "q3": {
-          "type": "question",
+        "d3": {
+          "type": "card",
           "settings": {
-            "question": "Is bamboo actually strong enough for a bike?",
-            "answer": "<p>Stronger per gram than steel. Bamboo has a tensile strength of 28,000 PSI \u2014 and the natural fibre structure absorbs road vibration better than metal, which means a smoother ride. Our frames have a failure rate under 1%. People have toured continents, raced ultra-endurance events, and commuted daily for 10+ years on frames built from our kits. Kate Rawles rode one 8,288 miles from Colombia to Ushuaia.</p>"
+            "tag": "prisons",
+            "title": "commissioning for a prison?",
+            "link": "\/pages\/frequently-asked-questions#prisons",
+            "fallback": "bbc-rd-prison-empty.jpg",
+            "image_alt": "The dedicated bamboo workshop inside a prison, benches and jigs ready"
           }
         },
-        "q4": {
-          "type": "question",
+        "d4": {
+          "type": "card",
           "settings": {
-            "question": "How long will a bamboo frame last?",
-            "answer": "<p>8-12 years with proper care \u2014 and we've got builders still riding frames from our first year (2012). The natural oils in bamboo plus our UV-protective clear coat keep things solid. Store it indoors, avoid leaving it in extreme heat, and it'll outlast most of the components you put on it.</p>"
-          }
-        },
-        "q5": {
-          "type": "question",
-          "settings": {
-            "question": "Can I ride in the rain?",
-            "answer": "<p>Yes. The frame is sealed with epoxy resin, making it water-resistant. Ride in the rain, commute through winter \u2014 just dry it off afterwards and don't leave it submerged in a puddle. Common sense stuff.</p>"
-          }
-        },
-        "q6": {
-          "type": "question",
-          "settings": {
-            "question": "What makes BBC different from other bamboo bike builders?",
-            "answer": "<p>We're not selling bikes \u2014 we're teaching people to build them. That's been our focus since 2012. Over 4,000 builders across 36 countries. Our kits and workshops are designed for complete beginners, and we back everything with lifetime expert support. We're also a social enterprise: our Bamboo Mobility Project CIC runs Build to Bond, teaching bike-building in prisons to strengthen family bonds.</p>"
+            "tag": "teams",
+            "title": "bringing your company?",
+            "link": "\/pages\/frequently-asked-questions#teams",
+            "fallback": "bbc-rd-tb-macallan.jpg",
+            "image_alt": "A corporate team building bamboo bikes together"
           }
         }
       },
       "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4",
-        "q5",
-        "q6"
-      ],
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ]
+    },
+    "pills": {
+      "type": "bbc-chapter-pills",
       "settings": {
-        "heading": "Getting Started",
-        "background": "white"
+        "chapters": "choosing a kit~#kits|building it~#building|workshops~#workshops|schools~#schools|prisons~#prisons|teams~#teams|orders~#orders|the mission~#mission"
       }
     },
-    "faq_kits": {
-      "type": "bbc-faq",
+    "ch1": {
+      "type": "bbc-faq-section",
+      "settings": {
+        "anchor": "kits",
+        "kicker": "01 · products",
+        "title": "choosing a kit.",
+        "background": "steel"
+      },
       "blocks": {
-        "q1": {
-          "type": "question",
+        "ki_1": {
+          "type": "bbc-accordion",
           "settings": {
-            "question": "What's included in a home build kit?",
-            "answer": "<p>Everything you need to build a complete frame: heat-treated Moso bamboo tubes, metal lugs (pre-fitted for lugged kits), epoxy resin, CNC machined headtube, BSA 68mm bottom bracket shell, dropouts, a single-use plywood alignment jig, and full video tutorial access. Just add basic hand tools.</p>"
+            "question": "Which kit should I start with?",
+            "answer": "<p>If you ride, build the bike you'll actually use — road, gravel, mountain or city. If you want a lighter first taste of frame-building — or a build to run with a class or group — start with a balance-bike kit. If you've got a dream geometry in mind, the custom kit is built to your numbers.<\/p>"
           }
         },
-        "q2": {
-          "type": "question",
+        "ki_2": {
+          "type": "bbc-accordion",
           "settings": {
-            "question": "What tools do I need?",
-            "answer": "<p>Nothing specialist. A hacksaw or pipe cutter, files and sandpaper, measuring tape, mixing containers, disposable gloves, and clamps. Most builders already have these. Every kit includes a detailed tool list so there are no surprises.</p>"
+            "question": "What's in the box?",
+            "answer": "<p>Everything the frame needs: heat-treated bamboo, flax fibre and bio-resin for the joints, the jig components, an illustrated manual and the full step-by-step video course. You add basic hand tools and a few weekends.<\/p>"
           }
         },
-        "q3": {
-          "type": "question",
+        "ki_3": {
+          "type": "bbc-accordion",
           "settings": {
-            "question": "What's the difference between lugged and non-lugged kits?",
-            "answer": "<p><strong>Lugged (pre-fabricated connections):</strong> Quicker to assemble, fixed geometry, less complex. Perfect for first-time builders \u2014 you can have a frame in a weekend.</p><p><strong>Non-lugged (build your own connections):</strong> More customisable, takes 2-3 days longer, allows custom geometry. Better for builders who want full creative control.</p>"
+            "question": "What do kits cost?",
+            "answer": "<p>Full-size frame kits run from £375 (road, city) to £795 (lugged road); balance-bike kits start at £66. Current prices always live on <a href=\"\/collections\/home-build-kits\">the shop<\/a> — the catalogue is the authority.<\/p>"
           }
         },
-        "q4": {
-          "type": "question",
+        "ki_4": {
+          "type": "bbc-accordion",
           "settings": {
-            "question": "What else do I need to make it a rideable bike?",
-            "answer": "<p>The kit builds a complete frame. To ride it, you'll need: fork, headset, bottom bracket, crankset, wheels, handlebars, stem, seatpost, saddle, brakes, and drivetrain. We sell component packs (City, Single-Speed, Gravel) or you can source parts from any bike shop. Many builders repurpose components from an old bike \u2014 works perfectly.</p>"
+            "question": "Can I build a custom geometry?",
+            "answer": "<p>Yes — the <a href=\"\/products\/custom-frame\">Custom Frame Kit<\/a> is cut to your measurements. Tell us how you ride and we'll help you spec it.<\/p>"
           }
         },
-        "q5": {
-          "type": "question",
+        "ki_5": {
+          "type": "bbc-accordion",
           "settings": {
-            "question": "What if I make a mistake?",
-            "answer": "<p>The epoxy has a long working time, so you can adjust as you go. If something goes wrong, our community Facebook group has 4,000+ builders who've seen it all \u2014 and our team is always available via email. We've never had someone who couldn't finish their build.</p>"
-          }
-        },
-        "q6": {
-          "type": "question",
-          "settings": {
-            "question": "How much do kits cost?",
-            "answer": "<p>Frame kits start from \u00a3375. Gravel kits from \u00a3385. Balance bike kits are \u00a3165. We're also registered with all major Cycle to Work providers (Cyclescheme, Bike2Work, etc.) \u2014 that can save you 25-39%.</p>"
+            "question": "What about wheels, gears and finishing parts?",
+            "answer": "<p><a href=\"\/collections\/component-packs\">Component packs<\/a> carry everything but the frame — groupset, wheels, finishing kit — matched to your build. <a href=\"\/collections\/maker-shop\">Parts &amp; tools<\/a> are also sold separately for repairs and upgrades.<\/p>"
           }
         }
       },
       "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4",
-        "q5",
-        "q6"
-      ],
-      "settings": {
-        "heading": "Home Build Kits",
-        "background": "cream"
-      }
+        "ki_1",
+        "ki_2",
+        "ki_3",
+        "ki_4",
+        "ki_5"
+      ]
     },
-    "faq_workshops": {
-      "type": "bbc-faq",
+    "ch2": {
+      "type": "bbc-faq-section",
+      "settings": {
+        "anchor": "building",
+        "kicker": "02 · products",
+        "title": "building it.",
+        "background": "paper"
+      },
       "blocks": {
-        "q1": {
-          "type": "question",
+        "bu_1": {
+          "type": "bbc-accordion",
           "settings": {
-            "question": "What should I bring to a workshop?",
-            "answer": "<p>Just yourself and old clothes you don't mind getting dusty (especially Day 2 \u2014 epoxy work). Closed-toe shoes are essential. We provide all tools, materials, safety equipment, tea and coffee. Optional: a camera to document your build, and lunch or funds for local cafes.</p>"
+            "question": "Do I need experience or special tools?",
+            "answer": "<p>No welding, no factory — a hacksaw, files, sandpaper and a tape measure. Most of our builders had never made anything like this before; the manual and video course assume you're starting from zero.<\/p>"
           }
         },
-        "q2": {
-          "type": "question",
+        "bu_2": {
+          "type": "bbc-accordion",
           "settings": {
-            "question": "Where are workshops held?",
-            "answer": "<p>Three locations:</p><p><strong>London, UK</strong> \u2014 Our primary workshop at Argall Works, 7 Argall Ave, London E10 7QE (5-minute walk from Lea Bridge Station).</p><p><strong>Amersfoort, Netherlands</strong> \u2014 Our European hub.</p><p><strong>Toulouse, France</strong> \u2014 Our French location.</p>"
+            "question": "How long does a build take?",
+            "answer": "<p>25–45 hours across a few weekends. No rush — bamboo is forgiving and most mistakes are fixable.<\/p>"
           }
         },
-        "q3": {
-          "type": "question",
+        "bu_3": {
+          "type": "bbc-accordion",
           "settings": {
-            "question": "Can I bring a friend?",
-            "answer": "<p>Each builder works on their own frame, so your friend would need their own booking. We keep groups small to ensure quality instruction. Couples and friends often book together \u2014 it's a great shared experience.</p>"
+            "question": "How strong is bamboo, really?",
+            "answer": "<p>Bamboo frame tubing tested at Swansea University to BS ISO 22157:2019 — 84.3 MPa ultimate tensile, comparable to mild steel at a fraction of the weight. Builders tour continents on these frames. <a href=\"\/pages\/why-bamboo\">The full datasheet lives on Why Bamboo.<\/a><\/p>"
           }
         },
-        "q4": {
-          "type": "question",
+        "bu_4": {
+          "type": "bbc-accordion",
           "settings": {
-            "question": "Can I use Cycle to Work?",
-            "answer": "<p>Yes. We're registered with all major Cycle to Work providers \u2014 Cyclescheme, Bike2Work, and others. This can save you 25-39% on your workshop or kit purchase. Just contact us for a quote compatible with your employer's scheme.</p>"
+            "question": "Will it crack? Can it get wet?",
+            "answer": "<p>The bamboo is heat-treated and every joint is bound in flax and bio-resin, then sealed with lacquer — rain, mud and winter commuting are fine. Splitting is rare and covered: we replace split bamboo within 3 months of purchase, and every kit carries a 1-year warranty.<\/p>"
           }
         },
-        "q5": {
-          "type": "question",
+        "bu_5": {
+          "type": "bbc-accordion",
           "settings": {
-            "question": "Can I attend from overseas?",
-            "answer": "<p>Absolutely \u2014 we regularly host international visitors. Workshop price includes shipping the frame back to you. For accommodation near our London workshop, we recommend the Olympic Park area (Stratford) \u2014 great hotels and easy connections to central London.</p>"
-          }
-        },
-        "q6": {
-          "type": "question",
-          "settings": {
-            "question": "How do I get my frame home?",
-            "answer": "<p>A bare frame fits easily in most car boots. If you're using public transport, we can provide a frame bag. For international visitors, we ship the frame to you \u2014 it's included in the workshop price.</p>"
+            "question": "What if I get stuck mid-build?",
+            "answer": "<p>The <a href=\"\/pages\/support-centre\">Support Centre<\/a> has tutorials and the builders' community, and you can book a free 10-minute call with the workshop. Email <a href=\"mailto:info@bamboobicycleclub.org\">info@bamboobicycleclub.org<\/a> — a real person answers.<\/p>"
           }
         }
       },
       "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4",
-        "q5",
-        "q6"
-      ],
-      "settings": {
-        "heading": "Workshops",
-        "background": "white"
-      }
+        "bu_1",
+        "bu_2",
+        "bu_3",
+        "bu_4",
+        "bu_5"
+      ]
     },
-    "faq_technical": {
-      "type": "bbc-faq",
+    "ch3": {
+      "type": "bbc-faq-section",
+      "settings": {
+        "anchor": "workshops",
+        "kicker": "03 · products",
+        "title": "workshops.",
+        "background": "steel"
+      },
       "blocks": {
-        "q1": {
-          "type": "question",
+        "wo_1": {
+          "type": "bbc-accordion",
           "settings": {
-            "question": "What bottom bracket standard do you use?",
-            "answer": "<p>BSA 68mm threaded \u2014 the most widely compatible standard. No proprietary nonsense.</p>"
+            "question": "Do you run in-person workshops?",
+            "answer": "<p>Yes — frame-building days at our London workshop, with partner sessions in the Netherlands. Formats and dates change through the year, so <a href=\"\/pages\/bicycle-frame-building-workshop\">the workshops page<\/a> is the source of truth for what's currently bookable.<\/p>"
           }
         },
-        "q2": {
-          "type": "question",
+        "wo_2": {
+          "type": "bbc-accordion",
           "settings": {
-            "question": "What size frame should I get?",
-            "answer": "<p>We have sizing guides on our website. If in doubt, send us your height and inside leg measurement and we'll recommend the right size. Custom geometries are available for non-standard fits.</p>"
+            "question": "Do you sell gift vouchers?",
+            "answer": "<p>Yes, and they're a favourite — workshop gift vouchers are active in the shop and redeemable against any workshop format when the recipient books.<\/p>"
           }
         },
-        "q3": {
-          "type": "question",
+        "wo_3": {
+          "type": "bbc-accordion",
           "settings": {
-            "question": "Can I use disc brakes?",
-            "answer": "<p>Yes. All our modern kits are disc brake compatible with modular dropout options for different axle standards.</p>"
-          }
-        },
-        "q4": {
-          "type": "question",
-          "settings": {
-            "question": "What tyre clearance do the frames have?",
-            "answer": "<p>Our Carbon Road kit fits up to 38mm tyres with slight modification to chain stays. Gravel kits accommodate wider tyres for off-road riding. Check individual product pages for specifics.</p>"
-          }
-        },
-        "q5": {
-          "type": "question",
-          "settings": {
-            "question": "Can I use internal cable routing?",
-            "answer": "<p>Yes \u2014 all our kits support internal cable routing.</p>"
+            "question": "I have a voucher — how do I book?",
+            "answer": "<p>Email <a href=\"mailto:info@bamboobicycleclub.org\">info@bamboobicycleclub.org<\/a> with your voucher reference and we'll get you scheduled.<\/p>"
           }
         }
       },
       "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4",
-        "q5"
-      ],
-      "settings": {
-        "heading": "Technical Specs",
-        "background": "cream"
-      }
+        "wo_1",
+        "wo_2",
+        "wo_3"
+      ]
     },
-    "faq_shipping": {
-      "type": "bbc-faq",
+    "ch4": {
+      "type": "bbc-faq-section",
+      "settings": {
+        "anchor": "schools",
+        "kicker": "04 · sector",
+        "title": "schools & education.",
+        "background": "paper"
+      },
       "blocks": {
-        "q1": {
-          "type": "question",
+        "sc_1": {
+          "type": "bbc-accordion",
           "settings": {
-            "question": "Do you ship internationally?",
-            "answer": "<p>Yes \u2014 36+ countries and counting. Kits are carefully packaged to protect the bamboo during transit. UK delivery is 2-3 days, EU 5-7 days, international 10-14 days. Full tracking on every shipment.</p>"
+            "question": "What do you offer schools?",
+            "answer": "<p>Three tiers. DISCOVER: a free talk and show-and-tell with real frames. BUILD: a reusable class kit (£595) with refills and teacher CPD so you can deliver builds yourself. PARTNER: a site licence (£2,500\/yr) for embedded delivery. Sessions align to KS3\/KS4 Design &amp; Technology — sustainable materials, tolerances, joining methods, circular economy.<\/p>"
           }
         },
-        "q2": {
-          "type": "question",
+        "sc_2": {
+          "type": "bbc-accordion",
           "settings": {
-            "question": "What about customs and import duties?",
-            "answer": "<p>International orders may be subject to local import duties and taxes \u2014 these vary by country and are the buyer's responsibility. We declare accurate values on customs forms. EU customers: since Brexit, VAT and duties apply. For Germany, we sometimes ship via our Netherlands branch to simplify customs.</p>"
+            "question": "Is the schools course accredited?",
+            "answer": "<p>Our schools Level 1 curriculum (Practical Manufacturing Skills) is in the OCN approval process. Post-16 and vocational settings can access our verified OCN London bespoke Level 2 course where its specification applies. We'll only ever describe accreditation exactly as the awarding body records it.<\/p>"
           }
         },
-        "q3": {
-          "type": "question",
+        "sc_3": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "Can our teachers run it themselves?",
+            "answer": "<p>Yes — that's the BUILD tier: one day of teacher training plus the class kit, then refill packs per cohort. <a href=\"\/pages\/schools\">More on the education page.<\/a><\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "sc_1",
+        "sc_2",
+        "sc_3"
+      ]
+    },
+    "ch5": {
+      "type": "bbc-faq-section",
+      "settings": {
+        "anchor": "prisons",
+        "kicker": "05 · sector",
+        "title": "prisons & justice.",
+        "background": "steel"
+      },
+      "blocks": {
+        "pr_1": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "What is Build to Bond?",
+            "answer": "<p>Our prison programme: Makers build bamboo bikes over a six-week accredited course — OCN London bespoke Level 2, Workshop Skills and Sustainable Manufacturing — learning workshop skills, material science and finishing. A second registered Level 2 course, Introduction to Product Design &amp; Manufacture (Bamboo Balance Bike), was accredited in July 2026. Frames are built to go home — a bike for a Maker's child is a reason to keep close family ties.<\/p>"
+          }
+        },
+        "pr_2": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "Does it work?",
+            "answer": "<p>90%+ completion across the prison programme, and a measured 26% confidence uplift in programme evaluation. Ministry of Justice research found prisoners who receive family visits are 39% less likely to reoffend — that's the mechanism the bike-that-goes-home is built on. The Prisons Minister has publicly endorsed Build to Bond; the full endorsement and the evidence behind the numbers live on <a href=\"\/pages\/impact\">our impact page<\/a>.<\/p>"
+          }
+        },
+        "pr_3": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "Where does it run?",
+            "answer": "<p>The flagship is HMP Lowdham Grange — a 2,000 sq ft dedicated workshop, running since late 2024, oversubscribed, with peer instructors trained from the cohorts. The programme is active across multiple prison sites; <a href=\"\/pages\/impact\">the impact page<\/a> carries the current picture.<\/p>"
+          }
+        },
+        "pr_4": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "How do I bring it to my prison?",
+            "answer": "<p>Email <a href=\"mailto:info@bamboobicycleclub.org\">info@bamboobicycleclub.org<\/a>. The core course is 6 weeks at 18 hours\/week with cohorts of six Makers; pricing is agreed per site and cohort. We handle OCN registration, materials, instructor cover and security-cleared delivery.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "pr_1",
+        "pr_2",
+        "pr_3",
+        "pr_4"
+      ]
+    },
+    "ch6": {
+      "type": "bbc-faq-section",
+      "settings": {
+        "anchor": "teams",
+        "kicker": "06 · sector",
+        "title": "companies & teams.",
+        "background": "paper"
+      },
+      "blocks": {
+        "te_1": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "What's a team build day?",
+            "answer": "<p>Your team builds real bamboo bike frames in a facilitated day — hands-on making, a shared output, and a sustainability story that isn't a lanyard talk. Every corporate event directly funds the prison and schools programmes.<\/p>"
+          }
+        },
+        "te_2": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "Who have you run these for?",
+            "answer": "<p>Our flagship corporate relationship is Investec — team builds over multiple years that grew into accelerator funding and advocacy. We're an Investec Beyond Business winner.<\/p>"
+          }
+        },
+        "te_3": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "Group size and venue?",
+            "answer": "<p>From a small leadership team at our London workshop to large away-days at your venue — tell us your headcount and we'll shape the day. <a href=\"\/pages\/bicycleteambuilding\">More on team building.<\/a><\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "te_1",
+        "te_2",
+        "te_3"
+      ]
+    },
+    "ch7": {
+      "type": "bbc-faq-section",
+      "settings": {
+        "anchor": "orders",
+        "kicker": "07 · products",
+        "title": "orders, shipping & returns.",
+        "background": "steel"
+      },
+      "blocks": {
+        "or_1": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "Where do you ship?",
+            "answer": "<p>Worldwide, tracked, from our London workshop — kits have shipped to 45 countries, and about 80% of kit sales are international. UK shipping £12; your country's rate shows at checkout.<\/p>"
+          }
+        },
+        "or_2": {
+          "type": "bbc-accordion",
           "settings": {
             "question": "What's your returns policy?",
-            "answer": "<p>Unused kits in original packaging can be returned within 14 days for a full refund (minus shipping costs). Once you've started building, we can't accept returns \u2014 but we'll help you troubleshoot any issues until you're happy with the result.</p>"
+            "answer": "<p>14-day returns on unopened kits — see <a href=\"\/policies\/refund-policy\">the refund policy<\/a> for the details.<\/p>"
           }
         },
-        "q4": {
-          "type": "question",
+        "or_3": {
+          "type": "bbc-accordion",
           "settings": {
-            "question": "What's your workshop cancellation policy?",
-            "answer": "<p>Full refund up to 14 days before your workshop date. 50% refund 7-14 days before. Within 7 days, we offer a date transfer rather than refund (subject to availability). Life happens \u2014 just let us know as early as you can.</p>"
+            "question": "What's the warranty?",
+            "answer": "<p>Every kit carries a 1-year warranty, plus the 3-month split-bamboo replacement promise.<\/p>"
           }
         }
       },
       "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4"
-      ],
-      "settings": {
-        "heading": "Shipping & Returns",
-        "background": "white"
-      }
+        "or_1",
+        "or_2",
+        "or_3"
+      ]
     },
-    "cta": {
-      "type": "bbc-cta",
+    "ch8": {
+      "type": "bbc-faq-section",
       "settings": {
-        "heading": "Still have questions?",
-        "text": "Our team responds to every message \u2014 usually within a few hours.",
-        "button_text": "Get in Touch",
-        "button_link": "/pages/contact-us",
-        "background": "forest"
-      }
+        "anchor": "mission",
+        "kicker": "08 · the mission",
+        "title": "where the money goes.",
+        "background": "paper"
+      },
+      "blocks": {
+        "mi_1": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "Where does the money go?",
+            "answer": "<p>Kit and workshop revenue covers our costs — funder money goes straight to programme delivery. We run two entities on purpose: BBC London Ltd runs the commercial side (kits, workshops, corporate); Bamboo Mobility Project CIC delivers the social programmes in prisons and schools. Teaching bamboo bicycle fabrication since 2012 — 4,000+ people trained, 3,500+ bikes built.<\/p>"
+          }
+        },
+        "mi_2": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "Who backs it?",
+            "answer": "<p>Investec Beyond Business winner (2025) · Financial Times · Inside Time · National Lottery Community Fund (“Pedal Forward”) · Kevin McCloud's Green Heroes · Design Museum exhibition. <a href=\"\/pages\/impact\">The proof lives on the impact page.<\/a><\/p>"
+          }
+        },
+        "mi_3": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "Still stuck?",
+            "answer": "<p>Email <a href=\"mailto:info@bamboobicycleclub.org\">info@bamboobicycleclub.org<\/a>, or visit the <a href=\"\/pages\/support-centre\">Support Centre<\/a> for tutorials, the builders' community and a free 10-minute call.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "mi_1",
+        "mi_2",
+        "mi_3"
+      ]
     }
   },
   "order": [
     "hero",
-    "faq_general",
-    "faq_kits",
-    "faq_workshops",
-    "faq_technical",
-    "faq_shipping",
-    "cta"
+    "doors",
+    "pills",
+    "ch1",
+    "ch2",
+    "ch3",
+    "ch4",
+    "ch5",
+    "ch6",
+    "ch7",
+    "ch8"
   ]
 }

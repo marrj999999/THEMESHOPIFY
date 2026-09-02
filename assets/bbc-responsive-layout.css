@@ -1,0 +1,158 @@
+/* ============================================================================
+   BBC — band layout, content-aware                                2026-08-28
+   Loads AFTER bbc-responsive-cards.css, so rules here win over it.
+
+   THE MISTAKE THIS FILE CORRECTS
+   My first pass fixed "too tall" by CAPPING media boxes (max-height). That
+   swapped an overflow for a GAP: the hero image became 608px inside a 678px
+   hero, leaving 69px of background showing under it — "the hero image doesn't
+   fill the screen correctly". Capping the container is the wrong tool. The
+   right one is to take the image OUT OF FLOW so it can neither dictate the
+   band height nor under-fill it.
+
+   The pattern was already in the markup: the hero <video> is position:absolute
+   and behaves correctly. Only the poster <img> was position:static. Sections
+   14 and 11 below simply apply the video's own pattern to the images.
+   ========================================================================= */
+
+/* 14 ─ HERO: image fills the band, never sets it ----------------------- */
+.bbc-rd .rd-hero .rd-bg {
+  max-height: none;          /* undoes the cap in bbc-responsive-cards.css §9 */
+  overflow: hidden;
+}
+.bbc-rd .rd-hero .rd-bg > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 11 ─ THE SPLIT BAND: image fills its column --------------------------
+   "in schools · real engineering / start free. build up when your students
+   ask for more." Measured at 1440x780: media 520px inside a 1231px band, so
+   711px of empty background sat beside the text.
+
+   Sticky was my first answer; it kept the image in view but still left the
+   column visibly unfilled. Stretching is what the band actually wants — a
+   normal editorial split, image flush with the text block.
+
+   .rd-media.rd-media doubles the class for specificity 0,4,0: BOTH
+   bbc-statement.css and bbc-redesign-2026.css set position:relative at 0,3,0,
+   and bbc-redesign-2026.css is re-emitted from the header section in the BODY,
+   so it lands after this file in document order. */
+@media (min-width: 1025px) {
+  .bbc-rd .rd-split { align-items: stretch; }
+  .bbc-rd .rd-split > .rd-media.rd-media {
+    position: relative;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .bbc-rd .rd-split > .rd-media.rd-media > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* 12 ─ LINE LENGTH on the process lists --------------------------------
+   .rd-steps li had max-width:none and ran the full 1136px container — roughly
+   126 characters per line against a 65-75 guideline. 72ch = 840px.
+
+   NOT changed: .rd-lede is capped by bbc-aaa-2026.css at var(--measure-lede)
+   = 68ch. For Atkinson Hyperlegible one ch is ~13.8px at 22px, so 68ch = 941px
+   ≈ 85 actual characters — above guideline. Most ledes here run 38-56 because
+   their copy is short. Correcting it means lowering --measure-lede to ~56ch,
+   an estate-wide design-system decision. Flagged, not changed. */
+.bbc-rd .rd-steps li { max-width: 72ch; }
+
+/* 13 ─ DISPLAY TYPE IN A HALF-WIDTH COLUMN -----------------------------
+   The split band's h2 rendered at 102.4px inside a 713px column, so the
+   headline wrapped to SIX lines and stood 596px tall on its own — more than a
+   third of the band. 102px is a full-bleed size; in a half-width column the
+   type has to step down with the measure.
+
+   !important is required, not stylistic: bbc-universal.css carries
+     .bbc-rd h2:not([class*="rd-fs-"]):not([class*="fs-"]) { font-size: ... !important }
+   — the same pattern that defeated the card headings. The clean fix is an
+   rd-fs-* class on the h2 in the section Liquid, which that :not() excludes. */
+@media (min-width: 1025px) {
+  .bbc-rd .rd-split .rd-txt h2 {
+    font-size: clamp(34px, 4vw, 58px) !important;
+    line-height: 1.06;
+  }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .bbc-rd .rd-split .rd-txt h2 {
+    font-size: clamp(30px, 5vw, 44px) !important;
+    line-height: 1.08;
+  }
+}
+
+/* 15 ─ "AS SEEN AT" LOGO ROW -----------------------------------------
+   Replaces the plain text credits line. Three real logos + two wordmarks
+   (London Design Festival and UK Bamboo Summit have no asset in this theme —
+   see snippets/bbc-seen-at.liquid for why they were not sourced from the web).
+   Sizing matches the existing .rd-foot-press treatment so the two logo rows
+   on the estate read as one system. */
+.bbc-rd .bbc-seenat { text-align: center; }
+.bbc-rd .bbc-seenat__label {
+  font-size: var(--type-eyebrow);
+  font-weight: 800;
+  letter-spacing: .14em;
+  color: var(--subtle);
+  margin: 0 0 18px;
+}
+.bbc-rd .bbc-seenat__row {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-wrap: wrap;
+  align-items: center; justify-content: center;
+  gap: 22px 44px;
+}
+.bbc-rd .bbc-seenat__item { display: flex; align-items: center; }
+.bbc-rd .bbc-seenat__logo {
+  height: 34px; width: auto; max-width: 170px;
+  object-fit: contain;
+  filter: grayscale(1) brightness(0);
+  opacity: .72;
+  transition: opacity .18s ease;
+}
+.bbc-rd .bbc-seenat__logo:hover { opacity: 1; }
+.bbc-rd .bbc-seenat__word {
+  display: flex; flex-direction: column; align-items: center;
+  font-size: var(--type-button);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--ink);
+  opacity: .82;
+}
+.bbc-rd .bbc-seenat__sub {
+  font-size: var(--type-caption);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  opacity: .7;
+}
+@media (max-width: 640px) {
+  .bbc-rd .bbc-seenat__row { gap: 18px 28px; }
+  .bbc-rd .bbc-seenat__logo { height: 26px; max-width: 130px; }
+}
+
+/* Per-logo optical balance. Normalising by height alone does not work across
+   wildly different aspect ratios: at a flat 34px the marks measured
+       design-museum   51x30 (1.7:1) ->  58px wide
+       luxembourg     160x73 (2.2:1) ->  75px wide
+       grand-designs  180x30 (6.0:1) -> 204px wide
+   so Grand Designs read 3.5x heavier than Design Museum. Same per-logo approach
+   bbc-align.css already uses for the press wall ([src*=logo-ft]{height:17px}). */
+.bbc-rd .bbc-seenat__logo[src*="design-museum"]     { height: 36px; }
+.bbc-rd .bbc-seenat__logo[src*="luxembourg-museum"] { height: 34px; }
+.bbc-rd .bbc-seenat__logo[src*="grand-designs"]     { height: 21px; max-width: 150px; }
+@media (max-width: 640px) {
+  .bbc-rd .bbc-seenat__logo[src*="design-museum"]     { height: 28px; }
+  .bbc-rd .bbc-seenat__logo[src*="luxembourg-museum"] { height: 26px; }
+  .bbc-rd .bbc-seenat__logo[src*="grand-designs"]     { height: 16px; max-width: 115px; }
+}

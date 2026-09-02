@@ -1,0 +1,72 @@
+{%- comment -%}
+  "As seen at" — exhibition/venue credits.                              2026-08-28
+
+  Replaces the plain text line that rendered from section.settings.sites_list:
+      "as seen at — Design Museum, London · Musée du Luxembourg, Paris ·
+       London Design Festival · Grand Designs Live · UK Bamboo Summit, Coventry"
+
+  LOGOS ARE ONLY USED WHERE THE ASSET ALREADY EXISTS IN THIS THEME. Three do:
+
+      logo-design-museum.svg      Design Museum, London
+      logo-luxembourg-museum.png  Musee du Luxembourg, Paris
+      logo-grand-designs.svg      Grand Designs Live
+
+  Three do not, and are rendered as styled wordmarks instead:
+
+      London Design Festival     James supplied the artwork 2026-08-28 but the
+                                 file was never saved to disk, so there is no
+                                 asset to reference yet. Slot is ready.
+      Eden Project               workshops delivered there (James, 2026-08-28)
+      UK Bamboo Summit, Coventry
+
+  Deliberately NOT sourced from the open web. These are third-party trademarks;
+  using the wrong mark on a credibility band is worse than using none, and which
+  marks BBC may display is a rights decision, not a build decision. To add either,
+  drop the official SVG into assets/ as logo-london-design-festival.svg,
+  logo-eden-project.svg or logo-uk-bamboo-summit.svg and move its entry from `wordmarks` to `logos` below.
+
+  Mixing marks and wordmarks in one row is a normal editorial pattern, and the
+  shared .bbc-seenat__item sizing keeps the rhythm even.
+{%- endcomment -%}
+
+{%- assign seen_label = label | default: 'as seen at' -%}
+
+<div class="bbc-seenat" role="region" aria-label="Exhibitions and events">
+  <p class="bbc-seenat__label">{{ seen_label }}</p>
+  <ul class="bbc-seenat__row" role="list">
+
+    <li class="bbc-seenat__item">
+      <img src="{{ 'logo-design-museum.svg' | asset_url }}"
+           alt="Design Museum, London" loading="lazy"
+           width="120" height="34" class="bbc-seenat__logo">
+    </li>
+
+    <li class="bbc-seenat__item">
+      <img src="{{ 'logo-luxembourg-museum.png' | asset_url }}&width=320"
+           srcset="{{ 'logo-luxembourg-museum.png' | asset_url }}&width=160 160w,
+                   {{ 'logo-luxembourg-museum.png' | asset_url }}&width=320 320w"
+           sizes="160px"
+           alt="Musée du Luxembourg, Paris" loading="lazy"
+           width="160" height="34" class="bbc-seenat__logo">
+    </li>
+
+    <li class="bbc-seenat__item bbc-seenat__item--text">
+      <span class="bbc-seenat__word">London Design Festival</span>
+    </li>
+
+    <li class="bbc-seenat__item">
+      <img src="{{ 'logo-grand-designs.svg' | asset_url }}"
+           alt="Grand Designs Live" loading="lazy"
+           width="130" height="34" class="bbc-seenat__logo">
+    </li>
+
+    <li class="bbc-seenat__item bbc-seenat__item--text">
+      <span class="bbc-seenat__word">Eden Project</span>
+    </li>
+
+    <li class="bbc-seenat__item bbc-seenat__item--text">
+      <span class="bbc-seenat__word">UK Bamboo Summit<span class="bbc-seenat__sub">Coventry</span></span>
+    </li>
+
+  </ul>
+</div>

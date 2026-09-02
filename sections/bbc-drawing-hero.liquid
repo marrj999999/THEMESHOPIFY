@@ -1,77 +1,223 @@
 {%- comment -%} ============================================================
-  BBC DRAWING HERO — the page opened as a fabrication drawing, not a photo
-  with type on it. Devices come from the approved Claude Design sheet
-  `preview/2026-fabrication.html` (title block · dimension callout · graph
-  paper · node divider), the same language the home v2 identity uses.
+  BBC DRAWING HERO v2 — the video hero for /pages/why-bamboo (2026-08-24,
+  James: "pick a video and use claude design to build a hero with video").
 
-  Built for /pages/why-bamboo, which is a page ABOUT a material — so the
-  material is drawn. Every string is a setting; callouts are blocks so their
-  position on the image is editable without touching code.
-  All styling lives in bbc-redesign-2026.css (design brief hard req 2).
+  v1 was a LIGHT fabrication-drawing sheet (copy left, still photo right with
+  dimension callouts). v2 joins the hero family established on home and impact
+  in Aug 2026 — forest panel, copy on the shared --bbc-gutter axis, culm accent,
+  media column right — with the two devices that stay UNIQUE to this page:
+    · the drawing TITLE BLOCK survives as the eyebrow ("№ 02 — the material")
+    · the DIMENSION CALLOUTS survive, pinned over the *moving* film — the
+      fabrication-drawing language applied to live footage. Blocks unchanged,
+      so positions stay editable in the theme editor.
+
+  THE FILM: 42s cut from `video_frame_testing.mp4` in Shopify Files (the
+  university frame-test footage): aluminium frame in the hydraulic rig →
+  bamboo culm close-ups → the bamboo frame in the same rig → the sectioned
+  culm. It is the page's argument — "a grass that rides like steel ... the
+  material, measured" — told in footage. Presenter-to-camera stretches were
+  deliberately cut around (they read badly with no sound).
+  James asked for a YouTube pick; the channel's on-topic uploads were surveyed
+  (choose-bamboo / notching / biocomposites) but YouTube rate-limits downloads
+  on this connection to 360p, which is too soft for a hero — and the SAME
+  footage family exists in Files at 720p. Swap the film by pasting a new URL
+  into the "Film URL" setting.
+
+  WHY THE CSS IS INLINE HERE, not in bbc-redesign-2026.css as v1 required:
+  that file is re-emitted ~11x per page AFTER section styles, so class-level
+  overrides silently lose (documented cascade trap, project CLAUDE.md #1).
+  v2 uses a fresh .dvh-* namespace that NO other stylesheet mentions — the
+  cascade war cannot reach names it does not use. bbc-align.css still owns the
+  shared --bbc-gutter variable via the .bbc-rd wrapper class.
+  EXCEPTION FOUND ON DEPLOY: element-level estate rules (h1, h1 em, .rd-btn
+  variants keyed to this page's OLD light surface) still reach INTO the
+  namespace via shared tags/classes — those three get scoped !important
+  re-assertions below, each annotated.
+
+  PLAYBACK pattern copied from the impact hero (load() + start on canplay +
+  fade in only on `playing`) — play() resolving while still paused shipped as
+  a real bug on the homepage hero; do not simplify this. Gates: reduced
+  motion, phones, save-data → the still photo stays.
 ============================================================ {%- endcomment -%}
 {{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
 
-<div class="bbc-rd rd-sheet">
-  <div class="rd-wrap">
-    <div class="rd-dhero">
-      <div class="rd-dhero__l">
-        {%- if section.settings.crumb_label != blank -%}
-          <nav class="rd-crumb rd-crumb--onlight" aria-label="Breadcrumb">
-            <a href="{{ routes.root_url }}">Home</a><span class="rd-sep" aria-hidden="true">/</span><span aria-current="page">{{ section.settings.crumb_label }}</span>
-          </nav>
-        {%- endif -%}
+{%- liquid
+  assign film = section.settings.video_url
+  assign poster = section.settings.video_poster
+-%}
 
-        {%- if section.settings.tb_v1 != blank or section.settings.tb_v2 != blank -%}
-          <div class="rd-tblock" aria-hidden="true">
-            <span class="rd-tb-k rd-tb-r">{{ section.settings.tb_k1 }}</span><span class="rd-tb-r">{{ section.settings.tb_v1 }}</span>
-            <span class="rd-tb-k">{{ section.settings.tb_k2 }}</span><span>{{ section.settings.tb_v2 }}</span>
-          </div>
-        {%- endif -%}
+<div class="bbc-rd dvh-wrap">
+  <div class="dvh">
+    <div class="dvh-copy">
+      {%- if section.settings.crumb_label != blank -%}
+        <nav class="rd-crumb dvh-crumb" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}">Home</a><span class="rd-sep" aria-hidden="true">/</span><span aria-current="page">{{ section.settings.crumb_label }}</span>
+        </nav>
+      {%- endif -%}
 
-        {%- if section.settings.heading != blank -%}
-          <h1 class="rd-reveal">{{ section.settings.heading }}</h1>
-        {%- endif -%}
-        {%- if section.settings.lede != blank -%}
-          <p class="rd-lede rd-mt2">{{ section.settings.lede }}</p>
-        {%- endif -%}
+      {%- if section.settings.tb_v1 != blank -%}
+        <p class="dvh-tb"><span class="dvh-tb-k">{{ section.settings.tb_k1 | default: 'drawing' }}</span> {{ section.settings.tb_v1 }}</p>
+      {%- endif -%}
 
-        {%- if section.settings.cta1_label != blank or section.settings.cta2_label != blank -%}
-          <div class="rd-flex rd-mt3">
-            {%- if section.settings.cta1_label != blank -%}
-              <a class="rd-btn rd-lime" href="{{ section.settings.cta1_url | default: '#' }}">{{ section.settings.cta1_label }} <span class="rd-arrow">&rarr;</span></a>
-            {%- endif -%}
-            {%- if section.settings.cta2_label != blank -%}
-              <a class="rd-btn rd-ghost" href="{{ section.settings.cta2_url | default: '#' }}">{{ section.settings.cta2_label }}</a>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
-      </div>
+      {%- if section.settings.heading != blank -%}
+        <h1 class="dvh-h1">{{ section.settings.heading }}</h1>
+      {%- endif -%}
 
-      <div class="rd-dhero__r rd-dimwrap">
-        {%- if section.settings.image != blank -%}
-          <img src="{{ section.settings.image | image_url: width: 1400 }}"
-               srcset="{{ section.settings.image | image_url: width: 700 }} 700w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
-               sizes="(max-width:900px) 100vw, 45vw"
-               alt="{{ section.settings.image_alt | escape }}"
-               width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" fetchpriority="high">
-        {%- else -%}
-          <img src="{{ section.settings.image_fallback | default: 'bbc-rd-frame-build.jpg' | asset_url }}"
-               alt="{{ section.settings.image_alt | escape }}" width="1400" height="1050" fetchpriority="high">
-        {%- endif -%}
+      {%- if section.settings.cta1_label != blank or section.settings.cta2_label != blank -%}
+        <div class="dvh-cta">
+          {%- if section.settings.cta1_label != blank -%}
+            <a class="rd-btn rd-lime" href="{{ section.settings.cta1_url | default: '#' }}">{{ section.settings.cta1_label }} <span class="rd-arrow">&rarr;</span></a>
+          {%- endif -%}
+          {%- if section.settings.cta2_label != blank -%}
+            <a class="rd-btn rd-on-dark" href="{{ section.settings.cta2_url | default: '#' }}">{{ section.settings.cta2_label }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
 
-        {%- comment -%} Callouts are blocks so each label AND its position are editable. {%- endcomment -%}
+      {%- if section.settings.lede != blank -%}
+        <p class="dvh-lede">{{ section.settings.lede }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="dvh-media">
+      {%- comment -%} The still photo ALWAYS renders and carries the alt text;
+        the film layers over it and fades in only once genuinely playing, so
+        every failure mode degrades to the photo, never to a black box. {%- endcomment -%}
+      {%- if section.settings.image != blank -%}
+        <img class="dvh-img" src="{{ section.settings.image | image_url: width: 1400 }}"
+             srcset="{{ section.settings.image | image_url: width: 700 }} 700w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
+             sizes="(max-width:1199px) 100vw, 55vw"
+             alt="{{ section.settings.image_alt | escape }}"
+             width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" fetchpriority="high">
+      {%- else -%}
+        <img class="dvh-img" src="{{ section.settings.image_fallback | default: 'bbc-rd-frame-build.jpg' | asset_url }}"
+             alt="{{ section.settings.image_alt | escape }}" width="1400" height="1050" fetchpriority="high">
+      {%- endif -%}
+
+      {%- if film != blank -%}
+        <video class="dvh-film" muted loop playsinline webkit-playsinline preload="metadata"
+               {% if poster != blank %}poster="{{ poster }}"{% endif %}
+               aria-hidden="true" tabindex="-1" src="{{ film }}"></video>
+      {%- endif -%}
+
+      <div class="dvh-scrim" aria-hidden="true"></div>
+
+      {%- comment -%} Callouts are gated OFF by default (2026-08-24, James: "there is a
+        hardcoded culm 30-40mm check on the hero, can you remove"). The chip was the saved
+        c1 block rendering over the film. Gated rather than deleted so his saved block and
+        its editor controls survive intact - flip "Show dimension callouts" to bring the
+        device back. Default false works because the draft template has no show_callouts
+        key, so the schema default genuinely applies (the `| default:` gating bug only
+        bites saved-as-empty strings, not absent keys). {%- endcomment -%}
+      {%- if section.settings.show_callouts -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'callout' and block.settings.text != blank -%}
-            <span class="rd-dim-callout rd-dim-callout--pin" style="top:{{ block.settings.top | default: 30 }}%;left:{{ block.settings.left | default: 34 }}%" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+            <span class="dvh-callout" style="top:{{ block.settings.top | default: 30 }}%;left:{{ block.settings.left | default: 34 }}%" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
           {%- endif -%}
         {%- endfor -%}
-      </div>
+      {%- endif -%}
     </div>
   </div>
   {%- if section.settings.show_nodediv -%}
     <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
   {%- endif -%}
 </div>
+
+{% stylesheet %}
+/* .dvh-* is a fresh namespace on purpose — see the head comment. Shared things
+   (buttons, breadcrumb, node divider, --bbc-gutter) come from the estate. */
+.dvh{display:grid;grid-template-columns:0.82fr 1fr;align-items:stretch;min-height:clamp(560px,82vh,940px);min-height:clamp(560px,82svh,940px);background:var(--forest,#003C32);overflow:hidden;isolation:isolate}
+.dvh-copy{position:relative;z-index:3;display:flex;flex-direction:column;justify-content:center;padding:clamp(26px,4.8vh,80px) clamp(20px,2.6vw,48px) clamp(30px,5.4vh,84px) var(--bbc-gutter,clamp(32px,6vw,120px));container-type:inline-size}
+/* the culm, MATERIAL-PAGE variant: same device as home/impact but with a tighter
+   16+4px node period — culms carry their nodes closest near the base, and this is
+   the page about the plant. Pseudo-element, so Dawn's div:empty trap cannot bite. */
+.dvh-copy::before{content:"";position:absolute;left:calc(var(--bbc-gutter,48px) - 34px);top:13%;bottom:13%;width:3px;border-radius:3px;background:repeating-linear-gradient(to bottom,var(--lime,#D4FD62) 0 16px,rgba(6,35,28,.55) 16px 20px)}
+.dvh-crumb{margin-bottom:clamp(12px,2vh,22px)}
+.dvh-crumb,.dvh-crumb a{color:rgba(230,220,200,.72)!important;text-shadow:none}
+.dvh-crumb a:hover{color:var(--lime,#D4FD62)!important}
+.dvh-crumb [aria-current]{color:var(--lime,#D4FD62)}
+.dvh-tb{margin:0 0 clamp(10px,1.8vh,20px);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--lime,#D4FD62)}
+.dvh-tb-k{display:inline-block;margin-right:10px;padding:2px 8px;border:1.5px solid rgba(212,253,98,.5);border-radius:3px;color:rgba(230,220,200,.85)}
+/* colour needs the same armour as the em below: the page's estate sheets style h1
+   for the OLD light drawing-sheet (near-forest ink) at >= (0,1,2)+, and they load
+   after the section bundle - on the deployed page the headline rendered DARK on the
+   forest panel (caught by screenshot). Scoped !important, nothing else uses .dvh-*. */
+.dvh .dvh-h1{margin:0;color:var(--bone,#E6DCC8)!important;font-size:clamp(2.3rem,7vw,5.4rem);line-height:1.02;letter-spacing:-.01em;text-wrap:balance}
+/* .dvh .dvh-h1 em + !important: an estate rule styles `h1 em` at (0,1,2) with a mid
+   green (#3F8B66) and the section stylesheet bundle loads BEFORE the 11x re-emitted
+   global files, so a bare .dvh-h1 em (0,1,1) lost on both counts - caught on the
+   deployed page, the em rendered pine instead of lime. */
+.dvh .dvh-h1 em{font-style:italic;color:var(--lime,#D4FD62)!important}
+.dvh-lede{margin:clamp(14px,2.2vh,24px) 0 0;max-width:46ch;color:rgba(238,243,236,.92);font-size:clamp(1rem,1.9cqw,1.25rem);line-height:1.55}
+.dvh-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:clamp(18px,2.8vh,30px)}
+/* same story for the primary button: an estate rule keyed to this page's old light
+   surface repainted .rd-lime as a dark pill with dark text (screenshot-caught,
+   unreadable). Re-assert the lime pair inside .dvh only. */
+.dvh .dvh-cta .rd-btn.rd-lime{background:var(--lime,#D4FD62)!important;color:var(--forest,#003C32)!important;border-color:var(--lime,#D4FD62)!important}
+.dvh .dvh-cta .rd-btn.rd-on-dark{color:var(--bone,#E6DCC8)!important;border-color:rgba(230,220,200,.65)!important;background:transparent!important}
+.dvh-media{position:relative;z-index:1;min-height:0;overflow:hidden}
+.dvh-img,.dvh-film{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.dvh-film{opacity:0;transition:opacity .6s ease;z-index:1}
+.dvh-film.is-on{opacity:1}
+.dvh-scrim{position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,var(--forest,#003C32) 0%,rgba(0,60,50,.34) 28%,rgba(0,60,50,0) 64%);pointer-events:none}
+/* dimension callout, the drawing device over the film. Forest chip on lime text —
+   measured over the brightest rig footage the pale variant fell under 3:1.
+   Currently gated OFF by the show_callouts setting - styles kept for re-enable. */
+.dvh-callout{position:absolute;z-index:3;transform:translate(-50%,-50%);padding:5px 10px;border:1.5px solid rgba(212,253,98,.55);border-radius:4px;background:rgba(0,40,33,.72);color:var(--lime,#D4FD62);font-size:11.5px;font-weight:700;letter-spacing:.06em;white-space:nowrap}
+.dvh-callout::after{content:"";position:absolute;left:50%;top:100%;width:1.5px;height:22px;background:rgba(212,253,98,.55)}
+@media(min-width:1200px){
+  .dvh .dvh-h1{font-size:clamp(2.4rem,min(13cqw,8vh),5.6rem)}
+}
+@media(max-width:1199px){
+  .dvh{grid-template-columns:1fr;min-height:0}
+  .dvh-media{grid-row:1;height:clamp(260px,42svh,480px)}
+  .dvh-copy{grid-row:2;padding-block:clamp(28px,5vw,56px)}
+  .dvh-copy::before{position:relative;inset:auto;width:68px;height:3px;margin:0 0 18px;background:repeating-linear-gradient(to right,var(--lime,#D4FD62) 0 16px,rgba(6,35,28,.55) 16px 20px)}
+  .dvh-scrim{background:linear-gradient(0deg,var(--forest,#003C32) 0%,rgba(0,60,50,.32) 26%,rgba(0,60,50,0) 62%)}
+}
+@media(max-width:749px){
+  .dvh-media{height:clamp(210px,32svh,380px)}
+  /* action above the explanation on phones — the family rule. DOM order intact. */
+  .dvh-copy{display:flex}
+  .dvh-crumb{order:1}
+  .dvh-tb{order:2}
+  .dvh-h1{order:3}
+  .dvh-cta{order:4;margin-top:clamp(16px,2.4vh,24px)}
+  .dvh-lede{order:5;margin-top:clamp(16px,2.4vh,24px)}
+  .dvh-callout{display:none} /* pins mislead at phone crops; the film reads alone */
+}
+@media(prefers-reduced-motion:reduce){
+  .dvh-film{display:none}
+}
+{% endstylesheet %}
+
+{% javascript %}
+/* Why-bamboo hero film. Same hardened pattern as the impact hero: play() can
+   resolve while the element is still paused at t=0, so start on `canplay` and
+   reveal only on `playing`. Gates leave the still photo in place. */
+(function () {
+  var v = document.querySelector('.dvh-film');
+  if (!v) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  /* phone gate removed 2026-08-24 - James: hero films must play on mobile too */
+  var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if (conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ''))) return;
+  v.muted = true; v.defaultMuted = true;
+  function start() {
+    var p = v.play();
+    if (p && p.catch) p.catch(function () { /* autoplay refused — photo stays */ });
+  }
+  v.addEventListener('playing', function () { v.classList.add('is-on'); }, { once: true });
+  v.setAttribute('preload', 'auto');
+  v.load();
+  if (v.readyState >= 3) start();
+  else v.addEventListener('canplay', start, { once: true });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { v.pause(); }
+    else if (v.classList.contains('is-on')) { start(); }
+  });
+})();
+{% endjavascript %}
 
 {% schema %}
 {
@@ -84,8 +230,8 @@
     { "type": "header", "content": "Title block (drawing panel)" },
     { "type": "text", "id": "tb_k1", "label": "Row 1 label", "default": "drawing" },
     { "type": "text", "id": "tb_v1", "label": "Row 1 value", "default": "№ 02 — the material" },
-    { "type": "text", "id": "tb_k2", "label": "Row 2 label", "default": "drawn" },
-    { "type": "text", "id": "tb_v2", "label": "Row 2 value", "default": "by hand, since 2012" },
+    { "type": "text", "id": "tb_k2", "label": "Row 2 label (unused in v2, kept for saved data)", "default": "drawn" },
+    { "type": "text", "id": "tb_v2", "label": "Row 2 value (unused in v2, kept for saved data)", "default": "by hand, since 2012" },
     { "type": "header", "content": "Content" },
     { "type": "text", "id": "heading", "label": "Heading (use <em> for the tinted words)", "default": "a grass that rides like steel" },
     { "type": "textarea", "id": "lede", "label": "Lede", "default": "Every workshop opens with the same question. It sounds like a gimmick — until day one is over. This is the material, measured." },
@@ -93,12 +239,16 @@
     { "type": "url", "id": "cta1_url", "label": "Primary CTA link" },
     { "type": "text", "id": "cta2_label", "label": "Secondary CTA label", "default": "build one" },
     { "type": "url", "id": "cta2_url", "label": "Secondary CTA link" },
-    { "type": "header", "content": "Image" },
+    { "type": "header", "content": "Film (looping, silent)" },
+    { "type": "text", "id": "video_url", "label": "Film URL (mp4, Shopify Files)", "default": "https://cdn.shopify.com/videos/c/o/v/cdb602478fe441388ed3efc045ede4f6.mp4", "info": "42s frame-test cut. Paste a different Files mp4 URL to swap. Clear to show the still photo only." },
+    { "type": "text", "id": "video_poster", "label": "Poster image URL", "default": "https://cdn.shopify.com/s/files/1/0502/8695/2631/files/preview_images/cdb602478fe441388ed3efc045ede4f6.thumbnail.0000000000.jpg?v=1787563117" },
+    { "type": "header", "content": "Still image (fallback + phones)" },
     { "type": "image_picker", "id": "image", "label": "Image" },
     { "type": "text", "id": "image_fallback", "label": "Fallback asset filename", "default": "bbc-rd-frame-build.jpg" },
     { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "A bamboo bicycle frame clamped in its building jig" },
     { "type": "header", "content": "Devices" },
-    { "type": "checkbox", "id": "show_nodediv", "label": "Node-divider seam at the base", "default": true }
+    { "type": "checkbox", "id": "show_nodediv", "label": "Node-divider seam at the base", "default": true },
+    { "type": "checkbox", "id": "show_callouts", "label": "Show dimension callouts over the film", "default": false, "info": "The pinned drawing-style labels (e.g. culm diameter). Off by default — James 2026-08-24." }
   ],
   "blocks": [
     {
@@ -107,7 +257,7 @@
       "settings": [
         { "type": "text", "id": "text", "label": "Label", "default": "culm · 30–40 mm ø" },
         { "type": "range", "id": "top", "label": "Position from top (%)", "min": 5, "max": 90, "step": 1, "unit": "%", "default": 30 },
-        { "type": "range", "id": "left", "label": "Position from left (%)", "min": 10, "max": 80, "step": 1, "unit": "%", "default": 34 }
+        { "type": "range", "id": "left", "label": "Position from left (%)", "min": 10, "max": 80, "step": 1, "unit": "%", "default": 30 }
       ]
     }
   ],

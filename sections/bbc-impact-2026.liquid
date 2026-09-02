@@ -9,7 +9,7 @@
 
   CONTENT POLICY (hard rules, updated 2026-06-20):
   - Prisons MAY be named (rule changed 2026-06-17). Active named sites:
-    HMP Lowdham Grange, HMP Foston Hall, HMP Lindholme, HMYOI Feltham (four active sites).
+    five UK prison sites at different delivery stages — use the Register count formula, never a named list.
     NEVER link a named/identifiable participant to a named prison (GDPR/safeguarding).
   - Source-of-truth figures only: 90% completion
     (NO attribution — figure unconfirmed across sources) · 4,000+ builders · 45 countries.
@@ -189,7 +189,7 @@
       {%- else -%}
       {%- if section.settings.fork_label != blank -%}<span class="rd-eyebrow rd-mt3">{{ section.settings.fork_label }}</span>{%- endif -%}
       {%- endif -%}
-      <div class="rd-paths rd-stagger">
+      <div class="rd-paths rd-stagger{% if section.settings.arm3_name != blank %} rd-paths--3{% endif %}">
         <div class="rd-path rd-path--schools rd-reveal">
           <span class="rd-duotone rd-path__media">
             <img src="{% if section.settings.arm1_image != blank %}{{ section.settings.arm1_image | image_url: width: 900 }}{% else %}{{ 'bbc-rd-wb-group.jpg' | asset_url }}{% endif %}" alt="{{ section.settings.arm1_image_alt | default: 'A school group with the bamboo bike frame they built' | escape }}" loading="lazy" width="900" height="500">
@@ -216,7 +216,25 @@
             <a class="rd-path__cta" href="{{ section.settings.arm2_cta_url | default: '/pages/contact-us' }}">{{ section.settings.arm2_cta_label }}</a>
           {%- endif -%}
         </div>
+        {%- if section.settings.arm3_name != blank -%}
+        <div class="rd-path rd-path--community rd-reveal">
+          <span class="rd-duotone rd-path__media">
+            <img src="{% if section.settings.arm3_image != blank %}{{ section.settings.arm3_image | image_url: width: 900 }}{% else %}{{ 'bbc-rd-prison-empty.jpg' | asset_url }}{% endif %}" alt="{{ section.settings.arm3_image_alt | default: 'Inside the Build to Bond workshop — benches, jigs and frames' | escape }}" loading="lazy" width="900" height="500">
+          </span>
+          <span class="rd-path__chip">{{ section.settings.arm3_chip }}</span>
+          <h3 class="rd-path__name">{{ section.settings.arm3_name }}</h3>
+          <p class="rd-path__who">{{ section.settings.arm3_who }}</p>
+          {%- assign a3 = section.settings.arm3_flow | split: '|' -%}
+          <div class="rd-flow">{%- for st in a3 -%}{%- assign parts = st | split: "::" -%}<span class="rd-flow__step"><b>{{ parts[0] | strip }}</b>{%- if parts[1] -%}<small>{{ parts[1] | strip }}</small>{%- endif -%}</span>{%- endfor -%}</div>
+          {%- if section.settings.arm3_cta_label != blank -%}
+            <a class="rd-path__cta" href="{{ section.settings.arm3_cta_url | default: '/pages/build-to-bond' }}">{{ section.settings.arm3_cta_label }}</a>
+          {%- endif -%}
+        </div>
+        {%- endif -%}
       </div>
+      <style>
+        @media(min-width:1024px){ .bbc-rd .rd-paths.rd-paths--3{ grid-template-columns:repeat(3,1fr); } }
+      </style>
       {%- if section.settings.converge_title != blank -%}
       <div class="rd-converge rd-reveal">
         <p class="rd-converge__title">{{ section.settings.converge_title }}</p>
@@ -573,7 +591,7 @@
           <img src="{{ 'bbc-world-map.svg' | asset_url }}" alt="{{ section.settings.map_alt | escape }}" width="1000" height="472" loading="lazy">
         {%- endif -%}
         <div class="rd-mapstats" aria-hidden="true">
-          <div class="rd-mapstat rd-mapstat--a"><b>{{ section.settings.mstat1_num | default: '4' }}</b><span>{{ section.settings.mstat1_lbl | default: 'active prison sites' }}</span></div>
+          <div class="rd-mapstat rd-mapstat--a"><b>{{ section.settings.mstat1_num | default: '5' }}</b><span>{{ section.settings.mstat1_lbl | default: 'active prison sites' }}</span></div>
           <div class="rd-mapstat rd-mapstat--b"><b>{{ section.settings.mstat2_num | default: '10' }}</b><span>{{ section.settings.mstat2_lbl | default: 'schools & universities' }}</span></div>
           <div class="rd-mapstat rd-mapstat--c"><b>{{ section.settings.mstat3_num | default: '3' }}</b><span>{{ section.settings.mstat3_lbl | default: 'international hubs' }}</span></div>
           <div class="rd-mapstat rd-mapstat--d"><b>{{ section.settings.mstat4_num | default: '45' }}</b><span>{{ section.settings.mstat4_lbl | default: 'countries reached' }}</span></div>
@@ -1448,6 +1466,61 @@ document.addEventListener('DOMContentLoaded', function () {
     },
     {
       "type": "text",
+      "id": "arm3_tag",
+      "label": "Arm 3 tag"
+    },
+    {
+      "type": "text",
+      "id": "arm3_title",
+      "label": "Arm 3 title"
+    },
+    {
+      "type": "textarea",
+      "id": "arm3_body",
+      "label": "Arm 3 body"
+    },
+    {
+      "type": "textarea",
+      "id": "arm3_flow",
+      "label": "Arm 3 pathway (| separated)"
+    },
+    {
+      "type": "image_picker",
+      "id": "arm3_image",
+      "label": "Pathway 2 image (workshop space only — no identifiable people)"
+    },
+    {
+      "type": "text",
+      "id": "arm3_image_alt",
+      "label": "Pathway 2 image alt"
+    },
+    {
+      "type": "text",
+      "id": "arm3_chip",
+      "label": "Pathway 2 chip"
+    },
+    {
+      "type": "text",
+      "id": "arm3_name",
+      "label": "Pathway 2 name"
+    },
+    {
+      "type": "textarea",
+      "id": "arm3_who",
+      "label": "Pathway 2 — who it's for"
+    },
+    {
+      "type": "text",
+      "id": "arm3_cta_label",
+      "label": "Pathway 2 CTA label"
+    },
+    {
+      "type": "url",
+      "id": "arm3_cta_url",
+      "label": "Pathway 2 CTA link"
+    },
+    {
+      "type": "text",
       "id": "converge_title",
       "label": "Convergence strip title",
       "default": "both pathways end in the same place ✱ a way forward."
@@ -1724,19 +1797,19 @@ document.addEventListener('DOMContentLoaded', function () {
       "type": "text",
       "id": "sites_title",
       "label": "Heading (blank to hide section)",
-      "default": "accredited programmes across four active prison sites."
+      "default": "accredited programmes across five active prison sites."
     },
     {
       "type": "textarea",
       "id": "sites_body",
       "label": "Body",
-      "default": "Live delivery at HMP Lowdham Grange, HMP Foston Hall, HMP Lindholme and HMYOI Feltham — with a self-delivery model that trains staff and peer instructors to run the workshop."
+      "default": "Build to Bond is established across five UK prison sites, at different delivery stages. It runs on a self-delivery model that trains staff and peer instructors to run the workshop."
     },
     {
       "type": "text",
       "id": "sites_list",
       "label": "Named sites line (HTML allowed)",
-      "default": "HMP Lowdham Grange &middot; HMP Foston Hall &middot; HMP Lindholme &middot; HMYOI Feltham"
+      "default": "five UK prison sites, at different delivery stages"
     },
     {
       "type": "text",
@@ -2377,7 +2450,7 @@ document.addEventListener('DOMContentLoaded', function () {
           "type": "textarea",
           "id": "benefit",
           "label": "What they get",
-          "default": "Real engineering in your classroom. Start with the free Speaker build, add OCN Level 1 when your students want more."
+          "default": "Real engineering in your classroom. Start with the free Speaker build, add accredited routes when your students want more."
         },
         {
           "type": "text",

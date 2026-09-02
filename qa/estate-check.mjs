@@ -57,7 +57,7 @@ import { BANNED } from './banned-claims.mjs';
 // NAMED WAIVERS — real findings owned outside the theme; reported as WAIVED, not FAIL.
 const WAIVERS = [
   { check: /raster sharpness/, reason: 'asset-ceiling: source files smaller than srcset ceilings — James image picks (11 files + product photos)' },
-  { check: /banned claims/, page: /frequently-asked-questions|project-zero-impact-case-study/, reason: 'store content: FAQ admin body + article — James list' },
+  // 2026-09-02: the FAQ waiver was REMOVED — it hid '36 countries', 'six Makers' and a Level 1 claim on a live page for weeks. A live breach is a FAIL until the content is fixed; never a waiver.
   { check: /one h1/, page: /support-centre|size-guide|privacy-policy/, reason: 'admin body h1s (semantics now demoted at render; body itself is James\'s)' },
 ];
 const rows = [];

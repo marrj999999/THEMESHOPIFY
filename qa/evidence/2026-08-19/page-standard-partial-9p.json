@@ -1,15 +1,15 @@
 [
   {
     "path": "/pages/impact",
-    "bands": 7,
+    "bands": 6,
     "eyebrowPct": 100,
-    "repeats": 2,
+    "repeats": 1,
     "adjDark": 1,
     "maxCTA": 1,
     "offPalette": [],
     "statDark": true,
     "statGhost": true,
-    "seq": "forest → forest → paper → bone → forest → paper → paper"
+    "seq": "forest → forest → paper → bone → forest → paper"
   },
   {
     "path": "/pages/schools",
@@ -61,7 +61,7 @@
   },
   {
     "path": "/pages/our-story-2",
-    "bands": 8,
+    "bands": 9,
     "eyebrowPct": 100,
     "repeats": 0,
     "adjDark": 0,
@@ -69,42 +69,42 @@
     "offPalette": [],
     "statDark": false,
     "statGhost": false,
-    "seq": "forest → bone → forest → bone → paper → bone → steel → forest"
+    "seq": "forest → bone → forest → bone → paper → bone → steel → forest → paper"
   },
   {
     "path": "/pages/support-mission",
-    "bands": 10,
+    "bands": 1,
     "eyebrowPct": 100,
     "repeats": 0,
     "adjDark": 0,
-    "maxCTA": 1,
+    "maxCTA": 0,
     "offPalette": [],
     "statDark": null,
     "statGhost": null,
-    "seq": "forest → bone → paper → forest → bone → paper → forest → bone → paper → bone"
+    "seq": "bone"
   },
   {
     "path": "/pages/bicycleteambuilding",
     "bands": 10,
     "eyebrowPct": 89,
-    "repeats": 0,
-    "adjDark": 0,
-    "maxCTA": 2,
-    "offPalette": [],
-    "statDark": null,
-    "statGhost": null,
-    "seq": "forest → bone → steel → bone → forest → bone → paper → steel → forest → paper"
-  },
-  {
-    "path": "/",
-    "bands": 10,
-    "eyebrowPct": 100,
-    "repeats": 0,
+    "repeats": 1,
     "adjDark": 0,
     "maxCTA": 1,
     "offPalette": [],
     "statDark": null,
     "statGhost": null,
-    "seq": "forest → steel → bone → paper → bone → forest → steel → forest → steel → lime"
+    "seq": "forest → bone → bone → steel → forest → bone → paper → bone → steel → paper"
+  },
+  {
+    "path": "/",
+    "bands": 8,
+    "eyebrowPct": 100,
+    "repeats": 1,
+    "adjDark": 1,
+    "maxCTA": 1,
+    "offPalette": [],
+    "statDark": null,
+    "statGhost": null,
+    "seq": "forest → steel → bone → paper → bone → forest → forest → lime"
   }
 ]

@@ -35,12 +35,12 @@
         "b3"
       ],
       "settings": {
-        "why_fallback": "bbc-rd-ride-gravel.jpg",
-        "why_eyebrow": "Why bamboo for gravel",
-        "build_video_id": "aJ03KqMtRSA",
-        "why_image_alt": "A bamboo gravel bike on a gravel track",
+        "sticky_buy": true,
         "content_bands": false,
-        "sticky_buy": true
+        "why_eyebrow": "Why bamboo for gravel",
+        "why_image_alt": "A bamboo gravel bike on a gravel track",
+        "why_fallback": "bbc-rd-ride-gravel.jpg",
+        "build_video_id": "aJ03KqMtRSA"
       }
     },
     "kitspec": {
@@ -238,7 +238,7 @@
           "settings": {
             "number": "4,000+",
             "label": "builders trained",
-            "source": "since 2012, 36 countries"
+            "source": "since 2012, 45 countries"
           }
         },
         "b18": {
@@ -290,7 +290,7 @@
           "type": "faq",
           "settings": {
             "question": "Is it weatherproof?",
-            "answer": "Yes. Finished frames are sealed with epoxy resin. Dry your bike after wet rides and store it indoors, and and with proper care it'll give you years of riding."
+            "answer": "Yes. Finished frames are sealed with epoxy resin. Dry your bike after wet rides and store it indoors, and with proper care it'll give you years of riding."
           }
         },
         "b25": {
@@ -363,23 +363,19 @@
         "b30"
       ],
       "settings": {
-        "why_fallback": "bbc-rd-ride-gravel.jpg",
-        "why_eyebrow": "Why bamboo for gravel",
-        "build_video_id": "aJ03KqMtRSA",
-        "why_image_alt": "A bamboo gravel bike on a gravel track",
-        "show_buybox": false,
         "content_bands": true,
-        "reversible_body": "",
-        "tools_text": "",
-        "reversible_title": "",
-        "tools_title": "",
-        "support_body": "",
-        "support_title": "",
-        "support_text": "",
-        "tools_heading": "",
-        "support_heading": "",
+        "show_buybox": false,
         "confidence_eyebrow": "",
-        "confidence_heading": ""
+        "confidence_heading": "",
+        "reversible_body": "",
+        "tools_heading": "",
+        "tools_text": "",
+        "support_heading": "",
+        "support_text": "",
+        "why_eyebrow": "Why bamboo for gravel",
+        "why_image_alt": "A bamboo gravel bike on a gravel track",
+        "why_fallback": "bbc-rd-ride-gravel.jpg",
+        "build_video_id": "aJ03KqMtRSA"
       }
     }
   },

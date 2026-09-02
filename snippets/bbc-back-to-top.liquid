@@ -1,3 +1,28 @@
+{%- comment -%}
+  ========================= PREVIEW SHIM — DO NOT PUBLISH =========================
+  2026-08-28. The two lines below load the responsive fixes sitewide.
+
+  THEY DO NOT BELONG IN THIS FILE. They are here only because this snippet is
+  the smallest thing layout/theme.liquid renders exactly once on every page, and
+  the Admin API can only replace whole files — reproducing the 34 KB
+  theme.liquid through a GraphQL variable risks silently corrupting the layout
+  that renders every page on the store.
+
+  Loading from the end of <body> is also load-bearing right now: several rules
+  in these files must land AFTER bbc-redesign-2026.css, which the header section
+  re-emits from the body on every page.
+
+  THE REAL FIX, once the Shopify CLI is authenticated: delete this comment and
+  the two stylesheet_tags, and add them to layout/theme.liquid instead, directly
+  after:
+      {{ 'bbc-consistency-2026.css' | asset_url | stylesheet_tag }}
+
+  Until that happens this preview theme is for LOOKING AT, not publishing.
+  ================================================================================
+{%- endcomment -%}
+{{ 'bbc-responsive-cards.css' | asset_url | stylesheet_tag }}
+{{ 'bbc-responsive-layout.css' | asset_url | stylesheet_tag }}
+
 {% comment %}
   BBC Back to Top Button
   Floating scroll-to-top button

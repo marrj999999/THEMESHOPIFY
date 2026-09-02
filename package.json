@@ -15,7 +15,10 @@
     "smoke:firefox": "npx playwright test --config=playwright.config.firefox.mjs",
     "test:motion": "npx playwright test --config=playwright.config.motion.mjs",
     "check:geometry": "node qa/geometry-check.mjs",
-    "check:editability": "node qa/editability-check.mjs"
+    "check:editability": "node qa/editability-check.mjs",
+    "check:live": "node qa/live-check.mjs --assert",
+    "check:live:quick": "node qa/live-check.mjs --quick --assert",
+    "check:claims": "node qa/canary.mjs --skip-visual && node qa/claims-register-sync.mjs --quiet && bash scripts/claim-lint.sh sections snippets templates"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",

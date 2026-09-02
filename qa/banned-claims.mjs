@@ -41,6 +41,22 @@ export const BANNED = [
                                                  // deliberately does not match this pattern.
   /LSBU Innovation Hub/i,                        // no counter-signed agreement on file
   /£70,000\s*(equipment|investment)/i,           // ditto — proposed terms, not mutual execution
+  // Added 2026-09-02 after the Site-vs-Vault review (vault: Reports/Website Review vs Vault
+  // 2026-09-02) found eleven Register breaches LIVE beneath green gates. Every one below was
+  // rendered on a public page that day. Authority for each: System/Claims Register.md.
+  /\bFeltham\b/i,                                // not a site (Shaw Trust DD stalled, silent since 19 Jun);
+                                                 // Register: never a named-sites list without a fresh check
+  /\b(4|four|three|3) (UK )?prison sites?\b/i,   // count formula only: "five UK prison sites, at
+                                                 // different delivery stages" (James, 2026-08-19)
+  /\bLevel 1\b(?! ?& ?2)/,                       // no external Level 1 claim until OCN evidence is filed
+  /independently tested/i,                       // Swansea tested TUBING (BS ISO 22157), never a frame;
+                                                 // 19 Aug control incident — cite the standard at point of claim
+  /last for years/i,                             // no approved service-life claim for any variant (PS-001 open)
+  /\brideable\b/i,                               // product-safety gate while PS-001 is open
+  /Enhanced[- ]DBS/i,                            // no Register row; roster incomplete — verify per person
+  /\b(six|6) Makers\b/i,                         // cohort size is an open decision (6/7/8 — D2)
+  /10% of profits/i,                             // no executed inter-company transfer policy on file
+  /Education CIC/i,                              // entity is Bamboo Mobility Project CIC (17 Feb 2025)
 ];
 
 // Every string here MUST be rejected by BOTH gates. Add a row whenever a claim escapes —
@@ -54,6 +70,17 @@ export const CORPUS = [
   'Sustainable Design & Manufacturing',
   '36+ countries',
   '100% completion',
+  // 2026-09-02 additions — each was live on the day of the review
+  'HMYOI Feltham',
+  '4 prison sites running',
+  'Level 1 curriculum',
+  'independently tested at Swansea University',
+  'with proper care they last for years',
+  'a real, rideable bamboo bike',
+  'Enhanced-DBS facilitators',
+  'cohorts of six Makers',
+  '10% of profits',
+  'BBC Education CIC',
 ];
 
 // The correct wording, for reference in fixes and reviews.

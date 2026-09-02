@@ -145,12 +145,12 @@
     <div class="rd-wrap">
       {%- if section.settings.money_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.money_eyebrow }}</span>{%- endif -%}
       <h2 class="rd-reveal">{{ section.settings.money_title | default: 'where the money goes' }}</h2>
-      <div class="bbc-sup__flow" role="group" aria-label="How Bamboo Bicycle Club is structured: the Ltd company gives {{ section.settings.flow_pledge | default: '10% of profits' }} to the CIC">
+      <div class="bbc-sup__flow" role="group" aria-label="How Bamboo Bicycle Club is structured: the Ltd company gives {{ section.settings.flow_pledge | default: 'every sale supports' }} to the CIC">
         <div class="bbc-sup__flow-box">
           <h3>{{ section.settings.flow_ltd_title | default: 'bamboo bicycle club ltd' }}</h3>
           <p>{{ section.settings.flow_ltd_body | default: 'The commercial side — kits, workshops and team-building days.' }}</p>
         </div>
-        <div class="bbc-sup__flow-arrow"><span>{{ section.settings.flow_pledge | default: '10% of profits' }}</span> <span class="bbc-sup__flow-glyph" aria-hidden="true">&rarr;</span></div>
+        <div class="bbc-sup__flow-arrow"><span>{{ section.settings.flow_pledge | default: 'every sale supports' }}</span> <span class="bbc-sup__flow-glyph" aria-hidden="true">&rarr;</span></div>
         <div class="bbc-sup__flow-box bbc-sup__flow-box--cic">
           <h3>{{ section.settings.flow_cic_title | default: 'bamboo mobility project CIC' }}</h3>
           <p>{{ section.settings.flow_cic_body | default: 'The social side — accredited skills programmes in prisons and schools. Community interest company no. 16257348, asset-locked.' }}</p>
@@ -530,7 +530,7 @@
       "type": "text",
       "id": "flow_pledge",
       "label": "Pledge label",
-      "default": "10% of profits"
+      "default": "every sale supports"
     },
     {
       "type": "text",
@@ -904,7 +904,7 @@
           "type": "pillar",
           "settings": {
             "title": "Education",
-            "body": "OCN-accredited courses — Level 1 and Level 2 — taught at the workbench, not the whiteboard. Real qualifications for people the classroom failed.",
+            "body": "Two OCN London accredited Level 2 courses, taught at the workbench, not the whiteboard. Real qualifications for people the classroom failed.",
             "image_fallback": "bbc-rd-wb-lug.jpg",
             "image_alt": "Wrapping a bamboo frame joint by hand"
           }
@@ -940,7 +940,7 @@
           "settings": {
             "number": "4",
             "label": "prison sites running",
-            "comparator": "Lowdham Grange · Foston Hall · Lindholme · Feltham"
+            "comparator": "established, at different delivery stages"
           }
         },
         {
@@ -979,7 +979,7 @@
           "settings": {
             "amount": "~£8,500",
             "title": "A full cohort",
-            "body": "Six Makers through a complete accredited programme — instructor, coordinator, kits, materials, and the assessment at the end.",
+            "body": "A full cohort through a complete accredited programme — instructor, coordinator, kits, materials, and the assessment at the end.",
             "cta_label": "Fund a cohort",
             "primary": true
           }

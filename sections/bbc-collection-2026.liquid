@@ -6,8 +6,67 @@
 {%- endcomment -%}
 
 
-<div class="bbc-rd bbc-rd-collection">
+<div class="bbc-rd bbc-rd-collection{% if collection.handle == 'home-build-kits' %} kvh-page{% endif %}">
 
+  {%- comment -%} ============================================================
+    HOME-BUILD-KITS HERO (2026-08-24, James: "for the build a bike create a hero
+    with some home build kits quick links and link to Julian home build kit video
+    ... and create an introduction to building a bike at home").
+    Family format (forest / gutter axis / culm / film right), gated to THIS
+    collection only - every other collection keeps the paper head below.
+    THE FILM (v2 2026-08-24, James: "video quality is very poor, use So1spIs9_jM"):
+    44s from the COMPLETE 1080p master of "Carbon Lugs for Bamboo Bike Frames
+    Explained" - plans on the bench, a lug wrapped by hand, the finished bamboo
+    road bike, riding through the city. 1160x1000, 6.2MB. v1 mixed a 1080p flatlay
+    with a 360p home build upscaled 1.4x - the upscale was the visible softness.
+    QUICK LINKS: chips generated from the collection's own products, so a new
+    kit appears in the rail automatically and a retired one leaves it.
+    JULIAN: links OUT to Julian Goulding's own YouTube film "I built my own
+    Bamboo Bike Frame!" [ckCwJXJGKD0]. Third-party video - the rights register
+    covers offline classroom use with credit, NOT re-hosting, so the site links
+    to his upload rather than serving a copy. That is also the more convincing
+    social proof: a real customer on his own channel.
+    .kvh-* is a fresh namespace (same reasoning as the why-bamboo .dvh-*): the
+    cascade war cannot reach names no other sheet mentions. --bbc-gutter comes
+    from bbc-align via .bbc-rd. Playback = the estate's hardened pattern.
+  ============================================================ {%- endcomment -%}
+  {%- if collection.handle == 'home-build-kits' -%}
+  <header class="kvh">
+    <div class="kvh-copy">
+      <nav class="rd-crumb kvh-crumb" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep" aria-hidden="true">/</span><span aria-current="page">{{ collection.title | escape }}</span></nav>
+      <p class="kvh-eyebrow">{{ section.settings.eyebrow | default: 'Build at home' }}</p>
+      <h1 class="kvh-h1">{{ section.settings.kits_title | default: 'a bike you build yourself.' }}</h1>
+      <p class="kvh-lede">{{ section.settings.kits_intro | default: 'Everything arrives in one box: graded bamboo, the lugs, the jig and every tool. No welding and no workshop - most builders start with zero experience, and the manual and video course carry you the whole way.' }}</p>
+      <div class="kvh-chips" role="list" aria-label="Choose your kit">
+        {%- for product in collection.products limit: 8 -%}
+          <a class="kvh-chip" role="listitem" href="{{ product.url }}"><span class="kvh-chip-t">{{ product.title | replace: ' Frame Build Kit', '' | replace: ' Home Build Kit', '' | replace: ' Build Kit', '' | replace: ' Frame Kit', '' | replace: ' Kit with Resins', ' Flax' | replace: ' Kit', '' }}</span></a>
+        {%- endfor -%}
+      </div>
+      {%- if section.settings.julian_url != blank -%}
+        <p class="kvh-watch"><a class="kvh-watch-a" href="{{ section.settings.julian_url }}" target="_blank" rel="noopener"><span class="kvh-watch-t">{{ section.settings.julian_label | default: "Watch Julian build his: 'I built my own Bamboo Bike Frame' &rarr;" }}</span></a></p>
+      {%- endif -%}
+    </div>
+    <div class="kvh-media">
+      <img class="kvh-img" src="{{ 'bbc-rd-wb-kit.jpg' | asset_url }}" alt="A bamboo frame kit laid out: graded tubes, lugs, jig parts and the build manual" width="1200" height="900" fetchpriority="high">
+      {%- if section.settings.kits_video_url != blank -%}
+        <video class="kvh-film" muted loop playsinline webkit-playsinline preload="metadata"
+               {% if section.settings.kits_video_poster != blank %}poster="{{ section.settings.kits_video_poster }}"{% endif %}
+               aria-hidden="true" tabindex="-1" src="{{ section.settings.kits_video_url }}"></video>
+      {%- endif -%}
+      <div class="kvh-scrim" aria-hidden="true"></div>
+    </div>
+  </header>
+  {%- comment -%} BUILDER ANSWERS (2026-08-24, from the vault email-mining data):
+    shipping is the single biggest kit question (~1,170 asks, heavily international),
+    build time is second (~240, "can it be done in a weekend?"), and 72% of kit
+    builders need a fork - previously buried. Three answers, right under the hero,
+    before anyone has to ask. All three lines are estate-verified claims. {%- endcomment -%}
+  <div class="kvh-answers" role="list">
+    <div class="kvh-answer" role="listitem"><b>{{ section.settings.ans1_head | default: 'Ships worldwide' }}</b><span>{{ section.settings.ans1_body | default: 'Tracked delivery to 45 countries.' }}</span></div>
+    <div class="kvh-answer" role="listitem"><b>{{ section.settings.ans2_head | default: 'Built in a weekend' }}</b><span>{{ section.settings.ans2_body | default: 'Hand tools and the video course - no workshop needed.' }}</span></div>
+    <div class="kvh-answer" role="listitem"><b>{{ section.settings.ans3_head | default: 'Need a fork or parts?' }}</b><span>{{ section.settings.ans3_body | default: 'Most builders add one.' }} <a class="kvh-ans-a" href="{{ section.settings.ans3_url | default: '/collections/component-packs' }}"><span class="kvh-ans-t">{{ section.settings.ans3_link | default: 'Component packs &rarr;' }}</span></a></span></div>
+  </div>
+  {%- else -%}
   <section class="rd-pad-sm rd-paper">
     <div class="rd-wrap rd-coll-head">
       <span class="rd-eyebrow">{%- if section.settings.eyebrow != blank -%}{% if collection.handle == 'home-build-kits' or collection.handle == 'road' or collection.handle == 'gravel-adventure' or collection.handle == 'mtb' or collection.handle == 'balance-bikes' %}{{ section.settings.eyebrow }}{% else %}Everything we make{% endif %}{%- elsif collection.handle == 'gift' -%}Give a build{%- elsif collection.handle == 'maker-shop' -%}From our workshop{%- else -%}Build at home{%- endif -%}</span>
@@ -25,6 +84,7 @@
       {%- endif -%}
     </div>
   </section>
+  {%- endif -%}
 
   <section class="rd-pad">
     <div class="rd-wrap">
@@ -119,6 +179,132 @@
   </section>
 </div>
 
+{% stylesheet %}
+/* .kvh-* home-build-kits hero - fresh namespace, see the head comment. */
+.kvh{display:grid;grid-template-columns:0.82fr 1fr;align-items:stretch;min-height:clamp(540px,78vh,880px);min-height:clamp(540px,78svh,880px);background:var(--forest,#003C32);overflow:hidden;isolation:isolate}
+.kvh-copy{position:relative;z-index:3;display:flex;flex-direction:column;justify-content:center;padding:clamp(26px,4.8vh,80px) clamp(20px,2.6vw,48px) clamp(30px,5.4vh,84px) var(--bbc-gutter,clamp(32px,6vw,120px));container-type:inline-size}
+.kvh-copy::before{content:"";position:absolute;left:calc(var(--bbc-gutter,48px) - 34px);top:13%;bottom:13%;width:3px;border-radius:3px;background:repeating-linear-gradient(to bottom,var(--lime,#D4FD62) 0 20px,rgba(6,35,28,.55) 20px 24px)}
+.kvh-crumb{margin-bottom:clamp(12px,2vh,22px)}
+.kvh-crumb,.kvh-crumb a{color:rgba(230,220,200,.72)!important;text-shadow:none}
+.kvh-crumb a:hover{color:var(--lime,#D4FD62)!important}
+.kvh-crumb [aria-current]{color:var(--lime,#D4FD62)}
+.kvh-eyebrow{margin:0 0 clamp(10px,1.8vh,20px);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--lime,#D4FD62)}
+.kvh .kvh-h1{margin:0;color:var(--bone,#E6DCC8)!important;font-size:clamp(2.2rem,6.6vw,5rem);line-height:1.02;letter-spacing:-.01em;text-wrap:balance}
+.kvh-lede{margin:clamp(14px,2.2vh,24px) 0 0;max-width:48ch;color:rgba(238,243,236,.92);font-size:clamp(1rem,1.9cqw,1.2rem);line-height:1.55}
+/* THE UNIQUE DEVICE: the kit rail. One chip per kit, straight from the collection,
+   so the hero doubles as navigation - the "quick links" of the brief. Lime outline
+   chips (the estate tag language); hover fills. */
+.kvh-chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:clamp(18px,2.8vh,28px)}
+/* COLOUR ARMOUR v2 (2026-08-24, James: "buttons and text is black on a dark
+   background" - correct: chips measured rgb(14,26,23), watch link rgb(20,33,28)).
+   A cross-origin estate rule paints these ANCHORS dark with !important and even a
+   (0,6,1)+!important override did not take on the deployed page. Ended the war by
+   moving the text into SPANS: anchor colour rules do not target spans, and a
+   DIRECT rule on the span - any specificity - always beats a colour the span
+   would merely inherit from its <a>. The anchor can be painted whatever the
+   estate likes; the visible glyphs are the span's. */
+.kvh-chip{display:inline-block;padding:7px 14px;border:1.5px solid rgba(212,253,98,.55);border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.02em;text-decoration:none!important;transition:background .15s ease}
+.kvh-chip .kvh-chip-t{color:var(--lime,#D4FD62)}
+.kvh-chip:hover,.kvh-chip:focus-visible{background:var(--lime,#D4FD62)}
+.kvh-chip:hover .kvh-chip-t,.kvh-chip:focus-visible .kvh-chip-t{color:var(--forest,#003C32)}
+.kvh-watch{margin:clamp(14px,2.2vh,22px) 0 0;font-size:14px}
+.kvh-watch-a{font-weight:700;text-decoration:underline!important;text-underline-offset:4px;text-decoration-color:rgba(238,243,236,.6)!important}
+.kvh-watch-a .kvh-watch-t{color:rgba(238,243,236,.88)}
+.kvh-watch-a:hover .kvh-watch-t{color:var(--lime,#D4FD62)}
+.kvh-media{position:relative;z-index:1;min-height:0;overflow:hidden}
+.kvh-img,.kvh-film{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.kvh-film{opacity:0;transition:opacity .6s ease;z-index:1}
+.kvh-film.is-on{opacity:1}
+.kvh-scrim{position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,var(--forest,#003C32) 0%,rgba(0,60,50,.34) 28%,rgba(0,60,50,0) 64%);pointer-events:none}
+@media(max-width:1199px){
+  .kvh{grid-template-columns:1fr;min-height:0}
+  .kvh-media{grid-row:1;height:clamp(240px,38svh,440px)}
+  .kvh-copy{grid-row:2;padding-block:clamp(28px,5vw,56px)}
+  .kvh-copy::before{position:relative;inset:auto;width:68px;height:3px;margin:0 0 18px;background:repeating-linear-gradient(to right,var(--lime,#D4FD62) 0 20px,rgba(6,35,28,.55) 20px 24px)}
+  .kvh-scrim{background:linear-gradient(0deg,var(--forest,#003C32) 0%,rgba(0,60,50,.32) 26%,rgba(0,60,50,0) 62%)}
+}
+@media(max-width:749px){
+  .kvh-media{height:clamp(180px,26svh,320px)}
+  /* the rail IS the action on this page, so it stays right after the headline;
+     the intro drops below it. Film trimmed so headline + rail land on screen. */
+  .kvh-copy{display:flex}
+  .kvh-crumb{order:1}
+  .kvh-eyebrow{order:2}
+  .kvh .kvh-h1{order:3}
+  .kvh-chips{order:4;margin-top:clamp(14px,2.2vh,22px)}
+  .kvh-lede{order:5;margin-top:clamp(14px,2.2vh,22px)}
+  .kvh-watch{order:6}
+}
+@media(prefers-reduced-motion:reduce){ .kvh-film{display:none} }
+/* Builder answers - the three researched questions, as a quiet forest strip
+   bridging hero to grid. */
+.kvh-answers{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--forest,#003C32);border-top:1px solid rgba(212,253,98,.25)}
+.kvh-answer{padding:18px var(--bbc-gutter,32px) 20px;border-right:1px solid rgba(230,220,200,.14)}
+.kvh-answer:last-child{border-right:0}
+.kvh-answer b{display:block;color:var(--lime,#D4FD62);font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.kvh-answer span{color:rgba(238,243,236,.85);font-size:13.5px;line-height:1.45}
+.kvh-ans-a{font-weight:700;text-decoration:underline!important;text-underline-offset:3px;text-decoration-color:rgba(212,253,98,.7)!important}
+.kvh-ans-a .kvh-ans-t{color:var(--lime,#D4FD62)}
+@media(max-width:899px){.kvh-answers{grid-template-columns:1fr}.kvh-answer{border-right:0;border-bottom:1px solid rgba(230,220,200,.14);padding:14px var(--bbc-gutter,18px)}.kvh-answer:last-child{border-bottom:0}}
+/* CSS fixes below the hero (James: "css is very poor"), scoped to this section:
+   1. The proof line rendered JAMMED into the cause line ("...schools.Independently
+      strength-tested...") because .rd-proof-bar is nested INSIDE .rd-cause-bar with
+      no separation. Breathing room + its own top rule.
+   2. Card hierarchy was flat - title and price both 18px. Price is the deciding
+      number on a listing; it leads now.
+   3. Product photo gets a quiet zoom on hover so the cards read as clickable. */
+.bbc-rd-collection .rd-cause-bar .rd-proof-bar{margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,60,50,.18)}
+.bbc-rd-collection .rd-grid .rd-card .rd-body h2{font-size:16px!important;line-height:1.3}
+.bbc-rd-collection .rd-grid .rd-card .rd-price{font-size:21px;font-weight:800;margin-top:6px}
+.bbc-rd-collection .rd-grid .rd-card .rd-ph{overflow:hidden}
+.bbc-rd-collection .rd-grid .rd-card .rd-ph img{transition:transform .35s ease}
+@media(prefers-reduced-motion:no-preference){.bbc-rd-collection .rd-grid .rd-card:hover .rd-ph img{transform:scale(1.04)}}
+/* v3 (2026-08-24, James ran the page: "css is still poor" - he was right, and the
+   faults only showed in a SCREENSHOT, not in measurements):
+   4. The cause/proof bar rendered as a ~180px dark SLAB, centred, dominating the
+      page before a single product. On the kits page it becomes a slim left-ruled
+      note: transparent, lime rule, left-aligned, one visual voice.
+   5. The answers strip wrapped raggedly and orphaned the arrow ("Component packs /
+      ->"). Nowrap on the links, tighter leading, balanced padding.
+   6. Every card wore the SAME "FRAME BUILD KIT" tag - a label that distinguishes
+      nothing is noise; hidden on this page only (other collections mix types and
+      keep it).
+   7. Rhythm: the grid section opened with ~90px of dead bone above the slab;
+      tightened so strip -> note -> grid reads as one page. */
+.kvh-page .rd-cause-bar{background:transparent!important;color:var(--forest,#003C32)!important;border:0!important;border-left:3px solid var(--lime,#D4FD62)!important;border-radius:0!important;padding:10px 18px!important;text-align:left!important;max-width:none!important;margin:0 0 26px!important;font-size:14.5px!important;box-shadow:none!important}
+.kvh-page .rd-cause-bar a{color:var(--forest,#003C32)!important}
+.kvh-page .rd-cause-bar .rd-proof-bar{background:transparent!important;border:0!important;border-top:0!important;padding:4px 0 0!important;margin-top:4px!important;font-size:13px!important;opacity:.78;text-align:left!important}
+.kvh-page section.rd-pad{padding-top:clamp(30px,4vh,44px)!important}
+.kvh-page .rd-cardtag{display:none!important}
+.kvh-answer{padding:16px var(--bbc-gutter,32px) 18px}
+.kvh-answer span{display:block;max-width:34ch}
+.kvh-answer a.kvh-ans-a{white-space:nowrap}
+{% endstylesheet %}
+
+{% javascript %}
+/* Kits hero film - the estate's hardened pattern (start on canplay, reveal on
+   playing; gates leave the flatlay photo). */
+(function () {
+  var v = document.querySelector('.kvh-film');
+  if (!v) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  /* phone gate removed 2026-08-24 - James: hero films must play on mobile too */
+  var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if (conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ''))) return;
+  v.muted = true; v.defaultMuted = true;
+  function start() { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  v.addEventListener('playing', function () { v.classList.add('is-on'); }, { once: true });
+  v.setAttribute('preload', 'auto');
+  v.load();
+  if (v.readyState >= 3) start();
+  else v.addEventListener('canplay', start, { once: true });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { v.pause(); }
+    else if (v.classList.contains('is-on')) { start(); }
+  });
+})();
+{% endjavascript %}
+
 {% schema %}
 {
   "name": "Collection 2026 (new)",
@@ -148,6 +334,95 @@
       "id": "cause_line",
       "label": "Funding cause line",
       "default": "Every kit you build helps fund OCN-accredited skills courses inside prisons and schools."
+    },
+    {
+      "type": "header",
+      "content": "Home-build-kits hero (this collection only)"
+    },
+    {
+      "type": "text",
+      "id": "kits_title",
+      "label": "Hero headline",
+      "default": "a bike you build yourself."
+    },
+    {
+      "type": "textarea",
+      "id": "kits_intro",
+      "label": "Hero introduction",
+      "default": "Everything arrives in one box: graded bamboo, the lugs, the jig and every tool. No welding and no workshop - most builders start with zero experience, and the manual and video course carry you the whole way."
+    },
+    {
+      "type": "text",
+      "id": "kits_video_url",
+      "label": "Hero film URL (mp4, Shopify Files)",
+      "default": "https://cdn.shopify.com/videos/c/o/v/b6d4505329904a23b996842a683417c1.mp4",
+      "info": "44s loop from the carbon-lugs film (real 1080p master). Clear to show the photo only."
+    },
+    {
+      "type": "text",
+      "id": "kits_video_poster",
+      "label": "Hero film poster URL",
+      "default": "https://cdn.shopify.com/s/files/1/0502/8695/2631/files/preview_images/b6d4505329904a23b996842a683417c1.thumbnail.0000000000.jpg?v=1787569006"
+    },
+    {
+      "type": "text",
+      "id": "julian_url",
+      "label": "Builder film link (YouTube)",
+      "default": "https://www.youtube.com/watch?v=ckCwJXJGKD0",
+      "info": "Julian Goulding's own build film. Links out - his video, his channel."
+    },
+    {
+      "type": "text",
+      "id": "julian_label",
+      "label": "Builder film link label",
+      "default": "Watch Julian build his: 'I built my own Bamboo Bike Frame' &rarr;"
+    },
+    {
+      "type": "text",
+      "id": "ans1_head",
+      "label": "Answer 1 heading",
+      "default": "Ships worldwide"
+    },
+    {
+      "type": "text",
+      "id": "ans1_body",
+      "label": "Answer 1 text",
+      "default": "Tracked delivery to 45 countries."
+    },
+    {
+      "type": "text",
+      "id": "ans2_head",
+      "label": "Answer 2 heading",
+      "default": "Built in a weekend"
+    },
+    {
+      "type": "text",
+      "id": "ans2_body",
+      "label": "Answer 2 text",
+      "default": "Hand tools and the video course - no workshop needed."
+    },
+    {
+      "type": "text",
+      "id": "ans3_head",
+      "label": "Answer 3 heading",
+      "default": "Need a fork or parts?"
+    },
+    {
+      "type": "text",
+      "id": "ans3_body",
+      "label": "Answer 3 text",
+      "default": "Most builders add one."
+    },
+    {
+      "type": "text",
+      "id": "ans3_link",
+      "label": "Answer 3 link label",
+      "default": "Component packs &rarr;"
+    },
+    {
+      "type": "url",
+      "id": "ans3_url",
+      "label": "Answer 3 link"
     },
     {
       "type": "range",

@@ -77,9 +77,19 @@ bar names the right theme before trusting what you see.
 
 - Prison names OK; **never a named/identifiable participant + a named prison**.
 - "Makers", never prisoners/offenders/beneficiaries.
-- Stats canon: 90% completion (BBC programme records) · 4,000+ builders · 3,500+ frames ·
-  1,500+ young people (builds, tasters, talks) · 36 countries. No SROI. 39% = MoJ research
-  framing only.
-- OCN titles: prison "OCN Level 2 — Sustainable Design & Manufacturing";
-  schools "OCN Level 1 Award — Practical Manufacturing Skills". Never "Level 1 & 2".
-- Pricing: grant framing only (kit ~£180 · cohort ~£8,500 · capex £7–10k · site-year ~£45k).
+- **The vault's `System/Claims Register.md` is the ONLY canon.** This block was found stale on
+  2026-09-02 (it still said 36 countries and named a Level 1 award) and had been quoted as
+  guidance — fix the register, then this file, never the reverse.
+- Stats canon: **90%+** completion (BBC programme records) · 4,000+ builders · 3,500+ frames ·
+  1,500+ young people (builds, tasters, talks) · **45 countries**. No SROI. 39% = MoJ research
+  framing only, with its mandatory context.
+- OCN titles (both bespoke Level 2, neither Ofqual-regulated): "Workshop Skills and Sustainable
+  Manufacturing" (1130735) · "Introduction to Product Design & Manufacture (Bamboo Balance Bike)"
+  (1131207). **No Level 1 claim of any kind** until its OCN evidence is filed. Never "Level 1 & 2".
+- Prison sites: the count formula only — "Build to Bond is established across five UK prison
+  sites, at different delivery stages." Never a named list; never Feltham.
+- Product safety (PS-001 open): never "rideable", "independently tested", "last for years", or any
+  toddler/age/safety wording. Material claim = Swansea BS ISO 22157 tubing figure, cited at point
+  of claim.
+- Pricing: agreed per site and cohort. No £280/learner, no sector comparison. Cohort size is an
+  open decision (D2) — publish no number.

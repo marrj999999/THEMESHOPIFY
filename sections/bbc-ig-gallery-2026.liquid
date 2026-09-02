@@ -1,0 +1,99 @@
+{%- comment -%}
+  INSTAGRAM GALLERY — 2026-08-25. James: "for the gallery could you just embed our
+  instagram page."
+
+  WHY NOT A REAL EMBED: Instagram retired whole-profile embeds (Basic Display API
+  died Dec 2024); a live feed needs a third-party widget app + external script.
+  Instead this renders the feed natively: real posts pulled via the Meta Graph API,
+  images re-hosted in Shopify Files (IG CDN URLs expire), each tile linking to the
+  actual Instagram post. Same look, no third-party JS, estate styling throughout.
+
+  REFRESH: tiles are editor blocks — swap an image + link in the editor, or ask
+  Claude to "refresh the instagram gallery" (re-pulls via Graph API, re-uploads,
+  updates the template). SAFEGUARDING: every image is reviewed before inclusion —
+  no prison-participant faces; prison interiors excluded unless cleared.
+
+  Tiles are square, 4-up desktop / 2-up phone. Links open Instagram in a new tab.
+{%- endcomment -%}
+
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+<div class="bbc-rd bbc-rd-iggal">
+  <section class="rd-pad" {% if section.settings.anchor != blank %}id="{{ section.settings.anchor }}"{% endif %}>
+    <div class="rd-wrap">
+      {%- if section.settings.eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.title != blank -%}<h2 class="rd-reveal rd-mw-20ch">{{ section.settings.title }}</h2>{%- endif -%}
+      {%- if section.settings.lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.lede }}</p>{%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+      <ul class="igg-grid rd-mt4" role="list">
+        {%- for block in section.blocks -%}
+          <li class="igg-cell rd-reveal" {{ block.shopify_attributes }}>
+            <a class="igg-tile" href="{{ block.settings.link }}" target="_blank" rel="noopener">
+              {%- if block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 640 }}"
+                     srcset="{{ block.settings.image | image_url: width: 400 }} 400w, {{ block.settings.image | image_url: width: 640 }} 640w, {{ block.settings.image | image_url: width: 900 }} 900w"
+                     sizes="(max-width: 749px) 46vw, (max-width: 980px) 30vw, 24vw"
+                     alt="{{ block.settings.label | escape }}" loading="lazy"
+                     width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
+              {%- endif -%}
+              {%- if block.settings.link contains '/reel/' -%}<span class="igg-reel">reel</span>{%- endif -%}
+              <span class="igg-hover"><span class="igg-label">{{ block.settings.label }}</span><span class="igg-arrow" aria-hidden="true">&nearr;</span></span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+      {%- endif -%}
+
+      {%- if section.settings.follow_label != blank -%}
+        <div class="rd-mt4 igg-followrow">
+          <a class="rd-btn rd-ghost" href="{{ section.settings.follow_url }}" target="_blank" rel="noopener">{{ section.settings.follow_label }} <span class="rd-arrow">&rarr;</span></a>
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+<style>
+  .bbc-rd-iggal .igg-grid{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  @media (max-width:980px){ .bbc-rd-iggal .igg-grid{ grid-template-columns:repeat(3,1fr); } }
+  @media (max-width:749px){ .bbc-rd-iggal .igg-grid{ grid-template-columns:repeat(2,1fr); gap:8px; } }
+  .bbc-rd-iggal .igg-cell{ margin:0; }
+  .bbc-rd-iggal .igg-tile{ position:relative; display:block; aspect-ratio:1/1; overflow:hidden; border-radius:10px; background:var(--forest-700,#002A23); }
+  .bbc-rd-iggal .igg-tile img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .45s ease; }
+  .bbc-rd-iggal .igg-tile:hover img, .bbc-rd-iggal .igg-tile:focus-visible img{ transform:scale(1.045); }
+  .bbc-rd-iggal .igg-tile:focus-visible{ outline:3px solid var(--lime,#D4FD62); outline-offset:2px; }
+  .bbc-rd-iggal .igg-reel{ position:absolute; top:10px; left:10px; background:var(--lime,#D4FD62); color:var(--forest,#003C32); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:3px 9px; border-radius:999px; }
+  .bbc-rd-iggal .igg-hover{ position:absolute; inset:auto 0 0 0; display:flex; align-items:center; justify-content:space-between; gap:8px; padding:34px 12px 10px; background:linear-gradient(180deg, rgba(0,42,35,0) 0%, rgba(0,42,35,.82) 100%); opacity:0; transition:opacity .3s ease; }
+  .bbc-rd-iggal .igg-tile:hover .igg-hover, .bbc-rd-iggal .igg-tile:focus-visible .igg-hover{ opacity:1; }
+  .bbc-rd-iggal .igg-label{ color:#E6DCC8; font-size:13.5px; line-height:1.3; }
+  .bbc-rd-iggal .igg-arrow{ color:var(--lime,#D4FD62); font-size:16px; flex:none; }
+  @media (hover:none){ .bbc-rd-iggal .igg-hover{ display:none; } }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Instagram Gallery",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "on instagram" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "the club, day to day." },
+    { "type": "textarea", "id": "lede", "label": "Lede (optional)", "default": "Builds, rides and workshop life — straight from our Instagram. Tap any tile to see the post." },
+    { "type": "text", "id": "follow_label", "label": "Follow button label", "default": "follow @bamboobicycleclub" },
+    { "type": "text", "id": "follow_url", "label": "Instagram profile URL", "default": "https://www.instagram.com/bamboobicycleclub/" },
+    { "type": "text", "id": "anchor", "label": "Anchor id (optional)" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Instagram tile",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "url", "id": "link", "label": "Instagram post URL" },
+        { "type": "text", "id": "label", "label": "Short label (hover + alt text)" }
+      ]
+    }
+  ],
+  "max_blocks": 24,
+  "presets": [ { "name": "BBC Instagram Gallery" } ]
+}
+{% endschema %}

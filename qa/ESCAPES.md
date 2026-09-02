@@ -1075,3 +1075,22 @@ context.
 
 **Rule.** Audit logo walls the way you audit sentences. Ask what each mark is entitled
 to claim, and label the group so the page cannot be read as claiming more.
+
+## 2026-09-02 — Site-vs-Vault review: eleven live breaches under green gates
+
+| What escaped | Where (live) | Found by | Gate that should have caught it | Assertion added |
+|---|---|---|---|---|
+| Feltham named as a live site | impact-report, support-mission | vault review | claim-lint / estate-check (no pattern) | `/\bFeltham\b/` + canary fixture |
+| "4 prison sites running" vs "five" | support-mission vs prisons/impact | review | nothing compared pages | live-check `prison-site-count` contradiction |
+| "Level 1 … OCN approval in progress" ×5 | schools, FAQ, impact-report, toc, support-mission | review | claim-lint (only `Level 1 & 2` banned) | `/\bLevel 1\b(?! ?& ?2)/` |
+| "independently tested" + "last for years" on PDPs | gravel-lugged, road (and 6 more kit templates) | review | claim-lint — true-parts/wrong-subject (19 Aug) | patterns + canary |
+| "36 countries" | gravel PDP stat block | review | estate-check had the pattern but was never run on live PDPs; FAQ was **waived** | waiver removed; live-check no-waiver rule |
+| "six Makers" | FAQ, support-mission | review | no pattern (open decision D2) | `/\b(six|6) Makers\b/` |
+| Timpson present-tense / paraphrased quote | impact-report | review | nothing checked attribution form | live-check `timpson-attribution` UNDATED = FAIL |
+| "rideable" ×3 pages | teambuilding, programmes, toc | 7 Aug audit asked for it; never added | claim-lint | `/\brideable\b/` |
+| "Enhanced-DBS facilitators" ×4 | prisons, schools, teambuilding, speaker | 27 Aug note flagged it | no register row, no pattern | `/Enhanced[- ]DBS/` |
+| "10% of profits" | support-mission hardcoded fallback | review | claim-lint reads source — it was a `default:` in Liquid nobody grepped | pattern + fallback rewritten |
+| "BBC Education CIC" | schools | review | no pattern | `/Education CIC/` |
+| `qa/README.md` quoted stale canon (36 countries, Level 1 Award) | repo doc | review | — docs copied the canon | README now points at the Register only |
+
+**Rule reinforced.** A pattern list only catches what someone already wrote down; the live-check contradiction lane catches the class (two pages, two answers) without needing the words in advance.

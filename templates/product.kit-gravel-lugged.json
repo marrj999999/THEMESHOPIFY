@@ -3,139 +3,276 @@
     "main": {
       "type": "bbc-product-2026",
       "blocks": {
-        "b0": {
+        "perk_1": {
           "type": "perk",
           "settings": {
             "text": "No power tools required — just basic hand tools"
           }
         },
-        "b1": {
+        "perk_2": {
           "type": "perk",
           "settings": {
             "text": "Illustrated manual + 15+ hours of step-by-step video"
           }
         },
-        "b2": {
+        "perk_3": {
           "type": "perk",
           "settings": {
             "text": "Lifetime community of 4,000+ builders for support"
           }
         },
-        "b3": {
+        "perk_4": {
           "type": "perk",
           "settings": {
             "text": "Cycle to Work accepted — save through salary sacrifice"
           }
-        },
-        "b4": {
-          "type": "need",
-          "settings": {
-            "title": "Basic hand tools",
-            "description": "A hacksaw, files, sandpaper, a measuring tape — no power tools. Everything else is in the kit."
-          }
-        },
-        "b5": {
-          "type": "need",
-          "settings": {
-            "title": "A bit of space",
-            "description": "A sturdy table around 1200 × 600 mm and a spot the frame can sit undisturbed while joints cure."
-          }
-        },
-        "b6": {
-          "type": "need",
-          "settings": {
-            "title": "A few weekends",
-            "description": "25–35 hours across multiple sessions. No rush — bamboo is forgiving and most mistakes are fixable."
-          }
-        },
-        "b7": {
+        }
+      },
+      "block_order": [
+        "perk_1",
+        "perk_2",
+        "perk_3",
+        "perk_4"
+      ],
+      "settings": {
+        "product_badge": "Gravel · lugged",
+        "product_subtitle": "Our step-up gravel kit swaps free-hand carbon wrapping for pre-formed aluminium lugs the bamboo simply bonds into — cleaner joints, more repeatable geometry and a more refined finish. Same adventure-ready gravel geometry, built to the most precise, durable standard we make.",
+        "stock_line": "In stock — ships ~twice a week from our London workshop, fully tracked.",
+        "difficulty_label": "Beginner-friendly · no experience needed",
+        "build_time_label": "~15–25 hrs · a few weekends",
+        "reassure_line": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks",
+        "mission_line": "Build your own — and help fund a place on our Build to Bond prison programme.",
+        "buddy_text": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories.",
+        "secondary_label": "Prefer a workshop?",
+        "sizing_eyebrow": "Find your fit",
+        "sizing_heading": "built to fit you",
+        "sizing_body": "Small 152–171 cm · Medium 170–180 cm · Large 178–185 cm · XL 185–193 cm. Between sizes, or not sure? Send us your height and inside-leg measurement and we'll recommend the fit — or choose a Custom frame.",
+        "sizing_note": "",
+        "loop_step1_sm": "a gravel frame",
+        "bundle_a_text": "Everything to build the bamboo lugged gravel frame.",
+        "bundle_total_text": "A complete, one-of-a-kind gravel bike — built by you.",
+        "bundle_b_label": "Component pack",
+        "bundle_b_price": "Priced by build",
+        "bundle_b_text": "Bars, wheels, drivetrain and finishing kit, chosen for your build.",
+        "press_quote": "Woody made the full 8,288 miles with virtually no mechanical issues at all.",
+        "press_cite": "Kate Rawles · author of 'The Life Cycle'",
+        "sticky_buy": true,
+        "content_bands": false
+      }
+    },
+    "kitspec": {
+      "type": "bbc-kit-spec",
+      "settings": {
+        "background": "bone",
+        "anchor": "spec",
+        "eyebrow": "fits your parts",
+        "heading": "will it take my parts?",
+        "lede": "The numbers you need to check a part you already own. The kit is the frame — fork, wheels and groupset are yours to choose.",
+        "foot_left": "Building from a donor bike? Send us its spec and we'll confirm the fit before you order.",
+        "foot_right": "Ask us about your parts",
+        "foot_url": "/pages/contact-us"
+      },
+      "blocks": {
+        "sp0": {
           "type": "spec",
           "settings": {
-            "label": "Construction",
-            "value": "Pre-formed aluminium lugs"
+            "label": "lugs",
+            "value": "Aluminium",
+            "note": "pre-formed, bonded to the bamboo"
           }
         },
-        "b8": {
+        "sp1": {
           "type": "spec",
           "settings": {
-            "label": "Build time",
-            "value": "15–25 hrs"
+            "label": "brakes",
+            "value": "Disc",
+            "note": "disc-brake compatible"
           }
         },
-        "b9": {
+        "sp2": {
           "type": "spec",
           "settings": {
-            "label": "Strength",
-            "value": "High strength-to-weight"
+            "label": "mounts",
+            "value": "Bottle, rack + mudguard",
+            "note": "ample"
           }
         },
-        "b10": {
+        "sp3": {
           "type": "spec",
           "settings": {
-            "label": "Usage",
-            "value": "Gravel · touring · bikepacking"
+            "label": "groupsets",
+            "value": "All major",
+            "note": "pair with our GRX or Ekar packs"
           }
         },
-        "b11": {
+        "sp4": {
+          "type": "spec",
+          "settings": {
+            "label": "build time",
+            "value": "15–25 hrs",
+            "note": "across a few weekends"
+          }
+        }
+      },
+      "block_order": [
+        "sp0",
+        "sp1",
+        "sp2",
+        "sp3",
+        "sp4"
+      ]
+    },
+    "kitship": {
+      "type": "bbc-kit-shipping",
+      "settings": {
+        "background": "forest",
+        "anchor": "shipping",
+        "eyebrow": "shipped worldwide from the London workshop",
+        "heading": "no customs bill at the door",
+        "col1": "Destination",
+        "col2": "Shipping",
+        "col3": "Duty & tax",
+        "panel_title": "Delivered duty paid",
+        "panel_body": "The price at checkout is the price the kit costs you. We pay the import duty and tax before it ships, so the courier has nothing to collect when it arrives.",
+        "worked": "Sydney, Large kit: £595 kit + £75 shipping = £670 total, and nothing further on delivery.",
+        "foot": "Packed by hand and shipped twice a week, tracked all the way. Kits have reached 45 countries."
+      },
+      "blocks": {
+        "rt0": {
+          "type": "rate",
+          "settings": {
+            "place": "United Kingdom",
+            "rate": "£12",
+            "duty": "Included"
+          }
+        },
+        "rt1": {
+          "type": "rate",
+          "settings": {
+            "place": "Europe",
+            "rate": "£25",
+            "duty": "Paid by us"
+          }
+        },
+        "rt2": {
+          "type": "rate",
+          "settings": {
+            "place": "USA & Canada",
+            "rate": "£45",
+            "duty": "Paid by us"
+          }
+        },
+        "rt3": {
+          "type": "rate",
+          "settings": {
+            "place": "Rest of world",
+            "rate": "£75",
+            "duty": "Paid by us"
+          }
+        }
+      },
+      "block_order": [
+        "rt0",
+        "rt1",
+        "rt2",
+        "rt3"
+      ]
+    },
+    "lower": {
+      "type": "bbc-product-2026",
+      "settings": {
+        "product_badge": "Gravel · lugged",
+        "product_subtitle": "Our step-up gravel kit swaps free-hand carbon wrapping for pre-formed aluminium lugs the bamboo simply bonds into — cleaner joints, more repeatable geometry and a more refined finish. Same adventure-ready gravel geometry, built to the most precise, durable standard we make.",
+        "stock_line": "In stock — ships ~twice a week from our London workshop, fully tracked.",
+        "difficulty_label": "Beginner-friendly · no experience needed",
+        "build_time_label": "~15–25 hrs · a few weekends",
+        "reassure_line": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks",
+        "mission_line": "Build your own — and help fund a place on our Build to Bond prison programme.",
+        "buddy_text": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories.",
+        "secondary_label": "Prefer a workshop?",
+        "sizing_eyebrow": "Find your fit",
+        "sizing_heading": "built to fit you",
+        "sizing_body": "Small 152–171 cm · Medium 170–180 cm · Large 178–185 cm · XL 185–193 cm. Between sizes, or not sure? Send us your height and inside-leg measurement and we'll recommend the fit — or choose a Custom frame.",
+        "sizing_note": "",
+        "loop_step1_sm": "a gravel frame",
+        "bundle_a_text": "Everything to build the bamboo lugged gravel frame.",
+        "bundle_total_text": "A complete, one-of-a-kind gravel bike — built by you.",
+        "bundle_b_label": "Component pack",
+        "bundle_b_price": "Priced by build",
+        "bundle_b_text": "Bars, wheels, drivetrain and finishing kit, chosen for your build.",
+        "press_quote": "Woody made the full 8,288 miles with virtually no mechanical issues at all.",
+        "press_cite": "Kate Rawles · author of 'The Life Cycle'",
+        "show_buybox": false,
+        "content_bands": true
+      },
+      "blocks": {
+        "step_1": {
           "type": "step",
           "settings": {
-            "title": "Set the geometry",
+            "title": "set the geometry",
             "description": "Lock gravel geometry on the jig — wider clearance and a slacker head angle than road."
           }
         },
-        "b12": {
+        "step_2": {
           "type": "step",
           "settings": {
-            "title": "Join & wrap",
-            "description": "Bond the tubes into the pre-formed lugs and leave to cure — no free-hand fibre wrapping needed."
+            "title": "join & wrap",
+            "description": "Bond the tubes with epoxy and wrap each joint with carbon-fibre tow."
           }
         },
-        "b13": {
+        "step_3": {
           "type": "step",
           "settings": {
-            "title": "Cure",
+            "title": "cure",
             "description": "Leave it for a full cure — that's where maximum joint strength comes from."
           }
         },
-        "b14": {
+        "step_4": {
           "type": "step",
           "settings": {
-            "title": "Sand, seal & ride",
-            "description": "Sand smooth, seal the bamboo, fit the headset and bottom bracket. Adventure awaits."
+            "title": "sand, seal & ride",
+            "description": "Sand smooth, seal the bamboo, fit headset and BB. Adventure awaits."
           }
         },
-        "b15": {
+        "review_p1": {
+          "type": "review",
+          "settings": {
+            "quote": "The lugged construction made it so much more approachable. I was nervous but the result is rock solid.",
+            "cite": "Gravel Lugged builder, Home kit build"
+          }
+        },
+        "review_p2": {
           "type": "review",
           "settings": {
             "quote": "As lively as my titanium frame and as comfortable as my steel one — a real joy to ride. I always end up extending my rides.",
-            "cite": "— Lylian, home-build gravel"
+            "cite": "Lylian · home-build gravel"
           }
         },
-        "b16": {
+        "stat_1": {
           "type": "stat",
           "settings": {
-            "number": "4,000+",
-            "label": "builders trained",
-            "source": "since 2012, 36 countries"
+            "number": "3,500+",
+            "label": "frames built at home",
+            "source": "BBC records · since 2012"
           }
         },
-        "b17": {
+        "stat_2": {
           "type": "stat",
           "settings": {
-            "number": "Swansea",
-            "label": "University tested",
-            "source": "independent testing"
+            "number": "84.3 MPa",
+            "label": "bamboo tubing, tested",
+            "source": "Swansea University · BS ISO 22157:2019"
           }
         },
-        "b18": {
+        "stat_3": {
           "type": "stat",
           "settings": {
-            "number": "1 yr",
-            "label": "kit warranty",
-            "source": "+ 14-day returns on unopened kits"
+            "number": "2012",
+            "label": "building since — early builds still ridden",
+            "source": "BBC records"
           }
         },
-        "b19": {
+        "stat_4": {
           "type": "stat",
           "settings": {
             "number": "~2×/wk",
@@ -143,159 +280,101 @@
             "source": "full tracking"
           }
         },
-        "b20": {
-          "type": "faq",
-          "settings": {
-            "question": "What does \"lugged\" mean, and how is it different from the standard gravel kit?",
-            "answer": "Instead of free-wrapping every joint with carbon-fibre tow, the bamboo tubes bond into pre-formed aluminium lugs — sockets that hold each tube at a fixed angle. You get cleaner, more precise joints, more repeatable geometry and a more refined finish. It's the premium step up from the standard carbon-wrapped gravel kit."
-          }
-        },
-        "b21": {
-          "type": "faq",
-          "settings": {
-            "question": "Is the lugged kit easier or harder to build?",
-            "answer": "Easier, and faster. The lugs locate the tubes for you and there's far less wrapping, so the build is 15–25 hours versus 25–40 for the standard gravel kit — with just one overnight cure. It's our most beginner-friendly route into a full gravel frame."
-          }
-        },
-        "b22": {
-          "type": "faq",
-          "settings": {
-            "question": "Is a lugged frame as strong as the wrapped one?",
-            "answer": "Very strong for its weight. Bamboo is a light, hollow natural composite and every joint is reinforced with carbon-fibre, giving a high strength-to-weight ratio. Our bamboo is independently tested at Swansea University. Builders ride these frames daily and tour continents — with proper care they last for years."
-          }
-        },
-        "b23": {
-          "type": "faq",
-          "settings": {
-            "question": "Can I still repair it down the line?",
-            "answer": "Lugged construction is the more repairable option: because each tube bonds into its own lug socket, a damaged tube can be replaced at the joint rather than rebuilding a hand-wrapped union from scratch — handy if you tour or bikepack hard."
-          }
-        },
-        "b24": {
-          "type": "faq",
-          "settings": {
-            "question": "Do I need power tools?",
-            "answer": "No. Just basic hand tools — a hacksaw, files, sandpaper, a measuring tape and a work surface around 1200 × 600 mm. The lugs, bamboo, epoxy, jig and 15+ hours of video tutorials are all in the kit."
-          }
-        },
-        "b25": {
+        "related_1": {
           "type": "related",
           "settings": {
-            "title": "Standard Gravel Kit",
+            "title": "road lugged kit",
             "price": "",
-            "url": "",
-            "fallback": "bbc-rd-prod-gravel.jpg"
+            "fallback": "bbc-rd-prod-flax.jpg"
           }
         },
-        "b26": {
+        "related_2": {
           "type": "related",
           "settings": {
-            "title": "Road Lugged Kit",
+            "title": "MTB frame kit",
             "price": "",
-            "url": "",
+            "fallback": "bbc-rd-prod-build.jpg"
+          }
+        },
+        "related_3": {
+          "type": "related",
+          "settings": {
+            "title": "balance bike kit",
+            "price": "From £165",
+            "fallback": "bbc-rd-prod-balance.jpg"
+          }
+        },
+        "related_4": {
+          "type": "related",
+          "settings": {
+            "title": "custom frame kit",
+            "price": "Request a quote",
             "fallback": "bbc-rd-road-charlie.jpg"
           }
         },
-        "b27": {
-          "type": "related",
+        "faq_1": {
+          "type": "faq",
           "settings": {
-            "title": "Gravel component pack",
-            "price": "",
-            "url": "",
-            "fallback": "bbc-rd-prod-build.jpg"
+            "question": "What does \"lugged\" mean, and how is it different from the standard gravel kit?",
+            "answer": "<p>Instead of free-wrapping every joint with carbon-fibre tow, the bamboo tubes bond into pre-formed aluminium lugs — sockets that hold each tube at a fixed angle. You get cleaner, more precise joints, more repeatable geometry and a more refined finish. It's the premium step up from the standard carbon-wrapped gravel kit.</p>"
           }
         },
-        "hl1": {
-          "type": "highlight",
+        "faq_2": {
+          "type": "faq",
           "settings": {
-            "heading": "No welding, no workshop",
-            "body": "Build the whole frame on your kitchen table with basic hand tools — everything else is in the kit.",
-            "fallback": "bbc-rd-bamboo-tubes.jpg"
+            "question": "Is the lugged kit easier or harder to build?",
+            "answer": "<p>Easier, and faster. The lugs locate the tubes for you and there's far less wrapping, so the build is 15–25 hours versus 25–40 for the standard gravel kit — with just one overnight cure. It's our most beginner-friendly route into a full gravel frame.</p>"
           }
         },
-        "hl2": {
-          "type": "highlight",
+        "faq_3": {
+          "type": "faq",
           "settings": {
-            "heading": "Everything in the box",
-            "body": "Bamboo, the jig, metal fittings, resin, fibre and 15+ hours of step-by-step video — you only add the components.",
-            "fallback": "bbc-rd-prod-build.jpg"
+            "question": "Is a lugged frame as strong as the wrapped one?",
+            "answer": "Bamboo frame tubing tested at Swansea University to BS ISO 22157:2019 — 84.3 MPa ultimate tensile, comparable to mild steel at a fraction of the weight. That figure is for the tubing we supply, not for a finished frame: how strong your bike ends up is decided by your joints. Follow the manual, let the resin cure fully, and check the joints before every early ride — and call us if anything looks wrong."
           }
         },
-        "hl3": {
-          "type": "highlight",
+        "faq_4": {
+          "type": "faq",
           "settings": {
-            "heading": "Every kit funds learning",
-            "body": "Your build helps fund accredited skills courses in prisons and schools. You learn a skill — so does someone else.",
-            "fallback": "bbc-rd-prod-flax.jpg"
+            "question": "Can I still repair it down the line?",
+            "answer": "<p>Lugged construction is the more repairable option: because each tube bonds into its own lug socket, a damaged tube can be replaced at the joint rather than rebuilding a hand-wrapped union from scratch — handy if you tour or bikepack hard.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need power tools?",
+            "answer": "<p>No. Just basic hand tools — a hacksaw, files, sandpaper, a measuring tape and a work surface around 1200 × 600 mm. The lugs, bamboo, epoxy, jig and 15+ hours of video tutorials are all in the kit.</p>"
           }
         }
       },
       "block_order": [
-        "b0",
-        "b1",
-        "b2",
-        "b3",
-        "b4",
-        "b5",
-        "b6",
-        "b7",
-        "b8",
-        "b9",
-        "b10",
-        "b11",
-        "b12",
-        "b13",
-        "b14",
-        "b15",
-        "b16",
-        "b17",
-        "b18",
-        "b19",
-        "b20",
-        "b21",
-        "b22",
-        "b23",
-        "b24",
-        "b25",
-        "b26",
-        "b27",
-        "hl1",
-        "hl2",
-        "hl3"
-      ],
-      "settings": {
-        "product_badge": "Gravel · lugged",
-        "product_subtitle": "Our step-up gravel kit swaps free-hand carbon wrapping for pre-formed aluminium lugs the bamboo simply bonds into — cleaner joints, more repeatable geometry and a more refined finish. Same adventure-ready gravel geometry, built to the most precise, durable standard we make.",
-        "rating_value": "",
-        "review_count": "",
-        "reviews_subline": "Rated by the builders who made one",
-        "why_heading": "The lugged gravel frame, built right the first time.",
-        "why_fallback": "bbc-rd-ride-gravel-lugged.jpg",
-        "loop_step1_sm": "a bamboo gravel bike · from £595",
-        "related_heading": "More gravel & lugged kits",
-        "bundle_b_label": "Gravel component pack",
-        "bundle_b_price": "from £532",
-        "bundle_total_price": "from £1,127",
-        "why_quote": "The lugged construction made it so much more approachable. I was nervous but the result is rock solid.",
-        "why_quote_cite": "Gravel Lugged builder, Home kit build",
-        "why_eyebrow": "Why bamboo for gravel",
-        "build_video_id": "eQNvQGYRV3I",
-        "why_image_alt": "A bamboo gravel bike loaded for bikepacking"
-      }
-    },
-    "videoband": {
-      "type": "bbc-rd-video-embed",
-      "settings": {
-        "video_youtube": "ckCwJXJGKD0",
-        "eyebrow": "Before you buy",
-        "heading": "Watch the build, start to finish",
-        "body": "Every kit ships with 15+ hours of step-by-step video. Here's a taste of what you'll do.",
-        "dark": false
-      }
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "review_p1",
+        "review_p2",
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "related_1",
+        "related_2",
+        "related_3",
+        "related_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ]
     }
   },
   "order": [
     "main",
-    "videoband"
+    "kitspec",
+    "kitship",
+    "lower"
   ]
 }

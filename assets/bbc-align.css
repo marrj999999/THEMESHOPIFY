@@ -68,6 +68,50 @@
    set here - bbc-universal.css owns the global type scale, so there is ONE authority. */
 .bbc-rd .ew{min-height:clamp(460px,78vh,700px)!important;min-height:clamp(460px,78svh,700px)!important}
 .bbc-rd .ew-copy{padding:clamp(26px,min(5.5vw,4.8vh),92px)!important;padding-bottom:clamp(30px,min(6vw,5.4vh),84px)!important}
+/* PAGE GUTTER, one source of truth (2026-08-21, James: "everything is justified left
+   touching the edge, it's not clear and readable"). He was right and the numbers were
+   stark - at 1440 the first two screens had FOUR different left edges: culm 32px, hero
+   copy 43px, header 46px, and the page's own content axis at 113px. The hero sat 70px
+   left of everything below it and only 43px off the browser edge, which is what read as
+   cramped. Note the bands BELOW the hero are mostly CENTRED (363px), so there is no
+   single left spine to align to - the fix is a generous, consistent gutter, not
+   alignment to the 1200px container (tested: that squeezed the headline to four lines).
+   Declared on .bbc-rd so the header section can use the SAME variable and the logo lands
+   on the same axis as the headline. container-type is what lets the h1 size itself from
+   this column - see the cqw note above.
+   STEPPED, NOT ONE CLAMP - and this is the important bit. A flat clamp(32px,6vw,120px)
+   gave 32px on a phone, but the ESTATE AXIS at phone is 18px: bbc-consistency-2026.css
+   pins .ew-copy to 18px <=520 and 32px at 750-1023 (added 2026-08-10, "the estate axis
+   runs 18/32/72"), and it loads AFTER this file so it wins on source order. Measured at
+   390px: press content, door cards, why-bamboo head and stats ALL sit at 18px, and the
+   hero headline already matched them - so the flat clamp broke nothing in the hero but it
+   DID push the header logo to 32px, misaligning it against a hero that was already right.
+   The steps below reproduce the estate axis exactly at phone and tablet and only take
+   over on desktop, where the bands below are centred and there is no left spine to match.
+   Verified: 390 -> logo/headline/estate all 18px; 768 -> all 32px; 1440 -> logo and
+   headline both 86px.
+   THREE files now touch .ew-copy padding-left (this one, bbc-consistency-2026.css and the
+   section's mobile block). That is the real untidiness; consolidating them onto this
+   variable is the cleanup, but it needs bbc-consistency's two rules deleted in the same
+   pass, so it is left as a deliberate follow-up rather than a half-done change. */
+.bbc-rd{--bbc-gutter:18px}
+@media(min-width:521px){.bbc-rd{--bbc-gutter:32px}}
+@media(min-width:1024px){.bbc-rd{--bbc-gutter:clamp(32px,6vw,120px)}}
+.bbc-rd .ew-copy{padding-left:var(--bbc-gutter)!important;container-type:inline-size}
+/* The culm's horizontal position is LAYOUT, so it lives here with the gutter it depends
+   on rather than in the section's decoration block - it has to move whenever the gutter
+   moves, and one variable driving both is the whole point. The section still owns its
+   colour, node gradient and animation. [class] bump because the section's
+   .bbc-rd-home .ew-rule is (0,2,0) and its inline style is emitted after this file. */
+.bbc-rd-home .ew-rule[class]{left:calc(var(--bbc-gutter) - 34px)!important}
+/* Stacked culm width must be an exact multiple of the dash PERIOD or it ends on a
+   sliver. The node gradient repeats every 24px (20px lime + 4px joint); the section
+   set the horizontal variant to 74px, which is 3.08 periods, so it painted three
+   dashes plus a 2px orphan that read as a rendering artifact rather than a bamboo
+   cane - caught by screenshot at 1024, not by any measurement. 68px = lime,joint,
+   lime,joint,lime, terminating flush on lime. If the gradient period is ever changed,
+   this width has to change with it. */
+@media(max-width:1199px){.bbc-rd-home .ew-rule[class]{width:68px!important}}
 .bbc-rd .ew-eyebrow{margin-bottom:clamp(10px,1.8vh,20px)!important}
 .bbc-rd .ew-lede{margin-top:clamp(14px,2.2vh,24px)!important}
 .bbc-rd .ew-proof{margin-top:clamp(12px,2vh,22px)!important;gap:clamp(16px,2.2vw,28px)!important}
@@ -218,5 +262,379 @@
    Cannot be fixed at source: bbc-home-2026.liquid is 89KB, past the single-emit round-trip
    limit, so the show_* band-visibility patch used on the smaller pages cannot be applied here. */
 .bbc-rd-home section.rd-pad.rd-dark.rd-center:has(> .rd-wrap > h2:empty){display:none!important}
+
+/* WHY-BAMBOO band: stat strip removed (2026-08-21, James: "remove this from the home
+   page block" quoting the lede, the three stats and the source line). The band keeps its
+   eyebrow, its headline, the four cards and the CTA - only the lede + stat strip + source
+   go. Sensible: "45 countries" was being said THREE times on one page (top bar, hero stats,
+   and here), and card 3 still carries it in prose ("Built at kitchen tables in 45
+   countries"), so nothing factual is lost.
+   WHY CSS AND NOT THE LIQUID - two independent reasons, both worth knowing:
+   1. The markup is in bbc-home-2026.liquid, which is ~105KB, past the single-emit
+      round-trip limit, so the file cannot be rewritten through this pipe. Same constraint
+      that forced the empty-CTA-band fix above to be CSS.
+   2. Clearing the settings in the theme editor would NOT work anyway. Every one of these
+      is `{{ section.settings.x | default: '...' }}`, so a blank setting falls through to
+      the hardcoded default and renders regardless. That is the documented gating bug in
+      this section (see the fab_why_spec comment at bbc-home-2026.liquid:751) - blank only
+      means blank where an `{%- if ... != blank -%}` guard was added, and these three never
+      got one.
+   TO RESTORE: delete this rule. There is no editor-side switch, precisely because of (2).
+   SCOPING IS LOAD-BEARING: .acc-stats is ALSO used by sections/bbc-band-2026.liquid, and
+   .rd-stat-src is a generic class that also carries the HERO's source line - both must
+   survive. Hence .bbc-rd-home + section.acc + direct-child selectors rather than the bare
+   class. The `.acc-stats{justify-content:center}` rule earlier in this file is deliberately
+   left in place: it now serves bbc-band-2026 only, not the homepage. */
+.bbc-rd-home section.acc .acc-head > .acc-lede,
+.bbc-rd-home section.acc > .rd-wrap > .acc-stats,
+.bbc-rd-home section.acc > .rd-wrap > .rd-stat-src{display:none!important}
+
+/* ============================================================================
+   HOME HERO - responsive rebuild (2026-08-21, James: "responsive hero layout
+   optimised for all platforms ... optimise the video size, if we can increase
+   the video size do so ... move content").
+   Measured BEFORE, on the draft theme:
+     1920x1080  hero 708px tall, 215px of dead space beneath it, video 1047px wide
+     1440x900   hero 700px, media column 55%
+     768x1024   copy column 339px holding a 73.6px headline -> broke to ONE WORD
+                PER LINE; media column 414px showing a 45% slice of a 920px source
+     390x844    BOTH CTAs below the fold - nothing actionable visible on load
+   The source film is 920x792, so "bigger video" is bought with HEIGHT and with
+   full-width stacking, never by upscaling past the source. See note 4 below.
+   ============================================================================ */
+
+/* 1. HEIGHT. The ceiling was 700px, so a 1080p screen rendered a 708px hero with
+   215px of dead space under it and the video - the point of the band - stayed
+   small. Raising the ceiling grows the video ~25% in area at 1080p at no cost in
+   sharpness, because the media column WIDTH is unchanged. The 460->560px floor
+   and the svh middle term (the short-laptop protection this file added earlier)
+   are both kept, so wide-but-short laptops are still guarded.
+   AFTER: 1920x1080 hero 886px, dead space 38px, media area 741k -> 928k px2.
+          1440x900  hero 738px, dead space 5px. */
+@media(min-width:1200px){
+  .bbc-rd .ew{min-height:clamp(560px,82vh,940px)!important;min-height:clamp(560px,82svh,940px)!important}
+}
+
+/* 2. HEADLINE, two-column mode only. bbc-universal.css still owns the global type
+   scale - this is a LAYOUT constraint, not a type decision. The h1 is sized from
+   the VIEWPORT (9vw) but lives in a column that is only ~45% of it, so "more than"
+   fits only while the 9.5vh term happens to be the smaller of the two. Work it
+   through: the phrase needs about 4.95 x font-size, the column offers 0.45vw minus
+   84px of padding, and at 9vw those never balance - 16:9 screens are rescued by
+   the vh term alone. On a tall screen (1440x1200) 9vw wins and the phrase splits
+   mid-line. 7.4vw leaves every common 16:9 case byte-identical (verified: 1440x900
+   still 85.5px, 1920x1080 still 102.6px, both vh-limited) and holds the line
+   together when the vh term stops limiting. Stacked mode below 1200px is
+   full-width and deliberately keeps the untouched global scale. */
+@media(min-width:1200px){
+  /* SUPERSEDED 2026-08-21 (same day): 7.4vw was tuned for a 43px gutter. Widening the
+     gutter to fix the cramped left edge narrowed the column, and a VIEWPORT-based size
+     cannot track that - the column is 45vw MINUS a growing gutter, so the ratio drifts
+     and the headline broke to "a way / forward." on tall screens. Sized from the COLUMN
+     instead: cqw is 1% of .ew-copy's content box, so it self-corrects at every size.
+     Threshold measured empirically - the accent phrase holds while font <= 0.1445 x
+     column width; 14cqw sits just under it. Verified 1440x900 (72px), 1440x1200 (70px),
+     1920x1080 (89px) - three lines with "a way forward." intact in all three, where
+     6.2vw gave four lines on two of them. The 8.2vh term still guards short laptops.
+     If cqw is ever unsupported the whole declaration drops and bbc-universal's global
+     scale takes over, which is a safe fallback rather than a broken one. */
+  .bbc-rd.bbc-rd-home .ew-h1{font-size:clamp(2.6rem,min(14cqw,8.2vh),6.5rem)!important}
+}
+
+/* 3. STACK BELOW 1200px. The 0.82fr/1fr split ran all the way down to 750px and
+   that is where it came apart - see the 768x1024 measurements above. Stacking
+   hands the headline its full measure back AND makes the video full-bleed wide:
+   at 768 the media goes 414px -> 753px, an 82% gain, and the crop turns from
+   portrait (0.52 box against a 1.16 source, losing ~45% of the frame WIDTH) into
+   a gentle landscape one. This is the single biggest "bigger video" win and it
+   costs no sharpness at all, since 753px is still under the 920px source.
+   AFTER at 768x1024: headline 5 lines -> 2, both CTAs above the fold.
+   KNOWN TRADE: on a SHORT landscape tablet (1024x768) the stacked hero runs past
+   the fold, so the CTAs need a small scroll. A third, wide-and-short two-column
+   mode was considered and rejected - at 1024 the copy column is only 454px and
+   the headline clears it by about 9px, which is too close to call safe. */
+@media(max-width:1199px){
+  .bbc-rd .ew{grid-template-columns:1fr!important;min-height:0!important}
+  .bbc-rd .ew-media{order:0!important;height:clamp(280px,44svh,520px)!important;min-height:0!important}
+  .bbc-rd .ew-copy{order:1!important;max-width:none!important;justify-content:flex-start!important}
+  /* the 90deg scrim fades the photo into the copy column on its LEFT. Stacked,
+     the copy sits BELOW, so the fade has to turn 90 degrees with it or it washes
+     out the wrong edge. The section's own mobile block already does this at
+     <=749px; this extends the same correction across the new stacked range. */
+  .bbc-rd .ew-media::before{background:linear-gradient(0deg,var(--forest) 0%,rgba(0,60,50,.32) 26%,rgba(0,60,50,0) 62%)!important}
+}
+
+/* 4. MOVE THE CONTENT, phones. Measured at 390x844: eyebrow + headline + the
+   proof row pushed both CTAs to y=783, i.e. off-screen, so a phone visitor landed
+   on a hero with nothing to act on. .ew-copy is already display:flex on a column,
+   so the buttons lift above the stats with `order` alone - no markup change, and
+   the DOM order (stats before buttons) stays intact for screen readers and for
+   every wider breakpoint. The stats keep their place in the hero, just under the
+   fold line instead of on top of the buttons.
+   MEASURED AFTER: 390x844 (iPhone 14/15) puts BOTH buttons above the fold, at
+   y=722 and y=788. The limit is the small 375x667 SE, where the primary clears at
+   y=632 and the secondary lands ~31px under. Shrinking the film to buy back that
+   31px was rejected - it works against the brief, and the primary CTA is the one
+   that has to be visible. */
+@media(max-width:749px){
+  .bbc-rd .ew-copy > .ew-eyebrow{order:1!important}
+  .bbc-rd .ew-copy > .ew-h1{order:2!important}
+  .bbc-rd .ew-copy > .ew-lede{order:3!important}
+  .bbc-rd .ew-copy > .ew-cta{order:4!important;margin-top:clamp(18px,2.6vh,28px)!important}
+  .bbc-rd .ew-copy > .ew-proof{order:5!important}
+  .bbc-rd .ew-copy > .rd-stat-src{order:6!important}
+  .bbc-rd .ew-copy > .ew-cred{order:7!important}
+  /* The 2026-08-21 hero sub-line joins this run AFTER the buttons, not before them.
+     Measured when it was first added at order:3: it pushed .ew-cta from y=715 to y=809
+     on a 390x844 phone, which put BOTH buttons back under the fold and undid the whole
+     point of note 4 above. Order 5 gives: eyebrow, headline, buttons, sub-line, stats -
+     the phone visitor gets the hook and the action first, the explanation one scroll
+     down. Desktop is unaffected; `order` only applies inside this media query.
+     [class] bump is load-bearing: bbc-home-2026.liquid also sets order:3 on .ew-sub at
+     (0,3,0)+important and its inline <style> is emitted in the BODY, i.e. after this
+     file, so an equal-specificity rule here would lose on source order.
+     CLEANUP: delete that order:3 declaration from the section's mobile block next time
+     the section is edited, then this bump can drop back to a plain selector. */
+  .bbc-rd .ew-copy > .ew-sub[class]{order:5!important}
+}
+
+/* HERO CULM must actually paint. Dawn's base.css:471 carries `div:empty{display:none}`
+   and .ew-rule is an EMPTY <div>, so the hero's accent rule has NEVER rendered at any
+   breakpoint since the 2026 build. This is not a regression from the identity pass - the
+   original 60px lime dash was invisible for exactly the same reason, which is why nobody
+   ever missed it. Verified in-page 2026-08-21: computed display was `none` while every
+   other declaration (position, width, top/bottom/left) applied normally.
+   .bbc-rd-home .ew-rule is (0,2,0) against div:empty's (0,1,1) and wins on specificity
+   alone; the only reason it lost is that the decoration block never declared `display`.
+   SAME FAMILY, still dead on purpose: .ew-grain (the noise/texture overlay on the film)
+   and .rd-ov (the door-card scrim) are also empty divs and also hidden. Grain is one
+   `display:block` from returning - left off deliberately, the film is only 920px wide and
+   an overlay risks muddying it. Flagged to James rather than switched on unilaterally. */
+.bbc-rd-home .ew-rule{ display:block; }
+
+/* ============================================================================
+   IMPACT HERO - matched to the homepage hero, with its own film and accent
+   (2026-08-21, James: "on impact get rid of stats on hero as they are below and
+   match the design to the hero on the home page ... but make unique for impact")
+   BEFORE: a full-bleed workshop PHOTO with everything centred over it - breadcrumb,
+   eyebrow, h1, lede, a 3-stat strip and two buttons - which shares no geometry at all
+   with the homepage's two-column left-aligned video hero.
+   The markup is layered, not columnar: .rd-bg (photo) + .rd-scrim + .rd-inner (copy),
+   all absolutely stacked inside a flex .rd-hero. That turns out to be convertible with
+   CSS alone: make .rd-hero a two-column GRID and place all three children explicitly,
+   .rd-bg and .rd-scrim into column 2 and .rd-inner into column 1. No markup change is
+   needed for the LAYOUT. Only the <video> needs JS - see assets/bbc-impact-hero.js for
+   why (the 112KB section cannot be rewritten through this pipe).
+   SCOPE WIDENED 2026-08-24 (James: "rebuild the team-building hero in the same format"):
+   every selector here is .bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) so the SAME conversion
+   drives /pages/bicycleteambuilding, whose hero is the identical layered .rd-hero
+   pattern. :is() keeps the specificity at (0,3,0), exactly what the two-class form had,
+   so nothing else in the cascade moves. Differences on the tb page: its film is a real
+   SECTION setting (bbc-teambuilding-2026.liquid is 40KB, small enough to edit at source,
+   so it carries its own <video class="imp-film"> and its own {% javascript %} - the
+   bbc-impact-hero.js loader is impact-only and does NOT run there), and it has no
+   .rd-heroproof so that rule is simply inert. The tb hero's own film: 22s loop from the
+   corporate away-day master [xv0x13KNCBw], recovered from the offline archive's partial
+   1080p download - the first ~33s of that file decode cleanly and the montage lives
+   there. See Workstreams/Website Redesign Feedback Loop.md.
+   SCOPE WIDENED AGAIN 2026-08-24 pm (James: "pick the best video for our story and build
+   a unique hero"): .bbc-rd-about (/pages/our-story-2) joins the :is() list - identical
+   layered .rd-hero, no CTA row (the phone reorder rules that mention .rd-cta-row are
+   simply inert there). Its film loads via the generalised bbc-impact-hero.js config, and
+   its UNIQUE DEVICE - the completed timeline culm - is the block right after this one.
+   ============================================================================ */
+
+/* 0. STORY-PAGE UNIQUE DEVICE (2026-08-24): the culm as a COMPLETED timeline.
+   Home's culm is full-strength (the brand, present tense); impact and tb fade toward
+   the top (work in progress). The story page inverts the family grammar on purpose:
+   its culm runs FULL STRENGTH end to end - fourteen years, grown - and carries
+   "est. 2012" etched at its root in lime, rotated along the cane like a maker's mark.
+   Both pseudo-elements of .rd-inner are used (::before = the culm override below,
+   ::after = the mark), so this device costs no markup and no section rewrite.
+   The base ::before comes from the shared family rule; this override strips its fade
+   mask and tightens the node period to 16+4 (the why-bamboo growth spacing - the story
+   and the plant share a metaphor). */
+/* [class] bump: the shared family ::before (block 5) is (0,4,1) and comes LATER in
+   this file, so an equal-specificity override here loses on source order - caught on
+   the deployed page, the mask was still applied. (0,5,1) settles it. */
+.bbc-rd.bbc-rd-about .rd-hero .rd-inner[class]::before{background:repeating-linear-gradient(to bottom,var(--lime,#D4FD62) 0 16px,rgba(6,35,28,.55) 16px 20px);-webkit-mask-image:none;mask-image:none}
+.bbc-rd.bbc-rd-about .rd-hero .rd-inner::after{content:"est. 2012";position:absolute;left:calc(var(--bbc-gutter) - 44px);bottom:calc(13% - 34px);writing-mode:vertical-rl;transform:rotate(180deg);font-size:clamp(10px,0.73vw,10.5px);font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--lime,#D4FD62);opacity:.85}
+@media(max-width:1199px){
+  .bbc-rd.bbc-rd-about .rd-hero .rd-inner[class]::before{background:repeating-linear-gradient(to right,var(--lime,#D4FD62) 0 16px,rgba(6,35,28,.55) 16px 20px);-webkit-mask-image:none;mask-image:none}
+  /* horizontal culm: the mark sits just right of the 68px dash, upright. Absolute,
+     NOT relative - .rd-inner is a flex column, so a relative ::after becomes the LAST
+     flex item and lands under the lede instead of beside the dash (caught on first
+     read-through, not shipped). top mirrors .rd-inner's padding-block so the mark
+     shares the dash's row; the -1px optically centres the 10.5px cap height on the
+     3px cane. */
+  .bbc-rd.bbc-rd-about .rd-hero .rd-inner::after{position:absolute;left:calc(var(--bbc-gutter) + 78px);top:calc(clamp(28px,5vw,56px) - 1px);bottom:auto;writing-mode:horizontal-tb;transform:none}
+}
+
+/* 1. STATS OUT, the actual request. They were duplicated almost verbatim by the 4-stat
+   band immediately below the hero: "4,000+ people trained" and "90%+ prison-course
+   completion" appear in BOTH. Note the section DOES have a real `hero_proof_on` boolean
+   with a proper {%- if -%} guard, so unticking "Show proof figures in hero" in the theme
+   editor does exactly this and is the tidier route - but templates/page.impact.json has
+   it saved as true and that file must never be pushed from here, so the CSS does it. If
+   James unticks the box, this rule becomes a harmless no-op. */
+.bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .rd-heroproof{display:none!important}
+
+/* 2. THE GRID. Same 0.82fr/1fr split and the same svh-clamped height as the homepage
+   .ew hero, so the two pages share a silhouette. .rd-bg must lose its absolute
+   positioning or it will not participate in the grid at all. */
+.bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero{display:grid!important;grid-template-columns:0.82fr 1fr!important;align-items:stretch!important;min-height:clamp(560px,82vh,940px)!important;min-height:clamp(560px,82svh,940px)!important;background:var(--forest)!important;overflow:hidden;isolation:isolate}
+.bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero > .rd-bg{position:relative!important;inset:auto!important;grid-column:2;grid-row:1;width:100%!important;height:100%!important}
+.bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero > .rd-bg > img{width:100%!important;height:100%!important;object-fit:cover;display:block}
+.bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero > .rd-scrim{grid-column:2;grid-row:1;z-index:2;background:linear-gradient(90deg,var(--forest) 0%,rgba(0,60,50,.34) 28%,rgba(0,60,50,0) 64%)!important}
+.bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero > .rd-inner{grid-column:1;grid-row:1;display:flex!important;flex-direction:column;justify-content:center;position:relative;z-index:3;padding-bottom:0!important}
+
+/* The injected film sits OVER the section's own <img> and only fades in once it is
+   genuinely playing, so every failure mode falls back to the photo rather than to a
+   black box. See the head comment in bbc-impact-hero.js. */
+.bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .imp-film{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease;z-index:1}
+.bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .imp-film.is-on{opacity:1}
+
+/* 3. COPY ON THE PAGE GUTTER. Same --bbc-gutter as the header and the homepage hero, so
+   the logo and this headline share one axis exactly as they do on home. Everything here
+   is fighting bbc-align's OWN hero rules further up this file, which centre
+   `.rd-hero .rd-wrap > :not(.rd-crumb)` at (0,3,0) and the eyebrow at (0,4,0) - hence the
+   .bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) prefix (0,4,0) and the [class] bump on the frame label (0,5,0).
+   Those centring rules are correct for every OTHER page hero and must not be weakened. */
+.bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .rd-wrap{max-width:none!important;margin:0!important;padding-left:var(--bbc-gutter)!important;padding-right:clamp(20px,2.6vw,48px)!important;container-type:inline-size}
+/* [class][class] is load-bearing, not decoration. bbc-align's own narrow-measure rule
+   further up ("NARROW-MEASURE CENTRING") matches [class*=rd-mw-][class][class][class][class]
+   at (0,5,0) and force-centres anything carrying an rd-mw-* class. This h1 has rd-mw-15ch,
+   so at a plain (0,4,0) the headline CENTRED itself while the eyebrow and lede stayed left -
+   invisible at desktop, where the column is narrow enough that 15ch fills it, and obvious the
+   moment the hero stacked at 768. Caught by screenshot, not by measurement. */
+.bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .rd-wrap > *[class][class]{text-align:left!important;margin-inline:0!important}
+/* The hero copy carried heavy text-shadows (up to 30px blur) so it could sit legibly on a
+   full-bleed photo. On the solid forest panel they are not needed - bone on forest and lime
+   on forest are both already well past AA - and at headline size the shadow reads as a
+   smudge rather than as depth. */
+.bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .rd-wrap :is(h1,.rd-lede,.rd-frame-label,.rd-crumb,.rd-crumb a,.rd-crumb span){text-shadow:none!important}
+.bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .rd-wrap > .rd-cta-row,
+.bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .rd-wrap > .rd-flex{justify-content:flex-start!important}
+.bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .rd-frame-label[class]{display:block;text-align:left!important;margin-inline:0!important}
+.bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .rd-crumb{justify-content:flex-start!important;text-align:left!important}
+
+/* 4. HEADLINE sized from the COLUMN, not the viewport - the same container-query fix the
+   homepage headline needed, and for the same reason: the column is a fraction of the
+   viewport MINUS a growing gutter, so a vw-based size drifts. Slightly smaller than home
+   (13cqw vs 14cqw) because this headline is two long words per line, not three short. */
+@media(min-width:1200px){
+  .bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero h1{font-size:clamp(2.4rem,min(13cqw,8vh),5.6rem)!important;max-width:none!important}
+}
+
+/* 5. THE CULM, and this is where impact is deliberately NOT the homepage. Same bamboo
+   node motif and the same 24px period, but masked to fade toward the top instead of
+   running at full strength end to end - it reads as something part-grown rather than
+   finished, which is the page's argument ("building bikes. rebuilding lives."). Drawn as
+   a ::before on .rd-inner because, unlike the homepage, this hero has no spare empty div
+   to hang it on - and a pseudo-element sidesteps Dawn's div:empty{display:none} trap that
+   kept the homepage culm invisible for months. */
+.bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .rd-inner::before{content:'';position:absolute;left:calc(var(--bbc-gutter) - 34px);top:13%;bottom:13%;width:3px;border-radius:3px;background:repeating-linear-gradient(to bottom,var(--lime,#D4FD62) 0 20px,rgba(6,35,28,.55) 20px 24px);-webkit-mask-image:linear-gradient(to top,#000 0%,#000 46%,rgba(0,0,0,.20) 100%);mask-image:linear-gradient(to top,#000 0%,#000 46%,rgba(0,0,0,.20) 100%)}
+
+/* 6. STACK BELOW 1200px, mirroring the homepage breakpoint exactly. The scrim has to
+   rotate 90deg with the layout or it washes the wrong edge - same correction the home
+   hero needed. The culm turns horizontal and becomes a real flex item (position:relative)
+   so it sits above the breadcrumb rather than floating over the film; 68px is three full
+   node periods, the same figure the homepage stacked culm settled on. */
+@media(max-width:1199px){
+  .bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero{grid-template-columns:1fr!important;min-height:0!important}
+  .bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero > .rd-bg{grid-column:1;grid-row:1;height:clamp(260px,42svh,480px)!important}
+  .bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero > .rd-scrim{grid-column:1;grid-row:1;background:linear-gradient(0deg,var(--forest) 0%,rgba(0,60,50,.32) 26%,rgba(0,60,50,0) 62%)!important}
+  .bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero > .rd-inner{grid-column:1;grid-row:2;padding-block:clamp(28px,5vw,56px)!important}
+  .bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .rd-inner::before{position:relative;top:auto;bottom:auto;left:auto;width:68px;height:3px;margin:0 0 18px var(--bbc-gutter);background:repeating-linear-gradient(to right,var(--lime,#D4FD62) 0 20px,rgba(6,35,28,.55) 20px 24px);-webkit-mask-image:linear-gradient(to right,#000 0%,#000 46%,rgba(0,0,0,.20) 100%);mask-image:linear-gradient(to right,#000 0%,#000 46%,rgba(0,0,0,.20) 100%)}
+}
+
+/* 7. PHONES: buttons above the lede, exactly as the homepage hero does. Measured at
+   390x844 before this block: the film (42svh) plus breadcrumb, eyebrow, a two-line
+   headline and a five-line lede put the CTA row at y=895 - BOTH buttons off-screen on
+   load, the same failure the homepage hero had. .rd-wrap is display:block, so `order`
+   does nothing until it is made a flex column; that is why the display switch is here
+   and not in the shared stacked block. Trimming the film to 32svh buys the rest.
+   DOM order is untouched, so screen readers and every wider breakpoint still get
+   crumb -> eyebrow -> headline -> lede -> buttons.
+   AFTER: film 270px, primary CTA clears at y=686 and the secondary at y=748, both
+   comfortably above an 844px fold. */
+@media(max-width:749px){
+  .bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero > .rd-bg{height:clamp(210px,32svh,380px)!important}
+  .bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .rd-wrap{display:flex!important;flex-direction:column}
+  .bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .rd-wrap > .rd-crumb{order:1}
+  .bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .rd-wrap > .rd-frame-label{order:2}
+  .bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .rd-wrap > h1{order:3}
+  .bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .rd-wrap > .rd-cta-row{order:4;margin-top:clamp(16px,2.4vh,24px)!important}
+  .bbc-rd:is(.bbc-rd-impact,.bbc-rd-tb,.bbc-rd-about) .rd-hero .rd-wrap > .rd-lede{order:5;margin-top:clamp(16px,2.4vh,24px)!important}
+}
+
+/* ============================================================================
+   IMPACT "WHO BACKS IT." LEDGER (2026-08-24, James: "research and improve this
+   design element, look at comparative"). Research base: sector peers (The Clink,
+   Switchback, Key4Life) group supporters by RELATIONSHIP - this band already does,
+   and its quantified notes ("2025 winner / GBP 24,000", "direct contracts with HMPPS")
+   are STRONGER than sector norm, so the structure stays. The generic social-proof
+   literature is unanimous on one-ink press logo rows (colour marks pull unevenly);
+   the homepage press wall already follows it.
+   THE EXCEPTION THAT MATTERS: funder/accreditor logos must STAY full colour.
+   TNLCF's grant conditions require the full-colour logo with clear space wherever
+   possible - greyscaling a funder mark can breach acknowledgement terms. So: press
+   row = one ink; funded-by / accredited-by / delivered-with tiles = full colour on
+   white, which is exactly what the white tiles provide. Do not "unify" them.
+   SCOPE: all of this is .bbc-rd-impact-scoped because snippets/bbc-press.liquid is
+   a SHARED component with a documented contract ("4-7 recognisable full-colour
+   logos", qa/PRESS-BLOCK.md) rendered on six templates - the snippet itself must
+   not change. ============================================================== */
+
+/* Press row, one ink. Each mark gets a height tuned to its aspect ratio because the
+   shared 26px + max-width:170px pair silently halves wide nameplates: FT (ratio
+   12.26) rendered ~14px tall and The Independent (14.18) ~12px against the
+   Guardian's 24px - same class of defect as the homepage press wall's width cap,
+   found by measuring naturalWidth/Height per asset. Heights below equalise OPTICAL
+   weight, not geometric height; the width cap is lifted (max-width:none) because
+   with a correct height a nameplate's width is its identity.
+   Hover restores the real colours - the marks are links to the coverage, and the
+   colour flash doubles as the affordance.
+   EVENING STANDARD PNG WAS CHECKED before inking: sampled via canvas, 63%
+   transparent / 0% white pixels, so brightness(0) inks the letterforms and does
+   NOT produce a black slab. Re-check any replacement asset the same way.
+   BBC NEWS IS THE EXCEPTION: its white letters sit INSIDE the blocks, so
+   brightness(0) turns the whole lockup into solid squares (caught by screenshot).
+   grayscale(1) alone keeps the blocks/letter contrast. */
+.bbc-rd-impact .bbc-impact-backs .bbc-press__logo{filter:grayscale(1) brightness(0);opacity:.78;transition:filter .25s ease,opacity .25s ease;max-width:none!important}
+.bbc-rd-impact .bbc-impact-backs .bbc-press__link:hover .bbc-press__logo,
+.bbc-rd-impact .bbc-impact-backs .bbc-press__link:focus-visible .bbc-press__logo{filter:none;opacity:1}
+.bbc-rd-impact .bbc-impact-backs .bbc-press__logo[src*="logo-ft"]{height:17px!important}
+.bbc-rd-impact .bbc-impact-backs .bbc-press__logo[src*="independent"]{height:15px!important}
+.bbc-rd-impact .bbc-impact-backs .bbc-press__logo[src*="evening-standard"]{height:19px!important}
+.bbc-rd-impact .bbc-impact-backs .bbc-press__logo[src*="bbcnews"]{height:26px!important;filter:grayscale(1)!important;opacity:.9}
+.bbc-rd-impact .bbc-impact-backs .bbc-press__logo[src*="inside-time"]{height:21px!important}
+/* the "see all coverage" line: .rd-center's readable-prose rule (p at (0,5,1)) pins
+   it left under a centred eyebrow and row; !important is the cheapest correct win. */
+.bbc-rd-impact .bbc-impact-backs .bbc-press__more{text-align:center!important;max-width:none!important}
+
+/* Group labels pick up the culm node-dash - the same 20px lime + joint period as the
+   hero, so the band reads as part of one system. */
+.bbc-rd-impact .rd-backs__k{display:flex!important;align-items:center;gap:10px}
+.bbc-rd-impact .rd-backs__k::before{content:"";width:24px;height:3px;border-radius:2px;background:linear-gradient(90deg,#D4FD62 0 20px,rgba(6,35,28,.45) 20px 24px);flex:0 0 auto}
+
+/* Tiles: softer edge, small lift, and two per-asset corrections. Investec's SVG is a
+   2500x2500 canvas with the wordmark small in the middle - at tile size it rendered
+   as a speck, so it is scaled up inside the tile (overflow:hidden guards the frame).
+   The HMPPS crest gets more height for the same reason. Full colour throughout - see
+   the TNLCF note above. */
+.bbc-rd-impact .rd-backs__tile{border-color:rgba(0,60,50,.14)!important;box-shadow:0 1px 3px rgba(0,40,33,.07);border-radius:8px!important;overflow:hidden}
+.bbc-rd-impact .rd-backs__tile .rd-backers__logo[src*="investec"]{transform:scale(1.75)}
+.bbc-rd-impact .rd-backs__tile .rd-backers__logo[src*="hmpps"]{max-height:48px!important}
+
+/* Caption pairing targets. The markup renders ALL tiles then ALL notes per group, so
+   "2025 winner / GBP 24,000" floated under two logos with no visual owner. A small
+   impact-only script (bbc-impact-hero.js, pairing IIFE) zips note i under tile i -
+   block order in the template guarantees the mapping. These rules style the result;
+   with JS off the notes simply stay where they are today, which is the current
+   design, not a break. */
+.bbc-rd-impact .rd-backs__tilewrap{display:flex;flex-direction:column;gap:8px;flex:1 1 128px;min-width:0}
+.bbc-rd-impact .rd-backs__tilewrap .rd-backs__tile{flex:0 0 auto;width:100%}
+.bbc-rd-impact .rd-backs__cap{margin:0;font-size:clamp(11px,0.8vw,11.5px);line-height:1.4;color:var(--charcoal,#2A2A26);opacity:.82}
 
 /*# sourceMappingURL=/cdn/shop/t/53/assets/bbc-align.css.map */
