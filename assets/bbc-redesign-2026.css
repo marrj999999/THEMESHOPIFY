@@ -2035,3 +2035,4 @@
 .bbc-rd .rd-recog__list li{font-size:var(--fs-13-5);border:2.5px solid var(--ink);border-radius:999px;padding:5px 12px;background:var(--bone)}
 .bbc-rd .rd-ident{margin:16px 0 0;text-align:left;font-size:var(--fs-12-5);color:var(--subtle);max-width:90ch}
 @media (max-width:760px){.bbc-rd .rd-recog{grid-template-columns:1fr}}
+.bbc-rd .rd-ident--press{margin-top:8px;color:var(--charcoal)}

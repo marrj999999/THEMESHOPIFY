@@ -660,7 +660,7 @@
           <img src="{{ 'bbc-world-map.svg' | asset_url }}" alt="{{ section.settings.map_alt | escape }}" width="1000" height="472" loading="lazy">
         {%- endif -%}
         <div class="rd-mapstats" aria-hidden="true">
-          <div class="rd-mapstat rd-mapstat--a"><b>{{ section.settings.mstat1_num | default: '5' }}</b><span>{{ section.settings.mstat1_lbl | default: 'active prison sites' }}</span></div>
+          <div class="rd-mapstat rd-mapstat--a"><b>{{ section.settings.mstat1_num | default: '5' }}</b><span>{{ section.settings.mstat1_lbl | default: 'UK prison sites' }}</span></div>
           <div class="rd-mapstat rd-mapstat--b"><b>{{ section.settings.mstat2_num | default: '10' }}</b><span>{{ section.settings.mstat2_lbl | default: 'schools & universities' }}</span></div>
           <div class="rd-mapstat rd-mapstat--c"><b>{{ section.settings.mstat3_num | default: '3' }}</b><span>{{ section.settings.mstat3_lbl | default: 'international hubs' }}</span></div>
           <div class="rd-mapstat rd-mapstat--d"><b>{{ section.settings.mstat4_num | default: '45' }}</b><span>{{ section.settings.mstat4_lbl | default: 'countries reached' }}</span></div>
@@ -769,6 +769,9 @@
       {%- endif -%}
       {%- if section.settings.ident_line != blank -%}
       <p class="rd-ident rd-reveal">{{ section.settings.ident_line }}</p>
+      {%- endif -%}
+      {%- if section.settings.press_line != blank -%}
+      <p class="rd-ident rd-ident--press rd-reveal">{{ section.settings.press_line }}</p>
       {%- endif -%}
       {%- if section.settings.report_card_title != blank -%}
       <div class="rd-reveal rd-dlcard rd-mt3">
@@ -1188,7 +1191,7 @@ document.addEventListener('DOMContentLoaded', function () {
       "type": "text",
       "id": "mstat1_lbl",
       "label": "Map stat 1 label",
-      "default": "active prison sites"
+      "default": "UK prison sites"
     },
     {
       "type": "text",
@@ -1265,6 +1268,7 @@ document.addEventListener('DOMContentLoaded', function () {
     { "type": "text", "id": "recog_c", "label": "Recognition 3" },
     { "type": "text", "id": "recog_d", "label": "Recognition 4" },
     { "type": "textarea", "id": "ident_line", "label": "Identity line (who we are, legally)" },
+    { "type": "textarea", "id": "press_line", "label": "Press and researchers line" },
     {
       "type": "header",
       "content": "Hero"
@@ -1909,7 +1913,7 @@ document.addEventListener('DOMContentLoaded', function () {
       "type": "text",
       "id": "sites_title",
       "label": "Heading (blank to hide section)",
-      "default": "accredited programmes across five active prison sites."
+      "default": "Build to Bond is established across five UK prison sites, at different delivery stages."
     },
     {
       "type": "textarea",
