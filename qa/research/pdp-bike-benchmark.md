@@ -1,4 +1,7 @@
-# Bike / frame PDP benchmark — for BBC bamboo frame-kit page (£375–£795, ships worldwide)
+# Bike / frame PDP benchmark
+
+> 2026-09-02 correction (James): all wrapped BBC kits use FLAX fibre + epoxy, not carbon tow; lugged kits use ALUMINIUM lugs. Any "carbon" in the BBC rows below is superseded.
+ — for BBC bamboo frame-kit page (£375–£795, ships worldwide)
 
 Scraped 2026-09-02 via Firecrawl / Tavily (read-only). HERObike (herobike.org) is now a hijacked watch-spam domain and bamboobee.com no longer resolves — My Boo (my-boo.de) used as the bamboo competitor.
 

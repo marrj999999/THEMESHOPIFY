@@ -1963,3 +1963,14 @@
 /* kit-drawing heading: NOT a display beat — the estate display rule sized it at 102px in a 0.9fr
    column and broke "everything" mid-word (preview screenshot, 2026-09-02). Two beats per page max. */
 .bbc-rd .rd-kdraw h2.rd-fs-kdraw{font-size:clamp(var(--fs-32),3.3vw,var(--fs-48)) !important;line-height:1.04 !important;overflow-wrap:normal;word-break:normal;hyphens:manual;max-width:16ch}
+/* kit drawing — numbered pins on the photo (the labelled diagram). Pins are the list's numbers,
+   so the list is the key; pin positions are per-callout editor settings (% of the image). */
+.bbc-rd .rd-kdraw__card .rd-kdraw__img{position:relative}
+.bbc-rd .rd-kdraw__pins{position:absolute;inset:22px;pointer-events:none}
+.bbc-rd .rd-kdraw__pin{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:var(--forest);color:var(--lime);border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:var(--fs-12-5);line-height:1}
+.bbc-rd .rd-kdraw__pin::before{content:"";position:absolute;inset:-7px;border-radius:50%;border:2px solid var(--lime);opacity:.8}
+@media (prefers-reduced-motion:no-preference){
+  .bbc-rd .rd-kdraw__pin::before{animation:rd-pin-pulse 2.4s ease-out infinite}
+  @keyframes rd-pin-pulse{0%{transform:scale(.7);opacity:.9}70%{transform:scale(1.25);opacity:0}100%{transform:scale(1.25);opacity:0}}
+}
+@media (max-width:989px){.bbc-rd .rd-kdraw__pins{inset:14px}.bbc-rd .rd-kdraw__pin{width:24px;height:24px;font-size:var(--fs-11-5)}}

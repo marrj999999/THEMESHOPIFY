@@ -26,28 +26,204 @@
           "settings": {
             "text": "Cycle to Work accepted — save through salary sacrifice"
           }
-        },
-        "need_1": {
-          "type": "need",
+        }
+      },
+      "block_order": [
+        "perk_1",
+        "perk_2",
+        "perk_3",
+        "perk_4"
+      ],
+      "settings": {
+        "product_badge": "Made to measure",
+        "product_subtitle": "A bamboo frame designed around you — any geometry, any discipline. You don't need to know frame design: we work through your measurements and riding style with you 1:1, then you build it.",
+        "stock_line": "In stock — ships ~twice a week from our London workshop, fully tracked.",
+        "difficulty_label": "Beginner-friendly · no experience needed",
+        "build_time_label": "~30–50 hrs · a few weekends",
+        "reassure_line": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks",
+        "mission_line": "Build your own — and help fund a place on our Build to Bond prison programme.",
+        "buddy_text": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories.",
+        "secondary_label": "Prefer a workshop?",
+        "sizing_eyebrow": "Find your fit",
+        "sizing_heading": "made to your measurements",
+        "sizing_body": "A custom frame isn't built to a size chart — it's built to you. After you order we'll ask for your measurements and draw the frame 1:1.",
+        "sizing_note": "Outside these bands, or between sizes? That's exactly what a custom build is for — we design around your body and riding style.",
+        "loop_step1_sm": "your custom frame",
+        "bundle_a_text": "Everything to build the bamboo custom frame.",
+        "bundle_total_text": "A complete, one-of-a-kind custom bike — built by you.",
+        "bundle_b_label": "Component pack",
+        "bundle_b_price": "Priced by build",
+        "bundle_b_text": "Bars, wheels, drivetrain and finishing kit, chosen for your build.",
+        "press_quote": "Bamboo naturally dampens vibration, allowing the smoothest ride.",
+        "press_cite": "The Guardian",
+        "sticky_buy": true,
+        "content_bands": false
+      }
+    },
+    "kitspec": {
+      "type": "bbc-kit-spec",
+      "settings": {
+        "background": "bone",
+        "anchor": "spec",
+        "eyebrow": "fits your parts",
+        "heading": "will it take my parts?",
+        "lede": "The numbers you need to check a part you already own. The kit is the frame — fork, wheels and groupset are yours to choose.",
+        "foot_left": "Building from a donor bike? Send us its spec and we'll confirm the fit before you order.",
+        "foot_right": "Ask us about your parts",
+        "foot_url": "\/pages\/contact-us"
+      },
+      "blocks": {
+        "sp0": {
+          "type": "spec",
           "settings": {
-            "title": "basic hand tools",
-            "description": "A hacksaw, files, sandpaper, a measuring tape — no power tools. Everything else is in the kit."
+            "label": "head tube",
+            "value": "44 mm",
+            "note": "tapered on request"
           }
         },
-        "need_2": {
-          "type": "need",
+        "sp1": {
+          "type": "spec",
           "settings": {
-            "title": "a bit of space",
-            "description": "A sturdy table around 1200 × 600 mm and a spot the frame can sit undisturbed while joints cure."
+            "label": "bottom bracket",
+            "value": "68 \/ 73 mm · T47 · eccentric",
+            "note": "chosen at checkout"
           }
         },
-        "need_3": {
-          "type": "need",
+        "sp2": {
+          "type": "spec",
           "settings": {
-            "title": "a few weekends",
-            "description": "25–35 hours across multiple sessions. No rush — bamboo is forgiving and most mistakes are fixable."
+            "label": "seatpost",
+            "value": "27.2 or 31.6 mm",
+            "note": "chosen at checkout"
           }
         },
+        "sp3": {
+          "type": "spec",
+          "settings": {
+            "label": "dropouts",
+            "value": "Modular",
+            "note": "QR · horizontal · 12 mm thru · custom on request"
+          }
+        },
+        "sp4": {
+          "type": "spec",
+          "settings": {
+            "label": "geometry",
+            "value": "1:1 to you",
+            "note": "built to your measurements"
+          }
+        },
+        "sp5": {
+          "type": "spec",
+          "settings": {
+            "label": "other builds",
+            "value": "Cargo · tandem · tall bike",
+            "note": "custom-designed"
+          }
+        },
+        "sp6": {
+          "type": "spec",
+          "settings": {
+            "label": "build time",
+            "value": "30–50 hrs",
+            "note": "depends on the design"
+          }
+        }
+      },
+      "block_order": [
+        "sp0",
+        "sp1",
+        "sp2",
+        "sp3",
+        "sp4",
+        "sp5",
+        "sp6"
+      ]
+    },
+    "kitship": {
+      "type": "bbc-kit-shipping",
+      "settings": {
+        "background": "forest",
+        "anchor": "shipping",
+        "eyebrow": "shipped worldwide from the London workshop",
+        "heading": "no customs bill at the door",
+        "col1": "Destination",
+        "col2": "Shipping",
+        "col3": "Duty & tax",
+        "panel_title": "Delivered duty paid",
+        "panel_body": "The price at checkout is the price the kit costs you. We pay the import duty and tax before it ships, so the courier has nothing to collect when it arrives.",
+        "worked": "Sydney, kit: £495 kit + £75 shipping = £570 total, and nothing further on delivery.",
+        "foot": "Packed by hand and shipped twice a week, tracked all the way. Kits have reached 45 countries."
+      },
+      "blocks": {
+        "rt0": {
+          "type": "rate",
+          "settings": {
+            "place": "United Kingdom",
+            "rate": "£12",
+            "duty": "Included"
+          }
+        },
+        "rt1": {
+          "type": "rate",
+          "settings": {
+            "place": "Europe",
+            "rate": "£25",
+            "duty": "Paid by us"
+          }
+        },
+        "rt2": {
+          "type": "rate",
+          "settings": {
+            "place": "USA & Canada",
+            "rate": "£45",
+            "duty": "Paid by us"
+          }
+        },
+        "rt3": {
+          "type": "rate",
+          "settings": {
+            "place": "Rest of world",
+            "rate": "£75",
+            "duty": "Paid by us"
+          }
+        }
+      },
+      "block_order": [
+        "rt0",
+        "rt1",
+        "rt2",
+        "rt3"
+      ]
+    },
+    "lower": {
+      "type": "bbc-product-2026",
+      "settings": {
+        "product_badge": "Made to measure",
+        "product_subtitle": "A bamboo frame designed around you — any geometry, any discipline. You don't need to know frame design: we work through your measurements and riding style with you 1:1, then you build it.",
+        "stock_line": "In stock — ships ~twice a week from our London workshop, fully tracked.",
+        "difficulty_label": "Beginner-friendly · no experience needed",
+        "build_time_label": "~30–50 hrs · a few weekends",
+        "reassure_line": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks",
+        "mission_line": "Build your own — and help fund a place on our Build to Bond prison programme.",
+        "buddy_text": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories.",
+        "secondary_label": "Prefer a workshop?",
+        "sizing_eyebrow": "Find your fit",
+        "sizing_heading": "made to your measurements",
+        "sizing_body": "A custom frame isn't built to a size chart — it's built to you. After you order we'll ask for your measurements and draw the frame 1:1.",
+        "sizing_note": "Outside these bands, or between sizes? That's exactly what a custom build is for — we design around your body and riding style.",
+        "loop_step1_sm": "your custom frame",
+        "bundle_a_text": "Everything to build the bamboo custom frame.",
+        "bundle_total_text": "A complete, one-of-a-kind custom bike — built by you.",
+        "bundle_b_label": "Component pack",
+        "bundle_b_price": "Priced by build",
+        "bundle_b_text": "Bars, wheels, drivetrain and finishing kit, chosen for your build.",
+        "press_quote": "Bamboo naturally dampens vibration, allowing the smoothest ride.",
+        "press_cite": "The Guardian",
+        "show_buybox": false,
+        "content_bands": true
+      },
+      "blocks": {
         "step_1": {
           "type": "step",
           "settings": {
@@ -76,6 +252,20 @@
             "description": "Sand smooth, seal the bamboo, fit headset and BB. Adventure awaits."
           }
         },
+        "review_p1": {
+          "type": "review",
+          "settings": {
+            "quote": "I wanted something nobody else had. Now I ride a bike that's completely mine — geometry, shape, everything.",
+            "cite": "Custom kit builder, Bespoke geometry build"
+          }
+        },
+        "review_p2": {
+          "type": "review",
+          "settings": {
+            "quote": "I went from knowing nothing about bicycles to having built one. Two years on, I still burst with pride riding something I made myself.",
+            "cite": "Louise · home-build road bike"
+          }
+        },
         "stat_1": {
           "type": "stat",
           "settings": {
@@ -87,9 +277,9 @@
         "stat_2": {
           "type": "stat",
           "settings": {
-            "number": "Swansea",
-            "label": "University tested",
-            "source": "independent testing"
+            "number": "84.3 MPa",
+            "label": "bamboo tubing, tested",
+            "source": "Swansea University · BS ISO 22157:2019"
           }
         },
         "stat_3": {
@@ -140,48 +330,6 @@
             "fallback": "bbc-rd-road-charlie.jpg"
           }
         },
-        "geometry_1": {
-          "type": "geometry",
-          "settings": {
-            "label": "Rider height",
-            "value": "160-170cm \/ 168-178cm \/ 178-187cm \/ 185-193cm (S\/M\/L\/XL)"
-          }
-        },
-        "geometry_2": {
-          "type": "geometry",
-          "settings": {
-            "label": "Seat tube (C-C)",
-            "value": "48cm \/ 52cm \/ 56cm \/ 58cm (S\/M\/L\/XL)"
-          }
-        },
-        "geometry_3": {
-          "type": "geometry",
-          "settings": {
-            "label": "Top tube (effective)",
-            "value": "52cm \/ 54cm \/ 56cm \/ 58cm (S\/M\/L\/XL)"
-          }
-        },
-        "geometry_4": {
-          "type": "geometry",
-          "settings": {
-            "label": "Head tube",
-            "value": "12cm \/ 14cm \/ 17cm \/ 19cm (S\/M\/L\/XL)"
-          }
-        },
-        "geometry_5": {
-          "type": "geometry",
-          "settings": {
-            "label": "Stack",
-            "value": "54cm \/ 56cm \/ 58cm \/ 60cm (S\/M\/L\/XL)"
-          }
-        },
-        "geometry_6": {
-          "type": "geometry",
-          "settings": {
-            "label": "Reach",
-            "value": "37cm \/ 38cm \/ 39cm \/ 40cm (S\/M\/L\/XL)"
-          }
-        },
         "faq_1": {
           "type": "faq",
           "settings": {
@@ -216,62 +364,9 @@
             "question": "How long does it take, and why does it cost more than a stock kit?",
             "answer": "<p>A custom build takes longer than a fixed-spec kit because you're designing the geometry from scratch with us first, and the build itself runs longer (more design and prep time up front). The price reflects the bespoke 1:1 design work and a jig set up specifically for your geometry — you're paying for the consultation and the made-to-measure fit, not just the materials. Lead time depends on the design stage; we confirm it with you when we scope your build.<\/p>"
           }
-        },
-        "spec_p1": {
-          "type": "spec",
-          "settings": {
-            "label": "Geometry",
-            "value": "Made to your measurements"
-          }
-        },
-        "spec_p2": {
-          "type": "spec",
-          "settings": {
-            "label": "Discipline",
-            "value": "Road · gravel · MTB · city"
-          }
-        },
-        "spec_p3": {
-          "type": "spec",
-          "settings": {
-            "label": "Design support",
-            "value": "1:1 guided — no expertise needed"
-          }
-        },
-        "spec_p4": {
-          "type": "spec",
-          "settings": {
-            "label": "Construction",
-            "value": "Bamboo, flax & carbon, by hand"
-          }
-        },
-        "review_p1": {
-          "type": "review",
-          "settings": {
-            "quote": "I wanted something nobody else had. Now I ride a bike that's completely mine — geometry, shape, everything.",
-            "cite": "Custom kit builder, Bespoke geometry build"
-          }
-        },
-        "review_p2": {
-          "type": "review",
-          "settings": {
-            "quote": "I went from knowing nothing about bicycles to having built one. Two years on, I still burst with pride riding something I made myself.",
-            "cite": "Louise · home-build road bike"
-          }
         }
       },
       "block_order": [
-        "perk_1",
-        "perk_2",
-        "perk_3",
-        "perk_4",
-        "need_1",
-        "need_2",
-        "need_3",
-        "spec_p1",
-        "spec_p2",
-        "spec_p3",
-        "spec_p4",
         "step_1",
         "step_2",
         "step_3",
@@ -286,44 +381,18 @@
         "related_2",
         "related_3",
         "related_4",
-        "geometry_1",
-        "geometry_2",
-        "geometry_3",
-        "geometry_4",
-        "geometry_5",
-        "geometry_6",
         "faq_1",
         "faq_2",
         "faq_3",
         "faq_4",
         "faq_5"
-      ],
-      "settings": {
-        "product_badge": "Made to measure",
-        "product_subtitle": "A bamboo frame designed around you — any geometry, any discipline. You don't need to know frame design: we work through your measurements and riding style with you 1:1, then you build it.",
-        "stock_line": "In stock — ships ~twice a week from our London workshop, fully tracked.",
-        "difficulty_label": "Beginner-friendly · no experience needed",
-        "build_time_label": "~25–45 hrs · a few weekends",
-        "reassure_line": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks",
-        "mission_line": "Build your own — and help fund a place on our Build to Bond prison programme.",
-        "buddy_text": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories.",
-        "secondary_label": "Prefer a workshop?",
-        "sizing_eyebrow": "Find your fit",
-        "sizing_heading": "made to your measurements",
-        "sizing_body": "A custom frame isn't built to a size chart — it's built to you. These typical bands are a starting point; we work out your exact geometry together before anything ships.",
-        "sizing_note": "Outside these bands, or between sizes? That's exactly what a custom build is for — we design around your body and riding style.",
-        "loop_step1_sm": "your custom frame",
-        "bundle_a_text": "Everything to build the bamboo custom frame.",
-        "bundle_total_text": "A complete, one-of-a-kind custom bike — built by you.",
-        "bundle_b_label": "Component pack",
-        "bundle_b_price": "Priced by build",
-        "bundle_b_text": "Bars, wheels, drivetrain and finishing kit, chosen for your build.",
-        "press_quote": "Bamboo naturally dampens vibration, allowing the smoothest ride.",
-        "press_cite": "The Guardian"
-      }
+      ]
     }
   },
   "order": [
-    "main"
+    "main",
+    "kitspec",
+    "kitship",
+    "lower"
   ]
 }

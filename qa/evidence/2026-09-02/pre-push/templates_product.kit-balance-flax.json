@@ -26,26 +26,86 @@
           "settings": {
             "text": "Cycle to Work accepted — save through salary sacrifice"
           }
-        },
-        "need_1": {
-          "type": "need",
+        }
+      },
+      "block_order": [
+        "perk_1",
+        "perk_2",
+        "perk_3",
+        "perk_4"
+      ],
+      "settings": {
+        "sticky_buy": true,
+        "content_bands": false,
+        "product_badge": "First bike · flax · eco",
+        "product_subtitle": "Our most sustainable and most affordable balance bike: bamboo tubes joined with natural flax fibre and resin — no metal lugs, no carbon, no plastic shop bike. It's the same first bike a parent builds for their own child on our prison programme, so the one you make at home helps fund a place for a family to be reunited.",
+        "stock_line": "In stock — ships ~twice a week from our London workshop, fully tracked.",
+        "secondary_label": "Prefer a workshop?",
+        "reassure_line": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks",
+        "mission_line": "Build your own — and help fund a place on our Build to Bond prison programme.",
+        "buddy_text": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories.",
+        "difficulty_label": "Beginner-friendly · no experience needed",
+        "build_time_label": "~10–15 hrs · our simplest kit",
+        "show_sizing": false,
+        "sizing_eyebrow": "Find your fit",
+        "sizing_heading": "built to fit your child",
+        "sizing_body": "Sized by inside-leg measurement — send us your child's height and inside leg and we'll confirm the fit before you order.",
+        "sizing_note": "Being between sizes is normal: build the smaller one. Outside these sizes? Build a custom frame.",
+        "loop_step1_sm": "a balance bike",
+        "bundle_a_text": "Everything to build the bamboo balance bike.",
+        "bundle_b_label": "Component pack",
+        "bundle_b_price": "Priced by build",
+        "bundle_b_text": "Bars, wheels, drivetrain and finishing kit, chosen for your build.",
+        "bundle_total_text": "A complete, one-of-a-kind balance bike — built by you.",
+        "press_quote": "Taps into 'the IKEA effect' — that extra bit of affection people reserve for objects they put together themselves.",
+        "press_cite": "Financial Times"
+      }
+    },
+    "kitship": {
+      "type": "bbc-kit-shipping",
+      "settings": {
+        "background": "forest",
+        "anchor": "shipping",
+        "eyebrow": "shipped worldwide from the London workshop",
+        "heading": "no customs bill at the door",
+        "col1": "Destination",
+        "col2": "Shipping",
+        "col3": "Duty & tax",
+        "panel_title": "Delivered duty paid",
+        "panel_body": "The price at checkout is the price the kit costs you. We pay the import duty and tax before it ships, so the courier has nothing to collect when it arrives.",
+        "worked": "",
+        "foot": "Packed by hand and shipped twice a week, tracked all the way. Kits have reached 45 countries."
+      }
+    },
+    "lower": {
+      "type": "bbc-product-2026",
+      "blocks": {
+        "spec_p1": {
+          "type": "spec",
           "settings": {
-            "title": "basic hand tools",
-            "description": "A hacksaw, files, sandpaper, a measuring tape — no power tools. Everything else is in the kit."
+            "label": "Age range",
+            "value": "Designed for sized by inside leg"
           }
         },
-        "need_2": {
-          "type": "need",
+        "spec_p2": {
+          "type": "spec",
           "settings": {
-            "title": "a bit of space",
-            "description": "A sturdy table around 1200 × 600 mm and a spot the frame can sit undisturbed while joints cure."
+            "label": "Construction",
+            "value": "Bamboo + flax fibre — fully natural joints, no lugs or carbon"
           }
         },
-        "need_3": {
-          "type": "need",
+        "spec_p3": {
+          "type": "spec",
           "settings": {
-            "title": "a few weekends",
-            "description": "25–35 hours across multiple sessions. No rush — bamboo is forgiving and most mistakes are fixable."
+            "label": "Build time",
+            "value": "10–15 hrs — our simplest kit"
+          }
+        },
+        "spec_p4": {
+          "type": "spec",
+          "settings": {
+            "label": "Weight",
+            "value": "Light for little legs"
           }
         },
         "step_1": {
@@ -76,6 +136,13 @@
             "description": "Sand smooth, seal the bamboo, fit headset and BB. Adventure awaits."
           }
         },
+        "review_p1": {
+          "type": "review",
+          "settings": {
+            "quote": "The flax finish is gorgeous — every time I look at it I smile. And I built it myself.",
+            "cite": "Balance Flax Builder, Home kit build"
+          }
+        },
         "stat_1": {
           "type": "stat",
           "settings": {
@@ -87,9 +154,9 @@
         "stat_2": {
           "type": "stat",
           "settings": {
-            "number": "Swansea",
-            "label": "University tested",
-            "source": "independent testing"
+            "number": "84.3 MPa",
+            "label": "bamboo tubing, tested",
+            "source": "Swansea University · BS ISO 22157:2019"
           }
         },
         "stat_3": {
@@ -140,48 +207,6 @@
             "fallback": "bbc-rd-road-charlie.jpg"
           }
         },
-        "geometry_1": {
-          "type": "geometry",
-          "settings": {
-            "label": "Rider height",
-            "value": "160-170cm \/ 168-178cm \/ 178-187cm \/ 185-193cm (S\/M\/L\/XL)"
-          }
-        },
-        "geometry_2": {
-          "type": "geometry",
-          "settings": {
-            "label": "Seat tube (C-C)",
-            "value": "48cm \/ 52cm \/ 56cm \/ 58cm (S\/M\/L\/XL)"
-          }
-        },
-        "geometry_3": {
-          "type": "geometry",
-          "settings": {
-            "label": "Top tube (effective)",
-            "value": "52cm \/ 54cm \/ 56cm \/ 58cm (S\/M\/L\/XL)"
-          }
-        },
-        "geometry_4": {
-          "type": "geometry",
-          "settings": {
-            "label": "Head tube",
-            "value": "12cm \/ 14cm \/ 17cm \/ 19cm (S\/M\/L\/XL)"
-          }
-        },
-        "geometry_5": {
-          "type": "geometry",
-          "settings": {
-            "label": "Stack",
-            "value": "54cm \/ 56cm \/ 58cm \/ 60cm (S\/M\/L\/XL)"
-          }
-        },
-        "geometry_6": {
-          "type": "geometry",
-          "settings": {
-            "label": "Reach",
-            "value": "37cm \/ 38cm \/ 39cm \/ 40cm (S\/M\/L\/XL)"
-          }
-        },
         "faq_1": {
           "type": "faq",
           "settings": {
@@ -192,7 +217,7 @@
         "faq_2": {
           "type": "faq",
           "settings": {
-            "question": "Is it light enough for a toddler to handle?",
+            "question": "Is it light enough for a sized by inside leg to handle?",
             "answer": "<p>Bamboo is naturally light and the balance frame is small, so it's made to be manageable for little legs. We don't want to publish a weight we haven't measured — we'll share the exact finished weight on request.<\/p>"
           }
         },
@@ -214,53 +239,11 @@
           "type": "faq",
           "settings": {
             "question": "How strong is the finished frame?",
-            "answer": "<p>Very strong for its weight. Bamboo is a light, hollow natural composite and every joint is reinforced with carbon-fibre, giving a high strength-to-weight ratio. Our bamboo tubing is independently tested at Swansea University to BS ISO 22157:2019.<\/p>"
-          }
-        },
-        "spec_p1": {
-          "type": "spec",
-          "settings": {
-            "label": "Age range",
-            "value": "Designed for ages 2–5"
-          }
-        },
-        "spec_p2": {
-          "type": "spec",
-          "settings": {
-            "label": "Construction",
-            "value": "Bamboo + flax fibre — fully natural joints, no lugs or carbon"
-          }
-        },
-        "spec_p3": {
-          "type": "spec",
-          "settings": {
-            "label": "Build time",
-            "value": "10–15 hrs — our simplest kit"
-          }
-        },
-        "spec_p4": {
-          "type": "spec",
-          "settings": {
-            "label": "Weight",
-            "value": "Light for little legs"
-          }
-        },
-        "review_p1": {
-          "type": "review",
-          "settings": {
-            "quote": "The flax finish is gorgeous — every time I look at it I smile. And I built it myself.",
-            "cite": "Balance Flax Builder, Home kit build"
+            "answer": "Bamboo frame tubing tested at Swansea University to BS ISO 22157:2019 — 84.3 MPa ultimate tensile, comparable to mild steel at a fraction of the weight. That figure is for the tubing we supply, not for a finished frame: how strong your bike ends up is decided by your joints. Follow the manual, let the resin cure fully, and check the joints before every early ride — and call us if anything looks wrong."
           }
         }
       },
       "block_order": [
-        "perk_1",
-        "perk_2",
-        "perk_3",
-        "perk_4",
-        "need_1",
-        "need_2",
-        "need_3",
         "spec_p1",
         "spec_p2",
         "spec_p3",
@@ -278,12 +261,6 @@
         "related_2",
         "related_3",
         "related_4",
-        "geometry_1",
-        "geometry_2",
-        "geometry_3",
-        "geometry_4",
-        "geometry_5",
-        "geometry_6",
         "faq_1",
         "faq_2",
         "faq_3",
@@ -291,31 +268,36 @@
         "faq_5"
       ],
       "settings": {
+        "content_bands": true,
+        "show_buybox": false,
         "product_badge": "First bike · flax · eco",
         "product_subtitle": "Our most sustainable and most affordable balance bike: bamboo tubes joined with natural flax fibre and resin — no metal lugs, no carbon, no plastic shop bike. It's the same first bike a parent builds for their own child on our prison programme, so the one you make at home helps fund a place for a family to be reunited.",
         "stock_line": "In stock — ships ~twice a week from our London workshop, fully tracked.",
-        "difficulty_label": "Beginner-friendly · no experience needed",
-        "build_time_label": "~10–15 hrs · our simplest kit",
+        "secondary_label": "Prefer a workshop?",
         "reassure_line": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks",
         "mission_line": "Build your own — and help fund a place on our Build to Bond prison programme.",
         "buddy_text": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories.",
-        "secondary_label": "Prefer a workshop?",
+        "difficulty_label": "Beginner-friendly · no experience needed",
+        "build_time_label": "~10–15 hrs · our simplest kit",
+        "show_sizing": false,
         "sizing_eyebrow": "Find your fit",
         "sizing_heading": "built to fit your child",
-        "sizing_body": "Fit depends on your child's inside-leg measurement more than age — send us their height and inside leg and we'll confirm it suits them.",
+        "sizing_body": "Sized by inside-leg measurement — send us your child's height and inside leg and we'll confirm the fit before you order.",
         "sizing_note": "Being between sizes is normal: build the smaller one. Outside these sizes? Build a custom frame.",
         "loop_step1_sm": "a balance bike",
         "bundle_a_text": "Everything to build the bamboo balance bike.",
-        "bundle_total_text": "A complete, one-of-a-kind balance bike — built by you.",
         "bundle_b_label": "Component pack",
         "bundle_b_price": "Priced by build",
         "bundle_b_text": "Bars, wheels, drivetrain and finishing kit, chosen for your build.",
+        "bundle_total_text": "A complete, one-of-a-kind balance bike — built by you.",
         "press_quote": "Taps into 'the IKEA effect' — that extra bit of affection people reserve for objects they put together themselves.",
         "press_cite": "Financial Times"
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "kitship",
+    "lower"
   ]
 }

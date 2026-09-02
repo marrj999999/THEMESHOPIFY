@@ -59,6 +59,15 @@
                  alt="{{ section.settings.image_alt | default: img.alt | default: product.title | escape }}"
                  width="{{ img.width }}" height="{{ img.height }}" loading="lazy">
           {%- endif -%}
+          {%- if section.settings.show_pins and img != blank -%}
+            <div class="rd-kdraw__pins" aria-hidden="true">
+              {%- for block in callouts -%}
+                {%- if block.settings.x > 0 or block.settings.y > 0 -%}
+                  <span class="rd-kdraw__pin" style="left:{{ block.settings.x }}%;top:{{ block.settings.y }}%">{{ forloop.index }}</span>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
           {%- if section.settings.sheet_label != blank -%}
             <div class="rd-tblock rd-kdraw__tb" aria-hidden="true"><span class="k">sheet</span><span>{{ section.settings.sheet_label }}</span></div>
           {%- endif -%}
@@ -93,7 +102,8 @@
     { "type": "range", "id": "product_image_index", "label": "…or product image number", "min": 1, "max": 8, "step": 1, "default": 2, "info": "Used when no image is picked. Kit exploded views are usually image 2." },
     { "type": "text", "id": "image_alt", "label": "Image alt text" },
     { "type": "text", "id": "sheet_label", "label": "Sheet label", "default": "1 of 1 · 1:1 plan in the box" },
-    { "type": "text", "id": "sticker", "label": "Sticker (frame-sticker wit)", "default": "it grew itself." }
+    { "type": "text", "id": "sticker", "label": "Sticker (frame-sticker wit)", "default": "it grew itself." },
+    { "type": "checkbox", "id": "show_pins", "label": "Number the parts on the photo (labelled diagram)", "default": true, "info": "Each callout's X/Y places its number on the image. Set both to 0 to hide a pin." }
   ],
   "blocks": [
     {
@@ -101,7 +111,9 @@
       "name": "Callout",
       "settings": [
         { "type": "text", "id": "label", "label": "Part", "default": "heat-treated Moso bamboo tubes" },
-        { "type": "text", "id": "note", "label": "Note", "default": "with spares" }
+        { "type": "text", "id": "note", "label": "Note", "default": "with spares" },
+        { "type": "range", "id": "x", "label": "Pin X (% from left)", "min": 0, "max": 100, "step": 1, "default": 0 },
+        { "type": "range", "id": "y", "label": "Pin Y (% from top)", "min": 0, "max": 100, "step": 1, "default": 0 }
       ]
     }
   ],
