@@ -2053,3 +2053,4 @@
 @media (max-width:1100px){.bbc-rd .rd-kit-culm,.bbc-rd .rd-kdraw__culm{left:6px;width:6px;top:24px;bottom:24px}}
 /* titleblocks stay legible on phones */
 @media (max-width:480px){.bbc-rd .rd-tblock{font-size:var(--fs-11-5)}}
+.bbc-rd .rd-kdraw__copy{text-align:left}
