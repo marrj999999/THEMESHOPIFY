@@ -165,3 +165,6 @@ confident.
 **Never hardcode a peer URL.** Discover it, check the status code, and look at a screenshot before
 quoting any number from it. This is the sixth crude-measurement false finding this week, and the
 first where I caught it before writing it up as a result.
+
+## 2026-09-02 — PDP: bike-industry set added (10 peers) + e-commerce evidence
+Coverage for the PDP type now clears the bar: the 7-peer craft-goods set (re-run today: BBC gravel 13.1vp · 1,219w · ATC y1193) plus a 10-peer bike/kit set (Canyon, Brompton, Ribble, Fairlight, Surly, Temple, Cowboy, Specialized, My Boo, Framework) in `pdp-bike-benchmark.md`, and a 44-row evidence checklist in `pdp-ecommerce-evidence.md`. Scorecard + fix order: vault `Reports/Kit Page Benchmark 2026-09-02` (artifact linked there). Headline gaps are all buy-box lines: stock/dispatch, payment + C2W, stories near price, ATC below the desktop fold, no weight limit or stack/reach (both evidence-gated).
