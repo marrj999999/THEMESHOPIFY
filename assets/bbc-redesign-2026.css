@@ -2076,3 +2076,84 @@
 .bbc-rd .rd-b2b-cs .rd-cscard-item[data-size="featured"],.bbc-rd .rd-b2b-cs .rd-cscard--featured{grid-column:1/-1}
 @media (max-width:989px){.bbc-rd .rd-b2b-cs .rd-csgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:640px){.bbc-rd .rd-b2b-cs .rd-csgrid{grid-template-columns:1fr}}
+/* ═══ EDUCATION v2 — 2 Sep 2026 (aligned to the "Intro to Services" deck: material, five ways in,
+   pathway sheets, school timetable, outcomes, recognition). Self-owned edm-/edp-/edt-tt/edo- classes;
+   the culm timeline is the impact/b2b .rd-stations device. Tokens only. ═══ */
+.bbc-rd .edu-band h2.rd-fs-stn{font-size:clamp(var(--fs-32),3.3vw,var(--fs-48)) !important;line-height:1.04 !important;overflow-wrap:normal;word-break:normal;hyphens:manual;max-width:16ch}
+/* material */
+.bbc-rd .edm-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:34px}
+.bbc-rd .edm{background:var(--paper);border:2.5px solid var(--ink);border-radius:6px;padding:22px;display:flex;flex-direction:column;gap:10px;box-shadow:3px 3px 0 var(--ink)}
+.bbc-rd .edm h3{margin:0;font-size:var(--fs-20);line-height:1.15}
+.bbc-rd .edm p{margin:0;font-size:var(--fs-14-5);color:var(--charcoal)}
+.bbc-rd .edm-range{margin:26px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
+.bbc-rd .edm-range li{list-style:none;font-size:var(--fs-13-5);border:2.5px solid var(--ink);border-radius:999px;padding:5px 12px;background:var(--bone)}
+.bbc-rd .edm-range li.edm-range__k{border:0;background:transparent;padding:0;font-size:var(--fs-12-5);font-weight:700;letter-spacing:.14em;text-transform:lowercase;color:var(--subtle);margin-right:8px}
+@media (max-width:989px){.bbc-rd .edm-grid{grid-template-columns:1fr}}
+/* five ways in: five stations on the culm, then the pathway sheets */
+.bbc-rd .edp-stations .rd-stations__grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+.bbc-rd .edp-stations .rd-stations__num{font-size:var(--fs-12-5);font-weight:800;letter-spacing:.14em;color:var(--subtle)}
+.bbc-rd .edp-stations .rd-stations__title{font-size:var(--fs-21)}
+.bbc-rd .edp-stations .rd-stations__title a{color:inherit;text-decoration:none}
+.bbc-rd .edp-stations .rd-stations__title a:hover,.bbc-rd .edp-stations .rd-stations__title a:focus-visible{text-decoration:underline;text-decoration-thickness:3px;text-decoration-color:var(--lime-700)}
+.bbc-rd .edp-stations .rd-stations__note{order:-1}
+@media (max-width:989px){.bbc-rd .edp-stations .rd-stations__grid{grid-template-columns:1fr}}
+.bbc-rd .edp-list{list-style:none;margin:44px 0 0;padding:0;display:grid;gap:14px}
+.bbc-rd .edp{border:2.5px solid var(--ink);border-radius:6px;background:var(--bone);transition:box-shadow var(--mo-base) var(--mo-ease)}
+.bbc-rd .edp[open]{box-shadow:5px 5px 0 var(--ink);background:var(--paper)}
+.bbc-rd .edp__sum{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:16px 20px;cursor:pointer;list-style:none}
+.bbc-rd .edp__sum::-webkit-details-marker{display:none}
+.bbc-rd .edp__sum:focus-visible{outline:3px solid var(--lime-700);outline-offset:2px;border-radius:6px}
+.bbc-rd .edp__n{font-size:var(--fs-12-5);font-weight:800;letter-spacing:.1em;color:var(--forest);width:44px;height:44px;border-radius:50%;background:var(--lime);border:2px solid var(--ink);display:inline-flex;align-items:center;justify-content:center;flex:0 0 44px}
+.bbc-rd .edp__t{margin:0;font-size:var(--fs-22);line-height:1.1}
+.bbc-rd .edp__t small{display:block;font-size:var(--fs-12-5);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--subtle);margin-top:4px}
+.bbc-rd .edp__meta{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
+.bbc-rd .edp__meta span{font-size:var(--fs-12-5);border:2px solid var(--ink);border-radius:999px;padding:4px 10px;background:var(--paper);white-space:nowrap}
+.bbc-rd .edp__caret{width:22px;height:22px;color:var(--forest);transition:transform var(--mo-base) var(--mo-ease);flex:0 0 22px}
+.bbc-rd .edp[open] .edp__caret{transform:rotate(180deg)}
+.bbc-rd .edp__body{display:grid;grid-template-columns:5fr 7fr;gap:32px;padding:6px 20px 26px;border-top:1.5px solid color-mix(in srgb, var(--forest) 22%, transparent);margin-top:2px;padding-top:22px}
+.bbc-rd .edp__media{position:relative;border:2.5px solid var(--ink);border-radius:6px;overflow:hidden;background:var(--bone);aspect-ratio:4/3;align-self:start}
+.bbc-rd .edp__media img{width:100%;height:100%;object-fit:cover;display:block}
+.bbc-rd .edp__lede{font-size:var(--fs-18-5);line-height:1.35;margin:0 0 10px;font-weight:700;color:var(--forest)}
+.bbc-rd .edp__copy{font-size:var(--fs-14-5);color:var(--charcoal);margin:0;max-width:62ch}
+.bbc-rd .edp__facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 22px;margin:20px 0 0;padding:0}
+.bbc-rd .edp__facts div{display:flex;flex-direction:column;gap:3px}
+.bbc-rd .edp__facts .edp__wide{grid-column:1/-1}
+.bbc-rd .edp__facts dt{font-size:var(--fs-10-5);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--forest-300)}
+.bbc-rd .edp__facts dd{margin:0;font-size:var(--fs-14-5)}
+.bbc-rd .edp__spec{width:100%;border-collapse:collapse;margin-top:18px;font-size:var(--fs-14-5)}
+.bbc-rd .edp__spec th,.bbc-rd .edp__spec td{text-align:left;padding:8px 0;border-top:1.5px solid color-mix(in srgb, var(--forest) 22%, transparent);vertical-align:top}
+.bbc-rd .edp__spec th{width:30%;font-weight:700;color:var(--forest);padding-right:14px}
+.bbc-rd .edp__prog{margin:18px 0 0;background:var(--forest);color:var(--bone);border-radius:6px;padding:14px 16px;font-size:var(--fs-14-5)}
+.bbc-rd .edp__prog b{color:var(--lime);text-transform:lowercase;letter-spacing:.06em}
+.bbc-rd .edp__tags{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:var(--fs-12-5);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--forest)}
+.bbc-rd .edp__tags li+li::before{content:"·";margin-right:14px;color:var(--subtle)}
+@media (max-width:989px){.bbc-rd .edp__body{grid-template-columns:1fr;gap:20px}.bbc-rd .edp__sum{grid-template-columns:auto 1fr}.bbc-rd .edp__meta{grid-column:1/-1;justify-content:flex-start}}
+@media (max-width:520px){.bbc-rd .edp__facts{grid-template-columns:1fr}.bbc-rd .edp__sum{padding:14px 14px}.bbc-rd .edp__body{padding:18px 14px 20px}}
+/* school timetable (dark band) */
+.bbc-rd .edt-tt{width:100%;border-collapse:collapse;margin-top:36px;font-size:var(--fs-14-5);color:var(--bone)}
+.bbc-rd .edt-tt th{text-align:left;font-size:var(--fs-12-5);letter-spacing:.12em;text-transform:uppercase;color:var(--lime);padding:0 18px 12px 0;font-weight:700}
+.bbc-rd .edt-tt td{padding:14px 18px 14px 0;border-top:1.5px solid color-mix(in srgb, var(--bone) 24%, transparent);vertical-align:top}
+.bbc-rd .edt-tt td:first-child{font-weight:700;color:var(--paper)}
+.bbc-rd .edt-tt td:last-child{font-weight:700;padding-right:0}
+.bbc-rd .edt-tt__foot{margin:28px 0 0;font-size:var(--fs-20);color:var(--lime);font-weight:700;max-width:34ch}
+@media (max-width:760px){
+  .bbc-rd .edt-tt thead{display:none}
+  .bbc-rd .edt-tt,.bbc-rd .edt-tt tbody,.bbc-rd .edt-tt tr,.bbc-rd .edt-tt td{display:block}
+  .bbc-rd .edt-tt tr{padding:14px 0;border-top:1.5px solid color-mix(in srgb, var(--bone) 24%, transparent)}
+  .bbc-rd .edt-tt td{padding:3px 0;border:0}
+  .bbc-rd .edt-tt td::before{content:attr(data-k) " · ";font-size:var(--fs-10-5);letter-spacing:.12em;text-transform:uppercase;color:var(--lime);font-weight:700}
+  .bbc-rd .edt-tt td:first-child::before{content:none}
+  .bbc-rd .edt-tt td:first-child{font-size:var(--fs-20)}
+}
+/* outcomes (steel band) */
+.bbc-rd .edo-grid{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 32px}
+.bbc-rd .edo{border-top:2.5px solid var(--ink);padding-top:14px}
+.bbc-rd .edo h3{margin:0;font-size:var(--fs-22);line-height:1.15;color:var(--forest)}
+.bbc-rd .edo p{margin:8px 0 0;font-size:var(--fs-14-5);color:var(--charcoal)}
+.bbc-rd .edo--sum{border-top-color:color-mix(in srgb, var(--ink) 30%, transparent)}
+.bbc-rd .edo--sum h3{color:var(--ink)}
+@media (max-width:989px){.bbc-rd .edo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.bbc-rd .edo-grid{grid-template-columns:1fr}}
+/* five ways in: station titles are anchor jumps — no resting underline, lime rule on hover/focus */
+.bbc-rd .edp-stations .rd-stations__title a,.bbc-rd .edp-stations .rd-stations__title a:visited{text-decoration:none !important;border-bottom:0 !important;box-shadow:none !important;background:none !important}
+.bbc-rd .edp-stations .rd-stations__title a:hover,.bbc-rd .edp-stations .rd-stations__title a:focus-visible{text-decoration:underline !important;text-decoration-thickness:3px;text-decoration-color:var(--lime-700);text-underline-offset:4px}

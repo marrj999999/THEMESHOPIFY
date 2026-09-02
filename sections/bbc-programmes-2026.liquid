@@ -47,6 +47,12 @@
     <div class="rd-inner">
       <div class="rd-wrap">
         <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><span class="rd-here">Education</span></nav>
+        {%- if section.settings.hero_tb_a != blank or section.settings.hero_tb_b != blank -%}
+          <div class="rd-tblock rd-tblock--hero" aria-hidden="true">
+            <span class="k r">{{ section.settings.hero_tb_a_key | default: 'pathways' }}</span><span class="r">{{ section.settings.hero_tb_a }}</span>
+            <span class="k">{{ section.settings.hero_tb_b_key | default: 'accredited' }}</span><span>{{ section.settings.hero_tb_b }}</span>
+          </div>
+        {%- endif -%}
         {%- if section.settings.hero_eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>{%- endif -%}
         <h1 class="rd-mt2 rd-mw-18ch">{{ section.settings.hero_title }}</h1>
         <div class="rd-lede">{{ section.settings.hero_lede }}</div>
@@ -183,6 +189,129 @@
     </div>
   </section>
 
+  {%- comment -%} ---------- MATERIAL (2026-09-02) — from Chris's "Intro to Services" deck, slides 3–4:
+     the regenerative-material story and the range ("one frame, multiple entry points"). Claim gates:
+     no carbon figure (Claims Register); "no welding, no factory" = approved FAQ wording. {%- endcomment -%}
+  {%- if section.settings.mat_title != blank -%}
+  <section class="rd-pad edu-band" id="material">
+    <div class="rd-wrap">
+      <div class="rd-stations__head">
+        <div>
+          {%- if section.settings.mat_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.mat_eyebrow }}</span>{%- endif -%}
+          <h2 class="rd-reveal rd-fs-stn">{{ section.settings.mat_title }}</h2>
+        </div>
+        {%- if section.settings.mat_lede != blank -%}<p class="rd-lede">{{ section.settings.mat_lede }}</p>{%- endif -%}
+      </div>
+      <div class="edm-grid">
+        {%- for i in (1..3) -%}
+          {%- assign _t = 'mat' | append: i | append: '_t' -%}{%- assign _b = 'mat' | append: i | append: '_b' -%}{%- assign _i = 'mat' | append: i | append: '_icon' -%}
+          {%- if section.settings[_t] != blank -%}
+          <div class="edm rd-reveal">
+            {%- render 'bbc-edu-pic', icon: section.settings[_i] -%}
+            <h3>{{ section.settings[_t] }}</h3>
+            <p>{{ section.settings[_b] }}</p>
+          </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- if section.settings.mat_range != blank -%}
+      <ul class="edm-range">
+        <li class="edm-range__k">{{ section.settings.mat_range_label | default: 'one frame, many entry points' }}</li>
+        {%- assign _rng = section.settings.mat_range | split: ',' -%}{%- for r in _rng -%}<li>{{ r | strip }}</li>{%- endfor -%}
+      </ul>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- FIVE WAYS IN (2026-09-02) — the deck's progression (slides 5–10): five pathways
+     on the culm timeline (impact/b2b .rd-stations device), each opening to its pathway sheet — cohort,
+     format, duration, pricing basis, build/tools/learning, progression. Block type `pathway`. Copy gates:
+     Claims Register — OCN courses by exact title only, no regulated-status wording; no ride, safety
+     or conformity claims on the balance bike; no L1 wording. {%- endcomment -%}
+  {%- assign pathways = section.blocks | where: 'type', 'pathway' -%}
+  {%- if section.settings.pw_title != blank and pathways.size > 0 -%}
+  <section class="rd-pad rd-paper rd-stations edp-stations" id="pathways">
+    <div class="rd-wrap">
+      <div class="rd-stations__head">
+        <div>
+          {%- if section.settings.pw_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.pw_eyebrow }}</span>{%- endif -%}
+          <h2 class="rd-reveal rd-fs-stn">{{ section.settings.pw_title }}</h2>
+        </div>
+        {%- if section.settings.pw_lede != blank -%}<p class="rd-lede">{{ section.settings.pw_lede }}</p>{%- endif -%}
+      </div>
+      <div class="rd-stations__rail">
+        <div class="rd-stations__track" aria-hidden="true"></div>
+        <div class="rd-stations__culm" aria-hidden="true"></div>
+        <ol class="rd-stations__grid">
+          {%- for block in pathways -%}
+          {%- assign _num = block.settings.num -%}{%- if _num == blank -%}{%- assign _num = forloop.index | prepend: '0' | slice: -2, 2 -%}{%- endif -%}
+          <li class="rd-stations__item rd-reveal">
+            <span class="rd-stations__dot{% if forloop.last %} rd-stations__dot--lime{% endif %}">{%- render 'bbc-edu-pic', icon: block.settings.icon -%}</span>
+            <span class="rd-stations__num" aria-hidden="true">{{ _num }}</span>
+            {%- if block.settings.tag != blank -%}<span class="rd-stations__note">{{ block.settings.tag }}</span>{%- endif -%}
+            <h3 class="rd-stations__title"><a href="#pw-{{ forloop.index }}">{{ block.settings.title }}</a></h3>
+            {%- if block.settings.blurb != blank -%}<p class="rd-stations__body">{{ block.settings.blurb }}</p>{%- endif -%}
+          </li>
+          {%- endfor -%}
+        </ol>
+      </div>
+      <ol class="edp-list" aria-label="Pathway details">
+        {%- for block in pathways -%}
+        {%- assign _num = block.settings.num -%}{%- if _num == blank -%}{%- assign _num = forloop.index | prepend: '0' | slice: -2, 2 -%}{%- endif -%}
+        <li {{ block.shopify_attributes }}>
+          <details class="edp" id="pw-{{ forloop.index }}" name="pathway"{% if block.settings.open %} open{% endif %}>
+            <summary class="edp__sum">
+              <span class="edp__n">{{ _num }}</span>
+              <h3 class="edp__t">{{ block.settings.title }}{%- if block.settings.tag != blank -%}<small>{{ block.settings.tag }}</small>{%- endif -%}</h3>
+              <span class="edp__meta">{%- if block.settings.duration != blank -%}<span>{{ block.settings.duration }}</span>{%- endif -%}{%- if block.settings.cohort != blank -%}<span>{{ block.settings.cohort }}</span>{%- endif -%}<svg class="edp__caret" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </summary>
+            <div class="edp__body">
+              <div class="edp__media">
+                {%- if block.settings.image != blank -%}
+                  <img src="{{ block.settings.image | image_url: width: 900 }}" srcset="{{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 900 }} 900w" sizes="(max-width:989px) 92vw, 36vw" alt="{{ block.settings.image_alt | escape }}" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
+                {%- elsif block.settings.img_asset != blank -%}
+                  <img src="{{ block.settings.img_asset | asset_url }}&width=900" srcset="{{ block.settings.img_asset | asset_url }}&width=500 500w, {{ block.settings.img_asset | asset_url }}&width=900 900w" sizes="(max-width:989px) 92vw, 36vw" alt="{{ block.settings.image_alt | escape }}" loading="lazy" width="900" height="675">
+                {%- endif -%}
+                <span class="rd-path__ic">{%- render 'bbc-edu-pic', icon: block.settings.icon -%}</span>
+              </div>
+              <div class="edp__txt">
+                {%- if block.settings.lede != blank -%}<p class="edp__lede">{{ block.settings.lede }}</p>{%- endif -%}
+                {%- if block.settings.body != blank -%}<p class="edp__copy">{{ block.settings.body }}</p>{%- endif -%}
+                <dl class="edp__facts">
+                  {%- if block.settings.cohort != blank -%}<div><dt>cohort</dt><dd>{{ block.settings.cohort }}</dd></div>{%- endif -%}
+                  {%- if block.settings.format != blank -%}<div><dt>format</dt><dd>{{ block.settings.format }}</dd></div>{%- endif -%}
+                  {%- if block.settings.duration != blank -%}<div><dt>duration</dt><dd>{{ block.settings.duration }}</dd></div>{%- endif -%}
+                  {%- if block.settings.pricing != blank -%}<div><dt>pricing</dt><dd>{{ block.settings.pricing }}</dd></div>{%- endif -%}
+                  {%- if block.settings.accred != blank -%}<div class="edp__wide"><dt>accreditation</dt><dd>{{ block.settings.accred }}</dd></div>{%- endif -%}
+                </dl>
+                {%- if block.settings.s1k != blank or block.settings.s2k != blank or block.settings.s3k != blank -%}
+                <table class="edp__spec">
+                  <tbody>
+                    {%- if block.settings.s1k != blank -%}<tr><th scope="row">{{ block.settings.s1k }}</th><td>{{ block.settings.s1v }}</td></tr>{%- endif -%}
+                    {%- if block.settings.s2k != blank -%}<tr><th scope="row">{{ block.settings.s2k }}</th><td>{{ block.settings.s2v }}</td></tr>{%- endif -%}
+                    {%- if block.settings.s3k != blank -%}<tr><th scope="row">{{ block.settings.s3k }}</th><td>{{ block.settings.s3v }}</td></tr>{%- endif -%}
+                  </tbody>
+                </table>
+                {%- endif -%}
+                {%- if block.settings.progression != blank -%}<p class="edp__prog"><b>{{ section.settings.pw_prog_label | default: 'progression' }}</b> &mdash; {{ block.settings.progression }}</p>{%- endif -%}
+                {%- if block.settings.tags != blank -%}
+                <ul class="edp__tags" aria-label="themes">{%- assign _tg = block.settings.tags | split: ',' -%}{%- for t in _tg -%}<li>{{ t | strip }}</li>{%- endfor -%}</ul>
+                {%- endif -%}
+              </div>
+            </div>
+          </details>
+        </li>
+        {%- endfor -%}
+      </ol>
+      {%- if section.settings.pw_note != blank -%}<p class="rd-stations__more">{{ section.settings.pw_note }}</p>{%- endif -%}
+      <div class="rd-cta-row rd-mt4">
+        <a class="rd-btn rd-lime" href="{{ contact_url }}">{{ section.settings.pw_cta_label | default: 'book a discovery call' }} <span class="rd-arrow">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
   {%- comment -%} ========== SCHOOLS ARM ========== {%- endcomment -%}
   <section id="schools" class="rd-split">
     <div class="rd-reveal rd-media">
@@ -205,6 +334,33 @@
       </div>
     </div>
   </section>
+
+  {%- comment -%} ---------- TIMETABLE (2026-09-02, deck slide 11) — school formats mapped to the pathways.
+     Block type `ttrow`; the table collapses to labelled rows below 760px. {%- endcomment -%}
+  {%- assign ttrows = section.blocks | where: 'type', 'ttrow' -%}
+  {%- if section.settings.tt_title != blank and ttrows.size > 0 -%}
+  <section class="rd-pad rd-dark edu-band" id="timetable">
+    <div class="rd-wrap">
+      <div class="rd-stations__head">
+        <div>
+          {%- if section.settings.tt_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.tt_eyebrow }}</span>{%- endif -%}
+          <h2 class="rd-reveal rd-fs-stn">{{ section.settings.tt_title }}</h2>
+        </div>
+        {%- if section.settings.tt_lede != blank -%}<p class="rd-lede">{{ section.settings.tt_lede }}</p>{%- endif -%}
+      </div>
+      {%- assign _h1 = section.settings.tt_h1 | default: 'school format' -%}{%- assign _h2 = section.settings.tt_h2 | default: 'typical time' -%}{%- assign _h3 = section.settings.tt_h3 | default: 'typical use' -%}{%- assign _h4 = section.settings.tt_h4 | default: 'best suited pathway' -%}
+      <table class="edt-tt">
+        <thead><tr><th scope="col">{{ _h1 }}</th><th scope="col">{{ _h2 }}</th><th scope="col">{{ _h3 }}</th><th scope="col">{{ _h4 }}</th></tr></thead>
+        <tbody>
+          {%- for block in ttrows -%}
+          <tr {{ block.shopify_attributes }}><td data-k="{{ _h1 | escape }}">{{ block.settings.format }}</td><td data-k="{{ _h2 | escape }}">{{ block.settings.time }}</td><td data-k="{{ _h3 | escape }}">{{ block.settings.use }}</td><td data-k="{{ _h4 | escape }}">{{ block.settings.best }}</td></tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+      {%- if section.settings.tt_foot != blank -%}<p class="edt-tt__foot">{{ section.settings.tt_foot }}</p>{%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
 
   {%- comment -%} ---------- THE SCHOOLS PATHWAY (5 tiered programmes) ----------
      Merged in from the unpublished bbc-education-2026 draft (2026-08-27, James:
@@ -374,6 +530,29 @@
   </style>
   {%- endif -%}
 
+  {%- comment -%} ---------- OUTCOMES (2026-09-02, deck slide 12) — "one vehicle, five outcomes".
+     Block type `outcome`. Copy gates: Claims Register — no unevidenced framework or scheme claims. {%- endcomment -%}
+  {%- assign outcomes = section.blocks | where: 'type', 'outcome' -%}
+  {%- if section.settings.out_title != blank and outcomes.size > 0 -%}
+  <section class="rd-pad rd-steel edu-band" id="outcomes">
+    <div class="rd-wrap">
+      <div class="rd-stations__head">
+        <div>
+          {%- if section.settings.out_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.out_eyebrow }}</span>{%- endif -%}
+          <h2 class="rd-reveal rd-fs-stn">{{ section.settings.out_title }}</h2>
+        </div>
+        {%- if section.settings.out_lede != blank -%}<p class="rd-lede">{{ section.settings.out_lede }}</p>{%- endif -%}
+      </div>
+      <ul class="edo-grid" role="list">
+        {%- for block in outcomes -%}
+        <li class="edo rd-reveal" {{ block.shopify_attributes }}><h3>{{ block.settings.title }}</h3><p>{{ block.settings.body }}</p></li>
+        {%- endfor -%}
+        {%- if section.settings.out_sum != blank -%}<li class="edo edo--sum rd-reveal"><h3>{{ section.settings.out_sum }}</h3>{%- if section.settings.out_sum_body != blank -%}<p>{{ section.settings.out_sum_body }}</p>{%- endif -%}</li>{%- endif -%}
+      </ul>
+    </div>
+  </section>
+  {%- endif -%}
+
   {%- comment -%} ---------- HOW COMMISSIONING WORKS (2026-08-27) ----------
      Stakeholder refocus (James): councils + education institutions. Steps mirror the
      REAL Camden commissioning thread (supplier setup, RA, safeguarding + photography
@@ -489,13 +668,24 @@
   {%- endif -%}
 
   {%- comment -%} ---------- CREDIBILITY (quote + sites + logos) ---------- {%- endcomment -%}
-  {%- if section.settings.cred_quote != blank or section.settings.sites_list != blank -%}
+  {%- if section.settings.cred_quote != blank or section.settings.sites_list != blank or section.settings.recog_a != blank -%}
   <section class="rd-pad-sm rd-paper rd-center">
     <div class="rd-wrap rd-mw-680px">
+      {%- if section.settings.cred_quote != blank -%}
       <div class="rd-pull rd-mx-auto">
         <p class="rd-q">{{ section.settings.cred_quote }}</p>
         {%- if section.settings.cred_cite != blank -%}<cite>{{ section.settings.cred_cite }}</cite>{%- endif -%}
       </div>
+      {%- endif -%}
+      {%- if section.settings.recog_a != blank -%}
+      <div class="rd-recog rd-mt3 rd-reveal">
+        {%- if section.settings.recog_label != blank -%}<span class="rd-recog__k">{{ section.settings.recog_label }}</span>{%- endif -%}
+        <ul class="rd-recog__list">
+          {%- assign recogs = "recog_a,recog_b,recog_c,recog_d" | split: "," -%}
+          {%- for key in recogs -%}{%- assign v = section.settings[key] -%}{%- if v != blank -%}<li>{{ v }}</li>{%- endif -%}{%- endfor -%}
+        </ul>
+      </div>
+      {%- endif -%}
       {%- if section.settings.sites_list != blank -%}<div class="rd-sitenames rd-mt4">{{ section.settings.sites_list }}</div>{%- endif -%}
       {%- if section.settings.funder_logo != blank or section.settings.accred_logo != blank -%}<div class="rd-mt3 rd-flex rd-jc-center" style="gap:32px;align-items:center;">{%- if section.settings.funder_logo != blank -%}<img src="{{ section.settings.funder_logo | asset_url }}" alt="{{ section.settings.funder_logo_alt | escape }}" loading="lazy" style="height:56px !important;width:auto !important;max-width:220px;object-fit:contain;">{%- endif -%}{%- if section.settings.accred_logo != blank -%}<img src="{{ section.settings.accred_logo | asset_url }}" alt="{{ section.settings.accred_logo_alt | escape }}" loading="lazy" style="height:48px !important;width:auto !important;max-width:180px;object-fit:contain;">{%- endif -%}</div>{%- endif -%}
       {%- if section.settings.funder_line != blank -%}<p class="rd-ship-note rd-mt1">{{ section.settings.funder_line }}</p>{%- endif -%}
@@ -1288,6 +1478,395 @@
       "type": "text",
       "id": "facts_cta_url",
       "label": "Stat band CTA url"
+    },
+    {
+      "type": "header",
+      "content": "Hero titleblock (deck alignment, Sep 2026)"
+    },
+    {
+      "type": "text",
+      "id": "hero_tb_a_key",
+      "label": "Titleblock key A",
+      "default": "pathways"
+    },
+    {
+      "type": "text",
+      "id": "hero_tb_a",
+      "label": "Titleblock value A"
+    },
+    {
+      "type": "text",
+      "id": "hero_tb_b_key",
+      "label": "Titleblock key B",
+      "default": "accredited"
+    },
+    {
+      "type": "text",
+      "id": "hero_tb_b",
+      "label": "Titleblock value B"
+    },
+    {
+      "type": "header",
+      "content": "Material band"
+    },
+    {
+      "type": "text",
+      "id": "mat_eyebrow",
+      "label": "Eyebrow",
+      "default": "material"
+    },
+    {
+      "type": "text",
+      "id": "mat_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "mat_lede",
+      "label": "Lede"
+    },
+    {
+      "type": "select",
+      "id": "mat1_icon",
+      "label": "Fact 1 pictogram",
+      "options": [
+        {
+          "value": "speaker",
+          "label": "speaker"
+        },
+        {
+          "value": "balance",
+          "label": "balance"
+        },
+        {
+          "value": "tool",
+          "label": "tool"
+        },
+        {
+          "value": "skills",
+          "label": "skills"
+        },
+        {
+          "value": "bike",
+          "label": "bike"
+        },
+        {
+          "value": "tag",
+          "label": "tag"
+        },
+        {
+          "value": "bolt",
+          "label": "bolt"
+        },
+        {
+          "value": "box",
+          "label": "box"
+        },
+        {
+          "value": "leaf",
+          "label": "leaf"
+        },
+        {
+          "value": "tubes",
+          "label": "tubes"
+        },
+        {
+          "value": "clock",
+          "label": "clock"
+        }
+      ],
+      "default": "leaf"
+    },
+    {
+      "type": "text",
+      "id": "mat1_t",
+      "label": "Fact 1 title"
+    },
+    {
+      "type": "textarea",
+      "id": "mat1_b",
+      "label": "Fact 1 body"
+    },
+    {
+      "type": "select",
+      "id": "mat2_icon",
+      "label": "Fact 2 pictogram",
+      "options": [
+        {
+          "value": "speaker",
+          "label": "speaker"
+        },
+        {
+          "value": "balance",
+          "label": "balance"
+        },
+        {
+          "value": "tool",
+          "label": "tool"
+        },
+        {
+          "value": "skills",
+          "label": "skills"
+        },
+        {
+          "value": "bike",
+          "label": "bike"
+        },
+        {
+          "value": "tag",
+          "label": "tag"
+        },
+        {
+          "value": "bolt",
+          "label": "bolt"
+        },
+        {
+          "value": "box",
+          "label": "box"
+        },
+        {
+          "value": "leaf",
+          "label": "leaf"
+        },
+        {
+          "value": "tubes",
+          "label": "tubes"
+        },
+        {
+          "value": "clock",
+          "label": "clock"
+        }
+      ],
+      "default": "tool"
+    },
+    {
+      "type": "text",
+      "id": "mat2_t",
+      "label": "Fact 2 title"
+    },
+    {
+      "type": "textarea",
+      "id": "mat2_b",
+      "label": "Fact 2 body"
+    },
+    {
+      "type": "select",
+      "id": "mat3_icon",
+      "label": "Fact 3 pictogram",
+      "options": [
+        {
+          "value": "speaker",
+          "label": "speaker"
+        },
+        {
+          "value": "balance",
+          "label": "balance"
+        },
+        {
+          "value": "tool",
+          "label": "tool"
+        },
+        {
+          "value": "skills",
+          "label": "skills"
+        },
+        {
+          "value": "bike",
+          "label": "bike"
+        },
+        {
+          "value": "tag",
+          "label": "tag"
+        },
+        {
+          "value": "bolt",
+          "label": "bolt"
+        },
+        {
+          "value": "box",
+          "label": "box"
+        },
+        {
+          "value": "leaf",
+          "label": "leaf"
+        },
+        {
+          "value": "tubes",
+          "label": "tubes"
+        },
+        {
+          "value": "clock",
+          "label": "clock"
+        }
+      ],
+      "default": "tubes"
+    },
+    {
+      "type": "text",
+      "id": "mat3_t",
+      "label": "Fact 3 title"
+    },
+    {
+      "type": "textarea",
+      "id": "mat3_b",
+      "label": "Fact 3 body"
+    },
+    {
+      "type": "text",
+      "id": "mat_range_label",
+      "label": "Range label",
+      "default": "one frame, many entry points"
+    },
+    {
+      "type": "textarea",
+      "id": "mat_range",
+      "label": "Range chips (comma-separated)"
+    },
+    {
+      "type": "header",
+      "content": "Five ways in (add Pathway blocks)"
+    },
+    {
+      "type": "text",
+      "id": "pw_eyebrow",
+      "label": "Eyebrow",
+      "default": "progression"
+    },
+    {
+      "type": "text",
+      "id": "pw_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "pw_lede",
+      "label": "Lede"
+    },
+    {
+      "type": "text",
+      "id": "pw_prog_label",
+      "label": "Progression label",
+      "default": "progression"
+    },
+    {
+      "type": "textarea",
+      "id": "pw_note",
+      "label": "Note under the sheets"
+    },
+    {
+      "type": "text",
+      "id": "pw_cta_label",
+      "label": "CTA label",
+      "default": "book a discovery call"
+    },
+    {
+      "type": "header",
+      "content": "Timetable (add Timetable row blocks)"
+    },
+    {
+      "type": "text",
+      "id": "tt_eyebrow",
+      "label": "Eyebrow",
+      "default": "timetable"
+    },
+    {
+      "type": "text",
+      "id": "tt_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tt_lede",
+      "label": "Lede"
+    },
+    {
+      "type": "text",
+      "id": "tt_h1",
+      "label": "Column 1 heading",
+      "default": "school format"
+    },
+    {
+      "type": "text",
+      "id": "tt_h2",
+      "label": "Column 2 heading",
+      "default": "typical time"
+    },
+    {
+      "type": "text",
+      "id": "tt_h3",
+      "label": "Column 3 heading",
+      "default": "typical use"
+    },
+    {
+      "type": "text",
+      "id": "tt_h4",
+      "label": "Column 4 heading",
+      "default": "best suited pathway"
+    },
+    {
+      "type": "text",
+      "id": "tt_foot",
+      "label": "Foot line"
+    },
+    {
+      "type": "header",
+      "content": "Outcomes (add Outcome blocks)"
+    },
+    {
+      "type": "text",
+      "id": "out_eyebrow",
+      "label": "Eyebrow",
+      "default": "outcomes"
+    },
+    {
+      "type": "text",
+      "id": "out_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "out_lede",
+      "label": "Lede"
+    },
+    {
+      "type": "text",
+      "id": "out_sum",
+      "label": "Summary card title"
+    },
+    {
+      "type": "textarea",
+      "id": "out_sum_body",
+      "label": "Summary card body"
+    },
+    {
+      "type": "header",
+      "content": "Recognition chips (credibility band)"
+    },
+    {
+      "type": "text",
+      "id": "recog_label",
+      "label": "Label",
+      "default": "recognition"
+    },
+    {
+      "type": "text",
+      "id": "recog_a",
+      "label": "Chip A"
+    },
+    {
+      "type": "text",
+      "id": "recog_b",
+      "label": "Chip B"
+    },
+    {
+      "type": "text",
+      "id": "recog_c",
+      "label": "Chip C"
+    },
+    {
+      "type": "text",
+      "id": "recog_d",
+      "label": "Chip D"
     }
   ],
   "blocks": [
@@ -1617,6 +2196,222 @@
           "type": "text",
           "id": "date",
           "label": "Date label"
+        }
+      ]
+    },
+    {
+      "type": "pathway",
+      "name": "Pathway (five ways in)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "num",
+          "label": "Number (01…)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag (e.g. taster)"
+        },
+        {
+          "type": "textarea",
+          "id": "blurb",
+          "label": "Timeline blurb"
+        },
+        {
+          "type": "textarea",
+          "id": "lede",
+          "label": "Sheet lede"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Sheet body"
+        },
+        {
+          "type": "text",
+          "id": "cohort",
+          "label": "Cohort"
+        },
+        {
+          "type": "text",
+          "id": "format",
+          "label": "Format"
+        },
+        {
+          "type": "text",
+          "id": "duration",
+          "label": "Duration"
+        },
+        {
+          "type": "text",
+          "id": "pricing",
+          "label": "Pricing basis"
+        },
+        {
+          "type": "textarea",
+          "id": "accred",
+          "label": "Accreditation (optional)"
+        },
+        {
+          "type": "text",
+          "id": "s1k",
+          "label": "Spec 1 key"
+        },
+        {
+          "type": "text",
+          "id": "s1v",
+          "label": "Spec 1 value"
+        },
+        {
+          "type": "text",
+          "id": "s2k",
+          "label": "Spec 2 key"
+        },
+        {
+          "type": "text",
+          "id": "s2v",
+          "label": "Spec 2 value"
+        },
+        {
+          "type": "text",
+          "id": "s3k",
+          "label": "Spec 3 key"
+        },
+        {
+          "type": "text",
+          "id": "s3v",
+          "label": "Spec 3 value"
+        },
+        {
+          "type": "textarea",
+          "id": "progression",
+          "label": "Progression"
+        },
+        {
+          "type": "text",
+          "id": "tags",
+          "label": "Themes (comma-separated)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt"
+        },
+        {
+          "type": "text",
+          "id": "img_asset",
+          "label": "Theme asset fallback (filename)"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Pictogram",
+          "options": [
+            {
+              "value": "speaker",
+              "label": "speaker"
+            },
+            {
+              "value": "balance",
+              "label": "balance"
+            },
+            {
+              "value": "tool",
+              "label": "tool"
+            },
+            {
+              "value": "skills",
+              "label": "skills"
+            },
+            {
+              "value": "bike",
+              "label": "bike"
+            },
+            {
+              "value": "tag",
+              "label": "tag"
+            },
+            {
+              "value": "bolt",
+              "label": "bolt"
+            },
+            {
+              "value": "box",
+              "label": "box"
+            },
+            {
+              "value": "leaf",
+              "label": "leaf"
+            },
+            {
+              "value": "tubes",
+              "label": "tubes"
+            },
+            {
+              "value": "clock",
+              "label": "clock"
+            }
+          ],
+          "default": "speaker"
+        },
+        {
+          "type": "checkbox",
+          "id": "open",
+          "label": "Open by default",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "ttrow",
+      "name": "Timetable row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "format",
+          "label": "School format"
+        },
+        {
+          "type": "text",
+          "id": "time",
+          "label": "Typical time"
+        },
+        {
+          "type": "text",
+          "id": "use",
+          "label": "Typical use"
+        },
+        {
+          "type": "text",
+          "id": "best",
+          "label": "Best suited pathway"
+        }
+      ]
+    },
+    {
+      "type": "outcome",
+      "name": "Outcome",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body"
         }
       ]
     }
