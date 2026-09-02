@@ -401,7 +401,7 @@
           {%- if article == blank or article.title == blank -%}{%- continue -%}{%- endif -%}
           {%- assign _v = 'grid' -%}{%- if forloop.first and section.settings.cs_first_featured -%}{%- assign _v = 'featured' -%}{%- endif -%}
           {%- assign _date = article.published_at | date: '%B %Y' -%}
-          {%- assign _ctx = article.excerpt_or_content | strip_html | truncatewords: 32 -%}
+          {%- assign _ctx = article.excerpt_or_content | replace: '</p>', '. ' | replace: '<br>', ' ' | strip_html | replace: '..', '.' | truncatewords: 32 -%}
           {%- render 'bbc-cscard',
                variant: _v,
                kind: section.settings.cs_kind,

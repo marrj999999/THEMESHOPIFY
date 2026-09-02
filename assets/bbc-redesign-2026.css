@@ -2026,7 +2026,7 @@
 .bbc-rd .rd-path--prisons .rd-path__ic .rd-pic,.bbc-rd .rd-path--councils .rd-path__ic .rd-pic{color:var(--forest)}
 
 /* stations heading sits at the kit-drawing size, not the 102px display size (display-h2 budget) */
-.bbc-rd .rd-stations h2.rd-fs-stn{font-size:clamp(var(--fs-32),3.3vw,var(--fs-48)) !important;line-height:1.04 !important;overflow-wrap:normal;word-break:normal;hyphens:manual;max-width:16ch}
+.bbc-rd .rd-stations h2.rd-fs-stn,.bbc-rd .rd-b2b-cs h2.rd-fs-stn{font-size:clamp(var(--fs-32),3.3vw,var(--fs-48)) !important;line-height:1.04 !important;overflow-wrap:normal;word-break:normal;hyphens:manual;max-width:16ch}
 /* IMPACT v2 — benchmark additions (2 Sep): theory-of-change link, recognition ledger, identity line */
 .bbc-rd .rd-stations__more{margin:28px 0 0;font-size:var(--fs-14-5)}
 .bbc-rd .rd-recog{display:grid;grid-template-columns:auto 1fr;gap:10px 26px;align-items:baseline;text-align:left;border-top:2.5px solid var(--ink);padding-top:18px}
