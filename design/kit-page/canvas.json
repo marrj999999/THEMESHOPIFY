@@ -1,0 +1,13 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1440, "h": 5600, "title": "Kit page · desktop 1440 · the drawing office" },
+    { "file": "Phone.dc.html", "x": 1540, "y": 0, "w": 390, "h": 3100, "title": "Kit page · phone 390" },
+    { "file": "DirectionB.dc.html", "x": 0, "y": 5760, "w": 720, "h": 640, "title": "Direction B · the workbench (sketch)" },
+    { "file": "DirectionC.dc.html", "x": 820, "y": 5760, "w": 720, "h": 640, "title": "Direction C · the editorial (sketch)" }
+  ],
+  "annotations": [
+    { "id": "brief", "x": 0, "y": -200, "w": 640, "text": "Kit product page — road kit as the worked example.\nLEADING DIRECTION (Main + Phone): 'the drawing office' — the live site's drawing-sheet grid, titleblock, node divider and lime culm, turned into the kit's own device: an exploded parts drawing with numbered callouts that draw in, a culm that grows as the build timeline, and a hand-drawn pictogram per spec cell.\nAll values are the live theme's: forest #003C32 · lime #D4FD62 · bone #E6DCC8 · paper #F1E9D8 · steel #DEE6F0 · Atkinson Hyperlegible · 2.5px ink stamps with 5px offset shadow · eyebrow 14px lowercase with lime dash.\nCopy is Claims Register safe; one bracketed [to verify] stat. Motion is CSS on divs only (no SVG animation), inert under reduced-motion.\nB and C below are alternates to react to, not finished." },
+    { "id": "next", "x": 1540, "y": -140, "w": 380, "text": "If Main is the direction: it implements as sections on bbc-product-2026 + bbc-kit-spec (pictogram block setting) + a new bbc-kit-drawing hero section. Shipping rates and the 95% stat need James before they ship." }
+  ],
+  "launch": { "view": "canvas" }
+}
