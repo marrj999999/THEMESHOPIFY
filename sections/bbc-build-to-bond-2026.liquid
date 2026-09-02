@@ -160,10 +160,20 @@
     -%}
     <div class="rd-reveal rd-media{% if _has_film %} rd-media--film{% endif %}">
       {%- if section.settings.film != blank -%}
-        {%- render 'bbc-media', video: section.settings.film, image: section.settings.film_poster, src: _film_poster, fallback: 'bbc-rd-lowdham-poster.jpg', label: section.settings.film_label, alt: section.settings.film_alt, class: 'bbc-media--ar169 b2b-film', sizes: '(max-width:749px) 100vw, 50vw', loading: 'lazy' -%}
+        {%- assign film = section.settings.film -%}
+        <div class="b2b-film b2b-film--native">
+          {%- if section.settings.film_label != blank -%}<span class="b2b-film__ticket" aria-hidden="true">{{ section.settings.film_label }}</span>{%- endif -%}
+          <video class="b2b-film__video" controls playsinline preload="metadata"
+                 poster="{% if film.preview_image != blank %}{{ film.preview_image | image_url: width: 1400 }}{% else %}{{ _film_poster | asset_url }}{% endif %}"
+                 aria-label="{{ section.settings.film_alt | escape }}">
+            {%- for src in film.sources -%}{%- if src.format == 'mp4' -%}<source src="{{ src.url }}" type="{{ src.mime_type }}">{%- endif -%}{%- endfor -%}
+            {%- for src in film.sources -%}{%- if src.format == 'm3u8' -%}<source src="{{ src.url }}" type="application/x-mpegURL">{%- endif -%}{%- endfor -%}
+          </video>
+        </div>
       {%- elsif section.settings.film_url != blank -%}
-        <div class="b2b-film b2b-film--plain">
-          <video class="b2b-film__video" controls playsinline preload="none" poster="{{ _film_poster | asset_url }}" aria-label="{{ section.settings.film_alt | escape }}">
+        <div class="b2b-film b2b-film--native">
+          {%- if section.settings.film_label != blank -%}<span class="b2b-film__ticket" aria-hidden="true">{{ section.settings.film_label }}</span>{%- endif -%}
+          <video class="b2b-film__video" controls playsinline preload="metadata" poster="{{ _film_poster | asset_url }}" aria-label="{{ section.settings.film_alt | escape }}">
             <source src="{{ section.settings.film_url }}" type="video/mp4">
           </video>
         </div>

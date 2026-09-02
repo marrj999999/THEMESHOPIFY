@@ -38,37 +38,37 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "title": "enrol",
-            "body": "Makers join through the prison's workshops or education team. No prior experience needed.",
-            "icon": "skills",
-            "note": "weeks 0 to 1 · induction and first craft"
+            "title": "start with the craft",
+            "body": "Workshop induction, tool discipline and a first small build in bamboo, so nobody touches a frame until the basics are second nature.",
+            "icon": "tool",
+            "note": "week 1 · induction and first make"
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
-            "title": "build",
-            "body": "Six weeks in the workshop: frame layout, mitring, structural bonding and finishing — real manufacturing, taught by hand.",
-            "icon": "tool",
-            "note": "weeks 1 to 5 · the frame"
+            "title": "learn the bike",
+            "body": "Bicycle theory: geometry, how a frame carries load, what every part does. The week ends with each Maker pitching a bike company of their own.",
+            "icon": "skills",
+            "note": "week 2 · theory, then a pitch"
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
-            "title": "accredit",
-            "body": "Portfolio work towards OCN London’s bespoke Level 2, Workshop Skills and Sustainable Manufacturing.",
+            "title": "build the frame",
+            "body": "Three weeks at the jig: measure, mitre, bond and finish a full bamboo frame, quality-checked at every gate, then components fitted and a supervised test ride.",
             "icon": "confidence",
-            "note": "week 6 · portfolio assessed"
+            "note": "weeks 3 to 6 · the frame, assessed"
           }
         },
         "step_4": {
           "type": "step",
           "settings": {
-            "title": "family visit day",
-            "body": "The finished balance bike is presented by the Maker to their own child — and goes home with them.",
+            "title": "the bike that goes home",
+            "body": "The balance-bike course follows: each Maker designs and builds a child's bike, writes its user guide and a personal message, and hands it over on family visit day.",
             "icon": "family",
-            "note": "the last day · the bike goes home"
+            "note": "then · family visit day"
           }
         },
         "stat_hours": {
@@ -119,7 +119,7 @@
         "step_4"
       ],
       "settings": {
-        "why_body_2": "Ministry of Justice research found prisoners who receive family visits are 39% less likely to reoffend (Lord Farmer Review, 2017). And with just 20% of prison-leavers in work six weeks after release nationally (MoJ, 2024–25), the skills matter as much as the bond. Build to Bond is built around that evidence: a six-week course where the skills are real, the qualification is assessed, and the finish line is a stronger family bond.",
+        "why_body_2": "Ministry of Justice research found prisoners who receive family visits are 39% less likely to reoffend (Lord Farmer Review, 2017). And with just 20% of prison-leavers in work six weeks after release nationally (MoJ, 2024–25), the skills matter as much as the bond. Build to Bond is built on both: real skills, an assessed qualification, and a stronger family bond at the finish line.",
         "sites_title": "where it runs.",
         "sites_body": "Build to Bond is established across four UK prison sites, at different delivery stages — with a self-delivery model that trains prison staff and peer instructors to run the workshop.",
         "sites_partner": "Delivered under direct contracts with HMPPS and private operators",
@@ -133,21 +133,21 @@
         "film_poster_asset": "bbc-rd-lowdham-poster.jpg",
         "film_label": "watch the film · 3 min · subtitled",
         "film_alt": "Build to Bond at HMP Lowdham Grange, the film",
-        "film_caption": "Filmed inside HMP Lowdham Grange by the prison's Inside Media Department. Subtitled. Makers are not identifiable.",
-        "steps_lede": "One cohort, six weeks, eighteen hours a week. Every Maker builds a full bamboo frame and finishes with a bike that goes home.",
+        "film_caption": "Three minutes, subtitled. Filmed inside HMP Lowdham Grange by the prison's Inside Media Department. Makers are not identifiable.",
+        "steps_lede": "Eighteen hours a week in the workshop. Every Maker builds a full bamboo frame from raw tubes, then designs and builds the balance bike that goes home with their child.",
         "path1_tag": "course one · six weeks",
         "path1_title": "Workshop Skills and Sustainable Manufacturing",
-        "path1_body": "OCN London bespoke Level 2, centre course 1130735. Measuring, mitring, bonding and finishing a full bamboo frame, with a portfolio of evidence. 108 contact hours per Maker.",
+        "path1_body": "The core course. From raw bamboo to a finished frame: measuring, mitring, bonding, paint and finishing, components and a test ride, with a portfolio assessed against OCN Level 2 (centre course 1130735). 108 contact hours per Maker.",
         "path1_img": "bbc-rd-prison-plans.jpg",
         "path1_icon": "tool",
         "path2_tag": "course two · the bike that goes home",
-        "path2_title": "Introduction to Product Design & Manufacture (Bamboo Balance Bike)",
-        "path2_body": "OCN London bespoke Level 2, centre course 1131207. Makers design and build a child's balance bike and present it on family visit day.",
+        "path2_title": "Introduction to Product Design and Manufacture (Bamboo Balance Bike)",
+        "path2_body": "Makers design and build a child's balance bike, write its user guide and a personal message, and present it on family visit day. Opt-in and trauma-informed throughout. OCN Level 2, centre course 1131207.",
         "path2_img": "bbc-rd-prison-bike.jpg",
         "path2_icon": "balance",
         "path3_tag": "what comes next",
         "path3_title": "from Maker to peer mentor",
-        "path3_body": "More than ten Makers have gone on to help teach the next cohort, alongside the 14 prison staff we have trained as instructors.",
+        "path3_body": "Makers who finish can help teach the next cohort. More than ten have, alongside the 14 prison staff we have trained to run the workshop themselves.",
         "path3_img": "bbc-rd-prison-frame-jig.jpg",
         "path3_icon": "ladder",
         "recog_label": "recognition",
@@ -155,7 +155,13 @@
         "recog_b": "Inside Time, November 2025",
         "recog_c": "National Justice Museum, Working Through It exhibition, 2026",
         "recog_d": "Investec Beyond Business 2025 winner",
-        "cta2_url": "/pages/support-mission"
+        "cta2_url": "/pages/support-mission",
+        "hero_lede": "Build to Bond is a six-week bamboo bike-building course inside prison workshops. Makers learn real manufacturing skills, work towards an OCN Level 2, and finish by handing a bike they built to their own child.",
+        "story_title": "real manufacturing, taught by hand.",
+        "story_body_1": "We built a new kind of training for prisons. If school felt like failing, this is maths, measurement, design and engineering you can do with your hands, and it ends with something you can hold. Inside a working prison workshop, small cohorts of Makers measure, mitre and bond bamboo frames from raw tubes: the same craft we have taught in our London workshop since 2012.",
+        "story_body_2": "It is not just bikes. Makers learn design theory, tolerances and jig work, bicycle mechanics, painting and finishing, and how to check their own work against a standard. Every session builds a portfolio of evidence towards an OCN Level 2, assessed as they go.",
+        "why_body_1": "The finished build is a child's balance bike. On family visit day, the Maker hands it over themselves. For many it is the first thing they have ever made, given to the person who matters most.",
+        "steps_title": "six weeks to a frame. then the bike that goes home."
       }
     }
   },

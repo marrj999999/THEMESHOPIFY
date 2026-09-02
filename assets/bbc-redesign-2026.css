@@ -944,7 +944,7 @@
   .bbc-rd .rd-hero .rd-wrap > *:nth-child(4){ animation-delay:.28s; }
   .bbc-rd .rd-hero .rd-wrap > *:nth-child(5){ animation-delay:.36s; }
 }
-@keyframes rd-rise{ from{ opacity:0; transform:translateY(18px); } to{ opacity:1; transform:none; } }
+@keyframes rd-rise{ from{ opacity:.85; transform:translateY(18px); } to{ opacity:1; transform:none; } }
 
 /* ============================================================
    Global chrome — header (nav) + footer, scoped .bbc-rd
@@ -2066,3 +2066,8 @@
 .bbc-rd .rd-split .rd-media--film{width:100%;max-width:100%;min-width:0;box-sizing:border-box}
 .bbc-rd .rd-media--film .bbc-media,.bbc-rd .rd-media--film .bbc-media__img{max-width:100%}
 @media (max-width:760px){.bbc-rd .rd-split .rd-media--film{padding:18px 18px 8px}.bbc-rd .b2b-film__cap{white-space:normal}}
+/* B2B film — native player, visible from the first paint (2 Sep, second pass) */
+.bbc-rd .b2b-film--native{position:relative;border:2.5px solid var(--ink);border-radius:6px;box-shadow:5px 5px 0 var(--ink);overflow:hidden;background:var(--forest-700);width:100%}
+.bbc-rd .b2b-film__video{display:block;width:100%;aspect-ratio:16/9;background:var(--forest-700)}
+.bbc-rd .b2b-film__ticket{position:absolute;left:14px;top:14px;z-index:2;background:var(--lime);color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:5px 12px;font-size:var(--fs-12-5);font-weight:700;letter-spacing:.02em;text-transform:lowercase;transform:rotate(-4deg);pointer-events:none;box-shadow:2px 2px 0 var(--ink)}
+.bbc-rd .rd-split .rd-media--film .rd-reveal,.bbc-rd .rd-split .rd-media--film{opacity:1 !important;animation:none !important}
