@@ -299,3 +299,11 @@ Gates: G1 lint clean · G2 pushed+validated (one schema race: template must push
 - Case studies: new band rendering 8 real articles with their own featured images. `cs_handles` = `blog/handle | kind | youtubeId | outcome | attribution`; outcome and attribution are editorial because blog excerpts open with pipe-delimited metadata and the publish date is not the delivery date.
 - Pathway sheet balance: media column carries the film/photo, the "seen in" link and the themes so a 16:9 film no longer leaves a hole. Schools band: quote moved under the table so both columns land together.
 - Gate: liquid ✓ token-lint 0 ✓ claim-lint ✓. Playwright at 1440 / 768 / 390 after a real scroll: no horizontal overflow, exclusive accordion works, films present. Read-back ✓ on 199089193334.
+
+## 2026-09-03 — Education page v3 LIVE + full test (James: "Ok make live and test full")
+- Pushed live 196820238710: snippets/bbc-edu-pic.liquid + assets/bbc-redesign-2026.css → sections/bbc-programmes-2026.liquid → (50 s) → templates/page.programmes.json. Read-back ✓ on all four. Rollback kit at qa/evidence/2026-09-03/pre-push.
+- WEIGHT: first live measure 26.4 MB. The hero loop was downloaded twice (preload=metadata + an explicit load() restarts the fetch) and the band film pulled its full 7.7 MB. Now: hero preload=none with the source attached after window load (first input on phones), band film preload=none behind its poster, and a page-scoped 640-wide re-encode (assets/bbc-rd-edu-hero-loop.mp4, 2.3 MB vs 8.5 MB). **26.4 → 4.98 MB.** evh_film_url now accepts a bare asset filename.
+- live-check: weight passes both widths; remaining FAIL is the cookie card at 54% of the mobile viewport — reproduces on /pages/impact, so app-level and estate-wide.
+- canary 14/14 alive (visual baseline reseeded, run twice). Links: 16/16 resolve 200. Films all play (speaker facade → iframe, Kirui card → iframe, why-bamboo native 42 s, hero loop running).
+- Lighthouse desktop 99 perf / 100 a11y / 100 SEO, LCP 0.9 s, CLS 0, TBT 0. Mobile 100 a11y, 66 perf, LCP 8.5 s — /pages/impact scores 63 / 8.5 s on the same run (estate CSS baseline, not a regression).
+- Fixed while testing: .edt-instk contrast 3.64:1 → charcoal at full opacity; a11y 97 → 100 desktop and mobile.
