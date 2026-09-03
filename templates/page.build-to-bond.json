@@ -1,0 +1,190 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-build-to-bond-2026",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "90%",
+            "label": "course completion",
+            "source": "BBC programme records"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "2",
+            "label": "OCN London Level 2 courses",
+            "source": "Workshop Skills · Balance Bike"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "26%",
+            "label": "measured rise in Maker confidence",
+            "source": "BBC programme surveys"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "number": "4",
+            "label": "UK prison sites",
+            "source": "at different delivery stages"
+          }
+        },
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "start with the craft",
+            "body": "Workshop induction, tool discipline and a first small build in bamboo, so nobody touches a frame until the basics are second nature.",
+            "icon": "tool",
+            "note": "week 1 · induction and first make"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "learn the bike",
+            "body": "Bicycle theory: geometry, how a frame carries load, what every part does. The week ends with each Maker pitching a bike company of their own.",
+            "icon": "skills",
+            "note": "week 2 · theory, then a pitch"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "build the frame",
+            "body": "Three weeks at the jig: measure, mitre, bond and finish a full bamboo frame, quality-checked at every gate, then components fitted and a supervised test ride.",
+            "icon": "confidence",
+            "note": "weeks 3 to 6 · the frame, assessed"
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "the bike that goes home",
+            "body": "The balance-bike course follows: each Maker designs and builds a child's bike, writes its user guide and a personal message, and hands it over on family visit day.",
+            "icon": "family",
+            "note": "then · family visit day"
+          }
+        },
+        "stat_hours": {
+          "type": "stat",
+          "settings": {
+            "number": "108",
+            "label": "contact hours per Maker, per course",
+            "source": "6 weeks × 18 hours"
+          }
+        },
+        "stat_staff": {
+          "type": "stat",
+          "settings": {
+            "number": "14",
+            "label": "prison staff trained as instructors",
+            "source": "programme records, September 2026"
+          }
+        },
+        "stat_peers": {
+          "type": "stat",
+          "settings": {
+            "number": "10+",
+            "label": "Makers now peer mentors",
+            "source": "programme records, September 2026"
+          }
+        },
+        "stat_workshop": {
+          "type": "stat",
+          "settings": {
+            "number": "2,000",
+            "label": "sq ft dedicated workshop at our flagship site",
+            "source": "facility records"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "stat_hours",
+        "stat_staff",
+        "stat_peers",
+        "stat_workshop",
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "why_body_2": "Ministry of Justice research found prisoners who receive family visits are 39% less likely to reoffend (Lord Farmer Review, 2017). And with just 20% of prison-leavers in work six weeks after release nationally (MoJ, 2024–25), the skills matter as much as the bond. Build to Bond is built on both: real skills, an assessed qualification, and a stronger family bond at the finish line.",
+        "sites_title": "where it runs.",
+        "sites_body": "Build to Bond is established across four UK prison sites, at different delivery stages — with a self-delivery model that trains prison staff and peer instructors to run the workshop.",
+        "sites_partner": "Delivered under direct contracts with HMPPS and private operators",
+        "stats_note": "BBC programme records · updated August 2026",
+        "hero_tb_a_key": "runs in",
+        "hero_tb_a": "four UK prisons",
+        "hero_tb_b_key": "accredited",
+        "hero_tb_b": "two OCN Level 2 courses",
+        "film": "shopify://files/videos/bbc-lowdham-film-v15-subtitled-720p.mp4",
+        "film_url": "https://cdn.shopify.com/videos/c/vp/2535afe73f154df581a49436dc479a69/2535afe73f154df581a49436dc479a69.HD-720p-1.6Mbps-93316156.mp4",
+        "film_poster_asset": "bbc-rd-lowdham-poster.jpg",
+        "film_label": "watch the film · 3 min · subtitled",
+        "film_alt": "Build to Bond at HMP Lowdham Grange, the film",
+        "film_caption": "Three minutes, subtitled. Filmed inside HMP Lowdham Grange by the prison's Inside Media Department. Makers are not identifiable.",
+        "steps_lede": "Eighteen hours a week in the workshop. Every Maker builds a full bamboo frame from raw tubes, then designs and builds the balance bike that goes home with their child.",
+        "path1_tag": "course one · six weeks",
+        "path1_title": "Workshop Skills and Sustainable Manufacturing",
+        "path1_body": "The core course. From raw bamboo to a finished frame: measuring, mitring, bonding, paint and finishing, components and a test ride, with a portfolio assessed against OCN Level 2 (centre course 1130735). 108 contact hours per Maker.",
+        "path1_img": "bbc-rd-prison-plans.jpg",
+        "path1_icon": "tool",
+        "path2_tag": "course two · the bike that goes home",
+        "path2_title": "Introduction to Product Design and Manufacture (Bamboo Balance Bike)",
+        "path2_body": "Makers design and build a child's balance bike, write its user guide and a personal message, and present it on family visit day. Opt-in and trauma-informed throughout. OCN Level 2, centre course 1131207.",
+        "path2_img": "bbc-rd-prison-bike.jpg",
+        "path2_icon": "balance",
+        "path3_tag": "what comes next",
+        "path3_title": "from Maker to peer mentor",
+        "path3_body": "Makers who finish can help teach the next cohort. More than ten have, alongside the 14 prison staff we have trained to run the workshop themselves.",
+        "path3_img": "bbc-rd-prison-frame-jig.jpg",
+        "path3_icon": "ladder",
+        "recog_label": "recognition",
+        "recog_a": "Financial Times, 5 September 2025",
+        "recog_b": "Inside Time, November 2025",
+        "recog_c": "National Justice Museum, Working Through It exhibition, 2026",
+        "recog_d": "Investec Beyond Business 2025 winner",
+        "cta2_url": "mailto:info@bamboobicycleclub.org?subject=Build%20to%20Bond",
+        "hero_lede": "Build to Bond is a six-week bamboo bike-building course inside prison workshops. Makers learn real manufacturing skills, work towards an OCN Level 2, and finish by handing a bike they built to their own child.",
+        "story_title": "real manufacturing, taught by hand.",
+        "story_body_1": "We built a new kind of training for prisons. If school felt like failing, this is maths, measurement, design and engineering you can do with your hands, and it ends with something you can hold. Inside a working prison workshop, small cohorts of Makers measure, mitre and bond bamboo frames from raw tubes: the same craft we have taught in our London workshop since 2012.",
+        "story_body_2": "It is not just bikes. Makers learn design theory, tolerances and jig work, bicycle mechanics, painting and finishing, and how to check their own work against a standard. Every session builds a portfolio of evidence towards an OCN Level 2, assessed as they go.",
+        "why_body_1": "The finished build is a child's balance bike. On family visit day, the Maker hands it over themselves. For many it is the first thing they have ever made, given to the person who matters most.",
+        "steps_title": "six weeks to a frame. then the bike that goes home.",
+        "cs_eyebrow": "case studies",
+        "cs_title": "from the workshops.",
+        "cs_lede": "Every story from the prison programme, in their own words and ours: the flagship site, a new workshop opening, the minister, the press, and the students who redesigned the course.",
+        "cs_handles": "impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2\nnews/bamboo-bike-workshop-opens-hmp-lindholme\nimpact/build-to-bond-hmp-lowdham-grange-impact\nnews/financial-times-how-bamboo-bicycle-club-is-helping-to-break-the-prison-cycle\nnews/inside-time-bamboozling-way-to-build-bikes-bamboo-bicycle-club-at-lowdham-grange\nschools-and-education/prisons-minister-endorses-bbcs-build-to-bond\nnews/bamboo-bike-building-transforming-lives-at-lowdham-grange-prison\nschools-and-education/psychology-students-prison-case-studies-aston-we-job-box",
+        "cs_first_featured": true,
+        "cs_kind": "prisons",
+        "cs_link_label": "read the story",
+        "hero_cta1_url": "/pages/contact-us?subject=prisons",
+        "hero_cta2_label": "email info@bamboobicycleclub.org",
+        "hero_cta2_url": "mailto:info@bamboobicycleclub.org?subject=Build%20to%20Bond",
+        "f1_url": "/pages/contact-us?subject=prisons",
+        "f1_link": "talk to us about your site",
+        "hcw_url": "mailto:info@bamboobicycleclub.org?subject=Build%20to%20Bond%20costs",
+        "hcw_link": "ask us for the full costs, in grant-budget terms",
+        "cta1_url": "/pages/contact-us?subject=prisons",
+        "cta1_label": "talk to us about your site",
+        "cta2_label": "email info@bamboobicycleclub.org",
+        "cta3_label": "back the mission",
+        "cta3_url": "/pages/support-mission"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

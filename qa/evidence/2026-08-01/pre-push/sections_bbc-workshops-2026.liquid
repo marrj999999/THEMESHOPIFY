@@ -1,0 +1,992 @@
+{%- comment -%}
+  BBC New Design (2026) — Workshops page, single self-contained section.
+  Structure mirrors the Claude Design handoff (workshops.html):
+  hero → reassurance stats → "the whole build" how-it-works (4 numbered steps)
+  → "see it before you book" video → give-back funding loop → 3 location cards
+  → "good to know" FAQ → final CTA.
+
+  Fully schema-driven (every heading / paragraph / image / link / repeating
+  item is editable in the theme editor). Scoped under .bbc-rd via
+  bbc-redesign-2026.css so it cannot affect other sections. Uses ONLY existing
+  rd-* classes plus the shared rd-* utility layer (no inline style="").
+
+  CONTENT POLICY: the give-back loop refers to accredited skills courses inside prisons and schools (generic).
+  No prison is ever named (BBC external-comms rule). Set workshop prices:
+  Road £595 (2 days) · Gravel £595 (2–3 days) · MTB £695 (3 days); Cycle to Work
+  accepted. Booking is email-first (no instant checkout) — see the "How booking
+  works" section. Location cards use real weekend build-day photos
+  (bbc-rd-ws-london / -amersfoort / -toulouse.jpg).
+{%- endcomment -%}
+
+
+{%- liquid
+  assign hero_cta1 = section.settings.hero_cta1_url | default: '#book'
+  assign hero_cta2 = section.settings.hero_cta2_url | default: '#how'
+  assign video_url = section.settings.video_url | default: '#'
+  assign loop_url  = section.settings.loop_cta_url | default: '/pages/impact'
+  assign final_c1  = section.settings.cta1_url | default: 'mailto:info@bamboobicycleclub.org'
+  assign final_c2  = section.settings.cta2_url | default: '/pages/contact-us'
+  assign book_cta  = section.settings.book_cta_url | default: 'mailto:info@bamboobicycleclub.org'
+-%}
+
+<div class="bbc-rd bbc-rd-workshops">
+
+  {%- comment -%} ---------- HERO ---------- {%- endcomment -%}
+  <header class="rd-hero">
+    <div class="rd-bg">
+      {%- if section.settings.hero_image != blank -%}
+        <img src="{{ section.settings.hero_image | image_url: width: 1600 }}" srcset="{{ section.settings.hero_image | image_url: width: 800 }} 800w, {{ section.settings.hero_image | image_url: width: 1200 }} 1200w, {{ section.settings.hero_image | image_url: width: 1600 }} 1600w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w, {{ section.settings.hero_image | image_url: width: 2600 }} 2600w" sizes="100vw" alt="{{ section.settings.hero_image_alt | default: 'Building a bamboo bike frame in the workshop' | escape }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" fetchpriority="high" loading="eager">
+      {%- else -%}
+        <img src="{{ section.settings.hero_fallback | default: 'bbc-rd-gravel-sunset.jpg' | asset_url }}" alt="{{ section.settings.hero_image_alt | default: 'Building a bamboo bike frame in the workshop' | escape }}" width="1200" height="800" fetchpriority="high" loading="eager">
+      {%- endif -%}
+    </div>
+    <div class="rd-scrim"></div>
+    <div class="rd-inner">
+      <div class="rd-wrap">
+        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><span class="rd-here">Workshops</span></nav>
+        {%- if section.settings.hero_eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>{%- endif -%}
+        <h1 class="rd-mt2 rd-mw-14ch">{{ section.settings.hero_title }}</h1>
+        <div class="rd-lede">{{ section.settings.hero_lede }}</div>
+        <div class="rd-cta-row">
+          {%- if section.settings.hero_cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ hero_cta1 }}">{{ section.settings.hero_cta1_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+          {%- if section.settings.hero_cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ hero_cta2 }}">{{ section.settings.hero_cta2_label }}</a>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {%- comment -%} ---------- REASSURANCE STATS ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-paper">
+    <div class="rd-wrap">
+      <div class="rd-stats">
+        {%- for block in section.blocks -%}{%- if block.type == 'stat' -%}
+          <div class="rd-reveal rd-stat" {{ block.shopify_attributes }}>
+            <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
+            <div class="rd-lbl">{{ block.settings.label }}</div>
+            {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- CREDIBILITY STRIP ---------- {%- endcomment -%}
+  <section class="rd-trustband">
+    <div class="rd-wrap"><p class="rd-trustline">Run by Bamboo Mobility Project CIC &middot; enhanced-DBS facilitators &middot; public-liability insured</p></div>
+  </section>
+
+  {%- comment -%} ---------- HOW IT WORKS (4 numbered steps) ---------- {%- endcomment -%}
+  <section class="rd-pad" id="how">
+    <div class="rd-wrap">
+      <div class="rd-split rd-tight rd-gap48-as">
+        <div>
+          <span class="rd-eyebrow">{{ section.settings.how_eyebrow }}</span>
+          <h2 class="rd-reveal">{{ section.settings.how_title }}</h2>
+          <p class="rd-lede rd-mt2">{{ section.settings.how_lede }}</p>
+          <div class="rd-flex rd-mt3">
+            {%- for block in section.blocks -%}{%- if block.type == 'how_tag' -%}
+              <span class="rd-tag" {{ block.shopify_attributes }}>{{ block.settings.label }}</span>
+            {%- endif -%}{%- endfor -%}
+          </div>
+        </div>
+        <ol class="rd-steps">
+          {%- for block in section.blocks -%}{%- if block.type == 'step' -%}
+            <li {{ block.shopify_attributes }}>
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.body }}</p>
+            </li>
+          {%- endif -%}{%- endfor -%}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- WATCH A BUILD (video) ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-dark">
+    <div class="rd-wrap">
+      <div class="rd-split rd-tight rd-gap40-ac">
+        <div>
+          <span class="rd-eyebrow rd-on-dark">{{ section.settings.video_eyebrow }}</span>
+          <h2 class="rd-reveal">{{ section.settings.video_title }}</h2>
+          <p class="rd-lede rd-mt2">{{ section.settings.video_lede }}</p>
+          {%- if section.settings.video_cta_label != blank and section.settings.video_url != blank -%}<a class="rd-btn rd-lime rd-mt3" href="{{ video_url }}">{{ section.settings.video_cta_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+        </div>
+        <div class="rd-video">
+          {%- if section.settings.video_url != blank and section.settings.video_url != '#' -%}
+            {%- comment -%} standard player (2026-07-22): inline YouTube, auto thumbnail {%- endcomment -%}
+            <div style="border-radius:14px;overflow:hidden;">
+              {%- render 'bbc-media', image: section.settings.video_image, src: section.settings.video_fallback, youtube: section.settings.video_url, label: 'watch a real build', alt: section.settings.video_title, class: 'bbc-media--ar169', sizes: '(max-width:749px) 100vw, 640px' -%}
+            </div>
+          {%- else -%}
+          {%- assign video_poster = section.settings.video_fallback | default: 'bbc-rd-build-poster.jpg' | asset_url -%}
+          {%- if section.settings.video_image != blank -%}{%- assign video_poster = section.settings.video_image | image_url: width: 1400 -%}{%- endif -%}
+          <video class="rd-video-el" controls preload="none" playsinline poster="{{ video_poster }}" width="1100" height="619">
+            {%- if section.settings.video_mp4 != blank -%}{% # theme-check-disable RemoteAsset %}<source src="{{ section.settings.video_mp4 }}" type="video/mp4">{% # theme-check-enable RemoteAsset %}{%- endif -%}
+            <source src="{{ 'bbc-rd-build-teaser.mp4' | asset_url }}" type="video/mp4">
+          </video>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- PRESS (standard block, qa/PRESS-BLOCK.md) ---------- {%- endcomment -%}
+  {%- if section.settings.press_quote != blank -%}
+  <section class="rd-pad-sm rd-paper">
+    <div class="rd-wrap rd-center">
+      {%- render 'bbc-press', style: 'bar', preset: 'cycling', label: section.settings.press_label, quote: section.settings.press_quote, cite: section.settings.press_cite -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- GIVE-BACK FUNDING LOOP ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-steel rd-center">
+    <div class="rd-wrap rd-mw-760px">
+      <span class="rd-eyebrow">{{ section.settings.loop_eyebrow }}</span>
+      <h3 class="rd-fs-clamp22px3vw32">{{ section.settings.loop_heading }}</h3>
+      <div class="rd-loop rd-mt3 rd-mt-24px">
+        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s1_big }}</div>{%- if section.settings.loop_s1_sm != blank -%}<div class="rd-sm">{{ section.settings.loop_s1_sm }}</div>{%- endif -%}</div>
+        <div class="rd-arr">&rarr;</div>
+        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s2_big }}</div>{%- if section.settings.loop_s2_sm != blank -%}<div class="rd-sm">{{ section.settings.loop_s2_sm }}</div>{%- endif -%}</div>
+        <div class="rd-arr">&rarr;</div>
+        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_s3_big }}</div>{%- if section.settings.loop_s3_sm != blank -%}<div class="rd-sm">{{ section.settings.loop_s3_sm }}</div>{%- endif -%}</div>
+      </div>
+      {%- if section.settings.loop_cta_label != blank -%}<a class="rd-btn rd-ghost rd-mt3" href="{{ loop_url }}">{{ section.settings.loop_cta_label }}</a>{%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- WHERE & WHAT (3 location cards) ---------- {%- endcomment -%}
+  <section class="rd-pad" id="dates">
+    <div class="rd-wrap">
+      <span class="rd-eyebrow">{{ section.settings.loc_eyebrow }}</span>
+      <h2 class="rd-reveal">{{ section.settings.loc_title }}</h2>
+      {%- if section.settings.loc_lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.loc_lede }}</p>{%- endif -%}
+      <div class="rd-grid rd-g3 rd-mt4">
+        {%- for block in section.blocks -%}{%- if block.type == 'location' -%}
+          {%- assign loc_link = block.settings.link_url | default: '/pages/contact-us' -%}
+          <div class="rd-reveal rd-card" {{ block.shopify_attributes }}>
+            <div class="rd-ph">
+              {%- if block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.image_alt | default: 'Building a bamboo bike frame in the workshop' | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
+              {%- else -%}
+                <img src="{{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_url }}" alt="{{ block.settings.image_alt | default: 'Building a bamboo bike frame in the workshop' | escape }}" width="1300" height="1300">
+              {%- endif -%}
+            </div>
+            <div class="rd-body">
+              <h3 class="rd-fs-21px">{{ block.settings.title }}</h3>
+              <p>{{ block.settings.body }}</p>
+              {%- if block.settings.link_label != blank -%}<a class="rd-btn rd-lime rd-mt3" href="{{ loc_link }}">{{ block.settings.link_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+      <div class="rd-flex rd-mt4">
+        {%- for block in section.blocks -%}{%- if block.type == 'frame_tag' -%}
+          {%- if block.settings.lime -%}{%- assign frame_tag_cls = 'rd-tag rd-lime' -%}{%- else -%}{%- assign frame_tag_cls = 'rd-tag' -%}{%- endif -%}
+          <span class="{{ frame_tag_cls }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</span>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- HOW BOOKING WORKS (signup sheet) ---------- {%- endcomment -%}
+  <section class="rd-pad rd-paper" id="book">
+    <div class="rd-wrap">
+      <div class="rd-split rd-tight rd-gap48-as">
+        <div>
+          <span class="rd-eyebrow">{{ section.settings.book_eyebrow }}</span>
+          <h2 class="rd-reveal">{{ section.settings.book_title }}</h2>
+          <p class="rd-lede rd-mt2">{{ section.settings.book_lede }}</p>
+          <div class="rd-flex rd-mt3">
+            {%- if section.settings.price1 != blank -%}<span class="rd-tag rd-lime">{{ section.settings.price1 }}</span>{%- endif -%}
+            {%- if section.settings.price2 != blank -%}<span class="rd-tag">{{ section.settings.price2 }}</span>{%- endif -%}
+            {%- if section.settings.price3 != blank -%}<span class="rd-tag">{{ section.settings.price3 }}</span>{%- endif -%}
+          </div>
+          {%- if section.settings.book_cta_label != blank -%}<a class="rd-btn rd-lime rd-mt3" href="{{ book_cta }}">{{ section.settings.book_cta_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+          {%- if section.settings.book_note != blank -%}<p class="rd-src rd-mt2">{{ section.settings.book_note }}</p>{%- endif -%}
+        </div>
+        <ol class="rd-steps">
+          {%- if section.settings.book_s1_title != blank -%}<li><h3>{{ section.settings.book_s1_title }}</h3><p>{{ section.settings.book_s1_body }}</p></li>{%- endif -%}
+          {%- if section.settings.book_s2_title != blank -%}<li><h3>{{ section.settings.book_s2_title }}</h3><p>{{ section.settings.book_s2_body }}</p></li>{%- endif -%}
+          {%- if section.settings.book_s3_title != blank -%}<li><h3>{{ section.settings.book_s3_title }}</h3><p>{{ section.settings.book_s3_body }}</p></li>{%- endif -%}
+          {%- if section.settings.book_s4_title != blank -%}<li><h3>{{ section.settings.book_s4_title }}</h3><p>{{ section.settings.book_s4_body }}</p></li>{%- endif -%}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- GOOD TO KNOW (FAQ) ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-paper">
+    <div class="rd-wrap rd-mw-820px">
+      <span class="rd-eyebrow">{{ section.settings.faq_eyebrow }}</span>
+      <h2 class="rd-reveal">{{ section.settings.faq_title }}</h2>
+      <div class="rd-faq rd-mt3">
+        {%- for block in section.blocks -%}{%- if block.type == 'faq' -%}
+          <details {{ block.shopify_attributes }}>
+            <summary>{{ block.settings.question }}</summary>
+            <div class="rd-a">{{ block.settings.answer }}</div>
+          </details>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- FINAL CTA ---------- {%- endcomment -%}
+  <section class="rd-pad rd-dark rd-center">
+    <div class="rd-wrap rd-mw-760px">
+      <span class="rd-eyebrow rd-on-dark">{{ section.settings.cta_kicker }}</span>
+      <h2 class="rd-reveal">{{ section.settings.cta_title }}</h2>
+      <p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.cta_lede }}</p>
+      <div class="rd-flex rd-mt3 rd-jc-center">
+        {%- if section.settings.cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ final_c1 }}">{{ section.settings.cta1_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ final_c2 }}">{{ section.settings.cta2_label }}</a>{%- endif -%}
+      </div>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Workshops 2026 (new)",
+  "tag": "section",
+  "class": "section bbc-workshops-2026-wrap",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero background image"
+    },
+    {
+      "type": "text",
+      "id": "hero_fallback",
+      "label": "Default hero photo filename",
+      "default": "bbc-rd-gravel-sunset.jpg"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero image alt text",
+      "default": "A finished bamboo gravel bike at golden hour"
+    },
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Eyebrow",
+      "default": "Workshops · London · Amersfoort · Toulouse"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Headline",
+      "default": "two to three days. one bike. zero experience."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_lede",
+      "label": "Lede",
+      "default": "If you can hold a tool, you can build a bike."
+    },
+    {
+      "type": "text",
+      "id": "hero_cta1_label",
+      "label": "Primary CTA label",
+      "default": "Book a workshop"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta1_url",
+      "label": "Primary CTA link (defaults to #book on this page)"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta2_label",
+      "label": "Secondary CTA label",
+      "default": "How it works"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta2_url",
+      "label": "Secondary CTA link (defaults to #how on this page)"
+    },
+    {
+      "type": "header",
+      "content": "How it works"
+    },
+    {
+      "type": "text",
+      "id": "how_eyebrow",
+      "label": "Eyebrow",
+      "default": "\"Can I actually do this?\""
+    },
+    {
+      "type": "text",
+      "id": "how_title",
+      "label": "Title",
+      "default": "yes. here's the whole build."
+    },
+    {
+      "type": "textarea",
+      "id": "how_lede",
+      "label": "Lede",
+      "default": "We guide you through every step — from choosing your bamboo to the final finish. The only thing you bring is old clothes you don't mind getting epoxy on."
+    },
+    {
+      "type": "header",
+      "content": "Watch a build (video)"
+    },
+    {
+      "type": "text",
+      "id": "video_eyebrow",
+      "label": "Eyebrow",
+      "default": "Watch a real build"
+    },
+    {
+      "type": "text",
+      "id": "video_title",
+      "label": "Title",
+      "default": "see it before you book."
+    },
+    {
+      "type": "textarea",
+      "id": "video_lede",
+      "label": "Lede",
+      "default": "Our full build series walks through every stage on camera — the same one home-kit builders follow worldwide."
+    },
+    {
+      "type": "text",
+      "id": "video_cta_label",
+      "label": "CTA label",
+      "default": "Watch the series"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "\"Watch the series\" link (CTA hidden if blank)"
+    },
+    {
+      "type": "url",
+      "id": "video_mp4",
+      "label": "Inline video file URL (optional — overrides the bundled teaser)",
+      "info": "Plays inline. Leave blank to use the bundled 50s build teaser."
+    },
+    {
+      "type": "image_picker",
+      "id": "video_image",
+      "label": "Video poster image"
+    },
+    {
+      "type": "text",
+      "id": "video_fallback",
+      "label": "Default video poster filename",
+      "default": "bbc-rd-build-poster.jpg"
+    },
+    {
+      "type": "text",
+      "id": "video_image_alt",
+      "label": "Video poster alt text",
+      "default": "A cyclist riding a bamboo bike on a moorland trail under a rainbow"
+    },
+    {
+      "type": "header",
+      "content": "Give-back loop"
+    },
+    {
+      "type": "text",
+      "id": "loop_eyebrow",
+      "label": "Eyebrow",
+      "default": "Your build does more"
+    },
+    {
+      "type": "textarea",
+      "id": "loop_heading",
+      "label": "Heading",
+      "default": "what you spend here helps fund accredited skills courses inside prisons and schools."
+    },
+    {
+      "type": "text",
+      "id": "loop_s1_big",
+      "label": "Step 1 title",
+      "default": "You build"
+    },
+    {
+      "type": "text",
+      "id": "loop_s1_sm",
+      "label": "Step 1 detail",
+      "default": "a bamboo bike"
+    },
+    {
+      "type": "text",
+      "id": "loop_s2_big",
+      "label": "Step 2 title",
+      "default": "Profits fund"
+    },
+    {
+      "type": "text",
+      "id": "loop_s2_sm",
+      "label": "Step 2 detail",
+      "default": "accredited courses"
+    },
+    {
+      "type": "text",
+      "id": "loop_s3_big",
+      "label": "Step 3 title",
+      "default": "A life changes"
+    },
+    {
+      "type": "text",
+      "id": "loop_s3_sm",
+      "label": "Step 3 detail",
+      "default": "skills · confidence · futures"
+    },
+    {
+      "type": "text",
+      "id": "loop_cta_label",
+      "label": "CTA label",
+      "default": "See our impact"
+    },
+    {
+      "type": "url",
+      "id": "loop_cta_url",
+      "label": "CTA link (defaults to the impact page)"
+    },
+    {
+      "type": "header",
+      "content": "Where & what (locations)"
+    },
+    {
+      "type": "text",
+      "id": "loc_eyebrow",
+      "label": "Eyebrow",
+      "default": "Choose your build"
+    },
+    {
+      "type": "text",
+      "id": "loc_title",
+      "label": "Title",
+      "default": "where, and what."
+    },
+    {
+      "type": "textarea",
+      "id": "loc_lede",
+      "label": "Lede",
+      "default": "Build with us in person at one of three workshops — London, Amersfoort or Toulouse. Every build is 2–3 days, with all materials, tools and tuition included."
+    },
+    {
+      "type": "header",
+      "content": "How booking works (signup)"
+    },
+    {
+      "type": "text",
+      "id": "book_eyebrow",
+      "label": "Eyebrow",
+      "default": "How booking works"
+    },
+    {
+      "type": "text",
+      "id": "book_title",
+      "label": "Title",
+      "default": "reserve your place"
+    },
+    {
+      "type": "textarea",
+      "id": "book_lede",
+      "label": "Lede",
+      "default": "There's no instant checkout — every frame is built to your measurements, so we book you in personally. Email us and we'll take it from there."
+    },
+    {
+      "type": "text",
+      "id": "price1",
+      "label": "Price tier 1",
+      "default": "Road · 2 days · £595"
+    },
+    {
+      "type": "text",
+      "id": "price2",
+      "label": "Price tier 2",
+      "default": "Gravel · 2–3 days · £595"
+    },
+    {
+      "type": "text",
+      "id": "price3",
+      "label": "Price tier 3",
+      "default": "MTB · 3 days · £695"
+    },
+    {
+      "type": "text",
+      "id": "book_cta_label",
+      "label": "Email CTA label",
+      "default": "Email us to book"
+    },
+    {
+      "type": "url",
+      "id": "book_cta_url",
+      "label": "Email CTA link (defaults to info@bamboobicycleclub.org)"
+    },
+    {
+      "type": "textarea",
+      "id": "book_note",
+      "label": "Note under CTA",
+      "default": "Cycle to Work accepted — typically save 25–39% through your employer's scheme. Every price includes all materials, tools, expert tuition, lunch and refreshments."
+    },
+    {
+      "type": "text",
+      "id": "book_s1_title",
+      "label": "Step 1 title",
+      "default": "email us for dates"
+    },
+    {
+      "type": "textarea",
+      "id": "book_s1_body",
+      "label": "Step 1 body",
+      "default": "Tell us which workshop and frame type you'd like, and we'll send you the available weekends."
+    },
+    {
+      "type": "text",
+      "id": "book_s2_title",
+      "label": "Step 2 title",
+      "default": "we book you in"
+    },
+    {
+      "type": "textarea",
+      "id": "book_s2_body",
+      "label": "Step 2 body",
+      "default": "Once a date suits you, we'll confirm your place and reserve your spot in the workshop."
+    },
+    {
+      "type": "text",
+      "id": "book_s3_title",
+      "label": "Step 3 title",
+      "default": "complete our online form"
+    },
+    {
+      "type": "textarea",
+      "id": "book_s3_body",
+      "label": "Step 3 body",
+      "default": "We'll send you a short online form for your measurements and design preferences, so your frame is tailored to you."
+    },
+    {
+      "type": "text",
+      "id": "book_s4_title",
+      "label": "Step 4 title",
+      "default": "we arrange a call"
+    },
+    {
+      "type": "textarea",
+      "id": "book_s4_body",
+      "label": "Step 4 body",
+      "default": "Before your build, we'll have a quick call to talk through your design and answer any questions."
+    },
+    {
+      "type": "header",
+      "content": "Good to know (FAQ)"
+    },
+    {
+      "type": "text",
+      "id": "faq_eyebrow",
+      "label": "Eyebrow",
+      "default": "Before you book"
+    },
+    {
+      "type": "text",
+      "id": "faq_title",
+      "label": "Title",
+      "default": "good to know"
+    },
+    {
+      "type": "header",
+      "content": "Final CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_kicker",
+      "label": "Kicker",
+      "default": "Your build starts with an email"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Title",
+      "default": "build a bike you'll never forget."
+    },
+    {
+      "type": "textarea",
+      "id": "cta_lede",
+      "label": "Lede",
+      "default": "Tell us your frame type and the workshop that suits you, and we'll send you the available dates. Most builders ride away after two days."
+    },
+    {
+      "type": "text",
+      "id": "cta1_label",
+      "label": "CTA 1 label",
+      "default": "Email us to book"
+    },
+    {
+      "type": "url",
+      "id": "cta1_url",
+      "label": "CTA 1 link (defaults to info@bamboobicycleclub.org)"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "CTA 2 label",
+      "default": "Ask a question"
+    },
+    {
+      "type": "url",
+      "id": "cta2_url",
+      "label": "CTA 2 link (defaults to the contact page)"
+    },
+    {
+      "type": "header",
+      "content": "Press (standard block)"
+    },
+    {
+      "type": "text",
+      "id": "press_label",
+      "label": "Eyebrow",
+      "default": "as reviewed"
+    },
+    {
+      "type": "textarea",
+      "id": "press_quote",
+      "label": "Press quote (blank hides band)",
+      "default": "To get one of these bamboo beauties you go on a two-day course to make your own — although home-build kits are now available too."
+    },
+    {
+      "type": "text",
+      "id": "press_cite",
+      "label": "Attribution",
+      "default": "Gregor MacGregor, BikeRadar"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Reassurance stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "95%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "had never built before"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source (optional)"
+        }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Build step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step title",
+          "default": "select & cut your bamboo"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Step body",
+          "default": "Choose your culms and mitre them to your personalised frame drawing."
+        }
+      ]
+    },
+    {
+      "type": "how_tag",
+      "name": "How-it-works tag",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Tag label",
+          "default": "Tools provided"
+        }
+      ]
+    },
+    {
+      "type": "location",
+      "name": "Location card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "fallback",
+          "label": "Default photo filename (used unless you pick one above)",
+          "default": "bbc-rd-bike-field.jpg"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Photo alt text",
+          "default": "Bamboo bike built at a BBC workshop"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "london e8"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Our home workshop in Hackney. Weekends & weekdays, year-round."
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Book London"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link (defaults to the contact page)"
+        }
+      ]
+    },
+    {
+      "type": "frame_tag",
+      "name": "Frame-type tag",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Tag label",
+          "default": "Road · 2 days"
+        },
+        {
+          "type": "checkbox",
+          "id": "lime",
+          "label": "Lime fill",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Do I need any experience?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "None at all. Around 95% of participants have never built anything like this before."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Workshops 2026 (new)",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "95%",
+            "label": "had never built before"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "2–3 days",
+            "label": "to build a complete frame"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "All-in",
+            "label": "materials, tools & tuition included"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "25–39%",
+            "label": "typical saving via Cycle to Work"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Select & cut your bamboo",
+            "body": "Choose your culms and mitre them to your personalised frame drawing."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Set the jig",
+            "body": "Lock the geometry — tailored to your body measurements, taken in advance."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Lash & bond the joints",
+            "body": "Wrap the joints in natural fibre and high-strength bio-resin."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Finish & ride away",
+            "body": "Final inspection, a celebration, and a frame ready for components."
+          }
+        },
+        {
+          "type": "how_tag",
+          "settings": {
+            "label": "Tools provided"
+          }
+        },
+        {
+          "type": "how_tag",
+          "settings": {
+            "label": "Lunch & coffee"
+          }
+        },
+        {
+          "type": "how_tag",
+          "settings": {
+            "label": "Expert 1:1 guidance"
+          }
+        },
+        {
+          "type": "how_tag",
+          "settings": {
+            "label": "Group discounts 3+"
+          }
+        },
+        {
+          "type": "location",
+          "settings": {
+            "fallback": "bbc-rd-gravel-fence.jpg",
+            "image_alt": "A finished bamboo gravel bike",
+            "title": "London E8",
+            "body": "Our home workshop in Hackney. Weekends & weekdays, year-round.",
+            "link_label": "Book London"
+          }
+        },
+        {
+          "type": "location",
+          "settings": {
+            "fallback": "bbc-rd-redbar.jpg",
+            "image_alt": "A finished bamboo bike with red flat bars",
+            "title": "Amersfoort, NL",
+            "body": "Our European hub, serving the Netherlands, Belgium and Germany. All materials included.",
+            "link_label": "Book Amersfoort"
+          }
+        },
+        {
+          "type": "location",
+          "settings": {
+            "fallback": "bbc-rd-cargo.jpg",
+            "image_alt": "A bamboo cargo bike on a city street",
+            "title": "Toulouse, FR",
+            "body": "Serving southern France and Spain. All materials included.",
+            "link_label": "Book Toulouse"
+          }
+        },
+        {
+          "type": "frame_tag",
+          "settings": {
+            "label": "Road · 2 days",
+            "lime": true
+          }
+        },
+        {
+          "type": "frame_tag",
+          "settings": {
+            "label": "Gravel · 2 days",
+            "lime": false
+          }
+        },
+        {
+          "type": "frame_tag",
+          "settings": {
+            "label": "MTB · 3 days",
+            "lime": false
+          }
+        },
+        {
+          "type": "frame_tag",
+          "settings": {
+            "label": "City & tourer",
+            "lime": false
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need any experience?",
+            "answer": "None at all. Around 95% of participants have never built anything like this before — we guide you through every step."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Can I come with someone?",
+            "answer": "Yes — many people book with partners or friends. Group discounts are available for 3 or more."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Can I use Cycle to Work?",
+            "answer": "Yes — we're registered with four schemes (Cyclescheme, Cycle Solutions, Evans and Halfords), so you can typically save 25–39%."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What do I leave with?",
+            "answer": "A complete frame ready for components. We can advise on, or supply, a groupset to finish the build."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What should I bring?",
+            "answer": "Just yourself and old clothes you don't mind getting epoxy on. Tools, materials, safety kit, lunch, tea and coffee are all provided."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How long will the frame last?",
+            "answer": "With proper care, bamboo frames ride for years — we still have frames from our earliest workshops going strong. Our support doesn't end when you leave."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,320 @@
+{% comment %}
+  BBC Timeline V2 — Readable milestone timeline
+{% endcomment %}
+
+{%- style -%}
+  .bbc-timeline {
+    padding: 80px 24px;
+    background: var(--bbc-cream);
+  }
+
+  .bbc-timeline__container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .bbc-timeline__header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .bbc-timeline__heading {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 700;
+    color: var(--bbc-forest);
+    margin: 0 0 16px 0;
+  }
+
+  .bbc-timeline__intro {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 1.125rem;
+    color: #4a5568;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .bbc-timeline__track {
+    position: relative;
+    padding-left: 32px;
+  }
+
+  /* Vertical line */
+  .bbc-timeline__track::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--bbc-forest) 0%, var(--bbc-teal) 100%);
+  }
+
+  .bbc-timeline__item {
+    position: relative;
+    padding-bottom: 52px;
+    transition: all 0.15s ease;
+  }
+
+  .bbc-timeline__item:last-child {
+    padding-bottom: 0;
+  }
+
+  /* Dot on timeline */
+  .bbc-timeline__item::before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border: 3px solid var(--bbc-forest);
+    border-radius: 50%;
+    z-index: 1;
+    transition: transform 0.15s ease;
+  }
+
+  .bbc-timeline__item--highlight::before {
+    background: var(--bbc-gold);
+    border-color: var(--bbc-gold);
+    width: 22px;
+    height: 22px;
+    left: -34px;
+    top: 2px;
+    box-shadow: 0 0 0 5px rgba(255,169,0,0.2);
+  }
+
+  .bbc-timeline__year {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 800;
+    color: var(--bbc-teal);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+
+  /* Gold year pill on highlight items */
+  .bbc-timeline__item--highlight .bbc-timeline__year {
+    background: rgba(255,169,0,0.12);
+    color: #b87a00;
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 1px solid rgba(255,169,0,0.3);
+  }
+
+  .bbc-timeline__title {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--bbc-forest);
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+  }
+
+  .bbc-timeline__description {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 1rem;
+    color: #4a5568;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Highlight item gets a card treatment */
+  .bbc-timeline__item--highlight {
+    background: white;
+    border-left: 4px solid var(--bbc-gold);
+    border-radius: 0 16px 16px 0;
+    padding: 24px 24px 24px 28px;
+    margin-bottom: 52px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  }
+
+  .bbc-timeline__item--highlight:last-child {
+    margin-bottom: 0;
+  }
+
+  .bbc-timeline__item--highlight .bbc-timeline__title {
+    font-size: 1.375rem;
+  }
+
+  .bbc-timeline__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 6px 12px;
+    background: white;
+    border-radius: 20px;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--bbc-forest);
+  }
+
+  .bbc-timeline__badge .material-symbols-outlined {
+    font-size: 14px;
+    color: var(--bbc-gold);
+  }
+
+  @media (min-width: 768px) {
+    .bbc-timeline__container {
+      max-width: 800px;
+    }
+    
+    .bbc-timeline__track {
+      padding-left: 56px;
+    }
+
+    .bbc-timeline__track::before {
+      left: 11px;
+    }
+
+    .bbc-timeline__item::before {
+      left: -56px;
+    }
+
+    .bbc-timeline__item--highlight::before {
+      left: -58px;
+      top: 28px; /* align with card padding */
+    }
+    
+    .bbc-timeline__item--highlight {
+      padding: 28px 32px 28px 32px;
+      margin-left: -8px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .bbc-timeline {
+      padding: 48px 16px;
+    }
+
+    .bbc-timeline__track {
+      padding-left: 28px;
+    }
+
+    .bbc-timeline__item::before {
+      left: -28px;
+      width: 14px;
+      height: 14px;
+    }
+
+    .bbc-timeline__item--highlight::before {
+      width: 16px;
+      height: 16px;
+      left: -29px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="bbc-timeline">
+  <div class="bbc-timeline__container">
+    <div class="bbc-timeline__header">
+      {% if section.settings.heading != blank %}
+        <h2 class="bbc-timeline__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.intro != blank %}
+        <p class="bbc-timeline__intro">{{ section.settings.intro }}</p>
+      {% endif %}
+    </div>
+
+    <div class="bbc-timeline__track">
+      {% for block in section.blocks %}
+        <div class="bbc-timeline__item{% if block.settings.highlight %} bbc-timeline__item--highlight{% endif %}" {{ block.shopify_attributes }}>
+          <div class="bbc-timeline__year">{{ block.settings.year }}</div>
+          <h3 class="bbc-timeline__title">{{ block.settings.title }}</h3>
+          <p class="bbc-timeline__description">{{ block.settings.description }}</p>
+          {% if block.settings.badge != blank %}
+            <div class="bbc-timeline__badge">
+              {% render 'bbc-icons', icon: block.settings.badge_icon | default: 'star' %}
+              {{ block.settings.badge }}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Timeline V2",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Journey"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "From a small London workshop to a global community of builders."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "milestone",
+      "name": "Milestone",
+      "settings": [
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year",
+          "default": "2012"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "BBC Founded"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "James and Ian open the first bamboo bicycle workshop in London, teaching people to build their own sustainable frames."
+        },
+        {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "Highlight this milestone",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge text (optional)"
+        },
+        {
+          "type": "text",
+          "id": "badge_icon",
+          "label": "Badge icon",
+          "default": "star",
+          "info": "Material Symbols icon name"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Timeline V2",
+      "blocks": [
+        { "type": "milestone", "settings": { "year": "2012", "title": "BBC Founded", "description": "James and Ian open the first bamboo bicycle workshop in London, teaching people to build their own sustainable frames.", "highlight": true }},
+        { "type": "milestone", "settings": { "year": "2014", "title": "DIY Kits Launch", "description": "We launch our first home build kits, making bamboo bike building accessible to people everywhere." }},
+        { "type": "milestone", "settings": { "year": "2015", "title": "Design Museum Exhibition", "description": "Our work is featured in the Cycle Revolution exhibition at the Design Museum.", "badge": "Major Recognition", "badge_icon": "museum" }},
+        { "type": "milestone", "settings": { "year": "2018", "title": "Kevin McCloud's Green Heroes", "description": "Selected for eco-friendly product design at Grand Designs Live.", "badge": "Award Winner", "badge_icon": "eco" }},
+        { "type": "milestone", "settings": { "year": "2020", "title": "Build to Bond Launches", "description": "Our prison rehabilitation programme begins at HMP Lowdham Grange, helping parents build bicycles for their children.", "highlight": true }},
+        { "type": "milestone", "settings": { "year": "2025", "title": "Investec Beyond Business", "description": "Recognised for our educational work in prisons, helping parents maintain family connections.", "badge": "2025 Winner", "badge_icon": "emoji_events", "highlight": true }}
+      ]
+    }
+  ]
+}
+{% endschema %}

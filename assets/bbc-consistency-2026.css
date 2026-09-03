@@ -1,0 +1,427 @@
+/* ============================================================================
+   BBC CONSISTENCY LAYER — qa/CONSISTENCY-SPEC.md made executable (2026-08-07)
+   Loaded LAST from theme.liquid so the laws win the cascade.
+   Each rule cites its law. Keep this sheet small: when a law can be fixed at
+   source (as Law 1 was, in bbc-redesign-2026.css), fix it there instead.
+   ========================================================================== */
+
+/* LAW 2 — buttons are pills; the header CTA joins the system */
+.rd-nav-cta { border-radius: 999px !important; }
+
+/* LAW 2 — pills never carry underlines (underline = tertiary link signifier) */
+.bbc-rd .rd-btn, .rd-btn, .rd-btn:link, .rd-btn:visited { text-decoration: none !important; }
+
+/* LAW 3 — chips are tags: one case, everywhere (uppercase never breaks proper nouns) */
+/* !important: section inline <style> blocks load after this sheet and win otherwise.
+   Uppercase never breaks proper nouns, so the blast radius is safe. */
+.bbc-rd [class*="chip"], [class*="__chip"], .ew-tag, .rd-path__chip, .rd-dlcard__badge {
+  text-transform: uppercase !important; letter-spacing: .06em; }
+.bbcpl-qtag { text-transform: uppercase; letter-spacing: .05em; margin-right: 8px; }
+
+/* LAW 3 — gold is retired: legacy gold badge re-pointed to the 2026 palette */
+.bbc-badge--gold {
+  background: var(--lime, #D4FD62) !important;
+  color: var(--drift-0b2b24) !important;
+  border-color: #0B2B24 !important;
+}
+
+/* LAW 4 — legacy quote card de-rounded (sustainability et al) */
+.bbc-quote { border-radius: 0 !important; }
+
+/* LAW 9 — breadcrumb usable outside .bbc-rd scope (Dawn collection/blog pages) */
+.rd-crumb { display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 700; margin-bottom: 14px; }
+.rd-crumb .rd-sep { opacity: .5; }
+.rd-crumb--onlight, .rd-crumb--onlight a { color: var(--ink, #0E1A17); }
+.rd-crumb--onlight a { opacity: .75; text-decoration: underline; text-underline-offset: 2px; }
+.rd-crumb--onlight a:hover, .rd-crumb--onlight a:focus-visible { opacity: 1; text-decoration: underline; }
+.rd-crumb--onlight { margin: 18px 0 4px; }
+
+/* LAW 6 — stat rows carry their source (Claims Register-backed only) */
+.rd-stat-src { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  opacity: .65; margin: 10px 0 0; }
+
+/* LAW 7 — pasted page content cannot import fonts (the Calibri-on-sustainability case).
+   code/pre keep their monospace. */
+.rte *:not(code):not(pre):not(kbd) { font-family: inherit !important; }
+
+/* LAW 7 — Word-paste inline fonts (found outside .rte on legacy pages): the attribute
+   selector out-specifies the inline style's font via !important. */
+[style*="font-family"]:not(code):not(pre) { font-family: inherit !important; }
+
+/* ===== STYLING DNA (2026-08-08 styling census) =====
+   Measured drift, normalised centrally. See qa/CONSISTENCY-SPEC.md §DNA. */
+
+/* No synthetic bold: only 400/700 Atkinson faces exist — declared 800 was
+   browser-faked (97 headings + 58 chips measured). */
+.bbc-rd h1, .bbc-rd h2, .bbc-rd h3, [class*="chip"], .rd-cscard__kind, .rd-tag {
+  font-weight: 700 !important; }
+
+/* Card radius trio is {0 sharp, 6 stamped, 999 pill}: strays normalised */
+.rd-door, .acc-card { border-radius: 6px !important; }
+
+/* One underline: 2px stroke, 3px offset (measured 81:14 majority) */
+.bbc-rd main a:not(.rd-btn):not(.rd-nav-cta):not([class*="card"]) {
+  text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+/* ===== ROLLOUT R1 — evaluated winners (Block Consistency Rollout workstream, 2026-08-08) ===== */
+
+/* WINNER step chips: square (stamped DNA) — impact/schools flow circles conform */
+.rd-flow__step::before { border-radius: 6px !important; }
+
+/* WINNER accordion: bordered +card — support-mission's bare FAQ conforms visually */
+.bbc-sup__faq { border: 2px solid var(--ink, #0E1A17); background: var(--paper2, #EDE5D4);
+  padding: 14px 18px; margin: 10px 0; }
+
+/* WINNER input fields: stamped square (2px border, 6px radius) — newsletter aligns to contact/teambuilding */
+.rd-footer input[type="email"], footer input[type="email"], .rd-news input[type="email"] {
+  border-radius: 6px !important; border: 2px solid var(--ink, #0E1A17) !important; }
+
+/* Clickable cards get hover feedback (the measured gap): stamp-lift grammar,
+   guarded by the global prefers-reduced-motion reset */
+.rd-cscard, .rd-door, .rd-path, .rd-dlcard { transition: transform .18s ease, box-shadow .18s ease; }
+.rd-cscard:hover, .rd-door:hover, .rd-path:hover, .rd-dlcard:hover { transform: translate(-2px, -2px); }
+.rd-card.rd-stamp:hover { box-shadow: 7px 7px 0 var(--ink, #0E1A17); }
+
+/* Home's private ew-btn hover joins the estate lift grammar */
+.ew-btn { transition: transform .18s ease, opacity .18s ease; }
+.ew-btn:hover { transform: translateY(-2px); opacity: 1; }
+
+/* ===== ROLLOUT R2 — markup-level winners ===== */
+
+/* Parts accordion joins the bordered +card canon */
+.bbc-accordion__item { border: 2px solid var(--ink, #0E1A17) !important; background: var(--paper2, #EDE5D4);
+  margin: 0 0 10px; border-radius: 0; }
+.bbc-accordion__trigger { display: flex; align-items: center; gap: 10px; width: 100%; padding: 14px 18px; }
+.bbc-accordion__glyph { margin-left: auto; font-weight: 700; }
+.bbc-accordion__glyph::before { content: "+"; }
+.bbc-accordion__trigger[aria-expanded="true"] .bbc-accordion__glyph::before { content: "\2212"; }
+
+/* Dimension-tick canon (rd-dim) aliased onto the why-bamboo band's acc-stats anatomy */
+.acc-stats { gap: clamp(20px, 4vw, 44px); }
+.acc-stats li { position: relative; padding-top: 18px; border: 0; }
+.acc-stats li > b { display: block; }
+
+/* Legacy breadcrumb current-page colour normalised (FAQ lime one-off) */
+.bbc-rd [class*="breadcrumb"] [aria-current], .bbc-rd [class*="breadcrumb"] > span { color: inherit !important; }
+
+/* LAW: logos render in colour (locked brief) — styles.css (theme-only, not in repo)
+   greys them at rest (grayscale(1) + opacity .62). Overridden here, at-rest AND hover. */
+.bbc-rd .rd-logocell .rd-logoimg { filter: none !important; opacity: 1 !important; }
+
+/* ===== BASELINE CONFORMANCE fixes (instance-vs-baseline audit 2026-08-08) ===== */
+/* acc-stats joins the rd-stats 52px value tier */
+.acc-stats li > b { font-size: var(--fs-52); }
+/* parts h1 joins the commerce-hero tier (42px, was 30) */
+.bbc-parts__title { font-size: var(--fs-42) !important; }
+
+/* BASELINE: form fields join the stamped tier (2px border, 6px radius) —
+   was 1px on contact/teambuilding forms; number/radio/checkbox untouched */
+.bbc-rd form input[type="text"], .bbc-rd form input[type="email"],
+.bbc-rd form input[type="tel"], .bbc-rd form textarea, .bbc-rd form select {
+  border-width: 2px !important; border-radius: 6px !important; }
+
+/* article kicker joins the kicker DNA (was 18px/400 sentence-case lime) */
+.bbc-rd .rd-art-kicker{ font-size:14px !important; font-weight:700 !important; text-transform:lowercase !important; letter-spacing:.14em !important; }
+
+/* ------------------------------------------------------------------
+   DRIFT TOKENS — 2026-08-08 lint zero-pass. Off-system values found in
+   live sheets, tokenised VERBATIM (no visual change) so the palette drift
+   is named and visible. James: ratify each into the system or migrate its
+   consumers to a canonical token, then delete the row.
+   ------------------------------------------------------------------ */
+:root{
+  --drift-047857:#047857;
+  --drift-0a2533:#0a2533;
+  --drift-0b2b24:#0b2b24;
+  --drift-0e5a32:#0e5a32;
+  --drift-17553a:#17553a;
+  --drift-1e293b:#1e293b;
+  --drift-1e40af:#1e40af;
+  --drift-1f4530:#1f4530;
+  --drift-231f1c:#231f1c;
+  --drift-26332e:#26332e;
+  --drift-2a3530:#2a3530;
+  --drift-333333:#333333;
+  --drift-3a443f:#3a443f;
+  --drift-475569:#475569;
+  --drift-4d5c54:#4d5c54;
+  --drift-555555:#555555;
+  --drift-5a655f:#5a655f;
+  --drift-64748b:#64748b;
+  --drift-666666:#666666;
+  --drift-888888:#888888;
+  --drift-8a1c1c:#8a1c1c;
+  --drift-92400e:#92400e;
+  --drift-9db8ad:#9db8ad;
+  --drift-b91c1c:#b91c1c;
+  --drift-bcc8c2:#bcc8c2;
+  --drift-c9d8d0:#c9d8d0;
+  --drift-cfd8d2:#cfd8d2;
+  --drift-cfe0d7:#cfe0d7;
+  --drift-dbe6df:#dbe6df;
+  --drift-dc2626:#dc2626;
+  --drift-e3ebe4:#e3ebe4;
+  --drift-e9efe7:#e9efe7;
+  --drift-eaf3ee:#eaf3ee;
+  --drift-ede6d6:#ede6d6;
+  --drift-eef3ec:#eef3ec;
+  --drift-ffa900:#ffa900;
+  --fs-10-5:10.5px;
+  --fs-11-5:11.5px;
+  --fs-12-5:12.5px;
+  --fs-12pt:12pt;
+  --fs-13-5:13.5px;
+  --fs-14-5:14.5px;
+  --fs-18-5:18.5px;
+  --fs-20:20px;
+  --fs-21:21px;
+  --fs-22:22px;
+  --fs-24:24px;
+  --fs-26:26px;
+  --fs-32:32px;
+  --fs-42:42px;
+  --fs-48:48px;
+  --fs-52:52px;
+  --fs-8:8px;
+  --fs-9:9px;
+}
+
+/* Canonical tokens aliased at :root — the .bbc-rd-scoped definitions do not
+   reach Dawn-native chrome (collections, cart, account, mobile menu), and the
+   lint zero-pass moved those sheets onto var() references. .bbc-rd's own
+   definitions still win inside redesign subtrees (nearest-ancestor rule). */
+:root{
+  --forest:#003C32; --forest-700:#002A23; --forest-300:#1F6655;
+  --teal:#3F8B66; --lime:#D4FD62; --lime-700:#9BC02E;
+  --bone:#E6DCC8; --paper:#F1E9D8; --steel:#DEE6F0; --ink:#0E1A17; --charcoal:#2A332F;
+  --white:#ffffff; --black:#000000;
+}
+
+/* Legacy .faq-item (size-guide) joins the accordion canon: bordered stamped card,
+   radius trio 6px (was borderless 8px). Holds until the Tier-R rebuild replaces the page. */
+.faq-item{ border:2px solid var(--ink,#0E1A17) !important; border-radius:6px !important; }
+
+/* ==================================================================
+   MOBILE-REALITY PASS — 2026-08-08, from James's iPhone screenshots.
+   Five defects the instruments baselined as "approved state" or that
+   only reproduce on iOS. Each rule notes its defect.
+   ================================================================== */
+/* iOS Safari font boosting inflated stat values unevenly (ragged
+   hero numbers on home/impact/PDP). Kill boosting globally. */
+html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+/* Card anchors drew link underlines through every child (titles, body,
+   even pill labels) — ancestor-propagated decoration that per-child
+   `none` cannot remove, so it must die on the anchor itself. */
+.bbc-rd a.rd-door, .bbc-rd a.rd-door *,
+.bbc-rd a.rd-path, .bbc-rd a.rd-path *,
+.bbc-rd a.rd-cscard, .bbc-rd a.rd-cscard *,
+.bbc-rd a.rd-logocell, .bbc-rd a.rd-logocell *,
+.bbc-rd-home a.rd-door, .bbc-rd-home a.rd-door *,
+.bbc-rd a.rd-card, .bbc-rd a.rd-card *{ text-decoration:none !important; }
+/* Hover feedback keeps its underline on the TITLE only. */
+.bbc-rd a.rd-cscard:hover .rd-cscard__title,
+.bbc-rd a.rd-card:hover h3, .bbc-rd a.rd-card:hover [class*="title"],
+.bbc-rd a.rd-door:hover h3, .bbc-rd a.rd-path:hover h3{ text-decoration:underline !important; text-decoration-thickness:2px !important; text-underline-offset:3px !important; }
+/* Hero proof rows: top-align values, stop the third stat orphan-wrapping
+   at phone widths (impact's "2012" wrapped below the row). */
+.bbc-rd .rd-heroproof, .bbc-rd-home .ew-proof{ align-items:flex-start !important; }
+.bbc-rd .rd-heroproof li span, .bbc-rd-home .ew-proof li span{ max-width:14ch; }
+@media(max-width:480px){
+  .bbc-rd .rd-heroproof{ gap:10px 18px !important; }
+  .bbc-rd-home .ew-proof{ gap:10px 18px !important; }
+}
+/* Stat source micro-line was ink-on-forest (~1.4:1) on dark heroes. */
+.bbc-rd-home .ew .rd-stat-src, .bbc-rd .rd-dark .rd-stat-src, .bbc-rd.rd-dark .rd-stat-src,
+.bbc-rd .rd-hero .rd-stat-src{ color:var(--bone,#E6DCC8) !important; }
+/* (scope repair 2026-08-09: the first selector was .bbc-rd-home .rd-stat-src — page-wide —
+   which turned the PAPER why-band source line bone-on-paper. Hero (.ew) only.) */
+
+/* ==================================================================
+   EYEBALL SWEEP — 2026-08-09. Defects found by reading WebKit@390
+   slices like a design review; several invisible to every instrument.
+   ================================================================== */
+/* Impact path-card images: WebKit resolved the wrapper aspect-ratio +
+   img height:100% chain to a 770px empty void (Chromium: 233px).
+   Deterministic sizing on the img itself, engine-proof. */
+.bbc-rd-impact .rd-path__media > img,
+.bbc-rd-impact .rd-path__media .rd-duotone > img{ height:auto !important; aspect-ratio:16/7 !important; object-fit:cover !important; }
+/* acc-stats: the between-item divider (border-left + 16px inset) followed
+   item 3 onto its wrapped row — an indented orphan divider. No dividers
+   once the row wraps. */
+/* Footer press strip: mixed logo geometries fought height:34 + max-width:170
+   (FT capped smaller than Guardian etc.) — uniform 26px cap height, free widths. */
+.bbc-rd .rd-foot-press img{ height:26px !important; max-width:none !important; }
+/* optical compensation: FT + Design Museum artwork sits padded inside its viewBox */
+.bbc-rd.rd-footer .rd-foot-press img[src*="logo-ft"]{ height:31px !important; }
+/* press wordmarks may never overflow a narrow column — contain-scale instead.
+   0,4,1 both lines: a phantom cross-origin rule beats anything weaker (proven on height) */
+.bbc-rd.rd-footer .rd-foot-wrap .rd-foot-press img{ max-width:100% !important; object-fit:contain !important; object-position:left center; }
+.bbc-rd .rd-foot-press img[src*="design-museum"]{ height:34px !important; }
+.bbc-rd .rd-foot-press{ gap:20px 30px !important; }
+/* Door pills: never orphan the arrow on its own line; tighten at phone width. */
+@media(max-width:420px){
+  .bbc-rd-home .ew-btn, .bbc-rd-home .rd-door .rd-btn{ font-size:13px; letter-spacing:.02em; }
+}
+/* Law 2 (spec): CTA labels lowercase, proper nouns keep caps. Home's CTAs
+   mixed Watch/All/Book/See with lowercase siblings on one page — enforce the
+   written law; no home CTA label contains a proper noun. James can veto. */
+/* ============ PUNCH RESTORATION — 2026-08-09 (James: "site has gone
+   backwards — solve and compare"). Before/after comparison verdict:
+   structure hugely improved; voice flattened. These restore the punch. */
+/* CTA case — comparison verdict (2026-08-09): the before deliberately ran a
+   TWO-TIER voice: hero/band primary pills sentence case, card-level CTAs
+   lowercase. My lowercase law flattened it; the ::first-letter repair cannot
+   work on flex buttons. Case now comes from CONTENT (typed values), law
+   documented as two-tier in the spec. No transform.
+/* the hero photo sticker — the signature element the rebuild dropped; DNA's
+   8px rotated sticker exception, lime (gold stays retired) */
+.bbc-rd-home .ew-sticker{ position:absolute; right:28px; top:clamp(480px,74vh,760px); bottom:auto; z-index:9;
+  background:var(--lime,#D4FD62); color:var(--ink,#0E1A17); font-weight:700; font-size:clamp(12.5px,12.5px,12.5px);
+  text-transform:uppercase; letter-spacing:.09em; padding:9px 14px; border-radius:8px;
+  transform:rotate(-2.5deg); box-shadow:3px 3px 0 rgba(0,0,0,.28); max-width:min(70%,340px);
+  text-align:center; pointer-events:none; }
+/* mobile: the sticker lands as a badge row between photo and headline — read in the 390 crop, kept (an earlier hide rule assumed it would not fit; it does) */
+/* mobile stat presence: clamp minimums lost the boosted size iOS used to fake */
+@media(max-width:640px){
+  .bbc-rd .rd-heroproof b, .bbc-rd-home .ew-proof b{ font-size:clamp(26px,26px,26px) !important; line-height:1.05 !important; }
+}
+/* hero source micro-line: quiet but WCAG-passing (a11y audit: .5 failed contrast) */
+.bbc-rd-home .ew .rd-stat-src, .bbc-rd .rd-hero .rd-stat-src{ font-size:10px; opacity:.78; }
+
+/* Long pill labels must NEVER exceed their container — at any width.
+   (Originally ≤480px for the phone clip; widened to all widths as strictly
+   safer — wrapping only engages when a pill would otherwise overflow, and
+   verified at 1280 the fit-note pill stays one line with room to spare.) */
+.bbc-rd .rd-btn{ white-space:normal !important; text-align:center; line-height:1.25; max-width:100%; }
+/* PDP stock dot: flex-wrap let WebKit drop the text node below the dot —
+   nowrap keeps dot + text side-by-side (the text block wraps internally). */
+.bbc-rd .rd-cmp-15126{ flex-wrap:nowrap !important; align-items:flex-start !important; }
+.bbc-rd .rd-cmp-93984{ margin-top:4px; }
+
+/* Press strip (home + impact, bbc-press snippet): logos rendered at intrinsic
+   SVG sizes — Independent tiny, Guardian huge. Uniform optical height. */
+.bbc-rd .bbc-press__logo{ height:24px !important; width:auto !important; max-width:150px; object-fit:contain; }
+/* Footer payment icons: a global svg reset stacked them one per line. Row. */
+.bbc-rd .rd-foot-pay{ display:flex !important; flex-wrap:wrap; gap:6px; align-items:center; }
+.bbc-rd .rd-foot-pay .rd-payicon, .bbc-rd .rd-foot-pay svg{ display:inline-block !important; height:24px; width:auto; }
+
+/* footer counting ribbon — engagement stat above the wordmark; .rd-num counts up */
+.bbc-rd .rd-foot-count{ margin:26px 0 0; font-size:15px; color:var(--bone,#E6DCC8); opacity:.85; }
+.bbc-rd .rd-foot-count .rd-num{ font-size:clamp(22px,22px,22px); font-weight:700; color:var(--lime,#D4FD62); margin-right:4px; }
+
+/* ================================================================
+   acc-stats — SINGLE OWNER (2026-08-09). Five stylesheets were
+   fighting over this band (ticks striking through digits, resurrected
+   dividers, ragged rows — James's phone screenshots, twice). Every
+   property it needs lives HERE and nowhere else; !important is the
+   armour against the section's inline rules.
+   ================================================================ */
+.bbc-rd .acc-stats{ display:flex !important; flex-wrap:wrap !important; align-items:flex-start !important;
+  gap:28px 36px !important; list-style:none !important; margin:26px 0 0 !important; padding:0 !important; }
+.bbc-rd .acc-stats li{ position:relative !important; padding:16px 0 0 !important; margin:0 !important; border:0 !important; }
+.bbc-rd .acc-stats li > b{ display:block !important; font-size:clamp(34px,4.4vw,52px) !important; line-height:1 !important;
+  font-weight:700 !important; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+.bbc-rd .acc-stats li > span{ display:block !important; margin-top:8px !important; font-size:14px !important; line-height:1.3; max-width:16ch; }
+/* the dimension tick — 16px reserved headroom above the digits, END of overlap */
+.bbc-rd .acc-stats li::before{ content:"" !important; position:absolute !important; top:0 !important; left:0 !important;
+  right:auto !important; width:100% !important; height:1px !important; background:currentColor !important; opacity:.35 !important; }
+.bbc-rd .acc-stats li::after{ content:"" !important; position:absolute !important; top:-4px !important; left:0 !important;
+  width:1px !important; height:9px !important; background:currentColor !important; opacity:.35 !important; }
+
+/* Flagship hero joins the page axis (768 geometry-sweep catch): the ew-copy's
+   own clamp inset ran 22/42/70px while the estate axis runs 18/32/72 — a
+   4/10/2px disagreement that reads as accidental. Left edge now uses the
+   wrap's exact formula; vertical rhythm and right inset keep the hero clamp. */
+/* v2 2026-08-10: the viewport-axis formula inside the hero's PARTIAL-WIDTH
+   column collapsed the headline to one word per line at >=1400 (caught live
+   in James's Chrome). The 10px mismatch only ever mattered in the tablet
+   range — pin the axis there; the designed clamp keeps every other width
+   (2px at 1280 is imperceptible; 18px at phone matches the estate). */
+@media(min-width:750px) and (max-width:1023px){ .bbc-rd-home .ew-copy{ padding-left:32px !important; } }
+@media(max-width:520px){ .bbc-rd-home .ew-copy{ padding-left:18px !important; } }
+
+/* two 2px axis strays from the 768 sweep: press__more carried a stray
+   fractional em-margin; the report ship-note sat 2px off its column */
+.bbc-rd .bbc-press__more{ margin-left:0 !important; }
+.bbc-rd .rd-ship-note{ margin-left:0 !important; padding-left:0 !important; }
+
+/* a11y contrast pass 2026-08-18: door text sits on photography — deepen the
+   scrim gradient so chips, titles and pill labels clear 4.5:1 everywhere */
+.bbc-rd .rd-door .rd-ov, .bbc-rd-home .rd-door .rd-ov{ background:linear-gradient(180deg, rgba(0,30,25,.18) 0%, rgba(0,30,25,.62) 55%, rgba(0,26,21,.86) 100%) !important; }
+/* third-party app iframes get an accessible name (Lighthouse frame-title) */
+/* ghost chips/pills on door photography: keep the ghost hierarchy but give the
+   text a translucent dark backdrop so bone stays legible over any image crop */
+.bbc-rd .rd-door:not(:first-of-type) .rd-tag.rd-lime{ background:rgba(0,26,21,.55) !important; }
+.bbc-rd .rd-door .rd-btn.rd-lime:not(:first-of-type .rd-btn){}
+.bbc-rd .rd-grid .rd-door:not(:first-of-type) .rd-btn.rd-lime{ background:rgba(0,26,21,.45) !important; }
+
+/* ==================================================================
+   §F FABRICATION-DRAWING IDENTITY (Claude Design v2, James 2026-08-18)
+   The homepage reads as a workshop drawing: graph-paper on paper
+   surfaces, node-marked band seams, leader-line callouts on imagery,
+   spec micro-lines, an engineering titleblock on the hero media.
+   Devices estate-scoped .bbc-rd (band system 2026-08-18); graph-paper + titleblock stay home-scoped. Case lives in content, never transforms.
+   ================================================================== */
+.bbc-rd.bbc-rd-home .rd-paper{
+  background-color:var(--paper,#F1E9D8) !important;
+  /* !important: redesign-css sets `background:var(--paper)` shorthand later in the
+     cascade, which silently wipes the graph-paper image (caught live 2026-08-18) */
+  background-image:linear-gradient(rgba(0,60,50,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,60,50,.055) 1px,transparent 1px),linear-gradient(rgba(0,60,50,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,60,50,.03) 1px,transparent 1px) !important;
+  background-size:96px 96px,96px 96px,24px 24px,24px 24px !important;
+}
+.bbc-rd .rd-nodediv{ height:0; border-top:1.5px solid rgba(14,26,23,.28); position:relative; max-width:1100px; margin:0 auto; }
+.bbc-rd .rd-nodediv i{ position:absolute; top:-7px; width:2px; height:13px; background:rgba(14,26,23,.4); }
+.bbc-rd .rd-nodediv i:nth-child(1){ left:18%; } .bbc-rd .rd-nodediv i:nth-child(2){ left:19.2%; }
+.bbc-rd .rd-nodediv i:nth-child(3){ left:57%; } .bbc-rd .rd-nodediv i:nth-child(4){ left:58.4%; }
+.bbc-rd .rd-nodediv i:nth-child(5){ left:86%; }
+.bbc-rd section > .rd-nodediv{ margin-top:0; transform:translateY(calc(-1 * var(--rd-pad-y, 96px) + 28px)); }
+.bbc-rd .rd-specline{ font-size:11px; letter-spacing:.14em; opacity:.55; margin:10px 0 0; }
+.bbc-rd .rd-dimwrap{ position:relative; }
+.bbc-rd .rd-dim-callout{ position:absolute; left:14px; top:14px; background:var(--paper,#F1E9D8); color:var(--forest,#003C32); border:1.5px solid var(--forest,#003C32); border-radius:3px; font-size:clamp(10.5px,10.5px,10.5px); font-weight:700; letter-spacing:.08em; padding:4px 9px; z-index:3; }
+.bbc-rd .rd-dim-callout::after{ content:""; position:absolute; left:18px; top:100%; width:1px; height:26px; background:var(--forest,#003C32); }
+.bbc-rd .rd-dim-callout::before{ content:""; position:absolute; left:15px; top:calc(100% + 24px); width:7px; height:7px; border-radius:50%; border:1.5px solid var(--forest,#003C32); background:transparent; }
+.bbc-rd-home .rd-titleblock{ position:absolute; left:22px; bottom:22px; display:grid; grid-template-columns:auto auto; border:1.5px solid rgba(230,220,200,.55); font-size:10px; letter-spacing:.1em; color:rgba(230,220,200,.9); z-index:5; background:rgba(0,42,35,.55); backdrop-filter:blur(2px); }
+.bbc-rd-home .rd-titleblock span{ padding:5px 10px; border-bottom:1px solid rgba(230,220,200,.3); }
+.bbc-rd-home .rd-titleblock span:nth-last-child(-n+2){ border-bottom:0; }
+.bbc-rd-home .rd-titleblock span:nth-child(odd){ border-right:1px solid rgba(230,220,200,.3); opacity:.7; }
+@media (max-width:749px){
+  .bbc-rd-home .rd-titleblock{ display:none; } /* hero real estate is scarce on phones */
+  .bbc-rd .rd-dim-callout{ font-size:clamp(9.5px,9.5px,9.5px); }
+}
+@media (prefers-reduced-motion: no-preference){
+  .bbc-rd-home .rd-titleblock{ transition:opacity .3s ease; }
+}
+
+/* ==================================================================
+   §B STANDARD BAND SYSTEM (bbc-band-2026) — glue only.
+   The band emits canon markup; components are owned elsewhere. This
+   block only gives acc-stats its base layout OUTSIDE the home page
+   (home's inline styles remain the owner there) and the centered row.
+   ================================================================== */
+.bbc-rd .rd-band .acc-stats{ list-style:none; display:flex; flex-wrap:wrap; gap:0; margin:2.2rem 0 0; padding:0; }
+.bbc-rd .rd-band .acc-stats li{ padding:0 1.6rem; border-right:1px solid rgba(7,62,39,.18); }
+.bbc-rd .rd-band .acc-stats li:first-child{ padding-left:0; }
+.bbc-rd .rd-band .acc-stats li:last-child{ border-right:0; }
+.bbc-rd .rd-band .acc-stats b{ display:block; font-weight:800; font-size:clamp(28px,3.4vw,42px); line-height:1; color:var(--forest,#003C32); }
+.bbc-rd .rd-band .acc-stats span{ font-size:.85rem; color:var(--charcoal,#2A332F); }
+.bbc-rd .rd-band .acc-stats.rd-jc-center{ justify-content:center; }
+.bbc-rd .rd-band .rd-dark .acc-stats b{ color:var(--lime,#D4FD62); }
+.bbc-rd .rd-band .rd-dark .acc-stats span{ color:var(--bone,#E6DCC8); }
+.bbc-rd .rd-band .rd-dark .acc-stats li{ border-right-color:rgba(230,220,200,.25); }
+.bbc-rd .rd-band .rd-stat-src{ font-size:11px; font-weight:700; letter-spacing:.1em; opacity:.6; margin:14px 0 0; }
+.bbc-rd .rd-band .rd-dark .rd-stat-src{ opacity:.78; }
+
+/* opt-in graph-paper for spec/engineering bands anywhere (why-bamboo wbx first) */
+.bbc-rd .rd-graph{
+  background-color:var(--paper,#F1E9D8) !important;
+  background-image:linear-gradient(rgba(0,60,50,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,60,50,.055) 1px,transparent 1px),linear-gradient(rgba(0,60,50,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,60,50,.03) 1px,transparent 1px) !important;
+  background-size:96px 96px,96px 96px,24px 24px,24px 24px !important;
+}
+
+/* statement headings on phones: never shear mid-word with no hyphen
+   (why-bamboo's "sustainability" at 390 — WebKit eyeball sweep 2026-08-18).
+   Real hyphenation instead; wide statements (home) never trigger it. */
+@media (max-width:480px){
+  .bbcst .bbcst-head, .bbc-rd .bbcst-head{ word-break:normal !important; overflow-wrap:normal !important; hyphens:auto; -webkit-hyphens:auto; }
+}

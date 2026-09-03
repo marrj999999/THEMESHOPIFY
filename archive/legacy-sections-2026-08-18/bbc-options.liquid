@@ -1,0 +1,405 @@
+{% comment %}
+  BBC Options Section — Clean Professional Version
+  Two-column cards for Kit vs Workshop
+  
+  Design Rules:
+  - SVG icons only (no emojis)
+  - Consistent icon container styling
+  - SVG checkmarks for features
+{% endcomment %}
+
+<section class="bbc-section bbc-section--{{ section.settings.background }}">
+  <div class="bbc-container">
+    
+    <div class="bbc-text-center bbc-mb-xl">
+      {% if section.settings.label != blank %}
+        <p class="bbc-label">{{ section.settings.label }}</p>
+      {% endif %}
+      <h2 class="bbc-heading-lg bbc-mb-md">{{ section.settings.heading }}</h2>
+      {% if section.settings.text != blank %}
+        <p class="bbc-body-lg">{{ section.settings.text }}</p>
+      {% endif %}
+    </div>
+    
+    <div class="bbc-options__grid bbc-options__grid--{{ section.settings.columns | default: 2 }}">
+      {%- for block in section.blocks -%}
+        <div class="bbc-options__card{% if block.settings.highlight %} bbc-options__card--highlight{% endif %}" {{ block.shopify_attributes }}>
+          
+          {% if block.settings.badge != blank %}
+            <span class="bbc-options__badge">{{ block.settings.badge }}</span>
+          {% endif %}
+          
+          {% if block.settings.image != blank %}
+            <div class="bbc-options__image-wrap">
+              {{ block.settings.image | image_url: width: 600 | image_tag:
+                class: 'bbc-options__image',
+                loading: 'lazy',
+                alt: block.settings.title
+              }}
+            </div>
+          {% elsif block.settings.icon != blank %}
+            <div class="bbc-options__icon">
+              {% render 'bbc-icons', icon: block.settings.icon %}
+            </div>
+          {% endif %}
+          
+          <h3 class="bbc-heading-md bbc-mb-sm">{{ block.settings.title }}</h3>
+          
+          {% if block.settings.description != blank %}
+            <p class="bbc-body bbc-mb-md">{{ block.settings.description }}</p>
+          {% endif %}
+          
+          {% if block.settings.features != blank %}
+            <ul class="bbc-options__features bbc-mb-lg">
+              {% assign features = block.settings.features | split: '|' %}
+              {% for feature in features %}
+                <li>
+                  <span class="bbc-options__check" aria-hidden="true">
+                    {% render 'bbc-icons', icon: 'check' %}
+                  </span>
+                  {{ feature | strip }}
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          
+          {% if block.settings.button_text != blank %}
+            <a href="{{ block.settings.button_link }}" class="bbc-btn bbc-btn--{{ block.settings.button_style | default: 'primary' }} bbc-options__btn">
+              {{ block.settings.button_text }}
+            </a>
+          {% endif %}
+          
+        </div>
+      {%- endfor -%}
+    </div>
+    
+    {% if section.settings.footer_text != blank %}
+      <p class="bbc-body bbc-text-center bbc-options__footer">
+        {{ section.settings.footer_text }}
+      </p>
+    {% endif %}
+    
+  </div>
+</section>
+
+<style>
+  .bbc-options__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .bbc-options__grid--3 {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1100px;
+  }
+
+  .bbc-options__footer {
+    margin-top: 32px;
+    color: var(--bbc-text-muted, #64748b);
+  }
+  
+  .bbc-options__card {
+    position: relative;
+    padding: 40px 32px;
+    background: var(--bbc-white, var(--bbc-white));
+    border: 2px solid var(--bbc-border, #d4d4d4);
+    border-radius: 12px;
+    text-align: center;
+  }
+  
+  .bbc-section--white .bbc-options__card {
+    background: var(--bbc-cream, var(--bbc-cream));
+    border-color: transparent;
+  }
+  
+  .bbc-options__card--highlight {
+    border-color: var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  .bbc-options__badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 20px;
+    background: var(--bbc-gold, var(--bbc-gold));
+    color: var(--bbc-black, #1a1a1a);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 50px;
+    white-space: nowrap;
+  }
+  
+  /* Icon container - Material Symbols */
+  .bbc-options__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    background: var(--bbc-cream, var(--bbc-cream));
+    border-radius: 16px;
+  }
+  
+  .bbc-section--white .bbc-options__icon,
+  .bbc-section--cream .bbc-options__icon {
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+  
+  .bbc-options__icon .material-symbols-outlined {
+    font-size: 32px;
+    color: var(--bbc-forest, var(--bbc-forest));
+  }
+  
+  .bbc-options__features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+  }
+  
+  .bbc-options__features li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    font-size: 0.9375rem;
+    color: var(--bbc-text, #1a1a1a);
+    border-bottom: 1px solid var(--bbc-border, #d4d4d4);
+  }
+  
+  .bbc-options__features li:last-child {
+    border-bottom: none;
+  }
+  
+  /* Checkmark styling - Material Symbols */
+  .bbc-options__check {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .bbc-options__check .material-symbols-outlined {
+    font-size: 18px;
+    color: var(--bbc-teal, var(--bbc-teal));
+    font-weight: 600;
+  }
+  
+  .bbc-options__image-wrap {
+    margin: -40px -32px 24px;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+  }
+
+  .bbc-options__image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+  }
+
+  .bbc-options__btn {
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-options__grid,
+    .bbc-options__grid--3 {
+      grid-template-columns: 1fr;
+    }
+    
+    .bbc-options__card {
+      padding: 32px 24px;
+    }
+    
+    .bbc-options__icon {
+      width: 56px;
+      height: 56px;
+    }
+    
+    .bbc-options__icon svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Options",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Choose Your Path"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How Would You Like to Build?"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "footer_text",
+      "label": "Footer text"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns",
+      "options": [
+        { "value": "2", "label": "2 columns" },
+        { "value": "3", "label": "3 columns" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "cream", "label": "Cream" }
+      ],
+      "default": "cream"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "option",
+      "name": "Option",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card image",
+          "info": "Optional — replaces icon when set. Recommend 16:9 ratio."
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "package", "label": "Package/Box" },
+            { "value": "tools", "label": "Tools/Workshop" },
+            { "value": "wrench", "label": "Wrench" },
+            { "value": "bike", "label": "Bicycle" },
+            { "value": "users", "label": "People/Group" },
+            { "value": "video", "label": "Video/Tutorial" },
+            { "value": "truck", "label": "Shipping" },
+            { "value": "clock", "label": "Time" },
+            { "value": "globe", "label": "Worldwide" },
+            { "value": "book", "label": "Guide/Learning" }
+          ],
+          "default": "package"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Build at Home"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "textarea",
+          "id": "features",
+          "label": "Features (separate with |)"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            { "value": "primary", "label": "Primary (Gold)" },
+            { "value": "secondary", "label": "Secondary (Forest)" },
+            { "value": "outline", "label": "Outline" },
+            { "value": "outline-light", "label": "Outline Light" },
+            { "value": "white", "label": "White" },
+            { "value": "gold", "label": "Gold" }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "Highlight card",
+          "default": false,
+          "info": "Adds gold border to this card"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Options",
+      "blocks": [
+        {
+          "type": "option",
+          "settings": {
+            "icon": "package",
+            "title": "Build at Home",
+            "description": "Complete DIY frame kit shipped to your door with video tutorials and community support.",
+            "features": "£550–750 complete kit|35–40 hours build time|Ships worldwide|Video guides included",
+            "button_text": "Shop Kits",
+            "button_style": "secondary"
+          }
+        },
+        {
+          "type": "option",
+          "settings": {
+            "badge": "Most Popular",
+            "icon": "tools",
+            "title": "Learn with Experts",
+            "description": "Hands-on workshop at our London studio with all materials and guidance included.",
+            "features": "£500 all inclusive|2–3 days immersive|Small groups of 6|Take your bike home",
+            "button_text": "Book Workshop",
+            "button_style": "primary",
+            "highlight": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

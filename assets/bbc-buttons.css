@@ -1,0 +1,17 @@
+/* INTENTIONALLY EMPTIED - 2026-08-17 (CSS consolidation)
+
+   Was: 3393 bytes, 39 rules, targeting ONLY these classes:
+     .bbc-btn .bbc-btn--primary .bbc-btn--secondary .bbc-btn--outline .bbc-btn--outline-light
+     .bbc-btn--sm .bbc-btn--lg .bbc-btn--full .bbc-btn-group (+ --center --right --stack) .loading
+
+   PROVEN DEAD, two independent ways:
+   1. Disabled the sheet and diffed 33 computed properties across every element on
+      home (1745 els), why-bamboo (1341) and a product page (1011): 0 elements changed.
+   2. Grepped rendered markup on 10 templates (home, why-bamboo, impact, schools,
+      size-guide, collection, product, blog, cart, contact) for class="...bbc-btn...":
+      0 occurrences. The redesign uses .rd-btn / .rd-cta-row instead.
+
+   Emptied rather than deleted because the <link> is emitted from layout/theme.liquid
+   (33,976 bytes) which is too large to round-trip safely from here. When theme.liquid is
+   next edited: remove the stylesheet_tag for this file and delete the asset.
+   Reversible: the original is in git / theme version history. */

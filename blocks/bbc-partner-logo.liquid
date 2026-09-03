@@ -1,0 +1,72 @@
+{%- comment -%}
+  BBC theme block — Partner / institution logo. From the monolith `partner` block
+  in sections/bbc-education-2026.liquid. Reuses .rd-logocell / .rd-logoimg /
+  .rd-logotext.
+
+  Logo precedence (backward-compatible):
+    1. `logo` (image_picker)  → real uploaded image (.rd-logoimg)
+    2. `logo_fallback` (text) → a bundled theme asset filename rendered via asset_img_url
+    3. otherwise the institution name as a styled wordmark (.rd-logotext)
+  Optionally links out. Sits inside the .rd-logogrid wrapper rendered by
+  sections/bbc-logo-wall.liquid (or any logo grid).
+{%- endcomment -%}
+{%- capture cell -%}
+  {%- if block.settings.logo != blank -%}
+    {{ block.settings.logo | image_url: width: 480 | image_tag: class: 'rd-logoimg', widths: '240,480', alt: block.settings.name, loading: 'lazy' }}
+  {%- elsif block.settings.logo_fallback != blank -%}
+    {%- if block.settings.logo_fallback contains '.svg' -%}
+      {%- comment -%} Inline the SVG so it sizes by its viewBox (an <img> SVG won't couple width↔height in Chrome). {%- endcomment -%}
+      <span class="rd-logoimg rd-logosvg" role="img" aria-label="{{ block.settings.name | escape }}">{{ block.settings.logo_fallback | inline_asset_content }}</span>
+    {%- else -%}
+      <img src="{{ block.settings.logo_fallback | asset_url }}" class="rd-logoimg" alt="{{ block.settings.name | escape }}" loading="lazy">
+    {%- endif -%}
+  {%- else -%}
+    <span class="rd-logotext">{{ block.settings.name }}</span>
+  {%- endif -%}
+{%- endcapture -%}
+{%- if block.settings.url != blank -%}
+  <a class="rd-logocell" href="{{ block.settings.url }}" target="_blank" rel="noopener" aria-label="{{ block.settings.name | escape }}" {{ block.shopify_attributes }}>{{ cell }}</a>
+{%- else -%}
+  <div class="rd-logocell" {{ block.shopify_attributes }}>{{ cell }}</div>
+{%- endif -%}
+
+{% stylesheet %}
+  /* --- Partner / institution logos (boxed-card grid) ---
+     Same logo-display rules as the press bar: uniform optical height, auto width
+     (never stretch), centred in the cell, monochrome at rest, full colour on hover/focus.
+     The .rd-logocell card + grid (in bbc-redesign-2026.css) handles framing + even spacing. */
+  .bbc-rd .rd-logocell .rd-logoimg{
+    height:auto;
+    max-height:34px;        /* uniform optical cap across mixed aspect ratios */
+    max-width:158px;
+    width:auto;
+    object-fit:contain;
+    filter:grayscale(1);
+    opacity:.62;
+    transition:filter .2s ease, opacity .2s ease;
+  }
+  /* Inline-SVG partner logos: size by their own viewBox (reliable, unlike an <img> SVG). */
+  .bbc-rd .rd-logocell .rd-logosvg{ display:inline-flex; align-items:center; }
+  .bbc-rd .rd-logocell .rd-logosvg svg{ height:32px !important; width:auto !important; max-width:150px; display:block; }
+  .bbc-rd .rd-logocell:hover .rd-logoimg,
+  .bbc-rd a.rd-logocell:focus-visible .rd-logoimg{
+    filter:grayscale(0);
+    opacity:1;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Partner logo",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "name", "label": "Institution name (wordmark + alt text)", "default": "University College London" },
+    { "type": "image_picker", "id": "logo", "label": "Logo image (shown instead of the name)" },
+    { "type": "text", "id": "logo_fallback", "label": "Logo image filename" },
+    { "type": "url", "id": "url", "label": "Link (optional)" }
+  ],
+  "presets": [
+    { "name": "BBC Partner logo" }
+  ]
+}
+{% endschema %}

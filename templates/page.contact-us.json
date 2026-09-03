@@ -1,0 +1,57 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "bbc-contact-2026",
+      "blocks": {
+        "b0": {
+          "type": "route",
+          "settings": {
+            "tag": "Make",
+            "title": "Build a bike",
+            "body": "Book a workshop or order a kit — no experience needed.",
+            "link_label": "Workshops & kits →",
+            "link_url": "/pages/workshops"
+          }
+        },
+        "b1": {
+          "type": "route",
+          "settings": {
+            "tag": "Partner",
+            "title": "Work with us",
+            "body": "Run an accredited programme in a prison, school or college, or a corporate team-build day.",
+            "link_label": "Our programmes →",
+            "link_url": "/pages/impact"
+          }
+        },
+        "b2": {
+          "type": "route",
+          "settings": {
+            "tag": "Support",
+            "title": "Back the mission",
+            "body": "Fund a cohort, offer placements, or champion our work.",
+            "link_label": "Get involved →",
+            "link_url": "/pages/impact"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,143 @@
+{%- comment -%}
+  BBC Statement SECTION — the standard headline-first editorial block.
+  Styling is the site-wide .bbcst-* component in bbc-statement.css (loaded below).
+  Left-justified stack: eyebrow -> giant headline (+ optional * marker) ->
+  optional image (none | below | background) -> body + footnote -> buttons
+  (primary + secondary) -> additional links. Labels lowercase, body 18px.
+  Backgrounds: paper / forest / lime / steel — all AAA.
+{%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+{{ 'bbc-statement.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg = section.settings.background | default: 'paper'
+  case bg
+    when 'forest'
+      assign bg_cls = 'is-forest'
+    when 'lime'
+      assign bg_cls = 'is-lime'
+    when 'steel'
+      assign bg_cls = 'is-steel'
+    else
+      assign bg_cls = 'is-paper'
+  endcase
+  assign pos = section.settings.image_position | default: 'none'
+  assign fb = section.settings.image_fallback
+  assign has_pick = false
+  if section.settings.image != blank
+    assign has_pick = true
+  endif
+  assign has_img = false
+  if has_pick or fb != blank
+    assign has_img = true
+  endif
+  assign is_bg = false
+  if pos == 'background' and has_img
+    assign is_bg = true
+  endif
+-%}
+
+<div class="bbc-rd bbcst-wrap {{ bg_cls }}{% if is_bg %} has-bg{% endif %}">
+  <section class="bbcst{% if section.settings.height == 'compact' %} is-compact{% endif %}">
+    {%- if is_bg -%}
+      <div class="bbcst-bg">
+        {%- if has_pick -%}
+          <img src="{{ section.settings.image | image_url: width: 2000 }}" srcset="{{ section.settings.image | image_url: width: 1200 }} 1200w, {{ section.settings.image | image_url: width: 2000 }} 2000w" sizes="100vw" alt="{{ section.settings.image_alt | escape }}" loading="lazy">
+        {%- else -%}
+          <img src="{{ fb | asset_img_url: '2000x' }}" alt="{{ section.settings.image_alt | escape }}" loading="lazy">
+        {%- endif -%}
+      </div>
+      <div class="bbcst-scrim"></div>
+    {%- endif -%}
+    <div class="bbcst-inner">
+      {%- if section.settings.eyebrow != blank -%}<span class="bbcst-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal bbcst-head">{{ section.settings.headline }}{% if section.settings.star_marker != blank %}<sup class="bbcst-star">{{ section.settings.star_marker }}</sup>{% endif %}</h2>
+
+      {%- if pos == 'below' and has_img -%}
+        <figure class="bbcst-figure">
+          {%- if has_pick -%}
+            <img src="{{ section.settings.image | image_url: width: 1600 }}" srcset="{{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1600 }} 1600w" sizes="(max-width:900px) 92vw, 1000px" alt="{{ section.settings.image_alt | escape }}" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" loading="lazy">
+          {%- else -%}
+            <img src="{{ fb | asset_img_url: '1600x' }}" alt="{{ section.settings.image_alt | escape }}" loading="lazy">
+          {%- endif -%}
+        </figure>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank or section.settings.footnote != blank -%}
+        <div class="bbcst-support">
+          {%- if section.settings.body != blank -%}<p class="bbcst-body">{{ section.settings.body }}</p>{%- endif -%}
+          {%- if section.settings.footnote != blank -%}<p class="bbcst-note">{% if section.settings.star_marker != blank %}{{ section.settings.star_marker }} {% endif %}{{ section.settings.footnote }}</p>{%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.button1_label != blank or section.settings.button2_label != blank -%}
+        <div class="bbcst-actions">
+          {%- if section.settings.button1_label != blank -%}<a class="bbcst-btn is-primary" href="{{ section.settings.button1_url | default: '#' }}">{{ section.settings.button1_label }}</a>{%- endif -%}
+          {%- if section.settings.button2_label != blank -%}<a class="bbcst-btn is-secondary" href="{{ section.settings.button2_url | default: '#' }}">{{ section.settings.button2_label }}</a>{%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- assign anylink = false -%}
+      {%- for i in (1..4) -%}{%- assign lk = 'link' | append: i | append: '_label' -%}{%- if section.settings[lk] != blank -%}{%- assign anylink = true -%}{%- endif -%}{%- endfor -%}
+      {%- if anylink -%}
+        <div class="bbcst-links">
+          {%- for i in (1..4) -%}
+            {%- assign lk = 'link' | append: i | append: '_label' -%}
+            {%- assign uk = 'link' | append: i | append: '_url' -%}
+            {%- assign lbl = section.settings[lk] -%}
+            {%- assign url = section.settings[uk] -%}
+            {%- if lbl != blank -%}<a class="bbcst-link" href="{{ url | default: '#' }}">{{ lbl }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "BBC Statement",
+  "tag": "section",
+  "class": "bbc-statement-wrap",
+  "settings": [
+    { "type": "paragraph", "content": "Headline-first block. Everything left-justified. Hierarchy: headline -> body (18px) -> footnote -> primary/secondary buttons -> additional links. Styling is the site-wide .bbcst-* standard in bbc-statement.css." },
+    {
+      "type": "select", "id": "background", "label": "Background", "default": "paper",
+      "options": [
+        { "value": "paper", "label": "Paper (light)" },
+        { "value": "forest", "label": "Forest (dark green)" },
+        { "value": "lime", "label": "Lime" },
+        { "value": "steel", "label": "Steel (grey-blue)" }
+      ]
+    },
+    { "type": "select", "id": "height", "label": "Height", "default": "tall", "options": [ { "value": "tall", "label": "Tall (82vh)" }, { "value": "compact", "label": "Compact" } ] },
+    { "type": "header", "content": "Headline" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow (lowercase label)" },
+    { "type": "textarea", "id": "headline", "label": "Headline (big — carries the message)", "default": "build bikes. build skills. build futures." },
+    { "type": "text", "id": "star_marker", "label": "Footnote marker (e.g. *)", "default": "*" },
+    { "type": "header", "content": "Image (optional)" },
+    { "type": "select", "id": "image_position", "label": "Image position", "default": "none", "options": [ { "value": "none", "label": "No image" }, { "value": "below", "label": "Below the headline" }, { "value": "background", "label": "Full-bleed background (text over)" } ] },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_fallback", "label": "Fallback asset filename (optional)" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Bamboo Bicycle Club" },
+    { "type": "header", "content": "Buttons (primary + secondary)" },
+    { "type": "text", "id": "button1_label", "label": "Primary button label" },
+    { "type": "url", "id": "button1_url", "label": "Primary button URL" },
+    { "type": "text", "id": "button2_label", "label": "Secondary button label" },
+    { "type": "url", "id": "button2_url", "label": "Secondary button URL" },
+    { "type": "header", "content": "Body + footnote" },
+    { "type": "textarea", "id": "body", "label": "Body (standard, 18px)" },
+    { "type": "textarea", "id": "footnote", "label": "Footnote (small, after the marker)" },
+    { "type": "header", "content": "Additional links" },
+    { "type": "text", "id": "link1_label", "label": "Link 1 label" },
+    { "type": "url", "id": "link1_url", "label": "Link 1 URL" },
+    { "type": "text", "id": "link2_label", "label": "Link 2 label" },
+    { "type": "url", "id": "link2_url", "label": "Link 2 URL" },
+    { "type": "text", "id": "link3_label", "label": "Link 3 label" },
+    { "type": "url", "id": "link3_url", "label": "Link 3 URL" },
+    { "type": "text", "id": "link4_label", "label": "Link 4 label" },
+    { "type": "url", "id": "link4_url", "label": "Link 4 URL" }
+  ],
+  "presets": [ { "name": "BBC Statement" } ]
+}
+{% endschema %}

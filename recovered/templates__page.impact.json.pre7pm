@@ -1,0 +1,407 @@
+{
+  "sections": {
+    "impact-hero": {
+      "type": "bbc-impact-hero",
+      "settings": {
+        "eyebrow": "Our Impact",
+        "giant_number": "1,533",
+        "number_label": "People Empowered Since 2012",
+        "heading": "Build Bikes. Build Skills. Build Futures.",
+        "subheading": "Since 2012, we've empowered 1,533 people to build their own bamboo bicycle — developing real skills, confidence, and pathways to employment.",
+        "cta_text": "Work With Us",
+        "cta_link": "\/pages\/contact-us",
+        "report_text": "Download Our Impact Report (PDF)",
+        "report_link": "",
+        "participant_quote": "The bike was the first thing I ever made with my own hands. When my daughter rode it on family visit day, I felt like a dad again.",
+        "participant_name": "A Build to Bond participant, HMP Lowdham Grange",
+        "background_color": "#ffffff",
+        "cta2_text": "Watch Our Video",
+        "cta2_link": "\/pages\/bamboo-bicycle-club-education"
+      }
+    },
+    "press-logos": {
+      "type": "bbc-press-logos",
+      "blocks": {
+        "press-ft": {
+          "type": "logo",
+          "settings": {
+            "name": "Financial Times",
+            "badge": "September 2025",
+            "link": "https:\/\/www.ft.com\/content\/6ebe2eba-b832-4289-9924-2e9f948d5f98"
+          }
+        },
+        "press-guardian": {
+          "type": "logo",
+          "settings": {
+            "name": "The Guardian",
+            "badge": "Featured"
+          }
+        },
+        "press-bbc-news": {
+          "type": "logo",
+          "settings": {
+            "name": "BBC News",
+            "badge": "Featured"
+          }
+        },
+        "press-inside-time": {
+          "type": "logo",
+          "settings": {
+            "name": "Inside Time",
+            "badge": "Featured"
+          }
+        },
+        "press-discovery": {
+          "type": "logo",
+          "settings": {
+            "name": "Discovery Channel",
+            "badge": "Documentary"
+          }
+        },
+        "press-gcn": {
+          "type": "logo",
+          "settings": {
+            "name": "GCN",
+            "badge": "Featured"
+          }
+        }
+      },
+      "block_order": [
+        "press-ft",
+        "press-guardian",
+        "press-bbc-news",
+        "press-inside-time",
+        "press-discovery",
+        "press-gcn"
+      ],
+      "settings": {
+        "eyebrow": "As seen in & recognised by",
+        "logo_height": 36,
+        "background_color": "#ffffff",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "mission": {
+      "type": "bbc-impact-mission",
+      "settings": {
+        "eyebrow": "Our Mission",
+        "heading": "We Open Pathways. We Build Skills. We Change Lives.",
+        "intro": "We open pathways into green careers for people often excluded from traditional education — redefining how skills are learned through practical, hands-on making. By combining sustainable design, vocational training and real-world experience, we create accessible routes into employment and the green economy.",
+        "show_pathway": true,
+        "pathway": "Hands-on training → Skills development → Confidence & rehabilitation → Employment pathways",
+        "background_color": "#f8f8f6",
+        "padding_top": 80,
+        "padding_bottom": 80
+      },
+      "blocks": {
+        "col-education": {
+          "type": "column",
+          "settings": {
+            "icon": "education",
+            "title": "Education",
+            "body": "OCN-accredited training (Level 1 & 2) in Sustainable Manufacturing. Practical STEM and vocational learning using industry-relevant skills in manufacturing and engineering.",
+            "detail": "Nationally recognised qualification"
+          }
+        },
+        "col-employment": {
+          "type": "column",
+          "settings": {
+            "icon": "employment",
+            "title": "Employment",
+            "body": "Pathways into sustainable transport, manufacturing, construction and composites. Direct links to employers, apprenticeships and training providers.",
+            "detail": "Guaranteed interview on release"
+          }
+        },
+        "col-rehabilitation": {
+          "type": "column",
+          "settings": {
+            "icon": "rehabilitation",
+            "title": "Rehabilitation",
+            "body": "Therapeutic, hands-on making builds patience, focus and resilience. Strengthens family connections through Build to Bond.",
+            "detail": "90% prison course completion"
+          }
+        }
+      },
+      "block_order": [
+        "col-education",
+        "col-employment",
+        "col-rehabilitation"
+      ]
+    },
+    "stats": {
+      "type": "bbc-impact-stats",
+      "blocks": {
+        "stat-1": {
+          "type": "stat",
+          "settings": {
+            "number": "1,533",
+            "label": "People Empowered",
+            "detail": "Since 2012",
+            "source": "BBC Programme Records"
+          }
+        },
+        "stat-2": {
+          "type": "stat",
+          "settings": {
+            "number": "155",
+            "label": "Participants This Year",
+            "detail": "2025–2026",
+            "source": "BBC Programme Records"
+          }
+        },
+        "stat-3": {
+          "type": "stat",
+          "settings": {
+            "number": "90%",
+            "label": "Completion Rate",
+            "detail": "Prison programme",
+            "source": "BBC Prison Programme Records"
+          }
+        },
+        "stat-4": {
+          "type": "stat",
+          "settings": {
+            "number": "12+",
+            "label": "Prisons Reached",
+            "detail": "Across England & Wales",
+            "source": "BBC Programme Records"
+          }
+        }
+      },
+      "block_order": [
+        "stat-1",
+        "stat-2",
+        "stat-3",
+        "stat-4"
+      ],
+      "settings": {
+        "heading": "Our Impact at a Glance",
+        "subheading": "Measurable change through sustainable craftsmanship since 2012"
+      }
+    },
+    "problem": {
+      "type": "bbc-problem-statement",
+      "blocks": {
+        "stat-1": {
+          "type": "stat",
+          "settings": {
+            "number": "39%",
+            "label": "less likely to reoffend",
+            "source": "MoJ Farmer Review"
+          }
+        },
+        "stat-2": {
+          "type": "stat",
+          "settings": {
+            "number": "£11.41",
+            "label": "return per £1 invested",
+            "source": "PACT Research"
+          }
+        },
+        "stat-3": {
+          "type": "stat",
+          "settings": {
+            "number": "45%",
+            "label": "of prisoners lose family contact",
+            "source": "Prison Reform Trust"
+          }
+        }
+      },
+      "block_order": [
+        "stat-1",
+        "stat-2",
+        "stat-3"
+      ],
+      "settings": {
+        "eyebrow": "Why This Matters",
+        "heading": "Family Connection Reduces Reoffending",
+        "text": "<p>Research consistently shows that maintaining family ties during imprisonment is one of the most effective ways to reduce reoffending. Yet 45% of prisoners lose contact with their children — damaging the relationships most crucial to successful rehabilitation.<\/p>",
+        "background_color": "#f8f8f6"
+      }
+    },
+    "story-1": {
+      "type": "bbc-participant-story",
+      "blocks": {
+        "tag-1": {
+          "type": "tag",
+          "settings": {
+            "label": "Build to Bond"
+          }
+        },
+        "tag-2": {
+          "type": "tag",
+          "settings": {
+            "label": "OCN Level 2"
+          }
+        },
+        "tag-3": {
+          "type": "tag",
+          "settings": {
+            "label": "HMP Lowdham Grange"
+          }
+        }
+      },
+      "block_order": [
+        "tag-1",
+        "tag-2",
+        "tag-3"
+      ],
+      "settings": {
+        "eyebrow": "In Their Words",
+        "section_heading": "Stories From the Programme",
+        "section_sub": "",
+        "text_align": "left",
+        "quote": "The bamboo bike course offers more than just technical training — it provides an avenue for creativity, teamwork, and self-expression. Watching the pride on a father's face when he presents a bike to his child is something special.",
+        "quote_mark": true,
+        "name": "Sally Allsopp",
+        "role": "Industries Manager, HMP Lowdham Grange",
+        "photo_alt": "",
+        "show_placeholder": false,
+        "image_position": "left",
+        "background_color": "#f8f8f6",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "story-2": {
+      "type": "bbc-participant-story",
+      "blocks": {
+        "tag-1": {
+          "type": "tag",
+          "settings": {
+            "label": "Community Programme"
+          }
+        },
+        "tag-2": {
+          "type": "tag",
+          "settings": {
+            "label": "Young Person"
+          }
+        }
+      },
+      "block_order": [
+        "tag-1",
+        "tag-2"
+      ],
+      "settings": {
+        "eyebrow": "Community Impact",
+        "section_heading": "Building Beyond Prison Walls",
+        "section_sub": "",
+        "text_align": "left",
+        "quote": "Building the bike taught me more than I ever learned in school. I didn't think I could make something that actually worked — but I did.",
+        "quote_mark": true,
+        "name": "A young participant",
+        "role": "Community programme, London",
+        "photo_alt": "",
+        "show_placeholder": false,
+        "image_position": "right",
+        "background_color": "#ffffff",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "funder-cta": {
+      "type": "bbc-impact-funder-cta",
+      "blocks": {
+        "card-buy": {
+          "type": "card",
+          "settings": {
+            "icon": "leaf",
+            "audience": "Buy",
+            "title": "Own or Build a Bamboo Bicycle",
+            "body": "Buy a ready-made bamboo frame or book a place on a build workshop. Every purchase supports our prison rehabilitation and education programmes.",
+            "link_text": "Shop bamboo bikes",
+            "link_url": "\/collections\/all",
+            "primary": true
+          }
+        },
+        "card-partner": {
+          "type": "card",
+          "settings": {
+            "icon": "building",
+            "audience": "Partner",
+            "title": "Work With Us",
+            "body": "We deliver programmes across prisons, schools, and community education. Corporate team-build workshops available. OCN Level 2 accredited. Self-delivery model for prisons.",
+            "link_text": "Explore partnerships",
+            "link_url": "\/pages\/contact-us",
+            "primary": false
+          }
+        },
+        "card-support": {
+          "type": "card",
+          "settings": {
+            "icon": "heart",
+            "audience": "Support",
+            "title": "Fund, Donate, or Champion",
+            "body": "£11.41 return per £1 invested. Fund a programme cohort, offer career placements, or champion our work through media and CSR. Every contribution builds futures.",
+            "link_text": "Talk to us about supporting",
+            "link_url": "\/pages\/contact-us",
+            "primary": false
+          }
+        }
+      },
+      "block_order": [
+        "card-buy",
+        "card-partner",
+        "card-support"
+      ],
+      "settings": {
+        "eyebrow": "Get Involved",
+        "heading": "Three Ways to Be Part of It",
+        "subheading": "Buy a bamboo bike, partner with our programmes, or support our work — every route creates real impact.",
+        "background_color": "#f8f8f6",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "closing": {
+      "type": "rich-text",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "full_width": true,
+        "padding_top": 60,
+        "padding_bottom": 80
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Join us in building a more inclusive, skilled, and sustainable future."
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Every bamboo bike built is a skill learned, a confidence gained, and a pathway opened. Get in touch to find out how you can be part of it.<\/p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Get in Touch",
+            "button_link": "\/pages\/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ]
+    }
+  },
+  "order": [
+    "impact-hero",
+    "press-logos",
+    "mission",
+    "stats",
+    "problem",
+    "story-1",
+    "story-2",
+    "funder-cta",
+    "closing"
+  ]
+}

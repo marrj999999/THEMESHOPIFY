@@ -1,0 +1,114 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-impact-report-2026",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "90%",
+            "label": "prison course completion",
+            "source": "BBC programme records"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "4",
+            "label": "active prison sites",
+            "source": "with HMPPS"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "26%",
+            "label": "measured rise in participant confidence",
+            "source": "programme evaluation"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "number": "4,000+",
+            "label": "builders worldwide since 2012",
+            "source": "45 countries"
+          }
+        },
+        "arm_1": {
+          "type": "arm",
+          "settings": {
+            "tag": "Rehabilitation",
+            "title": "build to bond — prisons",
+            "body": "A six-week bamboo bike-building course inside prison workshops. Makers earn an OCN Level 2 in Workshop Skills and Sustainable Manufacturing and finish by presenting the balance bike they built to their own child on family visit day. Live at HMP Lowdham Grange, HMP Foston Hall, HMP Lindholme and HMYOI Feltham, on a self-delivery model that trains staff and peer instructors to run the workshop."
+          }
+        },
+        "arm_2": {
+          "type": "arm",
+          "settings": {
+            "tag": "Prevention",
+            "title": "make engineers — schools & youth",
+            "body": "Curriculum-mapped engineering programmes for ages 11–19, from a free bamboo-speaker taster to a rideable bamboo gravel frame — with an optional proposed Level 1 curriculum, Practical Manufacturing Skills (OCN approval in progress). 1,500+ young people reached to date through builds, tasters and talks."
+          }
+        },
+        "quote_1": {
+          "type": "quote",
+          "settings": {
+            "quote": "Innovative projects, such as Build to Bond, support rehabilitation and help cut reoffending.",
+            "attr": "Lord Timpson, Prisons Minister"
+          }
+        },
+        "quote_2": {
+          "type": "quote",
+          "settings": {
+            "quote": "A truly inspiring cohort, delivering meaningful impact in the community.",
+            "attr": "Ruth Leas, CEO, Investec Bank",
+            "src": "Investec Beyond Business 2025"
+          }
+        },
+        "plan_1": {
+          "type": "plan",
+          "settings": {
+            "title": "codify delivery",
+            "body": "Turn Build to Bond into a fully documented, turnkey programme — session plans, worksheets and instructor training — so new sites can run it without us in the room."
+          }
+        },
+        "plan_2": {
+          "type": "plan",
+          "settings": {
+            "title": "measure what matters",
+            "body": "Introduce a simple pre\/post participant measure across both arms, so next year's report can show change in confidence and skills — not just completion."
+          }
+        },
+        "plan_3": {
+          "type": "plan",
+          "settings": {
+            "title": "follow makers beyond the gate",
+            "body": "Build the follow-up that tells us what happens after release and after school — progression into work, education and training."
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "arm_1",
+        "arm_2",
+        "quote_1",
+        "quote_2",
+        "plan_1",
+        "plan_2",
+        "plan_3"
+      ],
+      "settings": {
+        "cta1_url": "\/pages\/impact",
+        "cta2_url": "\/pages\/prisons",
+        "measure_body": "We track course completion (90%, BBC programme records), accredited qualifications for every cohort — OCN Level 2 (Workshop Skills and Sustainable Manufacturing) in prisons, the proposed Level 1 curriculum, Practical Manufacturing Skills (OCN approval in progress) in schools — and participant confidence, which rose a measured 26% across evaluated cohorts (programme evaluation). We do not publish outcome claims we cannot evidence: no return-on-investment figures, no reoffending attribution. Where our numbers improve on the national picture, we say so with sources; where we don't yet know, we say that too."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

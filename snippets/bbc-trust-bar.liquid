@@ -1,0 +1,152 @@
+{% comment %}
+  BBC Trust Bar — Shows key stats across all pages
+  Add to theme.liquid after header
+  Uses SVG icons for consistency across devices
+{% endcomment %}
+
+<div class="bbc-trust-bar" role="complementary" aria-label="Company credentials">
+  <div class="bbc-trust-bar__container">
+    <div class="bbc-trust-bar__item">
+      <span class="bbc-trust-bar__icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+      </span>
+      <span class="bbc-trust-bar__stat">{{ settings.bbc_tb_stat1 | default: "4,000+" }}</span>
+      <span class="bbc-trust-bar__label">{{ settings.bbc_tb_lbl1 | default: "Bikes Built" }}</span>
+    </div>
+    <div class="bbc-trust-bar__item">
+      <span class="bbc-trust-bar__icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </span>
+      <span class="bbc-trust-bar__stat">{{ settings.bbc_tb_stat2 | default: "45" }}</span>
+      <span class="bbc-trust-bar__label">{{ settings.bbc_tb_lbl2 | default: "Countries" }}</span>
+    </div>
+    <div class="bbc-trust-bar__item">
+      <span class="bbc-trust-bar__icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+      </span>
+      <span class="bbc-trust-bar__stat">{{ settings.bbc_tb_stat3 | default: "Since 2012" }}</span>
+      <span class="bbc-trust-bar__label visually-hidden">{{ settings.bbc_tb_lbl3 | default: "Established" }}</span>
+    </div>
+    <div class="bbc-trust-bar__item">
+      <span class="bbc-trust-bar__icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </span>
+      <span class="bbc-trust-bar__stat">Reused</span>
+      <span class="bbc-trust-bar__label">{{ settings.bbc_tb_lbl4 | default: "cohort to cohort" }}</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .bbc-trust-bar {
+    background: var(--bbc-forest, #073e27);
+    color: white;
+    padding: 12px 20px;
+    font-family: var(--font-body-family, 'Plus Jakarta Sans', sans-serif);
+  }
+  
+  .bbc-trust-bar__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  
+  .bbc-trust-bar__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    min-height: 24px;
+  }
+  
+  .bbc-trust-bar__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bbc-gold, #ffa900);
+  }
+  
+  .bbc-trust-bar__icon svg {
+    display: block;
+  }
+  
+  .bbc-trust-bar__stat {
+    font-weight: 700;
+    color: var(--bbc-gold, #ffa900);
+  }
+  
+  .bbc-trust-bar__label {
+    opacity: 0.9;
+  }
+  
+  /* Screen reader only class */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-trust-bar {
+      padding: 10px 16px;
+    }
+    
+    .bbc-trust-bar__container {
+      gap: 16px;
+    }
+    
+    .bbc-trust-bar__item {
+      font-size: 12px;
+      gap: 6px;
+    }
+    
+    .bbc-trust-bar__icon svg {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .bbc-trust-bar__label:not(.visually-hidden) {
+      /* Show abbreviated on mobile - use CSS content if needed */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .bbc-trust-bar__container {
+      justify-content: space-between;
+      gap: 8px;
+    }
+    
+    .bbc-trust-bar__item {
+      flex-direction: column;
+      gap: 2px;
+      text-align: center;
+    }
+    
+    .bbc-trust-bar__label:not(.visually-hidden) {
+      display: none;
+    }
+  }
+</style>

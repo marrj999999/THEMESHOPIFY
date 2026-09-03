@@ -1,0 +1,198 @@
+{%- comment -%}
+  bbc-media — THE standard BBC video/image treatment (v2, 2026-07-22).
+  One snippet renders every image/video moment on the theme the same way:
+
+  · Image only → plain responsive image.
+  · + video   → the SIGNATURE PLAYER, built from the brand system:
+      - duotone poster (forest wash, brief's duotone direction) that
+        RESOLVES TO FULL COLOUR on hover/focus — the "colour arrives" moment
+      - lime TICKET chip (rotated, Atkinson 800 lowercase) — label param,
+        e.g. "watch the full build · 29 min"
+      - breathing lime play button (reduced-motion guarded)
+      - click → loading state (poster dims, button spins) → plays INLINE
+        in the frame (youtube-nocookie / vimeo / uploaded file), snapping
+        the box to 16:9 so the film always fills — no letterboxing
+      - fullscreen enabled (allow + allowfullscreen + fs=1)
+      - nothing heavy loads until click (facade); preconnect on hover
+      - NO poster supplied? YouTube's own maxres thumbnail is used
+        automatically (hq fallback) — zero-config consistency.
+
+  Usage:
+    {% render 'bbc-media',
+        image: block.settings.image,        (image_picker object)
+        src: 'file-or-url.jpg',             (asset filename or full URL)
+        fallback: 'bbc-rd-x.jpg',           (asset fallback)
+        video: block.settings.video,        (uploaded Shopify video)
+        youtube: block.settings.video_url,  (YouTube/Vimeo URL *or bare ID*)
+        label: 'watch · 9 min',             (ticket chip text, optional)
+        alt: '...', class: 'bbc-media--ar169', sizes: '...', loading: 'lazy' %}
+{%- endcomment -%}
+
+{%- liquid
+  assign _u = youtube | default: ''
+  assign _kind = ''
+  assign _vid = ''
+  if _u != blank
+    if _u contains 'vimeo'
+      assign _kind = 'vimeo'
+      assign _vid = _u | split: 'vimeo.com/' | last | split: '?' | first | split: '/' | first
+    else
+      assign _kind = 'youtube'
+      assign _t = _u | split: 'youtu.be/' | last | split: 'watch?v=' | last | split: 'embed/' | last | split: 'shorts/' | last | split: 'live/' | last
+      assign _vid = _t | split: '&' | first | split: '?' | first | split: '/' | first
+    endif
+  endif
+  assign _hasfile = false
+  if video != blank
+    assign _hasfile = true
+  endif
+  assign _playable = false
+  if _vid != blank or _hasfile
+    assign _playable = true
+  endif
+-%}
+
+<div class="bbc-media{% if class != blank %} {{ class }}{% endif %}{% if _playable %} bbc-media--playable{% endif %}"
+  {%- if _kind != blank %} data-bbc-embed="{{ _kind }}" data-bbc-id="{{ _vid | escape }}"{% endif -%}>
+  {%- if image != blank -%}
+    <img class="bbc-media__img" src="{{ image | image_url: width: 1400 }}"
+      srcset="{{ image | image_url: width: 700 }} 700w, {{ image | image_url: width: 1100 }} 1100w, {{ image | image_url: width: 1400 }} 1400w"
+      sizes="{{ sizes | default: '(max-width:749px) 100vw, 50vw' }}"
+      alt="{{ alt | default: image.alt | escape }}" loading="{{ loading | default: 'lazy' }}"
+      width="{{ image.width }}" height="{{ image.height }}">
+  {%- elsif src != blank -%}
+    <img class="bbc-media__img" src="{% if src contains '//' %}{{ src }}{% else %}{{ src | asset_url }}{% endif %}" alt="{{ alt | escape }}" loading="{{ loading | default: 'lazy' }}">
+  {%- elsif fallback != blank -%}
+    <img class="bbc-media__img" src="{{ fallback | asset_url }}" alt="{{ alt | escape }}" loading="{{ loading | default: 'lazy' }}">
+  {%- elsif _hasfile and video.preview_image != blank -%}
+    {%- comment -%} zero-config poster for uploaded files: the video's own preview frame.
+       Was the black-box case — file videos rendered no poster at all (2026-08-08). {%- endcomment -%}
+    <img class="bbc-media__img" src="{{ video.preview_image | image_url: width: 1400 }}"
+      srcset="{{ video.preview_image | image_url: width: 700 }} 700w, {{ video.preview_image | image_url: width: 1400 }} 1400w"
+      sizes="{{ sizes | default: '(max-width:749px) 100vw, 50vw' }}"
+      alt="{{ alt | escape }}" loading="{{ loading | default: 'lazy' }}"
+      width="{{ video.preview_image.width }}" height="{{ video.preview_image.height }}">
+  {%- elsif _kind == 'youtube' and _vid != blank -%}
+    {%- comment -%} zero-config poster: YouTube's own thumbnail {%- endcomment -%}
+    <img class="bbc-media__img" src="https://i.ytimg.com/vi/{{ _vid | escape }}/maxresdefault.jpg" alt="{{ alt | escape }}" loading="{{ loading | default: 'lazy' }}" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://i.ytimg.com/vi/{{ _vid | escape }}/hqdefault.jpg'}">
+  {%- endif -%}
+
+  {%- if _hasfile and _kind == blank -%}
+    <template class="bbc-media__file">{{ video | video_tag: controls: true, autoplay: true, playsinline: true, image_size: '1400x' }}</template>
+  {%- endif -%}
+
+  {%- if _playable -%}
+    <span class="bbc-media__duo" aria-hidden="true"></span>
+    <button class="bbc-media__play" type="button" aria-label="Play video"><span class="bbc-media__playicon"></span></button>
+    <span class="bbc-media__chip" aria-hidden="true">{{ label | default: 'film' }}</span>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+.bbc-media{position:relative;overflow:hidden;display:block;background:#0e1a17}
+.bbc-media--ar43{aspect-ratio:4/3}
+.bbc-media--ar169{aspect-ratio:16/9}
+.bbc-media__img{display:block;width:100%;height:100%;object-fit:cover}
+/* inside a case-card media frame the player absolute-fills the frame's aspect box —
+   without this the block collapses to 0 height (wall video posters vanished at 1568,
+   caught by the 2026-07-24 alignment audit) */
+.rd-cscard__media > .bbc-media{position:absolute;inset:0;width:100%;height:100%}
+.bbcpl-media > .bbc-media{position:absolute;inset:0;width:100%;height:100%}
+/* `width:100%` is load-bearing, not tidiness. .bbcpl-media is a grid item that stretches
+   to the pillar row's height. With width:auto, aspect-ratio resolves the OTHER way —
+   width from height — so a tall text column made the photo wider than its track: measured
+   1137px and 1329px inside a 780px column at 1530w, overrunning the text by 357px and
+   548px (2026-08-03). The absolutely-filled image then painted under the copy, which is
+   why pixel-sampled contrast reported pillar text at 1.08:1 on a photographic background
+   while the cascade said it was ink on bone — two instruments disagreeing because the
+   defect was geometry, not colour. The reversed pillar also ran 387px past the viewport.
+   Constraining width makes aspect-ratio derive height from width, as intended. */
+.bbcpl-media:has(> .bbc-media){aspect-ratio:16/10;width:100%}
+.bbc-media--playable{cursor:pointer}
+/* duotone poster (forest wash) that resolves to colour on hover/focus */
+.bbc-media--playable .bbc-media__img{filter:grayscale(1) contrast(1.06) brightness(.9);transition:filter .45s ease}
+.bbc-media__duo{position:absolute;inset:0;background:#003C32;mix-blend-mode:multiply;opacity:.42;transition:opacity .45s ease;pointer-events:none}
+.bbc-media--playable:hover .bbc-media__img,.bbc-media--playable:focus-within .bbc-media__img,.bbc-media.is-loading .bbc-media__img{filter:none}
+.bbc-media--playable:hover .bbc-media__duo,.bbc-media--playable:focus-within .bbc-media__duo,.bbc-media.is-loading .bbc-media__duo,.bbc-media.is-playing .bbc-media__duo{opacity:0}
+/* play button — lime circle, forest triangle, gentle breathe, tilt on hover */
+.bbc-media__play{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent;cursor:pointer;padding:0;z-index:2}
+.bbc-media__playicon{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:78px;height:78px;border-radius:50%;background:#D4FD62;box-shadow:0 10px 30px rgba(0,0,0,.45);transition:transform .25s ease,background .25s ease}
+.bbc-media__playicon::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-40%,-50%);width:0;height:0;border-style:solid;border-width:14px 0 14px 23px;border-color:transparent transparent transparent #003C32}
+@media (prefers-reduced-motion: no-preference){
+  .bbc-media--playable .bbc-media__playicon{animation:bbcm-breathe 3.2s ease-in-out infinite}
+  @keyframes bbcm-breathe{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.05)}}
+}
+.bbc-media--playable:hover .bbc-media__playicon{animation:none;transform:translate(-50%,-50%) scale(1.1) rotate(-6deg)}
+/* lime ticket chip */
+.bbc-media__chip{position:absolute;left:14px;bottom:14px;z-index:2;background:#D4FD62;color:#003C32;font-family:"Atkinson Hyperlegible",sans-serif;font-weight:800;font-size:14px;line-height:1;letter-spacing:.01em;padding:9px 13px;border-radius:8px;transform:rotate(-1.5deg);box-shadow:0 4px 14px rgba(0,0,0,.35);pointer-events:none}
+/* loading: poster stays, button spins */
+.bbc-media.is-loading .bbc-media__playicon{animation:bbcm-spin .8s linear infinite;background:#D4FD62}
+.bbc-media.is-loading .bbc-media__playicon::after{border-color:transparent transparent transparent rgba(0,60,50,.35)}
+@keyframes bbcm-spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+/* playing: box locks to 16:9 so the film always FILLS (no letterbox) */
+.bbc-media.is-loading,.bbc-media.is-playing{aspect-ratio:16/9;height:auto}
+.bbc-media__frame{position:absolute;inset:0;background:#06231C;z-index:3;opacity:0;transition:opacity .3s ease}
+.bbc-media.is-playing .bbc-media__frame{opacity:1}
+.bbc-media__frame iframe,.bbc-media__frame video{position:absolute !important;inset:0 !important;width:100% !important;height:100% !important;max-width:100% !important;border:0;background:#000}
+/* the !importants counter bbc-mobile-fixes.css:305 (global iframe{height:auto !important}) — the rule that collapsed every embed to 150px */
+.bbc-media.is-playing .bbc-media__img{opacity:0}
+.bbc-media.is-playing .bbc-media__play,.bbc-media.is-playing .bbc-media__chip{display:none}
+.bbc-media__play:focus-visible{outline:3px solid #c6f24e;outline-offset:-3px}
+{% endstylesheet %}
+
+{% javascript %}
+(function () {
+  var pre = false;
+  function preconnect() {
+    if (pre) return; pre = true;
+    ['https://www.youtube-nocookie.com', 'https://i.ytimg.com', 'https://player.vimeo.com'].forEach(function (h) {
+      var l = document.createElement('link'); l.rel = 'preconnect'; l.href = h; document.head.appendChild(l);
+    });
+  }
+  document.addEventListener('pointerover', function (e) {
+    if (e.target.closest && e.target.closest('.bbc-media--playable')) preconnect();
+  }, { passive: true });
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.bbc-media__play');
+    if (!btn) return;
+    var m = btn.closest('.bbc-media');
+    if (!m || m.classList.contains('is-playing') || m.classList.contains('is-loading')) return;
+    // play inline even when the media sits inside a linked card — don't navigate
+    e.preventDefault();
+    e.stopPropagation();
+    preconnect();
+    var frame = document.createElement('div');
+    frame.className = 'bbc-media__frame';
+    var kind = m.getAttribute('data-bbc-embed');
+    // sanitise: video ids are alphanumeric / dash / underscore only
+    var id = (m.getAttribute('data-bbc-id') || '').replace(/[^A-Za-z0-9_-]/g, '');
+    var media = null;
+    if ((kind === 'youtube' || kind === 'vimeo') && id) {
+      var ifr = document.createElement('iframe');
+      ifr.src = kind === 'youtube'
+        ? 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&fs=1'
+        : 'https://player.vimeo.com/video/' + id + '?autoplay=1&title=0&byline=0';
+      ifr.setAttribute('allow', 'autoplay; encrypted-media; fullscreen; picture-in-picture');
+      ifr.setAttribute('allowfullscreen', '');
+      ifr.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+      ifr.setAttribute('title', 'Video');
+      frame.appendChild(ifr);
+      media = ifr;
+    } else {
+      var tpl = m.querySelector('.bbc-media__file');
+      if (!tpl || !tpl.content) return;
+      frame.appendChild(tpl.content.cloneNode(true));
+      var v = frame.querySelector('video');
+      if (v) { v.setAttribute('autoplay', ''); v.setAttribute('playsinline', ''); if (v.play) { v.play().catch(function () {}); } media = v; }
+    }
+    // loading → playing: poster stays (dimmed, spinner) until the player is ready
+    m.classList.add('is-loading');
+    m.appendChild(frame);
+    var done = false;
+    function ready() { if (done) return; done = true; m.classList.remove('is-loading'); m.classList.add('is-playing'); }
+    if (media) { media.addEventListener('load', ready); media.addEventListener('loadeddata', ready); }
+    setTimeout(ready, 4000); /* fallback: never strand the loading state */
+  });
+})();
+{% endjavascript %}

@@ -1,0 +1,626 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-product-2026",
+      "blocks": {
+        "perk_1": {
+          "type": "perk",
+          "settings": {
+            "text": "No power tools required — just basic hand tools"
+          }
+        },
+        "perk_2": {
+          "type": "perk",
+          "settings": {
+            "text": "Illustrated manual + 15+ hours of step-by-step video"
+          }
+        },
+        "perk_3": {
+          "type": "perk",
+          "settings": {
+            "text": "Lifetime community of 4,000+ builders for support"
+          }
+        },
+        "perk_4": {
+          "type": "perk",
+          "settings": {
+            "text": "Cycle to Work accepted — save through salary sacrifice"
+          }
+        }
+      },
+      "block_order": [
+        "perk_1",
+        "perk_2",
+        "perk_3",
+        "perk_4"
+      ],
+      "settings": {
+        "product_badge": "MTB frame kit",
+        "product_subtitle": "Bigger bamboo tubes, tighter tolerances and disc-ready 29er geometry — built by hand to take roots, rocks and drops. Bamboo's natural damping kills trail chatter the way an alloy frame never will, and the joints are stronger than the tubes.",
+        "stock_line": "In stock — ships ~twice a week from our London workshop, fully tracked.",
+        "secondary_label": "Prefer a workshop?",
+        "reassure_line": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks",
+        "mission_line": "Build your own — and help fund a place on our Build to Bond prison programme.",
+        "buddy_text": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories.",
+        "difficulty_label": "Beginner-friendly · no experience needed",
+        "build_time_label": "~30–45 hrs · a few weekends",
+        "sizing_eyebrow": "Find your fit",
+        "sizing_heading": "built to fit you",
+        "sizing_body": "Small 157–171 cm · Medium 169–180 cm · Large 178–187 cm · XL 185–193 cm. Between sizes, or not sure? Send us your height and inside-leg measurement and we'll recommend the fit — or choose a Custom frame.",
+        "sizing_note": "",
+        "loop_step1_sm": "a 29er frame",
+        "bundle_a_text": "Everything to build the bamboo mountain bike frame.",
+        "bundle_b_label": "Component pack",
+        "bundle_b_price": "Priced by build",
+        "bundle_b_text": "Bars, wheels, drivetrain and finishing kit, chosen for your build.",
+        "bundle_total_text": "A complete, one-of-a-kind mountain bike — built by you.",
+        "stories_eyebrow": "Built from this kit",
+        "stories_title": "what people have done with theirs.",
+        "stories_lede": "Frames built at kitchen tables and in our workshop, then ridden hard.",
+        "stories_all_label": "More builds",
+        "stories_all_url": "/blogs/club-news",
+        "press_quote": "Cycling record holder Kate Strong in bamboo bike ride challenge.",
+        "press_cite": "BBC News · 2023",
+        "sticky_buy": true,
+        "content_bands": false,
+        "sheet_bg": true,
+        "pay_line": "Klarna and Shop Pay at checkout · Cycle to Work accepted",
+        "help_lead": "Not sure it's for you?",
+        "help_label": "Book a free 10-minute call",
+        "help_url": "/pages/contact-us",
+        "stories_label": "Read the builder stories",
+        "stories_url": "/blogs/club-news/tagged/mtb"
+      }
+    },
+    "kitship": {
+      "type": "bbc-kit-shipping",
+      "settings": {
+        "background": "forest",
+        "anchor": "shipping",
+        "eyebrow": "shipped worldwide from the London workshop",
+        "heading": "no customs bill at the door",
+        "col1": "Destination",
+        "col2": "Shipping",
+        "col3": "Duty & tax",
+        "panel_title": "Delivered duty paid",
+        "panel_body": "The price at checkout is the price the kit costs you. We pay the import duty and tax before it ships, so the courier has nothing to collect when it arrives.",
+        "worked": "Sydney, Large kit: £385 kit + £75 shipping = £460 total, and nothing further on delivery.",
+        "foot": "Packed by hand and shipped twice a week, tracked all the way. Kits have reached 45 countries."
+      },
+      "blocks": {
+        "rt0": {
+          "type": "rate",
+          "settings": {
+            "place": "United Kingdom",
+            "rate": "£12",
+            "duty": "Included"
+          }
+        },
+        "rt1": {
+          "type": "rate",
+          "settings": {
+            "place": "Europe",
+            "rate": "£25",
+            "duty": "Paid by us"
+          }
+        },
+        "rt2": {
+          "type": "rate",
+          "settings": {
+            "place": "USA & Canada",
+            "rate": "£45",
+            "duty": "Paid by us"
+          }
+        },
+        "rt3": {
+          "type": "rate",
+          "settings": {
+            "place": "Rest of world",
+            "rate": "£75",
+            "duty": "Paid by us"
+          }
+        }
+      },
+      "block_order": [
+        "rt0",
+        "rt1",
+        "rt2",
+        "rt3"
+      ]
+    },
+    "lower": {
+      "type": "bbc-product-2026",
+      "settings": {
+        "product_badge": "MTB frame kit",
+        "product_subtitle": "Bigger bamboo tubes, tighter tolerances and disc-ready 29er geometry — built by hand to take roots, rocks and drops. Bamboo's natural damping kills trail chatter the way an alloy frame never will, and the joints are stronger than the tubes.",
+        "stock_line": "In stock — ships ~twice a week from our London workshop, fully tracked.",
+        "secondary_label": "Prefer a workshop?",
+        "reassure_line": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks",
+        "mission_line": "Build your own — and help fund a place on our Build to Bond prison programme.",
+        "buddy_text": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories.",
+        "difficulty_label": "Beginner-friendly · no experience needed",
+        "build_time_label": "~30–45 hrs · a few weekends",
+        "sizing_eyebrow": "Find your fit",
+        "sizing_heading": "built to fit you",
+        "sizing_body": "Small 157–171 cm · Medium 169–180 cm · Large 178–187 cm · XL 185–193 cm. Between sizes, or not sure? Send us your height and inside-leg measurement and we'll recommend the fit — or choose a Custom frame.",
+        "sizing_note": "",
+        "loop_step1_sm": "a 29er frame",
+        "bundle_a_text": "Everything to build the bamboo mountain bike frame.",
+        "bundle_b_label": "Component pack",
+        "bundle_b_price": "Priced by build",
+        "bundle_b_text": "Bars, wheels, drivetrain and finishing kit, chosen for your build.",
+        "bundle_total_text": "A complete, one-of-a-kind mountain bike — built by you.",
+        "stories_eyebrow": "Built from this kit",
+        "stories_title": "what people have done with theirs.",
+        "stories_lede": "Frames built at kitchen tables and in our workshop, then ridden hard.",
+        "stories_all_label": "More builds",
+        "stories_all_url": "/blogs/club-news",
+        "press_quote": "Cycling record holder Kate Strong in bamboo bike ride challenge.",
+        "press_cite": "BBC News · 2023",
+        "show_buybox": false,
+        "content_bands": true
+      },
+      "blocks": {
+        "spec_p1": {
+          "type": "spec",
+          "settings": {
+            "label": "Wheel size",
+            "value": "29er frame · 650B/27.5\" pack option"
+          }
+        },
+        "spec_p2": {
+          "type": "spec",
+          "settings": {
+            "label": "Geometry",
+            "value": "Hardtail trail / XC, disc mounts"
+          }
+        },
+        "spec_p3": {
+          "type": "spec",
+          "settings": {
+            "label": "Build time",
+            "value": "30–45 hrs"
+          }
+        },
+        "spec_p4": {
+          "type": "spec",
+          "settings": {
+            "label": "Strength",
+            "value": "High strength-to-weight"
+          }
+        },
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "set the geometry",
+            "description": "Lock gravel geometry on the jig — wider clearance and a slacker head angle than road."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "join & wrap",
+            "description": "Bond the tubes with epoxy and wrap each joint with flax fibre."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "cure",
+            "description": "Leave it for a full cure — that's where maximum joint strength comes from."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "sand, seal & ride",
+            "description": "Sand smooth, seal the bamboo, fit headset and BB. Adventure awaits."
+          }
+        },
+        "review_p1": {
+          "type": "review",
+          "settings": {
+            "quote": "Rides lovely. Build quality is better than I expected for a home-built frame. Taking it on proper trails now.",
+            "cite": "SingleTrack World Member · MTB builder, UK"
+          }
+        },
+        "review_p2": {
+          "type": "review",
+          "settings": {
+            "quote": "The bike keeps taking everything I throw at it — drops, jumps, steep technical trails, long days in the saddle. It's pure joy.",
+            "cite": "Mark · bamboo 29er, two years in the Surrey Hills"
+          }
+        },
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "3,500+",
+            "label": "frames built at home",
+            "source": "BBC records · since 2012"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "84.3 MPa",
+            "label": "bamboo tubing, tested",
+            "source": "Swansea University · BS ISO 22157:2019"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "2012",
+            "label": "building since — early builds still ridden",
+            "source": "BBC records"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "number": "~2×/wk",
+            "label": "shipped from London",
+            "source": "full tracking"
+          }
+        },
+        "related_1": {
+          "type": "related",
+          "settings": {
+            "title": "road lugged kit",
+            "price": "",
+            "fallback": "bbc-rd-prod-flax.jpg"
+          }
+        },
+        "related_2": {
+          "type": "related",
+          "settings": {
+            "title": "MTB frame kit",
+            "price": "",
+            "fallback": "bbc-rd-prod-build.jpg"
+          }
+        },
+        "related_3": {
+          "type": "related",
+          "settings": {
+            "title": "balance bike kit",
+            "price": "From £165",
+            "fallback": "bbc-rd-prod-balance.jpg"
+          }
+        },
+        "related_4": {
+          "type": "related",
+          "settings": {
+            "title": "custom frame kit",
+            "price": "Request a quote",
+            "fallback": "bbc-rd-road-charlie.jpg"
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Can a bamboo frame really handle proper trail riding?",
+            "answer": "Finished frames are sealed with epoxy resin. Dry your bike after wet rides, store it indoors, and check the joints before every early ride. The tubing we supply is tested at Swansea University to BS ISO 22157:2019; how your bike holds up over the years is decided by the joints you make — follow the manual and let the resin cure fully, and call us if anything ever looks wrong."
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it stiff enough to climb and put power down?",
+            "answer": "<p>The MTB kit uses bigger-diameter bamboo tubes and tighter tolerances than our road and gravel kits, built for off-road loads. Builders report it climbs well and descends confidently — 'the 29er geometry is spot on.'</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Will it survive impacts and rough terrain?",
+            "answer": "Finished frames are sealed with epoxy resin. Dry your bike after wet rides, store it indoors, and check the joints before every early ride. The tubing we supply is tested at Swansea University to BS ISO 22157:2019; how your bike holds up over the years is decided by the joints you make — follow the manual and let the resin cure fully, and call us if anything ever looks wrong."
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "What wheel size and brakes does it take?",
+            "answer": "<p>It's built around 29er geometry with disc-brake mounts and a BSA 68mm bottom bracket. Our MTB component pack is specced for 650B/27.5\" if you prefer the smaller, punchier wheel — your call.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does the MTB frame take to build?",
+            "answer": "<p>About 30–45 hours over a few weekends — a little longer than our road and gravel kits because the tubes are larger and the off-road tolerances are tighter. No power tools needed: just basic hand tools and a work surface.</p>"
+          }
+        },
+        "story_1": {
+          "type": "story",
+          "settings": {
+            "kind": "expedition",
+            "title": "8,288 miles down the andes",
+            "outcome": "8,288 miles down the andes",
+            "blurb": "Kate Rawles built hers with us, then rode the length of South America.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/CordilleraBlancaPeru_617cbc2f-5a4b-4f15-b3be-56011f4be10a.jpg?v=1771839617",
+            "url": "/blogs/impact/kate-rawles-8-288-miles-to-patagonia-on-a-bamboo-bike"
+          }
+        },
+        "story_2": {
+          "type": "story",
+          "settings": {
+            "kind": "expedition",
+            "title": "london to singapore, 22,000km",
+            "outcome": "london to singapore, 22,000km",
+            "blurb": "Two doctors, two self-built frames, one continent-crossing ride.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/edad684e909bdbf87ecb75c13065888b_cc69559d-3cf7-499f-aa19-7e3ba5f2b5df.jpg?v=1771793484",
+            "video": "J2KS_s9X5Jg",
+            "url": "/blogs/impact/london-to-singapore-bamboo-bike-22000km"
+          }
+        },
+        "story_3": {
+          "type": "story",
+          "settings": {
+            "kind": "ten years",
+            "title": "ten years of daily riding",
+            "outcome": "ten years of daily riding",
+            "blurb": "A first-time builder’s frame, still in service a decade later.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/files/kiku-obata_the-bamboo-biker-the-friend_01.jpg?v=1",
+            "url": "/blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike"
+          }
+        },
+        "story_film": {
+          "type": "story",
+          "settings": {
+            "kind": "build film",
+            "title": "a full frame build, filmed",
+            "outcome": "a full frame build, filmed",
+            "blurb": "Gravel Cyclist takes a kit from tubes to finished frame, on camera.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/OBCo73yMris-HD.jpg?v=1691577549",
+            "video": "OBCo73yMris",
+            "url": "/blogs/news/gravel-cyclist-frame-build-part-2"
+          }
+        },
+        "story_unbox": {
+          "type": "story",
+          "settings": {
+            "kind": "what you get",
+            "title": "what is actually in the box",
+            "outcome": "what is actually in the box",
+            "blurb": "Every part of a build kit, unpacked — the video people watch before they buy.",
+            "image": "https://i.ytimg.com/vi/k79tmYj9Cxk/maxresdefault.jpg",
+            "video": "k79tmYj9Cxk",
+            "url": "https://www.youtube.com/watch?v=k79tmYj9Cxk"
+          }
+        },
+        "story_full": {
+          "type": "story",
+          "settings": {
+            "kind": "full build",
+            "title": "a whole frame, start to finish",
+            "outcome": "a whole frame, start to finish",
+            "blurb": "The complete home-kit build in one film, so you know what you are taking on.",
+            "image": "https://i.ytimg.com/vi/UhuzVI2yVNU/maxresdefault.jpg",
+            "video": "UhuzVI2yVNU",
+            "url": "https://www.youtube.com/watch?v=UhuzVI2yVNU"
+          }
+        }
+      },
+      "block_order": [
+        "spec_p1",
+        "spec_p2",
+        "spec_p3",
+        "spec_p4",
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "review_p1",
+        "review_p2",
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "related_1",
+        "related_2",
+        "related_3",
+        "related_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "story_1",
+        "story_2",
+        "story_3",
+        "story_film",
+        "story_unbox",
+        "story_full"
+      ]
+    },
+    "kitdraw": {
+      "type": "bbc-kit-drawing-2026",
+      "settings": {
+        "anchor": "in-the-box",
+        "tb_a_key": "kit",
+        "tb_a": "№ 06 — mtb",
+        "tb_b_key": "built",
+        "tb_b": "by you, at home",
+        "eyebrow": "what arrives",
+        "heading": "everything but the parts you already own.",
+        "lede": "One box: graded bamboo, the metalwork, the fibre and resin, the jig, the plan and the course. Fork, wheels and groupset are yours to choose.",
+        "foot": "Spares included. If anything in the box is not right, we replace it.",
+        "product_image_index": 2,
+        "image_alt": "The mtb kit laid out flat",
+        "sheet_label": "1 of 1 · 1:1 plan in the box",
+        "sticker": "it grew itself.",
+        "show_pins": true
+      },
+      "blocks": {
+        "c1": {
+          "type": "callout",
+          "settings": {
+            "label": "heat-treated Moso bamboo tubes",
+            "note": "pre-shaped, with spares",
+            "x": 15,
+            "y": 55
+          }
+        },
+        "c2": {
+          "type": "callout",
+          "settings": {
+            "label": "CNC head tube, bottom-bracket shell and modular dropouts",
+            "note": "",
+            "x": 66,
+            "y": 10
+          }
+        },
+        "c3": {
+          "type": "callout",
+          "settings": {
+            "label": "flax fibre and two-part epoxy resin",
+            "note": "for the joints",
+            "x": 66,
+            "y": 35
+          }
+        },
+        "c4": {
+          "type": "callout",
+          "settings": {
+            "label": "plywood alignment jig and 1:1 frame plan",
+            "note": "",
+            "x": 78,
+            "y": 85
+          }
+        },
+        "c5": {
+          "type": "callout",
+          "settings": {
+            "label": "illustrated manual + 15 hours of video",
+            "note": "and the builder community",
+            "x": 48,
+            "y": 15
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ]
+    },
+    "kitspec": {
+      "type": "bbc-kit-spec",
+      "settings": {
+        "background": "bone",
+        "anchor": "spec",
+        "eyebrow": "fits your parts",
+        "heading": "will it take my parts?",
+        "lede": "The numbers you need to check a part you already own. The kit is the frame — fork, wheels and groupset are yours to choose.",
+        "foot_left": "Building from a donor bike? Send us its spec and we'll confirm the fit before you order.",
+        "foot_right": "Ask us about your parts",
+        "foot_url": "/pages/contact-us"
+      },
+      "blocks": {
+        "sp0": {
+          "type": "spec",
+          "settings": {
+            "label": "wheel size",
+            "value": "29er or 650B",
+            "note": "choose at checkout",
+            "icon": "wheel"
+          }
+        },
+        "sp1": {
+          "type": "spec",
+          "settings": {
+            "label": "brakes",
+            "value": "Disc",
+            "note": "disc-brake mounts",
+            "icon": "brake"
+          }
+        },
+        "sp2": {
+          "type": "spec",
+          "settings": {
+            "label": "bottom bracket",
+            "value": "BSA 68 mm",
+            "note": "threaded",
+            "icon": "bb"
+          }
+        },
+        "sp3": {
+          "type": "spec",
+          "settings": {
+            "label": "build time",
+            "value": "30–45 hrs",
+            "note": "across a few weekends",
+            "icon": "clock"
+          }
+        },
+        "ef1": {
+          "type": "effort",
+          "settings": {
+            "label": "build time",
+            "value": "30–45 hrs",
+            "note": "across a few weekends"
+          }
+        },
+        "ef2": {
+          "type": "effort",
+          "settings": {
+            "label": "difficulty",
+            "value": "No experience needed",
+            "note": "most builders start from zero"
+          }
+        },
+        "ef3": {
+          "type": "effort",
+          "settings": {
+            "label": "tools",
+            "value": "Hand tools only",
+            "note": "hacksaw · files · sandpaper · tape"
+          }
+        },
+        "ef4": {
+          "type": "effort",
+          "settings": {
+            "label": "space",
+            "value": "A table",
+            "note": "about 1200 × 600 mm"
+          }
+        },
+        "dc1": {
+          "type": "doc",
+          "settings": {
+            "label": "1:1 frame plan — in the box",
+            "url": ""
+          }
+        },
+        "dc2": {
+          "type": "doc",
+          "settings": {
+            "label": "Build manual and video course — with your kit",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "sp0",
+        "sp1",
+        "sp2",
+        "sp3",
+        "ef1",
+        "ef2",
+        "ef3",
+        "ef4",
+        "dc1",
+        "dc2"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "kitdraw",
+    "kitspec",
+    "kitship",
+    "lower"
+  ]
+}

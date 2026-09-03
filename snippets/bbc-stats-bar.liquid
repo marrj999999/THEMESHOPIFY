@@ -1,0 +1,33 @@
+{% comment %}
+  BBC Stats Bar - Trust indicators
+  Brand colors: FOREST #073e27, TEAL #3f8b66, GOLD #ffa900
+  Font: Plus Jakarta Sans
+  Usage: {% render 'bbc-stats-bar' %}
+{% endcomment %}
+
+<div class="bbc-stats-bar" style="
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 1.5rem 1rem;
+  background: #073e27;
+  color: #FFFFFF;
+">
+  <div class="bbc-stat" style="text-align: center;">
+    <span style="font-size: 1.75rem; font-weight: 700; color: #ffa900;">4,000+</span>
+    <span style="display: block; font-size: 0.875rem; color: rgba(255,255,255,0.9);">{{ settings.bbc_sb_lbl1 | default: "bikes built" }}</span>
+  </div>
+  <div class="bbc-stat" style="text-align: center;">
+    <span style="font-size: 1.75rem; font-weight: 700; color: #ffa900;">45</span>
+    <span style="display: block; font-size: 0.875rem; color: rgba(255,255,255,0.9);">{{ settings.bbc_sb_lbl4 | default: "countries" }}</span>
+  </div>
+  <div class="bbc-stat" style="text-align: center;">
+    <span style="font-size: 1.75rem; font-weight: 700; color: #ffa900;">{{ settings.bbc_sb_lbl2 | default: "Since 2012" }}</span>
+    <span style="display: block; font-size: 0.875rem; color: rgba(255,255,255,0.9);">{{ settings.bbc_sb_stat4 | default: "14 years" }}</span>
+  </div>
+  <div class="bbc-stat" style="text-align: center;">
+    <span style="font-size: 1.75rem; font-weight: 700; color: #ffa900;">90%</span>
+    <span style="display: block; font-size: 0.875rem; color: rgba(255,255,255,0.9);">{{ settings.bbc_sb_lbl3 | default: "course completion" }}</span>
+  </div>
+</div>

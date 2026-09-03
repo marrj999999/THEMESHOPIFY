@@ -1,0 +1,486 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-programmes-2026",
+      "blocks": {
+        "f1": {
+          "type": "fact",
+          "settings": {
+            "number": "1,500+",
+            "label": "students taught",
+            "source": "programme records"
+          }
+        },
+        "f2": {
+          "type": "fact",
+          "settings": {
+            "number": "24",
+            "label": "schools, colleges & universities",
+            "source": "on record, 2014–today"
+          }
+        },
+        "f3": {
+          "type": "fact",
+          "settings": {
+            "number": "2",
+            "label": "OCN London Level 2 courses",
+            "source": "Workshop Skills · Balance Bike"
+          }
+        },
+        "ss1": {
+          "type": "sstep",
+          "settings": {
+            "title": "no workshop needed",
+            "body": "Hand tools and technical drawings — no welding, no factory. We bring everything; you bring the class and a room with tables."
+          }
+        },
+        "ss2": {
+          "type": "sstep",
+          "settings": {
+            "title": "no engineering background needed",
+            "body": "Teachers join in whether or not they've held a saw. Session plans, risk assessments and the run-of-day arrive before we do."
+          }
+        },
+        "ss3": {
+          "type": "sstep",
+          "settings": {
+            "title": "accredited when you want it",
+            "body": "The balance bike build is available as an OCN London Level 2 course — Introduction to Product Design & Manufacture (Bamboo Balance Bike), centre course 1131207 — with portfolio evidence collected session by session."
+          }
+        },
+        "ss4": {
+          "type": "sstep",
+          "settings": {
+            "title": "priced by cohort and format",
+            "body": "Each pathway is quoted on cohort size and delivery format, and we help schools find funding routes before the budget conversation starts."
+          }
+        },
+        "fact_glh": {
+          "type": "fact",
+          "settings": {
+            "number": "120",
+            "label": "guided learning hours, full course",
+            "source": "OCN course 1130735"
+          }
+        },
+        "pw_1": {
+          "type": "pathway",
+          "settings": {
+            "num": "01",
+            "title": "speaker session",
+            "tag": "taster · make & take",
+            "icon": "speaker",
+            "open": true,
+            "blurb": "",
+            "lede": "A hands-on introduction to bamboo, sustainable design and practical engineering.",
+            "body": "A low-cost, low-barrier, light-touch session with an immediate, tangible outcome. Students explore regenerative materials, tools and product design through an accessible making activity — creating something themselves while discovering where STEM, sustainability and engineering can lead.",
+            "cohort": "up to 30",
+            "format": "whole-group activity",
+            "duration": "1–2 hours (1.5 hrs recommended)",
+            "pricing": "based on cohort size and delivery format",
+            "accred": "",
+            "s1k": "activity",
+            "s1v": "make-and-take product",
+            "s2k": "material",
+            "s2v": "bamboo & regenerative design",
+            "s3k": "learning",
+            "s3v": "STEM, sustainability & practical skills",
+            "progression": "A low-barrier introduction that can lead into pathways 02–05.",
+            "tags": "Engagement, Awareness, Accessible STEM",
+            "image_alt": "Marking up a bamboo tube for the speaker build on the workbench",
+            "image": "shopify://shop_images/bbc-tier-speaker.jpg",
+            "img_asset": "",
+            "youtube": "uhN-yv90F_Y",
+            "film_label": "watch the speaker build",
+            "seen_label": "the Engineering Club talk — a free public lecture on bamboo bike design",
+            "seen_url": "/blogs/schools-and-education/engineering-club-a-free-public-lecture-on-bamboo-bike-design"
+          }
+        },
+        "pw_2": {
+          "type": "pathway",
+          "settings": {
+            "num": "02",
+            "title": "balance bike build",
+            "tag": "accessible learning",
+            "icon": "balance",
+            "open": false,
+            "blurb": "",
+            "lede": "Build a real bamboo balance bike — practical engineering, teamwork and accredited learning.",
+            "body": "Students work in small teams using hand tools and technical drawings to build a working balance bike, developing practical skills in product design, manufacturing and problem-solving.",
+            "cohort": "up to 30",
+            "format": "teams of 3–5",
+            "duration": "3–6 hours",
+            "pricing": "based on cohort size and number of bikes built",
+            "accred": "OCN London Level 2 available — Introduction to Product Design & Manufacture (Bamboo Balance Bike), centre course 1131207.",
+            "s1k": "build",
+            "s1v": "working balance bike",
+            "s2k": "tools",
+            "s2v": "hand tools, no welding",
+            "s3k": "learning",
+            "s3v": "product design, manufacturing & practical engineering",
+            "progression": "An accessible route into engineering, technical learning and further skills development.",
+            "tags": "Hands-on learning, Teamwork, Accredited skills",
+            "image_alt": "A part-built bamboo balance bike with wheels and components laid out on the build drawing",
+            "img_asset": "",
+            "image": "shopify://shop_images/pz-balance-bike-assembly.jpg",
+            "seen_label": "Project Zero, Waltham Forest — 27 young people, 27 working bikes",
+            "seen_url": "/blogs/news/project-zero-impact-case-study"
+          }
+        },
+        "pw_3": {
+          "type": "pathway",
+          "settings": {
+            "num": "03",
+            "title": "enterprise",
+            "tag": "business skills",
+            "icon": "tag",
+            "open": false,
+            "blurb": "",
+            "lede": "From idea to pitch — practical enterprise learning built around a real product.",
+            "body": "Students create their own bike business, developing a brand, product and commercial idea while building skills in teamwork, budgeting, marketing, problem-solving and pitching.",
+            "cohort": "up to 30",
+            "format": "teams",
+            "duration": "6 hours",
+            "pricing": "based on cohort size and delivery format",
+            "accred": "",
+            "s1k": "build",
+            "s1v": "bike business concept",
+            "s2k": "skills",
+            "s2v": "branding, costing & pitching",
+            "s3k": "learning",
+            "s3v": "enterprise, communication & problem-solving",
+            "progression": "Builds confidence, commercial awareness and pathways into further learning, employment and entrepreneurship.",
+            "tags": "Enterprise, Teamwork, Employability",
+            "image_alt": "Hands fitting a handlebar grip onto a bamboo balance bike during the build",
+            "img_asset": "",
+            "image": "shopify://shop_images/camden-fitting-grip.jpg",
+            "seen_label": "Digital Futures — sustainability and enterprise, twice in a day",
+            "seen_url": "/blogs/schools-and-education/sustainability-entrepreneurship-we-job-box-digital-futures"
+          }
+        },
+        "pw_4": {
+          "type": "pathway",
+          "settings": {
+            "num": "04",
+            "title": "e-bike build",
+            "tag": "STEM",
+            "icon": "bolt",
+            "open": false,
+            "blurb": "",
+            "lede": "Electric drivetrains on bamboo frames — hands-on STEM, sustainable transport and future technology.",
+            "body": "Students work with motors, batteries, sensors and controllers to assemble and test an e-bike, applying science, engineering and maths through a practical challenge.",
+            "cohort": "up to 16",
+            "format": "teams of 4",
+            "duration": "1 or 2 days (6-hour sessions)",
+            "pricing": "based on cohort size and number of bikes built",
+            "accred": "",
+            "s1k": "build",
+            "s1v": "working e-bike",
+            "s2k": "tech",
+            "s2v": "motors, sensors & controllers",
+            "s3k": "learning",
+            "s3v": "applied science, engineering & maths",
+            "progression": "Pathways into sustainable transport, manufacturing, construction and composites.",
+            "tags": "Hands-on STEM, Future mobility, Active travel",
+            "image_alt": "A bamboo electric cargo bike built by UCL Masters students, on the road",
+            "img_asset": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/IMAGE_2_LOAFLY_248a5253-795b-404f-adee-2fc1bd586e91.png",
+            "seen_label": "UCL Masters engineers — bamboo under load, up to an e-cargo bike",
+            "seen_url": "/blogs/impact/ucl-masters-bamboo-electric-cargo-bike-university"
+          }
+        },
+        "pw_5": {
+          "type": "pathway",
+          "settings": {
+            "num": "05",
+            "title": "ai & 3d printing",
+            "tag": "future-ready",
+            "icon": "box",
+            "open": false,
+            "blurb": "",
+            "lede": "From digital design to physical parts — practical skills in AI, CAD and 3D printing.",
+            "body": "Students use AI-assisted design, CAD and 3D printing to develop and manufacture real bike components, exploring digital fabrication, materials and modern engineering through a practical challenge.",
+            "cohort": "up to 30",
+            "format": "teams",
+            "duration": "1–2 days",
+            "pricing": "based on cohort size and delivery format",
+            "accred": "",
+            "s1k": "build",
+            "s1v": "real bike components",
+            "s2k": "tech",
+            "s2v": "CAD, AI tools & 3D printing",
+            "s3k": "learning",
+            "s3v": "design, prototyping & manufacturing",
+            "progression": "Pathways into engineering, digital manufacturing, apprenticeships and technical careers.",
+            "tags": "AI & digital design, 3D printing, Future skills",
+            "image_alt": "A glossy black composite lug joining bamboo tubes, freshly finished",
+            "image": "shopify://shop_images/17851906315456961_Bamboo_bicycle_lug_nicely_fini.jpg",
+            "img_asset": "",
+            "seen_label": "the world’s first 3D-printed bamboo bike, with Oxford Brookes",
+            "seen_url": "/blogs/news/bikebiz-bamboo-bicycle-club-and-oxford-brookes-build-worlds-first-3d-printed-bamboo-bike"
+          }
+        },
+        "tt_1": {
+          "type": "ttrow",
+          "settings": {
+            "format": "Lesson / period",
+            "time": "45–60 mins",
+            "use": "Curriculum lesson / introduction",
+            "best": "Enterprise · Make & Take"
+          }
+        },
+        "tt_2": {
+          "type": "ttrow",
+          "settings": {
+            "format": "Double lesson",
+            "time": "60–90 mins",
+            "use": "Practical STEM activity",
+            "best": "Make & Take · Enterprise"
+          }
+        },
+        "tt_3": {
+          "type": "ttrow",
+          "settings": {
+            "format": "Half day",
+            "time": "2.5–3 hrs",
+            "use": "Enrichment / targeted cohort",
+            "best": "Balance bike · E-bike"
+          }
+        },
+        "tt_4": {
+          "type": "ttrow",
+          "settings": {
+            "format": "Full / drop-down day",
+            "time": "~5 hrs",
+            "use": "STEM / enterprise / enrichment day",
+            "best": "Balance bike · E-bike · AI & 3D printing"
+          }
+        },
+        "tt_5": {
+          "type": "ttrow",
+          "settings": {
+            "format": "Multi-day programme",
+            "time": "2–5 days",
+            "use": "Deeper skills / progression",
+            "best": "AI & 3D printing · E-bike"
+          }
+        },
+        "out_1": {
+          "type": "outcome",
+          "settings": {
+            "title": "springboard into adulthood",
+            "body": "Accredited training with work-ready skills and direct pathways to opportunities."
+          }
+        },
+        "out_2": {
+          "type": "outcome",
+          "settings": {
+            "title": "education pathway",
+            "body": "Two OCN London Level 2 courses, curriculum projects and portfolio evidence for academic progression."
+          }
+        },
+        "out_3": {
+          "type": "outcome",
+          "settings": {
+            "title": "active travel & decarbonisation",
+            "body": "Personal builds that ride home — accessible, zero-emission mobility with a story worth telling."
+          }
+        },
+        "out_4": {
+          "type": "outcome",
+          "settings": {
+            "title": "inclusion",
+            "body": "Team-based learning with adapted builds, so every young person can take part and finish something real."
+          }
+        },
+        "out_5": {
+          "type": "outcome",
+          "settings": {
+            "title": "green skills",
+            "body": "Environmental STEM training delivering transferable skills for green careers."
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "fact_glh",
+        "pw_1",
+        "pw_2",
+        "pw_3",
+        "pw_4",
+        "pw_5",
+        "ss1",
+        "ss2",
+        "ss3",
+        "ss4",
+        "tt_1",
+        "tt_2",
+        "tt_3",
+        "tt_4",
+        "tt_5",
+        "out_1",
+        "out_2",
+        "out_3",
+        "out_4",
+        "out_5"
+      ],
+      "settings": {
+        "hero_fallback": "bbc-edu-hero-poster.jpg",
+        "hero_image_alt": "Bamboo frame lugs laid out on the workbench, mid stop-motion build",
+        "hero_eyebrow": "education",
+        "hero_title": "education, built by hand.",
+        "hero_lede": "Hands-on STEM and accredited learning through building real bamboo bikes — in schools, colleges and youth settings. Five pathways, from a single lesson to a multi-day programme.",
+        "hero_cta2_label": "for schools & colleges",
+        "hero_cta3_label": "for councils & youth services",
+        "paths_title": "",
+        "paths_lede": "",
+        "pri_eyebrow": "",
+        "pri_title": "",
+        "pri_lede": "",
+        "budget_title": "",
+        "sec_title": "",
+        "routes_title": "",
+        "cred_quote": "",
+        "cred_cite": "",
+        "sites_list": "as seen at — Design Museum, London · Musée du Luxembourg, Paris · London Design Festival · Grand Designs Live · UK Bamboo Summit, Coventry",
+        "stories_eyebrow": "",
+        "stories_title": "",
+        "stories_lede": "",
+        "stories_all_label": "",
+        "stories_all_url": "/blogs/schools-and-education",
+        "stories_lead": false,
+        "stories_mosaic": true,
+        "evh_film_on": true,
+        "tools_img1": "shopify://shop_images/bbc-app-screen-1.png",
+        "tools_img2": "shopify://shop_images/bbc-app-screen-2.png",
+        "tools_img3": "shopify://shop_images/bbc-app-screen-3.png",
+        "prog_eyebrow": "",
+        "prog_title": "",
+        "prog_lede": "",
+        "com_proof_image": "shopify://shop_images/bbc-ig-ig02.jpg",
+        "inst_eyebrow": "track record",
+        "inst_title": "built in schools, colleges and universities.",
+        "inst_unis": "UCL · Aston University · Imperial College London · King’s College London · London School of Hygiene & Tropical Medicine · London South Bank University · Oxford Brookes University · University of Surrey · University of Manchester · Swansea University · University of Warwick · Coventry University · University of Exeter · Nottingham Trent University",
+        "inst_schools": "Southbank UTC · Bradfield College · Kingswood School, Bath · The Judd School · Harborne Academy · James Brindley School, Birmingham · Reed’s School, Cobham · Verulam School, St Albans · Bearsden Academy, Glasgow · BMET College, Birmingham",
+        "inst_note": "Every institution named is on record — workshops delivered, kits supplied or builds run together, 2014 to today. Some sessions are delivered with partners, including We Job Box.",
+        "facts_note": "Programme records · updated September 2026",
+        "hero_proof_on": false,
+        "hero_proof1_num": "1,500+",
+        "hero_proof1_label": "students taught",
+        "hero_proof2_num": "22",
+        "hero_proof2_label": "schools, colleges & universities",
+        "hero_proof3_num": "2",
+        "hero_proof3_label": "OCN London Level 2 courses",
+        "hero_quote": "",
+        "hero_quote_cite": "",
+        "ghost_stat": "2014",
+        "stats_label": "the education record — since 2014",
+        "facts_cta_label": "see the schools, colleges & universities",
+        "facts_cta_url": "#institutions",
+        "hero_cta1_label": "book a discovery call",
+        "hero_tb_a_key": "pathways",
+        "hero_tb_a": "five ways in",
+        "hero_tb_b_key": "accredited",
+        "hero_tb_b": "two OCN Level 2 courses",
+        "sch_tag": "in schools · ages 11–19",
+        "sch_card_title": "fits the timetable",
+        "sch_card_body": "Five pathways from a single lesson to a multi-day programme — teacher-friendly, hand tools only, OCN London Level 2 accredited when you build up.",
+        "comc_tag": "for councils · youth services",
+        "comc_card_title": "prevention through making",
+        "comc_card_body": "The same five pathways in youth settings — a free taster talk to accredited builds and enterprise skills. Delivered with Project Zero in Waltham Forest; piloted with Camden.",
+        "mat_eyebrow": "material",
+        "mat_title": "grown, not mined.",
+        "mat_lede": "Bamboo is harvested in years, not decades — no welding, no factory. A frame under load in a university test rig is the whole argument in forty seconds.",
+        "mat1_icon": "leaf",
+        "mat1_t": "Regrows in three to five years",
+        "mat1_b": "sustainable design that students can hold, cut and shape.",
+        "mat2_icon": "tool",
+        "mat2_t": "Low barriers",
+        "mat2_b": "a hacksaw, files, sandpaper and a tape measure make real engineering accessible.",
+        "mat3_icon": "tubes",
+        "mat3_t": "Learning through materials",
+        "mat3_b": "engineering, design and sustainability in the same hour.",
+        "mat_range_label": "one frame, many entry points",
+        "mat_range": "bamboo speaker, balance bike, road & gravel frame, e-bike, 3D-printed lugs, bespoke frames",
+        "pw_eyebrow": "progression",
+        "pw_title": "five ways in.",
+        "pw_lede": "Start with a talk, climb to digital fabrication. One bench, one set of skills, five ways to book it — each sheet carries the cohort, the format, the duration and what gets built.",
+        "pw_prog_label": "progression",
+        "pw_note": "One sheet open at a time. Every pathway is quoted on cohort size and delivery format; a taster talk in your venue is free.",
+        "pw_cta_label": "book a discovery call",
+        "sch_eyebrow": "in schools · ages 11–19",
+        "sch_title": "fits the timetable.",
+        "sch_lede": "Every pathway fits a school format — a single period, a double, a half day, a drop-down day or a multi-day programme. Teachers stay in the room; we bring the tools, the material and the plan.",
+        "sch_cta_label": "book a discovery call",
+        "tt_eyebrow": "",
+        "tt_title": "",
+        "tt_lede": "",
+        "tt_h1": "school format",
+        "tt_h2": "typical time",
+        "tt_h3": "typical use",
+        "tt_h4": "best suited pathway",
+        "tt_foot": "From a single lesson to a full STEM day or an intensive programme.",
+        "com_eyebrow": "community & councils",
+        "com_title": "prevention through making.",
+        "com_lede": "Start with a free taster talk in your venue and go as far as your young people want — the same five pathways, built for youth settings.",
+        "com_audiences": "councils, violence reduction units, youth hubs, PRUs, community trusts",
+        "com_proof": "Delivered with Project Zero and Waltham Forest College — 27 young people built working bamboo bikes, and their ratings regularly reached 9–10 out of 10. Piloted with Camden at Euston Skills Centre.",
+        "com_proof_label": "read the Project Zero case study",
+        "com_proof_url": "/blogs/news/project-zero-impact-case-study",
+        "com_cta_label": "start a conversation",
+        "out_eyebrow": "outcomes",
+        "out_title": "one vehicle. five outcomes.",
+        "out_lede": "What a young person leaves with — and what a school, council or funder can evidence.",
+        "out_sum": "",
+        "out_sum_body": "",
+        "recog_label": "recognition",
+        "recog_a": "Financial Times, September 2025",
+        "recog_b": "The Guardian",
+        "recog_c": "Kevin McCloud's Green Heroes, Grand Designs Live 2018",
+        "recog_d": "D&T Practice magazine, January 2024",
+        "cta_eyebrow": "next steps",
+        "cta_title": "book a discovery call.",
+        "cta_lede": "A short call is all it takes to start. Tell us who you are and what you'd like to run, and we'll come back with a scoped plan and budget you can take to your governor, head or funder.",
+        "cta1_label": "book a discovery call",
+        "cta2_label": "email us",
+        "pw_seen_label": "seen in",
+        "pw_accred_chip": "OCN Level 2",
+        "cs_eyebrow": "programmes in practice",
+        "cs_title": "the same bench, in very different rooms.",
+        "cs_lede": "Real deliveries — schools, universities, youth services and community halls — each with its own photographs, taken in the room.",
+        "cs_handles": "news/project-zero-impact-case-study | community |  | 27 young people built working bamboo bikes in Waltham Forest, and their ratings regularly reached 9–10 out of 10. | Project Zero · Waltham Forest\nschools-and-education/psychology-students-prison-case-studies-aston-we-job-box | universities |  | Five teams, five real case studies, two and a half hours to design a behaviour-change solution and present it back. | With We Job Box · June 2026\nschools-and-education/design-thinking-sprint-university-of-surrey-we-job-box | universities |  | Thirty students, four zones and one sharp “How might we…?” — a Double Diamond sprint on a live brief. | With We Job Box · June 2026\nschools-and-education/sustainability-entrepreneurship-we-job-box-digital-futures | community |  | Two sessions in a day, twenty-five young people each, on a DSIT-funded programme evaluated by Aston University. | With We Job Box · February 2026\nimpact/camden-balance-bike-enterprise-day | community |  | Making, costing and pitching in one session — a hands-on enterprise day piloted with Camden Council. | Piloted with Camden · July 2026\nschools-and-education/build-a-bamboo-bike-we-job-box-green-day | community |  | A challenge for a hundred young people — a full row of finished frames by the afternoon. | With We Job Box · October 2025\nschools-and-education/new-schools-race-event-hosted-at-bradfield-colledge | schools |  | A Head of Design who wanted his pupils to build a real bicycle, not just be shown one. | Bradfield College · 2024\nimpact/kirui-bamboo-bikes-nairobi-kenya | community | bg1A1qHJ0NA | Kay built his own bike with us in London, then took the technique home and now builds in Nairobi. | Kirui · Nairobi, Kenya",
+        "cs_first_featured": true,
+        "cs_kind": "community",
+        "cs_link_label": "read the story",
+        "cs_all_label": "all education & community stories",
+        "cs_all_url": "/blogs/schools-and-education",
+        "sch_quote": "Crafting bamboo bicycles goes beyond the workshop; it's a journey of innovation, environmental responsibility, and the integration of STEM principles.",
+        "sch_quote_cite": "Nick Mills, Head of Design, Bradfield College — D&T Practice magazine, January 2024",
+        "mat_film": "shopify://files/videos/bbc-whybamboo-film.mp4",
+        "mat_film_url": "https://cdn.shopify.com/videos/c/vp/cdb602478fe441388ed3efc045ede4f6/cdb602478fe441388ed3efc045ede4f6.HD-720p-1.6Mbps-92443212.mp4",
+        "mat_film_poster": "",
+        "mat_film_label": "why bamboo · 42 sec",
+        "mat_film_alt": "A bamboo bicycle frame under load in a university hydraulic test rig",
+        "com_image": "shopify://shop_images/pz-hands-bamboo.jpg",
+        "com_image_alt": "Young people's hands shaping a bamboo tube with hand tools on a workbench",
+        "evh_film_url": "bbc-rd-edu-hero-loop.mp4"
+      }
+    },
+    "videoband": {
+      "type": "bbc-rd-video-embed",
+      "settings": {
+        "video_youtube": "GevFK1s-I8w",
+        "eyebrow": "free to follow",
+        "heading": "watch the balance bike build, start to finish",
+        "caption": "",
+        "body": "The complete tutorial series — cut, glue, finish, ride — free for any classroom or youth group to follow along.",
+        "dark": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "videoband"
+  ]
+}

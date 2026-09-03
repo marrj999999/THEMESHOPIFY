@@ -1,0 +1,404 @@
+{% comment %}
+  BBC Community — Clean Professional Version
+  
+  Design Rules:
+  - SVG icons only (no emojis)
+  - Consistent styling
+  - Professional social links
+{% endcomment %}
+
+<section class="bbc-community">
+  <div class="bbc-community__container page-width">
+    <header class="bbc-community__header">
+      {% if section.settings.eyebrow != blank %}
+        <span class="bbc-community__eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+      <h2 class="bbc-community__heading">{{ section.settings.heading }}</h2>
+      {% if section.settings.subheading != blank %}
+        <p class="bbc-community__subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </header>
+    
+    {% if section.blocks.size > 0 %}
+      <div class="bbc-community__grid" role="list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'photo' -%}
+            <figure class="bbc-community__item" role="listitem" {{ block.shopify_attributes }}>
+              {% if block.settings.image %}
+                <div class="bbc-community__image-wrapper">
+                  <img 
+                    src="{{ block.settings.image | image_url: width: 600 }}" 
+                    alt="{{ block.settings.alt | default: block.settings.caption | default: 'Community builder photo' }}"
+                    loading="lazy"
+                    width="300"
+                    height="300"
+                    class="bbc-community__image"
+                  >
+                  {% if block.settings.location != blank %}
+                    <span class="bbc-community__location">
+                      <span class="bbc-community__location-icon" aria-hidden="true">{% render 'bbc-icons', icon: 'map-pin' %}</span>
+                      {{ block.settings.location }}
+                    </span>
+                  {% endif %}
+                </div>
+              {% else %}
+                <div class="bbc-community__image-placeholder">
+                  <span class="bbc-community__placeholder-icon" aria-hidden="true">{% render 'bbc-icons', icon: 'image' %}</span>
+                </div>
+              {% endif %}
+              {% if block.settings.caption != blank %}
+                <figcaption class="bbc-community__caption">{{ block.settings.caption }}</figcaption>
+              {% endif %}
+            </figure>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {% endif %}
+    
+    <footer class="bbc-community__footer">
+      <nav class="bbc-community__social" aria-label="Social media links">
+        {% if section.settings.instagram_url != blank %}
+          <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener" class="bbc-community__social-link" aria-label="Follow us on Instagram">
+            <span class="bbc-community__social-icon" aria-hidden="true">{% render 'bbc-icons', icon: 'instagram' %}</span>
+            <span>Instagram</span>
+          </a>
+        {% endif %}
+        {% if section.settings.facebook_url != blank %}
+          <a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener" class="bbc-community__social-link" aria-label="Follow us on Facebook">
+            <span class="bbc-community__social-icon" aria-hidden="true">{% render 'bbc-icons', icon: 'facebook' %}</span>
+            <span>Facebook</span>
+          </a>
+        {% endif %}
+        {% if section.settings.youtube_url != blank %}
+          <a href="{{ section.settings.youtube_url }}" target="_blank" rel="noopener" class="bbc-community__social-link" aria-label="Subscribe on YouTube">
+            <span class="bbc-community__social-icon" aria-hidden="true">{% render 'bbc-icons', icon: 'youtube' %}</span>
+            <span>YouTube</span>
+          </a>
+        {% endif %}
+      </nav>
+      {% if section.settings.cta_text != blank %}
+        <p class="bbc-community__cta">{{ section.settings.cta_text }}</p>
+      {% endif %}
+    </footer>
+  </div>
+</section>
+
+<style>
+  .bbc-community {
+    padding: 80px 20px;
+    background: var(--bbc-cream, var(--bbc-cream));
+    position: relative;
+  }
+  
+  .bbc-community__header {
+    margin-bottom: 48px;
+    max-width: 600px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .bbc-community__eyebrow {
+    display: inline-block;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--bbc-teal, var(--bbc-teal));
+    margin-bottom: 12px;
+  }
+  
+  .bbc-community__heading {
+    font-family: var(--font-heading-family);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: var(--bbc-forest, var(--bbc-forest));
+    letter-spacing: -0.02em;
+    margin: 0 0 12px 0;
+    line-height: 1.1;
+  }
+  
+  .bbc-community__subheading {
+    font-size: 1.125rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.7;
+    margin: 0;
+    line-height: 1.5;
+  }
+  
+  .bbc-community__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .bbc-community__item {
+    margin: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+  }
+  
+  .bbc-community__item:hover {
+    transform: translateY(-4px);
+  }
+  
+  /* Featured first item */
+  .bbc-community__item:first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-community__item {
+      transition: none;
+    }
+    .bbc-community__item:hover {
+      transform: none;
+    }
+  }
+  
+  .bbc-community__image-wrapper {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+  
+  .bbc-community__item:first-child .bbc-community__image-wrapper {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+  
+  .bbc-community__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .bbc-community__image-placeholder {
+    aspect-ratio: 1;
+    background: var(--bbc-forest, var(--bbc-forest));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+  }
+  
+  .bbc-community__placeholder-icon .material-symbols-outlined {
+    font-size: 48px;
+    color: white;
+    opacity: 0.5;
+  }
+  
+  .bbc-community__location {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: var(--bbc-forest, var(--bbc-forest));
+    color: white;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .bbc-community__location-icon .material-symbols-outlined {
+    font-size: 14px;
+    color: var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  .bbc-community__caption {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin-top: 12px;
+    line-height: 1.4;
+  }
+  
+  /* Footer with social links */
+  .bbc-community__footer {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .bbc-community__social {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .bbc-community__social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: white;
+    border: 2px solid var(--bbc-border, #d4d4d4);
+    border-radius: 8px;
+    color: var(--bbc-forest, var(--bbc-forest));
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  
+  .bbc-community__social-link:hover {
+    border-color: var(--bbc-forest, var(--bbc-forest));
+    background: var(--bbc-forest, var(--bbc-forest));
+    color: white;
+  }
+  
+  .bbc-community__social-link:hover .bbc-community__social-icon svg {
+    fill: white;
+  }
+  
+  .bbc-community__social-link:focus-visible {
+    outline: 2px solid var(--bbc-gold, var(--bbc-gold));
+    outline-offset: 4px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-community__social-link {
+      transition: none;
+    }
+  }
+  
+  .bbc-community__social-icon {
+    display: flex;
+  }
+  
+  .bbc-community__social-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--bbc-forest, var(--bbc-forest));
+    transition: fill 0.2s ease;
+  }
+  
+  .bbc-community__cta {
+    font-size: 0.875rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.7;
+    margin: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-community {
+      padding: 60px 16px;
+    }
+    
+    .bbc-community__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    
+    .bbc-community__social {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .bbc-community__social-link {
+      padding: 10px 16px;
+      font-size: 0.8125rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Community",
+  "tag": "section",
+  "class": "bbc-community-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Community"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Follow Our Journey"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Stay connected and see what our community is building."
+    },
+    {
+      "type": "header",
+      "content": "Social Links"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Call to action text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Community Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo",
+          "info": "Square image (1:1) recommended"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Alt text",
+          "info": "Describe the image for accessibility"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "info": "e.g. 'London, UK' or 'Melbourne, AU'"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Community",
+      "settings": {
+        "heading": "Follow Our Journey",
+        "subheading": "Stay connected and see what our community is building."
+      }
+    }
+  ]
+}
+{% endschema %}

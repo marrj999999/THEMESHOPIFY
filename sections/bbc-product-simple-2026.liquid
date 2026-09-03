@@ -1,0 +1,112 @@
+{%- comment -%}
+  BBC New Design (2026) — generic PRODUCT section for NON-kit products
+  (gift cards, workshop bookings, clothing, parts, component packs).
+  Renders the real {{ product }} object with a JS-free add-to-cart, the
+  product description (.rd-prose) and a give-back line. Scoped under .bbc-rd
+  via bbc-redesign-2026.css (reuses the kit PDP's buy-box classes). No prison
+  is ever named (generic give-back wording).
+{%- endcomment -%}
+
+<div class="bbc-rd bbc-rd-product">
+  {%- if product -%}
+    {%- assign cv = product.selected_or_first_available_variant -%}
+    <section class="rd-section rd-pad-sm">
+      <div class="rd-wrap">
+
+        <nav class="rd-crumb rd-cmp-61169" aria-label="Breadcrumb">
+          <a class="rd-c-subtle-o1" href="{{ routes.root_url }}">Home</a>
+          <span class="rd-sep">/</span>
+          {%- if product.collections.first -%}
+            <a class="rd-c-subtle-o1" href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+            <span class="rd-sep">/</span>
+          {%- endif -%}
+          <span class="rd-here rd-c-ink">{{ product.title }}</span>
+        </nav>
+
+        <div class="rd-grid rd-cmp-45496">
+          <div>
+            <div class="rd-cmp-22077">
+              {%- if product.featured_image -%}
+                <img class="rd-img-cover"
+                     src="{{ product.featured_image | image_url: width: 1200 }}"
+                     srcset="{{ product.featured_image | image_url: width: 400 }} 400w, {{ product.featured_image | image_url: width: 600 }} 600w, {{ product.featured_image | image_url: width: 800 }} 800w, {{ product.featured_image | image_url: width: 1200 }} 1200w, {{ product.featured_image | image_url: width: 1600 }} 1600w"
+                     sizes="(min-width: 750px) 50vw, 100vw"
+                     alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                     width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}"
+                     fetchpriority="high" loading="eager">
+              {%- else -%}
+                <img class="rd-img-cover" src="{{ section.settings.fallback | default: 'bbc-rd-prod-build.jpg' | asset_url }}" alt="{{ product.title | escape }}" width="1000" height="1000" fetchpriority="high" loading="eager">
+              {%- endif -%}
+            </div>
+          </div>
+
+          <div class="rd-cmp-02745">
+            {%- if section.settings.product_badge != blank -%}
+              <span class="rd-tag rd-lime rd-mb-14px">{{ section.settings.product_badge }}</span>
+            {%- endif -%}
+
+            <h1 class="rd-cmp-62520">{{ product.title }}</h1>
+
+            <div class="rd-cmp-24279">
+              <span class="rd-cmp-99566">
+                {%- if product.price_varies -%}From {{ product.price_min | money }}{%- else -%}{{ cv.price | money }}{%- endif -%}
+              </span>
+              {%- if cv.compare_at_price and cv.compare_at_price > cv.price -%}
+                <span class="rd-was-price">{{ cv.compare_at_price | money }}</span>
+              {%- endif -%}
+            </div>
+
+            {% form 'product', product, id: 'bbc-buy-form' %}
+              {%- if product.has_only_default_variant == false -%}
+                <span class="rd-frame-label rd-cmp-04367">Choose an option</span>
+                <div class="rd-cmp-30367">
+                  {%- for v in product.variants -%}
+                    <label class="rd-vbtn{% if v == cv %} rd-sel{% endif %}{% unless v.available %} rd-oos{% endunless %}">
+                      <input class="rd-ac-forest" type="radio" name="id" value="{{ v.id }}" {% if v == cv %}checked{% endif %} {% unless v.available %}disabled{% endunless %}>
+                      {{ v.title }} — {{ v.price | money }}
+                    </label>
+                  {%- endfor -%}
+                </div>
+              {%- else -%}
+                <input type="hidden" name="id" value="{{ cv.id }}">
+              {%- endif -%}
+
+              <span class="rd-frame-label rd-cmp-21769">Quantity</span>
+              <input class="rd-cmp-88753" type="number" name="quantity" value="1" min="1" aria-label="Quantity">
+
+              <div class="rd-flex rd-cmp-44006">
+                <button type="submit" name="add" class="rd-btn rd-lime rd-flex1-jc" {% unless product.available %}disabled{% endunless %}>
+                  {%- if product.available -%}{{ section.settings.atc_label | default: 'Add to cart' }}{%- else -%}Sold out{%- endif -%}
+                </button>
+              </div>
+            {% endform %}
+
+            {%- if product.description != blank -%}
+              <div class="rd-prose rd-mt3">{{ product.description }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {%- if section.settings.cause_line != blank -%}
+      <section class="rd-trustband"><div class="rd-wrap"><p class="rd-trustline">{{ section.settings.cause_line }}</p></div></section>
+    {%- endif -%}
+  {%- else -%}
+    <section class="rd-pad rd-center"><div class="rd-wrap"><h1>Product unavailable</h1></div></section>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "BBC Product (simple)",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "product_badge", "label": "Badge (optional)" },
+    { "type": "text", "id": "atc_label", "label": "Add-to-cart button label", "default": "Add to cart" },
+    { "type": "text", "id": "fallback", "label": "Fallback image filename", "default": "bbc-rd-prod-build.jpg" },
+    { "type": "text", "id": "cause_line", "label": "Give-back line", "default": "Every purchase helps fund accredited skills courses inside prisons and schools." }
+  ],
+  "presets": [{ "name": "BBC Product (simple)" }]
+}
+{% endschema %}

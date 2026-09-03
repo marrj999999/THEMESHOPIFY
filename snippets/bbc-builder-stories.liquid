@@ -1,0 +1,67 @@
+{%- comment -%}
+  bbc-builder-stories — real customer builds matched to the kit by template suffix.
+  Thumbnails are each article's OWN featured image (live blog, 2026-06-18). The
+  balance kit pairs with team-building + Build to Bond case studies (an on-mission
+  set). Image strings beginning http are used directly; others are theme assets.
+{%- endcomment -%}
+{%- assign story_type = '' -%}
+{%- case template.suffix -%}
+  {%- when 'kit-road','kit-road-lugged' -%}{%- assign story_type = 'road' -%}
+  {%- when 'kit-gravel','kit-gravel-lugged' -%}{%- assign story_type = 'gravel' -%}
+  {%- when 'kit-mtb','kit-fatbike' -%}{%- assign story_type = 'mtb' -%}
+  {%- when 'kit-city' -%}{%- assign story_type = 'city' -%}
+  {%- when 'kit-custom' -%}{%- assign story_type = 'custom' -%}
+  {%- when 'kit-balance','kit-balance-flax' -%}{%- assign story_type = 'balance' -%}
+{%- endcase -%}
+{%- if story_type != blank -%}
+  {%- case story_type -%}
+    {%- when 'road' -%}
+      {%- assign st_titles = settings.bbc_st_titles_1 | default: "Adam's bamboo road bike|Adrian's aero bamboo bike|Shane's carbon-bamboo road bike|Ted's handmade road bike|Mike's carbon-bamboo road bike|Charlie's bamboo touring bike" | split: "|" -%}
+      {%- assign st_urls = settings.bbc_st_urls_1 | default: "/blogs/club-news/adams-bamboo-road-bike|/blogs/club-news/adrians-aero-bamboo-bike|/blogs/club-news/carbon-road-bike-by-shane|/blogs/club-news/build-by-ted-bamboobike-handmade-roadbike|/blogs/club-news/carbon-bamboo-road-bike-by-mike|/blogs/club-news/charlies-bamboo-touring-bike" | split: "|" -%}
+      {%- assign st_imgs = settings.bbc_st_imgs_1 | default: "https://bamboobicycleclub.org/cdn/shop/articles/03_Adams-Road-Bike-Bamboo-Bicycle-Club.jpg?v=1612887016&width=620|https://bamboobicycleclub.org/cdn/shop/articles/Adrians-Road-Bamboo-Bicycle.jpg?v=1612458650&width=620|https://bamboobicycleclub.org/cdn/shop/articles/bambooroadbikecarbon.jpg?v=1638184229&width=620|https://bamboobicycleclub.org/cdn/shop/articles/d85b070c2e538a8839489f92cb35f302.jpg?v=1771504743&width=620|https://bamboobicycleclub.org/cdn/shop/articles/99BE33D7-3CA6-4426-8F38-0B1F1C9CE1FA_-_Michael_Chesworth.jpg?v=1635266583&width=620|https://bamboobicycleclub.org/cdn/shop/articles/00_Custom-Touring-Bike-by-Charlie-Bamboo-Bicycle-Club.jpg?v=1613661243&width=620" | split: "|" -%}
+    {%- when 'gravel' -%}
+      {%- assign st_titles = settings.bbc_st_titles_2 | default: "Novice to 10,000 km|Colin's custom gravel bike|Alex's gravel bike|Andrew bikepacking his CX bamboo bike|Carl's bamboo gravel bike|Andrew's custom gravel bike" | split: "|" -%}
+      {%- assign st_urls = settings.bbc_st_urls_2 | default: "/blogs/club-news/building-my-first-bamboo-bicycle-a-journey-from-novice-to-10-000km|/blogs/club-news/colins-custom-bamboo-gravel-bike|/blogs/club-news/alexs-gravel-bike|/blogs/club-news/andrew-out-bikepacking-on-his-cx-bamboo-bike|/blogs/club-news/carls-bamboo-gravel-bike|/blogs/club-news/andrews-custom-gravel-bike" | split: "|" -%}
+      {%- assign st_imgs = settings.bbc_st_imgs_2 | default: "https://bamboobicycleclub.org/cdn/shop/articles/PXL_20230607_145122467.jpg?v=1762780024&width=620|https://bamboobicycleclub.org/cdn/shop/articles/ColinGravel.jpg?v=1741967650&width=620|https://bamboobicycleclub.org/cdn/shop/articles/Gravelbike-by-Alex.jpg?v=1693301223&width=620|https://bamboobicycleclub.org/cdn/shop/articles/77ca05b4bfdc6384f03f156c41fc03de.jpg?v=1771504952&width=620|https://bamboobicycleclub.org/cdn/shop/articles/00_Carls-Road-Bike-Bamboo-Bicycle-Club.jpg?v=1612958848&width=620|https://bamboobicycleclub.org/cdn/shop/articles/Andrewgravel.jpg?v=1699891075&width=620" | split: "|" -%}
+    {%- when 'mtb' -%}
+      {%- assign st_titles = settings.bbc_st_titles_3 | default: "Nick's 29er build|Reed's 29er build|Simon's 29er MTB|Shaun's 650b MTB|Nathaniel's custom 29er|Christopher's custom fatbike" | split: "|" -%}
+      {%- assign st_urls = settings.bbc_st_urls_3 | default: "/blogs/club-news/29er-build-by-nick|/blogs/club-news/29er-build-by-reed|/blogs/club-news/29er-mtb-build-by-simon|/blogs/club-news/650b-mtb-built-by-shaun|/blogs/club-news/custom-mtb-29er-by-nathaniel|/blogs/club-news/custom-fatbike-by-christopher" | split: "|" -%}
+      {%- assign st_imgs = settings.bbc_st_imgs_3 | default: "https://bamboobicycleclub.org/cdn/shop/articles/29erMTB.jpg?v=1642521185&width=620|https://bamboobicycleclub.org/cdn/shop/articles/5a_28eb454f-8f39-4c76-bdfa-16aeee6bb0dd.jpg?v=1634301020&width=620|https://bamboobicycleclub.org/cdn/shop/articles/CEC55B66-6881-4C38-B965-994431EFC300.jpg?v=1647044322&width=620|https://bamboobicycleclub.org/cdn/shop/articles/bcacf7d1b9cabfa09dd12b0cf391b75e.jpg?v=1771505036&width=620|https://bamboobicycleclub.org/cdn/shop/articles/01_Custom-MTB29er-by-Nathaniel.jpg?v=1619500770&width=620|https://bamboobicycleclub.org/cdn/shop/articles/Bamboofatbikewheel.jpg?v=1638635790&width=620" | split: "|" -%}
+    {%- when 'city' -%}
+      {%- assign st_titles = settings.bbc_st_titles_4 | default: "Becca's commuter bike|Abel's city bike|Bridget's city bike|Eric's city bike|Piers' single-speed build|Matthew's city bike" | split: "|" -%}
+      {%- assign st_urls = settings.bbc_st_urls_4 | default: "/blogs/club-news/beccas-commuter-bike|/blogs/club-news/city-bike-by-abel|/blogs/club-news/city-bike-by-bridget|/blogs/club-news/city-bike-by-eric|/blogs/club-news/build-by-piers-a-simple-single-speed-setup|/blogs/club-news/city-bike-by-matthew" | split: "|" -%}
+      {%- assign st_imgs = settings.bbc_st_imgs_4 | default: "https://bamboobicycleclub.org/cdn/shop/articles/Beccacommuterbike.png?v=1691575559&width=620|https://bamboobicycleclub.org/cdn/shop/articles/Abel-Finished-Bike.jpg?v=1613401491&width=620|https://bamboobicycleclub.org/cdn/shop/articles/BirgittaBamboocity.jpg?v=1709899026&width=620|https://bamboobicycleclub.org/cdn/shop/articles/01_City-Bike-by-Eric.jpg?v=1619788891&width=620|https://bamboobicycleclub.org/cdn/shop/articles/b1065656053fdacf99ab66acaa47130b.jpg?v=1771505127&width=620|https://bamboobicycleclub.org/cdn/shop/articles/01_Matthews-Bamboo-Gravel-Bike.jpg?v=1618060290&width=620" | split: "|" -%}
+    {%- when 'custom' -%}
+      {%- assign st_titles = settings.bbc_st_titles_5 | default: "George's bamboo BMX|Imke's custom touring bike|Anders' custom trails bike|Elizabeth's custom touring bike|Karl's custom cargo e-bike|Adam's custom cargo bike" | split: "|" -%}
+      {%- assign st_urls = settings.bbc_st_urls_5 | default: "/blogs/club-news/bamboo-bmx-build-by-george-bamboobike-bmx-handmade-custombmx|/blogs/club-news/custom-touring-bike-by-imke|/blogs/club-news/custom-trails-bike-by-anders|/blogs/club-news/elizabeths-custom-touring-bike|/blogs/club-news/karls-custom-cargo-e-bike-build|/blogs/club-news/custom-cargo-bike-by-adam" | split: "|" -%}
+      {%- assign st_imgs = settings.bbc_st_imgs_5 | default: "https://bamboobicycleclub.org/cdn/shop/articles/2745a25d689adcac3245e0012d58e970.jpg?v=1771505147&width=620|https://bamboobicycleclub.org/cdn/shop/articles/01_Imkes-Bamboo-Touring-Bike.jpg?v=1618051726&width=620|https://bamboobicycleclub.org/cdn/shop/articles/bamboostuntbike.jpg?v=1629466037&width=620|https://bamboobicycleclub.org/cdn/shop/articles/Touring-bamboobike.png?v=1691576029&width=620|https://bamboobicycleclub.org/cdn/shop/articles/322473145_530612975666452_5886718990312272139_n_2_560x_19bd5213-a69a-4ae2-b210-c18730bdf271.jpg?v=1675864481&width=620|https://bamboobicycleclub.org/cdn/shop/articles/01_Custom-Cargo-Bike-by-Adam.jpg?v=1618141435&width=620" | split: "|" -%}
+    {%- when 'balance' -%}
+      {%- assign st_titles = settings.bbc_st_titles_6 | default: "Build to Bond: rebuilding family ties|Inside Lowdham Grange|Four Seasons: a frame in three hours|Upcycle Brixton balance bikes|Team building with GM|Hilton Bankside staff build" | split: "|" -%}
+      {%- assign st_urls = settings.bbc_st_urls_6 | default: "/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2|/blogs/impact/build-to-bond-hmp-lowdham-grange-impact|/blogs/impact/four-seasons-hampshire-corporate-bamboo-team-build|/blogs/impact/corporate-team-build-upcycle-brixton-bamboo-balance-bikes|/blogs/news/team-building-with-gm-motors|/blogs/impact/hilton-bankside-staff-training-and-public-hire-bikes" | split: "|" -%}
+      {%- assign st_imgs = settings.bbc_st_imgs_6 | default: "https://bamboobicycleclub.org/cdn/shop/articles/lowdham-workshop-empty_369cef44-c50d-4752-bb0e-68db811a5f15.jpg?v=1774340710&width=620|bbc-rd-prison-jig.jpg|https://bamboobicycleclub.org/cdn/shop/articles/IMG_9772_blogheader_v2q60_1ad2b61a-0f2d-47d9-88fc-b15ca8efc229.webp?v=1771793491&width=620|https://bamboobicycleclub.org/cdn/shop/articles/SRW08823_e2572015-b157-475c-8f9c-89decaa65462.jpg?v=1771793508&width=620|https://bamboobicycleclub.org/cdn/shop/articles/TEAMBUILDING4.jpg?v=1680869912&width=620|https://bamboobicycleclub.org/cdn/shop/articles/BambooBike-151.jpg?v=1771839631&width=620" | split: "|" -%}
+  {%- endcase -%}
+  <div class="bbc-rd bbc-rd-builderstories">
+    <section class="rd-section rd-pad-sm rd-paper">
+      <div class="rd-wrap">
+        <span class="rd-eyebrow">{{ settings.bbc_stories_heading | default: "Real builds" }}</span>
+        <h2 class="rd-mw-22ch">{{ section.settings.stories_heading | default: 'Built by people like you' }}</h2>
+        <div class="rd-grid rd-g3 rd-mt3">
+          {%- for title in st_titles -%}
+            {%- assign _img = st_imgs[forloop.index0] -%}
+            {%- if _img contains 'http' -%}{%- assign _src = _img -%}{%- else -%}{%- assign _src = _img | asset_url -%}{%- endif -%}
+            <a class="rd-card rd-stamp rd-story-card" href="{{ st_urls[forloop.index0] }}">
+              <div class="rd-ph">
+                <img class="rd-img-cover" src="{{ _src }}" alt="{{ title | escape }}" width="620" height="388" loading="lazy">
+              </div>
+              <div class="rd-body">
+                <h3 class="rd-fs-21px">{{ title }}</h3>
+                <span class="rd-link-arrow rd-story-more">Read this build <span aria-hidden="true">&#8594;</span></span>
+              </div>
+            </a>
+          {%- endfor -%}
+        </div>
+        <a class="rd-link-arrow rd-mt3 rd-inline-block" href="/blogs/club-news">More builds from the club <span aria-hidden="true">&#8594;</span></a>
+      </div>
+    </section>
+  </div>
+{%- endif -%}

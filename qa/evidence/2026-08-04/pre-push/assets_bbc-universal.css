@@ -1,0 +1,364 @@
+/* ============================================================================
+   BBC — UNIVERSAL STYLESHEET (2026-07-22)
+   THE single authority for fonts, tokens, type roles and global styling.
+   Loads LAST in theme.liquid → wins every load-order tie by design.
+
+   CONTENTS
+     §1  Fonts (Atkinson Hyperlegible, self-hosted)
+     §2  Design tokens (:root — colour canon, type roles, spacing, Dawn vars)
+     §3  Font enforcement (Atkinson everywhere)
+     §4  Buttons (one pill system via Dawn variables)
+     §5  THE MASTHEAD SCALE (display/h2/h3/lede/body — qa/TYPE-SCALE.md)
+     §6  Secondary text links (.rd-textlink)
+     §7  Width utilities
+     §8  Masthead techniques (accent <em>, giant wordmark)
+     §9  GLOBAL POLISH + A11Y (selection, focus, numerals, balance) — NEW
+
+   RULES: no new hex or font-size outside this file. Contracts:
+   qa/TYPE-SCALE.md · qa/PRESS-BLOCK.md · qa/research/shopify-css-best-practice.md
+   History: built from bbc-tokens.css (2026-07-12→22); bbc-type-scale.css is DEAD
+   (was never loaded — do not resurrect its 84px caps).
+   ============================================================================ */
+
+/* ============================================================
+   BBC — DESIGN TOKENS (single source of truth)
+   Created 2026-07-12 (Phase 1, design brief 2026-07-11).
+   LOAD ORDER: this sheet loads LAST in theme.liquid, so its
+   :root definitions win every earlier :root (foundation,
+   unified-styles, aaa-2026, Dawn settings). Scoped .bbc-rd
+   tokens in bbc-redesign-2026.css still win inside .bbc-rd —
+   values are kept identical here so there is no visual fork.
+   RULES: new work reads tokens from HERE. No new hex anywhere
+   else. Full brief: qa/DESIGN-BRIEF.md.
+   ============================================================ */
+
+/* ---- Atkinson Hyperlegible (self-hosted) — declared here so the
+   typeface exists on EVERY page, not just pages that load
+   bbc-redesign-2026.css (fixes cart/account/search fallback). */
+@font-face{ font-family:'Atkinson Hyperlegible'; font-style:normal; font-weight:400; font-display:swap; src:url('AtkinsonHyperlegible-Regular.woff2') format('woff2'), url('AtkinsonHyperlegible-Regular.ttf') format('truetype'); }
+@font-face{ font-family:'Atkinson Hyperlegible'; font-style:italic; font-weight:400; font-display:swap; src:url('AtkinsonHyperlegible-Italic.woff2') format('woff2'), url('AtkinsonHyperlegible-Italic.ttf') format('truetype'); }
+@font-face{ font-family:'Atkinson Hyperlegible'; font-style:normal; font-weight:700; font-display:swap; src:url('AtkinsonHyperlegible-Bold.woff2') format('woff2'), url('AtkinsonHyperlegible-Bold.ttf') format('truetype'); }
+@font-face{ font-family:'Atkinson Hyperlegible'; font-style:italic; font-weight:700; font-display:swap; src:url('AtkinsonHyperlegible-BoldItalic.woff2') format('woff2'), url('AtkinsonHyperlegible-BoldItalic.ttf') format('truetype'); }
+
+:root{
+  /* ---- Type ---- */
+  --rd-sans:"Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+  --font-display:var(--rd-sans);
+  /* Dawn chrome override (kill Jakarta rendering everywhere;
+     checkout is Shopify-hosted and unaffected): */
+  --font-body-family:"Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+  --font-heading-family:"Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+  --bbc-font:var(--rd-sans); /* legacy alias (bbc-product-styles) */
+
+  /* ---- Type scale (mirror of bbc-type-scale.css; that sheet
+     stays for .bbc-rd h2 sizing, values MUST match) ---- */
+  --fs-hero:clamp(42px,6.6vw,86px);
+  --fs-h1:clamp(38px,5.4vw,72px);
+  --fs-h2:clamp(32px,6.6vw,84px);
+  --fs-h3:clamp(22px,2.6vw,32px);
+  --fs-lede:clamp(18px,1.8vw,22px);
+
+  /* ---- Colour canon (2026 system; hex lives HERE only) ---- */
+  --forest:#003C32; --forest-700:#002A23; --forest-300:#1F6655;
+  --teal:#3F8B66; --gold:#FFA900;
+  --lime:#D4FD62; --lime-700:#9BC02E; --lime-aaa:#c6f24e;
+  --bone:#E6DCC8;            /* block-system "paper" surface */
+  --paper:#F1E9D8;           /* rd in-page paper (kept, matches .bbc-rd) */
+  --steel:#DEE6F0;           /* cool surface / stand-out boxes */
+  --ink:#0E1A17; --charcoal:#2A332F;
+  --mist:#CFC5B0; --subtle:#384540; --border-strong:#B8AE9C;
+
+  /* ---- Legacy namespace repoints (old sheets keep working,
+     but resolve to canon — kills the #073e27 stragglers and the
+     two competing limes) ---- */
+  --bbc-forest:var(--forest);
+  --bbc-forest-dark:var(--forest-700);
+  --bbc-heading:var(--forest);
+  --bbc-lime:var(--lime);
+  --rd-lime:var(--lime);
+  --bbc-gold:var(--gold);
+  --bbc-teal:var(--teal);
+
+  /* ---- Spacing / radius / shadow (canonical home; unified-styles
+     copies are scheduled for removal) ---- */
+  --bbc-space-1:4px; --bbc-space-2:8px; --bbc-space-3:12px;
+  --bbc-space-4:16px; --bbc-space-5:24px; --bbc-space-6:32px;
+  --bbc-space-7:48px; --bbc-space-8:64px;
+  --bbc-radius-sm:4px; --bbc-radius-md:8px; --bbc-radius-lg:12px;
+  --bbc-shadow-sm:0 1px 2px rgba(0,0,0,.05);
+  --bbc-shadow-md:0 4px 12px rgba(0,0,0,.08);
+  --bbc-shadow-lg:0 8px 24px rgba(0,0,0,.12);
+
+  /* ---- Measures ---- */
+  --measure:66ch; --measure-lede:54ch; --measure-head:18ch;
+  --rd-container:1200px;
+
+  /* ---- Dawn global style variables → brand (best practice: set Dawn's
+     own vars so every Dawn button/input matches Impact, no) ---- */
+  --buttons-radius:999px;
+  --buttons-radius-outset:999px;
+}
+
+/* ---- Atkinson enforcement (beats bbc-foundation's hardcoded
+   Jakarta body rule by load order; icon classes set their own
+   font-family and are untouched) ---- */
+body, button, input, select, textarea{ font-family:var(--rd-sans); }
+h1,h2,h3,h4,h5,h6{ font-family:var(--rd-sans); }
+
+/* ============================================================
+   2026 CONSOLIDATION — buttons unified via Dawn's own variables
+   (best practice: no, no settings_data.json).
+   Dawn's .button reads --buttons-radius; setting it here makes every
+   Dawn button a pill matching Impact's .rd-btn. Legacy .bbc-btn is a
+   custom class (doesn't read Dawn vars) so it gets ONE clean rule that
+   wins by load order — no !important needed. .rd-btn already correct.
+   Button COLOUR stays under Dawn's colour schemes (merchant-controlled).
+   ============================================================ */
+.bbc-btn{
+  border-radius:999px;
+  font-family:var(--rd-sans);
+  font-weight:700;
+}
+
+/* ============================================================
+   2026 CONSOLIDATION — CANONICAL HERO/BANNER HEADLINE
+   Every page's hero h1 matches Impact (the reference). Fixes the
+   size drift where only .bbc-rd-impact had a hero rule and other
+   banners fell back to smaller generic sizing. Loads last → wins.
+   Home's per-word animated .ew-h1 aligned to the same scale.
+   ============================================================ */
+.bbc-rd .rd-hero h1,
+.bbc-rd:not(.bbc-rd-product) .rd-pad h1:not(.rd-prose h1),
+.bbc-rd.bbc-rd-home .ew-h1{ font-size:clamp(3.4rem,9vw,7.75rem) !important; line-height:.95 !important; letter-spacing:-.025em !important; }
+/* ^ .rd-pad h1 added 2026-07-22: light-paper heroes (which-kit, theory-of-change,
+   impact-report, media-page) sat outside .rd-hero and fell to aaa-2026's stale
+   52px var. Product pages excluded — the PDP h1 is a product title, not a masthead.
+   .rd-prose excluded — headings typed into page BODY content must not masthead. */
+@media (max-width:749px){
+  .bbc-rd .rd-hero h1,
+  .bbc-rd:not(.bbc-rd-product) .rd-pad h1:not(.rd-prose h1),
+  .bbc-rd.bbc-rd-home .ew-h1{ font-size:clamp(2.9rem,12vw,4.6rem) !important; }
+}
+
+/* Prose (rendered page.content — legacy/legal/content pages): headings typed in
+   the admin RTE take the H3 ROLE, not display/band scale. An 8×h1 privacy policy
+   must read as a document, not eight mastheads (caught by the 2026-07-22 audit). */
+.bbc-rd .rd-prose h1,
+.bbc-rd .rd-prose h2{ font-size:clamp(21px,2.3vw,29px) !important; line-height:1.2 !important; letter-spacing:0 !important; font-weight:700; }
+.bbc-rd .rd-prose h3{ font-size:21px !important; line-height:1.25 !important; }
+
+/* ARTICLE HEADLINE role (blog posts — long editorial titles can run 8–12 words, so
+   masthead display would wrap 6+ lines; audit 2026-07-22 found articles falling to
+   aaa-2026's stale var instead of a deliberate role). ~54px @1280, documented in
+   qa/TYPE-SCALE.md. */
+.bbc-rd .rd-art-hero h1{ font-size:clamp(2.2rem,4.2vw,3.5rem) !important; line-height:1.05 !important; letter-spacing:-.015em !important; }
+
+/* ============================================================
+   2026 CONSOLIDATION — CANONICAL BAND HEADING (h2)
+   Every band heading matches Impact (clamp 2.8–5.4rem). Fixes the
+   drift where only Impact/Home had scoped h2 rules and other pages
+   fell back to smaller generic sizing. Loads last → wins. Home
+   covered at matching specificity. Cards/sub-heads use h3 (untouched).
+   ============================================================ */
+.bbc-rd h2,
+.bbc-rd.bbc-rd-home h2{ font-size:clamp(3rem,7.4vw,6.4rem) !important; line-height:.97 !important; letter-spacing:-.02em !important; }
+@media (max-width:749px){
+  .bbc-rd h2,
+  .bbc-rd.bbc-rd-home h2{ font-size:clamp(2.6rem,11vw,4rem) !important; }
+}
+
+/* ============================================================
+   2026 CONSOLIDATION — CANONICAL BODY + SUB-HEADING
+   Body copy → 18px per the design brief (block content only;
+   small captions/labels/sources keep their size). Bare h3 band
+   sub-heads get a consistent size; explicit rd-fs-* card titles
+   are left alone. Loads last → wins. Completes the type scale:
+   hero 96 · h2 86 · h3 ~24 · lede 22 · body 18.
+   ============================================================ */
+.bbc-rd .rd-body p:not(.rd-src):not(.rd-ship-note),
+.bbc-rd .rd-cscard__ctx,
+.bbc-rd .rd-cscard__quote,
+.bbc-rd .rd-path__who,
+.bbc-rd .rd-steps li,
+.bbc-rd .rd-list li,
+.bbc-rd .rd-txt > p:not(.rd-lede),
+.bbc-rd .acc-card p{ font-size:18px !important; line-height:1.5 !important; }
+.bbc-rd h3:not([class*="rd-fs-"]):not([class*="fs-"]){ font-size:clamp(21px,2.3vw,29px) !important; line-height:1.12 !important; }
+
+/* ============================================================
+   2026 CONSOLIDATION — SECONDARY TEXT LINK (.rd-textlink)
+   One dominant CTA per band (Unbounce/Mighty Ally): secondaries render
+   as underlined arrow TEXT LINKS, not competing pills. Scoped + loads
+   last, so the global link rules that once broke underlined links here
+   are overridden cleanly. Used in the discovery-call band + customer-
+   segment cards (Chris feedback 2026-07-20).
+   ============================================================ */
+.bbc-rd a.rd-textlink,
+.bbc-rd a.rd-textlink:not(#_){
+  background:none; border:0; padding:0; border-radius:0;
+  display:inline-block; margin-top:auto; margin-block-start:10px; align-self:flex-start;
+  padding-block:12px; /* 43px tap target (WCAG 2.5.8) without changing the visual line */
+  font-size:16px; font-weight:700; line-height:1.2;
+  color:var(--forest) !important;
+  text-decoration:underline !important;
+  text-underline-offset:4px; text-decoration-thickness:2px;
+}
+.bbc-rd a.rd-textlink:hover{ color:var(--forest-700) !important; }
+.bbc-rd .rd-dark a.rd-textlink:not(#_),
+.bbc-rd .rd-on-dark a.rd-textlink:not(#_){ color:var(--bone) !important; -webkit-text-fill-color:var(--bone) !important; }
+.bbc-rd .rd-dark a.rd-textlink:not(#_):hover{ color:#fff !important; -webkit-text-fill-color:#fff !important; }
+/* ^ §6's base uses a :not(#_) ID-specificity hack — the dark override must carry the
+   same tier or it silently loses (the report-link, THREE fixes deep: inherit chain →
+   text-fill paint → ID-tier. 2026-07-24) */
+/* redesign's a{color:inherit!important} out-ranks per-anchor rules — so dark bands set
+   the PARENT colour and anchors inherit it (the report-link invisibility, 2026-07-24) */
+.bbc-rd .rd-dark, .bbc-rd .rd-on-dark{ color:var(--bone); }
+.bbc-rd .rd-dark p.rd-on-dark, .bbc-rd .rd-dark p.rd-on-dark a{ color:var(--bone) !important; -webkit-text-fill-color:var(--bone) !important; } /* the report-link parent — a band-level rule was still winning */
+
+/* width utility used by the homepage video band (was missing — wrap fell back to 1200px) */
+.bbc-rd .rd-mw-980px,
+.bbc-rd.bbc-rd-home .rd-wrap.rd-mw-980px{ max-width:980px; margin-inline:auto; }
+
+/* ============================================================
+   MASTHEAD TECHNIQUES (research 2026-07-22, qa/TYPE-SCALE.md)
+   Accent-word convention: an <em> inside any display heading is the
+   brand accent (Toggl/home-hero pattern, standardised): italic lime
+   on dark surfaces, teal on light. Use for ONE phrase per headline.
+   ============================================================ */
+.bbc-rd h1 em,.bbc-rd h2 em{ font-style:italic; color:var(--teal); }
+.bbc-rd .rd-dark h1 em,.bbc-rd .rd-dark h2 em,
+.bbc-rd .rd-hero h1 em,.bbc-rd .rd-hero h2 em{ color:var(--lime); }
+
+/* Giant footer wordmark — type-as-poster (genre staple: PP/Rudnick/fashion).
+   One full-bleed lowercase line; clamps to the container; decorative. */
+.bbc-wordmark{ display:block; width:100%; overflow:clip; /* clip not hidden — hosts an animated child (§11) */ padding:28px 0 6px;
+  font-family:var(--rd-sans); font-weight:800; letter-spacing:-.03em; line-height:.9;
+  /* The clamp FLOOR was the bug: at 390px, 9.4vw resolved to 36.7px but the 2.6rem
+     minimum (41.6px) won, and "bamboo bicycle club" at that size needs 386px inside a
+     326px box. With white-space:nowrap + overflow:clip the signature rendered as
+     "bamboo bicycle c" on every mobile page. Measured: width ≈ font-size × 9.28, so
+     390px needs ≤35px. Floor dropped to 2rem and the slope to 8.6vw, which fits at 390
+     (33.5px → 311px) and still gives 110px at 1280. Tuned in place rather than added as
+     a mobile override, because a second font-size declaration is a new raw literal and
+     the token ratchet is down-only. */
+  font-size:clamp(2rem,8.6vw,7.5rem); white-space:nowrap; text-align:center;
+  color:var(--bone); opacity:.92; user-select:none; }
+.bbc-wordmark a{ color:inherit !important; text-decoration:none !important; display:inline-block; }
+
+/* ============================================================
+   §9 GLOBAL POLISH + A11Y (new, 2026-07-22)
+   ============================================================ */
+/* brand selection colour */
+::selection{ background:var(--lime); color:var(--forest); }
+/* one global focus ring (components may tighten, never remove) */
+:where(a,button,input,select,textarea,summary):focus-visible{ outline:3px solid var(--lime-aaa); outline-offset:2px; }
+/* headings: balanced rag everywhere */
+.bbc-rd :where(h1,h2,h3){ text-wrap:balance; }
+/* stat numerals align (count-ups, budgets, facts) */
+.rd-num,.rd-fact-n,.rd-yr{ font-variant-numeric:tabular-nums; }
+/* normalise emphasis weight */
+.bbc-rd b,.bbc-rd strong{ font-weight:700; }
+/* measure-capped wraps sit on the page axis, not centred — the proof-band class
+   found estate-wide (programmes/workshops/why-bamboo/teambuilding at 1024+): a
+   .rd-wrap.rd-mw-* centres itself, indenting whole bands +190px off the axis.
+   Explicit centring opts out via .rd-mx-auto / .rd-center. */
+.bbc-rd .rd-wrap[class*="rd-mw-"]:not(.rd-mx-auto):not(.rd-center){ margin-left:max(calc((100vw - 1200px) / 2), 0px); margin-right:0; }
+/* breadcrumbs follow their surface — bbc-redesign-2026.css hardcoded the dark-hero
+   recipe (paper links + lime current) on EVERY .rd-crumb, invisible on light heroes
+   (caught on /pages/which-kit + PDP, 2026-07-22). Default = inherit the band colour;
+   dark surfaces (.rd-hero image heroes, .rd-dark bands) restore paper + lime. */
+/* (nav type in the selector out-ranks the redesign sheet's tie — that sheet loads
+   later, per-section in the body, so a bare tie loses) */
+.bbc-rd nav.rd-crumb{ color:inherit; }
+.bbc-rd nav.rd-crumb a{ color:inherit; opacity:.72; }
+.bbc-rd nav.rd-crumb a:hover{ opacity:1; color:inherit; }
+.bbc-rd nav.rd-crumb .rd-here{ color:inherit; opacity:.85; }
+.bbc-rd .rd-hero nav.rd-crumb,.bbc-rd .rd-dark nav.rd-crumb,
+.bbc-rd .rd-hero nav.rd-crumb a,.bbc-rd .rd-dark nav.rd-crumb a{ color:#e9efe7; }
+.bbc-rd .rd-hero nav.rd-crumb .rd-here,.bbc-rd .rd-dark nav.rd-crumb .rd-here{ color:var(--lime); opacity:1; }
+
+/* ============================================================
+   §10 ABSORBED from bbc-type-scale.css (2026-07-22) — that file loaded
+   via bbc-header-2026 (NOT dead as earlier logged; record corrected).
+   Its only live effects, carried forward; the stale 84px caps lost on
+   specificity and are NOT carried:
+   ============================================================ */
+.bbc-rd-home .ew-stamp,
+.bbc-rd-home .ew-ink{ display:none; }  /* clean video hero */
+.bbc-rd-home .ew{ min-height:92svh; }             /* hero fills the fold */
+
+/* ============================================================================
+   §11 THE MOTION SYSTEM (2026-07-24) — contract: qa/MOTION.md
+   One tokenised vocabulary for all BBC motion. Research: Kowalski (UI <300ms,
+   ease-out entrances), MDN scroll-driven recipes, WCAG 2.2 §2.3.3, support
+   caniuse 2026-06 (view(): Chrome/Edge 115+, Safari/iOS 26, Firefox 155+, ~84%).
+   HARD RULES: evidence/credibility/prices never move · reduced-motion = inert ·
+   no view() support = fully visible static page (no opacity:0 outside @supports)
+   · crop-wrappers that host animated children use overflow:clip, NEVER hidden
+   (hidden creates a scroll container and silently kills every timeline inside —
+   the bug that muted the whole site until 2026-07-24) · new keyframes live HERE.
+   ============================================================================ */
+:root{
+  --mo-fast:.15s;        /* hover feedback, micro-interactions */
+  --mo-base:.22s;        /* menus, filters, small entrances */
+  --mo-entrance:.45s;    /* card/chip content entrances */
+  --mo-reveal:.6s;       /* band-level reveals (statement equivalents) */
+  --mo-ease:cubic-bezier(.2,.7,.2,1);       /* out — entrances + hovers */
+  --mo-ease-io:cubic-bezier(.45,0,.25,1);   /* in-out — positional moves */
+  --mo-rise:14px; --mo-rise-sm:8px;
+}
+
+@media (prefers-reduced-motion: no-preference){
+
+  /* ---- scroll-driven vocabulary (all @supports-gated; static page otherwise) ---- */
+  @supports (animation-timeline: view()){
+    /* chip/outcome stagger (promoted from bbc-impact 2026-07-24; classes unchanged) */
+    .rd-cscard__outs li{ animation:rd-chip-in both; animation-timeline:view(); animation-range:entry 0% entry 40%; }
+    .rd-cscard__outs li:nth-child(2){ animation-range:entry 8% entry 48%; }
+    .rd-cscard__outs li:nth-child(3){ animation-range:entry 16% entry 56%; }
+    .rd-cscard__outs li:nth-child(4){ animation-range:entry 24% entry 64%; }
+
+    /* .rd-stagger — grid children cascade in reading order (MDN range-offset recipe) */
+    .rd-stagger > *{ animation:rd-chip-in both; animation-timeline:view(); animation-range:entry 0% entry 45%; }
+    .rd-stagger > :nth-child(2){ animation-range:entry 6% entry 51%; }
+    .rd-stagger > :nth-child(3){ animation-range:entry 12% entry 57%; }
+    .rd-stagger > :nth-child(4){ animation-range:entry 18% entry 63%; }
+    .rd-stagger > :nth-child(5){ animation-range:entry 24% entry 69%; }
+    .rd-stagger > :nth-child(n+6){ animation-range:entry 30% entry 75%; }
+
+    /* footer wordmark rise — the signature close */
+    .bbc-wordmark a{ animation:rd-wordmark-rise both; animation-timeline:view(); animation-range:entry 0% entry 18%; } /* completes within minimal entry — page-end subjects never traverse a full entry range */
+
+    /* duotone develop — image resolves INTO the brand treatment (never out of it) */
+    .rd-duotone > img{ animation:rd-duotone-develop both; animation-timeline:view(); animation-range:entry 0% entry 60%; }
+  }
+
+  @keyframes rd-chip-in{ from{ opacity:.25; transform:translateY(var(--mo-rise-sm,8px)); } to{ opacity:1; transform:none; } } /* .25 floor, not 0 — fast scrolls must always see content (rd-rise-safe doctrine; the wall void James caught) */
+  @keyframes rd-wordmark-rise{ from{ opacity:.35; transform:translateY(22%); } to{ opacity:1; transform:none; } }
+  /* from = the utility's own filter + darkened: develops INTO grayscale(1) contrast(1.06) */
+  @keyframes rd-duotone-develop{ from{ filter:grayscale(1) contrast(1.06) brightness(.55); } to{ filter:grayscale(1) contrast(1.06) brightness(1); } }
+
+  /* ---- time-based vocabulary ---- */
+  @keyframes rd-evin{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+  .rd-evin{ animation:rd-evin var(--mo-base) var(--mo-ease) both; }
+
+  /* ---- hover grammar (pointer devices): cards lift 4, buttons 2, always --mo-fast ---- */
+  @media (hover:hover){
+    .rd-cscard--ev{ transition:transform var(--mo-fast) var(--mo-ease), box-shadow var(--mo-fast) var(--mo-ease); }
+    .rd-cscard--ev:hover{ transform:translateY(-4px); box-shadow:0 10px 24px rgba(14,26,23,.12); }
+  }
+}
+
+/* "on this page" chapter list (bbc-chapter-list snippet) — GOV.UK-pattern anchors,
+   NOT sticky (8-site impact-layout tour 2026-07-24: zero sticky rails in the genre).
+   Targets get scroll-margin so anchors never land flush to the top edge. */
+.bbc-chapters{ margin-top:26px; font-size:15px; }
+.bbc-chapters__label{ display:block; font-size:13px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; opacity:.7; margin-bottom:8px; }
+.bbc-chapters__list{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px 18px; }
+.bbc-chapters__list a{ font-weight:700; text-decoration:underline; text-underline-offset:4px; }
+[id="proof"],[id="evidence"],[id="map"],[id="backers"],[id="book-a-call"]{ scroll-margin-top:24px; }
+.rd-seg-ev{ display:inline-block; margin-left:18px; opacity:.85; }
+@media (prefers-reduced-motion: no-preference){ html{ scroll-behavior:smooth; } }
+
+/* hero folio index: was #5e7355 on forest (2.39:1, axe) — mist passes AAA-large */
+.bbc-rd-home .ew-folio{ color:var(--mist) !important; }

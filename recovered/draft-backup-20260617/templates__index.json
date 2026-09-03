@@ -1,0 +1,536 @@
+{
+  "sections": {
+    "bbc_hero_slider_cyeNUp": {
+      "type": "bbc-hero-slider",
+      "blocks": {
+        "slide_ErYTPV": {
+          "type": "slide",
+          "settings": {
+            "video_url": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/62ec9e0eb87a40afbca2e7aa3c818fc4.mp4",
+            "poster_asset": "bbc-rd-home-poster.jpg",
+            "bg_color": "#073e27",
+            "overlay_opacity": 40,
+            "eyebrow": "Since 2012",
+            "eyebrow_color": "#ffa900",
+            "heading": "4,000+ people have built their own bamboo bicycle.",
+            "heading_color": "#ffffff",
+            "subheading": "Workshops in London. Kits shipped worldwide. No experience needed.",
+            "subheading_color": "#ffffff",
+            "button_text": "Book a Workshop",
+            "button_link": "\/pages\/bicycle-frame-building-workshop",
+            "button_style": "primary",
+            "button_secondary_text": "Shop Kits",
+            "button_secondary_link": "\/collections\/home-build-kits",
+            "button_secondary_style": "outline-light"
+          }
+        },
+        "slide_gyiPwa": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "video_url": "",
+            "bg_color": "#073e27",
+            "overlay_opacity": 40,
+            "eyebrow": "Build with Us",
+            "eyebrow_color": "#ffa900",
+            "heading": "No experience needed. Just patience.",
+            "heading_color": "#ffffff",
+            "subheading": "95% of our builders have never built anything like this before. You'll be in good company.",
+            "subheading_color": "#ffffff",
+            "button_text": "See How It Works",
+            "button_link": "\/pages\/about",
+            "button_style": "primary",
+            "button_secondary_text": "",
+            "button_secondary_link": "",
+            "button_secondary_style": "outline-light"
+          }
+        },
+        "slide_aNeJYN": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "video_url": "",
+            "bg_color": "#073e27",
+            "overlay_opacity": 40,
+            "eyebrow": "Proven Performance",
+            "eyebrow_color": "#ffa900",
+            "heading": "8,288 miles through the Andes. On bamboo.",
+            "heading_color": "#ffffff",
+            "subheading": "Kate Rawles rode from Colombia to Tierra del Fuego on her BBC-built bike 'Woody'. The most reliable bike she's ever owned.",
+            "subheading_color": "#ffffff",
+            "button_text": "Read Her Story",
+            "button_link": "\/pages\/gallery",
+            "button_style": "primary",
+            "button_secondary_text": "",
+            "button_secondary_link": "",
+            "button_secondary_style": "outline-light"
+          }
+        }
+      },
+      "block_order": [
+        "slide_ErYTPV",
+        "slide_gyiPwa",
+        "slide_aNeJYN"
+      ],
+      "name": "Hero Slider",
+      "settings": {
+        "show_press_bar": true,
+        "press_label": "Featured in:"
+      }
+    },
+    "press_logos": {
+      "type": "bbc-press-logos-v3",
+      "blocks": {
+        "ft": {
+          "type": "logo",
+          "settings": {
+            "name": "Financial Times",
+            "logo_svg": "logo-ft.svg",
+            "link": "https:\/\/www.ft.com\/content\/6ebe2eba-b832-4289-9924-2e9f948d5f98",
+            "open_new_tab": true
+          }
+        },
+        "guardian": {
+          "type": "logo",
+          "settings": {
+            "name": "The Guardian",
+            "logo_svg": "logo-guardian.svg",
+            "link": "",
+            "open_new_tab": true
+          }
+        },
+        "bikeradar": {
+          "type": "logo",
+          "settings": {
+            "name": "BikeRadar",
+            "logo_svg": "logo-bikeradar.svg",
+            "link": "",
+            "open_new_tab": true
+          }
+        },
+        "roadcc": {
+          "type": "logo",
+          "settings": {
+            "name": "road.cc",
+            "logo_svg": "logo-roadcc.svg",
+            "link": "",
+            "open_new_tab": true
+          }
+        },
+        "designmuseum": {
+          "type": "logo",
+          "settings": {
+            "name": "Design Museum",
+            "logo_svg": "logo-design-museum.svg",
+            "link": "",
+            "open_new_tab": true
+          }
+        },
+        "granddesigns": {
+          "type": "logo",
+          "settings": {
+            "name": "Grand Designs",
+            "logo_svg": "logo-grand-designs.svg",
+            "link": "",
+            "open_new_tab": true
+          }
+        },
+        "insidetime": {
+          "type": "logo",
+          "settings": {
+            "name": "Inside Time",
+            "logo_svg": "logo-inside-time.svg",
+            "link": "",
+            "open_new_tab": true
+          }
+        },
+        "huck": {
+          "type": "logo",
+          "settings": {
+            "name": "Huck Magazine",
+            "logo_svg": "logo-huck.svg",
+            "link": "",
+            "open_new_tab": true
+          }
+        }
+      },
+      "block_order": [
+        "ft",
+        "guardian",
+        "bikeradar",
+        "roadcc",
+        "designmuseum",
+        "granddesigns",
+        "insidetime",
+        "huck"
+      ],
+      "settings": {
+        "eyebrow": "As Featured In",
+        "eyebrow_color": "#718096",
+        "logo_height": 36,
+        "logo_max_width": 140,
+        "logo_gap": 48,
+        "grayscale_effect": true,
+        "background_color": "#ffffff",
+        "show_borders": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "options": {
+      "type": "bbc-options",
+      "blocks": {
+        "workshop": {
+          "type": "option",
+          "settings": {
+            "badge": "Most Popular",
+            "icon": "build",
+            "title": "Join a Workshop",
+            "description": "Build your frame in 2-3 days with expert guidance. Walk in a beginner, leave with a bike.",
+            "features": "From £500|2-3 days, all inclusive|London workshop|Small groups of 4-6",
+            "button_text": "View Workshops",
+            "button_link": "\/pages\/bicycle-frame-building-workshop",
+            "button_style": "primary",
+            "highlight": true
+          }
+        },
+        "kit": {
+          "type": "option",
+          "settings": {
+            "badge": "",
+            "icon": "package_2",
+            "title": "Build at Home",
+            "description": "Complete DIY frame kit with video tutorials and community support. Build at your own pace.",
+            "features": "From £375|35-40 hours total|Ships worldwide|Video guides included",
+            "button_text": "Shop Kits",
+            "button_link": "\/collections\/home-build-kits",
+            "button_style": "primary",
+            "highlight": false
+          }
+        }
+      },
+      "block_order": [
+        "workshop",
+        "kit"
+      ],
+      "settings": {
+        "label": "",
+        "heading": "Two Ways to Build Your Bike",
+        "text": "",
+        "footer_text": "",
+        "columns": "2",
+        "background": "white"
+      }
+    },
+    "why_bamboo": {
+      "type": "bbc-content",
+      "blocks": {
+        "f1": {
+          "type": "feature",
+          "settings": {
+            "icon": "check",
+            "icon_style": "plain",
+            "text": "56.7% lower carbon footprint than aluminium",
+            "subtext": ""
+          }
+        },
+        "f2": {
+          "type": "feature",
+          "settings": {
+            "icon": "check",
+            "icon_style": "plain",
+            "text": "Natural vibration dampening for comfortable rides",
+            "subtext": ""
+          }
+        },
+        "f3": {
+          "type": "feature",
+          "settings": {
+            "icon": "check",
+            "icon_style": "plain",
+            "text": "Stronger per gram than steel",
+            "subtext": ""
+          }
+        },
+        "f4": {
+          "type": "feature",
+          "settings": {
+            "icon": "check",
+            "icon_style": "plain",
+            "text": "Each frame is unique — your bike, your build",
+            "subtext": ""
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
+      "settings": {
+        "label": "Why Bamboo?",
+        "heading": "Nature's Perfect Frame Material",
+        "text": "<p>Bamboo combines the best qualities of steel, carbon, and titanium. It's stronger than steel, absorbs vibration better than carbon fibre, and grows back in just 3-5 years.<\/p>",
+        "button_text": "",
+        "button_link": "",
+        "button_style": "primary",
+        "image_asset": "bbc-rd-bamboo-tubes.jpg",
+        "image_alt": "Raw bamboo tubes ready to be built into a bicycle frame",
+        "image_caption": "",
+        "image_ratio": "auto",
+        "image_size": "medium",
+        "image_position": "right",
+        "content_width": "50-50",
+        "vertical_align": "center",
+        "mobile_order": "image_first",
+        "gap_size": "lg",
+        "background": "cream"
+      }
+    },
+    "story_impact": {
+      "type": "bbc-story",
+      "blocks": {
+        "stat1": {
+          "type": "stat",
+          "settings": {
+            "number": "4,000+",
+            "label": "Bikes Built",
+            "detail": "And counting"
+          }
+        },
+        "stat2": {
+          "type": "stat",
+          "settings": {
+            "number": "36",
+            "label": "Countries",
+            "detail": "Worldwide"
+          }
+        },
+        "stat3": {
+          "type": "stat",
+          "settings": {
+            "number": "13",
+            "label": "Years",
+            "detail": "Since 2012"
+          }
+        },
+        "m1": {
+          "type": "milestone",
+          "settings": {
+            "year": "2012",
+            "title": "BBC Founded",
+            "description": "James & Ian open first workshop in Hackney"
+          }
+        },
+        "m2": {
+          "type": "milestone",
+          "settings": {
+            "year": "2020",
+            "title": "Build to Bond",
+            "description": "Prison rehabilitation programme launches"
+          }
+        },
+        "m3": {
+          "type": "milestone",
+          "settings": {
+            "year": "2025",
+            "title": "Investec Winner",
+            "description": "Beyond Business award for social impact"
+          }
+        }
+      },
+      "block_order": [
+        "stat1",
+        "stat2",
+        "stat3",
+        "m1",
+        "m2",
+        "m3"
+      ],
+      "settings": {
+        "eyebrow": "Our Story",
+        "heading": "13 years of building more than bikes",
+        "story_text": "<p>In 2012, James and Ian opened a small workshop in Hackney with one goal: prove that anyone can build a bicycle frame.<\/p><p>Today, we use bamboo bicycle building for prison rehabilitation, school programmes, and community projects. Every bike we help create connects people — to craft, to purpose, and to each other.<\/p>",
+        "founder_quote": "If we want people to choose sustainable options, we need to offer something better than what polluting products can be.",
+        "founder_name": "James Marr",
+        "founder_role": "Founder",
+        "timeline_title": "Key Milestones",
+        "visual_position": "right",
+        "content_width": "60-40",
+        "vertical_align": "top",
+        "mobile_order": "text_first",
+        "gap_size": "lg",
+        "image_asset": "bbc-rd-workshop.jpg",
+        "image_alt": "Builders at work in the Bamboo Bicycle Club workshop",
+        "image_caption": ""
+      }
+    },
+    "journeys": {
+      "type": "bbc-journeys",
+      "blocks": {
+        "j1": {
+          "type": "journey",
+          "settings": {
+            "image_asset": "bbc-rd-bike-field.jpg",
+            "distance": "12,000+ miles",
+            "route": "London to New Zealand",
+            "rider": ""
+          }
+        },
+        "j2": {
+          "type": "journey",
+          "settings": {
+            "image_asset": "bbc-rd-gravel-fence.jpg",
+            "distance": "1,200 miles",
+            "route": "Pamir Highway, Winter",
+            "rider": ""
+          }
+        },
+        "j3": {
+          "type": "journey",
+          "settings": {
+            "image_asset": "bbc-rd-road-charlie.jpg",
+            "distance": "",
+            "route": "Daily Commute, 7+ Years",
+            "rider": "Jamie, Romania"
+          }
+        }
+      },
+      "block_order": [
+        "j1",
+        "j2",
+        "j3"
+      ],
+      "settings": {
+        "eyebrow": "Adventure",
+        "heading": "Where Our Bikes Go",
+        "visual_position": "left",
+        "content_width": "50-50",
+        "vertical_align": "center",
+        "mobile_order": "image_first",
+        "gap_size": "md",
+        "featured_image_asset": "bbc-rd-gravel-sunset.jpg",
+        "featured_distance": "8,288 miles",
+        "featured_title": "Colombia to Tierra del Fuego",
+        "featured_name": "Kate Rawles, Environmental Advocate",
+        "featured_quote": "Woody turned out to be the most reliable bike I've ever owned. I had hardly any mechanical problems on the whole journey.",
+        "featured_description": "Kate rode her BBC-built bamboo bike 'Woody' through the Andes, documenting the journey in her book 'The Life Cycle'.",
+        "featured_link": "",
+        "cta_text": "See More Adventures",
+        "cta_link": "\/pages\/gallery",
+        "button_style": "outline-light"
+      }
+    },
+    "press_recognition": {
+      "type": "bbc-press-recognition",
+      "blocks": {
+        "a1": {
+          "type": "award",
+          "settings": {
+            "icon": "emoji_events",
+            "name": "Investec Beyond Business",
+            "year": "2025 Winner",
+            "description": "£24,000 for prison education work"
+          }
+        },
+        "a2": {
+          "type": "award",
+          "settings": {
+            "icon": "eco",
+            "name": "Kevin McCloud's Green Heroes",
+            "year": "2018",
+            "description": "Grand Designs Live"
+          }
+        },
+        "a3": {
+          "type": "award",
+          "settings": {
+            "icon": "museum",
+            "name": "Design Museum Exhibition",
+            "year": "2015-16",
+            "description": "Cycle Revolution"
+          }
+        }
+      },
+      "block_order": [
+        "a1",
+        "a2",
+        "a3"
+      ],
+      "settings": {
+        "eyebrow": "Recognition",
+        "heading": "As Featured In",
+        "featured_quote": "Bamboo Bicycle Club taps into 'the IKEA effect' — that extra bit of affection people reserve for objects they put together themselves.",
+        "quote_source": "Financial Times",
+        "quote_date": "September 2025",
+        "awards_title": "Awards & Recognition"
+      }
+    },
+    "testimonials": {
+      "type": "bbc-homepage-testimonials",
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Still riding mine daily after 7 years. Built it at home in Romania using the kit. It's outlasted two steel bikes I owned before.",
+            "name": "Jamie",
+            "role": "Kit builder, 7+ years"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "How did it feel riding something mostly made from a member of the grass family? Surprisingly good.",
+            "name": "BikeRadar",
+            "role": "Video review"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Innovative projects like Build to Bond support rehabilitation and help people leave prison as better citizens.",
+            "name": "James Timpson",
+            "role": "UK Prisons Minister"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "label": "From Our Builders",
+        "heading": "Real Stories",
+        "columns": "3",
+        "background": "white"
+      }
+    },
+    "cta": {
+      "type": "bbc-cta",
+      "settings": {
+        "heading": "Your bike is waiting to be built",
+        "text": "Join 4,000+ people who've discovered the joy of building their own sustainable bicycle.",
+        "button_text": "Start Building",
+        "button_link": "\/collections\/home-build-kits",
+        "button_style": "primary",
+        "button_secondary_text": "Book Workshop",
+        "button_secondary_link": "\/pages\/bicycle-frame-building-workshop",
+        "button_secondary_style": "outline",
+        "background": "forest"
+      }
+    }
+  },
+  "order": [
+    "bbc_hero_slider_cyeNUp",
+    "press_logos",
+    "options",
+    "why_bamboo",
+    "story_impact",
+    "journeys",
+    "press_recognition",
+    "testimonials",
+    "cta"
+  ]
+}

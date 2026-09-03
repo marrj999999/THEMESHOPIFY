@@ -1,0 +1,215 @@
+<title>Impact Page Stakeholder Audit</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{--bg:#f5f0e8;--panel:#fbf8f2;--ink:#14211c;--ink-2:#4a5a53;--ink-3:#7a877f;--forest:#003c32;--forest-2:#0d5446;--lime:#d4fd62;--lime-ink:#2a4a00;--gold:#ffa900;--rule:#d9d2c3;--chip:#e9e3d6;--crit:#b3261e;--crit-bg:#fbe9e7;--warn:#9a5f00;--warn-bg:#fff1d6;--ok:#2f7d4f;--ok-bg:#e3f2e8;--info:#2b5f8c;--info-bg:#e4eef7;--on-forest:#f2eee4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0f1a16;--panel:#15231e;--ink:#eae6dc;--ink-2:#b5b9b1;--ink-3:#8b928c;--forest:#0b3a30;--forest-2:#125647;--lime-ink:#d4fd62;--gold:#ffb83a;--rule:#2a3a34;--chip:#223129;--crit:#ff8a80;--crit-bg:#3a1a17;--warn:#ffcc66;--warn-bg:#3a2a0f;--ok:#8fd8a8;--ok-bg:#153524;--info:#8fc1ee;--info-bg:#162a3a}}
+:root[data-theme="dark"]{--bg:#0f1a16;--panel:#15231e;--ink:#eae6dc;--ink-2:#b5b9b1;--ink-3:#8b928c;--forest:#0b3a30;--forest-2:#125647;--lime-ink:#d4fd62;--gold:#ffb83a;--rule:#2a3a34;--chip:#223129;--crit:#ff8a80;--crit-bg:#3a1a17;--warn:#ffcc66;--warn-bg:#3a2a0f;--ok:#8fd8a8;--ok-bg:#153524;--info:#8fc1ee;--info-bg:#162a3a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-size:17px;line-height:1.55}
+h1,h2,h3{font-family:"Plus Jakarta Sans",system-ui,sans-serif;margin:0;text-wrap:balance;color:var(--ink)}
+a{color:var(--forest-2)}:root[data-theme="dark"] a{color:var(--lime)}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) a{color:var(--lime)}}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+header.top{background:var(--forest);color:var(--on-forest);padding:52px 0 40px;border-bottom:6px solid var(--lime)}
+header.top h1{color:var(--on-forest);font-size:clamp(32px,5vw,50px);font-weight:800;letter-spacing:-.01em;line-height:1.05}
+header.top .k{font-family:"Plus Jakarta Sans",sans-serif;color:var(--lime);letter-spacing:.14em;text-transform:uppercase;font-size:12px;font-weight:700;margin-bottom:16px}
+header.top p{max-width:64ch;margin:16px 0 0;color:var(--on-forest);opacity:.92;font-size:18px}
+main{padding:40px 0 80px}section{margin:0 0 52px}
+section>h2{font-size:27px;font-weight:800;margin-bottom:6px}section>.lede{color:var(--ink-2);max-width:70ch;margin:0 0 20px}
+h3.sub{font-size:19px;margin:26px 0 6px}p.who{color:var(--ink-2);margin:0 0 10px;max-width:80ch;font-size:15.5px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0}
+.tile{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:16px}
+.tile .n{font-family:"Plus Jakarta Sans",sans-serif;font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}.tile .l{font-size:13px;color:var(--ink-2);margin-top:6px;line-height:1.35}
+.tile.crit .n{color:var(--crit)}.tile.warn .n{color:var(--warn)}.tile.ok .n{color:var(--ok)}
+.chip{display:inline-block;font-family:"Plus Jakarta Sans",sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.chip.crit{background:var(--crit-bg);color:var(--crit)}.chip.warn{background:var(--warn-bg);color:var(--warn)}.chip.ok{background:var(--ok-bg);color:var(--ok)}.chip.info{background:var(--info-bg);color:var(--info)}.chip.n{background:var(--chip);color:var(--ink-2)}
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--panel);margin:14px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:10px 11px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule)}
+th{font-family:"Plus Jakarta Sans",sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:700;background:var(--chip)}tr:last-child td{border-bottom:0}
+td b{color:var(--ink)}td i{color:var(--ink-3)}
+.callout{background:var(--panel);border:1px solid var(--rule);border-left:5px solid var(--gold);border-radius:8px;padding:16px 18px;margin:18px 0;max-width:82ch}.callout.ok{border-left-color:var(--ok)}.callout.crit{border-left-color:var(--crit)}.callout.info{border-left-color:var(--info)}
+.callout h4{font-size:15px;margin:0 0 6px;font-family:"Plus Jakarta Sans",sans-serif}.callout p{margin:0;font-size:15.5px;color:var(--ink-2)}
+ul.tight{padding-left:20px;margin:8px 0;max-width:78ch}ul.tight li{margin:5px 0;color:var(--ink-2)}ul.tight li b{color:var(--ink)}
+ol.steps{padding-left:0;list-style:none;counter-reset:s;max-width:82ch}ol.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--rule)}
+ol.steps li::before{content:counter(s,decimal-leading-zero);font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;color:var(--lime-ink);font-size:20px;line-height:1.2}ol.steps li .t{font-weight:700}ol.steps li .b{color:var(--ink-2);font-size:15.5px}
+footer{border-top:1px solid var(--rule);padding:20px 0 40px;font-size:13px;color:var(--ink-3)}
+</style>
+
+<header class="top"><div class="wrap">
+  <div class="k">impact page · read as eight stakeholders · 2 September 2026</div>
+  <h1>Impact Page Stakeholder Audit</h1>
+  <p>The impact page and the pages it hands people to, read the way each stakeholder reads them. The information each one needs comes from what they have actually asked Bamboo Bicycle Club for, in the vault's meeting notes, site notes, grant files and twelve years of archived email. Each need is checked against the live site and the v2 preview, and every gap is gated against the Claims Register.</p>
+</div></header>
+
+<div class="wrap"><main>
+
+<section>
+  <h2>Verdict</h2>
+  <p class="lede">The impact page does its job for every stakeholder: it proves the work is real, dated and honestly counted, and it hands each reader to the right next page. The gaps are on those next pages and behind them. Commissioners get costs and routes but not the paperwork list their security and finance teams will ask for. Teachers get the free start but not what arrives for a class. Funders get the numbers but will find the documents they request do not yet exist. Four pages carry a claim the Register bans. And the single biggest loss across every audience is not a missing paragraph: it is enquiries that were never answered.</p>
+  <div class="tiles">
+    <div class="tile ok"><div class="n">8 / 8</div><div class="l">stakeholders the impact page routes correctly to a next page</div></div>
+    <div class="tile crit"><div class="n">4</div><div class="l">live claim escapes on the pages stakeholders land on; three fixes prepared, one to decide</div></div>
+    <div class="tile warn"><div class="n">6</div><div class="l">documents stakeholders ask for that do not yet exist, so the site must not promise them</div></div>
+    <div class="tile crit"><div class="n">1 in 8</div><div class="l">lost deals in the archive lost to simple non-response, the pattern behind every audience's gaps</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>How this was read</h2>
+  <ul class="tight">
+    <li><b>The stakeholders</b> are the eight the vault already walks in its 27 August alignment report: prison commissioner, council or youth commissioner, teacher or D&amp;T lead, university partner, funder or grant-maker, press or policy researcher, supporter or donor (with corporate CSR buyers), and kit customer.</li>
+    <li><b>Their needs</b> were taken from evidence of what they asked, not from what we assume they want: site notes for Lindholme, Northumberland, Foston Hall and Feltham; the HMPPS Wales brief; Camden and Waltham Forest meetings; the education deal history mined from twelve years of email; the Investec, National Lottery and trust files; the press log; and Parliamentary correspondence.</li>
+    <li><b>Coverage</b> was checked on the live site today and on the v2 preview (theme 199089193334): the impact page, the prisons, build-to-bond, support-mission, programmes, impact-report and theory-of-change pages.</li>
+    <li><b>Every gap</b> is marked with what it takes to close: a wording that is already approved, a decision from James, or evidence that does not yet exist.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>The stakeholders, one by one</h2>
+  <p class="lede">Green means the site answers it. Amber means partly, or only after a fix already prepared. Red means it is missing or wrong. The last column says what closes it.</p>
+
+  <h3 class="sub">1. Prison commissioner</h3>
+  <p class="who">Governors, heads of education, skills and work, industries managers, learning and skills managers; the operators Sodexo, Serco and G4S; education primes such as Novus and PeoplePlus. Reads: impact, then build-to-bond, then prisons. The vault records their questions site by site.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>What they asked for</th><th>Evidence</th><th>On the site</th><th>Gap and what closes it</th></tr></thead>
+    <tbody>
+      <tr><td><b>Costs split into capital and per-learner, packaged under £10k, on one page</b></td><td>Lindholme and Northumberland asked for sub-£10k packages; a Cat B call asked for capex and DPS coded separately; Durham's governor asked for "the one-page pricing".</td><td><span class="chip ok">Yes</span> prisons page: £7–10k setup, ~£8,500 cohort, ~£45k site-year, marked indicative</td><td>Done. Keep "indicative": the growth plan bars a national price until site costs are reconciled.</td></tr>
+      <tr><td><b>When to buy: the budget cycle</b></td><td>Eastwood Park: "not in the ADP, which is now set until April 2027"; primes buy in a May–June window.</td><td><span class="chip crit">No</span></td><td>Add one line to the prisons page: "annual delivery plans are set for the financial year; talk to us before your ADP round." Process fact, no claim gate.</td></tr>
+      <tr><td><b>The security and safety pack</b>: risk assessment, safe systems of work, tool control with etching and shadow boards, resin handling, vetting timeline</td><td>Foston's "did you ever get a response ref the SSOW?" sat unanswered for weeks and blocked a site; Northumberland's tool etching was the last gate before a cohort; Lindholme staff asked which gloves, tools and glue for weeks.</td><td><span class="chip warn">Partly</span> prisons page says "designed around security and tool-control requirements" and claims "Enhanced-DBS facilitators"</td><td>Replace the DBS line (fix prepared: "facilitators vetted for prison delivery"; the Register bars an unverified clearance claim). Add a plain list of what BBC brings to the security team: site risk assessment, safe-systems-of-work pack, tool schedule with etching and shadow-board layout, resin data sheets for the H&amp;S officer. Do not say "COSHH assessed": the pack is a draft and not yet authority to use.</td></tr>
+      <tr><td><b>Exact course identity for their learning records</b></td><td>Lowdham needed an 8-digit QAN for CURIOUS and the number supplied "may not be in the correct format"; Foston asked for the qualification title.</td><td><span class="chip warn">Partly</span> titles on impact-report and theory-of-change; no course IDs, no statement that there is no QAN</td><td>Add to the prisons page: OCN London centre course IDs 1130735 and 1131207; bespoke, not Ofqual-regulated; no QAN. All approved short forms. Saves a week of emails per site.</td></tr>
+      <tr><td><b>Evaluation built in before re-contracting</b></td><td>HMPPS contracts: "we will require a review to be built in prior to re-contracting"; HMPPS Wales called evaluation "crucial"; Spring Hill: "cost isn't the issue if it's purposeful".</td><td><span class="chip warn">Partly</span> impact "how we count"; impact-report "measure what matters"; support-mission promises funders quarterly outcome reporting</td><td>Mirror the funder promise for commissioners: "every cohort reports starts, completions, OCN registrations and achievements, withdrawals and reasons, and learner and staff feedback". This is the growth plan's own scorecard. Needs James to commit to it.</td></tr>
+      <tr><td><b>Fit with their population</b>: churn against a six-week course, the child element in some populations, women's establishments</td><td>Whitemoor's senior team declined over the balance-bike-for-a-child element; Bure asked about partner employers for a PCoSO population; a Cat B remand call flagged churn.</td><td><span class="chip crit">No</span></td><td>Add: "designed for men's and women's establishments; the child element is optional; course length shaped to your regime." Design statements, safe. Do not claim a women's cohort has run: none has.</td></tr>
+      <tr><td><b>Employment pathways after release</b></td><td>Bure, North Sea Camp and Spring Hill all asked about employers and pathways.</td><td><span class="chip crit">No</span> (correctly: Jobs on Release is an aspiration, not live)</td><td>Say so in "how we count": "we do not yet track employment after release". Honest beats silent. Evidence to unlock it: a follow-up agreement with an operator.</td></tr>
+      <tr><td><b>Reference material from a running site</b></td><td>Foston asked for another site's SSOW and tool set-up; Eastwood Park wants a women's-estate case study in 2027.</td><td><span class="chip ok">Yes</span> Lowdham stories, staff quote, press, film on prisons and impact</td><td>Add the Lindholme first-cohort card when completion is evidenced.</td></tr>
+      <tr><td><b>Who they contract with, and insurance</b></td><td>HMPPS Wales asked which legal entity contracts and delivers, plus insurance with indemnity levels; Shaw Trust's due diligence stalled on financing.</td><td><span class="chip warn">Partly</span> "public-liability insured" on prisons; the CIC named on support-mission and now on the impact identity line</td><td>Add "you contract with Bamboo Mobility Project CIC" to the prisons page. Indemnity levels and product liability stay off until the certificates say so.</td></tr>
+    </tbody></table></div>
+
+  <h3 class="sub">2. Council or youth commissioner</h3>
+  <p class="who">Camden Council's inclusive-economy and early-help teams, Waltham Forest and Project Zero, alternative-provision leads. Reads: impact strand 2, then programmes#community.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>What they asked for</th><th>Evidence</th><th>On the site</th><th>Gap and what closes it</th></tr></thead>
+    <tbody>
+      <tr><td><b>Modular formats with costs, to match a cohort and a budget</b></td><td>Camden asked for exactly this in April 2026 and got a menu from a three-hour session to a two-day build.</td><td><span class="chip ok">Yes</span> five-rung ladder on programmes, "priced by quote"</td><td>Done.</td></tr>
+      <tr><td><b>Who the cohort is and who owns delivery</b></td><td>Camden's three open questions after the demo: priority cohort, budget, which service owns delivery.</td><td><span class="chip warn">Partly</span> "for councils and youth services"</td><td>Name the services the ladder is built for: early help, youth services, inclusion teams, alternative provision. No claim gate.</td></tr>
+      <tr><td><b>Honesty about attrition and what makes a day work</b></td><td>Camden's pilot: six started, one finished; the vault's lesson is a prepared, opted-in cohort with familiar support staff.</td><td><span class="chip ok">Yes</span> the Camden card is neutral, as the Register requires</td><td>Add the lesson as an offer: "we run best with a prepared cohort and a familiar support worker in the room". Turns a weak case into a design rule.</td></tr>
+      <tr><td><b>Safeguarding policy and provision standards</b></td><td>Alternative-provision commissioning needs the DfE standards self-assessment; the safeguarding policy is drafted, not adopted.</td><td><span class="chip n">Silent</span> (correctly)</td><td>Vault action, not a page: adopt the policy, complete the self-assessment. Until then the site must not cite either.</td></tr>
+      <tr><td><b>Evidence they can put in their own reports</b></td><td>Waltham Forest College asked for a quote for its National Lottery impact report; Project Zero needed certificates.</td><td><span class="chip ok">Yes</span> 27 bikes, 45 reached, ratings that regularly reached 9–10</td><td>Answer the outstanding quote request. A process gap, not a page gap.</td></tr>
+    </tbody></table></div>
+
+  <h3 class="sub">3. Teacher or head of design and technology</h3>
+  <p class="who">Heads of D&amp;T, technicians, enrichment leads; bursars and deputy heads above about £1,500. Reads: impact strand 1, then programmes. Twelve years of school email say what they ask.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>What they asked for</th><th>Evidence</th><th>On the site</th><th>Gap and what closes it</th></tr></thead>
+    <tbody>
+      <tr><td><b>Exactly what arrives for a class</b></td><td>The most common thread-opener in twelve years ("does the starter pack contain all the materials, including jigs?"). The ambiguity produced the worst outcome on record: a whole kit returned for refund.</td><td><span class="chip crit">No</span> programmes tiers say "request a quote"; the labelled in-the-box diagram exists only on the kit product pages</td><td>Give each school tier a "what arrives" list, the same device the kit pages got today. Contents are facts, no claim gate.</td></tr>
+      <tr><td><b>A price to put against a budget number</b></td><td>State-school ceilings clustered at £500–£650 for a decade; budget is the number-one deal killer; "every semester I decide you're too expensive".</td><td><span class="chip crit">No</span> "priced by quote" on every paid tier</td><td>Needs James: a from-price per tier. The playbook's prices are marked not current authority.</td></tr>
+      <tr><td><b>Try one first</b></td><td>Reed's and Kingswood both ordered one kit for staff to build before launching students.</td><td><span class="chip crit">No</span></td><td>Offer it: "your technician builds the first one; we plan the class from there". An offer, not a claim; James to agree.</td></tr>
+      <tr><td><b>Supplier onboarding and invoicing to a PO</b></td><td>LSBU's new-supplier form nearly killed a deal the champion wanted; UCL's payment went to the wrong account for two months. The vault calls the finance office "a second customer".</td><td><span class="chip crit">No</span></td><td>One line: "we complete your supplier onboarding and invoice against your purchase order". Process fact.</td></tr>
+      <tr><td><b>Club or enrichment format, curriculum links</b></td><td>"GCSE" appears zero times in twelve years; "curriculum" seven; the D&amp;T Practice article is the proof teachers cite.</td><td><span class="chip ok">Yes</span> free speaker build, key-stage mapping, Bradfield quote</td><td>Done.</td></tr>
+      <tr><td><b>Safety and liability</b></td><td>Asked once in twelve years ("are we liable if it breaks?"). The playbook says: do not improvise assurance.</td><td><span class="chip crit">Wrong</span> programmes tier says it "builds a rideable bamboo gravel frame"; "rideable" is a banned product-safety claim</td><td>Change to "builds a bamboo gravel frame". The rideability claim needs the product-safety evidence that is still open.</td></tr>
+    </tbody></table></div>
+
+  <h3 class="sub">4. University partner</h3>
+  <p class="who">Engineering and design departments (UCL, Surrey, Warwick, Aston, Swansea), research offices. Reads: impact strand 1 and the UCL card, then programmes and theory-of-change.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>What they asked for</th><th>Evidence</th><th>On the site</th><th>Gap and what closes it</th></tr></thead>
+    <tbody>
+      <tr><td><b>Collaboration briefs, not kits</b></td><td>UCL's multi-year cargo and e-bike projects; Surrey and Warwick asked for interviews, CAD and FEA data and visits.</td><td><span class="chip ok">Yes</span> UCL story, design sprints, Aston and Surrey cards</td><td>Done.</td></tr>
+      <tr><td><b>Material data</b></td><td>A Swansea MSc student asked for life-cycle data (none exists); Swansea's own tests are the material evidence.</td><td><span class="chip crit">Wrong</span> theory-of-change card says "independent laboratory testing of the frames"; Swansea tested tubing, the exact wrong-subject wording from the 19 August incident</td><td>Fix prepared: "bamboo tubing tested at Swansea University to BS ISO 22157:2019, the material, not a customer-built frame". Add "no life-cycle assessment yet" to the honesty note; an LCA partnership is the unlock.</td></tr>
+      <tr><td><b>Timing</b></td><td>"We are planning activities for September and October."</td><td><span class="chip crit">No</span></td><td>One line on programmes: "university sessions are planned in September and October for the year".</td></tr>
+      <tr><td><b>Research-funding eligibility</b></td><td>Manchester's knowledge-exchange team: no paid employees, negative shareholder funds; not Innovate UK eligible.</td><td><span class="chip n">Not a page matter</span></td><td>Vault: the CIC accounts due 17 November are the unlock for most of the blocked funders.</td></tr>
+    </tbody></table></div>
+
+  <h3 class="sub">5. Funder or grant-maker</h3>
+  <p class="who">Investec Beyond Business, the National Lottery Community Fund, trusts and foundations, impact investors. Reads: impact end to end, then support-mission and the report. The vault's strongest page for them, and the audience with the longest document list.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>What they asked for</th><th>Evidence</th><th>On the site</th><th>Gap and what closes it</th></tr></thead>
+    <tbody>
+      <tr><td><b>Dated, sourced outcomes and a theory of change</b></td><td>A researcher asked in 2025 whether BBC had a theory of change; Investec's quarterly report is a grant condition.</td><td><span class="chip ok">Yes</span> record dated August 2026, four stations, link to the full theory of change, "how we count"</td><td>Done on the preview. The "this quarter" strip (31 learners, 9 staff and mentors, 44 undergraduates) needs a Register row and James's sign-off.</td></tr>
+      <tr><td><b>Legal form, governance, where the money goes</b></td><td>"Where does the money go?" is an FAQ; the 10% profit line was published without an executed policy and removed; advisers pressed on CIC versus Ltd.</td><td><span class="chip ok">Yes</span> support-mission explains the two entities; the impact identity line says CIC, not a charity</td><td>Names of the directors belong here once the director roster is verified; the National Lottery's two-unrelated-directors test depends on it.</td></tr>
+      <tr><td><b>Accounts</b></td><td>Triangle Trust, Paul Hamlyn and Esmée Fairbairn are all blocked on independently examined accounts; the CIC's first accounts are due 17 November 2026.</td><td><span class="chip warn">Overstated</span> support-mission: "Can we see the accounts? Yes, both companies file at Companies House"</td><td>Say it straight: "the Ltd's accounts are filed; the CIC's first accounts are due November 2026". One sentence, template change.</td></tr>
+      <tr><td><b>The document pack</b>: governing document, bank statement, safeguarding, EDI, environmental and data policies, insurance, DBS evidence, referees</td><td>The bid pack shows the governing document and bank statement missing, policies drafted but not adopted, insurance public-liability only, DBS partial, referees only James can supply.</td><td><span class="chip n">Silent</span> (correctly)</td><td>Vault action: finish the pack. Until then the site must not offer "policies on request".</td></tr>
+      <tr><td><b>Financial sustainability without grants</b></td><td>Investec's mentor: strip grant income out and "you're loss-making of minus fifty grand"; rebuild the model per programme and per site.</td><td><span class="chip warn">Risky</span> support-mission: "once running, sites are sustained by earned income and prison education budgets"</td><td>Soften to what is evidenced: "kits and workshops fund the core; grants fund start-up and scale; prison education budgets fund cohorts". Needs James.</td></tr>
+      <tr><td><b>Reporting cadence</b></td><td>Investec chased the Q1 report twice; "do not let it slip again".</td><td><span class="chip ok">Yes</span> support-mission promises outcome reporting each quarter</td><td>Keep the promise. The Q2 report's self-correction (10 completions reported, 8 evidenced) is the credibility story to tell funders.</td></tr>
+      <tr><td><b>Social return on investment</b></td><td>The impact-investor persona evaluates SROI; the £11.41 figure is banned.</td><td><span class="chip ok">Yes</span> "how we count" says no return-on-investment figures</td><td>Done. The Justice Data Lab route is the honest path to a comparator.</td></tr>
+    </tbody></table></div>
+
+  <h3 class="sub">6. Press and policy researcher</h3>
+  <p class="who">Journalists (the FT, Inside Time, cycling and design press), MPs' offices, Ministry of Justice and HMPPS policy leads, the National Justice Museum. Reads: impact for facts and quotes, then the coverage page.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>What they asked for</th><th>Evidence</th><th>On the site</th><th>Gap and what closes it</th></tr></thead>
+    <tbody>
+      <tr><td><b>Facts that survive a fact-check, with dates</b></td><td>The FT's fact-checker confirmed thirteen years teaching, kit prices, workshop locations and the Lowdham timeline; the FT date was later corrected in the Register.</td><td><span class="chip ok">Yes</span> dated stats, dated quotes, identity line, consistent figures across pages</td><td><span class="chip crit">One contradiction</span> impact-report says "4 active prison sites with HMPPS" beside its own "five UK prison sites" line. Fix prepared.</td></tr>
+      <tr><td><b>Verbatim quotes with attribution</b></td><td>A paraphrased Timpson quote was twice found published as verbatim.</td><td><span class="chip ok">Yes</span> Register verbatim, "Financial Times, September 2025" and "Inside Time, November 2025"</td><td>Attribution decision D3 ("then Prisons Minister") still open.</td></tr>
+      <tr><td><b>A way in: spokesperson, images, building the bike themselves</b></td><td>Journalists consistently asked to build, not to receive a release; the standing offer is an interview, workshop access and high-resolution images.</td><td><span class="chip crit">No</span> impact has no press line; the coverage page is a list</td><td>Add one line to the impact ledger: "press and researchers: interviews, images and a workshop visit on request". Added to the preview today.</td></tr>
+      <tr><td><b>Coverage count</b></td><td>The press audit collapsed duplicates (three Inside Time reposts were one article).</td><td><span class="chip warn">Unverified</span> "featured in 40+ publications"</td><td>Check the count against the press log's verified outlets before it stays.</td></tr>
+      <tr><td><b>Policy context with sources</b></td><td>MPs' offices asked about restorative-justice partners and whether equipment can enter the Westminster estate.</td><td><span class="chip ok">Yes</span> MoJ figures sourced on theory-of-change, prisons and impact</td><td>Done. Parliamentary correspondence correctly absent from the page.</td></tr>
+    </tbody></table></div>
+
+  <h3 class="sub">7. Supporter, donor and corporate CSR buyer</h3>
+  <p class="who">Individuals who "back the mission", corporate sustainability and people leads. Reads: impact CTA, then support-mission and team-building.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>What they asked for</th><th>Evidence</th><th>On the site</th><th>Gap and what closes it</th></tr></thead>
+    <tbody>
+      <tr><td><b>Where the money goes, in sizes they can picture</b></td><td>FAQ question; the vault's persona panel wants credibility cues such as the Investec relationship.</td><td><span class="chip ok">Yes</span> costed asks from £180 to £45k, two entities explained, Investec quote</td><td>Done.</td></tr>
+      <tr><td><b>A price per head and a fit for their group size</b></td><td>Corporate deals died on cost per head and on 20 to 80-person groups against a six-bench workshop; an 80-person June event went unanswered for four months; no price card exists.</td><td><span class="chip crit">No</span> team-building formats are "price on application"</td><td>Needs James: a price card and a group-size statement. Investec's adviser said the £5,000-for-fifty quote was undercharging, so the number is not the fear.</td></tr>
+      <tr><td><b>Benefit they can report</b></td><td>"Companies are very hesitant to give money to charity without seeing any necessary benefit."</td><td><span class="chip warn">Partly</span> the social story is on impact; nothing says what a company can report</td><td>Add to team-building: what a corporate day funds (a cohort place, a kit) and the photo, story and figures they get for their own reporting.</td></tr>
+      <tr><td><b>A reply</b></td><td>Five LinkedIn team-build enquiries unactioned across three weekly reviews.</td><td><span class="chip warn">Overpromised</span> support-mission: "James will come back to you within two working days"</td><td>Route enquiries to the shared inbox with cover named, and promise what is true, especially with paternity leave starting this month.</td></tr>
+    </tbody></table></div>
+
+  <h3 class="sub">8. Kit customer</h3>
+  <p class="who">Home builders who reach the impact page from the shop. What they need from it is proof that "every sale supports" is real.</p>
+  <ul class="tight">
+    <li><b>Covered.</b> The funding-loop line was corrected from "10% of profits" to "every sale supports"; the identity line and support-mission explain the two entities. Their transactional questions (shipping, build time, compatibility, sizing) belong on the kit pages, where today's rollout put them.</li>
+    <li><b>Still contradictory elsewhere</b>: build time, workshop price and the Cycle to Work saving differ between pages. Not an impact-page matter, but a customer who cross-reads notices.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Four claims stakeholders will read today that the Register bans</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Page</th><th>Live wording</th><th>Why it fails</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>/pages/impact-report</td><td>"4 active prison sites, with HMPPS", beside "five UK prison sites, at different delivery stages" on the same page</td><td>Contradicts the approved five-sites formula and itself; a press reader spots it in one scroll</td><td><span class="chip warn">Fix prepared</span> stat becomes "5 UK prison sites, at different delivery stages"</td></tr>
+      <tr><td>/pages/prisons</td><td>"Enhanced-DBS facilitators, vetted for prison delivery"</td><td>DBS status is partial in the compliance record; the grant context says name only people whose evidence is recorded</td><td><span class="chip warn">Fix prepared</span> "facilitators vetted for prison delivery"</td></tr>
+      <tr><td>/pages/theory-of-change</td><td>"Independent laboratory testing of the frames to BS ISO 22157"</td><td>Swansea tested tubing; this is the wrong-subject wording that caused the 19 August control incident</td><td><span class="chip warn">Fix prepared</span> tubing wording with the standard cited</td></tr>
+      <tr><td>/pages/programmes</td><td>"builds a rideable bamboo gravel frame"</td><td>"Rideable" is a banned product-safety claim while the classification and test evidence are open</td><td><span class="chip crit">To decide</span> "builds a bamboo gravel frame"</td></tr>
+    </tbody></table></div>
+  <div class="callout crit"><h4>All four are page templates</h4><p>Template pushes to the live theme need James's word. The three prepared fixes are in the repo and pass the gate; the fourth is a one-word change on the programmes template. One "go" ships them together.</p></div>
+</section>
+
+<section>
+  <h2>What no page can say yet, because the document does not exist</h2>
+  <p class="lede">Stakeholders ask for these by name. The site is right to stay silent, and the vault should treat each as a dated task.</p>
+  <ul class="tight">
+    <li><b>An adopted safeguarding policy</b> (two drafts, none adopted). Asked by funders, councils and HMPPS Wales.</li>
+    <li><b>The CIC's governing document and first accounts</b> (accounts due 17 November 2026). Blocks Triangle Trust, Paul Hamlyn, Esmée Fairbairn and the Lottery's director test.</li>
+    <li><b>A signed COSHH assessment for the resin</b> at each site. Lindholme's safe system of work requires it; the pack is a draft.</li>
+    <li><b>DBS or clearance evidence per named person</b>, and insurance certificates with indemnity levels and product liability.</li>
+    <li><b>HMPPS's actual due-diligence questionnaire.</b> Never confirmed; the Wales prep says "ask, don't assume".</li>
+    <li><b>A per-cohort outcomes scorecard</b> (starts, completions, OCN results, withdrawals, feedback). Commissioners will be promised it; the growth plan defines it; no site reports it yet.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Recommendations, in order</h2>
+  <ol class="steps">
+    <li><div><div class="t">Ship the four claim fixes</div><div class="b">Three are prepared; the fourth is one word. They sit on the pages commissioners, teachers and journalists land on from impact.</div></div></li>
+    <li><div><div class="t">Answer before you add</div><div class="b">Every audience's biggest recorded loss is an unanswered enquiry. Point the site's contact promise at the shared inbox with cover named, and make the promise true. This outranks any new band.</div></div></li>
+    <li><div><div class="t">A one-page commissioner sheet on the prisons page</div><div class="b">Costs split capital and per-learner; course IDs and the no-QAN note; what BBC brings to the security team; what each cohort reports; who you contract with; when to buy. Durham's governor asked for exactly this. Every line is already approved or a process fact.</div></div></li>
+    <li><div><div class="t">"What arrives for a class" on every school tier</div><div class="b">The kit pages got the labelled diagram today; the school packs need the same list. The refund on record came from its absence.</div></div></li>
+    <li><div><div class="t">Three honest lines in "how we count"</div><div class="b">No employment tracking after release yet; no life-cycle assessment yet; the CIC's first accounts due November. Each one pre-empts a question a diligent reader will ask.</div></div></li>
+    <li><div><div class="t">Decisions only James can make</div><div class="b">School from-prices; a corporate price card and group-size statement; the commissioner reporting promise; the "this quarter" figures; the cohort wording; the Timpson attribution. Six decisions, each one line of copy.</div></div></li>
+    <li><div><div class="t">Build the documents</div><div class="b">Adopt the safeguarding policy, file the CIC accounts, sign the COSHH pack, confirm HMPPS's due-diligence list, start the per-cohort scorecard. These unlock more funders and sites than any page change.</div></div></li>
+  </ol>
+  <div class="callout info"><h4>Added to the preview today</h4><p>A press-and-researchers line in the impact page's identity ledger. Everything else above is a recommendation or a prepared fix awaiting a go. Preview: bamboobicycleclub.org/pages/impact?preview_theme_id=199089193334.</p></div>
+</section>
+
+<section>
+  <h2>Sources</h2>
+  <ul class="tight">
+    <li>Vault: Reports/Three-Page Stakeholder Alignment 2026-08-27 · Business/Stakeholder Map · Marketing/Audience Simulation Panel · Reports/Prison Programme Growth Evidence and Action Plan 2026-07-27 · Dashboard/Prison Pipeline · Dashboard/Grant Pipeline · Sites/Lindholme, Northumberland · Prisons/HMP Foston Hall, Feltham, Whitemoor, Bure, Eastwood Park, Durham, Spring Hill, HMPPS Wales · Meetings/2026-08-07 Investec Financial Model Review · Meetings/2026-07-13 and 07-24 Wales prep · Contacts/Agata Krasuska, Anna Newsum · Grants/Bid Pack README, NLCF Pedal Forward, Past Applications Library, BBC Grant Eligibility Profile · Business/Education Deal History, Workshop Demand Intelligence, Sales Intelligence · Marketing/Press History, Press and Media Log, PR Strategy · Business/Parliamentary Engagement 2025 · Context/BBC Narrative, Grant Writing Context · Projects/Independent Schools/Sales Playbook · System/Claims Register · Business/Proof Bank.</li>
+    <li>Site: live pages fetched 2 September 2026; v2 preview on theme 199089193334.</li>
+  </ul>
+</section>
+
+</main></div>
+<footer><div class="wrap">Bamboo Bicycle Club · impact page stakeholder audit · 2 September 2026 · quotations from stakeholders are as recorded in the vault.</div></footer>

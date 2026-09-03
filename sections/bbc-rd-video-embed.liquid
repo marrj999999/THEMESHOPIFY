@@ -1,0 +1,46 @@
+{%- comment -%}
+  BBC New Design (2026) — reusable video band. Scoped under .bbc-rd via bbc-redesign-2026.css.
+  Drop into any page template's section order. Responsive 16:9 YouTube embed (lazy, no-cookie).
+{%- endcomment -%}
+
+<div class="bbc-rd bbc-rd-videoband">
+  <section class="rd-pad{% if section.settings.dark %} rd-dark{% else %} rd-paper{% endif %}">
+    <div class="rd-wrap">
+      {%- if section.settings.eyebrow != blank -%}<span class="rd-eyebrow{% if section.settings.dark %} rd-on-dark{% endif %}">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+      <div class="rd-video rd-mt3">
+        {%- if section.settings.video_youtube != blank -%}
+          <iframe class="rd-video-el" style="aspect-ratio:16/9;width:100%;height:auto;border:0;display:block;" src="https://www.youtube-nocookie.com/embed/{{ section.settings.video_youtube }}?rel=0" title="{{ section.settings.heading | escape }}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        {%- else -%}
+          <img width="1600" height="1200" class="rd-video-el" src="{{ section.settings.poster_fallback | default: 'bbc-rd-frame-build.jpg' | asset_url }}" alt="{{ section.settings.heading | escape }}" loading="lazy">
+          <span class="rd-play" aria-hidden="true"></span>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.caption != blank -%}<p class="rd-src rd-mt1">{{ section.settings.caption }}</p>{%- endif -%}
+      {%- if section.settings.body != blank -%}<p class="rd-lede rd-maxw rd-mt2">{{ section.settings.body }}</p>{%- endif -%}
+      {%- if section.settings.cta_label != blank -%}
+        <p class="rd-mt2"><a class="rd-btn {% if section.settings.dark %}rd-on-dark{% else %}rd-ghost{% endif %}" href="{{ section.settings.cta_url | default: '#' }}">{{ section.settings.cta_label }} <span class="rd-arrow">&rarr;</span></a></p>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Video band 2026",
+  "tag": "section",
+  "class": "section bbc-rd-videoband-wrap",
+  "settings": [
+    { "type": "text", "id": "video_youtube", "label": "YouTube video ID", "default": "ckCwJXJGKD0" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Watch" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "See a bamboo bike come together" },
+    { "type": "text", "id": "caption", "label": "Caption", "default": "Build film by Julian Goulding · a Bamboo Bicycle Club community build" },
+    { "type": "textarea", "id": "body", "label": "Body" },
+    { "type": "text", "id": "poster_fallback", "label": "Default poster filename", "default": "bbc-rd-frame-build.jpg" },
+    { "type": "text", "id": "cta_label", "label": "CTA label" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" },
+    { "type": "checkbox", "id": "dark", "label": "Dark background", "default": false }
+  ],
+  "presets": [ { "name": "Video band 2026" } ]
+}
+{% endschema %}

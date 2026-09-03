@@ -1,0 +1,381 @@
+{% comment %}
+  BBC Footer 2026 — global chrome for the Bamboo Bicycle Club redesign.
+  Renders the .bbc-rd / .rd-footer block. All styling lives in
+  bbc-redesign-2026.css — this section writes NO CSS.
+
+  Best-practice structure (ecommerce footer):
+  - Brand column: logo + name + tagline + contact (NAP) + social icons
+  - Up to 4 editable link columns ("column" blocks) wired to Navigation menus
+  - Newsletter signup band (Shopify customer form)
+  - Bottom row: legal/copyright + accreditation badges + policy links
+{% endcomment %}
+
+
+<footer class="bbc-rd rd-footer">
+  <div class="rd-foot-wrap">
+    <div class="rd-foot-top">
+      <div class="rd-foot-brandcol">
+        <a class="rd-foot-brand" href="{{ routes.root_url }}">
+          <span class="rd-mk">
+            {%- if section.settings.logo != blank -%}
+              <img src="{{ section.settings.logo | image_url: width: 88 }}" alt="{{ section.settings.brand_text | default: shop.name | escape }}" width="{{ section.settings.logo.width }}" height="{{ section.settings.logo.height }}" loading="lazy">
+            {%- else -%}
+              <img src="{{ 'bbc-rd-roundel.png' | asset_url }}" alt="{{ section.settings.brand_text | default: shop.name | escape }}" width="22" height="22" loading="lazy">
+            {%- endif -%}
+          </span>{{ section.settings.brand_text | default: 'Bamboo Bicycle Club' }}
+        </a>
+        {%- if section.settings.tagline != blank -%}<p class="rd-tagline">{{ section.settings.tagline }}</p>{%- endif -%}
+        {%- if section.settings.contact != blank -%}<p class="rd-tagline rd-mt-12px">{{ section.settings.contact }}</p>{%- endif -%}
+
+        {%- liquid
+          assign has_social = false
+          if section.settings.social_instagram != blank or section.settings.social_facebook != blank or section.settings.social_linkedin != blank or section.settings.social_youtube != blank
+            assign has_social = true
+          endif
+        -%}
+        {%- if has_social -%}
+          <div class="rd-foot-social">
+            {%- if section.settings.social_instagram != blank -%}<a href="{{ section.settings.social_instagram }}" rel="noopener" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.26.07 1.64.07 4.84s0 3.58-.07 4.84c-.05 1.17-.25 1.8-.41 2.23a3.7 3.7 0 0 1-.9 1.38 3.7 3.7 0 0 1-1.38.9c-.42.16-1.06.36-2.23.41-1.26.06-1.64.07-4.85.07s-3.58 0-4.84-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.84c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 1.8c-3.15 0-3.5.01-4.74.07-.9.04-1.38.19-1.71.32-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.13.33-.28.81-.32 1.71C3.2 8.5 3.2 8.85 3.2 12s.01 3.5.07 4.74c.04.9.19 1.38.32 1.71.17.43.37.74.69 1.06.32.32.63.52 1.06.69.33.13.81.28 1.71.32 1.24.07 1.59.07 4.74.07s3.5-.01 4.74-.07c.9-.04 1.38-.19 1.71-.32.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.13-.33.28-.81.32-1.71.07-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.04-.9-.19-1.38-.32-1.71a2.8 2.8 0 0 0-.69-1.06 2.8 2.8 0 0 0-1.06-.69c-.33-.13-.81-.28-1.71-.32C15.5 4.01 15.15 4 12 4zm0 3.06A4.94 4.94 0 1 0 12 16.94 4.94 4.94 0 0 0 12 7.06zm0 8.14A3.2 3.2 0 1 1 12 8.8a3.2 3.2 0 0 1 0 6.4zm6.3-8.34a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z"/></svg></a>{%- endif -%}
+            {%- if section.settings.social_facebook != blank -%}<a href="{{ section.settings.social_facebook }}" rel="noopener" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></a>{%- endif -%}
+            {%- if section.settings.social_linkedin != blank -%}<a href="{{ section.settings.social_linkedin }}" rel="noopener" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>{%- endif -%}
+            {%- if section.settings.social_youtube != blank -%}<a href="{{ section.settings.social_youtube }}" rel="noopener" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>{%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'column' -%}
+          <div {{ block.shopify_attributes }}>
+            <h3 class="rd-foot-h rd-fs-label">{{ block.settings.heading }}</h3>
+            <ul>
+              {%- if block.settings.menu != blank -%}
+                {%- for l in block.settings.menu.links -%}<li><a href="{{ l.url }}">{{ l.title }}</a></li>{%- endfor -%}
+              {%- else -%}
+                {%- comment -%} Distinct fallbacks per column until Navigation menus are assigned {%- endcomment -%}
+                {%- assign col_key = block.settings.heading | downcase | strip -%}
+                {%- case col_key -%}
+                  {%- when 'mission' -%}
+                    <li><a href="/pages/impact">Our impact</a></li>
+                    <li><a href="/pages/impact-report">Impact report</a></li>
+                    <li><a href="/pages/build-to-bond">Build to Bond</a></li>
+                    <li><a href="/pages/schools">Schools &amp; education</a></li>
+                    {%- comment -%} "Back the mission" link removed 2026-08-19 — page unpublished (James) {%- endcomment -%}
+                    <li><a href="/pages/why-bamboo">Why bamboo</a></li>
+                    <li><a href="/blogs/news">{{ section.settings.tx_news_stories | default: "News &amp; stories" }}</a></li>
+                  {%- when 'help' -%}
+                    <li><a href="/pages/support-centre">Support centre</a></li>
+                    <li><a href="/pages/contact-us">Contact us</a></li>
+                    <li><a href="/pages/frequently-asked-questions">FAQs</a></li>
+                  {%- when 'company' -%}
+                    <li><a href="/pages/our-story-2">Our story</a></li>
+                    <li><a href="/pages/bicycleteambuilding">Team building</a></li>
+                    <li><a href="/pages/gallery">Gallery</a></li>
+                  {%- else -%}
+                    <li><a href="/collections/home-build-kits">Home-build kits</a></li>
+                    <li><a href="/pages/which-kit">Which kit is right for me?</a></li>
+                    <li><a href="/collections/road">Road</a></li>
+                    <li><a href="/collections/gravel-adventure">Gravel &amp; adventure</a></li>
+                    <li><a href="/collections/mtb">Mountain</a></li>
+                    <li><a href="/collections/balance-bikes">Balance bikes</a></li>
+                    <li><a href="/pages/bicycle-frame-building-workshop">{{ section.settings.tx_menu_workshops | default: "Workshops" }}</a></li>
+                {%- endcase -%}
+              {%- endif -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.news_show -%}
+      <div class="rd-foot-news">
+        <div class="rd-news-copy">
+          <h3 class="rd-foot-h rd-fs-label">{{ section.settings.news_heading | default: 'join 4,000+ builders' }}</h3>
+          {%- if section.settings.news_text != blank -%}<p>{{ section.settings.news_text }}</p>{%- endif -%}
+        </div>
+        {%- form 'customer', id: 'rd-footer-news' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="rd-news-form">
+            <input type="email" name="contact[email]" aria-label="Email address" placeholder="{{ section.settings.news_placeholder | default: 'you@email.com' }}" required>
+            <button type="submit" class="rd-btn rd-lime rd-btn-sm" name="commit">{{ section.settings.news_cta | default: 'subscribe' }}</button>
+            {%- if form.posted_successfully? -%}<p class="rd-news-ok">{{ section.settings.tx_thanks_you_re_on_the_list | default: "Thanks — you're on the list." }}</p>{%- endif -%}
+          </div>
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+
+
+    {%- if section.settings.count_ribbon != blank -%}<p class="rd-foot-count">{{ section.settings.count_ribbon }}</p>{%- endif -%}
+    <div class="rd-foot-press" aria-label="As featured in">
+      {%- assign flogos = "logo-ft.svg,logo-guardian.svg,logo-roadcc.svg,logo-design-museum.svg,logo-inside-time.svg" | split: "," -%}{%- assign fnames = "Financial Times,The Guardian,road.cc,Design Museum,Inside Time" | split: "," -%}
+      {%- for lg in flogos -%}<img src="{{ lg | asset_url }}" alt="Featured in {{ fnames[forloop.index0] }}" height="20" loading="lazy">{%- endfor -%}
+    </div>
+    <p class="rd-foot-signoff">{{ section.settings.tx_one_craft | default: "One craft. One engine for change." }}</p>
+
+    {%- comment -%} giant wordmark — type-as-poster close (masthead research 2026-07-22,
+       qa/TYPE-SCALE.md). Decorative link home; screen readers get the plain label. {%- endcomment -%}
+    {%- if section.settings.show_wordmark != false -%}
+    <span class="bbc-wordmark" aria-hidden="true"><a href="{{ routes.root_url }}" tabindex="-1">{{ section.settings.tx_bamboo_bicycle_club | default: "bamboo bicycle club" }}</a></span>
+    {%- endif -%}
+
+    <div class="rd-foot-bottom">
+      <span>{{ section.settings.legal | default: '© 2026 Bamboo Bicycle Club · Bamboo Mobility Project CIC · Reg 16257348' }}</span>
+      <span class="rd-cmp-88744">
+        {%- for block in section.blocks -%}{%- if block.type == 'badge' -%}<span class="rd-tag" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>{%- endif -%}{%- endfor -%}
+      </span>
+
+      <span class="rd-foot-pay">{% for type in shop.enabled_payment_types limit: 6 %}{{ type | payment_type_svg_tag: class: "rd-payicon" }}{% endfor %}</span>
+      {%- if section.settings.policy_menu != blank -%}
+        <span class="rd-foot-policy">
+          {%- for l in section.settings.policy_menu.links -%}<a href="{{ l.url }}">{{ l.title }}</a>{%- endfor -%}
+        </span>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+<script>(function(){var t=function(){document.querySelectorAll('iframe:not([title])').forEach(function(f){f.setAttribute('title','Third-party app content');});};t();var o=new MutationObserver(t);o.observe(document.body,{childList:true,subtree:true});setTimeout(function(){o.disconnect();},12000);})();</script>
+
+{% schema %}
+{
+  "name": "Footer 2026 (new)",
+  "tag": "div",
+  "class": "bbc-footer-2026-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Editability pass 2026-08-10"
+    },
+    {
+      "type": "text",
+      "id": "tx_thanks_you_re_on_the_list",
+      "label": "Thanks — you're on the list.",
+      "default": "Thanks — you're on the list."
+    },
+    {
+      "type": "text",
+      "id": "tx_bamboo_bicycle_club",
+      "label": "bamboo bicycle club",
+      "default": "bamboo bicycle club"
+    },
+    {
+      "type": "text",
+      "id": "count_ribbon",
+      "label": "Counting ribbon (blank = off)",
+      "default": "<b class=\"rd-num\">3,500+</b> frames built at kitchen tables — and counting"
+    },
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo mark",
+      "info": "Small round logo chip. Leave blank for an empty lime chip."
+    },
+    {
+      "type": "text",
+      "id": "brand_text",
+      "label": "Brand name",
+      "default": "Bamboo Bicycle Club"
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Build your own bamboo bicycle. Workshops in London, kits shipped worldwide. Every build funds skills inside prisons and schools."
+    },
+    {
+      "type": "text",
+      "id": "contact",
+      "label": "Contact line",
+      "default": "info@bamboobicycleclub.org · London, UK"
+    },
+    {
+      "type": "header",
+      "content": "Social"
+    },
+    {
+      "type": "url",
+      "id": "social_instagram",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "social_facebook",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "social_linkedin",
+      "label": "LinkedIn URL"
+    },
+    {
+      "type": "url",
+      "id": "social_youtube",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "news_show",
+      "label": "Show newsletter signup",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "news_heading",
+      "label": "Heading",
+      "default": "join 4,000+ builders"
+    },
+    {
+      "type": "textarea",
+      "id": "news_text",
+      "label": "Text",
+      "default": "One story a month — workshops, kits, and what your builds make possible. No spam, unsubscribe anytime."
+    },
+    {
+      "type": "text",
+      "id": "news_placeholder",
+      "label": "Email placeholder",
+      "default": "you@email.com"
+    },
+    {
+      "type": "text",
+      "id": "news_cta",
+      "label": "Button label",
+      "default": "subscribe"
+    },
+    {
+      "type": "header",
+      "content": "Legal & policies"
+    },
+    {
+      "type": "text",
+      "id": "legal",
+      "label": "Legal / copyright line",
+      "default": "© 2026 Bamboo Bicycle Club · Bamboo Mobility Project CIC · Reg 16257348"
+    },
+    {
+      "type": "link_list",
+      "id": "policy_menu",
+      "label": "Policy links (bottom row)",
+      "info": "Privacy, terms, shipping, returns. Pick a menu from Online Store → Navigation."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wordmark",
+      "label": "Show the giant wordmark",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tx_news_stories",
+      "label": "News & stories",
+      "default": "News &amp; stories"
+    },
+    {
+      "type": "text",
+      "id": "tx_one_craft",
+      "label": "One craft. One engine for change.",
+      "default": "One craft. One engine for change."
+    },
+    {
+      "type": "text",
+      "id": "tx_menu_workshops",
+      "label": "Workshops",
+      "default": "Workshops"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Link column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "build"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "info": "Leave blank to use the built-in column links, or pick a menu from Online Store → Navigation."
+        }
+      ]
+    },
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Badge text",
+          "default": "OCN Accredited"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Footer 2026 (new)",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "heading": "Build"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "heading": "Mission"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "heading": "Help"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "heading": "Company"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "text": "OCN Accredited"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "text": "Social enterprise · CIC"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "text": "Investec Beyond Business 2025"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "text": "Secure checkout"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

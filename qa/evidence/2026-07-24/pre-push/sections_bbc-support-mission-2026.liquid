@@ -1,0 +1,916 @@
+{%- comment -%}
+  BBC New Design (2026) — "Back the mission" funder/supporter destination page.
+  Single self-contained section, fully schema-driven, scoped under .bbc-rd /
+  .bbc-rd-support. Built 2026-07-02 from the funder-page research blueprint:
+  hero (report-as-proof, Redemption Roasters pattern) → problem (one vivid
+  number, Bike Project pattern) → theory-of-change pillars (Elvis & Kresse
+  pattern) → dated numbers strip (Redemption live-data pattern) → one Maker
+  story (Fine Cell Work dignity pattern) → where the money goes (charity:water
+  plumbing-narrative pattern) → giving ladder (Fine Cell Work work-units +
+  Movember scoped-envelope pattern) → trust strip (named-authority quote
+  outranks a logo wall) → closing ask + email capture.
+
+  CONTENT POLICY (hard rules):
+  - Never link a named/identifiable participant to a named prison.
+  - "Makers", never "prisoners"/"offenders"/"beneficiaries".
+  - Green stats only: 90%+ completion · 4,000+ builders · 3,500+ frames ·
+    OCN L1/L2. No SROI figure. No per-learner contract pricing (the ladder
+    uses grant-budget framing: kit ~£180 · cohort ~£8,500 · capex £7–10k ·
+    site-year ~£45k).
+  - Strength/carbon claims: only the BS ISO 22157 / "grown, not mined" framings.
+{%- endcomment -%}
+
+{%- comment -%}
+  MAINTENANCE: presets are scaffolding — once this section is on a page, the
+  template owns all content and preset edits change NOTHING live. To improve
+  live copy, give James an editor checklist; never edit presets expecting a
+  live change, and never push templates/*.json.
+  Preset changelog: 2026-07-02 v1 (initial, review-gated).
+{%- endcomment -%}
+
+{%- liquid
+  assign enquiry_url = section.settings.enquiry_url | default: '/pages/contact-us'
+  assign anchor_id = 'fund-the-work'
+  assign hero_cta1 = section.settings.hero_cta1_url | default: '#how-it-works'
+  assign hero_cta2 = section.settings.hero_cta2_url | default: '#fund-the-work'
+-%}
+
+<div class="bbc-rd bbc-rd-support">
+
+  {%- comment -%} ---------- BAND 1 · HERO ---------- {%- endcomment -%}
+  <header class="rd-hero rd-mh-74">
+    <div class="rd-bg">
+      {%- if section.settings.hero_image != blank -%}
+        <img src="{{ section.settings.hero_image | image_url: width: 1600 }}" srcset="{{ section.settings.hero_image | image_url: width: 800 }} 800w, {{ section.settings.hero_image | image_url: width: 1200 }} 1200w, {{ section.settings.hero_image | image_url: width: 1600 }} 1600w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w" sizes="100vw" alt="{{ section.settings.hero_image_alt | default: 'Hands shaping a bamboo frame on the jig' | escape }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" fetchpriority="high" loading="eager">
+      {%- else -%}
+        <img src="{{ section.settings.hero_fallback | default: 'bbc-rd-wb-jig.jpg' | asset_url }}" alt="{{ section.settings.hero_image_alt | default: 'Hands shaping a bamboo frame on the jig' | escape }}" width="1500" height="999" fetchpriority="high" loading="eager">
+      {%- endif -%}
+    </div>
+    <div class="rd-scrim"></div>
+    <div class="rd-inner">
+      <div class="rd-wrap">
+        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><span class="rd-here">Back the mission</span></nav>
+        {%- if section.settings.hero_eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>{%- endif -%}
+        <h1 class="rd-mt2 rd-mw-20ch">{{ section.settings.hero_title }}</h1>
+        <div class="rd-lede">{{ section.settings.hero_lede }}</div>
+        <div class="rd-cta-row">
+          <a class="rd-btn rd-lime" href="{{ hero_cta1 }}">{{ section.settings.hero_cta1_label | default: 'Read how it works' }} <span class="rd-arrow" aria-hidden="true">&darr;</span></a>
+          <a class="rd-btn rd-on-dark" href="{{ hero_cta2 }}">{{ section.settings.hero_cta2_label | default: 'Fund the work' }}</a>
+        </div>
+        {%- if section.settings.hero_proof != blank -%}<p class="rd-mt2 rd-c-lime" style="font-size:14px;font-weight:700;letter-spacing:.02em;">{{ section.settings.hero_proof }}</p>{%- endif -%}
+      </div>
+    </div>
+  </header>
+
+  {%- comment -%} ---------- BAND 2 · THE PROBLEM ---------- {%- endcomment -%}
+  <section class="rd-pad-sm">
+    <div class="rd-wrap rd-mw-70ch">
+      <h2 class="rd-reveal bbc-sup__sr">The problem we work on</h2>
+      <p class="bbc-sup__problem">{{ section.settings.problem_body }}</p>
+      {%- if section.settings.problem_stat != blank -%}
+        <p class="bbc-sup__problem-stat"><strong>{{ section.settings.problem_stat }}</strong> <span>{{ section.settings.problem_stat_source }}</span></p>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- BAND 3 · THEORY OF CHANGE PILLARS ---------- {%- endcomment -%}
+  <section class="rd-pad" id="how-it-works">
+    <div class="rd-wrap">
+      <h2 class="rd-reveal">{{ section.settings.toc_title | default: 'one build. three things change.' }}</h2>
+      <p class="rd-lede rd-mw-70ch">{{ section.settings.toc_lede }}</p>
+      <div class="bbc-sup__pillars">
+        {%- for block in section.blocks -%}{%- if block.type == 'pillar' -%}
+          <article class="rd-reveal bbc-sup__pillar" {{ block.shopify_attributes }}>
+            {%- assign pimg = block.settings.image_fallback | default: 'bbc-rd-wb-hand.jpg' -%}
+            <div class="rd-reveal bbc-sup__pillar-media">
+              {%- render "bbc-media", image: block.settings.image, src: pimg, video: block.settings.video_file, youtube: block.settings.video_url, alt: block.settings.image_alt -%}
+            </div>
+            <h3 class="rd-reveal bbc-sup__pillar-title">{{ block.settings.title }}</h3>
+            <p class="rd-reveal bbc-sup__pillar-body">{{ block.settings.body }}</p>
+            {%- if block.settings.link_url != blank -%}
+              <a class="bbc-sup__textlink" href="{{ block.settings.link_url }}">{{ block.settings.link_label | default: 'See this in practice' }} <span class="rd-arrow" aria-hidden="true">&rarr;</span></a>
+            {%- endif -%}
+          </article>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- BAND 4 · DATED NUMBERS ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-dark">
+    <div class="rd-wrap">
+      <h2 class="rd-reveal bbc-sup__sr">Our numbers</h2>
+      <div class="bbc-sup__numbers">
+        {%- for block in section.blocks -%}{%- if block.type == 'stat' -%}
+          <div class="bbc-sup__stat" {{ block.shopify_attributes }}>
+            <span class="bbc-sup__stat-number">{{ block.settings.number }}</span>
+            <span class="bbc-sup__stat-label">{{ block.settings.label }}</span>
+            {%- if block.settings.comparator != blank -%}<span class="bbc-sup__stat-comparator">{{ block.settings.comparator }}</span>{%- endif -%}
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+      {%- if section.settings.stats_dated != blank -%}
+        <p class="bbc-sup__dated">{{ section.settings.stats_dated }}</p>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- BAND 5 · ONE MAKER STORY ---------- {%- endcomment -%}
+  {%- if section.settings.maker_quote != blank -%}
+  <section class="rd-pad">
+    <div class="rd-wrap rd-mw-70ch">
+      <h2 class="rd-reveal bbc-sup__sr">One Maker's story</h2>
+      <figure class="bbc-sup__quote">
+        <blockquote><p>&ldquo;{{ section.settings.maker_quote }}&rdquo;</p></blockquote>
+        <figcaption>&mdash; {{ section.settings.maker_attribution | default: 'A Build to Bond Maker' }}</figcaption>
+      </figure>
+      {%- if section.settings.maker_note != blank -%}
+        <p class="bbc-sup__quote-note">{{ section.settings.maker_note }}</p>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- BAND 6 · WHERE THE MONEY GOES ---------- {%- endcomment -%}
+  <section class="rd-pad bbc-sup__money">
+    <div class="rd-wrap">
+      <h2 class="rd-reveal">{{ section.settings.money_title | default: 'where the money goes' }}</h2>
+      <div class="bbc-sup__flow" role="group" aria-label="How Bamboo Bicycle Club is structured: the Ltd company gives {{ section.settings.flow_pledge | default: '10% of profits' }} to the CIC">
+        <div class="bbc-sup__flow-box">
+          <h3>{{ section.settings.flow_ltd_title | default: 'bamboo bicycle club ltd' }}</h3>
+          <p>{{ section.settings.flow_ltd_body | default: 'The commercial side — kits, workshops and team-building days.' }}</p>
+        </div>
+        <div class="bbc-sup__flow-arrow"><span>{{ section.settings.flow_pledge | default: '10% of profits' }}</span> <span class="bbc-sup__flow-glyph" aria-hidden="true">&rarr;</span></div>
+        <div class="bbc-sup__flow-box bbc-sup__flow-box--cic">
+          <h3>{{ section.settings.flow_cic_title | default: 'bamboo mobility project CIC' }}</h3>
+          <p>{{ section.settings.flow_cic_body | default: 'The social side — accredited skills programmes in prisons and schools. Community interest company no. 16257348, asset-locked.' }}</p>
+        </div>
+      </div>
+      {%- assign faq_count = 0 -%}
+      {%- for block in section.blocks -%}{%- if block.type == 'faq' -%}{%- assign faq_count = faq_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+      {%- if faq_count > 0 -%}
+        <div class="bbc-sup__faqs">
+          {%- for block in section.blocks -%}{%- if block.type == 'faq' -%}
+            <details class="bbc-sup__faq" {{ block.shopify_attributes }}>
+              <summary>{{ block.settings.question }}</summary>
+              <div class="bbc-sup__faq-a">{{ block.settings.answer }}</div>
+            </details>
+          {%- endif -%}{%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- BAND 7 · THE GIVING LADDER ---------- {%- endcomment -%}
+  <section class="rd-pad rd-dark" id="{{ anchor_id }}">
+    <div class="rd-wrap">
+      <h2 class="rd-reveal">{{ section.settings.ladder_title | default: 'fund the work' }}</h2>
+      <p class="rd-lede rd-mw-70ch">{{ section.settings.ladder_lede }}</p>
+      <div class="bbc-sup__ladder">
+        {%- for block in section.blocks -%}{%- if block.type == 'rung' -%}
+          {%- assign rung_url = block.settings.cta_url | default: enquiry_url -%}
+          <article class="bbc-sup__rung" {{ block.shopify_attributes }}>
+            <span class="bbc-sup__rung-amount">{{ block.settings.amount }}</span>
+            <h3 class="bbc-sup__rung-title">{{ block.settings.title }}</h3>
+            <p class="bbc-sup__rung-body">{{ block.settings.body }}</p>
+            {%- if block.settings.cta_label != blank -%}
+              <a class="rd-btn {% if block.settings.primary %}rd-lime{% else %}rd-on-dark{% endif %}" href="{{ rung_url }}">{{ block.settings.cta_label }}</a>
+            {%- endif -%}
+          </article>
+        {%- endif -%}{%- endfor -%}
+      </div>
+      <p class="bbc-sup__ladder-note">{{ section.settings.ladder_note }}</p>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- BAND 8 · TRUST STRIP ---------- {%- endcomment -%}
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      <h2 class="rd-reveal bbc-sup__sr">{{ section.settings.backers_label | default: 'Backing and coverage' }}</h2>
+      {%- if section.settings.endorsement_quote != blank -%}
+      <figure class="bbc-sup__endorsement">
+        <blockquote><p>&ldquo;{{ section.settings.endorsement_quote }}&rdquo;</p></blockquote>
+        <figcaption>&mdash; {{ section.settings.endorsement_attribution }}</figcaption>
+      </figure>
+      {%- endif -%}
+      {%- assign backer_count = 0 -%}
+      {%- for block in section.blocks -%}{%- if block.type == 'backer' -%}{%- assign backer_count = backer_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+      {%- if backer_count > 0 -%}
+        <ul class="bbc-sup__backers" aria-label="{{ section.settings.backers_label | default: 'Backing and coverage' | escape }}">
+          {%- for block in section.blocks -%}{%- if block.type == 'backer' -%}
+            <li class="bbc-sup__backer" {{ block.shopify_attributes }}>
+              <span class="bbc-sup__backer-name">{{ block.settings.name }}</span>
+              {%- if block.settings.detail != blank -%}<span class="bbc-sup__backer-detail">{{ block.settings.detail }}</span>{%- endif -%}
+            </li>
+          {%- endif -%}{%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- BAND 9 · CLOSING ASK ---------- {%- endcomment -%}
+  <section class="rd-pad-sm bbc-sup__close">
+    <div class="rd-wrap">
+      <h2 class="rd-reveal">{{ section.settings.close_title | default: 'start a conversation' }}</h2>
+      <p class="rd-lede rd-mw-70ch">{{ section.settings.close_body }}</p>
+      <div class="rd-cta-row">
+        <a class="rd-btn rd-lime" href="{{ enquiry_url }}">{{ section.settings.close_cta1_label | default: 'Talk to James about funding' }} <span class="rd-arrow" aria-hidden="true">&rarr;</span></a>
+        {%- if section.settings.close_cta2_url != blank -%}
+          <a class="rd-btn" href="{{ section.settings.close_cta2_url }}">{{ section.settings.close_cta2_label | default: 'Get one build story a month' }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- MOBILE STICKY CTA ---------- {%- endcomment -%}
+  {%- if section.settings.sticky_cta -%}
+    <div class="bbc-sup__sticky">
+      <a class="rd-btn rd-lime" href="#{{ anchor_id }}">{{ section.settings.sticky_label | default: 'Support the work' }}</a>
+    </div>
+  {%- endif -%}
+
+</div>
+
+<script>
+  (function(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('.bbc-sup__stat-number').forEach(function(el){
+      var m = el.textContent.trim().match(/^(\d+)(.*)$/); if(!m) return;
+      var target = +m[1], suffix = m[2];
+      var io = new IntersectionObserver(function(es){
+        es.forEach(function(e){ if(!e.isIntersecting) return; io.unobserve(el);
+          var t0 = performance.now();
+          requestAnimationFrame(function tick(t){ var p = Math.min((t - t0)/900, 1);
+            el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
+            if (p < 1) requestAnimationFrame(tick); });
+        });
+      }, {threshold: 0.6});
+      io.observe(el);
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  .bbc-rd-support .bbc-sup__sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  .bbc-rd-support .rd-mw-70ch { max-width: 70ch; }
+  .bbc-rd-support [id] { scroll-margin-top: 90px; }
+  .bbc-rd-support .bbc-sup__textlink { color: var(--forest, #003C32); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+
+  .bbc-rd-support .bbc-sup__problem { font-size: clamp(18px, 1.6vw, 21px); line-height: 1.55; }
+  .bbc-rd-support .bbc-sup__problem-stat { margin-top: 16px; font-size: 16px; }
+  .bbc-rd-support .bbc-sup__problem-stat strong { color: var(--forest, #003C32); font-size: 22px; display: block; }
+  .bbc-rd-support .bbc-sup__problem-stat span { color: rgba(0,60,50,.78); }
+
+  .bbc-rd-support .bbc-sup__pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; margin-top: 32px; }
+  .bbc-rd-support .bbc-sup__pillar-media img { width: 100%; aspect-ratio: 3 / 2; height: auto; object-fit: cover; border-radius: 10px; display: block; }
+  .bbc-rd-support .bbc-sup__pillar-title { margin: 14px 0 6px; font-size: 18px; }
+  .bbc-rd-support .bbc-sup__pillar-body { line-height: 1.5; }
+
+  .bbc-rd-support .bbc-sup__numbers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 720px; margin: 0 auto; }
+  .bbc-rd-support .bbc-sup__stat { text-align: center; }
+  .bbc-rd-support .bbc-sup__stat-number { display: block; font-size: clamp(34px, 4.4vw, 52px); font-weight: 800; color: var(--lime, #D4FD62); }
+  .bbc-rd-support .bbc-sup__stat-label { display: block; margin-top: 4px; }
+  .bbc-rd-support .bbc-sup__stat-comparator { display: block; margin-top: 4px; font-size: 13px; color: #BCC8C2; }
+  .bbc-rd-support p.bbc-sup__dated { display: block; width: 100%; text-align: center; margin-top: 20px; font-size: 13px; color: #BCC8C2; }
+
+  .bbc-rd-support .bbc-sup__quote p { font-size: clamp(20px, 2.3vw, 28px); line-height: 1.4; font-weight: 700; color: var(--forest, #003C32); }
+  .bbc-rd-support .bbc-sup__quote blockquote, .bbc-rd-support .bbc-sup__endorsement blockquote { margin: 0; border: 0; padding: 0; font-style: normal; }
+  .bbc-rd-support .bbc-sup__quote blockquote p, .bbc-rd-support .bbc-sup__endorsement blockquote p { font-style: normal; }
+  .bbc-rd-support .bbc-sup__quote figcaption { display: block; margin-top: 12px; color: rgba(0,60,50,.78); }
+  .bbc-rd-support .bbc-sup__quote-note { margin-top: 16px; font-size: 15px; color: rgba(0,60,50,.78); }
+
+  .bbc-rd-support .bbc-sup__flow { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: center; margin-top: 28px; }
+  .bbc-rd-support .bbc-sup__flow-box { border: 2px solid var(--forest, #003C32); border-radius: 12px; padding: 22px; }
+  .bbc-rd-support .bbc-sup__flow-box--cic { background: var(--forest, #003C32); color: #fff; }
+  .bbc-rd-support .bbc-sup__flow-box--cic h3, .bbc-rd-support .bbc-sup__flow-box--cic p { color: #fff; }
+  .bbc-rd-support .bbc-sup__flow-box h3 { margin: 0 0 8px; font-size: 16px; }
+  .bbc-rd-support .bbc-sup__flow-arrow { font-weight: 800; text-align: center; color: var(--forest, #003C32); }
+  .bbc-rd-support .bbc-sup__flow-arrow span { display: block; font-size: 13px; font-weight: 600; }
+
+  .bbc-rd-support .bbc-sup__faqs { margin-top: 28px; max-width: 720px; }
+  .bbc-rd-support .bbc-sup__faq { border-bottom: 1px solid rgba(0,60,50,.15); }
+  .bbc-rd-support .bbc-sup__faq summary { padding: 14px 0; cursor: pointer; font-weight: 700; }
+  .bbc-rd-support .bbc-sup__faq-a { padding: 0 0 16px; line-height: 1.55; }
+
+  .bbc-rd-support .bbc-sup__ladder { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 32px; }
+  .bbc-rd-support .bbc-sup__rung { border: 1px solid rgba(255,255,255,.25); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; }
+  .bbc-rd-support .bbc-sup__rung-amount { font-size: clamp(24px, 2.6vw, 30px); font-weight: 800; color: var(--lime, #D4FD62); }
+  .bbc-rd-support .bbc-sup__rung-title { margin: 8px 0 6px; font-size: 16px; }
+  .bbc-rd-support .bbc-sup__rung-body { flex: 1; line-height: 1.5; font-size: 15px; }
+  .bbc-rd-support .bbc-sup__rung .rd-btn { margin-top: 14px; align-self: flex-start; }
+  .bbc-rd-support .bbc-sup__ladder-note { margin-top: 20px; font-size: 13px; color: #BCC8C2; }
+
+  .bbc-rd-support .bbc-sup__endorsement p { font-size: clamp(19px, 2vw, 24px); line-height: 1.45; font-weight: 600; max-width: 60ch; }
+  .bbc-rd-support .bbc-sup__endorsement blockquote { margin: 0; }
+  .bbc-rd-support .bbc-sup__endorsement figcaption { display: block; margin-top: 10px; color: rgba(0,60,50,.78); }
+  .bbc-rd-support .bbc-sup__backers { list-style: none; display: flex; flex-wrap: wrap; gap: 28px; margin: 28px 0 0; padding: 0; }
+  .bbc-rd-support .bbc-sup__backer-name { display: block; font-weight: 800; }
+  .bbc-rd-support .bbc-sup__backer-detail { display: block; font-size: 13px; color: rgba(0,60,50,.78); }
+
+  .bbc-rd-support .bbc-sup__sticky { display: none; }
+
+  @media (max-width: 940px) {
+    .bbc-rd-support .bbc-sup__pillars { grid-template-columns: 1fr; }
+    .bbc-rd-support .bbc-sup__ladder { grid-template-columns: repeat(2, 1fr); }
+    .bbc-rd-support .bbc-sup__flow { grid-template-columns: 1fr; }
+    .bbc-rd-support .bbc-sup__flow-glyph { display: inline-block; transform: rotate(90deg); }
+    /* clear the theme's fixed bottom tab bar (.rd-botbar, ~60px, z-index 95) plus our sticky CTA */
+    .bbc-rd-support .bbc-sup__sticky { display: block; position: fixed; bottom: calc(60px + env(safe-area-inset-bottom)); left: 0; right: 0; padding: 10px 16px; background: rgba(255,255,255,.96); border-top: 1px solid rgba(0,60,50,.12); z-index: 94; text-align: center; }
+    .bbc-rd-support .bbc-sup__sticky .rd-btn { width: 100%; max-width: 480px; }
+    .bbc-rd-support { padding-bottom: 76px; }
+    .bbc-rd-support [id] { scroll-margin-top: 90px; scroll-margin-bottom: 140px; }
+  }
+  @media (max-width: 640px) {
+    .bbc-rd-support .bbc-sup__ladder { grid-template-columns: 1fr; }
+    .bbc-rd-support .bbc-sup__numbers { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .bbc-rd-support .bbc-sup__rung { transition: transform .18s ease, border-color .18s ease; }
+    .bbc-rd-support .bbc-sup__rung:hover { transform: translateY(-3px); border-color: var(--gold, #FFA900); }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Support Mission 2026",
+  "tag": "section",
+  "class": "bbc-support-mission-2026",
+  "enabled_on": {
+    "templates": [
+      "page"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_fallback",
+      "label": "Default photo filename (used unless you pick one above)",
+      "info": "Leave alone — bundled placeholder shown until you pick a photo.",
+      "default": "bbc-rd-wb-jig.jpg"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero image alt",
+      "default": "Hands shaping a bamboo frame on the jig"
+    },
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Eyebrow",
+      "default": "Back the mission"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Headline",
+      "default": "a qualification earned at the bench."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_lede",
+      "label": "Lede",
+      "default": "Most people leave prison with nothing to show for it. Our Makers finish an accredited build — skills that go home even when the bike can't. Funded by the bikes we sell, and by people like you."
+    },
+    {
+      "type": "text",
+      "id": "hero_cta1_label",
+      "label": "Primary button label",
+      "default": "Read how it works"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta1_url",
+      "label": "Primary button link",
+      "info": "Blank = jumps to the how-it-works band on this page."
+    },
+    {
+      "type": "text",
+      "id": "hero_cta2_label",
+      "label": "Secondary button label",
+      "default": "Fund the work"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta2_url",
+      "label": "Secondary button link",
+      "info": "Blank = jumps to the Fund the work band on this page."
+    },
+    {
+      "type": "header",
+      "content": "The problem"
+    },
+    {
+      "type": "textarea",
+      "id": "problem_body",
+      "label": "Problem body",
+      "default": "Most prison education is a worksheet. Ours is a workbench. We teach fabrication with hand tools, and every course finishes with something you can hold."
+    },
+    {
+      "type": "text",
+      "id": "problem_stat",
+      "label": "One vivid stat (blank to hide)",
+      "info": "Published external figure with a named source only.",
+      "default": "£40,000+"
+    },
+    {
+      "type": "text",
+      "id": "problem_stat_source",
+      "label": "Stat context",
+      "default": "what a year in prison costs the public — MoJ published figures"
+    },
+    {
+      "type": "header",
+      "content": "Theory of change — add columns as Pillar blocks"
+    },
+    {
+      "type": "text",
+      "id": "toc_title",
+      "label": "Title",
+      "info": "If you add or remove pillars, update the count in this heading.",
+      "default": "one build. three things change."
+    },
+    {
+      "type": "textarea",
+      "id": "toc_lede",
+      "label": "Lede",
+      "default": "Every programme runs on the same spine: a real bike, built by hand, start to finish."
+    },
+    {
+      "type": "header",
+      "content": "Numbers strip — add numbers as Stat blocks"
+    },
+    {
+      "type": "text",
+      "id": "stats_dated",
+      "label": "'Figures as of…' small print",
+      "default": "Figures from our own programme records, July 2026. We publish how we count."
+    },
+    {
+      "type": "header",
+      "content": "Maker story"
+    },
+    {
+      "type": "textarea",
+      "id": "maker_quote",
+      "label": "Quote (blank to hide this band)",
+      "info": "Anonymised only — never name a Maker or link one to a prison.",
+      "default": "The bike was the first thing I ever made with my own hands. When my daughter rode it on family visit day, I felt like a dad again."
+    },
+    {
+      "type": "text",
+      "id": "maker_attribution",
+      "label": "Attribution",
+      "info": "Programme-level only, e.g. 'A Build to Bond Maker' — never a name.",
+      "default": "A Build to Bond Maker"
+    },
+    {
+      "type": "text",
+      "id": "maker_note",
+      "label": "Note under quote",
+      "default": "We never name our Makers alongside the prisons they're in. Their stories are theirs."
+    },
+    {
+      "type": "header",
+      "content": "Where the money goes"
+    },
+    {
+      "type": "text",
+      "id": "money_title",
+      "label": "Title",
+      "default": "where the money goes"
+    },
+    {
+      "type": "text",
+      "id": "flow_ltd_title",
+      "label": "Ltd box title",
+      "default": "bamboo bicycle club ltd"
+    },
+    {
+      "type": "textarea",
+      "id": "flow_ltd_body",
+      "label": "Ltd box body",
+      "default": "The commercial side — kits, workshops and team-building days."
+    },
+    {
+      "type": "text",
+      "id": "flow_pledge",
+      "label": "Pledge label",
+      "default": "10% of profits"
+    },
+    {
+      "type": "text",
+      "id": "flow_cic_title",
+      "label": "CIC box title",
+      "default": "bamboo mobility project CIC"
+    },
+    {
+      "type": "textarea",
+      "id": "flow_cic_body",
+      "label": "CIC box body",
+      "default": "The social side — accredited skills programmes in prisons and schools. Community interest company no. 16257348, asset-locked."
+    },
+    {
+      "type": "header",
+      "content": "Giving ladder — add rungs as Giving rung blocks"
+    },
+    {
+      "type": "text",
+      "id": "ladder_title",
+      "label": "Title",
+      "default": "fund the work"
+    },
+    {
+      "type": "textarea",
+      "id": "ladder_lede",
+      "label": "Lede",
+      "default": "Each option is costed from live programme budgets. Pick a size and we'll show you what it runs."
+    },
+    {
+      "type": "textarea",
+      "id": "ladder_note",
+      "label": "Footnote",
+      "default": "Larger grants are scoped with you — every proposal comes itemised, and you get outcome reporting each quarter."
+    },
+    {
+      "type": "url",
+      "id": "enquiry_url",
+      "label": "Enquiry link",
+      "info": "Used whenever a rung or the closing CTA has no link of its own. Blank = the contact page."
+    },
+    {
+      "type": "header",
+      "content": "Trust strip — add names as Backer blocks"
+    },
+    {
+      "type": "textarea",
+      "id": "endorsement_quote",
+      "label": "Endorsement quote (blank to hide)",
+      "default": "A truly inspiring cohort, delivering meaningful impact in the community."
+    },
+    {
+      "type": "text",
+      "id": "endorsement_attribution",
+      "label": "Attribution",
+      "default": "Ruth Leas, CEO, Investec Bank · Investec Beyond Business 2025"
+    },
+    {
+      "type": "text",
+      "id": "backers_label",
+      "label": "Backers list label",
+      "default": "Backing and coverage"
+    },
+    {
+      "type": "header",
+      "content": "Closing"
+    },
+    {
+      "type": "text",
+      "id": "close_title",
+      "label": "Title",
+      "default": "start a conversation"
+    },
+    {
+      "type": "textarea",
+      "id": "close_body",
+      "label": "Body",
+      "default": "No pitch deck needed. Tell us who you are and what you'd like to back, and James will come back to you within two working days."
+    },
+    {
+      "type": "text",
+      "id": "close_cta1_label",
+      "label": "CTA 1 label",
+      "default": "Talk to James about funding"
+    },
+    {
+      "type": "text",
+      "id": "close_cta2_label",
+      "label": "CTA 2 label",
+      "default": "Get one build story a month"
+    },
+    {
+      "type": "url",
+      "id": "close_cta2_url",
+      "label": "CTA 2 link (newsletter)"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_cta",
+      "label": "Show sticky mobile CTA",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sticky_label",
+      "label": "Sticky CTA label",
+      "default": "Support the work"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pillar",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_fallback",
+          "label": "Default photo filename (used unless you pick one above)",
+          "info": "Leave alone — bundled placeholder shown until you pick a photo.",
+          "default": "bbc-rd-wb-hand.jpg"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "education"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "See this in practice"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL (YouTube/Vimeo — plays inline)"
+        },
+        {
+          "type": "video",
+          "id": "video_file",
+          "label": "Or upload a video (plays inline)"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "info": "Green stats only — never the retired SROI 'return per pound' figure or an unsourced percentage.",
+          "default": "90%+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "of Makers complete the course"
+        },
+        {
+          "type": "text",
+          "id": "comparator",
+          "label": "Small print under the number (how it's counted)"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "Money FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    },
+    {
+      "type": "rung",
+      "name": "Giving rung",
+      "settings": [
+        {
+          "type": "text",
+          "id": "amount",
+          "label": "Amount",
+          "info": "Grant-budget framing only (~£180 kit, ~£8,500 cohort) — never per-learner contract pricing.",
+          "default": "£180"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "one kit"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "What it buys"
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "Button label (blank to hide the button)",
+          "default": "Talk to us"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "Button link",
+          "info": "Leave blank to use the enquiry link."
+        },
+        {
+          "type": "checkbox",
+          "id": "primary",
+          "label": "Highlight this rung",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "backer",
+      "name": "Backer",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Investec"
+        },
+        {
+          "type": "text",
+          "id": "detail",
+          "label": "Detail",
+          "default": "Beyond Business 2025 — £24,000"
+        },
+        {
+          "type": "text",
+          "id": "logo_asset",
+          "label": "Logo asset filename (blank for text only)",
+          "info": "e.g. bbc-logo-investec.png — must exist in theme assets"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Support Mission 2026",
+      "blocks": [
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Education",
+            "body": "OCN-accredited courses — Level 1 and Level 2 — taught at the workbench, not the whiteboard. Real qualifications for people the classroom failed.",
+            "image_fallback": "bbc-rd-wb-lug.jpg",
+            "image_alt": "Wrapping a bamboo frame joint by hand"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Employment",
+            "body": "Skills the labour market is short of — fabrication, finishing, tolerances — plus peer instructors trained from within the programme.",
+            "image_fallback": "bbc-rd-wb-jig.jpg",
+            "image_alt": "A frame set up on the building jig"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Rehabilitation",
+            "body": "Build to Bond Makers build a balance bike for their own child — family contact is one of the strongest factors in staying out, and the bike is the bridge.",
+            "image_fallback": "bbc-rd-wb-bond.jpg",
+            "image_alt": "A finished child-size balance bike in the workshop"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "90%+",
+            "label": "of Makers complete the course",
+            "comparator": "our own programme records — we publish how we count"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "3",
+            "label": "prison sites running",
+            "comparator": "more sites onboarding with HMPPS — we count only what's live"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Why a CIC and not a charity?",
+            "answer": "Because the workshops pay for most of it. The CIC is asset-locked — money in stays in — but it lets us run like the business we are, with kits and workshops funding the mission instead of a fundraising department."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What does grant funding pay for that sales don't?",
+            "answer": "Scale and start-up. A new prison workshop needs benches, jigs and tools before the first cohort starts — that's what backers fund. Once running, sites are sustained by earned income and prison education budgets."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Can we see the accounts?",
+            "answer": "Yes — both companies file at Companies House: Bamboo Bicycle Club Ltd (10809302) and Bamboo Mobility Project CIC (16257348). Ask and we'll walk you through them."
+          }
+        },
+        {
+          "type": "rung",
+          "settings": {
+            "amount": "~£180",
+            "title": "One kit",
+            "body": "Puts a frame kit and tools on one Maker's bench for a full build.",
+            "cta_label": "Fund a kit",
+            "primary": false
+          }
+        },
+        {
+          "type": "rung",
+          "settings": {
+            "amount": "~£8,500",
+            "title": "A full cohort",
+            "body": "Six Makers through a complete accredited programme — instructor, coordinator, kits, materials, and the assessment at the end.",
+            "cta_label": "Fund a cohort",
+            "primary": true
+          }
+        },
+        {
+          "type": "rung",
+          "settings": {
+            "amount": "£7–10k",
+            "title": "A workshop, kitted out",
+            "body": "Benches, jigs and tools for a new site — one-off capital that stays with the prison permanently, whatever happens next.",
+            "cta_label": "Fund a workshop"
+          }
+        },
+        {
+          "type": "rung",
+          "settings": {
+            "amount": "~£45k",
+            "title": "A site, for a year",
+            "body": "Four cohorts, twenty-four Makers, one prison workshop running all year — with quarterly outcome reporting.",
+            "cta_label": "Talk to James"
+          }
+        },
+        {
+          "type": "backer",
+          "settings": {
+            "name": "Investec",
+            "detail": "Beyond Business 2025 — £24,000, chosen from 148 applicants"
+          }
+        },
+        {
+          "type": "backer",
+          "settings": {
+            "name": "London South Bank University",
+            "detail": "£70,000 equipment partnership"
+          }
+        },
+        {
+          "type": "backer",
+          "settings": {
+            "name": "Financial Times",
+            "detail": "\"How Bamboo Bicycle Club is helping to break the prison cycle\" — Sept 2025"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

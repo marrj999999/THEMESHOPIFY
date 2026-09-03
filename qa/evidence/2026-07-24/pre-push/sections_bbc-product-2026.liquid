@@ -1,0 +1,1769 @@
+{%- comment -%}
+  BBC New Design (2026) — PRODUCT page. Single self-contained section that
+  renders on a Shopify product template and integrates the real {{ product }}
+  object for commerce (JS-free {% form 'product' %} add-to-cart).
+  Scoped under .bbc-rd / .bbc-rd-product via bbc-redesign-2026.css so it cannot
+  affect other sections. Built from the Claude Design handoff (product.html —
+  "Gravel Frame Build Kit") with verified BBC copy/specs folded in from the
+  existing theme sections (bbc-kit-complete, bbc-kit-whats-included,
+  bbc-kit-reviews, bbc-kit-confidence, bbc-product-build-time,
+  bbc-product-durability) and templates/product.kit-gravel.json.
+
+  Content policy (hard rules):
+    - No prison is ever named — the funding tie-in is generic
+      ("funds accredited skills courses inside prisons and schools").
+    - Only source-of-truth figures are hardcoded as defaults:
+        Gravel kit from £385 · component pack from £425 · 4,000+ builders
+        · <1% failure · Swansea-tested · 8–12 yr life · build 25–35 hrs
+        · Swansea-tested bamboo · ships ~2×/week · Cycle to Work.
+    - The ★4.8 / 214 reviews / "98% would build again" numbers from the design
+      are NOT verified — they are editable settings flagged for James to
+      replace with real review data.
+    - All non-product copy, ratings, links, images and repeating groups are
+      editable via {% schema %}; images fall back to bundled bbc-rd-*.jpg.
+
+  Structure: breadcrumb + 2-col top (gallery | buy box) → funding-loop tie-in
+  (dark) → "complete your build" bundle → "what you'll need at home" 3 cards →
+  spec strip (4) → build steps (4, numbered) → why-bamboo + what's-included
+  split → in-kit / not-in-kit 2 cards → reviews → trust stats (4) → FAQ →
+  related kits → sticky buy bar.
+
+  NOTE: a literal {% schema %} string may appear in this header comment; the
+  real, JSON-validatable schema is the LAST {% schema %}…{% endschema %} block.
+{%- endcomment -%}
+
+
+{%- comment -%} Defensive: load the redesign stylesheet here too, so kit pages are styled even when the active header group isn't bbc-header-2026 (idempotent — the browser dedupes by URL). {%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign crumb_home = section.settings.crumb_home_url | default: '/'
+  assign crumb_kits = section.settings.crumb_kits_url | default: '/collections/home-build-kits'
+  assign loop_url   = section.settings.loop_url | default: '/pages/impact'
+  assign bundle_url = section.settings.bundle_url | default: '/collections/component-packs'
+  assign reviews_url = section.settings.reviews_url | default: '#bbc-rd-reviews'
+-%}
+
+<div class="bbc-rd bbc-rd-product">
+
+  {%- comment -%} ============== TOP: BREADCRUMB + GALLERY/BUYBOX ============== {%- endcomment -%}
+  {%- if product -%}
+    {%- assign cv = product.selected_or_first_available_variant -%}
+    <section class="rd-section rd-pad-sm">
+      <div class="rd-wrap">
+
+        <nav class="rd-crumb rd-cmp-61169" aria-label="Breadcrumb">
+          <a class="rd-c-subtle-o1" href="{{ crumb_home }}">Home</a>
+          <span class="rd-sep">/</span>
+          <a class="rd-c-subtle-o1" href="{{ crumb_kits }}">Frame Kits</a>
+          <span class="rd-sep">/</span>
+          <span class="rd-here rd-c-ink">{{ product.title }}</span>
+        </nav>
+
+        <div class="rd-grid rd-cmp-45496">
+
+          {%- comment -%} ---------- GALLERY ---------- {%- endcomment -%}
+          <div>
+            <div class="rd-cmp-22077">
+              {%- if product.featured_image -%}
+                <img class="rd-img-cover" id="bbc-rd-main-img"
+                     src="{{ product.featured_image | image_url: width: 1200 }}"
+                     srcset="{{ product.featured_image | image_url: width: 400 }} 400w, {{ product.featured_image | image_url: width: 600 }} 600w, {{ product.featured_image | image_url: width: 800 }} 800w, {{ product.featured_image | image_url: width: 1200 }} 1200w, {{ product.featured_image | image_url: width: 1600 }} 1600w"
+                     sizes="(min-width: 750px) 50vw, 100vw"
+                     alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                     width="{{ product.featured_image.width }}"
+                     height="{{ product.featured_image.height }}"
+                    
+                     fetchpriority="high" loading="eager">
+              {%- else -%}
+                <img class="rd-img-cover" id="bbc-rd-main-img"
+                     src="{{ section.settings.gallery_fallback | default: 'bbc-rd-prod-gravel.jpg' | asset_url }}"
+                     alt="{{ product.title | escape }}"
+                     width="1000" height="1000"
+                    
+                     fetchpriority="high" loading="eager">
+              {%- endif -%}
+            </div>
+
+            {%- if product.images.size > 1 -%}
+              <div class="rd-cmp-31841" id="bbc-rd-thumbs">
+                {%- for image in product.images limit: 8 -%}
+                  <button type="button"
+                          data-bbc-src="{{ image | image_url: width: 1200 }}"
+                          aria-label="View image {{ forloop.index }}"
+                          class="rd-thumb-btn{% if forloop.first %} rd-sel{% endif %}">
+                    <img class="rd-img-cover" src="{{ image | image_url: width: 240 }}"
+                         alt="{{ image.alt | default: product.title | escape }}"
+                         width="{{ image.width }}" height="{{ image.height }}"
+                        
+                         loading="lazy">
+                  </button>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </div>
+
+          {%- comment -%} ---------- BUY BOX ---------- {%- endcomment -%}
+          <div class="rd-cmp-02745">
+            {%- if section.settings.product_badge != blank -%}
+              <span class="rd-tag rd-lime rd-mb-14px">{{ section.settings.product_badge }}</span>
+            {%- endif -%}
+
+            <h1 class="rd-cmp-62520">{{ product.title }}</h1>
+
+            {%- if section.settings.difficulty_label != blank or section.settings.build_time_label != blank -%}
+              <div class="rd-flex rd-mt-18px" style="gap:8px;flex-wrap:wrap;">
+                {%- if section.settings.difficulty_label != blank -%}<span class="rd-tag">{{ section.settings.difficulty_label }}</span>{%- endif -%}
+                {%- if section.settings.build_time_label != blank -%}<span class="rd-tag">{{ section.settings.build_time_label }}</span>{%- endif -%}
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.rating_value != blank -%}
+            <div class="rd-flex rd-cmp-08680">
+              <span class="rd-cmp-99447" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <b class="rd-fw-800">{{ section.settings.rating_value }}</b>
+              <a class="rd-cmp-53515" href="{{ reviews_url }}">· {{ section.settings.review_count }} builder reviews</a>
+            </div>
+            {%- else -%}
+            <div class="rd-flex rd-cmp-08680">
+              <a class="rd-cmp-09075" href="{{ reviews_url }}">Builder reviews &rarr;</a>
+            </div>
+            {%- endif -%}
+
+            {%- if section.settings.product_subtitle != blank -%}
+              <p class="rd-lede rd-mt-18px">{{ section.settings.product_subtitle }}</p>
+            {%- endif -%}
+
+            <div class="rd-cmp-24279">
+              <span class="rd-cmp-99566">
+                {%- if product.price_varies -%}
+                  From {{ product.price_min | money_without_trailing_zeros }}
+                {%- else -%}
+                  {{ cv.price | money_without_trailing_zeros }}
+                {%- endif -%}
+              </span>
+              {%- if cv.compare_at_price and cv.compare_at_price > cv.price -%}
+                <span class="rd-was-price">{{ cv.compare_at_price | money_without_trailing_zeros }}</span>
+              {%- endif -%}
+            </div>
+
+            <div class="rd-flex rd-cmp-15126">
+              <span class="rd-cmp-93984"></span>
+              {{ section.settings.stock_line }}
+            </div>
+
+            {%- comment -%} ---------- ADD TO CART (JS-free) ---------- {%- endcomment -%}
+            {% form 'product', product, id: 'bbc-buy-form' %}
+              {%- if product.has_only_default_variant == false -%}
+                <span class="rd-frame-label rd-cmp-04367">Choose your size / option</span>
+                <div class="rd-cmp-30367">
+                  {%- for v in product.variants -%}
+                    <label class="rd-vbtn{% if v == cv %} rd-sel{% endif %}{% unless v.available %} rd-oos{% endunless %}">
+                      <input class="rd-ac-forest" type="radio" name="id" value="{{ v.id }}" {% if v == cv %}checked{% endif %} {% unless v.available %}disabled{% endunless %}>
+                      {{ v.title }} — {{ v.price | money_without_trailing_zeros }}
+                    </label>
+                  {%- endfor -%}
+                </div>
+              {%- else -%}
+                <input type="hidden" name="id" value="{{ cv.id }}">
+              {%- endif -%}
+
+              <span class="rd-frame-label rd-cmp-21769">Quantity</span>
+              <input class="rd-cmp-88753" type="number" name="quantity" value="1" min="1" aria-label="Quantity"
+                    >
+
+              <div class="rd-flex rd-cmp-44006">
+                <button type="submit" name="add" class="rd-btn rd-lime rd-flex1-jc" {% unless product.available %}disabled{% endunless %}>
+                  {%- if product.available -%}Add to cart{%- else -%}Sold out{%- endif -%}
+                </button>
+                {%- if section.settings.secondary_label != blank -%}
+                  <a class="rd-btn rd-ghost" href="{{ section.settings.secondary_url | default: '/pages/bicycle-frame-building-workshop' }}">{{ section.settings.secondary_label }}</a>
+                {%- endif -%}
+              </div>
+            {% endform %}
+
+            {%- if section.settings.reassure_line != blank -%}
+              <p class="rd-center rd-cmp-86881">{{ section.settings.reassure_line }}</p>
+            {%- endif -%}
+
+            {%- comment -%} Point-of-purchase mission line (social-value proof beside the buy button). {%- endcomment -%}
+            {%- if section.settings.mission_line != blank -%}
+              <p class="rd-product-mission">{{ section.settings.mission_line }}</p>
+            {%- endif -%}
+
+            {%- comment -%} ---------- BUILD WITH A BUDDY ---------- {%- endcomment -%}
+            {%- if section.settings.buddy_text != blank -%}
+              <div class="rd-cmp-58136">
+                <span class="rd-fw-800" aria-hidden="true">&#128101;</span>
+                <span>{{ section.settings.buddy_text }}</span>
+              </div>
+            {%- endif -%}
+
+            {%- comment -%} ---------- PERKS (blocks) ---------- {%- endcomment -%}
+            {%- assign perks = section.blocks | where: 'type', 'perk' -%}
+            {%- if perks.size > 0 -%}
+              <ul class="rd-list rd-mt-18px">
+                {%- for block in perks -%}
+                  <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+
+        </div>
+      </div>
+    </section>
+  {%- else -%}
+    {%- comment -%} Non-product context (degraded): editor placeholder only. {%- endcomment -%}
+    {%- if request.design_mode -%}
+      <section class="rd-section rd-pad-sm">
+        <div class="rd-wrap rd-center">
+          <span class="rd-eyebrow">Product section</span>
+          <h2>Add this section to a product template</h2>
+          <p class="rd-lede rd-maxw rd-m-14pxauto0">The gallery and buy box render once this section is on a product page. The content below is editable now.</p>
+        </div>
+      </section>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- comment -%} ============== HIGHLIGHTS (image + headline + paragraph — Baymard pattern) ============== {%- endcomment -%}
+  {%- assign highlights = section.blocks | where: 'type', 'highlight' -%}
+  {%- if highlights.size > 0 -%}
+    <section class="rd-section rd-pad-sm">
+      <div class="rd-wrap">
+        {%- if section.settings.highlights_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.highlights_eyebrow }}</span>{%- endif -%}
+        {%- if section.settings.highlights_heading != blank -%}<h2 class="rd-mw-22ch">{{ section.settings.highlights_heading }}</h2>{%- endif -%}
+        <div class="rd-highlights rd-mt4">
+          {%- for block in highlights -%}
+            <div class="rd-highlight" {{ block.shopify_attributes }}>
+              <div class="rd-highlight__media">
+                {%- if block.settings.image != blank -%}
+                  <img src="{{ block.settings.image | image_url: width: 760 }}" alt="{{ block.settings.heading | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
+                {%- else -%}
+                  <img src="{{ block.settings.fallback | default: 'bbc-rd-bamboo-tubes.jpg' | asset_url }}" alt="{{ block.settings.heading | escape }}" width="760" height="500" loading="lazy">
+                {%- endif -%}
+              </div>
+              <div class="rd-highlight__body">
+                <h3 class="rd-fs-21px">{{ block.settings.heading }}</h3>
+                <p class="rd-mt1">{{ block.settings.body }}</p>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ============== SIZE & FIT (real bands + build-to-fit honesty) ============== {%- endcomment -%}
+  {%- if section.settings.show_sizing -%}
+    <section class="rd-section rd-pad-sm" id="bbc-rd-sizing">
+      <div class="rd-wrap">
+        {%- if section.settings.sizing_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.sizing_eyebrow }}</span>{%- endif -%}
+        <h2 class="rd-mw-22ch">{{ section.settings.sizing_heading | default: "Built to fit you" }}</h2>
+        <div class="rd-grid rd-g2 rd-mt3">
+          <div>{% render 'bbc-size-data' %}</div>
+          <div class="rd-card rd-stamp"><div class="rd-body">
+            {%- if section.settings.sizing_body != blank -%}<div class="rd-lede">{{ section.settings.sizing_body }}</div>{%- endif -%}
+            <p class="rd-mt2">{{ section.settings.sizing_note | default: "Your frame's size is set on the jig you build on — so pick the size that matches your fit, then fine-tune with seatpost, stem and saddle. Being between sizes is normal: build the smaller one." }}</p>
+            <a class="rd-btn rd-ghost rd-mt2" href="{{ section.settings.custom_url | default: '/products/custom-frame' }}">{{ section.settings.custom_cta | default: "Outside these sizes? Build a custom frame" }} <span class="rd-arrow" aria-hidden="true">&#8594;</span></a>
+          </div></div>
+        </div>
+        {%- assign geo = section.blocks | where: 'type', 'geometry' -%}
+        {%- if geo.size > 0 -%}
+          <h3 class="rd-mt4 rd-fs-21px">{{ section.settings.geo_heading | default: "Frame geometry" }}</h3>
+          <table class="bbc-geo-table rd-mt2">
+            {%- for b in geo -%}
+              <tr {{ b.shopify_attributes }}><th scope="row">{{ b.settings.label }}</th><td>{{ b.settings.value }}</td></tr>
+            {%- endfor -%}
+          </table>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ============== FUNDING LOOP TIE-IN (dark) ============== {%- endcomment -%}
+  <section class="rd-section rd-pad-sm rd-dark">
+    <div class="rd-wrap rd-center">
+      {%- if section.settings.loop_eyebrow != blank -%}
+        <span class="rd-eyebrow rd-on-dark">{{ section.settings.loop_eyebrow }}</span>
+      {%- endif -%}
+      <h2 class="rd-cmp-97576">{{ section.settings.loop_heading }}</h2>
+      <div class="rd-loop rd-mt3">
+        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_step1_big }}</div><div class="rd-sm">{{ section.settings.loop_step1_sm }}</div></div>
+        <div class="rd-arr" aria-hidden="true">&#8594;</div>
+        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_step2_big }}</div><div class="rd-sm">{{ section.settings.loop_step2_sm }}</div></div>
+        <div class="rd-arr" aria-hidden="true">&#8594;</div>
+        <div class="rd-step"><div class="rd-big">{{ section.settings.loop_step3_big }}</div><div class="rd-sm">{{ section.settings.loop_step3_sm }}</div></div>
+      </div>
+      {%- if section.settings.loop_cta_label != blank -%}
+        <a class="rd-btn rd-on-dark rd-mt3" href="{{ loop_url }}">{{ section.settings.loop_cta_label }} <span class="rd-arrow" aria-hidden="true">&#8594;</span></a>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ============== COMPLETE YOUR BUILD (bundle) ============== {%- endcomment -%}
+  <section class="rd-section rd-pad-sm rd-paper">
+    <div class="rd-wrap">
+      {%- if section.settings.bundle_eyebrow != blank -%}
+        <span class="rd-eyebrow">{{ section.settings.bundle_eyebrow }}</span>
+      {%- endif -%}
+      <h2 class="rd-mw-20ch">{{ section.settings.bundle_heading }}</h2>
+      {%- if section.settings.bundle_lede != blank -%}
+        <p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.bundle_lede }}</p>
+      {%- endif -%}
+
+      <div class="rd-mt3 rd-cmp-00502">
+        <div class="rd-card rd-stamp"><div class="rd-body">
+          <div class="rd-frame-label">{{ section.settings.bundle_a_label }}</div>
+          <div class="rd-cmp-57334">{% if product.price_varies %}From {{ product.price_min | money_without_trailing_zeros }}{% else %}{{ product.price | money_without_trailing_zeros }}{% endif %}</div>
+          <p>{{ section.settings.bundle_a_text }}</p>
+        </div></div>
+        <div class="rd-cmp-76373" aria-hidden="true">+</div>
+        <div class="rd-card rd-stamp"><div class="rd-body">
+          <div class="rd-frame-label">{{ section.settings.bundle_b_label }}</div>
+          <div class="rd-cmp-57334">{{ section.settings.bundle_b_price }}</div>
+          <p>{{ section.settings.bundle_b_text }}</p>
+        </div></div>
+        <div class="rd-cmp-76373" aria-hidden="true">=</div>
+        <div class="rd-card rd-stamp rd-lime"><div class="rd-body">
+          <div class="rd-frame-label">{{ section.settings.bundle_total_label }}</div>
+          <div class="rd-cmp-57334">{{ section.settings.bundle_total_price }}</div>
+          <p>{{ section.settings.bundle_total_text }}</p>
+          {%- if section.settings.bundle_cta_label != blank -%}
+            <a class="rd-btn rd-lime rd-mt2" href="{{ bundle_url }}">{{ section.settings.bundle_cta_label }} <span class="rd-arrow" aria-hidden="true">&#8594;</span></a>
+          {%- endif -%}
+        </div></div>
+      </div>
+
+      {%- if section.settings.bundle_foot != blank -%}
+        <p class="rd-mt2 rd-cmp-64793">{{ section.settings.bundle_foot }}</p>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ============== WHAT YOU'LL NEED AT HOME (3 cards) ============== {%- endcomment -%}
+  {%- assign needs = section.blocks | where: 'type', 'need' -%}
+  {%- if needs.size > 0 -%}
+    <section class="rd-section rd-pad-sm">
+      <div class="rd-wrap">
+        {%- if section.settings.need_eyebrow != blank -%}
+          <span class="rd-eyebrow">{{ section.settings.need_eyebrow }}</span>
+        {%- endif -%}
+        <h2 class="rd-mw-22ch">{{ section.settings.need_heading }}</h2>
+        <div class="rd-grid rd-g3 rd-mt3">
+          {%- for block in needs -%}
+            <div class="rd-card rd-stamp" {{ block.shopify_attributes }}><div class="rd-body">
+              <h3 class="rd-fs-21px">{{ block.settings.title }}</h3>
+              <p class="rd-mt1">{{ block.settings.description }}</p>
+            </div></div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ============== SPEC STRIP (4) ============== {%- endcomment -%}
+  {%- assign specs = section.blocks | where: 'type', 'spec' -%}
+  {%- if specs.size > 0 -%}
+    <section class="rd-section rd-pad-sm">
+      <div class="rd-wrap">
+        <div class="rd-spectable" style="grid-template-columns:repeat({{ specs.size }},1fr);">
+          {%- for block in specs -%}
+            <div class="rd-spec-cell" {{ block.shopify_attributes }}>
+              <div class="rd-frame-label">{{ block.settings.label }}</div>
+              <div class="rd-cmp-43552">{{ block.settings.value }}</div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ============== BUILD STEPS (4, numbered) ============== {%- endcomment -%}
+  {%- assign steps = section.blocks | where: 'type', 'step' -%}
+  {%- if steps.size > 0 -%}
+    <section class="rd-section rd-pad">
+      <div class="rd-wrap">
+        {%- if section.settings.steps_eyebrow != blank -%}
+          <span class="rd-eyebrow">{{ section.settings.steps_eyebrow }}</span>
+        {%- endif -%}
+        <h2 class="rd-mw-18ch">{{ section.settings.steps_heading }}</h2>
+        <div class="rd-grid rd-g4 rd-mt4">
+          {%- for block in steps -%}
+            <div class="rd-card rd-stamp" {{ block.shopify_attributes }}><div class="rd-body">
+              <span class="rd-tag rd-lime">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+              <h3 class="rd-mt2 rd-fs-18px">{{ block.settings.title }}</h3>
+              <p class="rd-mt1">{{ block.settings.description }}</p>
+            </div></div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ============== WHY BAMBOO + INCLUDED (split) ============== {%- endcomment -%}
+  <section class="rd-section rd-split rd-rev rd-steel">
+    <div class="rd-media">
+      {%- if section.settings.why_image != blank -%}
+        <img src="{{ section.settings.why_image | image_url: width: 1400 }}"
+             alt="{{ section.settings.why_image_alt | escape }}"
+             width="{{ section.settings.why_image.width }}" height="{{ section.settings.why_image.height }}"
+             loading="lazy">
+      {%- else -%}
+        <img src="{{ section.settings.why_fallback | default: 'bbc-rd-bamboo-tubes.jpg' | asset_url }}"
+             alt="{{ section.settings.why_image_alt | escape }}"
+             width="1200" height="800" loading="lazy">
+      {%- endif -%}
+    </div>
+    <div class="rd-txt">
+      {%- if section.settings.why_eyebrow != blank -%}
+        <span class="rd-eyebrow">{{ section.settings.why_eyebrow }}</span>
+      {%- endif -%}
+      <h2>{{ section.settings.why_heading }}</h2>
+      {%- if section.settings.why_body != blank -%}
+        <p class="rd-lede rd-mt2">{{ section.settings.why_body }}</p>
+      {%- endif -%}
+      {%- if section.settings.why_quote != blank -%}
+        <div class="rd-pull rd-mt3">
+          <p class="rd-q">{{ section.settings.why_quote }}</p>
+          {%- if section.settings.why_quote_cite != blank -%}
+            <cite>{{ section.settings.why_quote_cite }}</cite>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ============== IN-KIT / NOT-IN-KIT (2 cards) ============== {%- endcomment -%}
+  <section class="rd-section rd-pad">
+    <div class="rd-wrap">
+      <div class="rd-grid rd-g2">
+        <div class="rd-card rd-stamp"><div class="rd-body">
+          <h3 class="rd-fs-21px">{{ section.settings.inkit_heading }}</h3>
+          <p class="rd-mt2">{{ section.settings.inkit_body }}</p>
+        </div></div>
+        <div class="rd-card rd-stamp"><div class="rd-body">
+          <h3 class="rd-fs-21px">{{ section.settings.notkit_heading }}</h3>
+          <p class="rd-mt2">{{ section.settings.notkit_body }}</p>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ============== BUILD WITH CONFIDENCE (de-risk: reversibility · tools · support) ============== {%- endcomment -%}
+  {%- if section.settings.reversible_body != blank or section.settings.tools_text != blank or section.settings.support_text != blank -%}
+    <section class="rd-section rd-pad-sm rd-paper">
+      <div class="rd-wrap">
+        {%- if section.settings.confidence_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.confidence_eyebrow }}</span>{%- endif -%}
+        {%- if section.settings.confidence_heading != blank -%}<h2 class="rd-mw-22ch">{{ section.settings.confidence_heading }}</h2>{%- endif -%}
+        <div class="rd-grid rd-g3 rd-mt3">
+          {%- if section.settings.reversible_body != blank -%}
+            <div class="rd-card rd-stamp"><div class="rd-body">
+              <h3 class="rd-fs-21px">{{ section.settings.reversible_heading | default: "You can't really ruin it" }}</h3>
+              <p class="rd-mt1">{{ section.settings.reversible_body }}</p>
+            </div></div>
+          {%- endif -%}
+          {%- if section.settings.tools_text != blank -%}
+            <div class="rd-card rd-stamp"><div class="rd-body">
+              <h3 class="rd-fs-21px">{{ section.settings.tools_heading | default: "Tools you'll need" }}</h3>
+              <ul class="rd-list rd-mt1">
+                {%- assign rd_tools = section.settings.tools_text | split: '|' -%}
+                {%- for t in rd_tools -%}<li>{{ t | strip }}</li>{%- endfor -%}
+              </ul>
+            </div></div>
+          {%- endif -%}
+          {%- if section.settings.support_text != blank -%}
+            <div class="rd-card rd-stamp"><div class="rd-body">
+              <h3 class="rd-fs-21px">{{ section.settings.support_heading | default: "You're never on your own" }}</h3>
+              <p class="rd-mt1">{{ section.settings.support_text }}</p>
+            </div></div>
+          {%- endif -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ============== CARE + POLICY (completion safety-net) ============== {%- endcomment -%}
+  {%- if section.settings.care_body != blank or section.settings.policy_text != blank -%}
+    <section class="rd-section rd-pad-sm">
+      <div class="rd-wrap">
+        <div class="rd-grid rd-g2">
+          {%- if section.settings.care_body != blank -%}
+            <div class="rd-card rd-stamp"><div class="rd-body">
+              <h3 class="rd-fs-21px">{{ section.settings.care_heading | default: "Caring for your frame" }}</h3>
+              <p class="rd-mt2">{{ section.settings.care_body }}</p>
+            </div></div>
+          {%- endif -%}
+          {%- if section.settings.policy_text != blank -%}
+            <div class="rd-card rd-stamp"><div class="rd-body">
+              <h3 class="rd-fs-21px">{{ section.settings.policy_heading | default: "Warranty, returns &amp; shipping" }}</h3>
+              <ul class="rd-list rd-mt2">
+                {%- assign rd_policy = section.settings.policy_text | split: '|' -%}
+                {%- for p in rd_policy -%}<li>{{ p | strip }}</li>{%- endfor -%}
+              </ul>
+            </div></div>
+          {%- endif -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ============== WATCH THE BUILD (video) ============== {%- endcomment -%}
+  <section class="rd-pad-sm rd-dark rd-center">
+    <div class="rd-wrap rd-mw-820px">
+      <span class="rd-eyebrow rd-on-dark">Watch the build</span>
+      <h2 class="rd-mt2">See a frame come together.</h2>
+      <p class="rd-lede rd-mt2">The same hand-build every kit follows — start to finish, on camera.</p>
+      {%- comment -%} standard player (2026-07-22): facade + auto YouTube thumbnail — no iframe until click {%- endcomment -%}
+      <div class="rd-mt3" style="border-radius:14px;overflow:hidden;">
+        {%- assign bv = section.settings.build_video_id | default: 'ckCwJXJGKD0' -%}
+        {%- render 'bbc-media', youtube: bv, label: 'watch the build film', alt: 'Bamboo Bicycle Club — frame build film', class: 'bbc-media--ar169', sizes: '(max-width:749px) 100vw, 900px' -%}
+      </div>
+      {%- comment -%} press proof in the PDP mid-page zone (qa/PRESS-BLOCK.md) {%- endcomment -%}
+      {%- if section.settings.press_quote != blank -%}
+      <div class="rd-mt4">
+        {%- render 'bbc-press', style: 'bar', preset: 'cycling', quote: section.settings.press_quote, cite: section.settings.press_cite -%}
+      </div>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ============== REVIEWS ============== {%- endcomment -%}
+  {%- assign reviews = section.blocks | where: 'type', 'review' -%}
+  {%- if reviews.size > 0 -%}
+    <section class="rd-section rd-pad-sm rd-dark" id="bbc-rd-reviews">
+      <div class="rd-wrap">
+        <div class="rd-flex rd-between rd-mb-24px">
+          <div>
+            {%- if section.settings.reviews_eyebrow != blank -%}
+              <span class="rd-eyebrow rd-on-dark">{{ section.settings.reviews_eyebrow }}</span>
+            {%- endif -%}
+            <h2 class="rd-m-0">{{ section.settings.reviews_heading }}</h2>
+          </div>
+          <div class="rd-ta-right">
+            {%- if section.settings.rating_value != blank -%}<div class="rd-cmp-18720" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>{%- endif -%}
+            {%- if section.settings.reviews_subline != blank -%}
+              <div class="rd-cmp-33678">{{ section.settings.reviews_subline }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+        <div class="rd-grid rd-g2">
+          {%- for block in reviews -%}
+            <div class="rd-pull" {{ block.shopify_attributes }}>
+              <p class="rd-q rd-fs-clamp18px2vw22">{{ block.settings.quote }}</p>
+              {%- if block.settings.cite != blank -%}
+                <cite>{{ block.settings.cite }}</cite>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ============== TRUST STATS (4) ============== {%- endcomment -%}
+  {%- assign stats = section.blocks | where: 'type', 'stat' -%}
+  {%- if stats.size > 0 -%}
+    <section class="rd-section rd-pad-sm rd-paper">
+      <div class="rd-wrap">
+        <div class="rd-stats">
+          {%- for block in stats -%}
+            <div class="rd-stat" {{ block.shopify_attributes }}>
+              <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
+              <div class="rd-lbl">{{ block.settings.label }}</div>
+              {%- if block.settings.source != blank -%}
+                <div class="rd-src">{{ block.settings.source }}</div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ============== FAQ ============== {%- endcomment -%}
+  {%- assign faqs = section.blocks | where: 'type', 'faq' -%}
+  {%- if faqs.size > 0 -%}
+    <section class="rd-section rd-pad">
+      <div class="rd-wrap rd-mw-860px">
+        {%- if section.settings.faq_eyebrow != blank -%}
+          <span class="rd-eyebrow">{{ section.settings.faq_eyebrow }}</span>
+        {%- endif -%}
+        <h2>{{ section.settings.faq_heading }}</h2>
+        <div class="rd-faq rd-mt3 rd-mw-none">
+          {%- for block in faqs -%}
+            <details {{ block.shopify_attributes }} {% if forloop.first %}open{% endif %}>
+              <summary>{{ block.settings.question }}</summary>
+              <div class="rd-a">{{ block.settings.answer }}</div>
+            </details>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ============== REAL BUILDS (matched to this kit) ============== {%- endcomment -%}
+  {% render 'bbc-builder-stories', section: section %}
+
+  {%- comment -%} ============== RELATED KITS ============== {%- endcomment -%}
+  {%- assign related = section.blocks | where: 'type', 'related' -%}
+  {%- if related.size > 0 -%}
+    <section class="rd-section rd-pad-sm rd-paper">
+      <div class="rd-wrap">
+        <div class="rd-flex rd-between rd-mb-28px">
+          <h2 class="rd-fs-clamp26px3vw32">{{ section.settings.related_heading }}</h2>
+          {%- if section.settings.related_cta_label != blank -%}
+            <a class="rd-btn rd-ghost" href="{{ section.settings.related_cta_url | default: '/collections/home-build-kits' }}">{{ section.settings.related_cta_label }} <span class="rd-arrow" aria-hidden="true">&#8594;</span></a>
+          {%- endif -%}
+        </div>
+        <div class="rd-grid rd-g4">
+          {%- for block in related -%}
+            {%- assign rel_url = block.settings.url | default: '/collections/home-build-kits' -%}
+            <a class="rd-card" href="{{ rel_url }}" {{ block.shopify_attributes }}>
+              <div class="rd-ph">
+                {%- if block.settings.image != blank -%}
+                  <img src="{{ block.settings.image | image_url: width: 600 }}"
+                       alt="{{ block.settings.title | escape }}"
+                       width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}"
+                       loading="lazy">
+                {%- else -%}
+                  <img src="{{ block.settings.fallback | default: 'bbc-rd-prod-flax.jpg' | asset_url }}"
+                       alt="{{ block.settings.title | escape }}"
+                       width="1000" height="1000" loading="lazy">
+                {%- endif -%}
+              </div>
+              <div class="rd-body">
+                <h3 class="rd-fs-18px">{{ block.settings.title }}</h3>
+                {%- if block.settings.price != blank -%}
+                  <p class="rd-cmp-83298">{{ block.settings.price }}</p>
+                {%- endif -%}
+              </div>
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ============== PRODUCT STRUCTURED DATA (JSON-LD) — no aggregateRating (ratings hidden) ============== {%- endcomment -%}
+  {%- if product -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "description": {{ product.description | strip_html | truncate: 300 | json }},
+      {%- if product.featured_image -%}"image": [{{ product.featured_image | image_url: width: 1200 | json }}],{%- endif -%}
+      "brand": { "@type": "Brand", "name": "Bamboo Bicycle Club" },
+      {%- if cv.sku != blank -%}"sku": {{ cv.sku | json }},{%- endif -%}
+      "offers": {
+        "@type": "Offer",
+        "url": {{ shop.url | append: product.url | json }},
+        "priceCurrency": {{ cart.currency.iso_code | json }},
+        "price": {{ cv.price | divided_by: 100.0 }},
+        "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
+      }
+    }
+    </script>
+  {%- endif -%}
+
+  {%- comment -%} ============== STICKY BUY BAR (progressive, JS-free anchor) ============== {%- endcomment -%}
+  {%- if product -%}
+    <div id="bbc-rd-stickybar" style="position:fixed; left:0; right:0; bottom:0; z-index:90; background:var(--forest); color:var(--bone); transform:translateY(110%); transition:transform .25s ease;">
+      <div class="rd-wrap rd-cmp-47707">
+        <span class="rd-fw-800">{{ product.title }}</span>
+        <span class="rd-c-lime-b">
+          {%- if product.price_varies -%}From {{ product.price_min | money_without_trailing_zeros }}{%- else -%}{{ cv.price | money_without_trailing_zeros }}{%- endif -%}
+        </span>
+        <span class="rd-ml-auto"></span>
+        <a class="rd-btn rd-lime rd-p-11px22px" href="#bbc-buy-form">Add to cart <span class="rd-arrow" aria-hidden="true">&#8594;</span></a>
+      </div>
+    </div>
+  {%- endif -%}
+
+</div>
+
+{%- comment -%}
+  Progressive enhancement only — the page is fully usable without this script:
+  thumbnails are real buttons (main image already shows), the sticky bar simply
+  stays hidden, and the form/anchors work natively.
+{%- endcomment -%}
+{%- if product -%}
+<script>
+  (function () {
+    var root = document.getElementById('bbc-rd-thumbs');
+    var main = document.getElementById('bbc-rd-main-img');
+    if (root && main) {
+      root.addEventListener('click', function (e) {
+        var btn = e.target.closest('button[data-bbc-src]');
+        if (!btn) return;
+        main.removeAttribute('srcset'); // clear responsive candidates so the chosen image wins
+        main.src = btn.getAttribute('data-bbc-src');
+        root.querySelectorAll('button').forEach(function (b) {
+          b.classList.toggle('rd-sel', b === btn);
+        });
+      });
+    }
+    var bar = document.getElementById('bbc-rd-stickybar');
+    var form = document.getElementById('bbc-buy-form');
+    if (bar && form && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          var below = en.boundingClientRect.top < 0;
+          bar.style.transform = (!en.isIntersecting && below) ? 'none' : 'translateY(110%)';
+        });
+      }, { threshold: 0 });
+      io.observe(form);
+    }
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Kit page 2026 (new)",
+  "tag": "section",
+  "class": "bbc-rd-product-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Buy box"
+    },
+    {
+      "type": "text",
+      "id": "product_badge",
+      "label": "Badge above title",
+      "default": "Home build kit"
+    },
+    {
+      "type": "textarea",
+      "id": "product_subtitle",
+      "label": "Subtitle under title",
+      "default": "Adventure-ready geometry for gravel roads, light touring and bikepacking — hand-built by you from bamboo, flax and carbon."
+    },
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Rating value (leave blank until verified)",
+      "info": "Leave blank to hide the rating. Only fill with REAL review data — an unverified rating is a trust/legal risk."
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Review count (leave blank until verified)",
+      "info": "Shown next to the rating; leave blank until you have real numbers."
+    },
+    {
+      "type": "text",
+      "id": "stock_line",
+      "label": "In-stock / shipping line",
+      "default": "In stock — ships ~twice a week from our London workshop, fully tracked."
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "Prefer a workshop?"
+    },
+    {
+      "type": "url",
+      "id": "secondary_url",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "text",
+      "id": "reassure_line",
+      "label": "Reassurance line under buttons",
+      "default": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks"
+    },
+    {
+      "type": "textarea",
+      "id": "mission_line",
+      "label": "Mission line (social-value proof by the buy button)",
+      "default": "Build your own — and help fund a place on our Build to Bond prison programme. Profits fund accredited skills courses inside prisons and schools."
+    },
+    {
+      "type": "textarea",
+      "id": "buddy_text",
+      "label": "Build-with-a-buddy offer",
+      "default": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories."
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_fallback",
+      "label": "Gallery fallback image",
+      "info": "Used only when the product has no images."
+    },
+    {
+      "type": "header",
+      "content": "Build confidence & support"
+    },
+    {
+      "type": "text",
+      "id": "difficulty_label",
+      "label": "Difficulty chip",
+      "default": "Beginner-friendly · no experience needed"
+    },
+    {
+      "type": "text",
+      "id": "build_time_label",
+      "label": "Build-time chip",
+      "default": "~25–45 hrs · a few weekends"
+    },
+    {
+      "type": "text",
+      "id": "confidence_eyebrow",
+      "label": "Confidence eyebrow",
+      "default": "Build with confidence"
+    },
+    {
+      "type": "text",
+      "id": "confidence_heading",
+      "label": "Confidence heading",
+      "default": "you've got this — and we've got you"
+    },
+    {
+      "type": "text",
+      "id": "reversible_heading",
+      "label": "Reversibility heading",
+      "default": "you can't really ruin it"
+    },
+    {
+      "type": "textarea",
+      "id": "reversible_body",
+      "label": "Reversibility body",
+      "default": "The glue is slow and adjustable, each joint wrap is additive (more = stronger), and a cured joint simply sands back to shape. The kit even ships with spare bamboo — at no single point is a mistake permanent."
+    },
+    {
+      "type": "text",
+      "id": "tools_heading",
+      "label": "Tools heading",
+      "default": "tools you'll need"
+    },
+    {
+      "type": "textarea",
+      "id": "tools_text",
+      "label": "Tools list (separate with |)",
+      "default": "Hacksaw|Files|Sandpaper|Tape measure|A rounded wood file|Electrical & masking tape|A 1200×600mm board|No power tools needed"
+    },
+    {
+      "type": "text",
+      "id": "support_heading",
+      "label": "Support heading",
+      "default": "you're never on your own"
+    },
+    {
+      "type": "textarea",
+      "id": "support_text",
+      "label": "Support body",
+      "default": "Stuck mid-build? Get help fast through our builder forum, step-by-step YouTube videos, WhatsApp and email. Most of our builders start with zero experience."
+    },
+    {
+      "type": "text",
+      "id": "care_heading",
+      "label": "Care heading",
+      "default": "caring for your frame"
+    },
+    {
+      "type": "textarea",
+      "id": "care_body",
+      "label": "Care body",
+      "default": "Seal the bamboo and store it indoors; dry it after wet rides. A frame you built — and understand — is one you can maintain and repair yourself for years."
+    },
+    {
+      "type": "text",
+      "id": "policy_heading",
+      "label": "Policy heading",
+      "default": "warranty, returns & shipping"
+    },
+    {
+      "type": "textarea",
+      "id": "policy_text",
+      "label": "Policy lines (separate with |)",
+      "default": "1-year warranty on the kit materials|Full refund within 14 days on unopened, unused kits|Ships in ~2 weeks · UK £12 · Europe £25 · USA £45 · rest of world £75"
+    },
+    {
+      "type": "header",
+      "content": "Highlights"
+    },
+    {
+      "type": "text",
+      "id": "highlights_eyebrow",
+      "label": "Highlights eyebrow",
+      "default": "Why builders love it"
+    },
+    {
+      "type": "text",
+      "id": "highlights_heading",
+      "label": "Highlights heading",
+      "default": "what makes it different"
+    },
+    {
+      "type": "header",
+      "content": "Size & fit"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sizing",
+      "label": "Show the size & fit section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sizing_eyebrow",
+      "label": "Sizing eyebrow",
+      "default": "Find your fit"
+    },
+    {
+      "type": "text",
+      "id": "sizing_heading",
+      "label": "Sizing heading",
+      "default": "built to fit you"
+    },
+    {
+      "type": "textarea",
+      "id": "sizing_body",
+      "label": "Sizing intro",
+      "default": "No sizing gamble: you build your frame to fit you. Use your height and inseam to pick your size."
+    },
+    {
+      "type": "textarea",
+      "id": "sizing_note",
+      "label": "Sizing note",
+      "default": "Your frame's size is set on the jig you build on — so pick the size that matches your fit, then fine-tune with seatpost, stem and saddle. Being between sizes is normal: build the smaller one."
+    },
+    {
+      "type": "text",
+      "id": "geo_heading",
+      "label": "Geometry table heading",
+      "default": "frame geometry"
+    },
+    {
+      "type": "text",
+      "id": "custom_cta",
+      "label": "Custom CTA label",
+      "default": "Outside these sizes? Build a custom frame"
+    },
+    {
+      "type": "url",
+      "id": "custom_url",
+      "label": "Custom CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Breadcrumb & links"
+    },
+    {
+      "type": "url",
+      "id": "crumb_home_url",
+      "label": "Breadcrumb: Home link"
+    },
+    {
+      "type": "url",
+      "id": "crumb_kits_url",
+      "label": "Breadcrumb: Frame Kits link"
+    },
+    {
+      "type": "url",
+      "id": "reviews_url",
+      "label": "Rating link target"
+    },
+    {
+      "type": "header",
+      "content": "Funding loop (dark band)"
+    },
+    {
+      "type": "text",
+      "id": "loop_eyebrow",
+      "label": "Loop eyebrow",
+      "default": "Every kit does more"
+    },
+    {
+      "type": "textarea",
+      "id": "loop_heading",
+      "label": "Loop heading",
+      "default": "your build helps fund accredited skills courses — inside prisons and schools."
+    },
+    {
+      "type": "text",
+      "id": "loop_step1_big",
+      "label": "Loop step 1 — big",
+      "default": "You build"
+    },
+    {
+      "type": "text",
+      "id": "loop_step1_sm",
+      "label": "Loop step 1 — small",
+      "default": "a gravel frame"
+    },
+    {
+      "type": "text",
+      "id": "loop_step2_big",
+      "label": "Loop step 2 — big",
+      "default": "Profits fund"
+    },
+    {
+      "type": "text",
+      "id": "loop_step2_sm",
+      "label": "Loop step 2 — small",
+      "default": "accredited skills courses"
+    },
+    {
+      "type": "text",
+      "id": "loop_step3_big",
+      "label": "Loop step 3 — big",
+      "default": "A life changes"
+    },
+    {
+      "type": "text",
+      "id": "loop_step3_sm",
+      "label": "Loop step 3 — small",
+      "default": "skills · confidence · futures"
+    },
+    {
+      "type": "text",
+      "id": "loop_cta_label",
+      "label": "Loop button label",
+      "default": "See our impact"
+    },
+    {
+      "type": "url",
+      "id": "loop_url",
+      "label": "Loop button link"
+    },
+    {
+      "type": "header",
+      "content": "Complete your build (bundle)"
+    },
+    {
+      "type": "text",
+      "id": "bundle_eyebrow",
+      "label": "Bundle eyebrow",
+      "default": "What it costs to actually ride"
+    },
+    {
+      "type": "text",
+      "id": "bundle_heading",
+      "label": "Bundle heading",
+      "default": "complete your build, the easy way."
+    },
+    {
+      "type": "textarea",
+      "id": "bundle_lede",
+      "label": "Bundle intro",
+      "default": "The kit is the frame. Add a matched component pack — fork, wheels, groupset, finishing kit — and you're ride-ready. Or source parts from any bike shop; your frame fits all major groupsets."
+    },
+    {
+      "type": "text",
+      "id": "bundle_a_label",
+      "label": "Bundle: frame label",
+      "default": "Frame kit"
+    },
+    {
+      "type": "text",
+      "id": "bundle_a_price",
+      "label": "Bundle: frame price text",
+      "default": "From £385"
+    },
+    {
+      "type": "textarea",
+      "id": "bundle_a_text",
+      "label": "Bundle: frame description",
+      "default": "Everything to build the bamboo gravel frame."
+    },
+    {
+      "type": "text",
+      "id": "bundle_b_label",
+      "label": "Bundle: component-pack label",
+      "default": "Gravel component pack"
+    },
+    {
+      "type": "text",
+      "id": "bundle_b_price",
+      "label": "Bundle: component-pack price text",
+      "default": "From £425"
+    },
+    {
+      "type": "textarea",
+      "id": "bundle_b_text",
+      "label": "Bundle: component-pack description",
+      "default": "Fork, wheels, groupset, bars, saddle and finishing kit."
+    },
+    {
+      "type": "text",
+      "id": "bundle_total_label",
+      "label": "Bundle: total label",
+      "default": "Ride-ready, all in"
+    },
+    {
+      "type": "text",
+      "id": "bundle_total_price",
+      "label": "Bundle: total price text",
+      "default": "From £810"
+    },
+    {
+      "type": "textarea",
+      "id": "bundle_total_text",
+      "label": "Bundle: total description",
+      "default": "A complete, one-of-a-kind gravel bike — built by you."
+    },
+    {
+      "type": "text",
+      "id": "bundle_cta_label",
+      "label": "Bundle button label",
+      "default": "Add the component pack"
+    },
+    {
+      "type": "url",
+      "id": "bundle_url",
+      "label": "Bundle button link"
+    },
+    {
+      "type": "textarea",
+      "id": "bundle_foot",
+      "label": "Bundle footnote",
+      "default": "Prefer to choose your own parts? Skip the pack — the frame works with any standard groupset, and we'll advise."
+    },
+    {
+      "type": "header",
+      "content": "What you'll need at home"
+    },
+    {
+      "type": "text",
+      "id": "need_eyebrow",
+      "label": "Need eyebrow",
+      "default": "Before you order"
+    },
+    {
+      "type": "text",
+      "id": "need_heading",
+      "label": "Need heading",
+      "default": "what you'll need at home."
+    },
+    {
+      "type": "header",
+      "content": "Build steps"
+    },
+    {
+      "type": "text",
+      "id": "steps_eyebrow",
+      "label": "Steps eyebrow",
+      "default": "How you'll build it"
+    },
+    {
+      "type": "text",
+      "id": "steps_heading",
+      "label": "Steps heading",
+      "default": "four stages, across a few weekends."
+    },
+    {
+      "type": "header",
+      "content": "Why bamboo (split)"
+    },
+    {
+      "type": "text",
+      "id": "why_eyebrow",
+      "label": "Why eyebrow",
+      "default": "Why bamboo"
+    },
+    {
+      "type": "text",
+      "id": "why_heading",
+      "label": "Why heading",
+      "default": "a smoother, more compliant ride."
+    },
+    {
+      "type": "textarea",
+      "id": "why_body",
+      "label": "Why body",
+      "default": "Bamboo's natural vibration damping takes the edge off rough trails — ideal for bikepacking. Frames are compatible with all major groupsets and can be built around Shimano GRX or Rohloff geared hubs."
+    },
+    {
+      "type": "textarea",
+      "id": "why_quote",
+      "label": "Why pull-quote",
+      "default": "The current trend is for carbon frames that lack environmental credentials. Bamboo is easy to grow, offsets its carbon footprint, and — combined with flax and bio-composites — offers a viable alternative."
+    },
+    {
+      "type": "text",
+      "id": "why_quote_cite",
+      "label": "Why quote attribution"
+    },
+    {
+      "type": "image_picker",
+      "id": "why_image",
+      "label": "Why image"
+    },
+    {
+      "type": "text",
+      "id": "why_image_alt",
+      "label": "Why image alt text",
+      "default": "Close detail of a hand-wrapped bamboo frame joint"
+    },
+    {
+      "type": "text",
+      "id": "why_fallback",
+      "label": "Why image fallback filename",
+      "default": "bbc-rd-bamboo-tubes.jpg",
+      "info": "Bundled asset used until a real image is set."
+    },
+    {
+      "type": "header",
+      "content": "In-kit / not-in-kit"
+    },
+    {
+      "type": "text",
+      "id": "inkit_heading",
+      "label": "In-the-kit heading",
+      "default": "in the kit"
+    },
+    {
+      "type": "textarea",
+      "id": "inkit_body",
+      "label": "In-the-kit body",
+      "default": "Heat-treated Moso bamboo tubes (with spares), a full-size frame blueprint, a plywood alignment jig, the CNC metal parts that the steering, cranks and wheels bolt to (head tube, bottom-bracket shell and dropouts), carbon-fibre tow (the reinforcing fibre you wrap each joint with), two-part epoxy resin, and an illustrated manual plus 15+ hours of step-by-step video tutorials."
+    },
+    {
+      "type": "text",
+      "id": "notkit_heading",
+      "label": "Not-in-the-kit heading",
+      "default": "you'll add"
+    },
+    {
+      "type": "textarea",
+      "id": "notkit_body",
+      "label": "Not-in-the-kit body",
+      "default": "Fork, wheels, groupset, handlebars, saddle and finishing components. Grab a complete component pack from us, or source parts from any bike shop."
+    },
+    {
+      "type": "header",
+      "content": "Reviews"
+    },
+    {
+      "type": "text",
+      "id": "reviews_eyebrow",
+      "label": "Reviews eyebrow",
+      "default": "Builder reviews"
+    },
+    {
+      "type": "text",
+      "id": "reviews_heading",
+      "label": "Reviews heading (FLAG: confirm rating)",
+      "default": "rated by the builders who made one",
+      "info": "Design said 'Rated 4.8 from 214 builders' — not verified."
+    },
+    {
+      "type": "text",
+      "id": "reviews_subline",
+      "label": "Reviews sub-line",
+      "info": "Optional. Blank by default (the heading already covers it). Use a real, verifiable line only — e.g. a true average rating."
+    },
+    {
+      "type": "text",
+      "id": "stories_heading",
+      "label": "Builder-stories heading",
+      "default": "built by people like you"
+    },
+    {
+      "type": "header",
+      "content": "Build video"
+    },
+    {
+      "type": "text",
+      "id": "build_video_id",
+      "label": "YouTube video ID",
+      "default": "ckCwJXJGKD0",
+      "info": "Per-kit build video. Defaults to the general frame-build film — set a kit-specific YouTube ID (the part after watch?v=) for each kit if you have one."
+    },
+    {
+      "type": "header",
+      "content": "FAQ"
+    },
+    {
+      "type": "text",
+      "id": "faq_eyebrow",
+      "label": "FAQ eyebrow",
+      "default": "Common questions"
+    },
+    {
+      "type": "text",
+      "id": "faq_heading",
+      "label": "FAQ heading",
+      "default": "before you build."
+    },
+    {
+      "type": "header",
+      "content": "Related kits"
+    },
+    {
+      "type": "text",
+      "id": "related_heading",
+      "label": "Related heading",
+      "default": "more kits to build"
+    },
+    {
+      "type": "text",
+      "id": "related_cta_label",
+      "label": "Related button label",
+      "default": "All frame kits"
+    },
+    {
+      "type": "url",
+      "id": "related_cta_url",
+      "label": "Related button link"
+    },
+    {
+      "type": "header",
+      "content": "Press (standard block)"
+    },
+    {
+      "type": "textarea",
+      "id": "press_quote",
+      "label": "Press quote under the build film (blank hides)",
+      "default": "Si meets with Emily Chappell, the creator of this amazing bamboo bike, to hear why your next bike should be made from bamboo."
+    },
+    {
+      "type": "text",
+      "id": "press_cite",
+      "label": "Attribution",
+      "default": "Global Cycling Network"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "geometry",
+      "name": "Geometry row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Measurement",
+          "default": "Reach"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value(s)",
+          "default": "388 / 393 / 402 / 412 mm (S/M/L/XL)"
+        }
+      ]
+    },
+    {
+      "type": "highlight",
+      "name": "Highlight",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Headline",
+          "default": "no welding, no workshop"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Build the whole frame on your kitchen table with basic hand tools — everything else is in the kit."
+        },
+        {
+          "type": "text",
+          "id": "fallback",
+          "label": "Fallback image filename",
+          "default": "bbc-rd-bamboo-tubes.jpg"
+        }
+      ]
+    },
+    {
+      "type": "perk",
+      "name": "Buy-box perk",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Perk text",
+          "default": "No power tools required — just basic hand tools"
+        }
+      ]
+    },
+    {
+      "type": "need",
+      "name": "What you need card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card title",
+          "default": "basic hand tools"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Card description",
+          "default": "A hacksaw, files, sandpaper, a measuring tape — no power tools. Everything else is in the kit."
+        }
+      ]
+    },
+    {
+      "type": "spec",
+      "name": "Spec item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Spec label",
+          "default": "Build time"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Spec value",
+          "default": "25–35 hrs"
+        }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Build step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step title",
+          "default": "set the geometry"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Step description",
+          "default": "Lock gravel geometry on the jig — wider clearance and a slacker head angle than road."
+        }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "A really comfortable ride — smooth but not too flexy, a bit like steel. And there are advantages in having built the bike myself."
+        },
+        {
+          "type": "text",
+          "id": "cite",
+          "label": "Attribution",
+          "default": "— Kate Rawles, before her 8,288-mile Andes expedition"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Trust stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Stat number",
+          "default": "<1%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Stat label",
+          "default": "failure rate across builds"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Stat source",
+          "default": "4,000+ builders since 2012"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Do I need power tools?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "No. Just basic hand tools — a hacksaw, files, sandpaper, a measuring tape and a work surface. Everything else is in the kit."
+        }
+      ]
+    },
+    {
+      "type": "related",
+      "name": "Related kit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Kit title",
+          "default": "road lugged kit"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price text (optional)"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Kit link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Kit image"
+        },
+        {
+          "type": "text",
+          "id": "fallback",
+          "label": "Image fallback filename",
+          "default": "bbc-rd-prod-flax.jpg"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kit page 2026 (new)",
+      "blocks": [
+        {
+          "type": "perk",
+          "settings": {
+            "text": "No power tools required — just basic hand tools"
+          }
+        },
+        {
+          "type": "perk",
+          "settings": {
+            "text": "Illustrated manual + 15+ hours of step-by-step video"
+          }
+        },
+        {
+          "type": "perk",
+          "settings": {
+            "text": "Lifetime community of 4,000+ builders for support"
+          }
+        },
+        {
+          "type": "perk",
+          "settings": {
+            "text": "Cycle to Work accepted — save through salary sacrifice"
+          }
+        },
+        {
+          "type": "need",
+          "settings": {
+            "title": "Basic hand tools",
+            "description": "A hacksaw, files, sandpaper, a measuring tape — no power tools. Everything else is in the kit."
+          }
+        },
+        {
+          "type": "need",
+          "settings": {
+            "title": "A bit of space",
+            "description": "A sturdy table around 1200 × 600 mm and a spot the frame can sit undisturbed while joints cure."
+          }
+        },
+        {
+          "type": "need",
+          "settings": {
+            "title": "A few weekends",
+            "description": "25–35 hours across multiple sessions. No rush — bamboo is forgiving and most mistakes are fixable."
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Build time",
+            "value": "25–35 hrs"
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Construction",
+            "value": "Flax & carbon, by hand"
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Strength",
+            "value": "High strength-to-weight"
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Usage",
+            "value": "Gravel · touring · bikepacking"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Set the geometry",
+            "description": "Lock gravel geometry on the jig — wider clearance and a slacker head angle than road."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Join & wrap",
+            "description": "Bond the tubes with epoxy and wrap each joint with carbon-fibre tow."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Cure",
+            "description": "Leave it for a full cure — that's where maximum joint strength comes from."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Sand, seal & ride",
+            "description": "Sand smooth, seal the bamboo, fit headset and BB. Adventure awaits."
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "quote": "Woody made the full 8,288 miles with virtually no mechanical issues at all. All bikes are like magicians — but a bamboo bike multiplies that a hundredfold.",
+            "cite": "— Kate Rawles, author of 'The Life Cycle' (Icon Books)"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "quote": "Reading the stories assured me that building a bamboo gravel bike is definitely possible. Now my hands are itching to build a second.",
+            "cite": "— Tim, gravel kit build, Netherlands"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "<1%",
+            "label": "failure rate across builds",
+            "source": "4,000+ builders since 2012"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "Swansea",
+            "label": "University tested",
+            "source": "independent testing"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "8–12 yrs",
+            "label": "frame life with care",
+            "source": "2012 builds still ridden"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "~2×/wk",
+            "label": "shipped from London",
+            "source": "full tracking"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need power tools?",
+            "answer": "No. Just basic hand tools — a hacksaw, files, sandpaper, a measuring tape and a work surface (a table around 1200 × 600 mm). Everything else is in the kit."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What if I make a mistake?",
+            "answer": "Most mistakes are fixable. Epoxy can be sanded back and re-applied, and bamboo is forgiving. If you're stuck, our community has seen every problem — someone will have the answer within hours."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How strong is it really?",
+            "answer": "Very strong for its weight. Bamboo is a light, hollow natural composite and every joint is reinforced with carbon-fibre, giving a high strength-to-weight ratio. Our bamboo is independently tested at Swansea University. Builders ride these frames daily and tour continents — with proper care they last for years."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Is it weatherproof?",
+            "answer": "Yes. Finished frames are sealed with epoxy resin. Dry your bike after wet rides and store it indoors, and it'll last 8–12 years with proper care."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Not sure which size?",
+            "answer": "Send us your height and inside-leg measurement and we'll recommend the perfect fit — or choose a Custom frame, made to your measurements."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Can I use Cycle to Work?",
+            "answer": "Yes — build your bamboo bike through the government's Cycle to Work scheme and save hundreds through salary sacrifice."
+          }
+        },
+        {
+          "type": "related",
+          "settings": {
+            "title": "Road Lugged Kit",
+            "price": "",
+            "fallback": "bbc-rd-prod-flax.jpg"
+          }
+        },
+        {
+          "type": "related",
+          "settings": {
+            "title": "MTB Frame Kit",
+            "price": "",
+            "fallback": "bbc-rd-prod-build.jpg"
+          }
+        },
+        {
+          "type": "related",
+          "settings": {
+            "title": "Balance Bike Kit",
+            "price": "From £165",
+            "fallback": "bbc-rd-prod-balance.jpg"
+          }
+        },
+        {
+          "type": "related",
+          "settings": {
+            "title": "Custom Frame Kit",
+            "price": "Request a quote",
+            "fallback": "bbc-rd-road-charlie.jpg"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

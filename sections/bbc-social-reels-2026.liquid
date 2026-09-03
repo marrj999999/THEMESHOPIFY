@@ -1,0 +1,150 @@
+{%- comment -%}
+  Bamboo Bicycle Club — Social reels band (2026 credibility layer).
+  Three vertical reels, native <video> loops (muted, playsinline, lazy).
+  Autoplays only when prefers-reduced-motion is NOT set; otherwise shows
+  first frame with a tap-to-play control. Styling piggybacks bbc-redesign-2026.css tokens.
+{%- endcomment -%}
+
+<div class="bbc-rd rd-dark">
+  <section class="rd-pad-sm">
+    <div class="rd-wrap">
+      <span class="rd-eyebrow rd-on-dark">{{ section.settings.eyebrow | default: 'From our Instagram' }}</span>
+      <div class="rd-flex rd-between rd-gap-24 rd-reels-head">
+        <h2 class="rd-reveal rd-m-0">{{ section.settings.heading | default: 'real builds, this month.' }}</h2>
+        {%- if section.settings.ig_url != blank -%}
+          <a class="rd-btn rd-on-dark rd-btn-sm" href="{{ section.settings.ig_url }}" rel="noopener" target="_blank">{{ section.settings.cta_label | default: 'Follow the builds' }}</a>
+        {%- endif -%}
+      </div>
+      <div class="rd-reels-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.video_file != blank -%}
+            <figure class="rd-reel" {{ block.shopify_attributes }}>
+              <video class="rd-reel-video" muted loop playsinline preload="metadata"
+                     src="{{ block.settings.video_file | asset_url }}"
+                     aria-label="{{ block.settings.caption | escape }}"></video>
+              <figcaption class="rd-reel-cap">
+                {%- if block.settings.tag != blank -%}<span class="rd-tag rd-lime">{{ block.settings.tag }}</span>{%- endif -%}
+                <p>{{ block.settings.caption }}</p>
+              </figcaption>
+            </figure>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% stylesheet %}
+  .bbc-rd .rd-reels-head{ align-items:center; margin-bottom:28px; flex-wrap:wrap; }
+  .bbc-rd .rd-reels-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+  .bbc-rd .rd-reel{ margin:0; border:2.5px solid var(--forest-700); border-radius:14px; overflow:hidden; background:#00201a; box-shadow:4px 4px 0 var(--forest-700); }
+  .bbc-rd .rd-reel-video{ display:block; width:100%; aspect-ratio:9/16; object-fit:cover; }
+  .bbc-rd .rd-reel-cap{ padding:14px 16px 18px; }
+  .bbc-rd .rd-reel-cap p{ margin:8px 0 0; font-size:14.5px; line-height:1.45; color:#cfd8d2; }
+  @media (max-width:900px){ .bbc-rd .rd-reels-grid{ grid-template-columns:1fr; max-width:420px; margin:0 auto; } }
+{% endstylesheet %}
+
+<script>
+  (function () {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var vids = document.currentScript.previousElementSibling
+      ? document.querySelectorAll('.rd-reel-video') : [];
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var v = e.target;
+        if (e.isIntersecting) { v.play().catch(function(){}); } else { v.pause(); }
+      });
+    }, { threshold: 0.35 });
+    document.querySelectorAll('.rd-reel-video').forEach(function (v) { io.observe(v); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Social reels (2026)",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "From our Instagram"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "real builds, this month."
+    },
+    {
+      "type": "url",
+      "id": "ig_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Follow the builds"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "reel",
+      "name": "Reel",
+      "settings": [
+        {
+          "type": "text",
+          "id": "video_file",
+          "label": "Video asset filename",
+          "info": "An .mp4 uploaded to theme assets, e.g. bbc-reel-kate-rawles.mp4"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "default": "Real build"
+        },
+        {
+          "type": "textarea",
+          "id": "caption",
+          "label": "Caption"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Social reels (2026)",
+      "blocks": [
+        {
+          "type": "reel",
+          "settings": {
+            "video_file": "bbc-reel-kate-rawles.mp4",
+            "tag": "8,000 miles · Patagonia",
+            "caption": "Kate Rawles rode a bike she built at our bench 8,000 miles from Colombia to Patagonia — with virtually no mechanicals."
+          }
+        },
+        {
+          "type": "reel",
+          "settings": {
+            "video_file": "bbc-reel-alessandro.mp4",
+            "tag": "Maker Monday",
+            "caption": "Alessandro's home build, sprayed and finished — one of 4,000+ builders since 2012."
+          }
+        },
+        {
+          "type": "reel",
+          "settings": {
+            "video_file": "bbc-reel-grown-not-made.mp4",
+            "tag": "Grown, not made",
+            "caption": "From a grass to a frame: why bamboo works, in ten seconds."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

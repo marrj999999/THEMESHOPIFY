@@ -1,0 +1,143 @@
+{% comment %}
+  BBC Build Gallery - Customer submitted bike photos
+{% endcomment %}
+
+<div class="bbc-build-gallery section-{{ section.id }}" style="background: {{ section.settings.background_color }}; padding: 4rem 2rem;">
+  <div class="page-width">
+    <div class="bbc-build-gallery__header" style="text-align: center; margin-bottom: 2rem;">
+      <h2 style="font-family: var(--font-heading-family); color: #1A1A1A; margin-bottom: 0.5rem;">
+        {{ section.settings.title | default: "Community Builds" }}
+      </h2>
+      <p style="color: var(--bbc-gray-500); max-width: 600px; margin: 0 auto;">
+        {{ section.settings.subtitle | default: "4,000+ bikes built by our community across 45 countries. Here are some of our favourites." }}
+      </p>
+    </div>
+    
+    <div class="bbc-build-gallery__grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;">
+      {% for block in section.blocks %}
+        <div class="bbc-build-gallery__item" style="position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 4/3; cursor: pointer;" 
+          onclick="this.querySelector('.bbc-build-gallery__overlay').style.opacity = this.querySelector('.bbc-build-gallery__overlay').style.opacity === '1' ? '0' : '1'">
+          {% if block.settings.image != blank %}
+            <img src="{{ block.settings.image | image_url: width: 600 }}" 
+              alt="{{ block.settings.builder_name }}'s build" 
+              width="600"
+              height="{{ 600 | divided_by: block.settings.image.aspect_ratio | round }}"
+              style="width: 100%; height: 100%; object-fit: cover;"
+              loading="lazy">
+          {% else %}
+            <div style="width: 100%; height: 100%; background: var(--bbc-gray-200); display: flex; align-items: center; justify-content: center; color: var(--bbc-gray-400);">
+              No image
+            </div>
+          {% endif %}
+          <div class="bbc-build-gallery__overlay" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: opacity 0.3s; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;">
+            <div style="color: white; font-weight: bold;">{{ block.settings.builder_name }}</div>
+            <div style="color: rgba(255,255,255,0.8); font-size: 0.875rem;">{{ block.settings.bike_type }} · {{ block.settings.location }}</div>
+            {% if block.settings.quote != blank %}
+              <div style="color: rgba(255,255,255,0.9); font-style: italic; margin-top: 0.5rem; font-size: 0.875rem;">"{{ block.settings.quote }}"</div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    
+    <div style="text-align: center; margin-top: 2rem;">
+      <p style="color: var(--bbc-gray-500); margin-bottom: 1rem;">Built your own bamboo bike? Share it with us!</p>
+      <a href="{{ section.settings.submit_url | default: '/pages/contact' }}" 
+        style="display: inline-block; background: #2D5A3D; color: white; padding: 0.75rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: 500;">
+        Submit Your Build
+      </a>
+      {% if section.settings.instagram_handle != blank %}
+        <a href="https://instagram.com/{{ section.settings.instagram_handle }}" target="_blank"
+          style="display: inline-block; background: transparent; color: #2D5A3D; padding: 0.75rem 1.5rem; border: 2px solid #2D5A3D; border-radius: 4px; text-decoration: none; font-weight: 500; margin-left: 0.5rem;">
+          Follow @{{ section.settings.instagram_handle }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .bbc-build-gallery__item:hover .bbc-build-gallery__overlay {
+    opacity: 1 !important;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Build Gallery",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Community Builds"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "4,000+ bikes built by our community across 45 countries"
+    },
+    {
+      "type": "url",
+      "id": "submit_url",
+      "label": "Submit Build URL"
+    },
+    {
+      "type": "text",
+      "id": "instagram_handle",
+      "label": "Instagram Handle",
+      "default": "bamboobicycleclub"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "build",
+      "name": "Build Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "builder_name",
+          "label": "Builder Name",
+          "default": "John D."
+        },
+        {
+          "type": "text",
+          "id": "bike_type",
+          "label": "Bike Type",
+          "default": "Road Bike"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "London, UK"
+        },
+        {
+          "type": "text",
+          "id": "quote",
+          "label": "Quote (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Build Gallery"
+    }
+  ]
+}
+{% endschema %}

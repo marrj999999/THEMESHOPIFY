@@ -1,0 +1,72 @@
+{%- comment -%}
+  Bamboo Bicycle Club — Search results (2026 redesign).
+  Renders {{ search.results }} (products, articles, pages) in stamp cards.
+  Styling in assets/bbc-redesign-2026.css.
+{%- endcomment -%}
+
+<div class="bbc-rd bbc-rd-search-page">
+  <section class="rd-pad-sm rd-paper">
+    <div class="rd-wrap rd-coll-head">
+      <span class="rd-eyebrow">Search</span>
+      <h1>{% if search.performed and search.terms != blank %}Results for &ldquo;{{ search.terms | escape }}&rdquo;{% else %}Search{% endif %}</h1>
+      <form class="rd-search rd-search-center rd-cmp-79852" action="{{ routes.search_url }}" method="get" role="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search kits, workshops, news…" aria-label="Search the site">
+      </form>
+    </div>
+  </section>
+
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      {%- if search.performed -%}
+        {%- paginate search.results by 12 -%}
+          <div class="rd-coll-bar"><span class="rd-coll-count">{{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %}</span></div>
+          <div class="rd-grid rd-g3">
+            {%- for item in search.results -%}
+              {%- assign img = item.featured_image | default: item.image -%}
+              <a class="rd-reveal rd-card rd-stamp" href="{{ item.url }}">
+                <div class="rd-ph">
+                  {%- if img -%}
+                    <img src="{{ img | image_url: width: 800 }}" alt="{{ item.title | escape }}" width="{{ img.width }}" height="{{ img.height }}" loading="lazy">
+                  {%- else -%}
+                    <img src="{{ 'bbc-rd-detail.jpg' | asset_url }}" alt="{{ item.title | escape }}" width="1200" height="800" loading="lazy">
+                  {%- endif -%}
+                  <span class="rd-tag rd-lime rd-cardtag">{{ item.object_type }}</span>
+                </div>
+                <div class="rd-body">
+                  <h2 class="rd-reveal rd-fs-18px">{{ item.title }}</h2>
+                  {%- if item.object_type == 'product' -%}
+                    <div class="rd-price">{% if item.price_varies %}From {% endif %}{{ item.price | money_without_trailing_zeros }}</div>
+                  {%- else -%}
+                    <p class="rd-excerpt">{{ item.content | strip_html | truncatewords: 18 }}</p>
+                  {%- endif -%}
+                </div>
+              </a>
+            {%- else -%}
+              <p class="rd-lede">No results. Try &ldquo;gravel&rdquo;, &ldquo;workshop&rdquo; or &ldquo;impact&rdquo;.</p>
+            {%- endfor -%}
+          </div>
+          {%- if paginate.pages > 1 -%}
+            <nav class="rd-pagination" aria-label="Pagination">
+              {%- for part in paginate.parts -%}
+                {%- if part.is_link -%}<a href="{{ part.url }}" aria-label="Page {{ part.title }}">{{ part.title }}</a>
+                {%- else -%}<span{% if part.title == paginate.current_page %} class="rd-cur" aria-current="page"{% endif %}>{{ part.title }}</span>{%- endif -%}
+              {%- endfor -%}
+            </nav>
+          {%- endif -%}
+        {%- endpaginate -%}
+      {%- else -%}
+        <p class="rd-lede">Type above to search kits, workshops, pages and news.</p>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Search 2026 (new)",
+  "tag": "div",
+  "settings": [],
+  "presets": [ { "name": "Search 2026 (new)" } ]
+}
+{% endschema %}

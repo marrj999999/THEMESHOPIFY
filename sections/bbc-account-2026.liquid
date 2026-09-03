@@ -1,0 +1,782 @@
+{%- comment -%}
+  Bamboo Bicycle Club — Customer account (2026 redesign).
+  ONE section powering every Shopify customer template. Branches on the
+  {{ template }} object and renders the matching Shopify customer form /
+  content in the .bbc-rd stamp-card style. Styling lives in
+  assets/bbc-redesign-2026.css — reuse only existing rd-* classes.
+
+  Templates handled: customers/login · register · account · order ·
+  addresses · reset_password · activate_account. Each degrades gracefully
+  if its objects are empty.
+{%- endcomment -%}
+
+<div class="bbc-rd bbc-rd-account">
+
+  {%- comment -%}
+    Build the FULL template path, e.g. "customers/login" (fixed 2026-07-27).
+
+    This was `template.name`, which for a template inside a directory returns only the leaf —
+    "login", not "customers/login". Every branch below compares against "customers/…", so every
+    comparison failed and the section fell through to the FALLBACK stub: an <h1>your account</h1>
+    and a "Go to your account" link pointing at /account, which 302s straight back to
+    /account/login. A logged-out customer therefore hit an inescapable loop with no email or
+    password field anywhere — no sign-in, no registration, no order history, no addresses.
+    Confirmed on the LIVE theme as well as the draft.
+
+    Written to work whichever shape Liquid returns: if a directory is present we join it to the
+    name; if `tpl` already contains a slash we leave it alone.
+  {%- endcomment -%}
+  {%- assign tpl = template.name -%}
+  {%- unless tpl contains '/' -%}
+    {%- assign tpl_dir = template.directory -%}
+    {%- if tpl_dir != blank -%}{%- assign tpl = tpl_dir | append: '/' | append: tpl -%}{%- endif -%}
+  {%- endunless -%}
+
+  {%- comment -%} ============ LOGIN ============ {%- endcomment -%}
+  {%- if tpl == 'customers/login' -%}
+    <section class="rd-pad-sm rd-paper">
+      <div class="rd-wrap rd-coll-head rd-mw-680px">
+        <span class="rd-eyebrow">{{ section.settings.login_eyebrow | default: 'Your account' }}</span>
+        <h1>{{ section.settings.login_heading | default: 'sign in' }}</h1>
+        {%- if section.settings.login_intro != blank -%}
+          <div class="rd-lede rd-mt2 rd-mw-60ch">{{ section.settings.login_intro }}</div>
+        {%- endif -%}
+      </div>
+    </section>
+
+    <section class="rd-pad">
+      <div class="rd-wrap rd-mw-680px rd-mx-auto">
+
+        {%- form 'customer_login', novalidate: 'novalidate' -%}
+          {%- if form.errors -%}
+            <div class="rd-form-note rd-err" role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          <div class="rd-form rd-mx-auto">
+            <div>
+              <label for="rd-acc-email">Email</label>
+              <input type="email" id="rd-acc-email" name="customer[email]" value="{{ form.email }}" autocomplete="email" autocapitalize="off" autocorrect="off" required>
+            </div>
+            {%- if form.password_needed -%}
+              <div>
+                <label for="rd-acc-pass">Password</label>
+                <input type="password" id="rd-acc-pass" name="customer[password]" autocomplete="current-password" required>
+              </div>
+            {%- endif -%}
+            <div>
+              <button type="submit" class="rd-btn rd-lime rd-btn-block">{{ section.settings.login_submit | default: 'Sign in' }}</button>
+            </div>
+            <p class="rd-cmp-67002">
+              <a class="rd-btn rd-text" href="#rd-recover">{{ section.settings.tx_acc_1 | default: "Forgotten your password?" }}</a>
+              <span class="rd-sep" aria-hidden="true"> · </span>
+              <a class="rd-btn rd-text" href="{{ routes.account_register_url }}">{{ section.settings.tx_acc_2 | default: "Create an account" }}</a>
+            </p>
+          </div>
+        {%- endform -%}
+
+        <div id="rd-recover" class="rd-mt4">
+          <h2 class="rd-reveal rd-fs-21px rd-mb-8px">{{ section.settings.tx_acc_3 | default: "reset your password" }}</h2>
+          <p class="rd-lede rd-mb-24px rd-mw-60ch">Enter your email and we will send you a link to set a new password.</p>
+          {%- form 'recover_customer_password' -%}
+            {%- if form.posted_successfully? -%}
+              <div class="rd-form-note rd-ok" role="status">We have sent you an email with a link to reset your password.</div>
+            {%- endif -%}
+            {%- if form.errors -%}
+              <div class="rd-form-note rd-err" role="alert">{{ form.errors | default_errors }}</div>
+            {%- endif -%}
+            <div class="rd-form rd-mx-auto">
+              <div>
+                <label for="rd-recover-email">Email</label>
+                <input type="email" id="rd-recover-email" name="email" autocomplete="email" autocapitalize="off" autocorrect="off" required>
+              </div>
+              <div>
+                <button type="submit" class="rd-btn rd-ghost rd-btn-block">{{ section.settings.tx_acc_5 | default: "Send reset link" }}</button>
+              </div>
+            </div>
+          {%- endform -%}
+        </div>
+
+      </div>
+    </section>
+
+  {%- comment -%} ============ REGISTER ============ {%- endcomment -%}
+  {%- elsif tpl == 'customers/register' -%}
+    <section class="rd-pad-sm rd-paper">
+      <div class="rd-wrap rd-coll-head rd-mw-680px">
+        <span class="rd-eyebrow">{{ section.settings.register_eyebrow | default: 'Join us' }}</span>
+        <h1>{{ section.settings.register_heading | default: 'create an account' }}</h1>
+        {%- if section.settings.register_intro != blank -%}
+          <div class="rd-lede rd-mt2 rd-mw-60ch">{{ section.settings.register_intro }}</div>
+        {%- endif -%}
+      </div>
+    </section>
+
+    <section class="rd-pad">
+      <div class="rd-wrap rd-mw-680px rd-mx-auto">
+        {%- form 'create_customer' -%}
+          {%- if form.errors -%}
+            <div class="rd-form-note rd-err" role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          <div class="rd-form rd-mx-auto">
+            <div>
+              <label for="rd-reg-first">First name</label>
+              <input type="text" id="rd-reg-first" name="customer[first_name]" value="{{ form.first_name }}" autocomplete="given-name">
+            </div>
+            <div>
+              <label for="rd-reg-last">Last name</label>
+              <input type="text" id="rd-reg-last" name="customer[last_name]" value="{{ form.last_name }}" autocomplete="family-name">
+            </div>
+            <div>
+              <label for="rd-reg-email">Email</label>
+              <input type="email" id="rd-reg-email" name="customer[email]" value="{{ form.email }}" autocomplete="email" autocapitalize="off" autocorrect="off" required>
+            </div>
+            <div>
+              <label for="rd-reg-pass">Password</label>
+              <input type="password" id="rd-reg-pass" name="customer[password]" autocomplete="new-password" required>
+            </div>
+            <div>
+              <button type="submit" class="rd-btn rd-lime rd-btn-block">{{ section.settings.register_submit | default: 'Create account' }}</button>
+            </div>
+            <p class="rd-cmp-67002">
+              Already have an account?
+              <a class="rd-btn rd-text" href="{{ routes.account_login_url }}">Sign in</a>
+            </p>
+          </div>
+        {%- endform -%}
+      </div>
+    </section>
+
+  {%- comment -%} ============ ACCOUNT (dashboard) ============ {%- endcomment -%}
+  {%- elsif tpl == 'customers/account' -%}
+    <section class="rd-pad-sm rd-paper">
+      <div class="rd-wrap rd-coll-head">
+        <span class="rd-eyebrow">{{ section.settings.account_eyebrow | default: 'Your account' }}</span>
+        <h1>
+          {%- if customer.first_name != blank -%}
+            Hello, {{ customer.first_name }}
+          {%- else -%}
+            Your account
+          {%- endif -%}
+        </h1>
+        <div class="rd-flex rd-mt3">
+          <a class="rd-btn rd-ghost" href="{{ routes.account_addresses_url }}">Manage addresses</a>
+          <a class="rd-btn rd-text" href="{{ routes.account_logout_url }}">Log out</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="rd-pad">
+      <div class="rd-wrap">
+        <h2 class="rd-reveal rd-fs-21px rd-mb-24px">order history</h2>
+        {%- if customer.orders.size > 0 -%}
+          {%- paginate customer.orders by 20 -%}
+            <table class="rd-acc-table">
+              <caption class="rd-sr-only">Order history</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Order</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Payment</th>
+                  <th scope="col">Fulfilment</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for order in customer.orders -%}
+                  <tr>
+                    <td data-label="Order"><a class="rd-acc-link" href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                    <td data-label="Date">{{ order.created_at | date: '%-d %b %Y' }}</td>
+                    <td data-label="Payment">{{ order.financial_status_label }}</td>
+                    <td data-label="Fulfilment">{{ order.fulfillment_status_label }}</td>
+                    <td data-label="Total">{{ order.total_net_amount | money }}</td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+
+            {%- if paginate.pages > 1 -%}
+              <nav class="rd-pagination" aria-label="Order pages">
+                {%- for part in paginate.parts -%}
+                  {%- if part.is_link -%}
+                    <a href="{{ part.url }}" aria-label="Page {{ part.title }}">{{ part.title }}</a>
+                  {%- else -%}
+                    <span{% if part.title == paginate.current_page %} class="rd-cur" aria-current="page"{% endif %}>{{ part.title }}</span>
+                  {%- endif -%}
+                {%- endfor -%}
+              </nav>
+            {%- endif -%}
+          {%- endpaginate -%}
+        {%- else -%}
+          <p class="rd-lede rd-mw-60ch">You have not placed any orders yet.</p>
+          <a class="rd-btn rd-lime rd-mt3" href="{{ routes.all_products_collection_url }}">Browse the shop</a>
+        {%- endif -%}
+      </div>
+    </section>
+
+  {%- comment -%} ============ ORDER ============ {%- endcomment -%}
+  {%- elsif tpl == 'customers/order' -%}
+    <section class="rd-pad-sm rd-paper">
+      <div class="rd-wrap rd-coll-head">
+        <span class="rd-eyebrow">{{ section.settings.tx_acc_10 | default: "Your account" }}</span>
+        {%- if order -%}
+          <h1>Order {{ order.name }}</h1>
+          <p class="rd-lede rd-mt2">Placed {{ order.created_at | date: '%-d %B %Y' }}</p>
+          {%- if order.cancelled -%}
+            <div class="rd-form-note rd-err rd-mt2" role="status">This order was cancelled on {{ order.cancelled_at | date: '%-d %B %Y' }}.{% if order.cancel_reason %} Reason: {{ order.cancel_reason_label }}.{% endif %}</div>
+          {%- endif -%}
+        {%- else -%}
+          <h1>order</h1>
+        {%- endif -%}
+        <p class="rd-mt3"><a class="rd-btn rd-text" href="{{ routes.account_url }}">&larr; Back to your account</a></p>
+      </div>
+    </section>
+
+    {%- if order -%}
+      <section class="rd-pad">
+        <div class="rd-wrap">
+
+          <table class="rd-acc-table">
+            <caption class="rd-sr-only">Order {{ order.name }} line items</caption>
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for line_item in order.line_items -%}
+                <tr>
+                  <td data-label="Item">
+                    {%- if line_item.url != blank -%}
+                      <a class="rd-acc-link" href="{{ line_item.url }}">{{ line_item.title }}</a>
+                    {%- else -%}
+                      {{ line_item.title }}
+                    {%- endif -%}
+                    {%- if line_item.fulfillment.tracking_number != blank -%}
+                      <span class="rd-acc-sub">Tracking: {{ line_item.fulfillment.tracking_number }}</span>
+                    {%- endif -%}
+                  </td>
+                  <td data-label="Price">{{ line_item.original_price | money }}</td>
+                  <td data-label="Quantity">{{ line_item.quantity }}</td>
+                  <td data-label="Total">{{ line_item.original_line_price | money }}</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th scope="row" colspan="3">Subtotal</th>
+                <td data-label="Subtotal">{{ order.line_items_subtotal_price | money }}</td>
+              </tr>
+              {%- for discount_application in order.discount_applications -%}
+                <tr>
+                  <th scope="row" colspan="3">Discount{% if discount_application.title != blank %} ({{ discount_application.title }}){% endif %}</th>
+                  <td data-label="Discount">&minus;{{ discount_application.total_allocated_amount | money }}</td>
+                </tr>
+              {%- endfor -%}
+              {%- for shipping_method in order.shipping_methods -%}
+                <tr>
+                  <th scope="row" colspan="3">Shipping ({{ shipping_method.title }})</th>
+                  <td data-label="Shipping">{{ shipping_method.price | money }}</td>
+                </tr>
+              {%- endfor -%}
+              {%- for tax_line in order.tax_lines -%}
+                <tr>
+                  <th scope="row" colspan="3">Tax ({{ tax_line.title }} {{ tax_line.rate_percentage }}%)</th>
+                  <td data-label="Tax">{{ tax_line.price | money }}</td>
+                </tr>
+              {%- endfor -%}
+              <tr class="rd-acc-total-row">
+                <th scope="row" colspan="3">Total</th>
+                <td data-label="Total">{{ order.total_net_amount | money }} {{ order.currency }}</td>
+              </tr>
+            </tfoot>
+          </table>
+
+          <div class="rd-grid rd-g2 rd-mt4">
+            <div class="rd-reveal rd-card rd-stamp">
+              <div class="rd-body">
+                <h2 class="rd-reveal rd-fs-18px rd-mb-8px">{{ section.settings.tx_acc_6 | default: "shipping address" }}</h2>
+                {%- if order.shipping_address -%}
+                  <div class="rd-acc-addr">{{ order.shipping_address | format_address }}</div>
+                {%- else -%}
+                  <p class="rd-c-charcoal">No shipping address on this order.</p>
+                {%- endif -%}
+              </div>
+            </div>
+            <div class="rd-reveal rd-card rd-stamp">
+              <div class="rd-body">
+                <h2 class="rd-reveal rd-fs-18px rd-mb-8px">billing address</h2>
+                {%- if order.billing_address -%}
+                  <div class="rd-acc-addr">{{ order.billing_address | format_address }}</div>
+                {%- else -%}
+                  <p class="rd-c-charcoal">No billing address on this order.</p>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    {%- else -%}
+      <section class="rd-pad"><div class="rd-wrap"><p class="rd-lede">This order could not be found.</p></div></section>
+    {%- endif -%}
+
+  {%- comment -%} ============ ADDRESSES ============ {%- endcomment -%}
+  {%- elsif tpl == 'customers/addresses' -%}
+    <section class="rd-pad-sm rd-paper">
+      <div class="rd-wrap rd-coll-head">
+        <span class="rd-eyebrow">{{ section.settings.tx_acc_10 | default: "Your account" }}</span>
+        <h1>your addresses</h1>
+        <p class="rd-mt3"><a class="rd-btn rd-text" href="{{ routes.account_url }}">&larr; Back to your account</a></p>
+      </div>
+    </section>
+
+    <section class="rd-pad">
+      <div class="rd-wrap rd-mw-860px rd-mx-auto">
+
+        {%- comment -%} Add a new address {%- endcomment -%}
+        <details class="rd-acc-details rd-mb-36px"{% if customer.addresses.size == 0 %} open{% endif %}>
+          <summary>Add a new address</summary>
+          <div class="rd-acc-details-body">
+            {%- form 'customer_address', customer.new_address -%}
+              {%- if form.errors -%}
+                <div class="rd-form-note rd-err" role="alert">{{ form.errors | default_errors }}</div>
+              {%- endif -%}
+              <div class="rd-form rd-mw-none">
+                <div>
+                  <label for="rd-addr-new-first">First name</label>
+                  <input type="text" id="rd-addr-new-first" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name">
+                </div>
+                <div>
+                  <label for="rd-addr-new-last">Last name</label>
+                  <input type="text" id="rd-addr-new-last" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name">
+                </div>
+                <div>
+                  <label for="rd-addr-new-company">Company (optional)</label>
+                  <input type="text" id="rd-addr-new-company" name="address[company]" value="{{ form.company }}" autocomplete="organization">
+                </div>
+                <div>
+                  <label for="rd-addr-new-a1">Address line 1</label>
+                  <input type="text" id="rd-addr-new-a1" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1">
+                </div>
+                <div>
+                  <label for="rd-addr-new-a2">Address line 2 (optional)</label>
+                  <input type="text" id="rd-addr-new-a2" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2">
+                </div>
+                <div>
+                  <label for="rd-addr-new-city">Town / City</label>
+                  <input type="text" id="rd-addr-new-city" name="address[city]" value="{{ form.city }}" autocomplete="address-level2">
+                </div>
+                <div>
+                  <label for="rd-addr-new-country">Country / Region</label>
+                  <select id="rd-addr-new-country" name="address[country]" autocomplete="country" data-default="{{ form.country }}">{{ all_country_option_tags }}</select>
+                </div>
+                <div>
+                  <label for="rd-addr-new-province">Province / County</label>
+                  <input type="text" id="rd-addr-new-province" name="address[province]" value="{{ form.province }}" autocomplete="address-level1">
+                </div>
+                <div>
+                  <label for="rd-addr-new-zip">Postcode</label>
+                  <input type="text" id="rd-addr-new-zip" name="address[zip]" value="{{ form.zip }}" autocomplete="postal-code" autocapitalize="characters">
+                </div>
+                <div>
+                  <label for="rd-addr-new-phone">Phone (optional)</label>
+                  <input type="tel" id="rd-addr-new-phone" name="address[phone]" value="{{ form.phone }}" autocomplete="tel">
+                </div>
+                <div>
+                  <label class="rd-acc-check" for="rd-addr-new-default">
+                    <input type="checkbox" id="rd-addr-new-default" name="address[default]" value="1">
+                    Set as default address
+                  </label>
+                </div>
+                <div>
+                  <button type="submit" class="rd-btn rd-lime">{{ section.settings.tx_acc_7 | default: "Add address" }}</button>
+                </div>
+              </div>
+            {%- endform -%}
+          </div>
+        </details>
+
+        {%- comment -%} Existing addresses {%- endcomment -%}
+        {%- if customer.addresses.size > 0 -%}
+          {%- paginate customer.addresses by 10 -%}
+            <div class="rd-grid rd-g2">
+              {%- for address in customer.addresses -%}
+                <div class="rd-reveal rd-card rd-stamp">
+                  <div class="rd-body">
+                    {%- if address == customer.default_address -%}<span class="rd-tag rd-lime">Default</span>{%- endif -%}
+                    <div class="rd-acc-addr rd-mt2">{{ address | format_address }}</div>
+
+                    <div class="rd-flex rd-mt3">
+                      <details class="rd-acc-details rd-acc-edit">
+                        <summary class="rd-btn rd-ghost rd-btn-sm">Edit</summary>
+                        <div class="rd-acc-details-body">
+                          {%- form 'customer_address', address -%}
+                            <div class="rd-form rd-mw-none">
+                              <div>
+                                <label for="rd-addr-{{ address.id }}-first">First name</label>
+                                <input type="text" id="rd-addr-{{ address.id }}-first" name="address[first_name]" value="{{ address.first_name }}" autocomplete="given-name">
+                              </div>
+                              <div>
+                                <label for="rd-addr-{{ address.id }}-last">Last name</label>
+                                <input type="text" id="rd-addr-{{ address.id }}-last" name="address[last_name]" value="{{ address.last_name }}" autocomplete="family-name">
+                              </div>
+                              <div>
+                                <label for="rd-addr-{{ address.id }}-company">Company (optional)</label>
+                                <input type="text" id="rd-addr-{{ address.id }}-company" name="address[company]" value="{{ address.company }}" autocomplete="organization">
+                              </div>
+                              <div>
+                                <label for="rd-addr-{{ address.id }}-a1">Address line 1</label>
+                                <input type="text" id="rd-addr-{{ address.id }}-a1" name="address[address1]" value="{{ address.address1 }}" autocomplete="address-line1">
+                              </div>
+                              <div>
+                                <label for="rd-addr-{{ address.id }}-a2">Address line 2 (optional)</label>
+                                <input type="text" id="rd-addr-{{ address.id }}-a2" name="address[address2]" value="{{ address.address2 }}" autocomplete="address-line2">
+                              </div>
+                              <div>
+                                <label for="rd-addr-{{ address.id }}-city">Town / City</label>
+                                <input type="text" id="rd-addr-{{ address.id }}-city" name="address[city]" value="{{ address.city }}" autocomplete="address-level2">
+                              </div>
+                              <div>
+                                <label for="rd-addr-{{ address.id }}-country">Country / Region</label>
+                                <select id="rd-addr-{{ address.id }}-country" name="address[country]" autocomplete="country" data-default="{{ address.country }}">{{ all_country_option_tags }}</select>
+                              </div>
+                              <div>
+                                <label for="rd-addr-{{ address.id }}-province">Province / County</label>
+                                <input type="text" id="rd-addr-{{ address.id }}-province" name="address[province]" value="{{ address.province }}" autocomplete="address-level1">
+                              </div>
+                              <div>
+                                <label for="rd-addr-{{ address.id }}-zip">Postcode</label>
+                                <input type="text" id="rd-addr-{{ address.id }}-zip" name="address[zip]" value="{{ address.zip }}" autocomplete="postal-code" autocapitalize="characters">
+                              </div>
+                              <div>
+                                <label for="rd-addr-{{ address.id }}-phone">Phone (optional)</label>
+                                <input type="tel" id="rd-addr-{{ address.id }}-phone" name="address[phone]" value="{{ address.phone }}" autocomplete="tel">
+                              </div>
+                              <div>
+                                <label class="rd-acc-check" for="rd-addr-{{ address.id }}-default">
+                                  <input type="checkbox" id="rd-addr-{{ address.id }}-default" name="address[default]" value="1"{% if address == customer.default_address %} checked{% endif %}>
+                                  Set as default address
+                                </label>
+                              </div>
+                              <div>
+                                <button type="submit" class="rd-btn rd-lime">{{ section.settings.tx_acc_8 | default: "Update address" }}</button>
+                              </div>
+                            </div>
+                          {%- endform -%}
+                        </div>
+                      </details>
+
+                      <form method="post" action="{{ address.url }}">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="rd-btn rd-text" onclick="return confirm('Are you sure you want to delete this address?');">Delete</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+
+            {%- if paginate.pages > 1 -%}
+              <nav class="rd-pagination" aria-label="Address pages">
+                {%- for part in paginate.parts -%}
+                  {%- if part.is_link -%}
+                    <a href="{{ part.url }}" aria-label="Page {{ part.title }}">{{ part.title }}</a>
+                  {%- else -%}
+                    <span{% if part.title == paginate.current_page %} class="rd-cur" aria-current="page"{% endif %}>{{ part.title }}</span>
+                  {%- endif -%}
+                {%- endfor -%}
+              </nav>
+            {%- endif -%}
+          {%- endpaginate -%}
+        {%- else -%}
+          <p class="rd-lede rd-mw-60ch">You have not saved any addresses yet.</p>
+        {%- endif -%}
+
+      </div>
+    </section>
+
+  {%- comment -%} ============ RESET PASSWORD ============ {%- endcomment -%}
+  {%- elsif tpl == 'customers/reset_password' -%}
+    <section class="rd-pad-sm rd-paper">
+      <div class="rd-wrap rd-coll-head rd-mw-680px">
+        <span class="rd-eyebrow">{{ section.settings.tx_acc_10 | default: "Your account" }}</span>
+        <h1>choose a new password</h1>
+        <div class="rd-lede rd-mt2 rd-mw-60ch">Enter a new password for your account below.</div>
+      </div>
+    </section>
+
+    <section class="rd-pad">
+      <div class="rd-wrap rd-mw-680px rd-mx-auto">
+        {%- form 'reset_customer_password' -%}
+          {%- if form.errors -%}
+            <div class="rd-form-note rd-err" role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          <div class="rd-form rd-mx-auto">
+            <div>
+              <label for="rd-reset-pass">New password</label>
+              <input type="password" id="rd-reset-pass" name="customer[password]" autocomplete="new-password" required>
+            </div>
+            <div>
+              <label for="rd-reset-confirm">Confirm password</label>
+              <input type="password" id="rd-reset-confirm" name="customer[password_confirmation]" autocomplete="new-password" required>
+            </div>
+            <div>
+              <button type="submit" class="rd-btn rd-lime rd-btn-block">{{ section.settings.tx_acc_9 | default: "Reset password" }}</button>
+            </div>
+          </div>
+        {%- endform -%}
+      </div>
+    </section>
+
+  {%- comment -%} ============ ACTIVATE ACCOUNT ============ {%- endcomment -%}
+  {%- elsif tpl == 'customers/activate_account' -%}
+    <section class="rd-pad-sm rd-paper">
+      <div class="rd-wrap rd-coll-head rd-mw-680px">
+        <span class="rd-eyebrow">{{ section.settings.tx_acc_10 | default: "Your account" }}</span>
+        <h1>{{ section.settings.tx_acc_11 | default: "activate your account" }}</h1>
+        <div class="rd-lede rd-mt2 rd-mw-60ch">Create a password to activate your account and finish setting up.</div>
+      </div>
+    </section>
+
+    <section class="rd-pad">
+      <div class="rd-wrap rd-mw-680px rd-mx-auto">
+        {%- form 'activate_customer_password' -%}
+          {%- if form.errors -%}
+            <div class="rd-form-note rd-err" role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          <div class="rd-form rd-mx-auto">
+            <div>
+              <label for="rd-act-pass">Password</label>
+              <input type="password" id="rd-act-pass" name="customer[password]" autocomplete="new-password" required>
+            </div>
+            <div>
+              <label for="rd-act-confirm">Confirm password</label>
+              <input type="password" id="rd-act-confirm" name="customer[password_confirmation]" autocomplete="new-password" required>
+            </div>
+            <div class="rd-flex">
+              <button type="submit" name="commit" class="rd-btn rd-lime">{{ section.settings.tx_acc_12 | default: "Activate account" }}</button>
+              <button type="submit" name="decline" class="rd-btn rd-ghost">{{ section.settings.tx_acc_13 | default: "Decline invitation" }}</button>
+            </div>
+          </div>
+        {%- endform -%}
+      </div>
+    </section>
+
+  {%- comment -%} ============ FALLBACK ============ {%- endcomment -%}
+  {%- else -%}
+    <section class="rd-pad-sm rd-paper">
+      <div class="rd-wrap rd-coll-head">
+        <span class="rd-eyebrow">{{ section.settings.tx_acc_10 | default: "Your account" }}</span>
+        <h1>your account</h1>
+        <p class="rd-mt3"><a class="rd-btn rd-lime" href="{{ routes.account_url }}">Go to your account</a></p>
+      </div>
+    </section>
+  {%- endif -%}
+
+</div>
+
+{%- comment -%}
+  Minimal scoped styles for elements that have no existing rd-* class
+  (account/order tables, the format_address block, disclosure shells).
+  These are namespaced under .bbc-rd-account so nothing else is touched,
+  and they lean on the existing --bbc design tokens.
+{%- endcomment -%}
+{%- style -%}
+  .bbc-rd .rd-sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  .bbc-rd-account .rd-acc-table{ width:100%; border-collapse:collapse; border:2.5px solid var(--ink); border-radius:10px; overflow:hidden; background:var(--bone); }
+  .bbc-rd-account .rd-acc-table caption{ text-align:left; }
+  .bbc-rd-account .rd-acc-table th,
+  .bbc-rd-account .rd-acc-table td{ padding:14px 16px; text-align:left; font-size:16px; border-bottom:1.5px solid var(--mist); vertical-align:top; }
+  .bbc-rd-account .rd-acc-table thead th{ background:#073e27; color:#fff; font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:.04em; border-bottom:none; }
+  .bbc-rd-account .rd-acc-table tbody tr:nth-child(even){ background:var(--paper); }
+  .bbc-rd-account .rd-acc-table tbody tr:last-child td{ border-bottom:none; }
+  .bbc-rd-account .rd-acc-table tfoot th,
+  .bbc-rd-account .rd-acc-table tfoot td{ font-weight:700; background:var(--paper); }
+  .bbc-rd-account .rd-acc-table tfoot .rd-acc-total-row th,
+  .bbc-rd-account .rd-acc-table tfoot .rd-acc-total-row td{ font-size:18px; color:var(--forest); background:var(--bone); border-top:2px solid var(--ink); }
+  .bbc-rd-account .rd-acc-link{ color:var(--forest); font-weight:700; text-decoration:underline; text-decoration-color:var(--lime-700); text-underline-offset:3px; }
+  .bbc-rd-account .rd-acc-link:hover{ text-decoration-color:var(--forest); }
+  .bbc-rd-account .rd-acc-sub{ display:block; font-size:14px; color:var(--subtle); margin-top:4px; }
+  .bbc-rd-account .rd-acc-addr{ font-size:16px; color:var(--charcoal); line-height:1.6; }
+  .bbc-rd-account .rd-acc-check{ display:inline-flex; align-items:center; gap:10px; font-weight:600; color:var(--charcoal); margin:0; }
+  .bbc-rd-account .rd-acc-check input{ width:auto; accent-color:var(--forest); }
+  .bbc-rd-account .rd-acc-details{ border:2px solid var(--ink); border-radius:8px; background:var(--bone); overflow:hidden; }
+  .bbc-rd-account .rd-acc-details > summary{ cursor:pointer; list-style:none; padding:14px 18px; font-weight:800; font-size:16px; color:var(--forest); }
+  .bbc-rd-account .rd-acc-details > summary::-webkit-details-marker{ display:none; }
+  .bbc-rd-account .rd-acc-details-body{ padding:18px; border-top:1.5px solid var(--mist); }
+  .bbc-rd-account .rd-acc-edit{ border:none; border-radius:0; background:transparent; overflow:visible; }
+  .bbc-rd-account .rd-acc-edit > summary{ padding:0; }
+  .bbc-rd-account .rd-acc-edit > summary::-webkit-details-marker{ display:none; }
+  .bbc-rd-account .rd-acc-edit > .rd-acc-details-body{ border-top:none; padding:18px 0 0; }
+  .bbc-rd-account form{ margin:0; }
+  @media(max-width:620px){
+    .bbc-rd-account .rd-acc-table,
+    .bbc-rd-account .rd-acc-table thead,
+    .bbc-rd-account .rd-acc-table tbody,
+    .bbc-rd-account .rd-acc-table tfoot,
+    .bbc-rd-account .rd-acc-table tr,
+    .bbc-rd-account .rd-acc-table th,
+    .bbc-rd-account .rd-acc-table td{ display:block; }
+    .bbc-rd-account .rd-acc-table thead{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+    .bbc-rd-account .rd-acc-table tr{ border-bottom:2px solid var(--ink); padding:6px 0; }
+    .bbc-rd-account .rd-acc-table tbody tr:last-child{ border-bottom:none; }
+    .bbc-rd-account .rd-acc-table td{ border-bottom:none; padding:8px 16px; display:flex; justify-content:space-between; gap:16px; }
+    .bbc-rd-account .rd-acc-table td::before{ content:attr(data-label); font-weight:700; color:var(--subtle); }
+    .bbc-rd-account .rd-acc-table tfoot th{ padding:8px 16px; }
+    .bbc-rd-account .rd-acc-table tfoot td{ display:flex; justify-content:space-between; }
+    .bbc-rd-account .rd-acc-table tfoot td::before{ content:attr(data-label); font-weight:700; color:var(--subtle); }
+  }
+{%- endstyle -%}
+
+{% schema %}
+{
+  "name": "Account 2026 (new)",
+  "tag": "section",
+  "class": "bbc-rd-account-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Sign in"
+    },
+    {
+      "type": "text",
+      "id": "login_eyebrow",
+      "label": "Login eyebrow",
+      "default": "Your account"
+    },
+    {
+      "type": "text",
+      "id": "login_heading",
+      "label": "Login heading",
+      "default": "sign in"
+    },
+    {
+      "type": "textarea",
+      "id": "login_intro",
+      "label": "Login intro"
+    },
+    {
+      "type": "text",
+      "id": "login_submit",
+      "label": "Login button label",
+      "default": "Sign in"
+    },
+    {
+      "type": "header",
+      "content": "Register"
+    },
+    {
+      "type": "text",
+      "id": "register_eyebrow",
+      "label": "Register eyebrow",
+      "default": "Join us"
+    },
+    {
+      "type": "text",
+      "id": "register_heading",
+      "label": "Register heading",
+      "default": "create an account"
+    },
+    {
+      "type": "textarea",
+      "id": "register_intro",
+      "label": "Register intro"
+    },
+    {
+      "type": "text",
+      "id": "register_submit",
+      "label": "Register button label",
+      "default": "Create account"
+    },
+    {
+      "type": "header",
+      "content": "Account"
+    },
+    {
+      "type": "text",
+      "id": "account_eyebrow",
+      "label": "Account eyebrow",
+      "default": "Your account"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_1",
+      "label": "Forgotten your password?",
+      "default": "Forgotten your password?"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_2",
+      "label": "Create an account",
+      "default": "Create an account"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_3",
+      "label": "reset your password",
+      "default": "reset your password"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_5",
+      "label": "Send reset link",
+      "default": "Send reset link"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_6",
+      "label": "shipping address",
+      "default": "shipping address"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_7",
+      "label": "Add address",
+      "default": "Add address"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_8",
+      "label": "Update address",
+      "default": "Update address"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_9",
+      "label": "Reset password",
+      "default": "Reset password"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_10",
+      "label": "Your account",
+      "default": "Your account"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_11",
+      "label": "activate your account",
+      "default": "activate your account"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_12",
+      "label": "Activate account",
+      "default": "Activate account"
+    },
+    {
+      "type": "text",
+      "id": "tx_acc_13",
+      "label": "Decline invitation",
+      "default": "Decline invitation"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Account 2026 (new)"
+    }
+  ]
+}
+{% endschema %}

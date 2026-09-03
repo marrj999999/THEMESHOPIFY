@@ -1,0 +1,2215 @@
+{%- comment -%}
+  BBC New Design (2026) — homepage, single self-contained section.
+  Built from the Claude Design handoff. Fully schema-driven (editable in
+  the theme editor) and scoped under .bbc-home-2026 via bbc-redesign-2026.css
+  so it cannot affect other sections. Prison references are GENERIC by design
+  (no prison is named) per BBC external-comms policy.
+  Image fields fall back to bundled placeholder assets until real photos are uploaded.
+{%- endcomment -%}
+
+
+{%- liquid
+  assign hero_cta1 = section.settings.hero_cta1_url | default: '/pages/bicycle-frame-building-workshop'
+  assign hero_cta2 = section.settings.hero_cta2_url | default: '/pages/impact'
+  assign kits_url  = section.settings.kits_link_url | default: '/collections/home-build-kits'
+  assign feat_cta1 = section.settings.impact_cta1_url | default: '/pages/impact'
+  assign feat_cta2 = section.settings.impact_cta2_url | default: '/pages/schools'
+  assign final_c1  = section.settings.cta1_url | default: '/pages/bicycle-frame-building-workshop'
+  assign final_c2  = section.settings.cta2_url | default: '/pages/schools'
+  assign final_c3  = section.settings.cta3_url | default: '/pages/impact'
+-%}
+
+<div class="bbc-rd bbc-rd-home">
+
+    {%- comment -%} ---------- HERO — Editorial Workbench: masked paint-on draw -> photo resolve (2026-06-12) ---------- {%- endcomment -%}
+
+  <style>
+    .bbc-rd-home .ew{ --citron:var(--lime,#D4FD62); /* LAW 8: private citron retired → lime */ --shadow-green:#06231C; --pine:#0E4E40; --moss:#5E7355;
+      position:relative; display:grid; grid-template-columns:0.82fr 1fr; min-height:90vh; min-height:90svh;
+      background:var(--forest); overflow:hidden; isolation:isolate; }
+    .bbc-rd-home .ew-copy{ position:relative; z-index:3; display:flex; flex-direction:column; justify-content:flex-end;
+      padding:clamp(40px,5.5vw,92px); padding-bottom:clamp(48px,6vw,84px); max-width:760px; min-width:0; }
+    .bbc-rd-home .ew-rule{ width:60px; height:4px; background:var(--lime); border-radius:3px; margin:0 0 24px; }
+    .bbc-rd-home .ew-eyebrow{ font-family:var(--rd-sans),sans-serif; font-weight:700; text-transform:uppercase;
+      letter-spacing:.22em; font-size:13px; color:var(--lime); margin:0 0 20px; }
+    .bbc-rd-home .ew-h1{ font-family:var(--rd-sans); font-weight:800; /* Fraunces retired 2026-07-12 — it was never loaded, so this rendered Georgia; Atkinson-only is the system */
+      font-size:clamp(46px,6.6vw,92px); line-height:.95; letter-spacing:-.025em; color:var(--bone); margin:0; text-wrap:balance; }
+    .bbc-rd-home .ew-fwd{ display:block; font-style:italic; font-weight:700; color:var(--citron); }
+    .bbc-rd-home .ew-lede{ font-family:'Atkinson Hyperlegible',var(--rd-sans),sans-serif; font-size:clamp(17px,1.4vw,20px);
+      line-height:1.5; color:var(--bone,#E6DCC8); max-width:42ch; margin:24px 0 0; }
+    .bbc-rd-home .ew-cta{ display:flex; gap:14px; flex-wrap:wrap; margin:34px 0 0; }
+    .bbc-rd-home .ew-btn{ font-family:var(--rd-sans),sans-serif; display:inline-flex; align-items:center;
+      justify-content:center; gap:9px; font-weight:800; font-size:16px; line-height:1; min-height:52px; padding:0 26px;
+      border-radius:9px; border:2.5px solid var(--shadow-green); text-decoration:none; cursor:pointer; transition:transform var(--mo-fast), box-shadow var(--mo-fast); }
+    .bbc-rd-home .ew-btn.is-lime{ background:var(--lime-700); color:var(--forest); box-shadow:5px 5px 0 var(--shadow-green); }
+    .bbc-rd-home .ew-btn.is-lime:hover{ transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--shadow-green); }
+    .bbc-rd-home .ew-btn.is-ghost{ background:transparent; border-color:var(--bone); color:var(--bone); }
+    .bbc-rd-home .ew-btn.is-ghost:hover{ background:rgba(230,220,200,.12); }
+    /* Proof row — isolated figures, not numbers inside sentences (2026-07-27 presentation audit) */
+    .bbc-rd-home .ew-proof{ list-style:none; display:flex; flex-wrap:wrap; gap:28px; margin:22px 0 0; padding:0; }
+    .bbc-rd-home .ew-proof li{ display:flex; flex-direction:column; }
+    .bbc-rd-home .ew-proof b{ font-family:var(--rd-sans),sans-serif; font-size:var(--type-h3); font-weight:800; line-height:1; color:var(--bbc-lime,#D4FD62); }
+    .bbc-rd-home .ew-proof span{ font-family:var(--rd-sans),sans-serif; font-size:var(--type-caption); letter-spacing:.02em; color:#BFCDC5; margin-top:4px; }
+    .bbc-rd-home .ew-cred{ font-family:var(--rd-sans),sans-serif; font-size:12.5px; letter-spacing:.02em; color:#BFCDC5; margin:26px 0 0; }
+    .bbc-rd-home .ew-folio{ position:absolute; left:clamp(40px,5.5vw,92px); bottom:18px; z-index:3; font-family:var(--rd-sans),sans-serif;
+      font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--moss); }
+
+    /* ---- word-ladder entrance (focus pull) ---- */
+    .bbc-rd-home .ew .wd{ display:inline-block; }
+    .bbc-rd-home .ew.will-anim .wd, .bbc-rd-home .ew.will-anim .ew-eyebrow, .bbc-rd-home .ew.will-anim .ew-lede,
+    .bbc-rd-home .ew.will-anim .ew-cta, .bbc-rd-home .ew.will-anim .ew-cred{
+      opacity:0; filter:blur(4px); transform:translateY(10px); }
+    .bbc-rd-home .ew.is-on .wd, .bbc-rd-home .ew.is-on .ew-eyebrow, .bbc-rd-home .ew.is-on .ew-lede,
+    .bbc-rd-home .ew.is-on .ew-cta, .bbc-rd-home .ew.is-on .ew-cred{
+      opacity:1; filter:blur(0); transform:none;
+      transition:opacity .32s ease-out, filter .32s ease-out, transform .32s ease-out;
+      transition-delay:var(--d,0s); }
+    .bbc-rd-home .ew.is-on .ew-lede{ --d:.8s; } .bbc-rd-home .ew.is-on .ew-cta{ --d:1s; } .bbc-rd-home .ew.is-on .ew-cred{ --d:1.15s; }
+
+    /* ---- media: drawing board -> photo ---- */
+    .bbc-rd-home .ew-media{ position:relative; z-index:1; overflow:hidden; background:var(--shadow-green); }
+    .bbc-rd-home .ew-media > img.ew-photo{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 42%;
+      filter:url(#bbcDuotone) contrast(1.06) saturate(.92); opacity:0; transform:scale(1.045); }
+    @keyframes ewPhotoFallback{ to{ opacity:1; transform:scale(1); } }
+    .bbc-rd-home .ew-media > img.ew-photo{ animation:ewPhotoFallback .9s ease 2.2s forwards; }
+    .bbc-rd-home .ew.photo-in .ew-media > img.ew-photo{ opacity:1; transform:scale(1);
+      transition:opacity .7s ease-out, transform 1.25s cubic-bezier(.22,1,.36,1); }
+    .bbc-rd-home .ew-media::before{ content:""; position:absolute; inset:0; z-index:2; pointer-events:none; opacity:0; transition:opacity .9s ease;
+      background:linear-gradient(90deg, var(--forest) 0%, rgba(0,60,50,.45) 16%, rgba(0,60,50,0) 44%); }
+    .bbc-rd-home .ew.photo-in .ew-media::before{ opacity:1; }
+    .bbc-rd-home .ew-grain{ position:absolute; inset:0; z-index:3; pointer-events:none; opacity:.10; mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+    /* ---- ink layer (the drawing) ---- */
+    .bbc-rd-home .ew-ink{ position:absolute; inset:4% 3% 10% 3%; z-index:4; width:94%; height:86%; pointer-events:none; }
+    .bbc-rd-home .ew.photo-in .ew-ink{ opacity:0; transition:opacity .85s ease .12s; }
+    .bbc-rd-home .ew-ink .gs{ fill:none; stroke:#fff; stroke-linecap:round; stroke-linejoin:round; }
+    .bbc-rd-home .ew-ink .chase{ fill:none; stroke:var(--lime); stroke-width:7; stroke-linecap:round; opacity:0; }
+    .bbc-rd-home .ew-ink .scaf{ stroke:var(--bone); fill:none; opacity:0; }
+    .bbc-rd-home .ew-ink text.scaf{ stroke:none; fill:var(--bone); font-family:var(--rd-sans),sans-serif; font-weight:700; letter-spacing:.18em; }
+
+    /* ---- draughtsman stamp (idle, after resolve) ---- */
+    .bbc-rd-home .ew-stamp{ position:absolute; z-index:5; left:22px; bottom:22px; width:148px; padding:10px 12px 7px;
+      border:1.5px solid rgba(230,220,200,.5); border-radius:6px; background:rgba(6,35,28,.55);
+      backdrop-filter:blur(3px); opacity:0; transform:translateY(8px); }
+    .bbc-rd-home .ew.photo-in .ew-stamp{ opacity:1; transform:none; transition:opacity var(--mo-reveal) ease 1s, transform var(--mo-reveal) ease 1s; }
+    .bbc-rd-home .ew-stamp img{ width:100%; display:block; }
+    .bbc-rd-home .ew-stamp .cap{ font-family:var(--rd-sans),sans-serif; font-size:8.5px; letter-spacing:.16em; text-transform:uppercase;
+      color:var(--bone); opacity:.85; margin-top:6px; display:flex; justify-content:space-between; }
+    .bbc-rd-home .ew-stamp svg.tick{ position:absolute; inset:-1.5px; width:calc(100% + 3px); height:calc(100% + 3px); overflow:visible; }
+    .bbc-rd-home .ew-stamp svg.tick rect{ fill:none; stroke:var(--lime); stroke-width:1.5; opacity:.45; rx:6;
+      stroke-dasharray:.12 .88; stroke-dashoffset:0; animation:bbcStampdash 11s linear infinite; }
+    @keyframes bbcStampdash{ to{ stroke-dashoffset:-1; } }
+
+    .bbc-rd-home .ew-tag{ position:absolute; z-index:5; right:22px; bottom:22px; font-family:var(--rd-sans),sans-serif;
+      background:var(--lime); color:var(--forest); font-weight:800; font-size:12px; letter-spacing:.04em; text-transform:uppercase;
+      padding:8px 14px; border-radius:999px; border:2px solid var(--shadow-green); box-shadow:3px 3px 0 var(--shadow-green);
+      opacity:0; }
+    .bbc-rd-home .ew.photo-in .ew-tag{ opacity:1; transition:opacity .5s ease .7s; }
+
+    @media(max-width:749px){
+      .bbc-rd-home .ew{ grid-template-columns:1fr; min-height:auto; }
+      .bbc-rd-home .ew-media{ order:0; height:46svh; min-height:300px; }
+      .bbc-rd-home .ew-media > img.ew-photo{ object-position:50% 45%; }
+      .bbc-rd-home .ew-media::before{ background:linear-gradient(0deg, var(--forest) 0%, rgba(0,60,50,.3) 24%, rgba(0,60,50,0) 60%); }
+      .bbc-rd-home .ew-copy{ order:1; padding:32px 22px 40px; max-width:none; }
+      .bbc-rd-home .ew-rule{ display:none; } .bbc-rd-home .ew-btn{ width:100%; }
+      .bbc-rd-home .ew-folio{ display:none; } .bbc-rd-home .ew-stamp{ display:none; }
+      .bbc-rd-home .ew-ink{ inset:6% 2% 8% 2%; width:96%; height:86%; }
+    }
+    @media(prefers-reduced-motion:reduce){
+      .bbc-rd-home .ew.will-anim .wd,.bbc-rd-home .ew.will-anim .ew-eyebrow,.bbc-rd-home .ew.will-anim .ew-lede,
+      .bbc-rd-home .ew.will-anim .ew-cta,.bbc-rd-home .ew.will-anim .ew-cred{ opacity:1; filter:none; transform:none; }
+      .bbc-rd-home .ew-media > img.ew-photo{ opacity:1 !important; transform:none !important; }
+      .bbc-rd-home .ew-ink{ display:none; } .bbc-rd-home .ew-stamp svg.tick rect{ animation:none; }
+    }
+  
+    /* AUDIT FIX 2026-06-15 */
+    .bbc-rd.bbc-rd-home a.rd-card, .bbc-rd.bbc-rd-home a.rd-card *{ text-decoration:none !important; }
+    .bbc-rd-home .rd-ph{ aspect-ratio:16/10; overflow:hidden; }
+    .bbc-rd-home .rd-ph > img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .bbc-rd-home .rd-ph.rd-ar-43{ aspect-ratio:4/3; overflow:hidden; }
+    .bbc-rd-home .rd-ph.rd-ar-43 > img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .bbc-rd-home .ew-btn.is-ghost{ color:#EDE6D6; border-color:#EDE6D6; }
+
+    /* ---- Why bamboo: clean 4-up pillar band (2026-06-17) ---- */
+    .bbc-rd-home .wb2-center{ text-align:center; }
+    .bbc-rd-home .wb2-head{ max-width:680px; margin:0 auto; }
+    .bbc-rd-home .wb2-title{ font-family:var(--rd-sans),sans-serif; font-weight:800;
+      font-size:clamp(30px,4vw,46px); line-height:1.04; letter-spacing:-.02em; color:var(--forest); margin:.35em 0 0; text-wrap:balance; }
+    .bbc-rd-home .wb2-lede{ font-family:'Atkinson Hyperlegible',var(--rd-sans),sans-serif; font-size:clamp(16px,1.3vw,19px);
+      line-height:1.55; color:#3a4a40; max-width:48ch; margin:16px auto 0; }
+    .bbc-rd-home .wb2-row{ list-style:none; margin:clamp(36px,4.2vw,60px) 0 0; padding:0;
+      display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(22px,2.8vw,44px); }
+    .bbc-rd-home .wb2-pillar{ text-align:center; }
+    .bbc-rd-home .wb2-ic{ width:52px; height:52px; border-radius:13px; display:flex; align-items:center; justify-content:center;
+      background:var(--lime); color:var(--forest); border:2.5px solid var(--shadow-green); box-shadow:3px 3px 0 var(--shadow-green); margin:0 auto 18px; }
+    .bbc-rd-home .wb2-ic svg{ width:26px; height:26px; }
+    .bbc-rd-home .wb2-pillar h3{ font-family:var(--rd-sans),sans-serif; font-weight:800; font-size:18px;
+      color:var(--forest); margin:0 0 8px; letter-spacing:-.01em; }
+    .bbc-rd-home .wb2-pillar p{ font-family:'Atkinson Hyperlegible',var(--rd-sans),sans-serif; font-size:14.5px;
+      line-height:1.5; color:#46554b; margin:0 auto; max-width:26ch; }
+    /* FIX: pillar text must be legible on the dark (rd-dark) technical band */
+    .bbc-rd-home .rd-dark .wb2-pillar h3{ color:var(--bbc-cream,#faf7f0); }
+    .bbc-rd-home .rd-dark .wb2-pillar p{ color:rgba(250,247,240,.85); }
+    /* FIX: numbered steps left-aligned to match the band header (was centred = misaligned) */
+    .bbc-rd-home .rd-steps .wb2-pillar{ text-align:left; }
+    .bbc-rd-home .rd-steps .wb2-pillar p{ margin:0; max-width:34ch; }
+    .bbc-rd-home .rd-steps .rd-stepn{ margin:0 0 12px; }
+    /* University logos as white cells on the dark technical band */
+        .bbc-rd-home .rd-unilogos{ grid-template-columns:repeat(4,minmax(0,1fr)); }
+    @media(max-width:899px){ .bbc-rd-home .rd-unilogos{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media(max-width:479px){ .bbc-rd-home .rd-unilogos{ grid-template-columns:1fr; } }
+    .bbc-rd-home .rd-unilogos .wb2-pillar{ display:flex; flex-direction:column; align-items:center; }
+    .bbc-rd-home .rd-unilogo{ width:100%; max-width:210px; min-height:72px; margin:0 auto 16px; }
+    .bbc-rd-home .rd-unilogo .rd-logoimg{ max-width:100% !important; }
+    .bbc-rd-home .rd-unilogos .wb2-pillar p{ color:rgba(250,247,240,.85); max-width:24ch; }
+    .bbc-rd-home .wb2-cta{ margin-top:clamp(34px,4vw,52px); }
+    @media(max-width:899px){ .bbc-rd-home .wb2-row{ grid-template-columns:repeat(2,1fr); gap:38px 28px; } }
+    @media(max-width:479px){ .bbc-rd-home .wb2-row{ grid-template-columns:1fr; gap:30px; } .bbc-rd-home .wb2-cta .ew-btn{ width:100%; } }
+  
+    /* ==========================================================================
+       HERO IDENTITY PASS (2026-08-21, James: "remove the drawing details ... unique,
+       visually stimulating, aligned with the company and distinctive brand, unique
+       animations and layout ... optimised header, sub text and use of buttons").
+       CONCEPT - bamboo is the one frame material that GROWS, so the hero ASSEMBLES
+       instead of fading: a segmented lime culm grows up the left gutter, a hairline
+       seam draws down the film edge, then the copy arrives in the existing word ladder.
+       The culm uses real bamboo node spacing (repeating-gradient joints) rather than a
+       generic accent bar, and it is the same node motif already used by .rd-nodediv on
+       the paper band, so the page reads as one system. It also REPLACES .ew-rule, an
+       element that was already there doing nothing but sit as a 60px dash.
+       OWNERSHIP - bbc-align.css owns hero LAYOUT (min-height, stacking, order, .ew-copy
+       padding) and its rules carry !important. This block is DECORATION ONLY. Do not
+       re-declare min-height / grid-template-columns / .ew-copy padding here: the two
+       files will fight and align wins, silently.
+       ========================================================================== */
+    .bbc-rd-home .ew-copy{ position:relative; }
+    /* VERTICAL BALANCE. The copy column was justify-content:flex-end, which was fine while
+       the hero was capped at 700px and the content nearly filled it. Raising the ceiling for
+       the video (bbc-align note 1) turned every new pixel into a void ABOVE the copy:
+       measured at 1440x900, 172px of dead space over the eyebrow against 49px under the
+       buttons, a 3.5:1 imbalance - and the culm then overhung the content by 136px at the
+       top, reading as a stray line rather than an anchor. Centring splits the slack evenly
+       (~110px each side) so the copy sits optically centred against a full-height film.
+       Two-column mode only; bbc-align pins flex-start in stacked mode below 1200px. */
+    @media(min-width:1200px){ .bbc-rd-home .ew-copy{ justify-content:center; } }
+    .bbc-rd-home .ew-rule{
+      position:absolute; left:clamp(14px,2.2vw,38px);
+      /* percentage insets, not a fixed clamp: with the copy centred the slack is symmetric,
+         so a symmetric inset brackets the content at any height instead of running the full
+         padding box. 14% lands within ~8px of the content top and bottom at 1440x900. */
+      top:14%; bottom:14%;
+      width:3px; height:auto; margin:0; border-radius:3px;
+      background:repeating-linear-gradient(to bottom,
+        var(--lime) 0 44px, rgba(6,35,28,.55) 44px 50px);
+      transform:scaleY(0); transform-origin:50% 100%; }
+    .bbc-rd-home .ew.is-on .ew-rule{ transform:scaleY(1);
+      transition:transform .95s cubic-bezier(.22,1,.36,1) .05s; }
+    .bbc-rd-home .ew-media::after{
+      content:""; position:absolute; left:0; top:0; bottom:0; width:2px; z-index:4;
+      pointer-events:none;
+      background:linear-gradient(to bottom, var(--lime), rgba(212,253,98,0));
+      transform:scaleY(0); transform-origin:50% 0; }
+    .bbc-rd-home .ew.is-on .ew-media::after{ transform:scaleY(1);
+      transition:transform 1.1s cubic-bezier(.22,1,.36,1) .3s; }
+    /* RHYTHM. Measured gaps ran 16 / 18 / 18 / 34px - essentially flat, so the eye got no
+       hierarchy between headline, statement and evidence. The sub-line now opens a little
+       wider under the headline and closes with its own bottom margin, which ADDS to the
+       proof row's top margin (adjacent flex items do not collapse) to separate statement
+       from figures: ~25px above, ~31px below at 1440x900. */
+    .bbc-rd-home .ew-sub{ font-family:'Atkinson Hyperlegible',var(--rd-sans),sans-serif;
+      font-size:clamp(16px,1.25vw,19px); line-height:1.5; color:#CBD8D1;
+      max-width:46ch; margin:clamp(20px,2.8vh,32px) 0 clamp(6px,1vh,12px); }
+    .bbc-rd-home .ew.will-anim .ew-sub{ opacity:0; filter:blur(4px); transform:translateY(10px); }
+    .bbc-rd-home .ew.is-on .ew-sub{ opacity:1; filter:blur(0); transform:none;
+      transition:opacity .32s ease-out, filter .32s ease-out, transform .32s ease-out;
+      transition-delay:.9s; }
+    /* BUTTONS. Hierarchy was flat - both read as equal weight against the film. The
+       primary now carries the brightest lime in the band (10.65:1 on forest text per the
+       brand guide) so there is one obvious action, the ghost stays secondary, and both
+       get a real pressed state instead of only a hover. */
+    .bbc-rd-home .ew-btn.is-lime{ background:var(--lime); }
+    .bbc-rd-home .ew-btn.is-lime:active,
+    .bbc-rd-home .ew-btn.is-ghost:active{ transform:translate(2px,2px);
+      box-shadow:2px 2px 0 var(--shadow-green); }
+    .bbc-rd-home .ew-btn.is-ghost:hover{ background:rgba(230,220,200,.16); }
+    /* The vertical culm belongs to TWO-COLUMN mode. Below 1200px the hero is stacked and the
+       copy is top-aligned, so a full-height vertical rule would overhang the bottom the same
+       way it overhung the top before this fix. The whole stacked range gets the horizontal
+       culm instead - same motif, correct axis. (Was max-width:749px, which left 750-1199px
+       with a vertical rule against top-aligned copy.) */
+    @media(max-width:1199px){
+      .bbc-rd-home .ew-rule{ display:block; position:static; width:74px; height:3px;
+        margin:0 0 15px; transform:scaleX(0); transform-origin:0 50%;
+        background:repeating-linear-gradient(to right,
+          var(--lime) 0 20px, rgba(6,35,28,.55) 20px 24px); }
+      .bbc-rd-home .ew.is-on .ew-rule{ transform:scaleX(1); }
+      .bbc-rd-home .ew-media::after{ left:0; right:0; top:auto; bottom:0;
+        width:auto; height:2px; transform:scaleX(0); transform-origin:0 50%;
+        background:linear-gradient(to right, var(--lime), rgba(212,253,98,0)); }
+      .bbc-rd-home .ew.is-on .ew-media::after{ transform:scaleX(1); }
+      /* ORDER lives in bbc-align.css with the rest of the .ew-copy run (order:5, AFTER the
+         buttons - at order:3 it pushed both mobile CTAs back under the fold). Deliberately
+         NOT set here: two files setting order on the same element is what forced the
+         [class] specificity bump in align. */
+    }
+    @media(prefers-reduced-motion:reduce){
+      .bbc-rd-home .ew-rule, .bbc-rd-home .ew-media::after{
+        transform:none !important; transition:none !important; }
+      .bbc-rd-home .ew.will-anim .ew-sub{ opacity:1; filter:none; transform:none; }
+    }
+
+  .bbc-rd-home ol.rd-steps{list-style:none;padding-left:0;counter-reset:none;} .bbc-rd-home ol.rd-steps>li::before, .bbc-rd-home ol.rd-steps>li::marker{content:none!important;display:none!important;} .bbc-rd-home .rd-steps .rd-stepn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:var(--bbc-lime,#c6f24e);color:var(--bbc-forest,#003C32);font-weight:800;font-size:20px;border:2px solid var(--bbc-forest,#003C32);}
+</style>
+
+  <header class="ew" aria-label="Bamboo Bicycle Club">
+    <svg class="ew-defs" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+      <filter id="bbcDuotone" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0"/>
+        <feComponentTransfer>
+          <feFuncR type="table" tableValues="0.0 0.23 0.91"/>
+          <feFuncG type="table" tableValues="0.235 0.35 0.89"/>
+          <feFuncB type="table" tableValues="0.196 0.23 0.80"/>
+        </feComponentTransfer>
+      </filter>
+    </svg>
+
+    <div class="ew-copy">
+      <div class="ew-rule"></div>
+      {%- if section.settings.hero_eyebrow != blank -%}<p class="ew-eyebrow" style="--d:0s">{{ section.settings.hero_eyebrow }}</p>{%- endif -%}
+      <h1 class="ew-h1"><span class="wd" style="--d:.1s">more</span> <span class="wd" style="--d:.2s">than</span> <span class="wd" style="--d:.3s">a</span> <span class="wd" style="--d:.4s">bike.</span><span class="ew-fwd"><span class="wd" style="--d:.55s">a</span> <span class="wd" style="--d:.65s">way</span> <span class="wd" style="--d:.75s">forward.</span></span></h1>
+      {%- comment -%} Sub-line added 2026-08-21. The hero went headline -> figures ->
+        buttons with nothing saying what BBC actually does; that is the gap in the
+        hierarchy, not the headline. hero_lede is deliberately blank in index.json and
+        "blank means blank" is a documented rule here, so this is a NEW setting whose
+        SCHEMA DEFAULT renders (index.json has no key for it) and which James can edit or
+        clear. Wording mirrors the LOCKED vault mission - "in schools before exclusion,
+        and in prisons after" - and drops "accredited" on purpose: the prison Level 2 is
+        verified but the schools accreditation evidence is still pending. {%- endcomment -%}
+      {%- if section.settings.hero_sub != blank -%}<p class="ew-sub">{{ section.settings.hero_sub }}</p>{%- endif -%}
+      {%- if section.settings.hero_lede != blank -%}<p class="ew-lede">{{ section.settings.hero_lede }}</p>{%- endif -%}
+{%- comment -%}
+        Proof row (2026-07-27). The presentation audit measured our first figure at y3897 —
+        about four screens down, and 5x later than the next-latest peer, with ZERO figures above
+        the fold. Peers that do this well (Recycling Lives "132 / people into paid employment",
+        Belu at 96px) ISOLATE the number so the eye catches it before the sentence. We had the
+        same facts written into prose — "Shipped worldwide to 45 countries" reads as a sentence,
+        not as proof. Every default below is Claims-Register approved wording.
+      {%- endcomment -%}
+      {%- if section.settings.hero_proof_on -%}
+        <ul class="ew-proof" aria-label="Bamboo Bicycle Club in numbers">
+          <li><b>{{ section.settings.hero_proof1_num | default: '4,000+' }}</b><span>{{ section.settings.hero_proof1_label | default: 'people trained' }}</span></li>
+          <li><b>{{ section.settings.hero_proof2_num | default: '45' }}</b><span>{{ section.settings.hero_proof2_label | default: 'countries' }}</span></li>
+          <li><b>{{ section.settings.hero_proof3_num | default: '2012' }}</b><span>{{ section.settings.hero_proof3_label | default: 'building since' }}</span></li>
+        </ul>
+        {%- comment -%}
+          No `| default:` here on purpose. A Liquid default fires on an EMPTY string as well as a
+          missing one, so a hard-coded fallback makes the field unclearable in the editor: you blank
+          it, save, and the old line is still on the page. Blank must mean blank. The schema default
+          still populates a newly added section.
+        {%- endcomment -%}
+        {%- if section.settings.hero_proof_src != blank -%}
+          <p class="rd-stat-src">{{ section.settings.hero_proof_src }}</p>
+        {%- endif -%}
+      {%- endif -%}
+      <div class="ew-cta">
+        {%- if section.settings.hero_cta1_label != blank -%}<a class="ew-btn is-lime" href="{{ hero_cta1 }}">{{ section.settings.hero_cta1_label }}&nbsp;&rarr;</a>{%- endif -%}
+        {%- if section.settings.hero_cta2_label != blank -%}<a class="ew-btn is-ghost" href="{{ hero_cta2 }}" style="color:#EDE6D6 !important;border-color:#EDE6D6 !important;">{{ section.settings.hero_cta2_label }}</a>{%- endif -%}
+      </div>
+            {%- comment -%}The label promises "blank hides"; the old `| default:` broke that promise.{%- endcomment -%}
+            {%- if section.settings.hero_cred != blank -%}<p class="ew-cred">{{ section.settings.hero_cred }}</p>{%- endif -%}
+    </div>
+
+    <div class="ew-media{% if section.settings.hero_video_on %} has-video{% endif %}">
+      {%- comment -%} DRAWING TITLEBLOCK REMOVED 2026-08-21 (James: "remove the drawing
+        details"). It was a faux drawing-office spec table (drawing / material / est. /
+        drawn) sitting on top of the film. Markup and its nine fab_titleblock/fab_tb_*
+        schema settings are both gone - a checkbox that no longer does anything is worse
+        than no checkbox, and index.json still carries fab_titleblock:true, so CSS-hiding
+        or gating would have left a dead control in the editor. Recoverable from git.
+      {%- endcomment -%}
+      {%- if section.settings.hero_sticker != blank -%}<span class="ew-sticker">{{ section.settings.hero_sticker }}</span>{%- endif -%}
+      {%- if section.settings.hero_image != blank -%}
+        <img class="ew-photo" src="{{ section.settings.hero_image | image_url: width: 1600 }}" srcset="{{ section.settings.hero_image | image_url: width: 800 }} 800w, {{ section.settings.hero_image | image_url: width: 1200 }} 1200w, {{ section.settings.hero_image | image_url: width: 1600 }} 1600w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w, {{ section.settings.hero_image | image_url: width: 2600 }} 2600w" sizes="(max-width:749px) 100vw, 56vw" alt="{{ section.settings.hero_image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" fetchpriority="high" loading="eager">
+      {%- else -%}
+        <img class="ew-photo" src="https://cdn.shopify.com/s/files/1/0502/8695/2631/files/bbc-hero-bespoked.jpg?v=1781292423&width=1600" srcset="https://cdn.shopify.com/s/files/1/0502/8695/2631/files/bbc-hero-bespoked.jpg?v=1781292423&width=800 800w, https://cdn.shopify.com/s/files/1/0502/8695/2631/files/bbc-hero-bespoked.jpg?v=1781292423&width=1200 1200w, https://cdn.shopify.com/s/files/1/0502/8695/2631/files/bbc-hero-bespoked.jpg?v=1781292423&width=1600 1600w, https://cdn.shopify.com/s/files/1/0502/8695/2631/files/bbc-hero-bespoked.jpg?v=1781292423&width=2000 2000w, https://cdn.shopify.com/s/files/1/0502/8695/2631/files/bbc-hero-bespoked.jpg?v=1781292423&width=2600 2600w" sizes="(max-width:749px) 100vw, 56vw" alt="{{ section.settings.hero_image_alt | default: 'Hand-built bamboo gravel bicycle' | escape }}" width="2600" height="1950" fetchpriority="high" loading="eager">
+      {%- endif -%}
+      <div class="ew-grain"></div>
+      {%- if section.settings.hero_video_on -%}
+        {%- comment -%} 2026-08-21: the "film" style option existed in the schema but was never
+             implemented in code — it silently fell back to the teaser, so the editor choice did
+             nothing and the draft hero didn't match live (which plays the film). Film/duotone
+             also use the film's own poster, unless a custom poster has been picked. {%- endcomment -%}
+        {%- assign hv = 'bbc-rd-home-teaser.mp4' -%}
+        {%- assign hp = section.settings.video_poster_fallback | default: 'bbc-rd-home-poster.jpg' -%}
+        {%- if section.settings.hero_video_style == 'film' -%}{%- assign hv = 'bbc-hero-film.mp4' -%}{%- endif -%}
+        {%- if section.settings.hero_video_style == 'duotone' -%}{%- assign hv = 'bbc-hero-film-duotone.mp4' -%}{%- endif -%}
+        {%- if hv != 'bbc-rd-home-teaser.mp4' and hp == 'bbc-rd-home-poster.jpg' -%}{%- assign hp = 'bbc-hero-poster.jpg' -%}{%- endif -%}
+        {%- comment -%}
+          The hero film is 7 MB and was set to `autoplay preload="metadata"`. autoplay
+          OVERRIDES preload — the browser fetches the whole file regardless — so mobile
+          visitors downloaded 7 MB, 79% of the homepage payload, over whatever connection
+          they had. Measured 2026-07-29 at 390px on throttled 4G: 8,857 KB total, of which
+          7,016 KB was this one file.
+
+          It also autoplayed under prefers-reduced-motion, which MOTION.md hard rule 2
+          forbids ("reduced-motion = fully inert"). One fix closes both.
+
+          Now: no autoplay attribute and preload="none", so nothing downloads by default and
+          the poster carries the hero. A tiny script opts in ONLY where the film earns its
+          bytes — a wide viewport, motion allowed, and not on a metered/slow connection per
+          the Network Information API. Everyone else keeps the poster, which is 54 KB.
+        {%- endcomment -%}
+        <video class="ew-video" style="position:absolute !important;inset:0 !important;width:100% !important;height:100% !important;object-fit:cover !important;" muted loop playsinline preload="none" data-src="{{ hv | asset_url }}" poster="{{ hp | asset_url }}" aria-label="{{ section.settings.hero_image_alt | default: 'Bamboo bikes built and ridden — a Bamboo Bicycle Club film' | escape }}"></video>
+        <script>
+          (function () {
+            var v = document.currentScript.previousElementSibling;
+            if (!v || v.tagName !== 'VIDEO') return;
+            var wideEnough = window.matchMedia('(min-width: 750px)').matches;
+            var motionOK = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+            var c = navigator.connection || {};
+            var goodConnection = !c.saveData && !/2g/.test(c.effectiveType || '');
+            if (!(wideEnough && motionOK && goodConnection)) return;   // poster stands
+            var s = document.createElement('source');
+            s.src = v.dataset.src; s.type = 'video/mp4';
+            v.appendChild(s);
+            v.preload = 'auto';
+            // load() + play once there is data. Appending a <source> and calling play()
+            // straight away does NOT reliably start playback: measured 2026-08-21 at
+            // 1440px, play() RESOLVED yet the element stayed paused at currentTime 0
+            // while still buffering the whole 6.6 MB film — worst case, full bandwidth
+            // spent for a static poster. load() runs resource selection against the new
+            // source; canplay guarantees play() is called with data ready.
+            v.load();
+            var start = function () {
+              v.play().catch(function () { /* autoplay refused — poster stands, no error surfaced */ });
+            };
+            if (v.readyState >= 3) { start(); }
+            else { v.addEventListener('canplay', start, { once: true }); }
+          })();
+        </script>
+      {%- endif -%}
+
+      <svg class="ew-ink" viewBox="125 502 1796 1044" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <mask id="bbcInk" maskUnits="userSpaceOnUse" x="125" y="502" width="1796" height="1044">
+            <rect x="125" y="502" width="1796" height="1044" fill="#000"/>
+            <path class="gs" id="g1"  d="M1325,795 L955,1205"  stroke-width="100" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+            <path class="gs" id="g2"  d="M1295,668 L780,706"   stroke-width="92"  pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+            <path class="gs" id="g3a" d="M752,572 L952,1212"   stroke-width="92"  pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+            <path class="gs" id="g3b" d="M588,566 L910,574"    stroke-width="86"  pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+            <path class="gs" id="g4"  d="M1296,585 C1322,770 1432,990 1540,1160" stroke-width="100" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+            <path class="gs" id="g5"  d="M778,712 L490,1164"   stroke-width="82"  pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+            <path class="gs" id="g6a" d="M952,1220 L488,1166"  stroke-width="86"  pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+            <path class="gs" id="g6b" d="M965,1290 L505,1190"  stroke-width="70"  pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+            <circle class="gs" id="g7" cx="487" cy="1164" r="172" stroke-width="352" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+            <circle class="gs" id="g8" cx="1540" cy="1158" r="186" stroke-width="380" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+            <path class="gs" id="g9"  d="M1276,650 C1400,556 1550,562 1588,652 S1538,775 1458,700" stroke-width="130" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+            <circle class="gs" id="g10a" cx="945" cy="1210" r="88" stroke-width="184" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+            <path class="gs" id="g10b" d="M950,1210 L1170,1234" stroke-width="76" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+            <rect class="gflood" id="gflood" x="125" y="502" width="1796" height="1044" fill="#fff" opacity="0"/>
+          </mask>
+        </defs>
+
+        <g mask="url(#bbcInk)" id="bbcArt"></g>
+
+        <g id="bbcScaffold">
+          <g class="scaf" id="sc-bb">
+            <line x1="885" y1="1210" x2="1005" y2="1210" stroke-width="2"/>
+            <line x1="945" y1="1150" x2="945" y2="1270" stroke-width="2"/>
+            <circle cx="945" cy="1210" r="30" stroke-width="2" stroke-dasharray="8 8"/>
+          </g>
+          <circle class="scaf" id="sc-rw" cx="487" cy="1164" r="340" stroke-width="2" stroke-dasharray="12 12"/>
+          <circle class="scaf" id="sc-fw" cx="1540" cy="1158" r="362" stroke-width="2" stroke-dasharray="12 12"/>
+          <g class="scaf" id="sc-dim">
+            <line x1="752" y1="528" x2="1296" y2="528" stroke-width="2"/>
+            <line x1="752" y1="514" x2="752" y2="542" stroke-width="2"/>
+            <line x1="1296" y1="514" x2="1296" y2="542" stroke-width="2"/>
+          </g>
+          <text class="scaf" id="sc-stamp" x="1895" y="1535" text-anchor="end" font-size="34">BBC &#183; DRG N&#186;1 &#183; 1:1</text>
+          <circle class="scaf" id="sc-pop" cx="945" cy="1210" r="96" stroke="#D4FD62" stroke-width="3" opacity="0"
+            style="transform-box:fill-box; transform-origin:center;"/>
+        </g>
+
+        <g id="bbcChase">
+          <path class="chase" d="M1325,795 L955,1205"  pathLength="1" stroke-dasharray="0.045 0.955" stroke-dashoffset="1" id="c1"/>
+          <path class="chase" d="M1295,668 L780,706"   pathLength="1" stroke-dasharray="0.045 0.955" stroke-dashoffset="1" id="c2"/>
+          <path class="chase" d="M752,572 L952,1212"   pathLength="1" stroke-dasharray="0.045 0.955" stroke-dashoffset="1" id="c3"/>
+          <path class="chase" d="M1296,585 C1322,770 1432,990 1540,1160" pathLength="1" stroke-dasharray="0.045 0.955" stroke-dashoffset="1" id="c4"/>
+          <path class="chase" d="M778,712 L490,1164"   pathLength="1" stroke-dasharray="0.045 0.955" stroke-dashoffset="1" id="c5"/>
+          <path class="chase" d="M952,1220 L488,1166"  pathLength="1" stroke-dasharray="0.045 0.955" stroke-dashoffset="1" id="c6"/>
+        </g>
+      </svg>
+
+      <div class="ew-stamp" aria-hidden="true">
+        <svg class="tick"><rect width="100%" height="100%" pathLength="1"/></svg>
+        <img src="https://cdn.shopify.com/s/files/1/0502/8695/2631/files/bbc-frame-line.svg?v=1781292517" alt="" loading="lazy" width="148" height="86">
+        <div class="cap"><span>{{ section.settings.tx_drg_n_186_1 | default: "Drg N&#186;1" }}</span><span>{{ section.settings.tx_est_2012 | default: "Est. 2012" }}</span></div>
+      </div>
+      {%- comment -%}
+        ROTATING HERO CAPTIONS (2026-08-21, James: "get rid of the hand-built lugged
+        one and build some other captions to align with the video ... work out the
+        number of captions").
+        NUMBER: bbc-hero-film.mp4 is exactly 75s. Ten captions at 7.5s each = 75s, so
+        the caption cycle restarts in step with the film loop instead of drifting
+        against it. Change the count and the timing below follows automatically - the
+        slot percentage is computed from caps.size, not hardcoded.
+        WORDING: every line was checked against the vault Claims Register
+        (System/Claims Register.md). Notes on the three that needed care:
+          - the material line cites BS ISO 22157 AND is scoped to TUBING. Swansea
+            tested bamboo tubing, never an assembled frame; see the product-safety
+            boundary and the 19 Aug 2026 control incident on the gravel PDP, where
+            "Swansea - University tested" had to be pulled for exactly this reason.
+          - "tested around the world" was requested but NOT used: it implies frame
+            testing, which is the same boundary. Reach is covered by the approved
+            45-countries figure, which already sits in the proof row.
+          - "easiest way to build a frame" was requested but NOT used as a superlative;
+            replaced with the concrete, supportable "No welding. No workshop." and
+            "Hand tools and a weekend."
+        "It grew itself." and "Grown, not mined." are the brand's own frame-sticker and
+        key-message wording (Marketing/Brand and Voice Guide).
+        A11Y: the group is aria-hidden - it auto-updates, and every claim in it also
+        appears as static text elsewhere on the page, so nothing is lost to a screen
+        reader. It pauses on hover, and prefers-reduced-motion pins it to caption 1
+        (MOTION.md hard rule 2). NOTE for review: WCAG 2.2.2 also wants a pause control
+        for auto-updating content; this file's marquee was stopped for that exact
+        reason (see bbc-align.css). Hover-pause plus reduced-motion is a mitigation,
+        not a full mechanism - flagged to James.
+      {%- endcomment -%}
+      {%- capture cap_default -%}
+It grew itself.
+No welding. No workshop.
+Hand tools and a weekend.
+Natural vibration damping.
+Tubing tested to BS ISO 22157.
+Every frame is one of one.
+Most builders start from scratch.
+Real engineering you can hold.
+Grown, not mined.
+Skills that outlast the bike.
+{%- endcapture -%}
+      {%- assign cap_src = section.settings.hero_captions | default: cap_default -%}
+      {%- assign caps = cap_src | strip | newline_to_br | split: '<br />' -%}
+      {%- assign cap_n = caps.size -%}
+      {%- assign cap_slot = 100.0 | divided_by: cap_n -%}
+      {%- assign cap_hold = cap_slot | minus: 1.2 -%}
+      {%- assign cap_dur = cap_n | times: 7.5 -%}
+      <style>
+        .bbc-rd-home .ew-tag--cycle{ display:grid; justify-items:center; align-items:center; }
+        .bbc-rd-home .ew-tag--cycle .ew-cap{ grid-area:1/1; white-space:nowrap; opacity:0;
+          animation:ewCapCycle {{ cap_dur }}s linear infinite;
+          animation-delay:calc({{ cap_dur }}s / {{ cap_n }} * var(--i,0)); }
+        .bbc-rd-home .ew-tag--cycle:hover .ew-cap{ animation-play-state:paused; }
+        @keyframes ewCapCycle{
+          0%{ opacity:0 } 1.2%{ opacity:1 } {{ cap_hold }}%{ opacity:1 }
+          {{ cap_slot }}%{ opacity:0 } 100%{ opacity:0 }
+        }
+        @media(prefers-reduced-motion:reduce){
+          .bbc-rd-home .ew-tag--cycle .ew-cap{ animation:none; opacity:0; }
+          .bbc-rd-home .ew-tag--cycle .ew-cap:first-child{ opacity:1; }
+        }
+      </style>
+      <span class="ew-tag ew-tag--cycle" aria-hidden="true">
+        {%- for c in caps -%}{%- assign ct = c | strip -%}{%- if ct != blank -%}<b class="ew-cap" style="--i:{{ forloop.index0 }}">{{ ct }}</b>{%- endif -%}{%- endfor -%}
+      </span>
+    </div>
+    <span class="ew-folio">{{ section.settings.tx_bamboo_bicycle_club_est_2012 | default: "Bamboo Bicycle Club &middot; Est. 2012 &middot; London" }}</span>
+  </header>
+
+  <script>
+    (function(){
+      var hero = document.querySelector('.bbc-rd-home .ew');
+      if(!hero) return;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var mobile = window.matchMedia('(max-width: 749px)').matches;
+      if(reduce || typeof document.body.animate !== 'function'){
+        hero.classList.add('is-on','photo-in');
+        return;
+      }
+      hero.classList.add('will-anim');
+
+      var K = mobile ? 0.62 : 1;
+      var T = 1.55; /* global tempo - draw read as rushed at 1.0 */
+      var EASE = 'cubic-bezier(0.65,0,0.35,1)';
+      function tempo(a){ return a.map(function(s){ return [s[0], s[1]*T, s[2]*T]; }); }
+      var seq = tempo([
+        ['g1',  500,  820], ['g2',  1010, 640], ['g3a', 1330, 600], ['g3b', 1690, 380],
+        ['g4',  1280, 700], ['g5',  1580, 500], ['g6a', 1795, 480], ['g6b', 1985, 420],
+        ['g7',  1950, 780], ['g8',  2130, 780], ['g9',  2430, 500], ['g10a',2780, 430], ['g10b',2960, 320]
+      ]);
+      var chase = tempo([['c1',500,820],['c2',1010,640],['c3',1330,600],['c4',1280,700],['c5',1580,500],['c6',1795,480]]);
+      var scaf = tempo([['sc-bb',900,1500],['sc-dim',1150,1200],['sc-rw',1700,900],['sc-fw',1880,900],['sc-stamp',1300,1300]]);
+      var FLOOD = 3160*T*K, RESOLVE = (3520*T + 450)*K; /* +450ms hold on the finished drawing */
+
+      function startAnims(){
+        seq.forEach(function(s){
+          var el = document.getElementById(s[0]); if(!el) return;
+          el.animate([{strokeDashoffset:1},{strokeDashoffset:0}],
+            {duration:s[2]*K, delay:s[1]*K, easing:EASE, fill:'forwards'});
+        });
+        if(!mobile){
+          chase.forEach(function(s){
+            var el = document.getElementById(s[0]); if(!el) return;
+            el.animate([{strokeDashoffset:1,opacity:1},{strokeDashoffset:0,opacity:1}],
+              {duration:s[2], delay:s[1]-110, easing:EASE, fill:'forwards'});
+            el.animate([{opacity:0},{opacity:1}],{duration:120, delay:s[1]-110, fill:'forwards'});
+            el.animate([{opacity:1},{opacity:0}],{duration:200, delay:s[1]+s[2]-160, fill:'forwards'});
+          });
+          scaf.forEach(function(s){
+            var el = document.getElementById(s[0]); if(!el) return;
+            el.animate([{opacity:0},{opacity:.55}],{duration:200, delay:s[1], easing:'ease-out', fill:'forwards'});
+            el.animate([{opacity:.55},{opacity:0}],{duration:380, delay:s[1]+s[2], easing:'ease-in', fill:'forwards'});
+          });
+          var pop = document.getElementById('sc-pop');
+          if(pop){
+            pop.animate([{opacity:0,transform:'scale(0.2)'},{opacity:.9,transform:'scale(1.06)',offset:.7},{opacity:0,transform:'scale(1.18)'}],
+              {duration:560, delay:2820*T, easing:'cubic-bezier(0.2,0.7,0.4,1.65)', fill:'forwards'});
+          }
+        }
+        var flood = document.getElementById('gflood');
+        if(flood){ flood.animate([{opacity:0},{opacity:1}],{duration:380*K, delay:FLOOD, easing:'ease-in', fill:'forwards'}); }
+      }
+
+      function run(){
+        hero.classList.add('is-on');
+        startAnims();
+        setTimeout(function(){ hero.classList.add('photo-in'); }, RESOLVE);
+      }
+
+      // ---- art: fetch our line-art SVG from the Shopify CDN, namespace its classes, inject under the mask ----
+      var ART = 'https://cdn.shopify.com/s/files/1/0502/8695/2631/files/bbc-frame-line.svg?v=1781292517';
+      var artState = 0; // 0 pending, 1 ready, -1 failed
+      var inView = false, started = false;
+
+      function maybe(){
+        if(started || !inView || artState === 0) return;
+        started = true;
+        if(artState === 1){ run(); }
+        else { hero.classList.add('is-on'); setTimeout(function(){ hero.classList.add('photo-in'); }, 600); }
+      }
+
+      fetch(ART).then(function(r){ if(!r.ok){ throw new Error('art'); } return r.text(); }).then(function(t){
+        t = t.replace(/\.b(\d)\{/g, '.bbcb$1{').replace(/class="b(\d)"/g, 'class="bbcb$1"');
+        var doc = new DOMParser().parseFromString(t, 'image/svg+xml');
+        var root = doc.documentElement;
+        var g = document.getElementById('bbcArt');
+        if(!g || !root || root.nodeName !== 'svg' || doc.querySelector('parsererror')){ throw new Error('art'); }
+        while(root.firstChild){ g.appendChild(document.adoptNode(root.firstChild)); }
+        artState = 1; maybe();
+      }).catch(function(){ artState = -1; maybe(); });
+
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting && !inView){ inView = true; io.disconnect(); maybe(); }
+        });
+      }, {threshold:.35});
+      io.observe(hero);
+      setTimeout(function(){ if(!inView){ inView = true; maybe(); } }, 2500);
+      setTimeout(function(){ if(!started){ if(artState === 0){ artState = -1; } inView = true; maybe(); } }, 6000);
+
+      // ?frame=<ms> — freeze the composition at one timestamp (verification rig; inert without the param)
+      var qsm = location.search.match(/[?&]frame=(\d+)/);
+      if(qsm){
+        var seekT = +qsm[1];
+        started = true; io.disconnect();
+        var poll = setInterval(function(){
+          if(artState === 0){ return; }
+          clearInterval(poll);
+          hero.classList.add('is-on');
+          startAnims();
+          requestAnimationFrame(function(){
+            var pre = document.getAnimations();
+            pre.forEach(function(a){ a.pause(); try{ a.currentTime = seekT; }catch(e){} });
+            if(seekT >= RESOLVE){
+              hero.classList.add('photo-in');
+              requestAnimationFrame(function(){ requestAnimationFrame(function(){
+                document.getAnimations().forEach(function(a){
+                  if(pre.indexOf(a) === -1){ a.pause(); try{ a.currentTime = seekT - RESOLVE; }catch(e){} }
+                });
+                document.title = 'FROZEN@' + seekT;
+              }); });
+            } else {
+              document.title = 'FROZEN@' + seekT;
+            }
+          });
+        }, 50);
+      }
+    }());
+  </script>
+
+  {%- comment -%} ---------- STATS ---------- {%- endcomment -%}
+  
+
+
+  {%- comment -%} ---------- PRESS (standard block, 2026-07-22) ----------
+     Rendered via snippets/bbc-press.liquid — the sitewide standard
+     (research: quote-anchored logo bar; contract in qa/PRESS-BLOCK.md).
+     Styled-text fake logos REMOVED (real logos only, house rule).
+  ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-steel">
+    <div class="rd-wrap">
+      {%- comment -%} reel:false 2026-08-18 (James: "opening press layout looks poor") —
+      the ticker clipped long quotes mid-sentence at position 2. Contract default form
+      instead: ONE static anchor quote + real logo row. Centred: the proof strip is a
+      full-width trust moment, not axis text. {%- endcomment -%}
+      {%- render 'bbc-press',
+          style: 'bar',
+          align: 'left',
+          reel: false,
+          preset: 'national',
+          label: section.settings.press_kicker,
+          quote: section.settings.press_quote,
+          cite: section.settings.press_cite,
+          more_label: section.settings.press_more_label,
+          more_url: section.settings.press_more_url -%}
+    </div>
+  </section>
+  {%- comment -%} Band order v1 (Claude Design reorder, James approved 2026-08-18):
+hero > press > doors > why-bamboo(paper) > kits > film > reviews(steel) > impact > loop > cta.
+Surface sequence dark,steel,base,paper,base,dark,steel,dark,steel,dark - no same-surface
+adjacency (PAGE-STANDARD S3 kept; loop band documents its own moveability). {%- endcomment -%}
+{%- comment -%} ---------- DOORS ---------- {%- endcomment -%}
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      <div class="rd-center rd-cmp-20294">
+        <span class="rd-eyebrow">{{ section.settings.doors_kicker }}</span>
+        <h2 class="rd-reveal">{{ section.settings.doors_title }}</h2>
+        <p class="rd-lede rd-mt2">{{ section.settings.doors_intro }}</p>
+      </div>
+      <div class="rd-grid rd-g3 rd-stagger">
+        {%- for block in section.blocks -%}{%- if block.type == 'door' -%}
+          {%- assign door_url = block.settings.link_url | default: '/' -%}
+          <a class="rd-door" href="{{ door_url }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 1200 }}" srcset="{{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 800 }} 800w, {{ block.settings.image | image_url: width: 1200 }} 1200w, {{ block.settings.image | image_url: width: 1600 }} 1600w" sizes="(max-width:749px) 92vw, 33vw" alt="{{ block.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
+            {%- else -%}
+              <img src="{{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '900x' }}" srcset="{{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '400x' }} 400w, {{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '600x' }} 600w, {{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '900x' }} 900w, {{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '1400x' }} 1400w" sizes="(max-width:749px) 92vw, 42vw" alt="{{ block.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="1200" height="900">
+            {%- endif -%}
+            <div class="rd-ov"></div>
+            <div class="rd-c">
+              {%- if block.settings.tag != blank -%}<span class="rd-tag rd-lime">{{ block.settings.tag }}</span>{%- endif -%}
+              <h3 class="rd-mt2">{{ block.settings.title }}</h3>
+              <p>{{ block.settings.body }}</p>
+              {%- if block.settings.link_label != blank -%}<span class="rd-btn rd-lime">{{ block.settings.link_label | replace: " →", " →" }}</span>{%- endif -%}
+            </div>
+          </a>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- WHY BAMBOO (4-up pillar band) ---------- {%- endcomment -%}
+  {%- assign why_url = section.settings.why_link_url | default: '/pages/why-bamboo' -%}
+  <style>
+    {%- comment -%} Surface must come from the colour grammar. This band was the ONLY place in
+      the 2026 estate painting a band with --bbc-cream (#faf7f0) — a fifth light tone next to
+      the canonical four Impact uses (paper #F1E9D8, bone #E6DCC8, forest, steel). Measured
+      2026-08-03: the homepage rendered 6 distinct band surfaces against Impact's 4, and this
+      was the odd one. It was fragile as well as off-palette — --bbc-cream is declared twice
+      with different values (#faf7f0 in bbc-aaa-2026.css, #f8fafc in bbc-foundation.css), so
+      the band's colour depended on which sheet won. --paper is the documented light surface.
+    {%- endcomment -%}
+    .bbc-rd-home .acc{ background:var(--paper,#F1E9D8); }
+    .bbc-rd-home .acc-head{ max-width:60ch; }
+    .bbc-rd-home .acc-title{ font-family:var(--rd-sans),sans-serif; font-weight:800;
+      font-size:clamp(30px,4.4vw,48px); line-height:1.04; letter-spacing:-.02em; color:var(--bbc-forest,#003C32); margin:.5rem 0 0; text-align:left; text-wrap:balance; }
+    .bbc-rd-home .acc-lede{ font-family:'Atkinson Hyperlegible',var(--rd-sans),sans-serif; font-size:clamp(16px,1.3vw,19px);
+      line-height:1.55; color:var(--bbc-ink,#14211c); max-width:60ch; margin:1rem 0 0; }
+    .bbc-rd-home .acc-stats{ list-style:none; display:flex; flex-wrap:wrap; gap:0; margin:2.2rem 0 0; padding:0; }
+    .bbc-rd-home .acc-stats li{ padding:0 1.6rem; border-right:1px solid rgba(7,62,39,.18); }
+    .bbc-rd-home .acc-stats li:first-child{ padding-left:0; }
+    .bbc-rd-home .acc-stats li:last-child{ border-right:0; }
+    .bbc-rd-home .acc-stats b{ display:block; font-family:var(--rd-sans),sans-serif; font-weight:800;
+      font-size:clamp(28px,3.4vw,42px); line-height:1; color:var(--bbc-forest,#003C32); }
+    .bbc-rd-home .acc-stats span{ font-size:.85rem; color:var(--bbc-slate,#334155); }
+    .bbc-rd-home .acc-cards{ list-style:none; padding:0; margin:2.6rem 0 0;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:28px; }
+    .bbc-rd-home .acc-card a{ display:block; text-decoration:none !important; color:inherit; }
+    .bbc-rd-home .acc-card a:hover h3{ text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:3px; }
+    .bbc-rd-home .acc-card img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:14px; display:block;
+      transition:transform var(--mo-base) ease, box-shadow var(--mo-base) ease; background:#e7e2d5; }
+    .bbc-rd-home .acc-card a:hover img{ transform:scale(1.03); box-shadow:0 12px 30px rgba(7,62,39,.20); }
+    .bbc-rd-home .acc-card h3{ font-family:var(--rd-sans),sans-serif; font-weight:800; font-size:19px;
+      color:var(--bbc-forest,#003C32); margin:1rem 0 .25rem; }
+    .bbc-rd-home .acc-card p{ font-family:'Atkinson Hyperlegible',var(--rd-sans),sans-serif; font-size:15px; line-height:1.5;
+      color:var(--bbc-ink,#14211c); margin:0; max-width:42ch; }
+    .bbc-rd-home .acc-cta{ margin:2.4rem 0 0; }
+    @media(max-width:560px){ .bbc-rd-home .acc-stats li{ padding:0 1rem; } }
+    .bbc-rd.bbc-rd-home .rd-cscard__quote{ font-size:26px; line-height:1.3; }
+    .bbc-rd-home .rd-csgrid{ grid-template-columns:1.15fr 1fr; }
+    .bbc-rd-home .rd-csgrid > :first-child{ grid-row:span 3; }
+    @media (max-width:749px){ .bbc-rd-home .rd-csgrid{ grid-template-columns:1fr; } .bbc-rd-home .rd-csgrid > :first-child{ grid-row:auto; } }
+  </style>
+  <section class="rd-pad rd-paper acc" id="why-bamboo">
+    <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="rd-wrap">
+      <div class="acc-head">
+        <span class="rd-eyebrow">{{ section.settings.why_kicker | default: 'Built by anyone' }}</span>
+        <h2 class="rd-reveal acc-title">{{ section.settings.why_title | default: 'no workshop. no welding. no experience needed.' }}</h2>
+        <p class="acc-lede">{{ section.settings.why_lede | default: 'Bamboo frames go together with a few hand tools, a jig and a weekend — and most builders have never made anything before.' }}</p>
+        {%- comment -%} Spec micro-line. Gated on blank (2026-08-18): with `| default:` baked in,
+          clearing the setting in the editor did nothing — the hardcoded string rendered anyway.
+          Same gating-bug family as the impact story band. Blank now genuinely means blank.
+          James removed the BS ISO 22157 / 84.3 MPa / Swansea line from this band; the setting
+          stays so a new one can be typed in the editor. {%- endcomment -%}
+        {%- if section.settings.fab_why_spec != blank -%}
+          <p class="rd-specline">{{ section.settings.fab_why_spec }}</p>
+        {%- endif -%}
+      </div>
+      <ul class="acc-stats">
+        <li><b>{{ section.settings.why_stat1_num | default: '80%' }}</b><span>{{ section.settings.why_stat1_label | default: 'of kits ship beyond the UK' }}</span></li>
+        <li><b>{{ section.settings.why_stat2_num | default: '45' }}</b><span>{{ section.settings.why_stat2_label | default: 'countries' }}</span></li>
+        <li><b>{{ section.settings.why_stat3_num | default: '3,500+' }}</b><span>{{ section.settings.why_stat3_label | default: 'frames built at home' }}</span></li>
+      </ul>
+      <p class="rd-stat-src">{{ section.settings.why_stat_src | default: 'BBC training & customer records' }}</p>
+      <ul class="acc-cards rd-stagger">
+        <li class="acc-card"><a href="{{ section.settings.why_card1_url | default: '/pages/workshops' }}">
+          {%- render "bbc-media", image: section.settings.why_card1_img, fallback: "bbc-rd-wb-kit.jpg", video: section.settings.why_card1_video_file, youtube: section.settings.why_card1_video_url, alt: section.settings.why_card1_alt -%}
+          <h3>{{ section.settings.why_card1_title | default: 'simple hand tools' }}</h3>
+          <p>{{ section.settings.why_card1_body | default: 'A file, a saw, some sandpaper — everything else comes in the kit.' }}</p>
+        </a></li>
+        <li class="acc-card"><a href="{{ section.settings.why_card2_url | default: '/pages/workshops' }}">
+          {%- render "bbc-media", image: section.settings.why_card2_img, fallback: "bbc-rd-wb-builder.jpg", video: section.settings.why_card2_video_file, youtube: section.settings.why_card2_video_url, alt: section.settings.why_card2_alt -%}
+          <h3>{{ section.settings.why_card2_title | default: 'no experience needed' }}</h3>
+          <p>{{ section.settings.why_card2_body | default: 'Most builders have never made anything before. We guide every step.' }}</p>
+        </a></li>
+        <li class="acc-card"><a href="{{ section.settings.why_card3_url | default: '/pages/workshops' }}">
+          {%- render "bbc-media", image: section.settings.why_card3_img, fallback: "bbc-rd-wb-group.jpg", video: section.settings.why_card3_video_file, youtube: section.settings.why_card3_video_url, alt: section.settings.why_card3_alt -%}
+          <h3>{{ section.settings.why_card3_title | default: 'any age, anywhere' }}</h3>
+          <p>{{ section.settings.why_card3_body | default: 'Built at kitchen tables in 45 countries, by people of all ages.' }}</p>
+        </a></li>
+        <li class="acc-card"><a href="{{ section.settings.why_card4_url | default: '/pages/workshops' }}">
+          <img src="{% if section.settings.why_card4_img != blank %}{{ section.settings.why_card4_img | image_url: width: 480 }}{% else %}{{ 'bbc-rd-wb-ride.jpg' | asset_url }}{% endif %}" alt="{{ section.settings.why_card4_alt | default: 'Riding a finished bamboo bike on the road' | escape }}" width="480" height="360" loading="lazy">
+          <h3>{{ section.settings.why_card4_title | default: 'built to last' }}</h3>
+          <p>{{ section.settings.why_card4_body | default: 'Light, strong and it soaks up the road. These bikes get ridden hard.' }}</p>
+        </a></li>
+      </ul>
+      <div class="acc-cta">
+        <a class="ew-btn is-lime" href="{{ section.settings.why_cta_url | default: '/pages/workshops' }}">{{ section.settings.why_cta_label | default: 'See how a build works&nbsp;&rarr;' }}</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- KITS ---------- {%- endcomment -%}
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      <div class="rd-flex rd-between rd-mb-36px">
+        <div><span class="rd-eyebrow">{{ section.settings.kits_kicker }}</span><h2 class="rd-reveal">{{ section.settings.kits_title }}</h2></div>
+        {%- comment -%} Same blank-gate as the why-bamboo spec line above — this one keeps its
+          text, but clearing it in the editor must actually clear it. {%- endcomment -%}
+        {%- if section.settings.fab_kits_spec != blank -%}
+          <p class="rd-specline">{{ section.settings.fab_kits_spec }}</p>
+        {%- endif -%}
+        {%- if section.settings.kits_link_label != blank -%}<a class="rd-btn rd-ghost" href="{{ kits_url }}">{{ section.settings.kits_link_label }}</a>{%- endif -%}
+      </div>
+      <div class="rd-grid rd-g4 rd-stagger">
+        {%- for block in section.blocks -%}{%- if block.type == 'kit' -%}
+          {%- assign kit_link = block.settings.link_url | default: kits_url -%}
+          <a class="rd-reveal rd-card" href="{{ kit_link }}" {{ block.shopify_attributes }}>
+            <div class="rd-ph">
+              {%- if block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 900 }}" srcset="{{ block.settings.image | image_url: width: 400 }} 400w, {{ block.settings.image | image_url: width: 600 }} 600w, {{ block.settings.image | image_url: width: 900 }} 900w, {{ block.settings.image | image_url: width: 1200 }} 1200w" sizes="(max-width:749px) 92vw, 30vw" alt="{{ block.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
+              {%- else -%}
+                {%- case block.settings.fallback -%}
+                  {%- when 'bbc-rd-prod-gravel.jpg' -%}<img src="https://cdn.shopify.com/s/files/1/0502/8695/2631/files/gravel-bundle.webp?v=1781533204&width=900" srcset="https://cdn.shopify.com/s/files/1/0502/8695/2631/files/gravel-bundle.webp?v=1781533204&width=400 400w, https://cdn.shopify.com/s/files/1/0502/8695/2631/files/gravel-bundle.webp?v=1781533204&width=600 600w, https://cdn.shopify.com/s/files/1/0502/8695/2631/files/gravel-bundle.webp?v=1781533204&width=900 900w" sizes="(max-width:749px) 92vw, 42vw" alt="Gravel lugged bamboo frame kit — parts laid out flat" width="1600" height="1000" loading="lazy">
+                  {%- when 'bbc-rd-prod-build.jpg' -%}<img src="https://cdn.shopify.com/s/files/1/0502/8695/2631/files/components.webp?v=1781533169&width=900" srcset="https://cdn.shopify.com/s/files/1/0502/8695/2631/files/components.webp?v=1781533169&width=400 400w, https://cdn.shopify.com/s/files/1/0502/8695/2631/files/components.webp?v=1781533169&width=600 600w, https://cdn.shopify.com/s/files/1/0502/8695/2631/files/components.webp?v=1781533169&width=900 900w" sizes="(max-width:749px) 92vw, 42vw" alt="Bamboo bike components and tools laid out — wheels, saddle and fittings" width="1600" height="1000" loading="lazy">
+                  {%- else -%}<img src="{{ block.settings.fallback | default: 'bbc-rd-prod-gravel.jpg' | asset_img_url: '900x' }}" srcset="{{ block.settings.fallback | default: 'bbc-rd-prod-gravel.jpg' | asset_img_url: '400x' }} 400w, {{ block.settings.fallback | default: 'bbc-rd-prod-gravel.jpg' | asset_img_url: '600x' }} 600w, {{ block.settings.fallback | default: 'bbc-rd-prod-gravel.jpg' | asset_img_url: '900x' }} 900w, {{ block.settings.fallback | default: 'bbc-rd-prod-gravel.jpg' | asset_img_url: '1400x' }} 1400w" sizes="(max-width:749px) 92vw, 42vw" alt="{{ block.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="1600" height="1000">
+                {%- endcase -%}
+              {%- endif -%}
+            </div>
+            <div class="rd-body"><h3 class="rd-fs-21px">{{ block.settings.title }}</h3><p>{{ block.settings.body }}</p></div>
+          </a>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- WATCH A BUILD (YouTube, inline-play) ----------
+     Rebuilt 2026-07-22 (James): complete-build film sourced from the BBC channel —
+     UhuzVI2yVNU "Building a Bamboo Bike Frame from a Home Kit (Full Build)", the
+     channel's best-performing full build (16.4k views, 9m25s, box of raw bamboo →
+     finished frame). Poster + lime play → plays inline via bbc-media (no iframe
+     until click). Legacy video_mp4 path kept only when no YouTube URL is set.
+  ---------- {%- endcomment -%}
+  {%- comment -%} NOTE: no rd-center — the homepage's one-left-axis rule
+     (bbc-statement.css:172) forces mw-wraps left inside rd-center; we follow
+     the axis instead: left-aligned head, full-wrap cinematic video. {%- endcomment -%}
+  {%- if section.settings.show_video != false -%}
+  <section class="rd-pad rd-dark">
+    <div class="rd-wrap">
+      {%- if section.settings.video_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.video_eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.video_title != blank -%}<h2 class="rd-reveal rd-mt2">{{ section.settings.video_title }}</h2>{%- endif -%}
+      {%- if section.settings.video_lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.video_lede }}</p>{%- endif -%}
+      {%- assign yt = section.settings.video_url | default: 'https://www.youtube.com/watch?v=DAMHyvr698k' -%}
+      {%- if yt != blank -%}
+      <div class="rd-reveal rd-mt3" style="border-radius:14px;overflow:hidden;">
+        {%- render 'bbc-media', image: section.settings.video_poster, youtube: yt, label: section.settings.video_chip, alt: section.settings.video_title, class: 'bbc-media--ar169', sizes: '(max-width:749px) 100vw, 1136px' -%}
+      </div>
+      {%- elsif section.settings.video_mp4 != blank -%}
+      <div class="rd-video rd-mt3" style="position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#06231C;">
+        <video poster="{% if section.settings.video_poster != blank %}{{ section.settings.video_poster | image_url: width: 1600 }}{% else %}{{ 'bbc-rd-workshop.jpg' | asset_url }}{% endif %}" controls preload="none" playsinline aria-label="{{ section.settings.video_title | escape }}" style="position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;">
+          <source src="{{ section.settings.video_mp4 }}" type="video/mp4">
+        </video>
+      </div>
+      {%- endif -%}
+      {%- if section.settings.video_credit != blank -%}<p class="rd-ship-note rd-mt2">{{ section.settings.video_credit }}</p>{%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+
+  {%- comment -%} PROVEN RIDE band REMOVED 2026-08-19 (James: remove from home page).
+     Its settings (tx_proven_* , press quotes, GCN/Taro cards) stay in the schema but no
+     longer render; the ride-quality proof lives on /pages/why-bamboo. {%- endcomment -%}
+
+  {%- comment -%} ---------- IMPACT FEATURE ---------- {%- endcomment -%}
+  <section class="rd-split rd-dark">
+    <div class="rd-reveal rd-media rd-dimwrap">
+      <span class="rd-dim-callout">{{ section.settings.fab_impact_callout | default: 'cohort · frames ride home' }}</span>
+      {%- if section.settings.impact_band_image != blank -%}
+        <img src="{{ section.settings.impact_band_image | image_url: width: 1400 }}" srcset="{{ section.settings.impact_band_image | image_url: width: 600 }} 600w, {{ section.settings.impact_band_image | image_url: width: 900 }} 900w, {{ section.settings.impact_band_image | image_url: width: 1400 }} 1400w, {{ section.settings.impact_band_image | image_url: width: 1800 }} 1800w" sizes="(max-width:749px) 100vw, 50vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="{{ section.settings.impact_band_image.width }}" height="{{ section.settings.impact_band_image.height }}" loading="lazy">
+      {%- else -%}
+        {%- if section.settings.impact_band_image != blank -%}<img src="{{ section.settings.impact_band_image | image_url: width: 900 }}" srcset="{{ section.settings.impact_band_image | image_url: width: 400 }} 400w, {{ section.settings.impact_band_image | image_url: width: 600 }} 600w, {{ section.settings.impact_band_image | image_url: width: 900 }} 900w, {{ section.settings.impact_band_image | image_url: width: 1400 }} 1400w" sizes="(max-width:749px) 92vw, 42vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="{{ section.settings.impact_band_image.width }}" height="{{ section.settings.impact_band_image.height }}">{%- else -%}<img src="{{ 'bbc-rd-cohort.jpg' | asset_img_url: '900x' }}" srcset="{{ 'bbc-rd-cohort.jpg' | asset_img_url: '400x' }} 400w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '600x' }} 600w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '900x' }} 900w, {{ 'bbc-rd-cohort.jpg' | asset_img_url: '1400x' }} 1400w" sizes="(max-width:749px) 92vw, 42vw" alt="{{ section.settings.impact_image_alt | default: 'Builders together with the bamboo bikes they made' | escape }}" width="1400" height="933">{%- endif -%}
+      {%- endif -%}
+    </div>
+    <div class="rd-txt">
+      <span class="rd-eyebrow rd-on-dark">{{ section.settings.impact_kicker }}</span>
+      <h2 class="rd-reveal">{{ section.settings.impact_title }}</h2>
+      <p class="rd-lede rd-mt2">{{ section.settings.impact_body }}</p>
+      {%- if section.settings.impact_quote != blank -%}
+        <div class="rd-reveal rd-pull rd-mt3">
+          <p class="rd-q">{{ section.settings.impact_quote }}</p>
+          {%- if section.settings.impact_cite != blank -%}<cite>{{ section.settings.impact_cite }}</cite>{%- endif -%}
+        </div>
+      {%- endif -%}
+      <div class="rd-flex rd-mt3">
+        {%- if section.settings.impact_cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ feat_cta1 }}">{{ section.settings.impact_cta1_label }}</a>{%- endif -%}
+        {%- if section.settings.impact_cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ feat_cta2 }}">{{ section.settings.impact_cta2_label }}</a>{%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} FUNDING LOOP band REMOVED 2026-08-19 (James: remove "how it works" from
+     home page). loop_* settings stay in the schema but no longer render; the mechanism
+     story lives on /pages/impact. NOTE: impact feature (dark) now sits directly above the
+     final CTA (dark) — flagged to James. {%- endcomment -%}
+
+  {%- comment -%} ---------- FINAL CTA ---------- {%- endcomment -%}
+  <section class="rd-pad rd-dark rd-center">
+    <div class="rd-wrap rd-mw-760px">
+      <span class="rd-eyebrow rd-on-dark">{{ section.settings.cta_kicker }}</span>
+      <h2 class="rd-reveal">{{ section.settings.cta_title }}</h2>
+      <p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.cta_lede }}</p>
+      <div class="rd-flex rd-mt3 rd-jc-center">
+        {%- if section.settings.cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ final_c1 }}">{{ section.settings.cta1_label }}</a>{%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ final_c2 }}">{{ section.settings.cta2_label }}</a>{%- endif -%}
+        {%- if section.settings.cta3_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ final_c3 }}">{{ section.settings.cta3_label }}</a>{%- endif -%}
+      </div>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Home 2026 (new design)",
+  "tag": "section",
+  "class": "section bbc-home-2026-wrap",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "impact_band_image",
+      "label": "Impact band image (blank = built-in cohort photo)"
+    },
+    {
+      "type": "header",
+      "content": "Editability pass 2026-08-10"
+    },
+    {
+      "type": "text",
+      "id": "tx_drg_n_186_1",
+      "label": "Drg N&#186;1",
+      "default": "Drg N&#186;1"
+    },
+    {
+      "type": "text",
+      "id": "tx_est_2012",
+      "label": "Est. 2012",
+      "default": "Est. 2012"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_captions",
+      "label": "Hero captions - one per line, cycles with the film",
+      "info": "10 lines x 7.5s = the 75s film loop, so the cycle stays in step. Timing follows the line count automatically. CHECK ANY FACTUAL LINE against the vault Claims Register before adding one.",
+      "default": "It grew itself.\nNo welding. No workshop.\nHand tools and a weekend.\nNatural vibration damping.\nTubing tested to BS ISO 22157.\nEvery frame is one of one.\nMost builders start from scratch.\nReal engineering you can hold.\nGrown, not mined.\nSkills that outlast the bike."
+    },
+    {
+      "type": "text",
+      "id": "tx_bamboo_bicycle_club_est_2012",
+      "label": "Bamboo Bicycle Club &middot; Est. 20",
+      "default": "Bamboo Bicycle Club &middot; Est. 2012 &middot; London"
+    },
+    {
+      "type": "text",
+      "id": "tx_proven_on_the_road",
+      "label": "Proven on the road",
+      "default": "Proven on the road"
+    },
+    {
+      "type": "text",
+      "id": "tx_bamboo_soaks_up_the_road_rid",
+      "label": "bamboo soaks up the road — riders an",
+      "default": "bamboo soaks up the road — riders and reviewers agree."
+    },
+    {
+      "type": "textarea",
+      "id": "tx_not_just_our_word_national_p",
+      "label": "Not just our word. National press, p",
+      "default": "Not just our word. National press, pro reviewers and ten-year riders all land on the same thing: it rides beautifully."
+    },
+    {
+      "type": "text",
+      "id": "tx_bamboo_naturally_dampens_vib",
+      "label": "Bamboo naturally dampens vibration, ",
+      "default": "Bamboo naturally dampens vibration, allowing the smoothest ride."
+    },
+    {
+      "type": "text",
+      "id": "tx_the_guardian",
+      "label": "The Guardian",
+      "default": "The Guardian"
+    },
+    {
+      "type": "text",
+      "id": "tx_a_really_really_comfortable",
+      "label": "A really, really comfortable ride &m",
+      "default": "A really, really comfortable ride &mdash; smooth but not too flexy."
+    },
+    {
+      "type": "text",
+      "id": "tx_kate_rawles_bikeradar",
+      "label": "Kate Rawles &middot; BikeRadar",
+      "default": "Kate Rawles &middot; BikeRadar"
+    },
+    {
+      "type": "text",
+      "id": "why_stat_src",
+      "label": "Why-band stat source line",
+      "default": "BBC training & customer records"
+    },
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image (sunset rider)"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero image alt text",
+      "default": "A rider on a bamboo road bike at sunset on an open hilltop road"
+    },
+    {
+      "type": "checkbox",
+      "id": "hero_video_on",
+      "label": "Hero video (overrides the draw-on animation)",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "hero_video_style",
+      "label": "Hero video style",
+      "options": [
+        {
+          "value": "film",
+          "label": "Full colour film"
+        },
+        {
+          "value": "duotone",
+          "label": "Duotone film"
+        }
+      ],
+      "default": "film"
+    },
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Eyebrow",
+      "default": "Build bikes · build skills · build futures"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Headline",
+      "default": "more than a bike. a way forward."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_lede",
+      "label": "Lede",
+      "default": "Every bamboo bike built in our workshops funds accredited skills programmes — in schools, with young people, and inside prisons — opening real routes into work and further learning for people too often left out."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_sub",
+      "label": "Hero sub-line (under the headline)",
+      "info": "One line. Mirrors the locked vault mission. Blank hides it.",
+      "default": "Every bike built in our workshops funds skills programmes — in schools before exclusion, and in prisons after."
+    },
+    {
+      "type": "text",
+      "id": "hero_cta1_label",
+      "label": "Primary CTA label",
+      "default": "Book a build"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta1_url",
+      "label": "Primary CTA link (defaults to the workshop page)"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta2_label",
+      "label": "Secondary CTA label",
+      "default": "See our impact"
+    },
+    {
+      "type": "header",
+      "content": "Hero proof row"
+    },
+    {
+      "type": "checkbox",
+      "id": "hero_proof_on",
+      "label": "Show proof figures in hero",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "hero_proof1_num",
+      "label": "Figure 1",
+      "default": "4,000+"
+    },
+    {
+      "type": "text",
+      "id": "hero_sticker",
+      "label": "Photo sticker (blank = off)",
+      "default": "hand-built bamboo · lugged by hand"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof1_label",
+      "label": "Figure 1 label",
+      "default": "people trained"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof2_num",
+      "label": "Figure 2",
+      "default": "45"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof2_label",
+      "label": "Figure 2 label",
+      "default": "countries"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof3_num",
+      "label": "Figure 3",
+      "default": "2012"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof3_label",
+      "label": "Figure 3 label",
+      "default": "building since"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof_src",
+      "label": "Stats source line (Law 6)",
+      "default": "BBC training & customer records"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta2_url",
+      "label": "Secondary CTA link (defaults to the impact page)"
+    },
+    {
+      "type": "header",
+      "content": "Funding loop"
+    },
+    {
+      "type": "text",
+      "id": "loop_kicker",
+      "label": "Kicker",
+      "default": "How it works"
+    },
+    {
+      "type": "text",
+      "id": "loop_heading",
+      "label": "Heading",
+      "default": "one craft. one engine for change."
+    },
+    {
+      "type": "textarea",
+      "id": "loop_intro",
+      "label": "Intro",
+      "default": "We're not a bike shop with a charity attached. The workshops fund the mission — directly."
+    },
+    {
+      "type": "text",
+      "id": "loop_s1_big",
+      "label": "Step 1 title",
+      "default": "You build"
+    },
+    {
+      "type": "text",
+      "id": "loop_s1_sm",
+      "label": "Step 1 detail",
+      "default": "a bamboo bike · from £375"
+    },
+    {
+      "type": "text",
+      "id": "loop_s2_big",
+      "label": "Step 2 title",
+      "default": "Profits fund"
+    },
+    {
+      "type": "text",
+      "id": "loop_s2_sm",
+      "label": "Step 2 detail",
+      "default": "accredited skills courses"
+    },
+    {
+      "type": "text",
+      "id": "loop_s3_big",
+      "label": "Step 3 title",
+      "default": "A life changes"
+    },
+    {
+      "type": "text",
+      "id": "loop_s3_sm",
+      "label": "Step 3 detail",
+      "default": "skills · family · futures"
+    },
+    {
+      "type": "header",
+      "content": "Doors (intro)"
+    },
+    {
+      "type": "text",
+      "id": "doors_kicker",
+      "label": "Kicker",
+      "default": "However you've arrived"
+    },
+    {
+      "type": "text",
+      "id": "doors_title",
+      "label": "Title",
+      "default": "one club, many ways in."
+    },
+    {
+      "type": "textarea",
+      "id": "doors_intro",
+      "label": "Intro",
+      "default": "Whether you want to build a bike, run a programme, or back the mission — there's a door for you."
+    },
+    {
+      "type": "header",
+      "content": "Impact feature"
+    },
+    {
+      "type": "image_picker",
+      "id": "impact_image",
+      "label": "Image (workshop, no identifiable learners)"
+    },
+    {
+      "type": "text",
+      "id": "impact_image_alt",
+      "label": "Image alt text",
+      "default": "A bamboo bicycle frame taking shape on a build template"
+    },
+    {
+      "type": "text",
+      "id": "impact_kicker",
+      "label": "Kicker",
+      "default": "Our mission"
+    },
+    {
+      "type": "text",
+      "id": "impact_title",
+      "label": "Title",
+      "default": "building bikes. building futures."
+    },
+    {
+      "type": "textarea",
+      "id": "impact_body",
+      "label": "Body",
+      "default": "The same hands-on build runs in schools, with young people facing barriers, and inside prisons — turning making into real skills, confidence and routes into work for people the system too often leaves out. Our prison programme, Build to Bond, is the proof it works: an OCN Level 2 accredited course with 90% completion."
+    },
+    {
+      "type": "textarea",
+      "id": "impact_quote",
+      "label": "Pull quote",
+      "default": "The bike was the first thing I ever made with my own hands. When my daughter rode it on family visit day, I felt like a dad again."
+    },
+    {
+      "type": "text",
+      "id": "impact_cite",
+      "label": "Quote attribution",
+      "default": "— A Build to Bond maker"
+    },
+    {
+      "type": "text",
+      "id": "impact_cta1_label",
+      "label": "Primary CTA label",
+      "default": "Read the impact"
+    },
+    {
+      "type": "url",
+      "id": "impact_cta1_url",
+      "label": "Primary CTA link (defaults to the impact page)"
+    },
+    {
+      "type": "text",
+      "id": "impact_cta2_label",
+      "label": "Secondary CTA label",
+      "default": "Run the programme"
+    },
+    {
+      "type": "url",
+      "id": "impact_cta2_url",
+      "label": "Secondary CTA link (defaults to the education page)"
+    },
+    {
+      "type": "header",
+      "content": "Why bamboo"
+    },
+    {
+      "type": "text",
+      "id": "why_kicker",
+      "label": "Kicker",
+      "default": "Why bamboo"
+    },
+    {
+      "type": "text",
+      "id": "why_title",
+      "label": "Title",
+      "default": "four reasons the material does the heavy lifting"
+    },
+    {
+      "type": "textarea",
+      "id": "why_lede",
+      "label": "Lede",
+      "default": "Bamboo is a natural composite — grown, not manufactured. It earns its place four ways."
+    },
+    {
+      "type": "text",
+      "id": "why_link_label",
+      "label": "Link label",
+      "default": "See the full science & testing →"
+    },
+    {
+      "type": "url",
+      "id": "why_link_url",
+      "label": "Why-bamboo link (defaults to /pages/why-bamboo)"
+    },
+    {
+      "type": "header",
+      "content": "Why bamboo · Pillar 1 — Durability"
+    },
+    {
+      "type": "text",
+      "id": "p1_title",
+      "label": "Title",
+      "default": "simple hand tools"
+    },
+    {
+      "type": "textarea",
+      "id": "p1_body",
+      "label": "Body",
+      "default": "A file, a saw, sandpaper. Everything else is in the kit."
+    },
+    {
+      "type": "header",
+      "content": "Why bamboo · Pillar 2 — Ride quality"
+    },
+    {
+      "type": "text",
+      "id": "p2_title",
+      "label": "Title",
+      "default": "rides smoother"
+    },
+    {
+      "type": "textarea",
+      "id": "p2_body",
+      "label": "Body",
+      "default": "Natural fibres soak up the road buzz that aluminium and steel pass straight to your hands."
+    },
+    {
+      "type": "header",
+      "content": "Why bamboo · Pillar 3 — Accessibility"
+    },
+    {
+      "type": "text",
+      "id": "p3_title",
+      "label": "Title",
+      "default": "anyone can build it"
+    },
+    {
+      "type": "textarea",
+      "id": "p3_body",
+      "label": "Body",
+      "default": "No mines or smelters — just bamboo, a jig and hand tools. Most builders start from scratch."
+    },
+    {
+      "type": "header",
+      "content": "Why bamboo · Pillar 4 — Sustainability"
+    },
+    {
+      "type": "text",
+      "id": "p4_title",
+      "label": "Title",
+      "default": "greener by far"
+    },
+    {
+      "type": "textarea",
+      "id": "p4_body",
+      "label": "Body",
+      "default": "Bamboo regrows in 3–5 years — a rapidly renewable grass, grown not mined. Build it yourself and you can repair it too, so it lasts."
+    },
+    {
+      "type": "header",
+      "content": "Watch a build (video)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_video",
+      "label": "Show video section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "video_eyebrow",
+      "label": "Eyebrow",
+      "default": "Watch a real build"
+    },
+    {
+      "type": "text",
+      "id": "video_title",
+      "label": "Heading",
+      "default": "from bare bamboo to the open road."
+    },
+    {
+      "type": "textarea",
+      "id": "video_lede",
+      "label": "Lede (under the heading)",
+      "default": "One kit, one pair of hands — the whole build, from a box of raw bamboo to a frame you can ride."
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "YouTube video (plays inline — defaults to the Full Build film)"
+    },
+    {
+      "type": "text",
+      "id": "video_chip",
+      "label": "Ticket chip on the poster",
+      "default": "film · 29 min"
+    },
+    {
+      "type": "text",
+      "id": "video_credit",
+      "label": "Credit line (under the video)",
+      "default": "the full build film · 9 minutes, start to finish · from our YouTube channel"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_poster",
+      "label": "Video poster image"
+    },
+    {
+      "type": "text",
+      "id": "video_poster_fallback",
+      "label": "Default poster filename",
+      "default": "bbc-rd-home-poster.jpg"
+    },
+    {
+      "type": "url",
+      "id": "video_mp4",
+      "label": "Video URL (.mp4 — leave blank to use the bundled teaser)"
+    },
+    {
+      "type": "header",
+      "content": "Kits (intro)"
+    },
+    {
+      "type": "text",
+      "id": "kits_kicker",
+      "label": "Kicker",
+      "default": "Build at home"
+    },
+    {
+      "type": "text",
+      "id": "kits_title",
+      "label": "Title",
+      "default": "frame kits, shipped worldwide."
+    },
+    {
+      "type": "text",
+      "id": "kits_link_label",
+      "label": "Link label",
+      "default": "All frame kits →"
+    },
+    {
+      "type": "url",
+      "id": "kits_link_url",
+      "label": "Link (defaults to the home-build-kits collection)"
+    },
+    {
+      "type": "header",
+      "content": "Press"
+    },
+    {
+      "type": "text",
+      "id": "press_kicker",
+      "label": "Kicker",
+      "default": "As seen in & recognised by"
+    },
+    {
+      "type": "text",
+      "id": "press_more_label",
+      "label": "All-coverage link label",
+      "default": "read the coverage →"
+    },
+    {
+      "type": "url",
+      "id": "press_more_url",
+      "label": "All-coverage link (defaults to the news blog)"
+    },
+    {
+      "type": "textarea",
+      "id": "press_quote",
+      "label": "Pull quote",
+      "default": "Taps into 'the IKEA effect' — that extra bit of affection people reserve for objects they put together themselves."
+    },
+    {
+      "type": "text",
+      "id": "press_cite",
+      "label": "Quote attribution",
+      "default": "Financial Times, 2025"
+    },
+    {
+      "type": "header",
+      "content": "Community (intro)"
+    },
+    {
+      "type": "text",
+      "id": "community_kicker",
+      "label": "Kicker",
+      "default": "From the community"
+    },
+    {
+      "type": "text",
+      "id": "community_title",
+      "label": "Title",
+      "default": "3,500+ frames built at home."
+    },
+    {
+      "type": "header",
+      "content": "Final CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_kicker",
+      "label": "Kicker",
+      "default": "Join in"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Title",
+      "default": "build it. ride it. pass it on."
+    },
+    {
+      "type": "textarea",
+      "id": "cta_lede",
+      "label": "Lede",
+      "default": "Whether you build a bike, run a programme, or fund a cohort — you become part of the loop."
+    },
+    {
+      "type": "text",
+      "id": "cta1_label",
+      "label": "CTA 1 label",
+      "default": "Book a build →"
+    },
+    {
+      "type": "url",
+      "id": "cta1_url",
+      "label": "CTA 1 link (defaults to the workshop page)"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "CTA 2 label",
+      "default": "Work with us"
+    },
+    {
+      "type": "url",
+      "id": "cta2_url",
+      "label": "CTA 2 link (defaults to the education page)"
+    },
+    {
+      "type": "text",
+      "id": "cta3_label",
+      "label": "CTA 3 label",
+      "default": "Support the mission"
+    },
+    {
+      "type": "url",
+      "id": "cta3_url",
+      "label": "CTA 3 link (defaults to the impact page)"
+    },
+    {
+      "type": "header",
+      "content": "Why-Bamboo band"
+    },
+    {
+      "type": "text",
+      "id": "why_stat1_num",
+      "label": "Stat 1 number"
+    },
+    {
+      "type": "text",
+      "id": "why_stat1_label",
+      "label": "Stat 1 label"
+    },
+    {
+      "type": "text",
+      "id": "why_stat2_num",
+      "label": "Stat 2 number"
+    },
+    {
+      "type": "text",
+      "id": "why_stat2_label",
+      "label": "Stat 2 label"
+    },
+    {
+      "type": "text",
+      "id": "why_stat3_num",
+      "label": "Stat 3 number"
+    },
+    {
+      "type": "text",
+      "id": "why_stat3_label",
+      "label": "Stat 3 label"
+    },
+    {
+      "type": "image_picker",
+      "id": "why_card1_img",
+      "label": "Card 1 image"
+    },
+    {
+      "type": "text",
+      "id": "why_card1_title",
+      "label": "Card 1 title"
+    },
+    {
+      "type": "textarea",
+      "id": "why_card1_body",
+      "label": "Card 1 body"
+    },
+    {
+      "type": "text",
+      "id": "why_card1_alt",
+      "label": "Card 1 image alt text"
+    },
+    {
+      "type": "url",
+      "id": "why_card1_url",
+      "label": "Card 1 link"
+    },
+    {
+      "type": "image_picker",
+      "id": "why_card2_img",
+      "label": "Card 2 image"
+    },
+    {
+      "type": "text",
+      "id": "why_card2_title",
+      "label": "Card 2 title"
+    },
+    {
+      "type": "textarea",
+      "id": "why_card2_body",
+      "label": "Card 2 body"
+    },
+    {
+      "type": "text",
+      "id": "why_card2_alt",
+      "label": "Card 2 image alt text"
+    },
+    {
+      "type": "url",
+      "id": "why_card2_url",
+      "label": "Card 2 link"
+    },
+    {
+      "type": "image_picker",
+      "id": "why_card3_img",
+      "label": "Card 3 image"
+    },
+    {
+      "type": "text",
+      "id": "why_card3_title",
+      "label": "Card 3 title"
+    },
+    {
+      "type": "textarea",
+      "id": "why_card3_body",
+      "label": "Card 3 body"
+    },
+    {
+      "type": "text",
+      "id": "why_card3_alt",
+      "label": "Card 3 image alt text"
+    },
+    {
+      "type": "url",
+      "id": "why_card3_url",
+      "label": "Card 3 link"
+    },
+    {
+      "type": "image_picker",
+      "id": "why_card4_img",
+      "label": "Card 4 image"
+    },
+    {
+      "type": "text",
+      "id": "why_card4_title",
+      "label": "Card 4 title"
+    },
+    {
+      "type": "textarea",
+      "id": "why_card4_body",
+      "label": "Card 4 body"
+    },
+    {
+      "type": "text",
+      "id": "why_card4_alt",
+      "label": "Card 4 image alt text"
+    },
+    {
+      "type": "url",
+      "id": "why_card4_url",
+      "label": "Card 4 link"
+    },
+    {
+      "type": "text",
+      "id": "why_cta_label",
+      "label": "Band CTA label"
+    },
+    {
+      "type": "url",
+      "id": "why_cta_url",
+      "label": "Band CTA link"
+    },
+    {
+      "type": "url",
+      "id": "why_card1_video_url",
+      "label": "Video URL (plays inline)"
+    },
+    {
+      "type": "video",
+      "id": "why_card1_video_file",
+      "label": "Or upload a video (plays inline)"
+    },
+    {
+      "type": "url",
+      "id": "why_card2_video_url",
+      "label": "Video URL (plays inline)"
+    },
+    {
+      "type": "video",
+      "id": "why_card2_video_file",
+      "label": "Or upload a video (plays inline)"
+    },
+    {
+      "type": "url",
+      "id": "why_card3_video_url",
+      "label": "Video URL (plays inline)"
+    },
+    {
+      "type": "video",
+      "id": "why_card3_video_file",
+      "label": "Or upload a video (plays inline)"
+    },
+    {
+      "type": "text",
+      "id": "fab_why_spec",
+      "label": "Why-bamboo spec line (blank = hidden)"
+    },
+    {
+      "type": "text",
+      "id": "fab_kits_spec",
+      "label": "Kits spec line",
+      "default": "contents — tubes · lugs · jig · blueprint · video course"
+    },
+    {
+      "type": "text",
+      "id": "fab_impact_callout",
+      "label": "Impact image callout",
+      "default": "cohort · frames ride home"
+    },
+    {
+      "type": "text",
+      "id": "hero_cred",
+      "label": "Hero trust line (blank hides)",
+      "default": "Public-liability insured · safeguarding-first delivery"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "4,000+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "people have built a bike"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source",
+          "default": "since 2012"
+        }
+      ]
+    },
+    {
+      "type": "door",
+      "name": "Door",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "fallback",
+          "label": "Default photo filename (used unless you pick one above)",
+          "default": "bbc-rd-bike-field.jpg"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text",
+          "default": "A finished bamboo bicycle"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "default": "Make"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "build your own"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Learn more →"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "why",
+      "name": "Why-bamboo point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "comparable to mild steel"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body"
+        }
+      ]
+    },
+    {
+      "type": "kit",
+      "name": "Kit card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "fallback",
+          "label": "Default photo filename (used unless you pick one above)",
+          "default": "bbc-rd-prod-gravel.jpg"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text",
+          "default": "A bamboo frame kit"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "road & gravel"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "name": "Community story",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "fallback",
+          "label": "Default photo filename (used unless you pick one above)",
+          "default": "bbc-rd-bike-field.jpg"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text",
+          "default": "A finished bamboo bicycle built by a member of the community"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote"
+        },
+        {
+          "type": "text",
+          "id": "attribution",
+          "label": "Attribution"
+        },
+        {
+          "type": "checkbox",
+          "id": "lime",
+          "label": "Lime stamp shadow",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "press",
+      "name": "Press / recognition logo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Wordmark text",
+          "default": "The Guardian"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "default": "serif",
+          "options": [
+            {
+              "value": "ft",
+              "label": "Peach box, serif (Financial Times)"
+            },
+            {
+              "value": "serif",
+              "label": "Serif (The Guardian)"
+            },
+            {
+              "value": "serif-italic",
+              "label": "Serif italic (Inside Time)"
+            },
+            {
+              "value": "bbc",
+              "label": "Boxed letters (BBC)"
+            },
+            {
+              "value": "caps",
+              "label": "Spaced caps (Investec)"
+            },
+            {
+              "value": "disc",
+              "label": "Bold (Discovery)"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "logo_asset",
+          "label": "Logo asset filename (overrides styled text)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home 2026 (new design)",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "4,000+",
+            "label": "people have built a bike",
+            "source": "since 2012"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "90%",
+            "label": "prison course completion",
+            "source": "BBC programme records"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "36",
+            "label": "countries reached",
+            "source": "kits shipped worldwide"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "1,500+",
+            "label": "young people reached",
+            "source": "builds, tasters & talks"
+          }
+        },
+        {
+          "type": "door",
+          "settings": {
+            "fallback": "bbc-rd-bike-field.jpg",
+            "image_alt": "Finished bamboo road bike leaning against a fence in the countryside",
+            "tag": "Make",
+            "title": "Build your own",
+            "body": "Workshops in London, Amersfoort & Toulouse — or a kit shipped to your door. No experience needed.",
+            "link_label": "Workshops & kits →"
+          }
+        },
+        {
+          "type": "door",
+          "settings": {
+            "fallback": "bbc-rd-workshop.jpg",
+            "image_alt": "Inside the bamboo bicycle workshop",
+            "tag": "Partner",
+            "title": "Work with us",
+            "body": "Accredited programmes for prisons, schools and colleges — plus corporate team-building days.",
+            "link_label": "Our programmes →"
+          }
+        },
+        {
+          "type": "door",
+          "settings": {
+            "fallback": "bbc-rd-team.jpg",
+            "image_alt": "A diverse group laughing together while building a bamboo bike",
+            "tag": "Support",
+            "title": "Back the mission",
+            "body": "Fund a cohort, offer placements, or champion our work. Every pound helps fund accredited skills courses inside prisons and schools.",
+            "link_label": "Get involved →"
+          }
+        },
+        {
+          "type": "why",
+          "settings": {
+            "title": "Comparable to mild steel",
+            "body": "Tensile strength comparable to mild steel — yet workable with hand tools alone (BS ISO 22157, Swansea University)."
+          }
+        },
+        {
+          "type": "why",
+          "settings": {
+            "title": "Kinder ride",
+            "body": "Absorbs road vibration better than carbon fibre."
+          }
+        },
+        {
+          "type": "why",
+          "settings": {
+            "title": "Made to be mended",
+            "body": "Build it yourself and you can fix it yourself — a bike you can repair is one you keep. Renewable bamboo, made by hand."
+          }
+        },
+        {
+          "type": "why",
+          "settings": {
+            "title": "Built to last",
+            "body": "Our earliest 2012 frames are still ridden daily — looked after, a bamboo bike goes the distance."
+          }
+        },
+        {
+          "type": "kit",
+          "settings": {
+            "fallback": "bbc-rd-prod-gravel.jpg",
+            "image_alt": "Gravel lugged bamboo frame kit",
+            "title": "Road & Gravel",
+            "body": "Lugged or flax-joined kits with full video tutorials."
+          }
+        },
+        {
+          "type": "kit",
+          "settings": {
+            "fallback": "bbc-rd-prod-flax.jpg",
+            "image_alt": "Flax bamboo frame kit",
+            "title": "Mountain",
+            "body": "Burly geometries for 27.5\" and 29er builds."
+          }
+        },
+        {
+          "type": "kit",
+          "settings": {
+            "fallback": "bbc-rd-prod-balance.jpg",
+            "image_alt": "Children's balance bike kit",
+            "title": "Balance bikes",
+            "body": "The little build — and the one gifted in Build to Bond."
+          }
+        },
+        {
+          "type": "kit",
+          "settings": {
+            "fallback": "bbc-rd-prod-build.jpg",
+            "image_alt": "Bamboo frame mid-build",
+            "title": "Components & tools",
+            "body": "Jigs, lugs, glue and everything for the maker shop."
+          }
+        },
+        {
+          "type": "story",
+          "settings": {
+            "fallback": "bbc-rd-build-mint.jpg",
+            "image_alt": "Finished mint-and-bamboo road bike built from a home-build kit",
+            "quote": "After two years, I still burst with pride riding something completely unique that I made myself. I went from knowing nothing about bicycles to having built one.",
+            "attribution": "Louise · home-build road bike",
+            "lime": false
+          }
+        },
+        {
+          "type": "story",
+          "settings": {
+            "fallback": "bbc-rd-road-charlie.jpg",
+            "image_alt": "Finished bamboo road bike",
+            "quote": "To see the bike the first time and sit on it was euphoria — I still don't believe it. I was more taken than when I got my new car (sorry, car).",
+            "attribution": "Tamas · workshop build",
+            "lime": true
+          }
+        },
+        {
+          "type": "story",
+          "settings": {
+            "fallback": "bbc-rd-gravel-fence.jpg",
+            "image_alt": "A flax-and-bamboo gravel bike built from a home kit",
+            "quote": "Coooool! It feels so light, so natural and smooth — and then you add the feeling of proudness. That's the best part of it.",
+            "attribution": "Maialen · home-build gravel, France",
+            "lime": false
+          }
+        },
+        {
+          "type": "press",
+          "settings": {
+            "text": "FINANCIAL TIMES",
+            "style": "ft"
+          }
+        },
+        {
+          "type": "press",
+          "settings": {
+            "text": "The Guardian",
+            "style": "serif"
+          }
+        },
+        {
+          "type": "press",
+          "settings": {
+            "text": "BBC",
+            "style": "bbc"
+          }
+        },
+        {
+          "type": "press",
+          "settings": {
+            "text": "Inside Time",
+            "style": "serif-italic"
+          }
+        },
+        {
+          "type": "press",
+          "settings": {
+            "text": "Discovery",
+            "style": "disc"
+          }
+        },
+        {
+          "type": "press",
+          "settings": {
+            "text": "Investec",
+            "style": "caps"
+          }
+        },
+        {
+          "type": "press",
+          "settings": {
+            "text": "GCN",
+            "style": "caps"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

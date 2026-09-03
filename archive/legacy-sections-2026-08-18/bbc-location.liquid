@@ -1,0 +1,326 @@
+{% comment %}
+  BBC Location — Distinctive Brand Version
+  
+  Design Principles:
+  - Sharp edges throughout
+  - Left border accent
+  - Bamboo stripe decoration
+  - Bold typography
+{% endcomment %}
+
+<section class="bbc-location">
+  <div class="bbc-location__container page-width">
+    <div class="bbc-location__layout">
+      <div class="bbc-location__map">
+        {% if section.settings.map_embed != blank %}
+          <div class="bbc-location__map-embed">
+            {{ section.settings.map_embed }}
+          </div>
+        {% elsif section.settings.image %}
+          <img 
+            src="{{ section.settings.image | image_url: width: 800 }}" 
+            alt="{{ section.settings.heading }}"
+            loading="lazy"
+            class="bbc-location__image"
+          >
+        {% else %}
+          <div class="bbc-location__map-placeholder">
+            <span class="bbc-location__placeholder-icon" aria-hidden="true">{% render 'bbc-icons', icon: 'map-pin' %}</span>
+            <span>Map coming soon</span>
+          </div>
+        {% endif %}
+      </div>
+      
+      <div class="bbc-location__content">
+        <h2 class="bbc-location__heading">{{ section.settings.heading }}</h2>
+        
+        {% if section.settings.address != blank %}
+          <address class="bbc-location__address">
+            {{ section.settings.address | newline_to_br }}
+          </address>
+        {% endif %}
+        
+        {% if section.settings.transport != blank %}
+          <div class="bbc-location__transport">
+            <strong>Getting Here</strong>
+            <p>{{ section.settings.transport }}</p>
+          </div>
+        {% endif %}
+        
+        {% if section.settings.hours != blank %}
+          <div class="bbc-location__hours">
+            <strong>Hours</strong>
+            <p>{{ section.settings.hours | newline_to_br }}</p>
+          </div>
+        {% endif %}
+        
+        {% if section.settings.note != blank %}
+          <p class="bbc-location__note">{{ section.settings.note }}</p>
+        {% endif %}
+        
+        {% if section.settings.directions_text != blank %}
+          <a href="{{ section.settings.directions_url }}" target="_blank" rel="noopener" class="bbc-location__directions">
+            {{ section.settings.directions_text }} →
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bbc-location {
+    padding: 80px 20px;
+    background: white;
+    position: relative;
+  }
+  
+  /* Bamboo stripe accent */
+  .bbc-location::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(
+      to right,
+      var(--bbc-teal, var(--bbc-teal)) 0%,
+      var(--bbc-teal, var(--bbc-teal)) 40%,
+      transparent 40%,
+      transparent 50%,
+      var(--bbc-gold, var(--bbc-gold)) 50%,
+      var(--bbc-gold, var(--bbc-gold)) 100%
+    );
+  }
+  
+  .bbc-location__layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    max-width: 1000px;
+  }
+  
+  .bbc-location__map {
+    overflow: hidden;
+    background: var(--bbc-cream, var(--bbc-cream));
+  }
+  
+  .bbc-location__map-embed {
+    aspect-ratio: 4/3;
+  }
+  
+  .bbc-location__map-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  
+  .bbc-location__image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .bbc-location__map-placeholder {
+    aspect-ratio: 4/3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 0.9375rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.6;
+  }
+  
+  .bbc-location__placeholder-icon .material-symbols-outlined {
+    font-size: 48px;
+    color: var(--bbc-teal, var(--bbc-teal));
+  }
+  
+  .bbc-location__heading {
+    font-family: var(--font-heading-family);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 20px 0;
+  }
+  
+  .bbc-location__address {
+    font-style: normal;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(7, 62, 39, 0.1);
+  }
+  
+  .bbc-location__transport,
+  .bbc-location__hours {
+    margin-bottom: 20px;
+  }
+  
+  .bbc-location__transport strong,
+  .bbc-location__hours strong {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--bbc-teal, var(--bbc-teal));
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  
+  .bbc-location__transport p,
+  .bbc-location__hours p {
+    font-size: 0.9375rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0;
+    line-height: 1.5;
+  }
+  
+  .bbc-location__note {
+    font-size: 0.875rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.8;
+    margin: 20px 0;
+    padding: 16px 20px;
+    background: var(--bbc-cream, var(--bbc-cream));
+    border-left: 4px solid var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  .bbc-location__directions {
+    display: inline-block;
+    padding: 14px 28px;
+    background: var(--bbc-forest, var(--bbc-forest));
+    color: white;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  
+  .bbc-location__directions:hover {
+    background: var(--bbc-teal, var(--bbc-teal));
+  }
+  
+  .bbc-location__directions:focus-visible {
+    outline: 2px solid var(--bbc-gold, var(--bbc-gold));
+    outline-offset: 2px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-location__directions {
+      transition: none;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-location {
+      padding: 40px 16px;
+    }
+    
+    .bbc-location__layout {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    
+    .bbc-location__heading {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Location",
+  "tag": "section",
+  "class": "bbc-location-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Map"
+    },
+    {
+      "type": "html",
+      "id": "map_embed",
+      "label": "Map embed code",
+      "info": "Paste Google Maps embed iframe code here"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Fallback image",
+      "info": "Shown if no map embed is provided"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Visit Our Workshop"
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "Address",
+      "default": "Bamboo Bicycle Club\nUnit 3, The Arches\nHackney, London\nE8 2DJ"
+    },
+    {
+      "type": "textarea",
+      "id": "transport",
+      "label": "Transport info",
+      "default": "5 minute walk from Hackney Central station (Overground)"
+    },
+    {
+      "type": "textarea",
+      "id": "hours",
+      "label": "Hours",
+      "default": "Wednesday - Sunday\n10am - 6pm"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note",
+      "default": "Visits by appointment only — please get in touch first!"
+    },
+    {
+      "type": "header",
+      "content": "Directions Link"
+    },
+    {
+      "type": "text",
+      "id": "directions_text",
+      "label": "Directions button text",
+      "default": "Get Directions"
+    },
+    {
+      "type": "url",
+      "id": "directions_url",
+      "label": "Directions URL",
+      "info": "Link to Google Maps directions"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Location",
+      "settings": {
+        "heading": "Visit Our Workshop",
+        "address": "Bamboo Bicycle Club\nUnit 3, The Arches\nHackney, London\nE8 2DJ",
+        "transport": "5 minute walk from Hackney Central station (Overground)",
+        "hours": "Wednesday - Sunday\n10am - 6pm",
+        "note": "Visits by appointment only — please get in touch first!",
+        "directions_text": "Get Directions"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,131 @@
+{%- comment -%}
+  BBC New Design (2026) — GALLERY GRID (community builds). Simple responsive
+  photo grid, schema-driven, scoped under .bbc-rd. Defaults use the bundled
+  bbc-rd-gal-* photography until real community submissions replace them.
+{%- endcomment -%}
+
+<div class="bbc-rd bbc-rd-gallerygrid">
+  <section class="rd-pad-sm">
+    <div class="rd-wrap">
+      {%- if section.settings.eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.title != blank -%}<h2 class="rd-reveal rd-mw-20ch">{{ section.settings.title }}</h2>{%- endif -%}
+      <div class="rd-grid rd-g3 rd-mt4">
+        {%- for block in section.blocks -%}{%- if block.type == 'photo' -%}
+          <figure class="rd-reveal rd-card" {{ block.shopify_attributes }} style="overflow:hidden;margin:0;">
+            {%- render "bbc-media", image: block.settings.image, src: block.settings.asset, fallback: "bbc-rd-gal-rider.jpg", video: block.settings.video_file, youtube: block.settings.video_url, alt: block.settings.caption, class: "bbc-media--ar43" -%}
+            {%- comment -%} Caption role, not body role. This was `class="rd-body"` with an inline
+              font-size:14px, which made .rd-body render 14px here and 18px in the other 171
+              places it appears estate-wide — the only real type drift the 2026-08-03 audit found
+              for that class. A figcaption is a caption; every other section already names one
+              (rd-origin__cap, rd-opsmap__cap, rd-reel-cap). Styling moves to CSS on the token so
+              it cannot drift again. {%- endcomment -%}
+            {%- if block.settings.caption != blank -%}<figcaption class="rd-gal__cap">{{ block.settings.caption }}</figcaption>{%- endif -%}
+          </figure>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Gallery Grid 2026",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Community builds"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "real bikes, built by real people."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo (overrides asset)"
+        },
+        { "type": "url", "id": "video_url", "label": "Video URL (YouTube/Vimeo — plays inline)" },
+        { "type": "video", "id": "video_file", "label": "Or upload a video (plays inline)" },
+        {
+          "type": "text",
+          "id": "asset",
+          "label": "Bundled asset filename",
+          "default": "bbc-rd-gal-rider.jpg"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption",
+          "default": "A community build"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gallery Grid 2026",
+      "blocks": [
+        {
+          "type": "photo",
+          "settings": {
+            "asset": "bbc-rd-gal-gravel.jpg",
+            "caption": "Gravel build, ready for the hills"
+          }
+        },
+        {
+          "type": "photo",
+          "settings": {
+            "asset": "bbc-rd-gal-rider.jpg",
+            "caption": "First ride on a hand-built frame"
+          }
+        },
+        {
+          "type": "photo",
+          "settings": {
+            "asset": "bbc-rd-gal-roadwood.jpg",
+            "caption": "Road build in the woods"
+          }
+        },
+        {
+          "type": "photo",
+          "settings": {
+            "asset": "bbc-rd-gal-meadow.jpg",
+            "caption": "Built at home, ridden everywhere"
+          }
+        },
+        {
+          "type": "photo",
+          "settings": {
+            "asset": "bbc-rd-gal-redroad.jpg",
+            "caption": "8,288 miles to Patagonia — Kate Rawles' Woody"
+          }
+        },
+        {
+          "type": "photo",
+          "settings": {
+            "asset": "bbc-rd-gal-cargo.jpg",
+            "caption": "Long-tail cargo, built in a London flat"
+          }
+        },
+        {
+          "type": "photo",
+          "settings": {
+            "asset": "bbc-rd-gal-balance.jpg",
+            "caption": "A balance bike for the smallest rider"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

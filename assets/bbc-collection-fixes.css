@@ -1,0 +1,292 @@
+/**
+ * BBC Collection Page — Optimised CSS
+ * Consolidated from 5 overlapping files into one clean sheet
+ * Works WITH Dawn's flex grid system, never against it
+ */
+
+/* =============================================================================
+   1. GRID FIX — Ensure Dawn's gap system works correctly
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  .product-grid.grid {
+    column-gap: var(--grid-mobile-horizontal-spacing) !important;
+    row-gap: var(--grid-mobile-vertical-spacing) !important;
+  }
+}
+
+.grid__item {
+  margin-bottom: 0 !important;
+}
+
+/* =============================================================================
+   2. PRODUCT CARDS — Clean, professional appearance
+   ============================================================================= */
+
+.collection .card-wrapper {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.collection .card-wrapper:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.collection .card,
+.collection .card--standard,
+.collection .card--card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e8e8e8;
+}
+
+.collection .card__inner {
+  border-radius: 8px;
+}
+
+/* =============================================================================
+   3. PRODUCT IMAGES — Fill cards, clean backgrounds
+   ============================================================================= */
+
+.collection .card__media,
+.collection .card .media {
+  background: #f8f8f6;
+}
+
+.collection .card__media img,
+.collection .card .media img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transition: transform 0.3s ease;
+}
+
+.collection .card-wrapper:hover .card__media img,
+.collection .card-wrapper:hover .media img {
+  transform: scale(1.03);
+}
+
+/* =============================================================================
+   4. CARD TEXT — Readable titles and prices
+   ============================================================================= */
+
+.collection .card__content,
+.collection .card-information {
+  padding: 12px 14px 16px;
+}
+
+/* Product title */
+.collection .card__heading,
+.collection .card__heading a,
+.collection .full-unstyled-link {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: var(--bbc-forest) !important;
+  text-decoration: none !important;
+  line-height: 1.35 !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
+}
+
+.collection .card__heading a:hover {
+  color: var(--bbc-teal) !important;
+}
+
+/* Price */
+.collection .price,
+.collection .price-item {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--bbc-forest) !important;
+}
+
+.collection .price__sale .price-item--regular {
+  font-size: 13px !important;
+  color: var(--drift-888888) !important;
+  font-weight: 400 !important;
+}
+
+/* =============================================================================
+   5. FILTER / SORT BAR — Compact, clean
+   ============================================================================= */
+
+.facets__summary {
+  font-size: 1.3rem !important;
+  font-weight: 500 !important;
+  padding: 10px 16px !important;
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.1) !important;
+}
+
+.facets__label {
+  font-size: 1.25rem !important;
+}
+
+.facet-checkbox__text-label,
+.facet-checkbox__text {
+  font-size: 1.2rem !important;
+}
+
+.facets__display {
+  padding: 12px 16px !important;
+}
+
+.facets__item {
+  padding: 6px 0 !important;
+}
+
+.facets__disclosure {
+  margin-bottom: 8px !important;
+  border-radius: 4px !important;
+}
+
+.facet-filters__sort,
+.select__select {
+  font-size: 1.3rem !important;
+}
+
+.product-count__text {
+  font-size: 1.2rem !important;
+  color: rgba(var(--color-foreground), 0.7) !important;
+}
+
+.facets__form {
+  align-items: center !important;
+}
+
+/* =============================================================================
+   6. BADGES
+   ============================================================================= */
+
+.collection .badge {
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  background: var(--bbc-gold) !important;
+  color: var(--bbc-forest) !important;
+}
+
+/* =============================================================================
+   7. PAGINATION
+   ============================================================================= */
+
+.collection .pagination__item a,
+.collection .pagination__item span {
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+.collection .pagination__item--current span {
+  background: var(--bbc-forest) !important;
+  color: #fff !important;
+}
+
+/* =============================================================================
+   8. MOBILE OPTIMISATIONS
+   ============================================================================= */
+
+@media screen and (max-width: 749px) {
+  .facets__summary {
+    font-size: 1.2rem !important;
+    padding: 8px 12px !important;
+  }
+
+  .facet-checkbox__text-label {
+    font-size: 1.1rem !important;
+  }
+
+  /* Tighter card text on mobile */
+  .collection .card__content,
+  .collection .card-information {
+    padding: 8px 10px 12px !important;
+  }
+
+  .collection .card__heading,
+  .collection .card__heading a,
+  .collection .full-unstyled-link {
+    font-size: 13px !important;
+    line-height: 1.3 !important;
+  }
+
+  .collection .price,
+  .collection .price-item {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+  }
+}
+
+/* =============================================================================
+   9. DESKTOP OPTIMISATIONS
+   ============================================================================= */
+
+@media screen and (min-width: 750px) {
+  .collection .card__heading,
+  .collection .card__heading a {
+    font-size: 15px !important;
+  }
+
+  .collection .price,
+  .collection .price-item {
+    font-size: 17px !important;
+  }
+
+  .collection .card__content,
+  .collection .card-information {
+    padding: 14px 16px 18px;
+  }
+}
+
+/* =============================================================================
+   10. VISIBILITY FIX — Dawn scroll-trigger animation bug
+   ============================================================================= */
+
+.collection .product-grid .grid__item,
+.collection .product-grid .grid__item.scroll-trigger,
+.collection .product-grid .grid__item.scroll-trigger.animate--slide-in,
+#product-grid .grid__item,
+#product-grid .grid__item.scroll-trigger,
+#product-grid .grid__item.scroll-trigger.animate--slide-in {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+.collection .product-grid-container,
+.collection .product-grid-container.scroll-trigger,
+.collection .product-grid-container.scroll-trigger.animate--slide-in,
+#ProductGridContainer,
+#ProductGridContainer.scroll-trigger,
+#ProductGridContainer.scroll-trigger.animate--slide-in {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+.collection .product-grid .card-wrapper,
+.collection .product-grid .card,
+#product-grid .card-wrapper,
+#product-grid .card {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* =============================================================================
+   11. REDUCED MOTION
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .collection .card-wrapper,
+  .collection .card__media img {
+    transition: none !important;
+  }
+
+  .collection .card-wrapper:hover {
+    transform: none !important;
+  }
+}

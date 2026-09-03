@@ -1,0 +1,563 @@
+{% comment %}
+  BBC Product Durability Section
+  Displays bamboo frame durability data: stats, features, real-world proof, testimonial.
+  All content is editable via the Shopify theme editor.
+{% endcomment %}
+
+{%- style -%}
+.bbc-durability {
+  padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.background_color }};
+}
+.bbc-durability__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.bbc-durability__header {
+  margin-bottom: 2rem;
+}
+.bbc-durability__title {
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", system-ui, sans-serif);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin: 0 0 0.5rem;
+}
+.bbc-durability__subtitle {
+  font-size: 1rem;
+  color: #4a6355;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Stats bar */
+.bbc-durability__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0;
+  border: 1px solid rgba(7,62,39,0.12);
+  margin-bottom: 2rem;
+}
+.bbc-durability__stat {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border-right: 1px solid rgba(7,62,39,0.12);
+}
+.bbc-durability__stat:last-child { border-right: none; }
+.bbc-durability__stat-value {
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", system-ui, sans-serif);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: var(--bbc-forest, var(--bbc-forest));
+  line-height: 1;
+  margin: 0 0 0.35rem;
+}
+.bbc-durability__stat-label {
+  font-size: 0.8rem;
+  color: #4a6355;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Feature items grid */
+.bbc-durability__features {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+.bbc-durability__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  padding: 1rem;
+  background: var(--bbc-cream, var(--bbc-cream));
+}
+.bbc-durability__feature-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--bbc-teal, var(--bbc-teal));
+  margin-top: 2px;
+}
+.bbc-durability__feature-icon svg { width: 100%; height: 100%; }
+.bbc-durability__feature-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin: 0 0 0.25rem;
+}
+.bbc-durability__feature-desc {
+  font-size: 0.85rem;
+  color: #4a6355;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Proof items */
+.bbc-durability__proof-heading {
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", system-ui, sans-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(7,62,39,0.12);
+}
+.bbc-durability__proof {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.bbc-durability__proof-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border-left: 3px solid var(--bbc-gold, var(--bbc-gold));
+  background: var(--bbc-white);
+}
+.bbc-durability__proof-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--bbc-gold, var(--bbc-gold));
+  margin-top: 1px;
+}
+.bbc-durability__proof-icon svg { width: 100%; height: 100%; }
+.bbc-durability__proof-text {
+  font-size: 0.875rem;
+  color: #1a2e24;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Quote */
+.bbc-durability__quote {
+  margin: 0 0 2rem;
+  padding: 1.5rem 1.75rem;
+  background: var(--bbc-cream, var(--bbc-cream));
+  border-left: 4px solid var(--bbc-gold, var(--bbc-gold));
+  position: relative;
+}
+.bbc-durability__quote-text {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--bbc-forest, var(--bbc-forest));
+  font-style: italic;
+  margin: 0 0 0.75rem;
+}
+.bbc-durability__quote-cite {
+  font-size: 0.875rem;
+  color: var(--bbc-teal, var(--bbc-teal));
+  font-style: normal;
+}
+.bbc-durability__quote-cite strong { font-weight: 700; }
+
+/* Care tips */
+.bbc-durability__care {
+  padding: 1.25rem 1.5rem;
+  background: var(--bbc-white);
+  border: 1px solid rgba(7,62,39,0.1);
+}
+.bbc-durability__care-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--bbc-forest, var(--bbc-forest));
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 0.875rem;
+}
+.bbc-durability__care-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.bbc-durability__care-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #1a2e24;
+}
+.bbc-durability__care-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--bbc-teal, var(--bbc-teal));
+}
+.bbc-durability__care-icon svg { width: 100%; height: 100%; }
+
+@media (max-width: 749px) {
+  .bbc-durability__stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .bbc-durability__stat {
+    border-right: 1px solid rgba(7,62,39,0.12);
+    border-bottom: none;
+  }
+  .bbc-durability__features {
+    grid-template-columns: 1fr 1fr;
+  }
+  .bbc-durability__proof {
+    grid-template-columns: 1fr;
+  }
+  .bbc-durability__care-list {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+{%- endstyle -%}
+
+<section class="bbc-durability" id="durability">
+  <div class="bbc-durability__inner">
+
+    {%- comment -%} Header {%- endcomment -%}
+    <header class="bbc-durability__header">
+      <h2 class="bbc-durability__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="bbc-durability__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </header>
+
+    {%- comment -%} Stats bar — always shows if values set {%- endcomment -%}
+    {%- assign has_stats = false -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'stat' -%}{%- assign has_stats = true -%}{%- endif -%}
+    {%- endfor -%}
+
+    {%- if has_stats -%}
+      <div class="bbc-durability__stats">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'stat' -%}
+            <div class="bbc-durability__stat" {{ block.shopify_attributes }}>
+              <p class="bbc-durability__stat-value">{{ block.settings.value }}</p>
+              <p class="bbc-durability__stat-label">{{ block.settings.label }}</p>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Feature blocks {%- endcomment -%}
+    {%- assign has_features = false -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'feature' -%}{%- assign has_features = true -%}{%- endif -%}
+    {%- endfor -%}
+
+    {%- if has_features -%}
+      <div class="bbc-durability__features">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'feature' -%}
+            <div class="bbc-durability__feature" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon != blank and block.settings.icon != 'none' -%}
+                <div class="bbc-durability__feature-icon" aria-hidden="true">
+                  {%- render 'bbc-icons', icon: block.settings.icon -%}
+                </div>
+              {%- endif -%}
+              <div>
+                <p class="bbc-durability__feature-title">{{ block.settings.title }}</p>
+                <p class="bbc-durability__feature-desc">{{ block.settings.description }}</p>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Real-world proof items {%- endcomment -%}
+    {%- assign has_proof = false -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'proof' -%}{%- assign has_proof = true -%}{%- endif -%}
+    {%- endfor -%}
+
+    {%- if has_proof -%}
+      {%- if section.settings.proof_heading != blank -%}
+        <h3 class="bbc-durability__proof-heading">{{ section.settings.proof_heading }}</h3>
+      {%- endif -%}
+      <div class="bbc-durability__proof">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'proof' -%}
+            <div class="bbc-durability__proof-item" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon != blank and block.settings.icon != 'none' -%}
+                <div class="bbc-durability__proof-icon" aria-hidden="true">
+                  {%- render 'bbc-icons', icon: block.settings.icon -%}
+                </div>
+              {%- endif -%}
+              <p class="bbc-durability__proof-text">{{ block.settings.text }}</p>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Quote / Testimonial {%- endcomment -%}
+    {%- if section.settings.quote_text != blank -%}
+      <blockquote class="bbc-durability__quote">
+        <p class="bbc-durability__quote-text">&ldquo;{{ section.settings.quote_text }}&rdquo;</p>
+        {%- if section.settings.quote_author != blank -%}
+          <footer>
+            <cite class="bbc-durability__quote-cite">
+              <strong>— {{ section.settings.quote_author }}</strong>
+              {%- if section.settings.quote_detail != blank -%}
+                , {{ section.settings.quote_detail }}
+              {%- endif -%}
+            </cite>
+          </footer>
+        {%- endif -%}
+      </blockquote>
+    {%- endif -%}
+
+    {%- comment -%} Care tips {%- endcomment -%}
+    {%- assign has_care = false -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'care_tip' -%}{%- assign has_care = true -%}{%- endif -%}
+    {%- endfor -%}
+
+    {%- if has_care -%}
+      <div class="bbc-durability__care">
+        {%- if section.settings.care_title != blank -%}
+          <p class="bbc-durability__care-title">{{ section.settings.care_title }}</p>
+        {%- endif -%}
+        <ul class="bbc-durability__care-list" role="list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'care_tip' -%}
+              <li class="bbc-durability__care-item" {{ block.shopify_attributes }}>
+                <span class="bbc-durability__care-icon" aria-hidden="true">
+                  {%- render 'bbc-icons', icon: 'check' -%}
+                </span>
+                {{ block.settings.tip }}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Durability",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Durability & Strength"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Yes, it's strong enough. Here's the science (and the proof)."
+    },
+    {
+      "type": "header",
+      "content": "Proof Section"
+    },
+    {
+      "type": "text",
+      "id": "proof_heading",
+      "label": "Proof section heading",
+      "default": "Real-World Proof"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial / Quote"
+    },
+    {
+      "type": "textarea",
+      "id": "quote_text",
+      "label": "Quote text",
+      "default": "Woody turned out to be the most reliable bike I've ever owned. I had hardly any mechanical problems on the whole journey.",
+      "info": "Leave blank to hide the quote block"
+    },
+    {
+      "type": "text",
+      "id": "quote_author",
+      "label": "Author name",
+      "default": "Kate Rawles"
+    },
+    {
+      "type": "text",
+      "id": "quote_detail",
+      "label": "Author detail",
+      "default": "Author of 'The Life Cycle' (Icon Books) · 8,288 miles through the Andes"
+    },
+    {
+      "type": "header",
+      "content": "Care Tips"
+    },
+    {
+      "type": "text",
+      "id": "care_title",
+      "label": "Care tips heading",
+      "default": "Simple Care Tips"
+    },
+    {
+      "type": "header",
+      "content": "Spacing & Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 24,
+      "max": 96,
+      "step": 8,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 24,
+      "max": 96,
+      "step": 8,
+      "default": 48,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Stat value",
+          "default": "8–12",
+          "info": "E.g. '8–12', '<1%', '28K'"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Stat label",
+          "default": "Years lifespan"
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "shield",
+          "options": [
+            { "value": "none", "label": "No icon" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "zap", "label": "Lightning / Strength" },
+            { "value": "check-circle", "label": "Check circle" },
+            { "value": "leaf", "label": "Leaf / Eco" },
+            { "value": "tools", "label": "Tools" },
+            { "value": "globe", "label": "Globe" },
+            { "value": "bike", "label": "Bicycle" },
+            { "value": "award", "label": "Award" },
+            { "value": "star", "label": "Star" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Natural Strength"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Tensile strength comparable to mild steel — tested to BS ISO 22157 at Swansea University"
+        }
+      ]
+    },
+    {
+      "type": "proof",
+      "name": "Proof Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "globe",
+          "options": [
+            { "value": "none", "label": "No icon" },
+            { "value": "globe", "label": "Globe / Journey" },
+            { "value": "bike", "label": "Bicycle" },
+            { "value": "star", "label": "Star" },
+            { "value": "check", "label": "Check" },
+            { "value": "zap", "label": "Lightning" },
+            { "value": "tools", "label": "Tools" },
+            { "value": "award", "label": "Award" },
+            { "value": "users", "label": "Users / Community" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Proof text",
+          "default": "8,288 miles — Kate Rawles, Colombia to Patagonia",
+          "info": "Use bold HTML e.g. <strong>8,288 miles</strong>"
+        }
+      ]
+    },
+    {
+      "type": "care_tip",
+      "name": "Care Tip",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tip",
+          "label": "Care tip",
+          "default": "Store indoors when possible"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Durability",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "8–12", "label": "Years lifespan" } },
+        { "type": "stat", "settings": { "value": "<1%", "label": "Failure rate" } },
+        { "type": "stat", "settings": { "value": "28K", "label": "PSI strength" } },
+        { "type": "feature", "settings": { "icon": "zap", "title": "Natural Strength", "description": "Tensile strength comparable to mild steel — tested to BS ISO 22157 at Swansea University" } },
+        { "type": "feature", "settings": { "icon": "shield", "title": "Vibration Damping", "description": "Smoother ride than metal or carbon fibre" } },
+        { "type": "feature", "settings": { "icon": "check-circle", "title": "Crash Resilience", "description": "Doesn't shatter on impact like carbon" } },
+        { "type": "feature", "settings": { "icon": "leaf", "title": "Weather Sealed", "description": "Marine-grade epoxy, water-resistant" } },
+        { "type": "proof", "settings": { "icon": "globe", "text": "<strong>8,288 miles</strong> — Kate Rawles, Colombia to Patagonia" } },
+        { "type": "proof", "settings": { "icon": "bike", "text": "<strong>7+ years</strong> daily riding by Jamie in Romania" } },
+        { "type": "proof", "settings": { "icon": "star", "text": "<strong>Pamir Highway</strong> in winter, monsoons in India" } },
+        { "type": "proof", "settings": { "icon": "tools", "text": "<strong>Repairable</strong> with epoxy anywhere in the world" } },
+        { "type": "care_tip", "settings": { "tip": "Store indoors when possible" } },
+        { "type": "care_tip", "settings": { "tip": "Dry after wet rides" } },
+        { "type": "care_tip", "settings": { "tip": "Inspect joints annually" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,25 @@
+{%- comment -%}
+  BBC theme block — Accordion / FAQ row. From the monolith `faq` block in
+  sections/bbc-why-bamboo-2026.liquid (and bbc-workshops-2026.liquid). Reuses the
+  .rd-faq > details > summary + .rd-a markup so it styles identically. Native
+  <details>/<summary> = open/close with no JavaScript. Sits inside the .rd-faq
+  wrapper rendered by sections/bbc-faq-section.liquid.
+{%- endcomment -%}
+<details class="rd-reveal" {{ block.shopify_attributes }}>
+  <summary>{{ block.settings.question }}</summary>
+  <div class="rd-a">{{ block.settings.answer }}</div>
+</details>
+
+{% schema %}
+{
+  "name": "BBC Accordion row",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "question", "label": "Question", "default": "Do I need any experience to build one?" },
+    { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>None at all. Around 95% of our builders have never made anything like this before — we guide you through every step.</p>" }
+  ],
+  "presets": [
+    { "name": "BBC Accordion row" }
+  ]
+}
+{% endschema %}

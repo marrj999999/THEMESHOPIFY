@@ -1,0 +1,281 @@
+{% comment %}
+  BBC Build Time Section
+  Fully editable via Shopify theme editor.
+  
+  Block types:
+  - step: Individual build step (title, description, time estimate)
+  - comparison: Build type comparison card (title, time, description)
+  
+  Updated 2026-02-20: Made all content editable via schema blocks.
+{% endcomment %}
+
+{% render 'bbc-design-system' %}
+{% render 'bbc-icons' %}
+
+<section class="bbc-section bbc-section--cream" id="build-time">
+  <div class="bbc-container">
+    <header class="bbc-header">
+      <h2 class="bbc-section-title">{{ section.settings.title }}</h2>
+      {% if section.settings.subtitle != blank %}
+        <p class="bbc-section-subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </header>
+    
+    <div class="bbc-stats">
+      <div class="bbc-stats__item">
+        <p class="bbc-stat-value">{{ section.settings.hours_estimate }}</p>
+        <p class="bbc-stat-label">{{ section.settings.hours_label | default: 'hours total' }}</p>
+      </div>
+    </div>
+    
+    {% assign steps = section.blocks | where: 'type', 'step' %}
+    {% if steps.size > 0 %}
+      <div class="bbc-timeline">
+        <h3 class="bbc-timeline__title">{{ section.settings.timeline_title | default: 'Build Timeline Breakdown' }}</h3>
+        <ol class="bbc-timeline__list">
+          {% for block in steps %}
+            <li class="bbc-timeline__item" {{ block.shopify_attributes }}>
+              <span class="bbc-timeline__num">{{ forloop.index }}</span>
+              <div class="bbc-timeline__content">
+                <p class="bbc-timeline__name">{{ block.settings.step_title }}</p>
+                <p class="bbc-timeline__desc">{{ block.settings.step_description }}</p>
+              </div>
+              <span class="bbc-timeline__time">{{ block.settings.step_time }}</span>
+            </li>
+          {% endfor %}
+        </ol>
+      </div>
+    {% endif %}
+    
+    {% assign comparisons = section.blocks | where: 'type', 'comparison' %}
+    {% if comparisons.size > 0 %}
+      <div class="bbc-grid bbc-grid--{{ comparisons.size }}" style="max-width: {% if comparisons.size == 2 %}500px{% else %}750px{% endif %}; margin: var(--bbc-sp-6) auto 0;">
+        {% for block in comparisons %}
+          <div class="bbc-card" style="text-align: center;" {{ block.shopify_attributes }}>
+            {% if block.settings.icon != 'none' %}
+              <div style="color: var(--bbc-teal); margin-bottom: var(--bbc-sp-2);">{% render 'bbc-icons', icon: block.settings.icon %}</div>
+            {% endif %}
+            <p class="bbc-card-title">{{ block.settings.comparison_title }}</p>
+            <p class="bbc-stat-value" style="font-size: var(--bbc-size-2xl);">{{ block.settings.comparison_time }}</p>
+            <p class="bbc-text-sm">{{ block.settings.comparison_description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    
+    {% if section.settings.tip_title != blank %}
+      <div class="bbc-cta" style="margin-top: var(--bbc-sp-6); text-align: left; display: flex; gap: var(--bbc-sp-4); align-items: flex-start;">
+        <div style="color: var(--bbc-gold);">{% render 'bbc-icons', icon: 'zap' %}</div>
+        <div>
+          <p class="bbc-cta-title" style="margin-bottom: var(--bbc-sp-1);">{{ section.settings.tip_title }}</p>
+          <p class="bbc-cta-text" style="margin: 0;">{{ section.settings.tip_text }}</p>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Build Time",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "How Long Does It Take?"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "info": "Optional text below title"
+    },
+    {
+      "type": "header",
+      "content": "Time Estimate"
+    },
+    {
+      "type": "text",
+      "id": "hours_estimate",
+      "label": "Hours estimate",
+      "default": "25–40",
+      "info": "E.g. '15–25', '25–40', '30–45'"
+    },
+    {
+      "type": "text",
+      "id": "hours_label",
+      "label": "Hours label",
+      "default": "hours total"
+    },
+    {
+      "type": "header",
+      "content": "Timeline"
+    },
+    {
+      "type": "text",
+      "id": "timeline_title",
+      "label": "Timeline heading",
+      "default": "Build Timeline Breakdown"
+    },
+    {
+      "type": "header",
+      "content": "Pro Tip"
+    },
+    {
+      "type": "text",
+      "id": "tip_title",
+      "label": "Tip title",
+      "default": "Pro Tip: Build in Sessions",
+      "info": "Leave blank to hide"
+    },
+    {
+      "type": "textarea",
+      "id": "tip_text",
+      "label": "Tip text",
+      "default": "Most successful kit builders work 2–3 hour sessions across multiple weekends. No need to rush — the epoxy cure time creates natural breaks."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Build Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_title",
+          "label": "Step name",
+          "default": "Preparation & Planning"
+        },
+        {
+          "type": "text",
+          "id": "step_description",
+          "label": "Step description",
+          "default": "Unbox, inventory parts, watch tutorials"
+        },
+        {
+          "type": "text",
+          "id": "step_time",
+          "label": "Time estimate",
+          "default": "2–3 hrs"
+        }
+      ]
+    },
+    {
+      "type": "comparison",
+      "name": "Build Type Card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "package",
+          "options": [
+            { "value": "none", "label": "No icon" },
+            { "value": "package", "label": "Package (Home Kit)" },
+            { "value": "tools", "label": "Tools (Workshop)" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "zap", "label": "Lightning" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "comparison_title",
+          "label": "Card title",
+          "default": "Home Kit Build"
+        },
+        {
+          "type": "text",
+          "id": "comparison_time",
+          "label": "Time display",
+          "default": "25–40 hrs"
+        },
+        {
+          "type": "text",
+          "id": "comparison_description",
+          "label": "Description",
+          "default": "Work at your own pace"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Build Time",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "step_title": "Preparation & Planning",
+            "step_description": "Unbox, inventory parts, watch tutorials",
+            "step_time": "2–3 hrs"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "step_title": "Jig Assembly & Tube Fitting",
+            "step_description": "Set up jig, prepare bamboo tubes",
+            "step_time": "4–6 hrs"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "step_title": "Lug Connection & Bonding",
+            "step_description": "Join tubes with epoxy, wrap with fibre",
+            "step_time": "8–12 hrs"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "step_title": "Curing Time",
+            "step_description": "Wait for epoxy to fully cure",
+            "step_time": "24–48 hrs"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "step_title": "Sanding & Finishing",
+            "step_description": "Smooth joints, apply final sealant",
+            "step_time": "4–6 hrs"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "step_title": "Component Fitting",
+            "step_description": "Add wheels, groupset, handlebars",
+            "step_time": "3–5 hrs"
+          }
+        },
+        {
+          "type": "comparison",
+          "settings": {
+            "icon": "package",
+            "comparison_title": "Home Kit Build",
+            "comparison_time": "25–40 hrs",
+            "comparison_description": "Work at your own pace"
+          }
+        },
+        {
+          "type": "comparison",
+          "settings": {
+            "icon": "tools",
+            "comparison_title": "Workshop Build",
+            "comparison_time": "2 days",
+            "comparison_description": "Expert guidance included"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

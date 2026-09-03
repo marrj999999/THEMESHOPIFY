@@ -1,0 +1,570 @@
+{% comment %}
+  BBC Timeline — Redesigned 2026-02-18
+  Research: Brompton (alternating), Trek (era grouping), Rapha (stats in milestones),
+  Innocent (personality + pill years), Patagonia (founder emotion first).
+
+  Desktop: alternating left/right cards around a central line
+  Mobile:  single-column, dot on left line, cards full-width
+  All content editable in Shopify theme editor.
+{% endcomment %}
+
+{%- style -%}
+
+/* ─── SECTION SHELL ──────────────────────────────────────────── */
+.bbc-tl {
+  padding: 96px 0 80px;
+  background: var(--bbc-forest, var(--bbc-forest));
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle bamboo-joint texture */
+.bbc-tl::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      transparent 88px,
+      rgba(255,255,255,.04) 88px,
+      rgba(255,255,255,.04) 96px
+    );
+  pointer-events: none;
+}
+
+/* ─── HEADER ────────────────────────────────────────────────── */
+.bbc-tl__header {
+  max-width: 680px;
+  margin: 0 auto 80px;
+  padding: 0 24px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.bbc-tl__eyebrow {
+  display: inline-block;
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--bbc-gold, var(--bbc-gold));
+  margin-bottom: 14px;
+}
+
+.bbc-tl__heading {
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--bbc-white);
+  margin: 0 0 20px;
+}
+
+.bbc-tl__subheading {
+  font-family: var(--font-body-family, system-ui, sans-serif);
+  font-size: 1.1875rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,.75);
+  margin: 0;
+}
+
+/* ─── TRACK WRAPPER ─────────────────────────────────────────── */
+.bbc-tl__track {
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+  z-index: 1;
+}
+
+/* central vertical line – desktop only */
+@media (min-width: 769px) {
+  .bbc-tl__track::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    transform: translateX(-50%);
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--bbc-teal, var(--bbc-teal)) 5%,
+      var(--bbc-teal, var(--bbc-teal)) 80%,
+      var(--bbc-gold, var(--bbc-gold)) 95%,
+      transparent
+    );
+    border-radius: 2px;
+  }
+}
+
+/* mobile left line */
+@media (max-width: 768px) {
+  .bbc-tl__track {
+    padding-left: 56px;
+  }
+  .bbc-tl__track::before {
+    content: '';
+    position: absolute;
+    left: 36px;           /* aligns with dot centre */
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--bbc-teal, var(--bbc-teal)) 5%,
+      var(--bbc-teal, var(--bbc-teal)) 80%,
+      var(--bbc-gold, var(--bbc-gold)) 95%,
+      transparent
+    );
+    border-radius: 2px;
+  }
+}
+
+/* ─── MILESTONE ─────────────────────────────────────────────── */
+.bbc-ms {
+  position: relative;
+  display: grid;
+  gap: 0 40px;
+  padding-bottom: 64px;
+}
+
+.bbc-ms:last-child { padding-bottom: 0; }
+
+/* Desktop alternating grid */
+@media (min-width: 769px) {
+  .bbc-ms {
+    grid-template-columns: 1fr 56px 1fr;
+    align-items: start;
+  }
+  /* odd milestones: card LEFT, dot CENTRE, empty RIGHT */
+  .bbc-ms:nth-child(odd)  .bbc-ms__card { grid-column: 1; text-align: right; }
+  .bbc-ms:nth-child(odd)  .bbc-ms__pin  { grid-column: 2; }
+  .bbc-ms:nth-child(odd)  .bbc-ms__year-side { grid-column: 3; padding-top: 6px; text-align: left; }
+
+  /* even milestones: empty LEFT, dot CENTRE, card RIGHT */
+  .bbc-ms:nth-child(even) .bbc-ms__card { grid-column: 3; grid-row: 1; }
+  .bbc-ms:nth-child(even) .bbc-ms__pin  { grid-column: 2; grid-row: 1; }
+  .bbc-ms:nth-child(even) .bbc-ms__year-side { grid-column: 1; grid-row: 1; padding-top: 6px; text-align: right; }
+
+  /* card connector arrow */
+  .bbc-ms:nth-child(odd) .bbc-ms__card::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 20px;
+    border: 10px solid transparent;
+    border-left-color: rgba(255,255,255,.07);
+  }
+  .bbc-ms:nth-child(even) .bbc-ms__card::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 20px;
+    border: 10px solid transparent;
+    border-right-color: rgba(255,255,255,.07);
+  }
+}
+
+/* Mobile: single column */
+@media (max-width: 768px) {
+  .bbc-ms {
+    grid-template-columns: 32px 1fr;
+    grid-template-rows: auto auto;
+    gap: 0 16px;
+    padding-bottom: 52px;
+  }
+  .bbc-ms__pin       { grid-column: 1; grid-row: 1; }
+  .bbc-ms__year-side { grid-column: 2; grid-row: 1; align-self: center; margin-bottom: 10px; }
+  .bbc-ms__card      { grid-column: 2; grid-row: 2; }
+}
+
+/* ─── DOT / PIN ──────────────────────────────────────────────── */
+.bbc-ms__pin {
+  display: flex;
+  justify-content: center;
+  padding-top: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.bbc-ms__dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--bbc-teal, var(--bbc-teal));
+  border: 4px solid var(--bbc-forest, var(--bbc-forest));
+  box-shadow: 0 0 0 2px var(--bbc-teal, var(--bbc-teal));
+  transition: transform .25s, box-shadow .25s;
+}
+
+.bbc-ms--highlight .bbc-ms__dot {
+  width: 26px;
+  height: 26px;
+  background: var(--bbc-gold, var(--bbc-gold));
+  box-shadow: 0 0 0 3px var(--bbc-gold, var(--bbc-gold)), 0 0 16px rgba(255,169,0,.45);
+}
+
+.bbc-ms:hover .bbc-ms__dot {
+  transform: scale(1.35);
+  box-shadow: 0 0 0 4px rgba(255,169,0,.3);
+}
+
+/* ─── YEAR LABEL (beside dot) ──────────────────────────────── */
+.bbc-ms__year-side {
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(255,255,255,.18);
+  letter-spacing: -0.03em;
+  transition: color .25s;
+  white-space: nowrap;
+}
+
+.bbc-ms--highlight .bbc-ms__year-side {
+  color: var(--bbc-gold, var(--bbc-gold));
+  font-size: 2.25rem;
+}
+
+.bbc-ms:hover .bbc-ms__year-side {
+  color: rgba(255,255,255,.45);
+}
+
+@media (max-width: 768px) {
+  .bbc-ms__year-side { font-size: 1.375rem; }
+  .bbc-ms--highlight .bbc-ms__year-side { font-size: 1.5rem; }
+}
+
+/* ─── CARD ───────────────────────────────────────────────────── */
+.bbc-ms__card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px;
+  padding: 28px 32px;
+  position: relative;
+  transition: background .25s, border-color .25s, transform .25s;
+}
+
+.bbc-ms:hover .bbc-ms__card {
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,169,0,.35);
+  transform: translateY(-3px);
+}
+
+.bbc-ms--highlight .bbc-ms__card {
+  background: rgba(255,169,0,.1);
+  border-color: rgba(255,169,0,.35);
+}
+
+/* coloured top bar */
+.bbc-ms__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 12px 12px 0 0;
+  background: var(--bbc-teal, var(--bbc-teal));
+  opacity: 0;
+  transition: opacity .25s;
+}
+.bbc-ms--highlight .bbc-ms__card::before {
+  background: var(--bbc-gold, var(--bbc-gold));
+  opacity: 1;
+}
+.bbc-ms:hover .bbc-ms__card::before { opacity: 1; }
+
+.bbc-ms__title {
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.1875rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--bbc-white);
+  margin: 0 0 10px;
+}
+
+.bbc-ms--highlight .bbc-ms__title {
+  font-size: 1.375rem;
+  color: var(--bbc-gold, var(--bbc-gold));
+}
+
+.bbc-ms__description {
+  font-family: var(--font-body-family, system-ui, sans-serif);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,.78);
+  margin: 0;
+}
+
+/* ─── BADGES ─────────────────────────────────────────────────── */
+.bbc-ms__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+@media (min-width: 769px) {
+  .bbc-ms:nth-child(odd) .bbc-ms__badges { justify-content: flex-end; }
+}
+
+.bbc-ms__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.bbc-ms__badge--award   { background: rgba(255,169,0,.18); color: var(--bbc-gold, var(--bbc-gold)); border: 1px solid rgba(255,169,0,.35); }
+.bbc-ms__badge--impact  { background: rgba(63,139,102,.25); color: #73d393; border: 1px solid rgba(63,139,102,.4); }
+.bbc-ms__badge--press   { background: rgba(255,255,255,.1); color: rgba(255,255,255,.8); border: 1px solid rgba(255,255,255,.2); }
+.bbc-ms__badge--product { background: rgba(115,211,147,.15); color: #73d393; border: 1px solid rgba(115,211,147,.3); }
+
+/* ─── INLINE STATS ───────────────────────────────────────────── */
+.bbc-ms__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+
+@media (min-width: 769px) {
+  .bbc-ms:nth-child(odd) .bbc-ms__stats { justify-content: flex-end; }
+}
+
+.bbc-ms__stat-num {
+  display: block;
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.375rem;
+  font-weight: 800;
+  color: var(--bbc-gold, var(--bbc-gold));
+  line-height: 1;
+}
+
+.bbc-ms__stat-lbl {
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,.6);
+  margin-top: 3px;
+}
+
+/* ─── MOBILE REDUCED MOTION ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .bbc-ms:hover .bbc-ms__dot,
+  .bbc-ms:hover .bbc-ms__card { transform: none; }
+}
+
+{%- endstyle -%}
+
+<section class="bbc-tl">
+  <div class="bbc-tl__header">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="bbc-tl__eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    <h2 class="rd-reveal bbc-tl__heading">{{ section.settings.heading }}</h2>
+    {%- if section.settings.subheading != blank -%}
+      <p class="bbc-tl__subheading">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="bbc-tl__track">
+    {%- for block in section.blocks -%}
+      {%- assign is_highlight = block.settings.current -%}
+      <div class="bbc-ms{% if is_highlight %} bbc-ms--highlight{% endif %}" {{ block.shopify_attributes }}>
+
+        {%- comment -%} Dot {%- endcomment -%}
+        <div class="bbc-ms__pin">
+          <div class="bbc-ms__dot"></div>
+        </div>
+
+        {%- comment -%} Year label {%- endcomment -%}
+        <div class="bbc-ms__year-side">{{ block.settings.year }}</div>
+
+        {%- comment -%} Content card {%- endcomment -%}
+        <div class="bbc-ms__card">
+          <h3 class="bbc-ms__title">{{ block.settings.title }}</h3>
+          <p class="bbc-ms__description">{{ block.settings.description }}</p>
+
+          {%- comment -%} Badges {%- endcomment -%}
+          {%- if block.settings.badge_1 != blank or block.settings.badge_2 != blank -%}
+            <div class="bbc-ms__badges">
+              {%- if block.settings.badge_1 != blank -%}
+                <span class="bbc-ms__badge bbc-ms__badge--{{ block.settings.badge_1_style | default: 'press' }}">{{ block.settings.badge_1 }}</span>
+              {%- endif -%}
+              {%- if block.settings.badge_2 != blank -%}
+                <span class="bbc-ms__badge bbc-ms__badge--{{ block.settings.badge_2_style | default: 'press' }}">{{ block.settings.badge_2 }}</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- comment -%} Inline stats {%- endcomment -%}
+          {%- if block.settings.stat_1_num != blank or block.settings.stat_2_num != blank -%}
+            <div class="bbc-ms__stats">
+              {%- if block.settings.stat_1_num != blank -%}
+                <div>
+                  <span class="bbc-ms__stat-num">{{ block.settings.stat_1_num }}</span>
+                  <span class="bbc-ms__stat-lbl">{{ block.settings.stat_1_lbl }}</span>
+                </div>
+              {%- endif -%}
+              {%- if block.settings.stat_2_num != blank -%}
+                <div>
+                  <span class="bbc-ms__stat-num">{{ block.settings.stat_2_num }}</span>
+                  <span class="bbc-ms__stat-lbl">{{ block.settings.stat_2_lbl }}</span>
+                </div>
+              {%- endif -%}
+              {%- if block.settings.stat_3_num != blank -%}
+                <div>
+                  <span class="bbc-ms__stat-num">{{ block.settings.stat_3_num }}</span>
+                  <span class="bbc-ms__stat-lbl">{{ block.settings.stat_3_lbl }}</span>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Timeline",
+  "tag": "section",
+  "class": "bbc-timeline-section",
+  "settings": [
+    { "type": "text",     "id": "eyebrow",    "label": "Eyebrow",    "default": "Our Story" },
+    { "type": "text",     "id": "heading",    "label": "Heading",    "default": "13 Years of Building More Than Bikes" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "From a small London workshop in Hackney to a global community of 4,000 builders across 45 countries." }
+  ],
+  "blocks": [
+    {
+      "type": "milestone",
+      "name": "Milestone",
+      "settings": [
+        { "type": "text",     "id": "year",        "label": "Year",        "default": "2012" },
+        { "type": "text",     "id": "title",       "label": "Title",       "default": "BBC Founded" },
+        { "type": "textarea","id": "description", "label": "Description", "default": "James and Ian open the first bamboo bicycle workshop in Hackney, London. A weekend experiment that became a movement." },
+        { "type": "checkbox","id": "current",     "label": "Highlight milestone", "default": false, "info": "Use for major moments — gold treatment" },
+        { "type": "header",  "content": "Badges (optional)" },
+        { "type": "text",    "id": "badge_1",      "label": "Badge 1 text" },
+        { "type": "select",  "id": "badge_1_style","label": "Badge 1 style",
+          "options": [
+            { "value": "award",   "label": "Award (gold)" },
+            { "value": "impact",  "label": "Impact (green)" },
+            { "value": "press",   "label": "Press (white)" },
+            { "value": "product", "label": "Product (teal)" }
+          ], "default": "press" },
+        { "type": "text",    "id": "badge_2",      "label": "Badge 2 text" },
+        { "type": "select",  "id": "badge_2_style","label": "Badge 2 style",
+          "options": [
+            { "value": "award",   "label": "Award (gold)" },
+            { "value": "impact",  "label": "Impact (green)" },
+            { "value": "press",   "label": "Press (white)" },
+            { "value": "product", "label": "Product (teal)" }
+          ], "default": "impact" },
+        { "type": "header",  "content": "Inline stats (optional)" },
+        { "type": "text",    "id": "stat_1_num",   "label": "Stat 1 number", "info": "e.g. 4,000+" },
+        { "type": "text",    "id": "stat_1_lbl",   "label": "Stat 1 label",  "info": "e.g. Builders" },
+        { "type": "text",    "id": "stat_2_num",   "label": "Stat 2 number" },
+        { "type": "text",    "id": "stat_2_lbl",   "label": "Stat 2 label" },
+        { "type": "text",    "id": "stat_3_num",   "label": "Stat 3 number" },
+        { "type": "text",    "id": "stat_3_lbl",   "label": "Stat 3 label" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Timeline",
+      "settings": {
+        "eyebrow": "Our Story",
+        "heading": "13 Years of Building More Than Bikes",
+        "subheading": "From a small London workshop in Hackney to a global community of 4,000 builders across 45 countries."
+      },
+      "blocks": [
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2012", "current": true,
+            "title": "BBC Founded in Hackney",
+            "description": "James and Ian open a small workshop in East London with one goal: prove that anyone can build a bicycle frame. The first class sells out in a week.",
+            "badge_1": "Company Launch", "badge_1_style": "product",
+            "stat_1_num": "2", "stat_1_lbl": "Founders",
+            "stat_2_num": "8", "stat_2_lbl": "First students"
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2014",
+            "title": "DIY Kits Ship Worldwide",
+            "description": "We launch our first home-build kit so people everywhere can build at their own pace. Within months, bikes are being built in 12 countries.",
+            "badge_1": "Product Launch", "badge_1_style": "product",
+            "stat_1_num": "12", "stat_1_lbl": "Countries"
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2015",
+            "title": "Design Museum Exhibition",
+            "description": "Our work is selected for Cycle Revolution at London's Design Museum. Validation that sustainable craft belongs in the conversation about cycling's future.",
+            "badge_1": "Major Recognition", "badge_1_style": "award",
+            "badge_2": "Design Museum", "badge_2_style": "press"
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2018",
+            "title": "Kevin McCloud's Green Heroes",
+            "description": "Selected at Grand Designs Live for eco-friendly product design. That same year, Kate Rawles completes an 8,288-mile Andes journey on her BBC frame, 'Woody'.",
+            "badge_1": "Award Winner", "badge_1_style": "award",
+            "stat_1_num": "8,288", "stat_1_lbl": "Miles ridden on BBC frame"
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2020",
+            "title": "Build to Bond Launches",
+            "description": "Our prison rehabilitation programme begins at HMP Lowdham Grange. Prisoners build bicycles as gifts for their children — creating tangible family connections that outlast sentences.",
+            "badge_1": "Social Impact", "badge_1_style": "impact",
+            "badge_2": "Prison Education", "badge_2_style": "impact"
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2025", "current": true,
+            "title": "Investec Beyond Business Winner",
+            "description": "Awarded £24,000 for our prison education work. Featured in the Financial Times. 4,000 people have now built their own bamboo bicycle in 36+ countries.",
+            "badge_1": "£24,000 Award", "badge_1_style": "award",
+            "badge_2": "Financial Times", "badge_2_style": "press",
+            "stat_1_num": "4,000+", "stat_1_lbl": "Bikes built",
+            "stat_2_num": "36+",    "stat_2_lbl": "Countries",
+            "stat_3_num": "13",     "stat_3_lbl": "Years"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

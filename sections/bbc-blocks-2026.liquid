@@ -1,0 +1,195 @@
+{%- comment -%}
+  BBC BLOCK LIBRARY — one section, composed from reusable beats.
+  Created 2026-07-27. Spec: qa/research/block-library-spec.md
+
+  WHAT THIS IS FOR
+  The estate is built from monolith sections (bbc-home-2026 is 8,560px of one
+  section), so every page reinvented the same beats and drifted from each other.
+  This section lets a page be composed in the theme editor from shared blocks, so
+  a "proof strip" means the same thing on workshops as it does on impact.
+
+  THE DELIBERATE OMISSION: there is no `text` or `editorial` block. Editorial is
+  what a band becomes when nobody chose a device, and it is exactly the
+  "eyebrow → big heading → grid of bordered cards" repetition James called AI
+  slop. Prose lives INSIDE a block with a word budget, never as a band of its own.
+
+  Budgets (BLOCK-SYSTEM.md — "body is a caption, not an essay"):
+    proof ≤20 · steps ≤15/step · quote ≤40 · evidence ≤35 · cta ≤25
+  These are enforced by estate-check, not by hoping.
+
+  Every string is a schema setting. Nothing here is hardcoded copy.
+{%- endcomment -%}
+
+{{ 'bbc-blocks.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign surface = section.settings.surface
+  assign pad = 'bl--pad'
+  if section.settings.compact
+    assign pad = 'bl--pad-sm'
+  endif
+-%}
+
+<section class="bbc-rd bl {{ pad }} {% if surface == 'dark' %}rd-dark bl--on-dark{% elsif surface == 'paper' %}rd-paper{% elsif surface == 'steel' %}rd-steel{% endif %}"
+         {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handle }}"{% endif %}>
+  <div class="bl__wrap">
+
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="bl__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="bl__head rd-reveal">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.lede != blank -%}
+      <p class="bl__lede">{{ section.settings.lede }}</p>
+    {%- endif -%}
+
+    {%- comment -%} Group blocks by type so each renders in its own correct container. {%- endcomment -%}
+    {%- assign proofs = section.blocks | where: 'type', 'proof' -%}
+    {%- assign steps = section.blocks | where: 'type', 'step' -%}
+    {%- assign quotes = section.blocks | where: 'type', 'quote' -%}
+    {%- assign evidence = section.blocks | where: 'type', 'evidence' -%}
+    {%- assign ctas = section.blocks | where: 'type', 'cta' -%}
+
+    {%- if proofs.size > 0 -%}
+      <ul class="bl-proof rd-mt3" {% if section.settings.proof_label != blank %}aria-label="{{ section.settings.proof_label | escape }}"{% endif %}>
+        {%- for b in proofs -%}
+          <li {{ b.shopify_attributes }}>
+            <b>{{ b.settings.figure }}</b>
+            <span>{{ b.settings.label }}</span>
+            {%- if b.settings.source != blank -%}<cite>{{ b.settings.source }}</cite>{%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if steps.size > 0 -%}
+      <ol class="bl-steps rd-mt4">
+        {%- for b in steps -%}
+          <li {{ b.shopify_attributes }}>
+            <div class="bl-steps__n" aria-hidden="true">{{ forloop.index }}</div>
+            <div>
+              {%- if b.settings.title != blank -%}<h3>{{ b.settings.title }}</h3>{%- endif -%}
+              {%- if b.settings.body != blank -%}<p>{{ b.settings.body }}</p>{%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    {%- endif -%}
+
+    {%- if evidence.size > 0 -%}
+      <ul class="bl-ev rd-mt4">
+        {%- for b in evidence -%}
+          <li {{ b.shopify_attributes }}>
+            {%- if b.settings.outcome != blank -%}<b>{{ b.settings.outcome }}</b>{%- endif -%}
+            {%- if b.settings.body != blank -%}<p>{{ b.settings.body }}</p>{%- endif -%}
+            {%- if b.settings.source != blank -%}<cite>{{ b.settings.source }}</cite>{%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- for b in quotes -%}
+      <figure class="bl-quote rd-mt4" {{ b.shopify_attributes }}>
+        <blockquote>{{ b.settings.text }}</blockquote>
+        {%- if b.settings.attribution != blank -%}
+          <figcaption>
+            <b>{{ b.settings.attribution }}</b>
+            {%- if b.settings.role != blank -%}{{ b.settings.role }}{%- endif -%}
+          </figcaption>
+        {%- endif -%}
+      </figure>
+    {%- endfor -%}
+
+    {%- if ctas.size > 0 -%}
+      <div class="bl-cta">
+        {%- for b in ctas -%}
+          <a class="rd-btn {% if forloop.first %}rd-lime{% else %}rd-on-dark{% endif %}"
+             href="{{ b.settings.url | default: '#' }}" {{ b.shopify_attributes }}>{{ b.settings.label }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC blocks",
+  "tag": "section",
+  "class": "bbc-blocks-2026",
+  "settings": [
+    { "type": "paragraph", "content": "Compose a band from shared blocks. There is deliberately no free-text block — prose belongs inside a block with a word budget." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "lede", "label": "Lede (one sentence, max 15 words)" },
+    { "type": "text", "id": "anchor", "label": "Anchor id (for in-page links)" },
+    { "type": "text", "id": "proof_label", "label": "Proof list accessible name", "default": "In numbers" },
+    { "type": "select", "id": "surface", "label": "Surface",
+      "options": [
+        { "value": "paper", "label": "Paper" },
+        { "value": "dark", "label": "Forest (dark)" },
+        { "value": "steel", "label": "Steel" }
+      ], "default": "paper" },
+    { "type": "checkbox", "id": "compact", "label": "Compact padding", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "proof",
+      "name": "Proof figure",
+      "settings": [
+        { "type": "text", "id": "figure", "label": "Figure", "default": "4,000+" },
+        { "type": "text", "id": "label", "label": "Label (max 4 words)", "default": "people trained" },
+        { "type": "text", "id": "source", "label": "Source (optional)" }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Step title" },
+        { "type": "textarea", "id": "body", "label": "Step body (max 15 words)" }
+      ]
+    },
+    {
+      "type": "evidence",
+      "name": "Evidence card",
+      "settings": [
+        { "type": "text", "id": "outcome", "label": "Outcome" },
+        { "type": "textarea", "id": "body", "label": "Body (max 35 words)" },
+        { "type": "text", "id": "source", "label": "Source — required for a claim" }
+      ]
+    },
+    {
+      "type": "quote",
+      "name": "Quote",
+      "settings": [
+        { "type": "textarea", "id": "text", "label": "Quote (max 40 words)" },
+        { "type": "text", "id": "attribution", "label": "Attributed to" },
+        { "type": "text", "id": "role", "label": "Role / publication" }
+      ]
+    },
+    {
+      "type": "cta",
+      "name": "CTA",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "url", "id": "url", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC blocks — proof + steps",
+      "blocks": [
+        { "type": "proof", "settings": { "figure": "4,000+", "label": "people trained" } },
+        { "type": "proof", "settings": { "figure": "45", "label": "countries" } },
+        { "type": "proof", "settings": { "figure": "2012", "label": "building since" } },
+        { "type": "step", "settings": { "title": "Choose your build", "body": "Pick a frame style. No experience needed." } },
+        { "type": "step", "settings": { "title": "Build it with us", "body": "Two to three days in the workshop, guided throughout." } },
+        { "type": "step", "settings": { "title": "Ride it home", "body": "Your own bamboo frame, built by your own hands." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

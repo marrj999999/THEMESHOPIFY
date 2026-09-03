@@ -1,0 +1,146 @@
+{% comment %}
+  Bamboo Bicycle Club — Header / Nav (2026 redesign)
+  Global chrome: appears on every page (header group).
+
+  - Styling lives entirely in assets/bbc-redesign-2026.css (compound .bbc-rd.rd-header
+    selector). This section writes NO CSS — it only emits markup + a tiny toggle script.
+  - Commerce-safe: cart links to {{ routes.cart_url }} and shows {{ cart.item_count }};
+    the menu is a Shopify link_list (editable in Online Store > Navigation), supporting
+    one level of dropdown children (e.g. "Frame Kits").
+  - Mobile drawer is toggled by adding class "rd-open" to the <header>.
+{% endcomment %}
+
+{%- comment -%} Unified redesign stylesheet — loaded ONCE here (the header is on every page via the header group); all other bbc-*-2026 sections rely on this. Primary fonts preloaded (woff2, crossorigin) for faster first paint. {%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+{{ 'AtkinsonHyperlegible-Regular.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
+{{ 'AtkinsonHyperlegible-Bold.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
+
+<header class="bbc-rd rd-header" id="rd-header2026">
+  <div class="rd-nav-row">
+
+    {%- comment -%} Brand: roundel + wordmark {%- endcomment -%}
+    <a class="rd-brand" href="{{ routes.root_url }}">
+      <span class="rd-mk">
+        {%- if section.settings.logo -%}
+          <img
+            src="{{ section.settings.logo | image_url: width: section.settings.logo.width }}"
+            alt="{{ section.settings.brand_text | default: shop.name }}"
+            width="{{ section.settings.logo.width }}"
+            height="{{ section.settings.logo.height }}"
+            fetchpriority="high" loading="eager">
+        {%- endif -%}
+      </span>
+      {{ section.settings.brand_text | default: 'Bamboo Bicycle Club' }}
+    </a>
+
+    {%- comment -%} Desktop primary nav + cart + CTA {%- endcomment -%}
+    <nav class="rd-nav-links" aria-label="Primary">
+      {%- for link in section.settings.menu.links -%}
+        {%- if link.links.size > 0 -%}
+          <div class="rd-has-drop"><a class="rd-nav-link{% if link.active or link.child_active %} rd-active{% endif %}" href="{{ link.url }}">{{ link.title }} <span class="rd-caret">&#9662;</span></a>
+            <div class="rd-drop">{%- for child in link.links -%}<a href="{{ child.url }}">{{ child.title }}</a>{%- endfor -%}</div></div>
+        {%- else -%}
+          <a class="rd-nav-link{% if link.active or link.child_active %} rd-active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+
+      <div class="rd-search-wrap rd-desktop">
+        <form class="rd-search" action="{{ routes.search_url }}" method="get" role="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+          <input type="search" name="q" placeholder="Search" aria-label="Search the site" autocomplete="off">
+        </form>
+        <div class="rd-results" role="listbox"></div>
+      </div>
+
+      <a class="rd-cart" href="{{ routes.cart_url }}" aria-label="Cart"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><span class="rd-cart-count">{{ cart.item_count }}</span></a>
+      <a class="rd-nav-cta" href="{{ section.settings.cta_url | default: '/pages/bicycle-frame-building-workshop' }}">{{ section.settings.cta_label | default: 'Book a build' }}</a>
+    </nav>
+
+    {%- comment -%} Mobile hamburger (right-aligned on small screens) {%- endcomment -%}
+    <button class="rd-menu-btn" id="rd-menubtn" aria-label="Open menu" aria-expanded="false" aria-controls="rd-header2026"><span class="rd-bars"><span></span><span></span><span></span></span>Menu</button>
+  </div>
+
+  {%- comment -%} Mobile drawer — shown when .rd-open is on the header {%- endcomment -%}
+  <div class="rd-mobile">
+    <div class="rd-mwrap">
+      <div class="rd-search-wrap rd-msearch-wrap">
+        <form class="rd-search rd-msearch" action="{{ routes.search_url }}" method="get" role="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+          <input type="search" name="q" placeholder="Search kits, workshops…" aria-label="Search the site" autocomplete="off">
+        </form>
+        <div class="rd-results"></div>
+      </div>
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- if link.links.size > 0 -%}
+          {%- for child in link.links -%}
+            <a class="rd-sub" href="{{ child.url }}">{{ child.title }}</a>
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
+      <a class="rd-cart" href="{{ routes.cart_url }}" aria-label="Cart">Cart ({{ cart.item_count }})</a>
+      <a class="rd-mcta" href="{{ section.settings.cta_url | default: '/pages/bicycle-frame-building-workshop' }}">{{ section.settings.cta_label | default: 'Book a build' }}</a>
+    </div>
+  </div>
+
+</header>
+
+{%- comment -%} Mobile bottom tab bar — thumb zone. OUTSIDE the backdrop-filtered header so position:fixed anchors to the viewport (and so it stays put when the header auto-hides). Skipped on product pages (they keep their own sticky buy bar). {%- endcomment -%}
+{%- unless template contains 'product' -%}
+  {%- assign rdp = request.path -%}
+  <div class="bbc-rd">
+    <nav class="rd-botbar" aria-label="Primary (mobile)">
+      <a href="{{ routes.collections_url }}/home-build-kits"{% if rdp contains '/products/' or rdp contains 'kit' or rdp contains '/collections' %} class="rd-active"{% endif %}><svg viewBox="0 0 24 24"><circle cx="6" cy="16.5" r="3.3"/><circle cx="18" cy="16.5" r="3.3"/><path d="M6 16.5l4.5-7.5H16l-3.5 7.5M10.5 9h4"/></svg><span>Kits</span></a>
+      <a href="/pages/bicycle-frame-building-workshop"{% if rdp contains 'workshop' %} class="rd-active"{% endif %}><svg viewBox="0 0 24 24"><path d="M14.7 6.3a3.6 3.6 0 0 0-4.8 4.3l-5.2 5.2a1.7 1.7 0 0 0 2.4 2.4l5.2-5.2a3.6 3.6 0 0 0 4.3-4.8l-2.3 2.3-1.9-1.9 2.3-2.3z"/></svg><span>Workshops</span></a>
+      <a href="/pages/impact"{% if rdp contains 'impact' %} class="rd-active"{% endif %}><svg viewBox="0 0 24 24"><path d="M5 19c0-7.5 5.5-13 14-13.5C19 13 13.5 19 5 19z"/><path d="M5.5 18.5C8.5 13 12 10.5 15.5 9"/></svg><span>Impact</span></a>
+      <button type="button" id="rd-botmenu" aria-label="Open menu"><svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg><span>Menu</span></button>
+    </nav>
+  </div>
+{%- endunless -%}
+
+{%- comment -%} Nav behaviour is in an external, deferred asset (no parser-blocking inline JS) {%- endcomment -%}
+<script src="{{ 'bbc-rd-nav.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Header 2026 (new)",
+  "tag": "div",
+  "class": "bbc-rd-header-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image (in the roundel; empty = plain forest circle)"
+    },
+    {
+      "type": "text",
+      "id": "brand_text",
+      "label": "Brand text",
+      "default": "Bamboo Bicycle Club"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Primary menu",
+      "default": "main-menu",
+      "info": "One level of dropdown children is supported (e.g. a Frame Kits sub-menu). Manage menus in Online Store > Navigation."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA button label",
+      "default": "Book a build"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header 2026 (new)"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,115 @@
+{%- comment -%}
+  BBC theme block — Press / recognition wordmark. From the monolith `press` block.
+  Reuses .rd-lg / .rd-lg-ft / .rd-lg-serif(.rd-it) / .rd-lg-bbc / .rd-lg-caps / .rd-lg-disc,
+  and the boxed-letters treatment for the BBC wordmark.
+
+  Logo precedence (backward-compatible):
+    1. `logo` (image_picker)  → real uploaded image (.rd-lg-img)
+    2. `logo_fallback` (text) → a bundled theme asset filename rendered via asset_img_url
+    3. otherwise the existing styled wordmark
+  Optional `url` wraps the whole thing in an <a class="rd-lg-link">.
+  Real logos render muted/greyscale (press-bar treatment) and go full-colour on hover.
+  Sits inside the .rd-logobar wrapper rendered by sections/bbc-logo-wall.liquid.
+{%- endcomment -%}
+{%- capture mark -%}
+  {%- if block.settings.logo != blank -%}
+    {{ block.settings.logo | image_url: width: 480 | image_tag: class: 'rd-lg rd-lg-real rd-lg-img rd-lg-photo', widths: '170,240,340,480', alt: block.settings.text, loading: 'lazy' }}
+  {%- elsif block.settings.logo_fallback != blank -%}
+    {%- if block.settings.logo_fallback contains '.svg' -%}
+      {%- comment -%} Inline the SVG: an <img> SVG won't couple width↔height in Chrome (width:auto resolves to 300px); an inline <svg> sizes correctly by its viewBox with CSS height. {%- endcomment -%}
+      <span class="rd-lg rd-lg-real rd-lg-svg" role="img" aria-label="{{ block.settings.text | escape }}">{{ block.settings.logo_fallback | inline_asset_content }}</span>
+    {%- else -%}
+      <img src="{{ block.settings.logo_fallback | asset_url }}" alt="{{ block.settings.text | escape }}" loading="lazy" class="rd-lg rd-lg-real rd-lg-img rd-lg-photo">
+    {%- endif -%}
+  {%- elsif block.settings.style == 'bbc' -%}
+    <span class="rd-lg rd-lg-bbc">{%- assign letters = block.settings.text | strip | split: '' -%}{%- for ch in letters -%}{%- unless ch == ' ' -%}<b>{{ ch }}</b>{%- endunless -%}{%- endfor -%}</span>
+  {%- elsif block.settings.style == 'serif-italic' -%}
+    <span class="rd-lg rd-lg-serif rd-it">{{ block.settings.text }}</span>
+  {%- else -%}
+    <span class="rd-lg rd-lg-{{ block.settings.style }}">{{ block.settings.text }}</span>
+  {%- endif -%}
+{%- endcapture -%}
+{%- if block.settings.url != blank -%}
+  <a class="rd-lg-link" href="{{ block.settings.url }}" target="_blank" rel="noopener" aria-label="{{ block.settings.text | escape }}" {{ block.shopify_attributes }}>{{ mark }}</a>
+{%- else -%}
+  <span class="rd-lg-wrap" {{ block.shopify_attributes }}>{{ mark }}</span>
+{%- endif -%}
+
+{% stylesheet %}
+  /* --- Real press logos: uniform optical height, monochrome-at-rest, colour-on-hover ---
+     Logo-display best practice: cap height + center + auto width (never stretch a mixed
+     logo set), generous clear-space, even gaps, responsive scale-down. The .rd-logobar
+     flex wrapper (in bbc-redesign-2026.css) already centres + wraps with even gaps. */
+  /* Inline-SVG logos (theme-asset .svg via inline_asset_content) size by their own viewBox —
+     the RELIABLE path. An <img> SVG won't couple width↔height in Chrome (width:auto → 300px),
+     so we render real <svg> and let CSS height drive a true aspect-correct width. */
+  .bbc-rd .rd-lg-svg{ display:inline-flex; align-items:center; margin:6px; }
+  .bbc-rd .rd-lg-svg svg{ height:28px !important; width:auto !important; max-width:170px; display:block; }
+  .bbc-rd .rd-lg-svg[aria-label="FINANCIAL TIMES"] svg{ height:48px !important; }
+  /* Raster logos: definite height + auto width = true aspect ratio. The <img> path now serves
+     raster only (all SVGs take the inline path), so this is safe and avoids both-max letterboxing. */
+  .bbc-rd img.rd-lg-photo{
+    display:block !important;
+    height:28px !important;
+    width:auto !important;
+    max-width:160px;
+    object-fit:contain; margin:6px;
+  }
+  /* Monochrome at rest so a mixed logo set reads as one intentional system; full colour on
+     hover/focus (also when the link wrapper is focused). Covers BOTH inline-SVG + <img> paths. */
+  .bbc-rd .rd-lg-svg, .bbc-rd .rd-lg-photo{
+    filter:grayscale(1) !important;
+    opacity:.62 !important;
+    transition:filter .2s ease, opacity .2s ease;
+  }
+  /* On dark bands, render marks as white knockouts so they stay legible. */
+  .bbc-rd.rd-dark .rd-lg-svg, .bbc-rd.rd-dark img.rd-lg-photo,
+  .bbc-rd.rd-dark .rd-lg-svg:hover, .bbc-rd.rd-dark img.rd-lg-photo:hover,
+  .bbc-rd.rd-dark .rd-lg-link:hover .rd-lg-svg, .bbc-rd.rd-dark .rd-lg-link:hover .rd-lg-photo{
+    filter:brightness(0) invert(1) !important;
+    opacity:.85 !important;
+  }
+  .bbc-rd .rd-lg-svg:hover, .bbc-rd .rd-lg-photo:hover,
+  .bbc-rd .rd-lg-link:hover .rd-lg-svg, .bbc-rd .rd-lg-link:hover .rd-lg-photo,
+  .bbc-rd .rd-lg-link:focus-visible .rd-lg-svg, .bbc-rd .rd-lg-link:focus-visible .rd-lg-photo{
+    filter:grayscale(0) !important;
+    opacity:1 !important;
+  }
+  /* The link wrapper must not inherit the wordmark underline/opacity hover treatment. */
+  .bbc-rd a.rd-lg-link:has(.rd-lg-real){ opacity:1; text-decoration:none; }
+  .bbc-rd a.rd-lg-link:has(.rd-lg-real):hover,
+  .bbc-rd a.rd-lg-link:has(.rd-lg-real):focus-visible{ opacity:1; text-decoration:none; }
+  .bbc-rd a.rd-lg-link:focus-visible{ outline:3px solid var(--forest); outline-offset:4px; border-radius:3px; }
+  /* Scale logos down on small screens so the bar still reads evenly. */
+  @media (max-width:600px){
+    .bbc-rd .rd-lg-svg svg{ height:24px !important; max-width:124px; }
+    .bbc-rd img.rd-lg-photo{ height:24px !important; max-width:124px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Press logo",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "text", "label": "Wordmark text", "default": "The Guardian" },
+    {
+      "type": "select", "id": "style", "label": "Style", "default": "serif",
+      "options": [
+        { "value": "ft", "label": "Peach box, serif (Financial Times)" },
+        { "value": "serif", "label": "Serif (The Guardian)" },
+        { "value": "serif-italic", "label": "Serif italic (Inside Time)" },
+        { "value": "bbc", "label": "Boxed letters (BBC)" },
+        { "value": "caps", "label": "Spaced caps (Investec)" },
+        { "value": "disc", "label": "Bold (Discovery)" }
+      ]
+    },
+    { "type": "image_picker", "id": "logo", "label": "Logo image override (replaces wordmark)" },
+    { "type": "text", "id": "logo_fallback", "label": "Logo image filename" },
+    { "type": "url", "id": "url", "label": "Link (optional)" }
+  ],
+  "presets": [
+    { "name": "BBC Press logo" }
+  ]
+}
+{% endschema %}

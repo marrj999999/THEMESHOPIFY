@@ -1,0 +1,58 @@
+{%- comment -%}
+  Header quick-links row.                                              2026-08-28
+
+  Extracted from sections/bbc-header-2026.liquid so this row can be edited without
+  reproducing a 23 KB section file through the Admin API.
+
+  CHANGE (James, 2026-08-28): the second quick-link was a direct link to
+  /pages/bicycle-frame-building-workshop labelled "Workshops" — so the most
+  prominent programme entry point dropped you on ONE programme instead of letting
+  you choose. It is now "Programmes", a hover/focus dropdown listing every child of
+  the Programmes item in the Main Menu.
+
+  The children are read from section.settings.menu (the Shopify menu), NOT hardcoded,
+  so adding a programme in Online Store > Navigation updates this row automatically
+  and the top bar can never drift from the mega panel again.
+
+  Markup reuses the existing .rd-megamenu hover/focus machinery already defined in
+  this section's <style> block; only the panel geometry differs (.rd-qlmenu-panel).
+{%- endcomment -%}
+<div class="rd-quicklinks">
+
+  <a class="rd-nav-link rd-quicklink{% if request.path == '/collections/home-build-kits' %} rd-ql-active{% endif %}"
+     href="/collections/home-build-kits">Build a bike</a>
+
+  {%- assign _prog_found = false -%}
+  {%- for link in section.settings.menu.links -%}
+    {%- if link.title == 'Programmes' and link.links.size > 0 -%}
+      {%- assign _prog_found = true -%}
+      <div class="rd-megamenu rd-qlmenu">
+        <button type="button"
+                class="rd-nav-link rd-quicklink rd-qlmenu-btn{% if link.child_active %} rd-ql-active{% endif %}"
+                aria-haspopup="true" aria-expanded="false" aria-controls="rd-qlmenu-panel">
+          {{ link.title }}<span class="rd-caret" aria-hidden="true"></span>
+        </button>
+        <div class="rd-mega-panel rd-qlmenu-panel" id="rd-qlmenu-panel" role="menu" aria-label="{{ link.title }}">
+          <ul>
+            {%- for child in link.links -%}
+              <li><a href="{{ child.url }}" role="menuitem">{{ child.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- comment -%} Fallback: if the Programmes menu item is ever renamed or emptied, keep a
+     working link here rather than silently dropping a nav slot. {%- endcomment -%}
+  {%- unless _prog_found -%}
+    <a class="rd-nav-link rd-quicklink" href="/pages/programmes">Programmes</a>
+  {%- endunless -%}
+
+  <a class="rd-nav-link rd-quicklink{% if request.path == '/pages/why-bamboo' %} rd-ql-active{% endif %}"
+     href="/pages/why-bamboo">Why bamboo</a>
+
+  <a class="rd-nav-link rd-quicklink{% if request.path == '/pages/impact' %} rd-ql-active{% endif %}"
+     href="/pages/impact">Impact</a>
+
+</div>

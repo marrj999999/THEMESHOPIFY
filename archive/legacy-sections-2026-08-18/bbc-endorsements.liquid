@@ -1,0 +1,501 @@
+{% comment %}
+  BBC Endorsements Section — Complete rebuild with clean layout
+  Awards, Minister Quote, Press Feature, University Partners
+{% endcomment %}
+
+{%- style -%}
+  .bbc-endorsements {
+    padding: 80px 24px;
+    background: white;
+  }
+
+  .bbc-endorsements__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .bbc-endorsements__header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .bbc-endorsements__heading {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  /* Awards Row */
+  .bbc-endorsements__awards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .bbc-endorsements__award {
+    background: var(--bbc-cream, var(--bbc-cream));
+    padding: 32px;
+    border-radius: 16px;
+    text-align: center;
+  }
+
+  .bbc-endorsements__award-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background: var(--bbc-gold, var(--bbc-gold));
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+
+  .bbc-endorsements__award-icon .material-symbols-outlined {
+    font-size: 32px;
+    color: white;
+  }
+
+  .bbc-endorsements__award-name {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin-bottom: 4px;
+  }
+
+  .bbc-endorsements__award-year {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--bbc-gold, var(--bbc-gold));
+    margin-bottom: 16px;
+  }
+
+  .bbc-endorsements__award-desc {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 0.9375rem;
+    color: var(--bbc-text-muted, #64748b);
+    line-height: 1.6;
+  }
+
+  /* Featured Quote + Press Grid */
+  .bbc-endorsements__featured {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+
+  @media (min-width: 769px) {
+    .bbc-endorsements__featured {
+      grid-template-columns: 1.2fr 0.8fr;
+    }
+  }
+
+  /* Quote Card */
+  .bbc-endorsements__quote-card {
+    background: var(--bbc-forest, var(--bbc-forest));
+    color: white;
+    padding: 48px 40px;
+    border-radius: 20px;
+    position: relative;
+  }
+
+  .bbc-endorsements__quote-mark {
+    position: absolute;
+    top: 24px;
+    left: 32px;
+    font-size: 4rem;
+    color: rgba(255, 169, 0, 0.3);
+    font-family: var(--font-body-family);
+    line-height: 1;
+  }
+
+  .bbc-endorsements__quote-text {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0 0 32px 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bbc-endorsements__quote-author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .bbc-endorsements__quote-avatar {
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 169, 0, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bbc-endorsements__quote-avatar .material-symbols-outlined {
+    font-size: 28px;
+    color: var(--bbc-gold, var(--bbc-gold));
+  }
+
+  .bbc-endorsements__quote-name {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .bbc-endorsements__quote-role {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 0.875rem;
+    opacity: 0.8;
+  }
+
+  /* Press Card */
+  .bbc-endorsements__press-card {
+    background: var(--bbc-cream, var(--bbc-cream));
+    padding: 40px 32px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .bbc-endorsements__press-label {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--bbc-teal, var(--bbc-teal));
+    margin-bottom: 12px;
+  }
+
+  .bbc-endorsements__press-name {
+    font-family: "Times New Roman", Georgia, serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .bbc-endorsements__press-headline {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--bbc-text-muted, #64748b);
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .bbc-endorsements__press-date {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 0.875rem;
+    color: var(--bbc-text-muted, #64748b);
+    margin-bottom: 20px;
+  }
+
+  .bbc-endorsements__press-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--bbc-forest, var(--bbc-forest));
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .bbc-endorsements__press-link:hover {
+    color: var(--bbc-teal, var(--bbc-teal));
+  }
+
+  .bbc-endorsements__press-link:focus-visible {
+    outline: 3px solid var(--bbc-gold, var(--bbc-gold));
+    outline-offset: 3px;
+  }
+
+  .bbc-endorsements__press-link .material-symbols-outlined {
+    font-size: 16px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-endorsements__press-link { transition: none; }
+  }
+
+  /* Partners Section */
+  .bbc-endorsements__partners {
+    border-top: 1px solid var(--bbc-border, #e2e8f0);
+    padding-top: 48px;
+  }
+
+  .bbc-endorsements__partners-label {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--bbc-text-muted, #64748b);
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .bbc-endorsements__partners-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .bbc-endorsements__partner {
+    text-align: center;
+  }
+
+  .bbc-endorsements__partner-name {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin-bottom: 4px;
+  }
+
+  .bbc-endorsements__partner-type {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 0.8125rem;
+    color: var(--bbc-text-muted, #64748b);
+  }
+
+  @media (max-width: 480px) {
+    .bbc-endorsements {
+      padding: 48px 16px;
+    }
+
+    .bbc-endorsements__quote-card {
+      padding: 32px 24px;
+    }
+
+    .bbc-endorsements__quote-text {
+      font-size: 1.0625rem;
+    }
+
+    .bbc-endorsements__press-card {
+      padding: 32px 24px;
+    }
+
+    .bbc-endorsements__partners-grid {
+      gap: 32px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="bbc-endorsements">
+  <div class="bbc-endorsements__container">
+    {% if section.settings.heading != blank %}
+      <div class="bbc-endorsements__header">
+        <h2 class="bbc-endorsements__heading">{{ section.settings.heading }}</h2>
+      </div>
+    {% endif %}
+
+    {%- comment -%} Awards Grid {%- endcomment -%}
+    {% assign awards = section.blocks | where: "type", "award" %}
+    {% if awards.size > 0 %}
+      <div class="bbc-endorsements__awards">
+        {% for block in awards %}
+          <div class="bbc-endorsements__award" {{ block.shopify_attributes }}>
+            <div class="bbc-endorsements__award-icon">
+              {% render 'bbc-icons', icon: block.settings.icon | default: 'award' %}
+            </div>
+            <div class="bbc-endorsements__award-name">{{ block.settings.award_name }}</div>
+            <div class="bbc-endorsements__award-year">{{ block.settings.year }}</div>
+            <div class="bbc-endorsements__award-desc">{{ block.settings.description }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {%- comment -%} Featured Quote + Press {%- endcomment -%}
+    {% assign quotes = section.blocks | where: "type", "quote" %}
+    {% assign presses = section.blocks | where: "type", "press" %}
+    
+    {% if quotes.size > 0 or presses.size > 0 %}
+      <div class="bbc-endorsements__featured">
+        {% for block in quotes limit: 1 %}
+          <div class="bbc-endorsements__quote-card" {{ block.shopify_attributes }}>
+            <div class="bbc-endorsements__quote-mark">"</div>
+            <p class="bbc-endorsements__quote-text">{{ block.settings.quote }}</p>
+            <div class="bbc-endorsements__quote-author">
+              <div class="bbc-endorsements__quote-avatar">
+                {% render 'bbc-icons', icon: 'person' %}
+              </div>
+              <div>
+                <div class="bbc-endorsements__quote-name">{{ block.settings.name }}</div>
+                <div class="bbc-endorsements__quote-role">{{ block.settings.role }}</div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+        {% for block in presses limit: 1 %}
+          <div class="bbc-endorsements__press-card" {{ block.shopify_attributes }}>
+            <div class="bbc-endorsements__press-label">As Featured In</div>
+            <div class="bbc-endorsements__press-name">{{ block.settings.publication }}</div>
+            {% if block.settings.headline != blank %}
+              <div class="bbc-endorsements__press-headline">"{{ block.settings.headline }}"</div>
+            {% endif %}
+            {% if block.settings.date != blank %}
+              <div class="bbc-endorsements__press-date">{{ block.settings.date }}</div>
+            {% endif %}
+            {% if block.settings.link != blank %}
+              <a href="{{ block.settings.link }}" class="bbc-endorsements__press-link" target="_blank" rel="noopener">
+                Read Article
+                {% render 'bbc-icons', icon: 'arrow-right' %}
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {%- comment -%} Partners Grid {%- endcomment -%}
+    {% assign partners = section.blocks | where: "type", "partner" %}
+    {% if partners.size > 0 %}
+      <div class="bbc-endorsements__partners">
+        <div class="bbc-endorsements__partners-label">Our University Partners</div>
+        <div class="bbc-endorsements__partners-grid">
+          {% for block in partners %}
+            <div class="bbc-endorsements__partner" {{ block.shopify_attributes }}>
+              <div class="bbc-endorsements__partner-name">{{ block.settings.name }}</div>
+              <div class="bbc-endorsements__partner-type">{{ block.settings.type }}</div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Endorsements",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Recognition & Partnerships"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "award",
+      "name": "Award",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon name",
+          "default": "emoji_events"
+        },
+        {
+          "type": "text",
+          "id": "award_name",
+          "label": "Award Name",
+          "default": "Investec Beyond Business"
+        },
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year",
+          "default": "2025 Winner"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "name": "Quote",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role"
+        }
+      ]
+    },
+    {
+      "type": "press",
+      "name": "Press Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "publication",
+          "label": "Publication"
+        },
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Headline"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "partner",
+      "name": "Partner",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Partner Name"
+        },
+        {
+          "type": "text",
+          "id": "type",
+          "label": "Partnership Type"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Endorsements"
+    }
+  ]
+}
+{% endschema %}

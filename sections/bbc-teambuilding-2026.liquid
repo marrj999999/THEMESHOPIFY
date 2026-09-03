@@ -1,0 +1,956 @@
+{%- comment -%}
+  BBC New Design (2026) — TEAM BUILDING page (corporate). A public advert that sells the
+  corporate team-build (a team builds a real bamboo bike together, in ~3 hrs to a full day,
+  and can donate it to a community charity). Mirrors the Education page pattern + reuses the
+  .bbc-rd CSS. Real clients (Four Seasons, General Motors, The Macallan, Hilton) + real case
+  studies linked to our blog. Social-enterprise CIC + donate-the-bike is the moat. Generic by
+  design (no prison named). Request-a-quote, no public price. Scoped under .bbc-rd.
+{%- endcomment -%}
+
+{%- liquid
+  assign enquire = section.settings.enquiry_url | default: '#team-enquiry'
+  assign email_url = section.settings.enquiry_email | default: 'mailto:info@bamboobicycleclub.org'
+-%}
+
+<div class="bbc-rd bbc-rd-tb">
+
+  {%- comment -%} ---------- HERO ---------- {%- endcomment -%}
+  <header class="rd-hero rd-mh-70">
+    {%- comment -%} Hero film (2026-08-24, James: "get the macallan video and rebuild the
+      hero using the same format as impact"). The 22s loop is cut from BBC's own
+      "Bamboo Bike Team Building Workshop (Corporate Away Day)" film [xv0x13KNCBw] -
+      wall of bamboo bikes, the workshop sign, the team conferring, hands on tubes.
+      The photo below stays as poster/fallback and carries the alt; the film fades in
+      over it only once genuinely playing (same hardened pattern as impact/why-bamboo,
+      see the {% javascript %} block). LAYOUT comes from bbc-align.css, which converts
+      this layered hero to the two-column family grid for .bbc-rd-tb exactly as it
+      does for .bbc-rd-impact - the film reuses the .imp-film class for that reason. {%- endcomment -%}
+    <div class="rd-bg"><img src="{{ section.settings.hero_image | default: 'bbc-rd-tb-hero.jpg' | asset_url }}" alt="{{ section.settings.hero_alt | default: 'A corporate team building bamboo bikes together' | escape }}" width="1400" height="933" fetchpriority="high">
+      {%- if section.settings.hero_video_url != blank -%}
+        <video class="imp-film" muted loop playsinline webkit-playsinline preload="metadata"
+               {% if section.settings.hero_video_poster != blank %}poster="{{ section.settings.hero_video_poster }}"{% endif %}
+               aria-hidden="true" tabindex="-1" src="{{ section.settings.hero_video_url }}"></video>
+      {%- endif -%}
+    </div>
+    <div class="rd-scrim"></div>
+    <div class="rd-inner"><div class="rd-wrap">
+      <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><span class="rd-here">{{ section.settings.tx_team_building | default: "Team Building" }}</span></nav>
+      <span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>
+      <h1 class="rd-mt2 rd-mw-18ch">{{ section.settings.hero_title }}</h1>
+      <div class="rd-lede">{{ section.settings.hero_lede }}</div>
+      <div class="rd-cta-row">
+        <a class="rd-btn rd-lime" href="{{ enquire }}">{{ section.settings.hero_cta1 | default: 'Request a quote' }} <span class="rd-arrow">&rarr;</span></a>
+        <a class="rd-btn rd-on-dark" href="#how">{{ section.settings.hero_cta2 | default: 'How it works' }}</a>
+      </div>
+    </div></div>
+  </header>
+
+  {%- comment -%} CHAPTER PILLS — estate jump-nav, added 2026-08-19 (align with impact / why-bamboo / FAQ) {%- endcomment -%}
+  <div class="rd-tbchap-wrap">
+    <nav class="rd-tbchap" aria-label="Page chapters">
+      <a href="#days">your day</a><a href="#how">the real thing</a><a href="#stories">team stories</a><a href="#faq">good to know</a><a href="#team-enquiry">get a quote</a>
+    </nav>
+  </div>
+
+  {%- comment -%} BAND ORDER RESTRUCTURED 2026-08-19 to the researched consensus spine
+   (Team Tactics / Eventurous / GOTO charity-bike-build pages): facts first, formats second,
+   narrative third, purpose, then proof (stories + brands together), assurance, FAQ, form.
+   Client logo strip moved from position 2 into the proof cluster. {%- endcomment -%}
+{%- comment -%} ---------- KEY FACTS ---------- {%- endcomment -%}
+  <section class="rd-pad-sm">
+    <div class="rd-wrap">
+      <div class="rd-facts">
+        <div class="rd-reveal rd-fact"><span class="rd-reveal rd-fact-n">5–50+</span><span class="rd-reveal rd-fact-l">people per team day</span></div>
+        <div class="rd-reveal rd-fact"><span class="rd-reveal rd-fact-n">3 hrs–full day</span><span class="rd-reveal rd-fact-l">flexible format</span></div>
+        <div class="rd-reveal rd-fact"><span class="rd-reveal rd-fact-n">{{ section.settings.tx_your_venue | default: "Your venue" }}</span><span class="rd-reveal rd-fact-l">{{ section.settings.tx_uk_wide_or_come_to_us | default: "UK-wide, or come to us" }}</span></div>
+        <div class="rd-reveal rd-fact"><span class="rd-reveal rd-fact-n">{{ section.settings.tx_no_experience | default: "No experience" }}</span><span class="rd-reveal rd-fact-l">{{ section.settings.tx_needed_we_guide_every_step | default: "needed — we guide every step" }}</span></div>
+        <div class="rd-reveal rd-fact"><span class="rd-reveal rd-fact-n">{{ section.settings.tx_indoor_outdoor | default: "Indoor / outdoor" }}</span><span class="rd-reveal rd-fact-l">{{ section.settings.tx_bring_workshop_1 | default: "we bring the workshop" }}</span></div>
+        <div class="rd-reveal rd-fact"><span class="rd-reveal rd-fact-n">{{ section.settings.tx_donate_the_bikes | default: "Donate the bikes" }}</span><span class="rd-reveal rd-fact-l">{{ section.settings.tx_to_a_community_charity | default: "to a community charity" }}</span></div>
+      </div>
+        <p class="rd-ship-note rd-mt3">Fewer than five people? <a href="{{ section.settings.url_pages_bicycle_frame_building | default: '/pages/bicycle-frame-building-workshop' }}">{{ section.settings.tx_join_an_open_build_weekend_i | default: "Join an open build weekend instead &rarr;" }}</a> Five or more — request a quote below.</p>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- PACKAGES (benchmark: Swingers transparent tiers) ---------- {%- endcomment -%}
+  <section class="rd-pad" id="days">
+    <div class="rd-wrap">
+      <div class="rd-center">
+        <span class="rd-eyebrow">{{ section.settings.pkg_eyebrow | default: 'Choose your build day' }}</span>
+        <h2 class="rd-reveal">{{ section.settings.pkg_title | default: 'two ways to build together.' }}</h2>
+      </div>
+      <div class="rd-grid rd-g2 rd-mt4">
+        <div class="rd-reveal rd-card rd-stamp"><div class="rd-body">
+          <span class="rd-tag rd-lime">{{ section.settings.pkg1_tag }}</span>
+          <h3 class="rd-mt2 rd-fs-21px">{{ section.settings.pkg1_title }}</h3>
+          <p>{{ section.settings.pkg1_body }}</p>
+          <ul class="rd-list rd-mt2">
+            {%- assign p1b = section.settings.pkg1_bullets | split: '|' -%}
+            {%- for b in p1b -%}<li>{{ b | strip }}</li>{%- endfor -%}
+          </ul>
+          <p class="rd-mt3" style="font-weight:800;color:var(--forest);">{{ section.settings.pkg1_price }}</p>
+          <a class="rd-btn rd-lime rd-mt2" href="{{ section.settings.pkg1_url | default: '#team-enquiry' }}">{{ section.settings.pkg1_cta | default: 'Request a quote' }} <span class="rd-arrow">&rarr;</span></a>
+        </div></div>
+        <div class="rd-reveal rd-card rd-stamp"><div class="rd-body">
+          <span class="rd-tag rd-lime">{{ section.settings.pkg2_tag }}</span>
+          <h3 class="rd-mt2 rd-fs-21px">{{ section.settings.pkg2_title }}</h3>
+          <p>{{ section.settings.pkg2_body }}</p>
+          <ul class="rd-list rd-mt2">
+            {%- assign p2b = section.settings.pkg2_bullets | split: '|' -%}
+            {%- for b in p2b -%}<li>{{ b | strip }}</li>{%- endfor -%}
+          </ul>
+          <p class="rd-mt3" style="font-weight:800;color:var(--forest);">{{ section.settings.pkg2_price }}</p>
+          <a class="rd-btn rd-lime rd-mt2" href="{{ section.settings.pkg2_url | default: '#team-enquiry' }}">{{ section.settings.pkg2_cta | default: 'Request a quote' }} <span class="rd-arrow">&rarr;</span></a>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+{%- comment -%} ---------- WHAT THE DAY IS (split) ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-steel" id="how">
+    <div class="rd-wrap">
+      <div class="rd-split rd-tight rd-gap48-ac">
+        <div>
+          <span class="rd-eyebrow">{{ section.settings.tx_the_real_thing | default: "The real thing" }}</span>
+          <h2 class="rd-reveal">{{ section.settings.tx_a_real_bike_not_a_flat_pack | default: "a real bike. not a flat-pack kit." }}</h2>
+          <p class="rd-lede rd-mt2">{{ section.settings.tx_most_build_a_bike_days_bolt | default: "Most “build-a-bike” days bolt together a children’s kit in an hour. On ours, your team works raw bamboo — cutting, mitring, binding and finishing — into a frame that genuinely rides." }}</p>
+          <ul class="rd-list rd-mt3">
+            <li>{{ section.settings.tx_a_proper_hands_on_engineerin | default: "A proper hands-on engineering challenge that needs the whole team" }}</li>
+            <li>{{ section.settings.tx_every_step_guided_by_our_fac | default: "Every step guided by our facilitators — no DIY skill required" }}</li>
+            <li>{{ section.settings.tx_you_finish_the_day_with_a_re | default: "You finish the day with a real bamboo bike frame, built by your team" }}</li>
+            <li>{{ section.settings.tx_run_it_at_your_office_an_awa | default: "Run it at your office, an away-day venue, or our London workshop" }}</li>
+          </ul>
+        </div>
+        <div class="rd-reveal rd-card rd-stamp rd-lime">
+          <div class="rd-ph rd-ar-43">{%- render "bbc-media", src: section.settings.day_image, fallback: "bbc-rd-tb-gm.jpg", video: section.settings.video_file, youtube: section.settings.video_url, alt: "A corporate team building bamboo bike frames together" -%}</div>
+          <div class="rd-body"><p class="rd-cmp-35205">{{ section.settings.tx_cut_mitre_bind_finish_a_fram | default: "Cut, mitre, bind, finish — a frame made by hand, by your team." }}</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    {%- comment -%} ---------- CHARITY / CIC MOAT ---------- {%- endcomment -%}
+  <section class="rd-pad rd-dark rd-center">
+    <div class="rd-wrap rd-mw-820px">
+      <span class="rd-eyebrow rd-on-dark">{{ section.settings.tx_build_it_then_give_it_away | default: "Build it, then give it away" }}</span>
+      <h2 class="rd-reveal">{{ section.settings.tx_the_best_team_day_youll_do_a | default: "The best team day you’ll do all year — and the bikes go on to do good." }}</h2>
+      <p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.tx_we_re_a_social_enterprise_th | default: "We're a social enterprise: the fee for your day funds our accredited skills work in schools and prisons. And the bikes your team makes can be donated to a community charity — one company built balance bikes that went to Upcycle in Brixton." }}</p>
+      <div class="rd-cta-row rd-jc-center rd-mt3"><a class="rd-btn rd-lime" href="{{ enquire }}">Request a quote <span class="rd-arrow">&rarr;</span></a></div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- CASE STUDIES ---------- {%- endcomment -%}
+  {%- assign cs = section.blocks | where: 'type', 'casestudy' -%}
+  {%- if cs.size > 0 -%}
+    <section class="rd-pad-sm" id="stories">
+      <div class="rd-wrap">
+        <span class="rd-eyebrow">{{ section.settings.cs_eyebrow }}</span>
+        <h2 class="rd-reveal rd-mw-16ch">{{ section.settings.cs_title }}</h2>
+        {%- if section.settings.cs_lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.cs_lede }}</p>{%- endif -%}
+        <ul class="rd-csgrid rd-mt4" role="list">
+          {%- comment -%} Renders THE standard card (snippets/bbc-cscard.liquid), 2026-07-31.
+             Was 12 lines of bespoke markup with a wrapper <a> and no heading element — the same
+             copy that had drifted apart on six pages. heading = outcome, falling back to the
+             company name so a half-filled block still produces a usable link. {%- endcomment -%}
+          {%- for b in cs -%}
+            {%- assign _img = b.settings.image | default: 'bbc-rd-tb-fourseasons.jpg' -%}
+            {%- assign _head = b.settings.outcome | default: b.settings.company -%}
+            {%- render 'bbc-cscard',
+                 variant: 'grid',
+                 kind: b.settings.kind,
+                 heading: _head,
+                 url: b.settings.url,
+                 context: b.settings.blurb,
+                 attr: b.settings.company,
+                 image: _img,
+                 youtube: b.settings.video_url,
+                 video_file: b.settings.video_file,
+                 cta: b.settings.link_label -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- CLIENT LOGO STRIP ---------- {%- endcomment -%}
+  {%- assign clients = section.blocks | where: 'type', 'client' -%}
+  {%- if clients.size > 0 -%}
+    <section class="rd-pad-sm rd-paper rd-center">
+      <div class="rd-wrap">
+        <p class="rd-partnerlabel">{{ section.settings.clients_label }}</p>
+        <div class="rd-logogrid rd-mt2">
+          {%- for b in clients -%}
+            {%- comment -%} real logos only (qa/PRESS-BLOCK.md) — clients without a logo asset
+               don't render in the wall. Assets ready: investec/macallan/fourseasons/hilton.
+               GM · Google · McLaren stay OUT until James resolves the vault verification hold. {%- endcomment -%}
+            {%- capture cell -%}{%- if b.settings.logo_asset != blank -%}<img class="rd-logoimg" src="{{ b.settings.logo_asset | asset_url }}" alt="{{ b.settings.name | escape }}" loading="lazy">{%- endif -%}{%- endcapture -%}
+            {%- if b.settings.url != blank -%}<a class="rd-logocell" href="{{ b.settings.url }}" target="_blank" rel="noopener" aria-label="{{ b.settings.name | escape }} — read the case study">{{ cell }}</a>{%- else -%}<div class="rd-logocell">{{ cell }}</div>{%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- CREDIBILITY STRIP ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-paper rd-center">
+    <div class="rd-wrap">
+      <span class="rd-eyebrow">{{ section.settings.tx_accountable_insured | default: "Accountable & insured" }}</span>
+      <h2 class="rd-reveal rd-mt2">{{ section.settings.tx_a_team_day_you_can_stand_beh | default: "a team day you can stand behind." }}</h2>
+      <div class="rd-flex rd-mt4 rd-jc-center">
+        <span class="rd-tag rd-lime">{{ section.settings.tx_social_enterprise_bamboo_mob | default: "Social enterprise · Bamboo Mobility Project CIC" }}</span>
+        <span class="rd-tag">{{ section.settings.tx_enhanced_dbs_facilitators | default: "Public-liability insured" }}</span>
+        <span class="rd-tag">{{ section.settings.tx_public_liability_insured | default: "Public-liability insured" }}</span>
+        <span class="rd-tag">{{ section.settings.tx_investec_beyond_business_202 | default: "Investec Beyond Business 2025" }}</span>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- FAQ ---------- {%- endcomment -%}
+  {%- assign faqs = section.blocks | where: 'type', 'faq' -%}
+  {%- if faqs.size > 0 -%}
+    <section class="rd-pad-sm" id="faq">
+      <div class="rd-wrap rd-mw-820px">
+        <span class="rd-eyebrow">{{ section.settings.tx_good_to_know | default: "Good to know" }}</span>
+        <h2 class="rd-reveal rd-mt2">{{ section.settings.tx_questions_teams_ask | default: "questions teams ask." }}</h2>
+        <div class="rd-faqs rd-mt3">
+          {%- for b in faqs -%}
+            <details class="rd-faq" {{ b.shopify_attributes }}>
+              <summary>{{ b.settings.q }}</summary>
+              <div class="rd-faq-a">{{ b.settings.a }}</div>
+            </details>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+    {%- comment -%} ---------- INLINE ENQUIRY (benchmark: Go Ape on-page form) ---------- {%- endcomment -%}
+  <section class="rd-pad rd-steel" id="team-enquiry">
+    <div class="rd-wrap rd-mw-820px">
+      <span class="rd-eyebrow">{{ section.settings.tx_request_a_quote | default: "Request a quote" }}</span>
+      <h2 class="rd-reveal">{{ section.settings.tx_tell_us_team_size_and_a_roug | default: "tell us team size and a rough date. we do the rest." }}</h2>
+      <ol class="rd-steps rd-mt3">
+        <li><h3>{{ section.settings.tx_tell_us_the_basics | default: "tell us the basics" }}</h3><p>{{ section.settings.tx_team_size_and_a_rough_month | default: "Team size and a rough month — nothing else needed yet." }}</p></li>
+        <li><h3>{{ section.settings.tx_quote_within_one_working_day | default: "quote within one working day" }}</h3><p>{{ section.settings.tx_a_scoped_plan_and_price_you | default: "A scoped plan and price you can forward internally." }}</p></li>
+        <li><h3>{{ section.settings.tx_bring_workshop_2 | default: "we bring the workshop" }}</h3><p>{{ section.settings.tx_your_office_an_away_day_venu | default: "Your office, an away-day venue, or our London workshop." }}</p></li>
+        <li><h3>{{ section.settings.tx_build_ride_hand_over | default: "build, ride, hand over" }}</h3><p>{{ section.settings.tx_a_real_bike_your_team_made_r | default: "A real bike your team made — ride it or donate it." }}</p></li>
+      </ol>
+      {% form 'contact', id: 'team-enquiry-form', class: 'rd-form rd-mt4' %}
+        {%- if form.posted_successfully? -%}<p class="rd-lede">{{ section.settings.tx_thanks_we_ll_come_back_withi | default: "Thanks — we'll come back within one working day." }}</p>{%- endif -%}
+        {%- if form.errors -%}<p class="rd-err">{{ section.settings.tx_please_check_the_email_addre | default: "Please check the email address and try again." }}</p>{%- endif -%}
+        <div class="rd-grid rd-g2">
+          <label>Company<br><input type="text" name="contact[company]" autocomplete="organization"></label>
+          <label>Work email<br><input type="email" name="contact[email]" required autocomplete="email"></label>
+          <label>Team size<br><select name="contact[team_size]"><option>5–10</option><option>11–20</option><option>21–50</option><option>50+</option></select></label>
+          <label>Rough date<br><input type="month" name="contact[preferred_month]"></label>
+        </div>
+        <label class="rd-mt2" style="display:block;">Anything else? (optional)<br><textarea name="contact[body]" rows="3"></textarea></label>
+        <button type="submit" class="rd-btn rd-lime rd-mt3">Request a quote <span class="rd-arrow">&rarr;</span></button>
+        <p class="rd-ship-note rd-mt2">{{ section.settings.tx_we_reply_within_one_working | default: "We reply within one working day. No obligation, no spam." }}</p>
+      {% endform %}
+    </div>
+  </section>
+
+{%- comment -%} FINAL CTA band REMOVED 2026-08-19 (research restructure: Team Tactics /
+   Eventurous / GOTO all close on FAQ → enquiry form — a second dark CTA after the form is
+   dead weight. cta_* settings stay in the schema. {%- endcomment -%}
+
+</div>
+
+
+{%- comment -%} in-page anchor fix 2026-08-19: root overflow-x clip + smooth scroll no-ops
+   same-document hash jumps in Chromium, so every #anchor click silently failed. Delegated
+   handler scrolls explicitly; reduced-motion gets an instant jump. {%- endcomment -%}
+<script>
+  (function(){
+    if (window.__bbcAnchorFix) return; window.__bbcAnchorFix = 1;
+    document.addEventListener('click', function(e){
+      var a = e.target.closest('a[href^="#"]');
+      if (!a || a.getAttribute('href').length < 2) return;
+      var el = document.getElementById(a.getAttribute('href').slice(1));
+      if (!el) return;
+      e.preventDefault();
+      history.pushState(null, '', a.getAttribute('href'));
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 64, left: 0, behavior: 'instant' });
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  /* chapter pills — estate jump-nav (2026-08-19) */
+  .rd-tbchap-wrap{position:sticky;top:0;z-index:90}
+  .rd-tbchap{background:rgba(230,220,200,.96);border-bottom:1.5px solid rgba(14,26,23,.14);display:flex;gap:10px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding:10px 24px;justify-content:center}
+  .rd-tbchap::-webkit-scrollbar{display:none}
+  .rd-tbchap a{flex:none;font-size:14px;font-weight:800;letter-spacing:.02em;text-transform:lowercase;padding:7px 16px;border:2px solid currentColor;border-radius:999px;color:#2A332F;text-decoration:none !important;background:transparent}
+  .rd-tbchap a:hover,.rd-tbchap a:focus-visible{background:#D4FD62;border-color:#0E1A17;color:#003C32}
+  @media (prefers-reduced-motion: no-preference){ .rd-tbchap a{transition:background .15s cubic-bezier(.2,.7,.2,1),color .15s cubic-bezier(.2,.7,.2,1)} }
+  #days,#how,#stories,#faq,#team-enquiry{scroll-margin-top:64px}
+  @media (max-width:749px){ .rd-tbchap{padding:8px 14px;gap:8px;justify-content:flex-start} .rd-tbchap a{font-size:12.5px;padding:6px 13px} }
+  /* phone film height, THIS page only (2026-08-24). The shared family rule in
+     bbc-align gives the stacked hero film 32svh, which fits impact and why-bamboo -
+     but this hero's headline runs THREE lines and its lede four, so at 390x844 the
+     secondary CTA landed 11px under the fold (measured: 855 vs 844). 28svh buys the
+     ~34px back: primary ~759, secondary ~821, both above the fold. [class] bump
+     because the shared rule is (0,4,0)+!important in a LATER stylesheet - this
+     section bundle loads first, so it must win on specificity, (0,5,0). */
+  @media (max-width:749px){ .bbc-rd.bbc-rd-tb .rd-hero > .rd-bg[class]{height:clamp(190px,28svh,340px)!important} }
+{% endstylesheet %}
+
+{% javascript %}
+/* Team-building hero film. Same hardened pattern as impact/why-bamboo: play() can
+   resolve while still paused at t=0, so start on `canplay` and reveal only on
+   `playing`. Gates (reduced-motion / phones / save-data) leave the photo in place. */
+(function () {
+  var v = document.querySelector('.bbc-rd-tb .rd-hero .imp-film');
+  if (!v) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  /* phone gate removed 2026-08-24 - James: hero films must play on mobile too */
+  var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if (conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ''))) return;
+  v.muted = true; v.defaultMuted = true;
+  function start() {
+    var p = v.play();
+    if (p && p.catch) p.catch(function () { /* autoplay refused - photo stays */ });
+  }
+  v.addEventListener('playing', function () { v.classList.add('is-on'); }, { once: true });
+  v.setAttribute('preload', 'auto');
+  v.load();
+  if (v.readyState >= 3) start();
+  else v.addEventListener('canplay', start, { once: true });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { v.pause(); }
+    else if (v.classList.contains('is-on')) { start(); }
+  });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Team Building 2026",
+  "tag": "section",
+  "class": "section bbc-teambuilding-2026-wrap",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tx_bring_workshop_1",
+      "label": "Fact: we bring the workshop (1)",
+      "default": "we bring the workshop"
+    },
+    {
+      "type": "text",
+      "id": "tx_bring_workshop_2",
+      "label": "Fact: we bring the workshop (2)",
+      "default": "we bring the workshop"
+    },
+    {
+      "type": "header",
+      "content": "Editability pass 2026-08-10"
+    },
+    {
+      "type": "text",
+      "id": "tx_team_building",
+      "label": "Team Building",
+      "default": "Team Building"
+    },
+    {
+      "type": "text",
+      "id": "tx_uk_wide_or_come_to_us",
+      "label": "UK-wide, or come to us",
+      "default": "UK-wide, or come to us"
+    },
+    {
+      "type": "text",
+      "id": "tx_no_experience",
+      "label": "No experience",
+      "default": "No experience"
+    },
+    {
+      "type": "text",
+      "id": "tx_needed_we_guide_every_step",
+      "label": "needed — we guide every step",
+      "default": "needed — we guide every step"
+    },
+    {
+      "type": "text",
+      "id": "tx_indoor_outdoor",
+      "label": "Indoor / outdoor",
+      "default": "Indoor / outdoor"
+    },
+    {
+      "type": "text",
+      "id": "tx_donate_the_bikes",
+      "label": "Donate the bikes",
+      "default": "Donate the bikes"
+    },
+    {
+      "type": "text",
+      "id": "tx_to_a_community_charity",
+      "label": "to a community charity",
+      "default": "to a community charity"
+    },
+    {
+      "type": "text",
+      "id": "tx_join_an_open_build_weekend_i",
+      "label": "Join an open build weekend instead &",
+      "default": "Join an open build weekend instead &rarr;"
+    },
+    {
+      "type": "text",
+      "id": "tx_the_real_thing",
+      "label": "The real thing",
+      "default": "The real thing"
+    },
+    {
+      "type": "text",
+      "id": "tx_a_real_bike_not_a_flat_pack",
+      "label": "a real bike. not a flat-pack kit.",
+      "default": "a real bike. not a flat-pack kit."
+    },
+    {
+      "type": "textarea",
+      "id": "tx_most_build_a_bike_days_bolt",
+      "label": "Most “build-a-bike” days bolt togeth",
+      "default": "Most “build-a-bike” days bolt together a children’s kit in an hour. On ours, your team works raw bamboo — cutting, mitring, binding and finishing — into a frame that genuinely rides."
+    },
+    {
+      "type": "text",
+      "id": "tx_a_proper_hands_on_engineerin",
+      "label": "A proper hands-on engineering challe",
+      "default": "A proper hands-on engineering challenge that needs the whole team"
+    },
+    {
+      "type": "text",
+      "id": "tx_every_step_guided_by_our_fac",
+      "label": "Every step guided by our facilitator",
+      "default": "Every step guided by our facilitators — no DIY skill required"
+    },
+    {
+      "type": "text",
+      "id": "tx_you_finish_the_day_with_a_re",
+      "label": "You finish the day with a real, ride",
+      "default": "You finish the day with a real bamboo bike frame, built by your team"
+    },
+    {
+      "type": "text",
+      "id": "tx_run_it_at_your_office_an_awa",
+      "label": "Run it at your office, an away-day v",
+      "default": "Run it at your office, an away-day venue, or our London workshop"
+    },
+    {
+      "type": "text",
+      "id": "tx_cut_mitre_bind_finish_a_fram",
+      "label": "Cut, mitre, bind, finish — a frame m",
+      "default": "Cut, mitre, bind, finish — a frame made by hand, by your team."
+    },
+    {
+      "type": "text",
+      "id": "tx_build_it_then_give_it_away",
+      "label": "Build it, then give it away",
+      "default": "Build it, then give it away"
+    },
+    {
+      "type": "textarea",
+      "id": "tx_the_best_team_day_youll_do_a",
+      "label": "The best team day you’ll do all year",
+      "default": "The best team day you’ll do all year — and the bikes go on to do good."
+    },
+    {
+      "type": "textarea",
+      "id": "tx_we_re_a_social_enterprise_th",
+      "label": "We're a social enterprise: the fee f",
+      "default": "We're a social enterprise: the fee for your day funds our accredited skills work in schools and prisons. And the bikes your team makes can be donated to a community charity — one company built balance bikes that went to Upcycle in Brixton."
+    },
+    {
+      "type": "text",
+      "id": "tx_accountable_insured",
+      "label": "Accountable & insured",
+      "default": "Accountable & insured"
+    },
+    {
+      "type": "text",
+      "id": "tx_a_team_day_you_can_stand_beh",
+      "label": "a team day you can stand behind.",
+      "default": "a team day you can stand behind."
+    },
+    {
+      "type": "text",
+      "id": "tx_social_enterprise_bamboo_mob",
+      "label": "Social enterprise · Bamboo Mobility ",
+      "default": "Social enterprise · Bamboo Mobility Project CIC"
+    },
+    {
+      "type": "text",
+      "id": "tx_enhanced_dbs_facilitators",
+      "label": "Trust chip (facilitators)",
+      "default": "Public-liability insured"
+    },
+    {
+      "type": "text",
+      "id": "tx_public_liability_insured",
+      "label": "Public-liability insured",
+      "default": "Public-liability insured"
+    },
+    {
+      "type": "text",
+      "id": "tx_investec_beyond_business_202",
+      "label": "Investec Beyond Business 2025",
+      "default": "Investec Beyond Business 2025"
+    },
+    {
+      "type": "text",
+      "id": "tx_good_to_know",
+      "label": "Good to know",
+      "default": "Good to know"
+    },
+    {
+      "type": "text",
+      "id": "tx_questions_teams_ask",
+      "label": "questions teams ask.",
+      "default": "questions teams ask."
+    },
+    {
+      "type": "text",
+      "id": "tx_request_a_quote",
+      "label": "Request a quote",
+      "default": "Request a quote"
+    },
+    {
+      "type": "text",
+      "id": "tx_tell_us_team_size_and_a_roug",
+      "label": "tell us team size and a rough date. ",
+      "default": "tell us team size and a rough date. we do the rest."
+    },
+    {
+      "type": "text",
+      "id": "tx_tell_us_the_basics",
+      "label": "tell us the basics",
+      "default": "tell us the basics"
+    },
+    {
+      "type": "text",
+      "id": "tx_team_size_and_a_rough_month",
+      "label": "Team size and a rough month — nothin",
+      "default": "Team size and a rough month — nothing else needed yet."
+    },
+    {
+      "type": "text",
+      "id": "tx_quote_within_one_working_day",
+      "label": "quote within one working day",
+      "default": "quote within one working day"
+    },
+    {
+      "type": "text",
+      "id": "tx_a_scoped_plan_and_price_you",
+      "label": "A scoped plan and price you can forw",
+      "default": "A scoped plan and price you can forward internally."
+    },
+    {
+      "type": "text",
+      "id": "tx_your_office_an_away_day_venu",
+      "label": "Your office, an away-day venue, or o",
+      "default": "Your office, an away-day venue, or our London workshop."
+    },
+    {
+      "type": "text",
+      "id": "tx_build_ride_hand_over",
+      "label": "build, ride, hand over",
+      "default": "build, ride, hand over"
+    },
+    {
+      "type": "text",
+      "id": "tx_a_real_bike_your_team_made_r",
+      "label": "A real bike your team made — ride it",
+      "default": "A real bike your team made — ride it or donate it."
+    },
+    {
+      "type": "text",
+      "id": "tx_thanks_we_ll_come_back_withi",
+      "label": "Thanks — we'll come back within one ",
+      "default": "Thanks — we'll come back within one working day."
+    },
+    {
+      "type": "text",
+      "id": "tx_please_check_the_email_addre",
+      "label": "Please check the email address and t",
+      "default": "Please check the email address and try again."
+    },
+    {
+      "type": "text",
+      "id": "tx_we_reply_within_one_working",
+      "label": "We reply within one working day. No ",
+      "default": "We reply within one working day. No obligation, no spam."
+    },
+    {
+      "type": "text",
+      "id": "tx_bring_it_to_your_team",
+      "label": "Bring it to your team",
+      "default": "Bring it to your team"
+    },
+    {
+      "type": "text",
+      "id": "tx_lets_build_something_your_te",
+      "label": "let’s build something your team will",
+      "default": "let’s build something your team will remember."
+    },
+    {
+      "type": "textarea",
+      "id": "tx_tell_us_your_team_size_a_rou",
+      "label": "Tell us your team size, a rough date",
+      "default": "Tell us your team size, a rough date and your venue — we’ll send a proper quote within one working day. Materials, facilitation and the charity handover are all included."
+    },
+    {
+      "type": "text",
+      "id": "tx_email_us",
+      "label": "Email us",
+      "default": "Email us"
+    },
+    {
+      "type": "url",
+      "id": "url_pages_bicycle_frame_building",
+      "label": "Link: /pages/bicycle-frame-buildin"
+    },
+    {
+      "type": "url",
+      "id": "enquiry_url",
+      "label": "Enquiry / quote link",
+      "info": "Default /pages/contact-us"
+    },
+    {
+      "type": "url",
+      "id": "enquiry_email",
+      "label": "Enquiry email (mailto:)"
+    },
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "text",
+      "id": "hero_image",
+      "label": "Hero image filename",
+      "default": "bbc-rd-tb-hero.jpg"
+    },
+    {
+      "type": "text",
+      "id": "hero_alt",
+      "label": "Hero alt",
+      "default": "A corporate team celebrating the bamboo bike they built together"
+    },
+    {
+      "type": "text",
+      "id": "hero_video_url",
+      "label": "Hero film URL (mp4, Shopify Files)",
+      "default": "https://cdn.shopify.com/videos/c/o/v/c5b511a9d529444f8f21c2e24abe72fd.mp4",
+      "info": "22s loop from the corporate away-day film. Clear to show the photo only."
+    },
+    {
+      "type": "text",
+      "id": "hero_video_poster",
+      "label": "Hero film poster URL",
+      "default": "https://cdn.shopify.com/s/files/1/0502/8695/2631/files/preview_images/c5b511a9d529444f8f21c2e24abe72fd.thumbnail.0000000000.jpg?v=1787565168"
+    },
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Eyebrow",
+      "default": "Corporate team building · with a purpose"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Headline",
+      "default": "your team builds a real bamboo bike — together."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_lede",
+      "label": "Lede",
+      "default": "Your people cut, shape and bind raw bamboo into a frame that actually rides. Then, if you like, the finished bikes go to a community charity. A proper team day that leaves something behind."
+    },
+    {
+      "type": "text",
+      "id": "hero_cta1",
+      "label": "Primary CTA",
+      "default": "Request a quote"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta2",
+      "label": "Secondary CTA",
+      "default": "How it works"
+    },
+    {
+      "type": "header",
+      "content": "Client logo strip"
+    },
+    {
+      "type": "text",
+      "id": "clients_label",
+      "label": "Label",
+      "default": "Teams from these brands have built with us"
+    },
+    {
+      "type": "header",
+      "content": "What the day is"
+    },
+    {
+      "type": "text",
+      "id": "day_image",
+      "label": "Split image filename",
+      "default": "bbc-rd-tb-gm.jpg"
+    },
+    {
+      "type": "header",
+      "content": "Case studies"
+    },
+    {
+      "type": "text",
+      "id": "cs_eyebrow",
+      "label": "Eyebrow",
+      "default": "Teams we've built with"
+    },
+    {
+      "type": "text",
+      "id": "cs_title",
+      "label": "Heading",
+      "default": "real teams, real bikes, written up on our blog."
+    },
+    {
+      "type": "textarea",
+      "id": "cs_lede",
+      "label": "Lede",
+      "default": "From a hotel leadership team to a 50-strong cross-functional group — here's how a build day actually goes."
+    },
+    {
+      "type": "header",
+      "content": "Packages"
+    },
+    {
+      "type": "text",
+      "id": "pkg_eyebrow",
+      "label": "Packages eyebrow",
+      "default": "Choose your build day"
+    },
+    {
+      "type": "text",
+      "id": "pkg_title",
+      "label": "Packages heading",
+      "default": "two ways to build together."
+    },
+    {
+      "type": "text",
+      "id": "pkg1_tag",
+      "label": "Package 1 tag",
+      "default": "Half or full day · CSR favourite"
+    },
+    {
+      "type": "text",
+      "id": "pkg1_title",
+      "label": "Package 1 title",
+      "default": "balance bike build day"
+    },
+    {
+      "type": "textarea",
+      "id": "pkg1_body",
+      "label": "Package 1 body",
+      "default": "Small teams each build a balance bike from raw bamboo — then donate them onward on your behalf, the way one company's builds went to Upcycle in Brixton."
+    },
+    {
+      "type": "textarea",
+      "id": "pkg1_bullets",
+      "label": "Package 1 bullets (| separated)",
+      "default": "All tools, materials and facilitators included | 5–50+ people — your venue, an away-day space, or our London workshop | One bike per team of 3–4, finished in a session | Donation to a community charity arranged by us"
+    },
+    {
+      "type": "text",
+      "id": "pkg1_price",
+      "label": "Package 1 price line",
+      "default": "Priced by team size — quote within one working day"
+    },
+    {
+      "type": "text",
+      "id": "pkg1_cta",
+      "label": "Package 1 CTA label",
+      "default": "Request a quote"
+    },
+    {
+      "type": "url",
+      "id": "pkg1_url",
+      "label": "Package 1 CTA link (default: enquiry form)"
+    },
+    {
+      "type": "text",
+      "id": "pkg2_tag",
+      "label": "Package 2 tag",
+      "default": "Full day · the flagship"
+    },
+    {
+      "type": "text",
+      "id": "pkg2_title",
+      "label": "Package 2 title",
+      "default": "full frame build day"
+    },
+    {
+      "type": "textarea",
+      "id": "pkg2_body",
+      "label": "Package 2 body",
+      "default": "Your team builds full-size bamboo bicycle frames that genuinely ride — cutting, mitring, binding and finishing, guided every step. The day The Macallan's team built ten."
+    },
+    {
+      "type": "textarea",
+      "id": "pkg2_bullets",
+      "label": "Package 2 bullets (| separated)",
+      "default": "Expert facilitation, all materials and safety kit | One finished frame per team of 3–5 | Finished frames to keep, raffle internally, or donate | Runs at your venue or our London workshop"
+    },
+    {
+      "type": "text",
+      "id": "pkg2_price",
+      "label": "Package 2 price line",
+      "default": "From £595 per person"
+    },
+    {
+      "type": "text",
+      "id": "pkg2_cta",
+      "label": "Package 2 CTA label",
+      "default": "Request a quote"
+    },
+    {
+      "type": "url",
+      "id": "pkg2_url",
+      "label": "Package 2 CTA link (default: enquiry form)"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video URL (YouTube/Vimeo — plays inline)"
+    },
+    {
+      "type": "video",
+      "id": "video_file",
+      "label": "Or upload a video (plays inline)"
+    },
+    {
+      "type": "text",
+      "id": "tx_your_venue",
+      "label": "Your venue",
+      "default": "Your venue"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "client",
+      "name": "Client logo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Client name",
+          "default": "Four Seasons"
+        },
+        {
+          "type": "text",
+          "id": "logo_asset",
+          "label": "Logo theme-asset filename"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link (case study)"
+        }
+      ]
+    },
+    {
+      "type": "casestudy",
+      "name": "Case study",
+      "settings": [
+        {
+          "type": "text",
+          "id": "kind",
+          "label": "Kind tag",
+          "default": "Corporate"
+        },
+        {
+          "type": "text",
+          "id": "company",
+          "label": "Company",
+          "default": "Four Seasons"
+        },
+        {
+          "type": "text",
+          "id": "logo_asset",
+          "label": "Company logo filename (optional)"
+        },
+        {
+          "type": "text",
+          "id": "image",
+          "label": "Card photo filename",
+          "default": "bbc-rd-tb-fourseasons.jpg"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote (verbatim)"
+        },
+        {
+          "type": "text",
+          "id": "attribution",
+          "label": "Attribution"
+        },
+        {
+          "type": "text",
+          "id": "outcome",
+          "label": "Outcome headline (the card's only link text)"
+        },
+        {
+          "type": "textarea",
+          "id": "blurb",
+          "label": "Context line"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link (blog case study)"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Read the case study"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL (YouTube/Vimeo — plays inline)"
+        },
+        {
+          "type": "video",
+          "id": "video_file",
+          "label": "Or upload a video (plays inline)"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "q",
+          "label": "Question",
+          "default": "How many people can take part?"
+        },
+        {
+          "type": "textarea",
+          "id": "a",
+          "label": "Answer",
+          "default": "From a team of 5 to 50+."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Team Building 2026"
+    }
+  ]
+}
+{% endschema %}

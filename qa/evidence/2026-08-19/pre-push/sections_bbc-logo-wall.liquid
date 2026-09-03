@@ -1,0 +1,90 @@
+{%- comment -%}
+  BBC Logo wall SECTION — the homepage PRESS bar.
+  Reproduces the monolith PRESS markup: <section class="rd-pad-sm rd-steel"> > .rd-wrap.rd-center
+  > eyebrow + .rd-logobar (hosting bbc-press-logo theme blocks) + optional pull-quote.
+  Uses .rd-logobar / .rd-lg* and .rd-cmp-43643 / .rd-cmp-36671 from bbc-redesign-2026.css.
+{%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg = section.settings.background | default: 'steel'
+  case bg
+    when 'paper'
+      assign bg_cls = 'rd-paper'
+    when 'dark'
+      assign bg_cls = 'rd-dark'
+    else
+      assign bg_cls = 'rd-steel'
+  endcase
+-%}
+<div class="bbc-rd {{ bg_cls }}">
+  <section class="rd-pad-sm rd-center">
+    <div class="rd-wrap rd-center">
+      {%- if section.settings.kicker != blank -%}<span class="rd-eyebrow{% if bg == 'dark' %} rd-on-dark{% endif %}">{{ section.settings.kicker }}</span>{%- endif -%}
+      <div class="rd-logobar rd-mt3 rd-marquee-src">
+        {% content_for 'blocks' %}
+      </div>
+      {%- if section.settings.quote != blank -%}
+        <p class="rd-mt4 rd-cmp-43643">{{ section.settings.quote }}</p>
+        {%- if section.settings.cite != blank -%}<p class="rd-cmp-36671">{{ section.settings.cite }}</p>{%- endif -%}
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% stylesheet %}
+  /* --- Logo wall section: framing for the press bar ---
+     Best practice: a kicker line ALWAYS frames the marks ("As featured in" /
+     "Recognised by"); the bar is centred, wraps responsively, with even gaps and
+     generous clear-space. Per-logo monochrome→colour treatment lives in the
+     bbc-press-logo / bbc-partner-logo blocks. */
+  .bbc-rd .rd-logobar{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+    gap:22px 40px;          /* even vertical + generous horizontal clear-space */
+    max-width:980px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  @media (max-width:600px){
+    .bbc-rd .rd-logobar{ gap:18px 26px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Logo wall",
+  "tag": "section",
+  "class": "bbc-logowall-wrap",
+  "blocks": [{ "type": "bbc-press-logo" }],
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "As seen in & recognised by" },
+    { "type": "textarea", "id": "quote", "label": "Pull quote", "default": "Taps into 'the IKEA effect' — that extra bit of affection people reserve for objects they put together themselves." },
+    { "type": "text", "id": "cite", "label": "Quote attribution", "default": "Financial Times, 2025" },
+    {
+      "type": "select", "id": "background", "label": "Background", "default": "steel",
+      "options": [
+        { "value": "steel", "label": "Steel (cool grey-blue)" },
+        { "value": "paper", "label": "Paper (light)" },
+        { "value": "dark", "label": "Dark (forest green)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Logo wall",
+      "blocks": [
+        { "type": "bbc-press-logo", "settings": { "text": "Financial Times", "style": "ft", "logo_fallback": "logo-financial-times.svg" } },
+        { "type": "bbc-press-logo", "settings": { "text": "The Guardian", "style": "serif", "logo_fallback": "logo-guardian.svg" } },
+        { "type": "bbc-press-logo", "settings": { "text": "BBC", "style": "bbc", "logo_fallback": "logo-bbcnews.svg" } },
+        { "type": "bbc-press-logo", "settings": { "text": "Inside Time", "style": "serif-italic", "logo_fallback": "logo-inside-time.svg" } },
+        { "type": "bbc-press-logo", "settings": { "text": "road.cc", "style": "disc", "logo_fallback": "logo-roadcc.svg" } },
+        { "type": "bbc-press-logo", "settings": { "text": "Investec", "style": "caps", "logo_fallback": "bbc-logo-investec.svg" } },
+        { "type": "bbc-press-logo", "settings": { "text": "Grand Designs", "style": "serif", "logo_fallback": "logo-grand-designs.svg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

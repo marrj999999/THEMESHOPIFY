@@ -1,0 +1,167 @@
+{%- comment -%}
+  ========================= PREVIEW SHIM — DO NOT PUBLISH =========================
+  2026-08-28. The two lines below load the responsive fixes sitewide.
+
+  THEY DO NOT BELONG IN THIS FILE. They are here only because this snippet is
+  the smallest thing layout/theme.liquid renders exactly once on every page, and
+  the Admin API can only replace whole files — reproducing the 34 KB
+  theme.liquid through a GraphQL variable risks silently corrupting the layout
+  that renders every page on the store.
+
+  Loading from the end of <body> is also load-bearing right now: several rules
+  in these files must land AFTER bbc-redesign-2026.css, which the header section
+  re-emits from the body on every page.
+
+  THE REAL FIX, once the Shopify CLI is authenticated: delete this comment and
+  the two stylesheet_tags, and add them to layout/theme.liquid instead, directly
+  after:
+      {{ 'bbc-consistency-2026.css' | asset_url | stylesheet_tag }}
+
+  Until that happens this preview theme is for LOOKING AT, not publishing.
+  ================================================================================
+{%- endcomment -%}
+{{ 'bbc-responsive-cards.css' | asset_url | stylesheet_tag }}
+{{ 'bbc-responsive-layout.css' | asset_url | stylesheet_tag }}
+
+{% comment %}
+  BBC Back to Top Button
+  Floating scroll-to-top button
+  Include in theme.liquid before </body>: {% render 'bbc-back-to-top' %}
+{% endcomment %}
+
+<button type="button" 
+        class="bbc-back-to-top" 
+        id="bbc-back-to-top"
+        aria-label="Back to top"
+        title="Back to top">
+  {%- comment -%}
+    Inline SVG, not the Material Symbols font. This one hidden chevron was the ONLY
+    element on the estate still using that font-family — and a browser downloads a
+    @font-face as soon as any rendered element references it, so it cost 414 KB of
+    unsubset .ttf on EVERY page to draw a glyph nobody sees until they scroll.
+    Measured 2026-07-28 across impact / home / product / workshops / schools:
+    1 element each, 0 of them visible. bbc-icons.liquid is already inline SVG
+    ("No external font dependencies") — this brings the last straggler into line.
+  {%- endcomment -%}
+  <svg class="bbc-back-to-top__icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+       stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+       aria-hidden="true" focusable="false"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+<style>
+.bbc-back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99;
+  width: 48px;
+  height: 48px;
+  background: var(--bbc-forest, #073e27);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.bbc-back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.bbc-back-to-top:hover {
+  background: var(--bbc-teal, #3f8b66);
+  transform: translateY(-4px);
+}
+
+.bbc-back-to-top:focus-visible {
+  outline: 2px solid var(--bbc-gold, #ffa900);
+  outline-offset: 2px;
+}
+
+.bbc-back-to-top__icon {
+  width: 28px;
+  height: 28px;
+}
+
+/* Adjust position when sticky cart is visible */
+.bbc-sticky-cart.is-visible ~ .bbc-back-to-top,
+body:has(.bbc-sticky-cart.is-visible) .bbc-back-to-top {
+  bottom: 90px;
+}
+
+@media (max-width: 768px) {
+  .bbc-back-to-top {
+    bottom: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+  }
+  
+  .bbc-back-to-top__icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Mobile: higher when sticky cart visible */
+  .bbc-sticky-cart.is-visible ~ .bbc-back-to-top,
+  body:has(.bbc-sticky-cart.is-visible) .bbc-back-to-top {
+    bottom: 80px;
+  }
+}
+
+/* Reduce motion support */
+@media (prefers-reduced-motion: reduce) {
+  .bbc-back-to-top {
+    transition: opacity 0.1s, visibility 0.1s;
+  }
+  
+  .bbc-back-to-top:hover {
+    transform: translateY(0);
+  }
+}
+</style>
+
+<script>
+(function() {
+  const btn = document.getElementById('bbc-back-to-top');
+  if (!btn) return;
+  
+  const showThreshold = 400;
+  let ticking = false;
+  
+  function checkScroll() {
+    const shouldShow = window.scrollY > showThreshold;
+    btn.classList.toggle('is-visible', shouldShow);
+  }
+  
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        checkScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+  
+  btn.addEventListener('click', function() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? 'auto' : 'smooth'
+    });
+  });
+  
+  // Initial check
+  checkScroll();
+})();
+</script>

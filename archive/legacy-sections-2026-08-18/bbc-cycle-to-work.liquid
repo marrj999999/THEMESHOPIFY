@@ -1,0 +1,451 @@
+{% comment %}
+  BBC Cycle to Work — Distinctive Brand Version
+  
+  Design Principles:
+  - Sharp card edges
+  - Bold savings display
+  - Bamboo stripe accent
+  - Split layout with dramatic contrast
+{% endcomment %}
+
+<section class="bbc-c2w">
+  <div class="bbc-c2w__container page-width">
+    <div class="bbc-c2w__layout">
+      <div class="bbc-c2w__content">
+        {% if section.settings.badge != blank %}
+          <span class="bbc-c2w__badge">{{ section.settings.badge }}</span>
+        {% endif %}
+        
+        <h2 class="bbc-c2w__heading">{{ section.settings.title }}</h2>
+        
+        {% if section.settings.description != blank %}
+          <p class="bbc-c2w__description">{{ section.settings.description }}</p>
+        {% endif %}
+        
+        <ul class="bbc-c2w__benefits">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'benefit' -%}
+              <li {{ block.shopify_attributes }}>
+                <span class="bbc-c2w__check" aria-hidden="true">{% render 'bbc-icons', icon: 'check' %}</span>
+                {{ block.settings.text }}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+        
+        <div class="bbc-c2w__actions">
+          {% if section.settings.button_text != blank %}
+            <a href="{{ section.settings.button_url }}" class="bbc-btn bbc-btn--{{ section.settings.button_style | default: 'secondary' }} bbc-c2w__button">
+              {{ section.settings.button_text }}
+            </a>
+          {% endif %}
+          {% if section.settings.learn_more_text != blank %}
+            <a href="{{ section.settings.learn_more_url }}" class="bbc-btn bbc-btn--{{ section.settings.learn_more_style | default: 'outline' }} bbc-c2w__button">
+              {{ section.settings.learn_more_text }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+      
+      <div class="bbc-c2w__calculator">
+        <h3 class="bbc-c2w__calc-title">{{ section.settings.calc_title | default: "Example Savings" }}</h3>
+        
+        <div class="bbc-c2w__calc-rows">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'calc_row' -%}
+              <div class="bbc-c2w__calc-row{% if block.settings.is_total %} bbc-c2w__calc-row--total{% endif %}" {{ block.shopify_attributes }}>
+                <span class="bbc-c2w__calc-label">{{ block.settings.label }}</span>
+                <span class="bbc-c2w__calc-value{% if block.settings.is_saving %} bbc-c2w__calc-value--saving{% endif %}">{{ block.settings.value }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        
+        {% if section.settings.disclaimer != blank %}
+          <p class="bbc-c2w__disclaimer">{{ section.settings.disclaimer }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bbc-c2w {
+    padding: 100px 20px;
+    background: var(--bbc-cream, var(--bbc-cream));
+    position: relative;
+  }
+  
+  /* Bamboo stripe */
+  .bbc-c2w::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 200px;
+    background: linear-gradient(
+      to bottom,
+      var(--bbc-gold, var(--bbc-gold)) 0%,
+      var(--bbc-gold, var(--bbc-gold)) 45%,
+      transparent 45%,
+      transparent 55%,
+      var(--bbc-teal, var(--bbc-teal)) 55%,
+      var(--bbc-teal, var(--bbc-teal)) 100%
+    );
+  }
+  
+  .bbc-c2w__layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    max-width: 1100px;
+  }
+  
+  .bbc-c2w__badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: var(--bbc-forest, var(--bbc-forest));
+    color: white;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  
+  .bbc-c2w__heading {
+    font-family: var(--font-heading-family);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: var(--bbc-forest, var(--bbc-forest));
+    letter-spacing: -0.02em;
+    margin: 0 0 16px 0;
+    line-height: 1.1;
+  }
+  
+  .bbc-c2w__description {
+    font-size: 1.0625rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.8;
+    line-height: 1.7;
+    margin: 0 0 24px 0;
+  }
+  
+  .bbc-c2w__benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px 0;
+  }
+  
+  .bbc-c2w__benefits li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    font-size: 0.9375rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+  }
+  
+  .bbc-c2w__check {
+    color: var(--bbc-teal, var(--bbc-teal));
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  
+  .bbc-c2w__actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  
+  .bbc-c2w__button {
+    padding: 16px 28px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  
+  .bbc-c2w__button--primary {
+    background: var(--bbc-forest, var(--bbc-forest));
+    color: white;
+  }
+  
+  .bbc-c2w__button--primary:hover {
+    background: var(--bbc-teal, var(--bbc-teal));
+  }
+  
+  .bbc-c2w__button--secondary {
+    background: transparent;
+    color: var(--bbc-forest, var(--bbc-forest));
+    border: 2px solid var(--bbc-forest, var(--bbc-forest));
+  }
+  
+  .bbc-c2w__button--secondary:hover {
+    background: var(--bbc-forest, var(--bbc-forest));
+    color: white;
+  }
+  
+  .bbc-c2w__button:focus-visible {
+    outline: 2px solid var(--bbc-gold, var(--bbc-gold));
+    outline-offset: 4px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-c2w__button {
+      transition: none;
+    }
+  }
+  
+  /* Calculator card */
+  .bbc-c2w__calculator {
+    background: white;
+    padding: 36px 32px;
+    border-left: 6px solid var(--bbc-gold, var(--bbc-gold));
+    box-shadow: 8px 8px 0 var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  .bbc-c2w__calc-title {
+    font-family: var(--font-heading-family);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 24px 0;
+  }
+  
+  .bbc-c2w__calc-rows {
+    margin-bottom: 20px;
+  }
+  
+  .bbc-c2w__calc-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(7, 62, 39, 0.1);
+  }
+  
+  .bbc-c2w__calc-row--total {
+    border-bottom: none;
+    padding-top: 20px;
+    margin-top: 8px;
+    border-top: 2px solid var(--bbc-forest, var(--bbc-forest));
+  }
+  
+  .bbc-c2w__calc-label {
+    font-size: 0.9375rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.75;
+  }
+  
+  .bbc-c2w__calc-row--total .bbc-c2w__calc-label {
+    opacity: 1;
+    font-weight: 700;
+  }
+  
+  .bbc-c2w__calc-value {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--bbc-forest, var(--bbc-forest));
+  }
+  
+  .bbc-c2w__calc-value--saving {
+    color: var(--bbc-teal, var(--bbc-teal));
+  }
+  
+  .bbc-c2w__calc-row--total .bbc-c2w__calc-value {
+    font-family: var(--font-heading-family);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--bbc-teal, var(--bbc-teal));
+  }
+  
+  .bbc-c2w__disclaimer {
+    font-size: 0.75rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.5;
+    text-align: center;
+    margin: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-c2w {
+      padding: 60px 16px;
+    }
+    
+    .bbc-c2w::before {
+      display: none;
+    }
+    
+    .bbc-c2w__layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    
+    .bbc-c2w__calculator {
+      padding: 28px 24px;
+      box-shadow: 6px 6px 0 var(--bbc-gold, var(--bbc-gold));
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Cycle to Work",
+  "tag": "section",
+  "class": "bbc-c2w-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge text",
+      "default": "SAVE UP TO 42%"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Cycle to Work Scheme"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "UK employees can save 25-42% on a bamboo bicycle through salary sacrifice. Our kits and workshops are eligible for most Cycle to Work schemes."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Request a Quote"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "primary", "label": "Primary (Gold)" },
+        { "value": "secondary", "label": "Secondary (Forest)" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "outline-light", "label": "Outline Light" },
+        { "value": "white", "label": "White" },
+        { "value": "gold", "label": "Gold" }
+      ],
+      "default": "secondary"
+    },
+    {
+      "type": "text",
+      "id": "learn_more_text",
+      "label": "Secondary button text",
+      "default": "How It Works"
+    },
+    {
+      "type": "url",
+      "id": "learn_more_url",
+      "label": "Secondary button URL"
+    },
+    {
+      "type": "select",
+      "id": "learn_more_style",
+      "label": "Secondary button style",
+      "options": [
+        { "value": "primary", "label": "Primary (Gold)" },
+        { "value": "secondary", "label": "Secondary (Forest)" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "outline-light", "label": "Outline Light" },
+        { "value": "white", "label": "White" },
+        { "value": "gold", "label": "Gold" }
+      ],
+      "default": "outline"
+    },
+    {
+      "type": "header",
+      "content": "Calculator"
+    },
+    {
+      "type": "text",
+      "id": "calc_title",
+      "label": "Calculator title",
+      "default": "Example Savings"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "*Based on 40% tax bracket. Your savings depend on your tax rate."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Benefit text",
+          "default": "Frame kits from £375 - eligible for standard schemes"
+        }
+      ]
+    },
+    {
+      "type": "calc_row",
+      "name": "Calculator Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Road Bike Kit"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "£375"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_saving",
+          "label": "Is a saving (green)",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "is_total",
+          "label": "Is total row",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Cycle to Work",
+      "settings": {
+        "badge": "SAVE UP TO 42%",
+        "title": "Cycle to Work Scheme",
+        "description": "UK employees can save 25-42% on a bamboo bicycle through salary sacrifice. Our kits and workshops are eligible for most Cycle to Work schemes."
+      },
+      "blocks": [
+        { "type": "benefit", "settings": { "text": "Frame kits from £375 - eligible for standard schemes" } },
+        { "type": "benefit", "settings": { "text": "Workshops eligible up to £500" } },
+        { "type": "benefit", "settings": { "text": "Component packs can be included" } },
+        { "type": "benefit", "settings": { "text": "We accept: Cyclescheme, Cycle Solutions, Evans, Halfords" } },
+        { "type": "calc_row", "settings": { "label": "Road Bike Kit", "value": "£375", "is_saving": false, "is_total": false } },
+        { "type": "calc_row", "settings": { "label": "Tax Saving (40%)", "value": "-£150", "is_saving": true, "is_total": false } },
+        { "type": "calc_row", "settings": { "label": "NI Saving", "value": "-£7.50", "is_saving": true, "is_total": false } },
+        { "type": "calc_row", "settings": { "label": "You Pay", "value": "£217.50", "is_saving": false, "is_total": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,66 @@
+{% comment %}
+  BBC Schools — FAQ (Layer 1). Reduces procurement/logistics friction. Q/A = blocks (native details/summary).
+{% endcomment %}
+<section class="bbc-schools-faq">
+  <div class="page-width">
+    <div class="bbc-schools-faq__head">
+      {% if section.settings.eyebrow != blank %}<span class="bbc-schools-faq__eyebrow">{{ section.settings.eyebrow }}</span>{% endif %}
+      <h2 class="bbc-schools-faq__title">{{ section.settings.title }}</h2>
+    </div>
+    <div class="bbc-schools-faq__list">
+      {% for block in section.blocks %}
+        <details class="bbc-schools-faq__item" {{ block.shopify_attributes }}>
+          <summary class="bbc-schools-faq__q">{{ block.settings.q }}</summary>
+          <div class="bbc-schools-faq__a">{{ block.settings.a }}</div>
+        </details>
+      {% endfor %}
+    </div>
+    {% if section.settings.cta_text != blank %}
+      <p class="bbc-schools-faq__cta"><a href="{{ section.settings.cta_link | default: '#enquiry-form' }}">{{ section.settings.cta_text }} &rarr;</a></p>
+    {% endif %}
+  </div>
+</section>
+<style>
+  .bbc-schools-faq{background:var(--bbc-cream,#f8fafc);padding:64px 0}
+  .bbc-schools-faq__head{max-width:680px;margin:0 0 26px}
+  .bbc-schools-faq__eyebrow{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bbc-teal,#3f8b66);margin-bottom:10px}
+  .bbc-schools-faq__title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.25rem);color:var(--bbc-forest,#073e27);margin:0;line-height:1.15}
+  .bbc-schools-faq__list{max-width:780px}
+  .bbc-schools-faq__item{background:#fff;border:1px solid var(--bbc-gray-100,#e2e8f0);border-radius:10px;margin-bottom:10px;overflow:hidden}
+  .bbc-schools-faq__q{cursor:pointer;list-style:none;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.02rem;color:var(--bbc-forest,#073e27);padding:16px 20px;position:relative;padding-right:44px}
+  .bbc-schools-faq__q::-webkit-details-marker{display:none}
+  .bbc-schools-faq__q::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:1.4rem;font-weight:700;color:var(--bbc-teal,#3f8b66)}
+  .bbc-schools-faq__item[open] .bbc-schools-faq__q::after{content:"\2212"}
+  .bbc-schools-faq__a{padding:0 20px 18px;font-size:.98rem;line-height:1.6;color:var(--bbc-text,#1e293b)}
+  .bbc-schools-faq__a p{margin:0 0 8px}
+  .bbc-schools-faq__cta{margin:22px 0 0}
+  .bbc-schools-faq__cta a{font-weight:800;color:var(--bbc-forest,#073e27);text-decoration:none;border-bottom:2px solid var(--bbc-gold,#ffa900);padding-bottom:2px}
+</style>
+{% schema %}
+{
+  "name": "BBC Schools FAQ",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Questions" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "What schools ask us" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Still have a question? Ask us" },
+    { "type": "url", "id": "cta_link", "label": "CTA link (default: #enquiry-form)" }
+  ],
+  "blocks": [
+    { "type": "qa", "name": "Q&A", "settings": [
+      { "type": "text", "id": "q", "label": "Question" },
+      { "type": "richtext", "id": "a", "label": "Answer" }
+    ] }
+  ],
+  "presets": [
+    { "name": "BBC Schools FAQ", "blocks": [
+      { "type": "qa", "settings": { "q": "How much does it cost?", "a": "<p>The bamboo-speaker introduction is free. The bike-build programme is a reusable kit you buy once, then re-run each year for the cost of bamboo; an optional complete take-home bike is £800. Most schools fund it from existing budgets or a grant — tell us your budget and we’ll shape it to fit.</p>" } },
+      { "type": "qa", "settings": { "q": "How do we pay?", "a": "<p>By purchase order and invoice — the way schools already buy. Order values are kept low enough to buy directly without a tender.</p>" } },
+      { "type": "qa", "settings": { "q": "Is it safe? What about risk assessments?", "a": "<p>Yes. We’re a CIC with enhanced-DBS facilitators and public-liability insurance, and every programme ships with a CLEAPSS-referenced risk assessment. We can lead the two highest-risk steps on-site.</p>" } },
+      { "type": "qa", "settings": { "q": "Do we need a workshop?", "a": "<p>No. It runs as a term-long club, an off-timetable engineering week, or a single taster day — and we can deliver on-site if you don’t have the space or technician confidence.</p>" } },
+      { "type": "qa", "settings": { "q": "Does it fit the curriculum?", "a": "<p>It drops into D&T and pulls in physics, maths and sustainability, works as an NEA-grade design-and-make project, and supports Gatsby Benchmark 4 when you embed it in your careers plan. A one-page curriculum and careers map for SLT is included to help you evidence it.</p>" } },
+      { "type": "qa", "settings": { "q": "Is it accredited?", "a": "<p>Optional OCN accreditation is available where it counts for your learners (alternative provision, SEND, FE and post-16). For mainstream cohorts most schools value the experience and curriculum fit over a certificate — we’ll advise honestly.</p>" } }
+    ] }
+  ]
+}
+{% endschema %}

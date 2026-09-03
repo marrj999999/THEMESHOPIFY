@@ -1,0 +1,137 @@
+{% comment %}
+  BBC Add to Cart Button with Loading State
+  Usage: {% render 'bbc-add-to-cart', product: product %}
+  
+  This is a styled overlay for the default Shopify add to cart
+  Include after the main product form button to enhance it
+{% endcomment %}
+
+<style>
+  /* Enhanced Add to Cart Button Styles */
+  .product-form__submit {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 56px;
+    padding: 16px 32px;
+    background: var(--bbc-gold, #ffa900) !important;
+    color: var(--bbc-forest, #073e27) !important;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-body-family, 'Plus Jakarta Sans', sans-serif);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+  }
+  
+  .product-form__submit:hover:not(:disabled) {
+    background: #ffb82e !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 169, 0, 0.3);
+  }
+  
+  .product-form__submit:focus-visible {
+    outline: 3px solid var(--bbc-forest, #073e27);
+    outline-offset: 3px;
+  }
+  
+  .product-form__submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  /* Loading state */
+  .product-form__submit.loading .product-form__submit-text {
+    visibility: hidden;
+  }
+  
+  .product-form__submit .loading__spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    display: none;
+  }
+  
+  .product-form__submit.loading .loading__spinner {
+    display: block;
+  }
+  
+  .product-form__submit .loading__spinner circle {
+    stroke: var(--bbc-forest, #073e27);
+    stroke-width: 3;
+    fill: none;
+    stroke-dasharray: 60;
+    stroke-dashoffset: 20;
+    animation: bbc-button-spin 0.8s linear infinite;
+  }
+  
+  @keyframes bbc-button-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .product-form__submit,
+    .product-form__submit:hover:not(:disabled) {
+      transition: none;
+      transform: none;
+    }
+    
+    .product-form__submit .loading__spinner circle {
+      animation: none;
+    }
+  }
+  
+  /* Cart icon next to text */
+  .product-form__submit-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+  
+  /* Sold out / Unavailable state */
+  .product-form__submit[disabled] {
+    background: var(--bbc-stone, #e8e5de) !important;
+    color: var(--bbc-grey, #666666) !important;
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Find all add to cart forms
+  const forms = document.querySelectorAll('form[action*="/cart/add"]');
+  
+  forms.forEach(form => {
+    const button = form.querySelector('[type="submit"], .product-form__submit');
+    if (!button) return;
+    
+    // Add loading spinner if not present
+    if (!button.querySelector('.loading__spinner')) {
+      const spinner = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      spinner.setAttribute('class', 'loading__spinner');
+      spinner.setAttribute('viewBox', '0 0 24 24');
+      spinner.setAttribute('aria-hidden', 'true');
+      spinner.innerHTML = '<circle cx="12" cy="12" r="10"/>';
+      button.appendChild(spinner);
+    }
+    
+    // Add loading class on submit
+    form.addEventListener('submit', function() {
+      button.classList.add('loading');
+      
+      // Remove loading after a delay (Shopify will handle the actual response)
+      setTimeout(() => {
+        button.classList.remove('loading');
+      }, 3000);
+    });
+  });
+});
+</script>

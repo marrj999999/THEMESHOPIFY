@@ -1,0 +1,74 @@
+{
+  "discipline": "City",
+  "audience": "Ethically-minded urban commuters who want a practical, low-maintenance, upright bike that rides comfortably in all weather, stands out at the bike rack, and reflects their values — sustainable, hand-built, and tied to a social mission.",
+  "positioning": {
+    "eyebrow": "Built for the daily commute",
+    "title": "The commuter bike that doesn't look like every other commuter bike.",
+    "lede": "Upright, comfortable geometry with mounts for racks, mudguards and lights — hand-built by you from fast-growing bamboo and flax instead of carbon. A bike that turns heads at the rack, soaks up potholes, and carries a sustainability and social story no off-the-shelf frame can match."
+  },
+  "specs": [
+    { "label": "Build", "value": "25–35 hrs over a few weekends" },
+    { "label": "Geometry", "value": "Upright · rack, mudguard & light mounts" },
+    { "label": "Gearing", "value": "Single-speed or hub-gear ready" },
+    { "label": "Finish", "value": "Weatherproof lacquered · 8–12 yr life" }
+  ],
+  "who_for": [
+    { "title": "The all-weather commuter", "body": "Rides daily, rain or shine. Wants mudguard and rack mounts, a sealed weatherproof frame, and reliability with minimal fuss." },
+    { "title": "The values-led rider", "body": "Chooses bamboo and flax over carbon for the lower footprint — and because every kit funds a place on our prison build programme." },
+    { "title": "The stand-out commuter", "body": "Tired of riding past hundreds of identical bikes. Wants one that starts conversations at the rack — and is distinctive enough to deter the casual thief." }
+  ],
+  "faq": [
+    {
+      "q": "Can I really ride it in the rain every day?",
+      "a": "Yes. Finished frames are sealed with a weatherproof epoxy lacquer. Dry your bike after wet rides and store it indoors, and it'll last 8–12 years — many of our 2012 builds are still ridden daily."
+    },
+    {
+      "q": "How much maintenance does a bamboo commuter need?",
+      "a": "Very little. Build it single-speed and there's almost nothing to service — no derailleur to adjust. Keep the chain clean, dry the frame after wet rides, and inspect the joints once a year. That's it."
+    },
+    {
+      "q": "Will it handle hills and city traffic?",
+      "a": "The frame is single-speed or hub-gear ready, so you can spec gearing to suit your route and hills. The upright geometry gives you excellent visibility in traffic, and it fits standard racks, mudguards and lights."
+    },
+    {
+      "q": "Is it strong and secure enough for daily city use?",
+      "a": "Around 28,000 PSI tensile strength — comparable to mild steel but lighter — with under a 1% failure rate across 4,000+ builds since 2012, independently tested with Swansea University. And because no two bamboo frames look alike, yours is far harder for a thief to pass off than a generic bike."
+    },
+    {
+      "q": "Can I get it through Cycle to Work?",
+      "a": "Yes. Frame kits from £375 are eligible for standard Cycle to Work schemes — UK employees typically save 25–39% through salary sacrifice. We accept Cyclescheme, Cycle Solutions, Evans and Halfords."
+    }
+  ],
+  "reviews": [
+    {
+      "quote": "My daily commuter for 3 years now. Gets so many compliments locked up outside the office.",
+      "author": "Urban Cyclist",
+      "role": "City commuter build, London"
+    },
+    {
+      "quote": "Upright riding position is so comfortable. Much better than being hunched over on a road bike.",
+      "author": "Comfort Seeker",
+      "role": "City bike builder, Manchester"
+    },
+    {
+      "quote": "Added a front basket and rear rack. Perfect setup for shopping runs and pub trips.",
+      "author": "Practical Builder",
+      "role": "Utility build, Bristol"
+    }
+  ],
+  "related": [
+    { "title": "Single-speed component pack", "note": "Wheels, single-speed drivetrain and finishing kit to complete your commuter — from £425.", "fallback": "bbc-rd-prod-build.jpg" },
+    { "title": "Road Lugged Kit", "note": "Faster, drop-bar geometry for longer commutes and road riding.", "fallback": "bbc-rd-prod-flax.jpg" },
+    { "title": "Custom Frame Kit", "note": "Dial in your own geometry and gearing — request a quote.", "fallback": "bbc-rd-road-charlie.jpg" }
+  ],
+  "hero_fallback": "bbc-rd-bike-field.jpg",
+  "price_from": "£375",
+  "needs_real_data": [
+    "Star rating value and review count for the buy box (Gravel design used unverified 4.8 / 214 — no city-specific number is verified).",
+    "'Would build again' percentage in the reviews band (Gravel used unverified 98%).",
+    "A verified, named city/commuter testimonial — the four city quotes in bbc-kit-reviews.liquid and the inline quote are persona-attributed ('Urban Cyclist', 'City Kit Builder'), not real named customers.",
+    "Confirm Cycle to Work savings band: prompt specifies 25–39%, but the live bbc-cycle-to-work.liquid section states 25–42% — reconcile before publishing.",
+    "Confirm city build-time range: spec uses the prompt's 25–35 hrs, but product.kit-city.json's own collapsible reads 20–35 hrs.",
+    "Confirm number of variants/sizes shown (product has 5 variants) and whether hub-gear (e.g. Rohloff/Shimano) options are offered alongside single-speed."
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "rows": [
+    {
+      "name": "BBC home",
+      "url": "https://bamboobicycleclub.org/?preview_theme_id=196820238710",
+      "ours": true,
+      "coverage": 0.82,
+      "bands": 10,
+      "repetition": 30,
+      "diversity": 0.5,
+      "adjacency": 2,
+      "boxRatio": 0,
+      "symmetry": 100,
+      "densityRun": 2,
+      "ok": true
+    },
+    {
+      "name": "BBC impact",
+      "url": "https://bamboobicycleclub.org/pages/impact?preview_theme_id=196820238710",
+      "ours": true,
+      "coverage": 0.9,
+      "bands": 10,
+      "repetition": 30,
+      "diversity": 0.7,
+      "adjacency": 0,
+      "boxRatio": 10,
+      "symmetry": null,
+      "densityRun": 2,
+      "ok": true
+    },
+    {
+      "name": "BBC workshops",
+      "url": "https://bamboobicycleclub.org/pages/workshops?preview_theme_id=196820238710",
+      "ours": true,
+      "coverage": 0.83,
+      "bands": 10,
+      "repetition": 50,
+      "diversity": 0.5,
+      "adjacency": 2,
+      "boxRatio": 10,
+      "symmetry": 100,
+      "densityRun": 3,
+      "ok": true
+    },
+    {
+      "name": "BBC schools",
+      "url": "https://bamboobicycleclub.org/pages/schools?preview_theme_id=196820238710",
+      "ours": true,
+      "coverage": 0.75,
+      "bands": 8,
+      "repetition": 25,
+      "diversity": 0.75,
+      "adjacency": 0,
+      "boxRatio": 13,
+      "symmetry": null,
+      "densityRun": 2,
+      "ok": true
+    },
+    {
+      "name": "BBC programmes",
+      "url": "https://bamboobicycleclub.org/pages/programmes?preview_theme_id=196820238710",
+      "ours": true,
+      "coverage": 0.87,
+      "bands": 10,
+      "repetition": 40,
+      "diversity": 0.4,
+      "adjacency": 1,
+      "boxRatio": 0,
+      "symmetry": null,
+      "densityRun": 6,
+      "ok": true
+    }
+  ],
+  "medians": {
+    "ours": {
+      "bands": 10,
+      "repetition": 30,
+      "diversity": 0.5,
+      "adjacency": 1,
+      "boxRatio": 10,
+      "symmetry": 100,
+      "densityRun": 2
+    },
+    "peers": {
+      "bands": null,
+      "repetition": null,
+      "diversity": null,
+      "adjacency": null,
+      "boxRatio": null,
+      "symmetry": null,
+      "densityRun": null
+    }
+  }
+}

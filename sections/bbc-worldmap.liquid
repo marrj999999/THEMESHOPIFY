@@ -1,0 +1,133 @@
+{%- comment -%} ============================================================
+  BBC WORLD MAP — the reach map, lifted out of the impact page.
+
+  James asked for the map to move to Our Story (2026-08-19). It was welded into
+  the "where we work" band inside bbc-impact-2026, and every one of its styles was
+  scoped to `.bbc-rd-impact`, so it could not simply be referenced from another
+  template — the markup would have travelled and the layout would not.
+
+  So it is a section now: same figure, same four floating stats, same caption, but
+  portable and editable. Impact keeps the band, its heading and its partner list,
+  and turns the figure off with `map_enable`. The `#map` anchor stays on impact,
+  which matters — the on-this-page nav links "where we work~#map" and a moved
+  anchor is how that chapter list acquires a dead link.
+
+  Stats are blocks so the count can change without touching code, and their
+  position on the map is a per-block setting rather than four hard-coded classes
+  (rd-mapstat--a/b/c/d) that only made sense at one length.
+  Styling lives in bbc-redesign-2026.css (design brief hard req 2).
+============================================================ {%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign surf = 'rd-paper'
+  if section.settings.background == 'bone'
+    assign surf = 'rd-bone'
+  elsif section.settings.background == 'steel'
+    assign surf = 'rd-steel'
+  endif
+-%}
+
+<div class="bbc-rd bbc-worldmap {{ surf }}">
+  <section class="rd-pad-sm"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor }}"{% endif %}>
+    {%- if section.settings.show_nodediv -%}
+      <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank or section.settings.lede != blank -%}
+    <div class="rd-wrap rd-mw-820px">
+      {%- if section.settings.eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="rd-reveal rd-mw-22ch rd-mx-auto">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.lede != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.lede }}</p>{%- endif -%}
+    </div>
+    {%- endif -%}
+
+    <div class="rd-wmap rd-mt3">
+      <figure class="rd-wmap__fig">
+        {%- if section.settings.map_image != blank -%}
+          <img src="{{ section.settings.map_image | image_url: width: 2400 }}"
+               alt="{{ section.settings.map_alt | escape }}"
+               width="{{ section.settings.map_image.width }}" height="{{ section.settings.map_image.height }}" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'bbc-world-map.svg' | asset_url }}" alt="{{ section.settings.map_alt | escape }}"
+               width="1000" height="472" loading="lazy">
+        {%- endif -%}
+
+        {%- assign stats = section.blocks | where: 'type', 'stat' -%}
+        {%- if stats.size > 0 -%}
+          <div class="rd-wmap__stats" aria-hidden="true">
+            {%- for block in stats -%}
+              <div class="rd-wmap__stat{% if block.settings.big %} is-big{% endif %}"
+                   style="--wm-top:{{ block.settings.top | default: 20 }}%" {{ block.shopify_attributes }}>
+                <b>{{ block.settings.number }}</b><span>{{ block.settings.label }}</span>
+              </div>
+            {%- endfor -%}
+          </div>
+          {%- comment -%} The floating stats are aria-hidden decoration over the image, so the
+             same numbers are repeated here for anyone not seeing them. Without this the map
+             carries four facts a screen reader never reaches. {%- endcomment -%}
+          <ul class="rd-vh">
+            {%- for block in stats -%}<li>{{ block.settings.number }} {{ block.settings.label }}</li>{%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.caption != blank -%}
+          <figcaption class="rd-wmap__cap">{{ section.settings.caption }}</figcaption>
+        {%- endif -%}
+      </figure>
+    </div>
+
+    {%- if section.settings.cta_label != blank -%}
+    <div class="rd-wrap rd-mw-820px rd-mt3">
+      <a class="rd-path__cta" href="{{ section.settings.cta_url | default: '/pages/impact' }}">{{ section.settings.cta_label }}</a>
+    </div>
+    {%- endif -%}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "BBC World map",
+  "tag": "section",
+  "class": "bbc-worldmap-section",
+  "settings": [
+    { "type": "select", "id": "background", "label": "Background", "default": "paper",
+      "options": [
+        { "value": "paper", "label": "Paper" },
+        { "value": "bone", "label": "Bone" },
+        { "value": "steel", "label": "Steel" }
+      ] },
+    { "type": "text", "id": "anchor", "label": "Anchor id (for in-page links)", "default": "map" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "where we've reached" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "45 countries, one kit at a time." },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "Every country a Bamboo Bicycle Club kit has reached since 2012." },
+    { "type": "header", "content": "Map" },
+    { "type": "image_picker", "id": "map_image", "label": "Map image (blank = built-in world map)" },
+    { "type": "text", "id": "map_alt", "label": "Map alt text", "default": "World map with every country a Bamboo Bicycle Club kit has reached shaded green" },
+    { "type": "textarea", "id": "caption", "label": "Caption", "default": "✱ every country our kits have reached since 2012 — straight from our customer records. home in dark green." },
+    { "type": "header", "content": "Devices" },
+    { "type": "checkbox", "id": "show_nodediv", "label": "Node-divider seam at the top", "default": true },
+    { "type": "header", "content": "Call to action" },
+    { "type": "text", "id": "cta_label", "label": "CTA label" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Map stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "45" },
+        { "type": "text", "id": "label", "label": "Label", "default": "countries reached" },
+        { "type": "range", "id": "top", "label": "Position from top (%)", "min": 2, "max": 88, "step": 1, "unit": "%", "default": 8 },
+        { "type": "checkbox", "id": "big", "label": "Lead stat (larger)", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC World map",
+      "blocks": [ { "type": "stat" }, { "type": "stat" }, { "type": "stat" }, { "type": "stat" } ]
+    }
+  ]
+}
+{% endschema %}

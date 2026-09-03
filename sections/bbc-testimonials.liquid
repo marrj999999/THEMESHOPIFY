@@ -1,0 +1,377 @@
+{% comment %}
+  BBC Testimonials — Distinctive Brand Version
+  
+  Design Principles:
+  - Sharp card edges
+  - Large decorative quote marks
+  - Left border accent
+  - Asymmetric header
+  - Bold author names
+{% endcomment %}
+
+<section class="bbc-testimonials">
+  <div class="bbc-testimonials__container page-width">
+    <header class="bbc-testimonials__header">
+      {% if section.settings.eyebrow != blank %}
+        <span class="bbc-testimonials__eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h2 class="rd-reveal bbc-testimonials__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="bbc-testimonials__subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </header>
+    
+    <div class="bbc-testimonials__grid">
+      {% for block in section.blocks %}
+        <article class="bbc-testimonial{% if forloop.first %} bbc-testimonial--featured{% endif %}" {{ block.shopify_attributes }}>
+          <span class="bbc-testimonial__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-testimonial__quote">
+            {{ block.settings.quote }}
+          </blockquote>
+          <footer class="bbc-testimonial__author">
+            <cite class="bbc-testimonial__name">{{ block.settings.name }}</cite>
+            {% if block.settings.role != blank %}
+              <span class="bbc-testimonial__role">{{ block.settings.role }}</span>
+            {% endif %}
+            {% if block.settings.location != blank %}
+              <span class="bbc-testimonial__location">{{ block.settings.location }}</span>
+            {% endif %}
+          </footer>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .bbc-testimonials {
+    padding: var(--section-py, 80px) var(--section-px, 24px);
+    background: var(--bbc-white, var(--bbc-white));
+    position: relative;
+  }
+  
+  /* Bamboo stripe accent */
+  .bbc-testimonials::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(
+      to right,
+      var(--bbc-teal, var(--bbc-teal)) 0%,
+      var(--bbc-teal, var(--bbc-teal)) 60%,
+      transparent 60%,
+      transparent 70%,
+      var(--bbc-gold, var(--bbc-gold)) 70%,
+      var(--bbc-gold, var(--bbc-gold)) 100%
+    );
+  }
+  
+  .bbc-testimonials__header {
+    margin-bottom: 48px;
+    max-width: 600px;
+  }
+  
+  .bbc-testimonials__eyebrow {
+    display: inline-block;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--bbc-teal, var(--bbc-teal));
+    margin-bottom: 12px;
+  }
+  
+  .bbc-testimonials__heading {
+    font-family: var(--font-heading-family);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: var(--bbc-forest, var(--bbc-forest));
+    letter-spacing: -0.02em;
+    margin: 0 0 12px 0;
+    line-height: 1.1;
+  }
+  
+  .bbc-testimonials__subheading {
+    font-size: 1.125rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.7;
+    margin: 0;
+    line-height: 1.5;
+  }
+  
+  .bbc-testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+  }
+  
+  /* Testimonial card - sharp, confident */
+  .bbc-testimonial {
+    padding: 36px 32px;
+    background: var(--bbc-cream, var(--bbc-cream));
+    border-left: 4px solid transparent;
+    position: relative;
+    transition: border-color 0.2s ease;
+  }
+  
+  .bbc-testimonial:hover {
+    border-left-color: var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  .bbc-testimonial--featured {
+    border-left-color: var(--bbc-gold, var(--bbc-gold));
+    background: var(--bbc-forest, var(--bbc-forest));
+  }
+  
+  .bbc-testimonial--featured:hover {
+    border-left-color: var(--bbc-gold, var(--bbc-gold));
+    box-shadow: none;
+  }
+  
+  .bbc-testimonial--featured .bbc-testimonial__quote {
+    color: rgba(255,255,255,0.95);
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    line-height: 1.65;
+  }
+  
+  .bbc-testimonial--featured .bbc-testimonial__quote-mark {
+    color: var(--bbc-gold, var(--bbc-gold));
+    opacity: 0.35;
+    font-size: 8rem;
+  }
+  
+  .bbc-testimonial--featured .bbc-testimonial__author {
+    border-top-color: rgba(255,255,255,0.15);
+  }
+  
+  .bbc-testimonial--featured .bbc-testimonial__name {
+    color: var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  .bbc-testimonial--featured .bbc-testimonial__role {
+    color: rgba(255,255,255,0.7);
+    opacity: 1;
+  }
+  
+  .bbc-testimonial--featured .bbc-testimonial__location {
+    color: rgba(255,255,255,0.5);
+  }
+  
+  /* Full-width featured on desktop */
+  @media (min-width: 900px) {
+    .bbc-testimonials__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .bbc-testimonial--featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 48px;
+      padding: 48px 56px;
+    }
+    
+    .bbc-testimonial--featured .bbc-testimonial__quote-mark {
+      font-size: 10rem;
+    }
+    
+    .bbc-testimonial--featured .bbc-testimonial__author {
+      min-width: 200px;
+      text-align: right;
+      border-top: none;
+      border-left: 2px solid rgba(255,255,255,0.15);
+      padding-top: 0;
+      padding-left: 48px;
+    }
+    
+    .bbc-testimonial--featured .bbc-testimonial__name {
+      font-size: 1.125rem;
+    }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-testimonial {
+      transition: none;
+    }
+  }
+  
+  /* Large decorative quote mark */
+  .bbc-testimonial__quote-mark {
+    position: absolute;
+    top: 20px;
+    left: 24px;
+    font-family: var(--font-body-family);
+    font-size: 6rem;
+    line-height: 1;
+    color: var(--bbc-gold, var(--bbc-gold));
+    opacity: 0.15;
+    pointer-events: none;
+  }
+  
+  .bbc-testimonial--featured .bbc-testimonial__quote-mark {
+    opacity: 0.25;
+  }
+  
+  .bbc-testimonial__quote {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 24px 0;
+    font-style: normal;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .bbc-testimonial__author {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 20px;
+    border-top: 2px solid rgba(7, 62, 39, 0.08);
+  }
+  
+  .bbc-testimonial__name {
+    font-weight: 700;
+    font-style: normal;
+    color: var(--bbc-forest, var(--bbc-forest));
+    font-size: 0.9375rem;
+  }
+  
+  .bbc-testimonial__role {
+    font-size: 0.8125rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.7;
+  }
+  
+  .bbc-testimonial__location {
+    font-size: 0.75rem;
+    color: var(--bbc-teal, var(--bbc-teal));
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-testimonials__grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .bbc-testimonial {
+      padding: 28px 24px;
+    }
+    
+    .bbc-testimonial--featured {
+      box-shadow: 6px 6px 0 var(--bbc-gold, var(--bbc-gold));
+    }
+    
+    .bbc-testimonial__quote-mark {
+      font-size: 4rem;
+      top: 16px;
+      left: 16px;
+    }
+    
+    .bbc-testimonial__quote {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Testimonials",
+  "tag": "section",
+  "class": "bbc-testimonials-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Testimonials"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What Our Builders Say"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Join 4,000+ people who've built their own bamboo bikes"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote (without quotation marks)",
+          "default": "I genuinely thought I'd fail. I have no mechanical skills whatsoever. Two days later I rolled out of the workshop on a bike I built myself."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Sarah K."
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role/Profession",
+          "default": "Marketing Manager"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "London"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Woody turned out to be the most reliable bike I've ever owned. I had hardly any mechanical problems on the whole 8,288 mile journey and it was a smooth and shock-absorbing ride.",
+            "name": "Kate Rawles",
+            "role": "Author, 'The Life Cycle' (Icon Books)",
+            "location": "Colombia → Patagonia"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Still riding mine daily after 7 years. Built it at home in Romania using the kit. It's outlasted two steel bikes I owned before. The bamboo just keeps going.",
+            "name": "Jamie",
+            "role": "Home Kit Builder",
+            "location": "Romania"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I genuinely thought I'd fail. No mechanical skills whatsoever. Two days later I rolled out of the workshop on a bike I built myself. Still can't quite believe it.",
+            "name": "Workshop Builder",
+            "role": "First-time builder",
+            "location": "London"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

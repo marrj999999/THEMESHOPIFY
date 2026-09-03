@@ -1,0 +1,157 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-education-2026",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "number": "5",
+            "label": "engineering programmes",
+            "source": "3 live · 2 coming"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "number": "KS3 → post-16",
+            "label": "ages 11–19",
+            "source": "curriculum-mapped"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "number": "Benchmark 4",
+            "label": "Gatsby careers",
+            "source": "with a careers map"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "number": "1,544",
+            "label": "young people reached",
+            "source": "and counting"
+          }
+        },
+        "p1": {
+          "type": "programme",
+          "settings": {
+            "tier": "Foundation",
+            "title": "Acoustic Engineering & Sustainable Product Design",
+            "detail": "Ages 11–16 · KS3–KS4 · ~2–3 hrs · builds a working bamboo speaker",
+            "status": "live"
+          }
+        },
+        "p2": {
+          "type": "programme",
+          "settings": {
+            "tier": "Frame I",
+            "title": "Sustainable Product Engineering",
+            "detail": "Entry frame build (balance bike) · in development",
+            "status": "coming"
+          }
+        },
+        "p3": {
+          "type": "programme",
+          "settings": {
+            "tier": "Frame II",
+            "title": "Sustainable Bicycle Technical Development",
+            "detail": "Ages 14–18 · KS4 / post-16 · multi-session · builds a rideable bamboo gravel frame",
+            "status": "live"
+          }
+        },
+        "p4": {
+          "type": "programme",
+          "settings": {
+            "tier": "Additive",
+            "title": "Additive Manufacturing & Adaptive Design",
+            "detail": "Ages 14–19 / post-16 · design & 3D-print the lugs · parametric & adaptive design",
+            "status": "live"
+          }
+        },
+        "p5": {
+          "type": "programme",
+          "settings": {
+            "tier": "Systems",
+            "title": "Electric Mobility Engineering & Green Technology",
+            "detail": "Electronics & e-mobility engineering · in development",
+            "status": "coming"
+          }
+        },
+        "b1": {
+          "type": "badge",
+          "settings": {
+            "label": "OCN London accredited",
+            "lime": true
+          }
+        },
+        "b2": {
+          "type": "badge",
+          "settings": {
+            "label": "Gatsby Benchmark 4",
+            "lime": false
+          }
+        },
+        "b3": {
+          "type": "badge",
+          "settings": {
+            "label": "Bamboo Mobility Project CIC",
+            "lime": false
+          }
+        },
+        "b4": {
+          "type": "badge",
+          "settings": {
+            "label": "Enhanced-DBS facilitators · public-liability insured",
+            "lime": false
+          }
+        },
+        "pr1": {
+          "type": "press",
+          "settings": {
+            "text": "FINANCIAL TIMES",
+            "style": "ft"
+          }
+        },
+        "pr2": {
+          "type": "press",
+          "settings": {
+            "text": "The Guardian",
+            "style": "serif"
+          }
+        },
+        "pr3": {
+          "type": "press",
+          "settings": {
+            "text": "BBC",
+            "style": "bbc"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "pr1",
+        "pr2",
+        "pr3"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

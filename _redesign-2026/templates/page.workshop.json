@@ -1,0 +1,220 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-workshops-2026",
+      "blocks": {
+        "b0": {
+          "type": "stat",
+          "settings": {
+            "number": "95%",
+            "label": "had never built before"
+          }
+        },
+        "b1": {
+          "type": "stat",
+          "settings": {
+            "number": "2–3 days",
+            "label": "to build a complete frame"
+          }
+        },
+        "b2": {
+          "type": "stat",
+          "settings": {
+            "number": "All-in",
+            "label": "materials, tools & tuition included"
+          }
+        },
+        "b3": {
+          "type": "stat",
+          "settings": {
+            "number": "25–39%",
+            "label": "typical saving via Cycle to Work"
+          }
+        },
+        "b4": {
+          "type": "step",
+          "settings": {
+            "title": "Select & cut your bamboo",
+            "body": "Choose your culms and mitre them to your personalised frame drawing."
+          }
+        },
+        "b5": {
+          "type": "step",
+          "settings": {
+            "title": "Set the jig",
+            "body": "Lock the geometry — tailored to your body measurements, taken in advance."
+          }
+        },
+        "b6": {
+          "type": "step",
+          "settings": {
+            "title": "Lash & bond the joints",
+            "body": "Wrap the joints in natural fibre and high-strength bio-resin."
+          }
+        },
+        "b7": {
+          "type": "step",
+          "settings": {
+            "title": "Finish & ride away",
+            "body": "Final inspection, a celebration, and a frame ready for components."
+          }
+        },
+        "b8": {
+          "type": "how_tag",
+          "settings": {
+            "label": "Tools provided"
+          }
+        },
+        "b9": {
+          "type": "how_tag",
+          "settings": {
+            "label": "Lunch & coffee"
+          }
+        },
+        "b10": {
+          "type": "how_tag",
+          "settings": {
+            "label": "Expert 1:1 guidance"
+          }
+        },
+        "b11": {
+          "type": "how_tag",
+          "settings": {
+            "label": "Group discounts 3+"
+          }
+        },
+        "b12": {
+          "type": "location",
+          "settings": {
+            "fallback": "bbc-rd-gravel-fence.jpg",
+            "image_alt": "A finished bamboo gravel bike",
+            "title": "London E8",
+            "body": "Our home workshop in Hackney. Weekends & weekdays, year-round.",
+            "link_label": "Book London"
+          }
+        },
+        "b13": {
+          "type": "location",
+          "settings": {
+            "fallback": "bbc-rd-redbar.jpg",
+            "image_alt": "A finished bamboo bike with red flat bars",
+            "title": "Amersfoort, NL",
+            "body": "Our European hub, serving the Netherlands, Belgium and Germany. All materials included.",
+            "link_label": "Book Amersfoort"
+          }
+        },
+        "b14": {
+          "type": "location",
+          "settings": {
+            "fallback": "bbc-rd-cargo.jpg",
+            "image_alt": "A bamboo cargo bike on a city street",
+            "title": "Toulouse, FR",
+            "body": "Serving southern France and Spain. All materials included.",
+            "link_label": "Book Toulouse"
+          }
+        },
+        "b15": {
+          "type": "frame_tag",
+          "settings": {
+            "label": "Road · 2 days",
+            "lime": true
+          }
+        },
+        "b16": {
+          "type": "frame_tag",
+          "settings": {
+            "label": "Gravel · 2 days",
+            "lime": false
+          }
+        },
+        "b17": {
+          "type": "frame_tag",
+          "settings": {
+            "label": "MTB · 3 days",
+            "lime": false
+          }
+        },
+        "b18": {
+          "type": "frame_tag",
+          "settings": {
+            "label": "City & tourer",
+            "lime": false
+          }
+        },
+        "b19": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need any experience?",
+            "answer": "None at all. Around 95% of participants have never built anything like this before — we guide you through every step."
+          }
+        },
+        "b20": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I come with someone?",
+            "answer": "Yes — many people book with partners or friends. Group discounts are available for 3 or more."
+          }
+        },
+        "b21": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I use Cycle to Work?",
+            "answer": "Yes. We're registered with all major providers, so you can typically save 25–39%."
+          }
+        },
+        "b22": {
+          "type": "faq",
+          "settings": {
+            "question": "What do I leave with?",
+            "answer": "A complete frame ready for components. We can advise on, or supply, a groupset to finish the build."
+          }
+        },
+        "b23": {
+          "type": "faq",
+          "settings": {
+            "question": "What should I bring?",
+            "answer": "Just yourself and old clothes you don't mind getting epoxy on. Tools, materials, safety kit, lunch, tea and coffee are all provided."
+          }
+        },
+        "b24": {
+          "type": "faq",
+          "settings": {
+            "question": "How long will the frame last?",
+            "answer": "With proper care, bamboo frames ride for years — we still have frames from our earliest workshops going strong. Our support doesn't end when you leave."
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b11",
+        "b12",
+        "b13",
+        "b14",
+        "b15",
+        "b16",
+        "b17",
+        "b18",
+        "b19",
+        "b20",
+        "b21",
+        "b22",
+        "b23",
+        "b24"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

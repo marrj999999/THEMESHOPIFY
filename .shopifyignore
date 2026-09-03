@@ -1,0 +1,25 @@
+# SHOPIFY IGNORE — Protect James's Editor Content
+# These files contain images/content uploaded via Shopify editor
+# NEVER push these unless explicitly instructed by James
+
+# Theme settings (James's customizations)
+config/settings_data.json
+
+# Page templates (James's section order, images, content blocks)
+templates/*.json
+
+# Backup/temporary files
+*.backup
+*.bak
+.DS_Store
+
+# Development files
+node_modules/
+.git/
+.github/
+*.md
+!README.md
+
+# Test results
+test-results/
+playwright-report/

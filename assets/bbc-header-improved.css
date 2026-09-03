@@ -1,0 +1,700 @@
+/* =============================================================================
+   BBC Header & Navigation Improvements
+   Based on 11-site UX research (2026-02-20)
+   
+   Key changes:
+   - Increased font size (12px → 14-15px)
+   - Improved spacing (8px → 16px padding)
+   - Added hover states
+   - Better responsive breakpoints
+   - Enhanced visual hierarchy
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. TYPOGRAPHY — Primary Navigation
+   Research: 91% of sites use 14-16px nav text
+   ----------------------------------------------------------------------------- */
+
+.header__inline-menu .header__menu-item,
+.header__inline-menu .list-menu__item > a,
+.header__inline-menu .list-menu__item > summary {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(var(--color-foreground));
+}
+
+/* Large desktop — slightly larger text */
+@media screen and (min-width: 1200px) {
+  .header__inline-menu .header__menu-item,
+  .header__inline-menu .list-menu__item > a,
+  .header__inline-menu .list-menu__item > summary {
+    font-size: 15px;
+    letter-spacing: 0.05em;
+  }
+}
+
+/* Medium desktop — maintain readability */
+@media screen and (min-width: 990px) and (max-width: 1199px) {
+  .header__inline-menu .header__menu-item,
+  .header__inline-menu .list-menu__item > a,
+  .header__inline-menu .list-menu__item > summary {
+    font-size: 13px;
+    letter-spacing: 0.03em;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   2. SPACING — Minimal padding per James request
+   ----------------------------------------------------------------------------- */
+
+.header__inline-menu .list-menu__item > a,
+.header__inline-menu .list-menu__item > summary {
+  padding: 0.5rem 0.5rem;
+}
+
+@media screen and (min-width: 1200px) {
+  .header__inline-menu .list-menu__item > a,
+  .header__inline-menu .list-menu__item > summary {
+    padding: 0.5rem 0.625rem;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .header__inline-menu .list-menu__item > a,
+  .header__inline-menu .list-menu__item > summary {
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* Prevent menu wrapping */
+.header__inline-menu {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.header__inline-menu .list-menu {
+  flex-wrap: nowrap;
+  gap: 0;
+}
+
+/* -----------------------------------------------------------------------------
+   3. HOVER STATES — Clear feedback on interaction
+   Research: 55% use underline, 73% have transitions
+   ----------------------------------------------------------------------------- */
+
+.header__inline-menu .list-menu__item > a,
+.header__inline-menu .list-menu__item > summary {
+  position: relative;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+/* Underline effect - BBC Gold */
+.header__inline-menu .list-menu__item > a::after,
+.header__inline-menu .list-menu__item > summary::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--bbc-gold);
+  transition: width 0.25s ease, left 0.25s ease;
+  pointer-events: none;
+}
+
+.header__inline-menu .list-menu__item > a:hover::after,
+.header__inline-menu .list-menu__item > a:focus::after,
+.header__inline-menu .list-menu__item > summary:hover::after,
+.header__inline-menu .list-menu__item > summary:focus::after {
+  width: calc(100% - 2rem); /* Account for padding */
+  left: 1rem;
+}
+
+/* Subtle dim on non-hovered items when any item is hovered */
+.header__inline-menu:hover .list-menu__item > a:not(:hover),
+.header__inline-menu:hover .list-menu__item > summary:not(:hover) {
+  opacity: 0.7;
+}
+
+/* -----------------------------------------------------------------------------
+   4. DROPDOWN INDICATORS — Replace "+" with chevron
+   Research: 73% use chevron arrows
+   ----------------------------------------------------------------------------- */
+
+/* Style the disclosure triangle */
+.header__inline-menu details > summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.header__inline-menu details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Chevron icon via CSS */
+.header__inline-menu summary .icon-caret {
+  width: 10px;
+  height: 10px;
+  transition: transform 0.2s ease;
+}
+
+.header__inline-menu details[open] summary .icon-caret {
+  transform: rotate(180deg);
+}
+
+/* If using text-based indicators, hide them */
+.header__inline-menu .header__active-menu-item::after,
+.header__inline-menu .header__menu-item--has-submenu::after {
+  /* Ensure proper chevron styling */
+}
+
+/* -----------------------------------------------------------------------------
+   5. RESPONSIVE BEHAVIOUR — Earlier breakpoint
+   Switch to hamburger at 1100px to prevent wrapping
+   ----------------------------------------------------------------------------- */
+
+@media screen and (max-width: 1099px) {
+  .header__inline-menu {
+    display: none !important;
+  }
+  
+  header-drawer {
+    display: flex !important;
+  }
+}
+
+/* Show desktop nav on larger screens */
+@media screen and (min-width: 1100px) {
+  header-drawer {
+    display: none !important;
+  }
+  
+  .header__inline-menu {
+    display: flex !important;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   6. MOBILE DRAWER — Better touch targets
+   Research: Touch targets should be 44px minimum
+   ----------------------------------------------------------------------------- */
+
+.menu-drawer__menu-item {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.menu-drawer__submenu .menu-drawer__menu-item {
+  font-size: 16px;
+  font-weight: 500;
+  padding-left: 2rem;
+}
+
+/* Drawer header spacing */
+.menu-drawer__navigation {
+  padding: 0;
+}
+
+.menu-drawer__inner-container {
+  padding-top: 1rem;
+}
+
+/* -----------------------------------------------------------------------------
+   7. HEADER CONTAINER — Consistent height and alignment
+   ----------------------------------------------------------------------------- */
+
+.header {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media screen and (min-width: 990px) {
+  .header {
+    min-height: 72px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .header {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+/* Logo container — fix alignment with menu */
+.header__heading {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.header__heading-link {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.header__heading-logo-wrapper {
+  display: flex;
+  align-items: center;
+  margin-right: 0;
+  padding: 0;
+}
+
+/* Logo sizing */
+.header__heading-logo {
+  max-width: 160px;
+  height: auto;
+  display: block;
+}
+
+@media screen and (min-width: 990px) {
+  .header__heading-logo {
+    max-width: 180px;
+  }
+}
+
+/* Inline menu alignment with logo */
+.header__inline-menu {
+  display: flex;
+  align-items: center;
+  margin-left: 1.5rem;
+}
+
+.header__inline-menu .list-menu--inline {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 749px) {
+  .header__heading-logo {
+    max-width: 130px;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   8. KEYBOARD ACCESSIBILITY — Focus states
+   ----------------------------------------------------------------------------- */
+
+.header__inline-menu .list-menu__item > a:focus-visible,
+.header__inline-menu .list-menu__item > summary:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Remove default focus ring when using focus-visible */
+.header__inline-menu .list-menu__item > a:focus:not(:focus-visible),
+.header__inline-menu .list-menu__item > summary:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* -----------------------------------------------------------------------------
+   9. DROPDOWN MENUS — Better styling
+   ----------------------------------------------------------------------------- */
+
+.header__submenu {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none; /* Sentence case for sub-items */
+}
+
+.header__submenu .header__menu-item {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0.625rem 1rem;
+  text-transform: none;
+}
+
+.header__submenu .header__menu-item:hover {
+  background-color: rgba(7, 62, 39, 0.08);
+}
+
+/* Dropdown menus - dark text on light background */
+.header__submenu,
+.header__submenu .header__menu-item,
+.mega-menu__content,
+.mega-menu__link {
+  color: var(--bbc-forest) !important;
+  background-color: var(--white);
+}
+
+/* Mega menu improvements */
+.mega-menu__content {
+  padding: 1.5rem 2rem;
+}
+
+.mega-menu__link {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  transition: opacity 0.2s ease;
+}
+
+.mega-menu__link:hover {
+  opacity: 0.7;
+}
+
+/* -----------------------------------------------------------------------------
+   10. HEADER ICONS — Consistent sizing
+   ----------------------------------------------------------------------------- */
+
+.header__icons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media screen and (min-width: 990px) {
+  .header__icons {
+    gap: 0.75rem;
+  }
+}
+
+.header__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.5rem;
+  transition: opacity 0.2s ease;
+}
+
+.header__icon:hover {
+  opacity: 0.7;
+}
+
+.header__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Cart count bubble */
+.cart-count-bubble {
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 18px;
+  min-height: 18px;
+  padding: 2px 5px;
+  border-radius: 50%;
+}
+
+/* -----------------------------------------------------------------------------
+   11. ANNOUNCEMENT BAR — Clear messaging
+   ----------------------------------------------------------------------------- */
+
+.announcement-bar {
+  padding: 0.625rem 1rem;
+}
+
+.announcement-bar__message {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+@media screen and (min-width: 750px) {
+  .announcement-bar__message {
+    font-size: 14px;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   12. BBC BRAND COLOURS — White text on dark header
+   ----------------------------------------------------------------------------- */
+
+/* Header text - adaptive to color scheme */
+.header .list-menu__item > a,
+.header .list-menu__item > summary,
+.header .header__menu-item,
+.header__inline-menu a,
+.header__inline-menu summary {
+  color: rgb(var(--color-foreground));
+}
+
+/* Header icons - adaptive to color scheme */
+.header__icon,
+.header__icon svg,
+.header__icon path,
+.header .icon {
+  color: rgb(var(--color-foreground));
+  fill: currentColor;
+}
+
+/* Cart count bubble - BBC Gold on dark */
+.header .cart-count-bubble {
+  background-color: var(--bbc-gold);
+  color: var(--bbc-forest);
+}
+
+/* Hover state - slight opacity change */
+.header .list-menu__item > a:hover,
+.header .list-menu__item > summary:hover,
+.header__icon:hover {
+  opacity: 0.85;
+}
+
+/* Active/current page indicator - gold underline */
+.header__menu-item--active {
+  position: relative;
+}
+
+.header__menu-item--active::before {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 1rem;
+  right: 1rem;
+  height: 2px;
+  background-color: var(--bbc-gold);
+}
+
+/* -----------------------------------------------------------------------------
+   13. STICKY HEADER — Reduce size on scroll
+   ----------------------------------------------------------------------------- */
+
+.shopify-section-header-sticky {
+  transition: transform 0.3s ease;
+}
+
+.scrolled-past-header .header {
+  min-height: 56px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.scrolled-past-header .header__heading-logo {
+  max-width: 140px;
+  transition: max-width 0.3s ease;
+}
+
+/* -----------------------------------------------------------------------------
+   14. SEARCH MODAL — Improved UX
+   ----------------------------------------------------------------------------- */
+
+.header__search {
+  display: flex;
+  align-items: center;
+}
+
+/* Predictive search results */
+.predictive-search__item-heading {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.predictive-search__item-vendor {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* -----------------------------------------------------------------------------
+   15. HEADER-CONTENT GAP FIX — Remove white space after header
+   Issue: Large gap between green header and page content
+   Fix: Remove ALL top padding/margin from first content section
+   ----------------------------------------------------------------------------- */
+
+/* NUCLEAR OPTION: Remove ALL padding from first section after header */
+#MainContent > .shopify-section:first-child {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Target any div that might be the first child with padding */
+#MainContent > .shopify-section:first-child > div[class*="section-"],
+#MainContent > .shopify-section:first-child > div[class*="padding"] {
+  padding-top: 1.5rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  #MainContent > .shopify-section:first-child > div[class*="section-"],
+  #MainContent > .shopify-section:first-child > div[class*="padding"] {
+    padding-top: 2rem !important;
+  }
+}
+
+/* Collection pages — collection hero banner */
+.collection-hero {
+  padding-top: 1.5rem !important;
+  margin-top: 0 !important;
+}
+
+@media screen and (min-width: 750px) {
+  .collection-hero {
+    padding-top: 2rem !important;
+  }
+}
+
+/* Remove the outer section padding, keep inner content padding */
+.shopify-section.shopify-section--main-collection-banner {
+  padding-top: 0 !important;
+}
+
+/* Page templates — page content wrapper */
+.shopify-section--main-page,
+.shopify-section.section-main-page {
+  padding-top: 0 !important;
+}
+
+/* Product pages */
+.shopify-section--product-main,
+.shopify-section--main-product {
+  padding-top: 0 !important;
+}
+
+/* Contact and other info page sections */
+[class*="section-"][class*="contact"],
+[class*="section-"][class*="page"] {
+  padding-top: 0 !important;
+}
+
+/* Give content proper internal padding, not section padding */
+#MainContent > .shopify-section:first-child .page-width:first-child {
+  padding-top: 1.5rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  #MainContent > .shopify-section:first-child .page-width:first-child {
+    padding-top: 2rem !important;
+  }
+}
+
+/* Hero sections with full-bleed images need no padding at all */
+#MainContent > .shopify-section:first-child.section-image-banner,
+#MainContent > .shopify-section:first-child.section-slideshow,
+#MainContent > .shopify-section:first-child[class*="hero"] {
+  padding: 0 !important;
+}
+
+#MainContent > .shopify-section:first-child.section-image-banner > *,
+#MainContent > .shopify-section:first-child.section-slideshow > * {
+  padding-top: 0 !important;
+}
+
+/* BBC custom page heroes */
+.section-bbc-page-hero,
+.section-bbc-kit-hero,
+.section-bbc-impact-hero {
+  padding-top: 0 !important;
+}
+
+/* Override practical-spacing.css !important rules */
+.content-for-layout > .shopify-section:first-child,
+main > .shopify-section:first-child,
+main#MainContent > .shopify-section:first-child {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* -----------------------------------------------------------------------------
+   16. CRITICAL: Remove header section bottom margin
+   The header section often has margin-bottom from theme settings
+   ----------------------------------------------------------------------------- */
+
+/* Remove margin from header section wrapper */
+.section-header,
+.shopify-section-group-header-group .section-header,
+.shopify-section-header-sticky,
+[class*="header-group"] {
+  margin-bottom: 0 !important;
+}
+
+/* Remove any padding on content-for-layout wrapper */
+.content-for-layout,
+main#MainContent,
+#MainContent {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* The header-wrapper may have bottom margin */
+.header-wrapper {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Inline header styles may add margin - CRITICAL override */
+.section-header[style*="margin-bottom"],
+.section-header {
+  margin-bottom: 0 !important;
+}
+
+/* Nuclear override - target the actual inline style from header.liquid */
+.shopify-section-group-header-group .section-header,
+body .section-header,
+html body .section-header {
+  margin-bottom: 0 !important;
+}
+
+/* -----------------------------------------------------------------------------
+   17. UNIVERSAL GAP FIX — All pages, all templates
+   Removes ANY white space between header and first content
+   ----------------------------------------------------------------------------- */
+
+/* Collection banner section - new BBC custom banner */
+.collection-banner-section,
+.collection-banner-section .collection-banner {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* All BBC sections that might be first */
+[class*="bbc-"]:first-child,
+.shopify-section:first-child [class*="bbc-"] {
+  margin-top: 0 !important;
+}
+
+/* Dawn's collection template sections */
+.template-collection #MainContent > .shopify-section:first-child,
+.template-collection .collection-banner-section {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* All page templates */
+.template-page #MainContent > .shopify-section:first-child,
+.template-product #MainContent > .shopify-section:first-child,
+.template-blog #MainContent > .shopify-section:first-child,
+.template-article #MainContent > .shopify-section:first-child,
+.template-list-collections #MainContent > .shopify-section:first-child,
+.template-search #MainContent > .shopify-section:first-child,
+.template-cart #MainContent > .shopify-section:first-child {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Target section-spacing if present */
+#MainContent > .shopify-section:first-child[class*="spaced-section"],
+#MainContent > .shopify-section:first-child .spaced-section--full-width {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Any gradient or color-scheme wrapper that adds spacing */
+#MainContent > .shopify-section:first-child .gradient,
+#MainContent > .shopify-section:first-child [class*="color-scheme"] {
+  padding-top: 0 !important;
+}
+
+/* Main collection banner specific */
+.shopify-section--main-collection-banner,
+.main-collection-banner {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}

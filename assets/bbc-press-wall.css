@@ -1,0 +1,10 @@
+/* INTENTIONALLY EMPTIED - 2026-08-17 (CSS consolidation)
+
+   Was: 2454 bytes. Loaded by NOTHING - grepped every rendered template (home, why-bamboo,
+   impact, media-page, collection, product, blog, cart, size-guide) for a <link> to this
+   file: 0 references. It was dead code, not a dead ruleset.
+
+   The press wall is styled by bbc-align.css (.rd-foot-press / .rd-marquee-on rules) -
+   see the PRESS WALL block there, including the DO NOT add width:auto warning.
+
+   Safe to delete outright; emptied here to keep the change reversible. */

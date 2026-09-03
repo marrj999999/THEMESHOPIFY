@@ -1,0 +1,218 @@
+{% comment %}
+  BBC Trust Bar — USP strip below header
+  Research: 11/12 top sites have this pattern
+  Purpose: Build trust immediately, show key differentiators
+{% endcomment %}
+
+{%- style -%}
+  /* 
+   * BBC Trust Bar — Research-driven specs
+   * Based on: Allbirds, Rapha, Patagonia analysis (2026-02-15)
+   * Desktop: horizontal centered, 24px gaps
+   * Mobile: horizontal scroll, no wrap
+   */
+  
+  .bbc-trust-bar {
+    background: {{ section.settings.background_color }};
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 12px 0; /* Desktop: 12px matches Allbirds */
+  }
+
+  .bbc-trust-bar--dark {
+    background: var(--bbc-forest);
+  }
+
+  .bbc-trust-bar--dark .bbc-trust-bar__item,
+  .bbc-trust-bar--dark .bbc-trust-bar__separator {
+    color: var(--bbc-white);
+  }
+
+  .bbc-trust-bar__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .bbc-trust-bar__list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px; /* Desktop: 24px gap (research average) */
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .bbc-trust-bar__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 13px; /* Desktop: 13px (Allbirds/Patagonia) */
+    font-weight: 600;
+    color: var(--bbc-forest);
+    white-space: nowrap;
+  }
+
+  .bbc-trust-bar__icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .bbc-trust-bar__separator {
+    color: #cbd5e0;
+    font-weight: 300;
+  }
+
+  .bbc-trust-bar__link {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .bbc-trust-bar__link:hover {
+    opacity: 0.7;
+  }
+
+  /* Tablet: tighten gaps */
+  @media (max-width: 1024px) {
+    .bbc-trust-bar__list {
+      gap: 16px;
+    }
+  }
+
+  /* Mobile: horizontal scroll (research-backed) */
+  @media (max-width: 768px) {
+    .bbc-trust-bar {
+      padding: 10px 0; /* Mobile: 10px */
+    }
+
+    .bbc-trust-bar__container {
+      padding: 0 16px;
+    }
+
+    .bbc-trust-bar__list {
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      gap: 16px; /* Mobile: 16px gap */
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 4px 0;
+    }
+
+    .bbc-trust-bar__list::-webkit-scrollbar {
+      display: none;
+    }
+
+    .bbc-trust-bar__separator {
+      display: none; /* Hide separators on mobile, use gap only */
+    }
+
+    .bbc-trust-bar__item {
+      font-size: 12px; /* Mobile: 12px (research) */
+      min-height: 44px; /* Touch target minimum */
+      padding: 8px 0;
+    }
+  }
+{%- endstyle -%}
+
+<section class="bbc-trust-bar{% if section.settings.dark_mode %} bbc-trust-bar--dark{% endif %}">
+  <div class="bbc-trust-bar__container">
+    <ul class="bbc-trust-bar__list" role="list">
+      {% for block in section.blocks %}
+        {% unless forloop.first %}
+          <li class="bbc-trust-bar__separator" aria-hidden="true">|</li>
+        {% endunless %}
+        
+        <li class="bbc-trust-bar__item" {{ block.shopify_attributes }}>
+          {% if block.settings.icon != blank %}
+            <span class="bbc-trust-bar__icon">
+              {% render 'bbc-icons', icon: block.settings.icon %}
+            </span>
+          {% endif %}
+          
+          {% if block.settings.link != blank %}
+            <a href="{{ block.settings.link }}" class="bbc-trust-bar__link">
+              {{ block.settings.text }}
+            </a>
+          {% else %}
+            {{ block.settings.text }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Trust Bar",
+  "tag": "section",
+  "class": "bbc-trust-bar-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "dark_mode",
+      "label": "Dark background",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f8f8f6"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Trust item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "4,000+ Trained"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "", "label": "None" },
+            { "value": "check", "label": "Check" },
+            { "value": "verified", "label": "Verified" },
+            { "value": "globe", "label": "Globe" },
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "award", "label": "Award" },
+            { "value": "school", "label": "School" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "star", "label": "Star" },
+            { "value": "shield", "label": "Shield" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Trust Bar",
+      "blocks": [
+        { "type": "item", "settings": { "text": "4,000+ Trained", "icon": "verified" }},
+        { "type": "item", "settings": { "text": "45 Countries", "icon": "globe" }},
+        { "type": "item", "settings": { "text": "Free UK Shipping £50+", "icon": "shipping" }},
+        { "type": "item", "settings": { "text": "OCN Accredited", "icon": "school" }}
+      ]
+    }
+  ]
+}
+{% endschema %}

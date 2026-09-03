@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "bbc-harness",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8099", "--directory", "/tmp/bbc-harness"],
+      "port": 8099
+    },
+    {
+      "name": "shopify-dev",
+      "runtimeExecutable": "shopify",
+      "runtimeArgs": ["theme", "dev", "--store=bamboo-bicycle-club-london-uk", "--port=9292"],
+      "port": 9292
+    }
+  ]
+}

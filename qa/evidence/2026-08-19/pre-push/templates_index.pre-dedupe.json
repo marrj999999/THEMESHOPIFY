@@ -1,0 +1,426 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-home-2026",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "4,000+",
+            "label": "people have built a bike",
+            "source": "since 2012"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "90%",
+            "label": "prison course completion",
+            "source": "BBC programme records"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "36",
+            "label": "countries reached",
+            "source": "kits shipped worldwide"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "number": "1,500+",
+            "label": "young people reached",
+            "source": "builds, tasters & talks"
+          }
+        },
+        "door_1": {
+          "type": "door",
+          "settings": {
+            "fallback": "bbc-rd-bike-field.jpg",
+            "image_alt": "Finished bamboo road bike leaning against a fence in the countryside",
+            "tag": "Individuals",
+            "title": "want to build your own?",
+            "body": "Kits and workshops for complete beginners",
+            "link_label": "browse kits →",
+            "link_url": "\/collections\/home-build-kits"
+          }
+        },
+        "door_2": {
+          "type": "door",
+          "settings": {
+            "fallback": "bbc-rd-workshop.jpg",
+            "image_alt": "Inside the bamboo bicycle workshop",
+            "tag": "Prisons",
+            "title": "commissioning for a prison?",
+            "body": "An OCN Level 2 course — people inside build a bike for their child.",
+            "link_label": "see the prison programme →",
+            "link_url": "\/pages\/programmes#prisons"
+          }
+        },
+        "door_3": {
+          "type": "door",
+          "settings": {
+            "fallback": "bbc-rd-bamboo-tubes.jpg",
+            "image_alt": "Raw bamboo tubes ready for a classroom build",
+            "tag": "Schools",
+            "title": "running a school or college?",
+            "body": "Real engineering in your classroom.",
+            "link_label": "see the schools programme →",
+            "link_url": "\/pages\/programmes#schools"
+          }
+        },
+        "why_1": {
+          "type": "why",
+          "settings": {
+            "title": "comparable to mild steel",
+            "body": "Tensile strength comparable to mild steel — workable with hand tools (Swansea University)."
+          }
+        },
+        "why_2": {
+          "type": "why",
+          "settings": {
+            "title": "kinder ride",
+            "body": "Absorbs road vibration better than carbon fibre."
+          }
+        },
+        "why_3": {
+          "type": "why",
+          "settings": {
+            "title": "made to be mended",
+            "body": "Build it yourself and you can fix it yourself."
+          }
+        },
+        "why_4": {
+          "type": "why",
+          "settings": {
+            "title": "built to last",
+            "body": "Our earliest 2012 frames are still ridden daily."
+          }
+        },
+        "kit_1": {
+          "type": "kit",
+          "settings": {
+            "fallback": "bbc-rd-prod-gravel.jpg",
+            "image_alt": "Gravel lugged bamboo frame kit",
+            "title": "road & gravel",
+            "body": "simple and custom build kits",
+            "link_url": ""
+          }
+        },
+        "kit_2": {
+          "type": "kit",
+          "settings": {
+            "fallback": "bbc-rd-prod-flax.jpg",
+            "image_alt": "Flax bamboo frame kit",
+            "title": "mountain",
+            "body": "Burly geometries for 27.5\" and 29er builds.",
+            "link_url": ""
+          }
+        },
+        "kit_3": {
+          "type": "kit",
+          "settings": {
+            "fallback": "bbc-rd-prod-balance.jpg",
+            "image_alt": "Children's balance bike kit",
+            "title": "balance bikes",
+            "body": "The little build great for gifting to a new parent",
+            "link_url": ""
+          }
+        },
+        "kit_4": {
+          "type": "kit",
+          "settings": {
+            "fallback": "bbc-rd-prod-build.jpg",
+            "image_alt": "Bamboo frame mid-build",
+            "title": "components & tools",
+            "body": "Jigs, lugs, glue and everything for the maker shop.",
+            "link_url": ""
+          }
+        },
+        "story_1": {
+          "type": "story",
+          "settings": {
+            "fallback": "bbc-rd-build-mint.jpg",
+            "image_alt": "Finished mint-and-bamboo road bike built from a home-build kit",
+            "quote": "After two years, I still burst with pride riding something completely unique that I made myself. I went from knowing nothing about bicycles to having built one.",
+            "attribution": "Louise · home-build road bike",
+            "lime": false
+          }
+        },
+        "story_2": {
+          "type": "story",
+          "settings": {
+            "fallback": "bbc-rd-road-charlie.jpg",
+            "image_alt": "Finished bamboo road bike",
+            "quote": "To see the bike the first time and sit on it was euphoria — I still don't believe it. I was more taken than when I got my new car (sorry, car).",
+            "attribution": "Tamas · workshop build",
+            "lime": true
+          }
+        },
+        "story_3": {
+          "type": "story",
+          "settings": {
+            "fallback": "bbc-rd-gravel-fence.jpg",
+            "image_alt": "A flax-and-bamboo gravel bike built from a home kit",
+            "quote": "Coooool! It feels so light, so natural and smooth — and then you add the feeling of proudness. That's the best part of it.",
+            "attribution": "Maialen · home-build gravel, France",
+            "lime": false
+          }
+        },
+        "press_1": {
+          "type": "press",
+          "settings": {
+            "text": "FINANCIAL TIMES",
+            "style": "ft",
+            "logo_asset": ""
+          }
+        },
+        "press_2": {
+          "type": "press",
+          "settings": {
+            "text": "The Guardian",
+            "style": "serif",
+            "logo_asset": ""
+          }
+        },
+        "press_3": {
+          "type": "press",
+          "settings": {
+            "text": "BBC",
+            "style": "bbc",
+            "logo_asset": ""
+          }
+        },
+        "press_4": {
+          "type": "press",
+          "settings": {
+            "text": "Inside Time",
+            "style": "serif-italic",
+            "logo_asset": ""
+          }
+        },
+        "press_5": {
+          "type": "press",
+          "settings": {
+            "text": "Discovery",
+            "style": "disc",
+            "logo_asset": "logo-discovery.svg"
+          }
+        },
+        "press_6": {
+          "type": "press",
+          "settings": {
+            "text": "Investec",
+            "style": "caps",
+            "logo_asset": ""
+          }
+        },
+        "press_7": {
+          "type": "press",
+          "settings": {
+            "text": "GCN",
+            "style": "caps",
+            "logo_asset": ""
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "door_1",
+        "door_2",
+        "door_3",
+        "why_1",
+        "why_2",
+        "why_3",
+        "why_4",
+        "kit_1",
+        "kit_2",
+        "kit_3",
+        "kit_4",
+        "story_1",
+        "story_2",
+        "story_3",
+        "press_1",
+        "press_2",
+        "press_3",
+        "press_4",
+        "press_5",
+        "press_6",
+        "press_7"
+      ],
+      "settings": {
+        "tx_drg_n_186_1": "",
+        "tx_est_2012": "",
+        "tx_hand_built_bamboo_lugged_by": "Hand-built bamboo · lugged by hand",
+        "tx_bamboo_bicycle_club_est_2012": "Bamboo Bicycle Club · Est. 2012 · London",
+        "tx_proven_on_the_road": "Proven on the road",
+        "tx_bamboo_soaks_up_the_road_rid": "bamboo soaks up the road.",
+        "tx_not_just_our_word_national_p": "Not just our word. National press, pro reviewers and ten-year riders.",
+        "tx_bamboo_naturally_dampens_vib": "Bamboo naturally dampens vibration, allowing the smoothest ride.",
+        "tx_the_guardian": "The Guardian",
+        "tx_a_really_really_comfortable": "A really, really comfortable ride — smooth but not too flexy.",
+        "tx_kate_rawles_bikeradar": "Kate Rawles · BikeRadar",
+        "why_stat_src": "BBC training & customer records",
+        "hero_image_alt": "A rider on a bamboo road bike at sunset on an open hilltop road",
+        "hero_video_on": true,
+        "hero_video_style": "film",
+        "hero_eyebrow": "Build bikes · build skills · build futures",
+        "hero_title": "build bikes · build skills · build futures",
+        "hero_lede": "",
+        "hero_cta1_label": "Build a bike",
+        "hero_cta1_url": "",
+        "hero_cta2_label": "See our impact",
+        "hero_proof_on": true,
+        "hero_proof1_num": "",
+        "hero_sticker": "",
+        "hero_proof1_label": "",
+        "hero_proof2_num": "",
+        "hero_proof2_label": "countries",
+        "hero_proof3_num": "",
+        "hero_proof3_label": "",
+        "hero_proof_src": "",
+        "hero_cta2_url": "",
+        "loop_kicker": "How it works",
+        "loop_heading": "Our impact and who we support",
+        "loop_intro": "The workshops fund the mission — directly.",
+        "loop_s1_big": "You build",
+        "loop_s1_sm": "a bamboo bike · from £375",
+        "loop_s2_big": "Profits fund",
+        "loop_s2_sm": "accredited skills courses",
+        "loop_s3_big": "A life changes",
+        "loop_s3_sm": "skills · family · futures",
+        "doors_kicker": "three ways in",
+        "doors_title": "where we work.",
+        "doors_intro": "build by yourself or as part of a educational programme",
+        "impact_image_alt": "A bamboo bicycle frame taking shape on a build template",
+        "impact_kicker": "team days",
+        "impact_title": "Unique team building",
+        "impact_body": "Your team spends a day cutting, shaping and binding raw bamboo into frames that actually ride",
+        "impact_quote": "",
+        "impact_cite": "",
+        "impact_cta1_label": "book a team day",
+        "impact_cta1_url": "\/pages\/bicycleteambuilding",
+        "impact_cta2_label": "",
+        "impact_cta2_url": "",
+        "why_kicker": "Why bamboo",
+        "why_title": "easiest way to build a bke",
+        "why_lede": "Grown, not manufactured — it earns its place four ways.",
+        "why_link_label": "See the full science & testing →",
+        "why_link_url": "",
+        "p1_title": "simple hand tools",
+        "p1_body": "A file, a saw, sandpaper. Everything else is in the kit.",
+        "p2_title": "rides smoother",
+        "p2_body": "Natural fibres soak up the road buzz that aluminium and steel pass straight to your hands.",
+        "p3_title": "anyone can build it",
+        "p3_body": "No mines or smelters — just bamboo, a jig and hand tools. Most builders start from scratch.",
+        "p4_title": "greener by far",
+        "p4_body": "Regrows in 3–5 years — and a bike you built, you can repair.",
+        "show_video": true,
+        "video_eyebrow": "Watch a real build",
+        "video_title": "Gravel Build.",
+        "video_lede": "A example of a complete build",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=DAMHyvr698k",
+        "video_chip": "film · 29 min",
+        "video_credit": "Julian’s full gravel build, start to finish — filmed by builder Julian Goulding",
+        "video_poster_fallback": "bbc-rd-home-poster.jpg",
+        "video_mp4": "",
+        "kits_kicker": "Build at home",
+        "kits_title": "Frame kits options",
+        "kits_link_label": "All frame kits →",
+        "kits_link_url": "",
+        "press_kicker": "As seen in & recognised by",
+        "press_more_label": "read the coverage →",
+        "press_more_url": "",
+        "press_quote": "Taps into 'the IKEA effect' — that extra bit of affection people reserve for objects they put together themselves.",
+        "press_cite": "Financial Times, 2025",
+        "community_kicker": "From the community",
+        "community_title": "4,000+ builders. 4,000+ stories.",
+        "cta_kicker": "",
+        "cta_title": "",
+        "cta_lede": "",
+        "cta1_label": "",
+        "cta1_url": "",
+        "cta2_label": "",
+        "cta2_url": "",
+        "cta3_label": "",
+        "cta3_url": "",
+        "why_stat1_num": "",
+        "why_stat1_label": "",
+        "why_stat2_num": "",
+        "why_stat2_label": "",
+        "why_stat3_num": "",
+        "why_stat3_label": "",
+        "why_card1_title": "",
+        "why_card1_body": "",
+        "why_card1_alt": "",
+        "why_card1_url": "",
+        "why_card2_title": "",
+        "why_card2_body": "",
+        "why_card2_alt": "",
+        "why_card2_url": "",
+        "why_card3_title": "",
+        "why_card3_body": "",
+        "why_card3_alt": "",
+        "why_card3_url": "",
+        "why_card4_title": "",
+        "why_card4_body": "",
+        "why_card4_alt": "",
+        "why_card4_url": "",
+        "why_cta_label": "",
+        "why_cta_url": "",
+        "why_card1_video_url": "",
+        "why_card2_video_url": "",
+        "why_card3_video_url": "",
+        "fab_titleblock": true,
+        "fab_tb_k1": "drawing",
+        "fab_tb_v1": "№ 1 — the club",
+        "fab_tb_k2": "material",
+        "fab_tb_v2": "bamboo · flax · lugs",
+        "fab_tb_k3": "est.",
+        "fab_tb_v3": "2012 · london",
+        "fab_tb_k4": "drawn",
+        "fab_tb_v4": "by hand",
+        "fab_why_spec": "",
+        "fab_kits_spec": "contents — tubes · lugs · jig · blueprint · video course",
+        "fab_impact_callout": "cohort · frames ride home",
+        "hero_cred": ""
+      }
+    },
+    "brand_statement": {
+      "type": "bbc-statement",
+      "settings": {
+        "background": "lime",
+        "height": "tall",
+        "eyebrow": "bamboo bicycle club",
+        "headline": "build bikes. build skills. build futures.",
+        "star_marker": "*",
+        "image_position": "none",
+        "image_fallback": "",
+        "image_alt": "Bamboo Bicycle Club",
+        "button1_label": "build a bike",
+        "button1_url": "\/collections\/home-build-kits",
+        "button2_label": "our impact",
+        "button2_url": "\/pages\/impact",
+        "body": "one craft. one engine for change.",
+        "footnote": "we use bamboo bike-building to give practical skills and a way forward to people locked out of education — in schools before exclusion, and in prisons after.",
+        "link1_label": "why bamboo",
+        "link1_url": "\/pages\/why-bamboo",
+        "link2_label": "stories",
+        "link2_url": "\/blogs\/club-news",
+        "link3_label": "",
+        "link3_url": "",
+        "link4_label": "",
+        "link4_url": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "brand_statement"
+  ]
+}

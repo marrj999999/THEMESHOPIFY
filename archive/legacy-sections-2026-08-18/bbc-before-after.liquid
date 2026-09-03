@@ -1,0 +1,364 @@
+{% comment %}
+  BBC Before/After Slider
+  Drag to compare two images - perfect for showing build progress
+{% endcomment %}
+
+<section class="bbc-before-after" id="before-after-{{ section.id }}">
+  <div class="bbc-container">
+    {% if section.settings.heading != blank %}
+      <div class="bbc-before-after__header">
+        <h2 class="bbc-before-after__title">{{ section.settings.heading }}</h2>
+        {% if section.settings.subheading != blank %}
+          <p class="bbc-before-after__subtitle">{{ section.settings.subheading }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="bbc-before-after__slider" 
+         role="img" 
+         aria-label="Before and after comparison. Drag the slider to compare images.">
+      <div class="bbc-before-after__image bbc-before-after__image--before">
+        {% if section.settings.image_before != blank %}
+          {{ section.settings.image_before | image_url: width: 1200 | image_tag: 
+            loading: 'lazy',
+            alt: section.settings.label_before | default: 'Before'
+          }}
+        {% else %}
+          <div class="bbc-before-after__placeholder">
+            {% render 'bbc-icons', icon: 'image' %}
+            <span>Before Image</span>
+          </div>
+        {% endif %}
+        <span class="bbc-before-after__label bbc-before-after__label--before">
+          {{ section.settings.label_before | default: 'Before' }}
+        </span>
+      </div>
+      
+      <div class="bbc-before-after__image bbc-before-after__image--after">
+        {% if section.settings.image_after != blank %}
+          {{ section.settings.image_after | image_url: width: 1200 | image_tag: 
+            loading: 'lazy',
+            alt: section.settings.label_after | default: 'After'
+          }}
+        {% else %}
+          <div class="bbc-before-after__placeholder">
+            {% render 'bbc-icons', icon: 'image' %}
+            <span>After Image</span>
+          </div>
+        {% endif %}
+        <span class="bbc-before-after__label bbc-before-after__label--after">
+          {{ section.settings.label_after | default: 'After' }}
+        </span>
+      </div>
+      
+      <div class="bbc-before-after__handle" role="slider" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" tabindex="0">
+        <div class="bbc-before-after__handle-line"></div>
+        <div class="bbc-before-after__handle-circle">
+          {% render 'bbc-icons', icon: 'drag' %}
+        </div>
+        <div class="bbc-before-after__handle-line"></div>
+      </div>
+    </div>
+
+    {% if section.settings.caption != blank %}
+      <p class="bbc-before-after__caption">{{ section.settings.caption }}</p>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+.bbc-before-after {
+  padding: var(--section-py, 80px) var(--section-px, 24px);
+  background: {{ section.settings.background_color }};
+}
+
+.bbc-before-after__header {
+  text-align: center;
+  margin-bottom: var(--space-10, 40px);
+}
+
+.bbc-before-after__title {
+  font-size: var(--text-4xl, 2.25rem);
+  font-weight: var(--font-bold, 700);
+  line-height: var(--leading-tight, 1.15);
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin: 0 0 var(--space-3, 12px);
+}
+
+.bbc-before-after__subtitle {
+  font-size: var(--text-lg, 1.125rem);
+  color: var(--bbc-text-muted, #64748b);
+  margin: 0;
+}
+
+.bbc-before-after__slider {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: ew-resize;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.bbc-before-after__image {
+  position: relative;
+}
+
+.bbc-before-after__image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.bbc-before-after__image--before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.bbc-before-after__image--before img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  min-width: 200%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bbc-before-after__image--after img {
+  width: 100%;
+}
+
+.bbc-before-after__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3, 12px);
+  aspect-ratio: 16/9;
+  background: var(--bbc-cream, var(--bbc-cream));
+  color: var(--bbc-gray-300, #94a3b8);
+}
+
+.bbc-before-after__label {
+  position: absolute;
+  bottom: 16px;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 4px;
+}
+
+.bbc-before-after__label--before {
+  left: 16px;
+}
+
+.bbc-before-after__label--after {
+  right: 16px;
+}
+
+.bbc-before-after__handle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transform: translateX(-50%);
+}
+
+.bbc-before-after__handle-line {
+  flex: 1;
+  width: 4px;
+  background: white;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.bbc-before-after__handle-circle {
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  color: var(--bbc-forest, var(--bbc-forest));
+  flex-shrink: 0;
+}
+
+.bbc-before-after__handle:focus {
+  outline: none;
+}
+
+.bbc-before-after__handle:focus .bbc-before-after__handle-circle {
+  box-shadow: 0 0 0 3px var(--bbc-gold, var(--bbc-gold));
+}
+
+.bbc-before-after__caption {
+  text-align: center;
+  margin-top: var(--space-5, 20px);
+  color: var(--bbc-text-muted, #64748b);
+  font-size: var(--text-base, 0.9375rem);
+}
+
+@media (max-width: 768px) {
+  .bbc-before-after__handle-circle {
+    width: 40px;
+    height: 40px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  const slider = document.querySelector('#before-after-{{ section.id }} .bbc-before-after__slider');
+  if (!slider) return;
+  
+  const handle = slider.querySelector('.bbc-before-after__handle');
+  const beforeImage = slider.querySelector('.bbc-before-after__image--before');
+  let isDragging = false;
+  
+  function updateSlider(x) {
+    const rect = slider.getBoundingClientRect();
+    let percent = ((x - rect.left) / rect.width) * 100;
+    percent = Math.max(0, Math.min(100, percent));
+    
+    beforeImage.style.width = percent + '%';
+    handle.style.left = percent + '%';
+    handle.setAttribute('aria-valuenow', Math.round(percent));
+  }
+  
+  function onStart(e) {
+    isDragging = true;
+    slider.style.cursor = 'grabbing';
+    e.preventDefault();
+  }
+  
+  function onMove(e) {
+    if (!isDragging) return;
+    const x = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    updateSlider(x);
+  }
+  
+  function onEnd() {
+    isDragging = false;
+    slider.style.cursor = 'ew-resize';
+  }
+  
+  // Mouse events
+  slider.addEventListener('mousedown', onStart);
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onEnd);
+  
+  // Touch events
+  slider.addEventListener('touchstart', onStart, { passive: false });
+  document.addEventListener('touchmove', onMove, { passive: true });
+  document.addEventListener('touchend', onEnd);
+  
+  // Click to position
+  slider.addEventListener('click', function(e) {
+    updateSlider(e.clientX);
+  });
+  
+  // Keyboard navigation
+  handle.addEventListener('keydown', function(e) {
+    const rect = slider.getBoundingClientRect();
+    const currentPercent = parseFloat(handle.style.left) || 50;
+    let newPercent = currentPercent;
+    
+    switch(e.key) {
+      case 'ArrowLeft':
+        newPercent = Math.max(0, currentPercent - 5);
+        break;
+      case 'ArrowRight':
+        newPercent = Math.min(100, currentPercent + 5);
+        break;
+      default:
+        return;
+    }
+    
+    e.preventDefault();
+    beforeImage.style.width = newPercent + '%';
+    handle.style.left = newPercent + '%';
+    handle.setAttribute('aria-valuenow', Math.round(newPercent));
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "BBC Before/After",
+  "tag": "section",
+  "class": "bbc-before-after-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "See the Transformation"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "From raw bamboo to finished frame"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_before",
+      "label": "Before Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_after",
+      "label": "After Image"
+    },
+    {
+      "type": "text",
+      "id": "label_before",
+      "label": "Before Label",
+      "default": "Day 1"
+    },
+    {
+      "type": "text",
+      "id": "label_after",
+      "label": "After Label",
+      "default": "Finished"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption",
+      "default": "Drag the slider to see the build progress"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Before/After"
+    }
+  ]
+}
+{% endschema %}

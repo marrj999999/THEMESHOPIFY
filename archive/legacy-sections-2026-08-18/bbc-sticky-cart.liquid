@@ -1,0 +1,428 @@
+{% comment %}
+  BBC Sticky Add-to-Cart Bar
+  Fixed buy button that appears on scroll - crucial for mobile conversion
+  Add this section to product template
+{% endcomment %}
+
+{% if product %}
+<div class="bbc-sticky-cart" id="sticky-cart-{{ section.id }}" aria-hidden="true">
+  <div class="bbc-sticky-cart__inner">
+    <div class="bbc-sticky-cart__product">
+      {% if product.featured_image %}
+        <img src="{{ product.featured_image | image_url: width: 100 }}" 
+             alt="{{ product.title }}"
+             class="bbc-sticky-cart__image"
+             loading="lazy">
+      {% endif %}
+      <div class="bbc-sticky-cart__info">
+        <h3 class="bbc-sticky-cart__title">{{ product.title | truncate: 40 }}</h3>
+        <div class="bbc-sticky-cart__price">
+          {% if product.compare_at_price > product.price %}
+            <span class="bbc-sticky-cart__price-sale">{{ product.price | money }}</span>
+            <span class="bbc-sticky-cart__price-compare">{{ product.compare_at_price | money }}</span>
+          {% else %}
+            {{ product.price | money }}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    
+    <div class="bbc-sticky-cart__actions">
+      {% if product.variants.size > 1 %}
+        <select class="bbc-sticky-cart__variant" 
+                id="sticky-variant-{{ section.id }}"
+                aria-label="Select variant">
+          {% for variant in product.variants %}
+            <option value="{{ variant.id }}" 
+                    {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
+                    {% unless variant.available %}disabled{% endunless %}>
+              {{ variant.title }}{% unless variant.available %} - Sold Out{% endunless %}
+            </option>
+          {% endfor %}
+        </select>
+      {% endif %}
+      
+      <button type="button" 
+              class="bbc-btn bbc-btn--{{ section.settings.button_style | default: 'secondary' }} bbc-sticky-cart__button"
+              id="sticky-add-{{ section.id }}"
+              data-product-id="{{ product.id }}"
+              data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+              {% unless product.available %}disabled{% endunless %}>
+        {% if product.available %}
+          {% render 'bbc-icons', icon: 'cart', size: 20 %}
+          <span>{{ section.settings.button_text | default: 'Add to Cart' }}</span>
+        {% else %}
+          <span>Sold Out</span>
+        {% endif %}
+      </button>
+    </div>
+  </div>
+  
+  <button type="button" 
+          class="bbc-sticky-cart__close" 
+          aria-label="Close sticky cart bar"
+          id="sticky-close-{{ section.id }}">
+    {% render 'bbc-icons', icon: 'close', size: 20 %}
+  </button>
+</div>
+{% endif %}
+
+<style>
+.bbc-sticky-cart {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: white;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  padding: 12px 16px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0));
+}
+
+.bbc-sticky-cart.is-visible {
+  transform: translateY(0);
+}
+
+.bbc-sticky-cart__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.bbc-sticky-cart__product {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.bbc-sticky-cart__image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.bbc-sticky-cart__info {
+  min-width: 0;
+}
+
+.bbc-sticky-cart__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin: 0 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bbc-sticky-cart__price {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--bbc-teal, var(--bbc-teal));
+}
+
+.bbc-sticky-cart__price-sale {
+  color: #c00;
+}
+
+.bbc-sticky-cart__price-compare {
+  font-size: 0.8125rem;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 8px;
+  font-weight: 400;
+}
+
+.bbc-sticky-cart__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.bbc-sticky-cart__variant {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  background: white;
+  cursor: pointer;
+  max-width: 140px;
+}
+
+.bbc-sticky-cart__button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--bbc-forest, var(--bbc-forest));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.bbc-sticky-cart__button:hover:not(:disabled) {
+  background: var(--bbc-teal, var(--bbc-teal));
+}
+
+.bbc-sticky-cart__button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.bbc-sticky-cart__button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.bbc-sticky-cart__close {
+  position: absolute;
+  top: -12px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--bbc-gray-600);
+  transition: color 0.2s;
+}
+
+.bbc-sticky-cart__close:hover {
+  color: var(--bbc-forest, var(--bbc-forest));
+}
+
+/* Hide on desktop if setting enabled */
+{% if section.settings.mobile_only %}
+@media (min-width: 769px) {
+  .bbc-sticky-cart {
+    display: none !important;
+  }
+}
+{% endif %}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .bbc-sticky-cart__product {
+    display: none;
+  }
+  
+  .bbc-sticky-cart__actions {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .bbc-sticky-cart__variant {
+    flex: 1;
+    max-width: none;
+  }
+  
+  .bbc-sticky-cart__button {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+/* Animation for adding to cart */
+.bbc-sticky-cart__button.is-loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.bbc-sticky-cart__button.is-success {
+  background: var(--bbc-teal, var(--bbc-teal));
+}
+</style>
+
+<script>
+(function() {
+  const stickyCart = document.getElementById('sticky-cart-{{ section.id }}');
+  const addButton = document.getElementById('sticky-add-{{ section.id }}');
+  const closeButton = document.getElementById('sticky-close-{{ section.id }}');
+  const variantSelect = document.getElementById('sticky-variant-{{ section.id }}');
+  
+  if (!stickyCart || !addButton) return;
+  
+  // Show/hide based on scroll position
+  const triggerOffset = {{ section.settings.scroll_trigger | default: 400 }};
+  let isManuallyHidden = false;
+  let lastScrollY = window.scrollY;
+  
+  function checkVisibility() {
+    if (isManuallyHidden) return;
+    
+    const scrollY = window.scrollY;
+    const shouldShow = scrollY > triggerOffset;
+    
+    stickyCart.classList.toggle('is-visible', shouldShow);
+    stickyCart.setAttribute('aria-hidden', !shouldShow);
+    
+    lastScrollY = scrollY;
+  }
+  
+  // Throttled scroll listener
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        checkVisibility();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+  
+  // Close button
+  closeButton.addEventListener('click', function() {
+    isManuallyHidden = true;
+    stickyCart.classList.remove('is-visible');
+    stickyCart.setAttribute('aria-hidden', 'true');
+    
+    // Reset after some time
+    setTimeout(function() {
+      isManuallyHidden = false;
+    }, 30000);
+  });
+  
+  // Variant change
+  if (variantSelect) {
+    variantSelect.addEventListener('change', function() {
+      addButton.dataset.variantId = this.value;
+      
+      // Sync with main product form if exists
+      const mainSelect = document.querySelector('form[action*="/cart/add"] select[name="id"]');
+      if (mainSelect) {
+        mainSelect.value = this.value;
+        mainSelect.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    });
+  }
+  
+  // Add to cart
+  addButton.addEventListener('click', function() {
+    const variantId = this.dataset.variantId;
+    const buttonText = this.querySelector('span');
+    const originalText = buttonText.textContent;
+    
+    this.classList.add('is-loading');
+    buttonText.textContent = 'Adding...';
+    
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: variantId,
+        quantity: 1
+      })
+    })
+    .then(response => {
+      if (!response.ok) throw new Error('Add to cart failed');
+      return response.json();
+    })
+    .then(data => {
+      this.classList.remove('is-loading');
+      this.classList.add('is-success');
+      buttonText.textContent = 'Added!';
+      
+      // Update cart count
+      fetch('/cart.js')
+        .then(r => r.json())
+        .then(cart => {
+          document.querySelectorAll('[data-cart-count]').forEach(el => {
+            el.textContent = cart.item_count;
+          });
+        });
+      
+      // Reset button
+      setTimeout(() => {
+        this.classList.remove('is-success');
+        buttonText.textContent = originalText;
+      }, 2000);
+    })
+    .catch(error => {
+      this.classList.remove('is-loading');
+      buttonText.textContent = 'Error - Try Again';
+      
+      setTimeout(() => {
+        buttonText.textContent = originalText;
+      }, 2000);
+    });
+  });
+  
+  // Initial check
+  checkVisibility();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "BBC Sticky Cart",
+  "tag": "div",
+  "class": "bbc-sticky-cart-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "primary", "label": "Primary (Gold)" },
+        { "value": "secondary", "label": "Secondary (Forest)" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "outline-light", "label": "Outline Light" },
+        { "value": "white", "label": "White" },
+        { "value": "gold", "label": "Gold" }
+      ],
+      "default": "secondary"
+    },
+    {
+      "type": "range",
+      "id": "scroll_trigger",
+      "label": "Show After Scroll (px)",
+      "min": 100,
+      "max": 1000,
+      "step": 50,
+      "default": 400,
+      "info": "Pixels scrolled before bar appears"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_only",
+      "label": "Mobile Only",
+      "default": false,
+      "info": "Only show on mobile devices"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Sticky Cart"
+    }
+  ],
+  "templates": ["product"]
+}
+{% endschema %}

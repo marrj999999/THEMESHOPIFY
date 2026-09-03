@@ -1,0 +1,470 @@
+{% comment %}
+  BBC Product Geometry Tab
+  Shows frame measurements and sizing chart
+{% endcomment %}
+
+{%- style -%}
+  .bbc-geometry {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.background_color }};
+  }
+  .bbc-geometry__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .bbc-geometry__header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .bbc-geometry__title {
+    font-family: var(--font-heading-family);
+    font-size: 2rem;
+    color: var(--bbc-forest);
+    margin-bottom: 0.5rem;
+  }
+  .bbc-geometry__subtitle {
+    color: var(--bbc-gray-600);
+    font-size: 1rem;
+  }
+  .bbc-geometry__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 768px) {
+    .bbc-geometry__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+  .bbc-geometry__diagram {
+    background: var(--bbc-cream);
+    border-radius: 0;
+    padding: 2rem;
+    text-align: center;
+  }
+  .bbc-geometry__diagram img {
+    max-width: 100%;
+    height: auto;
+  }
+  .bbc-geometry__diagram-placeholder {
+    background: #e8e5de;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bbc-gray-600);
+    border-radius: 0;
+    font-size: 0.9rem;
+  }
+  .bbc-geometry__table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .bbc-geometry__table th,
+  .bbc-geometry__table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e8e5de;
+  }
+  .bbc-geometry__table th {
+    background: var(--bbc-forest);
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .bbc-geometry__table th:first-child {
+    border-radius: 8px 0 0 0;
+  }
+  .bbc-geometry__table th:last-child {
+    border-radius: 0 8px 0 0;
+  }
+  .bbc-geometry__table tr:nth-child(even) {
+    background: var(--bbc-cream);
+  }
+  .bbc-geometry__table tr:hover {
+    background: #f0ede6;
+  }
+  .bbc-geometry__highlight {
+    background: var(--bbc-gold) !important;
+    font-weight: 600;
+  }
+  .bbc-geometry__sizing-guide {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--bbc-forest) 0%, var(--bbc-teal) 100%);
+    border-radius: 0;
+    color: white;
+  }
+  .bbc-geometry__sizing-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .bbc-geometry__sizing-text {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+  }
+  .bbc-geometry__sizing-form {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .bbc-geometry__input {
+    flex: 1;
+    min-width: 120px;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 0;
+    font-size: 1rem;
+  }
+  .bbc-geometry__btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--bbc-gold);
+    color: var(--bbc-forest);
+    border: none;
+    border-radius: 0;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .bbc-geometry__btn:hover {
+    border-left-color: var(--bbc-teal, var(--bbc-teal));
+  }
+{%- endstyle -%}
+
+<div class="bbc-geometry" id="geometry">
+  <div class="bbc-geometry__container">
+    <div class="bbc-geometry__header">
+      <h2 class="bbc-geometry__title">{{ section.settings.title }}</h2>
+      <p class="bbc-geometry__subtitle">{{ section.settings.subtitle }}</p>
+    </div>
+    
+    <div class="bbc-geometry__grid">
+      <div class="bbc-geometry__diagram">
+        {% if section.settings.geometry_image != blank %}
+          <img src="{{ section.settings.geometry_image | image_url: width: 600 }}" 
+               alt="Frame geometry diagram" 
+               width="600" 
+               height="{{ 600 | divided_by: section.settings.geometry_image.aspect_ratio | round }}"
+               loading="lazy">
+        {% else %}
+          <div class="bbc-geometry__diagram-placeholder">
+            <span>📐 Geometry diagram - add via theme editor</span>
+          </div>
+        {% endif %}
+      </div>
+      
+      <div class="bbc-geometry__data">
+        <table class="bbc-geometry__table">
+          <thead>
+            <tr>
+              <th>Measurement</th>
+              <th>Small</th>
+              <th>Medium</th>
+              <th>Large</th>
+              <th>XL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Rider Height</strong></td>
+              <td>160-170cm</td>
+              <td>168-178cm</td>
+              <td>178-187cm</td>
+              <td>185-193cm</td>
+            </tr>
+            <tr>
+              <td>Seat Tube (C-C)</td>
+              <td>{{ section.settings.seat_tube_s | default: '48cm' }}</td>
+              <td>{{ section.settings.seat_tube_m | default: '52cm' }}</td>
+              <td>{{ section.settings.seat_tube_l | default: '56cm' }}</td>
+              <td>{{ section.settings.seat_tube_xl | default: '58cm' }}</td>
+            </tr>
+            <tr>
+              <td>Top Tube (Effective)</td>
+              <td>{{ section.settings.top_tube_s | default: '52cm' }}</td>
+              <td>{{ section.settings.top_tube_m | default: '54cm' }}</td>
+              <td>{{ section.settings.top_tube_l | default: '56cm' }}</td>
+              <td>{{ section.settings.top_tube_xl | default: '58cm' }}</td>
+            </tr>
+            <tr>
+              <td>Head Tube</td>
+              <td>{{ section.settings.head_tube_s | default: '12cm' }}</td>
+              <td>{{ section.settings.head_tube_m | default: '14cm' }}</td>
+              <td>{{ section.settings.head_tube_l | default: '17cm' }}</td>
+              <td>{{ section.settings.head_tube_xl | default: '19cm' }}</td>
+            </tr>
+            <tr>
+              <td>Stack</td>
+              <td>{{ section.settings.stack_s | default: '54cm' }}</td>
+              <td>{{ section.settings.stack_m | default: '56cm' }}</td>
+              <td>{{ section.settings.stack_l | default: '58cm' }}</td>
+              <td>{{ section.settings.stack_xl | default: '60cm' }}</td>
+            </tr>
+            <tr>
+              <td>Reach</td>
+              <td>{{ section.settings.reach_s | default: '37cm' }}</td>
+              <td>{{ section.settings.reach_m | default: '38cm' }}</td>
+              <td>{{ section.settings.reach_l | default: '39cm' }}</td>
+              <td>{{ section.settings.reach_xl | default: '40cm' }}</td>
+            </tr>
+            <tr>
+              <td>Chainstay</td>
+              <td colspan="4">{{ section.settings.chainstay | default: '42cm' }}</td>
+            </tr>
+            <tr>
+              <td>BB Drop</td>
+              <td colspan="4">{{ section.settings.bb_drop | default: '7cm' }}</td>
+            </tr>
+            <tr>
+              <td>Tire Clearance</td>
+              <td colspan="4">{{ section.settings.tire_clearance | default: 'Up to 38mm' }}</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div class="bbc-geometry__sizing-guide">
+          <div class="bbc-geometry__sizing-title">
+            <span class="bbc-geo__target-icon">{% render 'bbc-icons', icon: 'target' %}</span> Not sure which size?
+          </div>
+          <p class="bbc-geometry__sizing-text">
+            Send us your height and inside leg measurement — we'll recommend the perfect fit.
+          </p>
+          <div class="bbc-geometry__sizing-form">
+            <input type="text" class="bbc-geometry__input" placeholder="Your height (cm)">
+            <input type="text" class="bbc-geometry__input" placeholder="Inside leg (cm)">
+            <a href="mailto:info@bamboobicycleclub.org?subject=Sizing%20Help&body=Height:%0AInside%20Leg:%0AProduct:%20{{ product.title | url_encode }}" class="bbc-geometry__btn">Get Recommendation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "BBC Geometry Tab",
+  "tag": "section",
+  "class": "bbc-geometry-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Frame Geometry"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "All measurements in centimeters"
+    },
+    {
+      "type": "image_picker",
+      "id": "geometry_image",
+      "label": "Geometry Diagram"
+    },
+    {
+      "type": "header",
+      "content": "Measurements (Small)"
+    },
+    {
+      "type": "text",
+      "id": "seat_tube_s",
+      "label": "Seat Tube - Small",
+      "default": "48cm"
+    },
+    {
+      "type": "text",
+      "id": "top_tube_s",
+      "label": "Top Tube - Small",
+      "default": "52cm"
+    },
+    {
+      "type": "text",
+      "id": "head_tube_s",
+      "label": "Head Tube - Small",
+      "default": "12cm"
+    },
+    {
+      "type": "text",
+      "id": "stack_s",
+      "label": "Stack - Small",
+      "default": "54cm"
+    },
+    {
+      "type": "text",
+      "id": "reach_s",
+      "label": "Reach - Small",
+      "default": "37cm"
+    },
+    {
+      "type": "header",
+      "content": "Measurements (Medium)"
+    },
+    {
+      "type": "text",
+      "id": "seat_tube_m",
+      "label": "Seat Tube - Medium",
+      "default": "52cm"
+    },
+    {
+      "type": "text",
+      "id": "top_tube_m",
+      "label": "Top Tube - Medium",
+      "default": "54cm"
+    },
+    {
+      "type": "text",
+      "id": "head_tube_m",
+      "label": "Head Tube - Medium",
+      "default": "14cm"
+    },
+    {
+      "type": "text",
+      "id": "stack_m",
+      "label": "Stack - Medium",
+      "default": "56cm"
+    },
+    {
+      "type": "text",
+      "id": "reach_m",
+      "label": "Reach - Medium",
+      "default": "38cm"
+    },
+    {
+      "type": "header",
+      "content": "Measurements (Large)"
+    },
+    {
+      "type": "text",
+      "id": "seat_tube_l",
+      "label": "Seat Tube - Large",
+      "default": "56cm"
+    },
+    {
+      "type": "text",
+      "id": "top_tube_l",
+      "label": "Top Tube - Large",
+      "default": "56cm"
+    },
+    {
+      "type": "text",
+      "id": "head_tube_l",
+      "label": "Head Tube - Large",
+      "default": "17cm"
+    },
+    {
+      "type": "text",
+      "id": "stack_l",
+      "label": "Stack - Large",
+      "default": "58cm"
+    },
+    {
+      "type": "text",
+      "id": "reach_l",
+      "label": "Reach - Large",
+      "default": "39cm"
+    },
+    {
+      "type": "header",
+      "content": "Measurements (XL)"
+    },
+    {
+      "type": "text",
+      "id": "seat_tube_xl",
+      "label": "Seat Tube - XL",
+      "default": "58cm"
+    },
+    {
+      "type": "text",
+      "id": "top_tube_xl",
+      "label": "Top Tube - XL",
+      "default": "58cm"
+    },
+    {
+      "type": "text",
+      "id": "head_tube_xl",
+      "label": "Head Tube - XL",
+      "default": "19cm"
+    },
+    {
+      "type": "text",
+      "id": "stack_xl",
+      "label": "Stack - XL",
+      "default": "60cm"
+    },
+    {
+      "type": "text",
+      "id": "reach_xl",
+      "label": "Reach - XL",
+      "default": "40cm"
+    },
+    {
+      "type": "header",
+      "content": "Common Measurements"
+    },
+    {
+      "type": "text",
+      "id": "chainstay",
+      "label": "Chainstay Length",
+      "default": "42cm"
+    },
+    {
+      "type": "text",
+      "id": "bb_drop",
+      "label": "BB Drop",
+      "default": "7cm"
+    },
+    {
+      "type": "text",
+      "id": "tire_clearance",
+      "label": "Tire Clearance",
+      "default": "Up to 38mm"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Geometry Tab"
+    }
+  ]
+}
+{% endschema %}

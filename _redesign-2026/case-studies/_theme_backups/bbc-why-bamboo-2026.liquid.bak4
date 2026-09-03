@@ -1,0 +1,496 @@
+{%- comment -%}
+  BBC New Design (2026) — Why Bamboo? page, single self-contained section.
+  Scoped under .bbc-rd / .bbc-rd-whybamboo via bbc-redesign-2026.css (loaded in layout).
+  Reuses the shared .rd-* component classes so it matches the rest of the 2026 system.
+  Prison references are GENERIC by design (no prison named, no learner photos) per BBC policy.
+{%- endcomment -%}
+
+{%- liquid
+  assign video_cta = section.settings.video_cta_url | default: '/blogs/news/bamboo-testing-with-swansea-university'
+  assign builds_cta = section.settings.builds_cta_url | default: '/blogs/club-news'
+  assign final_cta = section.settings.final_cta_url | default: 'shopify://collections/frame-build-kits'
+-%}
+
+<div class="bbc-rd bbc-rd-whybamboo">
+
+  <style>
+    /* Why Bamboo — tighten section spacing + fix image/text alignment (2026-06-17). Scoped to this page only. */
+    .bbc-rd-whybamboo .rd-pad{ padding:clamp(34px,7vw,64px) 0; }      /* fluid — no 56→34 jump on phones */
+    .bbc-rd-whybamboo .rd-pad-sm{ padding:clamp(22px,4.5vw,40px) 0; } /* quotes: tight, scales smoothly */
+    .bbc-rd-whybamboo .rd-scrim{ display:block; }                     /* self-protect: base.css hides empty divs */
+    .bbc-rd-whybamboo .wbx{ padding-top:0; }                          /* merge video + comparison into one "engineering" beat */
+    /* rider quotes folded into their pillar (no separate band) */
+    .bbc-rd-whybamboo .wb-foldq{ margin:24px 0 0; padding:4px 0 4px 18px; border-left:3px solid var(--lime,#D4FD62); }
+    .bbc-rd-whybamboo .wb-foldq p{ margin:0; font-style:italic; font-size:1.05rem; line-height:1.45; color:var(--forest,#073e27); }
+    .bbc-rd-whybamboo .wb-foldq cite{ display:block; margin-top:8px; font-style:normal; font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:#5a6b60; }
+    .bbc-rd-whybamboo .rd-dark .wb-foldq p{ color:var(--bone,#F3EFE3); }
+    .bbc-rd-whybamboo .rd-dark .wb-foldq cite{ color:#BCC8C2; }
+    .bbc-rd-whybamboo .rd-hero{ min-height:58vh; }
+    .bbc-rd-whybamboo .rd-hero .rd-bg img{ object-position:center 42%; }   /* keep the bike in frame when cropped */
+    /* Stat band — flat solid forest, crisp. .rd-dark adds a radial-gradient glow (the "blotch") — kill it here. */
+    .bbc-rd-whybamboo .rd-wb-statsband{ background:var(--forest); padding:clamp(26px,3.2vw,40px) 0; }
+    .bbc-rd-whybamboo .rd-wb-statsband .rd-dark{ background:var(--forest); }   /* override the glow */
+    .bbc-rd-whybamboo .rd-wb-statsband .rd-stats{ margin:0; }
+    .bbc-rd-whybamboo .rd-wb-statsband .rd-num{ text-shadow:none; }
+    .bbc-rd-whybamboo .rd-split{ align-items:stretch; }            /* image fills the row → bottom-aligns with text */
+    .bbc-rd-whybamboo .rd-split .rd-media{ min-height:380px; }      /* was 520px fixed → caused the empty gap below short images */
+    .bbc-rd-whybamboo .rd-split .rd-txt{ padding:clamp(36px,4vw,60px); }
+    /* page-level overflow + image safety (kills horizontal scroll / image bleed) */
+    .bbc-rd-whybamboo{ overflow-x:hidden; }
+    .bbc-rd-whybamboo img{ max-width:100%; }
+
+    /* ===== TABLET (≤900) — split goes single column ===== */
+    @media(max-width:900px){
+      .bbc-rd-whybamboo .rd-split{ grid-template-columns:1fr !important; }
+      /* explicit box → image can't collapse or overlap. height:56vw is the iOS≤14 fallback (no aspect-ratio support); aspect-ratio wins everywhere modern. */
+      .bbc-rd-whybamboo .rd-split .rd-media{ aspect-ratio:16/10; min-height:0; height:56vw; max-height:430px; }
+      .bbc-rd-whybamboo .rd-split.rd-rev .rd-media{ order:0; }                     /* image always above text on stack */
+      .bbc-rd-whybamboo .rd-split .rd-txt{ padding:30px 26px; }
+      .bbc-rd-whybamboo .wbx-tiles{ grid-template-columns:repeat(2,1fr); }
+    }
+    /* ===== PHONES (≤600) — the view James is on ===== */
+    @media(max-width:600px){
+      .bbc-rd-whybamboo .rd-hero{ min-height:56vh; }
+      .bbc-rd-whybamboo .rd-hero .rd-inner{ padding-bottom:30px; }
+      .bbc-rd-whybamboo .rd-hero h1{ font-size:30px; line-height:1.08; letter-spacing:-.02em; max-width:18ch; }
+      .bbc-rd-whybamboo .rd-hero .rd-lede{ font-size:15px; line-height:1.5; margin-top:12px; }
+      .bbc-rd-whybamboo .rd-pad{ padding:34px 0; }
+      .bbc-rd-whybamboo .rd-pad-sm{ padding:22px 0; }
+      .bbc-rd-whybamboo .rd-wb-statsband{ padding:24px 0; }
+      .bbc-rd-whybamboo .rd-wb-statsband .rd-stats{ gap:22px 14px; }
+      .bbc-rd-whybamboo .rd-wb-statsband .rd-num{ font-size:28px; }
+      .bbc-rd-whybamboo .rd-wb-statsband .rd-lbl{ font-size:13px; }
+      .bbc-rd-whybamboo .rd-split .rd-media{ aspect-ratio:16/11; min-height:0; height:62vw; max-height:340px; }
+      .bbc-rd-whybamboo .rd-split .rd-txt{ padding:24px 20px; }
+      .bbc-rd-whybamboo h2{ font-size:26px; line-height:1.12; }
+      .bbc-rd-whybamboo .rd-lede{ font-size:15.5px; line-height:1.55; }
+      .bbc-rd-whybamboo .wbx-tile{ padding:16px 15px; }
+      .bbc-rd-whybamboo .wbx-num{ font-size:1.5rem; }
+      .bbc-rd-whybamboo .wbx-table th, .bbc-rd-whybamboo .wbx-table td{ padding:10px 11px; font-size:12.5px; }
+      /* comparison table scrolls horizontally on phones — give it a visible cue */
+      .bbc-rd-whybamboo .wbx-tablewrap{ position:relative; }
+      .bbc-rd-whybamboo .wbx-tablewrap::after{ content:"swipe table →"; display:block; text-align:right; margin-top:6px; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:#8a968d; }
+    }
+    /* ===== very small (≤380) ===== */
+    @media(max-width:380px){
+      .bbc-rd-whybamboo .rd-hero h1{ font-size:27px; }
+      .bbc-rd-whybamboo .rd-wb-statsband .rd-num{ font-size:25px; }
+    }
+  </style>
+
+  {%- comment -%} ---------- HERO ---------- {%- endcomment -%}
+  <header class="rd-hero">
+    <div class="rd-bg">
+      {%- if section.settings.hero_image != blank -%}
+        <img src="{{ section.settings.hero_image | image_url: width: 2000 }}"
+             srcset="{{ section.settings.hero_image | image_url: width: 1200 }} 1200w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w, {{ section.settings.hero_image | image_url: width: 2600 }} 2600w"
+             sizes="100vw" alt="{{ section.settings.hero_image_alt | default: 'A hand-built bamboo bicycle' | escape }}" fetchpriority="high" loading="eager">
+      {%- else -%}
+        <img src="{{ section.settings.hero_fallback | default: 'bbc-rd-hero-ride.jpg' | asset_url }}" alt="{{ section.settings.hero_image_alt | default: 'A bamboo gravel bike on a dramatic coastal clifftop' | escape }}" width="1600" height="900" fetchpriority="high" loading="eager">
+      {%- endif -%}
+    </div>
+    <div class="rd-scrim"></div>
+    <div class="rd-inner">
+      <div class="rd-wrap">
+        <span class="rd-eyebrow rd-on-dark">{{ section.settings.hero_eyebrow }}</span>
+        <h1>{{ section.settings.hero_title }}</h1>
+        <p class="rd-lede">{{ section.settings.hero_lede }}</p>
+      </div>
+    </div>
+  </header>
+
+  {%- comment -%} ---------- STAT BAND (own band below hero — no overlap/clipping) ---------- {%- endcomment -%}
+  {%- assign stats = section.blocks | where: 'type', 'stat' -%}
+  {%- if stats.size > 0 -%}
+    <section class="rd-wb-statsband">
+      <div class="rd-wrap">
+        <div class="rd-stats rd-dark">
+          {%- for b in stats -%}
+            <div class="rd-stat" {{ b.shopify_attributes }}>
+              <div class="rd-num">{{ b.settings.number }}</div>
+              <div class="rd-lbl">{{ b.settings.label }}</div>
+              {%- if b.settings.source != blank -%}<div class="rd-src">{{ b.settings.source }}</div>{%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- VIDEO: the science ---------- {%- endcomment -%}
+  {%- if section.settings.video_heading != blank -%}
+    <section class="rd-pad rd-paper">
+      <div class="rd-wrap">
+        <span class="rd-eyebrow">{{ section.settings.video_eyebrow }}</span>
+        <h2>{{ section.settings.video_heading }}</h2>
+        {%- assign v_src = section.settings.video_url | default: 'https://cdn.shopify.com/videos/c/vp/a66c9c6ad4e54ed5b506582dbb7d751c/a66c9c6ad4e54ed5b506582dbb7d751c.HD-720p-1.6Mbps-76173427.mp4' -%}
+        <div class="rd-video rd-mt3">
+          {%- if section.settings.video_youtube != blank -%}
+            <iframe class="rd-video-el" style="aspect-ratio:16/9;width:100%;height:auto;border:0;display:block;" src="https://www.youtube-nocookie.com/embed/{{ section.settings.video_youtube }}?rel=0" title="{{ section.settings.video_caption | escape }}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          {%- else -%}
+            <video class="rd-video-el" controls preload="metadata" playsinline {% if section.settings.video_poster != blank %}poster="{{ section.settings.video_poster | image_url: width: 1200 }}"{% endif %}>
+              <source src="{{ v_src }}" type="video/mp4">
+            </video>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.video_caption != blank -%}<p class="rd-src rd-mt1">{{ section.settings.video_caption }}</p>{%- endif -%}
+        <p class="rd-lede rd-maxw rd-mt2">{{ section.settings.video_body }}</p>
+        {%- if section.settings.video_cta_label != blank -%}
+          <p class="rd-mt2"><a class="rd-btn rd-ghost" href="{{ video_cta }}">{{ section.settings.video_cta_label }} <span class="rd-arrow">&rarr;</span></a></p>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- MATERIAL COMPARISON (technical) ---------- {%- endcomment -%}
+  {%- if section.settings.show_compare != false -%}
+  <style>
+    .bbc-rd-whybamboo .wbx{ --wf:var(--forest); --wg:#ffa900; --wt:#3f8b66; --wm:#5a6b60; }
+    .bbc-rd-whybamboo .wbx-tiles{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(7,62,39,.14); border:1px solid rgba(7,62,39,.14); border-radius:12px; overflow:hidden; }
+    .bbc-rd-whybamboo .wbx-tile{ background:#fff; padding:22px 20px; }
+    .bbc-rd-whybamboo .wbx-num{ font-weight:800; font-size:clamp(1.5rem,1.1rem + 1.2vw,2rem); color:var(--wf); line-height:1.05; font-variant-numeric:lining-nums tabular-nums; }
+    .bbc-rd-whybamboo .wbx-unit{ font-weight:700; font-size:12.5px; color:var(--wt); margin-top:3px; }
+    .bbc-rd-whybamboo .wbx-lbl{ font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--wm); margin-top:9px; line-height:1.35; }
+    .bbc-rd-whybamboo .wbx-cap{ font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--wm); margin:0 0 14px; }
+    .bbc-rd-whybamboo .wbx-bar{ display:grid; grid-template-columns:140px 1fr 52px; align-items:center; gap:14px; margin-bottom:11px; }
+    .bbc-rd-whybamboo .wbx-bn{ font-size:13px; font-weight:700; color:var(--wf); }
+    .bbc-rd-whybamboo .wbx-bt{ height:14px; background:rgba(7,62,39,.08); border-radius:7px; overflow:hidden; }
+    .bbc-rd-whybamboo .wbx-bf{ height:100%; background:var(--wt); border-radius:7px; }
+    .bbc-rd-whybamboo .wbx-bar.is-hl .wbx-bf{ background:var(--wg); }
+    .bbc-rd-whybamboo .wbx-bv{ font-size:13px; font-weight:700; color:var(--wm); text-align:right; font-variant-numeric:lining-nums tabular-nums; }
+    .bbc-rd-whybamboo .wbx-tablewrap{ overflow-x:auto; }
+    .bbc-rd-whybamboo .wbx-table{ width:100%; border-collapse:collapse; font-variant-numeric:lining-nums tabular-nums; }
+    .bbc-rd-whybamboo .wbx-table th,.bbc-rd-whybamboo .wbx-table td{ text-align:right; padding:12px 14px; border-bottom:1px solid rgba(7,62,39,.14); font-size:13.5px; white-space:nowrap; }
+    .bbc-rd-whybamboo .wbx-table :is(th,td):first-child{ text-align:left; white-space:normal; }
+    .bbc-rd-whybamboo .wbx-table thead th{ font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--wm); font-weight:700; border-bottom-width:2px; }
+    .bbc-rd-whybamboo .wbx-table tbody th{ font-weight:700; color:var(--wf); }
+    .bbc-rd-whybamboo .wbx-table thead th.b{ color:#b6790a; }
+    .bbc-rd-whybamboo .wbx-table td.b{ color:var(--wf); font-weight:800; background:rgba(255,169,0,.08); }
+    .bbc-rd-whybamboo .wbx-note{ font-size:12px; line-height:1.5; color:var(--wm); }
+    .bbc-rd-whybamboo .wbx-frame{ padding:18px 22px; border-left:4px solid var(--wg); background:#fff; font-size:1.04rem; line-height:1.5; }
+    .bbc-rd-whybamboo .wbx-frame strong{ color:var(--wf); }
+    @media(max-width:749px){ .bbc-rd-whybamboo .wbx-tiles{ grid-template-columns:repeat(2,1fr); } .bbc-rd-whybamboo .wbx-bar{ grid-template-columns:84px 1fr 46px; gap:10px; } }
+  </style>
+  <section class="rd-pad rd-paper wbx">
+    <div class="rd-wrap">
+      <span class="rd-eyebrow">{{ section.settings.compare_eyebrow | default: 'The engineering' }}</span>
+      <h2>{{ section.settings.compare_heading | default: 'How bamboo measures up' }}</h2>
+      <p class="rd-lede rd-maxw rd-mt2">{{ section.settings.compare_intro | default: 'A frame material lives or dies on four numbers: how light it is, how strong for that weight, how it soaks up the road, and what it costs the planet. Bamboo against the metals and carbon — honest ranges, with sources.' }}</p>
+
+      <div class="wbx-tiles rd-mt3">
+        <div class="wbx-tile"><div class="wbx-num">0.7</div><div class="wbx-unit">g/cm³ density</div><div class="wbx-lbl">Lighter than carbon, aluminium &amp; steel</div></div>
+        <div class="wbx-tile"><div class="wbx-num">High</div><div class="wbx-unit">strength-to-weight</div><div class="wbx-lbl">Light, stiff and tough</div></div>
+        <div class="wbx-tile"><div class="wbx-num">3–5</div><div class="wbx-unit">years to harvest</div><div class="wbx-lbl">A tree takes decades</div></div>
+        <div class="wbx-tile"><div class="wbx-num">4,000+</div><div class="wbx-unit">builders trained</div><div class="wbx-lbl">A skill you keep for life</div></div>
+      </div>
+
+      <div class="rd-mt3">
+        <p class="wbx-cap">Density · g/cm³ — lower is lighter</p>
+        <div class="wbx-bar"><span class="wbx-bn">Steel (4130)</span><span class="wbx-bt"><span class="wbx-bf" style="width:100%"></span></span><span class="wbx-bv">7.8</span></div>
+        <div class="wbx-bar"><span class="wbx-bn">Aluminium 6061</span><span class="wbx-bt"><span class="wbx-bf" style="width:34%"></span></span><span class="wbx-bv">2.7</span></div>
+        <div class="wbx-bar"><span class="wbx-bn">Carbon fibre</span><span class="wbx-bt"><span class="wbx-bf" style="width:20%"></span></span><span class="wbx-bv">1.5</span></div>
+        <div class="wbx-bar is-hl"><span class="wbx-bn">Bamboo</span><span class="wbx-bt"><span class="wbx-bf" style="width:10%"></span></span><span class="wbx-bv">0.7</span></div>
+      </div>
+
+      <div class="wbx-tablewrap rd-mt3">
+        <table class="wbx-table">
+          <thead><tr><th scope="col">Property</th><th scope="col" class="b">Bamboo</th><th scope="col">Steel (4130 / 853)</th><th scope="col">Aluminium 6061</th><th scope="col">Carbon fibre</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Density (g/cm³)</th><td class="b">0.6–0.9</td><td>7.8</td><td>2.7</td><td>1.5</td></tr>
+            <tr><th scope="row">Tensile strength (MPa)</th><td class="b">115–370</td><td>560–1,400</td><td>310</td><td>600–3,500 †</td></tr>
+            <tr><th scope="row">Stiffness — modulus (GPa)</th><td class="b">10–35</td><td>205</td><td>69</td><td>120–200</td></tr>
+            <tr><th scope="row">Vibration damping</th><td class="b">High</td><td>Very low</td><td>Low</td><td>Moderate</td></tr>
+            <tr><th scope="row">Embodied carbon (kg CO₂e/kg)</th><td class="b">Net‑negative</td><td>0.8–2.8</td><td>~5.4</td><td>24–35</td></tr>
+            <tr><th scope="row">Build it yourself?</th><td class="b">Yes — jig &amp; hand tools</td><td>Brazing / welding</td><td>Welding</td><td>Autoclave — no</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="wbx-note rd-mt2">Ranges reflect species, alloy and lay-up — bamboo especially varies with species, culm and moisture. † Carbon's headline strength is measured along the fibre; a frame tube only ever sees a fraction of it. Sources: Sánchez Vivas (bamboo.org), ScienceDirect, MatWeb/ASM, Reynolds Technology, ICE embodied-carbon database.</p>
+
+      <p class="wbx-frame rd-mt2">{{ section.settings.compare_framing | default: 'Carbon is lighter and stiffer. Bamboo answers on damping, fatigue-tolerance and embodied carbon — and it is the only one of the four you can build yourself, by hand, in a weekend.' }}</p>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- FEATURE BLOCKS + RIDER QUOTES (in order) ---------- {%- endcomment -%}
+  {%- for b in section.blocks -%}
+    {%- if b.type == 'feature' -%}
+      <section class="rd-pad{% if b.settings.dark %} rd-dark{% endif %}" {{ b.shopify_attributes }}>
+        <div class="rd-wrap">
+          <div class="rd-split{% if b.settings.reverse %} rd-rev{% endif %}">
+            <div class="rd-media">
+              <img src="{{ b.settings.image_fallback | default: 'bbc-rd-detail.jpg' | asset_url }}" alt="{{ b.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" loading="lazy">
+            </div>
+            <div class="rd-txt">
+              {%- if b.settings.eyebrow != blank -%}<span class="rd-eyebrow{% if b.settings.dark %} rd-on-dark{% endif %}">{{ b.settings.eyebrow }}</span>{%- endif -%}
+              <h2>{{ b.settings.heading }}</h2>
+              {%- assign paras = b.settings.body | strip | split: '|' -%}
+              {%- for p in paras -%}<p class="rd-lede rd-mt2">{{ p | strip }}</p>{%- endfor -%}
+              {%- if b.settings.quote != blank -%}
+                <blockquote class="wb-foldq">
+                  <p>{{ b.settings.quote }}</p>
+                  <cite>{{ b.settings.attribution }}{% if b.settings.context != blank %} — {{ b.settings.context }}{% endif %}</cite>
+                </blockquote>
+              {%- endif -%}
+              {%- if b.settings.cta_label != blank -%}
+                <p class="rd-mt2"><a class="rd-btn rd-text" href="{{ b.settings.cta_url | default: '#' }}">{{ b.settings.cta_label }} <span class="rd-arrow">&rarr;</span></a></p>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </section>
+    {%- elsif b.type == 'quote' -%}
+      {%- comment -%} legacy standalone quote — quotes now fold into their pillar; kept as a safe fallback {%- endcomment -%}
+      <section class="rd-pad-sm" {{ b.shopify_attributes }}>
+        <div class="rd-wrap rd-maxw">
+          <div class="rd-pull">
+            <p class="rd-q">{{ b.settings.quote }}</p>
+            <cite>{{ b.settings.attribution }}{% if b.settings.context != blank %} — {{ b.settings.context }}{% endif %}</cite>
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- comment -%} ---------- PROVEN WITH SCIENCE & UNIVERSITIES (verified, cited) ---------- {%- endcomment -%}
+  <style>
+    .rd-uni .rd-uni-logos{list-style:none;padding:0;margin:2rem auto 2.5rem;max-width:760px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+    @media(max-width:740px){ .rd-uni .rd-uni-logos{grid-template-columns:repeat(2,1fr);} }
+    .rd-uni .rd-uni-logos li{padding:0;}
+    .rd-uni .rd-uni-logos .rd-logocell{width:100%;min-height:64px;}
+    .rd-uni .rd-uni-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem;text-align:left;margin-top:.5rem}
+    .rd-uni .rd-uni-card{background:rgba(250,247,240,.06);border:1px solid rgba(250,247,240,.16);border-radius:16px;padding:1.4rem 1.5rem}
+    .rd-uni .rd-uni-card svg{color:var(--bbc-lime,#c6f24e)}
+    .rd-uni .rd-uni-card h3{margin:.6rem 0 .4rem;font-size:1.25rem;color:var(--bbc-cream,#faf7f0)}
+    .rd-uni .rd-uni-card p{margin:0 0 .7rem;color:rgba(250,247,240,.9);line-height:1.55}
+    .rd-uni .rd-uni-card cite{display:block;font-style:normal;font-size:.85rem;color:rgba(250,247,240,.7);border-top:1px solid rgba(250,247,240,.16);padding-top:.6rem}
+    .rd-uni .rd-uni-foot{margin-top:2rem;font-size:.95rem;color:rgba(250,247,240,.85)}
+    .rd-uni .rd-uni-foot a{color:var(--bbc-lime,#c6f24e)}
+    @media(max-width:740px){.rd-uni .rd-uni-grid{grid-template-columns:1fr}}
+  </style>
+  <section class="rd-pad rd-dark rd-center rd-uni">
+    <div class="rd-wrap">
+      <span class="rd-eyebrow rd-on-dark">Proven with science</span>
+      <h2>The evidence behind the bike</h2>
+      <p class="rd-lede rd-mt2" style="margin-inline:auto;max-width:54ch">We don't ask you to take "bamboo is good" on faith. Independent universities and peer-reviewed journals have measured what a bamboo frame actually does.</p>
+      <ul class="rd-uni-logos" aria-label="University research partners">
+        <li><span class="rd-logocell"><img class="rd-logoimg" src="{{ 'bbc-logo-ucl.png' | asset_url }}" alt="University College London" loading="lazy"></span></li><li><span class="rd-logocell"><img class="rd-logoimg" src="{{ 'bbc-logo-oxfordbrookes.png' | asset_url }}" alt="Oxford Brookes University" loading="lazy"></span></li><li><span class="rd-logocell"><img class="rd-logoimg" src="{{ 'bbc-logo-swansea.png' | asset_url }}" alt="Swansea University" loading="lazy"></span></li><li><span class="rd-logocell"><img class="rd-logoimg" src="{{ 'bbc-logo-lsbu.png' | asset_url }}" alt="London South Bank University" loading="lazy"></span></li>
+      </ul>
+      <div class="rd-uni-grid">
+        <article class="rd-uni-card">
+          {% render 'bbc-icons', icon: 'bike', size: 30 %}
+          <h3>A measurably better ride</h3>
+          <p>Frequency-response testing found a bamboo frame significantly improved ride comfort over an aluminium one.</p>
+          <cite>Thite et al., <em>Vehicle System Dynamics</em>, 2013 — Oxford Brookes University</cite>
+        </article>
+        <article class="rd-uni-card">
+          {% render 'bbc-icons', icon: 'leaf', size: 30 %}
+          <h3>Around half the carbon</h3>
+          <p>A life-cycle assessment of a bamboo bicycle frame measured ~50% lower environmental impact than aluminium, ~30% lower than steel.</p>
+          <cite>Agyekum, Fortuin &amp; van der Harst, <em>J. Cleaner Production</em>, 2017 — Wageningen University</cite>
+        </article>
+        <article class="rd-uni-card">
+          {% render 'bbc-icons', icon: 'shield', size: 30 %}
+          <h3>Tested to outlast its life</h3>
+          <p>Independent load and fatigue testing modelled a bamboo frame to outlast roughly 26&times; its intended service life.</p>
+          <cite>Arango Fierro et al., IntechOpen, 2019 — Univ. Autónoma de Occidente</cite>
+        </article>
+        <article class="rd-uni-card">
+          {% render 'bbc-icons', icon: 'tools', size: 30 %}
+          <h3>Flax-reinforced joints</h3>
+          <p>We bond joints with flax — a natural fibre prized for stiffness, low weight and outstanding vibration damping.</p>
+          <cite>Amiri et al., <em>Proc. IMechE Part P</em>, 2018 — North Dakota State University</cite>
+        </article>
+      </div>
+      <p class="rd-uni-foot">Bamboo's mechanical properties can be measured to a recognised international standard, <strong>BS&nbsp;ISO&nbsp;22157</strong>. We've also tested our own tubes with <a href="/blogs/news/bamboo-testing-with-swansea-university">Swansea University</a>.</p>
+    </div>
+  </section>
+
+
+  {%- comment -%} ---------- BUILD GALLERY: any design, any rider ---------- {%- endcomment -%}
+  {%- assign builds = section.blocks | where: 'type', 'build' -%}
+  {%- if builds.size > 0 -%}
+    <section class="rd-pad rd-paper">
+      <div class="rd-wrap">
+        <span class="rd-eyebrow">{{ section.settings.builds_eyebrow }}</span>
+        <h2>{{ section.settings.builds_heading }}</h2>
+        {%- if section.settings.builds_intro != blank -%}<p class="rd-lede rd-maxw rd-mt2">{{ section.settings.builds_intro }}</p>{%- endif -%}
+        <div class="rd-csgrid rd-mt3">
+          {%- for b in builds -%}
+            <a class="rd-cscard" href="{{ b.settings.link | default: '#' }}" {{ b.shopify_attributes }}>
+              <div class="rd-cscard__media">
+                {%- if b.settings.image != blank -%}
+                  <img src="{{ b.settings.image | image_url: width: 600 }}" alt="{{ b.settings.title | escape }}" loading="lazy">
+                {%- else -%}
+                  <img src="{{ b.settings.image_fallback | default: 'bbc-rd-bike-field.jpg' | asset_url }}" alt="{{ b.settings.title | escape }}" loading="lazy">
+                {%- endif -%}
+                <span class="rd-cscard__kind">{{ b.settings.kind }}</span>
+              </div>
+              <div class="rd-cscard__body">
+                <h3 class="rd-cscard__inst">{{ b.settings.title }}</h3>
+                <p class="rd-cscard__ctx">{{ b.settings.body }}</p>
+                <span class="rd-cscard__more">Read the build &rarr;</span>
+              </div>
+            </a>
+          {%- endfor -%}
+        </div>
+        {%- if section.settings.builds_cta_label != blank -%}
+          <p class="rd-mt3 rd-center"><a class="rd-btn rd-lime" href="{{ builds_cta }}">{{ section.settings.builds_cta_label }} <span class="rd-arrow">&rarr;</span></a></p>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- FAQ ---------- {%- endcomment -%}
+  {%- assign faqs = section.blocks | where: 'type', 'faq' -%}
+  {%- if faqs.size > 0 -%}
+    <section class="rd-pad">
+      <div class="rd-wrap rd-maxw">
+        <span class="rd-eyebrow">{{ section.settings.faq_eyebrow }}</span>
+        <h2>{{ section.settings.faq_heading }}</h2>
+        <div class="rd-faq rd-mt3">
+          {%- for b in faqs -%}
+            <details {{ b.shopify_attributes }}>
+              <summary>{{ b.settings.question }}</summary>
+              <div class="rd-a"><p>{{ b.settings.answer }}</p></div>
+            </details>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- FINAL CTA ---------- {%- endcomment -%}
+  <section class="rd-pad rd-darker">
+    <div class="rd-wrap rd-center">
+      <h2>{{ section.settings.final_heading }}</h2>
+      <p class="rd-lede rd-maxw rd-mt2" style="margin-inline:auto;">{{ section.settings.final_body }}</p>
+      {%- if section.settings.final_cta_label != blank -%}
+        <p class="rd-mt3"><a class="rd-btn rd-lime rd-btn-lg" href="{{ final_cta }}">{{ section.settings.final_cta_label }} <span class="rd-arrow">&rarr;</span></a></p>
+      {%- endif -%}
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Why Bamboo 2026 (new)",
+  "tag": "section",
+  "class": "section bbc-why-bamboo-2026-wrap",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "hero_fallback", "label": "Default hero filename", "default": "bbc-rd-hero-ride.jpg" },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero alt text", "default": "A bamboo gravel bike on a dramatic coastal clifftop" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Why Bamboo?" },
+    { "type": "text", "id": "hero_title", "label": "Headline", "default": "The only frame material you can build yourself, by hand, in a weekend" },
+    { "type": "textarea", "id": "hero_lede", "label": "Lede", "default": "Bamboo grows on every continent except Europe and Antarctica — nearly 1,600 species. No factories, foundries or billion-dollar supply chains. Anyone can build their own bamboo frame in two days." },
+    { "type": "header", "content": "Video — the science" },
+    { "type": "text", "id": "video_eyebrow", "label": "Eyebrow", "default": "Tested" },
+    { "type": "text", "id": "video_heading", "label": "Heading", "default": "Watch: bamboo under test" },
+    { "type": "text", "id": "video_youtube", "label": "YouTube video ID (leave blank to use the file below)" },
+    { "type": "url", "id": "video_url", "label": "Or video file URL (mp4 — blank uses the Swansea testing film)" },
+    { "type": "image_picker", "id": "video_poster", "label": "Video poster" },
+    { "type": "text", "id": "video_poster_fallback", "label": "Default poster filename", "default": "bbc-rd-frame-build.jpg" },
+    { "type": "text", "id": "video_caption", "label": "Caption", "default": "Our own bamboo tubes under three-point flexural testing at Swansea University — to ISO standard." },
+    { "type": "textarea", "id": "video_body", "label": "Body", "default": "We sent our actual bamboo tubes to Swansea University for three-point flexural bending tests. They behaved like a high-performance engineering material — because they are one." },
+    { "type": "text", "id": "video_cta_label", "label": "CTA label", "default": "Read the Swansea study" },
+    { "type": "url", "id": "video_cta_url", "label": "CTA link" },
+    { "type": "header", "content": "Material comparison" },
+    { "type": "checkbox", "id": "show_compare", "label": "Show material comparison", "default": true },
+    { "type": "text", "id": "compare_eyebrow", "label": "Eyebrow", "default": "The engineering" },
+    { "type": "text", "id": "compare_heading", "label": "Heading", "default": "How bamboo measures up" },
+    { "type": "textarea", "id": "compare_intro", "label": "Intro", "default": "A frame material lives or dies on four numbers: how light it is, how strong for that weight, how it soaks up the road, and what it costs the planet. Bamboo against the metals and carbon — honest ranges, with sources." },
+    { "type": "textarea", "id": "compare_framing", "label": "Closing line", "default": "Carbon is lighter and stiffer. Bamboo answers on damping, fatigue-tolerance and embodied carbon — and it is the only one of the four you can build yourself, by hand, in a weekend." },
+    { "type": "header", "content": "Build gallery" },
+    { "type": "text", "id": "builds_eyebrow", "label": "Eyebrow", "default": "Design versatility" },
+    { "type": "text", "id": "builds_heading", "label": "Heading", "default": "Any design. Any rider." },
+    { "type": "textarea", "id": "builds_intro", "label": "Intro", "default": "You can't shape steel in your kitchen or cut carbon fibre in your garage. Bamboo you can cut with a hand saw, shape with a file and join with wrapping and epoxy. The only limit on your frame design is your imagination." },
+    { "type": "text", "id": "builds_cta_label", "label": "CTA label", "default": "See all build stories" },
+    { "type": "url", "id": "builds_cta_url", "label": "CTA link" },
+    { "type": "header", "content": "FAQ" },
+    { "type": "text", "id": "faq_eyebrow", "label": "Eyebrow", "default": "Good to know" },
+    { "type": "text", "id": "faq_heading", "label": "Heading", "default": "Bamboo bike questions, answered" },
+    { "type": "header", "content": "Final CTA" },
+    { "type": "text", "id": "final_heading", "label": "Heading", "default": "Ready to build your bamboo bike?" },
+    { "type": "textarea", "id": "final_body", "label": "Body", "default": "Join 4,000+ people who've built their own bamboo bicycle frame." },
+    { "type": "text", "id": "final_cta_label", "label": "CTA label", "default": "Shop frame kits" },
+    { "type": "url", "id": "final_cta_url", "label": "CTA link" }
+  ],
+  "blocks": [
+    { "type": "stat", "name": "Hero stat", "settings": [
+      { "type": "text", "id": "number", "label": "Number", "default": "2–4×" },
+      { "type": "text", "id": "label", "label": "Label", "default": "Tensile strength" },
+      { "type": "text", "id": "source", "label": "Source" }
+    ]},
+    { "type": "feature", "name": "Image + text block", "settings": [
+      { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The science" },
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Heading" },
+      { "type": "textarea", "id": "body", "label": "Body (separate paragraphs with | )", "default": "First paragraph. | Second paragraph." },
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "image_fallback", "label": "Default image filename", "default": "bbc-rd-detail.jpg" },
+      { "type": "text", "id": "image_alt", "label": "Image alt" },
+      { "type": "checkbox", "id": "reverse", "label": "Image on right", "default": false },
+      { "type": "checkbox", "id": "dark", "label": "Dark background", "default": false },
+      { "type": "text", "id": "cta_label", "label": "CTA label" },
+      { "type": "url", "id": "cta_url", "label": "CTA link" },
+      { "type": "header", "content": "Folded rider quote (optional)" },
+      { "type": "textarea", "id": "quote", "label": "Quote" },
+      { "type": "text", "id": "attribution", "label": "Attribution" },
+      { "type": "text", "id": "context", "label": "Context" }
+    ]},
+    { "type": "quote", "name": "Rider quote (legacy)", "settings": [
+      { "type": "textarea", "id": "quote", "label": "Quote", "default": "Quote" },
+      { "type": "text", "id": "attribution", "label": "Attribution", "default": "Rider" },
+      { "type": "text", "id": "context", "label": "Context" }
+    ]},
+    { "type": "build", "name": "Build card", "settings": [
+      { "type": "text", "id": "kind", "label": "Tag", "default": "Build" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Title" },
+      { "type": "textarea", "id": "body", "label": "Body" },
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "image_fallback", "label": "Default image filename", "default": "bbc-rd-bike-field.jpg" },
+      { "type": "url", "id": "link", "label": "Link" }
+    ]},
+    { "type": "faq", "name": "FAQ item", "settings": [
+      { "type": "text", "id": "question", "label": "Question", "default": "Question?" },
+      { "type": "textarea", "id": "answer", "label": "Answer", "default": "Answer." }
+    ]}
+  ],
+  "presets": [
+    {
+      "name": "Why Bamboo 2026 (new)",
+      "settings": {},
+      "blocks": [
+        { "type": "stat", "settings": { "number": "2–4×", "label": "Strength-to-weight that rivals steel", "source": "Specific strength vs mild steel" } },
+        { "type": "stat", "settings": { "number": "<1%", "label": "Frame failure rate", "source": "across 4,000+ frames" } },
+        { "type": "stat", "settings": { "number": "56.7%", "label": "Less CO₂ than aluminium", "source": "Independent lifecycle analysis, 2024" } },
+        { "type": "stat", "settings": { "number": "4,000+", "label": "Builders since 2012", "source": "36+ countries" } },
+        { "type": "feature", "settings": { "eyebrow": "The science", "heading": "Comparable to steel \u2014 at a fraction of the weight", "image_fallback": "bbc-rd-detail.jpg", "image_alt": "Close-up of a bamboo bicycle frame joint showing the natural fibre structure", "reverse": false, "dark": false, "cta_label": "Read the Swansea University study", "cta_url": "/blogs/news/bamboo-testing-with-swansea-university", "body": "Bamboo's tensile strength is comparable to mild steel — at a fraction of the weight. Unlike steel, bamboo is a natural composite: parallel cellulose fibres in a lignin matrix, running the full length of the culm. The same structural principle as carbon fibre, evolved over millions of years. | We tested this with Swansea University. Their three-point flexural bending tests on our actual bamboo tubes confirmed high stiffness and strength comparable to engineering metals — bamboo behaves like a high-performance engineering material, because it is one." } },
+        { "type": "quote", "settings": { "quote": "Woody turned out to be the most reliable bike I've ever owned. I had hardly any mechanical problems on the whole journey and it was a smooth and shock-absorbing ride.", "attribution": "Kate Rawles", "context": "8,288 miles, Colombia to Patagonia, on a BBC-built bamboo frame" } },
+        { "type": "feature", "settings": { "eyebrow": "Ride quality", "heading": "A ride you can actually feel", "image_fallback": "bbc-rd-gravel-sunset.jpg", "image_alt": "A bamboo bike beside a misty mountain valley at dawn", "reverse": true, "dark": false, "cta_label": "", "body": "The fibre structure that makes bamboo strong also makes it comfortable. Those parallel fibres absorb road vibration naturally — more than bare metal does. Less buzz through the handlebars, less fatigue over long distances, a smoother ride on rough roads. | It is a real, documented material property. Bamboo's natural damping has been documented in structural engineering for decades. In a bicycle frame it means you arrive fresher, with less strain on your hands, wrists and back." } },
+        { "type": "quote", "settings": { "quote": "Having had it now for about 7 years and ridden it hard — the ride is much smoother than my Cooper. I've ridden over about half of Crete with it.", "attribution": "Jamie", "context": "London workshop builder, 7-year review" } },
+        { "type": "feature", "settings": { "eyebrow": "Accessibility", "heading": "Why it matters", "image_fallback": "bbc-rd-frame-build.jpg", "image_alt": "A bamboo frame being built on a jig with simple hand tools", "reverse": false, "dark": true, "cta_label": "", "body": "To make an aluminium frame you need bauxite mines, smelters running near 1,000°C and factories of CNC machines. Carbon fibre needs petroleum-derived precursors, autoclaves and clean rooms. | To make a bamboo bicycle frame you need bamboo, a jig, hand tools and two days. That's it. | We teach beginners — most with no prior experience — to build their own frame in a weekend. Through our Build to Bond programme, frame-building reconnects fathers with their children inside the criminal justice system." } },
+        { "type": "feature", "settings": { "eyebrow": "Sustainability", "heading": "The carbon maths", "image_fallback": "bbc-rd-bamboo-tubes.jpg", "image_alt": "Raw bamboo culms in the workshop", "reverse": true, "dark": false, "cta_label": "Our carbon footprint analysis", "cta_url": "/blogs/impact/manish-sustainable-ai-bamboo-gravel-bike-london-brighton", "body": "An independent lifecycle analysis (2024) found bamboo bicycle frames produce 56.7% less CO₂ than aluminium. | Bamboo reaches structural maturity in 3–5 years; trees take 20–50. It regrows from its root system with no replanting, needs no pesticides or irrigation, and sequesters carbon as it grows. | Most carbon-fibre sports equipment lasts just 3 years and 90% ends up in landfill. A bamboo frame? Still being ridden a decade later." } },
+        { "type": "quote", "settings": { "quote": "I knew nothing about bike maintenance. I thought that if I could be involved in the whole process of putting it together, I'd have a better idea of how to tackle any inevitable breakages. It reminded me how satisfying it is to build something from scratch.", "attribution": "Soraya", "context": "4-day London workshop, road bamboo bike build" } },
+        { "type": "build", "settings": { "kind": "Tandem", "title": "Swiss Family Tandem", "body": "Three-person bamboo tandem for the school run. Built at home in Switzerland from our kit.", "link": "/blogs/club-news/a-family-ride-like-no-other-the-swiss-bamboo-tandem" } },
+        { "type": "build", "settings": { "kind": "Cargo", "title": "Adam's Cargo Bike", "body": "Long-tail cargo built in a London flat. \"Surprisingly solid, takes quite a bit of load.\"", "link": "/blogs/club-news/custom-cargo-bike-by-adam" } },
+        { "type": "build", "settings": { "kind": "Aero Road", "title": "Adrian's Aero Build", "body": "Custom aero profile with foam inserts and internal cabling. Third BBC build.", "link": "/blogs/club-news/adrians-aero-bamboo-bike" } },
+        { "type": "build", "settings": { "kind": "Gravel", "title": "Tim's Gravel Explorer", "body": "First-time builder from the Netherlands. \"My hands are itching to build a second.\"", "link": "/blogs/club-news/gravel-bike-by-tim" } },
+        { "type": "build", "settings": { "kind": "10-Year Rider", "title": "Taro's Daily Commuter", "body": "Architect built for an Alzheimer's charity ride. Still his daily bamboo bike after a decade.", "link": "/blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike" } },
+        { "type": "build", "settings": { "kind": "Team Build", "title": "Four Seasons Corporate", "body": "12 senior managers, zero experience, one complete bamboo frame in three hours.", "link": "/blogs/news/building-with-bamboo-how-four-seasons-senior-team-crafted-a-bike-in-three-hours" } },
+        { "type": "faq", "settings": { "question": "Does a bamboo bicycle frame crack or split?", "answer": "Properly treated and sealed bamboo is very stable. Our tubes are heat-treated to remove moisture and sealed with epoxy resin. Store indoors and avoid prolonged exposure to extreme wet conditions." } },
+        { "type": "faq", "settings": { "question": "Can I ride a bamboo bike in the rain?", "answer": "Yes. Finished frames are fully sealed with epoxy resin. Dry your bike after wet rides and store it indoors — the same care you'd give any quality frame." } },
+        { "type": "faq", "settings": { "question": "How strong is bamboo, really?", "answer": "Per unit weight, yes. Bamboo's tensile strength sits in the same range as mild steel — but significantly lighter, giving a superior strength-to-weight ratio. Confirmed by our Swansea University testing." } },
+        { "type": "faq", "settings": { "question": "What about the joints?", "answer": "The joints are the strongest part. Carbon-fibre and epoxy lugs exceed the strength of the bamboo tubes themselves. Our method has been refined over 14 years and 4,000+ builds." } },
+        { "type": "faq", "settings": { "question": "How long will a bamboo frame last?", "answer": "8–12 years with proper care, with an under-1% failure rate across 4,000+ frames. Many of our 2012 builds are still ridden daily." } },
+        { "type": "faq", "settings": { "question": "Do I need experience to build one?", "answer": "No. 95% of our builders have zero mechanical experience. Workshop frames are completed in 2 days with full expert guidance; home kits include step-by-step instructions and video tutorials." } },
+        { "type": "faq", "settings": { "question": "What types of bamboo bicycle can I build?", "answer": "Any type — road, gravel, mountain, cargo, tandem, balance bike. The geometry is defined by your jig setup, so the design is up to you." } },
+        { "type": "faq", "settings": { "question": "Is bamboo a sustainable material for bicycles?", "answer": "Yes — one of the most sustainable structural materials there is. An independent 2024 lifecycle analysis found 56.7% lower CO₂ than aluminium. Bamboo matures in 3–5 years, sequesters carbon as it grows, and needs no pesticides or irrigation." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

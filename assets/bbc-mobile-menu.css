@@ -1,0 +1,23 @@
+/* INTENTIONALLY EMPTIED - 2026-08-17 (CSS consolidation)
+
+   Was: 6629 bytes, 69 rules, targeting ONLY legacy header markup:
+     .bbc-header__mobile-menu .bbc-header__mobile-menu-inner .bbc-header__mobile-menu-header
+     .bbc-header__mobile-menu-close .bbc-header__mobile-menu-title .bbc-header__mobile-nav
+     .bbc-header__mobile-link .bbc-header__mobile-chevron .bbc-header__mobile-section
+     .bbc-header__mobile-account .bbc-header__mobile-footer
+     .menu-drawer .menu-drawer__menu-item .menu-drawer__submenu
+
+   PROVEN DEAD, two independent ways:
+   1. Disabled the sheet and diffed 33 computed properties across every element on
+      home, why-bamboo and a product page: 0 elements changed.
+   2. Grepped rendered markup on 10 templates for bbc-header__ and menu-drawer:
+      0 occurrences anywhere. The 2026 redesign replaced this header entirely - the
+      mobile nav is now .rd-mobile / .rd-menu-btn / #rd-botmenu (see bbc-rd-nav.js),
+      and that drawer is already well built: 22 named links, smallest target 327x51,
+      Escape closes, focus returns to the trigger.
+
+   NOTE: this is NOT the cart drawer - that is Dawn's component-cart-drawer.css and is
+   still live. Do not confuse the two.
+
+   Emptied rather than deleted because the <link> comes from layout/theme.liquid
+   (too large to round-trip safely here). Remove the tag and the asset next time it is open. */

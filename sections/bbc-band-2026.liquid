@@ -1,0 +1,238 @@
+{%- comment -%} ============================================================
+  BBC BAND — the standard block (James, 2026-08-18: "create a standard
+  block, 5 variations, standard design elements, 100% editable").
+  One section, five variants, six presets. Emits CANON MARKUP ONLY —
+  every class below is owned by the estate's law CSS (consistency /
+  redesign / universal / statement). No component CSS lives here.
+    statement — eyebrow + display h2 + lede (+ CTAs). The universal opener.
+    split     — media | text feature band (team-days anatomy, rd-split).
+    cards     — door-card grid, 2/3/4-up (home doors anatomy, a.rd-door).
+    stats     — tick-marked stat row + Law-6 source line (acc-stats anatomy).
+    quote     — pull-quote + cite (rd-pull anatomy).
+  Surfaces follow the colour grammar: base / paper / steel / dark — mind
+  PAGE-STANDARD S3 (no same-surface neighbours) when placing bands.
+  Fabrication devices (§F): node-divider seam, spec micro-line — opt-in.
+============================================================ {%- endcomment -%}
+{%- liquid
+  assign v = section.settings.variant | default: 'statement'
+  assign surf = ''
+  if section.settings.surface == 'paper'
+    assign surf = ' rd-paper'
+  elsif section.settings.surface == 'steel'
+    assign surf = ' rd-steel'
+  elsif section.settings.surface == 'dark'
+    assign surf = ' rd-dark'
+  endif
+  assign centered = false
+  if section.settings.align == 'center'
+    assign centered = true
+  endif
+-%}
+
+{%- capture band_head -%}
+  {%- if section.settings.eyebrow != blank -%}
+    <span class="rd-eyebrow{% if section.settings.surface == 'dark' %} rd-on-dark{% endif %}">{{ section.settings.eyebrow }}</span>
+  {%- endif -%}
+  {%- if section.settings.heading != blank -%}
+    <h2 class="rd-reveal{% if centered and v != 'split' %} rd-mx-auto{% endif %}">{{ section.settings.heading }}</h2>
+  {%- endif -%}
+  {%- if section.settings.lede != blank -%}
+    <p class="rd-lede rd-mt2{% if centered and v != 'split' %} rd-mx-auto{% endif %}">{{ section.settings.lede }}</p>
+  {%- endif -%}
+  {%- if section.settings.specline != blank -%}
+    <p class="rd-specline">{{ section.settings.specline }}</p>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture band_ctas -%}
+  {%- if section.settings.cta1_label != blank or section.settings.cta2_label != blank -%}
+    <div class="rd-flex rd-mt3{% if centered %} rd-jc-center{% endif %}">
+      {%- if section.settings.cta1_label != blank -%}
+        {%- comment -%} Estate convention (bbc-hero-band): the PRIMARY/lime CTA carries a trailing
+          rd-arrow, the ghost secondary does not. The Band was the one section not doing it, so its
+          buttons read as foreign next to every other band on the page. Guarded so a label that
+          already ends in an arrow doesn't get a second one. {%- endcomment -%}
+        <a class="rd-btn {% if section.settings.cta1_style == 'ghost' %}rd-ghost{% else %}rd-lime{% endif %}" href="{{ section.settings.cta1_link | default: '/' }}">{{ section.settings.cta1_label | replace: " →", "" | replace: " &rarr;", "" }}{% unless section.settings.cta1_style == 'ghost' %} <span class="rd-arrow">&rarr;</span>{% endunless %}</a>
+      {%- endif -%}
+      {%- if section.settings.cta2_label != blank -%}
+        <a class="rd-btn {% if section.settings.cta2_style == 'lime' %}rd-lime{% else %}rd-ghost{% endif %}" href="{{ section.settings.cta2_link | default: '/' }}">{{ section.settings.cta2_label | replace: " →", " →" }}</a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture nodediv -%}
+  {%- if section.settings.show_nodediv -%}
+    <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  {%- endif -%}
+{%- endcapture -%}
+
+<div class="bbc-rd rd-band rd-band--{{ v }}">
+{%- if v == 'split' -%}
+  <section class="rd-split{% if section.settings.surface == 'dark' %} rd-dark{% endif %}{% if section.settings.media_side == 'right' %} rd-rev{% endif %}">
+    <div class="rd-reveal rd-media{% if section.settings.callout != blank %} rd-dimwrap{% endif %}">
+      {%- if section.settings.callout != blank -%}<span class="rd-dim-callout">{{ section.settings.callout }}</span>{%- endif -%}
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 1400 }}" srcset="{{ section.settings.image | image_url: width: 700 }} 700w, {{ section.settings.image | image_url: width: 1100 }} 1100w, {{ section.settings.image | image_url: width: 1400 }} 1400w" sizes="(max-width:900px) 100vw, 50vw" alt="{{ section.settings.image_alt | default: 'Bamboo Bicycle Club' | escape }}" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" loading="lazy">
+      {%- else -%}
+        <img src="{{ 'bbc-rd-bike-field.jpg' | asset_img_url: '1400x' }}" alt="{{ section.settings.image_alt | default: 'A hand-built bamboo bicycle in a field' | escape }}" width="1400" height="1050" loading="lazy">
+      {%- endif -%}
+    </div>
+    <div class="rd-txt">
+      {{ band_head }}
+      {{ band_ctas }}
+    </div>
+  </section>
+
+{%- elsif v == 'cards' -%}
+  <section class="rd-pad{{ surf }}{% if centered %} rd-center{% endif %}">
+    {{ nodediv }}
+    <div class="rd-wrap">
+      {{ band_head }}
+      <div class="rd-grid rd-g{{ section.settings.columns | default: 3 }} rd-stagger rd-mt3">
+        {%- for block in section.blocks -%}{%- if block.type == 'card' -%}
+          <a class="rd-door" href="{{ block.settings.link | default: '/' }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 1200 }}" srcset="{{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 800 }} 800w, {{ block.settings.image | image_url: width: 1200 }} 1200w" sizes="(max-width:749px) 92vw, 33vw" alt="{{ block.settings.image_alt | default: 'Bamboo Bicycle Club' | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
+            {%- else -%}
+              <img src="{{ block.settings.fallback | default: 'bbc-rd-bike-field.jpg' | asset_img_url: '900x' }}" alt="{{ block.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="1200" height="900" loading="lazy">
+            {%- endif -%}
+            <div class="rd-ov"></div>
+            <div class="rd-c">
+              {%- if block.settings.tag != blank -%}<span class="rd-tag rd-lime">{{ block.settings.tag }}</span>{%- endif -%}
+              <h3 class="rd-mt2">{{ block.settings.title }}</h3>
+              {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
+              {%- if block.settings.link_label != blank -%}<span class="rd-btn rd-lime">{{ block.settings.link_label | replace: " →", " →" }}</span>{%- endif -%}
+            </div>
+          </a>
+        {%- endif -%}{%- endfor -%}
+      </div>
+      {{ band_ctas }}
+    </div>
+  </section>
+
+{%- elsif v == 'stats' -%}
+  <section class="rd-pad{{ surf }}{% if centered %} rd-center{% endif %}">
+    {{ nodediv }}
+    <div class="rd-wrap">
+      {{ band_head }}
+      <ul class="acc-stats{% if centered %} rd-jc-center{% endif %}">
+        {%- for block in section.blocks -%}{%- if block.type == 'stat' -%}
+          <li {{ block.shopify_attributes }}><b>{{ block.settings.value }}</b><span>{{ block.settings.label }}</span></li>
+        {%- endif -%}{%- endfor -%}
+      </ul>
+      <p class="rd-stat-src">{{ section.settings.stat_source | default: 'BBC training & customer records' }}</p>
+      {{ band_ctas }}
+    </div>
+  </section>
+
+{%- elsif v == 'quote' -%}
+  <section class="rd-pad{{ surf }}">
+    {{ nodediv }}
+    <div class="rd-wrap rd-mw-980px">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="rd-eyebrow{% if section.settings.surface == 'dark' %} rd-on-dark{% endif %}">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <blockquote class="rd-pull rd-mt2 rd-reveal">
+        <p class="rd-q">&ldquo;{{ section.settings.quote_text | default: 'Going to the workshop was hands-down one of the best things I have ever done.' }}&rdquo;</p>
+        <cite>{{ section.settings.quote_cite | default: 'Stuart Heritage · The Guardian' }}</cite>
+      </blockquote>
+      {{ band_ctas }}
+    </div>
+  </section>
+
+{%- else -%}
+  <section class="rd-pad{{ surf }}{% if centered %} rd-center{% endif %}">
+    {{ nodediv }}
+    <div class="rd-wrap{% if centered %} rd-mw-760px{% endif %}">
+      {{ band_head }}
+      {{ band_ctas }}
+    </div>
+  </section>
+{%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "BBC Band (standard)",
+  "tag": "section",
+  "class": "bbc-band-section",
+  "settings": [
+    { "type": "header", "content": "Variant & surface" },
+    { "type": "select", "id": "variant", "label": "Variant", "default": "statement", "options": [
+      { "value": "statement", "label": "Statement (eyebrow + heading + lede)" },
+      { "value": "split", "label": "Split feature (media + text)" },
+      { "value": "cards", "label": "Card grid (door cards)" },
+      { "value": "stats", "label": "Stat proof row" },
+      { "value": "quote", "label": "Pull quote" }
+    ] },
+    { "type": "select", "id": "surface", "label": "Surface colour", "default": "base", "info": "Never place two same-surface bands next to each other (house colour grammar).", "options": [
+      { "value": "base", "label": "Bone (base)" },
+      { "value": "paper", "label": "Paper" },
+      { "value": "steel", "label": "Steel" },
+      { "value": "dark", "label": "Forest (dark)" }
+    ] },
+    { "type": "select", "id": "align", "label": "Alignment", "default": "left", "options": [
+      { "value": "left", "label": "Left axis" },
+      { "value": "center", "label": "Centered" }
+    ] },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "the standard band" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "one system. every page." },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "Built from the estate's standard design elements — same type, same pills, same motion." },
+    { "type": "text", "id": "specline", "label": "Spec micro-line (fabrication device, optional)" },
+    { "type": "checkbox", "id": "show_nodediv", "label": "Node-divider seam (fabrication device)", "default": false },
+    { "type": "header", "content": "Split variant" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text" },
+    { "type": "select", "id": "media_side", "label": "Media side", "default": "left", "options": [
+      { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }
+    ] },
+    { "type": "text", "id": "callout", "label": "Leader-line callout on image (optional)" },
+    { "type": "header", "content": "Cards variant" },
+    { "type": "select", "id": "columns", "label": "Columns", "default": "3", "options": [
+      { "value": "2", "label": "2" }, { "value": "3", "label": "3" }, { "value": "4", "label": "4" }
+    ] },
+    { "type": "header", "content": "Stats variant" },
+    { "type": "text", "id": "stat_source", "label": "Source line (required by house stats law)", "default": "BBC training & customer records" },
+    { "type": "header", "content": "Quote variant" },
+    { "type": "textarea", "id": "quote_text", "label": "Quote" },
+    { "type": "text", "id": "quote_cite", "label": "Attribution" },
+    { "type": "header", "content": "Calls to action" },
+    { "type": "text", "id": "cta1_label", "label": "Primary label" },
+    { "type": "url", "id": "cta1_link", "label": "Primary link" },
+    { "type": "select", "id": "cta1_style", "label": "Primary style", "default": "lime", "options": [
+      { "value": "lime", "label": "Solid (lime/forest by surface)" }, { "value": "ghost", "label": "Ghost" }
+    ] },
+    { "type": "text", "id": "cta2_label", "label": "Secondary label" },
+    { "type": "url", "id": "cta2_link", "label": "Secondary link" },
+    { "type": "select", "id": "cta2_style", "label": "Secondary style", "default": "ghost", "options": [
+      { "value": "lime", "label": "Solid" }, { "value": "ghost", "label": "Ghost" }
+    ] }
+  ],
+  "blocks": [
+    { "type": "card", "name": "Card", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "image_alt", "label": "Image alt text" },
+      { "type": "text", "id": "fallback", "label": "Fallback theme asset (when no image picked)" },
+      { "type": "text", "id": "tag", "label": "Chip label" },
+      { "type": "text", "id": "title", "label": "Title", "default": "card title" },
+      { "type": "textarea", "id": "text", "label": "Text" },
+      { "type": "url", "id": "link", "label": "Link" },
+      { "type": "text", "id": "link_label", "label": "Link label (e.g. 'see more →')" }
+    ] },
+    { "type": "stat", "name": "Stat", "settings": [
+      { "type": "text", "id": "value", "label": "Value (e.g. 4,000+)", "default": "4,000+" },
+      { "type": "text", "id": "label", "label": "Label", "default": "people trained" }
+    ] }
+  ],
+  "presets": [
+    { "name": "Band — Statement", "settings": { "variant": "statement" } },
+    { "name": "Band — Split feature", "settings": { "variant": "split", "surface": "dark", "eyebrow": "team days", "heading": "a feature, told properly.", "lede": "Media one side, story the other — the team-days anatomy." } },
+    { "name": "Band — Card grid", "settings": { "variant": "cards", "eyebrow": "three ways in", "heading": "pick a door." }, "blocks": [ { "type": "card" }, { "type": "card" }, { "type": "card" } ] },
+    { "name": "Band — Stat proof", "settings": { "variant": "stats", "eyebrow": "the record", "heading": "numbers that hold up." }, "blocks": [ { "type": "stat" }, { "type": "stat", "settings": { "value": "45", "label": "countries" } }, { "type": "stat", "settings": { "value": "3,500+", "label": "frames built at home" } } ] },
+    { "name": "Band — Pull quote", "settings": { "variant": "quote", "surface": "paper" } },
+    { "name": "Band — Dark closer", "settings": { "variant": "statement", "surface": "dark", "align": "center", "eyebrow": "start here", "heading": "ready when you are.", "lede": "Build a bike. Fund a future.", "cta1_label": "Build a bike", "cta1_link": "/collections/all", "cta2_label": "See our impact", "cta2_link": "/pages/impact" } }
+  ]
+}
+{% endschema %}

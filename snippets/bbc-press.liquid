@@ -1,0 +1,152 @@
+{%- comment -%}
+  bbc-press — THE standard press block (v2, 2026-07-22). Contract: qa/PRESS-BLOCK.md.
+  Quote-anchored logo bar + optional SCROLLING QUOTE REEL (one verified quote per
+  publication, each linking to the coverage). 4–7 recognisable full-colour logos,
+  uniform quiet row, every link carries ?ref=press-block (feedback-loop hook).
+
+  Usage:
+    {% render 'bbc-press',
+        style: 'bar',            ('bar' = quote + logos [default] · 'quiet' = logos only)
+        preset: 'national',      ('national' [default] · 'cycling')
+        reel: true,              (scrolling per-publication quote reel — replaces the static quote)
+        align: 'left',           (left-axis pages; default centred)
+        label: 'as seen in',     (eyebrow; blank hides)
+        quote: '…', cite: '…',   (static publication quote; used when reel is off)
+        more_label: '…', more_url: '…'  (optional "all coverage" link) %}
+
+  Canon lives HERE (single source of truth) — edit alongside qa/PRESS-BLOCK.md.
+  All quotes VERBATIM from the vault-verified articles (June 2026 sweep / Press Log).
+  ⚠️ Telegraph removed 2026-07-22 — vault marks that feature unverified. Fast Company in.
+  Light surfaces only. Real logos only, never styled text.
+{%- endcomment -%}
+
+{%- capture _reelq_c -%}{{ settings.bbc_pq1_text | default: "Taps into 'the IKEA effect' — that extra bit of affection people reserve for objects they put together themselves." }}~{{ settings.bbc_pq1_cite | default: "Financial Times" }}~{{ settings.bbc_pq1_url | default: "/blogs/news/financial-times-how-bamboo-bicycle-club-is-helping-to-break-the-prison-cycle" }};;{{ settings.bbc_pq2_text | default: "Going to the workshop was hands-down one of the best things I have ever done." }}~{{ settings.bbc_pq2_cite | default: "Stuart Heritage · The Guardian" }}~{{ settings.bbc_pq2_url | default: "https://www.theguardian.com/lifeandstyle/2015/jun/17/stuart-heritage-homemade-life-cycling-bamboo-bike" }};;{{ settings.bbc_pq3_text | default: "The material provides natural suspension." }}~{{ settings.bbc_pq3_cite | default: "CNN Money · quoting co-founder James Marr" }}~{{ settings.bbc_pq3_url | default: "/blogs/news/cnn-money-how-bamboo-bicycle-club-sells-build-your-own-bikes-to-the-world" }};;{{ settings.bbc_pq4_text | default: "Cycling record holder Kate Strong in bamboo bike ride challenge." }}~{{ settings.bbc_pq4_cite | default: "BBC News · 2023" }}~{{ settings.bbc_pq4_url | default: "/blogs/news/bbc-news-kate-strong-rides-3-000-miles-around-britain-on-a-bamboo-bike" }};;{{ settings.bbc_pq5_text | default: "Pandas eat it. Schoolchildren used to be caned with it. But now prisoners at Lowdham Grange have found a surprising new use for bamboo." }}~{{ settings.bbc_pq5_cite | default: "Inside Time" }}~{{ settings.bbc_pq5_url | default: "/blogs/news/inside-time-bamboozling-way-to-build-bikes-bamboo-bicycle-club-at-lowdham-grange" }};;{{ settings.bbc_pq6_text | default: "Si meets with Emily Chappell, the creator of this amazing bamboo bike, to hear why your next bike should be made from bamboo." }}~{{ settings.bbc_pq6_cite | default: "Global Cycling Network" }}~{{ settings.bbc_pq6_url | default: "/blogs/news/gcn-build-and-review-a-bamboo-gravel-bike" }};;{{ settings.bbc_pq7_text | default: "To get one of these bamboo beauties you go on a two-day course to make your own." }}~{{ settings.bbc_pq7_cite | default: "Gregor MacGregor · BikeRadar" }}~{{ settings.bbc_pq7_url | default: "/blogs/news/bikeradar-bamboo-bicycle-club-first-ride-video" }};;{{ settings.bbc_pq8_text | default: "The Bamboo Bicycle Club has impressively improved the accessibility of building a bamboo bicycle." }}~{{ settings.bbc_pq8_cite | default: "road.cc" }}~{{ settings.bbc_pq8_url | default: "/blogs/club-news/road-cc-bike-at-bedtime-bamboo-road-bike-made-with-the-easy-build-home-kit" }}{%- endcapture -%}
+{%- liquid
+  assign _style = style | default: 'bar'
+  assign _preset = preset | default: 'national'
+  if _preset == 'cycling'
+    assign _logos = 'logo-bikeradar.svg|BikeRadar|/blogs/news/bikeradar-bamboo-bicycle-club-first-ride-video,logo-roadcc.svg|road.cc|/blogs/club-news/road-cc-bike-at-bedtime-bamboo-road-bike-made-with-the-easy-build-home-kit,logo-cycling-weekly.svg|Cycling Weekly|/blogs/news,logo-huck.svg|Huck|/blogs/news,logo-metro.svg|Metro|/blogs/news,logo-bikebiz.png|BikeBiz|https://bikebiz.com/bamboo-bicycle-club-expands-into-france/'
+  else
+    assign _logos = 'logo-ft.svg|Financial Times|/blogs/news/financial-times-how-bamboo-bicycle-club-is-helping-to-break-the-prison-cycle,logo-guardian.svg|The Guardian|https://www.theguardian.com/lifeandstyle/2015/jun/17/stuart-heritage-homemade-life-cycling-bamboo-bike,logo-bbcnews.svg|BBC News|/blogs/news/bbc-news-kate-strong-rides-3-000-miles-around-britain-on-a-bamboo-bike,logo-independent.svg|The Independent|https://www.independent.co.uk/climate-change/news/build-your-own-bike-with-the-bamboo-bicycle-club-8542967.html,logo-evening-standard.png|Evening Standard|https://www.standard.co.uk/lifestyle/health/get-on-your-bamboo-bicycle-after-you-ve-made-it-yourself-9548575.html,logo-inside-time.svg|Inside Time|/blogs/news/inside-time-bamboozling-way-to-build-bikes-bamboo-bicycle-club-at-lowdham-grange'
+  endif
+  if _preset == 'recognition'
+    assign _logos = 'logo-design-museum.svg|Design Museum|/blogs/news,logo-national-justice-museum.svg|National Justice Museum|https://www.nationaljusticemuseum.org.uk/museum/events/working-through-it,logo-luxembourg-museum.png|Musée du Luxembourg (Paris)|/blogs/news,logo-investec.svg|Investec Beyond Business|/blogs/news'
+  endif
+  assign _items = _logos | split: ','
+
+  comment
+    Quote reel canon — verbatim, attributable, one per publication (source: PRESS-BLOCK quote bank).
+  endcomment
+  assign _reelq = _reelq_c | split: ';;'
+-%}
+
+<div class="bbc-press{% if align == 'left' %} bbc-press--left{% endif %}">
+  {%- if label != blank -%}<span class="rd-eyebrow">{{ label }}</span>{%- endif -%}
+
+  {%- if reel -%}
+  {%- comment -%} scrolling per-publication quote reel (marquee; pause button; reduced-motion → static wrap) {%- endcomment -%}
+  <div class="bbc-press__reel" data-bbc-reel>
+    <button class="bbc-press__pause" type="button" aria-pressed="false" aria-label="Pause the press quotes">&#10073;&#10073;</button>
+    <div class="bbc-press__track">
+      {%- comment -%}
+        Pass 2 is the marquee's duplicate set — it exists only so the strip scrolls seamlessly.
+        It carried aria-hidden="true" but its eight links stayed in the tab order, so keyboard
+        users tabbed into content screen readers had been told to ignore (axe aria-hidden-focus,
+        found 2026-08-05). `inert` removes it from focus AND the a11y tree; tabindex="-1" is the
+        fallback for anything without inert support.
+      {%- endcomment -%}
+      {%- for pass in (1..2) -%}
+      <div class="bbc-press__set"{% if pass == 2 %} aria-hidden="true" inert{% endif %}>
+        {%- for q in _reelq -%}
+          {%- assign f = q | split: '~' -%}
+          <figure class="bbc-press__q">
+            <blockquote>&ldquo;{{ f[0] | strip }}&rdquo;</blockquote>
+            <figcaption><a href="{{ f[2] | strip }}{% if f[2] contains '?' %}&{% else %}?{% endif %}ref=press-block"{% if f[2] contains '//' %} target="_blank" rel="noopener"{% endif %}{% if pass == 2 %} tabindex="-1"{% endif %}>{{ f[1] | strip }}</a></figcaption>
+          </figure>
+        {%- endfor -%}
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- elsif _style == 'bar' and quote != blank -%}
+  <blockquote class="rd-pull bbc-press__quote">
+    <p class="rd-q">{{ quote }}</p>
+    {%- if cite != blank -%}<cite>{{ cite }}</cite>{%- endif -%}
+  </blockquote>
+  {%- endif -%}
+
+  <ul class="bbc-press__row" role="list">
+    {%- for item in _items -%}
+      {%- assign p = item | split: '|' -%}
+      <li class="bbc-press__cell">
+        <a class="bbc-press__link" href="{{ p[2] }}?ref=press-block" aria-label="Bamboo Bicycle Club in {{ p[1] | strip }}"{% if p[2] contains '//' %} target="_blank" rel="noopener"{% endif %}>
+          <img class="bbc-press__logo" src="{{ p[0] | strip | asset_url }}" alt="{{ p[1] | strip }}" loading="lazy">
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+
+  {%- if more_label != blank -%}
+  <p class="bbc-press__more"><a href="{{ more_url | default: '/blogs/news' }}?ref=press-block">{{ more_label }}</a></p>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+.bbc-press__quote{margin-top:22px}
+.bbc-press__row{list-style:none;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:26px 42px;margin:28px 0 0;padding:0}
+.bbc-press__cell{display:flex}
+.bbc-press__link{display:flex;align-items:center;text-decoration:none;transition:transform .2s ease,opacity .2s ease;opacity:.92}
+.bbc-press__link:hover{transform:translateY(-2px);opacity:1}
+/* uniform quiet row — !important armours against the global img{height:auto!important} (bbc-mobile-fixes) */
+.bbc-press__logo{height:26px !important;width:auto !important;max-width:170px !important;object-fit:contain;display:block}
+@media (max-width:749px){
+  .bbc-press__row{gap:18px 26px}
+  .bbc-press__logo{height:22px !important;max-width:120px !important}
+}
+.bbc-press--left .bbc-press__row{justify-content:flex-start}
+.bbc-press--left{text-align:left}
+.bbc-press--left .rd-eyebrow{text-align:left} /* eyebrow + quote + link join the left axis (2026-08-18: mixed axes read untidy at position 2) */
+.bbc-press__more{margin-top:22px;font-size:15px}
+.bbc-press__more a{font-weight:700;text-decoration:underline;text-underline-offset:4px}
+.bbc-press__link:focus-visible{outline:3px solid #c6f24e;outline-offset:4px;border-radius:4px}
+/* ---- scrolling quote reel ---- */
+.bbc-press__reel{position:relative;overflow:hidden;margin-top:24px;padding-right:44px}
+.bbc-press__track{display:flex;width:max-content}
+.bbc-press__set{display:flex;gap:56px;padding-right:56px}
+.bbc-press__q{flex:0 0 auto;max-width:430px;margin:0;text-align:left}
+.bbc-press__q blockquote{margin:0;font-style:italic;font-weight:700;font-size:17px;line-height:1.45}
+.bbc-press__q figcaption{margin-top:8px;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.bbc-press__q figcaption a{text-decoration:underline;text-underline-offset:3px}
+.bbc-press__pause{position:absolute;right:0;top:0;z-index:2;width:34px;height:34px;border-radius:50%;border:2px solid currentColor;background:transparent;color:inherit;font-size:11px;line-height:1;cursor:pointer;opacity:.65}
+.bbc-press__pause:hover{opacity:1}
+.bbc-press__pause:focus-visible{outline:3px solid #c6f24e;outline-offset:2px}
+@media (prefers-reduced-motion: no-preference){
+  .bbc-press__track{animation:bbcpr-scroll 75s linear infinite}
+  .bbc-press__reel:hover .bbc-press__track,.bbc-press__reel:focus-within .bbc-press__track,.bbc-press__reel.is-paused .bbc-press__track{animation-play-state:paused}
+  @keyframes bbcpr-scroll{to{transform:translateX(-50%)}}
+}
+@media (prefers-reduced-motion: reduce){
+  .bbc-press__track{width:auto;flex-wrap:wrap}
+  .bbc-press__set{flex-wrap:wrap;gap:28px}
+  .bbc-press__set[aria-hidden]{display:none}
+  .bbc-press__pause{display:none}
+}
+@media (max-width:749px){
+  .bbc-press__q{max-width:300px}
+  .bbc-press__q blockquote{font-size:15px}
+  /* pause control gets its own headroom strip — over-text overlap caught on 390 sweep */
+  .bbc-press__reel{padding-right:0;padding-top:46px}
+}
+{% endstylesheet %}
+
+{% javascript %}
+document.addEventListener('click', function (e) {
+  var btn = e.target.closest('.bbc-press__pause');
+  if (!btn) return;
+  var reel = btn.closest('.bbc-press__reel');
+  var paused = reel.classList.toggle('is-paused');
+  btn.setAttribute('aria-pressed', paused ? 'true' : 'false');
+  btn.setAttribute('aria-label', paused ? 'Play the press quotes' : 'Pause the press quotes');
+  btn.textContent = paused ? '▶' : '❚❚'; /* static glyphs, not markup */
+});
+{% endjavascript %}

@@ -1,0 +1,344 @@
+{%- comment -%}
+  BBC New Design (2026) — WHICH KIT? picker page (/pages/which-kit).
+  Benchmark: Prusa comparison depth (2026-07-06 research). Quick-guide cards by
+  rider need → full comparison table → lugged-vs-wrapped explainer → CTA.
+  Build times and descriptions match the per-kit template data (ported 2026-07-06).
+{%- endcomment -%}
+
+<div class="bbc-rd bbc-rd-kitpicker">
+
+  {%- if section.settings.show_header != false -%}
+  <section class="rd-pad rd-paper">
+    <div class="rd-wrap rd-mw-820px">
+      <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/collections/home-build-kits">{{ section.settings.tx_crumb_kits2 | default: "Frame kits" }}</a><span class="rd-sep">/</span><span class="rd-here">{{ section.settings.tx_crumb_which | default: "Which kit?" }}</span></nav>
+      {%- if section.settings.eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h1 class="rd-mw-16ch">{{ section.settings.title }}</h1>
+      {%- if section.settings.lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.lede }}</p>{%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- QUICK GUIDE CARDS ---------- {%- endcomment -%}
+  {%- if section.settings.show_picks != false -%}
+  <section class="rd-pad-sm">
+    <div class="rd-wrap">
+      {%- if section.settings.picks_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.picks_eyebrow }}</span>{%- endif -%}
+      <div class="rd-grid rd-g3 rd-mt2">
+        {%- for block in section.blocks -%}{%- if block.type == 'pick' -%}
+          <a class="rd-reveal rd-card rd-stamp" href="{{ block.settings.url }}" {{ block.shopify_attributes }} style="text-decoration:none;">
+            <div class="rd-body">
+              <span class="rd-tag rd-lime">{{ block.settings.need }}</span>
+              <h3 class="rd-mt2 rd-fs-21px">{{ block.settings.kit }}</h3>
+              <p>{{ block.settings.body }}</p>
+              <p class="rd-mt2" style="font-weight:800;color:var(--forest);">{{ block.settings.meta }}</p>
+            </div>
+          </a>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- LUGGED VS WRAPPED ---------- {%- endcomment -%}
+  {%- if section.settings.lug_title != blank and section.settings.show_lug != false -%}
+  <section class="rd-pad rd-steel">
+    <div class="rd-wrap rd-mw-820px">
+      {%- if section.settings.lug_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.lug_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal">{{ section.settings.lug_title }}</h2>
+      <div class="rd-grid rd-g2 rd-mt4">
+        <div class="rd-reveal rd-card rd-stamp"><div class="rd-body">
+          <h3 class="rd-fs-21px">{{ section.settings.wrapped_title }}</h3>
+          <p>{{ section.settings.wrapped_body }}</p>
+        </div></div>
+        <div class="rd-reveal rd-card rd-stamp"><div class="rd-body">
+          <h3 class="rd-fs-21px">{{ section.settings.lugged_title }}</h3>
+          <p>{{ section.settings.lugged_body }}</p>
+        </div></div>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- CTA ---------- {%- endcomment -%}
+  {%- if section.settings.show_cta != false -%}
+  <section class="rd-pad rd-dark rd-center">
+    <div class="rd-wrap rd-mw-680px">
+      {%- if section.settings.cta_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.cta_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal">{{ section.settings.cta_title }}</h2>
+      {%- if section.settings.cta_lede != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.cta_lede }}</p>{%- endif -%}
+      <div class="rd-flex rd-mt3 rd-jc-center">
+        <a class="rd-btn rd-lime" href="{{ section.settings.cta1_url | default: '/collections/home-build-kits' }}">{{ section.settings.cta1_label }} <span class="rd-arrow">&rarr;</span></a>
+        <a class="rd-btn rd-on-dark" href="{{ section.settings.cta2_url | default: '/pages/contact-us' }}">{{ section.settings.cta2_label }}</a>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+</div>
+
+{% schema %}
+{
+  "name": "Which Kit 2026",
+  "settings": [
+    {
+      "type": "text",
+      "id": "picks_eyebrow",
+      "label": "Kit grid eyebrow",
+      "default": "Choose your build"
+    },
+    {
+      "type": "text",
+      "id": "cta_eyebrow",
+      "label": "Kit-picker CTA eyebrow",
+      "default": "Talk to us"
+    },
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_header",
+      "label": "Show this band",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Find your build"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Headline",
+      "default": "which kit is right for you?"
+    },
+    {
+      "type": "textarea",
+      "id": "lede",
+      "label": "Lede",
+      "default": "Every kit builds the same way — bamboo tubes, a jig, and joints you make by hand. The difference is what you'll ride when you're done, and how long the build takes. Start with how you want to ride."
+    },
+    {
+      "type": "header",
+      "content": "Kit grid"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_picks",
+      "label": "Show this band",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Lugged vs wrapped"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_lug",
+      "label": "Show this band",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "lug_eyebrow",
+      "label": "Eyebrow",
+      "default": "Two ways to join a frame"
+    },
+    {
+      "type": "text",
+      "id": "lug_title",
+      "label": "Heading (blank to hide)",
+      "default": "wrapped or lugged?"
+    },
+    {
+      "type": "text",
+      "id": "wrapped_title",
+      "label": "Wrapped title",
+      "default": "wrapped — the classic build"
+    },
+    {
+      "type": "textarea",
+      "id": "wrapped_body",
+      "label": "Wrapped body",
+      "default": "You wrap every joint by hand in flax and carbon fibre — the full framebuilding craft, refined over 14 years. More hours, more skills learned, a joint that's yours alone. Typically ~25–45 hours."
+    },
+    {
+      "type": "text",
+      "id": "lugged_title",
+      "label": "Lugged title",
+      "default": "lugged — the faster build"
+    },
+    {
+      "type": "textarea",
+      "id": "lugged_body",
+      "label": "Lugged body",
+      "default": "Pre-formed carbon-fibre lugs join the tubes, so you spend your time on fit and finish rather than wrapping. The same frame geometry, a quicker path to riding. Typically ~15–25 hours."
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show this band",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Heading",
+      "default": "still not sure?"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_lede",
+      "label": "Lede",
+      "default": "Browse every kit side by side, or tell us how you ride and we'll point you at the right one."
+    },
+    {
+      "type": "text",
+      "id": "cta1_label",
+      "label": "CTA 1 label",
+      "default": "See all frame kits"
+    },
+    {
+      "type": "url",
+      "id": "cta1_url",
+      "label": "CTA 1 link"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "CTA 2 label",
+      "default": "Ask us"
+    },
+    {
+      "type": "url",
+      "id": "cta2_url",
+      "label": "CTA 2 link"
+    },
+    {
+      "type": "text",
+      "id": "tx_crumb_kits2",
+      "label": "Frame kits",
+      "default": "Frame kits"
+    },
+    {
+      "type": "text",
+      "id": "tx_crumb_which",
+      "label": "Which kit?",
+      "default": "Which kit?"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pick",
+      "name": "Picker card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "need",
+          "label": "Rider need (tag)",
+          "default": "Gravel, touring, bikepacking"
+        },
+        {
+          "type": "text",
+          "id": "kit",
+          "label": "Kit name",
+          "default": "Gravel Frame Build Kit"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Adventure-ready geometry for gravel roads and light touring."
+        },
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Meta line",
+          "default": "~25–45 hrs · lugged option ~15–25 hrs"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Which Kit 2026",
+      "blocks": [
+        {
+          "type": "pick",
+          "settings": {
+            "need": "First bike for a small human",
+            "kit": "Balance Bike Kits",
+            "body": "A bamboo balance bike light enough for little legs — our simplest builds, and the same bike Makers build inside prisons for their children.",
+            "meta": "~8–15 hrs · a weekend"
+          }
+        },
+        {
+          "type": "pick",
+          "settings": {
+            "need": "Everyday riding & commuting",
+            "kit": "City Bike Frame Kit",
+            "body": "Upright, comfortable geometry with mounts for racks, mudguards and everything a daily bike carries.",
+            "meta": "~25–45 hrs · a few weekends"
+          }
+        },
+        {
+          "type": "pick",
+          "settings": {
+            "need": "Long days on tarmac",
+            "kit": "Road Frame Build Kit",
+            "body": "Endurance geometry for rough tarmac — a drop-bar frame tested at Swansea University to BS ISO 22157.",
+            "meta": "~25–45 hrs · lugged option ~15–25 hrs"
+          }
+        },
+        {
+          "type": "pick",
+          "settings": {
+            "need": "Gravel, touring, bikepacking",
+            "kit": "Gravel Frame Build Kit",
+            "body": "Adventure-ready geometry for gravel roads, light touring and bikepacking — our most popular kit.",
+            "meta": "~25–45 hrs · lugged option ~15–25 hrs"
+          }
+        },
+        {
+          "type": "pick",
+          "settings": {
+            "need": "Off-road trails",
+            "kit": "MTB Frame Build Kit (29er)",
+            "body": "Bigger bamboo tubes, tighter tolerances and disc-ready 29er geometry, built for off-road loads.",
+            "meta": "~30–45 hrs · a few weekends"
+          }
+        },
+        {
+          "type": "pick",
+          "settings": {
+            "need": "Snow, sand & expedition",
+            "kit": "Fatbike Home Build Kit",
+            "body": "Massive 4-inch-plus tyres at low pressure spread your weight and grip where nothing else will.",
+            "meta": "~30–45 hrs · a few weekends"
+          }
+        },
+        {
+          "type": "pick",
+          "settings": {
+            "need": "None of the above",
+            "kit": "Custom Frame Kit",
+            "body": "A bamboo frame designed around you — any geometry, any discipline: fast road, stable tourer, slack trail bike or something no catalogue sells.",
+            "meta": "~25–45 hrs · designed with you"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

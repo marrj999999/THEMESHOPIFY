@@ -1,0 +1,1089 @@
+/* =============================================================================
+   BBC UNIFIED STYLES — Consolidated CSS System
+   Created: 2026-02-20
+   
+   This file consolidates:
+   - bbc-collection.css
+   - bbc-collection-fixes.css
+   - bbc-collection-compact.css (archived)
+   - bbc-collection-enhanced.css (archived)
+   - bbc-collection-ultra-compact.css (archived)
+   
+   Design principles:
+   - No unless overriding third-party
+   - CSS custom properties for theme editor control
+   - Mobile-first responsive
+   - 8px spacing grid
+   - BBC brand consistency
+   ============================================================================= */
+
+/* =============================================================================
+   1. GLOBAL DESIGN TOKENS
+   ============================================================================= */
+
+:root {
+  /* Spacing scale (8px base) */
+  --bbc-space-1: 4px;
+  --bbc-space-2: 8px;
+  --bbc-space-3: 12px;
+  --bbc-space-4: 16px;
+  --bbc-space-5: 24px;
+  --bbc-space-6: 32px;
+  --bbc-space-7: 48px;
+  --bbc-space-8: 64px;
+  
+  /* Typography scale */
+  --bbc-text-xs: 12px;
+  --bbc-text-sm: 14px;
+  --bbc-text-base: 16px;
+  --bbc-text-lg: 18px;
+  --bbc-text-xl: 20px;
+  --bbc-text-2xl: 24px;
+  --bbc-text-3xl: 32px;
+  --bbc-text-4xl: 40px;
+  
+  /* Border radius */
+  --bbc-radius-sm: 4px;
+  --bbc-radius-md: 8px;
+  --bbc-radius-lg: 12px;
+  
+  /* Shadows */
+  --bbc-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --bbc-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --bbc-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  
+  /* Transitions */
+  --bbc-transition-fast: 0.15s ease;
+  --bbc-transition-normal: 0.25s ease;
+}
+
+/* =============================================================================
+   2. COLLECTION PAGE — Banner styles now in main-collection-banner.liquid
+   Fully customizable via theme editor (image, overlay, text, colors)
+   ============================================================================= */
+
+/* =============================================================================
+   3. COLLECTION PAGE — Filters & Sorting
+   ============================================================================= */
+
+/* Filter summary (accordion trigger) */
+.facets__summary {
+  font-size: var(--bbc-text-sm);
+  font-weight: 500;
+  padding: var(--bbc-space-3) var(--bbc-space-4);
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+}
+
+/* Filter labels */
+.facets__label,
+.facet-checkbox__text-label,
+.facet-checkbox__text {
+  font-size: var(--bbc-text-sm);
+}
+
+/* Filter dropdown content */
+.facets__display {
+  padding: var(--bbc-space-3) var(--bbc-space-4);
+}
+
+.facets__item {
+  padding: var(--bbc-space-2) 0;
+}
+
+/* Filter disclosure spacing */
+.facets__disclosure {
+  margin-bottom: var(--bbc-space-2);
+  border-radius: var(--bbc-radius-sm);
+}
+
+/* Sort dropdown */
+.facet-filters__sort,
+.select__select {
+  font-size: var(--bbc-text-sm);
+}
+
+/* Product count */
+.product-count__text {
+  font-size: var(--bbc-text-xs);
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+/* Toolbar alignment */
+.facets__form {
+  align-items: center;
+  gap: var(--bbc-space-4);
+}
+
+/* =============================================================================
+   4. COLLECTION PAGE — Product Grid
+   ============================================================================= */
+
+/* Grid gap - 12px allows 3-col layout on all screens */
+/* Removed: .product-grid gap override — Dawn uses CSS variables for gap, custom values break 2-col layout */
+
+/* Remove default margins */
+.grid__item {
+  margin-bottom: 0;
+}
+
+/* Ensure grid items don't collapse */
+.collection .grid__item {
+  min-width: 0;
+}
+
+/* =============================================================================
+   5. PRODUCT CARDS — Consistent styling
+   ============================================================================= */
+
+.collection .card-wrapper {
+  transition: box-shadow var(--bbc-transition-normal), 
+              transform var(--bbc-transition-normal);
+}
+
+.collection .card-wrapper:hover {
+  box-shadow: var(--bbc-shadow-md);
+  transform: translateY(-2px);
+}
+
+.collection .card,
+.collection .card--standard,
+.collection .card--card {
+  background: #fff;
+  border-radius: var(--bbc-radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(var(--color-foreground), 0.08);
+}
+
+.collection .card__inner {
+  border-radius: var(--bbc-radius-md);
+}
+
+/* Card media */
+.collection .card__media,
+.collection .card .media {
+  background: #f5f5f3;
+}
+
+.collection .card__media img,
+.collection .card .media img {
+  transition: transform 0.3s ease;
+}
+
+.collection .card-wrapper:hover .card__media img,
+.collection .card-wrapper:hover .media img {
+  transform: scale(1.03);
+}
+
+/* Card content */
+.collection .card__content {
+  padding: var(--bbc-space-4);
+}
+
+/* Card heading */
+.collection .card__heading {
+  font-size: var(--bbc-text-base);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: var(--bbc-space-2);
+}
+
+.collection .card__heading a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.collection .card__heading a:hover {
+  color: var(--bbc-forest, var(--bbc-forest));
+}
+
+/* Card price */
+.collection .price {
+  font-size: var(--bbc-text-sm);
+  font-weight: 600;
+}
+
+.collection .price--sale .price-item--regular {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.collection .price--sale .price-item--sale {
+  color: var(--drift-dc2626);
+}
+
+/* Card badges */
+.collection .badge {
+  font-size: var(--bbc-text-xs);
+  font-weight: 600;
+  padding: var(--bbc-space-1) var(--bbc-space-2);
+  border-radius: var(--bbc-radius-sm);
+}
+
+/* =============================================================================
+   6. PRODUCT PAGE — Layout consistency
+   ============================================================================= */
+
+/* Product grid layout */
+.product {
+  gap: var(--bbc-space-6);
+}
+
+@media (min-width: 990px) {
+  .product {
+    gap: var(--bbc-space-8);
+  }
+}
+
+/* Product info spacing */
+.product__info-container > * + * {
+  margin-top: var(--bbc-space-4);
+}
+
+/* Product title */
+.product__title h1 {
+  font-size: clamp(var(--bbc-text-xl), 4vw, var(--bbc-text-3xl));
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--bbc-space-2);
+}
+
+/* Product price */
+.product .price {
+  font-size: var(--bbc-text-xl);
+  font-weight: 700;
+}
+
+/* Variant picker */
+.product-form__input {
+  margin-top: var(--bbc-space-4);
+}
+
+.product-form__input label {
+  font-size: var(--bbc-text-sm);
+  font-weight: 600;
+  margin-bottom: var(--bbc-space-2);
+  display: block;
+}
+
+/* Variant buttons */
+.product-form__input input[type="radio"] + label {
+  font-size: var(--bbc-text-sm);
+  padding: var(--bbc-space-3) var(--bbc-space-4);
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: var(--bbc-radius-sm);
+  transition: all var(--bbc-transition-fast);
+}
+
+.product-form__input input[type="radio"]:checked + label {
+  border-color: var(--bbc-forest, var(--bbc-forest));
+  background: rgba(7, 62, 39, 0.05);
+}
+
+.product-form__input input[type="radio"]:hover + label {
+  border-color: var(--bbc-forest, var(--bbc-forest));
+}
+
+/* Quantity selector */
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: var(--bbc-space-2);
+}
+
+.quantity__button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: var(--bbc-radius-sm);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--bbc-transition-fast);
+}
+
+.quantity__button:hover {
+  border-color: var(--bbc-forest, var(--bbc-forest));
+  background: rgba(7, 62, 39, 0.05);
+}
+
+.quantity__input {
+  width: 60px;
+  height: 40px;
+  text-align: center;
+  font-size: var(--bbc-text-base);
+  font-weight: 600;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: var(--bbc-radius-sm);
+}
+
+/* Add to cart button */
+.product-form__submit {
+  width: 100%;
+  min-height: 52px;
+  font-size: var(--bbc-text-base);
+  font-weight: 700;
+  margin-top: var(--bbc-space-4);
+}
+
+/* Collapsible tabs */
+.product__accordion {
+  border-top: 1px solid rgba(var(--color-foreground), 0.1);
+  margin-top: var(--bbc-space-5);
+}
+
+.product__accordion summary {
+  font-size: var(--bbc-text-base);
+  font-weight: 600;
+  padding: var(--bbc-space-4) 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product__accordion details {
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+}
+
+.product__accordion details[open] summary {
+  padding-bottom: var(--bbc-space-3);
+}
+
+.product__accordion .accordion__content {
+  padding-bottom: var(--bbc-space-4);
+  font-size: var(--bbc-text-sm);
+  line-height: 1.6;
+}
+
+/* =============================================================================
+   7. HOMEPAGE SECTIONS — Consistent spacing
+   ============================================================================= */
+
+/* Section padding */
+.section-padding {
+  padding-top: var(--bbc-space-7);
+  padding-bottom: var(--bbc-space-7);
+}
+
+@media (min-width: 750px) {
+  .section-padding {
+    padding-top: var(--bbc-space-8);
+    padding-bottom: var(--bbc-space-8);
+  }
+}
+
+/* Section headings */
+.section-header {
+  text-align: center;
+  margin-bottom: var(--bbc-space-6);
+}
+
+.section-header__subtitle {
+  font-size: var(--bbc-text-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--bbc-gold, var(--bbc-gold));
+  margin-bottom: var(--bbc-space-2);
+}
+
+.section-header__title {
+  font-size: clamp(var(--bbc-text-2xl), 5vw, var(--bbc-text-4xl));
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.section-header__description {
+  font-size: var(--bbc-text-lg);
+  color: rgba(var(--color-foreground), 0.75);
+  margin-top: var(--bbc-space-4);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =============================================================================
+   8. BUTTONS — State consistency
+   ============================================================================= */
+
+/* Ensure Dawn buttons inherit our styles */
+.button,
+.shopify-payment-button__button {
+  transition: all var(--bbc-transition-fast);
+}
+
+/* Hover states */
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+/* Disabled states */
+.button:disabled,
+.button[disabled],
+.button[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Loading states */
+.button--loading {
+  position: relative;
+  color: transparent;
+}
+
+.button--loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* =============================================================================
+   9. FORMS — Consistent styling
+   ============================================================================= */
+
+/* Input fields */
+.field__input,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+textarea,
+select {
+  font-size: var(--bbc-text-base);
+  padding: var(--bbc-space-3) var(--bbc-space-4);
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: var(--bbc-radius-sm);
+  transition: border-color var(--bbc-transition-fast);
+}
+
+.field__input:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--bbc-forest, var(--bbc-forest));
+  outline: none;
+}
+
+/* Labels */
+.field__label,
+label {
+  font-size: var(--bbc-text-sm);
+  font-weight: 500;
+  margin-bottom: var(--bbc-space-2);
+  display: block;
+}
+
+/* Error states */
+.field--error .field__input,
+input[aria-invalid="true"] {
+  border-color: #dc2626;
+}
+
+.field__message--error {
+  color: var(--drift-dc2626);
+  font-size: var(--bbc-text-xs);
+  margin-top: var(--bbc-space-1);
+}
+
+/* =============================================================================
+   10. FOOTER — Consistent spacing
+   ============================================================================= */
+
+.footer {
+  padding-top: var(--bbc-space-7);
+  padding-bottom: var(--bbc-space-6);
+}
+
+.footer__content-top {
+  margin-bottom: var(--bbc-space-6);
+}
+
+.footer__content-bottom {
+  padding-top: var(--bbc-space-5);
+  border-top: 1px solid rgba(var(--color-foreground), 0.1);
+}
+
+/* Footer links */
+.footer-block__heading {
+  font-size: var(--bbc-text-base);
+  font-weight: 600;
+  margin-bottom: var(--bbc-space-4);
+}
+
+.footer-block__details-content a {
+  font-size: var(--bbc-text-sm);
+  display: block;
+  padding: var(--bbc-space-1) 0;
+  transition: color var(--bbc-transition-fast);
+}
+
+.footer-block__details-content a:hover {
+  color: var(--bbc-gold, var(--bbc-gold));
+}
+
+/* Newsletter form */
+.footer__newsletter .field__input {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: inherit;
+}
+
+.footer__newsletter .field__input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* =============================================================================
+   11. RESPONSIVE ADJUSTMENTS
+   ============================================================================= */
+
+/* Mobile spacing adjustments */
+@media (max-width: 749px) {
+  /* Tighter section padding on mobile */
+  .section-padding {
+    padding-top: var(--bbc-space-6);
+    padding-bottom: var(--bbc-space-6);
+  }
+  
+  /* Smaller headings on mobile */
+  .section-header__title {
+    font-size: var(--bbc-text-2xl);
+  }
+  
+  /* Full-width buttons on mobile */
+  .product-form__buttons {
+    flex-direction: column;
+  }
+  
+  .product-form__buttons > * {
+    width: 100%;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 750px) and (max-width: 989px) {
+  .product {
+    gap: var(--bbc-space-5);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+  .page-width {
+    max-width: 1200px;
+  }
+}
+
+/* =============================================================================
+   12. ANIMATION VISIBILITY FIX
+   Dawn's scroll-trigger can hide content — ensure visibility
+   ============================================================================= */
+
+/* Force visibility on scroll-triggered elements */
+.scroll-trigger.animate--slide-in,
+.scroll-trigger.animate--fade-in {
+  opacity: 1;
+}
+
+/* If JS hasn't run, ensure content is visible */
+.scroll-trigger--offscreen {
+  opacity: 1;
+}
+
+/* =============================================================================
+   13. CARD HEIGHT CONSISTENCY
+   Ensures product cards have equal heights in grid
+   ============================================================================= */
+
+/* Force equal card heights in grid */
+/* Removed: .product-grid .grid__item { display: flex; } — was interfering with Dawn's grid width calc */
+
+/* Removed: .product-grid .card-wrapper flex overrides — Dawn handles card layout */
+
+/* Simplified: let Dawn handle card flex layout */
+.product-grid .card {
+}
+
+.product-grid .card__inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-grid .card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-grid .card__information {
+  flex: 1;
+}
+
+/* Card image placeholder for missing images */
+.card__media:empty,
+.card .media:empty {
+  background: linear-gradient(135deg, #f5f5f3 0%, #e8e8e6 100%);
+  aspect-ratio: 1;
+}
+
+.card__media:empty::after,
+.card .media:empty::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ccc'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1' d='M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.4;
+}
+
+/* =============================================================================
+   14. HOMEPAGE HERO CONSISTENCY
+   ============================================================================= */
+
+/* Hero section with image background */
+.bbc-hero,
+.hero-section,
+[class*="hero"] {
+  position: relative;
+  overflow: hidden;
+}
+
+.bbc-hero__content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Hero text on dark backgrounds */
+.bbc-hero--dark,
+[class*="hero"][style*="background"] {
+  color: #fff;
+}
+
+.bbc-hero--dark h1,
+.bbc-hero--dark h2,
+.bbc-hero--dark .h1,
+.bbc-hero--dark .h2 {
+  color: #fff;
+}
+
+/* =============================================================================
+   15. TRUST BADGES / STATS BAR
+   ============================================================================= */
+
+.bbc-stats-bar,
+.trust-badges,
+[class*="stats-bar"] {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--bbc-space-6);
+  padding: var(--bbc-space-5) var(--bbc-space-4);
+}
+
+.bbc-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--bbc-space-2);
+}
+
+.bbc-stat-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--bbc-gold, var(--bbc-gold));
+}
+
+.bbc-stat-value {
+  font-size: var(--bbc-text-2xl);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.bbc-stat-label {
+  font-size: var(--bbc-text-xs);
+  color: rgba(var(--color-foreground), 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* =============================================================================
+   16. TESTIMONIALS / QUOTES
+   ============================================================================= */
+
+.bbc-testimonial,
+.testimonial-card,
+blockquote[class*="testimonial"] {
+  padding: var(--bbc-space-5);
+  background: #fff;
+  border-left: 4px solid var(--bbc-gold, var(--bbc-gold));
+  border-radius: 0 var(--bbc-radius-md) var(--bbc-radius-md) 0;
+}
+
+.bbc-testimonial__quote {
+  font-size: var(--bbc-text-lg);
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: var(--bbc-space-4);
+}
+
+.bbc-testimonial__author {
+  font-weight: 600;
+  color: var(--bbc-forest, var(--bbc-forest));
+}
+
+.bbc-testimonial__role {
+  font-size: var(--bbc-text-sm);
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+/* =============================================================================
+   17. PRICING CARDS
+   ============================================================================= */
+
+.bbc-pricing-card {
+  padding: var(--bbc-space-6);
+  background: #fff;
+  border: 1px solid rgba(var(--color-foreground), 0.1);
+  border-radius: var(--bbc-radius-md);
+  text-align: center;
+  transition: all var(--bbc-transition-normal);
+}
+
+.bbc-pricing-card:hover {
+  box-shadow: var(--bbc-shadow-lg);
+  transform: translateY(-4px);
+}
+
+.bbc-pricing-card--featured {
+  border-color: var(--bbc-gold, var(--bbc-gold));
+  border-width: 2px;
+  position: relative;
+}
+
+.bbc-pricing-card--featured::before {
+  content: 'Most Popular';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: var(--bbc-space-1) var(--bbc-space-3);
+  background: var(--bbc-gold, var(--bbc-gold));
+  color: var(--bbc-forest, var(--bbc-forest));
+  font-size: var(--bbc-text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: var(--bbc-radius-sm);
+}
+
+.bbc-pricing-card__price {
+  font-size: var(--bbc-text-4xl);
+  font-weight: 800;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin: var(--bbc-space-4) 0;
+}
+
+.bbc-pricing-card__price span {
+  font-size: var(--bbc-text-lg);
+  font-weight: 400;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+/* =============================================================================
+   18. FAQ / ACCORDION IMPROVEMENTS
+   ============================================================================= */
+
+.bbc-faq details {
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+}
+
+.bbc-faq details:first-child {
+  border-top: 1px solid rgba(var(--color-foreground), 0.1);
+}
+
+.bbc-faq summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--bbc-space-4) 0;
+  font-size: var(--bbc-text-base);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.bbc-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.bbc-faq summary::after {
+  content: '+';
+  font-size: var(--bbc-text-xl);
+  font-weight: 400;
+  color: var(--bbc-gold, var(--bbc-gold));
+  transition: transform var(--bbc-transition-fast);
+}
+
+.bbc-faq details[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.bbc-faq .accordion__content,
+.bbc-faq details > div {
+  padding-bottom: var(--bbc-space-4);
+  font-size: var(--bbc-text-sm);
+  line-height: 1.7;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+/* =============================================================================
+   19. IMAGE GALLERY (Product Page)
+   ============================================================================= */
+
+.product__media-gallery {
+  gap: var(--bbc-space-2);
+}
+
+.product__media-item {
+  border-radius: var(--bbc-radius-md);
+  overflow: hidden;
+  background: #f5f5f3;
+}
+
+.product__media-item img {
+  transition: transform 0.3s ease;
+}
+
+.product__media-item:hover img {
+  transform: scale(1.02);
+}
+
+/* Thumbnail strip */
+.thumbnail-slider {
+  gap: var(--bbc-space-2);
+}
+
+.thumbnail-slider button {
+  border: 2px solid transparent;
+  border-radius: var(--bbc-radius-sm);
+  overflow: hidden;
+  transition: border-color var(--bbc-transition-fast);
+}
+
+.thumbnail-slider button[aria-current="true"],
+.thumbnail-slider button:hover {
+  border-color: var(--bbc-forest, var(--bbc-forest));
+}
+
+/* =============================================================================
+   20. NEWSLETTER FORM
+   ============================================================================= */
+
+.bbc-newsletter {
+  display: flex;
+  gap: var(--bbc-space-2);
+  max-width: 500px;
+}
+
+.bbc-newsletter__input {
+  flex: 1;
+  padding: var(--bbc-space-3) var(--bbc-space-4);
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: var(--bbc-radius-sm);
+  font-size: var(--bbc-text-base);
+}
+
+.bbc-newsletter__input:focus {
+  border-color: var(--bbc-forest, var(--bbc-forest));
+  outline: none;
+}
+
+.bbc-newsletter__button {
+  padding: var(--bbc-space-3) var(--bbc-space-5);
+  background: var(--bbc-gold, var(--bbc-gold));
+  color: var(--bbc-forest, var(--bbc-forest));
+  font-weight: 700;
+  border: none;
+  border-radius: var(--bbc-radius-sm);
+  cursor: pointer;
+  transition: all var(--bbc-transition-fast);
+}
+
+.bbc-newsletter__button:hover {
+  background: #e69900;
+  transform: translateY(-1px);
+}
+
+/* =============================================================================
+   21. LINK STYLES
+   ============================================================================= */
+
+/* Default links (body text, content areas) */
+a:not(.button):not(.btn):not([class*="bbc-btn"]):not(.bbc-header__nav-link):not(.bbc-header__nav a) {
+  color: var(--bbc-forest, var(--bbc-forest));
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color var(--bbc-transition-fast);
+}
+
+a:not(.button):not(.btn):not([class*="bbc-btn"]):not(.bbc-header__nav-link):not(.bbc-header__nav a):hover {
+  color: var(--bbc-teal, var(--bbc-teal));
+}
+
+/* Navigation links — no underline (hover uses background, not underline) */
+.bbc-header__nav-link,
+.bbc-header__nav a {
+  text-decoration: none !important;
+}
+
+/* Card links - no underline */
+.card a,
+.product-card a,
+[class*="card"] a {
+  text-decoration: none;
+}
+
+/* =============================================================================
+   22. BADGE STYLES
+   ============================================================================= */
+
+.bbc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--bbc-space-1);
+  padding: var(--bbc-space-1) var(--bbc-space-2);
+  font-size: var(--bbc-text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-radius: var(--bbc-radius-sm);
+}
+
+.bbc-badge--gold {
+  background: var(--bbc-gold, var(--bbc-gold));
+  color: var(--bbc-forest, var(--bbc-forest));
+}
+
+.bbc-badge--forest {
+  background: var(--bbc-forest, var(--bbc-forest));
+  color: #fff;
+}
+
+.bbc-badge--outline {
+  background: transparent;
+  border: 1px solid currentColor;
+}
+
+/* =============================================================================
+   23. MOBILE MENU IMPROVEMENTS
+   ============================================================================= */
+
+@media (max-width: 989px) {
+  /* Ensure mobile menu has proper spacing */
+  .menu-drawer__menu-item {
+    padding: var(--bbc-space-3) var(--bbc-space-4);
+    font-size: var(--bbc-text-lg);
+    font-weight: 500;
+  }
+  
+  .menu-drawer__submenu .menu-drawer__menu-item {
+    font-size: var(--bbc-text-base);
+    padding-left: var(--bbc-space-6);
+  }
+}
+
+/* =============================================================================
+   24. LOADING STATES
+   ============================================================================= */
+
+.bbc-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: var(--bbc-radius-sm);
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* =============================================================================
+   25. UTILITY CLASSES
+   ============================================================================= */
+
+/* Text alignment */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+/* Spacing utilities */
+.mb-0 { margin-bottom: 0; }
+.mb-2 { margin-bottom: var(--bbc-space-2); }
+.mb-4 { margin-bottom: var(--bbc-space-4); }
+.mb-6 { margin-bottom: var(--bbc-space-6); }
+
+.mt-0 { margin-top: 0; }
+.mt-2 { margin-top: var(--bbc-space-2); }
+.mt-4 { margin-top: var(--bbc-space-4); }
+.mt-6 { margin-top: var(--bbc-space-6); }
+
+/* Display utilities */
+.hidden { display: none; }
+.block { display: block; }
+.flex { display: flex; }
+/* .grid { display: grid; } — REMOVED: conflicts with Dawn's .grid (flex-based) class */
+.bbc-grid { display: grid; }
+
+/* Flex utilities */
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: var(--bbc-space-2); }
+.gap-4 { gap: var(--bbc-space-4); }
+
+/* =============================================================================
+   26. PRINT STYLES
+   ============================================================================= */
+
+@media print {
+  .header,
+  .footer,
+  .product-form__submit,
+  .shopify-payment-button,
+  [data-shopify-buttoncontainer] {
+    display: none;
+  }
+  
+  .product__media-wrapper {
+    page-break-inside: avoid;
+  }
+  
+  .product__info-wrapper {
+    page-break-inside: avoid;
+  }
+}

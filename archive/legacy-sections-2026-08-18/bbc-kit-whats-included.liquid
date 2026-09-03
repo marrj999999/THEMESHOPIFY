@@ -1,0 +1,97 @@
+{{ 'bbc-kit-product.css' | asset_url | stylesheet_tag }}
+
+<section class="bbc-kit-box" aria-labelledby="kit-box-title-{{ section.id }}">
+  <div class="bbc-kit-box__inner">
+    <div class="bbc-kit-box__header">
+      {% if section.settings.eyebrow != blank %}
+        <p class="bbc-kit-box__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h2 id="kit-box-title-{{ section.id }}" class="bbc-kit-box__title">{{ section.settings.heading }}</h2>
+      {% if section.settings.subtitle != blank %}
+        <p class="bbc-kit-box__subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+
+    <div class="bbc-kit-box__grid">
+      {%- for block in section.blocks -%}
+        <div class="bbc-kit-box__item" {{ block.shopify_attributes }}>
+          {% if block.settings.image %}
+            <div class="bbc-kit-box__item-image">
+              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.title | escape }}
+            </div>
+          {% endif %}
+          <div class="bbc-kit-box__item-content">
+            <h3 class="bbc-kit-box__item-name">{{ block.settings.title }}</h3>
+            {% if block.settings.description != blank %}
+              <p class="bbc-kit-box__item-desc">{{ block.settings.description }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kit Contents",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Everything You Need"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What's In The Box"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Every kit includes everything to build a complete frame — no hidden extras"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Kit Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Item name",
+          "default": "Kit Item"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kit Contents",
+      "blocks": [
+        { "type": "item", "settings": { "title": "Bamboo Tube Set", "description": "5 heat-treated Moso bamboo tubes, pre-shaped and ready to build" } },
+        { "type": "item", "settings": { "title": "Carbon Fibre Tow & Epoxy", "description": "Pre-cut carbon fibre tow with two-part epoxy resin kit" } },
+        { "type": "item", "settings": { "title": "Alignment Jig", "description": "Plywood jig — ensures your frame is straight and true" } },
+        { "type": "item", "settings": { "title": "Metal Components", "description": "CNC machined headtube, BB shell (BSA 68mm), and dropouts" } },
+        { "type": "item", "settings": { "title": "Video Tutorials", "description": "15+ hours of step-by-step video guidance on YouTube" } },
+        { "type": "item", "settings": { "title": "Builder Community", "description": "Join 4,000+ builders for support, tips, and inspiration" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

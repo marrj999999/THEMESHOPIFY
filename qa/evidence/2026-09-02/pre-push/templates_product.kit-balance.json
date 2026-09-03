@@ -1,0 +1,303 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-product-2026",
+      "blocks": {
+        "perk_1": {
+          "type": "perk",
+          "settings": {
+            "text": "No power tools required — just basic hand tools"
+          }
+        },
+        "perk_2": {
+          "type": "perk",
+          "settings": {
+            "text": "Illustrated manual + 15+ hours of step-by-step video"
+          }
+        },
+        "perk_3": {
+          "type": "perk",
+          "settings": {
+            "text": "Lifetime community of 4,000+ builders for support"
+          }
+        },
+        "perk_4": {
+          "type": "perk",
+          "settings": {
+            "text": "Cycle to Work accepted — save through salary sacrifice"
+          }
+        }
+      },
+      "block_order": [
+        "perk_1",
+        "perk_2",
+        "perk_3",
+        "perk_4"
+      ],
+      "settings": {
+        "sticky_buy": true,
+        "content_bands": false,
+        "product_badge": "First-bike kit · a gift",
+        "product_subtitle": "A bamboo balance bike light enough for little legs, simple enough to build over a weekend, and personal enough to keep forever. It's the same bike a parent builds for their own child on our prison programme — so the one you make at home helps fund a place for a family to be reunited.",
+        "stock_line": "In stock — ships ~twice a week from our London workshop, fully tracked.",
+        "secondary_label": "Prefer a workshop?",
+        "reassure_line": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks",
+        "mission_line": "Build your own — and help fund a place on our Build to Bond prison programme.",
+        "buddy_text": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories.",
+        "difficulty_label": "Beginner-friendly · no experience needed",
+        "build_time_label": "~8–12 hrs · a weekend",
+        "show_sizing": false,
+        "sizing_eyebrow": "Find your fit",
+        "sizing_heading": "will it fit your child?",
+        "sizing_body": "Sized by inside-leg measurement — send us your child's height and inside leg and we'll confirm the fit before you order.",
+        "sizing_note": "Not sure? Send us your child's height and inside-leg measurement and we'll confirm the fit before you order.",
+        "loop_step1_sm": "a balance bike",
+        "bundle_a_text": "Everything to build the bamboo balance bike.",
+        "bundle_b_label": "Component pack",
+        "bundle_b_price": "Priced by build",
+        "bundle_b_text": "Bars, wheels, drivetrain and finishing kit, chosen for your build.",
+        "bundle_total_text": "A complete, one-of-a-kind balance bike — built by you.",
+        "press_quote": "Taps into 'the IKEA effect' — that extra bit of affection people reserve for objects they put together themselves.",
+        "press_cite": "Financial Times"
+      }
+    },
+    "kitship": {
+      "type": "bbc-kit-shipping",
+      "settings": {
+        "background": "forest",
+        "anchor": "shipping",
+        "eyebrow": "shipped worldwide from the London workshop",
+        "heading": "no customs bill at the door",
+        "col1": "Destination",
+        "col2": "Shipping",
+        "col3": "Duty & tax",
+        "panel_title": "Delivered duty paid",
+        "panel_body": "The price at checkout is the price the kit costs you. We pay the import duty and tax before it ships, so the courier has nothing to collect when it arrives.",
+        "worked": "",
+        "foot": "Packed by hand and shipped twice a week, tracked all the way. Kits have reached 45 countries."
+      }
+    },
+    "lower": {
+      "type": "bbc-product-2026",
+      "blocks": {
+        "spec_p1": {
+          "type": "spec",
+          "settings": {
+            "label": "Age range",
+            "value": "Designed for sized by inside leg"
+          }
+        },
+        "spec_p2": {
+          "type": "spec",
+          "settings": {
+            "label": "Weight",
+            "value": "Light for little legs"
+          }
+        },
+        "spec_p3": {
+          "type": "spec",
+          "settings": {
+            "label": "Build time",
+            "value": "8–12 hrs — a weekend"
+          }
+        },
+        "spec_p4": {
+          "type": "spec",
+          "settings": {
+            "label": "Finish",
+            "value": "Hand-sealed natural bamboo"
+          }
+        },
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "set the geometry",
+            "description": "Lock gravel geometry on the jig — wider clearance and a slacker head angle than road."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "join & wrap",
+            "description": "Bond the tubes with epoxy and wrap each joint with flax fibre."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "cure",
+            "description": "Leave it for a full cure — that's where maximum joint strength comes from."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "sand, seal & ride",
+            "description": "Sand smooth, seal the bamboo, fit headset and BB. Adventure awaits."
+          }
+        },
+        "review_p1": {
+          "type": "review",
+          "settings": {
+            "quote": "Built this with my daughter for her 3rd birthday. The look on her face when she realized we made it together was priceless.",
+            "cite": "Proud Parent · Balance bike builder, London"
+          }
+        },
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "3,500+",
+            "label": "frames built at home",
+            "source": "BBC records · since 2012"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "84.3 MPa",
+            "label": "bamboo tubing, tested",
+            "source": "Swansea University · BS ISO 22157:2019"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "2012",
+            "label": "building since — early builds still ridden",
+            "source": "BBC records"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "number": "~2×\/wk",
+            "label": "shipped from London",
+            "source": "full tracking"
+          }
+        },
+        "related_1": {
+          "type": "related",
+          "settings": {
+            "title": "road lugged kit",
+            "price": "",
+            "fallback": "bbc-rd-prod-flax.jpg"
+          }
+        },
+        "related_2": {
+          "type": "related",
+          "settings": {
+            "title": "MTB frame kit",
+            "price": "",
+            "fallback": "bbc-rd-prod-build.jpg"
+          }
+        },
+        "related_3": {
+          "type": "related",
+          "settings": {
+            "title": "balance bike kit",
+            "price": "From £165",
+            "fallback": "bbc-rd-prod-balance.jpg"
+          }
+        },
+        "related_4": {
+          "type": "related",
+          "settings": {
+            "title": "custom frame kit",
+            "price": "Request a quote",
+            "fallback": "bbc-rd-road-charlie.jpg"
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "What age and size is this for?",
+            "answer": "<p>Designed for children roughly aged 2–5, as a balance (pedal-free) first bike. The right fit depends on your child's inside-leg measurement more than age — send us their height and inside leg and we'll confirm it suits them.<\/p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it light enough for a sized by inside leg to handle?",
+            "answer": "<p>Bamboo is naturally light and the balance frame is small, so it's made to be manageable for little legs. We don't want to publish a weight we haven't measured — we'll share the exact finished weight on request.<\/p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Why no pedals?",
+            "answer": "<p>Balance bikes teach the hard part first — balancing and steering — without pedals or stabilisers. Children glide with their feet, then move straight to a pedal bike, usually skipping stabilisers altogether.<\/p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "How hard is the build, and how long does it take?",
+            "answer": "<p>It's our simplest kit — fewer parts than an adult frame and around 8–12 hours, comfortably a weekend. No power tools: just basic hand tools (hacksaw, files, sandpaper, tape) and a work surface. Most builders start with zero experience, and our community can help if you get stuck.<\/p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "How strong is the finished frame?",
+            "answer": "Bamboo frame tubing tested at Swansea University to BS ISO 22157:2019 — 84.3 MPa ultimate tensile, comparable to mild steel at a fraction of the weight. That figure is for the tubing we supply, not for a finished frame: how strong your bike ends up is decided by your joints. Follow the manual, let the resin cure fully, and check the joints before every early ride — and call us if anything looks wrong."
+          }
+        }
+      },
+      "block_order": [
+        "spec_p1",
+        "spec_p2",
+        "spec_p3",
+        "spec_p4",
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "review_p1",
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "related_1",
+        "related_2",
+        "related_3",
+        "related_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
+      "settings": {
+        "content_bands": true,
+        "show_buybox": false,
+        "product_badge": "First-bike kit · a gift",
+        "product_subtitle": "A bamboo balance bike light enough for little legs, simple enough to build over a weekend, and personal enough to keep forever. It's the same bike a parent builds for their own child on our prison programme — so the one you make at home helps fund a place for a family to be reunited.",
+        "stock_line": "In stock — ships ~twice a week from our London workshop, fully tracked.",
+        "secondary_label": "Prefer a workshop?",
+        "reassure_line": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks",
+        "mission_line": "Build your own — and help fund a place on our Build to Bond prison programme.",
+        "buddy_text": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories.",
+        "difficulty_label": "Beginner-friendly · no experience needed",
+        "build_time_label": "~8–12 hrs · a weekend",
+        "show_sizing": false,
+        "sizing_eyebrow": "Find your fit",
+        "sizing_heading": "will it fit your child?",
+        "sizing_body": "Sized by inside-leg measurement — send us your child's height and inside leg and we'll confirm the fit before you order.",
+        "sizing_note": "Not sure? Send us your child's height and inside-leg measurement and we'll confirm the fit before you order.",
+        "loop_step1_sm": "a balance bike",
+        "bundle_a_text": "Everything to build the bamboo balance bike.",
+        "bundle_b_label": "Component pack",
+        "bundle_b_price": "Priced by build",
+        "bundle_b_text": "Bars, wheels, drivetrain and finishing kit, chosen for your build.",
+        "bundle_total_text": "A complete, one-of-a-kind balance bike — built by you.",
+        "press_quote": "Taps into 'the IKEA effect' — that extra bit of affection people reserve for objects they put together themselves.",
+        "press_cite": "Financial Times"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "kitship",
+    "lower"
+  ]
+}

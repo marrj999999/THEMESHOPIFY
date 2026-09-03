@@ -1,0 +1,261 @@
+{% comment %}
+  BBC How It Works Section
+  Research: 7/12 social enterprises show process steps (Timpson, Clink, Shannon Trust)
+  Pattern: Learn → Build → Connect → Thrive (simplified 4-step journey)
+  Updated: 2026-02-15 from social enterprise research
+{% endcomment %}
+
+{%- style -%}
+.bbc-how-it-works {
+  padding: 80px 0;
+  background: {{ section.settings.background_color }};
+}
+
+.bbc-how-it-works__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.bbc-how-it-works__header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 64px;
+}
+
+.bbc-how-it-works__eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bbc-teal, var(--bbc-teal));
+  margin-bottom: 16px;
+}
+
+.bbc-how-it-works__heading {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin-bottom: 16px;
+}
+
+.bbc-how-it-works__intro {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #4a5568;
+}
+
+.bbc-how-it-works__steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 48px;
+  position: relative;
+}
+
+/* Connecting line (desktop only) */
+@media (min-width: 990px) {
+  .bbc-how-it-works__steps::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 80px;
+    right: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--bbc-teal, var(--bbc-teal)) 0%, var(--bbc-gold, var(--bbc-gold)) 100%);
+    z-index: 0;
+  }
+}
+
+.bbc-how-it-works__step {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.bbc-how-it-works__step-number {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--bbc-forest, var(--bbc-forest));
+  color: white;
+  font-size: 32px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  position: relative;
+}
+
+.bbc-how-it-works__step-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin-bottom: 12px;
+}
+
+.bbc-how-it-works__step-description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4a5568;
+}
+
+.bbc-how-it-works__step-duration {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bbc-teal, var(--bbc-teal));
+  margin-top: 12px;
+}
+
+@media (max-width: 749px) {
+  .bbc-how-it-works {
+    padding: 48px 0;
+  }
+  
+  .bbc-how-it-works__heading {
+    font-size: 28px;
+  }
+  
+  .bbc-how-it-works__header {
+    margin-bottom: 40px;
+  }
+  
+  .bbc-how-it-works__steps {
+    gap: 32px;
+  }
+  
+  .bbc-how-it-works__step-number {
+    width: 64px;
+    height: 64px;
+    font-size: 24px;
+  }
+}
+{%- endstyle -%}
+
+<section class="bbc-how-it-works">
+  <div class="bbc-how-it-works__container">
+    <div class="bbc-how-it-works__header">
+      {% if section.settings.eyebrow != blank %}
+        <p class="bbc-how-it-works__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      
+      <h2 class="bbc-how-it-works__heading">{{ section.settings.heading }}</h2>
+      
+      {% if section.settings.intro != blank %}
+        <p class="bbc-how-it-works__intro">{{ section.settings.intro }}</p>
+      {% endif %}
+    </div>
+    
+    <div class="bbc-how-it-works__steps">
+      {% for block in section.blocks %}
+        <div class="bbc-how-it-works__step" {{ block.shopify_attributes }}>
+          <div class="bbc-how-it-works__step-number">{{ forloop.index }}</div>
+          <h3 class="bbc-how-it-works__step-title">{{ block.settings.title }}</h3>
+          <p class="bbc-how-it-works__step-description">{{ block.settings.description }}</p>
+          {% if block.settings.duration != blank %}
+            <p class="bbc-how-it-works__step-duration">{{ block.settings.duration }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC How It Works",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "The Programme"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How Build to Bond Works"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Introduction text",
+      "default": "A structured 6-week programme that creates lasting connections between parents in prison and their children."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Training"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "We train prison staff and instructors to deliver the programme independently."
+        },
+        {
+          "type": "text",
+          "id": "duration",
+          "label": "Duration (optional)",
+          "default": "2 days"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC How It Works",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Learn",
+            "description": "Gain OCN Level 2 accreditation in Sustainable Manufacturing — a real qualification that counts.",
+            "duration": "6-week programme"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Build",
+            "description": "Create a bamboo balance bike with your hands. Every joint, every layer — skills that transfer beyond prison.",
+            "duration": "Hands-on training"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Connect",
+            "description": "Present the bike to your child during a family visit. A tangible gift that represents presence.",
+            "duration": "Family handover"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Thrive",
+            "description": "Skills, confidence, and employer interviews await. The journey continues after release.",
+            "duration": "Employment pathway"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

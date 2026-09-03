@@ -1,0 +1,51 @@
+{%- comment -%}
+  BBC theme block — Button. Reuses .rd-btn variants from bbc-redesign-2026.css:
+  primary = .rd-btn.rd-lime · ghost = .rd-btn.rd-ghost · on-dark = .rd-btn.rd-on-dark · text = .rd-btn.rd-text
+{%- endcomment -%}
+{%- liquid
+  assign variant = block.settings.style | default: 'primary'
+  case variant
+    when 'primary'
+      assign cls = 'rd-btn rd-lime'
+    when 'ghost'
+      assign cls = 'rd-btn rd-ghost'
+    when 'on-dark'
+      assign cls = 'rd-btn rd-on-dark'
+    when 'text'
+      assign cls = 'rd-btn rd-text'
+    else
+      assign cls = 'rd-btn rd-lime'
+  endcase
+  assign url = block.settings.url | default: '#'
+-%}
+<div class="bbc-rd-button-wrap" {{ block.shopify_attributes }}>
+  <a class="{{ cls }}" href="{{ url }}"{% if block.settings.open_new_tab %} target="_blank" rel="noopener"{% endif %}>
+    {{- block.settings.label -}}
+    {%- if block.settings.show_arrow %} <span class="rd-arrow">&rarr;</span>{%- endif -%}
+  </a>
+</div>
+
+{% schema %}
+{
+  "name": "BBC Button",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Book a build" },
+    { "type": "url", "id": "url", "label": "Link" },
+    {
+      "type": "select", "id": "style", "label": "Style", "default": "primary",
+      "options": [
+        { "value": "primary", "label": "Primary (lime, hard shadow)" },
+        { "value": "ghost", "label": "Ghost (outline, fills on hover)" },
+        { "value": "on-dark", "label": "On dark (bone fill)" },
+        { "value": "text", "label": "Text only" }
+      ]
+    },
+    { "type": "checkbox", "id": "show_arrow", "label": "Show trailing arrow (tertiary links only — Law 2)", "default": false },
+    { "type": "checkbox", "id": "open_new_tab", "label": "Open in a new tab", "default": false }
+  ],
+  "presets": [
+    { "name": "BBC Button" }
+  ]
+}
+{% endschema %}

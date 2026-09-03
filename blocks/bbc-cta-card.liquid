@@ -1,0 +1,59 @@
+{%- comment -%}
+  BBC theme block — CTA card. UNIFIES the monolith `door` block (and replaces door/help/pathway
+  across the site): tag + title + body + image + link. Reuses .rd-door / .rd-ov / .rd-c / .rd-tag /
+  .rd-btn from bbc-redesign-2026.css. The whole card is a link, matching the monolith.
+  Image fallback = bundled asset via asset_img_url (the brittle filename->CDN switch is removed).
+  Sits inside a grid container (.bbc-rd .rd-grid).
+{%- endcomment -%}
+{%- liquid
+  assign url = block.settings.link_url | default: '/'
+  assign fallback = block.settings.fallback | default: 'bbc-rd-bike-field.jpg'
+  if block.settings.accent
+    assign tag_cls = 'rd-tag rd-lime'
+    assign btn_cls = 'rd-btn rd-lime'
+  else
+    assign tag_cls = 'rd-tag'
+    assign btn_cls = 'rd-btn'
+  endif
+-%}
+<a class="rd-door" href="{{ url }}" {{ block.shopify_attributes }}>
+  {%- if block.settings.image != blank -%}
+    {{ block.settings.image
+      | image_url: width: 1200
+      | image_tag:
+        widths: '500,800,1200,1600',
+        sizes: '(max-width:749px) 92vw, 33vw',
+        alt: block.settings.image_alt,
+        loading: 'lazy' }}
+  {%- else -%}
+    <img src="{{ fallback | asset_img_url: '900x' }}" srcset="{{ fallback | asset_img_url: '400x' }} 400w, {{ fallback | asset_img_url: '600x' }} 600w, {{ fallback | asset_img_url: '900x' }} 900w, {{ fallback | asset_img_url: '1400x' }} 1400w" sizes="(max-width:749px) 92vw, 33vw" alt="{{ block.settings.image_alt | default: 'A hand-built bamboo bicycle' | escape }}" width="1200" height="900" loading="lazy">
+  {%- endif -%}
+  <div class="rd-ov"></div>
+  <div class="rd-c">
+    {%- if block.settings.tag != blank -%}<span class="{{ tag_cls }}">{{ block.settings.tag }}</span>{%- endif -%}
+    {%- if block.settings.title != blank -%}<h3 class="rd-mt2">{{ block.settings.title }}</h3>{%- endif -%}
+    {%- if block.settings.body != blank -%}<p>{{ block.settings.body }}</p>{%- endif -%}
+    {%- if block.settings.link_label != blank -%}<span class="{{ btn_cls }}">{{ block.settings.link_label }}</span>{%- endif -%}
+  </div>
+</a>
+
+{% schema %}
+{
+  "name": "BBC CTA card",
+  "tag": null,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "fallback", "label": "Fallback asset (if no image picked)", "default": "bbc-rd-bike-field.jpg" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "A finished bamboo bicycle" },
+    { "type": "text", "id": "tag", "label": "Tag", "default": "Make" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Build your own" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Workshops in London, Amersfoort & Toulouse — or a kit shipped to your door. No experience needed." },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Workshops & kits →" },
+    { "type": "url", "id": "link_url", "label": "Link" },
+    { "type": "checkbox", "id": "accent", "label": "Lime accent", "default": true }
+  ],
+  "presets": [
+    { "name": "BBC CTA card" }
+  ]
+}
+{% endschema %}

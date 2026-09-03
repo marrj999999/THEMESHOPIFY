@@ -1,0 +1,1105 @@
+{%- comment -%}
+  BBC New Design (2026) — dedicated BUILD TO BOND programme page.
+  Single self-contained section, fully schema-driven, scoped under .bbc-rd via
+  bbc-redesign-2026.css. Structure: hero → 4-stat band (dark) → what happens in
+  the workshop → why it works (MoJ family-ties framing) → how it works (steps)
+  → Maker + staff quotes → where it runs (named sites) → case-study card →
+  final CTA. Audience: mixed (funders, prison staff, press, public); the
+  commissioner sales page is /pages/prisons.
+
+  CONTENT POLICY (hard rules):
+  - Prisons MAY be named. NEVER link a named/identifiable participant to a
+    named prison (GDPR/safeguarding). Maker quotes stay anonymised.
+  - "Makers", never "prisoners"/"offenders"/"beneficiaries".
+  - Source-of-truth figures only: 90% completion (no attribution beyond BBC
+    programme records) · OCN Level 2 — Workshop Skills and Sustainable Manufacturing.
+  - The 39% lower-reoffending figure is MoJ RESEARCH on family ties — always
+    framed as the evidence the programme is built on, never a BBC outcome.
+  - No SROI figure. No "guaranteed interview" or unevidenced employer claims.
+{%- endcomment -%}
+
+{%- liquid
+  assign hero_cta1 = section.settings.hero_cta1_url | default: '/pages/prisons'
+  assign hero_cta2 = section.settings.hero_cta2_url | default: '/pages/impact'
+  assign final_c1 = section.settings.cta1_url | default: '/pages/prisons'
+  assign final_c2 = section.settings.cta2_url | default: '/pages/impact'
+-%}
+
+<div class="bbc-rd bbc-rd-b2b-page">
+
+  {%- comment -%} ---------- HERO ---------- {%- endcomment -%}
+  {%- if section.settings.show_hero != false -%}
+  <header class="rd-hero rd-mh-74 evh">
+    <div class="rd-bg">
+      {%- if section.settings.hero_image != blank -%}
+        <img src="{{ section.settings.hero_image | image_url: width: 1600 }}" srcset="{{ section.settings.hero_image | image_url: width: 800 }} 800w, {{ section.settings.hero_image | image_url: width: 1200 }} 1200w, {{ section.settings.hero_image | image_url: width: 1600 }} 1600w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w" sizes="100vw" alt="{{ section.settings.hero_image_alt | default: 'Inside the Build to Bond workshop' | escape }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" fetchpriority="high" loading="eager">
+      {%- else -%}
+        <img src="{{ section.settings.hero_fallback | default: 'bbc-rd-prison-jig.jpg' | asset_url }}" alt="{{ section.settings.hero_image_alt | default: 'Inside the Build to Bond workshop' | escape }}" width="1500" height="999" fetchpriority="high" loading="eager">
+      {%- endif -%}
+      {%- comment -%} film hero (2026-08-27, estate .evh pattern) — default film bbc-rd-jig-reel.mp4
+         (workshop jig footage, no faces — safeguarding: never people footage here without a
+         blur-audited clearance). Poster = prison-jig still. {%- endcomment -%}
+      {%- assign _evfilm = section.settings.evh_film_url -%}
+      {%- if _evfilm == blank -%}{%- assign _evfilm = 'bbc-rd-jig-reel.mp4' | asset_url -%}{%- endif -%}
+      {%- if section.settings.evh_film_on -%}
+      <video class="evh-film" muted playsinline loop preload="metadata" poster="{{ section.settings.hero_fallback | default: 'bbc-rd-prison-jig.jpg' | asset_url }}" aria-hidden="true" tabindex="-1">
+        <source src="{{ _evfilm }}" type="video/mp4">
+      </video>
+      {%- endif -%}
+    </div>
+    <div class="rd-scrim"></div>
+    <div class="rd-inner">
+      <div class="rd-wrap">
+        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="/pages/impact">Impact</a><span class="rd-sep">/</span><span class="rd-here">{{ section.settings.tx_crumb_b2b | default: "Build to Bond" }}</span></nav>
+        {%- if section.settings.hero_eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>{%- endif -%}
+        <h1 class="rd-mt2 rd-mw-15ch">{{ section.settings.hero_title }}</h1>
+        <div class="rd-lede">{{ section.settings.hero_lede }}</div>
+        <div class="rd-cta-row">
+          {%- if section.settings.hero_cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ hero_cta1 }}">{{ section.settings.hero_cta1_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+          {%- if section.settings.hero_cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ hero_cta2 }}">{{ section.settings.hero_cta2_label }}</a>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </header>
+  <style>
+    .evh .evh-film{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; opacity:0; transition:opacity .8s ease; }
+    .evh .evh-film.evh-on{ opacity:1; }
+    .evh .rd-bg img{ z-index:0; }
+    .bbc-rd .spr-card{ overflow:hidden; display:flex; flex-direction:column; }
+    .bbc-rd .spr-media{ aspect-ratio:16/10; overflow:hidden; background:var(--forest-700,#002A23); }
+    .bbc-rd .spr-media img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
+    .bbc-rd .spr-card:hover .spr-media img{ transform:scale(1.04); }
+    @media (prefers-reduced-motion: reduce){ .evh .evh-film{ display:none; } }
+    .b2b-ic{ width:38px; height:38px; color:var(--forest,#003C32); display:block; margin:0 0 10px; }
+    .b2b-ic .b2b-ic-a{ color:#7aa000; }
+  </style>
+  <script>
+    (function () {
+      var v = document.querySelector('.evh .evh-film');
+      if (!v) return;
+      if (navigator.connection && navigator.connection.saveData) { v.remove(); return; }
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.remove(); return; }
+      v.muted = true; v.setAttribute('muted', '');
+      var started = false;
+      function go() { if (started) return; started = true; var p = v.play(); if (p && p.catch) p.catch(function () { started = false; }); }
+      v.addEventListener('playing', function () { v.classList.add('evh-on'); });
+      v.addEventListener('canplay', go);
+      v.load();
+      if (v.readyState >= 3) go();
+      document.addEventListener('visibilitychange', function () { if (document.hidden) { v.pause(); } else if (started) { v.play().catch(function(){}); } });
+    })();
+  </script>
+  {%- endif -%}
+
+  {%- comment -%} ---------- TWO PATHS (fork — education-page pattern, 2026-08-27) {%- endcomment -%}
+  {%- if section.settings.show_fork != false -%}
+  <section class="rd-pad rd-paper">
+    <div class="rd-wrap">
+      <div class="rd-grid rd-g2">
+        <a class="rd-card rd-stamp rd-cardlink" href="{{ section.settings.f1_url | default: '/pages/prisons' }}">
+          <div class="rd-body">
+            <svg class="b2b-ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="6" y="4" width="20" height="24" rx="3" stroke="currentColor" stroke-width="2"/><path d="M11 12h10M11 17h10M11 22h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="24" r="3" fill="currentColor" class="b2b-ic-a"/></svg>
+            <span class="rd-tag rd-lime">{{ section.settings.f1_tag | default: 'for prisons & commissioners' }}</span>
+            <h3 class="rd-mt2 rd-fs-21px">{{ section.settings.f1_title | default: 'run it in your prison' }}</h3>
+            <p>{{ section.settings.f1_body | default: 'Self-delivery that fits a prison education budget: we set up the workshop, train your staff and peer instructors, and support every cohort.' }}</p>
+            <span class="rd-arrow-link">{{ section.settings.f1_link | default: "costs & routes in" }} <span class="rd-arrow">&rarr;</span></span>
+          </div>
+        </a>
+        <a class="rd-card rd-stamp rd-cardlink" href="{{ section.settings.f2_url | default: '/pages/support-mission' }}">
+          <div class="rd-body">
+            <svg class="b2b-ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 27C9 22 4 17.5 4 12.2 4 8.7 6.7 6 10.1 6c2.3 0 4.4 1.2 5.9 3.2C17.5 7.2 19.6 6 21.9 6 25.3 6 28 8.7 28 12.2c0 5.3-5 9.8-12 14.8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="22.5" cy="11" r="1.6" fill="currentColor" class="b2b-ic-a"/></svg>
+            <span class="rd-tag rd-lime">{{ section.settings.f2_tag | default: 'for funders & supporters' }}</span>
+            <h3 class="rd-mt2 rd-fs-21px">{{ section.settings.f2_title | default: 'back the mission' }}</h3>
+            <p>{{ section.settings.f2_body | default: 'The programme grows site by site with backing from funders and partners. See what support builds — and where it goes next.' }}</p>
+            <span class="rd-arrow-link">{{ section.settings.f2_link | default: "support the work" }} <span class="rd-arrow">&rarr;</span></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- WHAT HAPPENS IN THE WORKSHOP ---------- {%- endcomment -%}
+  {%- if section.settings.show_story != false -%}
+  <section class="rd-pad">
+    <div class="rd-wrap rd-mw-820px">
+      {%- if section.settings.story_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.story_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal">{{ section.settings.story_title }}</h2>
+      {%- if section.settings.story_body_1 != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.story_body_1 }}</p>{%- endif -%}
+      {%- if section.settings.story_body_2 != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.story_body_2 }}</p>{%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- WHY IT WORKS (split, dark) — MoJ family-ties framing ---------- {%- endcomment -%}
+  {%- if section.settings.show_why != false -%}
+  <section class="rd-split rd-dark">
+    <div class="rd-reveal rd-media">
+      {%- if section.settings.why_image != blank -%}
+        <img src="{{ section.settings.why_image | image_url: width: 1400 }}" alt="{{ section.settings.why_image_alt | default: 'A finished bamboo balance bike' | escape }}" width="{{ section.settings.why_image.width }}" height="{{ section.settings.why_image.height }}">
+      {%- else -%}
+        <img src="{{ section.settings.why_fallback | default: 'bbc-rd-b2b.jpg' | asset_url }}" alt="{{ section.settings.why_image_alt | default: 'A finished bamboo balance bike' | escape }}" width="1400" height="933">
+      {%- endif -%}
+    </div>
+    <div class="rd-txt">
+      {%- if section.settings.why_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.why_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal">{{ section.settings.why_title }}</h2>
+      {%- if section.settings.why_body_1 != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.why_body_1 }}</p>{%- endif -%}
+      {%- if section.settings.why_body_2 != blank -%}<p class="rd-mt2">{{ section.settings.why_body_2 }}</p>{%- endif -%}
+      {%- if section.settings.maker_quote != blank -%}
+        <div class="rd-reveal rd-pull rd-mt3">
+          <p class="rd-q">{{ section.settings.maker_quote }}</p>
+          {%- if section.settings.maker_cite != blank -%}<cite>{{ section.settings.maker_cite }}</cite>{%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- HOW IT WORKS (numbered steps) ---------- {%- endcomment -%}
+  {%- if section.settings.steps_title != blank and section.settings.show_steps != false -%}
+  <section class="rd-pad">
+    <div class="rd-wrap rd-mw-820px">
+      {%- if section.settings.steps_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.steps_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal">{{ section.settings.steps_title }}</h2>
+      <ol class="rd-steps rd-mt4">
+        {%- for block in section.blocks -%}{%- if block.type == 'step' -%}
+          <li {{ block.shopify_attributes }}>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.body }}</p>
+          </li>
+        {%- endif -%}{%- endfor -%}
+      </ol>
+    </div>
+  </section>
+  {%- endif -%}
+
+    {%- comment -%} ---------- THE COURSES (pathway — education-page pattern, 2026-08-27)
+     Wording gates: OCN courses named exactly per Claims Register; never "nationally
+     recognised"/Ofqual; no cohort numbers (unresolved decision); peer-instructor count 3
+     is Proof Bank-approved. {%- endcomment -%}
+  {%- if section.settings.show_paths != false -%}
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      <div class="rd-center">
+        {%- if section.settings.paths_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.paths_eyebrow }}</span>{%- endif -%}
+        <h2 class="rd-mw-22ch rd-mx-auto">{{ section.settings.paths_title | default: 'two courses, one progression.' }}</h2>
+      </div>
+      <div class="rd-grid rd-g3 rd-mt4">
+        {%- for n in (1..3) -%}
+          {%- assign k_img = 'path' | append: n | append: '_img' -%}
+          {%- assign k_tag = 'path' | append: n | append: '_tag' -%}
+          {%- assign k_ttl = 'path' | append: n | append: '_title' -%}
+          {%- assign k_bod = 'path' | append: n | append: '_body' -%}
+          <article class="rd-card rd-stamp spr-card rd-reveal">
+            {%- if section.settings[k_img] != blank -%}
+            <div class="spr-media"><img src="{{ section.settings[k_img] | asset_url }}&width=900"
+                 srcset="{{ section.settings[k_img] | asset_url }}&width=500 500w, {{ section.settings[k_img] | asset_url }}&width=900 900w"
+                 sizes="(max-width:749px) 92vw, 30vw" alt="{{ section.settings[k_ttl] | escape }}" loading="lazy" width="900" height="563"></div>
+            {%- endif -%}
+            <div class="rd-body">
+              <span class="rd-tag rd-lime">{{ section.settings[k_tag] }}</span>
+              <h3 class="rd-mt2 rd-fs-21px">{{ section.settings[k_ttl] }}</h3>
+              <p>{{ section.settings[k_bod] }}</p>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- STATS (dark) ----------
+    Moved below HOW IT WORKS (was directly under the hero). Hero and stats are both dark, so the
+    page opened with two dark bands run together — PAGE-STANDARD S3.
+
+    Moved TWO bands rather than one, unlike the other three pages: WHY IT WORKS is also dark, so
+    parking the stats directly after WHAT HAPPENS would only have relocated the collision. From
+    here the page alternates cleanly — hero dark, workshop light, why-it-works dark, how-it-works
+    light, stats dark, staff quote paper. Reordered, not recoloured, so nothing styled for a dark
+    surface has to change. (2026-08-04)
+  {%- endcomment -%}
+  {%- if section.settings.show_stats != false -%}
+  <section class="rd-pad-sm rd-dark">
+    <div class="rd-wrap">
+      <div class="rd-stats">
+        {%- for block in section.blocks -%}{%- if block.type == 'stat' -%}
+          <div class="rd-reveal rd-stat" {{ block.shopify_attributes }}>
+            <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
+            <div class="rd-lbl">{{ block.settings.label }}</div>
+            {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+      {%- if section.settings.stats_note != blank -%}<p class="rd-ship-note rd-mt2 rd-center" style="opacity:.75;">{{ section.settings.stats_note }}</p>{%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- STAFF QUOTE (paper, centred) ---------- {%- endcomment -%}
+  {%- if section.settings.staff_quote != blank and section.settings.show_staff != false -%}
+  <section class="rd-pad-sm rd-paper rd-center">
+    <div class="rd-wrap rd-mw-680px">
+      <div class="rd-reveal rd-pull rd-mx-auto">
+        <p class="rd-q">{{ section.settings.staff_quote }}</p>
+        {%- if section.settings.staff_cite != blank -%}<cite>{{ section.settings.staff_cite }}</cite>{%- endif -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- HOW COMMISSIONING WORKS (education-page pattern, 2026-08-27)
+     No prices here — pricing is per site and cohort (Claims Register); costs framing lives
+     on /pages/prisons. {%- endcomment -%}
+  {%- if section.settings.show_hcw != false -%}
+  <section class="rd-pad rd-paper">
+    <div class="rd-wrap rd-mw-820px">
+      {%- if section.settings.hcw_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.hcw_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal">{{ section.settings.hcw_title | default: 'how commissioning works.' }}</h2>
+      <ol class="rd-steps rd-mt4">
+        <li><h3>{{ section.settings.hcw1_t | default: 'start a conversation' }}</h3><p>{{ section.settings.hcw1_b | default: 'We talk through your population, regime and education budget — and you see the programme running.' }}</p></li>
+        <li><h3>{{ section.settings.hcw2_t | default: 'site visit & security' }}</h3><p>{{ section.settings.hcw2_b | default: 'Tooling, storage and safe systems of work agreed with your security team. Hand tools only, shadow boards, witnessed end-of-session reconciliation.' }}</p></li>
+        <li><h3>{{ section.settings.hcw3_t | default: 'set-up & training' }}</h3><p>{{ section.settings.hcw3_b | default: 'We fit out the workshop, deliver equipment and train your instructors — and the peer mentors who will help run it.' }}</p></li>
+        <li><h3>{{ section.settings.hcw4_t | default: 'cohorts run' }}</h3><p>{{ section.settings.hcw4_b | default: 'Your team delivers; we support with check-ins, materials and OCN moderation — invoiced per cohort, from the education budget.' }}</p></li>
+      </ol>
+      <div class="rd-mt3"><a class="rd-btn rd-ghost" href="{{ section.settings.hcw_url | default: '/pages/prisons' }}">{{ section.settings.hcw_link | default: 'full costs, in grant-budget terms' }} <span class="rd-arrow">&rarr;</span></a></div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- WHERE IT RUNS (named prison sites) ---------- {%- endcomment -%}
+  {%- if section.settings.sites_title != blank and section.settings.show_sites != false -%}
+  <section class="rd-pad-sm rd-center">
+    <div class="rd-wrap rd-mw-820px">
+      {%- if section.settings.sites_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.sites_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal rd-mw-22ch rd-mx-auto">{{ section.settings.sites_title }}</h2>
+      {%- if section.settings.sites_body != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.sites_body }}</p>{%- endif -%}
+      {%- if section.settings.sites_list != blank -%}<div class="rd-sitenames rd-mt3">{{ section.settings.sites_list }}</div>{%- endif -%}
+      {%- if section.settings.sites_partner != blank -%}<p class="rd-frame-label rd-mt3">{{ section.settings.sites_partner }}</p>{%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- CREDIBILITY (Timpson + coverage — education-page pattern, 2026-08-27)
+     Quote is the Claims Register-approved verbatim; attribution is dated to the source so it
+     stays accurate whoever holds the brief. Coverage row: approved claims only. {%- endcomment -%}
+  {%- if section.settings.cred_quote != blank and section.settings.show_cred != false -%}
+  <section class="rd-pad-sm rd-paper rd-center">
+    <div class="rd-wrap rd-mw-680px">
+      <div class="rd-pull rd-mx-auto">
+        <p class="rd-q">{{ section.settings.cred_quote }}</p>
+        {%- if section.settings.cred_cite != blank -%}<cite>{{ section.settings.cred_cite }}</cite>{%- endif -%}
+      </div>
+      {%- if section.settings.coverage_list != blank -%}<div class="rd-sitenames rd-mt4">{{ section.settings.coverage_list }}</div>{%- endif -%}
+      {%- if section.settings.trust_line != blank -%}<p class="rd-ship-note rd-mt2">{{ section.settings.trust_line }}</p>{%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- CASE STUDY CARD → full story ---------- {%- endcomment -%}
+  {%- if section.settings.cs_quote != blank and section.settings.show_cs != false -%}
+  <section class="rd-pad-sm">
+    <div class="rd-wrap rd-mw-820px">
+      {%- comment -%} THE standard card (snippets/bbc-cscard.liquid), 2026-07-31 — the featured
+         variant, matching the flagship on /pages/impact. Was a bespoke wrapper <a> whose `kind`
+         read "The full story" (a TYPE, not a category) and whose title sat in a non-linked span. {%- endcomment -%}
+      {%- assign _b2b_url = section.settings.cs_url | default: '/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2' -%}
+      {%- assign _b2b_head = section.settings.cs_heading | default: section.settings.cs_site -%}
+      {%- if _b2b_head == blank -%}{%- assign _b2b_head = 'Build to Bond · HMP Lowdham Grange' -%}{%- endif -%}
+      {%- assign _b2b_img = section.settings.cs_image | default: 'bbc-rd-prison-wide.jpg' -%}
+      {%- assign _b2b_kind = section.settings.cs_kind | default: 'prisons' -%}
+      {%- assign _b2b_cta = section.settings.cs_link_label | default: 'Read the full story' -%}
+      <ul class="rd-csgrid" role="list">
+        {%- render 'bbc-cscard',
+             variant: 'featured',
+             kind: _b2b_kind,
+             heading: _b2b_head,
+             url: _b2b_url,
+             context: section.settings.cs_blurb,
+             attr: section.settings.cs_site,
+             image: _b2b_img,
+             cta: _b2b_cta -%}
+      </ul>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- FINAL CTA (dark, centred) ---------- {%- endcomment -%}
+  {%- if section.settings.show_cta != false -%}
+  <section class="rd-pad rd-dark rd-center">
+    <div class="rd-wrap rd-mw-680px">
+      {%- if section.settings.cta_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.cta_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal">{{ section.settings.cta_title }}</h2>
+      {%- if section.settings.cta_lede != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.cta_lede }}</p>{%- endif -%}
+      <div class="rd-flex rd-mt3 rd-jc-center">
+        {%- if section.settings.cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ final_c1 }}">{{ section.settings.cta1_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ final_c2 }}">{{ section.settings.cta2_label }}</a>{%- endif -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+</div>
+
+{% schema %}
+{
+  "name": "Build to Bond 2026",
+  "class": "shopify-section--bbc-b2b-page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "cs_heading",
+      "label": "Case-study heading override (blank = site name)"
+    },
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hero",
+      "label": "Show this band",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image (workshop, no identifiable Makers)"
+    },
+    {
+      "type": "text",
+      "id": "hero_fallback",
+      "label": "Default hero photo filename",
+      "default": "bbc-rd-prison-jig.jpg"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero image alt text",
+      "default": "A frame jig inside the Build to Bond prison workshop"
+    },
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Eyebrow",
+      "default": "Our prison programme"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Headline",
+      "default": "a bike built inside. a bond that goes home."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_lede",
+      "label": "Lede",
+      "default": "Build to Bond is a six-week bamboo bike-building course inside prison workshops. Makers learn real manufacturing skills, work towards an OCN London accredited Level 2 — and build a balance bike that goes home to their child."
+    },
+    {
+      "type": "text",
+      "id": "hero_cta1_label",
+      "label": "Primary CTA label",
+      "default": "Run it in your prison"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta1_url",
+      "label": "Primary CTA link (defaults to the prisons page)"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta2_label",
+      "label": "Secondary CTA label",
+      "default": "Back the mission"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta2_url",
+      "label": "Secondary CTA link (defaults to Back the mission)"
+    },
+    {
+      "type": "header",
+      "content": "What happens in the workshop"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_story",
+      "label": "Show this band",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "story_eyebrow",
+      "label": "Eyebrow",
+      "default": "Inside the workshop"
+    },
+    {
+      "type": "text",
+      "id": "story_title",
+      "label": "Heading",
+      "default": "real manufacturing, taught by hand."
+    },
+    {
+      "type": "textarea",
+      "id": "story_body_1",
+      "label": "Paragraph 1",
+      "default": "Inside a working prison workshop, small cohorts of Makers measure, mitre and bond bamboo frames by hand — the same craft we've taught in our London workshop since 2012. Sessions build real skills: precision marking-out, jig setup, structural bonding, finishing and quality checks."
+    },
+    {
+      "type": "textarea",
+      "id": "story_body_2",
+      "label": "Paragraph 2",
+      "default": "Along the way, each Maker builds a portfolio of work towards OCN London’s bespoke Level 2, Workshop Skills and Sustainable Manufacturing — earned hands-on."
+    },
+    {
+      "type": "header",
+      "content": "Why it works (MoJ evidence framing)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_why",
+      "label": "Show this band",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "why_image",
+      "label": "Feature image"
+    },
+    {
+      "type": "text",
+      "id": "why_fallback",
+      "label": "Default feature photo filename",
+      "default": "bbc-rd-b2b.jpg"
+    },
+    {
+      "type": "text",
+      "id": "why_image_alt",
+      "label": "Feature image alt text",
+      "default": "A finished bamboo balance bike from the Build to Bond workshop"
+    },
+    {
+      "type": "text",
+      "id": "why_eyebrow",
+      "label": "Eyebrow",
+      "default": "Why it works"
+    },
+    {
+      "type": "text",
+      "id": "why_title",
+      "label": "Heading",
+      "default": "the bike is for their child. that's the point."
+    },
+    {
+      "type": "textarea",
+      "id": "why_body_1",
+      "label": "Paragraph 1",
+      "default": "The finished build is a child's balance bike. On family visit day, the Maker hands it over themselves — the first thing many have ever made, given to the person who matters most."
+    },
+    {
+      "type": "textarea",
+      "id": "why_body_2",
+      "label": "Paragraph 2",
+      "default": "Ministry of Justice research shows that people in prison who maintain family ties are 39% less likely to reoffend. Build to Bond is built around that evidence: a six-week course where the skills are real, the qualification is OCN London accredited, and the finish line is a stronger family bond."
+    },
+    {
+      "type": "textarea",
+      "id": "maker_quote",
+      "label": "Maker quote (anonymised only)",
+      "info": "Never name a Maker or link one to a prison."
+    },
+    {
+      "type": "text",
+      "id": "maker_cite",
+      "label": "Maker quote attribution"
+    },
+    {
+      "type": "header",
+      "content": "How it works (steps)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_steps",
+      "label": "Show this band",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "steps_eyebrow",
+      "label": "Eyebrow",
+      "default": "How it works"
+    },
+    {
+      "type": "text",
+      "id": "steps_title",
+      "label": "Heading (blank to hide)",
+      "default": "six weeks, start to handover."
+    },
+    {
+      "type": "header",
+      "content": "Stats"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show this band",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Staff quote"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_staff",
+      "label": "Show this band",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "staff_quote",
+      "label": "Quote (blank to hide band)",
+      "default": "Watching the pride on a father’s face when he presents a bike to his child is something special."
+    },
+    {
+      "type": "text",
+      "id": "staff_cite",
+      "label": "Attribution",
+      "default": "Sally Allsopp, Industries and Community Manager, HMP Lowdham Grange"
+    },
+    {
+      "type": "header",
+      "content": "Where it runs"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sites",
+      "label": "Show this band",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sites_eyebrow",
+      "label": "Eyebrow",
+      "default": "Where we work"
+    },
+    {
+      "type": "text",
+      "id": "sites_title",
+      "label": "Heading (blank to hide section)",
+      "default": "where it runs."
+    },
+    {
+      "type": "textarea",
+      "id": "sites_body",
+      "label": "Body",
+      "default": "Build to Bond is established across four UK prison sites, at different delivery stages — with a self-delivery model that trains prison staff and peer instructors to run the workshop."
+    },
+    {
+      "type": "text",
+      "id": "sites_list",
+      "label": "Named sites line (HTML allowed)"
+    },
+    {
+      "type": "text",
+      "id": "sites_partner",
+      "label": "Partner line",
+      "default": "Delivered under direct contracts with HMPPS and private operators"
+    },
+    {
+      "type": "header",
+      "content": "Case study card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cs",
+      "label": "Show this band",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cs_kind",
+      "label": "Card tag",
+      "info": "A category, not a type - e.g. prisons, schools.",
+      "default": "prisons"
+    },
+    {
+      "type": "text",
+      "id": "cs_image",
+      "label": "Card image filename",
+      "default": "bbc-rd-prison-wide.jpg"
+    },
+    {
+      "type": "textarea",
+      "id": "cs_quote",
+      "label": "Card visibility gate - text NOT displayed",
+      "info": "This copy never appears on the page; it only gates the card (any text shows it, blank hides it). Use the Show this band checkbox above instead.",
+      "default": "When one Maker received a balance-bike kit for his toddler, the workshop went quiet — then everyone wanted to build one."
+    },
+    {
+      "type": "textarea",
+      "id": "cs_blurb",
+      "label": "Context line",
+      "default": "How a six-week bamboo-bike course is rebuilding family ties from inside prison — the full story."
+    },
+    {
+      "type": "text",
+      "id": "cs_site",
+      "label": "Card footer label",
+      "default": "Build to Bond"
+    },
+    {
+      "type": "url",
+      "id": "cs_url",
+      "label": "Card link (the full story)"
+    },
+    {
+      "type": "text",
+      "id": "cs_link_label",
+      "label": "Card link label",
+      "default": "Read the full story"
+    },
+    {
+      "type": "header",
+      "content": "Final CTA"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show this band",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_eyebrow",
+      "label": "Eyebrow",
+      "default": "Bring it to your site"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Heading",
+      "default": "bring build to bond to your prison."
+    },
+    {
+      "type": "textarea",
+      "id": "cta_lede",
+      "label": "Lede",
+      "default": "A one-time setup, your staff trained to deliver, and repeatable cohorts that end with a bike going home. Commissioners, funders and education providers — we'd like to talk."
+    },
+    {
+      "type": "text",
+      "id": "cta1_label",
+      "label": "CTA 1 label",
+      "default": "For prisons & commissioners"
+    },
+    {
+      "type": "url",
+      "id": "cta1_url",
+      "label": "CTA 1 link (defaults to the prisons page)"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "CTA 2 label",
+      "default": "Fund a cohort"
+    },
+    {
+      "type": "url",
+      "id": "cta2_url",
+      "label": "CTA 2 link (defaults to Back the mission)"
+    },
+    {
+      "type": "text",
+      "id": "fab_spec",
+      "label": "Spec micro-line (fabrication device)",
+      "default": "qualification — OCN Level 2 · Workshop Skills and Sustainable Manufacturing"
+    },
+    {
+      "type": "text",
+      "id": "tx_crumb_b2b",
+      "label": "Build to Bond",
+      "default": "Build to Bond"
+    },
+    {
+      "type": "header",
+      "content": "Film hero"
+    },
+    {
+      "type": "checkbox",
+      "id": "evh_film_on",
+      "label": "Play the hero film",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "evh_film_url",
+      "label": "Film URL (blank = jig-reel asset)"
+    },
+    {
+      "type": "header",
+      "content": "Fork cards"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_fork",
+      "label": "Show fork cards",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "f1_tag",
+      "label": "Fork 1 tag"
+    },
+    {
+      "type": "text",
+      "id": "f1_title",
+      "label": "Fork 1 title"
+    },
+    {
+      "type": "textarea",
+      "id": "f1_body",
+      "label": "Fork 1 body"
+    },
+    {
+      "type": "text",
+      "id": "f1_url",
+      "label": "Fork 1 link"
+    },
+    {
+      "type": "text",
+      "id": "f2_tag",
+      "label": "Fork 2 tag"
+    },
+    {
+      "type": "text",
+      "id": "f2_title",
+      "label": "Fork 2 title"
+    },
+    {
+      "type": "textarea",
+      "id": "f2_body",
+      "label": "Fork 2 body"
+    },
+    {
+      "type": "text",
+      "id": "f2_url",
+      "label": "Fork 2 link"
+    },
+    {
+      "type": "header",
+      "content": "Courses pathway"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_paths",
+      "label": "Show courses band",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "paths_eyebrow",
+      "label": "Courses eyebrow",
+      "default": "the programme"
+    },
+    {
+      "type": "text",
+      "id": "paths_title",
+      "label": "Courses heading"
+    },
+    {
+      "type": "text",
+      "id": "path1_tag",
+      "label": "Course 1 tag"
+    },
+    {
+      "type": "text",
+      "id": "path1_title",
+      "label": "Course 1 title"
+    },
+    {
+      "type": "textarea",
+      "id": "path1_body",
+      "label": "Course 1 body"
+    },
+    {
+      "type": "text",
+      "id": "path2_tag",
+      "label": "Course 2 tag"
+    },
+    {
+      "type": "text",
+      "id": "path2_title",
+      "label": "Course 2 title"
+    },
+    {
+      "type": "textarea",
+      "id": "path2_body",
+      "label": "Course 2 body"
+    },
+    {
+      "type": "text",
+      "id": "path3_tag",
+      "label": "Course 3 tag"
+    },
+    {
+      "type": "text",
+      "id": "path3_title",
+      "label": "Course 3 title"
+    },
+    {
+      "type": "textarea",
+      "id": "path3_body",
+      "label": "Course 3 body"
+    },
+    {
+      "type": "header",
+      "content": "How commissioning works"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hcw",
+      "label": "Show commissioning band",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "hcw_eyebrow",
+      "label": "Commissioning eyebrow",
+      "default": "for your site"
+    },
+    {
+      "type": "text",
+      "id": "hcw_title",
+      "label": "Commissioning heading"
+    },
+    {
+      "type": "text",
+      "id": "hcw1_t",
+      "label": "Step 1 title"
+    },
+    {
+      "type": "textarea",
+      "id": "hcw1_b",
+      "label": "Step 1 body"
+    },
+    {
+      "type": "text",
+      "id": "hcw2_t",
+      "label": "Step 2 title"
+    },
+    {
+      "type": "textarea",
+      "id": "hcw2_b",
+      "label": "Step 2 body"
+    },
+    {
+      "type": "text",
+      "id": "hcw3_t",
+      "label": "Step 3 title"
+    },
+    {
+      "type": "textarea",
+      "id": "hcw3_b",
+      "label": "Step 3 body"
+    },
+    {
+      "type": "text",
+      "id": "hcw4_t",
+      "label": "Step 4 title"
+    },
+    {
+      "type": "textarea",
+      "id": "hcw4_b",
+      "label": "Step 4 body"
+    },
+    {
+      "type": "text",
+      "id": "hcw_link",
+      "label": "Commissioning link label"
+    },
+    {
+      "type": "text",
+      "id": "hcw_url",
+      "label": "Commissioning link URL"
+    },
+    {
+      "type": "header",
+      "content": "Credibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cred",
+      "label": "Show credibility band",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "cred_quote",
+      "label": "Credibility quote",
+      "default": "Innovative projects, such as Build to Bond, support rehabilitation and help people leave prison as better citizens, boosting the economy and keeping our streets safe."
+    },
+    {
+      "type": "text",
+      "id": "cred_cite",
+      "label": "Credibility citation",
+      "default": "Lord Timpson, Prisons Minister — Financial Times, September 2025"
+    },
+    {
+      "type": "text",
+      "id": "coverage_list",
+      "label": "Coverage row",
+      "default": "as covered — Financial Times · Inside Time · National Justice Museum, 'Working Through It' (2026)"
+    },
+    {
+      "type": "text",
+      "id": "trust_line",
+      "label": "Trust line",
+      "default": "Registered UK learning provider (UKPRN 10098630) · courses accredited by OCN London · winner, Investec Beyond Business 2025"
+    },
+    {
+      "type": "text",
+      "id": "stats_note",
+      "label": "Stats band note line"
+    },
+    {
+      "type": "text",
+      "id": "f1_link",
+      "label": "Fork 1 arrow label"
+    },
+    {
+      "type": "text",
+      "id": "f2_link",
+      "label": "Fork 2 arrow label"
+    },
+    {
+      "type": "text",
+      "id": "path1_img",
+      "label": "path1_img (asset filename)"
+    },
+    {
+      "type": "text",
+      "id": "path2_img",
+      "label": "path2_img (asset filename)"
+    },
+    {
+      "type": "text",
+      "id": "path3_img",
+      "label": "path3_img (asset filename)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "90%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "course completion"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source",
+          "default": "BBC programme records"
+        }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "enrol"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Makers join through the prison's workshops or education team. No prior experience needed."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Build to Bond 2026",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "90%",
+            "label": "course completion",
+            "source": "BBC programme records"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "Level 2",
+            "label": "OCN — Workshop Skills and Sustainable Manufacturing",
+            "source": "OCN London accredited"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "6 weeks",
+            "label": "from first cut to family visit day",
+            "source": "one cohort"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "4",
+            "label": "active prison sites",
+            "source": "with HMPPS"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Enrol",
+            "body": "Makers join through the prison's workshops or education team. No prior experience needed."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Build",
+            "body": "Six weekly sessions in the workshop: frame layout, mitring, structural bonding and finishing — real manufacturing, taught by hand."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Accredit",
+            "body": "Portfolio work towards OCN London’s bespoke Level 2, Workshop Skills and Sustainable Manufacturing."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Family visit day",
+            "body": "The finished balance bike is presented by the Maker to their own child — and goes home with them."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+      <p class="rd-specline">{{ section.settings.fab_spec | default: 'qualification — OCN Level 2 · Workshop Skills and Sustainable Manufacturing' }}</p>

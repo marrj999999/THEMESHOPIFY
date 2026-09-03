@@ -1,0 +1,63 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "bbc_footer_2026": {
+      "type": "bbc-footer-2026",
+      "blocks": {
+        "b0": {
+          "type": "column",
+          "settings": {
+            "heading": "Build",
+            "menu": "footer-shop"
+          }
+        },
+        "b1": {
+          "type": "column",
+          "settings": {
+            "heading": "Mission",
+            "menu": "footer-experience"
+          }
+        },
+        "b2": {
+          "type": "column",
+          "settings": {
+            "heading": "Customer service",
+            "menu": "footer-help"
+          }
+        },
+        "b3": {
+          "type": "column",
+          "settings": {
+            "heading": "More",
+            "menu": "footer-company"
+          }
+        },
+        "b4": {
+          "type": "badge",
+          "settings": {
+            "text": "OCN Accredited"
+          }
+        },
+        "b5": {
+          "type": "badge",
+          "settings": {
+            "text": "Investec Beyond Business 2025"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "bbc_footer_2026"
+  ]
+}

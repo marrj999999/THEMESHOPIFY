@@ -1,0 +1,123 @@
+{% comment %}
+  BBC Press Logos — Actual brand logos from verified media coverage
+  Uses SVG logo files uploaded to assets for authentic recognition
+{% endcomment %}
+
+<div class="bbc-press-logos" role="region" aria-label="Featured in media">
+  <p class="bbc-press-logos__label">{{ settings.bbc_press_label | default: "As Featured In" }}</p>
+  <div class="bbc-press-logos__grid">
+    
+    {%- comment -%} Financial Times - Sep 2025 Build to Bond coverage {%- endcomment -%}
+    <a href="https://www.ft.com" target="_blank" rel="noopener" class="bbc-press-logos__item" title="Financial Times - September 2025" aria-label="Featured in Financial Times">
+      <img src="{{ 'logo-financial-times.svg' | asset_url }}" alt="Financial Times" class="bbc-press-logo" loading="lazy" width="160" height="24">
+    </a>
+    
+    {%- comment -%} BikeRadar - Apr 2019 First ride video review {%- endcomment -%}
+    <a href="https://www.bikeradar.com" target="_blank" rel="noopener" class="bbc-press-logos__item" title="BikeRadar - Video Review 2019" aria-label="Featured in BikeRadar">
+      <img src="{{ 'logo-bikeradar.svg' | asset_url }}" alt="BikeRadar" class="bbc-press-logo" loading="lazy" width="120" height="24">
+    </a>
+    
+    {%- comment -%} road.cc - 2018 5-part build series {%- endcomment -%}
+    <a href="https://road.cc" target="_blank" rel="noopener" class="bbc-press-logos__item" title="road.cc - 5-Part Build Series 2018" aria-label="Featured in road.cc">
+      <img src="{{ 'logo-roadcc.svg' | asset_url }}" alt="road.cc" class="bbc-press-logo" loading="lazy" width="90" height="24">
+    </a>
+    
+    {%- comment -%} Design Museum - Cycle Revolution 2015-2016 {%- endcomment -%}
+    <a href="https://designmuseum.org" target="_blank" rel="noopener" class="bbc-press-logos__item" title="Design Museum - Cycle Revolution Exhibition 2015-2016" aria-label="Featured at Design Museum">
+      <img src="{{ 'logo-design-museum.svg' | asset_url }}" alt="Design Museum" class="bbc-press-logo" loading="lazy" width="150" height="24">
+    </a>
+    
+    {%- comment -%} Kevin McCloud's Green Heroes 2018 {%- endcomment -%}
+    <div class="bbc-press-logos__item bbc-press-logos__item--award" title="Kevin McCloud's Green Heroes 2018" aria-label="Winner of Kevin McCloud's Green Heroes 2018">
+      <img src="{{ 'logo-grand-designs.svg' | asset_url }}" alt="Grand Designs Live - Green Heroes" class="bbc-press-logo" loading="lazy" width="150" height="24">
+    </div>
+    
+  </div>
+</div>
+
+<style>
+  .bbc-press-logos {
+    padding: 32px 20px;
+    background: var(--bbc-cream, #f8f7f4);
+    text-align: center;
+  }
+  
+  .bbc-press-logos__label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--bbc-forest, #073e27);
+    opacity: 0.6;
+    margin: 0 0 24px 0;
+    font-weight: 500;
+  }
+  
+  .bbc-press-logos__grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .bbc-press-logos__item {
+    opacity: 0.5;
+    filter: grayscale(100%);
+    transition: opacity 0.2s ease, filter 0.2s ease;
+    text-decoration: none;
+  }
+  
+  .bbc-press-logos__item:hover,
+  .bbc-press-logos__item:focus-visible {
+    opacity: 1;
+    filter: grayscale(0%);
+  }
+  
+  .bbc-press-logos__item:focus-visible {
+    outline: 2px solid var(--bbc-gold, #ffa900);
+    outline-offset: 8px;
+    border-radius: 4px;
+  }
+  
+  .bbc-press-logo {
+    height: 24px;
+    width: auto;
+    display: block;
+  }
+  
+  .bbc-press-logos__item--award {
+    position: relative;
+    padding-left: 28px;
+  }
+  
+  .bbc-press-logos__item--award::before {
+    content: "🏆";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-press-logos__item {
+      transition: none;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-press-logos {
+      padding: 24px 16px;
+    }
+    
+    .bbc-press-logos__grid {
+      gap: 32px 40px;
+    }
+    
+    .bbc-press-logo {
+      height: 20px;
+    }
+  }
+</style>

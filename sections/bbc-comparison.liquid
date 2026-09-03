@@ -1,0 +1,186 @@
+{%- comment -%}
+  BBC Material comparison SECTION — "How bamboo measures up".
+  Reproduces the bbc-why-bamboo-2026 comparison beat (the .wbx region): intro
+  header band + 4 stat tiles + a 4-bar density chart + a properties <table>.
+  This section renders the header band, the tiles, the density bars and the
+  table's <thead>; the material rows are bbc-comparison-row theme blocks via
+  {% content_for 'blocks' %}. Source notes = a richtext section setting.
+
+  NOTE the table is TRANSPOSED vs the monolith: here each ROW is a material and
+  each COLUMN is a property (so the table header is the 7 property names below).
+  All .wbx-* styles are re-declared here (they were inline in the monolith and
+  are NOT in bbc-redesign-2026.css). Wrapped in .bbc-rd so .rd-* classes apply.
+{%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg = section.settings.background | default: 'paper'
+  if bg == 'dark'
+    assign bg_cls = 'rd-dark'
+  elsif bg == 'steel'
+    assign bg_cls = 'rd-steel'
+  else
+    assign bg_cls = 'rd-paper'
+  endif
+-%}
+
+<div class="bbc-rd">
+  <section class="rd-pad {{ bg_cls }} rd-graph wbx">
+  <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="rd-wrap">
+      {%- if section.settings.kicker != blank -%}
+        <span class="rd-eyebrow{% if bg == 'dark' %} rd-on-dark{% endif %}">{{ section.settings.kicker }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="rd-reveal">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.lede != blank -%}<p class="rd-lede rd-maxw rd-mt2">{{ section.settings.lede }}</p>{%- endif -%}
+
+      {%- comment -%} ---------- 4 STAT TILES ---------- {%- endcomment -%}
+      <div class="wbx-tiles rd-mt3">
+        <div class="wbx-tile"><div class="wbx-num">{{ section.settings.tile1_num }}</div><div class="wbx-unit">{{ section.settings.tile1_unit }}</div><div class="wbx-lbl">{{ section.settings.tile1_lbl }}</div></div>
+        <div class="wbx-tile"><div class="wbx-num">{{ section.settings.tile2_num }}</div><div class="wbx-unit">{{ section.settings.tile2_unit }}</div><div class="wbx-lbl">{{ section.settings.tile2_lbl }}</div></div>
+        <div class="wbx-tile"><div class="wbx-num">{{ section.settings.tile3_num }}</div><div class="wbx-unit">{{ section.settings.tile3_unit }}</div><div class="wbx-lbl">{{ section.settings.tile3_lbl }}</div></div>
+        <div class="wbx-tile"><div class="wbx-num">{{ section.settings.tile4_num }}</div><div class="wbx-unit">{{ section.settings.tile4_unit }}</div><div class="wbx-lbl">{{ section.settings.tile4_lbl }}</div></div>
+      </div>
+
+      {%- comment -%} ---------- DENSITY BAR CHART (4 bars) ---------- {%- endcomment -%}
+      <div class="rd-mt3">
+        {%- if section.settings.bars_caption != blank -%}<p class="wbx-cap">{{ section.settings.bars_caption }}</p>{%- endif -%}
+        <div class="wbx-bar"><span class="wbx-bn">{{ section.settings.bar1_name }}</span><span class="wbx-bt"><span class="wbx-bf" style="width:{{ section.settings.bar1_pct }}%"></span></span><span class="wbx-bv">{{ section.settings.bar1_val }}</span></div>
+        <div class="wbx-bar"><span class="wbx-bn">{{ section.settings.bar2_name }}</span><span class="wbx-bt"><span class="wbx-bf" style="width:{{ section.settings.bar2_pct }}%"></span></span><span class="wbx-bv">{{ section.settings.bar2_val }}</span></div>
+        <div class="wbx-bar"><span class="wbx-bn">{{ section.settings.bar3_name }}</span><span class="wbx-bt"><span class="wbx-bf" style="width:{{ section.settings.bar3_pct }}%"></span></span><span class="wbx-bv">{{ section.settings.bar3_val }}</span></div>
+        <div class="wbx-bar is-hl"><span class="wbx-bn">{{ section.settings.bar4_name }}</span><span class="wbx-bt"><span class="wbx-bf" style="width:{{ section.settings.bar4_pct }}%"></span></span><span class="wbx-bv">{{ section.settings.bar4_val }}</span></div>
+      </div>
+
+      {%- comment -%} ---------- PROPERTIES TABLE (header here; rows = blocks) ---------- {%- endcomment -%}
+      <div class="wbx-tablewrap rd-mt3">
+        <table class="wbx-table">
+          <thead>
+            <tr>
+              <th scope="col">{{ section.settings.col_material }}</th>
+              <th scope="col">{{ section.settings.col_density }}</th>
+              <th scope="col">{{ section.settings.col_tensile }}</th>
+              <th scope="col">{{ section.settings.col_stiffness }}</th>
+              <th scope="col">{{ section.settings.col_damping }}</th>
+              {%- if section.settings.col_carbon != blank -%}<th scope="col">{{ section.settings.col_carbon }}</th>{%- endif -%}
+              <th scope="col">{{ section.settings.col_buildable }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% content_for 'blocks' %}
+          </tbody>
+        </table>
+      </div>
+
+      {%- if section.settings.notes != blank -%}
+        <div class="wbx-note rd-mt2">{{ section.settings.notes }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.framing != blank -%}
+        <p class="wbx-frame rd-mt2">{{ section.settings.framing }}</p>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% stylesheet %}
+  .bbc-rd .wbx{ --wf:var(--forest,#003C32); --wg:var(--lime,#D4FD62); --wt:#0e5038; --wm:#38453e; }
+  .bbc-rd .wbx-tiles{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(7,62,39,.14); border:1px solid rgba(7,62,39,.14); border-radius:12px; overflow:hidden; }
+  .bbc-rd .wbx-tile{ background:#fff; padding:22px 20px; }
+  .bbc-rd .wbx-num{ font-weight:800; font-size:clamp(1.5rem,1.1rem + 1.2vw,2rem); color:var(--wf); line-height:1.05; font-variant-numeric:lining-nums tabular-nums; }
+  .bbc-rd .wbx-unit{ font-weight:700; font-size:12.5px; color:var(--wt); margin-top:3px; }
+  .bbc-rd .wbx-lbl{ font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--wm); margin-top:9px; line-height:1.35; }
+  .bbc-rd .wbx-cap{ font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--wm); margin:0 0 14px; }
+  .bbc-rd .wbx-bar{ display:grid; grid-template-columns:140px 1fr 52px; align-items:center; gap:14px; margin-bottom:11px; }
+  .bbc-rd .wbx-bn{ font-size:13px; font-weight:700; color:var(--wf); }
+  .bbc-rd .wbx-bt{ height:14px; background:rgba(7,62,39,.08); border-radius:7px; overflow:hidden; overflow:clip /* clip not hidden — hosts the rd-bar-grow timeline (MOTION.md rule 4); hidden fallback = engines without clip lack view() anyway */; }
+  .bbc-rd .wbx-bf{ display:block; height:100%; background:var(--wt); border-radius:7px; }
+  .bbc-rd .wbx-bar.is-hl .wbx-bf{ background:var(--wg); }
+  .bbc-rd .wbx-bv{ font-size:13px; font-weight:700; color:var(--wm); text-align:right; font-variant-numeric:lining-nums tabular-nums; }
+  .bbc-rd .wbx-tablewrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; position:relative; }
+  .bbc-rd .wbx-tablewrap::after{ content:""; position:sticky; }
+  @media (max-width:768px){ .bbc-rd .wbx-tablewrap{ mask-image:linear-gradient(90deg,#000 92%,transparent); } .bbc-rd .wbx-tablewrap::before{ content:"swipe for damping & DIY \2192"; display:block; font-size:11px; letter-spacing:.08em; text-transform:uppercase; opacity:.6; padding:4px 0 8px; } }
+  .bbc-rd .wbx-table{ width:100%; border-collapse:collapse; font-variant-numeric:lining-nums tabular-nums; }
+  .bbc-rd .wbx-table th,.bbc-rd .wbx-table td{ text-align:right; padding:12px 14px; border-bottom:1px solid rgba(7,62,39,.14); font-size:13.5px; white-space:nowrap; }
+  .bbc-rd .wbx-table :is(th,td):first-child{ text-align:left; white-space:normal; }
+  .bbc-rd .wbx-table thead th{ font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--wm); font-weight:700; border-bottom-width:2px; white-space:normal; }
+  .bbc-rd .wbx-note{ font-size:12px; line-height:1.5; color:var(--wm); }
+  .bbc-rd .wbx-note p{ margin:0; }
+  .bbc-rd .wbx-frame{ padding:18px 22px; border-left:4px solid var(--wg); background:#fff; font-size:1.04rem; line-height:1.5; }
+  .bbc-rd .wbx-frame strong{ color:var(--wf); }
+  @media(max-width:749px){
+    .bbc-rd .wbx-tiles{ grid-template-columns:repeat(2,1fr); }
+    .bbc-rd .wbx-bar{ grid-template-columns:84px 1fr 46px; gap:10px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Material comparison",
+  "tag": "section",
+  "class": "bbc-comparison-wrap",
+  "blocks": [{ "type": "@theme" }],
+  "settings": [
+    {
+      "type": "select", "id": "background", "label": "Background", "default": "paper",
+      "options": [
+        { "value": "paper", "label": "Paper (light)" },
+        { "value": "steel", "label": "Steel (grey-blue)" },
+        { "value": "dark", "label": "Dark (forest green)" }
+      ]
+    },
+    { "type": "header", "content": "Header band" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The engineering" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How bamboo measures up" },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "A frame material lives or dies on four numbers: how light it is, how strong for that weight, how it soaks up the road, and what it costs the planet. Bamboo against the metals and carbon — honest ranges, with sources." },
+    { "type": "header", "content": "Stat tiles (4)" },
+    { "type": "text", "id": "tile1_num", "label": "Tile 1 number", "default": "0.7" },
+    { "type": "text", "id": "tile1_unit", "label": "Tile 1 unit", "default": "g/cm3 density" },
+    { "type": "text", "id": "tile1_lbl", "label": "Tile 1 label", "default": "Lighter than carbon, aluminium & steel" },
+    { "type": "text", "id": "tile2_num", "label": "Tile 2 number", "default": "High" },
+    { "type": "text", "id": "tile2_unit", "label": "Tile 2 unit", "default": "strength-to-weight" },
+    { "type": "text", "id": "tile2_lbl", "label": "Tile 2 label", "default": "Light, stiff and tough" },
+    { "type": "text", "id": "tile3_num", "label": "Tile 3 number", "default": "3-5" },
+    { "type": "text", "id": "tile3_unit", "label": "Tile 3 unit", "default": "years to harvest" },
+    { "type": "text", "id": "tile3_lbl", "label": "Tile 3 label", "default": "A tree takes decades" },
+    { "type": "text", "id": "tile4_num", "label": "Tile 4 number", "default": "4,000+" },
+    { "type": "text", "id": "tile4_unit", "label": "Tile 4 unit", "default": "builders trained" },
+    { "type": "text", "id": "tile4_lbl", "label": "Tile 4 label", "default": "A skill you keep for life" },
+    { "type": "header", "content": "Density bar chart (4 bars)" },
+    { "type": "text", "id": "bars_caption", "label": "Chart caption", "default": "Density · g/cm3 — lower is lighter" },
+    { "type": "text", "id": "bar1_name", "label": "Bar 1 name", "default": "Steel (4130)" },
+    { "type": "range", "id": "bar1_pct", "label": "Bar 1 fill %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 100 },
+    { "type": "text", "id": "bar1_val", "label": "Bar 1 value", "default": "7.8" },
+    { "type": "text", "id": "bar2_name", "label": "Bar 2 name", "default": "Aluminium 6061" },
+    { "type": "range", "id": "bar2_pct", "label": "Bar 2 fill %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 34 },
+    { "type": "text", "id": "bar2_val", "label": "Bar 2 value", "default": "2.7" },
+    { "type": "text", "id": "bar3_name", "label": "Bar 3 name", "default": "Carbon fibre" },
+    { "type": "range", "id": "bar3_pct", "label": "Bar 3 fill %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 20 },
+    { "type": "text", "id": "bar3_val", "label": "Bar 3 value", "default": "1.5" },
+    { "type": "text", "id": "bar4_name", "label": "Bar 4 name (highlighted)", "default": "Bamboo" },
+    { "type": "range", "id": "bar4_pct", "label": "Bar 4 fill %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 10 },
+    { "type": "text", "id": "bar4_val", "label": "Bar 4 value", "default": "0.7" },
+    { "type": "header", "content": "Table column headers" },
+    { "type": "text", "id": "col_material", "label": "Column: material", "default": "Material" },
+    { "type": "text", "id": "col_density", "label": "Column: density", "default": "Density (g/cm3)" },
+    { "type": "text", "id": "col_tensile", "label": "Column: tensile", "default": "Tensile (MPa)" },
+    { "type": "text", "id": "col_stiffness", "label": "Column: stiffness", "default": "Stiffness (GPa)" },
+    { "type": "text", "id": "col_damping", "label": "Column: damping", "default": "Damping" },
+    { "type": "text", "id": "col_carbon", "label": "Column: embodied carbon", "default": "Embodied CO2 (kg/kg)" },
+    { "type": "text", "id": "col_buildable", "label": "Column: buildable", "default": "Build it yourself?" },
+    { "type": "header", "content": "Notes & closing line" },
+    { "type": "richtext", "id": "notes", "label": "Source notes", "default": "<p>Ranges reflect species, alloy and lay-up. Carbon's headline strength is measured along the fibre; a frame tube only ever sees a fraction of it. Sources: Sánchez Vivas (bamboo.org), ScienceDirect, MatWeb/ASM, Reynolds Technology, ICE embodied-carbon database.</p>" },
+    { "type": "textarea", "id": "framing", "label": "Closing line", "default": "Carbon is lighter and stiffer. Bamboo answers on damping, fatigue-tolerance and embodied carbon — and it is the only one of the four you can build yourself, by hand, in a weekend." }
+  ],
+  "presets": [
+    {
+      "name": "BBC Material comparison",
+      "blocks": [
+        { "type": "bbc-comparison-row", "settings": { "material": "Bamboo", "density": "0.6-0.9", "tensile": "115-370", "stiffness": "10-35", "damping": "High", "embodied_carbon": "Net-negative", "buildable": "Yes — jig & hand tools", "highlight": true } },
+        { "type": "bbc-comparison-row", "settings": { "material": "Steel (4130 / 853)", "density": "7.8", "tensile": "560-1,400", "stiffness": "205", "damping": "Very low", "embodied_carbon": "0.8-2.8", "buildable": "Brazing / welding", "highlight": false } },
+        { "type": "bbc-comparison-row", "settings": { "material": "Aluminium 6061", "density": "2.7", "tensile": "310", "stiffness": "69", "damping": "Low", "embodied_carbon": "~5.4", "buildable": "Welding", "highlight": false } },
+        { "type": "bbc-comparison-row", "settings": { "material": "Carbon fibre", "density": "1.5", "tensile": "600-3,500", "stiffness": "120-200", "damping": "Moderate", "embodied_carbon": "24-35", "buildable": "Autoclave — no", "highlight": false } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,115 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-teambuilding-2026",
+      "blocks": {
+        "cs_hilton": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "hospitality",
+            "company": "Hilton London Bankside",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/articles\/BambooBike-151.jpg?v=1771839631",
+            "blurb": "BBC taught Hilton Bankside staff to build bamboo bikes. The finished bikes joined the hotel’s guest hire fleet.",
+            "url": "\/blogs\/impact\/hilton-bankside-staff-training-and-public-hire-bikes",
+            "outcome": "Six staff, six bamboo bikes — then a public hire fleet."
+          }
+        },
+        "cs_macallan": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "premium brand",
+            "company": "The Macallan",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/articles\/SRW08823_07e4270f-777b-466d-a8fb-c9847b7d5a17.jpg?v=1771839627",
+            "blurb": "Macallan brought its ‘Masters of Their Craft’ guests to the London workshop to build bamboo frames of their own.",
+            "url": "\/blogs\/impact\/the-macallan-whisky-masters-of-their-craft",
+            "outcome": "Ten frames built in a single day."
+          }
+        },
+        "cs_article25": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "charity partnership",
+            "company": "Article 25",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/articles\/IMAGE_2_LOAFLY_c4c42877-376e-4bac-9b27-57dc8a4670a7.png?v=1771839648",
+            "blurb": "BBC worked with Article 25, which uses design to improve health, livelihoods and resilience.",
+            "url": "\/blogs\/impact\/article-25-bamboo-bikes-for-humanitarian-architecture",
+            "outcome": "Bikes built with a humanitarian architecture charity."
+          }
+        },
+        "cs_fourseasons": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "corporate",
+            "company": "Four Seasons Hotel Hampshire",
+            "outcome": "Twelve senior managers built a complete frame in three hours — then gave it away.",
+            "blurb": "Senior managers traded a strategy session for saws and bamboo; the finished bike was donated onward.",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/articles\/IMG_9772_blogheader_v2q60.webp?v=1745585988",
+            "url": "\/blogs\/news\/building-with-bamboo-how-four-seasons-senior-team-crafted-a-bike-in-three-hours"
+          }
+        },
+        "fq_cost": {
+          "type": "faq",
+          "settings": {
+            "q": "How much does a team build day cost?",
+            "a": "Priced per team, not per head — tell us your headcount and format and we quote within one working day, with a scoped plan you can forward internally."
+          }
+        },
+        "fq_size": {
+          "type": "faq",
+          "settings": {
+            "q": "How many people can take part?",
+            "a": "From 5 to 50+. Teams of 3–5 build together per frame; larger groups run as parallel build stations. Fewer than five? Join an open build weekend instead."
+          }
+        },
+        "fq_venue": {
+          "type": "faq",
+          "settings": {
+            "q": "Where does it happen?",
+            "a": "Your venue, UK-wide — we bring the workshop, tools and materials — or come to our London workshop. Indoor or outdoor both work."
+          }
+        },
+        "fq_exp": {
+          "type": "faq",
+          "settings": {
+            "q": "Do people need any experience?",
+            "a": "None. Every step is guided by our facilitators, and the tools are hand tools — if your team can measure and saw, they can build."
+          }
+        },
+        "fq_bikes": {
+          "type": "faq",
+          "settings": {
+            "q": "What happens to the bikes afterwards?",
+            "a": "Your choice: keep them, raffle them internally, or have us donate the builds onward on your behalf — the way one company’s builds went to Upcycle in Brixton."
+          }
+        }
+      },
+      "block_order": [
+        "cs_hilton",
+        "cs_macallan",
+        "cs_article25",
+        "cs_fourseasons",
+        "fq_cost",
+        "fq_size",
+        "fq_venue",
+        "fq_exp",
+        "fq_bikes"
+      ],
+      "settings": {}
+    },
+    "videoband": {
+      "type": "bbc-rd-video-embed",
+      "settings": {
+        "video_youtube": "xv0x13KNCBw",
+        "eyebrow": "A team day",
+        "heading": "watch a team build a bike together",
+        "caption": "",
+        "body": "Real bamboo, real tools, one finished bike — and the option to donate it to a community charity.",
+        "dark": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "videoband"
+  ]
+}

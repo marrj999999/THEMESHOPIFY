@@ -1,0 +1,239 @@
+{% comment %}
+  BBC Impact Statistics Section — Rebuilt with hardcoded CSS
+  Big numbers showing key impact metrics
+{% endcomment %}
+
+{%- style -%}
+  .bbc-impact-stats {
+    padding: 80px 24px;
+    background: var(--bbc-cream, var(--bbc-cream));
+  }
+
+  .bbc-impact-stats__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .bbc-impact-stats__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .bbc-impact-stats__heading {
+    font-family: var(--font-heading-family);
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 12px 0;
+    letter-spacing: -0.02em;
+  }
+
+  .bbc-impact-stats__subheading {
+    font-family: var(--font-body-family);
+    font-size: 1.125rem;
+    color: var(--color-foreground, #4a5568);
+    margin: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  .bbc-impact-stats__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .bbc-impact-stats__grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+  }
+
+  .bbc-impact-stats__card {
+    background: var(--color-background, var(--bbc-white));
+    padding: 40px 24px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .bbc-impact-stats__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+
+  .bbc-impact-stats__number {
+    font-family: var(--font-heading-family);
+    font-size: clamp(2.5rem, 6vw, 3.25rem);
+    font-weight: 800;
+    color: var(--bbc-forest, var(--bbc-forest));
+    line-height: 1;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .bbc-impact-stats__label {
+    font-family: var(--font-body-family);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+
+  .bbc-impact-stats__detail {
+    font-family: var(--font-body-family);
+    font-size: 0.875rem;
+    color: var(--color-foreground, #4a5568);
+    opacity: 0.7;
+  }
+
+  .bbc-impact-stats__source {
+    font-family: var(--font-body-family);
+    font-size: 0.6875rem;
+    color: var(--color-foreground, #4a5568);
+    opacity: 0.5;
+    margin-top: 8px;
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-impact-stats__card {
+      transition: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .bbc-impact-stats {
+      padding: 48px 16px;
+    }
+
+    .bbc-impact-stats__card {
+      padding: 28px 16px;
+    }
+
+    .bbc-impact-stats__number {
+      font-size: 2rem;
+    }
+  }
+
+  /* Fix 2026-02-23: At 375px the 2-col grid with 24px gap and 16px card padding
+     leaves only ~127px for content — too tight for number + label.
+     Tighten gap to 12px and card padding to 20px 10px. */
+  @media (max-width: 390px) {
+    .bbc-impact-stats__grid {
+      gap: 12px;
+    }
+
+    .bbc-impact-stats__card {
+      padding: 20px 10px;
+    }
+
+    .bbc-impact-stats__number {
+      font-size: 1.75rem;
+    }
+
+    .bbc-impact-stats__label {
+      font-size: 0.6875rem;
+    }
+  }
+{%- endstyle -%}
+
+<section class="bbc-impact-stats">
+  <div class="bbc-impact-stats__container">
+    <div class="bbc-impact-stats__header">
+      {% if section.settings.heading != blank %}
+        <h2 class="bbc-impact-stats__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+      
+      {% if section.settings.subheading != blank %}
+        <p class="bbc-impact-stats__subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+
+    <div class="bbc-impact-stats__grid">
+      {% for block in section.blocks %}
+        <div class="bbc-impact-stats__card" {{ block.shopify_attributes }}>
+          <div class="bbc-impact-stats__number">{{ block.settings.number }}</div>
+          <div class="bbc-impact-stats__label">{{ block.settings.label }}</div>
+          {% if block.settings.detail != blank %}
+            <div class="bbc-impact-stats__detail">{{ block.settings.detail }}</div>
+          {% endif %}
+          {% if block.settings.source != blank %}
+            <div class="bbc-impact-stats__source">{{ block.settings.source }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Impact Stats",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Impact at a Glance"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Measurable change through sustainable craftsmanship"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Statistic",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "4,000+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Builders Worldwide"
+        },
+        {
+          "type": "text",
+          "id": "detail",
+          "label": "Detail (optional)",
+          "default": "Since 2012"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source citation (optional)",
+          "info": "e.g. 'MoJ Farmer Review' — shown small beneath the stat for credibility"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Impact Stats",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "4,000+", "label": "Builders Trained", "detail": "Since 2012" }},
+        { "type": "stat", "settings": { "number": "36", "label": "Countries", "detail": "Global community" }},
+        { "type": "stat", "settings": { "number": "100%", "label": "Repairable", "detail": "Built by you, fixable by you" }},
+        { "type": "stat", "settings": { "number": "Level 2", "label": "OCN Accredited", "detail": "Qualification pathway" }}
+      ]
+    }
+  ]
+}
+{% endschema %}

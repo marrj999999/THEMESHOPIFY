@@ -1,0 +1,340 @@
+{%- comment -%}
+  Bamboo Bicycle Club — Contact (2026 redesign).
+  Distinct "ways in" routes (the audit's funder/partner/maker journeys) + a
+  native Shopify contact form. Styling in assets/bbc-redesign-2026.css.
+{%- endcomment -%}
+
+<div class="bbc-rd bbc-rd-contact">
+
+  {%- comment -%} ---------- HERO v2 (2026-08-24, James: "build a video and hero for
+    contact, show the tall bike video de1_LUwyRIE"). Family format, self-contained
+    .cvh-* namespace (the dvh/kvh pattern - no shared-file edits, no cascade war).
+    THE FILM: 35s of the tall-bike BUILD from the archive's partial 1080p master of
+    "We Built One of the Tallest Bamboo Bikes (2 Metres Up)" - only the first ~45s
+    of that download decode cleanly and the RIDING sits beyond them, so the hero
+    loops the build and the span-wrapped link delivers the ride on YouTube at
+    source quality. Links must span-wrap labels on dark (kvh lesson, same day).
+    Playback = the estate's hardened pattern. {%- endcomment -%}
+  {%- if section.settings.show_hero != false -%}
+  <header class="cvh">
+    <div class="cvh-copy">
+      <nav class="rd-crumb cvh-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><span class="rd-here">Contact</span></nav>
+      {%- if section.settings.eyebrow != blank -%}<p class="cvh-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1 class="cvh-h1">{{ section.settings.heading | default: 'talk to us' }}</h1>
+      <p class="cvh-lede">{{ section.settings.intro | default: 'Build a bike, run a programme, or back the mission — start here.' }}</p>
+      {%- if section.settings.tallbike_url != blank -%}
+        <p class="cvh-watch"><a class="cvh-watch-a" href="{{ section.settings.tallbike_url }}" target="_blank" rel="noopener"><span class="cvh-watch-t">{{ section.settings.tallbike_label | default: 'Watch the tall bike ride — two metres up &rarr;' }}</span></a></p>
+      {%- endif -%}
+    </div>
+    <div class="cvh-media">
+      {%- if section.settings.hero_image != blank -%}
+        <img class="cvh-img" src="{{ section.settings.hero_image | image_url: width: 1400 }}" alt="{{ section.settings.hero_image_alt | default: 'People building bamboo bikes in the workshop' | escape }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" fetchpriority="high">
+      {%- else -%}
+        <img class="cvh-img" src="{{ section.settings.hero_fallback | default: 'bbc-rd-workshop.jpg' | asset_url }}" alt="{{ section.settings.hero_image_alt | default: 'People building bamboo bikes in the workshop' | escape }}" width="1500" height="999" fetchpriority="high">
+      {%- endif -%}
+      {%- if section.settings.hero_video_url != blank -%}
+        <video class="cvh-film" muted loop playsinline webkit-playsinline preload="metadata"
+               {% if section.settings.hero_video_poster != blank %}poster="{{ section.settings.hero_video_poster }}"{% endif %}
+               aria-hidden="true" tabindex="-1" src="{{ section.settings.hero_video_url }}"></video>
+      {%- endif -%}
+      <div class="cvh-scrim" aria-hidden="true"></div>
+    </div>
+  </header>
+  {%- endif -%}
+
+  {%- if section.settings.show_form != false -%}
+  <section class="rd-pad">
+    <div class="rd-wrap">
+
+      {%- comment -%} Distinct routes — funder / partner / maker {%- endcomment -%}
+      {%- assign route_blocks = section.blocks | where: 'type', 'route' -%}
+      {%- if route_blocks.size > 0 -%}
+        <div class="rd-grid rd-g3 rd-mb-52px">
+          {%- for block in route_blocks -%}
+            {%- assign u = block.settings.link_url | default: '#' -%}
+            <div class="rd-reveal rd-card rd-stamp" {{ block.shopify_attributes }}>
+              <div class="rd-body">
+                {%- if block.settings.tag != blank -%}<span class="rd-tag rd-lime">{{ block.settings.tag }}</span>{%- endif -%}
+                <h2 class="rd-reveal rd-mt2 rd-fs-21px">{{ block.settings.title }}</h2>
+                <p class="rd-cmp-34664">{{ block.settings.body }}</p>
+                {%- if block.settings.link_label != blank -%}<a class="rd-btn rd-lime" href="{{ u }}">{{ block.settings.link_label }}</a>{%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <h2 class="rd-reveal rd-mb-8px">{{ section.settings.form_heading | default: 'send us a message' }}</h2>
+      {%- if section.settings.contact_line != blank -%}<p class="rd-lede rd-mb-8px">{{ section.settings.contact_line }}</p>{%- endif -%}
+      {%- if section.settings.contact_phone != blank -%}<p class="rd-mb-24px">Call us: <a href="tel:{{ section.settings.contact_phone | remove: ' ' }}">{{ section.settings.contact_phone }}</a></p>{%- endif -%}
+
+      {%- form 'contact' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="rd-form-note rd-ok">{{ section.settings.success_text | default: "Thanks — we've got your message and will be in touch." }}</div>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <div class="rd-form-note rd-err">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+        <div class="rd-form">
+          <div><label for="rd-cname">Name</label><input id="rd-cname" type="text" name="contact[name]" value="{{ form.name }}" autocomplete="name"></div>
+          <div><label for="rd-cemail">Email</label><input id="rd-cemail" type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" required></div>
+          <div><label for="rd-cphone">Phone (optional)</label><input id="rd-cphone" type="tel" name="contact[phone]" value="{{ form.phone }}" autocomplete="tel"></div>
+          <div><label for="rd-cmsg">Message</label><textarea id="rd-cmsg" name="contact[body]" required>{{ form.body }}</textarea></div>
+          <div><button type="submit" class="rd-btn rd-lime">{{ section.settings.submit_label | default: 'Send message' }}</button></div>
+        </div>
+      {%- endform -%}
+    </div>
+  </section>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+/* .cvh-* contact hero - family geometry, self-contained. */
+.cvh{display:grid;grid-template-columns:0.82fr 1fr;align-items:stretch;min-height:clamp(520px,74vh,840px);min-height:clamp(520px,74svh,840px);background:var(--forest,#003C32);overflow:hidden;isolation:isolate}
+.cvh-copy{position:relative;z-index:3;display:flex;flex-direction:column;justify-content:center;padding:clamp(26px,4.8vh,80px) clamp(20px,2.6vw,48px) clamp(30px,5.4vh,84px) var(--bbc-gutter,clamp(32px,6vw,120px));container-type:inline-size}
+.cvh-copy::before{content:"";position:absolute;left:calc(var(--bbc-gutter,48px) - 34px);top:13%;bottom:13%;width:3px;border-radius:3px;background:repeating-linear-gradient(to bottom,var(--lime,#D4FD62) 0 20px,rgba(6,35,28,.55) 20px 24px)}
+.cvh-crumb{margin-bottom:clamp(12px,2vh,22px)}
+.cvh-crumb,.cvh-crumb a{color:rgba(230,220,200,.72)!important;text-shadow:none}
+.cvh-crumb a:hover{color:var(--lime,#D4FD62)!important}
+.cvh-crumb .rd-here{color:var(--lime,#D4FD62)}
+.cvh-eyebrow{margin:0 0 clamp(10px,1.8vh,20px);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--lime,#D4FD62)}
+.cvh .cvh-h1{margin:0;color:var(--bone,#E6DCC8)!important;font-size:clamp(2.4rem,7vw,5.4rem);line-height:1.02;letter-spacing:-.01em;text-wrap:balance}
+.cvh-lede{margin:clamp(14px,2.2vh,24px) 0 0;max-width:44ch;color:rgba(238,243,236,.92);font-size:clamp(1rem,2cqw,1.25rem);line-height:1.55}
+.cvh-watch{margin:clamp(16px,2.6vh,26px) 0 0;font-size:14px}
+.cvh-watch-a{font-weight:700;text-decoration:underline!important;text-underline-offset:4px;text-decoration-color:rgba(212,253,98,.7)!important}
+.cvh-watch-a .cvh-watch-t{color:var(--lime,#D4FD62)}
+.cvh-watch-a:hover .cvh-watch-t{color:rgba(238,243,236,.95)}
+.cvh-media{position:relative;z-index:1;min-height:0;overflow:hidden}
+.cvh-img,.cvh-film{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cvh-film{opacity:0;transition:opacity .6s ease;z-index:1}
+.cvh-film.is-on{opacity:1}
+.cvh-scrim{position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,var(--forest,#003C32) 0%,rgba(0,60,50,.34) 28%,rgba(0,60,50,0) 64%);pointer-events:none}
+@media(max-width:1199px){
+  .cvh{grid-template-columns:1fr;min-height:0}
+  .cvh-media{grid-row:1;height:clamp(240px,38svh,440px)}
+  .cvh-copy{grid-row:2;padding-block:clamp(28px,5vw,56px)}
+  .cvh-copy::before{position:relative;inset:auto;width:68px;height:3px;margin:0 0 18px;background:repeating-linear-gradient(to right,var(--lime,#D4FD62) 0 20px,rgba(6,35,28,.55) 20px 24px)}
+  .cvh-scrim{background:linear-gradient(0deg,var(--forest,#003C32) 0%,rgba(0,60,50,.32) 26%,rgba(0,60,50,0) 62%)}
+}
+@media(max-width:749px){ .cvh-media{height:clamp(190px,28svh,340px)} }
+@media(prefers-reduced-motion:reduce){ .cvh-film{display:none} }
+{% endstylesheet %}
+
+{% javascript %}
+/* Contact hero film - the estate's hardened pattern. */
+(function () {
+  var v = document.querySelector('.cvh-film');
+  if (!v) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  /* phone gate removed 2026-08-24 - James: hero films must play on mobile too */
+  var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if (conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ''))) return;
+  v.muted = true; v.defaultMuted = true;
+  function start() { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  v.addEventListener('playing', function () { v.classList.add('is-on'); }, { once: true });
+  v.setAttribute('preload', 'auto');
+  v.load();
+  if (v.readyState >= 3) start();
+  else v.addEventListener('canplay', start, { once: true });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { v.pause(); }
+    else if (v.classList.contains('is-on')) { start(); }
+  });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Contact 2026 (new)",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hero",
+      "label": "Show this band",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Get in touch"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "talk to us"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro"
+    },
+    {
+      "type": "header",
+      "content": "Hero image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image (workshop / build day — no identifiable learners)"
+    },
+    {
+      "type": "text",
+      "id": "hero_fallback",
+      "label": "Default hero photo filename",
+      "default": "bbc-rd-workshop.jpg"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero image alt text",
+      "default": "Inside the bamboo bicycle workshop"
+    },
+    {
+      "type": "header",
+      "content": "Hero film (looping, silent)"
+    },
+    {
+      "type": "text",
+      "id": "hero_video_url",
+      "label": "Film URL (mp4, Shopify Files)",
+      "default": "https://cdn.shopify.com/videos/c/o/v/97baa41777e84834a450edde2c46513c.mp4",
+      "info": "35s tall-bike build loop. Clear to show the photo only."
+    },
+    {
+      "type": "text",
+      "id": "hero_video_poster",
+      "label": "Film poster URL",
+      "default": "https://cdn.shopify.com/s/files/1/0502/8695/2631/files/preview_images/97baa41777e84834a450edde2c46513c.thumbnail.0000000000.jpg?v=1787571346"
+    },
+    {
+      "type": "text",
+      "id": "tallbike_url",
+      "label": "Tall-bike film link (YouTube)",
+      "default": "https://www.youtube.com/watch?v=de1_LUwyRIE"
+    },
+    {
+      "type": "text",
+      "id": "tallbike_label",
+      "label": "Tall-bike link label",
+      "default": "Watch the tall bike ride — two metres up &rarr;"
+    },
+    {
+      "type": "header",
+      "content": "Form & details"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_form",
+      "label": "Show this band (routes + contact form)",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form heading",
+      "default": "send us a message"
+    },
+    {
+      "type": "text",
+      "id": "contact_line",
+      "label": "Contact line (email)",
+      "default": "Or email info@bamboobicycleclub.org"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "Phone (optional)",
+      "default": "+44 7446 930945"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Submit button label",
+      "default": "Send message"
+    },
+    {
+      "type": "text",
+      "id": "success_text",
+      "label": "Success message",
+      "default": "Thanks — we've got your message and will be in touch."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "route",
+      "name": "Way in",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "default": "Make"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "build a bike"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Workshops & kits →"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact 2026 (new)",
+      "blocks": [
+        {
+          "type": "route",
+          "settings": {
+            "tag": "Make",
+            "title": "Build a bike",
+            "body": "Book a workshop or order a kit — no experience needed.",
+            "link_label": "Workshops & kits →"
+          }
+        },
+        {
+          "type": "route",
+          "settings": {
+            "tag": "Partner",
+            "title": "Work with us",
+            "body": "Run an accredited programme in a prison, school or college, or a corporate team-build day.",
+            "link_label": "Our programmes →"
+          }
+        },
+        {
+          "type": "route",
+          "settings": {
+            "tag": "Support",
+            "title": "Back the mission",
+            "body": "Fund a cohort, offer placements, or champion our work.",
+            "link_label": "Get involved →"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

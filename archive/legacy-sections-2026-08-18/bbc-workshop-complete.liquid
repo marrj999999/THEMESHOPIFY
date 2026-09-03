@@ -1,0 +1,1770 @@
+{% comment %}
+  BBC Workshop Complete — Full workshop page with images
+  
+  Hardcoded content to bypass Shopify block caching issues.
+  Includes image placeholders with visual strategy guidance.
+{% endcomment %}
+
+<div class="bbc-workshop-page">
+  
+  {%- comment -%} HERO SECTION WITH BACKGROUND IMAGE {%- endcomment -%}
+  <section class="bbc-workshop-hero" {% if section.settings.hero_image %}style="background-image: url('{{ section.settings.hero_image | image_url: width: 1920 }}');"{% endif %}>
+    <div class="bbc-workshop-hero__overlay"></div>
+    <div class="bbc-workshop-hero__content page-width">
+      <span class="bbc-workshop-hero__eyebrow">{{ section.settings.hero_eyebrow | default: 'Hands-On Experience' }}</span>
+      <h1 class="bbc-workshop-hero__title">{{ section.settings.hero_title | default: 'Build Your Own Bamboo Bicycle' }}</h1>
+      <p class="bbc-workshop-hero__subtitle">{{ section.settings.hero_subtitle | default: "2-3 days. Expert guidance. A frame that's truly yours." }}</p>
+      <div class="bbc-workshop-hero__cta">
+        <a href="#booking" class="bbc-btn bbc-btn--primary bbc-btn--lg">Book a Workshop</a>
+        <a href="#experience" class="bbc-btn bbc-btn--outline bbc-btn--lg">See How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} TRUST BAR {%- endcomment -%}
+  <section class="bbc-workshop-trust">
+    <div class="page-width">
+      <div class="bbc-workshop-trust__grid">
+        <div class="bbc-workshop-trust__item">
+          <span class="bbc-workshop-trust__number">4,000+</span>
+          <span class="bbc-workshop-trust__label">Bikes Built</span>
+        </div>
+        <div class="bbc-workshop-trust__item">
+          <span class="bbc-workshop-trust__number">13</span>
+          <span class="bbc-workshop-trust__label">Years Experience</span>
+        </div>
+        <div class="bbc-workshop-trust__item">
+          <span class="bbc-workshop-trust__number">3</span>
+          <span class="bbc-workshop-trust__label">Workshop Locations</span>
+        </div>
+        <div class="bbc-workshop-trust__item">
+          <span class="bbc-workshop-trust__number">95%</span>
+          <span class="bbc-workshop-trust__label">First-Time Builders</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} INTRO WITH SIDE IMAGE {%- endcomment -%}
+  <section class="bbc-workshop-intro">
+    <div class="page-width">
+      <div class="bbc-workshop-intro__grid">
+        <div class="bbc-workshop-intro__content">
+          <h2 class="bbc-workshop-intro__heading">{{ section.settings.intro_heading | default: 'No Experience? No Problem.' }}</h2>
+          <p class="bbc-workshop-intro__text">{{ section.settings.intro_text | default: "Since 2012, we've taught thousands of people — most with zero framebuilding experience — to create their own bamboo bicycles. Our workshops are designed for complete beginners. If you can hold a tool, you can build a bike." }}</p>
+          <ul class="bbc-workshop-intro__highlights">
+            <li>{% render 'bbc-icons', icon: 'check_circle', size: 20 %} Small groups (max 6 builders)</li>
+            <li>{% render 'bbc-icons', icon: 'check_circle', size: 20 %} Expert guidance every step</li>
+            <li>{% render 'bbc-icons', icon: 'check_circle', size: 20 %} Take home a rideable frame</li>
+          </ul>
+        </div>
+        <div class="bbc-workshop-intro__image">
+          {% if section.settings.intro_image %}
+            {{ section.settings.intro_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: 'Workshop participant building' }}
+          {% else %}
+            <div class="bbc-placeholder bbc-placeholder--green">
+              <span class="bbc-placeholder__icon">{% render 'bbc-icons', icon: 'person', size: 48 %}</span>
+              <span class="bbc-placeholder__text">Participant learning to build</span>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} THE EXPERIENCE - DAY BY DAY WITH IMAGES {%- endcomment -%}
+  <section class="bbc-workshop-experience" id="experience">
+    <div class="page-width">
+      <header class="bbc-workshop-experience__header">
+        <span class="bbc-section-eyebrow">The Workshop Experience</span>
+        <h2 class="bbc-section-heading">What Happens Over 2-3 Days</h2>
+        <p class="bbc-section-subheading">From raw bamboo to finished frame — here's your journey</p>
+      </header>
+      
+      <div class="bbc-workshop-days">
+        {%- comment -%} DAY 1 {%- endcomment -%}
+        <div class="bbc-workshop-day">
+          <div class="bbc-workshop-day__image">
+            {% if section.settings.day1_image %}
+              {{ section.settings.day1_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: 'Day 1: Design and setup' }}
+            {% else %}
+              <div class="bbc-placeholder bbc-placeholder--blue">
+                <span class="bbc-placeholder__icon">{% render 'bbc-icons', icon: 'straighten', size: 40 %}</span>
+                <span class="bbc-placeholder__text">Geometry setup in jig</span>
+              </div>
+            {% endif %}
+          </div>
+          <div class="bbc-workshop-day__content">
+            <div class="bbc-workshop-day__number">1</div>
+            <h3 class="bbc-workshop-day__title">{{ section.settings.day1_title | default: 'Design & Setup' }}</h3>
+            <ul class="bbc-workshop-day__list">
+              <li>Custom geometry consultation based on your riding style</li>
+              <li>Select your bamboo tubes from our sustainably-sourced stock</li>
+              <li>Set up your frame in our precision jig system</li>
+              <li>Learn tube mitering and preparation techniques</li>
+            </ul>
+            <p class="bbc-workshop-day__duration">
+              {% render 'bbc-icons', icon: 'timer', size: 16 %} Approx 6-8 hours
+            </p>
+          </div>
+        </div>
+        
+        {%- comment -%} DAY 2 {%- endcomment -%}
+        <div class="bbc-workshop-day bbc-workshop-day--reverse">
+          <div class="bbc-workshop-day__image">
+            {% if section.settings.day2_image %}
+              {{ section.settings.day2_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: 'Day 2: Building joints' }}
+            {% else %}
+              <div class="bbc-placeholder bbc-placeholder--green">
+                <span class="bbc-placeholder__icon">{% render 'bbc-icons', icon: 'handyman', size: 40 %}</span>
+                <span class="bbc-placeholder__text">Wrapping joints with fiber</span>
+              </div>
+            {% endif %}
+          </div>
+          <div class="bbc-workshop-day__content">
+            <div class="bbc-workshop-day__number">2</div>
+            <h3 class="bbc-workshop-day__title">{{ section.settings.day2_title | default: 'Building & Joining' }}</h3>
+            <ul class="bbc-workshop-day__list">
+              <li>Heat treat bamboo joints for strength</li>
+              <li>Wrap joints with natural fibers and epoxy</li>
+              <li>Learn the BBC lug system for perfect alignment</li>
+              <li>Build bottom bracket and headtube assemblies</li>
+            </ul>
+            <p class="bbc-workshop-day__duration">
+              {% render 'bbc-icons', icon: 'timer', size: 16 %} Approx 8-10 hours
+            </p>
+          </div>
+        </div>
+        
+        {%- comment -%} DAY 3 {%- endcomment -%}
+        <div class="bbc-workshop-day">
+          <div class="bbc-workshop-day__image">
+            {% if section.settings.day3_image %}
+              {{ section.settings.day3_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: 'Day 3: Finishing' }}
+            {% else %}
+              <div class="bbc-placeholder bbc-placeholder--gold">
+                <span class="bbc-placeholder__icon">{% render 'bbc-icons', icon: 'celebration', size: 40 %}</span>
+                <span class="bbc-placeholder__text">Proud builder with finished frame</span>
+              </div>
+            {% endif %}
+          </div>
+          <div class="bbc-workshop-day__content">
+            <div class="bbc-workshop-day__number">3</div>
+            <h3 class="bbc-workshop-day__title">{{ section.settings.day3_title | default: 'Finishing & Completion' }}</h3>
+            <ul class="bbc-workshop-day__list">
+              <li>Final wrapping and joint finishing</li>
+              <li>Sand and prep for clear coat</li>
+              <li>Apply protective finish</li>
+              <li>Final inspection and celebration!</li>
+            </ul>
+            <p class="bbc-workshop-day__duration">
+              {% render 'bbc-icons', icon: 'timer', size: 16 %} Approx 4-6 hours
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <p class="bbc-workshop-experience__note">
+        {% render 'bbc-icons', icon: 'info', size: 20 %}
+        <span>Build times vary by frame type. Road frames typically complete in 2 days. MTB and complex geometries may need 3 days.</span>
+      </p>
+    </div>
+  </section>
+
+  {%- comment -%} GALLERY SECTION {%- endcomment -%}
+  <section class="bbc-workshop-gallery">
+    <div class="page-width">
+      <header class="bbc-workshop-gallery__header">
+        <span class="bbc-section-eyebrow">The Results</span>
+        <h2 class="bbc-section-heading">Workshop Builds</h2>
+        <p class="bbc-section-subheading">Frames built by first-time builders just like you</p>
+      </header>
+      
+      <div class="bbc-workshop-gallery__grid">
+        {% for i in (1..6) %}
+          {% assign img_key = 'gallery_image_' | append: i %}
+          {% if section.settings[img_key] %}
+            <div class="bbc-workshop-gallery__item">
+              {{ section.settings[img_key] | image_url: width: 400 | image_tag: loading: 'lazy', alt: 'Workshop build gallery' }}
+            </div>
+          {% else %}
+            <div class="bbc-workshop-gallery__item">
+              <div class="bbc-placeholder bbc-placeholder--light">
+                <span class="bbc-placeholder__icon">{% render 'bbc-icons', icon: 'pedal_bike', size: 32 %}</span>
+                <span class="bbc-placeholder__text">Gallery {{ i }}</span>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      <div class="bbc-workshop-gallery__cta">
+        <a href="https://instagram.com/bamboobicycleclub" target="_blank" rel="noopener" class="bbc-link">
+          See more on Instagram →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} VIDEO SECTION — only shows when video_url is set {%- endcomment -%}
+  {% if section.settings.video_url != blank %}
+  <section class="bbc-workshop-video">
+    <div class="page-width">
+      <header class="bbc-workshop-video__header">
+        <h2 class="bbc-section-heading">See the Workshop in Action</h2>
+      </header>
+      <div class="bbc-workshop-video__wrapper">
+        {% assign video_id = section.settings.video_url | split: 'v=' | last | split: '&' | first %}
+        {% if section.settings.video_url contains 'youtu.be' %}
+          {% assign video_id = section.settings.video_url | split: 'youtu.be/' | last | split: '?' | first %}
+        {% endif %}
+        <iframe 
+          src="https://www.youtube.com/embed/{{ video_id }}" 
+          title="BBC Workshop Experience"
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {%- comment -%} WHAT'S INCLUDED {%- endcomment -%}
+  <section class="bbc-workshop-included">
+    <div class="page-width">
+      <header class="bbc-workshop-included__header">
+        <span class="bbc-section-eyebrow">Everything You Need</span>
+        <h2 class="bbc-section-heading">What's Included</h2>
+      </header>
+      
+      <div class="bbc-workshop-included__grid">
+        <div class="bbc-workshop-included__item">
+          <div class="bbc-workshop-included__icon">{% render 'bbc-icons', icon: 'inventory', size: 32 %}</div>
+          <h3>Complete Frame Kit</h3>
+          <p>All bamboo tubes, lugs, dropouts, and materials needed to build your frame</p>
+        </div>
+        <div class="bbc-workshop-included__item">
+          <div class="bbc-workshop-included__icon">{% render 'bbc-icons', icon: 'support_agent', size: 32 %}</div>
+          <h3>Expert Guidance</h3>
+          <p>Step-by-step instruction from experienced frame builders (max 6 per session)</p>
+        </div>
+        <div class="bbc-workshop-included__item">
+          <div class="bbc-workshop-included__icon">{% render 'bbc-icons', icon: 'build', size: 32 %}</div>
+          <h3>Professional Tools</h3>
+          <p>Access to all tools, jigs, and equipment — nothing to buy or bring</p>
+        </div>
+        <div class="bbc-workshop-included__item">
+          <div class="bbc-workshop-included__icon">{% render 'bbc-icons', icon: 'restaurant', size: 32 %}</div>
+          <h3>Lunch & Refreshments</h3>
+          <p>Tea, coffee, snacks, and lunch provided throughout your build days</p>
+        </div>
+        <div class="bbc-workshop-included__item">
+          <div class="bbc-workshop-included__icon">{% render 'bbc-icons', icon: 'groups', size: 32 %}</div>
+          <h3>Community Access</h3>
+          <p>Join our global builder community for ongoing support and inspiration</p>
+        </div>
+        <div class="bbc-workshop-included__item">
+          <div class="bbc-workshop-included__icon">{% render 'bbc-icons', icon: 'play_circle', size: 32 %}</div>
+          <h3>Video Tutorials</h3>
+          <p>Full access to our tutorial library for component assembly and maintenance</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} TESTIMONIALS WITH IMAGES {%- endcomment -%}
+  <section class="bbc-workshop-testimonials">
+    <div class="page-width">
+      <header class="bbc-workshop-testimonials__header">
+        <span class="bbc-section-eyebrow">Builder Stories</span>
+        <h2 class="bbc-section-heading">What Our Workshop Graduates Say</h2>
+      </header>
+      
+      <div class="bbc-workshop-testimonials__grid">
+        <blockquote class="bbc-workshop-testimonial">
+          <div class="bbc-workshop-testimonial__image">
+            {% if section.settings.testimonial_1_image %}
+              {{ section.settings.testimonial_1_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: section.settings.testimonial_1_name }}
+            {% else %}
+              <div class="bbc-placeholder bbc-placeholder--avatar">
+                {% render 'bbc-icons', icon: 'person', size: 32 %}
+              </div>
+            {% endif %}
+          </div>
+          <p class="bbc-workshop-testimonial__quote">"{{ section.settings.testimonial_1_quote | default: "An incredible experience. I came with zero framebuilding experience and left with a bike I'm genuinely proud of. The instructors were patient, knowledgeable, and clearly passionate." }}"</p>
+          <footer class="bbc-workshop-testimonial__footer">
+            <strong>{{ section.settings.testimonial_1_name | default: 'Workshop Participant' }}</strong>
+            <span>{{ section.settings.testimonial_1_detail | default: 'First-time builder, London' }}</span>
+          </footer>
+        </blockquote>
+        
+        <blockquote class="bbc-workshop-testimonial">
+          <div class="bbc-workshop-testimonial__image">
+            {% if section.settings.testimonial_2_image %}
+              {{ section.settings.testimonial_2_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: section.settings.testimonial_2_name }}
+            {% else %}
+              <div class="bbc-placeholder bbc-placeholder--avatar">
+                {% render 'bbc-icons', icon: 'person', size: 32 %}
+              </div>
+            {% endif %}
+          </div>
+          <p class="bbc-workshop-testimonial__quote">"{{ section.settings.testimonial_2_quote | default: "Best birthday present I ever gave myself. Two days of pure focus and creativity. Now I ride past bike shops and think I made something better than anything in there." }}"</p>
+          <footer class="bbc-workshop-testimonial__footer">
+            <strong>{{ section.settings.testimonial_2_name | default: 'Marcus' }}</strong>
+            <span>{{ section.settings.testimonial_2_detail | default: 'Gravel build, Netherlands' }}</span>
+          </footer>
+        </blockquote>
+        
+        <blockquote class="bbc-workshop-testimonial">
+          <div class="bbc-workshop-testimonial__image">
+            {% if section.settings.testimonial_3_image %}
+              {{ section.settings.testimonial_3_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: section.settings.testimonial_3_name }}
+            {% else %}
+              <div class="bbc-placeholder bbc-placeholder--avatar">
+                {% render 'bbc-icons', icon: 'person', size: 32 %}
+              </div>
+            {% endif %}
+          </div>
+          <p class="bbc-workshop-testimonial__quote">"{{ section.settings.testimonial_3_quote | default: "The small group size meant we got loads of individual attention. James and the team were brilliant at explaining the why, not just the how." }}"</p>
+          <footer class="bbc-workshop-testimonial__footer">
+            <strong>{{ section.settings.testimonial_3_name | default: 'Sarah' }}</strong>
+            <span>{{ section.settings.testimonial_3_detail | default: 'Road bike build, Bristol' }}</span>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} LOCATIONS WITH IMAGES {%- endcomment -%}
+  <section class="bbc-workshop-locations">
+    <div class="page-width">
+      <header class="bbc-workshop-locations__header">
+        <span class="bbc-section-eyebrow">Where We Build</span>
+        <h2 class="bbc-section-heading">Workshop Locations</h2>
+      </header>
+      
+      <div class="bbc-workshop-locations__grid">
+        <div class="bbc-workshop-location">
+          <div class="bbc-workshop-location__image">
+            {% if section.settings.london_image %}
+              {{ section.settings.london_image | image_url: width: 400 | image_tag: loading: 'lazy', alt: 'London workshop' }}
+            {% else %}
+              <div class="bbc-placeholder bbc-placeholder--location">
+                {% render 'bbc-icons', icon: 'location_on', size: 32 %}
+                <span>London</span>
+              </div>
+            {% endif %}
+          </div>
+          <h3>London, UK</h3>
+          <p>Our original workshop in East London. The heart of Bamboo Bicycle Club since 2012.</p>
+          <span class="bbc-workshop-location__address">Hackney, London E8</span>
+          <a href="#booking" class="bbc-workshop-location__link">Book London →</a>
+        </div>
+        
+        <div class="bbc-workshop-location">
+          <div class="bbc-workshop-location__image">
+            {% if section.settings.amersfoort_image %}
+              {{ section.settings.amersfoort_image | image_url: width: 400 | image_tag: loading: 'lazy', alt: 'Amersfoort workshop' }}
+            {% else %}
+              <div class="bbc-placeholder bbc-placeholder--location">
+                {% render 'bbc-icons', icon: 'location_on', size: 32 %}
+                <span>Amersfoort</span>
+              </div>
+            {% endif %}
+          </div>
+          <h3>Amersfoort, Netherlands</h3>
+          <p>Our European hub serving the Netherlands, Belgium, and Germany.</p>
+          <span class="bbc-workshop-location__address">Amersfoort, NL</span>
+          <a href="#booking" class="bbc-workshop-location__link">Book Amersfoort →</a>
+        </div>
+        
+        <div class="bbc-workshop-location">
+          <div class="bbc-workshop-location__image">
+            {% if section.settings.toulouse_image %}
+              {{ section.settings.toulouse_image | image_url: width: 400 | image_tag: loading: 'lazy', alt: 'Toulouse workshop' }}
+            {% else %}
+              <div class="bbc-placeholder bbc-placeholder--location">
+                {% render 'bbc-icons', icon: 'location_on', size: 32 %}
+                <span>Toulouse</span>
+              </div>
+            {% endif %}
+          </div>
+          <h3>Toulouse, France</h3>
+          <p>Our newest location serving southern France and Spain.</p>
+          <span class="bbc-workshop-location__address">Toulouse, France</span>
+          <a href="/pages/toulouse-workshop" class="bbc-workshop-location__link">Book Toulouse →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} PRICING {%- endcomment -%}
+  <section class="bbc-workshop-pricing" id="booking">
+    <div class="page-width">
+      <header class="bbc-workshop-pricing__header">
+        <span class="bbc-section-eyebrow">Book Your Build</span>
+        <h2 class="bbc-section-heading">Workshop Options</h2>
+        <p class="bbc-section-subheading">Choose your frame type. All include complete materials and expert guidance.</p>
+      </header>
+      
+      <div class="bbc-workshop-pricing__grid">
+        <div class="bbc-workshop-option">
+          <h3>Road Frame</h3>
+          <div class="bbc-workshop-option__price">£500</div>
+          <ul class="bbc-workshop-option__features">
+            <li>{% render 'bbc-icons', icon: 'check_circle', size: 16 %} 2-day workshop</li>
+            <li>{% render 'bbc-icons', icon: 'check_circle', size: 16 %} Lightweight road geometry</li>
+            <li>{% render 'bbc-icons', icon: 'check_circle', size: 16 %} All materials included</li>
+            <li>{% render 'bbc-icons', icon: 'check_circle', size: 16 %} Lunch & refreshments</li>
+          </ul>
+          <a href="{{ section.settings.road_booking_url | default: '/products/road-frame-workshop' }}" class="bbc-btn bbc-btn--primary">Check Availability</a>
+        </div>
+        
+        <div class="bbc-workshop-option bbc-workshop-option--featured">
+          <span class="bbc-workshop-option__badge">Most Popular</span>
+          <h3>Gravel / Adventure</h3>
+          <div class="bbc-workshop-option__price">£550</div>
+          <ul class="bbc-workshop-option__features">
+            <li>{% render 'bbc-icons', icon: 'check_circle', size: 16 %} 2-3 day workshop</li>
+            <li>{% render 'bbc-icons', icon: 'check_circle', size: 16 %} Versatile adventure geometry</li>
+            <li>{% render 'bbc-icons', icon: 'check_circle', size: 16 %} Disc brake compatible</li>
+            <li>{% render 'bbc-icons', icon: 'check_circle', size: 16 %} All materials included</li>
+          </ul>
+          <a href="{{ section.settings.gravel_booking_url | default: '/products/gravel-frame-workshop' }}" class="bbc-btn bbc-btn--primary">Check Availability</a>
+        </div>
+        
+        <div class="bbc-workshop-option">
+          <h3>Hardtail MTB</h3>
+          <div class="bbc-workshop-option__price">£595</div>
+          <ul class="bbc-workshop-option__features">
+            <li>{% render 'bbc-icons', icon: 'check_circle', size: 16 %} 3-day workshop</li>
+            <li>{% render 'bbc-icons', icon: 'check_circle', size: 16 %} Trail-ready geometry</li>
+            <li>{% render 'bbc-icons', icon: 'check_circle', size: 16 %} Disc brake compatible</li>
+            <li>{% render 'bbc-icons', icon: 'check_circle', size: 16 %} Boost or standard spacing</li>
+          </ul>
+          <a href="{{ section.settings.mtb_booking_url | default: '/products/mtb-frame-workshop' }}" class="bbc-btn bbc-btn--primary">Check Availability</a>
+        </div>
+      </div>
+      
+      <div class="bbc-workshop-pricing__note">
+        <p>
+          {% render 'bbc-icons', icon: 'pedal_bike', size: 20 %}
+          <strong>Cycle to Work Accepted</strong> — Save 25-39% through your employer's scheme. We're registered with all major providers.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} FAQ {%- endcomment -%}
+  <section class="bbc-workshop-faq">
+    <div class="page-width">
+      <header class="bbc-workshop-faq__header">
+        <span class="bbc-section-eyebrow">Common Questions</span>
+        <h2 class="bbc-section-heading">Workshop FAQ</h2>
+      </header>
+      
+      <div class="bbc-workshop-faq__grid">
+        <details class="bbc-workshop-faq__item">
+          <summary>Do I need any experience?</summary>
+          <p>None at all. 95% of our workshop participants have never built anything like this before. We guide you through every step, from selecting your bamboo to the final finish.</p>
+        </details>
+        
+        <details class="bbc-workshop-faq__item">
+          <summary>What should I bring?</summary>
+          <p>Just yourself and old clothes you don't mind getting epoxy on. We provide everything else — tools, materials, safety equipment, lunch, tea and coffee.</p>
+        </details>
+        
+        <details class="bbc-workshop-faq__item">
+          <summary>Can I bring a friend?</summary>
+          <p>Absolutely! Many people book with partners or friends. Building together is a great experience. Group discounts available for 3+ bookings.</p>
+        </details>
+        
+        <details class="bbc-workshop-faq__item">
+          <summary>Can I use Cycle to Work?</summary>
+          <p>Yes! We're registered with all major Cycle to Work providers including Cyclescheme, Cycle Solutions, and Bike2Work. You can typically save 25-39%.</p>
+        </details>
+        
+        <details class="bbc-workshop-faq__item">
+          <summary>How do I get my frame home?</summary>
+          <p>Most people carry their frame on public transport or in a car boot. We can also arrange courier shipping (additional cost) if you're traveling from further away.</p>
+        </details>
+        
+        <details class="bbc-workshop-faq__item">
+          <summary>What about components?</summary>
+          <p>The workshop produces a complete frame ready for components. We can advise on component choices, and sell complete groupset packages separately.</p>
+        </details>
+        
+        <details class="bbc-workshop-faq__item">
+          <summary>How long will the frame last?</summary>
+          <p>With proper care, bamboo frames ride for 8-12+ years. We've had frames from our earliest workshops still going strong. Our support doesn't end when you leave.</p>
+        </details>
+        
+        <details class="bbc-workshop-faq__item">
+          <summary>What's your cancellation policy?</summary>
+          <p>Full refund if cancelled 14+ days before. 50% refund or date transfer 7-13 days before. No refund within 7 days, but you can transfer your booking to someone else.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} PRESS {%- endcomment -%}
+  <section class="bbc-workshop-press">
+    <div class="page-width">
+      <p class="bbc-workshop-press__label">As featured in</p>
+      <div class="bbc-workshop-press__logos">
+        {% render 'bbc-icons', icon: 'ft-logo' %}
+        {% render 'bbc-icons', icon: 'guardian-logo' %}
+        {% render 'bbc-icons', icon: 'telegraph-logo' %}
+        {% render 'bbc-icons', icon: 'grand-designs-logo' %}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} CONTACT {%- endcomment -%}
+  <section class="bbc-workshop-contact">
+    <div class="page-width">
+      <div class="bbc-workshop-contact__content">
+        <h2>Questions? We're Here to Help</h2>
+        <p>Not sure which workshop is right for you? Need to discuss accessibility, dates, or group bookings?</p>
+        <div class="bbc-workshop-contact__buttons">
+          <a href="mailto:info@bamboobicycleclub.org" class="bbc-btn bbc-btn--primary">
+            {% render 'bbc-icons', icon: 'mail', size: 18 %} Email Us
+          </a>
+          <a href="/pages/contact" class="bbc-btn bbc-btn--outline">
+            Contact Form
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<style>
+  /* ===== BBC WORKSHOP PAGE STYLES ===== */
+  
+  .bbc-workshop-page {
+    --bbc-forest: var(--bbc-forest);
+    --bbc-teal: var(--bbc-teal);
+    --bbc-gold: var(--bbc-gold);
+    --bbc-cream: #f8f7f4;
+    --bbc-steel: #4a5568;
+    --bbc-white: var(--bbc-white);
+  }
+  
+  /* Section utilities */
+  .bbc-section-eyebrow {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--bbc-teal);
+    margin-bottom: 8px;
+  }
+  
+  .bbc-section-heading {
+    font-family: var(--font-heading-family);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: var(--bbc-forest);
+    margin: 0 0 12px 0;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  
+  .bbc-section-subheading {
+    font-size: 1.125rem;
+    color: var(--bbc-steel);
+    margin: 0;
+    max-width: 600px;
+  }
+  
+  /* Placeholders */
+  .bbc-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .bbc-placeholder--green { background: #e8f5e9; color: var(--bbc-teal); }
+  .bbc-placeholder--blue { background: #e3f2fd; color: #1565c0; }
+  .bbc-placeholder--gold { background: var(--bbc-white)8e1; color: #f57f17; }
+  .bbc-placeholder--light { background: var(--bbc-cream); color: var(--bbc-steel); }
+  .bbc-placeholder--video { background: var(--bbc-forest); color: var(--bbc-white); min-height: 400px; }
+  .bbc-placeholder--avatar { 
+    width: 80px; 
+    height: 80px; 
+    min-height: auto;
+    border-radius: 50%; 
+    background: var(--bbc-cream); 
+    color: var(--bbc-steel); 
+  }
+  .bbc-placeholder--location { background: var(--bbc-cream); min-height: 180px; }
+  
+  .bbc-placeholder__text {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    max-width: 150px;
+  }
+  
+  /* Buttons */
+  .bbc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .bbc-btn--primary {
+    background: var(--bbc-forest);
+    color: var(--bbc-white);
+    border-color: var(--bbc-forest);
+  }
+  
+  .bbc-btn--primary:hover {
+    background: var(--bbc-teal);
+    border-color: var(--bbc-teal);
+  }
+  
+  .bbc-btn--outline {
+    background: transparent;
+    color: var(--bbc-forest);
+    border-color: var(--bbc-forest);
+  }
+  
+  .bbc-btn--outline:hover {
+    background: var(--bbc-forest);
+    color: var(--bbc-white);
+  }
+  
+  .bbc-btn--lg {
+    padding: 16px 32px;
+    font-size: 1rem;
+  }
+  
+  .bbc-btn:focus-visible {
+    outline: 3px solid var(--bbc-gold);
+    outline-offset: 2px;
+  }
+  
+  .bbc-link {
+    font-weight: 600;
+    color: var(--bbc-teal);
+    text-decoration: none;
+  }
+  
+  .bbc-link:hover { text-decoration: underline; }
+  
+  /* ===== HERO ===== */
+  .bbc-workshop-hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--bbc-forest) 0%, var(--bbc-teal) 100%);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+  }
+  
+  .bbc-workshop-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(7, 62, 39, 0.7);
+  }
+  
+  .bbc-workshop-hero__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 80px 20px;
+  }
+  
+  .bbc-workshop-hero__eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--bbc-gold);
+    margin-bottom: 16px;
+  }
+  
+  .bbc-workshop-hero__title {
+    font-family: var(--font-heading-family);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    color: var(--bbc-white);
+    margin: 0 0 16px 0;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  
+  .bbc-workshop-hero__subtitle {
+    font-size: 1.25rem;
+    color: rgba(255,255,255,0.9);
+    margin: 0 0 32px 0;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .bbc-workshop-hero__cta {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .bbc-workshop-hero__cta .bbc-btn--primary {
+    background: var(--bbc-gold);
+    border-color: var(--bbc-gold);
+    color: var(--bbc-forest);
+  }
+  
+  .bbc-workshop-hero__cta .bbc-btn--primary:hover {
+    background: var(--bbc-white);
+    border-color: var(--bbc-white);
+  }
+  
+  .bbc-workshop-hero__cta .bbc-btn--outline {
+    color: var(--bbc-white);
+    border-color: var(--bbc-white);
+  }
+  
+  .bbc-workshop-hero__cta .bbc-btn--outline:hover {
+    background: var(--bbc-white);
+    color: var(--bbc-forest);
+  }
+  
+  /* ===== TRUST BAR ===== */
+  .bbc-workshop-trust {
+    background: var(--bbc-forest);
+    padding: 32px 20px;
+  }
+  
+  .bbc-workshop-trust__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    text-align: center;
+  }
+  
+  .bbc-workshop-trust__number {
+    display: block;
+    font-family: var(--font-heading-family);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--bbc-gold);
+  }
+  
+  .bbc-workshop-trust__label {
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-workshop-trust__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  /* ===== INTRO WITH IMAGE ===== */
+  .bbc-workshop-intro {
+    padding: 100px 20px;
+    background: var(--bbc-white);
+  }
+  
+  .bbc-workshop-intro__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  
+  .bbc-workshop-intro__heading {
+    font-family: var(--font-heading-family);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: var(--bbc-forest);
+    margin: 0 0 20px 0;
+  }
+  
+  .bbc-workshop-intro__text {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--bbc-steel);
+    margin: 0 0 24px 0;
+  }
+  
+  .bbc-workshop-intro__highlights {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .bbc-workshop-intro__highlights li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 1rem;
+    color: var(--bbc-forest);
+  }
+  
+  .bbc-workshop-intro__highlights li svg { color: var(--bbc-teal); }
+  
+  .bbc-workshop-intro__image img {
+    width: 100%;
+    height: auto;
+  }
+  
+  @media (max-width: 900px) {
+    .bbc-workshop-intro__grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+  
+  /* ===== EXPERIENCE / DAYS WITH IMAGES ===== */
+  .bbc-workshop-experience {
+    padding: 100px 20px;
+    background: var(--bbc-cream);
+  }
+  
+  .bbc-workshop-experience__header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .bbc-workshop-days {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+  
+  .bbc-workshop-day {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  
+  .bbc-workshop-day--reverse {
+    direction: rtl;
+  }
+  
+  .bbc-workshop-day--reverse > * {
+    direction: ltr;
+  }
+  
+  .bbc-workshop-day__image {
+    overflow: hidden;
+  }
+  
+  .bbc-workshop-day__image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .bbc-workshop-day__content {
+    position: relative;
+  }
+  
+  .bbc-workshop-day__number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    background: var(--bbc-gold);
+    color: var(--bbc-forest);
+    font-family: var(--font-heading-family);
+    font-size: 1.5rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .bbc-workshop-day__title {
+    font-family: var(--font-heading-family);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--bbc-forest);
+    margin: 0 0 20px 64px;
+  }
+  
+  .bbc-workshop-day__list {
+    list-style: none;
+    padding: 0 0 0 64px;
+    margin: 0 0 20px 0;
+  }
+  
+  .bbc-workshop-day__list li {
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: 1rem;
+    color: var(--bbc-steel);
+    line-height: 1.5;
+  }
+  
+  .bbc-workshop-day__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 6px;
+    height: 6px;
+    background: var(--bbc-teal);
+  }
+  
+  .bbc-workshop-day__duration {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.875rem;
+    color: var(--bbc-teal);
+    font-weight: 600;
+    margin-left: 64px;
+  }
+  
+  .bbc-workshop-experience__note {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--bbc-white);
+    padding: 20px 24px;
+    margin-top: 60px;
+    border-left: 4px solid var(--bbc-teal);
+    font-size: 0.9375rem;
+    color: var(--bbc-steel);
+  }
+  
+  @media (max-width: 900px) {
+    .bbc-workshop-day,
+    .bbc-workshop-day--reverse {
+      grid-template-columns: 1fr;
+      direction: ltr;
+    }
+    
+    .bbc-workshop-day__image { order: -1; }
+    
+    .bbc-workshop-day__number { position: static; margin-bottom: 16px; }
+    .bbc-workshop-day__title { margin-left: 0; }
+    .bbc-workshop-day__list { padding-left: 0; }
+    .bbc-workshop-day__duration { margin-left: 0; }
+  }
+  
+  /* ===== GALLERY ===== */
+  .bbc-workshop-gallery {
+    padding: 100px 20px;
+    background: var(--bbc-white);
+  }
+  
+  .bbc-workshop-gallery__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  
+  .bbc-workshop-gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  
+  .bbc-workshop-gallery__item {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+  
+  .bbc-workshop-gallery__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .bbc-workshop-gallery__item:hover img {
+    transform: scale(1.05);
+  }
+  
+  .bbc-workshop-gallery__cta {
+    text-align: center;
+    margin-top: 32px;
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-workshop-gallery__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (max-width: 480px) {
+    .bbc-workshop-gallery__grid { grid-template-columns: 1fr; }
+  }
+  
+  /* ===== VIDEO ===== */
+  .bbc-workshop-video {
+    padding: 80px 20px;
+    background: var(--bbc-cream);
+  }
+  
+  .bbc-workshop-video__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .bbc-workshop-video__wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--bbc-forest);
+  }
+  
+  .bbc-workshop-video__wrapper iframe,
+  .bbc-workshop-video__wrapper .bbc-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* ===== WHAT'S INCLUDED ===== */
+  .bbc-workshop-included {
+    padding: 100px 20px;
+    background: var(--bbc-forest);
+  }
+  
+  .bbc-workshop-included__header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .bbc-workshop-included__header .bbc-section-eyebrow { color: var(--bbc-gold); }
+  .bbc-workshop-included__header .bbc-section-heading { color: var(--bbc-white); }
+  
+  .bbc-workshop-included__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  
+  .bbc-workshop-included__item {
+    text-align: center;
+    padding: 24px;
+  }
+  
+  .bbc-workshop-included__icon {
+    color: var(--bbc-gold);
+    margin-bottom: 16px;
+  }
+  
+  .bbc-workshop-included__item h3 {
+    font-family: var(--font-heading-family);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--bbc-white);
+    margin: 0 0 8px 0;
+  }
+  
+  .bbc-workshop-included__item p {
+    font-size: 0.9375rem;
+    color: rgba(255,255,255,0.8);
+    margin: 0;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-workshop-included__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (max-width: 500px) {
+    .bbc-workshop-included__grid { grid-template-columns: 1fr; }
+  }
+  
+  /* ===== TESTIMONIALS WITH IMAGES ===== */
+  .bbc-workshop-testimonials {
+    padding: 100px 20px;
+    background: var(--bbc-cream);
+  }
+  
+  .bbc-workshop-testimonials__header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .bbc-workshop-testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  
+  .bbc-workshop-testimonial {
+    background: var(--bbc-white);
+    padding: 32px;
+    border-left: 4px solid var(--bbc-gold);
+    margin: 0;
+    text-align: center;
+  }
+  
+  .bbc-workshop-testimonial__image {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .bbc-workshop-testimonial__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .bbc-workshop-testimonial__quote {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--bbc-steel);
+    margin: 0 0 20px 0;
+    font-style: italic;
+  }
+  
+  .bbc-workshop-testimonial__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .bbc-workshop-testimonial__footer strong {
+    font-size: 0.9375rem;
+    color: var(--bbc-forest);
+  }
+  
+  .bbc-workshop-testimonial__footer span {
+    font-size: 0.8125rem;
+    color: var(--bbc-teal);
+  }
+  
+  @media (max-width: 900px) {
+    .bbc-workshop-testimonials__grid { grid-template-columns: 1fr; }
+  }
+  
+  /* ===== LOCATIONS WITH IMAGES ===== */
+  .bbc-workshop-locations {
+    padding: 100px 20px;
+    background: var(--bbc-white);
+  }
+  
+  .bbc-workshop-locations__header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .bbc-workshop-locations__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  
+  .bbc-workshop-location {
+    text-align: center;
+  }
+  
+  .bbc-workshop-location__image {
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  
+  .bbc-workshop-location__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .bbc-workshop-location h3 {
+    font-family: var(--font-heading-family);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--bbc-forest);
+    margin: 0 0 12px 0;
+  }
+  
+  .bbc-workshop-location p {
+    font-size: 0.9375rem;
+    color: var(--bbc-steel);
+    margin: 0 0 12px 0;
+    line-height: 1.6;
+  }
+  
+  .bbc-workshop-location__address {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--bbc-steel);
+    opacity: 0.7;
+    margin-bottom: 16px;
+  }
+  
+  .bbc-workshop-location__link {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--bbc-teal);
+    text-decoration: none;
+  }
+  
+  .bbc-workshop-location__link:hover { text-decoration: underline; }
+  
+  @media (max-width: 768px) {
+    .bbc-workshop-locations__grid { grid-template-columns: 1fr; }
+  }
+  
+  /* ===== PRICING ===== */
+  .bbc-workshop-pricing {
+    padding: 100px 20px;
+    background: var(--bbc-cream);
+  }
+  
+  .bbc-workshop-pricing__header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .bbc-workshop-pricing__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .bbc-workshop-option {
+    background: var(--bbc-white);
+    padding: 32px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .bbc-workshop-option--featured {
+    border: 3px solid var(--bbc-gold);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+  
+  .bbc-workshop-option__badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bbc-gold);
+    color: var(--bbc-forest);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 6px 16px;
+  }
+  
+  .bbc-workshop-option h3 {
+    font-family: var(--font-heading-family);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--bbc-forest);
+    margin: 8px 0 16px 0;
+  }
+  
+  .bbc-workshop-option__price {
+    font-family: var(--font-heading-family);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--bbc-forest);
+    margin-bottom: 24px;
+  }
+  
+  .bbc-workshop-option__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    text-align: left;
+  }
+  
+  .bbc-workshop-option__features li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    font-size: 0.9375rem;
+    color: var(--bbc-steel);
+  }
+  
+  .bbc-workshop-option__features li svg { color: var(--bbc-teal); flex-shrink: 0; }
+  
+  .bbc-workshop-option .bbc-btn { width: 100%; }
+  
+  .bbc-workshop-pricing__note {
+    max-width: 600px;
+    margin: 40px auto 0;
+    background: var(--bbc-white);
+    padding: 20px 24px;
+    border-left: 4px solid var(--bbc-gold);
+  }
+  
+  .bbc-workshop-pricing__note p {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--bbc-steel);
+  }
+  
+  @media (max-width: 900px) {
+    .bbc-workshop-pricing__grid { grid-template-columns: 1fr; max-width: 400px; }
+  }
+  
+  /* ===== FAQ ===== */
+  .bbc-workshop-faq {
+    padding: 100px 20px;
+    background: var(--bbc-white);
+  }
+  
+  .bbc-workshop-faq__header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .bbc-workshop-faq__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .bbc-workshop-faq__item {
+    background: var(--bbc-cream);
+  }
+  
+  .bbc-workshop-faq__item summary {
+    padding: 20px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--bbc-forest);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .bbc-workshop-faq__item summary::-webkit-details-marker { display: none; }
+  
+  .bbc-workshop-faq__item summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--bbc-teal);
+    transition: transform 0.2s ease;
+  }
+  
+  .bbc-workshop-faq__item[open] summary::after { transform: rotate(45deg); }
+  
+  .bbc-workshop-faq__item p {
+    padding: 0 24px 20px;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--bbc-steel);
+    margin: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-workshop-faq__grid { grid-template-columns: 1fr; }
+  }
+  
+  /* ===== PRESS ===== */
+  .bbc-workshop-press {
+    padding: 60px 20px;
+    background: var(--bbc-cream);
+    text-align: center;
+  }
+  
+  .bbc-workshop-press__label {
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--bbc-steel);
+    margin: 0 0 24px 0;
+  }
+  
+  .bbc-workshop-press__logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    opacity: 0.6;
+  }
+  
+  .bbc-workshop-press__logos svg { height: 32px; width: auto; }
+  
+  /* ===== CONTACT CTA ===== */
+  .bbc-workshop-contact {
+    padding: 80px 20px;
+    background: var(--bbc-forest);
+  }
+  
+  .bbc-workshop-contact__content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .bbc-workshop-contact__content h2 {
+    font-family: var(--font-heading-family);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    color: var(--bbc-white);
+    margin: 0 0 12px 0;
+  }
+  
+  .bbc-workshop-contact__content p {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.8);
+    margin: 0 0 24px 0;
+  }
+  
+  .bbc-workshop-contact__buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .bbc-workshop-contact__buttons .bbc-btn--primary {
+    background: var(--bbc-gold);
+    border-color: var(--bbc-gold);
+    color: var(--bbc-forest);
+  }
+  
+  .bbc-workshop-contact__buttons .bbc-btn--primary:hover {
+    background: var(--bbc-white);
+    border-color: var(--bbc-white);
+  }
+  
+  .bbc-workshop-contact__buttons .bbc-btn--outline {
+    color: var(--bbc-white);
+    border-color: var(--bbc-white);
+  }
+  
+  .bbc-workshop-contact__buttons .bbc-btn--outline:hover {
+    background: var(--bbc-white);
+    color: var(--bbc-forest);
+  }
+  
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 600px) {
+    .bbc-workshop-hero { min-height: 60vh; }
+    .bbc-workshop-hero__content { padding: 60px 16px; }
+    .bbc-workshop-press__logos { gap: 24px; }
+    .bbc-workshop-press__logos svg { height: 24px; }
+  }
+  
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-btn,
+    .bbc-workshop-gallery__item img,
+    .bbc-workshop-faq__item summary::after {
+      transition: none;
+    }
+    .bbc-workshop-gallery__item:hover img { transform: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Workshop Complete",
+  "tag": "section",
+  "class": "bbc-workshop-complete-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero background image",
+      "info": "1920×1080px recommended. Workshop action shot with people building."
+    },
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Hero eyebrow",
+      "default": "Hands-On Experience"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero title",
+      "default": "Build Your Own Bamboo Bicycle"
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle",
+      "label": "Hero subtitle",
+      "default": "2-3 days. Expert guidance. A frame that's truly yours."
+    },
+    {
+      "type": "header",
+      "content": "Intro Section"
+    },
+    {
+      "type": "text",
+      "id": "intro_heading",
+      "label": "Intro heading",
+      "default": "No Experience? No Problem."
+    },
+    {
+      "type": "textarea",
+      "id": "intro_text",
+      "label": "Intro text",
+      "default": "Since 2012, we've taught thousands of people — most with zero framebuilding experience — to create their own bamboo bicycles. Our workshops are designed for complete beginners. If you can hold a tool, you can build a bike."
+    },
+    {
+      "type": "image_picker",
+      "id": "intro_image",
+      "label": "Intro image",
+      "info": "600×400px. Show participant learning to build."
+    },
+    {
+      "type": "header",
+      "content": "Day 1"
+    },
+    {
+      "type": "text",
+      "id": "day1_title",
+      "label": "Day 1 title",
+      "default": "Design & Setup"
+    },
+    {
+      "type": "image_picker",
+      "id": "day1_image",
+      "label": "Day 1 image",
+      "info": "600×400px. Geometry setup, jig, bamboo selection."
+    },
+    {
+      "type": "header",
+      "content": "Day 2"
+    },
+    {
+      "type": "text",
+      "id": "day2_title",
+      "label": "Day 2 title",
+      "default": "Building & Joining"
+    },
+    {
+      "type": "image_picker",
+      "id": "day2_image",
+      "label": "Day 2 image",
+      "info": "600×400px. Joint wrapping, epoxy work, concentration."
+    },
+    {
+      "type": "header",
+      "content": "Day 3"
+    },
+    {
+      "type": "text",
+      "id": "day3_title",
+      "label": "Day 3 title",
+      "default": "Finishing & Completion"
+    },
+    {
+      "type": "image_picker",
+      "id": "day3_image",
+      "label": "Day 3 image",
+      "info": "600×400px. Sanding, finish, proud moment."
+    },
+    {
+      "type": "header",
+      "content": "Gallery (6 images)"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image_1",
+      "label": "Gallery image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image_2",
+      "label": "Gallery image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image_3",
+      "label": "Gallery image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image_4",
+      "label": "Gallery image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image_5",
+      "label": "Gallery image 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image_6",
+      "label": "Gallery image 6"
+    },
+    {
+      "type": "header",
+      "content": "Video"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "YouTube video URL",
+      "info": "Full YouTube URL (e.g. https://www.youtube.com/watch?v=...)"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_1_image",
+      "label": "Photo",
+      "info": "Square, 200×200px"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_1_quote",
+      "label": "Quote"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_1_name",
+      "label": "Name"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_1_detail",
+      "label": "Detail"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_2_image",
+      "label": "Photo"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_2_quote",
+      "label": "Quote"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_2_name",
+      "label": "Name"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_2_detail",
+      "label": "Detail"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_3_image",
+      "label": "Photo"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_3_quote",
+      "label": "Quote"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_3_name",
+      "label": "Name"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_3_detail",
+      "label": "Detail"
+    },
+    {
+      "type": "header",
+      "content": "Locations"
+    },
+    {
+      "type": "image_picker",
+      "id": "london_image",
+      "label": "London workshop photo",
+      "info": "400×250px. Workshop interior or exterior."
+    },
+    {
+      "type": "image_picker",
+      "id": "amersfoort_image",
+      "label": "Amersfoort workshop photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "toulouse_image",
+      "label": "Toulouse workshop photo"
+    },
+    {
+      "type": "header",
+      "content": "Booking URLs"
+    },
+    {
+      "type": "url",
+      "id": "road_booking_url",
+      "label": "Road frame booking URL"
+    },
+    {
+      "type": "url",
+      "id": "gravel_booking_url",
+      "label": "Gravel frame booking URL"
+    },
+    {
+      "type": "url",
+      "id": "mtb_booking_url",
+      "label": "MTB frame booking URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Workshop Complete"
+    }
+  ]
+}
+{% endschema %}

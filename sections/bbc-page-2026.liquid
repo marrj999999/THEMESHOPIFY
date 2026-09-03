@@ -1,0 +1,63 @@
+{%- comment -%}
+  Bamboo Bicycle Club — Page (2026 redesign).
+  Generic template for ANY Shopify page (Why Bamboo, Gallery, Support
+  Centre, FAQs, Size Guide, Team Building, etc.). Compact forest hero
+  (breadcrumb + optional eyebrow + page title) then the page body as
+  .rd-prose in a centred ~820px column, with an optional CTA row.
+  Styling lives in assets/bbc-redesign-2026.css. Guarded so it
+  degrades gracefully off a page template.
+{%- endcomment -%}
+
+<div class="bbc-rd bbc-rd-page">
+  {%- if page -%}
+    <header class="rd-hero rd-dark rd-mh-auto">
+      {%- if section.settings.hero_image -%}
+        <div class="rd-bg"><img src="{{ section.settings.hero_image | image_url: width: 1600 }}" srcset="{{ section.settings.hero_image | image_url: width: 800 }} 800w, {{ section.settings.hero_image | image_url: width: 1200 }} 1200w, {{ section.settings.hero_image | image_url: width: 1600 }} 1600w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w" sizes="100vw" alt="{{ section.settings.hero_image.alt | escape | default: page.title }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" fetchpriority="high" loading="eager"></div>
+        <div class="rd-scrim"></div>
+      {%- endif -%}
+      <div class="rd-inner rd-pt-56">
+        <div class="rd-wrap rd-mw-820px">
+          <nav class="rd-crumb" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><span class="rd-here">{{ page.title }}</span></nav>
+          {%- if section.settings.eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.eyebrow }}</span>{%- endif -%}
+          <h1 class="rd-mt2">{{ page.title }}</h1>
+        </div>
+      </div>
+    </header>
+
+    <section class="rd-pad">
+      <div class="rd-wrap rd-mw-820px">
+        {%- if page.content != blank -%}
+          {%- comment -%} admin-typed h1s demote to h2 at render — the hero already provides the
+   page's single h1; keeps James's admin body untouched (estate battery, one-h1 class) {%- endcomment -%}
+<div class="rd-prose">{{ page.content | replace: '<h1>', '<h2>' | replace: '<h1 ', '<h2 ' | replace: '</h1>', '</h2>' }}</div>
+        {%- else -%}
+          <p class="rd-lede">This page has no content yet. Add some in Online Store &rarr; Pages.</p>
+        {%- endif -%}
+
+        {%- if section.settings.cta_label != blank and section.settings.cta_url != blank -%}
+          <div class="rd-prose rd-mt4 rd-cmp-28057">
+            <a class="rd-btn rd-lime" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+          </div>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- else -%}
+    <section class="rd-pad"><div class="rd-wrap"><p class="rd-lede">Add this section to a page template to render its content.</p></div></section>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Page 2026 (new)",
+  "tag": "div",
+  "class": "bbc-rd-page-section",
+  "settings": [
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image (optional — solid forest if left blank)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow (optional, shown above the title)" },
+    { "type": "header", "content": "Footer call to action (hidden unless both filled)" },
+    { "type": "text", "id": "cta_label", "label": "CTA button label" },
+    { "type": "url", "id": "cta_url", "label": "CTA button link" }
+  ],
+  "presets": [ { "name": "Page 2026 (new)" } ]
+}
+{% endschema %}

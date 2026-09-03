@@ -1,0 +1,661 @@
+{
+  "sections": {
+    "hero": {
+      "type": "bbc-drawing-hero",
+      "settings": {
+        "crumb_label": "Why Bamboo",
+        "tb_k1": "",
+        "tb_v1": "",
+        "tb_k2": "",
+        "tb_v2": "",
+        "heading": "a grass that <em>rides like steel<\/em>",
+        "lede": "Every workshop opens with the same question. This is the material, measured.",
+        "cta1_label": "read the datasheet",
+        "cta1_url": "#datasheet",
+        "cta2_label": "Build one",
+        "cta2_url": "shopify:\/\/collections\/home-build-kits",
+        "image": "",
+        "image_fallback": "bbc-rd-wb-bond.jpg",
+        "image_alt": "A gloved hand bonding a bamboo bicycle frame in its jig, flax wrap visible at the joint",
+        "show_nodediv": true
+      },
+      "blocks": {
+        "c1": {
+          "type": "callout",
+          "settings": {
+            "text": "culm · 30–40 mm ø",
+            "top": 22,
+            "left": 42
+          }
+        }
+      },
+      "block_order": [
+        "c1"
+      ]
+    },
+    "stat_band": {
+      "type": "bbc-datasheet",
+      "settings": {
+        "background": "sheet",
+        "eyebrow": "tested, not asserted",
+        "heading": "the numbers we were given, not the ones we liked",
+        "tb_k1": "standard",
+        "tb_v1": "BS ISO 22157:2019",
+        "tb_k2": "lab",
+        "tb_v2": "Swansea University",
+        "foot_left": "Tensile on 180 × 8 × 3 mm specimens. Our own tubing, sent to an independent lab.",
+        "foot_right": "Published 23 Feb 2023 — full results",
+        "foot_url": "\/blogs\/news\/bamboo-testing-with-swansea-university",
+        "anchor": "datasheet"
+      },
+      "blocks": {
+        "s1": {
+          "type": "spec",
+          "settings": {
+            "label": "ultimate tensile",
+            "value": "84.3",
+            "unit": "MPa",
+            "note": "Comparable to mild steel at a fraction of the weight."
+          }
+        },
+        "s2": {
+          "type": "spec",
+          "settings": {
+            "label": "ultimate flexural",
+            "value": "70.9",
+            "unit": "MPa",
+            "note": "3-point bending, 300 mm span."
+          }
+        },
+        "s3": {
+          "type": "spec",
+          "settings": {
+            "label": "ultimate compressive",
+            "value": "57.7",
+            "unit": "MPa",
+            "note": "The load a seat tube actually sees."
+          }
+        },
+        "s4": {
+          "type": "spec",
+          "settings": {
+            "label": "young's modulus",
+            "value": "6.4",
+            "unit": "GPa",
+            "note": "A fraction of a metal’s stiffness — the compliance you feel."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ]
+    },
+    "feature_science": {
+      "type": "bbc-pillar",
+      "settings": {
+        "background": "steel",
+        "reverse": false,
+        "index": "01",
+        "kicker": "the science",
+        "title": "a ride you can feel",
+        "body": "Bamboo's fibres turn road buzz into a trace of heat — so less of the rough road ever reaches your hands.",
+        "quote_kind": "academic",
+        "quote": "A bamboo frame significantly improved ride comfort over an equivalent aluminium one.",
+        "cite": "Thite et al., Vehicle System Dynamics (2013)",
+        "cite_context": "Oxford Brookes University",
+        "cta_label": "See the research",
+        "cta_url": "#research",
+        "image": "",
+        "image_fallback": "bbc-rd-gravel-sunset.jpg",
+        "image_alt": "A bamboo bike on a quiet road at dawn"
+      }
+    },
+    "feature_accessibility": {
+      "type": "bbc-pillar",
+      "settings": {
+        "background": "paper",
+        "reverse": true,
+        "index": "03",
+        "kicker": "accessibility",
+        "title": "anyone can build one",
+        "body": "No welding, no moulds, no factory — just bamboo, a jig and hand tools. Most builders start with zero experience and finish in two days.",
+        "quote_kind": "rider",
+        "quote": "I knew nothing about bikes. Building the whole thing myself, I finally understand how to fix it.",
+        "cite": "Soraya",
+        "cite_context": "4-day London workshop",
+        "cta_label": "See the impact",
+        "cta_url": "\/pages\/impact",
+        "image": "",
+        "image_fallback": "bbc-rd-frame-build.jpg",
+        "image_alt": "A bamboo frame on the build jig with hand tools"
+      }
+    },
+    "feature_strength": {
+      "type": "bbc-pillar",
+      "settings": {
+        "background": "paper",
+        "reverse": false,
+        "index": "02",
+        "kicker": "strength & ride",
+        "title": "strong where it counts",
+        "body": "Tensile strength comparable to mild steel — tested to BS ISO 22157 at Swansea — with flax-and-carbon joints. It gives over the bumps and stays stiff under power, so it moves with you.",
+        "quote_kind": "academic",
+        "quote": "Independent engineers fatigue-modelled a bamboo frame to outlast around 26 times its intended service life.",
+        "cite": "Arango Fierro et al. (2019)",
+        "cite_context": "structural & fatigue analysis",
+        "cta_label": "Read the test results",
+        "cta_url": "\/blogs\/news\/bamboo-testing-with-swansea-university",
+        "image": "shopify:\/\/shop_images\/DSF3290.jpg",
+        "image_fallback": "bbc-rd-detail.jpg",
+        "image_alt": "A finished bamboo road bike, ready to ride"
+      }
+    },
+    "science_video": {
+      "type": "bbc-section",
+      "blocks": {
+        "sv": {
+          "type": "bbc-video",
+          "settings": {
+            "video_youtube": "",
+            "video_mp4": "https:\/\/cdn.shopify.com\/videos\/c\/vp\/a66c9c6ad4e54ed5b506582dbb7d751c\/a66c9c6ad4e54ed5b506582dbb7d751c.HD-720p-1.6Mbps-76173427.mp4",
+            "poster": "shopify:\/\/shop_images\/frame-testing-poster.jpg",
+            "poster_fallback": "bbc-rd-frame-build.jpg",
+            "eyebrow": "Tested",
+            "heading": "watch: bamboo under test",
+            "body": "We sent our own bamboo tubes to Swansea University for three-point flexural bending tests to BS ISO 22157. They behaved like a high-performance engineering material — because they are one.",
+            "caption": "Filmed in the materials lab at Swansea University.",
+            "cta_label": "Read the Swansea study",
+            "cta_url": "\/blogs\/news\/bamboo-testing-with-swansea-university",
+            "dark": false
+          }
+        }
+      },
+      "block_order": [
+        "sv"
+      ],
+      "settings": {
+        "background": "paper",
+        "padding": "pad",
+        "max_width": "container",
+        "layout": "stack",
+        "center": false,
+        "item_gap": 0,
+        "anchor": ""
+      }
+    },
+    "education": {
+      "type": "bbc-statement",
+      "settings": {
+        "background": "forest",
+        "eyebrow": "why this matters",
+        "headline": "understanding is the real sustainability",
+        "star_marker": "*",
+        "body": "the greenest material is the one you understand.",
+        "footnote": "understand what bamboo is, how it grows and how it's joined, and you use it better — you waste less, repair instead of replace, and keep improving. that's why everything we do is teaching.",
+        "button1_label": "see the research",
+        "button1_url": "#research",
+        "button2_label": "our impact",
+        "button2_url": "\/pages\/impact",
+        "link1_label": "stories",
+        "link1_url": "\/blogs\/club-news",
+        "link2_label": "case studies",
+        "link2_url": "\/blogs\/impact"
+      }
+    },
+    "universities": {
+      "type": "bbc-logo-wall",
+      "blocks": {
+        "u_swa": {
+          "type": "bbc-press-logo",
+          "settings": {
+            "text": "Swansea University",
+            "style": "caps",
+            "logo_fallback": "bbc-logo-swansea.png",
+            "url": ""
+          }
+        },
+        "u_ucl": {
+          "type": "bbc-press-logo",
+          "settings": {
+            "text": "University College London",
+            "style": "caps",
+            "logo_fallback": "bbc-logo-ucl.png",
+            "url": ""
+          }
+        },
+        "u_lsbu": {
+          "type": "bbc-press-logo",
+          "settings": {
+            "text": "London South Bank University",
+            "style": "caps",
+            "logo_fallback": "bbc-logo-lsbu.png",
+            "url": ""
+          }
+        },
+        "u_man": {
+          "type": "bbc-press-logo",
+          "settings": {
+            "text": "University of Manchester",
+            "style": "caps",
+            "logo_fallback": "bbc-logo-manchester.svg",
+            "url": ""
+          }
+        },
+        "u_cov": {
+          "type": "bbc-press-logo",
+          "settings": {
+            "text": "Coventry University",
+            "style": "caps",
+            "logo_fallback": "bbc-logo-coventry.png",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "u_swa",
+        "u_ucl",
+        "u_man",
+        "u_lsbu",
+        "u_cov"
+      ],
+      "settings": {
+        "kicker": "Proven with science",
+        "quote": "We don't ask you to take \"bamboo is good\" on faith. We test it, we teach it, and we work with universities to understand it better.",
+        "cite": "",
+        "background": "steel"
+      }
+    },
+    "research": {
+      "type": "bbc-section",
+      "blocks": {
+        "r_head": {
+          "type": "bbc-heading",
+          "settings": {
+            "eyebrow": "The evidence",
+            "heading": "the research behind bamboo",
+            "lede": "<p>We don't just build with bamboo — we study it, and we teach it. A decade of testing, student projects and peer-reviewed research.<\/p>",
+            "style": "center",
+            "on_dark": false
+          }
+        },
+        "r_text": {
+          "type": "bbc-text",
+          "settings": {
+            "text": "<p><strong>The studies.<\/strong><\/p><ol><li>Swansea University (2023) — our frame tubing tested to BS ISO 22157:2019: ultimate tensile 84.3 MPa, flexural 70.9 MPa, compressive 57.7 MPa, modulus 6.4 GPa. <a href=\"\/blogs\/news\/bamboo-testing-with-swansea-university\">Full results<\/a>.<\/li><li>Thite et al., <em>Vehicle System Dynamics<\/em> (2013), Oxford Brookes University — peer-reviewed ride-comfort study: a bamboo frame significantly improved comfort over an equivalent aluminium one.<\/li><li>Arango Fierro et al. (2019) — structural &amp; fatigue analysis: a bamboo frame modelled to outlast around 26× its intended service life.<\/li><li>Sharma &amp; Harries (2015) · Wegst &amp; Ashby, <em>Philosophical Magazine<\/em> (2004) — the published property ranges our comparison table cites.<\/li><li>Amiri et al., <em>Proc. IMechE<\/em> (2018) — flax-fibre composites, the joint material.<\/li><\/ol><p><strong>The programmes.<\/strong> University College London — the “Pedal Progress” cargo-bike project, winner of the IMechE Group Project Award · University of Manchester — bamboo-composite materials R&amp;D · London South Bank University — jig-equipped engineering-lab teaching · Coventry University — UK Bamboo Summit keynote · University of Portsmouth — bamboo species study · University of Cumbria — Kate Rawles’ 8,288-mile “Woody”.<\/p>",
+            "lede": false,
+            "align": "left"
+          }
+        }
+      },
+      "block_order": [
+        "r_head",
+        "r_text"
+      ],
+      "settings": {
+        "background": "steel",
+        "padding": "pad",
+        "max_width": "medium",
+        "layout": "stack",
+        "center": true,
+        "item_gap": 12,
+        "anchor": "research"
+      }
+    },
+    "comparison": {
+      "type": "bbc-comparison",
+      "blocks": {
+        "row_bamboo": {
+          "type": "bbc-comparison-row",
+          "settings": {
+            "material": "Bamboo",
+            "density": "0.6–0.9",
+            "tensile": "115–370 · ours 84.3 †",
+            "stiffness": "10–35",
+            "damping": "High",
+            "embodied_carbon": "",
+            "buildable": "Yes — jig & hand tools",
+            "highlight": true
+          }
+        },
+        "row_steel": {
+          "type": "bbc-comparison-row",
+          "settings": {
+            "material": "Steel (4130 \/ 853)",
+            "density": "7.8",
+            "tensile": "560–1,400",
+            "stiffness": "205",
+            "damping": "Very low",
+            "embodied_carbon": "",
+            "buildable": "Brazing \/ welding",
+            "highlight": false
+          }
+        },
+        "row_aluminium": {
+          "type": "bbc-comparison-row",
+          "settings": {
+            "material": "Aluminium 6061",
+            "density": "2.7",
+            "tensile": "310",
+            "stiffness": "69",
+            "damping": "Low",
+            "embodied_carbon": "",
+            "buildable": "Welding",
+            "highlight": false
+          }
+        },
+        "row_carbon": {
+          "type": "bbc-comparison-row",
+          "settings": {
+            "material": "Carbon fibre",
+            "density": "1.5",
+            "tensile": "600–3,500 †",
+            "stiffness": "120–200",
+            "damping": "Moderate",
+            "embodied_carbon": "",
+            "buildable": "Autoclave — no",
+            "highlight": false
+          }
+        }
+      },
+      "block_order": [
+        "row_bamboo",
+        "row_steel",
+        "row_aluminium",
+        "row_carbon"
+      ],
+      "settings": {
+        "background": "steel",
+        "kicker": "The engineering",
+        "heading": "how bamboo measures up",
+        "lede": "A frame material comes down to how light it is, how strong for that weight, how it soaks up the road, and whether you can build it yourself. Honest ranges, with sources.",
+        "tile1_num": "0.7",
+        "tile1_unit": "g\/cm³ density",
+        "tile1_lbl": "Lighter than carbon, aluminium & steel",
+        "tile2_num": "26×",
+        "tile2_unit": "fatigue-modelled life",
+        "tile2_lbl": "Modelled to outlast its service life (2019 study)",
+        "tile3_num": "3–5",
+        "tile3_unit": "years to harvest",
+        "tile3_lbl": "A tree takes decades",
+        "tile4_num": "4,000+",
+        "tile4_unit": "builders trained",
+        "tile4_lbl": "A skill you keep for life",
+        "bars_caption": "Density · g\/cm³ — lower is lighter",
+        "bar1_name": "Steel (4130)",
+        "bar1_pct": 100,
+        "bar1_val": "7.8",
+        "bar2_name": "Aluminium 6061",
+        "bar2_pct": 34,
+        "bar2_val": "2.7",
+        "bar3_name": "Carbon fibre",
+        "bar3_pct": 20,
+        "bar3_val": "1.5",
+        "bar4_name": "Bamboo",
+        "bar4_pct": 10,
+        "bar4_val": "0.7",
+        "col_material": "Property",
+        "col_density": "Density (g\/cm³)",
+        "col_tensile": "Tensile strength (MPa)",
+        "col_stiffness": "Stiffness — modulus (GPa)",
+        "col_damping": "Vibration damping",
+        "col_carbon": "",
+        "col_buildable": "Build it yourself?",
+        "notes": "<p>Ranges reflect species, alloy and lay-up — bamboo especially varies with species, culm and moisture, which is exactly why we test to a standard. Our 84.3 MPa is a real culm section tested at Swansea (BS ISO 22157). † Carbon's headline strength is measured along the fibre; a frame tube only ever sees a fraction of it. Sources: Swansea University test data; Sharma &amp; Harries (2015); Wegst &amp; Ashby (2004); MatWeb \/ ASM.<\/p>",
+        "framing": ""
+      }
+    },
+    "build_gallery": {
+      "type": "bbc-section",
+      "blocks": {
+        "bg_head": {
+          "type": "bbc-heading",
+          "settings": {
+            "eyebrow": "Design versatility",
+            "heading": "any design. any rider.",
+            "lede": "<p>You can't shape steel in your kitchen or cut carbon in your garage. Bamboo you cut with a hand saw and join with flax wrapping and bio-resin — so you can build any frame you can draw.<\/p>",
+            "style": "center",
+            "on_dark": false
+          }
+        },
+        "bg_grid": {
+          "type": "bbc-group",
+          "settings": {
+            "layout": "grid-3",
+            "gap": 26,
+            "align": "stretch"
+          },
+          "blocks": {
+            "c1": {
+              "type": "bbc-case-study",
+              "settings": {
+                "fallback": "bbc-rd-bike-field.jpg",
+                "use_fallback_image": false,
+                "image_alt": "Swiss Family Tandem",
+                "kind": "Tandem",
+                "title": "swiss family tandem",
+                "blurb": "<p>Three-person bamboo tandem for the school run. Built at home in Switzerland.<\/p>",
+                "link_label": "Read the build",
+                "link_url": "\/blogs\/club-news\/a-family-ride-like-no-other-the-swiss-bamboo-tandem"
+              }
+            },
+            "c2": {
+              "type": "bbc-case-study",
+              "settings": {
+                "video": "cQFBTXKVBfA",
+                "fallback": "bbc-rd-cargo.jpg",
+                "use_fallback_image": false,
+                "image_alt": "Adam's Cargo Bike",
+                "kind": "Cargo",
+                "title": "adam's cargo bike",
+                "blurb": "<p>Long-tail cargo built in a London flat. \"Surprisingly solid, takes quite a load.\"<\/p>",
+                "link_label": "Read the build",
+                "link_url": "\/blogs\/club-news\/custom-cargo-bike-by-adam"
+              }
+            },
+            "c3": {
+              "type": "bbc-case-study",
+              "settings": {
+                "fallback": "bbc-rd-redbar.jpg",
+                "use_fallback_image": false,
+                "image_alt": "Adrian's Aero Build",
+                "kind": "Aero Road",
+                "title": "adrian's aero build",
+                "blurb": "<p>Custom aero profile with foam inserts and internal cabling.<\/p>",
+                "link_label": "Read the build",
+                "link_url": "\/blogs\/club-news\/adrians-aero-bamboo-bike"
+              }
+            },
+            "c4": {
+              "type": "bbc-case-study",
+              "settings": {
+                "fallback": "bbc-rd-gravel-fence.jpg",
+                "use_fallback_image": false,
+                "image_alt": "Tim's Gravel Explorer",
+                "kind": "Gravel",
+                "title": "tim's gravel explorer",
+                "blurb": "<p>First-time builder from the Netherlands. \"My hands are itching to build a second.\"<\/p>",
+                "link_label": "Read the build",
+                "link_url": "\/blogs\/club-news\/gravel-bike-by-tim"
+              }
+            },
+            "c5": {
+              "type": "bbc-case-study",
+              "settings": {
+                "fallback": "bbc-rd-gal-rider.jpg",
+                "use_fallback_image": false,
+                "image_alt": "Taro's Daily Commuter",
+                "kind": "10-Year Rider",
+                "title": "taro's daily commuter",
+                "blurb": "<p>Still his daily bamboo bike after a decade.<\/p>",
+                "link_label": "Read the build",
+                "link_url": "\/blogs\/club-news\/taro-10-years-riding-my-hand-built-bamboo-bike"
+              }
+            }
+          },
+          "block_order": [
+            "c1",
+            "c2",
+            "c3",
+            "c4",
+            "c5"
+          ]
+        }
+      },
+      "block_order": [
+        "bg_head",
+        "bg_grid"
+      ],
+      "settings": {
+        "background": "paper",
+        "padding": "pad",
+        "max_width": "container",
+        "layout": "stack",
+        "center": false,
+        "item_gap": 0,
+        "anchor": ""
+      }
+    },
+    "faq": {
+      "type": "bbc-faq-section",
+      "blocks": {
+        "f1": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "How strong is a bamboo frame?",
+            "answer": "<p>Comparable to mild steel in tension — about 84 MPa, tested to BS ISO 22157 at Swansea University — while far lighter. Every joint is reinforced with a flax-and-carbon composite, so in our builds the bamboo is the limiting factor, not the joins, and independent engineers have fatigue-modelled bamboo frames well beyond their service life (Arango Fierro et al., 2019).<\/p>"
+          }
+        },
+        "f2": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "Does it crack, or mind the rain?",
+            "answer": "<p>Our tubes are heat-treated, bound in flax and bio-resin at the joints, and sealed with lacquer. Dry after wet rides and store indoors — the same care you'd give any quality frame.<\/p>"
+          }
+        },
+        "f3": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "Do I need experience to build one?",
+            "answer": "<p>No — most of our builders start with none. Workshop frames are completed in 2 days with full expert guidance; home kits include step-by-step instructions and video tutorials.<\/p>"
+          }
+        },
+        "f4": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "How long will a bamboo frame last?",
+            "answer": "<p>Many of our 2012 frames are still ridden daily, 14 years on. Keep it sealed and stored indoors and it goes the distance.<\/p>"
+          }
+        },
+        "f5": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "What types of bamboo bicycle can I build?",
+            "answer": "<p>Any type — road, gravel, mountain, cargo, tandem, balance bike. The geometry is defined by your jig setup, so the design is up to you.<\/p>"
+          }
+        },
+        "f6": {
+          "type": "bbc-accordion",
+          "settings": {
+            "question": "Is bamboo a sustainable material for bicycles?",
+            "answer": "<p>Yes. It matures in 3–5 years (trees take 20–50), regrows from its root system, and needs no pesticides or irrigation. And because you build the frame yourself, you learn to repair it — so it lasts for years rather than being thrown away.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5",
+        "f6"
+      ],
+      "settings": {
+        "kicker": "Good to know",
+        "title": "bamboo bike questions, answered",
+        "lede": "",
+        "background": "steel"
+      }
+    },
+    "final_cta": {
+      "type": "bbc-band-2026",
+      "settings": {
+        "variant": "statement",
+        "surface": "dark",
+        "align": "center",
+        "eyebrow": "start your build",
+        "heading": "build your bamboo bike",
+        "lede": "Join 4,000+ people who've built their own — by hand, in a weekend.",
+        "cta1_label": "Shop frame kits",
+        "cta1_link": "\/collections\/home-build-kits",
+        "cta1_style": "lime",
+        "show_nodediv": true
+      }
+    },
+    "honest": {
+      "type": "bbc-honest",
+      "settings": {
+        "eyebrow": "what we won't claim",
+        "heading": "steel wins on strength",
+        "star": true,
+        "note": "And carbon wins on stiffness-to-weight. We publish the figure that lost as well as the one that won — every number above is an independent lab's, not ours."
+      },
+      "blocks": {
+        "w1": {
+          "type": "win",
+          "settings": {
+            "kicker": "where bamboo wins",
+            "lead": "Damping.",
+            "text": "It turns road buzz into heat instead of passing it to your hands."
+          }
+        },
+        "w2": {
+          "type": "win",
+          "settings": {
+            "kicker": "and wins again",
+            "lead": "Repairability.",
+            "text": "Repaired with local materials and basic skills — which is why the Kenya and Rwanda programmes teach building, not shipping."
+          }
+        },
+        "w3": {
+          "type": "win",
+          "settings": {
+            "kicker": "and the one nobody else can claim",
+            "lead": "You can build it.",
+            "text": "The only one of the four you can cut with a hand saw, in a weekend, with no factory."
+          }
+        }
+      },
+      "block_order": [
+        "w1",
+        "w2",
+        "w3"
+      ]
+    },
+    "chapters": {
+      "type": "bbc-chapter-pills",
+      "settings": {
+        "chapters": "the datasheet~#datasheet|the comparison~#shopify-section-template--29219859595638__comparison|the research~#research|who tests with us~#shopify-section-template--29219859595638__universities|questions~#shopify-section-template--29219859595638__faq|build one~#shopify-section-template--29219859595638__final_cta"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "chapters",
+    "feature_science",
+    "stat_band",
+    "feature_strength",
+    "science_video",
+    "research",
+    "comparison",
+    "honest",
+    "universities",
+    "education",
+    "feature_accessibility",
+    "build_gallery",
+    "faq",
+    "final_cta"
+  ]
+}

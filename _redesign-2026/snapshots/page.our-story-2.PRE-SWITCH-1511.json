@@ -1,0 +1,587 @@
+{
+  "sections": {
+    "hero": {
+      "type": "bbc-page-hero",
+      "settings": {
+        "badge": "Est. 2012",
+        "heading": "Our Story",
+        "subheading": "We teach people to build bamboo bicycles. In workshops, prisons, schools and homes — across 36 countries, since 2012.",
+        "trust_line": "4,000+ builders worldwide · Investec Beyond Business 2025 · FT, BikeRadar, Design Museum",
+        "button_primary_label": "View Workshops",
+        "button_primary_link": "\/pages\/bicycle-frame-building-workshop",
+        "button_secondary_label": "Shop Build Kits",
+        "button_secondary_link": "\/collections\/home-build-kits",
+        "layout": "centered",
+        "style": "image",
+        "content_align": "center",
+        "background_image": "shopify:\/\/shop_images\/SRW08823.jpg",
+        "overlay_opacity": 60
+      }
+    },
+    "recognition_strip": {
+      "type": "bbc-press-recognition",
+      "blocks": {
+        "investec": {
+          "type": "award",
+          "settings": {
+            "icon": "emoji_events",
+            "name": "Investec Beyond Business",
+            "year": "2025 Winner — £24,000",
+            "description": "National recognition for Build to Bond — OCN-accredited bamboo bicycle building in prisons."
+          }
+        },
+        "green_heroes": {
+          "type": "award",
+          "settings": {
+            "icon": "eco",
+            "name": "Kevin McCloud's Green Heroes",
+            "year": "2018 — Grand Designs Live",
+            "description": "Selected for sustainable manufacturing innovation."
+          }
+        },
+        "design_museum": {
+          "type": "award",
+          "settings": {
+            "icon": "museum",
+            "name": "Design Museum London",
+            "year": "2015–2016 Exhibition",
+            "description": "Cycle Revolution exhibition with live building demonstrations."
+          }
+        },
+        "ocn": {
+          "type": "award",
+          "settings": {
+            "icon": "school",
+            "name": "OCN London — Level 2",
+            "year": "Nationally Accredited",
+            "description": "Level 2 qualification in Sustainable Manufacturing."
+          }
+        },
+        "london_design": {
+          "type": "award",
+          "settings": {
+            "icon": "palette",
+            "name": "London Design Festival",
+            "year": "Official Partner",
+            "description": "Official partner status for design innovation."
+          }
+        }
+      },
+      "block_order": [
+        "investec",
+        "green_heroes",
+        "design_museum",
+        "ocn",
+        "london_design"
+      ],
+      "settings": {
+        "eyebrow": "Recognised By",
+        "heading": "Recognition & Awards",
+        "featured_quote": "",
+        "quote_source": "",
+        "quote_date": "",
+        "awards_title": "Awards & Accreditations"
+      }
+    },
+    "story": {
+      "type": "bbc-story",
+      "settings": {
+        "eyebrow": "How It Started",
+        "heading": "13 years of teaching people to build",
+        "story_text": "<p>In 2012, James Marr returned from Canada with an unusual skill — the ability to build bicycle frames from bamboo. He opened a small workshop in London with a simple goal: prove that anyone could do it. No prior experience. No welding. Just bamboo, natural fibre, and your own two hands.<\/p><p>The first builders came for the craft. They stayed for the transformation. Engineers, artists, teachers, teenagers, retirees, prisoners — people who had never made anything with their hands came in and left differently. Quieter. More confident. Connected to something they'd made themselves.<\/p><p>What started as a weekend experiment became a movement. BBC frames have since been ridden 8,288 miles from Colombia to Tierra del Fuego, from London to New Zealand, across the Pamir Highway in winter, and on a daily Tokyo commute for over a decade. Over 4,000 people across 36 countries have built their own bamboo bicycle. Every one is unique. Every one is someone's favourite.<\/p>",
+        "founder_quote": "If we want people to choose sustainable options, we need to offer something genuinely better than what polluting products can be.",
+        "founder_name": "James Marr",
+        "founder_role": "Founder & CEO, Bamboo Bicycle Club",
+        "visual_position": "right",
+        "content_width": "60-40",
+        "vertical_align": "top",
+        "mobile_order": "text_first",
+        "gap_size": "lg",
+        "image_asset": "bbc-rd-team2.jpg",
+        "image_alt": "The Bamboo Bicycle Club team",
+        "image_caption": ""
+      }
+    },
+    "impact_stats": {
+      "type": "bbc-impact-stats",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "number": "4,000+",
+            "label": "People Trained",
+            "detail": "Worldwide since 2012"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "number": "3,500+",
+            "label": "Bikes Built",
+            "detail": "And still counting"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "number": "36+",
+            "label": "Countries",
+            "detail": "Via workshops and kits"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "number": "~26%",
+            "label": "Confidence Uplift",
+            "detail": "Measured in programme participants"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "heading": "Our Global Community",
+        "subheading": "Builders, riders, and communities across 36 countries since 2012"
+      }
+    },
+    "timeline": {
+      "type": "bbc-timeline-enhanced",
+      "blocks": {
+        "m2012": {
+          "type": "milestone",
+          "settings": {
+            "year": "2012",
+            "title": "The Beginning",
+            "description": "Bamboo Bicycle Club founded in London by James Marr and Ian McMillan. James brought bamboo bicycle-building skills learned in Canada to share with others.",
+            "type": "major"
+          }
+        },
+        "m2013": {
+          "type": "milestone",
+          "settings": {
+            "year": "2013",
+            "title": "First International Builders",
+            "description": "Builders from Germany, France, and the Netherlands travel to London. Kit demand grows from outside the UK.",
+            "type": "regular"
+          }
+        },
+        "m2014": {
+          "type": "milestone",
+          "settings": {
+            "year": "2014",
+            "title": "DIY Kits Launch",
+            "description": "After 2 years perfecting the process, home build kits launch — enabling people worldwide to build their own bamboo bikes. Featured in Huck Magazine and Inhabitat.",
+            "type": "regular"
+          }
+        },
+        "m2015": {
+          "type": "milestone",
+          "settings": {
+            "year": "2015",
+            "title": "Design Museum",
+            "description": "Featured in the Cycle Revolution exhibition at the Design Museum London. Live building demonstrations and world's first aerodynamic bamboo bicycle unveiled.",
+            "type": "impact"
+          }
+        },
+        "m2016": {
+          "type": "milestone",
+          "settings": {
+            "year": "2016",
+            "title": "World First",
+            "description": "Created world's first 3D printed bamboo bicycle in collaboration with Oxford Brookes University — pioneering new manufacturing techniques.",
+            "type": "impact"
+          }
+        },
+        "m2017": {
+          "type": "milestone",
+          "settings": {
+            "year": "2017",
+            "title": "Schools Programme Launches",
+            "description": "Southbank UTC runs the first structured school programme — 30 bikes built over two years, integrated into the Design & Technology curriculum.",
+            "type": "regular"
+          }
+        },
+        "m2018": {
+          "type": "milestone",
+          "settings": {
+            "year": "2018",
+            "title": "Kevin McCloud's Green Heroes",
+            "description": "Selected at Grand Designs Live for eco-friendly product design and sustainable manufacturing innovation — recognised alongside leading UK green brands.",
+            "type": "impact"
+          }
+        },
+        "m2019": {
+          "type": "milestone",
+          "settings": {
+            "year": "2019",
+            "title": "International Education — Kenya",
+            "description": "Munich workshop team teaches bamboo building in Kenya, transferring skills to local artisans. Knowledge-sharing model taken international.",
+            "type": "regular"
+          }
+        },
+        "m2020": {
+          "type": "milestone",
+          "settings": {
+            "year": "2020",
+            "title": "Social Enterprise",
+            "description": "Bamboo Mobility Project CIC registered — our social enterprise arm delivering OCN-accredited courses in sustainable manufacturing to prisons and schools.",
+            "type": "major"
+          }
+        },
+        "m2022": {
+          "type": "milestone",
+          "settings": {
+            "year": "2022",
+            "title": "OCN Level 2 Accreditation",
+            "description": "OCN London Level 2 accreditation in Sustainable Manufacturing achieved — a nationally recognised qualification available to all programme participants.",
+            "type": "regular"
+          }
+        },
+        "m2023": {
+          "type": "milestone",
+          "settings": {
+            "year": "2023",
+            "title": "Kate Rawles Completes 8,288 Miles",
+            "description": "Environmental advocate Kate Rawles completes her Colombia → Tierra del Fuego expedition on 'Woody', her BBC-built bamboo bike. Zero frame failures.",
+            "type": "regular"
+          }
+        },
+        "m2024": {
+          "type": "milestone",
+          "settings": {
+            "year": "2024",
+            "title": "Toulouse Opens & Rwanda Partnership",
+            "description": "Toulouse workshop opens as BBC's third franchise location. Rwanda partnership launches with Urumuri — building local bamboo bicycle manufacturing capacity.",
+            "type": "regular"
+          }
+        },
+        "m2025": {
+          "type": "milestone",
+          "settings": {
+            "year": "2025",
+            "title": "Today",
+            "description": "4,000+ people trained across 36+ countries. Investec Beyond Business winner. Financial Times feature. James Timpson government endorsement. And we're just getting started.",
+            "type": "major"
+          }
+        }
+      },
+      "block_order": [
+        "m2012",
+        "m2013",
+        "m2014",
+        "m2015",
+        "m2016",
+        "m2017",
+        "m2018",
+        "m2019",
+        "m2020",
+        "m2022",
+        "m2023",
+        "m2024",
+        "m2025"
+      ],
+      "settings": {
+        "eyebrow": "Our Journey",
+        "heading": "13 Years of Building",
+        "intro": "From a single workshop in East London to workshops, prisons, schools, and homes on six continents."
+      }
+    },
+    "impact": {
+      "type": "bbc-build-to-bond",
+      "settings": {
+        "heading": "Build to Bond",
+        "tagline": "Building bicycles. Rebuilding family connections."
+      }
+    },
+    "voices": {
+      "type": "bbc-testimonials",
+      "blocks": {
+        "hasan": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "It was instrumental in creating a shift in my life — gaining confidence in myself and realising that there are different ways of learning.",
+            "name": "Hasan",
+            "role": "Workshop Participant",
+            "location": "London"
+          }
+        },
+        "kate": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Woody turned out to be the most reliable bike I've ever owned. I had hardly any mechanical problems on the whole 8,288-mile journey.",
+            "name": "Kate Rawles",
+            "role": "Environmental Advocate",
+            "location": "Colombia → Tierra del Fuego"
+          }
+        },
+        "soraya": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Building a bamboo bicycle is one of those things that seems mythical until you've done it. And then you realise it wasn't mythical at all — you just did it.",
+            "name": "Soraya",
+            "role": "Workshop Participant",
+            "location": "London"
+          }
+        },
+        "btb": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The bike was the first thing I ever made with my own hands. When my daughter rode it on family visit day, I felt like a dad again.",
+            "name": "Build to Bond Participant",
+            "role": "HMP Lowdham Grange",
+            "location": "Nottinghamshire"
+          }
+        },
+        "taro": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Ten years riding my BBC home-build kit through Tokyo — and still going strong. It has outlasted every other bike I've owned.",
+            "name": "Taro",
+            "role": "Home Kit Builder",
+            "location": "Tokyo, Japan"
+          }
+        }
+      },
+      "block_order": [
+        "hasan",
+        "kate",
+        "soraya",
+        "btb",
+        "taro"
+      ],
+      "settings": {
+        "eyebrow": "In Their Words",
+        "heading": "What Our Builders Say",
+        "subheading": "From London workshops to Tokyo commutes to prison rehabilitation programmes"
+      }
+    },
+    "values": {
+      "type": "multicolumn",
+      "blocks": {
+        "sustainability": {
+          "type": "column",
+          "settings": {
+            "title": "Sustainability",
+            "text": "<p>Bamboo regrows from the same root system in 3–5 years — a rapidly renewable grass we can work by hand. And because our builders make their own frames, they learn to maintain and repair them too, so they last.<\/p>"
+          }
+        },
+        "craftsmanship": {
+          "type": "column",
+          "settings": {
+            "title": "Craftsmanship",
+            "text": "<p>We teach traditional handcraft skills in a modern context — reconnecting people with the act of making something real, that lasts for years, with their own two hands.<\/p>"
+          }
+        },
+        "community": {
+          "type": "column",
+          "settings": {
+            "title": "Community",
+            "text": "<p>From London workshops to prisons, schools, and corporate events — we build more than bikes. We build confidence, skills, and the kind of pride that only comes from making something yourself.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "sustainability",
+        "craftsmanship",
+        "community"
+      ],
+      "settings": {
+        "title": "What We Stand For",
+        "heading_size": "h2",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "color_scheme": "scheme-2",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "founders": {
+      "type": "bbc-founders",
+      "blocks": {
+        "james": {
+          "type": "founder",
+          "settings": {
+            "name": "James Marr",
+            "role": "Founder & CEO",
+            "location": "London, UK",
+            "bio": "James learned bamboo bicycle building in Canada before returning to London to share the knowledge. He founded BBC in 2012 with Ian McMillan and has since built programmes recognised by the Financial Times, the UK Prisons Minister, Investec, and Kevin McCloud. He leads BBC's mission to make sustainable craftsmanship accessible to everyone.",
+            "linkedin": "https:\/\/www.linkedin.com\/in\/jamesamarr\/"
+          }
+        },
+        "toulouse": {
+          "type": "founder",
+          "settings": {
+            "name": "Toulouse Workshop",
+            "role": "Workshop Partner",
+            "location": "Toulouse, France",
+            "bio": "BBC's French home, opened May 2024, bringing bamboo bike building to the heart of cycling country. Workshops run in French and English. France is BBC's highest-converting international market."
+          }
+        },
+        "amersfoort": {
+          "type": "founder",
+          "settings": {
+            "name": "Amersfoort Workshop",
+            "role": "Workshop Partner",
+            "location": "Amersfoort, Netherlands",
+            "bio": "Our Dutch workshop serving the Netherlands and surrounding regions. Home to a thriving community of European bamboo bike builders."
+          }
+        }
+      },
+      "block_order": [
+        "james",
+        "toulouse",
+        "amersfoort"
+      ],
+      "settings": {
+        "label": "Who We Are",
+        "heading": "The People Behind the Bikes",
+        "intro": "From East London to Toulouse to Amersfoort — united by a shared belief that building something with your hands changes how you see yourself."
+      }
+    },
+    "endorsements": {
+      "type": "bbc-endorsements",
+      "blocks": {
+        "timpson_quote": {
+          "type": "quote",
+          "settings": {
+            "quote": "Innovative projects, such as Build to Bond, support rehabilitation and help people leave prison as better citizens, boosting the economy and keeping our streets safe.",
+            "name": "James Timpson",
+            "role": "UK Prisons Minister"
+          }
+        },
+        "bikeradar_quote": {
+          "type": "quote",
+          "settings": {
+            "quote": "Bamboo Bicycle Club taps into 'the IKEA effect' — that extra bit of affection people reserve for objects they put together themselves.",
+            "name": "BikeRadar",
+            "role": "Review"
+          }
+        },
+        "ft_press": {
+          "type": "press",
+          "settings": {
+            "publication": "Financial Times",
+            "headline": "How Bamboo Bicycle Club is helping to break the prison cycle",
+            "date": "September 2025",
+            "link": "https:\/\/www.ft.com\/content\/6ebe2eba-b832-4289-9924-2e9f948d5f98"
+          }
+        },
+        "bikeradar_press": {
+          "type": "press",
+          "settings": {
+            "publication": "BikeRadar",
+            "headline": "First Ride Video Review",
+            "date": "Video Review"
+          }
+        },
+        "roadcc_press": {
+          "type": "press",
+          "settings": {
+            "publication": "road.cc",
+            "headline": "5-Part Build Series — Unboxing to First Ride",
+            "date": "Full Documentation"
+          }
+        },
+        "designmuseum_press": {
+          "type": "press",
+          "settings": {
+            "publication": "Design Museum",
+            "headline": "Cycle Revolution Exhibition — The only bamboo bicycle maker of its kind in Europe",
+            "date": "2015–2016"
+          }
+        },
+        "bikeradar2_press": {
+          "type": "press",
+          "settings": {
+            "publication": "BikeBiz",
+            "headline": "World's First 3D Printed Bamboo Bike — Pioneering new manufacturing techniques",
+            "date": "2016"
+          }
+        },
+        "huck_press": {
+          "type": "press",
+          "settings": {
+            "publication": "Huck Magazine",
+            "headline": "Working Artisans Club — niche-manufacturing model that prioritises knowledge-sharing",
+            "date": "Feature"
+          }
+        }
+      },
+      "block_order": [
+        "timpson_quote",
+        "bikeradar_quote",
+        "ft_press",
+        "bikeradar_press",
+        "roadcc_press",
+        "designmuseum_press",
+        "bikeradar2_press",
+        "huck_press"
+      ],
+      "settings": {
+        "heading": "In the Press"
+      }
+    },
+    "press": {
+      "type": "bbc-press-logos-v2",
+      "settings": {
+        "label": "As Featured In",
+        "heading": "As featured in",
+        "show_ft": true,
+        "ft_link": "https:\/\/bamboobicycleclub.org\/blogs\/impact\/financial-times-prisons-minister-national-recognition-for-build-to-bond",
+        "show_guardian": true,
+        "show_telegraph": true,
+        "show_bikeradar": false,
+        "show_designmuseum": true,
+        "show_granddesigns": false,
+        "show_cyclingweekly": false,
+        "show_roadcc": false,
+        "show_cnn": true,
+        "show_metro": true,
+        "show_fastcompany": true,
+        "show_huck": false,
+        "guardian_link": "https:\/\/bamboobicycleclub.org\/blogs\/news\/the-guardian-environmental-activist-gears-up-for-6-000-mile-bamboo-bike-ride",
+        "telegraph_link": "https:\/\/bamboobicycleclub.org\/blogs\/news\/the-telegraph-how-i-joined-the-bamboo-bicycle-club",
+        "cnn_link": "https:\/\/bamboobicycleclub.org\/blogs\/news\/cnn-money-how-bamboo-bicycle-club-sells-build-your-own-bikes-to-the-world",
+        "metro_link": "https:\/\/bamboobicycleclub.org\/blogs\/news\/metro-wood-wars-could-bamboo-branch-out-and-revolutionise-construction",
+        "fastcompany_link": "https:\/\/bamboobicycleclub.org\/blogs\/news\/fast-company-this-custom-200-bike-frame-could-be-3-d-printed-in-your-living-room",
+        "designmuseum_link": "https:\/\/bamboobicycleclub.org\/blogs\/news\/design-museum-cycle-revolution-exhibition-bbc-frame-on-display"
+      }
+    },
+    "cta": {
+      "type": "bbc-cta",
+      "settings": {
+        "heading": "Ready to Build Something?",
+        "text": "Whether you want to build at home with a kit, join a London workshop, bring bamboo bike building to your organisation, or explore a franchise — we're here.",
+        "button_text": "View Workshops",
+        "button_link": "\/pages\/bicycle-frame-building-workshop",
+        "button_style": "primary",
+        "button_secondary_text": "Shop Build Kits",
+        "button_secondary_link": "\/collections\/home-build-kits",
+        "button_secondary_style": "outline-light",
+        "background": "forest"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "recognition_strip",
+    "story",
+    "impact_stats",
+    "timeline",
+    "impact",
+    "voices",
+    "values",
+    "founders",
+    "endorsements",
+    "press",
+    "cta"
+  ]
+}
+

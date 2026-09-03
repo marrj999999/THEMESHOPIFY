@@ -1,0 +1,45 @@
+{%- comment -%}
+  BBC theme block — Geometry ROW. One <tr> of the frame-geometry table.
+  The container section (bbc-geometry) renders the <table>, the size-column
+  <thead> and the wrapper; this block emits a single measurement row:
+  a <th scope="row"> (the measurement name) + up to 4 size columns.
+  Reproduces the bbc-product-geometry markup/classes (.bbc-geometry__table).
+  Empty size cells render an em dash so columns stay aligned.
+{%- endcomment -%}
+{%- liquid
+  assign c1 = block.settings.col1 | default: '—'
+  assign c2 = block.settings.col2 | default: '—'
+  assign c3 = block.settings.col3 | default: '—'
+  assign c4 = block.settings.col4 | default: '—'
+-%}
+<tr {{ block.shopify_attributes }}>
+  <th scope="row">{{ block.settings.label }}</th>
+  <td>{{ c1 }}</td>
+  <td>{{ c2 }}</td>
+  <td>{{ c3 }}</td>
+  <td>{{ c4 }}</td>
+</tr>
+
+{% stylesheet %}
+  .bbc-rd .bbc-geo-table th,
+  .bbc-rd .bbc-geo-table td{ padding:11px 14px; border-bottom:1px solid rgba(7,62,39,.14); text-align:left; font-size:14px; }
+  .bbc-rd .bbc-geo-table tbody th[scope="row"]{ font-weight:700; color:var(--forest,var(--forest,#003C32)); }
+  .bbc-rd .bbc-geo-table tbody tr:nth-child(even){ background:rgba(7,62,39,.03); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Geometry row",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "label", "label": "Measurement", "default": "Seat tube (C-C)" },
+    { "type": "text", "id": "col1", "label": "Size 1 value", "default": "48cm" },
+    { "type": "text", "id": "col2", "label": "Size 2 value", "default": "52cm" },
+    { "type": "text", "id": "col3", "label": "Size 3 value", "default": "56cm" },
+    { "type": "text", "id": "col4", "label": "Size 4 value", "default": "58cm" }
+  ],
+  "presets": [
+    { "name": "BBC Geometry row" }
+  ]
+}
+{% endschema %}

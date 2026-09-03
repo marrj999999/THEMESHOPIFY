@@ -1,0 +1,30 @@
+{
+  "name": "bbc-shopify-theme",
+  "version": "1.0.0",
+  "description": "Bamboo Bicycle Club Shopify Theme (Dawn-based)",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "lint:css": "stylelint 'assets/**/*.css'",
+    "check:consistency": "node qa/consistency-check.mjs",
+    "census": "node qa/estate-census.mjs",
+    "check:anatomy": "node qa/anatomy-conformance.mjs",
+    "check:bands": "node qa/band-grammar.mjs",
+    "smoke:webkit": "npx playwright test --config=playwright.config.webkit.mjs",
+    "smoke:firefox": "npx playwright test --config=playwright.config.firefox.mjs",
+    "test:motion": "npx playwright test --config=playwright.config.motion.mjs",
+    "check:geometry": "node qa/geometry-check.mjs",
+    "check:editability": "node qa/editability-check.mjs",
+    "check:live": "node qa/live-check.mjs --assert",
+    "check:live:quick": "node qa/live-check.mjs --quick --assert",
+    "check:claims": "node qa/canary.mjs --skip-visual && node qa/claims-register-sync.mjs --quiet && bash scripts/claim-lint.sh sections snippets templates"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@playwright/test": "^1.40.0",
+    "html-validate": "^11.5.6",
+    "stylelint": "^17.14.1",
+    "stylelint-declaration-strict-value": "^1.11.1"
+  }
+}

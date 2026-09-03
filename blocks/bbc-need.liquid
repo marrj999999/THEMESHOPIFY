@@ -1,0 +1,52 @@
+{%- comment -%}
+  BBC theme block — "What you'll need" card (title + description + optional icon).
+  From the bbc-product-2026 `need` block (.rd-card.rd-stamp > .rd-body > h3 + p).
+  Description is richtext here (the monolith used a textarea). Optional leading icon
+  from the bundled bbc-icons snippet. Sits inside a grid container (.rd-grid .rd-g3).
+{%- endcomment -%}
+<div class="rd-card rd-stamp" {{ block.shopify_attributes }}>
+  <div class="rd-body">
+    {%- if block.settings.icon != blank and block.settings.icon != 'none' -%}
+      <span class="bbc-need__ic" aria-hidden="true">{% render 'bbc-icons', icon: block.settings.icon, size: 28 %}</span>
+    {%- endif -%}
+    {%- if block.settings.title != blank -%}<h3 class="rd-fs-21px">{{ block.settings.title }}</h3>{%- endif -%}
+    {%- if block.settings.description != blank -%}<div class="rd-mt1 bbc-need__body">{{ block.settings.description }}</div>{%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .bbc-rd .bbc-need__ic{ display:inline-flex; color:var(--forest,var(--forest,#003C32)); margin-bottom:10px; }
+  .bbc-rd .bbc-need__ic svg{ width:28px; height:28px; }
+  .bbc-rd .bbc-need__body p{ margin:0; }
+  .bbc-rd .bbc-need__body p + p{ margin-top:.6em; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Need card",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "title", "label": "Card title", "default": "Basic hand tools" },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>A hacksaw, files, sandpaper, a measuring tape — no power tools. Everything else is in the kit.</p>" },
+    {
+      "type": "select", "id": "icon", "label": "Icon (optional)", "default": "none",
+      "options": [
+        { "value": "none", "label": "No icon" },
+        { "value": "tools", "label": "Tools" },
+        { "value": "clock", "label": "Clock" },
+        { "value": "package", "label": "Package" },
+        { "value": "check-circle", "label": "Check circle" },
+        { "value": "shield", "label": "Shield" },
+        { "value": "leaf", "label": "Leaf" },
+        { "value": "bike", "label": "Bike" },
+        { "value": "users", "label": "Users / community" },
+        { "value": "book", "label": "Book / manual" },
+        { "value": "video", "label": "Video" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "BBC Need card" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,485 @@
+{% comment %}
+  BBC Product Tabs — Sticky Navigation Bar
+  
+  Sticky tab nav for kit product pages. Each tab is a block — fully editable
+  in the Shopify theme editor. Add, remove, reorder, relabel, change icons.
+  
+  Each tab scrolls to a section by ID. Set "Section ID" to match either:
+  - A custom HTML id (e.g. "build-time" → <section id="build-time">)
+  - A Shopify section key (e.g. "whats-included" → tries "shopify-section-whats-included")
+  
+  Usage: Add to any product template. Sits above the content sections it navigates.
+{% endcomment %}
+
+{%- assign font_size_rem = section.settings.font_size | divided_by: 100.0 -%}
+{%- assign font_size_mobile = section.settings.font_size | minus: 5 | divided_by: 100.0 -%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--bbc-white);
+    border-bottom: 2px solid var(--bbc-forest, var(--bbc-forest));
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .bbc-tabs--{{ section.id }} {
+    max-width: {{ settings.page_width | default: 1200 }}px;
+    margin: 0 auto;
+    padding: 0 {{ section.settings.horizontal_padding }}px;
+  }
+
+  .bbc-tabs__scroll-wrap--{{ section.id }} {
+    position: relative;
+  }
+
+  .bbc-tabs__list--{{ section.id }} {
+    display: flex;
+    align-items: stretch;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .bbc-tabs__list--{{ section.id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .bbc-tabs__tab--{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 {{ section.settings.tab_padding_x }}px;
+    min-height: {{ section.settings.tab_height }}px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-family: var(--font-body-family, "Plus Jakarta Sans", system-ui, sans-serif);
+    font-size: {{ font_size_rem }}rem;
+    font-weight: 600;
+    color: {{ section.settings.text_color }};
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+
+  .bbc-tabs__tab--{{ section.id }}:hover {
+    color: {{ section.settings.hover_color }};
+    border-bottom-color: {{ section.settings.hover_color }};
+  }
+
+  .bbc-tabs__tab--{{ section.id }}.is-active,
+  .bbc-tabs__tab--{{ section.id }}[aria-selected="true"] {
+    color: {{ section.settings.active_color }};
+    border-bottom-color: {{ section.settings.active_color }};
+  }
+
+  .bbc-tabs__tab--{{ section.id }}:focus-visible {
+    outline: 2px solid var(--bbc-gold, var(--bbc-gold));
+    outline-offset: -2px;
+  }
+
+  .bbc-tabs__tab-icon--{{ section.id }} {
+    flex-shrink: 0;
+    width: {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    color: currentColor;
+  }
+
+  .bbc-tabs__tab--{{ section.id }}.is-active .bbc-tabs__tab-icon--{{ section.id }},
+  .bbc-tabs__tab--{{ section.id }}[aria-selected="true"] .bbc-tabs__tab-icon--{{ section.id }} {
+    opacity: 1;
+  }
+
+  .bbc-tabs__tab-icon--{{ section.id }} svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .bbc-tabs__fade--{{ section.id }} {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(to right, transparent, var(--bbc-white));
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  @media (min-width: 1024px) {
+    .bbc-tabs__fade--{{ section.id }} {
+      display: none;
+    }
+  }
+
+  @media (max-width: 749px) {
+    .bbc-tabs__tab--{{ section.id }} {
+      padding: 0 {{ section.settings.tab_padding_x | minus: 4 }}px;
+      font-size: {{ font_size_mobile }}rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-tabs__tab--{{ section.id }} {
+      transition: none;
+    }
+  }
+{%- endstyle -%}
+
+<nav aria-label="{{ section.settings.aria_label | default: 'Product information' }}">
+  <div class="bbc-tabs--{{ section.id }}">
+    <div class="bbc-tabs__scroll-wrap--{{ section.id }}">
+      <div class="bbc-tabs__list--{{ section.id }}"
+           role="tablist"
+           aria-label="{{ section.settings.aria_label | default: 'Product details' }}"
+           id="bbc-tablist-{{ section.id }}">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'tab' -%}
+            {%- assign is_first = forloop.first -%}
+            <button
+              type="button"
+              class="bbc-tabs__tab--{{ section.id }}{% if is_first %} is-active{% endif %}"
+              role="tab"
+              aria-selected="{% if is_first %}true{% else %}false{% endif %}"
+              aria-controls="{{ block.settings.section_id }}"
+              data-target="{{ block.settings.section_id }}"
+              tabindex="{% if is_first %}0{% else %}-1{% endif %}"
+              {{ block.shopify_attributes }}>
+              {%- if block.settings.icon != blank and block.settings.icon != 'none' -%}
+                <span class="bbc-tabs__tab-icon--{{ section.id }}" aria-hidden="true">
+                  {%- render 'bbc-icons', icon: block.settings.icon, size: section.settings.icon_size -%}
+                </span>
+              {%- endif -%}
+              <span>{{ block.settings.label }}</span>
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div class="bbc-tabs__fade--{{ section.id }}" aria-hidden="true"></div>
+    </div>
+  </div>
+</nav>
+
+<script>
+(function() {
+  var sectionId = '{{ section.id }}';
+  var tablist = document.getElementById('bbc-tablist-' + sectionId);
+  if (!tablist) return;
+
+  var navEl = tablist.closest('[aria-label]').parentElement;
+  // Find the sticky nav wrapper (shopify-section wrapper)
+  var stickyEl = document.getElementById('shopify-section-' + sectionId);
+  var tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
+  var fade = tablist.parentElement.querySelector('.bbc-tabs__fade--' + sectionId);
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Scroll fade indicator
+  function updateFade() {
+    if (!fade) return;
+    var hasMore = tablist.scrollWidth > tablist.clientWidth + 4 &&
+                  tablist.scrollLeft < tablist.scrollWidth - tablist.clientWidth - 4;
+    fade.style.opacity = hasMore ? '1' : '0';
+  }
+  tablist.addEventListener('scroll', updateFade, { passive: true });
+  window.addEventListener('resize', updateFade, { passive: true });
+  updateFade();
+
+  // Activate a tab (no scrolling — just UI state)
+  function activateTab(tab) {
+    tabs.forEach(function(t) {
+      var isThis = t === tab;
+      t.setAttribute('aria-selected', isThis ? 'true' : 'false');
+      t.setAttribute('tabindex', isThis ? '0' : '-1');
+      t.classList.toggle('is-active', isThis);
+    });
+    // Ensure active tab is visible in scrollable list
+    tab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }
+
+  // Scroll page to a section
+  function scrollToSection(targetId) {
+    var target = document.getElementById(targetId)
+                 || document.getElementById('shopify-section-' + targetId);
+    if (!target) return;
+    var offset = (stickyEl ? stickyEl.offsetHeight : 60) + 8;
+    var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: top, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+  }
+
+  // Click handler
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      activateTab(this);
+      scrollToSection(this.dataset.target);
+    });
+  });
+
+  // Keyboard: arrow keys navigate tabs (ARIA tablist pattern)
+  tablist.addEventListener('keydown', function(e) {
+    var idx = tabs.indexOf(document.activeElement);
+    if (idx < 0) return;
+    var next;
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      next = idx > 0 ? idx - 1 : tabs.length - 1;
+    } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      next = idx < tabs.length - 1 ? idx + 1 : 0;
+    } else if (e.key === 'Home') {
+      next = 0;
+    } else if (e.key === 'End') {
+      next = tabs.length - 1;
+    } else {
+      return;
+    }
+    e.preventDefault();
+    tabs[next].focus();
+    activateTab(tabs[next]);
+    scrollToSection(tabs[next].dataset.target);
+  });
+
+  // Scroll spy — highlight tab based on visible section
+  if ('IntersectionObserver' in window) {
+    var targetIds = tabs.map(function(t) { return t.dataset.target; }).filter(Boolean);
+    var targets = targetIds.map(function(id) {
+      return document.getElementById(id) || document.getElementById('shopify-section-' + id);
+    }).filter(Boolean);
+
+    if (targets.length) {
+      var navH = stickyEl ? stickyEl.offsetHeight : 60;
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          var id = el.id || '';
+          var match = tabs.find(function(t) {
+            return t.dataset.target === id ||
+                   'shopify-section-' + t.dataset.target === id ||
+                   t.dataset.target === id.replace('shopify-section-', '');
+          });
+          if (match) activateTab(match);
+        });
+      }, { rootMargin: '-' + (navH + 4) + 'px 0px -55% 0px', threshold: 0 });
+
+      targets.forEach(function(t) { io.observe(t); });
+    }
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "BBC Product Tabs",
+  "tag": "section",
+  "class": "bbc-product-tabs-sticky",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "range",
+      "id": "tab_height",
+      "label": "Tab height",
+      "min": 44,
+      "max": 72,
+      "step": 4,
+      "default": 52,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "tab_padding_x",
+      "label": "Tab horizontal padding",
+      "min": 12,
+      "max": 32,
+      "step": 4,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size (% of body)",
+      "min": 75,
+      "max": 110,
+      "step": 5,
+      "default": 90,
+      "info": "90 = 0.9rem, 100 = 1.0rem"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 14,
+      "max": 24,
+      "step": 2,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "horizontal_padding",
+      "label": "Container side padding",
+      "min": 16,
+      "max": 48,
+      "step": 8,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Default tab text",
+      "default": "#5a6a6a"
+    },
+    {
+      "type": "color",
+      "id": "hover_color",
+      "label": "Hover color",
+      "default": "#3f8b66"
+    },
+    {
+      "type": "color",
+      "id": "active_color",
+      "label": "Active tab color",
+      "default": "#073e27"
+    },
+    {
+      "type": "header",
+      "content": "Accessibility"
+    },
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "ARIA label",
+      "default": "Product information sections",
+      "info": "Describes this navigation to screen readers"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Section"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "No icon" },
+            { "value": "box", "label": "Box" },
+            { "value": "ruler", "label": "Ruler / Geometry" },
+            { "value": "clock", "label": "Clock / Build Time" },
+            { "value": "shield", "label": "Shield / Durability" },
+            { "value": "truck", "label": "Truck / Shipping" },
+            { "value": "support", "label": "Support / Help" },
+            { "value": "users", "label": "Users / Community" },
+            { "value": "star", "label": "Star / Reviews" },
+            { "value": "check", "label": "Checkmark" },
+            { "value": "check-circle", "label": "Check circle" },
+            { "value": "leaf", "label": "Leaf / Eco" },
+            { "value": "tools", "label": "Tools / Build" },
+            { "value": "mail", "label": "Mail" },
+            { "value": "globe", "label": "Globe / Worldwide" },
+            { "value": "award", "label": "Award" },
+            { "value": "bike", "label": "Bicycle" },
+            { "value": "map-pin", "label": "Map pin / Location" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "section_id",
+          "label": "Target section ID",
+          "default": "whats-included",
+          "info": "The HTML id of the section to scroll to. For BBC custom sections, use the id attribute (e.g. 'build-time'). For Dawn sections, use the section key from the template JSON (e.g. 'whats-included')."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Product Tabs",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "label": "What's Included",
+            "icon": "box",
+            "section_id": "whats-included"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Geometry",
+            "icon": "ruler",
+            "section_id": "geometry"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Build Time",
+            "icon": "clock",
+            "section_id": "build-time"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Durability",
+            "icon": "shield",
+            "section_id": "durability"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Shipping",
+            "icon": "truck",
+            "section_id": "shipping"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Support",
+            "icon": "support",
+            "section_id": "support"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Reviews",
+            "icon": "star",
+            "section_id": "build-reviews"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

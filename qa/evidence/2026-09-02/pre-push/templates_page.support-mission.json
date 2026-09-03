@@ -1,0 +1,200 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-support-mission-2026",
+      "blocks": {
+        "pillar-education": {
+          "type": "pillar",
+          "settings": {
+            "image_fallback": "bbc-rd-wb-lug.jpg",
+            "image_alt": "Wrapping a bamboo frame joint by hand",
+            "title": "education",
+            "body": "Two OCN London accredited Level 2 courses inside prisons, and schools programmes built to the same standard. Proper certificates, earned with tools in hand."
+          }
+        },
+        "pillar-employment": {
+          "type": "pillar",
+          "settings": {
+            "image_fallback": "bbc-rd-wb-jig.jpg",
+            "image_alt": "A frame set up on the building jig",
+            "title": "employment",
+            "body": "Skills the labour market is short of — fabrication, finishing, tolerances — plus peer instructors trained from within the programme."
+          }
+        },
+        "pillar-rehabilitation": {
+          "type": "pillar",
+          "settings": {
+            "image_fallback": "bbc-rd-wb-bond.jpg",
+            "image_alt": "A finished child-size balance bike in the workshop",
+            "title": "rehabilitation",
+            "body": "Build to Bond Makers build a balance bike for their own child — family contact is one of the strongest factors in staying out, and the bike is the bridge."
+          }
+        },
+        "stat-completion": {
+          "type": "stat",
+          "settings": {
+            "number": "90%+",
+            "label": "of Makers complete the course",
+            "comparator": "across every cohort to date"
+          }
+        },
+        "stat-sites": {
+          "type": "stat",
+          "settings": {
+            "number": "5",
+            "label": "UK prison sites",
+            "comparator": "established, at different delivery stages"
+          }
+        },
+        "faq-cic": {
+          "type": "faq",
+          "settings": {
+            "question": "Why a CIC and not a charity?",
+            "answer": "Because the workshops pay for most of it. The CIC is asset-locked — money in stays in — but it lets us run like the business we are, with kits and workshops funding the mission instead of a fundraising department."
+          }
+        },
+        "faq-grants": {
+          "type": "faq",
+          "settings": {
+            "question": "What does grant funding pay for that sales don't?",
+            "answer": "Scale and start-up. A new prison workshop needs benches, jigs and tools before the first cohort starts — that's what backers fund. Once running, sites are sustained by earned income and prison education budgets."
+          }
+        },
+        "faq-accounts": {
+          "type": "faq",
+          "settings": {
+            "question": "Can we see the accounts?",
+            "answer": "Yes — both companies file at Companies House: Bamboo Bicycle Club Ltd (10809302) and Bamboo Mobility Project CIC (16257348). Ask and we'll walk you through them."
+          }
+        },
+        "rung-kit": {
+          "type": "rung",
+          "settings": {
+            "amount": "~£180",
+            "title": "one kit",
+            "body": "Puts a frame kit and tools on one Maker's bench for a full build.",
+            "cta_label": "Fund a kit",
+            "primary": false
+          }
+        },
+        "rung-cohort": {
+          "type": "rung",
+          "settings": {
+            "amount": "~£8,500",
+            "title": "a full cohort",
+            "body": "A full cohort through a complete accredited programme — instructor, coordinator, kits, materials, and the assessment at the end.",
+            "cta_label": "Fund a cohort",
+            "primary": true
+          }
+        },
+        "rung-workshop": {
+          "type": "rung",
+          "settings": {
+            "amount": "~£7–10k",
+            "title": "a workshop, kitted out",
+            "body": "Benches, jigs and tools for a new site — one-off capital that stays with the prison permanently, whatever happens next.",
+            "cta_label": "Fund a workshop",
+            "primary": false
+          }
+        },
+        "rung-siteyear": {
+          "type": "rung",
+          "settings": {
+            "amount": "~£45k",
+            "title": "a site, for a year",
+            "body": "Four cohorts, twenty-four Makers, one prison workshop running all year.",
+            "cta_label": "Talk to James",
+            "primary": false
+          }
+        },
+        "backer-investec": {
+          "type": "backer",
+          "settings": {
+            "name": "Investec",
+            "detail": "Beyond Business 2025 — £24,000, chosen from 148 applicants"
+          }
+        },
+        "backer-lsbu": {
+          "type": "backer",
+          "settings": {
+            "name": "London South Bank University",
+            "detail": "Engineering lab access, 2025"
+          }
+        },
+        "backer-ft": {
+          "type": "backer",
+          "settings": {
+            "name": "Financial Times",
+            "detail": "\"How Bamboo Bicycle Club is helping to break the prison cycle\" — Sept 2025"
+          }
+        },
+        "story_2": {
+          "type": "story",
+          "settings": {
+            "kind": "families",
+            "title": "fathers building bikes their children ride",
+            "outcome": "fathers building bikes their children ride",
+            "blurb": "Build to Bond at HMP Lowdham Grange.",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/files\/lowdham-workshop-empty.jpg?v=1745576812",
+            "url": "\/blogs\/impact\/build-to-bond-hmp-lowdham-grange-impact"
+          }
+        },
+        "story_3": {
+          "type": "story",
+          "settings": {
+            "kind": "funders",
+            "title": "investec backed the model with £24,000",
+            "outcome": "investec backed the model with £24,000",
+            "blurb": "Beyond Business 2025 — selected from 148 applicants.",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/articles\/1759130900349_8a5efed2-23ac-460a-89c0-c6a7a1df8f05.jpg?v=1772817915",
+            "url": "\/blogs\/news\/investec-beyond-business-2025-bamboo-bicycle-club-wins-24-000-award"
+          }
+        },
+        "story_film": {
+          "type": "story",
+          "settings": {
+            "kind": "film",
+            "outcome": "grow your own bike",
+            "title": "grow your own bike",
+            "blurb": "The whole idea in one film — a bicycle you grow, cut and build rather than buy.",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/articles\/01_Easy-Road-Bike-by-Greg-Bamboo-Bicycle-Club_900x_c0a764f0-0386-48ce-8bf7-6829c3e62784.jpg?v=1633450741",
+            "video": "fc3_zPy-Ow4",
+            "url": "\/blogs\/news\/building-a-bamboo-bike-grow-your-own-bike"
+          }
+        }
+      },
+      "block_order": [
+        "pillar-education",
+        "pillar-employment",
+        "pillar-rehabilitation",
+        "stat-completion",
+        "stat-sites",
+        "faq-cic",
+        "faq-grants",
+        "faq-accounts",
+        "rung-kit",
+        "rung-cohort",
+        "rung-workshop",
+        "rung-siteyear",
+        "backer-investec",
+        "backer-lsbu",
+        "backer-ft",
+        "story_2",
+        "story_3",
+        "story_film"
+      ],
+      "settings": {
+        "stories_eyebrow": "What your money builds",
+        "stories_title": "the work you would be funding.",
+        "stories_lede": "Independently covered, and drawn from our own delivery records.",
+        "stories_all_label": "All coverage",
+        "stories_all_url": "\/blogs\/news",
+        "stories_mosaic": true,
+        "flow_pledge": "every sale supports"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

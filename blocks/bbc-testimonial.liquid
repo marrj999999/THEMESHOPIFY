@@ -1,0 +1,51 @@
+{%- comment -%}
+  BBC theme block — Testimonial (quote + attribution + image + lime toggle).
+  From the monolith `story` block. Reuses .rd-card.rd-stamp(.rd-lime) / .rd-ph.rd-ar-43 / .rd-body.
+  Image fallback = bundled asset via asset_img_url (the brittle filename->CDN switch is removed).
+  Sits inside a grid container (.bbc-rd .rd-grid).
+{%- endcomment -%}
+{%- liquid
+  if block.settings.lime
+    assign stamp = 'rd-card rd-stamp rd-lime'
+  else
+    assign stamp = 'rd-card rd-stamp'
+  endif
+  assign fallback = block.settings.fallback | default: 'bbc-rd-bike-field.jpg'
+-%}
+<div class="{{ stamp }}" {{ block.shopify_attributes }}>
+  <div class="rd-ph rd-ar-43">
+    {%- if block.settings.image != blank -%}
+      {{ block.settings.image
+        | image_url: width: 900
+        | image_tag:
+          widths: '400,600,900,1200',
+          sizes: '(max-width:749px) 92vw, 30vw',
+          alt: block.settings.image_alt,
+          loading: 'lazy' }}
+    {%- else -%}
+      <img src="{{ fallback | asset_img_url: '900x' }}" srcset="{{ fallback | asset_img_url: '400x' }} 400w, {{ fallback | asset_img_url: '600x' }} 600w, {{ fallback | asset_img_url: '900x' }} 900w, {{ fallback | asset_img_url: '1400x' }} 1400w" sizes="(max-width:749px) 92vw, 30vw" alt="{{ block.settings.image_alt | default: 'A hand-built bamboo bicycle built by a member of the community' | escape }}" width="1200" height="900" loading="lazy">
+    {%- endif -%}
+  </div>
+  <div class="rd-body">
+    <p class="rd-cmp-35205">{{ block.settings.quote }}</p>
+    <p class="rd-mt-10px">{{ block.settings.attribution }}</p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "BBC Testimonial",
+  "tag": null,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "fallback", "label": "Fallback asset (if no image picked)", "default": "bbc-rd-bike-field.jpg" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "A finished bamboo bicycle built by a member of the community" },
+    { "type": "textarea", "id": "quote", "label": "Quote", "default": "After two years, I still burst with pride riding something completely unique that I made myself." },
+    { "type": "text", "id": "attribution", "label": "Attribution", "default": "Louise · home-build road bike" },
+    { "type": "checkbox", "id": "lime", "label": "Lime stamp shadow", "default": false }
+  ],
+  "presets": [
+    { "name": "BBC Testimonial" }
+  ]
+}
+{% endschema %}

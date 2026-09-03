@@ -1,0 +1,73 @@
+{% comment %}
+  BBC Schools — Curriculum alignment (Layer 1). The key differentiator: maps to what schools teach.
+  Subject rows = blocks. Careers/qualifications strip + Gatsby B4.
+{% endcomment %}
+<section class="bbc-schools-cur">
+  <div class="page-width">
+    <div class="bbc-schools-cur__head">
+      {% if section.settings.eyebrow != blank %}<span class="bbc-schools-cur__eyebrow">{{ section.settings.eyebrow }}</span>{% endif %}
+      <h2 class="bbc-schools-cur__title">{{ section.settings.title }}</h2>
+      {% if section.settings.intro != blank %}<p class="bbc-schools-cur__intro">{{ section.settings.intro }}</p>{% endif %}
+    </div>
+    <div class="bbc-schools-cur__rows">
+      {% for block in section.blocks %}
+        <div class="bbc-schools-cur__row" {{ block.shopify_attributes }}>
+          <div class="bbc-schools-cur__subject">{{ block.settings.subject }}</div>
+          <div class="bbc-schools-cur__detail">{{ block.settings.detail }}</div>
+        </div>
+      {% endfor %}
+    </div>
+    {% if section.settings.careers != blank %}
+      <div class="bbc-schools-cur__careers">
+        <h3>{{ section.settings.careers_title }}</h3>
+        <p>{{ section.settings.careers }}</p>
+        {% if section.settings.gatsby != blank %}<p class="bbc-schools-cur__gatsby">{{ section.settings.gatsby }}</p>{% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+<style>
+  .bbc-schools-cur{background:var(--bbc-cream,#f8fafc);padding:64px 0}
+  .bbc-schools-cur__head{max-width:720px;margin:0 0 30px}
+  .bbc-schools-cur__eyebrow{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bbc-teal,#3f8b66);margin-bottom:10px}
+  .bbc-schools-cur__title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.25rem);color:var(--bbc-forest,#073e27);margin:0 0 12px;line-height:1.15}
+  .bbc-schools-cur__intro{font-size:1.1rem;line-height:1.55;color:var(--bbc-text,#1e293b);margin:0}
+  .bbc-schools-cur__rows{background:#fff;border:1px solid var(--bbc-gray-100,#e2e8f0);border-radius:14px;overflow:hidden}
+  .bbc-schools-cur__row{display:grid;grid-template-columns:180px 1fr;gap:18px;padding:16px 22px;border-bottom:1px solid var(--bbc-gray-100,#e2e8f0)}
+  .bbc-schools-cur__row:last-child{border-bottom:0}
+  .bbc-schools-cur__subject{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--bbc-forest,#073e27)}
+  .bbc-schools-cur__detail{font-size:.98rem;line-height:1.5;color:var(--bbc-text,#1e293b)}
+  .bbc-schools-cur__careers{margin-top:24px;background:var(--bbc-forest-light,#e8f0eb);border-left:4px solid var(--bbc-teal,#3f8b66);border-radius:12px;padding:20px 24px}
+  .bbc-schools-cur__careers h3{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.1rem;color:var(--bbc-forest,#073e27);margin:0 0 8px}
+  .bbc-schools-cur__careers p{font-size:.98rem;line-height:1.55;color:var(--bbc-text,#1e293b);margin:0 0 6px}
+  .bbc-schools-cur__gatsby{font-size:.9rem;font-style:italic;color:var(--bbc-text-muted,#64748b)}
+  @media (max-width:600px){.bbc-schools-cur__row{grid-template-columns:1fr;gap:4px}}
+</style>
+{% schema %}
+{
+  "name": "BBC Schools Curriculum",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Curriculum alignment" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "It maps to what you already teach" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "A hands-on, careers-framed project that drops into D&T and pulls in physics, maths and sustainability." },
+    { "type": "text", "id": "careers_title", "label": "Careers heading", "default": "Careers &amp; qualifications it feeds" },
+    { "type": "textarea", "id": "careers", "label": "Careers text", "default": "Composites technician, mechanical/manufacturing engineer, product designer. Feeds GCSE &amp; A-level D&amp;T (an NEA-grade design-and-make vehicle), T-Levels and Level 3 engineering apprenticeships." },
+    { "type": "textarea", "id": "gatsby", "label": "Gatsby line", "default": "Supports Gatsby Benchmark 4 (linking curriculum to careers) when you embed it in your careers plan — we provide a curriculum &amp; careers map to help you evidence it." }
+  ],
+  "blocks": [
+    { "type": "row", "name": "Subject row", "settings": [
+      { "type": "text", "id": "subject", "label": "Subject" },
+      { "type": "textarea", "id": "detail", "label": "What it covers" }
+    ] }
+  ],
+  "presets": [
+    { "name": "BBC Schools Curriculum", "blocks": [
+      { "type": "row", "settings": { "subject": "D&T", "detail": "Design, make and evaluate; measure and mark; cut, shape and finish a real material to a tolerance; the 6 Rs of sustainable design; an NEA-grade design-and-make project." } },
+      { "type": "row", "settings": { "subject": "Physics", "detail": "Forces, structures and triangulation; strength-to-weight; (speaker) sound, resonance and the decibel scale." } },
+      { "type": "row", "settings": { "subject": "Maths", "detail": "Accurate measurement; recording and analysing fair-test data; means of repeat readings." } },
+      { "type": "row", "settings": { "subject": "Sustainability", "detail": "Life Cycle Assessment, ecological footprint and material choice — examinable D&T content, delivered through bamboo itself." } }
+    ] }
+  ]
+}
+{% endschema %}

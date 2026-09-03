@@ -1,0 +1,164 @@
+{%- comment -%}
+  Bamboo Bicycle Club — Blog / News listing (2026 redesign).
+  Renders {{ blog }} articles in stamp cards with category tabs (blog tags —
+  the audit's Impact/Builds/How-to/Press/Events model), excerpt, date, and
+  pagination. Styling in assets/bbc-redesign-2026.css.
+{%- endcomment -%}
+
+
+<div class="bbc-rd bbc-rd-blog">
+
+  <section class="rd-pad-sm rd-paper">
+    <div class="rd-wrap rd-coll-head">
+      <span class="rd-eyebrow">{{ section.settings.eyebrow | default: 'Club news' }}</span>
+{%- comment -%} LAW 9 (CONSISTENCY-SPEC 2026-08-07): breadcrumb {%- endcomment -%}
+<nav class="rd-crumb rd-crumb--onlight" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep" aria-hidden="true">/</span><span aria-current="page">{{ blog.title | escape }}</span></nav>
+      <h1>{{ blog.title | default: section.settings.fallback_title | default: 'news' }}</h1>
+      {%- if section.settings.intro != blank -%}<div class="rd-lede rd-mt2 rd-mw-62ch">{{ section.settings.intro }}</div>{%- endif -%}
+    </div>
+  </section>
+
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      {%- if blog -%}
+        {%- if blog.all_tags.size > 0 -%}
+          <nav class="rd-tabs" aria-label="Categories">
+            <a href="{{ blog.url }}"{% if current_tags == blank %} class="rd-active"{% endif %}>All</a>
+            {%- comment -%} Curated category tabs (avoids dumping all 100+ blog tags). Falls back to all tags if unset. {%- endcomment -%}
+            {%- comment -%} PER-BLOG CATEGORIES. One template serves all four blogs, and their tag
+              vocabularies do not overlap — news is press/kit/tutorials, club-news is
+              Journeys/stories/gravel, schools is education/stem. A single shared list therefore
+              shows every blog three or four dead categories that return nothing on it.
+              Syntax: `handle: tag, tag | handle: tag, tag`. A chunk with no `handle:` prefix is
+              the fallback for any blog without its own group, so the old plain-list value still
+              works unchanged. {%- endcomment -%}
+            {%- assign _cats = '' -%}
+            {%- assign _fallback = '' -%}
+            {%- assign _groups = section.settings.category_tags | split: '|' -%}
+            {%- for g in _groups -%}
+              {%- if g contains ':' -%}
+                {%- assign _pair = g | split: ':' -%}
+                {%- assign _h = _pair[0] | strip -%}
+                {%- if _h == blog.handle -%}{%- assign _cats = _pair[1] -%}{%- endif -%}
+              {%- else -%}
+                {%- assign _fallback = g -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if _cats == blank -%}{%- assign _cats = _fallback -%}{%- endif -%}
+            {%- if _cats != blank -%}
+              {%- assign cat_list = _cats | split: ',' -%}
+              {%- comment -%} No `blog.all_tags contains` guard (removed 2026-08-18). It was meant to
+                hide a category the blog has no posts for, but it SILENTLY DROPS WORKING ONES:
+                on /blogs/schools-and-education the tag `education` has 13 published posts and
+                /tagged/education returns 9 cards on page one, yet all_tags does not report it, so
+                the biggest category on that blog had no pill at all. `stem` (6 posts) the same,
+                while `kit` — one single post — rendered fine. Whatever all_tags is doing, it is not
+                a reliable index of what filters.
+                The curated list is derived from measured tag counts, so every entry is known to
+                return posts; the guard added no safety and cost real categories. A typo in the
+                setting now shows an empty category rather than vanishing — visible beats silent.
+                {%- endcomment -%}
+              {%- for cat in cat_list -%}
+                {%- assign cat_t = cat | strip -%}
+                {%- if cat_t != blank -%}
+                  <a href="{{ blog.url }}/tagged/{{ cat_t | handle }}"{% if current_tags contains cat_t %} class="rd-active"{% endif %}>{{ cat_t }}</a>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- else -%}
+              {%- for tag in blog.all_tags -%}
+                <a href="{{ blog.url }}/tagged/{{ tag | handle }}"{% if current_tags contains tag %} class="rd-active"{% endif %}>{{ tag }}</a>
+              {%- endfor -%}
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+
+        {%- paginate blog.articles by section.settings.per_page -%}
+          {%- comment -%} Rotating fallback so image-less posts don't all show the same picture. {%- endcomment -%}
+          {%- assign blog_fallbacks = "bbc-rd-gal-meadow.jpg,bbc-rd-story-road.jpg,bbc-rd-gal-rider.jpg,bbc-rd-gal-gravel.jpg,bbc-rd-frame-build.jpg,bbc-rd-detail.jpg" | split: "," -%}
+          <div class="rd-grid rd-g3">
+            {%- for article in blog.articles -%}
+              <article class="rd-reveal rd-card rd-stamp rd-cardlink">
+                <div class="rd-ph">
+                  {%- if article.image -%}
+                    <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | escape | default: article.title }}" width="{{ article.image.width }}" height="{{ article.image.height }}" loading="lazy">
+                  {%- else -%}
+                    {%- assign fb_i = forloop.index0 | modulo: blog_fallbacks.size -%}
+                    <img src="{{ blog_fallbacks[fb_i] | asset_url }}" alt="{{ article.title | escape }}" width="1300" height="1300" loading="lazy">
+                  {%- endif -%}
+                  {%- assign card_tag = blank -%}{%- for t in article.tags -%}{%- assign t_num = t | plus: 0 -%}{%- if t_num == 0 and card_tag == blank -%}{%- assign card_tag = t -%}{%- endif -%}{%- endfor -%}{%- if card_tag != blank -%}<span class="rd-tag rd-lime rd-cardtag">{{ card_tag }}</span>{%- endif -%}
+                </div>
+                <div class="rd-body">
+                  <div class="rd-meta rd-cardmeta">{% if card_tag != blank %}{{ card_tag }}{% else %}From the workshop{% endif %} · {% render 'reading-time', article: article %}</div>
+                  <h2 class="rd-reveal rd-fs-21px"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+                  <p class="rd-excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
+                </div>
+              </article>
+            {%- else -%}
+              <p class="rd-lede">No posts yet.</p>
+            {%- endfor -%}
+          </div>
+
+          {%- if paginate.pages > 1 -%}
+            <nav class="rd-pagination" aria-label="Pagination">
+              {%- for part in paginate.parts -%}
+                {%- if part.is_link -%}<a href="{{ part.url }}" aria-label="Page {{ part.title }}">{{ part.title }}</a>
+                {%- else -%}<span{% if part.title == paginate.current_page %} class="rd-cur" aria-current="page"{% endif %}>{{ part.title }}</span>{%- endif -%}
+              {%- endfor -%}
+            </nav>
+          {%- endif -%}
+        {%- endpaginate -%}
+      {%- else -%}
+        <p class="rd-lede">Add this section to a blog template to list its posts.</p>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Blog 2026 (new)",
+  "tag": "div",
+  "class": "bbc-rd-blog-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Club news"
+    },
+    {
+      "type": "text",
+      "id": "fallback_title",
+      "label": "Title (used off a blog page)",
+      "default": "news"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro",
+      "default": "Impact, builds, how-tos and press from the workshop."
+    },
+    {
+      "type": "text",
+      "id": "category_tags",
+      "label": "Category tabs — `handle: tag, tag | handle: tag, tag`",
+      "info": "Prefix with a blog handle to scope a list to that blog. No prefix = used by any blog without its own group.",
+      "default": "news: press, Build to Bond, kit, Workshop Wednesdays, Tutorials, adventure, sustainability | club-news: Journeys, stories, gravel, Road, mtb, Build reviews | impact: impact, Social Enterprise, corporate, Build to Bond, adventure | schools-and-education: education, stem, case-study, sustainability, university"
+    },
+    {
+      "type": "range",
+      "id": "per_page",
+      "label": "Posts per page",
+      "min": 6,
+      "max": 24,
+      "step": 3,
+      "default": 9
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog 2026 (new)"
+    }
+  ]
+}
+{% endschema %}

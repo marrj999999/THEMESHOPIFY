@@ -1,0 +1,32 @@
+{%- comment -%}
+  BBC theme block — Endorsement quote. UNIFIES the monolith `endorsement` block
+  (sections/bbc-awards.liquid) and the credibility-quote cards
+  (sections/bbc-impact-2026.liquid). Uses the 2026 design-system version: a
+  blockquote on .rd-card.rd-stamp.rd-cred-card with .rd-cred-q / .rd-cred-cite. Name
+  is bold, with an optional org/title and an optional source (e.g. publication) after
+  a middot. Sits inside a grid container (.bbc-rd .rd-grid).
+{%- endcomment -%}
+<blockquote class="rd-card rd-stamp rd-cred-card" {{ block.shopify_attributes }}>
+  <div class="rd-cred-q">{{ block.settings.quote }}</div>
+  <cite class="rd-cred-cite">
+    {%- if block.settings.name != blank -%}<b>{{ block.settings.name }}</b>{%- endif -%}
+    {%- if block.settings.title_org != blank -%}<span> &middot; {{ block.settings.title_org }}</span>{%- endif -%}
+    {%- if block.settings.source != blank -%}<span> &middot; {{ block.settings.source }}</span>{%- endif -%}
+  </cite>
+</blockquote>
+
+{% schema %}
+{
+  "name": "BBC Endorsement",
+  "tag": null,
+  "settings": [
+    { "type": "richtext", "id": "quote", "label": "Quote", "default": "<p>Innovative projects, such as Build to Bond, support rehabilitation and help people leave prison as better citizens.</p>" },
+    { "type": "text", "id": "name", "label": "Name", "default": "Lord James Timpson" },
+    { "type": "text", "id": "title_org", "label": "Title / organisation", "default": "UK Prisons Minister" },
+    { "type": "text", "id": "source", "label": "Source (optional)", "default": "Financial Times, 2025" }
+  ],
+  "presets": [
+    { "name": "BBC Endorsement" }
+  ]
+}
+{% endschema %}

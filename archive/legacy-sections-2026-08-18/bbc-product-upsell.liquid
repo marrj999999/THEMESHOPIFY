@@ -1,0 +1,197 @@
+{% comment %}
+  BBC Product Upsell Section
+  Shows fork and component pack recommendations
+{% endcomment %}
+
+<div class="bbc-product-upsell">
+  <div class="bbc-product-upsell__container">
+    <h3 class="bbc-product-upsell__heading">
+      {% render 'bbc-icons', icon: 'package' %}
+      Complete Your Build
+    </h3>
+    
+    <div class="bbc-product-upsell__items">
+      <!-- Fork Upsell -->
+      <div class="bbc-upsell-item">
+        <div class="bbc-upsell-item__icon">
+          {% render 'bbc-icons', icon: 'fork' %}
+        </div>
+        <div class="bbc-upsell-item__content">
+          <h4 class="bbc-upsell-item__title">Carbon Gravel Fork</h4>
+          <p class="bbc-upsell-item__description">Disc brake compatible, thru-axle ready. The perfect fork for your gravel build.</p>
+          <div class="bbc-upsell-item__pricing">
+            <span class="bbc-upsell-item__price">£225</span>
+            <span class="bbc-upsell-item__discount">20% off with code FORK</span>
+          </div>
+          <a href="/products/carbon-gravel-fork" class="bbc-upsell-item__button">Add Fork</a>
+        </div>
+      </div>
+      
+      <!-- Component Pack Upsell -->
+      <div class="bbc-upsell-item">
+        <div class="bbc-upsell-item__icon">
+          {% render 'bbc-icons', icon: 'tools' %}
+        </div>
+        <div class="bbc-upsell-item__content">
+          <h4 class="bbc-upsell-item__title">Component Pack</h4>
+          <p class="bbc-upsell-item__description">Everything you need to turn your frame into a rideable bike. Curated for compatibility.</p>
+          <div class="bbc-upsell-item__pricing">
+            <span class="bbc-upsell-item__price">From £499</span>
+          </div>
+          <a href="{{ routes.collections_url }}/components" class="bbc-upsell-item__button">View Options</a>
+        </div>
+      </div>
+    </div>
+    
+    <p class="bbc-product-upsell__note">
+      <span class="bbc-upsell__tip-icon">{% render 'bbc-icons', icon: 'zap' %}</span> <strong>72% of kit builders</strong> also purchase a fork. Don't forget — you'll need one to complete your bike!
+    </p>
+  </div>
+</div>
+
+<style>
+  .bbc-product-upsell {
+    background: var(--bbc-cream, var(--bbc-cream));
+    border-radius: 0;
+    padding: 32px;
+    margin: 32px 0;
+  }
+  
+  .bbc-product-upsell__heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-heading-family);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 24px 0;
+  }
+  
+  .bbc-product-upsell__heading svg {
+    width: 24px;
+    height: 24px;
+    color: var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  .bbc-product-upsell__items {
+    display: grid;
+    gap: 20px;
+  }
+  
+  .bbc-upsell-item {
+    display: flex;
+    gap: 16px;
+    background: white;
+    border-radius: 0;
+    padding: 20px;
+    border: 1px solid rgba(7, 62, 39, 0.1);
+  }
+  
+  .bbc-upsell-item__icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background: var(--bbc-forest, var(--bbc-forest));
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .bbc-upsell-item__icon svg {
+    width: 24px;
+    height: 24px;
+    color: white;
+  }
+  
+  .bbc-upsell-item__content {
+    flex: 1;
+  }
+  
+  .bbc-upsell-item__title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 4px 0;
+  }
+  
+  .bbc-upsell-item__description {
+    font-size: 14px;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.8;
+    margin: 0 0 12px 0;
+  }
+  
+  .bbc-upsell-item__pricing {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .bbc-upsell-item__price {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+  }
+  
+  .bbc-upsell-item__discount {
+    font-size: 12px;
+    background: var(--bbc-gold, var(--bbc-gold));
+    color: var(--bbc-forest, var(--bbc-forest));
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  
+  .bbc-upsell-item__button {
+    display: inline-block;
+    background: var(--bbc-teal, var(--bbc-teal));
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  
+  .bbc-upsell-item__button:hover {
+    background: var(--bbc-forest, var(--bbc-forest));
+  }
+  
+  .bbc-product-upsell__note {
+    margin: 20px 0 0 0;
+    padding: 16px;
+    background: white;
+    border-radius: 0;
+    font-size: 14px;
+    color: var(--bbc-forest, var(--bbc-forest));
+    border-left: 4px solid var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-product-upsell {
+      padding: 20px;
+    }
+    
+    .bbc-upsell-item {
+      flex-direction: column;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Product Upsell",
+  "tag": "section",
+  "class": "bbc-product-upsell-section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "BBC Product Upsell"
+    }
+  ]
+}
+{% endschema %}

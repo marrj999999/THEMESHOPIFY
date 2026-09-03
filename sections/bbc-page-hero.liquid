@@ -1,0 +1,683 @@
+{% comment %}
+  BBC Page Hero — Improved with split layout, foreground image, and CTA buttons
+  Supports: centered, split-right, split-left layouts
+  Image: background (full bleed) OR foreground (side panel in split)
+  All content editable via Shopify theme editor
+{% endcomment %}
+
+{%- assign layout = section.settings.layout | default: 'centered' -%}
+{%- assign has_fg_image = section.settings.foreground_image -%}
+{%- assign is_split = false -%}
+{%- if layout == 'split-right' or layout == 'split-left' -%}
+  {%- assign is_split = true -%}
+{%- endif -%}
+
+<section
+  class="bbc-page-hero
+    bbc-page-hero--{{ layout }}
+    {% if section.settings.style == 'dark' %} bbc-page-hero--dark{% endif %}
+    {% if section.settings.style == 'image' %} bbc-page-hero--image{% endif %}
+    {% if is_split and has_fg_image %} bbc-page-hero--has-image{% endif %}"
+  aria-label="{{ section.settings.heading | escape }}"
+>
+
+  {%- comment -%} Full-bleed background image (centred layout only) {%- endcomment -%}
+  {% if section.settings.style == 'image' and section.settings.background_image %}
+    <div class="bbc-page-hero__background" aria-hidden="true">
+      <img
+        src="{{ section.settings.background_image | image_url: width: 1920 }}"
+        alt=""
+        loading="eager"
+        fetchpriority="high"
+        class="bbc-page-hero__bg-image"
+        style="object-position: {{ section.settings.image_focal_point | default: 'center center' }};"
+        width="1920"
+        height="800"
+      >
+      <div class="bbc-page-hero__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }}"></div>
+    </div>
+  {% endif %}
+
+  <div class="bbc-page-hero__container page-width">
+    <div class="bbc-page-hero__inner">
+
+      {%- comment -%} Text column {%- endcomment -%}
+      <div class="bbc-page-hero__text bbc-page-hero__text--{{ section.settings.content_align }}">
+        {% if section.settings.badge != blank %}
+          <span class="bbc-page-hero__badge">{{ section.settings.badge }}</span>
+        {% endif %}
+
+        <h1 class="bbc-page-hero__heading">{{ section.settings.heading }}</h1>
+
+        {% if section.settings.subheading != blank %}
+          <p class="bbc-page-hero__subheading">{{ section.settings.subheading }}</p>
+        {% endif %}
+
+        {% if section.settings.trust_line != blank %}
+          <p class="bbc-page-hero__trust">{{ section.settings.trust_line }}</p>
+        {% endif %}
+
+        {%- comment -%} CTA buttons {%- endcomment -%}
+        {% if section.settings.button_primary_label != blank or section.settings.button_secondary_label != blank %}
+          <div class="bbc-page-hero__buttons">
+            {% if section.settings.button_primary_label != blank %}
+              <a href="{{ section.settings.button_primary_link }}" class="bbc-page-hero__btn bbc-page-hero__btn--primary">
+                {{ section.settings.button_primary_label }}
+              </a>
+            {% endif %}
+            {% if section.settings.button_secondary_label != blank %}
+              <a href="{{ section.settings.button_secondary_link }}" class="bbc-page-hero__btn bbc-page-hero__btn--secondary">
+                {{ section.settings.button_secondary_label }}
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+      {%- comment -%} Foreground image column (split layouts only) {%- endcomment -%}
+      {% if is_split and has_fg_image %}
+        <div class="bbc-page-hero__image-col" aria-hidden="true">
+          <div class="bbc-page-hero__image-frame">
+            <img
+              src="{{ section.settings.foreground_image | image_url: width: 900 }}"
+              alt="{{ section.settings.foreground_image.alt | escape }}"
+              loading="eager"
+              fetchpriority="high"
+              width="900"
+              height="700"
+              class="bbc-page-hero__fg-image"
+            >
+            {% if section.settings.image_caption != blank %}
+              <p class="bbc-page-hero__caption">{{ section.settings.image_caption }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ============================================================
+     BASE
+  ============================================================ */
+  .bbc-page-hero {
+    position: relative;
+    background: var(--bbc-cream, var(--bbc-cream));
+    overflow: hidden;
+  }
+
+  .bbc-page-hero--dark {
+    background: var(--bbc-forest, var(--bbc-forest));
+  }
+
+  /* Subtle bamboo-stripe texture on dark */
+  .bbc-page-hero--dark::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -55deg,
+      transparent,
+      transparent 24px,
+      rgba(255,255,255,0.025) 24px,
+      rgba(255,255,255,0.025) 48px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .bbc-page-hero--image {
+    min-height: clamp(480px, 60vw, 640px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Mobile: let content define height, ensure background covers */
+  @media (max-width: 749px) {
+    .bbc-page-hero--image {
+      min-height: 0 !important;
+    }
+    
+    .bbc-page-hero--image.bbc-page-hero--centered .bbc-page-hero__inner {
+      padding: 56px 20px 48px 20px !important;
+    }
+  }
+
+  .bbc-page-hero--image .bbc-page-hero__container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .bbc-page-hero__container {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ============================================================
+     CENTRED LAYOUT (default)
+  ============================================================ */
+  .bbc-page-hero--centered .bbc-page-hero__inner {
+    padding: clamp(72px, 10vw, 120px) 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .bbc-page-hero--image.bbc-page-hero--centered .bbc-page-hero__inner {
+    padding: clamp(80px, 12vw, 140px) 0;
+  }
+
+  .bbc-page-hero--centered .bbc-page-hero__text {
+    max-width: 860px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .bbc-page-hero--centered .bbc-page-hero__text--left {
+    text-align: left;
+  }
+
+  /* ============================================================
+     SPLIT LAYOUT — only activates when image is present
+  ============================================================ */
+  .bbc-page-hero--split-right.bbc-page-hero--has-image .bbc-page-hero__inner,
+  .bbc-page-hero--split-left.bbc-page-hero--has-image .bbc-page-hero__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: clamp(420px, 55vw, 620px);
+    align-items: stretch;
+  }
+
+  /* No image: fall back to centred layout */
+  .bbc-page-hero--split-right:not(.bbc-page-hero--has-image) .bbc-page-hero__inner,
+  .bbc-page-hero--split-left:not(.bbc-page-hero--has-image) .bbc-page-hero__inner {
+    padding: clamp(72px, 10vw, 120px) 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .bbc-page-hero--split-right:not(.bbc-page-hero--has-image) .bbc-page-hero__text,
+  .bbc-page-hero--split-left:not(.bbc-page-hero--has-image) .bbc-page-hero__text {
+    max-width: 860px;
+    text-align: center;
+    padding: 0;
+  }
+
+  /* Split-right: text left, image right */
+  .bbc-page-hero--split-right.bbc-page-hero--has-image .bbc-page-hero__text {
+    order: 1;
+    padding: clamp(56px, 7vw, 96px) clamp(32px, 4vw, 64px) clamp(56px, 7vw, 96px) 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+  }
+
+  .bbc-page-hero--split-right.bbc-page-hero--has-image .bbc-page-hero__image-col {
+    order: 2;
+  }
+
+  /* Split-left: image left, text right */
+  .bbc-page-hero--split-left.bbc-page-hero--has-image .bbc-page-hero__text {
+    order: 2;
+    padding: clamp(56px, 7vw, 96px) 0 clamp(56px, 7vw, 96px) clamp(32px, 4vw, 64px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+  }
+
+  .bbc-page-hero--split-left.bbc-page-hero--has-image .bbc-page-hero__image-col {
+    order: 1;
+  }
+
+  /* Image column */
+  .bbc-page-hero__image-col {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bbc-page-hero__image-frame {
+    height: 100%;
+    min-height: 360px;
+  }
+
+  .bbc-page-hero__fg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .bbc-page-hero__caption {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.8);
+    background: rgba(7,62,39,0.55);
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin: 0;
+  }
+
+  /* ============================================================
+     BACKGROUND IMAGE OVERLAY (centred/image style)
+  ============================================================ */
+  .bbc-page-hero__background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .bbc-page-hero__bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .bbc-page-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--bbc-forest, var(--bbc-forest));
+  }
+
+  /* ============================================================
+     TEXT ELEMENTS
+  ============================================================ */
+  .bbc-page-hero__badge {
+    display: inline-block;
+    padding: 7px 18px;
+    background: var(--bbc-gold, var(--bbc-gold));
+    color: var(--bbc-forest, var(--bbc-forest));
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 20px;
+    border-radius: 100px;
+    box-shadow: 0 0 0 3px rgba(255,169,0,0.22);
+  }
+
+  .bbc-page-hero__heading {
+    font-family: var(--font-heading-family);
+    font-size: clamp(2.5rem, 5.5vw, 4rem);
+    font-weight: 800;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 20px 0;
+    line-height: 1.05;
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+  }
+
+  .bbc-page-hero--dark .bbc-page-hero__heading,
+  .bbc-page-hero--image .bbc-page-hero__heading {
+    color: var(--bbc-white);
+  }
+
+  .bbc-page-hero--image .bbc-page-hero__heading {
+    text-shadow: 0 2px 24px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.3);
+  }
+
+  .bbc-page-hero--image .bbc-page-hero__subheading {
+    text-shadow: 0 1px 12px rgba(0,0,0,0.4);
+  }
+
+  .bbc-page-hero__subheading {
+    font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+    line-height: 1.65;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.82;
+    margin: 0 0 8px 0;
+    max-width: 640px;
+  }
+
+  .bbc-page-hero--centered .bbc-page-hero__subheading {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .bbc-page-hero--dark .bbc-page-hero__subheading,
+  .bbc-page-hero--image .bbc-page-hero__subheading {
+    color: rgba(255,255,255,0.88);
+    opacity: 1;
+  }
+
+  .bbc-page-hero__trust {
+    font-size: 0.875rem;
+    color: var(--bbc-teal, var(--bbc-teal));
+    margin: 20px 0 0 0;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .bbc-page-hero--dark .bbc-page-hero__trust,
+  .bbc-page-hero--image .bbc-page-hero__trust {
+    color: var(--bbc-gold, var(--bbc-gold));
+  }
+
+  /* ============================================================
+     CTA BUTTONS
+  ============================================================ */
+  .bbc-page-hero__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .bbc-page-hero--centered .bbc-page-hero__buttons {
+    justify-content: center;
+  }
+
+  .bbc-page-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 28px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease;
+    letter-spacing: 0.01em;
+  }
+
+  .bbc-page-hero__btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(7,62,39,0.18);
+  }
+
+  .bbc-page-hero__btn--primary {
+    background: var(--bbc-gold, var(--bbc-gold));
+    color: var(--bbc-forest, var(--bbc-forest));
+  }
+
+  .bbc-page-hero__btn--primary:hover {
+    background: #ffb920;
+  }
+
+  .bbc-page-hero__btn--secondary {
+    background: transparent;
+    color: var(--bbc-forest, var(--bbc-forest));
+    border: 2px solid var(--bbc-forest, var(--bbc-forest));
+  }
+
+  .bbc-page-hero--dark .bbc-page-hero__btn--secondary,
+  .bbc-page-hero--image .bbc-page-hero__btn--secondary {
+    color: var(--bbc-white);
+    border-color: rgba(255,255,255,0.5);
+  }
+
+  .bbc-page-hero--dark .bbc-page-hero__btn--secondary:hover,
+  .bbc-page-hero--image .bbc-page-hero__btn--secondary:hover {
+    border-color: var(--bbc-white);
+  }
+
+  /* ============================================================
+     MOBILE
+  ============================================================ */
+  @media (max-width: 900px) {
+    .bbc-page-hero--split-right .bbc-page-hero__inner,
+    .bbc-page-hero--split-left .bbc-page-hero__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .bbc-page-hero--split-right .bbc-page-hero__text,
+    .bbc-page-hero--split-left .bbc-page-hero__text {
+      order: 1;
+      padding: 48px 0 32px 0;
+      text-align: center;
+    }
+
+    .bbc-page-hero--split-right .bbc-page-hero__image-col,
+    .bbc-page-hero--split-left .bbc-page-hero__image-col {
+      order: 2;
+    }
+
+    .bbc-page-hero--split-right .bbc-page-hero__subheading,
+    .bbc-page-hero--split-left .bbc-page-hero__subheading {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .bbc-page-hero--split-right .bbc-page-hero__buttons,
+    .bbc-page-hero--split-left .bbc-page-hero__buttons {
+      justify-content: center;
+    }
+
+    .bbc-page-hero__image-frame {
+      min-height: 260px;
+      max-height: 340px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .bbc-page-hero--centered .bbc-page-hero__inner {
+      padding: 48px 0 32px 0;
+    }
+
+    /* Fix: image hero must cover ALL text on mobile */
+    .bbc-page-hero--image {
+      min-height: 0;
+    }
+
+    .bbc-page-hero--image .bbc-page-hero__background {
+      /* Ensure background covers entire section */
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .bbc-page-hero--image .bbc-page-hero__inner {
+      padding: 48px 16px 40px 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .bbc-page-hero__heading {
+      font-size: clamp(1.75rem, 7vw, 2.5rem);
+    }
+
+    .bbc-page-hero__subheading {
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .bbc-page-hero__trust {
+      font-size: 0.75rem;
+      margin-top: 12px;
+      line-height: 1.4;
+    }
+
+    .bbc-page-hero__btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Page Hero",
+  "tag": "section",
+  "class": "bbc-page-hero-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "foreground_image",
+      "label": "Image (split layout)",
+      "info": "Upload your image here. Select 'Split — image right' or 'Split — image left' below to display it alongside the text. Recommended: 900×700px, portrait or landscape."
+    },
+    {
+      "type": "text",
+      "id": "image_caption",
+      "label": "Image caption (optional)",
+      "info": "Small text overlaid at the bottom of the image"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "info": "Small pill above the heading — e.g. 'Est. 2012'"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Page Title"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "info": "1–2 sentences. Shown below the heading."
+    },
+    {
+      "type": "text",
+      "id": "trust_line",
+      "label": "Trust line (optional)",
+      "info": "e.g. '4,000+ builders worldwide · Est. 2012'"
+    },
+    {
+      "type": "header",
+      "content": "Buttons (optional)"
+    },
+    {
+      "type": "text",
+      "id": "button_primary_label",
+      "label": "Primary button label",
+      "info": "e.g. 'View Workshops'"
+    },
+    {
+      "type": "url",
+      "id": "button_primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "button_secondary_label",
+      "label": "Secondary button label",
+      "info": "e.g. 'Shop Build Kits'"
+    },
+    {
+      "type": "url",
+      "id": "button_secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "header",
+      "content": "Layout & Style"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "centered", "label": "Centred — text only" },
+        { "value": "split-right", "label": "Split — image right, text left" },
+        { "value": "split-left", "label": "Split — image left, text right" }
+      ],
+      "default": "centered",
+      "info": "Split layouts require an image to be uploaded above"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Background colour",
+      "options": [
+        { "value": "light", "label": "Light (cream)" },
+        { "value": "dark", "label": "Dark (forest green)" },
+        { "value": "image", "label": "Image background (centred only)" }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "select",
+      "id": "content_align",
+      "label": "Text alignment (centred layout only)",
+      "options": [
+        { "value": "center", "label": "Centre" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Background image (optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image",
+      "info": "Only used when background is set to 'Image background'. Recommended: 1920×800px wide."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay darkness",
+      "min": 0,
+      "max": 90,
+      "step": 10,
+      "default": 60,
+      "unit": "%",
+      "info": "Darkens background image so text stays readable"
+    },
+    {
+      "type": "select",
+      "id": "image_focal_point",
+      "label": "Image focus point",
+      "info": "Which part of the background image to keep in view when cropping",
+      "options": [
+        { "value": "top center", "label": "Top" },
+        { "value": "center center", "label": "Centre (default)" },
+        { "value": "bottom center", "label": "Bottom" },
+        { "value": "40% center", "label": "Slightly left of centre" },
+        { "value": "60% center", "label": "Slightly right of centre" }
+      ],
+      "default": "center center"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Page Hero — Centred",
+      "settings": {
+        "heading": "Page Title",
+        "subheading": "A short description of what this page is about",
+        "style": "dark",
+        "layout": "centered"
+      }
+    },
+    {
+      "name": "BBC Page Hero — Split with Image",
+      "settings": {
+        "badge": "Est. 2012",
+        "heading": "Our Story",
+        "subheading": "We teach people to build bamboo bicycles. In workshops, prisons, schools and homes — across 45 countries, since 2012.",
+        "trust_line": "4,000+ builders worldwide · Investec Beyond Business 2025",
+        "style": "dark",
+        "layout": "split-right",
+        "button_primary_label": "View Workshops",
+        "button_primary_link": "/pages/bicycle-frame-building-workshop",
+        "button_secondary_label": "Shop Kits",
+        "button_secondary_link": "/collections/home-build-kits"
+      }
+    }
+  ]
+}
+{% endschema %}

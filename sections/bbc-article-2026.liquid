@@ -1,0 +1,523 @@
+{%- comment -%}
+  BBC Article 2026 — Medium-style editorial (rebuilt 2026-08-24, James: "poor
+  layout, no use of quotes, headers and body, featured image not interesting —
+  something similar to Medium").
+  THE MEDIUM ANATOMY, in BBC brand: text-led head (kicker > title > dek > byline
+  row with read time), the featured image INLINE below the byline with a caption
+  - never a full-bleed backdrop burying the title; a 700px reading column at
+  20px/1.65; h2/h3 with generous top space; pull-quotes carried on a lime culm
+  bar; hr as a centred culm dash; tag pills + share at the end; a 3px lime
+  reading-progress bar. All in a self-contained .art-* namespace in this file
+  (the estate's .rd-prose was too weak and is overridden here).
+  Auto-adapts by blog: /blogs/impact adds the stats band + mission CTA; other
+  blogs get the shop module. Read-next unchanged.
+{%- endcomment -%}
+
+{%- liquid
+  assign is_case = false
+  if blog.handle == 'impact'
+    assign is_case = true
+  endif
+  assign words = article.content | strip_html | number_of_words
+  assign rt = words | divided_by: 265 | at_least: 1
+  assign t = article.tags | join: ',' | downcase
+
+  # Shop/CTA mapping by tag then blog
+  assign shop_url = '/pages/bicycle-frame-building-workshop'
+  assign shop_label = 'Book a build'
+  assign shop_kicker = 'Ready to make one?'
+  assign shop_body = 'Build your own bamboo bike — in a London workshop or from a kit shipped to your door. No experience needed.'
+  if t contains 'gravel'
+    assign shop_url = '/collections/gravel-adventure'
+    assign shop_label = 'Build a gravel bike'
+    assign shop_kicker = 'Build the bike in this story'
+  elsif t contains 'road'
+    assign shop_url = '/collections/road'
+    assign shop_label = 'Build a road bike'
+    assign shop_kicker = 'Build the bike in this story'
+  elsif t contains 'mtb' or t contains '29er' or t contains 'mountain'
+    assign shop_url = '/collections/mtb'
+    assign shop_label = 'Build an MTB'
+    assign shop_kicker = 'Build the bike in this story'
+  elsif t contains 'balance'
+    assign shop_url = '/collections/balance-bikes'
+    assign shop_label = 'Build a balance bike'
+    assign shop_kicker = 'Build the bike in this story'
+  elsif t contains 'team' or t contains 'corporate'
+    assign shop_url = '/pages/bicycleteambuilding'
+    assign shop_label = 'Plan a team day'
+    assign shop_kicker = 'Do this with your team'
+  endif
+  if blog.handle == 'schools-and-education'
+    assign shop_url = '/pages/schools'
+    assign shop_label = 'Bring it to your school'
+    assign shop_kicker = 'For schools & colleges'
+    assign shop_body = 'Hands-on STEM your students can build — mapped to the curriculum. Start with a free speaker session.'
+  endif
+-%}
+
+<div class="bbc-rd bbc-rd-article{% if is_case %} bbc-rd-article--case{% endif %}">
+  <article>
+
+    {%- comment -%} Article schema (audit 2026-07-22 — articles had no structured data) {%- endcomment -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": {{ article.title | json }},
+        "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+        "dateModified": {{ article.updated_at | default: article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+        {%- if article.image -%}
+        "image": {{ article.image | image_url: width: 1200 | prepend: 'https:' | json }},
+        {%- endif -%}
+        "author": { "@type": "Organization", "name": "Bamboo Bicycle Club" },
+        "publisher": { "@type": "Organization", "name": "Bamboo Bicycle Club", "url": {{ shop.url | json }} },
+        "mainEntityOfPage": {{ canonical_url | json }}
+      }
+    </script>
+
+    {%- comment -%} ===== READING PROGRESS (Medium touch) ===== {%- endcomment -%}
+    <div class="art-progress" aria-hidden="true"><i></i></div>
+
+    {%- comment -%} ===== HEAD — text-led, image inline below (Medium anatomy) ===== {%- endcomment -%}
+    <header class="art-head">
+      <div class="art-col">
+        <nav class="rd-crumb art-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="{{ blog.url }}">{{ blog.title }}</a></nav>
+        {%- if is_case -%}<span class="art-kicker">{{ section.settings.tx_impact_story | default: "Impact story" }}</span>
+        {%- elsif article.tags.size > 0 -%}<span class="art-kicker">{{ article.tags.first | capitalize }}</span>{%- endif -%}
+        <h1 class="art-title">{{ article.title }}</h1>
+        {%- if article.excerpt != blank -%}<p class="art-dek">{{ article.excerpt | replace: '>', '> ' | strip_html | strip | truncatewords: 40 }}</p>{%- endif -%}
+        <div class="art-byline">
+          <span class="art-avatar" aria-hidden="true"></span>
+          <span class="art-who">
+            <b>{% if article.author != blank %}{{ article.author }}{% else %}Bamboo Bicycle Club{% endif %}</b>
+            <span class="art-meta">{{ article.published_at | date: '%-d %B %Y' }} &middot; {{ rt }} min read</span>
+          </span>
+        </div>
+      </div>
+      {%- if article.image -%}
+      <figure class="art-lead">
+        <img src="{{ article.image | image_url: width: 1600 }}" srcset="{{ article.image | image_url: width: 800 }} 800w, {{ article.image | image_url: width: 1200 }} 1200w, {{ article.image | image_url: width: 1600 }} 1600w" sizes="(max-width: 1020px) 100vw, 960px" alt="{{ article.image.alt | escape | default: article.title }}" width="{{ article.image.width }}" height="{{ article.image.height }}" fetchpriority="high" loading="eager">
+        {%- assign lead_cap = article.image.alt | strip -%}
+        {%- if lead_cap != blank and lead_cap != article.title -%}<figcaption>{{ lead_cap }}</figcaption>{%- endif -%}
+      </figure>
+      {%- endif -%}
+    </header>
+
+    {%- comment -%} ===== CASE-STUDY STATS BAND (dated + benchmarked; editable) ===== {%- endcomment -%}
+    {%- if is_case and section.settings.show_stats -%}
+      <div class="rd-dark rd-art-stats">
+        <div class="rd-art-col">
+          <span class="rd-eyebrow rd-on-dark">{{ section.settings.stats_label }}</span>
+          <div class="rd-art-statgrid">
+            {%- for i in (1..3) -%}
+              {%- assign nk = 'stat' | append: i | append: '_num' -%}
+              {%- assign lk = 'stat' | append: i | append: '_label' -%}
+              {%- assign num = section.settings[nk] -%}
+              {%- if num != blank -%}
+                <div class="rd-art-stat"><div class="rd-num bbc-counted">{{ num }}</div><div class="rd-lbl">{{ section.settings[lk] }}</div></div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          {%- if section.settings.stats_note != blank -%}<p class="rd-art-statnote">{{ section.settings.stats_note }}</p>{%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ===== BODY (700px reading column, Medium spec) ===== {%- endcomment -%}
+    <section class="art-bodywrap">
+      <div class="art-col">
+        <div class="art-prose">{{ article.content }}</div>
+        <script>
+          /* hide 404'd RTE images instead of rendering broken squares (geometry-check 2026-08-10) */
+          document.currentScript.previousElementSibling.querySelectorAll('img').forEach(function(i){
+            if (i.complete && i.naturalWidth === 0) i.style.display = 'none';
+            i.addEventListener('error', function(){ this.style.display = 'none'; });
+          });
+        </script>
+
+        {%- if article.tags.size > 0 -%}
+        <div class="art-tags">
+          {%- for tag in article.tags limit: 6 -%}<a class="art-tag" href="{{ blog.url }}/tagged/{{ tag | handleize }}"><span class="art-tag-t">{{ tag | capitalize }}</span></a>{%- endfor -%}
+        </div>
+        {%- endif -%}
+
+        <div class="art-share">
+          <span class="art-share-l">Share</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ article.url }}" rel="noopener" target="_blank" aria-label="Share on Facebook"><span class="art-share-t">Facebook</span></a>
+          <a href="https://www.linkedin.com/shareArticle?url={{ shop.url }}{{ article.url }}" rel="noopener" target="_blank" aria-label="Share on LinkedIn"><span class="art-share-t">LinkedIn</span></a>
+          <a href="mailto:?subject={{ article.title | url_encode }}&body={{ shop.url }}{{ article.url }}" aria-label="Share by email"><span class="art-share-t">Email</span></a>
+        </div>
+      </div>
+    </section>
+
+    {%- comment -%} ===== SHOP THE STORY / GET INVOLVED (switches by type) ===== {%- endcomment -%}
+    {%- if is_case -%}
+      <div class="rd-steel rd-art-cta">
+        <div class="rd-art-col rd-center">
+          <span class="rd-eyebrow">{{ section.settings.tx_back_the_mission | default: "Back the mission" }}</span>
+          <h2 class="rd-reveal">{{ section.settings.impact_cta_title | default: 'every bike we sell funds a place on the programme.' }}</h2>
+          <p class="rd-lede">{{ section.settings.impact_cta_body | default: 'Fund a cohort, offer placements, or partner with us. This is how stories like this one keep happening.' }}</p>
+          <a class="rd-btn rd-lime rd-btn-lg" href="{{ section.settings.impact_cta_url | default: '/pages/impact' }}">{{ section.settings.impact_cta_label | default: 'Support the mission →' }}</a>
+        </div>
+      </div>
+    {%- else -%}
+      <div class="rd-art-shop">
+        <div class="rd-art-col">
+          <div class="rd-art-shopcard rd-card rd-stamp">
+            <div class="rd-body">
+              <span class="rd-eyebrow">{{ shop_kicker }}</span>
+              <h2 class="rd-reveal rd-fs-21px">{{ shop_label }}</h2>
+              <p>{{ shop_body }}</p>
+              <a class="rd-btn rd-lime" href="{{ shop_url }}">{{ shop_label }} →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ===== READ NEXT — 3 cards, same blog, prefer shared tags ===== {%- endcomment -%}
+    {%- assign picked = ',' -%}
+    {%- assign count = 0 -%}
+    {%- comment -%} pass 1: shared-tag matches (ids delimiter-wrapped to avoid substring collisions) {%- endcomment -%}
+    {%- for a in blog.articles limit: 50 -%}
+      {%- if a.id != article.id and count < 3 -%}
+        {%- assign shared = false -%}
+        {%- for tag in article.tags -%}{%- if a.tags contains tag -%}{%- assign shared = true -%}{%- endif -%}{%- endfor -%}
+        {%- assign idkey = a.id | append: ',' -%}
+        {%- unless picked contains idkey -%}
+          {%- if shared -%}
+            {%- assign picked = picked | append: a.id | append: ',' -%}
+            {%- assign count = count | plus: 1 -%}
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+    
+  
+
+  {%- comment -%} pass 2: top-up with most-recent to reach 3 {%- endcomment -%}
+    {%- for a in blog.articles limit: 50 -%}
+      {%- if a.id != article.id and count < 3 -%}
+        {%- assign idkey = a.id | append: ',' -%}
+        {%- unless picked contains idkey -%}
+          {%- assign picked = picked | append: a.id | append: ',' -%}
+          {%- assign count = count | plus: 1 -%}
+        {%- endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if count > 0 -%}
+    <section class="rd-pad rd-paper rd-art-next">
+      <div class="rd-wrap">
+        <span class="rd-eyebrow">{{ section.settings.tx_read_next | default: "Read next" }}</span>
+        <h2 class="rd-reveal rd-mw-18ch">More from {{ blog.title | downcase }}</h2>
+        <div class="rd-grid rd-g3 rd-mt4">
+          {%- for a in blog.articles limit: 50 -%}
+            {%- assign idkey = a.id | append: ',' -%}
+            {%- if picked contains idkey -%}
+                <a class="rd-reveal rd-card rd-stamp rd-art-nextcard" href="{{ a.url }}">
+                  <div class="rd-ph">
+                    {%- if a.image -%}<img src="{{ a.image | image_url: width: 700 }}" alt="{{ a.image.alt | escape | default: a.title }}" width="{{ a.image.width }}" height="{{ a.image.height }}" loading="lazy">
+                    {%- else -%}<img src="{{ 'bbc-rd-detail.jpg' | asset_url }}" alt="{{ a.title | escape }}" width="1200" height="800" loading="lazy">{%- endif -%}
+                    {%- if a.tags.size > 0 -%}<span class="rd-tag rd-lime rd-cardtag">{{ a.tags.first | capitalize }}</span>{%- endif -%}
+                  </div>
+                  <div class="rd-body">
+                    <h3 class="rd-fs-18px">{{ a.title }}</h3>
+                    <span class="rd-art-nextmore">Read the story →</span>
+                  </div>
+                </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        <div class="rd-center rd-mt4"><a class="rd-btn rd-ghost" href="{{ blog.url }}">All {{ blog.title | downcase }} →</a></div>
+      </div>
+    </section>
+    {%- endif -%}
+
+  </article>
+</div>
+
+{% stylesheet %}
+/* .art-* Medium-style article, self-contained (2026-08-24). Reading spec:
+   700px column, 20px/1.65 Atkinson, culm pull-quotes, culm hr, progress bar. */
+.art-progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:9999;pointer-events:none}
+.art-progress i{display:block;height:100%;width:100%;background:var(--lime,#D4FD62);transform:scaleX(0);transform-origin:0 50%}
+.art-col{max-width:700px;margin-inline:auto;padding-inline:20px}
+/* .rd-art-col was referenced by the old template but never styled ANYWHERE -
+   the shop card / stats band / impact CTA ran full-bleed. QA catch 2026-08-24. */
+.rd-art-col{max-width:700px;margin-inline:auto;padding-inline:20px}
+.rd-art-shop{padding:0 0 clamp(36px,6vh,64px)}
+.rd-art-stats,.rd-art-cta{padding:clamp(28px,5vh,48px) 0}
+.art-head{padding:clamp(28px,5vh,56px) 0 0}
+.art-crumb{margin-bottom:18px}
+.art-kicker{display:inline-block;margin:0 0 14px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#4C7A1D}
+.bbc-rd-article .art-title{margin:0;font-size:clamp(1.9rem,4.6vw,2.9rem);line-height:1.12;letter-spacing:-.01em;color:var(--ink,#12211C);text-wrap:balance}
+.art-dek{margin:16px 0 0;font-size:clamp(1.05rem,2.4vw,1.3rem);line-height:1.5;color:rgba(18,33,28,.62)}
+.art-byline{display:flex;align-items:center;gap:12px;margin:22px 0 0;padding:14px 0;border-top:1px solid rgba(18,33,28,.12);border-bottom:1px solid rgba(18,33,28,.12)}
+.art-avatar{flex:0 0 36px;width:36px;height:36px;border-radius:50%;background:var(--forest,#003C32);position:relative}
+.art-avatar::after{content:"";position:absolute;left:9px;right:9px;top:16px;height:3px;border-radius:2px;background:repeating-linear-gradient(to right,var(--lime,#D4FD62) 0 6px,rgba(6,35,28,.6) 6px 8px)}
+.art-who{display:flex;flex-direction:column;gap:2px}
+.art-who b{font-size:15px;font-weight:800;color:var(--ink,#12211C)}
+.art-meta{font-size:13.5px;color:rgba(18,33,28,.55)}
+.art-lead{margin:clamp(24px,4vh,40px) auto 0;max-width:960px;padding-inline:20px}
+.art-lead img{display:block;width:100%;height:auto;border-radius:12px}
+.art-lead figcaption{margin-top:10px;text-align:center;font-size:13.5px;color:rgba(18,33,28,.5)}
+.art-bodywrap{padding:clamp(28px,5vh,52px) 0 clamp(36px,6vh,64px)}
+/* prose */
+.art-prose{font-size:20px;line-height:1.65;color:#20302A}
+.art-prose p{margin:0 0 1.5em}
+/* !important: the estate's display-heading rules size .bbc-rd h2 at 100px+ and
+   win on specificity - body headings must stay at reading scale. */
+.bbc-rd-article .art-prose h2{margin:2.1em 0 .55em!important;font-size:26px!important;line-height:1.25!important;letter-spacing:0!important;color:var(--ink,#12211C)!important;max-width:none!important}
+.bbc-rd-article .art-prose h3{margin:1.7em 0 .45em!important;font-size:21px!important;line-height:1.3!important;letter-spacing:0!important;color:var(--ink,#12211C)!important;max-width:none!important}
+.art-prose h2 + p,.art-prose h3 + p{margin-top:0}
+.art-prose a{color:inherit;text-decoration:underline;text-decoration-color:#9CCB2E;text-decoration-thickness:2px;text-underline-offset:3px}
+.art-prose a:hover{text-decoration-color:var(--forest,#003C32)}
+/* QUOTE CARD (v2, James: "improve treatment of quotes ... something unique"):
+   forest-tint card, giant lime quote glyph with an ink stroke, culm left bar,
+   small-caps attribution. Real <blockquote> and auto-promoted .art-q share it. */
+.art-prose blockquote,.art-prose .art-q{margin:2.2em 0;padding:46px 28px 22px 30px;position:relative;font-size:22px;line-height:1.5;font-weight:600;color:var(--forest,#003C32);background:rgba(0,60,50,.05);border-radius:14px}
+.art-prose blockquote::before,.art-prose .art-q::before{content:"\201C";position:absolute;top:-2px;left:20px;font-size:84px;line-height:1;font-weight:800;color:var(--lime,#D4FD62);-webkit-text-stroke:1.5px var(--forest,#003C32)}
+.art-prose blockquote::after,.art-prose .art-q::after{content:"";position:absolute;left:0;top:16px;bottom:16px;width:4px;border-radius:0 3px 3px 0;background:repeating-linear-gradient(to bottom,var(--lime,#D4FD62) 0 16px,rgba(6,35,28,.5) 16px 20px)}
+.art-prose blockquote p{margin:0 0 .6em}
+.art-prose blockquote p:last-child{margin:0}
+.art-q-c,.art-prose blockquote cite{display:block;margin-top:12px;font-size:13px;font-style:normal;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(18,33,28,.55)}
+.art-q-c::before,.art-prose blockquote cite::before{content:"\2014\00a0"}
+/* LINK BOX (James: "add links in a coloured box"): a list of links becomes a
+   forest panel of link cards; bare-text URLs are linkified by the JS pass.
+   Labels live in spans - the estate anchor rule cannot repaint them. */
+.art-linkbox{list-style:none;margin:1.6em 0 2em!important;padding:18px!important;background:var(--forest,#003C32);border-radius:14px;display:grid;gap:10px}
+.art-linkbox li{margin:0!important}
+.art-linkbox li::marker{content:""}
+.art-lb{display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding:13px 16px;background:rgba(230,220,200,.08);border-radius:10px;text-decoration:none!important;transition:background .15s ease}
+.art-lb:hover{background:rgba(212,253,98,.14)}
+.art-lb-t{flex:1;font-size:16px;font-weight:700;line-height:1.4;color:var(--bone,#E6DCC8)}
+.art-lb:hover .art-lb-t{color:var(--lime,#D4FD62)}
+.art-lb-d{flex:none;font-size:12.5px;font-weight:700;letter-spacing:.04em;color:var(--lime,#D4FD62);white-space:nowrap}
+/* DROP CAP - the unique editorial flourish on the opening paragraph. */
+.art-prose > p:first-of-type::first-letter{float:left;font-size:3.3em;line-height:.82;padding:.04em .12em 0 0;font-weight:800;color:var(--forest,#003C32)}
+.art-prose img{display:block;width:100%;height:auto;border-radius:10px;margin:1.8em 0}
+.art-prose figure{margin:1.8em 0}
+.art-prose figure img{margin:0}
+.art-prose figcaption{margin-top:9px;text-align:center;font-size:13.5px;color:rgba(18,33,28,.5)}
+.art-prose ul,.art-prose ol{margin:0 0 1.5em;padding-left:1.35em}
+.art-prose li{margin:.45em 0}
+.art-prose li::marker{color:#4C7A1D;font-weight:700}
+.art-prose hr{border:0;height:3px;width:68px;margin:2.6em auto;background:repeating-linear-gradient(to right,var(--lime,#D4FD62) 0 20px,rgba(6,35,28,.35) 20px 24px)}
+.art-prose strong{color:var(--ink,#12211C)}
+.art-prose iframe,.art-prose video{max-width:100%;border-radius:10px}
+.art-prose > p:first-child{font-size:21px}
+/* tags + share */
+.art-tags{display:flex;flex-wrap:wrap;gap:8px;margin:2.4em 0 0}
+.art-tag{display:inline-flex;padding:7px 14px;border-radius:999px;background:rgba(18,33,28,.06);text-decoration:none;transition:background .15s ease}
+.art-tag:hover{background:rgba(212,253,98,.45)}
+.art-tag .art-tag-t{font-size:13.5px;font-weight:700;color:var(--ink,#12211C)}
+.art-share{display:flex;align-items:center;gap:10px;margin:1.6em 0 0;padding-top:1.2em;border-top:1px solid rgba(18,33,28,.12)}
+.art-share-l{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(18,33,28,.5)}
+.art-share a{display:inline-flex;padding:7px 14px;border-radius:999px;border:1.5px solid rgba(18,33,28,.2);text-decoration:none;transition:border-color .15s ease,background .15s ease}
+.art-share a:hover{border-color:var(--forest,#003C32);background:rgba(212,253,98,.35)}
+.art-share .art-share-t{font-size:13.5px;font-weight:700;color:var(--ink,#12211C)}
+@media(max-width:749px){
+  .art-prose{font-size:18.5px}
+  .art-prose blockquote,.art-prose .art-q{font-size:19px;padding:40px 20px 18px 22px}
+  .art-prose blockquote::before,.art-prose .art-q::before{font-size:68px;left:14px}
+  .bbc-rd-article .art-prose h2{font-size:23px!important}
+  .art-lead{padding-inline:0}
+  .art-lead img{border-radius:0}
+}
+{% endstylesheet %}
+
+{% javascript %}
+/* Reading-progress bar - scales with scroll through the article body. */
+(function () {
+  var bar = document.querySelector('.art-progress i');
+  var body = document.querySelector('.art-prose');
+  if (!bar || !body) return;
+  var ticking = false;
+  function update() {
+    var r = body.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var total = r.height - vh;
+    var done = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : (r.top < vh ? 1 : 0);
+    bar.style.transform = 'scaleX(' + done + ')';
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+  update();
+})();
+
+/* QUOTE PROMOTION - a paragraph that both opens and closes with quotation marks
+   (optional "- attribution" tail) IS a quote; editors paste them as plain <p>.
+   Promotes to the quote-card treatment and splits the attribution into a cite
+   line. Runs only inside the prose; anything else is left alone. */
+(function () {
+  var prose = document.querySelector('.art-prose');
+  if (!prose) return;
+  [].slice.call(prose.querySelectorAll(':scope > p')).forEach(function (p) {
+    if (p.querySelector('img,iframe,video')) return;
+    var m = p.textContent.trim().match(/^[“"](.+)[”"]\s*(?:[—–-]{1,2}\s*(.+))?$/s);
+    if (!m) return;
+    p.classList.add('art-q');
+    var quote = m[1].trim(), cite = (m[2] || '').trim();
+    while (p.firstChild) p.removeChild(p.firstChild);
+    var qt = document.createElement('span');
+    qt.className = 'art-q-t';
+    qt.textContent = '“' + quote + '”';
+    p.appendChild(qt);
+    if (cite) {
+      var c = document.createElement('span');
+      c.className = 'art-q-c';
+      c.textContent = cite;
+      p.appendChild(c);
+    }
+  });
+})();
+
+/* LINK BOX - a list where most items carry a URL (as an anchor or pasted as bare
+   text) becomes a forest panel of link cards. Bare URLs are linkified; labels
+   live in spans so the estate anchor rule cannot repaint them on the dark box. */
+(function () {
+  var prose = document.querySelector('.art-prose');
+  if (!prose) return;
+  var URLRE = /https?:\/\/[^\s<)]+/;
+  [].slice.call(prose.querySelectorAll(':scope > ul, :scope > ol')).forEach(function (list) {
+    var items = [].slice.call(list.children).filter(function (li) { return li.tagName === 'LI'; });
+    if (!items.length) return;
+    var linky = items.filter(function (li) {
+      return li.querySelector('a[href^="http"]') || URLRE.test(li.textContent);
+    });
+    if (linky.length < items.length || linky.length < 1) return;
+    list.classList.add('art-linkbox');
+    items.forEach(function (li) {
+      var url = '', label = '';
+      var a = li.querySelector('a[href^="http"]');
+      if (a) {
+        url = a.getAttribute('href');
+        label = li.textContent.replace(URLRE, '').replace(/[—–-]\s*$/, '').trim() || a.textContent.trim() || url;
+      } else {
+        var mm = li.textContent.match(URLRE);
+        if (!mm) return;
+        url = mm[0].replace(/[).,]+$/, '');
+        label = li.textContent.replace(URLRE, '').replace(/\s*[—–-]\s*$/, '').trim() || url;
+      }
+      var host = '';
+      try { host = new URL(url).hostname.replace(/^www\./, ''); } catch (e) {}
+      while (li.firstChild) li.removeChild(li.firstChild);
+      var link = document.createElement('a');
+      link.className = 'art-lb';
+      link.setAttribute('href', url);
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener');
+      var lt = document.createElement('span');
+      lt.className = 'art-lb-t';
+      lt.textContent = label;
+      var ld = document.createElement('span');
+      ld.className = 'art-lb-d';
+      ld.textContent = host ? host + ' ↗' : '↗';
+      link.appendChild(lt); link.appendChild(ld);
+      li.appendChild(link);
+    });
+  });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Article 2026",
+  "tag": "section",
+  "class": "bbc-rd-article-section",
+  "settings": [
+    { "type": "header", "content": "Editability pass 2026-08-10" },
+    { "type": "text", "id": "tx_impact_story", "label": "Impact story", "default": "Impact story" },
+    { "type": "text", "id": "tx_back_the_mission", "label": "Back the mission", "default": "Back the mission" },
+    { "type": "text", "id": "tx_read_next", "label": "Read next", "default": "Read next" },
+    {
+      "type": "header",
+      "content": "Case-study stats band (impact posts only)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show stats band on impact posts",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "stats_label",
+      "label": "Band label",
+      "default": "The programme, in numbers"
+    },
+    {
+      "type": "text",
+      "id": "stat1_num",
+      "label": "Stat 1 number",
+      "default": "90%+"
+    },
+    {
+      "type": "text",
+      "id": "stat1_label",
+      "label": "Stat 1 label",
+      "default": "course completion"
+    },
+    {
+      "type": "text",
+      "id": "stat2_num",
+      "label": "Stat 2 number",
+      "default": "Level 2"
+    },
+    {
+      "type": "text",
+      "id": "stat2_label",
+      "label": "Stat 2 label",
+      "default": "OCN — Workshop Skills and Sustainable Manufacturing"
+    },
+    {
+      "type": "text",
+      "id": "stat3_num",
+      "label": "Stat 3 number",
+      "default": "4,000+"
+    },
+    {
+      "type": "text",
+      "id": "stat3_label",
+      "label": "Stat 3 label",
+      "default": "builders since 2012"
+    },
+    {
+      "type": "text",
+      "id": "stats_note",
+      "label": "Note under stats",
+      "default": "Figures from BBC programme records. Reoffending is a contested measure — we report what we can verify."
+    },
+    {
+      "type": "header",
+      "content": "Impact end CTA (impact posts)"
+    },
+    {
+      "type": "text",
+      "id": "impact_cta_title",
+      "label": "Title",
+      "default": "every bike we sell funds a place on the programme."
+    },
+    {
+      "type": "textarea",
+      "id": "impact_cta_body",
+      "label": "Body",
+      "default": "Fund a cohort, offer placements, or partner with us. This is how stories like this one keep happening."
+    },
+    {
+      "type": "text",
+      "id": "impact_cta_label",
+      "label": "Button label",
+      "default": "Support the mission →"
+    },
+    {
+      "type": "url",
+      "id": "impact_cta_url",
+      "label": "Button link"
+    }
+  ]
+}
+{% endschema %}

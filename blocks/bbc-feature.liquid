@@ -1,0 +1,48 @@
+{%- comment -%}
+  BBC theme block — Feature pillar (icon + title + body). From the monolith `why` block,
+  rendered as the .wb2-pillar markup used on the homepage "Why bamboo" 4-up band.
+  Reuses the .wb2-* classes defined inline in bbc-home-2026 — those styles are re-declared
+  in this block's {% stylesheet %} so the block is self-contained in this theme.
+  Icon via the bundled bbc-icons snippet.
+{%- endcomment -%}
+<li class="wb2-pillar" {{ block.shopify_attributes }}>
+  {%- if block.settings.icon != blank -%}
+    <span class="wb2-ic">{% render 'bbc-icons', icon: block.settings.icon, size: 24 %}</span>
+  {%- endif -%}
+  {%- if block.settings.title != blank -%}<h3>{{ block.settings.title }}</h3>{%- endif -%}
+  {%- if block.settings.body != blank -%}<p>{{ block.settings.body }}</p>{%- endif -%}
+</li>
+
+{% stylesheet %}
+  .bbc-rd .wb2-pillar{ text-align:center; list-style:none; }
+  .bbc-rd .wb2-ic{ width:52px; height:52px; border-radius:6px; display:flex; align-items:center; justify-content:center;
+    background:var(--lime); color:var(--forest); border:2.5px solid var(--forest-700); box-shadow:3px 3px 0 var(--forest-700); margin:0 auto 18px; }
+  .bbc-rd .wb2-ic svg{ width:26px; height:26px; }
+  .bbc-rd .wb2-pillar h3{ font-weight:800; font-size:18px; color:var(--forest); margin:0 0 8px; letter-spacing:-.01em; }
+  .bbc-rd .wb2-pillar p{ font-size:14.5px; line-height:1.5; color:#2a332f; margin:0 auto; max-width:26ch; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Feature pillar",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select", "id": "icon", "label": "Icon", "default": "shield",
+      "options": [
+        { "value": "shield", "label": "Shield (durability)" },
+        { "value": "bike", "label": "Bike (ride quality)" },
+        { "value": "tools", "label": "Tools (accessibility)" },
+        { "value": "leaf", "label": "Leaf (sustainability)" },
+        { "value": "globe", "label": "Globe" },
+        { "value": "clock", "label": "Clock" }
+      ]
+    },
+    { "type": "text", "id": "title", "label": "Title", "default": "Comparable to mild steel" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Tensile strength comparable to mild steel at a fraction of the weight — flex-tested to ISO standard at Swansea University." }
+  ],
+  "presets": [
+    { "name": "BBC Feature pillar" }
+  ]
+}
+{% endschema %}

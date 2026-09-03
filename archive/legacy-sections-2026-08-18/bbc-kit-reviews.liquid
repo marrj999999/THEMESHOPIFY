@@ -1,0 +1,539 @@
+{% comment %}
+  BBC Kit Reviews — Tag-Filtered Testimonials
+  
+  This section filters testimonials based on product tags.
+  If product has tag "road", shows road-specific reviews.
+  If product has tag "gravel", shows gravel-specific reviews.
+  Falls back to generic reviews if no matching tag found.
+  
+  Usage: Add to product.kit-*.json templates
+{% endcomment %}
+
+{%- liquid
+  assign bike_type = ''
+  assign has_matching_reviews = false
+  
+  if product.tags contains 'road'
+    assign bike_type = 'road'
+  elsif product.tags contains 'Gravel' or product.tags contains 'gravel'
+    assign bike_type = 'gravel'
+  elsif product.tags contains 'MTB' or product.tags contains 'mtb'
+    assign bike_type = 'mtb'
+  elsif product.tags contains 'City' or product.tags contains 'city'
+    assign bike_type = 'city'
+  elsif product.tags contains 'fatbike' or product.tags contains 'fat'
+    assign bike_type = 'fatbike'
+  elsif product.tags contains 'balance' or product.tags contains 'kids'
+    assign bike_type = 'balance'
+  elsif product.tags contains 'custom'
+    assign bike_type = 'custom'
+  endif
+-%}
+
+<section class="bbc-kit-reviews">
+  <div class="bbc-kit-reviews__container page-width">
+    <header class="bbc-kit-reviews__header">
+      <span class="bbc-kit-reviews__eyebrow">{{ section.settings.eyebrow | default: 'Testimonials' }}</span>
+      <h2 class="bbc-kit-reviews__heading">
+        {% case bike_type %}
+          {% when 'road' %}
+            What Road Bike Builders Say
+          {% when 'gravel' %}
+            What Gravel Bike Builders Say
+          {% when 'mtb' %}
+            What Mountain Bike Builders Say
+          {% when 'city' %}
+            What City Bike Builders Say
+          {% when 'fatbike' %}
+            What Fat Bike Builders Say
+          {% when 'balance' %}
+            What Parents Say
+          {% when 'custom' %}
+            What Custom Frame Builders Say
+          {% else %}
+            What Builders Say
+        {% endcase %}
+      </h2>
+      <p class="bbc-kit-reviews__subheading">{{ section.settings.subheading | default: 'Real feedback from home kit builders' }}</p>
+    </header>
+    
+    <div class="bbc-kit-reviews__grid">
+      {%- comment -%} ROAD BIKE REVIEWS {%- endcomment -%}
+      {% if bike_type == 'road' %}
+        <article class="bbc-kit-review bbc-kit-review--featured">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Still riding mine daily after 7 years. Built it at home using the kit. It's outlasted two steel bikes I owned before.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Jamie</cite>
+            <span class="bbc-kit-review__role">Road Bike Builder</span>
+            <span class="bbc-kit-review__location">Romania</span>
+            <span class="bbc-kit-review__badge">{% render 'bbc-icons', icon: 'verified', size: 14 %} Verified Builder</span>
+          </footer>
+        </article>
+        
+        <article class="bbc-kit-review">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            The video tutorials were incredibly helpful. Every time I got stuck, there was a video showing exactly what to do.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">DIY Builder</cite>
+            <span class="bbc-kit-review__role">road.cc Build Series</span>
+            <span class="bbc-kit-review__location">UK</span>
+          </footer>
+        </article>
+        
+        <article class="bbc-kit-review">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Bamboo absorbs road buzz beautifully. Better than carbon in many ways, and I built it myself.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Louise</cite>
+            <span class="bbc-kit-review__role">Road Bike Builder</span>
+            <span class="bbc-kit-review__location">UK</span>
+          </footer>
+        </article>
+      
+      {%- comment -%} GRAVEL BIKE REVIEWS {%- endcomment -%}
+      {% elsif bike_type == 'gravel' %}
+        <article class="bbc-kit-review bbc-kit-review--featured">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Woody turned out to be the most reliable bike I've ever owned. I had hardly any mechanical problems on the whole 8,288-mile journey through the Andes.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Kate Rawles</cite>
+            <span class="bbc-kit-review__role">Author, 'The Life Cycle' (Icon Books)</span>
+            <span class="bbc-kit-review__location">Colombia to Patagonia</span>
+            <span class="bbc-kit-review__badge">{% render 'bbc-icons', icon: 'verified', size: 14 %} 8,288 miles</span>
+          </footer>
+        </article>
+        
+        <article class="bbc-kit-review">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Survived the Pamir Highway in winter and monsoons in India. The bamboo handles vibration better than any steel touring bike I've ridden.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Adventure Cyclist</cite>
+            <span class="bbc-kit-review__role">Bikepacking Build</span>
+            <span class="bbc-kit-review__location">Central Asia</span>
+          </footer>
+        </article>
+        
+        <article class="bbc-kit-review">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Perfect for mixed terrain. The wider tyre clearance and disc brakes make it genuinely capable off-road.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Gravel Cyclist Member</cite>
+            <span class="bbc-kit-review__role">Home Kit Builder</span>
+            <span class="bbc-kit-review__location">UK</span>
+          </footer>
+        </article>
+      
+      {%- comment -%} MTB REVIEWS {%- endcomment -%}
+      {% elsif bike_type == 'mtb' %}
+        <article class="bbc-kit-review bbc-kit-review--featured">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Rides lovely. Build quality is better than I expected for a home-built frame. Taking it on proper trails now.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">SingleTrack World Member</cite>
+            <span class="bbc-kit-review__role">MTB Builder</span>
+            <span class="bbc-kit-review__location">UK</span>
+          </footer>
+        </article>
+        
+        <article class="bbc-kit-review">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            The 29er geometry is spot on. Climbs well, descends confidently. People can't believe it's bamboo.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Trail Rider</cite>
+            <span class="bbc-kit-review__role">29er Build</span>
+            <span class="bbc-kit-review__location">Wales</span>
+          </footer>
+        </article>
+        
+        <article class="bbc-kit-review">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Bamboo dampens trail chatter better than my old hardtail. More forgiving on roots and rocks.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Hardtail Fan</cite>
+            <span class="bbc-kit-review__role">MTB Builder</span>
+            <span class="bbc-kit-review__location">Scotland</span>
+          </footer>
+        </article>
+      
+      {%- comment -%} CITY BIKE REVIEWS {%- endcomment -%}
+      {% elsif bike_type == 'city' %}
+        <article class="bbc-kit-review bbc-kit-review--featured">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            My daily commuter for 3 years now. Gets so many compliments locked up outside the office.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Urban Cyclist</cite>
+            <span class="bbc-kit-review__role">City Commuter Build</span>
+            <span class="bbc-kit-review__location">London</span>
+          </footer>
+        </article>
+        
+        <article class="bbc-kit-review">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Added a front basket and rear rack. Perfect setup for shopping runs and pub trips.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Practical Builder</cite>
+            <span class="bbc-kit-review__role">Utility Build</span>
+            <span class="bbc-kit-review__location">Bristol</span>
+          </footer>
+        </article>
+        
+        <article class="bbc-kit-review">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Upright riding position is so comfortable. Much better than being hunched over on a road bike.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Comfort Seeker</cite>
+            <span class="bbc-kit-review__role">City Bike Builder</span>
+            <span class="bbc-kit-review__location">Manchester</span>
+          </footer>
+        </article>
+      
+      {%- comment -%} FATBIKE REVIEWS {%- endcomment -%}
+      {% elsif bike_type == 'fatbike' %}
+        <article class="bbc-kit-review bbc-kit-review--featured">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Built this for beach riding. The bamboo and fat tyres together give an incredibly smooth ride on sand.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Beach Rider</cite>
+            <span class="bbc-kit-review__role">Fat Bike Builder</span>
+            <span class="bbc-kit-review__location">Cornwall</span>
+          </footer>
+        </article>
+        
+        <article class="bbc-kit-review">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Took it out in the snow last winter. Floats over everything. The wide tyre clearance is perfect.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Winter Rider</cite>
+            <span class="bbc-kit-review__role">Fat Bike Build</span>
+            <span class="bbc-kit-review__location">Scotland</span>
+          </footer>
+        </article>
+        
+        <article class="bbc-kit-review">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Ultimate conversation starter. No one expects a bamboo fat bike.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Unique Builder</cite>
+            <span class="bbc-kit-review__role">Fat Bike Project</span>
+            <span class="bbc-kit-review__location">Wales</span>
+          </footer>
+        </article>
+      
+      {%- comment -%} BALANCE BIKE REVIEWS {%- endcomment -%}
+      {% elsif bike_type == 'balance' %}
+        <article class="bbc-kit-review bbc-kit-review--featured">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Built this with my daughter for her 3rd birthday. The look on her face when she realized we made it together was priceless.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Proud Parent</cite>
+            <span class="bbc-kit-review__role">Balance Bike Builder</span>
+            <span class="bbc-kit-review__location">London</span>
+          </footer>
+        </article>
+        
+        <article class="bbc-kit-review">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Much more meaningful than buying a plastic balance bike from the shop. A gift he'll remember forever.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Gift Giver</cite>
+            <span class="bbc-kit-review__role">Grandparent Build</span>
+            <span class="bbc-kit-review__location">Cambridge</span>
+          </footer>
+        </article>
+        
+        <article class="bbc-kit-review">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Love that part of the money goes to the prison rehabilitation programme. Teaching kids about sustainability and social impact.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Values-Driven Parent</cite>
+            <span class="bbc-kit-review__role">Build to Bond Supporter</span>
+            <span class="bbc-kit-review__location">Bristol</span>
+          </footer>
+        </article>
+      
+      {%- comment -%} CUSTOM FRAME REVIEWS {%- endcomment -%}
+      {% elsif bike_type == 'custom' %}
+        <article class="bbc-kit-review bbc-kit-review--featured">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Third build now. The custom kit let me dial in exactly the geometry I wanted. Nothing else like it on the market.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Repeat Builder</cite>
+            <span class="bbc-kit-review__role">Experienced Framebuilder</span>
+            <span class="bbc-kit-review__location">Germany</span>
+          </footer>
+        </article>
+        
+        <article class="bbc-kit-review">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Wanted a specific head tube angle and chainstay length. The custom kit gave me complete control.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Geometry Nerd</cite>
+            <span class="bbc-kit-review__role">Custom Build</span>
+            <span class="bbc-kit-review__location">Netherlands</span>
+          </footer>
+        </article>
+        
+        <article class="bbc-kit-review">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Built a cargo bike geometry. BBC helped me work out the tube lengths. Incredible support.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Cargo Builder</cite>
+            <span class="bbc-kit-review__role">Custom Cargo Frame</span>
+            <span class="bbc-kit-review__location">Denmark</span>
+          </footer>
+        </article>
+      
+      {%- comment -%} FALLBACK / GENERIC REVIEWS {%- endcomment -%}
+      {% else %}
+        <article class="bbc-kit-review bbc-kit-review--featured">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Still riding mine daily after 7 years. Built it at home using the kit. It's outlasted two steel bikes I owned before.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">Jamie</cite>
+            <span class="bbc-kit-review__role">Home Kit Builder</span>
+            <span class="bbc-kit-review__location">Romania</span>
+            <span class="bbc-kit-review__badge">{% render 'bbc-icons', icon: 'verified', size: 14 %} 7+ Years</span>
+          </footer>
+        </article>
+        
+        <article class="bbc-kit-review">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            The video tutorials were incredibly helpful. Every time I got stuck, there was a video showing exactly what to do.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">DIY Builder</cite>
+            <span class="bbc-kit-review__role">road.cc Build Series</span>
+            <span class="bbc-kit-review__location">UK</span>
+          </footer>
+        </article>
+        
+        <article class="bbc-kit-review">
+          <span class="bbc-kit-review__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="bbc-kit-review__quote">
+            Rides lovely. Build quality is better than I expected for a home-built frame.
+          </blockquote>
+          <footer class="bbc-kit-review__author">
+            <cite class="bbc-kit-review__name">SingleTrack World Member</cite>
+            <span class="bbc-kit-review__role">Home Kit Builder</span>
+            <span class="bbc-kit-review__location">UK</span>
+          </footer>
+        </article>
+      {% endif %}
+    </div>
+    
+    {%- comment -%} Review count badge {%- endcomment -%}
+    <div class="bbc-kit-reviews__footer">
+      <span class="bbc-kit-reviews__count">
+        {% render 'bbc-icons', icon: 'groups', size: 18 %}
+        Join 4,000+ builders worldwide
+      </span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bbc-kit-reviews {
+    padding: 60px 0;
+    background: #f8f9fa;
+  }
+  
+  .bbc-kit-reviews__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  .bbc-kit-reviews__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  
+  .bbc-kit-reviews__eyebrow {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--bbc-teal, var(--bbc-teal));
+    margin-bottom: 8px;
+  }
+  
+  .bbc-kit-reviews__heading {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 8px 0;
+  }
+  
+  .bbc-kit-reviews__subheading {
+    font-size: 1rem;
+    color: var(--bbc-gray-600);
+    margin: 0;
+  }
+  
+  .bbc-kit-reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  
+  .bbc-kit-review {
+    background: var(--bbc-white);
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    position: relative;
+  }
+  
+  .bbc-kit-review--featured {
+    border-left: 4px solid var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  .bbc-kit-review__quote-mark {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--bbc-teal, var(--bbc-teal));
+    opacity: 0.15;
+    line-height: 1;
+    position: absolute;
+    top: 16px;
+    left: 24px;
+  }
+  
+  .bbc-kit-review__quote {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--bbc-gray-900);
+    margin: 0 0 24px 0;
+    padding: 0;
+    border: none;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .bbc-kit-review__author {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .bbc-kit-review__name {
+    font-weight: 600;
+    color: var(--bbc-forest, var(--bbc-forest));
+    font-style: normal;
+  }
+  
+  .bbc-kit-review__role {
+    font-size: 0.875rem;
+    color: var(--bbc-gray-600);
+  }
+  
+  .bbc-kit-review__location {
+    font-size: 0.875rem;
+    color: #999;
+  }
+  
+  .bbc-kit-review__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--bbc-teal, var(--bbc-teal));
+    margin-top: 8px;
+  }
+  
+  .bbc-kit-reviews__footer {
+    text-align: center;
+    margin-top: 40px;
+  }
+  
+  .bbc-kit-reviews__count {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    color: var(--bbc-gray-600);
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-kit-reviews {
+      padding: 40px 0;
+    }
+    
+    .bbc-kit-review {
+      padding: 24px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Kit Reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Testimonials"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Real feedback from home kit builders"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Kit Reviews"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,377 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-education-2026",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "number": "5",
+            "label": "engineering programmes",
+            "source": "3 live · 2 coming"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "number": "11–19",
+            "label": "ages we teach",
+            "source": "KS3 to post-16"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "number": "Gatsby 4",
+            "label": "benchmark we evidence",
+            "source": "careers in the curriculum"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "number": "1,500+",
+            "label": "young people reached",
+            "source": "Make Engineers delivery records"
+          }
+        },
+        "pa_ucl": {
+          "type": "partner",
+          "settings": {
+            "name": "UCL",
+            "logo_asset": "bbc-logo-ucl.png",
+            "url": "\/blogs\/impact\/ucl-masters-bamboo-electric-cargo-bike-university"
+          }
+        },
+        "pa_lsbu": {
+          "type": "partner",
+          "settings": {
+            "name": "London South Bank University",
+            "logo_asset": "bbc-logo-lsbu.png",
+            "url": "\/blogs\/schools-and-education\/bamboo-bicycle-club-partners-with-southbank-university-a-new-hub-for-sustainable-bike-building"
+          }
+        },
+        "pa_swansea": {
+          "type": "partner",
+          "settings": {
+            "name": "Swansea University",
+            "logo_asset": "bbc-logo-swansea.png",
+            "url": "\/blogs\/news\/bamboo-testing-with-swansea-university"
+          }
+        },
+        "pa_kcl": {
+          "type": "partner",
+          "settings": {
+            "name": "King's College London",
+            "logo_asset": "bbc-logo-kcl.png"
+          }
+        },
+        "pa_oxfordbrookes": {
+          "type": "partner",
+          "settings": {
+            "name": "Oxford Brookes University",
+            "logo_asset": "bbc-logo-oxfordbrookes.png"
+          }
+        },
+        "pa_manchester": {
+          "type": "partner",
+          "settings": {
+            "name": "The University of Manchester",
+            "logo_asset": "bbc-logo-manchester.png"
+          }
+        },
+        "pa_coventry": {
+          "type": "partner",
+          "settings": {
+            "name": "Coventry University",
+            "logo_asset": "bbc-logo-coventry.png"
+          }
+        },
+        "pa_bradfield": {
+          "type": "partner",
+          "settings": {
+            "name": "Bradfield College",
+            "logo_asset": "bbc-logo-bradfield.png"
+          }
+        },
+        "pa_oratory": {
+          "type": "partner",
+          "settings": {
+            "name": "The Oratory School",
+            "logo_asset": "bbc-logo-oratory.png"
+          }
+        },
+        "pa_reeds": {
+          "type": "partner",
+          "settings": {
+            "name": "Reed's School",
+            "logo_asset": "bbc-logo-reeds.png"
+          }
+        },
+        "pa_stoke": {
+          "type": "partner",
+          "settings": {
+            "name": "Stoke-on-Trent",
+            "logo_asset": "bbc-logo-stoke.png"
+          }
+        },
+        "p1": {
+          "type": "programme",
+          "settings": {
+            "tier": "Foundation",
+            "title": "acoustic engineering & sustainable product design",
+            "detail": "Ages 11–16 · KS3–KS4 · ~2–3 hrs · builds a working bamboo speaker",
+            "free": true,
+            "status": "available"
+          }
+        },
+        "p2": {
+          "type": "programme",
+          "settings": {
+            "tier": "Frame I",
+            "title": "sustainable product engineering",
+            "detail": "Entry frame build (balance bike) · in development",
+            "status": "coming"
+          }
+        },
+        "p3": {
+          "type": "programme",
+          "settings": {
+            "tier": "Frame II",
+            "title": "sustainable bicycle technical development",
+            "detail": "Ages 14–18 · KS4 \/ post-16 · multi-session · builds a rideable bamboo gravel frame",
+            "status": "available"
+          }
+        },
+        "p4": {
+          "type": "programme",
+          "settings": {
+            "tier": "Additive",
+            "title": "additive manufacturing & adaptive design",
+            "detail": "Ages 14–19 \/ post-16 · design & 3D-print the lugs · parametric & adaptive design",
+            "status": "available"
+          }
+        },
+        "p5": {
+          "type": "programme",
+          "settings": {
+            "tier": "Systems",
+            "title": "electric mobility engineering & green technology",
+            "detail": "Electronics & e-mobility engineering · in development",
+            "status": "coming"
+          }
+        },
+        "b1": {
+          "type": "badge",
+          "settings": {
+            "label": "proposed Level 1 curriculum — Practical Manufacturing Skills (OCN approval in progress)",
+            "lime": true
+          }
+        },
+        "b2": {
+          "type": "badge",
+          "settings": {
+            "label": "Gatsby Benchmark 4",
+            "lime": false
+          }
+        },
+        "b3": {
+          "type": "badge",
+          "settings": {
+            "label": "Bamboo Mobility Project CIC",
+            "lime": false
+          }
+        },
+        "b4": {
+          "type": "badge",
+          "settings": {
+            "label": "Enhanced-DBS facilitators · public-liability insured",
+            "lime": false
+          }
+        },
+        "pr1": {
+          "type": "press",
+          "settings": {
+            "text": "Financial Times",
+            "logo_asset": "logo-financial-times.svg",
+            "style": "ft"
+          }
+        },
+        "pr2": {
+          "type": "press",
+          "settings": {
+            "text": "The Guardian",
+            "logo_asset": "logo-guardian.svg",
+            "style": "serif"
+          }
+        },
+        "pr3": {
+          "type": "press",
+          "settings": {
+            "text": "Inside Time",
+            "style": "serif-italic"
+          }
+        },
+        "cs_projectzero": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "schools",
+            "institution": "Project Zero, Waltham Forest",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/articles\/pz-project-zero-hero_1320ba8b-3312-44e2-8724-154380afc938.jpg?v=1782479487",
+            "outcome": "27 young people took part — workshop ratings regularly 9–10 out of 10.",
+            "blurb": "An impact case study from our Project Zero workshop — confidence measured, not assumed.",
+            "url": "\/blogs\/news\/project-zero-impact-case-study"
+          }
+        },
+        "cs_hague": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "international",
+            "institution": "A school in The Hague",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/articles\/SRW08509_3366821a-5011-47e8-8124-46415bf488bf.jpg?v=1771839584",
+            "outcome": "Seven bamboo bicycles built in a classroom.",
+            "blurb": "Pupils in the Netherlands built seven frames using the educational starter kit.",
+            "url": "\/blogs\/schools-and-education\/the-hague-school-project-seven-bikes-in-a-classroom"
+          }
+        },
+        "cs_ucl": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "universities",
+            "institution": "UCL",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/articles\/IMAGE_2_LOAFLY_248a5253-795b-404f-adee-2fc1bd586e91.png?v=1771793521",
+            "outcome": "A 150kg-payload cargo bike, built by masters students.",
+            "blurb": "Real engineering in a university lab — the same craft, scaled up.",
+            "url": "\/blogs\/impact\/ucl-masters-bamboo-electric-cargo-bike-university",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=iB2iHTzT2oQ"
+          }
+        },
+        "cs_kit": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "schools",
+            "institution": "The educational kit",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/articles\/00_Road_Frame_Build_Kit_Square.jpg?v=1771839600",
+            "outcome": "Build kits that reach schools we never visit.",
+            "blurb": "A self-contained package of materials, jig components and instructions, in use since 2015.",
+            "url": "\/blogs\/schools-and-education\/the-bbc-educational-kit-making-schools-programmes-scalable"
+          }
+        },
+        "cs_educic": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "organisation",
+            "institution": "BBC Education CIC",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/articles\/1759130900843.jpg?v=1771839643",
+            "outcome": "A dedicated Community Interest Company, formed to run the education work.",
+            "blurb": "At the end of 2025 BBC formed a CIC specifically to run and grow all its education projects.",
+            "url": "\/blogs\/impact\/bbc-forms-an-education-cic-mission-made-official"
+          }
+        },
+        "cs_southbank": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "universities",
+            "institution": "London South Bank University",
+            "image": "https:\/\/cdn.shopify.com\/s\/files\/1\/0502\/8695\/2631\/articles\/uni-rankings.jpg?v=1724845647",
+            "outcome": "A bamboo bike workshop inside a university engineering lab.",
+            "blurb": "Jig-equipped lab space on campus — exploring student workshops in sustainable design.",
+            "url": "\/blogs\/schools-and-education\/bamboo-bicycle-club-partners-with-southbank-university-a-new-hub-for-sustainable-bike-building"
+          }
+        },
+        "cs_utc": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "schools",
+            "institution": "South Bank UTC, London",
+            "image": "bbc-rd-edu.jpg",
+            "outcome": "Six students, six finished frames.",
+            "blurb": "A full cohort, one frame each — nobody left without a bike they had built.",
+            "url": "\/blogs\/schools-and-education\/southbank-utc-six-students-build-six-bikes"
+          }
+        },
+        "cs_wed": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "free to use",
+            "institution": "Workshop Wednesdays",
+            "image": "bbc-rd-build-poster.jpg",
+            "outcome": "Live engineering lessons, free on YouTube.",
+            "blurb": "Teaching the build in the open, so a school can run it without buying anything from us.",
+            "url": "\/blogs\/schools-and-education\/workshop-wednesdays-live-engineering-education-on-youtube"
+          }
+        },
+        "cs_swansea": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "materials",
+            "institution": "Swansea University",
+            "image": "bbc-rd-detail.jpg",
+            "outcome": "Tested to BS ISO 22157:2019 — 84.3 MPa ultimate tensile.",
+            "blurb": "Independent laboratory testing of the bamboo we build with, to the international standard for the material.",
+            "url": "\/blogs\/news\/bamboo-testing-with-swansea-university"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "pa_ucl",
+        "pa_lsbu",
+        "pa_swansea",
+        "pa_kcl",
+        "pa_oxfordbrookes",
+        "pa_manchester",
+        "pa_coventry",
+        "pa_bradfield",
+        "pa_oratory",
+        "pa_reeds",
+        "pa_stoke",
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "pr1",
+        "pr2",
+        "pr3",
+        "cs_projectzero",
+        "cs_hague",
+        "cs_ucl",
+        "cs_kit",
+        "cs_educic",
+        "cs_southbank",
+        "cs_utc",
+        "cs_wed",
+        "cs_swansea"
+      ],
+      "settings": {
+        "hero_cta2_label": "Download the teacher pack (PDF)",
+        "hero_cta2_url": "https:\/\/instructor.bamboobicycleclub.org\/wp-content\/uploads\/2026\/07\/Make_Engineers_Teacher_Pack_2026.pdf",
+        "taught_eyebrow": "As taught at",
+        "taught_title": "built into schools, colleges and universities."
+      }
+    },
+    "videoband": {
+      "type": "bbc-rd-video-embed",
+      "settings": {
+        "video_youtube": "bqgzwbehtEY",
+        "eyebrow": "In the classroom",
+        "heading": "watch students build from scratch",
+        "caption": "",
+        "body": "A complete STEM project — design, make, evaluate — that students take home and keep.",
+        "dark": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "videoband"
+  ]
+}

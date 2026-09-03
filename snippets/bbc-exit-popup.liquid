@@ -1,0 +1,133 @@
+{% comment %}
+  BBC Exit Intent Popup
+  Include in theme.liquid before </body>
+  Usage: {% render 'bbc-exit-popup' %}
+{% endcomment %}
+
+{% if settings.enable_exit_popup %}
+<div id="bbc-exit-popup" class="bbc-exit-popup" style="
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+">
+  <div class="bbc-exit-popup__content" style="
+    background: white;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    padding: 2.5rem;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  ">
+    <button id="bbc-exit-popup-close" style="
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #666;
+    ">&times;</button>
+    
+    <div style="font-size: 3rem; margin-bottom: 1rem; color: #3f8b66;">
+      <span class="material-symbols-outlined" style="font-size: 48px;">eco</span>
+    </div>
+    
+    <h3 style="font-family: var(--font-heading-family); color: #1A1A1A; margin-bottom: 0.5rem; font-size: 1.5rem;">
+      {{ settings.exit_popup_title | default: "Wait! Don't leave empty-handed" }}
+    </h3>
+    
+    <p style="color: #666; margin-bottom: 1.5rem;">
+      {{ settings.exit_popup_text | default: "Get our free guide to building your first bamboo bicycle, plus 10% off your first kit order." }}
+    </p>
+    
+    <form id="bbc-exit-popup-form" style="margin-bottom: 1rem;">
+      <input type="email" name="email" placeholder="Enter your email" required style="
+        width: 100%;
+        padding: 0.875rem 1rem;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+      ">
+      <button type="submit" style="
+        width: 100%;
+        background: #2D5A3D;
+        color: white;
+        border: none;
+        padding: 0.875rem 1rem;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+      ">
+        {{ settings.exit_popup_button | default: "Get My Free Guide" }}
+      </button>
+    </form>
+    
+    <p style="font-size: 0.75rem; color: #999;">{{ settings.bbc_nospam | default: "No spam, ever. Unsubscribe anytime." }}</p>
+  </div>
+</div>
+
+<script>
+(function() {
+  const popup = document.getElementById('bbc-exit-popup');
+  const closeBtn = document.getElementById('bbc-exit-popup-close');
+  const form = document.getElementById('bbc-exit-popup-form');
+  
+  // Check if already shown this session
+  if (sessionStorage.getItem('bbc_exit_shown')) return;
+  
+  // Exit intent detection
+  document.addEventListener('mouseout', function(e) {
+    if (e.clientY < 10 && !sessionStorage.getItem('bbc_exit_shown')) {
+      popup.style.display = 'flex';
+      sessionStorage.setItem('bbc_exit_shown', 'true');
+    }
+  });
+  
+  // Mobile: show after 30 seconds
+  if (window.innerWidth < 768) {
+    setTimeout(function() {
+      if (!sessionStorage.getItem('bbc_exit_shown')) {
+        popup.style.display = 'flex';
+        sessionStorage.setItem('bbc_exit_shown', 'true');
+      }
+    }, 30000);
+  }
+  
+  // Close popup
+  closeBtn.addEventListener('click', function() {
+    popup.style.display = 'none';
+  });
+  
+  popup.addEventListener('click', function(e) {
+    if (e.target === popup) {
+      popup.style.display = 'none';
+    }
+  });
+  
+  // Form submission
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = form.querySelector('input[name="email"]').value;
+    
+    // Send to Shopify customer API or your email service
+    fetch('/contact#contact_form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'form_type=customer&email=' + encodeURIComponent(email) + '&tags=exit-popup'
+    }).then(function() {
+      form.innerHTML = '<div style="color: #2D5A3D; font-weight: 500; padding: 1rem; display: flex; align-items: center; justify-content: center; gap: 8px;"><span class="material-symbols-outlined">check_circle</span> Thanks! Check your email for the guide.</div>';
+      setTimeout(function() { popup.style.display = 'none'; }, 3000);
+    });
+  });
+})();
+</script>
+{% endif %}

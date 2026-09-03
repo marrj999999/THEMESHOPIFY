@@ -1,0 +1,21 @@
+{%- comment -%}
+  BBC theme block — Accreditation badge. From the monolith `badge` block in
+  sections/bbc-education-2026.liquid. Reuses .rd-tag (+ .rd-lime fill). A small
+  pill for accreditation / recognition rows. Sits inside a flex row
+  (.bbc-rd .rd-flex.rd-jc-center) or any container.
+{%- endcomment -%}
+<span class="rd-tag{% if block.settings.lime %} rd-lime{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label }}</span>
+
+{% schema %}
+{
+  "name": "BBC Badge",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "label", "label": "Badge label", "default": "OCN London accredited" },
+    { "type": "checkbox", "id": "lime", "label": "Lime fill", "default": false }
+  ],
+  "presets": [
+    { "name": "BBC Badge" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,2785 @@
+{%- comment -%}
+  BBC New Design (2026) — "Our Impact / Build to Bond" page.
+  Single self-contained section, fully schema-driven (editable in the theme
+  editor) and scoped under .bbc-rd via bbc-redesign-2026.css so it cannot
+  affect other sections. Structure mirrors the design handoff (impact.html):
+  hero → 4-stat block (dark) → "a real workshop, inside" → Build to Bond
+  feature split → "more than a bike — a pathway" 3 cards → "three ways to be
+  part of it" 3 CTA cards → final CTA.
+
+  CONTENT POLICY (hard rules, updated 2026-06-20):
+  - Prisons MAY be named (rule changed 2026-06-17). Active named sites:
+    five UK prison sites at different delivery stages — use the Register count formula, never a named list.
+    NEVER link a named/identifiable participant to a named prison (GDPR/safeguarding).
+  - Source-of-truth figures only: 90% completion
+    (NO attribution — figure unconfirmed across sources) · 4,000+ builders · 45 countries.
+    The 39% lower-reoffending figure is MoJ RESEARCH (family ties), never a BBC outcome.
+  Image fields fall back to bundled placeholder assets until real photos are
+  uploaded.
+{%- endcomment -%}
+{%- comment -%} css-fix: grid the national-priorities stats (was single column) {%- endcomment -%}
+<style>
+  .rd-policy{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(24px,3vw,44px); text-align:left; }
+  @media(max-width:900px){ .rd-policy{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:560px){ .rd-policy{ grid-template-columns:1fr; } }
+  /* Two arms → aligned side-by-side columns (rd-arms was undefined in the CSS, so it stacked) */
+  @media(max-width:760px){ .bbc-rd-impact .rd-arms{ grid-template-columns:1fr; } }
+  /* Delivery-partner (HMPPS) logo header in the "Where we work" band */
+  .bbc-rd-impact .rd-deliver-logo{ display:block; width:60px; height:60px; margin:0 auto 20px; border-radius:8px; }
+  /* Credibility pull-quotes → large block-text impact statements */
+  .bbc-rd-impact .bbc-impact-cred .rd-cred-q{ font-size:clamp(22px,2.7vw,32px); line-height:1.32; }
+  .bbc-rd-impact .bbc-impact-cred .rd-cred-card{ gap:20px; }
+</style>
+
+
+
+{%- liquid
+  assign hero_cta1 = section.settings.hero_cta1_url | default: '/pages/schools'
+  assign hero_cta2 = section.settings.hero_cta2_url | default: '/pages/contact-us'
+  assign b2b_cta1   = section.settings.b2b_cta1_url | default: '/pages/schools'
+  assign final_c1   = section.settings.cta1_url | default: '/pages/schools'
+  assign final_c2   = section.settings.cta2_url | default: '/pages/contact-us'
+-%}
+
+<div class="bbc-rd bbc-rd-impact">
+
+  {%- comment -%} ---------- HERO ---------- {%- endcomment -%}
+  <header class="rd-hero rd-mh-74">
+    <div class="rd-bg">
+      {%- if section.settings.hero_image != blank -%}
+        <img src="{{ section.settings.hero_image | image_url: width: 1600 }}" srcset="{{ section.settings.hero_image | image_url: width: 800 }} 800w, {{ section.settings.hero_image | image_url: width: 1200 }} 1200w, {{ section.settings.hero_image | image_url: width: 1600 }} 1600w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w, {{ section.settings.hero_image | image_url: width: 2600 }} 2600w" sizes="100vw" alt="{{ section.settings.hero_image_alt | default: 'Inside a Bamboo Bicycle Club workshop' | escape }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" fetchpriority="high" loading="eager">
+      {%- else -%}
+        {%- comment -%}
+          The theme-asset fallback is what actually renders until an editor picks a hero
+          image — and it had NO srcset, so every visitor got the full 1600px/436KB file.
+          On a 390px phone that is the LCP element and ~2x more pixels than the screen can
+          use. Theme assets are CDN-resizable with &width= (verified 2026-07-28: 600w =
+          105KB vs 436KB), and asset_url always returns a ?v= versioned URL, so &width
+          appends safely. Mirrors the srcset the hero_image branch above already has.
+        {%- endcomment -%}
+        {%- assign hero_fb = section.settings.hero_fallback | default: 'bbc-rd-workshop.jpg' | asset_url -%}
+        <img src="{{ hero_fb }}&width=1600"
+             srcset="{{ hero_fb }}&width=600 600w, {{ hero_fb }}&width=900 900w, {{ hero_fb }}&width=1200 1200w, {{ hero_fb }}&width=1600 1600w"
+             sizes="100vw"
+             alt="{{ section.settings.hero_image_alt | default: 'Inside a Bamboo Bicycle Club workshop' | escape }}" width="1600" height="1066" fetchpriority="high" loading="eager">
+      {%- endif -%}
+    </div>
+    <div class="rd-scrim"></div>
+    <div class="rd-inner">
+      <div class="rd-wrap">
+        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><span class="rd-here">Impact</span></nav>
+        {%- if section.settings.hero_eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>{%- endif -%}
+        <h1 class="rd-mt2 rd-mw-15ch">{{ section.settings.hero_title }}</h1>
+        <div class="rd-lede">{{ section.settings.hero_lede }}</div>
+        {%- comment -%}
+          Proof strip (2026-07-27). Same device as the homepage hero, for the same measured reason:
+          the presentation audit found our first figure at y3897 — about four screens down and 5x
+          later than any peer — with ZERO figures above the fold. The stats band on this page sits
+          below the hero, so a funder or commissioner sees the claim before any evidence of it.
+          Peers who do this well (Recycling Lives "132 / people into paid employment", Belu at 96px)
+          ISOLATE the number so the eye catches it before the sentence. Every default below is
+          Claims-Register approved wording; all are editable in the theme editor.
+        {%- endcomment -%}
+        {%- if section.settings.hero_proof_on -%}
+          <ul class="rd-heroproof" aria-label="Impact in numbers">
+            <li><b>{{ section.settings.hero_proof1_num | default: '4,000+' }}</b><span>{{ section.settings.hero_proof1_label | default: 'people trained' }}</span></li>
+            <li><b>{{ section.settings.hero_proof2_num | default: '90%+' }}</b><span>{{ section.settings.hero_proof2_label | default: 'prison-course completion' }}</span></li>
+            <li><b>{{ section.settings.hero_proof3_num | default: '2012' }}</b><span>{{ section.settings.hero_proof3_label | default: 'delivering since' }}</span></li>
+          </ul>
+        {%- endif -%}
+        <div class="rd-cta-row">
+          {%- if section.settings.hero_cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ hero_cta1 }}">{{ section.settings.hero_cta1_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+          {%- if section.settings.hero_cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ hero_cta2 }}">{{ section.settings.hero_cta2_label }}</a>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {%- comment -%} ---------- WAYS IN band — REMOVED 2026-08-18 (James) ----------
+     Was <section id="book-a-call">: the `start here` eyebrow, three route text links
+     (build or own a bike · run it in your school or prison · fund or champion, from the
+     `help` blocks) and the ON THIS PAGE chapter nav. It began life as the BOOK A DISCOVERY
+     CALL band, added above the fold 2026-07-20 per Chris Barrett as the page's main CTA;
+     the discovery call went earlier today and James then took the rest.
+     The hero now runs straight into the stats band, so the page's only asks above the
+     evidence are the hero's own two buttons.
+     The `help` blocks and the chapters/help_eyebrow settings are LEFT IN PLACE — they cost
+     nothing, they hold James's copy, and re-adding the band is then a markup-only change.
+     ---------- {%- endcomment -%}
+
+  {%- comment -%} ---------- STATS (dark) ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-dark rd-band--stats">
+    <div class="rd-wrap">
+      <span class="rd-ghostnum" aria-hidden="true">{{ section.settings.ghost_stat | default: "2012" }}</span>
+      {%- if section.settings.stats_label != blank -%}<span class="rd-eyebrow">{{ section.settings.stats_label }}</span>{%- endif -%}
+      <div class="rd-stats">
+        {%- for block in section.blocks -%}{%- if block.type == 'stat' and block.settings.source != blank -%}
+          <div class="rd-stat rd-reveal" {{ block.shopify_attributes }}>
+            <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
+            <div class="rd-lbl">{{ block.settings.label }}</div>
+            <div class="rd-src">{{ block.settings.source }}</div>
+            {%- if block.settings.comparator != blank -%}<div class="rd-comparator">{{ block.settings.comparator }}</div>{%- endif -%}
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+      {%- if section.settings.data_as_of != blank -%}<p class="rd-dataasof rd-on-dark">{{ section.settings.data_as_of }}</p>{%- endif -%}
+    {%- comment -%} The underlined text link that used to sit here was a DUPLICATE: same
+      report_label condition, same report_url, same text as the pill button below, so the
+      stat band always rendered the identical CTA twice. PAGE-STANDARD's stat-band recipe is
+      eyebrow -> ghost numeral -> figures -> ONE CTA. S4 never caught it because S4 counts
+      .rd-btn only and this was a .rd-textlink. Removed 2026-08-05. {%- endcomment -%}
+      {%- if section.settings.report_label != blank -%}<div class="rd-mt3"><a class="rd-btn rd-on-dark" href="{{ section.settings.report_url | default: '/pages/impact-report' }}">{{ section.settings.report_label }} <span class="rd-arrow">&rarr;</span></a></div>{%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- ONE CRAFT, TWO ARMS (infographic) ---------- {%- endcomment -%}
+  {%- if section.settings.arms_title != blank -%}
+  <section class="rd-pad-sm rd-paper">
+    <div class="rd-wrap">
+      <div class="rd-center">
+        {%- if section.settings.arms_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.arms_eyebrow }}</span>{%- endif -%}
+        <h2 class="rd-reveal rd-mw-26ch rd-mx-auto">{{ section.settings.arms_title }}</h2>
+      </div>
+      {%- if section.settings.frame_info_enable -%}
+      <div class="rd-frameinfo rd-reveal" aria-hidden="false"><svg class="rd-frame-info" viewBox="0 0 960 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="One frame, two triangles: the schools pathway on the front triangle, the prisons pathway on the rear — both meeting at the saddle: a way forward.">
+  <g fill="none" stroke="var(--mist,#CFC5B0)" stroke-width="2.5">
+    <circle cx="203" cy="430" r="184"/><circle cx="758" cy="430" r="184"/>
+  </g>
+  <g fill="none" stroke="var(--forest,#003C32)" stroke-width="5" stroke-linecap="round">
+    <path d="M340,135 L640,150" pathLength="1"/> <path d="M640,150 L667,228" pathLength="1"/>
+    <path d="M430,430 L667,228" pathLength="1"/> <path d="M430,430 L340,135" pathLength="1"/>
+    <path d="M667,228 L758,430" stroke-width="3.5"/>
+    <path d="M430,430 L203,430" pathLength="1"/> <path d="M203,430 L340,135" pathLength="1"/>
+    <path d="M306,109 l60,-6" stroke-width="7"/>
+  </g>
+  <g class="rd-fi__route rd-fi__route--a" stroke="var(--lime,#D4FD62)" stroke-width="7" fill="none" stroke-linecap="round" opacity=".85">
+    <path d="M430,430 L667,228 L640,150 L340,135" pathLength="1"/>
+  </g>
+  <g class="rd-fi__route rd-fi__route--b" stroke="var(--steel,#DEE6F0)" stroke-width="7" fill="none" stroke-linecap="round" opacity=".9">
+    <path d="M430,430 L203,430 L340,135" pathLength="1"/>
+  </g>
+  <g class="rd-fi__nodes" font-family="inherit" font-weight="800" font-size="17" text-anchor="middle">
+    <circle cx="560" cy="319" r="17" fill="var(--lime,#D4FD62)" stroke="var(--forest,#003C32)" stroke-width="2.5"/>
+    <text x="560" y="325" fill="var(--forest,#003C32)">1</text>
+    <circle cx="667" cy="228" r="17" fill="var(--lime,#D4FD62)" stroke="var(--forest,#003C32)" stroke-width="2.5"/>
+    <text x="667" y="234" fill="var(--forest,#003C32)">2</text>
+    <circle cx="640" cy="150" r="17" fill="var(--lime,#D4FD62)" stroke="var(--forest,#003C32)" stroke-width="2.5"/>
+    <text x="640" y="156" fill="var(--forest,#003C32)">3</text>
+    <circle cx="475" cy="142" r="17" fill="var(--lime,#D4FD62)" stroke="var(--forest,#003C32)" stroke-width="2.5"/>
+    <text x="475" y="148" fill="var(--forest,#003C32)">4</text>
+    <circle cx="316" cy="430" r="17" fill="var(--steel,#DEE6F0)" stroke="var(--forest,#003C32)" stroke-width="2.5"/>
+    <text x="316" y="436" fill="var(--forest,#003C32)">1</text>
+    <circle cx="203" cy="430" r="17" fill="var(--steel,#DEE6F0)" stroke="var(--forest,#003C32)" stroke-width="2.5"/>
+    <text x="203" y="436" fill="var(--forest,#003C32)">2</text>
+    <circle cx="265" cy="297" r="17" fill="var(--steel,#DEE6F0)" stroke="var(--forest,#003C32)" stroke-width="2.5"/>
+    <text x="265" y="303" fill="var(--forest,#003C32)">3</text>
+    <circle cx="430" cy="430" r="26" fill="var(--forest,#003C32)"/>
+    <text x="430" y="438" font-size="26" fill="var(--lime,#D4FD62)">&#10033;</text>
+    <circle cx="340" cy="135" r="13" fill="var(--forest,#003C32)" stroke="var(--lime,#D4FD62)" stroke-width="3"/>
+  </g>
+  <g class="rd-fi__labels" font-size="15" font-weight="700" fill="var(--ink,#0E1A17)">
+    <text x="430" y="497" text-anchor="middle">one mission</text>
+    <text x="294" y="91" text-anchor="end" font-size="17">a way forward.</text>
+    <text x="595" y="331">{{ section.settings.arm1_name | default: 'make engineers' }}</text>
+    <text x="316" y="392" text-anchor="middle">{{ section.settings.arm2_name | default: 'build to bond' }}</text>
+  </g>
+</svg>
+        <p class="rd-frameinfo__caption">{{ section.settings.frame_info_caption | default: 'one frame, two triangles — the power goes in at the same place, and both routes end at the saddle.' }}</p>
+      </div>
+      {%- else -%}
+      {%- if section.settings.fork_label != blank -%}<span class="rd-eyebrow rd-mt3">{{ section.settings.fork_label }}</span>{%- endif -%}
+      {%- endif -%}
+      <div class="rd-paths rd-stagger{% if section.settings.arm3_name != blank %} rd-paths--3{% endif %}">
+        <div class="rd-path rd-path--schools rd-reveal">
+          <span class="rd-duotone rd-path__media">
+            <img src="{% if section.settings.arm1_image != blank %}{{ section.settings.arm1_image | image_url: width: 900 }}{% else %}{{ 'bbc-rd-wb-group.jpg' | asset_url }}{% endif %}" alt="{{ section.settings.arm1_image_alt | default: 'A school group with the bamboo bike frame they built' | escape }}" loading="lazy" width="900" height="500">
+          </span>
+          <span class="rd-path__chip">{{ section.settings.arm1_chip | default: 'in schools · before exclusion' }}</span>
+          <h3 class="rd-path__name">{{ section.settings.arm1_name | default: 'make engineers' }}</h3>
+          <p class="rd-path__who">{{ section.settings.arm1_who | default: "for SEND, PRU and at-risk young people being pushed out of the classroom — often their first positive encounter with engineering." }}</p>
+          {%- assign a1 = section.settings.arm1_flow | split: '|' -%}
+          <div class="rd-flow">{%- for st in a1 -%}{%- assign parts = st | split: "::" -%}<span class="rd-flow__step"><b>{{ parts[0] | strip }}</b>{%- if parts[1] -%}<small>{{ parts[1] | strip }}</small>{%- endif -%}</span>{%- endfor -%}</div>
+          {%- if section.settings.arm1_cta_label != blank -%}
+            <a class="rd-path__cta" href="{{ section.settings.arm1_cta_url | default: '/pages/schools' }}">{{ section.settings.arm1_cta_label }}</a>
+          {%- endif -%}
+        </div>
+        <div class="rd-path rd-path--prisons rd-reveal">
+          <span class="rd-duotone rd-path__media">
+            <img src="{% if section.settings.arm2_image != blank %}{{ section.settings.arm2_image | image_url: width: 900 }}{% else %}{{ 'bbc-rd-prison-empty.jpg' | asset_url }}{% endif %}" alt="{{ section.settings.arm2_image_alt | default: 'Inside the Build to Bond workshop — benches, jigs and frames' | escape }}" loading="lazy" width="900" height="500">
+          </span>
+          <span class="rd-path__chip">{{ section.settings.arm2_chip | default: 'in prisons · after' }}</span>
+          <h3 class="rd-path__name">{{ section.settings.arm2_name | default: 'build to bond' }}</h3>
+          <p class="rd-path__who">{{ section.settings.arm2_who | default: 'for people inside prison rebuilding skills, family ties and a route to work on release.' }}</p>
+          {%- assign a2 = section.settings.arm2_flow | split: '|' -%}
+          <div class="rd-flow">{%- for st in a2 -%}{%- assign parts = st | split: "::" -%}<span class="rd-flow__step"><b>{{ parts[0] | strip }}</b>{%- if parts[1] -%}<small>{{ parts[1] | strip }}</small>{%- endif -%}</span>{%- endfor -%}</div>
+          {%- if section.settings.arm2_cta_label != blank -%}
+            <a class="rd-path__cta" href="{{ section.settings.arm2_cta_url | default: '/pages/contact-us' }}">{{ section.settings.arm2_cta_label }}</a>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.arm3_name != blank -%}
+        <div class="rd-path rd-path--community rd-reveal">
+          <span class="rd-duotone rd-path__media">
+            <img src="{% if section.settings.arm3_image != blank %}{{ section.settings.arm3_image | image_url: width: 900 }}{% else %}{{ 'bbc-rd-prison-empty.jpg' | asset_url }}{% endif %}" alt="{{ section.settings.arm3_image_alt | default: 'Inside the Build to Bond workshop — benches, jigs and frames' | escape }}" loading="lazy" width="900" height="500">
+          </span>
+          <span class="rd-path__chip">{{ section.settings.arm3_chip }}</span>
+          <h3 class="rd-path__name">{{ section.settings.arm3_name }}</h3>
+          <p class="rd-path__who">{{ section.settings.arm3_who }}</p>
+          {%- assign a3 = section.settings.arm3_flow | split: '|' -%}
+          <div class="rd-flow">{%- for st in a3 -%}{%- assign parts = st | split: "::" -%}<span class="rd-flow__step"><b>{{ parts[0] | strip }}</b>{%- if parts[1] -%}<small>{{ parts[1] | strip }}</small>{%- endif -%}</span>{%- endfor -%}</div>
+          {%- if section.settings.arm3_cta_label != blank -%}
+            <a class="rd-path__cta" href="{{ section.settings.arm3_cta_url | default: '/pages/build-to-bond' }}">{{ section.settings.arm3_cta_label }}</a>
+          {%- endif -%}
+        </div>
+        {%- endif -%}
+      </div>
+      <style>
+        @media(min-width:1024px){ .bbc-rd .rd-paths.rd-paths--3{ grid-template-columns:repeat(3,1fr); } }
+      </style>
+      {%- if section.settings.converge_title != blank -%}
+      <div class="rd-converge rd-reveal">
+        <p class="rd-converge__title">{{ section.settings.converge_title }}</p>
+        {%- if section.settings.converge_note != blank -%}<p class="rd-converge__note">{{ section.settings.converge_note }}</p>{%- endif -%}
+      </div>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- THE STORY: a real workshop, inside ----------
+     Gated on the title (2026-07-24): with story_title cleared it rendered a 176px
+     empty dark shell — the third member of the gating-bug family. {%- endcomment -%}
+  {%- if section.settings.story_title != blank -%}
+  <section class="rd-pad rd-band--workshop">
+    <div class="rd-wrap rd-mw-820px">
+      {%- if section.settings.story_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.story_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal">{{ section.settings.story_title }}</h2>
+      {%- if section.settings.story_body_1 != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.story_body_1 }}</p>{%- endif -%}
+      {%- if section.settings.story_body_2 != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.story_body_2 }}</p>{%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- BUILD TO BOND FEATURE (split, dark) ----------
+     Behind show_b2b (2026-07-24 genre alignment): its story duplicated the flagship
+     #proof card directly below; the Allsopp voice moved onto the flagship. One
+     checkbox restores the band — all its settings are preserved. {%- endcomment -%}
+  {%- if section.settings.show_b2b != false -%}
+  <section class="rd-split rd-dark">
+    <div class="rd-reveal rd-media">
+      {%- if section.settings.b2b_image != blank -%}
+        <img src="{{ section.settings.b2b_image | image_url: width: 1400 }}" alt="{{ section.settings.b2b_image_alt | default: 'Inside a Bamboo Bicycle Club workshop' | escape }}" width="{{ section.settings.b2b_image.width }}" height="{{ section.settings.b2b_image.height }}">
+      {%- else -%}
+        <img src="{{ section.settings.b2b_fallback | default: 'bbc-rd-b2b.jpg' | asset_url }}" alt="{{ section.settings.b2b_image_alt | default: 'Inside a Bamboo Bicycle Club workshop' | escape }}" width="1400" height="933">
+      {%- endif -%}
+    </div>
+    <div class="rd-txt">
+      {%- if section.settings.b2b_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.b2b_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal">{{ section.settings.b2b_title }}</h2>
+      {%- if section.settings.b2b_body_1 != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.b2b_body_1 }}</p>{%- endif -%}
+      {%- if section.settings.b2b_body_2 != blank -%}<p class="rd-mt2">{{ section.settings.b2b_body_2 }}</p>{%- endif -%}
+      {%- if section.settings.b2b_quote != blank -%}
+        <div class="rd-reveal rd-pull rd-mt3">
+          <p class="rd-q">{{ section.settings.b2b_quote }}</p>
+          {%- if section.settings.b2b_cite != blank -%}<cite>{{ section.settings.b2b_cite }}</cite>{%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.b2b_cta1_label != blank -%}
+        <div class="rd-flex rd-mt3">
+          <a class="rd-btn rd-lime" href="{{ b2b_cta1 }}">{{ section.settings.b2b_cta1_label }} <span class="rd-arrow">&rarr;</span></a>
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- WHY NOW (policy backdrop, sourced) ---------- {%- endcomment -%}
+  {%- if section.settings.policy_title != blank -%}
+  <section class="rd-pad-sm rd-dark rd-band--policy">
+    <div class="rd-wrap">
+      <div class="rd-center">
+        {%- if section.settings.policy_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.policy_eyebrow }}</span>{%- endif -%}
+        <h2 class="rd-reveal rd-mw-22ch">{{ section.settings.policy_title }}</h2>
+      </div>
+      <div class="rd-policy rd-mt4">
+        {%- for block in section.blocks -%}{%- if block.type == 'policy' -%}
+          <div class="rd-stat rd-reveal" {{ block.shopify_attributes }}>
+            <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
+            <div class="rd-lbl">{{ block.settings.label }}</div>
+            {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- IMPACT STORIES — one per pillar (every kind of impact) ---------- {%- endcomment -%}
+  {%- if section.settings.stories_title != blank -%}
+  <section class="rd-pad-sm" id="evidence">
+    <div class="rd-wrap">
+      {%- if section.settings.stories_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.stories_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal rd-mw-20ch">{{ section.settings.stories_title }}</h2>
+      {%- if section.settings.stories_lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.stories_lede }}</p>{%- endif -%}
+      {%- comment -%} filter tabs built from the kinds present (Redemption tabbed-programmes / WaterAid filter pattern); no-JS = all visible {%- endcomment -%}
+      {%- assign _kinds = '' -%}
+      {%- for block in section.blocks -%}{%- if block.type == 'story' and block.settings.kind != blank -%}
+        {%- assign _k = block.settings.kind | downcase | strip -%}
+        {%- unless _kinds contains _k -%}{%- assign _kinds = _kinds | append: _k | append: ',' -%}{%- endunless -%}
+      {%- endif -%}{%- endfor -%}
+      {%- assign _kindlist = _kinds | split: ',' -%}
+      {%- if _kindlist.size > 1 -%}
+      <div class="rd-evfilter rd-mt3" role="group" aria-label="Filter the evidence by programme">
+        <button type="button" class="rd-evfilter__tab is-on" data-kind="all" aria-pressed="true">all</button>
+        {%- for k in _kindlist -%}<button type="button" class="rd-evfilter__tab" data-kind="{{ k }}" aria-pressed="false">{{ k }}</button>{%- endfor -%}
+      </div>
+      {%- endif -%}
+      {%- comment -%} ============ FEATURED SLIDER ============
+         Was a single card sitting as the first <li> of the evidence grid. James asked
+         for the featured story to rotate, so it is now its own region above the wall,
+         built from `feature` blocks — one slide each, editable, reorderable.
+
+         BACK-COMPAT: with no feature blocks it falls back to the original cs_* settings
+         as a single slide, so every other template using this section is unchanged and
+         a slider of one is just a static card (no controls, no timer).
+
+         id="proof" MOVES WITH IT. It is a deep-link target AND bbc-statement.css scopes
+         layout rules to #proof — the 2026-07-31 migration already killed this anchor once
+         by dropping the wrapper that carried it. It now sits on the region.
+      {%- endcomment -%}
+      {%- assign _feats = section.blocks | where: 'type', 'feature' -%}
+      {%- comment -%} The editor setting is SECONDS (a range of 4–15 reads sensibly there);
+         the JS interval wants milliseconds. Converting here rather than in the schema
+         keeps the editor honest — a "7000" slider would be nonsense to set by hand. {%- endcomment -%}
+      {%- assign _automs = section.settings.feat_autoplay_ms | default: 7 | times: 1000 -%}
+      {%- if _feats.size > 0 or section.settings.cs_blurb != blank or section.settings.cs_quote != blank -%}
+      <div class="rd-csfeat rd-mt4" id="proof" data-csfeat{% if _feats.size > 1 %} data-autoplay="{{ _automs }}"{% endif %}>
+        <div class="rd-csfeat__track" data-csfeat-track>
+          {%- if _feats.size > 0 -%}
+            {%- for block in _feats -%}
+              {%- assign _fu = block.settings.url | default: '#' -%}
+              {%- assign _fh = block.settings.heading | default: block.settings.site -%}
+              <div class="rd-csfeat__slide" data-csfeat-slide role="group" aria-roledescription="slide"
+                   aria-label="{{ forloop.index }} of {{ _feats.size }}"{% unless forloop.first %} hidden{% endunless %} {{ block.shopify_attributes }}>
+                {%- render 'bbc-cscard',
+                     variant: 'featured', item_tag: 'div',
+                     kind: block.settings.kind,
+                     heading: _fh,
+                     url: _fu,
+                     context: block.settings.blurb,
+                     attr: block.settings.site,
+                     chips: block.settings.outcomes,
+                     image_pic: block.settings.image_pic,
+                     image: block.settings.image,
+                     cta: block.settings.link_label -%}
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            {%- assign _cs_url = section.settings.cs_url | default: '/blogs/impact/build-to-bond-the-full-story-of-how-bamboo-bikes-are-rebuilding-family-connections-in-prison-2' -%}
+            {%- assign _cs_head = section.settings.cs_heading -%}
+            {%- if _cs_head == blank -%}{%- assign _cs_head = section.settings.cs_site | default: 'Build to Bond · HMP Lowdham Grange' -%}{%- endif -%}
+            <div class="rd-csfeat__slide" data-csfeat-slide>
+              {%- render 'bbc-cscard',
+                   variant: 'featured', item_tag: 'div',
+                   kind: section.settings.cs_kind,
+                   heading: _cs_head,
+                   url: _cs_url,
+                   context: section.settings.cs_blurb,
+                   attr: section.settings.cs_site,
+                   chips: section.settings.cs_outcomes,
+                   image_pic: section.settings.cs_image_pic,
+                   image: section.settings.cs_image,
+                   cta: section.settings.cs_link_label -%}
+            </div>
+          {%- endif -%}
+        </div>
+        {%- if _feats.size > 1 -%}
+          <div class="rd-csfeat__ui">
+            <button type="button" class="rd-csfeat__arrow" data-csfeat-prev aria-label="Previous story">&larr;</button>
+            <div class="rd-csfeat__dots" role="tablist" aria-label="Choose a featured story">
+              {%- for block in _feats -%}
+                <button type="button" class="rd-csfeat__dot{% if forloop.first %} is-on{% endif %}" role="tab"
+                        data-csfeat-dot="{{ forloop.index0 }}"
+                        aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                        aria-label="Story {{ forloop.index }} of {{ _feats.size }}"></button>
+              {%- endfor -%}
+            </div>
+            <button type="button" class="rd-csfeat__arrow" data-csfeat-next aria-label="Next story">&rarr;</button>
+            <button type="button" class="rd-csfeat__pause" data-csfeat-pause aria-pressed="false" aria-label="Pause the featured story rotation">pause</button>
+          </div>
+        {%- endif -%}
+      </div>
+      {%- endif -%}
+
+      {%- comment -%} ============ EVIDENCE WALL ============
+         Capped. There are 37 real case studies behind this and rendering all of them read
+         as a wall of blog posts rather than evidence. Cards past the limit are marked
+         data-overflow and start hidden, so the cap holds with JS off; "show more" and the
+         sector filter both re-apply it against whatever is currently matching.
+      {%- endcomment -%}
+      {%- assign _limit = section.settings.stories_limit | default: 6 -%}
+      {%- comment -%} A story promoted into the slider must not also sit in the wall below it.
+         The first build showed the UCL cargo-bike slide and then repeated it, same image and
+         same headline, as the very first grid card. Matching on URL rather than on a flag means
+         it keeps working when James promotes or demotes a story in the editor — there is no
+         second place to remember to update. {%- endcomment -%}
+      {%- assign _featurls = '' -%}
+      {%- for f in _feats -%}
+        {%- if f.settings.url != blank -%}{%- assign _featurls = _featurls | append: '|' | append: f.settings.url | append: '|' -%}{%- endif -%}
+      {%- endfor -%}
+      <ul class="rd-csgrid rd-mt4 rd-stagger" id="evidence-wall" data-evwall data-limit="{{ _limit }}" role="list">
+        {%- assign _shown = 0 -%}
+        {%- for block in section.blocks -%}{%- if block.type == 'story' -%}
+          {%- assign _thisurl = '|' | append: block.settings.url | append: '|' -%}
+          {%- if block.settings.url != blank and _featurls contains _thisurl -%}{%- continue -%}{%- endif -%}
+          {%- assign _shown = _shown | plus: 1 -%}
+          {%- if _shown > _limit -%}{%- assign _over = 'data-overflow hidden' -%}{%- else -%}{%- assign _over = '' -%}{%- endif -%}
+          {%- comment -%} heading = the OUTCOME line. It is the most specific, unique sentence on
+             the card, so it makes the best link text (WCAG 2.4.4 — the descriptive text must be
+             INSIDE the anchor, not a sibling). `title` used to render as a second, near-duplicate
+             summary line under it: "A 100kg-payload electric cargo bike, built by masters
+             students." above "masters students built a 100kg electric bamboo cargo bike." One
+             line per card now; title is the fallback when a block has no outcome. {%- endcomment -%}
+          {%- assign _head = block.settings.outcome | default: block.settings.title -%}
+          {%- render 'bbc-cscard',
+               variant: 'grid',
+               item_attrs: _over,
+               kind: block.settings.kind,
+               heading: _head,
+               url: block.settings.url,
+               context: block.settings.blurb,
+               chips: block.settings.chips,
+               date: block.settings.date,
+               source_label: block.settings.source_label,
+               source_url: block.settings.source_url,
+               image_pic: block.settings.image_pic,
+               image: block.settings.image,
+               youtube: block.settings.video_url,
+               video_file: block.settings.video_file -%}
+        {%- endif -%}{%- endfor -%}
+      </ul>
+      {%- if section.settings.stories_more != false -%}
+        {%- comment -%} Count is rendered server-side so the button is honest with JS off,
+           where it simply links to the full archive instead of expanding. {%- endcomment -%}
+        {%- assign _total = 0 -%}
+        {%- for block in section.blocks -%}{%- if block.type == 'story' -%}
+          {%- assign _turl = '|' | append: block.settings.url | append: '|' -%}
+          {%- unless block.settings.url != blank and _featurls contains _turl -%}{%- assign _total = _total | plus: 1 -%}{%- endunless -%}
+        {%- endif -%}{%- endfor -%}
+        {%- if _total > _limit -%}
+          <div class="rd-evmore rd-mt3">
+            <button type="button" class="rd-evmore__btn" data-evmore
+                    data-label-more="{{ section.settings.stories_more_label | default: 'show all' }}"
+                    data-label-less="{{ section.settings.stories_less_label | default: 'show fewer' }}"
+                    aria-expanded="false" aria-controls="evidence-wall">{{ section.settings.stories_more_label | default: 'show all' }} <span data-evmore-count>{{ _total }}</span></button>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+      {%- comment -%} provenance stays a SIBLING of the card group, never inside a card: press
+         links inside a card either nest anchors in the card link or create a second tab stop. {%- endcomment -%}
+      {%- if section.settings.cs_show_prov != false -%}
+      <p class="rd-cscard__prov">as reported in
+        <a href="https://www.ft.com/content/6ebe2eba-b832-4289-9924-2e9f948d5f98?ref=impact-evidence" target="_blank" rel="noopener">{{ section.settings.tx_financial_times | default: "Financial Times" }}</a> &middot;
+        <a href="/blogs/news/inside-time-bamboozling-way-to-build-bikes-bamboo-bicycle-club-at-lowdham-grange?ref=impact-evidence">{{ section.settings.tx_inside_time | default: "Inside Time" }}</a> &middot;
+        <a href="/blogs/news/bamboo-bicycle-club-wins-investec-beyond-business-2025?ref=impact-evidence">{{ section.settings.tx_investec_beyond_business | default: "Investec Beyond Business" }}</a></p>
+      {%- endif -%}
+      {%- if section.settings.stories_proofline != blank -%}<p class="rd-evproof-line">{{ section.settings.stories_proofline }}</p>{%- endif -%}
+      <div class="rd-mt4"><a class="rd-btn rd-ghost" href="{{ section.settings.stories_all_url | default: '/blogs/impact' }}">{{ section.settings.stories_all_label | default: 'See all impact stories' }} <span class="rd-arrow">&rarr;</span></a></div>
+      {% render 'bbc-video-lightbox' %}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- IMPACT VOICES (rolling quote reel) ---------- {%- endcomment -%}
+  {%- assign sq = section.blocks | where: "type", "scrollquote" -%}
+  {%- if sq.size > 0 -%}
+  <section class="rd-pad-sm rd-dark rd-band--quotes">
+    <div class="rd-wrap">
+      <div class="rd-qhead">
+        <div class="rd-qnav" hidden>
+          <button type="button" class="rd-qbtn rd-qbtn--pause" aria-label="Pause the moving quotes" aria-pressed="false">&#10073;&#10073;</button>
+          <button type="button" class="rd-qbtn" data-dir="-1" aria-label="Previous quote">&larr;</button>
+          <button type="button" class="rd-qbtn" data-dir="1" aria-label="Next quote">&rarr;</button>
+        </div>
+        {%- if section.settings.quotes_label != blank -%}<span class="rd-eyebrow">{{ section.settings.quotes_label }}</span>{%- endif -%}
+      </div>
+    </div>
+    <div class="rd-qscroll" role="region" aria-roledescription="carousel" aria-label="{{ section.settings.quotes_label | default: 'what the impact sounds like' | escape }}" tabindex="0">
+      <div class="rd-qtrack">
+        {%- for block in sq -%}
+        <figure class="rd-qscroll__item" role="group" aria-label="{{ forloop.index }} of {{ sq.size }}" {{ block.shopify_attributes }}>
+          <blockquote class="rd-qscroll__q">&ldquo;{{ block.settings.text }}&rdquo;</blockquote>
+          <figcaption class="rd-qscroll__a"><b>{{ block.settings.attr }}</b>{%- if block.settings.source != blank %} <span class="rd-qsrc">&middot; {{ block.settings.source }}</span>{% endif -%}</figcaption>
+        </figure>
+        {%- endfor -%}
+        {%- for block in sq -%}
+        <figure class="rd-qscroll__item" aria-hidden="true">
+          <blockquote class="rd-qscroll__q">&ldquo;{{ block.settings.text }}&rdquo;</blockquote>
+          <figcaption class="rd-qscroll__a"><b>{{ block.settings.attr }}</b>{%- if block.settings.source != blank %} <span class="rd-qsrc">&middot; {{ block.settings.source }}</span>{% endif -%}</figcaption>
+        </figure>
+        {%- endfor -%}
+      </div>
+    </div>
+    <script>
+    (() => {
+      document.querySelectorAll('.rd-band--quotes').forEach((band) => {
+        const rail = band.querySelector('.rd-qscroll'), track = band.querySelector('.rd-qtrack'),
+              nav = band.querySelector('.rd-qnav');
+        if (!nav) return;
+        nav.hidden = false;
+        const pause = band.querySelector('.rd-qbtn--pause');
+        const manual = () => { band.classList.add('is-manual'); pause.setAttribute('aria-pressed','true'); pause.textContent = '\u25B6'; };
+        const roll = () => { band.classList.remove('is-manual'); pause.setAttribute('aria-pressed','false'); pause.innerHTML = '&#10073;&#10073;'; };
+        pause.addEventListener('click', () => band.classList.contains('is-manual') ? roll() : manual());
+        nav.addEventListener('click', (e) => { const b = e.target.closest('[data-dir]');
+          if (!b) return; manual();
+          const items = [...rail.querySelectorAll('.rd-qscroll__item:not([aria-hidden])')];
+          const x = rail.scrollLeft; let best = 0;
+          items.forEach((el, i) => { if (Math.abs(el.offsetLeft - rail.offsetLeft - x) < Math.abs(items[best].offsetLeft - rail.offsetLeft - x)) best = i; });
+          const t = items[Math.min(items.length - 1, Math.max(0, best + +b.dataset.dir))];
+          if (t) t.scrollIntoView({ block:'nearest', inline:'start', behavior:'smooth' });
+        });
+      });
+    })();
+    </script>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- PATHWAY: more than a bike (3 cards) — gated: only render if there is pathway content ---------- {%- endcomment -%}
+  {%- assign has_pathway = false -%}
+  {%- for block in section.blocks -%}{%- if block.type == 'pathway' -%}{%- assign has_pathway = true -%}{%- endif -%}{%- endfor -%}
+  {%- if section.settings.path_title != blank or has_pathway -%}
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      {%- if section.settings.path_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.path_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal rd-mw-20ch">{{ section.settings.path_title }}</h2>
+      <div class="rd-grid rd-g3 rd-mt4">
+        {%- for block in section.blocks -%}{%- if block.type == 'pathway' -%}
+          <div class="rd-reveal rd-card" {{ block.shopify_attributes }}>
+            <div class="rd-body">
+              <h3 class="rd-fs-21px">{{ block.settings.title }}</h3>
+              <p>{{ block.settings.body }}</p>
+            </div>
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+      {%- if section.settings.path_quote != blank -%}
+        <div class="rd-reveal rd-pull rd-mt4 rd-mw-60ch">
+          <p class="rd-q">{{ section.settings.path_quote }}</p>
+          {%- if section.settings.path_cite != blank -%}<cite>{{ section.settings.path_cite }}</cite>{%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- WHERE WE WORK (named prison sites) ---------- {%- endcomment -%}
+  {%- if section.settings.sites_title != blank -%}
+  <section class="rd-pad-sm rd-paper" id="map">
+    <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="rd-wrap rd-mw-820px">
+      {%- if section.settings.sites_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.sites_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal rd-mw-22ch rd-mx-auto">{{ section.settings.sites_title }}</h2>
+      {%- if section.settings.sites_body != blank -%}<p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.sites_body }}</p>{%- endif -%}
+      {%- if section.settings.sites_list != blank -%}<div class="rd-sitenames rd-mt3">{{ section.settings.sites_list }}</div>{%- endif -%}
+    </div>
+    {%- if section.settings.map_enable -%}
+    <div class="rd-mapwide rd-mt3">
+      <figure class="rd-opsmap">
+        {%- if section.settings.map_image != blank -%}
+          <img src="{{ section.settings.map_image | image_url: width: 2400 }}" alt="{{ section.settings.map_alt | escape }}" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'bbc-world-map.svg' | asset_url }}" alt="{{ section.settings.map_alt | escape }}" width="1000" height="472" loading="lazy">
+        {%- endif -%}
+        <div class="rd-mapstats" aria-hidden="true">
+          <div class="rd-mapstat rd-mapstat--a"><b>{{ section.settings.mstat1_num | default: '5' }}</b><span>{{ section.settings.mstat1_lbl | default: 'active prison sites' }}</span></div>
+          <div class="rd-mapstat rd-mapstat--b"><b>{{ section.settings.mstat2_num | default: '10' }}</b><span>{{ section.settings.mstat2_lbl | default: 'schools & universities' }}</span></div>
+          <div class="rd-mapstat rd-mapstat--c"><b>{{ section.settings.mstat3_num | default: '3' }}</b><span>{{ section.settings.mstat3_lbl | default: 'international hubs' }}</span></div>
+          <div class="rd-mapstat rd-mapstat--d"><b>{{ section.settings.mstat4_num | default: '45' }}</b><span>{{ section.settings.mstat4_lbl | default: 'countries reached' }}</span></div>
+        </div>
+      {%- if section.settings.map_caption != blank -%}<figcaption class="rd-opsmap__cap">{{ section.settings.map_caption }}</figcaption>{%- endif -%}
+      </figure>
+    </div>
+    {%- endif -%}
+    <div class="rd-wrap rd-mw-820px">
+      {%- assign ops = section.blocks | where: "type", "opgroup" -%}
+      {%- if ops.size > 0 -%}
+      <ul class="rd-ops rd-mt3" role="list">
+        {%- for block in ops limit: 4 -%}
+        <li class="rd-ops__cell" {{ block.shopify_attributes }}>
+          
+          <h3 class="rd-ops__title">{{ block.settings.title }}</h3>
+          <p class="rd-ops__items">{{ block.settings.items }}</p>
+        </li>
+        {%- endfor -%}
+      </ul>
+      {%- if ops.size > 4 and section.settings.ops_more_label != blank -%}
+      <p class="rd-mt3" style="text-align:left;"><a class="rd-path__cta" style="margin-top:0;" href="{{ section.settings.ops_more_url | default: '/pages/our-story-2' }}">{{ section.settings.ops_more_label }}</a></p>
+      {%- endif -%}
+      {%- endif -%}
+      {%- if section.settings.sites_partner != blank -%}<p class="rd-frame-label rd-mt3">{{ section.settings.sites_partner }}</p>{%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- RECOGNISED BY (credibility quotes) ---------- {%- endcomment -%}
+  {%- if section.settings.cred_quote1 != blank -%}
+  {%- comment -%} WHO IT'S FOR band REMOVED 2026-08-19 (James, via Telegram: remove the
+     "who it's for" section from the impact page). Its settings (cred_eyebrow/heading/sub/
+     mechanism) and the segment blocks stay in the schema but no longer render.
+     cred_quote1 still gates this region and renders in WHO BACKS IT below. {%- endcomment -%}
+
+  {%- comment -%} ─────────── WHO BACKS IT — split out 2026-07-31 ───────────
+     One band was doing SEVEN jobs: heading, mechanism line, ministerial quote, a 2×2 audience
+     router, three proof lines, a report CTA and two logo walls — 1,846px, 268 words, 16 links.
+     Every other band on this page runs a single device, which is exactly why James said it "seems
+     very different to the rest of the page".
+     Split at the natural seam: ROUTING above (who this is for), CREDIBILITY below (who backs it).
+     The ministerial quote moved down with the backers — an endorsement is backing, not routing.
+  {%- endcomment -%}
+  <section class="rd-pad-sm rd-paper bbc-impact-backs" id="backers">
+    <div class="rd-nodediv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="rd-wrap" style="position:relative;">
+      <span class="rd-seal" aria-hidden="true">{{ section.settings.seal_text | default: "OCN accredited · CIC · since 2012" }}</span>
+      {%- if section.settings.backs_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.backs_eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.backs_heading != blank -%}<h2 class="rd-reveal rd-mw-22ch">{{ section.settings.backs_heading }}</h2>{%- endif -%}
+      {%- comment -%} ministerial endorsement (verbatim, attributable) — restored 2026-07-22;
+         it previously only GATED this band without ever rendering (audit footgun) {%- endcomment -%}
+      {%- comment -%} Two verified Timpson quotes exist. The band ran the general one alone,
+         four lines deep, under a heading that says "who backs it" — but that sentence is about
+         government policy and never mentions BBC. The one that does is the endorsement, so it
+         leads; the policy line becomes the context it sits inside. Both verbatim, both sourced
+         to Inside Time (Business/Case Studies/Verified 2026, checked 2026-08-19). {%- endcomment -%}
+      <div class="rd-backs__endorse rd-mt3">
+        <div>
+          <blockquote class="rd-pull rd-reveal">
+            <p class="rd-q">{{ section.settings.cred_quote1 }}</p>
+            {%- if section.settings.cred_attr1 != blank -%}<cite>{{ section.settings.cred_attr1 }}</cite>{%- endif -%}
+          </blockquote>
+        </div>
+        {%- if section.settings.cred_quote2 != blank -%}
+        <div class="rd-backs__ctx">
+          {%- if section.settings.cred_ctx_label != blank -%}<span class="rd-eyebrow">{{ section.settings.cred_ctx_label }}</span>{%- endif -%}
+          <blockquote class="rd-backs__ctxq rd-mt2">
+            <p>{{ section.settings.cred_quote2 }}</p>
+            {%- if section.settings.cred_attr2 != blank -%}<cite>{{ section.settings.cred_attr2 }}</cite>{%- endif -%}
+          </blockquote>
+        </div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.promise1 != blank -%}
+      <div class="rd-callout-steel rd-mt3" style="text-align:left;">
+        <ul class="rd-promises" role="list">
+          {%- for i in (1..3) -%}
+          {%- assign pk = 'promise' | append: i -%}{%- assign pu = 'promise' | append: i | append: '_url' -%}
+          {%- if section.settings[pk] != blank -%}
+          <li class="rd-promises__row"><span class="rd-promises__star">&#10033;</span> {{ section.settings[pk] }}{%- if section.settings[pu] != blank %} <a href="{{ section.settings[pu] }}">see for yourself &rarr;</a>{%- endif -%}</li>
+          {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+      {%- elsif section.settings.cred_mech != blank -%}<div class="rd-callout-steel rd-mt3" style="text-align:left;"><p>{{ section.settings.cred_mech }}</p></div>{%- endif -%}
+      {%- if section.settings.report_card_title != blank -%}
+      <div class="rd-reveal rd-dlcard rd-mt3">
+        <span class="rd-dlcard__badge">report</span>
+        <div class="rd-dlcard__body">
+          <p class="rd-dlcard__title">{{ section.settings.report_card_title }}</p>
+          {%- if section.settings.report_card_meta != blank -%}<p class="rd-dlcard__meta">{{ section.settings.report_card_meta }}</p>{%- endif -%}
+        </div>
+        <a class="rd-path__cta" style="margin-top:0;" href="{{ section.settings.report_card_url | default: '/pages/impact-report' }}">read it &rarr;</a>
+      </div>
+      {%- endif -%}
+
+      {%- comment -%} press strip — THE standard block (2026-07-22, qa/PRESS-BLOCK.md);
+         quiet style here (the pull-quote above already carries the voice) {%- endcomment -%}
+      <div class="rd-center">
+        {%- render 'bbc-press',
+            style: 'quiet',
+            preset: 'national',
+            label: section.settings.press_label,
+            more_label: section.settings.press_more,
+            more_url: section.settings.press_more_url -%}
+        {%- if section.settings.awards_line != blank -%}<p class="rd-partnerlabel rd-mt3">{{ section.settings.awards_line }}</p>{%- endif -%}
+        {%- if section.settings.funder_line != blank -%}<p class="rd-ship-note{% if section.settings.funder_logo != blank %} rd-mt1{% else %} rd-mt3{% endif %}">{{ section.settings.funder_line }}</p>{%- endif -%}
+        {%- comment -%} ============ GROUPED CREDENTIALS ============
+           One row labelled "backed by & accredited by" put a funder, an awarding body, a
+           customer and a university that never counter-signed under the same claim. Only two
+           of the five were backers. Each block now declares what it IS, and the band renders
+           a group per relationship — which is the honest fix and also the structure the row
+           was missing. Verified against System/Claims Register.md on 2026-08-19.
+
+           A block with no `group` falls into the first heading, so an older template that
+           never set one renders exactly as before. {%- endcomment -%}
+        {%- assign backers = section.blocks | where: "type", "backer" -%}
+        {%- if backers.size > 0 -%}
+        {%- assign _groups = section.settings.backer_groups | default: 'funded by|accredited by|delivered with' | split: '|' -%}
+        <div class="rd-backs__groups">
+          {%- for g in _groups -%}
+            {%- assign gkey = g | strip -%}
+            {%- assign inthis = '' -%}
+            {%- for block in backers -%}
+              {%- assign bg = block.settings.group | default: _groups[0] | strip -%}
+              {%- if bg == gkey -%}{%- assign inthis = inthis | append: block.id | append: ',' -%}{%- endif -%}
+            {%- endfor -%}
+            {%- if inthis != blank -%}
+            <div class="rd-backs__grp">
+              <span class="rd-backs__k">{{ gkey }}</span>
+              <ul class="rd-backs__tiles" role="list">
+                {%- for block in backers -%}
+                  {%- assign bg = block.settings.group | default: _groups[0] | strip -%}
+                  {%- if bg == gkey -%}
+                  <li class="rd-backs__tile" {{ block.shopify_attributes }}>
+                    {%- if block.settings.url != blank -%}<a href="{{ block.settings.url }}" class="rd-backers__link">{%- endif -%}
+                    {%- if block.settings.logo != blank -%}
+                    <img class="rd-backers__logo" src="{{ block.settings.logo | asset_url }}" alt="{{ block.settings.label | escape }}" loading="lazy">
+                    {%- else -%}
+                    <span class="rd-backers__chip">{{ block.settings.label }}</span>
+                    {%- endif -%}
+                    {%- if block.settings.url != blank -%}</a>{%- endif -%}
+                  </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+              {%- for block in backers -%}
+                {%- assign bg = block.settings.group | default: _groups[0] | strip -%}
+                {%- if bg == gkey and block.settings.note != blank -%}
+                  <p class="rd-backs__note">{{ block.settings.note }}</p>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  
+  {%- comment -%} WHAT'S NEXT band REMOVED 2026-07-20 (Chris Barrett feedback: cut to reduce
+     page length). Its settings (next_*) are retained in the schema but no longer rendered.
+     The primary CTA now lives directly under the hero — see BOOK A DISCOVERY CALL. {%- endcomment -%}
+
+{% stylesheet %}
+/* ---- evidence system (2026-07-22, visual tour: Redemption/Switchback/charity:water/Fine Cell) ---- */
+/* flagship outcome chips — the number leads (tabular via universal) */
+.rd-cscard__outs{list-style:none;display:flex;flex-wrap:wrap;gap:8px 10px;margin:16px 0 0;padding:0}
+.rd-cscard__outs li{font-size:14px;font-weight:800;letter-spacing:.01em;padding:6px 12px;border:2px solid currentColor;border-radius:999px;white-space:nowrap}
+.rd-cscard__prov{margin:14px 2px 0;font-size:13px;font-weight:700;opacity:.85}
+.rd-cscard__prov a{text-decoration:underline;text-underline-offset:3px;font-weight:800}
+/* FEATURED case study (2026-07-31) — the flagship spans the whole evidence wall and splits
+   media | body, so it reads as the lead item of this section rather than a second section.
+   Scoped here rather than in a shared sheet to keep the blast radius on one page. The
+   #proof-scoped rules in bbc-statement.css still apply: the id moved with the card. */
+.bbc-rd-impact .rd-csfeat{grid-column:1/-1}
+.bbc-rd-impact .rd-csfeat .rd-cscard--featured{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
+.bbc-rd-impact .rd-csfeat .rd-cscard__media{aspect-ratio:16/10;border-radius:0;overflow:clip}
+.bbc-rd-impact .rd-csfeat .rd-cscard__media img{width:100%;height:100%;object-fit:cover}
+.bbc-rd-impact .rd-csfeat .rd-cscard__body{padding:0}
+/* the featured quote is display copy and must not inherit the 3-up card's small type */
+.bbc-rd-impact .rd-csfeat .rd-cscard__quote{font-size:clamp(19px,1.7vw,23px);line-height:1.35}
+@media(max-width:860px){
+  .bbc-rd-impact .rd-csfeat .rd-cscard--featured{grid-template-columns:1fr;gap:18px}
+}
+/* evidence-wall card anatomy: outcome line leads the body */
+.rd-cscard__out{margin:0 0 8px;font-size:18px;line-height:1.35;font-weight:800}
+.rd-cscard__evq{margin:10px 0 0;padding:0;border:0;font-size:15px;line-height:1.5;font-style:italic}
+.rd-cscard__evq cite{display:block;margin-top:4px;font-style:normal;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.rd-cscard__meta{margin:10px 0 0;font-size:13px;font-weight:700;opacity:.8}
+.rd-cscard__meta .rd-cscard__dot{margin:0 6px}
+.rd-cscard__meta a{text-decoration:underline;text-underline-offset:3px}
+/* filter tabs — quiet pills, lime = active (one accent per band rule) */
+.rd-evfilter{display:flex;flex-wrap:wrap;gap:10px}
+.rd-evfilter__tab{font:inherit;font-size:14px;font-weight:800;letter-spacing:.02em;text-transform:lowercase;padding:8px 16px;border:2px solid currentColor;border-radius:999px;background:transparent;color:inherit;cursor:pointer}
+.rd-evfilter__tab.is-on{background:var(--lime);border-color:var(--ink);color:var(--ink)}
+.rd-evfilter__tab:focus-visible{outline:3px solid var(--lime-aaa);outline-offset:2px}
+[data-evwall] [data-kind][hidden]{display:none}
+/* stretched-link: whole evidence card clickable via the foot link; inner source/quote links stay above */
+.rd-cscard--ev{position:relative}
+.rd-cscard--ev .rd-cscard__stretch::after{content:"";position:absolute;inset:0}
+.rd-cscard--ev .rd-cscard__meta a,.rd-cscard--ev .rd-cscard__evq cite{position:relative;z-index:1}
+/* mechanism sentence — bold single line, the funder contract */
+.rd-mech{font-size:17px;font-weight:800;letter-spacing:.01em;max-width:56ch}
+.rd-helplinks{display:flex;flex-wrap:wrap;gap:10px 26px}
+/* flagship (#proof) sits on the page's left axis — its 820px wrap was centring
+   at wide viewports and drifting off-grid (caught in James's 1568px Chrome) */
+#proof .rd-mw-820px{margin-left:0}
+/* under-wall proof line — the archive statement (editable) */
+.rd-evproof-line{margin:26px 0 0;font-size:14px;font-weight:800;letter-spacing:.02em;opacity:.75}
+/* evidence motion PROMOTED to bbc-universal.css §11 (2026-07-24) — chip stagger,
+   .rd-evin filter rise and the card hover grammar are now sitewide vocabulary.
+   Contract: qa/MOTION.md. No motion keyframes may live in this section. */
+
+/* ── featured slider + capped wall (2026-08-19) ──────────────────────────────
+   Slides are hidden with [hidden], not translated off-canvas, so only the visible
+   slide is reachable by keyboard or screen reader. The track holds its height from
+   whichever slide is showing — no fixed height, because these cards vary. */
+/* The track reserves the height of the TALLEST slide, measured once at load, so the
+   page does not jump as the story rotates — slide 0 runs 65 words against slide 2's
+   25, which was 35px of movement every 7 seconds under the reader's eye. min-height
+   rather than height so a slide that grows (a long editor edit) is never clipped. */
+.rd-csfeat{position:relative}
+.rd-csfeat__track{min-height:var(--csfeat-h,auto)}
+.rd-csfeat__slide[hidden]{display:none}
+.rd-csfeat__ui{display:flex;align-items:center;gap:12px;margin-top:20px}
+.rd-csfeat__arrow,.rd-csfeat__pause{font:inherit;font-size:14px;font-weight:800;line-height:1;
+  border:2px solid currentColor;background:transparent;color:inherit;border-radius:999px;cursor:pointer;padding:8px 14px}
+.rd-csfeat__pause{margin-left:auto;text-transform:lowercase;letter-spacing:.02em}
+.rd-csfeat__arrow:focus-visible,.rd-csfeat__pause:focus-visible,.rd-csfeat__dot:focus-visible{outline:3px solid var(--lime-aaa);outline-offset:2px}
+.rd-csfeat__dots{display:flex;gap:8px;align-items:center}
+.rd-csfeat__dot{width:11px;height:11px;padding:0;border-radius:50%;border:2px solid currentColor;background:transparent;cursor:pointer}
+.rd-csfeat__dot.is-on{background:var(--lime);border-color:var(--ink)}
+.rd-evmore{display:flex;justify-content:center}
+.rd-evmore__btn{font:inherit;font-size:15px;font-weight:800;letter-spacing:.02em;text-transform:lowercase;
+  padding:11px 22px;border:2px solid currentColor;border-radius:999px;background:transparent;color:inherit;cursor:pointer}
+.rd-evmore__btn:focus-visible{outline:3px solid var(--lime-aaa);outline-offset:2px}
+/* !important because this competes with grid/flex layout rules in a later sheet that
+   share its specificity. Whether a card is on the page is not a layout decision. */
+[data-evwall] > [data-kind][hidden]{display:none !important}
+@media (max-width:600px){
+  .rd-csfeat__ui{flex-wrap:wrap}
+  .rd-csfeat__pause{margin-left:0}
+}
+
+/* ── who backs it: endorsement + grouped credentials (2026-08-19) ────────────
+   The old band stacked one huge quote, then a report CTA, then press, then a flat
+   logo row — four credibility devices with no hierarchy, and logos at whatever size
+   their source file happened to be (one arrived in a white box). Two columns for the
+   quote, then one bordered strip of labelled groups, each mark on a tile of the same
+   optical size. */
+.bbc-impact-backs .rd-backs__endorse{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:start}
+.bbc-impact-backs .rd-backs__ctxq{margin:0;border-left:3px solid var(--lime-700);padding:2px 0 2px 18px}
+.bbc-impact-backs .rd-backs__ctxq p{margin:0;font-size:15px;line-height:1.5}
+.bbc-impact-backs .rd-backs__ctxq cite{display:block;margin-top:10px;font-style:normal;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--forest-300)}
+
+.bbc-impact-backs .rd-backs__groups{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:38px;text-align:left;
+  border-top:1.5px solid var(--forest);border-bottom:1.5px solid var(--forest)}
+.bbc-impact-backs .rd-backs__grp{padding:22px 24px;border-right:1px solid rgba(0,60,50,.22)}
+.bbc-impact-backs .rd-backs__grp:last-child{border-right:0}
+.bbc-impact-backs .rd-backs__k{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--forest-300);margin-bottom:14px}
+.bbc-impact-backs .rd-backs__tiles{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+/* one tile size for every mark, so a padded SVG and a tight PNG carry equal weight */
+/* Fixed height, not min-height. The point of the tile is that every mark carries the same
+   optical weight; min-height let the widest logo push its own tile 8px taller than its
+   neighbour, which is the ragged row this band was rebuilt to remove. */
+.bbc-impact-backs .rd-backs__tile{flex:1 1 128px;height:72px;background:#fff;border:1.5px solid rgba(0,60,50,.2);border-radius:6px;display:grid;place-items:center;padding:10px 14px}
+/* bbc-statement.css sets `.bbc-rd-impact .rd-backers__logo{height:44px !important}` for the
+   old flat row. Inside a tile the mark must fit the tile, not dictate it — one logo at 44px
+   made its tile 74px against the others' 66px. !important is the only thing that beats
+   !important, and it is scoped to the tile so the old row is untouched. */
+.bbc-impact-backs .rd-backs__tile .rd-backers__logo{max-width:100%;max-height:40px;width:auto;height:auto !important;object-fit:contain;display:block}
+.bbc-impact-backs .rd-backs__tile .rd-backers__chip{font-size:13px;font-weight:700;color:var(--forest);text-align:center;line-height:1.15}
+/* `.rd-wrap p:not(.rd-eyebrow)` (0,2,1) out-specified the two-class version of this rule and
+   set the note to body size. Three classes takes it back without reaching for !important. */
+.bbc-impact-backs .rd-backs__grp .rd-backs__note{margin:12px 0 0;font-size:11.5px;color:var(--charcoal);opacity:.8;line-height:1.4;max-width:none}
+
+@media (max-width:900px){
+  .bbc-impact-backs .rd-backs__endorse{grid-template-columns:1fr;gap:26px}
+  .bbc-impact-backs .rd-backs__groups{grid-template-columns:1fr}
+  .bbc-impact-backs .rd-backs__grp{border-right:0;border-bottom:1px solid rgba(0,60,50,.22)}
+  .bbc-impact-backs .rd-backs__grp:last-child{border-bottom:0}
+}
+{% endstylesheet %}
+
+{% javascript %}
+document.addEventListener('click', function (e) {
+  var tab = e.target.closest('.rd-evfilter__tab');
+  if (!tab) return;
+  var band = tab.closest('section');
+  var wall = band && band.querySelector('[data-evwall]');
+  if (!wall) return;
+  band.querySelectorAll('.rd-evfilter__tab').forEach(function (t) {
+    var on = t === tab;
+    t.classList.toggle('is-on', on);
+    t.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+  var kind = tab.getAttribute('data-kind');
+  wall.setAttribute('data-kind-on', kind);
+  var more = band.querySelector('[data-evmore]');
+  if (more) { more.setAttribute('aria-expanded', 'false'); }
+  applyEvidenceCap(wall, kind, false, more);
+});
+
+/* The cap and the filter are the same operation: show the first N cards matching the
+   active sector, hide the rest. Keeping them in one function is what stops them
+   disagreeing — the first version filtered and capped separately, so picking a sector
+   with fewer than six cards still left overflow cards from the previous sector on
+   screen. `expanded` lifts the cap without touching the filter. */
+function applyEvidenceCap(wall, kind, expanded, moreBtn) {
+  var limit = parseInt(wall.getAttribute('data-limit'), 10) || 6;
+  var shown = 0, matching = 0;
+  wall.querySelectorAll(':scope > [data-kind]').forEach(function (card) {
+    var hit = (kind === 'all' || card.getAttribute('data-kind') === kind);
+    if (!hit) { card.setAttribute('hidden', ''); return; }
+    matching++;
+    if (expanded || shown < limit) {
+      shown++;
+      if (card.hasAttribute('hidden')) {
+        card.removeAttribute('hidden');
+        card.classList.add('rd-evin');
+        card.addEventListener('animationend', function () { card.classList.remove('rd-evin'); }, { once: true });
+      }
+    } else card.setAttribute('hidden', '');
+  });
+  if (moreBtn) {
+    moreBtn.hidden = matching <= limit;
+    var lbl = expanded ? moreBtn.getAttribute('data-label-less') : moreBtn.getAttribute('data-label-more');
+    var cnt = moreBtn.querySelector('[data-evmore-count]');
+    moreBtn.childNodes[0].nodeValue = lbl + ' ';
+    if (cnt) cnt.textContent = expanded ? '' : String(matching);
+  }
+  return matching;
+}
+
+document.addEventListener('click', function (e) {
+  var btn = e.target.closest('[data-evmore]');
+  if (!btn) return;
+  var band = btn.closest('section');
+  var wall = band && band.querySelector('[data-evwall]');
+  if (!wall) return;
+  var expanded = btn.getAttribute('aria-expanded') !== 'true';
+  btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  applyEvidenceCap(wall, wall.getAttribute('data-kind-on') || 'all', expanded, btn);
+});
+
+/* Initial pass: Liquid already hid the overflow for the unfiltered view, but the
+   button's count has to be right before anyone clicks it. */
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('[data-evwall]').forEach(function (wall) {
+    var band = wall.closest('section');
+    var more = band && band.querySelector('[data-evmore]');
+    wall.setAttribute('data-kind-on', 'all');
+    applyEvidenceCap(wall, 'all', false, more);
+  });
+});
+
+/* ── featured slider ──────────────────────────────────────────────────────────
+   Slides are real DOM, hidden with [hidden] rather than transformed off-screen, so
+   an assistive tech user is never offered a link they cannot see. Autoplay stops on
+   hover, on focus inside, when the tab is hidden, and permanently once the reader
+   uses a control — a reader who has taken charge should not be fought by a timer.
+   prefers-reduced-motion disables autoplay outright (qa/MOTION.md). */
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-csfeat]').forEach(function (root) {
+    var slides = Array.prototype.slice.call(root.querySelectorAll('[data-csfeat-slide]'));
+    if (slides.length < 2) return;
+    var dots = Array.prototype.slice.call(root.querySelectorAll('[data-csfeat-dot]'));
+    var pauseBtn = root.querySelector('[data-csfeat-pause]');
+    var ms = parseInt(root.getAttribute('data-autoplay'), 10) || 7000;
+    var i = 0, timer = null, stopped = reduce;
+
+    function show(n, focusIt) {
+      i = (n + slides.length) % slides.length;
+      slides.forEach(function (s, k) {
+        if (k === i) s.removeAttribute('hidden'); else s.setAttribute('hidden', '');
+      });
+      dots.forEach(function (d, k) {
+        d.classList.toggle('is-on', k === i);
+        d.setAttribute('aria-selected', k === i ? 'true' : 'false');
+      });
+      if (focusIt) {
+        var a = slides[i].querySelector('a');
+        if (a) a.setAttribute('tabindex', '0');
+      }
+    }
+    function tick() { show(i + 1); }
+    function start() { if (stopped || timer) return; timer = setInterval(tick, ms); }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function halt() { stopped = true; stop(); if (pauseBtn) { pauseBtn.setAttribute('aria-pressed', 'true'); pauseBtn.textContent = 'play'; } }
+
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', function (e) {
+      if (!root.contains(e.relatedTarget)) start();
+    });
+    document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+
+    var prev = root.querySelector('[data-csfeat-prev]');
+    var next = root.querySelector('[data-csfeat-next]');
+    if (prev) prev.addEventListener('click', function () { halt(); show(i - 1, true); });
+    if (next) next.addEventListener('click', function () { halt(); show(i + 1, true); });
+    dots.forEach(function (d) {
+      d.addEventListener('click', function () { halt(); show(parseInt(d.getAttribute('data-csfeat-dot'), 10), true); });
+    });
+    if (pauseBtn) pauseBtn.addEventListener('click', function () {
+      if (stopped) { stopped = false; pauseBtn.setAttribute('aria-pressed', 'false'); pauseBtn.textContent = 'pause'; start(); }
+      else halt();
+    });
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { halt(); show(i - 1, true); }
+      if (e.key === 'ArrowRight') { halt(); show(i + 1, true); }
+    });
+
+    /* Measure every slide once, reserve the tallest. Done after layout so images have
+       their real boxes; re-measured on resize because the cards reflow at breakpoints. */
+    function reserve() {
+      var was = slides.map(function (s) { return s.hasAttribute('hidden'); });
+      var max = 0;
+      slides.forEach(function (s) {
+        s.removeAttribute('hidden');
+        max = Math.max(max, s.getBoundingClientRect().height);
+      });
+      slides.forEach(function (s, k) { if (was[k]) s.setAttribute('hidden', ''); });
+      if (max) root.style.setProperty('--csfeat-h', Math.ceil(max) + 'px');
+    }
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(reserve, 180); });
+
+    show(0);
+    reserve();
+    if (window.requestAnimationFrame) requestAnimationFrame(reserve);
+    window.addEventListener('load', reserve);
+    if (reduce && pauseBtn) { pauseBtn.hidden = true; }
+    start();
+  });
+})();
+/* deep link: #evidence-<kind> pre-filters the wall. Runs at load AND on hashchange
+   (in-page chapter/segment links) — hash-only anchors have no element, so we also
+   scroll to the wall ourselves. Registered AFTER the click handler (order matters). */
+(function () {
+  function applyEvidenceHash(scroll) {
+    var m = location.hash.match(/^#evidence-([a-z]+)$/);
+    if (!m) return;
+    var tab = document.querySelector('.rd-evfilter__tab[data-kind="' + m[1] + '"]');
+    if (tab) tab.click();
+    if (scroll) {
+      var wall = document.getElementById('evidence');
+      if (wall) wall.scrollIntoView();
+    }
+  }
+  applyEvidenceHash(false);
+  window.addEventListener('hashchange', function () { applyEvidenceHash(true); });
+})();
+{% endjavascript %}
+
+  {% schema %}
+{
+  "name": "Impact 2026 (new design)",
+  "tag": "section",
+  "class": "section bbc-impact-2026-wrap",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Editability pass 2026-08-10"
+    },
+    {
+      "type": "text",
+      "id": "tx_financial_times",
+      "label": "Financial Times",
+      "default": "Financial Times"
+    },
+    {
+      "type": "text",
+      "id": "tx_inside_time",
+      "label": "Inside Time",
+      "default": "Inside Time"
+    },
+    {
+      "type": "text",
+      "id": "tx_investec_beyond_business",
+      "label": "Investec Beyond Business",
+      "default": "Investec Beyond Business"
+    },
+    {
+      "type": "header",
+      "content": "Map stats (editability pass 2026-08-10)"
+    },
+    {
+      "type": "text",
+      "id": "mstat1_num",
+      "label": "Map stat 1 number",
+      "default": "4"
+    },
+    {
+      "type": "text",
+      "id": "mstat1_lbl",
+      "label": "Map stat 1 label",
+      "default": "active prison sites"
+    },
+    {
+      "type": "text",
+      "id": "mstat2_num",
+      "label": "Map stat 2 number",
+      "default": "10"
+    },
+    {
+      "type": "text",
+      "id": "mstat2_lbl",
+      "label": "Map stat 2 label",
+      "default": "schools & universities"
+    },
+    {
+      "type": "text",
+      "id": "mstat3_num",
+      "label": "Map stat 3 number",
+      "default": "3"
+    },
+    {
+      "type": "text",
+      "id": "mstat3_lbl",
+      "label": "Map stat 3 label",
+      "default": "international hubs"
+    },
+    {
+      "type": "text",
+      "id": "mstat4_num",
+      "label": "Map stat 4 number",
+      "default": "45"
+    },
+    {
+      "type": "text",
+      "id": "mstat4_lbl",
+      "label": "Map stat 4 label",
+      "default": "countries reached"
+    },
+    {
+      "type": "text",
+      "id": "backer_groups",
+      "label": "Relationship groups (pipe separated)",
+      "default": "funded by|accredited by|delivered with"
+    },
+    {
+      "type": "text",
+      "id": "cred_ctx_label",
+      "label": "Label above the context quote",
+      "default": "the policy it sits inside"
+    },
+    {
+      "type": "text",
+      "id": "backers_label",
+      "label": "Backers wall label",
+      "default": "backed by & accredited by"
+    },
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image (workshop, no identifiable learners)"
+    },
+    {
+      "type": "text",
+      "id": "hero_fallback",
+      "label": "Default hero photo filename",
+      "default": "bbc-rd-workshop.jpg"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero image alt text",
+      "default": "Builders at work in the bamboo bicycle workshop"
+    },
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Eyebrow",
+      "default": "Our impact · Build to Bond"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Headline",
+      "default": "building bikes. rebuilding lives."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_lede",
+      "label": "Lede",
+      "default": "Inside prisons and schools, the same craft that builds a bike builds skills, confidence and the family ties that help people not return."
+    },
+    {
+      "type": "header",
+      "content": "Hero proof strip"
+    },
+    {
+      "type": "checkbox",
+      "id": "hero_proof_on",
+      "label": "Show proof figures in hero",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "hero_proof1_num",
+      "label": "Figure 1",
+      "default": "4,000+"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof1_label",
+      "label": "Figure 1 label",
+      "default": "people trained"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof2_num",
+      "label": "Figure 2",
+      "default": "90%+"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof2_label",
+      "label": "Figure 2 label",
+      "default": "prison-course completion"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof3_num",
+      "label": "Figure 3",
+      "default": "2012"
+    },
+    {
+      "type": "text",
+      "id": "hero_proof3_label",
+      "label": "Figure 3 label",
+      "default": "delivering since"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta1_label",
+      "label": "Primary CTA label",
+      "default": "Work with us"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta1_url",
+      "label": "Primary CTA link (defaults to the education page)"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta2_label",
+      "label": "Secondary CTA label",
+      "default": "Support our work"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta2_url",
+      "label": "Secondary CTA link (defaults to the contact page)"
+    },
+    {
+      "type": "text",
+      "id": "quotes_label",
+      "label": "Quotes band label",
+      "default": "builders say"
+    },
+    {
+      "type": "text",
+      "id": "ghost_stat",
+      "label": "Ghost numeral behind stats",
+      "default": "2012"
+    },
+    {
+      "type": "text",
+      "id": "seal_text",
+      "label": "Rotated seal text (recognised-by)",
+      "default": "OCN accredited · CIC · since 2012"
+    },
+    {
+      "type": "text",
+      "id": "stats_label",
+      "label": "Stats band label",
+      "default": "the record since 2012"
+    },
+    {
+      "type": "text",
+      "id": "data_as_of",
+      "label": "Stats freshness line",
+      "default": "Data updated July 2026 — BBC programme records"
+    },
+    {
+      "type": "text",
+      "id": "report_label",
+      "label": "Report CTA label (blank to hide)",
+      "default": "Read the 2026 impact report"
+    },
+    {
+      "type": "url",
+      "id": "report_url",
+      "label": "Report CTA link"
+    },
+    {
+      "type": "header",
+      "content": "One craft, two arms (infographic)"
+    },
+    {
+      "type": "text",
+      "id": "arms_eyebrow",
+      "label": "Eyebrow",
+      "default": "One mission, two arms"
+    },
+    {
+      "type": "text",
+      "id": "arms_title",
+      "label": "Heading (blank to hide)",
+      "default": "skills before exclusion. skills after."
+    },
+    {
+      "type": "text",
+      "id": "arms_tagline",
+      "label": "Tagline under diagram",
+      "default": "One craft — two ends of the same problem."
+    },
+    {
+      "type": "text",
+      "id": "arm1_tag",
+      "label": "Arm 1 tag",
+      "default": "Prevention — Make Engineers"
+    },
+    {
+      "type": "text",
+      "id": "arm1_title",
+      "label": "Arm 1 title",
+      "default": "before exclusion"
+    },
+    {
+      "type": "textarea",
+      "id": "arm1_body",
+      "label": "Arm 1 body",
+      "default": "Reaching SEND, PRU and at-risk young people before disengagement hardens into exclusion — their first real, positive encounter with engineering and design."
+    },
+    {
+      "type": "textarea",
+      "id": "arm1_flow",
+      "label": "Arm 1 pathway (| separated)",
+      "default": "Taster | Short course, real build | Recognised achievement | Warm hand-off to college or training"
+    },
+    {
+      "type": "text",
+      "id": "arm2_tag",
+      "label": "Arm 2 tag",
+      "default": "Rehabilitation — Build to Bond"
+    },
+    {
+      "type": "text",
+      "id": "arm2_title",
+      "label": "Arm 2 title",
+      "default": "after the system missed them"
+    },
+    {
+      "type": "textarea",
+      "id": "arm2_body",
+      "label": "Arm 2 body",
+      "default": "Re-engaging people inside prison with accredited skills, a strengthened family bond, and a route towards employment on release."
+    },
+    {
+      "type": "textarea",
+      "id": "arm2_flow",
+      "label": "Arm 2 pathway (| separated)",
+      "default": "Course | OCN accreditation | Family bond | Peer instructor | Link to work on release"
+    },
+    {
+      "type": "image_picker",
+      "id": "arm1_image",
+      "label": "Pathway 1 image (schools)"
+    },
+    {
+      "type": "text",
+      "id": "arm1_image_alt",
+      "label": "Pathway 1 image alt"
+    },
+    {
+      "type": "image_picker",
+      "id": "arm2_image",
+      "label": "Pathway 2 image (workshop space only — no identifiable people)"
+    },
+    {
+      "type": "text",
+      "id": "arm2_image_alt",
+      "label": "Pathway 2 image alt"
+    },
+    {
+      "type": "checkbox",
+      "id": "frame_info_enable",
+      "label": "Use the bike-frame infographic (replaces the fork)",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "frame_info_caption",
+      "label": "Frame infographic caption"
+    },
+    {
+      "type": "text",
+      "id": "fork_label",
+      "label": "Fork label",
+      "default": "one mission, two pathways"
+    },
+    {
+      "type": "text",
+      "id": "arm1_chip",
+      "label": "Pathway 1 chip",
+      "default": "in schools · before exclusion"
+    },
+    {
+      "type": "text",
+      "id": "arm1_name",
+      "label": "Pathway 1 name",
+      "default": "make engineers"
+    },
+    {
+      "type": "textarea",
+      "id": "arm1_who",
+      "label": "Pathway 1 — who it's for"
+    },
+    {
+      "type": "text",
+      "id": "arm1_cta_label",
+      "label": "Pathway 1 CTA label",
+      "default": "bring it to your school →"
+    },
+    {
+      "type": "url",
+      "id": "arm1_cta_url",
+      "label": "Pathway 1 CTA link"
+    },
+    {
+      "type": "text",
+      "id": "arm2_chip",
+      "label": "Pathway 2 chip",
+      "default": "in prisons · after"
+    },
+    {
+      "type": "text",
+      "id": "arm2_name",
+      "label": "Pathway 2 name",
+      "default": "build to bond"
+    },
+    {
+      "type": "textarea",
+      "id": "arm2_who",
+      "label": "Pathway 2 — who it's for"
+    },
+    {
+      "type": "text",
+      "id": "arm2_cta_label",
+      "label": "Pathway 2 CTA label",
+      "default": "commission a programme →"
+    },
+    {
+      "type": "url",
+      "id": "arm2_cta_url",
+      "label": "Pathway 2 CTA link"
+    },
+    {
+      "type": "text",
+      "id": "arm3_tag",
+      "label": "Arm 3 tag"
+    },
+    {
+      "type": "text",
+      "id": "arm3_title",
+      "label": "Arm 3 title"
+    },
+    {
+      "type": "textarea",
+      "id": "arm3_body",
+      "label": "Arm 3 body"
+    },
+    {
+      "type": "textarea",
+      "id": "arm3_flow",
+      "label": "Arm 3 pathway (| separated)"
+    },
+    {
+      "type": "image_picker",
+      "id": "arm3_image",
+      "label": "Pathway 2 image (workshop space only — no identifiable people)"
+    },
+    {
+      "type": "text",
+      "id": "arm3_image_alt",
+      "label": "Pathway 2 image alt"
+    },
+    {
+      "type": "text",
+      "id": "arm3_chip",
+      "label": "Pathway 2 chip"
+    },
+    {
+      "type": "text",
+      "id": "arm3_name",
+      "label": "Pathway 2 name"
+    },
+    {
+      "type": "textarea",
+      "id": "arm3_who",
+      "label": "Pathway 2 — who it's for"
+    },
+    {
+      "type": "text",
+      "id": "arm3_cta_label",
+      "label": "Pathway 2 CTA label"
+    },
+    {
+      "type": "url",
+      "id": "arm3_cta_url",
+      "label": "Pathway 2 CTA link"
+    },
+    {
+      "type": "text",
+      "id": "converge_title",
+      "label": "Convergence strip title",
+      "default": "both pathways end in the same place ✱ a way forward."
+    },
+    {
+      "type": "textarea",
+      "id": "converge_note",
+      "label": "Convergence footnote",
+      "default": "✱ the same hands-on engineering course in both settings — built around a bike the maker keeps."
+    },
+    {
+      "type": "header",
+      "content": "Why now (policy backdrop)"
+    },
+    {
+      "type": "text",
+      "id": "policy_eyebrow",
+      "label": "Eyebrow",
+      "default": "Why now"
+    },
+    {
+      "type": "text",
+      "id": "policy_title",
+      "label": "Heading (blank to hide)",
+      "default": "both arms sit on live national priorities."
+    },
+    {
+      "type": "header",
+      "content": "Recognised by (credibility quotes)",
+      "info": "Verified press / partner quotes. Leave quote 1 blank to hide the band."
+    },
+    {
+      "type": "text",
+      "id": "cred_eyebrow",
+      "label": "Eyebrow",
+      "default": "Recognised by"
+    },
+    {
+      "type": "text",
+      "id": "cred_heading",
+      "label": "Heading (optional)",
+      "default": "reported and backed"
+    },
+    {
+      "type": "textarea",
+      "id": "cred_quote1",
+      "label": "Quote 1",
+      "default": "Bamboo naturally dampens vibration, allowing the smoothest ride."
+    },
+    {
+      "type": "text",
+      "id": "cred_attr1",
+      "label": "Quote 1 attribution",
+      "default": "The Guardian"
+    },
+    {
+      "type": "text",
+      "id": "cred_src1",
+      "label": "Quote 1 source"
+    },
+    {
+      "type": "textarea",
+      "id": "cred_quote2",
+      "label": "Quote 2",
+      "default": "A really, really comfortable ride — smooth but not too flexy."
+    },
+    {
+      "type": "text",
+      "id": "cred_attr2",
+      "label": "Quote 2 attribution",
+      "default": "Kate Rawles"
+    },
+    {
+      "type": "text",
+      "id": "cred_src2",
+      "label": "Quote 2 source",
+      "default": "BikeRadar"
+    },
+    {
+      "type": "text",
+      "id": "press_label",
+      "label": "Press strip label",
+      "default": "As featured in"
+    },
+    {
+      "type": "text",
+      "id": "ops_more_label",
+      "label": "Where-we-operate 'full picture' link label",
+      "default": "the full picture →"
+    },
+    {
+      "type": "url",
+      "id": "ops_more_url",
+      "label": "Full picture link target"
+    },
+    {
+      "type": "checkbox",
+      "id": "map_enable",
+      "label": "Show where-we-operate world map",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "map_image",
+      "label": "World map image (blank = built-in bbc-world-map.svg)"
+    },
+    {
+      "type": "text",
+      "id": "map_alt",
+      "label": "World map alt text",
+      "default": "World map of Bamboo Bicycle Club locations — standing workshops and programmes in the UK, Netherlands, France and Germany; past programmes and partnerships in Sweden, the Netherlands, Kenya, Rwanda and Ethiopia; kits built in 45 countries."
+    },
+    {
+      "type": "text",
+      "id": "map_caption",
+      "label": "World map caption",
+      "default": "✱ kits built in 45 countries · standing programmes marked in lime, past programmes and partnerships ringed"
+    },
+    {
+      "type": "text",
+      "id": "next_eyebrow",
+      "label": "What's-next eyebrow",
+      "default": "what's next"
+    },
+    {
+      "type": "text",
+      "id": "next_title",
+      "label": "What's-next heading"
+    },
+    {
+      "type": "text",
+      "id": "next_lede",
+      "label": "What's-next lede (one sentence)"
+    },
+    {
+      "type": "textarea",
+      "id": "next_flow",
+      "label": "What's-next ambitions, | separated"
+    },
+    {
+      "type": "text",
+      "id": "backs_eyebrow",
+      "label": "Backers — eyebrow",
+      "default": "who backs it"
+    },
+    {
+      "type": "text",
+      "id": "backs_heading",
+      "label": "Backers — heading",
+      "default": "who backs it."
+    },
+    {
+      "type": "text",
+      "id": "promise1",
+      "label": "Promise 1"
+    },
+    {
+      "type": "url",
+      "id": "promise1_url",
+      "label": "Promise 1 proof link"
+    },
+    {
+      "type": "text",
+      "id": "promise2",
+      "label": "Promise 2"
+    },
+    {
+      "type": "url",
+      "id": "promise2_url",
+      "label": "Promise 2 proof link"
+    },
+    {
+      "type": "text",
+      "id": "promise3",
+      "label": "Promise 3"
+    },
+    {
+      "type": "url",
+      "id": "promise3_url",
+      "label": "Promise 3 proof link"
+    },
+    {
+      "type": "text",
+      "id": "report_card_title",
+      "label": "Report card title"
+    },
+    {
+      "type": "text",
+      "id": "report_card_meta",
+      "label": "Report card meta line"
+    },
+    {
+      "type": "url",
+      "id": "report_card_url",
+      "label": "Report card link"
+    },
+    {
+      "type": "textarea",
+      "id": "cred_mech",
+      "label": "Funder mechanism line (how the money works)",
+      "default": "Kit and workshop revenue covers our running costs. Funder money goes directly to programme delivery — and funders get completions, OCN awards and session data each term."
+    },
+    {
+      "type": "text",
+      "id": "cred_sub",
+      "label": "Credibility subline (longevity anchor)",
+      "default": "14 years. 4,000+ people trained. 3,500+ bikes across 45 countries."
+    },
+    {
+      "type": "text",
+      "id": "cred_mechanism",
+      "label": "Mechanism sentence (how the money works)",
+      "default": "Kit and workshop revenue covers our costs — funder money goes straight to programme delivery."
+    },
+    {
+      "type": "textarea",
+      "id": "funder_line",
+      "label": "Funder credit line",
+      "default": "Build to Bond is supported by The National Lottery Community Fund and Investec Beyond Business."
+    },
+    {
+      "type": "text",
+      "id": "funder_logo",
+      "label": "Funder logo asset (blank to hide)",
+      "default": "logo-nlcf.svg"
+    },
+    {
+      "type": "text",
+      "id": "funder_logo_alt",
+      "label": "Funder logo alt text",
+      "default": "The National Lottery Community Fund"
+    },
+    {
+      "type": "text",
+      "id": "accred_logo",
+      "label": "Accreditation logo asset (blank to hide)",
+      "default": "logo-ocn-london.svg"
+    },
+    {
+      "type": "text",
+      "id": "accred_logo_alt",
+      "label": "Accreditation logo alt text",
+      "default": "OCN London"
+    },
+    {
+      "type": "text",
+      "id": "press_more",
+      "label": "Press 'see more' link text",
+      "default": "…and featured in 40+ publications — see all coverage →"
+    },
+    {
+      "type": "text",
+      "id": "awards_line",
+      "label": "Awards line (blank to hide)",
+      "default": "Investec Beyond Business winner &middot; Kevin McCloud&rsquo;s Green Heroes &middot; OCN accredited"
+    },
+    {
+      "type": "url",
+      "id": "press_more_url",
+      "label": "Press 'see more' link"
+    },
+    {
+      "type": "header",
+      "content": "Where we work (named prison sites)",
+      "info": "Prisons may be named. NEVER link a named participant to a named prison."
+    },
+    {
+      "type": "text",
+      "id": "sites_eyebrow",
+      "label": "Eyebrow",
+      "default": "Where we work"
+    },
+    {
+      "type": "text",
+      "id": "sites_title",
+      "label": "Heading (blank to hide section)",
+      "default": "accredited programmes across five active prison sites."
+    },
+    {
+      "type": "textarea",
+      "id": "sites_body",
+      "label": "Body",
+      "default": "Build to Bond is established across five UK prison sites, at different delivery stages. It runs on a self-delivery model that trains staff and peer instructors to run the workshop."
+    },
+    {
+      "type": "text",
+      "id": "sites_list",
+      "label": "Named sites line (HTML allowed)",
+      "default": "five UK prison sites, at different delivery stages"
+    },
+    {
+      "type": "text",
+      "id": "sites_partner",
+      "label": "Partner line",
+      "default": "In partnership with HM Prison &amp; Probation Service"
+    },
+    {
+      "type": "header",
+      "content": "Case-study card (links to the full story)"
+    },
+    {
+      "type": "text",
+      "id": "cs_kind",
+      "label": "Card tag",
+      "default": "Case study"
+    },
+    {
+      "type": "image_picker",
+      "id": "cs_image_pic",
+      "label": "Case-study image (upload/pick — responsive)"
+    },
+    {
+      "type": "text",
+      "id": "cs_image",
+      "label": "Card image filename",
+      "default": "bbc-rd-prison-empty.jpg"
+    },
+    {
+      "type": "textarea",
+      "id": "cs_quote",
+      "label": "Card quote (blank to hide card)",
+      "default": "When one Maker received a balance-bike kit for his toddler, he was inspired that he could create something — and suddenly all that communication with his daughter developed that he might never have had."
+    },
+    {
+      "type": "text",
+      "id": "cs_attr",
+      "label": "Quote attribution",
+      "default": "— A Build to Bond participant"
+    },
+    {
+      "type": "textarea",
+      "id": "cs_blurb",
+      "label": "Context line",
+      "default": "How a six-week bamboo-bike course is rebuilding family ties inside HMP Lowdham Grange."
+    },
+    {
+      "type": "text",
+      "id": "cs_site",
+      "label": "Card footer label",
+      "default": "Build to Bond · HMP Lowdham Grange"
+    },
+    {
+      "type": "url",
+      "id": "cs_url",
+      "label": "Card link (the full story)"
+    },
+    {
+      "type": "text",
+      "id": "cs_link_label",
+      "label": "Card link label",
+      "default": "read the story"
+    },
+    {
+      "type": "text",
+      "id": "cs_outcomes",
+      "label": "Outcome chips (pipe-separated)",
+      "info": "Verified figures only. Blank = the built-in verified set.",
+      "default": "6 weeks × 18 hours|OCN Level 2|26% measured confidence uplift|3 Makers → peer instructors"
+    },
+    {
+      "type": "checkbox",
+      "id": "cs_show_prov",
+      "label": "Show 'as reported in' provenance links (FT · Inside Time · Investec)",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "On this page (chapter links)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_chapters",
+      "label": "Show the on-this-page links in the discovery band",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "chapters_label",
+      "label": "Chapters label",
+      "default": "on this page"
+    },
+    {
+      "type": "text",
+      "id": "chapters",
+      "label": "Chapters (label~#anchor pairs, separated by |)",
+      "default": "the proof~#proof|the evidence~#evidence|where we work~#map|who backs it~#backers"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_b2b",
+      "label": "Show the Build to Bond split band",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Impact stories grid (one per pillar)"
+    },
+    {
+      "type": "text",
+      "id": "cs_heading",
+      "label": "Featured case study — heading (the card's only link)",
+      "default": "Sally Allsopp, HMP Lowdham Grange: “Watching the pride on a father’s face when he presents a bike to his child is something special.”"
+    },
+    {
+      "type": "text",
+      "id": "stories_proofline",
+      "label": "Under-wall proof line",
+      "default": "56 independently verifiable case studies on file — these are seven."
+    },
+    {
+      "type": "text",
+      "id": "stories_eyebrow",
+      "label": "Eyebrow",
+      "default": "Every kind of impact"
+    },
+    {
+      "type": "range",
+      "id": "stories_limit",
+      "label": "Case studies shown at once",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "stories_more",
+      "label": "Offer a “show all” button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "stories_more_label",
+      "label": "Show-more label",
+      "default": "show all"
+    },
+    {
+      "type": "text",
+      "id": "stories_less_label",
+      "label": "Show-fewer label",
+      "default": "show fewer"
+    },
+    {
+      "type": "range",
+      "id": "feat_autoplay_ms",
+      "label": "Featured rotation (seconds)",
+      "min": 4,
+      "max": 15,
+      "step": 1,
+      "default": 7,
+      "unit": "s"
+    },
+    {
+      "type": "text",
+      "id": "stories_title",
+      "label": "Heading (blank to hide grid)",
+      "default": "from prisons to patagonia."
+    },
+    {
+      "type": "textarea",
+      "id": "stories_lede",
+      "label": "Lede",
+      "default": "The same craft shows up everywhere — on epic journeys, in boardrooms, in classrooms and across the world."
+    },
+    {
+      "type": "text",
+      "id": "st1_kind",
+      "label": "Card 1 tag",
+      "default": "Epic journey"
+    },
+    {
+      "type": "text",
+      "id": "st1_title",
+      "label": "Card 1 title",
+      "default": "8,288 miles to patagonia"
+    },
+    {
+      "type": "textarea",
+      "id": "st1_blurb",
+      "label": "Card 1 text",
+      "default": "Kate Rawles rode a BBC-built bamboo bike the length of South America for The Life Cycle."
+    },
+    {
+      "type": "text",
+      "id": "st1_image",
+      "label": "Card 1 image filename",
+      "default": "bbc-rd-gal-redroad.jpg"
+    },
+    {
+      "type": "url",
+      "id": "st1_url",
+      "label": "Card 1 link"
+    },
+    {
+      "type": "text",
+      "id": "st2_kind",
+      "label": "Card 2 tag",
+      "default": "Corporate"
+    },
+    {
+      "type": "text",
+      "id": "st2_title",
+      "label": "Card 2 title",
+      "default": "the macallan — masters of their craft"
+    },
+    {
+      "type": "textarea",
+      "id": "st2_blurb",
+      "label": "Card 2 text",
+      "default": "A distillery team built ten bamboo bikes together — craft meeting craft."
+    },
+    {
+      "type": "text",
+      "id": "st2_image",
+      "label": "Card 2 image filename",
+      "default": "bbc-rd-tb-macallan.jpg"
+    },
+    {
+      "type": "url",
+      "id": "st2_url",
+      "label": "Card 2 link"
+    },
+    {
+      "type": "text",
+      "id": "st3_kind",
+      "label": "Card 3 tag",
+      "default": "Education"
+    },
+    {
+      "type": "text",
+      "id": "st3_title",
+      "label": "Card 3 title",
+      "default": "UK bamboo summit, coventry"
+    },
+    {
+      "type": "textarea",
+      "id": "st3_blurb",
+      "label": "Card 3 text",
+      "default": "Leading the national conversation on bamboo's future in engineering and design."
+    },
+    {
+      "type": "text",
+      "id": "st3_image",
+      "label": "Card 3 image filename",
+      "default": "bbc-rd-cs-coventry.jpg"
+    },
+    {
+      "type": "url",
+      "id": "st3_url",
+      "label": "Card 3 link"
+    },
+    {
+      "type": "text",
+      "id": "st4_kind",
+      "label": "Card 4 tag",
+      "default": "Global"
+    },
+    {
+      "type": "text",
+      "id": "st4_title",
+      "label": "Card 4 title",
+      "default": "teaching kenya to build"
+    },
+    {
+      "type": "textarea",
+      "id": "st4_blurb",
+      "label": "Card 4 text",
+      "default": "Skills that stay behind — communities building and maintaining their own bamboo bikes."
+    },
+    {
+      "type": "text",
+      "id": "st4_image",
+      "label": "Card 4 image filename",
+      "default": "bbc-rd-cohort.jpg"
+    },
+    {
+      "type": "url",
+      "id": "st4_url",
+      "label": "Card 4 link"
+    },
+    {
+      "type": "url",
+      "id": "stories_all_url",
+      "label": "See-all link"
+    },
+    {
+      "type": "text",
+      "id": "stories_all_label",
+      "label": "See-all label",
+      "default": "See all impact stories"
+    },
+    {
+      "type": "header",
+      "content": "Stats (dark band)",
+      "info": "Use only verified figures with their source label."
+    },
+    {
+      "type": "text",
+      "id": "story_eyebrow",
+      "label": "Story eyebrow",
+      "default": "Inside the workshop"
+    },
+    {
+      "type": "header",
+      "content": "A real workshop, inside"
+    },
+    {
+      "type": "text",
+      "id": "story_title",
+      "label": "Heading",
+      "default": "a real workshop, inside."
+    },
+    {
+      "type": "textarea",
+      "id": "story_body_1",
+      "label": "Paragraph 1",
+      "default": "Inside HMP Lowdham Grange — a Category-B men's prison in Nottinghamshire — we've built a 2,000 sq ft workshop where learners take a six-week, OCN-accredited course: from workshop safety and material science through frame construction, mechanics and finishing."
+    },
+    {
+      "type": "textarea",
+      "id": "story_body_2",
+      "label": "Paragraph 2",
+      "default": "They earn an OCN Level 2 accreditation in sustainable design and manufacturing. Trusted learners are trained as instructors and help deliver the course. In the final week, frames are taken apart so the materials serve the next cohort — which is also what keeps it affordable."
+    },
+    {
+      "type": "header",
+      "content": "Build to Bond feature"
+    },
+    {
+      "type": "image_picker",
+      "id": "b2b_image",
+      "label": "Feature image (workshop, no identifiable learners)"
+    },
+    {
+      "type": "text",
+      "id": "b2b_fallback",
+      "label": "Default feature photo filename",
+      "default": "bbc-rd-b2b.jpg"
+    },
+    {
+      "type": "text",
+      "id": "b2b_image_alt",
+      "label": "Feature image alt text",
+      "default": "The Build to Bond workshop inside HMP Lowdham Grange"
+    },
+    {
+      "type": "text",
+      "id": "b2b_eyebrow",
+      "label": "Eyebrow",
+      "default": "The follow-on"
+    },
+    {
+      "type": "text",
+      "id": "b2b_title",
+      "label": "Heading",
+      "default": "a bike that goes home."
+    },
+    {
+      "type": "textarea",
+      "id": "b2b_body_1",
+      "label": "Paragraph 1",
+      "default": "The most engaged participants progress to Build to Bond — building a children's bamboo balance bike to gift to their own son, daughter, niece or nephew. That bike they keep. The bike goes home; the father stays inside."
+    },
+    {
+      "type": "textarea",
+      "id": "b2b_body_2",
+      "label": "Paragraph 2",
+      "default": "It's built on the evidence that maintaining family contact is one of the strongest predictors of reduced reoffending — people who keep close family ties while in prison are 39% less likely to reoffend (MoJ family-contact data)."
+    },
+    {
+      "type": "textarea",
+      "id": "b2b_quote",
+      "label": "Pull quote",
+      "default": "Watching the pride on a father's face when he presents a bike to his child is something special."
+    },
+    {
+      "type": "text",
+      "id": "b2b_cite",
+      "label": "Quote attribution",
+      "default": "— Sally Allsopp, Industries Manager"
+    },
+    {
+      "type": "text",
+      "id": "b2b_cta1_label",
+      "label": "CTA label",
+      "default": "Run the programme"
+    },
+    {
+      "type": "url",
+      "id": "b2b_cta1_url",
+      "label": "CTA link (defaults to the education page)"
+    },
+    {
+      "type": "header",
+      "content": "Pathway (intro)"
+    },
+    {
+      "type": "text",
+      "id": "path_eyebrow",
+      "label": "Eyebrow",
+      "default": "What it opens up"
+    },
+    {
+      "type": "text",
+      "id": "path_title",
+      "label": "Heading",
+      "default": "more than a bike — a pathway."
+    },
+    {
+      "type": "textarea",
+      "id": "path_quote",
+      "label": "Pull quote",
+      "default": "Innovative projects, such as Build to Bond, support rehabilitation and help people leave prison as better citizens."
+    },
+    {
+      "type": "text",
+      "id": "path_cite",
+      "label": "Quote attribution",
+      "default": "— Lord Timpson, Prisons Minister"
+    },
+    {
+      "type": "header",
+      "content": "Ways in (routes band)"
+    },
+    {
+      "type": "text",
+      "id": "help_eyebrow",
+      "label": "Eyebrow (opens the routes band)",
+      "default": "start here"
+    },
+    {
+      "type": "header",
+      "content": "Final CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_eyebrow",
+      "label": "Eyebrow",
+      "default": "Join in"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Heading",
+      "default": "help us build a more inclusive, skilled future."
+    },
+    {
+      "type": "textarea",
+      "id": "cta_lede",
+      "label": "Lede",
+      "default": "Every bamboo bike built is a skill learned, a confidence gained, and a pathway opened."
+    },
+    {
+      "type": "text",
+      "id": "cta1_label",
+      "label": "CTA 1 label",
+      "default": "Work with us"
+    },
+    {
+      "type": "url",
+      "id": "cta1_url",
+      "label": "CTA 1 link (defaults to the education page)"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "CTA 2 label",
+      "default": "Get in touch"
+    },
+    {
+      "type": "url",
+      "id": "cta2_url",
+      "label": "CTA 2 link (defaults to the contact page)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "story",
+      "name": "Impact story card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_pic",
+          "label": "Image (upload or pick)"
+        },
+        {
+          "type": "text",
+          "id": "kind",
+          "label": "Tag (e.g. Epic journey)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "blurb",
+          "label": "Short text"
+        },
+        {
+          "type": "text",
+          "id": "outcome",
+          "label": "Outcome line (the number/result — leads the card)"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Verified quote (verbatim only — no quote marks)"
+        },
+        {
+          "type": "text",
+          "id": "cite",
+          "label": "Quote attribution"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date (e.g. 2024)"
+        },
+        {
+          "type": "text",
+          "id": "source_label",
+          "label": "Source label (e.g. Inside Time)"
+        },
+        {
+          "type": "text",
+          "id": "chips",
+          "label": "Card chips (comma-separated)"
+        },
+        {
+          "type": "text",
+          "id": "source_url",
+          "label": "Source URL"
+        },
+        {
+          "type": "text",
+          "id": "image",
+          "label": "Image filename (assets/)"
+        },
+        {
+          "type": "text",
+          "id": "video",
+          "label": "YouTube video ID (optional — adds a play button, plays in-page)"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL (YouTube/Vimeo — plays inline)"
+        },
+        {
+          "type": "video",
+          "id": "video_file",
+          "label": "Or upload a video (plays inline)"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link to the full story"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "90%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "prison course completion"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source",
+          "default": "BBC programme records"
+        },
+        {
+          "type": "text",
+          "id": "comparator",
+          "label": "Comparator (e.g. vs 20% nationally, MoJ)"
+        }
+      ]
+    },
+    {
+      "type": "pathway",
+      "name": "Pathway card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "education"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "OCN Level 2 — Workshop Skills and Sustainable Manufacturing: a recognised qualification, earned hands-on."
+        }
+      ]
+    },
+    {
+      "type": "segment",
+      "name": "Customer segment",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "default": "Schools"
+        },
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Their question",
+          "default": "running a school or college?"
+        },
+        {
+          "type": "textarea",
+          "id": "benefit",
+          "label": "What they get",
+          "default": "Real engineering in your classroom. Start with the free Speaker build, add accredited routes when your students want more."
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "see the schools programme"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "evidence_label",
+          "label": "Evidence link label",
+          "default": "see the evidence"
+        },
+        {
+          "type": "text",
+          "id": "evidence_anchor",
+          "label": "Evidence anchor (e.g. #evidence-prisons)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_pic",
+          "label": "Card image"
+        },
+        {
+          "type": "text",
+          "id": "image",
+          "label": "Card image (asset name or CDN URL)"
+        }
+      ]
+    },
+    {
+      "type": "help",
+      "name": "Ways-to-help card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "default": "Buy"
+        },
+        {
+          "type": "checkbox",
+          "id": "tag_lime",
+          "label": "Lime tag",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "build or own a bike"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Book a workshop or buy a kit. Every purchase helps fund our prison and education programmes."
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Shop & book"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link (defaults to the contact page)"
+        },
+        {
+          "type": "checkbox",
+          "id": "lime",
+          "label": "Lime stamp shadow",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "opgroup",
+      "name": "Where-we-operate group",
+      "settings": [
+        {
+          "type": "text",
+          "id": "count",
+          "label": "Count badge (e.g. 4)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Group title (verb-honest: we run / we've taught in)"
+        },
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "Names, · separated"
+        }
+      ]
+    },
+    {
+      "type": "scrollquote",
+      "name": "Scrolling quote",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Quote"
+        },
+        {
+          "type": "text",
+          "id": "attr",
+          "label": "Attribution (name — context)"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source tag (e.g. Inside Time, Nov 2025)"
+        }
+      ]
+    },
+    {
+      "type": "backer",
+      "name": "Backed-by logo/chip",
+      "settings": [
+        {
+          "type": "text",
+          "id": "logo",
+          "label": "Logo asset filename (assets/, optional)"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Name (alt text, or text chip if no logo)"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link (optional)"
+        },
+        {
+          "type": "text",
+          "id": "group",
+          "label": "Relationship group",
+          "default": "funded by",
+          "info": "Must match one of the group names in the section's Relationship groups setting."
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Note under the group"
+        }
+      ]
+    },
+    {
+      "type": "policy",
+      "name": "Policy stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "~£18bn"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "the annual cost of reoffending"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source",
+          "default": "Ministry of Justice"
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Featured story (slider)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading — the person's own words work best",
+          "default": "Build to Bond"
+        },
+        {
+          "type": "text",
+          "id": "site",
+          "label": "Attribution / site line",
+          "default": "HMP Lowdham Grange"
+        },
+        {
+          "type": "textarea",
+          "id": "blurb",
+          "label": "Story"
+        },
+        {
+          "type": "text",
+          "id": "outcomes",
+          "label": "Outcome chips (comma separated)"
+        },
+        {
+          "type": "text",
+          "id": "kind",
+          "label": "Sector",
+          "default": "prisons"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Read the story"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_pic",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image",
+          "label": "Image asset filename (fallback)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Impact 2026 (new design)",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "90%",
+            "label": "prison course completion",
+            "source": "BBC programme records"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "Level 2",
+            "label": "OCN — Workshop Skills and Sustainable Manufacturing",
+            "source": "OCN London accredited"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "4,000+",
+            "label": "people have built a bike",
+            "source": "since 2012"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "36",
+            "label": "countries reached",
+            "source": "kits shipped worldwide"
+          }
+        },
+        {
+          "type": "pathway",
+          "settings": {
+            "title": "Education",
+            "body": "OCN Level 2 — Workshop Skills and Sustainable Manufacturing: a recognised qualification, earned hands-on."
+          }
+        },
+        {
+          "type": "pathway",
+          "settings": {
+            "title": "Employment",
+            "body": "Routes into sustainable transport, manufacturing and composites — with growing employer links and support into work on release."
+          }
+        },
+        {
+          "type": "pathway",
+          "settings": {
+            "title": "Rehabilitation",
+            "body": "Therapeutic, focused making builds patience and resilience — and strengthens family connection through Build to Bond."
+          }
+        },
+        {
+          "type": "help",
+          "settings": {
+            "tag": "Buy",
+            "tag_lime": true,
+            "title": "Build or own a bike",
+            "body": "Book a workshop or buy a kit. Every purchase helps fund our prison and education programmes.",
+            "link_label": "Shop & book",
+            "lime": false
+          }
+        },
+        {
+          "type": "help",
+          "settings": {
+            "tag": "Partner",
+            "tag_lime": true,
+            "title": "Work with us",
+            "body": "Programmes for prisons, schools and colleges. OCN Level 2 accredited, with a self-delivery model for prisons.",
+            "link_label": "Explore partnerships",
+            "lime": false
+          }
+        },
+        {
+          "type": "help",
+          "settings": {
+            "tag": "Support",
+            "tag_lime": true,
+            "title": "Fund or champion",
+            "body": "Fund a cohort, offer placements, or champion our work. Every contribution goes directly into accredited skills courses inside prisons and schools.",
+            "link_label": "Talk to us",
+            "lime": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

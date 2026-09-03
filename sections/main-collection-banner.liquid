@@ -1,0 +1,323 @@
+{% comment %}
+  BBC Collection Banner — Fully Editable
+  - Image picker with overlay opacity control
+  - Editable heading (overrides collection.title when set)
+  - Editable description (overrides collection.description when set)
+  - Text alignment and positioning controls
+  - Responsive with BBC brand styling
+{% endcomment %}
+
+{%- style -%}
+  /* Remove wrapper spacing */
+  .collection-banner-section {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  
+  #CollectionBanner-{{ section.id }} {
+    --banner-height: {{ section.settings.banner_height }}px;
+    --banner-height-mobile: {{ section.settings.banner_height_mobile }}px;
+    --overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --text-color: {{ section.settings.text_color }};
+    position: relative;
+    overflow: hidden;
+  }
+
+  #CollectionBanner-{{ section.id }} .collection-banner__media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  #CollectionBanner-{{ section.id }} .collection-banner__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: {{ section.settings.image_position }};
+  }
+
+  #CollectionBanner-{{ section.id }}::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: {{ section.settings.overlay_color }};
+    opacity: var(--overlay-opacity);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  #CollectionBanner-{{ section.id }} .collection-banner__content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: {{ section.settings.content_position }};
+    align-items: {{ section.settings.text_alignment }};
+    text-align: {{ section.settings.text_alignment }};
+    min-height: var(--banner-height-mobile);
+    padding: 32px 20px;
+    color: var(--text-color);
+  }
+
+  #CollectionBanner-{{ section.id }} .collection-banner__title {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: clamp(28px, 6vw, {{ section.settings.heading_size }}px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0;
+    color: var(--text-color);
+  }
+
+  #CollectionBanner-{{ section.id }} .collection-banner__description {
+    font-size: clamp(14px, 2vw, {{ section.settings.description_size }}px);
+    line-height: 1.6;
+    margin-top: 16px;
+    max-width: 700px;
+    color: var(--text-color);
+    opacity: 0.9;
+  }
+
+  #CollectionBanner-{{ section.id }} .collection-banner__description p {
+    margin: 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    #CollectionBanner-{{ section.id }} .collection-banner__content {
+      min-height: var(--banner-height);
+      padding: 48px 40px;
+    }
+  }
+
+  /* No image fallback - use brand color */
+  #CollectionBanner-{{ section.id }}.collection-banner--no-image {
+    background: {{ section.settings.fallback_background }};
+  }
+
+  #CollectionBanner-{{ section.id }}.collection-banner--no-image::after {
+    display: none;
+  }
+{%- endstyle -%}
+
+{%- comment -%}
+  Priority: Section image > Collection image > No image
+{%- endcomment -%}
+{%- assign banner_image = section.settings.banner_image | default: collection.image -%}
+{%- assign has_image = false -%}
+{%- if banner_image != blank -%}
+  {%- assign has_image = true -%}
+{%- endif -%}
+
+{%- comment -%}
+  Text: Section overrides > Collection defaults
+{%- endcomment -%}
+{%- assign banner_title = section.settings.custom_heading | default: collection.title -%}
+{%- assign banner_description = section.settings.custom_description | default: collection.description -%}
+
+<div
+  id="CollectionBanner-{{ section.id }}"
+  class="collection-banner{% unless has_image %} collection-banner--no-image{% endunless %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+>
+  {%- if has_image -%}
+    <div class="collection-banner__media">
+      <img
+        srcset="
+          {%- if banner_image.width >= 375 -%}{{ banner_image | image_url: width: 375 }} 375w,{%- endif -%}
+          {%- if banner_image.width >= 750 -%}{{ banner_image | image_url: width: 750 }} 750w,{%- endif -%}
+          {%- if banner_image.width >= 1100 -%}{{ banner_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+          {%- if banner_image.width >= 1500 -%}{{ banner_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+          {%- if banner_image.width >= 2000 -%}{{ banner_image | image_url: width: 2000 }} 2000w,{%- endif -%}
+          {{ banner_image | image_url }} {{ banner_image.width }}w
+        "
+        src="{{ banner_image | image_url: width: 1500 }}"
+        sizes="100vw"
+        alt="{{ banner_image.alt | default: banner_title | escape }}"
+        width="{{ banner_image.width }}"
+        height="{{ banner_image.height }}"
+        loading="eager"
+        fetchpriority="high"
+      >
+    </div>
+  {%- endif -%}
+
+  <div class="collection-banner__content page-width">
+    {%- if section.settings.show_title -%}
+{%- comment -%} LAW 9 (CONSISTENCY-SPEC 2026-08-07): breadcrumb on collection pages {%- endcomment -%}
+<nav class="rd-crumb rd-crumb--onlight" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep" aria-hidden="true">/</span><span aria-current="page">{{ collection.title | escape }}</span></nav>
+      <h1 class="collection-banner__title">
+        <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
+        {{- banner_title | escape -}}
+      </h1>
+    {%- endif -%}
+
+    {%- if section.settings.show_description and banner_description != blank -%}
+      <div class="collection-banner__description rte">
+        {{ banner_description }}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection Banner",
+  "class": "section collection-banner-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner image",
+      "info": "Overrides collection image. Recommended: 1920x600 or wider."
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image focal point",
+      "options": [
+        { "value": "center top", "label": "Top" },
+        { "value": "center center", "label": "Center" },
+        { "value": "center bottom", "label": "Bottom" },
+        { "value": "left center", "label": "Left" },
+        { "value": "right center", "label": "Right" }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "default": 40,
+      "unit": "%"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#003C32"
+    },
+    {
+      "type": "color",
+      "id": "fallback_background",
+      "label": "Background (no image)",
+      "default": "#003C32",
+      "info": "Used when no image is set"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show title",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "custom_heading",
+      "label": "Custom heading",
+      "info": "Leave blank to use collection title"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show description",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "custom_description",
+      "label": "Custom description",
+      "info": "Leave blank to use collection description"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 32,
+      "max": 72,
+      "step": 4,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "banner_height",
+      "label": "Banner height (desktop)",
+      "min": 200,
+      "max": 600,
+      "step": 20,
+      "default": 400,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "banner_height_mobile",
+      "label": "Banner height (mobile)",
+      "min": 150,
+      "max": 400,
+      "step": 10,
+      "default": 250,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Middle" },
+        { "value": "flex-end", "label": "Bottom" }
+      ],
+      "default": "center"
+    }
+  ]
+}
+{% endschema %}

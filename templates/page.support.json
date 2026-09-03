@@ -1,0 +1,140 @@
+{
+  "sections": {
+    "hero": {
+      "type": "rich-text",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Support Centre"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Find answers to common questions or get in touch with our team.</p>"
+          }
+        }
+      },
+      "block_order": ["heading", "text"]
+    },
+    "faq": {
+      "type": "collapsible-content",
+      "settings": {
+        "caption": "",
+        "heading": "Frequently Asked Questions",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "color_scheme": "scheme-2",
+        "container_color_scheme": "scheme-1",
+        "open_first_collapsible_row": true
+      },
+      "blocks": {
+        "q1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How long does it take to build a bamboo bicycle?",
+            "icon": "question_mark",
+            "row_content": "<p>At a workshop: 2-3 days with expert guidance. At home: 20-40 hours spread over several weeks, depending on your experience and the complexity of your build.</p>"
+          }
+        },
+        "q2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Is the frame strong enough for everyday use?",
+            "icon": "question_mark",
+            "row_content": "<p>Yes! Bamboo has an excellent strength-to-weight ratio, comparable to steel. Our frames are designed for regular cycling and have been ridden thousands of kilometres by our community.</p>"
+          }
+        },
+        "q3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What's included in the home build kits?",
+            "icon": "question_mark",
+            "row_content": "<p>Our kits include all bamboo tubes (heat-treated and sized), lugs (head tube, bottom bracket, seat tube, dropouts), binding materials, epoxy resins, and detailed instructions. Tools are not included but we sell tool kits separately.</p>"
+          }
+        },
+        "q4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Do you ship internationally?",
+            "icon": "question_mark",
+            "row_content": "<p>Yes! We've shipped to over 36 countries. International shipping costs are calculated at checkout based on your location. Please note that customs duties may apply in some countries.</p>"
+          }
+        },
+        "q5": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I use the Cycle to Work scheme?",
+            "icon": "question_mark",
+            "row_content": "<p>Yes, our kits and workshops are eligible for most Cycle to Work schemes including Cyclescheme, Cycle Solutions, Evans, and Halfords. Contact us for a quote or certificate letter.</p>"
+          }
+        },
+        "q6": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What if I have problems during my build?",
+            "icon": "question_mark",
+            "row_content": "<p>We offer ongoing support through our community forum, video tutorials, and email support. Most build questions can be answered within 24 hours. For complex issues, we can arrange a video call.</p>"
+          }
+        }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"]
+    },
+    "resources": {
+      "type": "multicolumn",
+      "settings": {
+        "title": "Resources",
+        "heading_size": "h2",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "videos": {
+          "type": "column",
+          "settings": {
+            "title": "Video Tutorials",
+            "text": "<p>Step-by-step build guides for all our kit types.</p>",
+            "link_label": "Watch tutorials",
+            "link": "https://youtube.com/bamboobicycleclub"
+          }
+        },
+        "forum": {
+          "type": "column",
+          "settings": {
+            "title": "Community Forum",
+            "text": "<p>Connect with other builders, share your progress, and get advice.</p>",
+            "link_label": "Join the forum",
+            "link": "/pages/contact-us"
+          }
+        },
+        "guides": {
+          "type": "column",
+          "settings": {
+            "title": "Build Guides",
+            "text": "<p>Downloadable PDF guides and frame geometry documents.</p>",
+            "link_label": "Download guides",
+            "link": "/pages/contact-us"
+          }
+        }
+      },
+      "block_order": ["videos", "forum", "guides"]
+    },
+    "contact": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "Still Need Help?",
+        "heading_size": "h2",
+        "color_scheme": "scheme-2"
+      }
+    }
+  },
+  "order": ["hero", "faq", "resources", "contact"]
+}

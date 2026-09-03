@@ -1,0 +1,169 @@
+{
+  "sections": {
+    "hero": {
+      "type": "image-banner",
+      "settings": {
+        "image_overlay_opacity": 30,
+        "image_height": "medium",
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "scheme-3"
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Frame Building Workshops",
+            "heading_size": "h0"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "Build your own bamboo bicycle frame in 2-3 days with expert guidance",
+            "text_style": "subtitle"
+          }
+        }
+      },
+      "block_order": ["heading", "text"]
+    },
+    "intro": {
+      "type": "rich-text",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Since 2012, we've helped over 4,000 people build their own bamboo bicycles. Our workshops offer a hands-on experience where you'll learn traditional framebuilding techniques while creating a unique, sustainable bicycle that's truly yours.</p>"
+          }
+        }
+      },
+      "block_order": ["text"]
+    },
+    "locations": {
+      "type": "multicolumn",
+      "settings": {
+        "title": "Workshop Locations",
+        "heading_size": "h2",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "color_scheme": "scheme-2"
+      },
+      "blocks": {
+        "london": {
+          "type": "column",
+          "settings": {
+            "title": "London, UK",
+            "text": "<p>Our original workshop in East London. The heart of Bamboo Bicycle Club since 2012.</p><p>📍 Hackney, London</p>",
+            "link_label": "Book London Workshop",
+            "link": "/pages/contact-us"
+          }
+        },
+        "amersfoort": {
+          "type": "column",
+          "settings": {
+            "title": "Amersfoort, Netherlands",
+            "text": "<p>Our European hub serving the Netherlands and surrounding countries.</p><p>📍 Amersfoort, NL</p>",
+            "link_label": "Book Amersfoort Workshop",
+            "link": "/pages/contact-us"
+          }
+        },
+        "toulouse": {
+          "type": "column",
+          "settings": {
+            "title": "Toulouse, France",
+            "text": "<p>Our newest location, opened in 2024, serving southern France.</p><p>📍 Toulouse, France</p>",
+            "link_label": "Book Toulouse Workshop",
+            "link": "/pages/tolouse"
+          }
+        }
+      },
+      "block_order": ["london", "amersfoort", "toulouse"]
+    },
+    "included": {
+      "type": "multicolumn",
+      "settings": {
+        "title": "What's Included",
+        "heading_size": "h2",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "kit": {
+          "type": "column",
+          "settings": {
+            "title": "Complete Frame Kit",
+            "text": "<p>All bamboo tubes, lugs, and materials needed to build your frame</p>"
+          }
+        },
+        "guidance": {
+          "type": "column",
+          "settings": {
+            "title": "Expert Guidance",
+            "text": "<p>Step-by-step instruction from experienced frame builders</p>"
+          }
+        },
+        "tools": {
+          "type": "column",
+          "settings": {
+            "title": "Tools & Equipment",
+            "text": "<p>Access to all professional tools and our custom jig system</p>"
+          }
+        },
+        "support": {
+          "type": "column",
+          "settings": {
+            "title": "Ongoing Support",
+            "text": "<p>Access to our community forum and video tutorials</p>"
+          }
+        }
+      },
+      "block_order": ["kit", "guidance", "tools", "support"]
+    },
+    "testimonials": {
+      "type": "rich-text",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2"
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "What Our Builders Say"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p><em>\"An incredible experience. I came with zero framebuilding experience and left with a bike I'm genuinely proud of. The instructors were patient, knowledgeable, and clearly passionate about what they do.\"</em></p><p>— Workshop participant, London</p>"
+          }
+        }
+      },
+      "block_order": ["heading", "text"]
+    },
+    "booking": {
+      "type": "bbc-workshop-booking",
+      "settings": {
+        "title": "Book Your Workshop",
+        "description": "Choose your location and bike type to check availability"
+      }
+    },
+    "contact": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "Questions? Get in Touch",
+        "heading_size": "h2",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": ["hero", "intro", "locations", "included", "testimonials", "booking", "contact"]
+}

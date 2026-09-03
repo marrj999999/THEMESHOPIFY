@@ -1,0 +1,246 @@
+{% comment %}
+  BBC Press Bar — Editable Logo Strip
+  All logos editable via theme editor image_picker
+  Research-backed: 11/12 sites use press logos, grayscale with hover effect
+{% endcomment %}
+
+{%- style -%}
+.bbc-press-bar {
+  padding: {{ section.settings.padding_desktop }}px 24px;
+  background: {{ section.settings.background }};
+}
+
+.bbc-press-bar__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.bbc-press-bar__label {
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--bbc-slate, #64748b);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.bbc-press-bar__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 32px 48px;
+}
+
+.bbc-press-bar__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease, filter 0.2s ease;
+  flex-shrink: 0;
+}
+
+.bbc-press-bar__logo img,
+.bbc-press-bar__logo svg {
+  height: {{ section.settings.logo_height }}px !important;
+  width: auto !important;
+  min-width: 60px;
+  max-width: 160px !important;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+  overflow: visible !important;
+}
+
+.bbc-press-bar__logo:hover img,
+.bbc-press-bar__logo:hover svg {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+.bbc-press-bar__logo a {
+  display: block;
+}
+
+/* Fallback text styling */
+.bbc-press-bar__logo-text {
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--bbc-slate, #64748b);
+}
+
+@media (max-width: 749px) {
+  .bbc-press-bar {
+    padding: {{ section.settings.padding_mobile }}px 16px;
+  }
+
+  .bbc-press-bar__grid {
+    gap: 20px 32px;
+  }
+
+  .bbc-press-bar__logo img,
+  .bbc-press-bar__logo svg {
+    height: {{ section.settings.logo_height_mobile }}px !important;
+    max-width: 120px !important;
+    width: auto !important;
+    min-width: 50px;
+    overflow: visible !important;
+  }
+}
+{%- endstyle -%}
+
+<section class="bbc-press-bar" data-section-id="{{ section.id }}">
+  <div class="bbc-press-bar__container">
+    {% if section.settings.label != blank %}
+      <p class="bbc-press-bar__label">{{ section.settings.label }}</p>
+    {% endif %}
+
+    <div class="bbc-press-bar__grid">
+      {% for block in section.blocks %}
+        <div class="bbc-press-bar__logo" {{ block.shopify_attributes }}>
+          {% if block.settings.link != blank %}
+            <a href="{{ block.settings.link }}" target="_blank" rel="noopener" aria-label="{{ block.settings.name }}">
+          {% endif %}
+          
+          {% if block.settings.logo != blank %}
+            {{ block.settings.logo | image_url: height: 80 | image_tag:
+              loading: 'lazy',
+              alt: block.settings.name,
+              widths: '80, 120, 160'
+            }}
+          {% elsif block.settings.logo_asset != blank %}
+            <img 
+              src="{{ block.settings.logo_asset | asset_url }}" 
+              alt="{{ block.settings.name }}"
+              loading="lazy"
+              height="{{ section.settings.logo_height }}"
+              width="120"
+              style="height: {{ section.settings.logo_height }}px !important; width: auto !important; min-width: 60px !important; max-width: 160px !important; display: inline-block !important; overflow: visible !important;"
+            >
+          {% else %}
+            <span class="bbc-press-bar__logo-text">{{ block.settings.name }}</span>
+          {% endif %}
+          
+          {% if block.settings.link != blank %}
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Press Logos Bar",
+  "tag": "section",
+  "class": "section-press-bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "As Featured In"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "#ffffff", "label": "White" },
+        { "value": "#f5f5f0", "label": "Cream" },
+        { "value": "var(--bbc-forest)", "label": "Forest" }
+      ],
+      "default": "#f5f5f0"
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height (desktop)",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "logo_height_mobile",
+      "label": "Logo height (mobile)",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "label": "Padding (desktop)",
+      "min": 24,
+      "max": 80,
+      "step": 8,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Padding (mobile)",
+      "min": 16,
+      "max": 48,
+      "step": 8,
+      "default": 32,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Publication Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo image",
+          "info": "Upload logo image (PNG or SVG). Recommended height: 60-80px."
+        },
+        {
+          "type": "text",
+          "id": "logo_asset",
+          "label": "Or use asset filename",
+          "info": "E.g. logo-ft.svg (for logos in theme assets folder)"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Publication name",
+          "default": "Publication"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Article link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press Logos Bar",
+      "blocks": [
+        { "type": "logo", "settings": { "logo_asset": "logo-ft.svg", "name": "Financial Times" } },
+        { "type": "logo", "settings": { "logo_asset": "logo-guardian.svg", "name": "The Guardian" } },
+        { "type": "logo", "settings": { "logo_asset": "logo-bikeradar-full.svg", "name": "BikeRadar" } },
+        { "type": "logo", "settings": { "logo_asset": "logo-roadcc-full.svg", "name": "road.cc" } },
+        { "type": "logo", "settings": { "logo_asset": "logo-design-museum-full.svg", "name": "Design Museum" } },
+        { "type": "logo", "settings": { "logo_asset": "logo-grand-designs-full.svg", "name": "Grand Designs" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

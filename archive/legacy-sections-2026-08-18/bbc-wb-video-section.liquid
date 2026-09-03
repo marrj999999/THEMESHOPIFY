@@ -1,0 +1,379 @@
+{{ 'bbc-why-bamboo.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  BBC Why Bamboo — Video Section
+  Layout: full-width video → stacked content below
+  Supports: native Shopify CDN video + YouTube + Vimeo
+  SEO: VideoObject JSON-LD structured data
+{%- endcomment -%}
+
+{%- assign has_native   = false -%}
+{%- assign has_cdn      = false -%}
+{%- assign has_youtube  = false -%}
+{%- assign has_vimeo    = false -%}
+{%- if section.settings.video != blank -%}
+  {%- assign has_native = true -%}
+{%- elsif section.settings.video_cdn_hd != blank -%}
+  {%- assign has_cdn = true -%}
+{%- elsif section.settings.video_url != blank -%}
+  {%- if section.settings.video_url.type == 'youtube' -%}{%- assign has_youtube = true -%}{%- endif -%}
+  {%- if section.settings.video_url.type == 'vimeo'   -%}{%- assign has_vimeo   = true -%}{%- endif -%}
+{%- endif -%}
+
+{%- comment -%} VideoObject JSON-LD — Google video carousel eligibility {%- endcomment -%}
+{%- if section.settings.seo_title != blank -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": {{ section.settings.seo_title | json }},
+  "description": {{ section.settings.seo_description | default: section.settings.body | strip_html | truncate: 300 | json }},
+  "uploadDate": "2026-02-23",
+  {% if section.settings.poster %}"thumbnailUrl": "{{ section.settings.poster | image_url: width: 1280 }}",{% endif %}
+  {% if has_native and section.settings.video.sources.first %}"contentUrl": "{{ section.settings.video.sources.first.url }}"{% elsif has_youtube %}"embedUrl": "https://www.youtube.com/embed/{{ section.settings.video_url.id }}"{% elsif has_vimeo %}"embedUrl": "https://player.vimeo.com/video/{{ section.settings.video_url.id }}"{% endif %}
+}
+</script>
+{%- endif -%}
+
+<section class="bbc-wb-video-section bbc-wb-video-section--{{ section.settings.bg }}"
+  aria-labelledby="wb-video-{{ section.id }}">
+
+  {%- comment -%} ── VIDEO BLOCK ── {%- endcomment -%}
+  <div class="bbc-wb-video-section__media">
+
+    {%- if has_native or has_cdn -%}
+      {%- comment -%} Video — autoplay, muted, loop {%- endcomment -%}
+      <div class="bbc-wb-video-section__player bbc-wb-video-section__player--native"
+           role="region" aria-label="{{ section.settings.seo_title | default: section.settings.heading | escape }}">
+        {%- if has_native -%}
+          {{-
+            section.settings.video
+            | video_tag:
+              image_size: '1600x',
+              autoplay: section.settings.autoplay,
+              loop: true,
+              muted: true,
+              controls: section.settings.show_controls,
+              class: 'bbc-wb-video-section__video'
+          -}}
+        {%- else -%}
+          {%- comment -%} Direct CDN URL fallback {%- endcomment -%}
+          <video
+            class="bbc-wb-video-section__video"
+            {%- if section.settings.autoplay %} autoplay muted{%- endif %}
+            loop
+            playsinline
+            {%- if section.settings.show_controls %} controls{%- endif %}
+            {%- if section.settings.poster %} poster="{{ section.settings.poster | image_url: width: 1920 }}"{%- endif %}>
+            <source src="{{ section.settings.video_cdn_hd }}" type="video/mp4">
+            {%- if section.settings.video_cdn_sd != blank -%}
+              <source src="{{ section.settings.video_cdn_sd }}" type="video/mp4">
+            {%- endif -%}
+          </video>
+        {%- endif -%}
+        <button class="bbc-wb-video-section__playbtn" aria-label="Pause video" data-wb-playpause>
+          <svg class="bbc-wb-video-section__pauseicon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
+          </svg>
+          <svg class="bbc-wb-video-section__playicon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display:none">
+            <polygon points="5,3 19,12 5,21"/>
+          </svg>
+        </button>
+      </div>
+
+    {%- elsif has_youtube -%}
+      <div class="bbc-wb-video-section__player bbc-wb-video-section__player--embed">
+        <div class="bbc-wb-video-embed-wide">
+          <iframe
+            src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?rel=0&modestbranding=1{%- if section.settings.autoplay -%}&autoplay=1&mute=1&loop=1&playlist={{ section.settings.video_url.id }}{%- endif -%}"
+            title="{{ section.settings.seo_title | default: section.settings.heading | escape }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+
+    {%- elsif has_vimeo -%}
+      <div class="bbc-wb-video-section__player bbc-wb-video-section__player--embed">
+        <div class="bbc-wb-video-embed-wide">
+          <iframe
+            src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}?title=0&byline=0&portrait=0&color=ffa900{%- if section.settings.autoplay -%}&autoplay=1&muted=1&loop=1&background=1{%- endif -%}"
+            title="{{ section.settings.seo_title | default: section.settings.heading | escape }}"
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+
+    {%- else -%}
+      {%- comment -%} Placeholder — no video set yet {%- endcomment -%}
+      <div class="bbc-wb-video-section__placeholder">
+        <div class="bbc-wb-video-section__placeholder-inner">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <polygon points="5,3 19,12 5,21"/>
+          </svg>
+          <p>Add a video above to display it here</p>
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Optional caption bar over video (bottom) {%- endcomment -%}
+    {%- if section.settings.caption != blank and has_native -%}
+      <p class="bbc-wb-video-section__caption">{{ section.settings.caption }}</p>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} ── TEXT CONTENT BELOW ── {%- endcomment -%}
+  {%- if section.settings.heading != blank or section.settings.body != blank -%}
+    <div class="bbc-wb-video-section__content {%- if section.settings.text_align == 'left' %} bbc-wb-video-section__content--left{%- endif -%}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="bbc-wb-video-section__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 id="wb-video-{{ section.id }}" class="bbc-wb-video-section__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <div class="bbc-wb-video-section__body">
+          {{ section.settings.body }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.btn1_text != blank or section.settings.btn2_text != blank -%}
+        <div class="bbc-wb-btn-row" style="justify-content:{{ section.settings.text_align | default: 'center' }}">
+          {%- if section.settings.btn1_text != blank -%}
+            {%- assign vs1 = section.settings.btn1_style | default: 'secondary' -%}
+            <a href="{{ section.settings.btn1_link }}" class="bbc-wb-btn bbc-wb-btn--{{ vs1 }}">
+              {{ section.settings.btn1_text }}
+              {%- if vs1 == 'link' -%}
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {%- endif -%}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.btn2_text != blank -%}
+            {%- assign vs2 = section.settings.btn2_style | default: 'outline' -%}
+            <a href="{{ section.settings.btn2_link }}" class="bbc-wb-btn bbc-wb-btn--{{ vs2 }}">
+              {{ section.settings.btn2_text }}
+              {%- if vs2 == 'link' -%}
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {%- endif -%}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</section>
+
+<script>
+  (function(){
+    var btn = document.querySelector('[data-wb-playpause]');
+    if (!btn) return;
+    var video = btn.closest('.bbc-wb-video-section__player').querySelector('video');
+    var pauseIcon = btn.querySelector('.bbc-wb-video-section__pauseicon');
+    var playIcon  = btn.querySelector('.bbc-wb-video-section__playicon');
+    if (!video) return;
+    btn.addEventListener('click', function(){
+      if (video.paused) {
+        video.play();
+        btn.setAttribute('aria-label','Pause video');
+        pauseIcon.style.display = '';
+        playIcon.style.display  = 'none';
+      } else {
+        video.pause();
+        btn.setAttribute('aria-label','Play video');
+        pauseIcon.style.display = 'none';
+        playIcon.style.display  = '';
+      }
+    });
+    if (typeof IntersectionObserver !== 'undefined') {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (!entry.isIntersecting) { video.pause(); }
+          else if ({{ section.settings.autoplay | json }}) { video.play(); }
+        });
+      }, {threshold: 0.3});
+      io.observe(video);
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Video Section",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Video"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video file (Shopify-hosted)",
+      "info": "Upload a video file (.mp4). Recommended: 1920×1080px, H.264, under 50MB."
+    },
+    {
+      "type": "text",
+      "id": "video_cdn_hd",
+      "label": "Or: Direct video URL (HD)",
+      "info": "Paste a Shopify CDN .mp4 URL. Used if no video file is selected above. Copy from Shopify Files."
+    },
+    {
+      "type": "text",
+      "id": "video_cdn_sd",
+      "label": "Direct video URL (SD / fallback)",
+      "info": "Optional lower-quality version for slower connections."
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Or: YouTube / Vimeo URL",
+      "accept": ["youtube", "vimeo"],
+      "info": "Used only if no Shopify-hosted video or CDN URL is set above."
+    },
+    {
+      "type": "image_picker",
+      "id": "poster",
+      "label": "Poster / thumbnail image",
+      "info": "Shown before the video loads. Also used for Google video preview. Recommended: 1280×720px."
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay (muted)",
+      "default": true,
+      "info": "Video plays automatically on page load, silently. Pauses when scrolled out of view."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_controls",
+      "label": "Show video controls",
+      "default": true,
+      "info": "Let visitors play, pause, and scrub the video."
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Video caption (optional)",
+      "info": "Displayed as a small label below the video."
+    },
+    {
+      "type": "header",
+      "content": "Content below video"
+    },
+    {
+      "type": "select",
+      "id": "bg",
+      "label": "Background colour",
+      "options": [
+        { "value": "white",  "label": "White" },
+        { "value": "cream",  "label": "Cream" },
+        { "value": "forest", "label": "Forest green" }
+      ],
+      "default": "white"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "center", "label": "Centred" },
+        { "value": "left",   "label": "Left" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body text"
+    },
+    {
+      "type": "text",
+      "id": "btn1_text",
+      "label": "Button 1 text"
+    },
+    {
+      "type": "url",
+      "id": "btn1_link",
+      "label": "Button 1 URL"
+    },
+    {
+      "type": "select",
+      "id": "btn1_style",
+      "label": "Button 1 style",
+      "options": [
+        { "value": "secondary",     "label": "■ Forest green — filled" },
+        { "value": "primary",       "label": "■ Gold — filled" },
+        { "value": "outline",       "label": "□ Outline green (light backgrounds)" },
+        { "value": "outline-light", "label": "□ Outline white (dark backgrounds)" },
+        { "value": "white",         "label": "■ White — filled (dark backgrounds)" },
+        { "value": "link",          "label": "↗ Text link (with arrow)" }
+      ],
+      "default": "secondary"
+    },
+    {
+      "type": "text",
+      "id": "btn2_text",
+      "label": "Button 2 text (optional)"
+    },
+    {
+      "type": "url",
+      "id": "btn2_link",
+      "label": "Button 2 URL (optional)"
+    },
+    {
+      "type": "select",
+      "id": "btn2_style",
+      "label": "Button 2 style (optional)",
+      "options": [
+        { "value": "outline",       "label": "□ Outline green (light backgrounds)" },
+        { "value": "link",          "label": "↗ Text link (with arrow)" },
+        { "value": "secondary",     "label": "■ Forest green — filled" },
+        { "value": "primary",       "label": "■ Gold — filled" },
+        { "value": "outline-light", "label": "□ Outline white (dark backgrounds)" },
+        { "value": "white",         "label": "■ White — filled (dark backgrounds)" }
+      ],
+      "default": "outline"
+    },
+    {
+      "type": "header",
+      "content": "SEO (Google Video Carousel)"
+    },
+    {
+      "type": "text",
+      "id": "seo_title",
+      "label": "Video title",
+      "info": "Used for Google search and video schema. Describe the video content clearly."
+    },
+    {
+      "type": "textarea",
+      "id": "seo_description",
+      "label": "Video description",
+      "info": "1–2 sentences describing what happens in the video. Helps Google index it."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Section"
+    }
+  ]
+}
+{% endschema %}

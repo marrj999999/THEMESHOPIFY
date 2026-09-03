@@ -1,0 +1,373 @@
+{% comment %}
+  BBC Hero v4 — With visual elements
+{% endcomment %}
+
+<section class="bbc-hero bbc-section bbc-section--{{ section.settings.background }}">
+  <div class="bbc-container">
+    
+    <div class="bbc-hero__layout">
+      
+      {%- comment -%} Text Content {%- endcomment -%}
+      <div class="bbc-hero__content">
+        <h1 class="bbc-h1 bbc-mb-md">{{ section.settings.heading }}</h1>
+        
+        {% if section.settings.subheading != blank %}
+          <p class="bbc-text-lg bbc-mb-lg">{{ section.settings.subheading }}</p>
+        {% endif %}
+        
+        {% if section.settings.button_primary_text != blank %}
+          <div class="bbc-hero__buttons bbc-mb-lg">
+            <a href="{{ section.settings.button_primary_link }}" class="bbc-btn bbc-btn--primary">
+              {{ section.settings.button_primary_text }}
+            </a>
+            {% if section.settings.button_secondary_text != blank %}
+              <a href="{{ section.settings.button_secondary_link }}" class="bbc-btn bbc-btn--outline">
+                {{ section.settings.button_secondary_text }}
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+        
+        {% if section.settings.show_pills %}
+          <nav aria-label="Quick links">
+            <ul class="bbc-pills">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'pill' -%}
+                  <li>
+                    <a href="{{ block.settings.link }}" class="bbc-pill" {{ block.shopify_attributes }}>
+                      {{ block.settings.text }}
+                    </a>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </nav>
+        {% endif %}
+      </div>
+      
+      {%- comment -%} Hero Media - Video or Image, editable via theme editor {%- endcomment -%}
+      <div class="bbc-hero__visual">
+        {% if section.settings.video_url != blank %}
+          <div class="bbc-hero__video-container">
+            {%- if section.settings.video_url.type == 'youtube' -%}
+              <iframe 
+                src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?{% if section.settings.video_autoplay %}autoplay=1&{% endif %}{% if section.settings.video_muted %}mute=1&{% endif %}{% if section.settings.video_loop %}loop=1&playlist={{ section.settings.video_url.id }}&{% endif %}{% unless section.settings.video_controls %}controls=0&{% endunless %}modestbranding=1&rel=0"
+                class="bbc-hero__video bbc-hero__video--youtube"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                title="{{ section.settings.heading | escape }}"
+              ></iframe>
+            {%- elsif section.settings.video_url.type == 'vimeo' -%}
+              <iframe 
+                src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}?{% if section.settings.video_autoplay %}autoplay=1&{% endif %}{% if section.settings.video_muted %}muted=1&{% endif %}{% if section.settings.video_loop %}loop=1&{% endif %}{% unless section.settings.video_controls %}controls=0&{% endunless %}title=0&byline=0&portrait=0"
+                class="bbc-hero__video bbc-hero__video--vimeo"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+                title="{{ section.settings.heading | escape }}"
+              ></iframe>
+            {%- else -%}
+              <video 
+                class="bbc-hero__video"
+                {% if section.settings.video_autoplay %}autoplay{% endif %}
+                {% if section.settings.video_loop %}loop{% endif %}
+                {% if section.settings.video_muted %}muted{% endif %}
+                {% if section.settings.video_controls %}controls{% endif %}
+                playsinline
+                poster="{% if section.settings.image != blank %}{{ section.settings.image | image_url: width: 1000 }}{% endif %}"
+              >
+                <source src="{{ section.settings.video_url }}" type="video/mp4">
+                <!-- Fallback to image if video fails -->
+                {% if section.settings.image != blank %}
+                  <img 
+                    src="{{ section.settings.image | image_url: width: 700 }}"
+                    alt="{{ section.settings.image.alt | default: section.settings.heading }}"
+                    class="bbc-hero__image"
+                  >
+                {% endif %}
+              </video>
+            {%- endif -%}
+          </div>
+        {% elsif section.settings.image != blank %}
+          <img 
+            src="{{ section.settings.image | image_url: width: 700 }}"
+            srcset="{{ section.settings.image | image_url: width: 400 }} 400w,
+                    {{ section.settings.image | image_url: width: 700 }} 700w,
+                    {{ section.settings.image | image_url: width: 1000 }} 1000w"
+            sizes="(max-width: 900px) 100vw, 50vw"
+            alt="{{ section.settings.image.alt | default: section.settings.heading }}"
+            class="bbc-hero__image"
+            loading="eager"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+          >
+        {% else %}
+          <div class="bbc-hero__placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14,6L10.5,9.5L13.5,12.5L10,16H18L14,6M4,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4Z"/>
+            </svg>
+            <span>Add hero video or image in theme editor</span>
+          </div>
+        {% endif %}
+      </div>
+      
+    </div>
+    
+    {%- comment -%} Stats below {%- endcomment -%}
+    {% if section.settings.show_stats %}
+      <div class="bbc-stats">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'stat' -%}
+            <div class="bbc-stat" {{ block.shopify_attributes }}>
+              <span class="bbc-stat__number">{{ block.settings.number }}</span>
+              <span class="bbc-stat__label">{{ block.settings.label }}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {% endif %}
+    
+  </div>
+</section>
+
+<style>
+  /*
+   * BBC Hero — Research-driven specs
+   * Based on: Allbirds, Rapha, Patagonia analysis (2026-02-15)
+   * Desktop: 80px padding, 48px H1, horizontal CTAs
+   * Mobile: 48px padding, 32px H1, stacked CTAs
+   */
+  
+  .bbc-hero {
+    padding-top: 80px; /* Desktop: 80px (research average) */
+    padding-bottom: 60px;
+  }
+  
+  .bbc-hero__layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  
+  .bbc-hero__content .bbc-h1 {
+    font-size: 48px; /* Desktop: 48px (research) */
+    line-height: 1.1;
+  }
+  
+  .bbc-hero__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .bbc-hero__buttons .bbc-btn {
+    height: 48px; /* Desktop: 48px (research minimum) */
+    padding: 0 32px;
+    font-size: 14px;
+  }
+  
+  .bbc-hero__visual {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .bbc-hero__image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 0; /* Sharp corners (BBC brand, research-backed) */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  }
+
+  .bbc-hero__video-container {
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+  }
+
+  .bbc-hero__video {
+    width: 100%;
+    height: auto;
+    border-radius: 0; /* Sharp corners (BBC brand, research-backed) */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    background: var(--bbc-black); /* Black background while loading */
+  }
+
+  .bbc-hero__video--youtube,
+  .bbc-hero__video--vimeo {
+    aspect-ratio: 16 / 9; /* Standard video aspect ratio */
+    height: auto;
+  }
+
+  /* Ensure iframes are responsive */
+  .bbc-hero__video-container iframe {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .bbc-hero__placeholder {
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: var(--bbc-forest, var(--bbc-forest));
+  }
+  
+  .bbc-hero__placeholder svg {
+    width: 80px;
+    height: 80px;
+    opacity: 0.4;
+  }
+  
+  .bbc-hero__placeholder span {
+    font-size: 1rem;
+    opacity: 0.6;
+  }
+  
+  .bbc-hero .bbc-stats {
+    margin-top: 64px;
+    padding-top: 48px;
+    border-top: 1px solid var(--bbc-border, #e2e8f0);
+  }
+  
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .bbc-hero__layout {
+      gap: 48px;
+    }
+    
+    .bbc-hero__content .bbc-h1 {
+      font-size: 40px;
+    }
+  }
+  
+  /* Mobile: research-backed specs */
+  @media (max-width: 768px) {
+    .bbc-hero {
+      padding-top: 48px; /* Mobile: 48px (research: halve desktop) */
+      padding-bottom: 40px;
+    }
+    
+    .bbc-hero__layout {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      text-align: center;
+    }
+    
+    .bbc-hero__content .bbc-h1 {
+      font-size: 32px; /* Mobile: 32px (research: ~33% reduction) */
+      line-height: 1.15;
+    }
+
+    .bbc-hero__buttons {
+      justify-content: center;
+    }
+
+    .bbc-hero__visual {
+      order: -1;
+    }
+
+    .bbc-hero .bbc-pills {
+      justify-content: center;
+    }
+  }
+
+  /* Small mobile: stack CTAs (research-backed) */
+  @media (max-width: 480px) {
+    .bbc-hero__buttons {
+      flex-direction: column; /* Stack CTAs on mobile (all 3 sites do this) */
+      align-items: stretch;
+      gap: 12px;
+    }
+    
+    .bbc-hero__buttons .bbc-btn {
+      width: 100%;
+      height: 52px; /* Mobile: 52px (research: Patagonia uses 52px) */
+      max-width: none;
+      font-size: 14px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Hero",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Media"
+    },
+    { 
+      "type": "video_url", 
+      "id": "video_url", 
+      "label": "Hero video",
+      "info": "Video will display instead of image when provided. Supports YouTube, Vimeo, or .mp4 file URLs.",
+      "accept": ["youtube", "vimeo"]
+    },
+    { 
+      "type": "checkbox", 
+      "id": "video_autoplay", 
+      "label": "Autoplay video",
+      "default": true,
+      "info": "Note: Most browsers require videos to be muted for autoplay to work"
+    },
+    { 
+      "type": "checkbox", 
+      "id": "video_loop", 
+      "label": "Loop video",
+      "default": true
+    },
+    { 
+      "type": "checkbox", 
+      "id": "video_muted", 
+      "label": "Mute video",
+      "default": true,
+      "info": "Required for autoplay on most browsers"
+    },
+    { 
+      "type": "checkbox", 
+      "id": "video_controls", 
+      "label": "Show video controls",
+      "default": false
+    },
+    { "type": "image_picker", "id": "image", "label": "Hero image (fallback)", "info": "Used as video poster and fallback if video fails to load" },
+    {
+      "type": "header", 
+      "content": "Hero Content"
+    },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Build Your Own Bamboo Bicycle" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Join 4,000+ makers across 45 countries. Workshops in London, kits shipped worldwide." },
+    { "type": "text", "id": "button_primary_text", "label": "Primary button", "default": "Get Started" },
+    { "type": "url", "id": "button_primary_link", "label": "Primary link" },
+    { "type": "text", "id": "button_secondary_text", "label": "Secondary button" },
+    { "type": "url", "id": "button_secondary_link", "label": "Secondary link" },
+    { "type": "checkbox", "id": "show_pills", "label": "Show pills", "default": true },
+    { "type": "checkbox", "id": "show_stats", "label": "Show stats", "default": true },
+    { "type": "select", "id": "background", "label": "Background", "options": [{ "value": "white", "label": "White" }, { "value": "cream", "label": "Cream" }], "default": "white" }
+  ],
+  "blocks": [
+    { "type": "pill", "name": "Pill", "settings": [{ "type": "text", "id": "text", "label": "Text" }, { "type": "url", "id": "link", "label": "Link" }] },
+    { "type": "stat", "name": "Stat", "settings": [{ "type": "text", "id": "number", "label": "Number" }, { "type": "text", "id": "label", "label": "Label" }] }
+  ],
+  "presets": [{
+    "name": "BBC Hero",
+    "blocks": [
+      { "type": "pill", "settings": { "text": "Workshops" } },
+      { "type": "pill", "settings": { "text": "DIY Kits" } },
+      { "type": "pill", "settings": { "text": "Our Impact" } },
+      { "type": "stat", "settings": { "number": "4,000+", "label": "Bikes Built" } },
+      { "type": "stat", "settings": { "number": "36", "label": "Countries" } },
+      { "type": "stat", "settings": { "number": "12", "label": "Years" } }
+    ]
+  }]
+}
+{% endschema %}

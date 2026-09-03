@@ -1,0 +1,380 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+  <style>
+    :root{--forest:#003C32;--forest-700:#002A23;--forest-300:#1F6655;--lime:#D4FD62;--lime-700:#9BC02E;--bone:#E6DCC8;--paper:#F1E9D8;--steel:#DEE6F0;--ink:#0E1A17;--charcoal:#2A332F;--mist:#CFC5B0;--subtle:#5A6863;
+      --mo-fast:.15s;--mo-base:.22s;--mo-entrance:.45s;--mo-reveal:.6s;--mo-ease:cubic-bezier(.2,.7,.2,1);--gutter:86px}
+    *{box-sizing:border-box}
+    body{margin:0;background:#E6DCC8;color:#0E1A17;font-family:"Atkinson Hyperlegible",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+    a{color:#003C32}a:hover{color:#1F6655}
+    h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.02em;line-height:1.04;text-wrap:balance;color:#0E1A17}
+    .eyebrow{display:inline-block;font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:lowercase;color:#5A6863;margin:0 0 14px}
+    .eyebrow::before{content:"";display:inline-block;width:16px;height:3px;background:#9BC02E;border-radius:2px;vertical-align:middle;margin:0 10px 3px 0}
+    .wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+    .pad{padding:88px 0}
+    .sheet{background:#F1E9D8;background-image:linear-gradient(rgba(0,60,50,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,60,50,.055) 1px,transparent 1px);background-size:24px 24px}
+    .nodediv{border-top:1.5px solid rgba(14,26,23,.3);position:relative;height:0}
+    .nodediv i{position:absolute;top:-7px;width:2px;height:13px;background:rgba(14,26,23,.4)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:700;font-size:16px;line-height:1;min-height:48px;padding:14px 26px;border-radius:8px;border:2.5px solid #0E1A17;background:#fff;color:#0E1A17;text-decoration:none;cursor:pointer;transition:transform var(--mo-fast),box-shadow var(--mo-fast)}
+    .btn:hover{transform:translateY(-2px);box-shadow:3px 3px 0 #0E1A17}
+    .btn-lime{background:#D4FD62;border-color:#D4FD62;color:#002A23}
+    .btn-forest{background:#003C32;border-color:#003C32;color:#E6DCC8}
+    .tblock{display:inline-grid;grid-template-columns:auto auto;border:1.5px solid #003C32;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#003C32;background:#F1E9D8}
+    .tblock span{padding:5px 10px}.tblock .k{border-right:1px solid #003C32;opacity:.7}.tblock .r{border-bottom:1px solid #003C32}
+    .stamp{background:#E6DCC8;border:2.5px solid #0E1A17;border-radius:6px;box-shadow:5px 5px 0 #0E1A17}
+    .ic{width:32px;height:32px;color:#003C32;flex:0 0 32px}
+    .ic .a{fill:#9BC02E}
+    /* motion — CSS only, divs only (no SVG animation, per James 2026-08-09); inert under reduced motion */
+    .rise{opacity:0;transform:translateY(14px);animation:rise var(--mo-reveal) var(--mo-ease) forwards}
+    @keyframes rise{to{opacity:1;transform:none}}
+    .culm-grow{transform-origin:left center;transform:scaleX(0);animation:grow 1.1s var(--mo-ease) .3s forwards}
+    @keyframes grow{to{transform:scaleX(1)}}
+    .culm-grow-y{transform-origin:top center;transform:scaleY(0);animation:growy 1.1s var(--mo-ease) .3s forwards}
+    @keyframes growy{to{transform:scaleY(1)}}
+    .leader{transform-origin:left center;transform:scaleX(0);animation:grow .5s var(--mo-ease) forwards}
+    .callout{opacity:0;animation:rise var(--mo-entrance) var(--mo-ease) forwards}
+    .lift{transition:transform var(--mo-fast) var(--mo-ease),box-shadow var(--mo-fast)}
+    .lift:hover{transform:translateY(-4px)}
+    .stamp.lift:hover{box-shadow:7px 7px 0 #0E1A17}
+    .sticker{transform:rotate(-6deg);transition:transform var(--mo-base) var(--mo-ease)}
+    .sticker:hover{transform:rotate(-2deg) scale(1.04)}
+    @media (prefers-reduced-motion:reduce){.rise,.callout{opacity:1;transform:none;animation:none}.culm-grow,.culm-grow-y,.leader{transform:none;animation:none}.lift:hover,.sticker:hover{transform:none}}
+    .spec{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1.5px solid #003C32;background:#F1E9D8}
+    .spec > div{padding:16px 18px;border-right:1px solid rgba(0,60,50,.2);border-bottom:1px solid rgba(0,60,50,.2);display:flex;flex-direction:column;gap:6px;position:relative}
+    .spec > div:nth-child(4n){border-right:0}
+    .spec > div:nth-child(n+5){border-bottom:0}
+    .spec dt{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#1F6655}
+    .spec dd{margin:0;font-size:18.5px;font-weight:700;letter-spacing:-.01em;color:#0E1A17}
+    .spec dd small{display:block;font-weight:400;font-size:12.5px;color:#2A332F;letter-spacing:0;margin-top:2px}
+    .spec dt{position:static}.spec .ic{position:absolute;top:12px;right:12px;width:26px;height:26px;opacity:.9}
+    .rates{width:100%;border-collapse:collapse;font-size:13.5px;color:#E6DCC8}
+    .rates th,.rates td{text-align:left;padding:11px 8px;border-bottom:1px solid rgba(230,220,200,.22)}
+    .rates th{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#D4FD62;font-weight:700}
+    .rates td:last-child,.rates th:last-child{text-align:right}
+    details{border:2px solid #0E1A17;border-radius:8px;background:#E6DCC8;padding:0}
+    summary{cursor:pointer;font-weight:700;font-size:17px;padding:16px 18px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+    summary::after{content:"+";font-size:22px;color:#1F6655}
+    details[open] summary::after{content:"–"}
+    details p{margin:0;padding:0 18px 16px;color:#2A332F;font-size:15.5px}
+  </style>
+</helmet>
+
+<div style="width:1440px;background:#E6DCC8;position:relative">
+
+  <!-- utility bar + header (matches live chrome) -->
+  <div style="background:#003C32;color:#E6DCC8;font-size:13px;font-weight:700;padding:9px 86px;display:flex;justify-content:space-between;align-items:center">
+    <span>Shipped worldwide to 45 countries · tracked delivery</span>
+    <span style="opacity:.8">Help · Search</span>
+  </div>
+  <div style="background:#E6DCC8;padding:22px 86px;display:flex;align-items:center;gap:36px;border-bottom:1.5px solid #CFC5B0">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="width:44px;height:44px;border-radius:50%;background:#D4FD62;border:2.5px solid #0E1A17;display:flex;align-items:center;justify-content:center">
+        <svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true" style="width:26px;height:26px;color:#0E1A17"><circle cx="8" cy="21" r="5" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="21" r="5" stroke="currentColor" stroke-width="2"/><path d="M8 21l5-9h7l4 9M13 12l-2-4h4" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      </div>
+      <div style="font-weight:800;font-size:15px;line-height:1;letter-spacing:.02em;color:#0E1A17">BAMBOO<br>BICYCLE<br>CLUB</div>
+    </div>
+    <nav style="display:flex;gap:28px;margin-left:auto;font-weight:700;font-size:16px;color:#003C32"><span>Build a bike</span><span>Workshops</span><span>Why bamboo</span><span>Impact</span><span>☰ Menu</span></nav>
+    <a class="btn btn-forest" style="border-radius:999px">Make a bike</a>
+  </div>
+
+  <!-- ══ 1 · HERO — the drawing sheet ══ -->
+  <div class="sheet" style="position:relative;overflow:clip">
+    <div style="position:absolute;left:32px;top:40px;bottom:40px;width:8px;display:flex;flex-direction:column;gap:10px" aria-hidden="true">
+      <div class="culm-grow-y" style="flex:1;background:#D4FD62;border-radius:3px"></div>
+      <div style="height:6px;background:#0E1A17;border-radius:2px"></div>
+      <div style="flex:1;background:#D4FD62;border-radius:3px"></div>
+      <div style="height:6px;background:#0E1A17;border-radius:2px"></div>
+      <div style="flex:.6;background:#D4FD62;border-radius:3px"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:start;padding:56px 86px 72px 86px">
+      <div>
+        <div class="rise" style="font-size:12.5px;color:#1F6655;margin-bottom:16px">Home / Frame kits / <b style="color:#0E1A17">Road</b></div>
+        <div class="tblock rise" style="animation-delay:.05s"><span class="k r">kit</span><span class="r">№ 02 — road</span><span class="k">built</span><span>by you, at home</span></div>
+        <h1 class="rise" style="font-size:84px;margin-top:18px;animation-delay:.1s">road frame<br>build kit.</h1>
+        <p class="rise" style="margin:18px 0 0;font-size:20px;line-height:1.45;color:#2A332F;max-width:44ch;animation-delay:.15s">A drop-bar frame you build yourself from bamboo and flax. Hand tools, a kitchen table and a few weekends — we cut, machine and jig everything it takes.</p>
+
+        <div class="rise" style="display:flex;align-items:baseline;gap:14px;margin:26px 0 6px;animation-delay:.2s">
+          <b style="font-size:38px;letter-spacing:-.03em">£375</b><span style="font-size:14px;color:#5A6863">Custom geometry £495</span><a href="#" style="margin-left:auto;font-size:14px;font-weight:700">Read 12 builder stories →</a>
+        </div>
+        <div class="rise" style="display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:#2A332F;margin:2px 0 4px;animation-delay:.22s">
+          <span style="display:inline-flex;align-items:center;gap:6px"><span style="width:16px;height:16px;border-radius:50%;background:#D4FD62;border:1.5px solid #0E1A17;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#002A23">✓</span><b>In stock</b> · [packed by hand, ships twice a week / two-week lead time — James to confirm]</span>
+          <span>Klarna · Shop Pay at checkout · Cycle to Work [confirm kit eligibility]</span>
+        </div>
+
+        <div class="rise" style="animation-delay:.25s">
+          <div class="eyebrow" style="margin:16px 0 8px">frame size</div>
+          <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px">
+            <div style="border:1.5px solid rgba(0,60,50,.35);border-radius:6px;padding:11px 4px;text-align:center;font-weight:700;font-size:14px;color:#003C32;line-height:1.15">S<small style="display:block;font-weight:400;font-size:11px;opacity:.75;margin-top:3px">157–170 cm</small></div>
+            <div style="border:1.5px solid #003C32;background:#003C32;color:#F1E9D8;border-radius:6px;padding:11px 4px;text-align:center;font-weight:700;font-size:14px;line-height:1.15">M<small style="display:block;font-weight:400;font-size:11px;opacity:.85;margin-top:3px">168–184 cm</small></div>
+            <div style="border:1.5px solid rgba(0,60,50,.35);border-radius:6px;padding:11px 4px;text-align:center;font-weight:700;font-size:14px;color:#003C32;line-height:1.15">L<small style="display:block;font-weight:400;font-size:11px;opacity:.75;margin-top:3px">180–193 cm</small></div>
+            <div style="border:1.5px solid rgba(0,60,50,.35);border-radius:6px;padding:11px 4px;text-align:center;font-weight:700;font-size:14px;color:#003C32;line-height:1.15">XL<small style="display:block;font-weight:400;font-size:11px;opacity:.75;margin-top:3px">190–196 cm</small></div>
+            <div style="border:1.5px dashed rgba(0,60,50,.45);border-radius:6px;padding:11px 4px;text-align:center;font-weight:700;font-size:14px;color:#003C32;line-height:1.15">Custom<small style="display:block;font-weight:400;font-size:11px;opacity:.75;margin-top:3px">your numbers</small></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:rgba(0,60,50,.06);border-radius:6px;padding:10px 12px;margin:10px 0 18px;font-size:14px">
+            <span>I'm</span><span style="width:74px;font-size:14px;padding:5px 8px;border:1.5px solid rgba(0,60,50,.3);border-radius:4px;background:#F1E9D8">178</span><span>cm tall →</span><b style="color:#003C32">you're a Medium</b><span style="margin-left:auto;font-size:12px;color:#5A6863">on the overlap? send us your inside leg</span>
+          </div>
+        </div>
+
+        <div class="rise" style="display:flex;gap:12px;animation-delay:.3s">
+          <a class="btn btn-lime" style="flex:1;border-radius:999px">Add to basket · £375</a>
+          <a class="btn" style="border-radius:999px;background:transparent;border-color:#003C32;color:#003C32">Prefer a workshop?</a>
+        </div>
+        <p class="rise" style="margin:10px 0 0;font-size:14px;color:#2A332F;animation-delay:.32s">Not sure it's for you? <a href="#" style="font-weight:700">Book a free 10-minute call</a> — no pitch, just answers.</p>
+
+        <div class="rise" style="display:grid;border:1.5px solid #003C32;border-radius:6px;overflow:hidden;margin-top:22px;animation-delay:.35s">
+          <div style="display:grid;grid-template-columns:32px 1fr;gap:12px;padding:12px 14px;font-size:14px;border-bottom:1px solid rgba(0,60,50,.18);background:#D4FD62;align-items:start">
+            <svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="4" y="9" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M22 13h4l3 4v6h-7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="10" cy="24" r="2.5" stroke="currentColor" stroke-width="2"/><circle cx="25" cy="24" r="2.5" stroke="currentColor" stroke-width="2"/><circle class="a" cx="7" cy="6" r="2"/></svg>
+            <span><b>Delivered duty paid.</b> Nothing to pay on arrival — we settle import duty and tax before it ships.<small style="display:block;font-size:12px;opacity:.75;margin-top:2px">Packed by hand in London · tracked to 45 countries</small></span>
+          </div>
+          <div style="display:grid;grid-template-columns:32px 1fr;gap:12px;padding:12px 14px;font-size:14px;border-bottom:1px solid rgba(0,60,50,.18);align-items:start">
+            <svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="17" r="11" stroke="currentColor" stroke-width="2"/><path d="M16 10v7l5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 3h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="a" cx="26" cy="7" r="2"/></svg>
+            <span><b>25–35 hours</b> across a few weekends. No power tools, no welding.<small style="display:block;font-size:12px;opacity:.75;margin-top:2px">Illustrated manual + 15 hours of step-by-step video</small></span>
+          </div>
+          <div style="display:grid;grid-template-columns:32px 1fr;gap:12px;padding:12px 14px;font-size:14px;border-bottom:1px solid rgba(0,60,50,.18);align-items:start">
+            <svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3l11 4v9c0 7-5 11-11 13C10 27 5 23 5 16V7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M11 16l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle class="a" cx="27" cy="5" r="2"/></svg>
+            <span><b>1-year kit warranty</b> · 14-day returns on unopened kits.<small style="display:block;font-size:12px;opacity:.75;margin-top:2px">Split bamboo replaced free within 3 months · <a href="#">returns policy, incl. international</a></small></span>
+          </div>
+          <div style="display:grid;grid-template-columns:32px 1fr;gap:12px;padding:12px 14px;font-size:14px;align-items:start">
+            <svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="5" stroke="currentColor" stroke-width="2"/><path d="M16 4v7M16 21v7M4 16h7M21 16h7" stroke="currentColor" stroke-width="2"/><circle class="a" cx="16" cy="16" r="1.6"/></svg>
+            <span><b>Lifetime community</b> of 4,000+ builders — someone has seen your problem.<small style="display:block;font-size:12px;opacity:.75;margin-top:2px">Free 10-minute video call when you're stuck</small></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- exploded parts drawing with animated callouts -->
+      <div style="position:relative;padding-top:24px">
+        <div class="stamp lift" style="position:relative;background:#F1E9D8;padding:22px;overflow:visible">
+          <img src="road-exploded.jpg" alt="The road frame kit laid out as an exploded parts drawing: bamboo tubes, head tube, bottom bracket shell, dropouts and jig" style="display:block;width:100%;height:auto;border-radius:3px;mix-blend-mode:multiply">
+          <div style="position:absolute;left:18px;bottom:18px;display:grid;grid-template-columns:auto auto;border:1.5px solid #003C32;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#003C32;background:#F1E9D8">
+            <span style="padding:4px 8px;border-right:1px solid #003C32;opacity:.7">sheet</span><span style="padding:4px 8px">1 of 1 · 1:1 plan in the box</span>
+          </div>
+          <div class="sticker" style="position:absolute;top:-16px;right:-18px;background:#D4FD62;color:#002A23;border:2.5px solid #0E1A17;border-radius:999px;padding:9px 16px;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;box-shadow:3px 3px 0 #0E1A17">it grew itself.</div>
+        </div>
+
+        <!-- callouts: numbered chips + hairline leaders (divs, so they animate) -->
+        <div class="callout" style="position:absolute;left:-6px;top:78px;display:flex;align-items:center;gap:0;animation-delay:.5s">
+          <div style="display:flex;align-items:center;gap:8px;background:#E6DCC8;border:2px solid #0E1A17;border-radius:999px;padding:6px 12px 6px 6px;font-size:13px;font-weight:700;box-shadow:3px 3px 0 #0E1A17"><span style="width:22px;height:22px;border-radius:50%;background:#003C32;color:#D4FD62;display:inline-flex;align-items:center;justify-content:center;font-size:12px">1</span>heat-treated Moso bamboo</div>
+          <div class="leader" style="width:72px;height:2px;background:#0E1A17;animation-delay:.6s"></div>
+        </div>
+        <div class="callout" style="position:absolute;right:-10px;top:190px;display:flex;flex-direction:row-reverse;align-items:center;animation-delay:.7s">
+          <div style="display:flex;align-items:center;gap:8px;background:#E6DCC8;border:2px solid #0E1A17;border-radius:999px;padding:6px 12px 6px 6px;font-size:13px;font-weight:700;box-shadow:3px 3px 0 #0E1A17"><span style="width:22px;height:22px;border-radius:50%;background:#003C32;color:#D4FD62;display:inline-flex;align-items:center;justify-content:center;font-size:12px">2</span>CNC head tube · BB shell · dropouts</div>
+          <div class="leader" style="width:64px;height:2px;background:#0E1A17;transform-origin:right center;animation-delay:.8s"></div>
+        </div>
+        <div class="callout" style="position:absolute;left:-6px;top:330px;display:flex;align-items:center;animation-delay:.9s">
+          <div style="display:flex;align-items:center;gap:8px;background:#E6DCC8;border:2px solid #0E1A17;border-radius:999px;padding:6px 12px 6px 6px;font-size:13px;font-weight:700;box-shadow:3px 3px 0 #0E1A17"><span style="width:22px;height:22px;border-radius:50%;background:#003C32;color:#D4FD62;display:inline-flex;align-items:center;justify-content:center;font-size:12px">3</span>flax fibre + two-part epoxy</div>
+          <div class="leader" style="width:88px;height:2px;background:#0E1A17;animation-delay:1s"></div>
+        </div>
+        <div class="callout" style="position:absolute;right:-10px;top:400px;display:flex;flex-direction:row-reverse;align-items:center;animation-delay:1.1s">
+          <div style="display:flex;align-items:center;gap:8px;background:#E6DCC8;border:2px solid #0E1A17;border-radius:999px;padding:6px 12px 6px 6px;font-size:13px;font-weight:700;box-shadow:3px 3px 0 #0E1A17"><span style="width:22px;height:22px;border-radius:50%;background:#003C32;color:#D4FD62;display:inline-flex;align-items:center;justify-content:center;font-size:12px">4</span>plywood alignment jig</div>
+          <div class="leader" style="width:52px;height:2px;background:#0E1A17;transform-origin:right center;animation-delay:1.2s"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:34px">
+          <div style="aspect-ratio:1;border:2px solid #0E1A17;border-radius:4px;overflow:clip;background:#F1E9D8"><img src="road-exploded.jpg" alt="Exploded kit drawing" style="width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply"></div>
+          <div style="aspect-ratio:1;border:1.5px solid rgba(14,26,23,.35);border-radius:4px;overflow:clip;position:relative"><img src="bbc-rd-lug.jpg" alt="A joint mid-build" style="width:100%;height:100%;object-fit:cover"><span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span style="width:34px;height:34px;border-radius:50%;background:#D4FD62;border:2px solid #0E1A17;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#0E1A17">▶</span></span></div>
+          <div style="aspect-ratio:1;border:1.5px solid rgba(14,26,23,.35);border-radius:4px;overflow:clip"><img src="bbc-rd-bamboo-tubes.jpg" alt="The bamboo tubes" style="width:100%;height:100%;object-fit:cover"></div>
+          <div style="aspect-ratio:1;border:1.5px solid rgba(14,26,23,.35);border-radius:4px;overflow:clip"><img src="road-ride.jpg" alt="A rider on a finished road build, for scale" style="width:100%;height:100%;object-fit:cover"></div>
+        </div>
+        <div class="callout" style="position:absolute;left:40%;top:calc(100% - 118px);animation-delay:1.3s">
+          <div style="display:flex;align-items:center;gap:8px;background:#003C32;color:#E6DCC8;border:2px solid #0E1A17;border-radius:999px;padding:6px 12px 6px 6px;font-size:13px;font-weight:700;box-shadow:3px 3px 0 #0E1A17"><span style="width:22px;height:22px;border-radius:50%;background:#D4FD62;color:#003C32;display:inline-flex;align-items:center;justify-content:center;font-size:12px">5</span>manual + 15 hrs of video</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nodediv"><i style="left:12%"></i><i style="left:34%"></i><i style="left:56%"></i><i style="left:78%"></i></div>
+
+  <!-- ══ 2 · THE BUILD — culm timeline ══ -->
+  <div style="background:#E6DCC8"><div class="wrap pad" style="padding:80px 32px 72px">
+    <div class="eyebrow">how it goes together</div>
+    <h2 style="font-size:46px;max-width:14ch">four weekends, one frame.</h2>
+    <div style="position:relative;margin-top:44px">
+      <div style="position:absolute;left:0;right:0;top:22px;height:8px;background:rgba(14,26,23,.12);border-radius:3px"></div>
+      <div class="culm-grow" style="position:absolute;left:0;right:0;top:22px;height:8px;background:#D4FD62;border-radius:3px"></div>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;position:relative">
+        <div class="lift" style="display:flex;flex-direction:column;gap:14px">
+          <div style="width:52px;height:52px;border-radius:50%;background:#003C32;border:2.5px solid #0E1A17;display:flex;align-items:center;justify-content:center;color:#D4FD62;font-weight:800;font-size:18px">1</div>
+          <svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 26L20 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18 8l6 6-3 3-6-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M22 4l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="a" cx="7" cy="7" r="2"/></svg>
+          <h3 style="font-size:22px">measure &amp; mitre</h3>
+          <p style="margin:0;color:#2A332F;font-size:15.5px">Tubes on the 1:1 plan, cut to your size. Hacksaw and files — nothing else.</p>
+          <span style="font-size:12.5px;color:#5A6863">weekend 1 · 4–6 hrs</span>
+        </div>
+        <div class="lift" style="display:flex;flex-direction:column;gap:14px">
+          <div style="width:52px;height:52px;border-radius:50%;background:#003C32;border:2.5px solid #0E1A17;display:flex;align-items:center;justify-content:center;color:#D4FD62;font-weight:800;font-size:18px">2</div>
+          <svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="3" y="6" width="26" height="20" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 26V6M24 26V6M3 16h26" stroke="currentColor" stroke-width="2"/><circle class="a" cx="16" cy="16" r="2.4"/></svg>
+          <h3 style="font-size:22px">jig &amp; tack</h3>
+          <p style="margin:0;color:#2A332F;font-size:15.5px">The plywood jig holds the geometry. Tack every joint, check it twice.</p>
+          <span style="font-size:12.5px;color:#5A6863">weekend 2 · 4–6 hrs</span>
+        </div>
+        <div class="lift" style="display:flex;flex-direction:column;gap:14px">
+          <div style="width:52px;height:52px;border-radius:50%;background:#003C32;border:2.5px solid #0E1A17;display:flex;align-items:center;justify-content:center;color:#D4FD62;font-weight:800;font-size:18px">3</div>
+          <svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 20c6-10 14-10 20 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 20c6 6 14 6 20 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M10 14l2 10M16 12v12M22 14l-2 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle class="a" cx="26" cy="8" r="2"/></svg>
+          <h3 style="font-size:22px">wrap &amp; bond</h3>
+          <p style="margin:0;color:#2A332F;font-size:15.5px">Flax fibre and epoxy around each joint. Then the slow part: let it cure.</p>
+          <span style="font-size:12.5px;color:#5A6863">weekend 3 · 8–12 hrs + curing</span>
+        </div>
+        <div class="lift" style="display:flex;flex-direction:column;gap:14px">
+          <div style="width:52px;height:52px;border-radius:50%;background:#D4FD62;border:2.5px solid #0E1A17;display:flex;align-items:center;justify-content:center;color:#003C32;font-weight:800;font-size:18px">4</div>
+          <svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="8" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"/><path d="M8 22l5-10h7l4 10M13 12l-2-4h4M20 12l3-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle class="a" cx="23.5" cy="6.5" r="2"/></svg>
+          <h3 style="font-size:22px">finish &amp; ride</h3>
+          <p style="margin:0;color:#2A332F;font-size:15.5px">Sand, seal, fit your parts. Check the joints before every early ride.</p>
+          <span style="font-size:12.5px;color:#5A6863">weekend 4 · 6–10 hrs</span>
+        </div>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- ══ 3 · WILL IT TAKE MY PARTS ══ -->
+  <div class="sheet"><div class="wrap pad">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:26px">
+      <div><div class="eyebrow">fits your parts</div><h2 style="font-size:46px">will it take my parts?</h2></div>
+      <p style="margin:0;font-size:18px;line-height:1.5;color:#2A332F">The numbers you need to check a part you already own. The kit is the frame — fork, wheels and groupset are yours to choose.</p>
+    </div>
+    <dl class="spec" style="margin:0">
+      <div><dt><svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="2"/><path d="M16 4v3M16 25v3M4 16h3M25 16h3" stroke="currentColor" stroke-width="2"/></svg>tyre clearance</dt><dd>38 mm<small>700c</small></dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 6v20M26 6v20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 16h20" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/><path d="M9 13l-3 3 3 3M23 13l3 3-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>rear spacing</dt><dd>135 / 142 mm<small>modular dropout</small></dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="3" y="13" width="26" height="6" rx="3" stroke="currentColor" stroke-width="2"/><path d="M8 13v-3M8 22v-3M24 13v-3M24 22v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>axle</dt><dd>12 mm thru<small>or QR · single-speed · hub gear</small></dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="3" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="8" r="1.4" fill="currentColor"/><circle cx="23" cy="12" r="1.4" fill="currentColor"/><circle cx="23" cy="20" r="1.4" fill="currentColor"/><circle cx="16" cy="24" r="1.4" fill="currentColor"/><circle cx="9" cy="20" r="1.4" fill="currentColor"/><circle cx="9" cy="12" r="1.4" fill="currentColor"/></svg>brakes</dt><dd>Disc<small>post mount · flat mount with adapter</small></dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="4" stroke="currentColor" stroke-width="2"/><path d="M5 12h22M5 20h22" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/></svg>bottom bracket</dt><dd>BSA 68 mm<small>threaded</small></dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="12" y="3" width="8" height="26" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 14h16v5H8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16 3v6" stroke="currentColor" stroke-width="2"/></svg>seatpost</dt><dd>27.2 mm<small>internal dropper routing optional</small></dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="9" cy="10" r="4" stroke="currentColor" stroke-width="2"/><circle cx="23" cy="10" r="4" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="23" r="4" stroke="currentColor" stroke-width="2"/><path d="M7 8l4 4M21 8l4 4M14 21l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>mounts</dt><dd>Rack + mudguard<small>braze-on front mech optional</small></dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="17" r="11" stroke="currentColor" stroke-width="2"/><path d="M16 10v7l5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 3h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>build time</dt><dd>25–35 hrs<small>across a few weekends</small></dd></div>
+    </dl>
+    <div style="display:flex;justify-content:space-between;gap:14px;border:1.5px solid #003C32;border-top:0;padding:11px 18px;font-size:12.5px;color:#2A332F;background:rgba(0,60,50,.04)">
+      <span>Building from a donor bike? Send us its spec and we'll confirm the fit before you order.</span>
+      <a href="#" style="font-weight:700">Ask us about your parts →</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px">
+      <div style="background:#E6DCC8;border:2px solid #0E1A17;border-radius:8px;box-shadow:4px 4px 0 #0E1A17;padding:14px 16px"><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#1F6655">build time</span><b style="display:block;font-size:18px;margin-top:4px">25–35 hrs</b><span style="font-size:12.5px;color:#2A332F">across a few weekends</span></div>
+      <div style="background:#E6DCC8;border:2px solid #0E1A17;border-radius:8px;box-shadow:4px 4px 0 #0E1A17;padding:14px 16px"><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#1F6655">difficulty</span><b style="display:block;font-size:18px;margin-top:4px">No experience needed</b><span style="font-size:12.5px;color:#2A332F">most builders start from zero</span></div>
+      <div style="background:#E6DCC8;border:2px solid #0E1A17;border-radius:8px;box-shadow:4px 4px 0 #0E1A17;padding:14px 16px"><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#1F6655">tools</span><b style="display:block;font-size:18px;margin-top:4px">Hand tools only</b><span style="font-size:12.5px;color:#2A332F">hacksaw · files · sandpaper · tape</span></div>
+      <div style="background:#E6DCC8;border:2px solid #0E1A17;border-radius:8px;box-shadow:4px 4px 0 #0E1A17;padding:14px 16px"><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#1F6655">space</span><b style="display:block;font-size:18px;margin-top:4px">A table</b><span style="font-size:12.5px;color:#2A332F">about 1200 × 600 mm</span></div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:18px;font-size:14px;color:#2A332F"><span style="font-weight:700;color:#003C32">Documents</span><a href="#">Build manual (PDF) [confirm public]</a><a href="#">1:1 frame plan — in the box</a><a href="#">Geometry, stack &amp; reach (PDF) [to produce]</a></div>
+  </div></div>
+
+  <!-- ══ 4 · DDP ══ -->
+  <div style="background:#003C32;color:#E6DCC8"><div class="wrap pad">
+    <div class="eyebrow" style="color:#D4FD62">shipped worldwide from the london workshop</div>
+    <h2 style="font-size:46px;color:#fff">no customs bill at the door.</h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:44px;align-items:start;margin-top:26px">
+      <table class="rates">
+        <tr><th>Destination</th><th>Shipping</th><th>Duty &amp; tax</th></tr>
+        <tr><td>United Kingdom</td><td>£12</td><td>Included</td></tr>
+        <tr><td>Europe</td><td>£25</td><td>Paid by us</td></tr>
+        <tr><td>USA &amp; Canada</td><td>£45</td><td>Paid by us</td></tr>
+        <tr><td>Rest of world</td><td>£75</td><td>Paid by us</td></tr>
+      </table>
+      <div class="lift" style="border:1.5px solid #D4FD62;border-radius:8px;padding:20px 22px;background:rgba(212,253,98,.07);position:relative">
+        <div style="position:absolute;top:-14px;right:18px;background:#D4FD62;color:#002A23;border-radius:999px;padding:5px 12px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase">45 countries and counting</div>
+        <b style="display:block;color:#D4FD62;font-size:19px;letter-spacing:-.01em;margin-bottom:8px">Delivered duty paid</b>
+        <p style="margin:0 0 10px;font-size:14.5px;opacity:.92">The price at checkout is the price the kit costs you. We pay the import duty and tax before it ships, so the courier has nothing to collect when it arrives.</p>
+        <p style="margin:4px 0 0;font-size:12.5px;border-top:1px solid rgba(230,220,200,.25);padding-top:11px;opacity:.9"><b style="color:#D4FD62">Sydney, Large kit:</b> £375 kit + £75 shipping = <b style="color:#D4FD62">£450 total</b>, and nothing further on delivery.</p>
+      </div>
+    </div>
+    <p style="margin:22px 0 0;font-size:13px;opacity:.75">Packed by hand and shipped twice a week, tracked all the way.</p>
+  </div></div>
+
+  <!-- ══ 5 · IN THE BOX / YOU ADD ══ -->
+  <div style="background:#E6DCC8"><div class="wrap pad">
+    <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:start">
+      <div>
+        <div class="eyebrow">what arrives</div>
+        <h2 style="font-size:46px">everything but the parts you already own.</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px">
+          <div class="stamp lift" style="overflow:clip;border-radius:6px"><img src="bbc-rd-bamboo-tubes.jpg" alt="Heat-treated bamboo tubes graded and bundled for a kit" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover"></div>
+          <div class="stamp lift" style="overflow:clip;border-radius:6px"><img src="bbc-rd-lug.jpg" alt="A flax-wrapped joint curing on the jig" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover"></div>
+        </div>
+        <ul style="list-style:none;padding:0;margin:22px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;font-size:15.5px;color:#2A332F">
+          <li style="display:flex;gap:10px;align-items:flex-start"><span style="width:16px;height:3px;background:#9BC02E;border-radius:2px;margin-top:11px;flex:0 0 16px"></span>Heat-treated Moso bamboo tubes, with spares</li>
+          <li style="display:flex;gap:10px;align-items:flex-start"><span style="width:16px;height:3px;background:#9BC02E;border-radius:2px;margin-top:11px;flex:0 0 16px"></span>Flax fibre and two-part epoxy resin</li>
+          <li style="display:flex;gap:10px;align-items:flex-start"><span style="width:16px;height:3px;background:#9BC02E;border-radius:2px;margin-top:11px;flex:0 0 16px"></span>CNC head tube, BSA 68 mm shell and modular dropouts</li>
+          <li style="display:flex;gap:10px;align-items:flex-start"><span style="width:16px;height:3px;background:#9BC02E;border-radius:2px;margin-top:11px;flex:0 0 16px"></span>Plywood alignment jig and 1:1 frame plan</li>
+          <li style="display:flex;gap:10px;align-items:flex-start"><span style="width:16px;height:3px;background:#9BC02E;border-radius:2px;margin-top:11px;flex:0 0 16px"></span>Illustrated manual + 15 hours of video</li>
+          <li style="display:flex;gap:10px;align-items:flex-start"><span style="width:16px;height:3px;background:#9BC02E;border-radius:2px;margin-top:11px;flex:0 0 16px"></span>Builder community and a free video call</li>
+        </ul>
+      </div>
+      <div class="stamp lift" style="padding:26px;background:#DEE6F0">
+        <div class="eyebrow" style="color:#003C32">you add</div>
+        <h3 style="font-size:26px">fork, wheels, groupset.</h3>
+        <p style="margin:12px 0 18px;color:#2A332F;font-size:15.5px">Bring parts from a donor bike, or take a matched pack and it all bolts straight on.</p>
+        <div style="display:grid;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;background:#F1E9D8;border:1.5px solid #0E1A17;border-radius:6px;padding:12px 14px;font-size:15px"><span><b>Road single-speed pack</b><small style="display:block;color:#5A6863;font-size:12.5px">the simplest build</small></span><b>from £425</b></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;background:#F1E9D8;border:1.5px solid #0E1A17;border-radius:6px;padding:12px 14px;font-size:15px"><span><b>Shimano 105 hydraulic disc</b><small style="display:block;color:#5A6863;font-size:12.5px">the full road build</small></span><b>see pack</b></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;background:#F1E9D8;border:1.5px solid #0E1A17;border-radius:6px;padding:12px 14px;font-size:15px"><span><b>Road disc fork</b><small style="display:block;color:#5A6863;font-size:12.5px">most builders need one</small></span><b>see fork</b></div>
+        </div>
+        <a class="btn" style="margin-top:18px;width:100%">Complete your build →</a>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="nodediv"><i style="left:20%"></i><i style="left:45%"></i><i style="left:70%"></i></div>
+
+  <!-- ══ 6 · BUILDERS ══ -->
+  <div class="sheet"><div class="wrap pad">
+    <div style="display:grid;grid-template-columns:.95fr 1.05fr;gap:48px;align-items:center">
+      <div class="stamp lift" style="overflow:clip;border-radius:6px;transform:rotate(-1.5deg)"><img src="road-ride.jpg" alt="A home-built bamboo road bike out on the road" style="display:block;width:100%;aspect-ratio:3/2;object-fit:cover"></div>
+      <div>
+        <div class="eyebrow">built by people like you</div>
+        <blockquote style="margin:0;font-size:30px;font-weight:700;line-height:1.25;letter-spacing:-.01em;color:#0E1A17;text-wrap:pretty">“Still riding mine daily after 7 years. Built it at home using the kit. It's outlasted two steel bikes I owned before.”</blockquote>
+        <p style="margin:16px 0 0;font-size:14px;color:#5A6863;letter-spacing:.04em;text-transform:uppercase;font-weight:700">Jamie · Road kit builder, Romania · Verified builder</p>
+        <div style="display:flex;gap:12px;margin-top:30px">
+          <div style="flex:1;background:#E6DCC8;border:2px solid #0E1A17;border-radius:8px;box-shadow:4px 4px 0 #0E1A17;padding:16px 18px"><b style="font-size:28px;letter-spacing:-.02em;display:block">4,000+</b><span style="font-size:13px;color:#2A332F">people trained since 2012</span></div>
+          <div style="flex:1;background:#E6DCC8;border:2px solid #0E1A17;border-radius:8px;box-shadow:4px 4px 0 #0E1A17;padding:16px 18px"><b style="font-size:28px;letter-spacing:-.02em;display:block">45</b><span style="font-size:13px;color:#2A332F">countries built in</span></div>
+          <div style="flex:1;background:#D4FD62;border:2px solid #0E1A17;border-radius:8px;box-shadow:4px 4px 0 #0E1A17;padding:16px 18px"><b style="font-size:28px;letter-spacing:-.02em;display:block">95%</b><span style="font-size:13px;color:#2A332F">[to verify] had never built before</span></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- ══ 7 · WHAT WE DO AND DON'T CLAIM ══ -->
+  <div style="background:#E6DCC8"><div class="wrap" style="padding:56px 32px">
+    <div style="background:#DEE6F0;border:2.5px solid #0E1A17;border-radius:6px;box-shadow:5px 5px 0 #0E1A17;padding:28px 32px;display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:start">
+      <svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true" style="width:44px;height:44px"><path d="M4 24h24M8 24V10l8-5 8 5v14" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 24v-8h8v8" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle class="a" cx="16" cy="11" r="2"/></svg>
+      <div>
+        <div class="eyebrow" style="color:#003C32">what we do and don't claim</div>
+        <h3 style="font-size:24px">the tubing is tested. your joints decide the frame.</h3>
+        <p style="margin:10px 0 0;font-size:15.5px;color:#2A332F;max-width:78ch">Bamboo frame tubing tested at Swansea University to BS ISO 22157:2019 — 84.3 MPa ultimate tensile, comparable to mild steel at a fraction of the weight. That figure is for the tubing we supply, not for a finished frame: how strong your bike ends up is decided by the joints you make. Follow the manual, let the resin cure fully, and check the joints before every early ride — and call us if anything looks wrong.</p>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- ══ 8 · QUESTIONS ══ -->
+  <div class="sheet"><div class="wrap pad" style="display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;align-items:start">
+    <div><div class="eyebrow">before you build</div><h2 style="font-size:46px">the questions the emails ask.</h2><p style="margin:14px 0 0;color:#2A332F;font-size:16px">Ranked by how often builders ask them, not by how we'd like to be asked.</p></div>
+    <div style="display:grid;gap:10px">
+      <details open><summary>Do I need power tools?</summary><p>No. Just basic hand tools — a hacksaw, files, sandpaper, a measuring tape and a work surface around 1200 × 600 mm. Everything else is in the kit.</p></details>
+      <details><summary>What drivetrain and groupset can I run?</summary><p>The frame works with all major road groupsets. Add one of our matched component packs, or source your own parts from any bike shop.</p></details>
+      <details><summary>Is it weatherproof?</summary><p>Yes. Finished frames are sealed with epoxy resin. Dry your bike after wet rides and store it indoors.</p></details>
+      <details><summary>Not sure which size?</summary><p>Send us your height and inside-leg measurement and we'll recommend the fit — or choose a Custom frame, made to your measurements.</p></details>
+      <details><summary>Can I use Cycle to Work?</summary><p>Yes — build your bamboo bike through the government's Cycle to Work scheme and save through salary sacrifice.</p></details>
+    </div>
+  </div></div>
+
+  <!-- ══ 9 · MISSION STRIP ══ -->
+  <div style="background:#003C32;color:#E6DCC8"><div class="wrap" style="padding:40px 32px;display:flex;align-items:center;gap:28px;justify-content:space-between">
+    <div style="display:flex;align-items:center;gap:18px">
+      <div style="width:8px;height:56px;border-radius:3px;background:#D4FD62"></div>
+      <p style="margin:0;font-size:20px;font-weight:700;max-width:40ch;color:#fff">Build your own — and help fund a place on Build to Bond, our prison bike-building course.</p>
+    </div>
+    <a class="btn" style="background:transparent;border-color:rgba(230,220,200,.5);color:#E6DCC8;border-radius:999px">See the impact →</a>
+  </div></div>
+
+  <!-- footer (abbreviated, matches live) -->
+  <div style="background:#002A23;color:#B6C2BC;padding:28px 86px;font-size:13px;display:flex;justify-content:space-between"><span>Bamboo Bicycle Club · est. 2012 · London · Bamboo Mobility Project CIC 16257348</span><span>info@bamboobicycleclub.org</span></div>
+
+  <!-- sticky buy bar (fixed to the viewport bottom on the live site; shown here in flow) -->
+  <div style="position:relative;background:#003C32;color:#E6DCC8;padding:12px 86px;display:flex;align-items:center;justify-content:space-between;border-top:2px solid #D4FD62">
+    <div><b style="display:block;font-size:15px">Road Frame Build Kit</b><span style="font-size:13px;opacity:.8">£375 · Medium selected</span></div>
+    <a class="btn btn-lime" style="border-radius:999px;min-height:44px">Add to basket · £375</a>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

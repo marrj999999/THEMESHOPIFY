@@ -1,0 +1,371 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-education-2026",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "number": "1,544",
+            "label": "young people have built with us",
+            "source": "Make Engineers delivery to date"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "number": "OCN London",
+            "label": "accredited outcomes",
+            "source": "Level 1 Award, Practical Manufacturing Skills"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "number": "Benchmark 4",
+            "label": "links your curriculum to careers",
+            "source": "Gatsby Benchmarks"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "number": "KS3–post-16",
+            "label": "curriculum-mapped, ages 11 to 19",
+            "source": "Make Engineers curriculum maps"
+          }
+        },
+        "p1": {
+          "type": "programme",
+          "settings": {
+            "tier": "Foundation — start here, free",
+            "title": "Acoustic Engineering & Sustainable Product Design",
+            "detail": "A working bamboo speaker, built by hand — design the chamber, test the sound, learn the physics. A complete STEM project in 2–3 hours, curriculum-mapped and OCN-accredited. Ages 11–16, KS3–KS4. The taster: run it, then decide the rest.",
+            "free": true,
+            "status": "available"
+          }
+        },
+        "p2": {
+          "type": "programme",
+          "settings": {
+            "tier": "Frame I",
+            "title": "Sustainable Product Engineering",
+            "detail": "The first frame your students build — a bamboo balance bike. Their entry into structural design and precision fabrication, where a finished object has to hold real weight. The natural next step once the Speaker has hooked them.",
+            "free": false,
+            "price_tag": "Request a quote",
+            "status": "coming"
+          }
+        },
+        "p3": {
+          "type": "programme",
+          "settings": {
+            "tier": "Frame II",
+            "title": "Sustainable Bicycle Technical Development",
+            "detail": "Students design, build and ride a real bamboo gravel frame — drawings, jig setup, mitring, structural bonding and quality checks, as a frame is made in industry. Multi-session, ages 14–18, KS4 \/ post-16.",
+            "free": false,
+            "price_tag": "Request a quote",
+            "status": "available"
+          }
+        },
+        "p4": {
+          "type": "programme",
+          "settings": {
+            "tier": "Additive",
+            "title": "Additive Manufacturing & Adaptive Design",
+            "detail": "Students design and 3D-print the frame lugs themselves — parametric, adaptive design taken from screen to part. Ages 14–19, post-16. Where digital design meets real fabrication.",
+            "free": false,
+            "price_tag": "Request a quote",
+            "status": "available"
+          }
+        },
+        "p5": {
+          "type": "programme",
+          "settings": {
+            "tier": "Systems",
+            "title": "Electric Mobility Engineering & Green Technology",
+            "detail": "Students wire and integrate the electronics that drive an electric bike — circuits, power and systems thinking, applied to clean transport. KS4 to post-16.",
+            "free": false,
+            "price_tag": "Request a quote",
+            "status": "coming"
+          }
+        },
+        "pt1": {
+          "type": "partner",
+          "settings": {
+            "name": "University College London",
+            "logo_asset": "bbc-logo-ucl.png",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/impact\/ucl-masters-bamboo-electric-cargo-bike-university"
+          }
+        },
+        "pt2": {
+          "type": "partner",
+          "settings": {
+            "name": "King's College London",
+            "logo_asset": "bbc-logo-kcl.png",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/schools-and-education\/kings-college-london-bamboo-staff-workshop"
+          }
+        },
+        "pt3": {
+          "type": "partner",
+          "settings": {
+            "name": "Coventry University",
+            "logo_asset": "bbc-logo-coventry.png",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/schools-and-education\/coventry-university-bbc-at-uk-bamboo-summit-2024"
+          }
+        },
+        "pt4": {
+          "type": "partner",
+          "settings": {
+            "name": "London South Bank University",
+            "logo_asset": "bbc-logo-lsbu.png",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/schools-and-education\/bamboo-bicycle-club-partners-with-southbank-university-a-new-hub-for-sustainable-bike-building"
+          }
+        },
+        "pt5": {
+          "type": "partner",
+          "settings": {
+            "name": "The Oratory School",
+            "logo_asset": "bbc-logo-oratory.png",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/schools-and-education\/the-oratory-school-bamboo-bike-workshop-for-students"
+          }
+        },
+        "pt6": {
+          "type": "partner",
+          "settings": {
+            "name": "Stoke-on-Trent College",
+            "logo_asset": "bbc-logo-stoke.png",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/schools-and-education\/stoke-on-trent-college-bamboo-workshop-with-students"
+          }
+        },
+        "pt7": {
+          "type": "partner",
+          "settings": {
+            "name": "Reed's School",
+            "logo_asset": "bbc-logo-reeds.png",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/schools-and-education\/reeds-school-end-of-term-bamboo-racing"
+          }
+        },
+        "pt8": {
+          "type": "partner",
+          "settings": {
+            "name": "Bradfield College",
+            "logo_asset": "bbc-logo-bradfield.png",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/schools-and-education\/new-schools-race-event-hosted-at-bradfield-colledge"
+          }
+        },
+        "c1": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "University",
+            "institution": "University College London",
+            "logo_asset": "bbc-logo-ucl.png",
+            "image": "bbc-rd-cs-ucl.jpg",
+            "quote": "This is research-led practice at its most direct.",
+            "blurb": "A three-year Masters research partnership with UCL Mechanical Engineering (2016–18) — from a 150kg cargo bike to a UK-compliant electric build.",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/impact\/ucl-masters-bamboo-electric-cargo-bike-university",
+            "link_label": "Read the case study"
+          }
+        },
+        "c2": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "Schools · STEM",
+            "institution": "Teaching STEM with purpose",
+            "image": "bbc-rd-cs-science.jpg",
+            "quote": "Alex passed his science module. He actually passed. He came back talking about the bicycle, and suddenly it all made sense.",
+            "blurb": "In-school workshops that teach STEM by building a real bamboo frame by hand.",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/schools-and-education\/teaching-stem-with-purpose-bamboo-bikes",
+            "link_label": "Read the case study"
+          }
+        },
+        "c3": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "School",
+            "institution": "The Oratory School",
+            "logo_asset": "bbc-logo-oratory.png",
+            "image": "bbc-rd-cs-oratory.jpg",
+            "quote": "There is not another school in the UK with this as an option for its students or the public.",
+            "attribution": "Nick Mills — Head of Design Technology, The Oratory School",
+            "blurb": "A permanent in-school bamboo-bike workshop, built into the school's D&T curriculum since 2020.",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/schools-and-education\/the-oratory-school-bamboo-bike-workshop-for-students",
+            "link_label": "Read the case study"
+          }
+        },
+        "c4": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "University",
+            "institution": "King's College London",
+            "logo_asset": "bbc-logo-kcl.png",
+            "image": "bbc-rd-cs-academics.jpg",
+            "quote": "The academics went first. The students would come later, if the staff decided it was worth it.",
+            "blurb": "A hands-on bamboo-frame workshop for King's College London teaching staff, who built as learners before weighing it for the curriculum.",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/schools-and-education\/kings-college-london-bamboo-staff-workshop",
+            "link_label": "Read the case study"
+          }
+        },
+        "c5": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "University",
+            "institution": "Coventry University",
+            "logo_asset": "bbc-logo-coventry.png",
+            "image": "bbc-rd-cs-coventry.jpg",
+            "quote": "BBC was the organisation chosen to demonstrate what working with bamboo actually feels like.",
+            "blurb": "BBC led the hands-on workshop at Coventry University's UK Bamboo Summit 2024 — the first national gathering of bamboo academics and engineers.",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/schools-and-education\/coventry-university-bbc-at-uk-bamboo-summit-2024",
+            "link_label": "Read the case study"
+          }
+        },
+        "c6": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "Schools event",
+            "institution": "Bradfield College",
+            "logo_asset": "bbc-logo-bradfield.png",
+            "image": "bbc-rd-cs-bradfield.jpg",
+            "quote": "",
+            "blurb": "Bradfield College has agreed to host an end-of-year schools gravel race — student teams design and build two custom bamboo gravel bikes with CAD.",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/schools-and-education\/new-schools-race-event-hosted-at-bradfield-colledge",
+            "link_label": "Read the case study"
+          }
+        },
+        "c7": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "College",
+            "institution": "Stoke-on-Trent College",
+            "logo_asset": "bbc-logo-stoke.png",
+            "image": "bbc-rd-cs-stoke.jpg",
+            "quote": "FE students and community artists in the same workshop is not a compromise — it is an enrichment for both groups.",
+            "blurb": "A March 2025 cross-sector bamboo workshop at Stoke-on-Trent College, seating FE students alongside a local artist to build together.",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/schools-and-education\/stoke-on-trent-college-bamboo-workshop-with-students",
+            "link_label": "Read the case study"
+          }
+        },
+        "c8": {
+          "type": "casestudy",
+          "settings": {
+            "kind": "School",
+            "institution": "Reed's School, Surrey",
+            "logo_asset": "bbc-logo-reeds.png",
+            "image": "bbc-rd-cs-racing.jpg",
+            "quote": "A bike built well is a bike that races well.",
+            "blurb": "A multi-session programme at Reed's School, Surrey (2019) — students built four bamboo bicycles and raced them at the end of term.",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/schools-and-education\/reeds-school-end-of-term-bamboo-racing",
+            "link_label": "Read the case study"
+          }
+        },
+        "b1": {
+          "type": "badge",
+          "settings": {
+            "label": "OCN London accredited",
+            "lime": true
+          }
+        },
+        "b2": {
+          "type": "badge",
+          "settings": {
+            "label": "Gatsby Benchmark 4",
+            "lime": false
+          }
+        },
+        "b3": {
+          "type": "badge",
+          "settings": {
+            "label": "Bamboo Mobility Project CIC",
+            "lime": false
+          }
+        },
+        "b4": {
+          "type": "badge",
+          "settings": {
+            "label": "Enhanced-DBS facilitators · public-liability insured",
+            "lime": false
+          }
+        },
+        "pr1": {
+          "type": "press",
+          "settings": {
+            "text": "University of Cumbria",
+            "style": "serif",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/news\/university-of-cumbria-8-000-miles-on-a-bike-made-of-british-bamboo"
+          }
+        },
+        "pr2": {
+          "type": "press",
+          "settings": {
+            "text": "BikeBiz",
+            "style": "caps",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/news\/bikebiz-bamboo-bicycle-club-and-oxford-brookes-build-worlds-first-3d-printed-bamboo-bike"
+          }
+        },
+        "pr3": {
+          "type": "press",
+          "settings": {
+            "text": "Design Museum",
+            "style": "caps",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/news\/design-museum-cycle-revolution-exhibition-bbc-frame-on-display"
+          }
+        },
+        "pr4": {
+          "type": "press",
+          "settings": {
+            "text": "Wallpaper*",
+            "style": "serif-italic",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/news\/wallpaper-bamboo-bicycle-club-featured-in-konstantin-grcics-paris-2024-olympic-exhibition"
+          }
+        },
+        "pr5": {
+          "type": "press",
+          "settings": {
+            "text": "Total Women's Cycling",
+            "style": "serif",
+            "url": "https:\/\/bamboobicycleclub.org\/blogs\/news\/total-womens-cycling-kate-rawles-on-solo-cycling-through-south-america-on-a-bamboo-bike"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "pt1",
+        "pt2",
+        "pt3",
+        "pt4",
+        "pt5",
+        "pt6",
+        "pt7",
+        "pt8",
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6",
+        "c7",
+        "c8",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "pr1",
+        "pr2",
+        "pr3",
+        "pr4",
+        "pr5"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,1111 @@
+
+/* ==========================================================================
+   BBC STATEMENT — standard headline-first editorial component (2026)
+   Site-wide standard: any section (or hand-authored markup) inside .bbc-rd
+   can use the .bbcst-* classes. Everything LEFT-justified, labels lowercase,
+   standard 18px body. One accent system, no colour clashes:
+     light backgrounds (paper / lime / steel) -> FOREST accent + dark text
+     dark backgrounds (forest / background-image) -> LIME accent + light text
+   Button hierarchy: .is-primary (solid pill) -> .is-secondary (outline) ->
+   .bbcst-links (additional text links). All colours meet WCAG AAA (>=7:1 body,
+   >=4.5:1 large) on the ACTUAL theme backgrounds (bone #E6DCC8, forest #003C32,
+   lime #D4FD62, steel #DEE6F0). Wrap selectors are compound (.bbc-rd.bbcst-wrap)
+   because the wrap element carries .bbc-rd itself.
+   ========================================================================== */
+.bbc-rd.bbcst-wrap{ position:relative; }
+.bbc-rd.bbcst-wrap.is-paper{ background:var(--bone,#E6DCC8); }
+.bbc-rd.bbcst-wrap.is-forest{ background:var(--forest,#003C32); }
+.bbc-rd.bbcst-wrap.is-lime{ background:var(--lime,#D4FD62); }
+.bbc-rd.bbcst-wrap.is-steel{ background:#DEE6F0; }
+
+.bbc-rd .bbcst{ position:relative; padding:clamp(48px,7vw,120px) 0; min-height:82vh; display:flex; flex-direction:column; justify-content:center; }
+.bbc-rd .bbcst.is-compact{ min-height:0; padding:clamp(44px,6vw,84px) 0; }
+/* The statement band used its own full-bleed padding — clamp(24px,5vw,90px), which is 64px at
+   1280 — while every other band on the site is .rd-wrap: a 1200px box centred with 32px padding,
+   landing content at 72px. An 8px step, left-aligned, against the band directly above it. Too
+   small to read as a deliberate full-bleed break and too big to look accidental-free; it just
+   looks misaligned. Horizontal padding moves to this inner wrapper using .rd-wrap's exact
+   formula, so the band keeps its full-bleed background and its content tracks the page axis at
+   every width. (2026-08-05) */
+.bbc-rd .bbcst-inner{ position:relative; z-index:2; width:100%; text-align:left;
+  max-width:var(--rd-container); margin-inline:auto; padding-inline:32px; box-sizing:border-box; }
+
+/* eyebrow — lowercase label */
+.bbc-rd .bbcst-eyebrow{ display:block; font-size:15px; font-weight:700; letter-spacing:.05em; /* statement dialect: designed tight voice, restored 2026-08-09 */ color:var(--forest,#003C32); margin:0 0 clamp(16px,2vw,26px); }
+/* headline — the content */
+.bbc-rd .bbcst-head{ font-size:clamp(3rem,10.5vw,10.5rem); line-height:.9; letter-spacing:-.04em; font-weight:800; margin:0; color:var(--forest,#003C32); text-wrap:balance; max-width:none; }
+.bbc-rd .bbcst-star{ font-size:.3em; font-weight:800; vertical-align:super; color:var(--forest,#003C32); line-height:0; }
+
+/* supporting text — standard 18px body + footnote, left, below the headline */
+.bbc-rd .bbcst-support{ margin-top:clamp(26px,3.4vw,46px); max-width:62ch; }
+.bbc-rd .bbcst-body{ font-size:18px; line-height:1.6; margin:0; color:var(--drift-26332e); }
+.bbc-rd .bbcst-note{ font-size:14px; line-height:1.6; margin:12px 0 0; color:var(--drift-3a443f); }
+
+/* image — below the headline (device / editorial) */
+.bbc-rd .bbcst-figure{ margin:clamp(26px,3.4vw,48px) 0 0; max-width:1000px; }
+.bbc-rd .bbcst-figure img{ display:block; width:100%; height:auto; border-radius:16px; }
+
+/* actions — primary + secondary buttons */
+.bbc-rd .bbcst-actions{ display:flex; flex-wrap:wrap; gap:14px; margin-top:clamp(28px,3.4vw,44px); }
+.bbc-rd .bbcst-btn{ display:inline-block; font-weight:800; font-size:16px; letter-spacing:.01em; text-decoration:none; padding:15px 30px; border-radius:999px; border:2px solid transparent; transition:transform .1s ease, opacity var(--mo-fast) ease; }
+.bbc-rd .bbcst-btn:active{ transform:scale(.985); }
+.bbc-rd .bbcst-btn.is-primary{ background:var(--forest,#003C32); color:var(--bone,#E6DCC8); border-color:var(--forest,#003C32); }
+.bbc-rd .bbcst-btn.is-primary:hover{ opacity:.9; }
+.bbc-rd .bbcst-btn.is-secondary{ background:transparent; color:var(--forest,#003C32); border-color:var(--forest,#003C32); }
+.bbc-rd .bbcst-btn.is-secondary:hover{ background:var(--forest,#003C32); color:var(--bone,#E6DCC8); }
+
+/* additional links */
+.bbc-rd .bbcst-links{ display:flex; flex-wrap:wrap; gap:12px 24px; align-items:center; margin-top:clamp(22px,2.6vw,32px); }
+.bbc-rd .bbcst-link{ font-size:15px; font-weight:700; text-decoration:none; color:var(--forest,#003C32); border-bottom:2px solid var(--forest,#003C32); padding-bottom:2px; white-space:nowrap; }
+.bbc-rd .bbcst-link:hover{ opacity:.6; }
+
+/* lime background — dark accents keep, just the muted note needs lifting */
+.bbc-rd.bbcst-wrap.is-lime .bbcst-note{ color:var(--drift-1f4530); }
+
+/* dark backgrounds (forest + background-image) — lime accent, light text */
+.bbc-rd.bbcst-wrap.is-forest .bbcst-head,
+.bbc-rd.bbcst-wrap.has-bg .bbcst-head{ color:var(--bone,#E6DCC8); }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-eyebrow,
+.bbc-rd.bbcst-wrap.has-bg .bbcst-eyebrow{ color:var(--lime,#D4FD62); }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-star,
+.bbc-rd.bbcst-wrap.has-bg .bbcst-star{ color:var(--lime,#D4FD62); }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-body,
+.bbc-rd.bbcst-wrap.has-bg .bbcst-body{ color:var(--drift-cfe0d7); }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-note{ color:var(--drift-c9d8d0); }
+.bbc-rd.bbcst-wrap.has-bg .bbcst-note{ color:var(--drift-dbe6df); }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-link,
+.bbc-rd.bbcst-wrap.has-bg .bbcst-link{ color:var(--bone,#E6DCC8); border-bottom-color:var(--lime,#D4FD62); }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-btn.is-primary,
+.bbc-rd.bbcst-wrap.has-bg .bbcst-btn.is-primary{ background:var(--lime,#D4FD62); color:var(--forest,#003C32); border-color:var(--lime,#D4FD62); }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-btn.is-secondary,
+.bbc-rd.bbcst-wrap.has-bg .bbcst-btn.is-secondary{ color:var(--bone,#E6DCC8); border-color:var(--bone,#E6DCC8); }
+.bbc-rd.bbcst-wrap.is-forest .bbcst-btn.is-secondary:hover,
+.bbc-rd.bbcst-wrap.has-bg .bbcst-btn.is-secondary:hover{ background:var(--bone,#E6DCC8); color:var(--forest,#003C32); }
+
+/* background-image mode: full-bleed photo + scrim */
+.bbc-rd .bbcst-bg{ position:absolute; inset:0; z-index:0; overflow:hidden; }
+.bbc-rd .bbcst-bg img{ width:100%; height:100%; object-fit:cover; display:block; }
+.bbc-rd .bbcst-scrim{ position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(0,32,26,.5), rgba(0,32,26,.8)); }
+
+@media(max-width:749px){
+  .bbc-rd .bbcst{ min-height:0; padding:clamp(44px,10vw,64px) 22px; justify-content:flex-start; }
+  .bbc-rd .bbcst-head{ font-size:clamp(2.5rem,12vw,5rem) !important; }
+  .bbc-rd .bbcst-actions{ gap:12px; }
+  .bbc-rd .bbcst-btn{ text-align:center; }
+}
+
+/* ==========================================================================
+   BBC PILLAR — full-height image + big-headline "beat" (pairs with statement)
+   Same standard: forest accent on light / lime accent on dark, lowercase
+   kickers, 18px body, left-justified. AAA on the real theme backgrounds.
+   ========================================================================== */
+.bbc-rd .bbcpl-wrap{ overflow:hidden; }
+.bbc-rd .bbcpl{ display:grid; grid-template-columns:1.02fr .98fr; grid-template-rows:minmax(84vh,auto); align-items:stretch; }
+.bbc-rd .bbcpl.is-rev .bbcpl-media{ order:2; }
+.bbc-rd .bbcpl.is-paper{ background:var(--bone,#E6DCC8); }
+.bbc-rd .bbcpl.is-steel{ background:#DEE6F0; }
+/* A forest surface must declare its own text colour. Without it, descendants that
+   set no colour of their own inherit ink from .bbc-rd, and the redesign's
+   `a{color:inherit !important}` rule then resolves .bbcpl-cta to ink on forest
+   (measured 1.44:1, 2026-08-03). The .bbcst-* family got :not(#_) guards in the
+   2026-07-07 pass; .bbcpl-* got none. Setting the container colour fixes the CTA
+   and any future link in this block without another specificity hack. */
+.bbc-rd .bbcpl.is-forest{ background:var(--forest,#003C32); color:var(--bone,#E6DCC8); }
+.bbc-rd .bbcpl-media{ position:relative; min-height:0; }
+.bbc-rd .bbcpl-media img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+.bbc-rd .bbcpl-txt{ display:flex; align-items:center; padding:clamp(40px,5vw,96px); text-align:left; }
+.bbc-rd .bbcpl-inner{ max-width:640px; }
+/* kicker (lowercase) */
+.bbc-rd .bbcpl-idx{ display:flex; align-items:center; gap:14px; margin:0 0 clamp(18px,2vw,30px); font-size:14px; font-weight:800; letter-spacing:.02em; color:var(--forest,#003C32); }
+.bbc-rd .bbcpl-rule{ display:inline-block; width:44px; height:3px; background:var(--forest,#003C32); flex:none; }
+.bbc-rd .bbcpl-num{ font-variant-numeric:tabular-nums; color:inherit; }
+/* headline */
+.bbc-rd .bbcpl-title{ font-size:clamp(3rem,7.2vw,7rem); line-height:.94; letter-spacing:-.02em; font-weight:800; margin:0; color:var(--forest,#003C32); text-wrap:balance; }
+/* body 18px standard */
+.bbc-rd .bbcpl-body{ font-size:18px; line-height:1.6; margin:clamp(20px,2vw,28px) 0 0; max-width:46ch; color:var(--drift-26332e); }
+/* quote */
+.bbc-rd .bbcpl-quote{ margin:clamp(22px,2.4vw,34px) 0 0; padding:0 0 0 20px; border-left:3px solid var(--forest,#003C32); }
+.bbc-rd .bbcpl-quote blockquote{ margin:0; font-size:19px; line-height:1.45; font-style:italic; color:var(--forest,#003C32); }
+.bbc-rd .bbcpl-quote figcaption{ margin-top:12px; font-size:13px; letter-spacing:.01em; color:var(--drift-3a443f); font-style:normal; }
+.bbc-rd .bbcpl-qtag{ display:inline-block; background:rgba(0,60,50,.1); color:var(--forest,#003C32); font-weight:800; padding:2px 8px; border-radius:4px; margin-right:8px; }
+/* cta link (matches statement link) */
+.bbc-rd .bbcpl-cta{ display:inline-block; margin-top:clamp(22px,2.4vw,32px); font-size:15px; font-weight:700; text-decoration:none; color:var(--forest,#003C32); border-bottom:2px solid var(--forest,#003C32); padding-bottom:2px; }
+.bbc-rd .bbcpl-cta:hover{ opacity:.6; }
+/* forest variant — lime accent, light text */
+.bbc-rd .bbcpl.is-forest .bbcpl-title{ color:var(--bone,#E6DCC8); }
+.bbc-rd .bbcpl.is-forest .bbcpl-idx{ color:var(--lime,#D4FD62); }
+.bbc-rd .bbcpl.is-forest .bbcpl-rule{ background:var(--lime,#D4FD62); }
+.bbc-rd .bbcpl.is-forest .bbcpl-body{ color:var(--drift-cfe0d7); }
+.bbc-rd .bbcpl.is-forest .bbcpl-quote{ border-left-color:var(--lime,#D4FD62); }
+.bbc-rd .bbcpl.is-forest .bbcpl-quote blockquote{ color:var(--drift-eaf3ee); }
+.bbc-rd .bbcpl.is-forest .bbcpl-quote figcaption{ color:var(--drift-c9d8d0); }
+.bbc-rd .bbcpl.is-forest .bbcpl-qtag{ background:rgba(212,253,98,.16); color:var(--lime,#D4FD62); }
+.bbc-rd .bbcpl.is-forest .bbcpl-cta{ color:var(--bone,#E6DCC8); border-bottom-color:var(--lime,#D4FD62); }
+@media(max-width:900px){
+  .bbc-rd .bbcpl{ grid-template-columns:1fr; grid-template-rows:auto; }
+  .bbc-rd .bbcpl.is-rev .bbcpl-media{ order:0; }
+  .bbc-rd .bbcpl-media{ min-height:0; aspect-ratio:16/10; }
+  .bbc-rd .bbcpl-txt{ padding:clamp(34px,7vw,52px) 24px; }
+  .bbc-rd .bbcpl-title{ font-size:clamp(2.6rem,11vw,4.4rem) !important; }
+}
+
+/* ============================================================
+   HOMEPAGE ROLLOUT — bring bbc-home-2026 (.bbc-rd-home) beats
+   up to the bbcst standard: big lowercase headlines, left-
+   justified, lowercase eyebrows. Loaded site-wide wherever a
+   statement/pillar section is present.
+   ============================================================ */
+/* section headlines -> statement scale (none contain proper nouns) */
+.bbc-rd.bbc-rd-home h2{
+  font-size:clamp(2.6rem,5.8vw,5.6rem);
+  line-height:.98;
+  letter-spacing:-.02em;
+  text-transform:lowercase;
+  text-align:left;
+}
+/* hero headline -> full statement scale */
+.bbc-rd.bbc-rd-home .ew-h1{
+  font-size:clamp(3rem,8.5vw,8.5rem);
+  line-height:.96;
+  letter-spacing:-.025em;
+  text-transform:lowercase;
+  text-align:left;
+}
+/* eyebrows lowercase to match bbcst kickers */
+.bbc-rd.bbc-rd-home .rd-eyebrow{ text-transform:lowercase; letter-spacing:.14em; }
+/* centered bands go left, per the standard */
+.bbc-rd.bbc-rd-home .rd-center{ text-align:left; }
+.bbc-rd.bbc-rd-home .rd-center h2{ margin-left:0; margin-right:0; }
+@media(max-width:900px){
+  .bbc-rd.bbc-rd-home h2{ font-size:clamp(2.2rem,9vw,3.4rem) !important; }
+  .bbc-rd.bbc-rd-home .ew-h1{ font-size:clamp(2.6rem,11.5vw,4.6rem) !important; }
+}
+/* pin formerly-centered wrappers to the left margin (match card grids) */
+.bbc-rd.bbc-rd-home .rd-wrap > .rd-center,
+.bbc-rd.bbc-rd-home .rd-center .rd-wrap > *{ margin-left:0; }
+.bbc-rd.bbc-rd-home .rd-center [class*="rd-mw-"]{ margin-left:0; margin-right:auto; }
+/* the generated rd-cmp-* wrappers centre with !important — match it to pin left */
+.bbc-rd.bbc-rd-home .rd-center[class*="rd-cmp-"]{ margin-left:0 !important; margin-right:auto !important; }
+.bbc-rd.bbc-rd-home .ew-eyebrow{ text-transform:lowercase; letter-spacing:.14em; }
+
+/* ============================================================
+   REFINEMENT PASS 2026-07-07 — optimum sizes, one button
+   system, image alignment. Direction: brutalist-editorial
+   ("deliberate, human, imperfect") — big lowercase display,
+   hard-cropped images, one accent per surface, hard button
+   hierarchy.
+   ============================================================ */
+/* body measure: cap at ~65 characters for readability */
+.bbc-rd .bbcst-body{ max-width:34em; }
+.bbc-rd .bbcpl-body{ max-width:30em; }
+/* pillar media fills its column — image and text edges align */
+.bbc-rd .bbcpl-media{ position:relative; overflow:hidden; }
+.bbc-rd .bbcpl-media img{ position:absolute; inset:0; width:100% !important; height:100% !important; object-fit:cover; display:block; }
+/* ONE button system: legacy rd-btn adopts the standard pill */
+.bbc-rd .rd-btn{ border-radius:999px !important; font-size:15px !important; font-weight:700; padding:14px 28px !important; }
+/* hierarchy on dark surfaces: lime fill = the ONE primary; bone fills demote to outline secondary */
+.bbc-rd .rd-btn.rd-on-dark{ background:transparent !important; color:var(--bone,#E6DCC8) !important; border:2px solid var(--bone,#E6DCC8) !important; }
+.bbc-rd .rd-btn.rd-on-dark:hover{ background:rgba(230,220,200,.14) !important; }
+/* standard buttons: unified sizing */
+.bbc-rd .bbcst-btn{ font-size:15px; padding:14px 28px; }
+@media(max-width:600px){
+  /* thumb-friendly: stacked full-width buttons */
+  .bbc-rd .bbcst-actions{ flex-direction:column; align-items:stretch; }
+  .bbc-rd .bbcst-btn{ text-align:center; }
+  /* mobile reading size */
+  .bbc-rd .bbcst-body, .bbc-rd .bbcpl-body{ font-size:16px; }
+}
+
+/* ============================================================
+   QA FIX PASS 2026-07-07 (round 1) — sitewide audit findings.
+   This sheet now loads globally from theme.liquid, so every
+   rule below is scoped to .bbc-rd (or a named 2026 wrapper /
+   theme-frontend element) and never touches checkout/admin.
+   Finding IDs refer to the 2026-07-07 QA sweep.
+   ============================================================ */
+
+/* ---- F1/F2/F16 · statement button/link text pairs (locked table).
+   bbc-redesign-2026.css forces `color:inherit !important` on
+   `.bbc-rd a:not(...)x5` (0,6,1) which made statement buttons/links
+   render ink on any surface. `:not(#_)` lifts these to id-level
+   specificity so the locked pairs win. */
+.bbc-rd a.bbcst-btn.is-primary:not(#_){ background:var(--forest,#003C32) !important; color:var(--bone,#E6DCC8) !important; }
+.bbc-rd.bbcst-wrap.is-forest a.bbcst-btn.is-primary:not(#_),
+.bbc-rd.bbcst-wrap.has-bg a.bbcst-btn.is-primary:not(#_){ background:var(--lime,#D4FD62) !important; color:var(--forest,#003C32) !important; }
+.bbc-rd a.bbcst-btn.is-secondary:not(#_){ background:transparent !important; color:var(--forest,#003C32) !important; border-color:var(--forest,#003C32) !important; }
+.bbc-rd a.bbcst-btn.is-secondary:not(#_):hover{ background:var(--forest,#003C32) !important; color:var(--bone,#E6DCC8) !important; }
+.bbc-rd.bbcst-wrap.is-forest a.bbcst-btn.is-secondary:not(#_),
+.bbc-rd.bbcst-wrap.has-bg a.bbcst-btn.is-secondary:not(#_){ background:transparent !important; color:var(--bone,#E6DCC8) !important; border-color:var(--bone,#E6DCC8) !important; }
+.bbc-rd.bbcst-wrap.is-forest a.bbcst-btn.is-secondary:not(#_):hover,
+.bbc-rd.bbcst-wrap.has-bg a.bbcst-btn.is-secondary:not(#_):hover{ background:var(--bone,#E6DCC8) !important; color:var(--forest,#003C32) !important; }
+.bbc-rd a.bbcst-link:not(#_){ color:var(--forest,#003C32) !important; }
+.bbc-rd.bbcst-wrap.is-forest a.bbcst-link:not(#_),
+.bbc-rd.bbcst-wrap.has-bg a.bbcst-link:not(#_){ color:var(--bone,#E6DCC8) !important; }
+
+/* ---- F19/F21 · header logo unconstrained (600x277 source blew the
+   header to 342px and pushed the CTA offscreen). Id selector beats the
+   global img{height:auto !important} tie. */
+#rd-header2026 .rd-logo-img{ height:46px !important; width:auto !important; max-width:210px !important; }
+@media(max-width:749px){
+  #rd-header2026 .rd-logo-img{ height:40px !important; max-width:170px !important; }
+}
+
+/* ---- F20 · invisible cart-drawer taking 468px of flow above the header
+   on bbc-*-2026 templates. The custom element itself carries .drawer —
+   restore Dawn's fixed positioning on both the element and any inner
+   .drawer, so the hidden drawer takes no flow space. */
+cart-drawer.drawer,
+cart-drawer .drawer{ position:fixed !important; top:0; left:0; visibility:hidden; }
+cart-drawer.drawer.active,
+cart-drawer.drawer.animate,
+cart-drawer.active .drawer,
+cart-drawer.animate .drawer{ visibility:visible; }
+
+/* ---- F9 · home hero ew-btn system → standard pill (radius 999,
+   palette lime, no offset shadow) */
+.bbc-rd .ew-btn{ border-radius:999px !important; font-size:15px !important; font-weight:700; }
+.bbc-rd a.ew-btn.is-lime:not(#_){ background:var(--lime,#D4FD62) !important; color:var(--forest,#003C32) !important; box-shadow:none !important; }
+.bbc-rd a.ew-btn.is-lime:not(#_):hover{ box-shadow:none !important; transform:none; opacity:.9; }
+.bbc-rd a.ew-btn.is-ghost:not(#_){ background:transparent !important; color:var(--bone,#E6DCC8) !important; border-color:var(--bone,#E6DCC8) !important; }
+
+/* ---- F10/F47/F54/F69 · "ghost" secondary had a solid #fff fill (an
+   off-palette fifth surface + second filled button). True outline. */
+.bbc-rd .rd-btn.rd-ghost{ background:transparent !important; color:var(--forest,#003C32) !important; border:2px solid var(--forest,#003C32) !important; }
+.bbc-rd .rd-btn.rd-ghost:hover{ background:rgba(0,60,50,.08) !important; }
+.bbc-rd .rd-dark .rd-btn.rd-ghost,
+.bbc-rd .rd-hero .rd-btn.rd-ghost,
+.bbc-rd.rd-dark .rd-btn.rd-ghost{ color:var(--bone,#E6DCC8) !important; border-color:var(--bone,#E6DCC8) !important; }
+.bbc-rd .rd-dark .rd-btn.rd-ghost:hover,
+.bbc-rd .rd-hero .rd-btn.rd-ghost:hover,
+.bbc-rd.rd-dark .rd-btn.rd-ghost:hover{ background:rgba(230,220,200,.14) !important; }
+
+/* ---- F24/F53/F68 · colour grammar: lime fill is reserved for DARK
+   surfaces; on light surfaces the filled primary is forest + bone. */
+.bbc-rd .rd-btn.rd-lime{ background:var(--forest,#003C32) !important; color:var(--bone,#E6DCC8) !important; border-color:var(--forest,#003C32) !important; }
+/* re-enable the lime fill on the known dark surfaces */
+.bbc-rd .rd-dark .rd-btn.rd-lime,
+.bbc-rd .rd-hero .rd-btn.rd-lime,
+.bbc-rd.rd-footer .rd-btn.rd-lime,
+#bbc-rd-stickybar .rd-btn.rd-lime,
+.bbc-rd.rd-dark .rd-btn.rd-lime{ background:var(--lime,#D4FD62) !important; color:var(--forest,#003C32) !important; border-color:var(--lime,#D4FD62) !important; }
+
+/* ---- F13 · home door-card row had 3 adjacent lime pills (+3 lime
+   chips). One lime primary (first door); the rest demote to bone
+   outline on the photo scrim. */
+.bbc-rd .rd-door .rd-btn.rd-lime{ background:transparent !important; color:var(--bone,#E6DCC8) !important; border:2px solid var(--bone,#E6DCC8) !important; }
+.bbc-rd .rd-grid .rd-door:first-of-type .rd-btn.rd-lime{ background:var(--lime,#D4FD62) !important; color:var(--forest,#003C32) !important; border-color:var(--lime,#D4FD62) !important; }
+.bbc-rd .rd-door:not(:first-of-type) .rd-tag.rd-lime{ background:transparent !important; color:var(--bone,#E6DCC8) !important; border:1px solid var(--bone,#E6DCC8) !important; }
+
+/* ---- F6/F8 · card rows: CTAs bottom-aligned so per-card buttons sit
+   on one baseline regardless of copy length. */
+.bbc-rd .rd-card:has(.rd-btn){ display:flex; flex-direction:column; }
+.bbc-rd .rd-card:has(.rd-btn) > .rd-body{ display:flex; flex-direction:column; flex:1 1 auto; align-items:flex-start; }
+.bbc-rd .rd-card > .rd-body .rd-btn{ margin-top:auto !important; }
+.bbc-rd .rd-card > .rd-body .rd-btn{ white-space:nowrap; }
+
+/* ---- F27 · 50/50 split media fills its column (kills the forest voids
+   above/below the photo; global img{height:auto!important} beaten by
+   inset+!important per BLOCK-SYSTEM 3b) */
+.bbc-rd .rd-split .rd-media{ position:relative; overflow:hidden; }
+.bbc-rd .rd-split .rd-media img{ position:absolute; inset:0; width:100% !important; height:100% !important; object-fit:cover; display:block; }
+@media(max-width:900px){
+  .bbc-rd .rd-split .rd-media{ aspect-ratio:16/10; }
+}
+
+/* ---- F17/F46/F57/F72 · footer press wall: uniform cap height instead
+   of the shared 205x300 portrait box (FT lockup was ~300px tall). */
+/* The press row and the sign-off line sat at EXACTLY the same y (row bottom 11141,
+   tagline top 11141 — measured, zero gap), so the tagline read as colliding with the
+   logos. Neither had vertical margin; this gives the row its own breathing space. */
+.bbc-rd .rd-foot-press{ display:flex; align-items:center; flex-wrap:wrap; gap:28px clamp(24px,4vw,48px); margin:clamp(28px,4vw,44px) 0 0; }
+.bbc-rd .rd-foot-signoff{ margin-top:clamp(16px,2vw,22px); }
+/* The press logos are dark-ink SVGs sitting on the forest footer. Sampled 2026-07-29:
+   mean luminance 19-27 against a background of 28.6 — i.e. DARKER than the surface they
+   sit on, so the row read as empty. Knocking them to flat white is the standard press-wall
+   treatment and satisfies FORMULA §3's one-height-per-row rule at the same time. */
+.bbc-rd .rd-foot-press img{
+  height:34px !important; width:auto !important; max-width:170px !important; object-fit:contain;
+  filter:brightness(0) invert(1); opacity:.72;
+}
+@media (hover:hover){
+  .bbc-rd .rd-foot-press img{ transition:opacity .18s ease; }
+  .bbc-rd .rd-foot-press img:hover{ opacity:1; }
+}
+
+/* ---- F75 · parts variant selected state (was white-on-cream) +
+   F66 parts ATC pill */
+.bbc-parts__option-btn.active{ background:var(--forest,#003C32) !important; color:var(--bone,#E6DCC8) !important; border-color:var(--forest,#003C32) !important; }
+.bbc-parts__add-btn{ border-radius:999px !important; }
+
+/* ---- F73 · PDP forest impact band: heading and .rd-loop grid share a
+   left edge (grid was +10px) */
+.bbc-rd.bbc-rd-product .rd-loop{ margin-inline-start:0; padding-inline-start:0; }
+
+/* ---- F55 · gallery hero rail (was centred at x=342 vs the 152 grid
+   rail) — pin the 820 measure to the shared 1136px rail edge */
+.bbc-rd.bbc-rd-page .rd-hero .rd-wrap.rd-mw-820px{ margin-left:max(24px, calc(50% - 568px)); margin-right:auto; }
+
+/* ---- F28 · our-story opening copy column pinned to the heading rail */
+.bbc-rd.bbc-rd-about .rd-wrap.rd-mw-820px{ margin-left:max(24px, calc(50% - 568px)); margin-right:auto; }
+
+/* ---- F29 · our-story "Three things" heading left-set over its grid */
+.bbc-rd.bbc-rd-about .rd-pad.rd-paper .rd-center{ text-align:left; }
+.bbc-rd.bbc-rd-about .rd-pad.rd-paper .rd-center[class*="rd-cmp-"]{ margin-left:0 !important; margin-right:auto !important; }
+
+/* ---- F56 · article hero H1 shares the 632px body rail */
+.bbc-rd.bbc-rd-article .rd-art-hero__inner{ max-width:632px; margin-inline:auto; }
+
+/* ---- F58 · gallery "Show us what you made." beat left-set to the rail */
+.bbc-rd.bbc-rd-sharebuild .rd-center{ text-align:left; }
+.bbc-rd.bbc-rd-sharebuild .rd-wrap.rd-mw-680px{ margin-left:max(24px, calc(50% - 568px)); margin-right:auto; }
+.bbc-rd.bbc-rd-sharebuild .rd-mx-auto{ margin-left:0 !important; margin-right:auto !important; }
+.bbc-rd.bbc-rd-sharebuild .rd-jc-center{ justify-content:flex-start !important; }
+
+/* ---- F49 · light-surface centred band headlines go left (teambuilding /
+   theory-of-change / which-kit). Forest closers stay centred pending the
+   F34 ruling in BLOCK-SYSTEM.md. */
+.bbc-rd.bbc-rd-tb section.rd-pad:not(.rd-dark) .rd-center,
+.bbc-rd.bbc-rd-toc section.rd-pad:not(.rd-dark) .rd-center,
+.bbc-rd.bbc-rd-kitpicker section.rd-pad:not(.rd-dark) .rd-center{ text-align:left; }
+.bbc-rd.bbc-rd-tb section.rd-pad:not(.rd-dark) .rd-center[class*="rd-cmp-"],
+.bbc-rd.bbc-rd-toc section.rd-pad:not(.rd-dark) .rd-center[class*="rd-cmp-"],
+.bbc-rd.bbc-rd-kitpicker section.rd-pad:not(.rd-dark) .rd-center[class*="rd-cmp-"]{ margin-left:0 !important; margin-right:auto !important; }
+
+/* ---- F48 · mobile: marketing CTAs stack full-width (≤600px rule).
+   Header CTA and footer subscribe are excluded. */
+@media(max-width:600px){
+  .bbc-rd section .rd-btn,
+  .bbc-rd .rd-hero .rd-btn{ display:block; width:100%; text-align:center; }
+  footer.bbc-rd.rd-footer .rd-btn{ display:inline-block; width:auto; }
+}
+
+/* ============================================================
+   PHASE-1 ADDITIONS (2026-07-12, design brief 2026-07-11)
+   ============================================================ */
+
+/* ---- Steel stand-out box (James: "happy to use further stand
+   out boxes"). Steel surface text pairs per BLOCK-SYSTEM §3c. */
+.rd-callout-steel{
+  background:var(--steel,#DEE6F0);
+  color:var(--ink,#0E1A17);
+  border-left:6px solid var(--forest,#003C32);
+  padding:28px 32px;
+  border-radius:2px;
+}
+.rd-callout-steel h3, .rd-callout-steel .rd-callout-head{
+  color:var(--ink,#0E1A17); margin:0 0 8px;
+}
+.rd-callout-steel p{ color:var(--drift-2a3530); margin:0; max-width:var(--measure,66ch); }
+.rd-callout-steel .rd-eyebrow{ color:var(--drift-17553a); }
+
+/* ---- Duotone image treatment (Brand Guidelines recipe: B&W +
+   FOREST block on EXCLUSION + 80% black gradient on MULTIPLY).
+   Wrap any <img> in .rd-duotone. Mission-page imagery only. */
+.rd-duotone{ position:relative; isolation:isolate; overflow:clip; display:block; } /* clip: hosts a scroll-driven img (universal §11) */
+.rd-duotone>img{ display:block; width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.06); }
+.rd-duotone::before{ content:""; position:absolute; inset:0; background:var(--forest,#003C32); mix-blend-mode:exclusion; pointer-events:none; }
+.rd-duotone::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.8) 100%); mix-blend-mode:multiply; pointer-events:none; }
+
+/* ---- Scroll reveal ("more life", James 2026-07-11). Pure CSS
+   scroll-driven animation: progressive enhancement, no JS, no
+   fallback needed (unsupported browsers just show the content),
+   and reduced-motion users are never animated. Add .rd-reveal
+   to any band/card. */
+@media (prefers-reduced-motion: no-preference){
+  @supports (animation-timeline: view()){
+    .rd-reveal{
+      animation:rd-rise both;
+      animation-timeline:view();
+      animation-range:entry 0% entry 55%;
+    }
+    @keyframes rd-rise{
+      from{ opacity:.85; transform:translateY(22px); }
+      to{ opacity:1; transform:none; }
+    }
+  }
+}
+
+/* ---- Impact page: Backed-by strip (Phase 2, 2026-07-12) ---- */
+/* pass-1 flex backers removed — single grid ruleset below */
+
+/* ---- Pathway flow: stack on mobile (QA-LOG D3) — inline arrows read
+   as run-on text under 600px; vertical steps with turned arrows ---- */
+@media (max-width:600px){
+  .rd-flow{ display:flex; flex-direction:column; align-items:flex-start; gap:4px; }
+  .rd-flow__arrow{ transform:rotate(90deg); display:inline-block; margin-left:14px; }
+}
+
+/* ---- Case-study card media: reserve space + tinted placeholder so
+   lazy-load lag reads intentional, not broken (QA-LOG D11) ---- */
+.rd-cscard__media{ aspect-ratio:8/5; background:var(--forest-700,#002A23); }
+.rd-cscard__media img{ width:100%; height:100%; object-fit:cover; }
+@keyframes rd-rise-safe{ from{ opacity:.85; transform:translateY(12px); } to{ opacity:1; transform:none; } }
+
+/* ============================================================
+   IMPACT PAGE — consolidated block (2026-07-13). All .bbc-rd-impact
+   rules gathered in cascade order; identical duplicates removed.
+   ============================================================ */
+
+
+/* ============================================================
+   IMPACT PAGE RETROFIT — big-type standard (2026-07-12, James
+   feedback: "what happened to large fonts"). Pattern per
+   BLOCK-SYSTEM Tier-2: heads go statement-scale/lowercase/LEFT.
+   ============================================================ */
+/* Section heads: statement scale, lowercase (h2 set audited — no
+   proper nouns), left rag, tight leading. Mobile needs its own clamp to beat bbc-mobile-fixes (documented gotcha). */
+.bbc-rd-impact h2{
+  font-size:clamp(2.8rem,7vw,5.4rem) !important;
+  line-height:.97 !important; letter-spacing:-.02em;
+  text-align:left;
+  max-width:none; margin-inline:0;
+}
+.bbc-rd-impact h1{ text-align:left; }
+@media (max-width:749px){
+  .bbc-rd-impact h2{ font-size:clamp(2.7rem,11.5vw,4rem) !important; }
+}
+/* One left axis per band — centred heads over left content was the
+   misalignment James flagged */
+.bbc-rd-impact .rd-center{ text-align:left !important; }
+.bbc-rd-impact .rd-center .rd-eyebrow::before{ margin:0 0 10px; }
+.bbc-rd-impact .rd-center h2, .bbc-rd-impact .rd-center .rd-lede{ margin-inline:0; }
+.bbc-rd-impact .rd-lede{ max-width:34em; }
+/* Eyebrows lowercase (brief: lowercase human voice) */
+.bbc-rd-impact .rd-eyebrow, .bbc-rd-impact .rd-frame-label{ text-transform:lowercase; letter-spacing:.14em; }
+
+/* ---- Mission pathway as a GRAPHIC: numbered lime nodes on a
+   spine (replaces plain text + arrows), all viewports ---- */
+.bbc-rd-impact .rd-flow{ counter-reset:step; display:flex; flex-direction:column; align-items:stretch; gap:0; margin-top:16px; }
+.bbc-rd-impact .rd-flow__step{ counter-increment:step; position:relative; padding:9px 0 9px 50px; font-weight:700; font-size:16px; }
+.bbc-rd-impact .rd-flow__step::before{
+  content:counter(step); position:absolute; left:0; top:4px;
+  width:34px; height:34px; border-radius:50%;
+  background:var(--lime,#D4FD62); color:var(--forest,#003C32);
+  display:grid; place-items:center; font-weight:800; font-size:16px;
+  border:2px solid var(--forest,#003C32);
+}
+.bbc-rd-impact .rd-flow__step::after{
+  content:""; position:absolute; left:16px; top:42px; bottom:-5px;
+  width:2px; background:var(--forest,#003C32); opacity:.28;
+}
+.bbc-rd-impact .rd-flow__step:last-child::after{ display:none; }
+.bbc-rd-impact .rd-flow__arrow{ display:none; }
+
+/* ---- Quotes: proper pull-quote treatment (James: "quotes look
+   awful") — giant lime mark, big italic Atkinson, small-caps attr */
+.bbc-rd-impact .rd-cred-q{
+  position:relative; font-size:clamp(1.35rem,2.4vw,1.9rem);
+  line-height:1.3; font-style:italic; font-weight:700;
+  padding-left:26px; margin:0; text-align:left;
+}
+.bbc-rd-impact .rd-cred-q::before{
+  content:"\201C"; position:absolute; left:-6px; top:-18px;
+  font-size:4.4rem; line-height:1; color:var(--lime,#D4FD62);
+  font-style:normal; -webkit-text-stroke:2px var(--forest,#003C32);
+}
+
+/* ---- More lime: policy numbers + stat numbers get the accent on
+   dark bands; backer chips lime-edged ---- */
+.bbc-rd-impact .rd-dark .rd-facts b, .bbc-rd-impact .rd-dark [class*="policy"] b{ color:var(--lime,#D4FD62); }
+.bbc-rd-impact .rd-backers__chip{ border-color:var(--lime,#D4FD62); }
+
+/* ============================================================
+   PATHWAYS BAND — fork & converge (2026-07-12 spec)
+   One mission node → two colour-coded pathway panels
+   (schools = light/lime · prisons = dark/steel) → one
+   lime convergence strip. Reuses .rd-flow numbered nodes.
+   ============================================================ */
+/* fork connector (desktop) — pure CSS, aria-hidden in markup */
+.bbc-rd-impact .rd-fork{ position:relative; height:96px; margin-top:clamp(20px,3vw,36px); }
+.bbc-rd-impact .rd-fork__node{
+  position:absolute; left:50%; top:0; transform:translateX(-50%);
+  width:44px; height:44px; border-radius:50%; background:var(--forest,#003C32);
+  color:var(--lime,#D4FD62); display:grid; place-items:center;
+  font-size:var(--fs-26); font-weight:800; line-height:1; z-index:1;
+}
+.bbc-rd-impact .rd-fork__label{
+  position:absolute; left:calc(50% + 34px); top:10px;
+  font-size:14px; font-weight:800; letter-spacing:.04em;
+  text-transform:lowercase; color:var(--forest,#003C32); white-space:nowrap;
+}
+.bbc-rd-impact .rd-fork::before{ /* stem down from node */
+  content:""; position:absolute; left:50%; top:44px; height:18px; width:3px;
+  background:var(--forest,#003C32); transform:translateX(-50%);
+}
+.bbc-rd-impact .rd-fork::after{ /* horizontal split bar */
+  content:""; position:absolute; top:62px; left:25%; right:25%; height:3px;
+  background:var(--forest,#003C32);
+}
+.bbc-rd-impact .rd-fork__drop{ position:absolute; top:62px; width:3px; height:34px; background:var(--forest,#003C32); }
+.bbc-rd-impact .rd-fork__drop.is-a{ left:calc(25% - 1.5px); }
+.bbc-rd-impact .rd-fork__drop.is-b{ right:calc(25% - 1.5px); }
+.bbc-rd-impact .rd-fork__drop::after{ /* track-coloured terminal dot */
+  content:""; position:absolute; left:50%; bottom:-7px; transform:translateX(-50%);
+  width:14px; height:14px; border-radius:50%; border:2px solid var(--ink,#0E1A17);
+}
+.bbc-rd-impact .rd-fork__drop.is-a::after{ background:var(--lime,#D4FD62); }
+.bbc-rd-impact .rd-fork__drop.is-b::after{ background:var(--steel,#DEE6F0); }
+
+/* pathway panels — IDENTICAL TREATMENT, MEANINGFUL FILL (option B, James 2026-07-27).
+   Settles a live contradiction between two design decisions:
+     PATHWAYS-SPEC.md (12 Jul) — James: the twin cards "read as one thing said
+       twice"; answer was light = schools/daylight, dark = prisons/inside.
+     B1 anti-blocky pass      — de-boxed .rd-path, but re-filled prisons only,
+       leaving one arm a card and the other nothing. That broken middle state is
+       what James objected to on 27 Jul.
+   Both complaints are satisfied by separating TREATMENT from FILL: border width,
+   style, radius, padding and shadow geometry are identical across the two arms —
+   which is what the peer set actually shows (16 of 17 sibling groups) — while the
+   surface colour still carries the daylight/inside meaning.
+   FORMULA §8 holds: this is the page's ONE bordered-card band, 3 true boxes vs a
+   cap of 6. Mobile is the deciding case — stacked at 390px the centre fork is
+   suppressed, so fill is the only thing left to tell the two arms apart. */
+.bbc-rd-impact .rd-paths{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3vw,36px); align-items:stretch; }
+.bbc-rd-impact .rd-path{
+  border:2.5px solid var(--ink,#0E1A17); border-radius:6px;
+  padding:clamp(24px,3vw,38px); display:flex; flex-direction:column;
+}
+.bbc-rd-impact .rd-path--schools{ background:var(--paper,#F1E9D8); box-shadow:5px 5px 0 var(--lime-700,#9BC02E); }
+.bbc-rd-impact .rd-path--prisons{ background:var(--forest,#003C32); border-color:var(--forest-700,#002A23); box-shadow:5px 5px 0 var(--forest-700,#002A23); }
+/* track chip */
+.bbc-rd-impact .rd-path__chip{
+  align-self:flex-start; font-size:13px; font-weight:800; letter-spacing:.06em;
+  text-transform:lowercase; padding:6px 14px; border-radius:999px;
+  border:1.5px solid var(--ink,#0E1A17);
+  background:var(--lime,#D4FD62); color:var(--forest,#003C32);
+}
+.bbc-rd-impact .rd-path--prisons .rd-path__chip{ background:var(--steel,#DEE6F0); color:var(--ink,#0E1A17); border-color:var(--ink,#0E1A17); }
+/* pathway name — small display moment, lowercase, left */
+.bbc-rd-impact h3.rd-path__name{
+  font-size:clamp(2.1rem,3.6vw,2.9rem) !important; line-height:.97; letter-spacing:-.02em;
+  font-weight:800; text-transform:lowercase; margin:16px 0 0; color:var(--ink,#0E1A17);
+}
+.bbc-rd-impact .rd-path p.rd-path__who{ font-size:17px !important; line-height:1.55; margin:10px 0 0; max-width:34em; color:var(--drift-3a443f); }
+
+/* hierarchy lock: steps + body must stay clearly below the name */
+.bbc-rd-impact .rd-path .rd-flow__step{ font-size:16px !important; line-height:1.45; padding:8px 0 8px 46px; }
+.bbc-rd-impact .rd-path .rd-flow__step::before{ width:30px; height:30px; font-size:15px; top:5px; }
+.bbc-rd-impact .rd-path .rd-flow__step::after{ left:14px; top:37px; }
+.bbc-rd-impact .rd-path .rd-flow{ margin-top:18px; }
+/* dark-surface overrides — required by the forest fill, not a treatment difference.
+   The spec's track colours: lime = schools, steel = prisons. */
+.bbc-rd-impact .rd-path--prisons h3.rd-path__name{ color:var(--bone,#E6DCC8); }
+.bbc-rd-impact .rd-path--prisons p.rd-path__who{ color:var(--bone,#E6DCC8); opacity:.85; }
+.bbc-rd-impact .rd-path--prisons .rd-flow__step{ color:var(--bone,#E6DCC8); }
+.bbc-rd-impact .rd-path--prisons .rd-flow__step::before{
+  background:var(--bone,#E6DCC8); color:var(--forest,#003C32); border-color:var(--lime,#D4FD62);
+}
+/* per-pathway CTA — standard pill buttons (BLOCK-SYSTEM: forest fill
+   on light, lime fill on dark). Filled buttons sidestep the global
+   link-underline/colour rules that broke the underlined version. */
+.bbc-rd-impact .rd-path__cta,
+.bbc-rd-impact a.rd-path__cta:not(#_){
+  margin-top:auto; align-self:flex-start; display:inline-block;
+  margin-block-start:26px; padding:13px 24px; border-radius:999px;
+  font-size:15px; font-weight:700; line-height:1;
+  background:var(--forest,#003C32); color:var(--bone,#E6DCC8) !important;
+  text-decoration:none !important; border:none;
+}
+.bbc-rd-impact .rd-path--prisons .rd-path__cta,
+.bbc-rd-impact .rd-path--prisons a.rd-path__cta:not(#_){
+  background:var(--lime,#D4FD62); color:var(--forest,#003C32) !important;
+}
+.bbc-rd-impact .rd-path__cta:hover{ opacity:.85; }
+
+/* convergence strip — the band's single lime surface */
+.bbc-rd-impact .rd-converge{
+  margin-top:clamp(24px,3vw,40px); background:var(--lime,#D4FD62);
+  border:2.5px solid var(--ink,#0E1A17); border-radius:6px;
+  box-shadow:5px 5px 0 var(--ink,#0E1A17);
+  padding:clamp(20px,2.6vw,30px) clamp(22px,3vw,38px);
+}
+.bbc-rd-impact .rd-converge__title{
+  font-size:clamp(1.5rem,2.8vw,2.2rem); line-height:1.05; letter-spacing:-.02em;
+  font-weight:800; text-transform:lowercase; margin:0; color:var(--forest,#003C32);
+}
+.bbc-rd-impact .rd-converge__title .bbcst-star{ color:var(--forest,#003C32); }
+.bbc-rd-impact .rd-converge__note{ font-size:14px; line-height:1.6; margin:14px 0 0; color:var(--drift-3a443f); max-width:66ch; }
+
+/* mobile: simple static stack — no absolute geometry (the rail/label
+   version collided; simpler wins) */
+@media (max-width:759px){
+  .bbc-rd-impact .rd-paths{ grid-template-columns:1fr; gap:24px; }
+  .bbc-rd-impact .rd-fork{ position:static; height:auto; display:flex; align-items:center; gap:14px; margin:10px 0 22px; }
+  .bbc-rd-impact .rd-fork::before, .bbc-rd-impact .rd-fork::after,
+  .bbc-rd-impact .rd-fork__drop{ display:none; }
+  .bbc-rd-impact .rd-fork__node, .bbc-rd-impact .rd-fork__label{ position:static; transform:none; white-space:normal; }
+  .bbc-rd-impact .rd-converge{ margin-top:24px; }
+}
+
+/* CRIT 2026-07-12 fixes */
+@media (max-width:749px){
+  .bbc-rd-impact h1{ font-size:clamp(2.9rem,12.5vw,4.4rem) !important; line-height:.97 !important; }
+}
+/* CRIT#2: converge payoff — beat the aaa-2026 paragraph cap */
+.bbc-rd-impact p.rd-converge__title{ font-size:clamp(1.5rem,2.8vw,2.2rem) !important; }
+
+/* backed-by: ONE grid, uniform cell height (2026-07-12 sweep) */
+.bbc-rd-impact .rd-backers{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:18px; align-items:center; justify-items:center; }
+.bbc-rd-impact .rd-backers__cell{ height:56px; display:flex; align-items:center; justify-content:center; }
+.bbc-rd-impact .rd-backers__logo{ height:44px !important; width:auto !important; max-width:150px; object-fit:contain; display:block; }
+.bbc-rd-impact .rd-backers__chip{ display:inline-block; font-weight:700; font-size:14px; padding:8px 14px; border:2px solid var(--lime,#D4FD62); border-radius:999px; white-space:normal; text-align:center; max-width:100%; }
+/* eyebrow dash must never touch the label */
+.bbc-rd-impact .rd-eyebrow::before{ margin-right:10px; }
+/* eyebrows: lowercase wins over the section-inline uppercase (caps war — one central, per replan) */
+.bbc-rd-impact .rd-eyebrow{ text-transform:lowercase !important; }
+.bbc-rd-impact .rd-frame-label, .bbc-rd-impact .rd-partnerlabel{ text-transform:none !important; letter-spacing:.06em; }
+/* where-we-operate groups (FORMULA: 18px titles, 16px items, count chip) */
+.bbc-rd-impact .rd-ops{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; list-style:none; margin:0; padding:0; text-align:left; }
+.bbc-rd-impact .rd-ops__cell{ border:2.5px solid var(--ink,#0E1A17); border-radius:6px; background:var(--paper,#F1E9D8); padding:20px 22px; position:relative; }
+.bbc-rd-impact .rd-ops__count{ position:absolute; top:-14px; right:16px; min-width:34px; height:28px; padding:0 10px; border-radius:999px; background:var(--lime,#D4FD62); color:var(--forest,#003C32); border:2px solid var(--ink,#0E1A17); font-weight:800; font-size:15px; display:inline-flex; align-items:center; justify-content:center; }
+.bbc-rd-impact h3.rd-ops__title{ font-size:var(--fs-21) !important; font-weight:800; margin:0 0 6px; text-transform:none; }
+.bbc-rd-impact .rd-ops__items{ font-size:16px !important; line-height:1.5; margin:0; color:var(--drift-3a443f); }
+/* where-we-operate world map (J2) — breaks out of the 820px wrap, centred on the viewport;
+   marker pulse lives inside the SVG itself (renders via <img>) with its own reduced-motion guard */
+
+
+
+@media (max-width:749px){
+  
+  
+}
+
+/* FINAL PASS G2: reveals must never blank a viewport — items start
+   visible (.3 opacity floor) and settle quickly; fast scrolls always
+   see content (Bike Project cautionary tale, similar-pages research) */
+@media (prefers-reduced-motion: no-preference){
+  @supports (animation-timeline: view()){
+    .bbc-rd-impact .rd-reveal{
+      animation:rd-rise-safe both; animation-timeline:view();
+      animation-range:entry 0% entry 30%;
+    }
+  }
+}
+
+/* FINAL PASS G3: one left axis in get-involved (h2 left + centred lede violated FORMULA §4) */
+.bbc-rd-impact .rd-center .rd-lede{ text-align:left; margin-inline:0; }
+
+/* A4 promises + A3 download card (final pass) */
+.bbc-rd-impact .rd-promises{ list-style:none; margin:0; padding:0; }
+.bbc-rd-impact .rd-promises__row{ font-size:17px; line-height:1.5; padding:8px 0; }
+.bbc-rd-impact .rd-promises__row a{ font-weight:700; color:var(--drift-17553a); }
+.bbc-rd-impact .rd-promises__star{ color:var(--drift-17553a); font-weight:800; margin-right:8px; }
+.bbc-rd-impact .rd-dlcard{ display:flex; align-items:center; gap:18px; border:2.5px solid var(--ink,#0E1A17); border-radius:6px; background:var(--paper,#F1E9D8); padding:18px 22px; text-align:left; box-shadow:5px 5px 0 var(--lime-700,#9BC02E); flex-wrap:wrap; }
+.bbc-rd-impact .rd-dlcard__badge{ background:var(--forest,#003C32); color:var(--lime,#D4FD62); font-weight:800; font-size:13px; padding:6px 12px; border-radius:4px; text-transform:lowercase; }
+.bbc-rd-impact .rd-dlcard__body{ flex:1; min-width:180px; }
+.bbc-rd-impact p.rd-dlcard__title{ font-weight:800; font-size:18px !important; margin:0; }
+.bbc-rd-impact p.rd-dlcard__meta{ font-size:14px !important; margin:2px 0 0; color:var(--drift-3a443f); }
+
+/* unify card-title role at 21px (help/get-involved cards) + chips lowercase at source only */
+.bbc-rd-impact .rd-steel h3, .bbc-rd-impact .rd-card h3:not(.rd-path__name){ font-size:var(--fs-21) !important; }
+
+/* CRIT r2 closures */
+.bbc-rd-impact .rd-eyebrow{ font-weight:800; }
+.bbc-rd-impact .rd-tag{ text-transform:lowercase; font-weight:800; letter-spacing:.04em; }
+.bbc-rd-impact h1{ font-size:clamp(3rem,7.5vw,6rem) !important; } /* hero must out-scale band h2 on desktop too */
+@media (max-width:759px){
+  .bbc-rd-impact .rd-backers{ grid-template-columns:repeat(2,1fr); gap:10px; }
+  .bbc-rd-impact .rd-backers__cell{ height:auto; min-height:48px; }
+}
+
+/* CRIT r3 closures */
+/* D1: surface-aware eyebrow — lime on dark (was 1.24:1 unreadable) */
+.bbc-rd-impact .rd-dark .rd-eyebrow{ color:var(--lime,#D4FD62) !important; }
+/* D3: eyebrows share the left axis everywhere */
+.bbc-rd-impact .rd-eyebrow{ display:block !important; text-align:left !important; }
+/* D2: ONE chip style — lime fill, ink border, 800 (tags need !important vs legacy uppercase) */
+.bbc-rd-impact .rd-tag{ text-transform:lowercase !important; font-weight:800 !important; }
+.bbc-rd-impact .rd-backers__chip{ background:var(--lime,#D4FD62); color:var(--forest,#003C32); border:1.5px solid var(--ink,#0E1A17); font-weight:800; }
+.bbc-rd-impact .rd-dlcard__badge{ background:var(--lime,#D4FD62); color:var(--forest,#003C32); border:1.5px solid var(--ink,#0E1A17); border-radius:999px; }
+
+/* CRIT r4 mechanical closures */
+/* one left axis: kill centred heading boxes (rd-mx-auto) inside impact */
+/* superseded by the alignment contract (assets/bbc-align.css, qa/ALIGNMENT.md):
+   .rd-mx-auto MEANS auto margins; forcing it to 0 is what left measure blocks 420px off-centre. */
+/* mission glyph AAA on paper: forest + >=18px everywhere it appears */
+.bbc-rd-impact .rd-promises__star, .bbc-rd-impact .bbcst-star,
+.bbc-rd-impact .rd-converge__title .bbcst-star{ color:var(--forest,#003C32) !important; font-size:19px; }
+/* backers group label */
+.bbc-rd-impact .rd-backers__label{ display:block; font-size:13px; font-weight:800; letter-spacing:.14em; text-transform:lowercase; color:var(--drift-17553a); margin:26px 0 10px; text-align:left; }
+
+/* J3: pathway media — hard-crop duotone bleed to card edges, name overlaps it */
+/* the panels are cards again, so the media bleeds to the card edge — applied to
+   BOTH arms (it used to bleed on prisons only, part of the same asymmetry). */
+.bbc-rd-impact .rd-path__media{ display:block; aspect-ratio:16/7; margin:calc(-1*clamp(24px,3vw,38px)) calc(-1*clamp(24px,3vw,38px)) 0; border-radius:3px 3px 0 0; }
+.bbc-rd-impact .rd-path__media img{ border-radius:3px 3px 0 0; }
+.bbc-rd-impact .rd-path__chip{ margin-top:18px; }
+.bbc-rd-impact h3.rd-path__name{ margin-top:12px; }
+/* bigger fork moment */
+.bbc-rd-impact .rd-fork__node{ width:56px; height:56px; font-size:var(--fs-32); }
+.bbc-rd-impact .rd-fork__label{ font-size:16px; }
+
+/* CRIT-final root fixes + James hover/journey pass (2026-07-13) */
+/* superseded by the alignment contract — generated wrappers now centre like every other box. */
+/* JOURNEY TIMELINE: thick coloured rail, stations with title+detail, hover life */
+.bbc-rd-impact .rd-path .rd-flow{ position:relative; }
+.bbc-rd-impact .rd-path .rd-flow__step{ padding:12px 0 12px 56px; transition:transform .18s ease; }
+.bbc-rd-impact .rd-path .rd-flow__step::after{ width:4px; left:15px; opacity:1; background:var(--lime,#D4FD62); }
+.bbc-rd-impact .rd-path--prisons .rd-flow__step::after{ background:var(--steel,#DEE6F0); opacity:1; }
+.bbc-rd-impact .rd-path .rd-flow__step::before{ width:34px; height:34px; font-size:16px; box-shadow:0 0 0 4px var(--paper,#F1E9D8); transition:transform .18s ease; }
+/* the node's halo must match the surface it sits on, or it reads as a ring */
+.bbc-rd-impact .rd-path--prisons .rd-flow__step::before{ box-shadow:0 0 0 4px var(--forest,#003C32); }
+.bbc-rd-impact .rd-flow__step b{ display:block; font-size:16px; }
+.bbc-rd-impact .rd-flow__step small{ display:block; font-size:var(--fs-13-5); font-weight:400; color:var(--drift-3a443f); margin-top:2px; }
+.bbc-rd-impact .rd-path--prisons .rd-flow__step small{ color:var(--bone,#E6DCC8); opacity:.82; }
+@media (hover:hover){
+  .bbc-rd-impact .rd-flow__step:hover{ transform:translateX(4px); }
+  .bbc-rd-impact .rd-flow__step:hover::before{ transform:scale(1.15); }
+  .bbc-rd-impact .rd-path{ transition:transform var(--mo-base) ease, box-shadow var(--mo-base) ease; }
+  .bbc-rd-impact .rd-path:hover{ transform:translateY(-4px); }
+  .bbc-rd-impact .rd-path__media{ overflow:clip; } /* clip: duotone img inside is scroll-driven (MOTION.md r4) */
+  .bbc-rd-impact .rd-path__media img{ transition:transform .35s ease; }
+  .bbc-rd-impact .rd-path:hover .rd-path__media img{ transform:scale(1.04); }
+  .bbc-rd-impact .rd-ops__cell, .bbc-rd-impact .rd-dlcard{ transition:transform .18s ease; }
+  .bbc-rd-impact .rd-ops__cell:hover, .bbc-rd-impact .rd-dlcard:hover{ transform:translateY(-3px); }
+}
+
+/* eyebrow dash never touches label — incl. dark-band variant (James IMG_3205) */
+.bbc-rd-impact .rd-eyebrow::before, .bbc-rd-impact .rd-frame-label::before{ margin-right:10px !important; }
+.bbc-rd-impact .rd-backers{ justify-items:start; }
+/* get-involved cards: same object language as the rest of the page */
+.bbc-rd-impact .rd-steel .rd-card{ border:2.5px solid var(--ink,#0E1A17); border-radius:6px; transition:transform .18s ease, box-shadow .18s ease; }
+@media (hover:hover){ .bbc-rd-impact .rd-steel .rd-card:hover{ transform:translateY(-4px); box-shadow:8px 8px 0 var(--ink,#0E1A17); } }
+
+/* FULL-REVIEW closures (2026-07-13) — file:line-located defects */
+/* workshop band 820px wrap centred (redesign-2026:563) → one axis */
+/* superseded by the alignment contract — a measure block is a centred column. */
+/* generated rd-cmp wrapper sits OUTSIDE the scope div → :has() reach */
+/* superseded by the alignment contract. */
+/* logo rows: ONE mobile height (FORMULA 34px) for press + backers */
+@media (max-width:759px){
+  .bbc-rd-impact .rd-logoimg{ height:34px !important; }
+  .bbc-rd-impact .rd-backers__logo{ height:34px !important; }
+}
+/* design ruling: final CTA closer joins the left axis (one system) */
+.bbc-rd-impact section.rd-center, .bbc-rd-impact .rd-dark.rd-center{ text-align:left !important; }
+
+/* BIKE-FRAME INFOGRAPHIC (James-approved concept) */
+.bbc-rd-impact .rd-frameinfo{ margin-top:clamp(22px,3vw,40px); text-align:left; }
+.bbc-rd-impact .rd-frame-info{ width:100%; max-width:880px; height:auto; display:block; font-family:inherit; }
+.bbc-rd-impact .rd-frameinfo__caption{ font-size:14px; color:var(--drift-3a443f); margin:10px 0 0; max-width:66ch; }
+@media (max-width:759px){ .bbc-rd-impact .rd-fi__labels{ display:none; } .bbc-rd-impact .rd-frameinfo__caption{ font-size:var(--fs-13-5); } }
+/* rd-ride removed 2026-08-09 — owner veto: no SVG animations */
+/* STATS ON THE MAP: region callouts over the figure */
+
+.bbc-rd-impact .rd-mapcall{ position:absolute; background:var(--paper,#F1E9D8); border:2px solid var(--ink,#0E1A17); border-radius:6px; padding:8px 12px; font-size:var(--fs-13-5); font-weight:700; line-height:1.35; box-shadow:3px 3px 0 var(--ink,#0E1A17); max-width:220px; text-align:left; }
+.bbc-rd-impact .rd-mapcall::before{ content:""; position:absolute; width:10px; height:10px; border-radius:50%; background:var(--lime,#D4FD62); border:2px solid var(--ink,#0E1A17); }
+.bbc-rd-impact .rd-mapcall--uk{ left:31%; top:2%; } .bbc-rd-impact .rd-mapcall--uk::before{ left:76%; bottom:-26px; }
+.bbc-rd-impact .rd-mapcall--eu{ left:56%; top:34%; } .bbc-rd-impact .rd-mapcall--eu::before{ left:-22px; top:8px; }
+.bbc-rd-impact .rd-mapcall--world{ right:2%; bottom:6%; border-color:var(--forest,#003C32); }
+.bbc-rd-impact .rd-mapcall--world::before{ display:none; }
+@media (max-width:759px){
+  .bbc-rd-impact .rd-mapcall{ position:static; display:inline-block; margin:8px 8px 0 0; box-shadow:2px 2px 0 var(--ink,#0E1A17); }
+  .bbc-rd-impact .rd-mapcall::before{ display:none; }
+}
+
+/* symbol-only fork diagram (James: "build with symbols") */
+.bbc-rd-impact .rd-fork2{ margin:clamp(18px,3vw,34px) 0 6px; text-align:left; }
+.bbc-rd-impact .rd-fork2__label{ display:block; font-size:14px; font-weight:800; letter-spacing:.06em; text-transform:lowercase; color:var(--forest,#003C32); margin-bottom:6px; }
+.bbc-rd-impact .rd-forksym{ width:100%; max-width:880px; height:auto; display:block; font-family:inherit; }
+@media (max-width:759px){ .bbc-rd-impact .rd-forksym{ max-width:100%; } }
+
+/* ============================================================
+   ANTI-BLOCKY PASS (2026-07-13) — per-band devices from
+   qa/research/anti-blocky-layouts.md §3. One device per band.
+   ============================================================ */
+/* B0 · D2 ghost numeral: 2012 as architecture behind the stats */
+.bbc-rd-impact .rd-band--stats{ position:relative; overflow:clip; }
+/* renamed from .rd-ghost 2026-07-29 — that name was ALSO the ghost/outline button
+   (.rd-btn.rd-ghost), two unrelated components on one class. Nothing rendered wrong,
+   because the CSS only ever targeted the compound selector, but any future bare
+   .rd-ghost rule would have hit a 15px pill and a 307px numeral at once. */
+.bbc-rd-impact .rd-band--stats .rd-ghostnum{ position:absolute; right:-2%; top:50%; transform:translateY(-52%); font-size:clamp(9rem,24vw,20rem); line-height:.8; font-weight:800; letter-spacing:-.04em; color:var(--lime,#D4FD62); opacity:.07; pointer-events:none; }
+@media (max-width:600px){ .bbc-rd-impact .rd-band--stats .rd-ghostnum{ display:none; } }
+
+/* .rd-lumen was folded into .rd-dark (bbc-redesign-2026.css) on 2026-07-28 so every
+   dark band gets the treatment estate-wide — 22 bands across 10 pages — rather than
+   needing a class on each section. Nothing references .rd-lumen any more. */
+
+/* B1 · D6 borderless pathways: hairline fork instead of twin boxes.
+   The base .rd-path rule above is now borderless outright, so this no longer
+   needs an de-boxing pass — and the prisons-only re-fill that used
+   to live here (the reason the two arms rendered as different blocks) is gone. */
+.bbc-rd-impact .rd-paths{ gap:clamp(32px,5vw,72px); position:relative; }
+@media (min-width:760px){ .bbc-rd-impact .rd-paths::before{ content:"\2731"; position:absolute; left:50%; top:0; bottom:0; transform:translateX(-50%); border-left:2px solid var(--mist,#CFC5B0); width:0; color:var(--forest,#003C32); font-size:18px; line-height:1; padding-top:2px; } }
+@media (hover:hover){ .bbc-rd-impact .rd-path:hover{ transform:none; } }
+
+/* B2 · D4 asymmetric 7/3: heading owns the width, policy stats stack in a rail */
+@media (min-width:900px){
+  .bbc-rd-impact .rd-band--policy .rd-wrap{ display:grid; grid-template-columns:7fr 3fr; column-gap:clamp(32px,5vw,72px); align-items:start; }
+  .bbc-rd-impact .rd-band--policy .rd-wrap > .rd-center{ grid-column:1; }
+  .bbc-rd-impact .rd-band--policy .rd-policy{ grid-column:2; grid-row:1; display:flex !important; flex-direction:column; gap:22px; border-left:2px solid var(--lime,#D4FD62); padding-left:22px; margin-top:0; }
+}
+
+/* B3 · D1 full-bleed: the workshop photo (single case card band) IS the band.
+   2026-07-24: the escape never actually worked — the card inherited the 3-col grid
+   (460px column) and its own overflow clipped the 100vw media to a narrow strip
+   (glaring at 1568+, disguised as a "normal" image at 1280). Single-card grids now
+   span, and the card may not clip its full-bleed child. */
+#proof .rd-csgrid.rd-csgrid-1{ grid-template-columns:1fr; justify-content:stretch; } /* id out-ranks redesign's centred minmax(0,460px) single-card rule, which loads later */
+#proof .rd-csgrid-1 .rd-cscard{ overflow:visible; }
+#proof .rd-csgrid-1 .rd-cscard__body{ padding-left:0; padding-right:0; } /* borderless card: invisible body pad floated text 22px off the 216 axis */
+.bbc-rd-impact .rd-csgrid-1 .rd-cscard__media{ width:100%; aspect-ratio:16/10; border-radius:0; overflow:clip; } /* 16/10 = the one card-media ratio across the page (alignment audit 2026-07-24) */
+/* (the old 100vw escape assumed a centred parent — on the left-axis layout it
+   overshot one edge and gapped the other; wrap-width cinematic 21/9 is the honest
+   version of "the photo IS the band" and holds at every width, 2026-07-24) */
+.bbc-rd-impact .rd-csgrid-1 .rd-cscard__media img{ width:100%; height:100%; object-fit:cover; border-radius:0; }
+
+/* B4 · D10 statement quote: de-box, near-heading scale, hanging star */
+.bbc-rd-impact .rd-split .rd-q, .bbc-rd-impact .rd-q{ background:transparent; border:0; box-shadow:none; font-size:clamp(24px,3.4vw,42px) !important; line-height:1.12 !important; font-weight:800; letter-spacing:-.02em; max-width:20ch; padding:0; }
+
+/* B5 · D8 index/directory: ops cards become a typeset directory */
+.bbc-rd-impact .rd-ops{ display:block; }
+.bbc-rd-impact .rd-ops__cell{ display:grid; grid-template-columns:auto 1fr auto; align-items:baseline; gap:14px; border:0; border-radius:0; background:transparent; box-shadow:none; padding:18px 0; border-bottom:2px solid var(--mist,#CFC5B0); position:static; }
+.bbc-rd-impact .rd-ops__cell::after{ content:""; grid-column:2; border-bottom:2px dotted var(--mist,#CFC5B0); transform:translateY(-4px); }
+.bbc-rd-impact h3.rd-ops__title{ grid-column:1; grid-row:1; margin:0; }
+.bbc-rd-impact .rd-ops__items{ grid-column:1 / -1; grid-row:2; margin:4px 0 0; }
+.bbc-rd-impact .rd-ops__count{ position:static; grid-column:3; grid-row:1; font-size:clamp(1.6rem,3vw,2.4rem); font-weight:800; background:none; border:0; color:var(--forest,#003C32); padding:0; min-width:0; height:auto; }
+@media (hover:hover){ .bbc-rd-impact .rd-ops__cell:hover{ transform:none; } }
+
+/* B6 · D7 staggered evidence grid, borderless */
+.bbc-rd-impact .rd-cscard{ border:0 !important; border-radius:0 !important; box-shadow:none !important; background:transparent !important; }
+
+/* The borderless treatment above strips the card's background but NOT the card's
+   text colour, and the two are a matched pair. bbc-redesign-2026.css:348-363 gives
+   [data-family="programme"] bone text ON a forest fill. Remove the fill here and the
+   bone text lands on the page's own bone surface: measured 1.00:1 — foreground and
+   background the exact same colour (2026-08-03, pixel-sampled, 32 nodes across both
+   viewports). The featured prison case study rendered as a completely blank column
+   next to its photo — quote, outcomes, "OCN Level 2" and the read-more link all
+   present in the DOM and all invisible.
+   Only "programme" breaks: "applied" (steel + ink) and "recognition" (paper, no
+   colour) both degrade safely to ink on bone when their fill is stripped.
+   `.bbc-rd.bbc-rd-impact` is one element, giving (0,4,0)/(0,5,0) — enough to beat the
+   family rules' (0,3,0)/(0,4,0) without adding another !important. */
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"]{ color:var(--ink,#0E1A17); }
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__heading,
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__heading .rd-cscard__link,
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__more{ color:var(--ink,#0E1A17); }
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__ctx,
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__out,
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__outs,
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__attr,
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__inst,
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] .rd-cscard__meta,
+.bbc-rd.bbc-rd-impact .rd-cscard[data-family="programme"] p{ color:var(--charcoal,#2A332F); }
+
+/* The 2nd and 3rd children used to be dropped 40–80px so they cascaded away from the
+   big featured card that sat first in this grid. That featured card moved out to its
+   own slider (2026-08-19), so the rule was staggering three ordinary cards instead:
+   row one began at y3376, y3416 and y3456 — a 40px waterfall with nothing to cascade
+   from. Retired along with the premise that justified it.
+
+   align-items:start also let each card keep its natural height, so a 454px card sat
+   beside two 600px ones and the row's baseline came apart. Stretch instead, and let
+   the card fill its cell so every "read the story" lands on one line.
+
+   NOT inside a min-width query. The first version scoped these to ≥900px, which left
+   the two-up tablet grid ragged — hidden at six cards because those six happened to
+   match, and only visible once "show all" filled the rows. At one column they are inert.
+
+   :not([hidden]) is load-bearing, not tidiness. `display:flex` has the same specificity
+   as the rule that hides capped cards, and this sheet loads later, so without the guard
+   it won the cascade and re-painted all 28 hidden cards: the six-card cap silently
+   stopped working and the page went back to 14,743px. A layout rule must never be able
+   to out-rank [hidden]. */
+.bbc-rd-impact .rd-csgrid{ align-items:stretch; }
+.bbc-rd-impact .rd-csgrid > .rd-cscard-item:not([hidden]){ display:flex; height:100%; }
+.bbc-rd-impact .rd-csgrid > .rd-cscard-item:not([hidden]) > .rd-cscard{ display:flex; flex-direction:column; width:100%; }
+.bbc-rd-impact .rd-csgrid > .rd-cscard-item:not([hidden]) .rd-cscard__body{ display:flex; flex-direction:column; flex:1 1 auto; }
+.bbc-rd-impact .rd-csgrid > .rd-cscard-item:not([hidden]) .rd-cscard__more,
+.bbc-rd-impact .rd-csgrid > .rd-cscard-item:not([hidden]) a.rd-textlink{ margin-top:auto; }
+
+/* B7 · D3 marginalia rail: eyebrow leaves the stack */
+@media (min-width:900px){
+  .bbc-rd-impact .rd-band--next .rd-rail{ display:grid; grid-template-columns:minmax(130px,1fr) minmax(0,3.4fr); column-gap:clamp(24px,4vw,72px); }
+  .bbc-rd-impact .rd-band--next .rd-rail > .rd-eyebrow{ grid-column:1; grid-row:1; position:sticky; top:24px; align-self:start; }
+  .bbc-rd-impact .rd-band--next .rd-rail > *:not(.rd-eyebrow){ grid-column:2; }
+}
+
+/* B8 · D6 ruled get-involved: three doors as rule-separated columns */
+.bbc-rd-impact .rd-steel .rd-card{ background:transparent !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; }
+@media (min-width:760px){ .bbc-rd-impact .rd-steel .rd-card + .rd-card{ border-left:2px solid var(--ink,#0E1A17) !important; padding-left:clamp(20px,3vw,36px); border-radius:0 !important; } }
+@media (max-width:759px){ .bbc-rd-impact .rd-steel .rd-card + .rd-card{ border-top:2px solid var(--ink,#0E1A17) !important; padding-top:22px; } }
+@media (hover:hover){ .bbc-rd-impact .rd-steel .rd-card:hover{ transform:none; box-shadow:none !important; } }
+
+/* B9 · D9 rotated seal + de-boxed proof */
+.bbc-rd-impact .rd-seal{ display:inline-grid; place-items:center; width:clamp(92px,11vw,128px); aspect-ratio:1; border:2.5px solid var(--ink,#0E1A17); border-radius:999px; transform:rotate(-6deg); font-weight:800; text-transform:lowercase; letter-spacing:.04em; font-size:12px; text-align:center; background:var(--lime,#D4FD62); color:var(--forest,#003C32); position:absolute; right:0; top:-18px; padding:10px; z-index:2; }
+@media (max-width:600px){ .bbc-rd-impact .rd-seal{ width:84px; font-size:var(--fs-10-5); top:-10px; } }
+.bbc-rd-impact .rd-callout-steel{ background:transparent; border-left:0; padding:0; }
+.bbc-rd-impact .rd-promises__row{ border-top:2px solid var(--mist,#CFC5B0); }
+.bbc-rd-impact .rd-dlcard{ border:0; box-shadow:none; background:transparent; border-top:2px solid var(--ink,#0E1A17); border-radius:0; padding-inline:0; }
+
+/* B10 · D5 the one seam-cross: closing heading laps the boundary */
+/* D5 seam-cross removed after visual test — overlapped its own eyebrow; the rare move ships only when clean (FORMULA §8.5 allows zero) */
+/* anti-blocky fix: schools card lost its padding — media margins must match (was poking past the wrap) */
+/* cred quote: the last box — becomes a pure pull-quote (100% sweep) */
+.bbc-impact-cred .rd-card, .bbc-impact-cred [class*="quote"], .bbc-rd-impact .rd-cred-q{ }
+.bbc-rd-impact .bbc-impact-cred .rd-stamp, .bbc-rd-impact .bbc-impact-cred blockquote,
+.bbc-rd-impact .rd-cred-q, .bbc-rd-impact .rd-cred-q *{ }
+.bbc-rd-impact .bbc-impact-cred .rd-card.rd-stamp{ background:transparent !important; border:0 !important; box-shadow:none !important; padding:0 !important; }
+/* type bridge (James): ledes carry the jump to display heads; station details legible on mobile */
+.bbc-rd-impact .rd-lede{ font-size:clamp(19px,1.9vw,22px) !important; line-height:1.5; }
+.bbc-rd-impact .rd-flow__step small{ font-size:var(--fs-14-5); }
+/* SIGN-OFF CRIT closures (2026-07-13) */
+/* 820px wraps join the page axis (was flush-left after the margin-0 fix) */
+/* superseded by the alignment contract — this rule out-specified bbc-align.css and kept the
+   impact page's 820px measure pinned to the left axis with a 420px gap on the right. */
+/* lazy imgs must never blank during fast scroll on this page */
+.bbc-rd-impact img[loading="lazy"]{ content-visibility:visible !important; }
+/* seal: keep inside the mobile viewport */
+@media (max-width:600px){ .bbc-rd-impact .rd-seal{ right:8px; } }
+
+/* responsive + quotes pass (2026-07-13) */
+.bbc-rd-impact .rd-band--close h2{ margin-left:0 !important; padding-left:0 !important; }
+.bbc-rd-impact .rd-band--close .rd-wrap{ padding-left:32px !important; margin-left:max(0px, calc((100vw - 1200px) / 2)) !important; margin-right:auto !important; }  /* rd-mw-680px was margin-left:44 — join the axis like the 820 wraps */
+/* BUILDERS SAY — scroll-snap quote strip (multiple quotes, James) */
+.bbc-rd-impact .rd-qscroll{ display:flex; gap:clamp(28px,4vw,64px); overflow-x:auto; scroll-snap-type:x mandatory; padding:18px max(32px, calc((100vw - 1200px)/2 + 32px)) 26px; -webkit-overflow-scrolling:touch; scrollbar-width:thin; scrollbar-color:var(--forest,#003C32) transparent; }
+.bbc-rd-impact .rd-qscroll__item{ scroll-snap-align:start; flex:0 0 auto; width:min(78vw,520px); margin:0; }
+.bbc-rd-impact .rd-qscroll__q{ font-size:clamp(24px,3vw,38px); line-height:1.15; font-weight:800; letter-spacing:-.02em; margin:0; border:0; padding:0; }
+.bbc-rd-impact .rd-qscroll__q::before{ content:"\2731"; color:var(--drift-17553a); font-size:.6em; margin-right:10px; }
+.bbc-rd-impact .rd-qscroll__a{ margin-top:12px; font-size:14px; font-weight:700; color:var(--drift-3a443f); }
+/* mobile single axis: the split band + mw-680 wrap carry 32px vs the page's 18 — unify */
+@media (max-width:899px){
+  .bbc-rd-impact .rd-split .rd-wrap, .bbc-rd-impact .rd-split > div,
+  .bbc-rd-impact .rd-band--close .rd-wrap{ padding-left:18px !important; padding-right:18px !important; margin-left:0 !important; }
+}
+/* impact-voices slider chrome (research spec) */
+.bbc-rd-impact .rd-qscroll{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ .bbc-rd-impact .rd-qscroll{ scroll-behavior:auto; } }
+.bbc-rd-impact .rd-qscroll:focus-visible{ outline:3px solid var(--forest,#003C32); outline-offset:4px; }
+.bbc-rd-impact .rd-qhead{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+.bbc-rd-impact .rd-qnav{ display:flex; align-items:center; gap:10px; }
+.bbc-rd-impact .rd-qbtn{ width:44px; height:44px; border-radius:50%; border:2px solid var(--forest,#003C32); background:transparent; color:var(--forest,#003C32); font-size:18px; cursor:pointer; }
+.bbc-rd-impact .rd-qbtn:hover{ background:var(--lime,#D4FD62); }
+.bbc-rd-impact .rd-qbtn[disabled]{ opacity:.3; cursor:default; background:transparent; }
+.bbc-rd-impact .rd-qcount{ font-size:14px; font-weight:800; color:var(--forest,#003C32); font-variant-numeric:tabular-nums; }
+.bbc-rd-impact .rd-qsrc{ font-weight:400; color:var(--drift-5a655f); }
+/* IMPACT VOICES — rolling reel on forest (James: fun, key proof) */
+.bbc-rd-impact .rd-band--quotes{ overflow:clip; }
+.bbc-rd-impact .rd-band--quotes .rd-qhead{ justify-content:flex-start; gap:20px; flex-direction:row-reverse; justify-content:flex-end; margin-bottom:14px; }
+.bbc-rd-impact .rd-band--quotes .rd-eyebrow{ color:var(--lime,#D4FD62) !important; }
+.bbc-rd-impact .rd-band--quotes .rd-qscroll{ overflow:hidden; padding-block:14px 22px; }
+.bbc-rd-impact .rd-qtrack{ display:flex; gap:clamp(40px,5vw,88px); width:max-content; animation:rd-roll 55s linear infinite; }
+@keyframes rd-roll{ to{ transform:translateX(-50%); } }
+.bbc-rd-impact .rd-band--quotes:hover .rd-qtrack,
+.bbc-rd-impact .rd-band--quotes:focus-within .rd-qtrack{ animation-play-state:paused; }
+.bbc-rd-impact .rd-band--quotes.is-manual .rd-qtrack{ animation:none; }
+.bbc-rd-impact .rd-band--quotes.is-manual .rd-qscroll{ overflow-x:auto; scroll-snap-type:x mandatory; }
+@media (prefers-reduced-motion: reduce){
+  .bbc-rd-impact .rd-qtrack{ animation:none; }
+  .bbc-rd-impact .rd-band--quotes .rd-qscroll{ overflow-x:auto; }
+}
+/* type worked: quote bold statement, attribution bold name + light source */
+.bbc-rd-impact .rd-band--quotes .rd-qscroll__q{ color:var(--bone,#E6DCC8); font-size:clamp(22px,2.6vw,34px); line-height:1.18; font-weight:800; letter-spacing:-.015em; }
+.bbc-rd-impact .rd-band--quotes .rd-qscroll__q::before{ color:var(--lime,#D4FD62); }
+.bbc-rd-impact .rd-band--quotes .rd-qscroll__a{ color:var(--drift-cfe0d7); font-weight:400; font-size:14px; margin-top:10px; }
+.bbc-rd-impact .rd-band--quotes .rd-qscroll__a b{ color:var(--bone,#E6DCC8); font-weight:800; }
+.bbc-rd-impact .rd-band--quotes .rd-qsrc{ color:var(--drift-9db8ad); }
+.bbc-rd-impact .rd-band--quotes .rd-qbtn{ border-color:var(--bone,#E6DCC8); color:var(--bone,#E6DCC8); }
+.bbc-rd-impact .rd-band--quotes .rd-qbtn:hover{ background:var(--lime,#D4FD62); color:var(--forest,#003C32); }
+/* world map: align figure + caption to the page left axis (was centred in the wrap) */
+
+
+
+
+
+/* alignment finish (2026-07-13): heading stays on the 72 axis in device bands */
+@media (min-width:900px){
+  /* marginalia rail: eyebrow floats into the left margin, heading holds the axis */
+  .bbc-rd-impact .rd-band--next .rd-rail{ display:block; position:relative; }
+  .bbc-rd-impact .rd-band--next .rd-rail > .rd-eyebrow{ position:absolute; left:0; top:6px; width:auto; }  /* sits in the 32px gutter, heading holds 72 */
+  .bbc-rd-impact .rd-band--next .rd-rail > *:not(.rd-eyebrow){ margin-left:0; }
+  .bbc-rd-impact .rd-band--next .rd-rail > h2{ margin-top:34px; }
+  /* B2B split: text column first so the heading lands on the page axis; image right */
+  .bbc-rd-impact .rd-split.rd-dark{ }
+  .bbc-rd-impact .rd-split.rd-dark .rd-media{ order:2; }
+  .bbc-rd-impact .rd-split.rd-dark .rd-txt{ order:1; }
+}
+
+/* WORLD MAP — full-bleed wide, big stats dropped in the ocean (James 2026-07-13) */
+
+
+
+
+
+
+
+/* ocean placements (equirectangular): North Pacific, North Atlantic, Indian Ocean, far-right Pacific */
+
+
+
+/* MOBILE: overlay off — map full-width, stats become a 2x2 row on the page axis */
+@media (max-width:759px){
+  /* cancel full-bleed on mobile: map + stats sit in the normal page gutter (18px) */
+  
+  
+  
+  
+  
+  
+  
+  
+}
+
+/* where-we-operate: single CENTRED big-number stat row under the map (de-dup + central, James 2026-07-13) */
+.bbc-rd-impact .rd-ops{ display:grid !important; grid-template-columns:repeat(4,1fr); gap:28px 24px; margin-top:clamp(24px,3vw,40px); }
+.bbc-rd-impact .rd-ops__cell{ display:block !important; text-align:center; border:0 !important; padding:0 !important; background:transparent !important; }
+.bbc-rd-impact .rd-ops__cell::after{ display:none !important; }
+
+.bbc-rd-impact h3.rd-ops__title{ font-size:15px !important; font-weight:800; text-transform:lowercase; margin:8px 0 0; text-align:center; }
+.bbc-rd-impact .rd-ops__items{ font-size:13px !important; line-height:1.45; color:var(--drift-5a655f); margin:6px auto 0; max-width:26ch; text-align:center; }
+@media (max-width:759px){ .bbc-rd-impact .rd-ops{ grid-template-columns:repeat(2,1fr); gap:24px 18px; } }
+/* map: clean + centred */
+
+
+/* where-we-operate detail: names row (numbers now live ON the map — no repeat) */
+.bbc-rd-impact .rd-ops{ display:flex !important; flex-wrap:wrap; justify-content:center; gap:14px 30px; grid-template-columns:none !important; }
+.bbc-rd-impact .rd-ops__cell{ flex:0 1 auto; max-width:280px; }
+.bbc-rd-impact h3.rd-ops__title{ font-size:14px !important; }
+
+/* MAP STATS — authoritative distributed ocean placement (measured geography; !important beats strays) */
+
+
+/* MAP STATS — all four in the open Pacific (James 2026-07-13), right-aligned stack */
+
+
+   /* 45 hero */
+   /* 10 */
+   /* 4 */
+   /* 3 */
+
+
+
+@media (max-width:759px){   }
+
+/* ============================================================
+   WORLD MAP — clean rewrite 2026-07-13 (flex-centred, wide,
+   all 4 stats in the Pacific per James). Replaces all prior
+   map CSS. Mobile: map on top, stats 2x2 on the page axis.
+   ============================================================ */
+.bbc-rd-impact .rd-mapwide{ width:min(1120px, calc(100% - 48px)); margin-inline:auto; }
+.bbc-rd-impact .rd-opsmap{ position:relative; width:100%; max-width:1080px; margin:0; }
+.bbc-rd-impact .rd-opsmap > img{ display:block; width:100%; height:auto; }
+.bbc-rd-impact .rd-opsmap__cap{ margin:14px 0 0; max-width:60ch; text-align:left; align-self:flex-start; }
+/* stats stacked in the open Pacific (right side of the map) */
+.bbc-rd-impact .rd-mapstats{ position:absolute; inset:0; pointer-events:none; }
+.bbc-rd-impact .rd-mapstat{ position:absolute; right:2%; text-align:right; }
+.bbc-rd-impact .rd-mapstat b{ display:block; font-weight:800; line-height:.82; letter-spacing:-.03em; color:var(--forest,#003C32); font-size:clamp(2rem,4.6vw,4.2rem); }
+.bbc-rd-impact .rd-mapstat span{ display:block; font-size:clamp(11px,1vw,14px); font-weight:800; color:var(--forest,#003C32); max-width:14ch; margin:3px 0 0 auto; }
+.bbc-rd-impact .rd-mapstat--d{ top:8%; }  .bbc-rd-impact .rd-mapstat--d b{ font-size:clamp(2.6rem,6vw,5.6rem); }
+.bbc-rd-impact .rd-mapstat--b{ top:33%; }
+.bbc-rd-impact .rd-mapstat--a{ top:56%; }
+.bbc-rd-impact .rd-mapstat--c{ top:79%; }
+@media (max-width:759px){
+  .bbc-rd-impact .rd-mapstats{ position:static; display:grid; grid-template-columns:1fr 1fr; gap:22px 20px; padding:24px 0 0; width:100%; }
+  .bbc-rd-impact .rd-mapstat{ position:static; right:auto; text-align:left; }
+  .bbc-rd-impact .rd-mapstat span{ margin-left:0; }
+  .bbc-rd-impact .rd-mapstat b{ font-size:clamp(2.4rem,12vw,3.4rem); }
+  .bbc-rd-impact .rd-mapstat--d b{ font-size:clamp(2.6rem,13vw,3.8rem); }
+  .bbc-rd-impact .rd-opsmap__cap{ align-self:stretch; }
+}

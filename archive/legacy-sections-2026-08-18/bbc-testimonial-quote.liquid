@@ -1,0 +1,202 @@
+{% stylesheet %}
+  .bbc-testimonial-section {
+    padding: 48px 20px;
+  }
+
+  .bbc-testimonial-section.bamboo-bg {
+    background-color: #2E7D32;
+    color: var(--bbc-white);
+  }
+
+  .bbc-testimonial-section.light-bg {
+    background-color: #f9f9f9;
+  }
+
+  .bbc-testimonial-section .section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  .bbc-testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .bbc-quote {
+    border-left: 4px solid #2E7D32;
+    padding: 24px;
+    background: var(--bbc-white);
+    font-style: italic;
+    position: relative;
+  }
+
+  .bbc-testimonial-section.bamboo-bg .bbc-quote {
+    background: rgba(255, 255, 255, 0.95);
+    border-left-color: var(--bbc-white);
+  }
+
+  .bbc-quote::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    font-size: 3rem;
+    color: #2E7D32;
+    opacity: 0.2;
+    line-height: 1;
+  }
+
+  .bbc-testimonial-section.bamboo-bg .bbc-quote::before {
+    color: var(--bbc-white);
+  }
+
+  .bbc-quote p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0 0 16px 0;
+    color: var(--bbc-gray-900);
+    font-family: var(--font-body-family);
+  }
+
+  .bbc-testimonial-section.bamboo-bg .bbc-quote p {
+    color: #1B3D27;
+  }
+
+  .bbc-quote-attribution {
+    font-style: normal;
+    font-size: 0.9rem;
+    color: var(--bbc-gray-600);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .bbc-testimonial-section.bamboo-bg .bbc-quote-attribution {
+    color: #0F2418;
+  }
+
+  .bbc-quote-name {
+    display: block;
+  }
+
+  .bbc-quote-role {
+    display: block;
+    font-size: 0.85rem;
+    opacity: 0.85;
+  }
+
+  @media (max-width: 768px) {
+    .bbc-testimonial-section {
+      padding: 32px 16px;
+    }
+
+    .bbc-testimonial-section .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+    }
+
+    .bbc-testimonial-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .bbc-quote {
+      padding: 16px;
+    }
+
+    .bbc-quote p {
+      font-size: 0.95rem;
+    }
+  }
+{% endstylesheet %}
+
+<section class="bbc-testimonial-section {% if section.settings.bg_style == 'bamboo' %}bamboo-bg{% else %}light-bg{% endif %}">
+  {% if section.settings.section_title != blank %}
+    <h2 class="section-title">{{ section.settings.section_title }}</h2>
+  {% endif %}
+
+  <div class="bbc-testimonial-grid">
+    {% for block in section.blocks %}
+      {% if block.settings.quote_text != blank %}
+        <div class="bbc-quote" {{ block.shopify_attributes }}>
+          <p>{{ block.settings.quote_text }}</p>
+          {% if block.settings.attribution_name != blank or block.settings.attribution_role != blank %}
+            <div class="bbc-quote-attribution">
+              {% if block.settings.attribution_name != blank %}
+                <span class="bbc-quote-name">{{ block.settings.attribution_name }}</span>
+              {% endif %}
+              {% if block.settings.attribution_role != blank %}
+                <span class="bbc-quote-role">{{ block.settings.attribution_role }}</span>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonial Quotes",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section heading",
+      "default": "What people say"
+    },
+    {
+      "type": "select",
+      "id": "bg_style",
+      "label": "Background style",
+      "options": [
+        {
+          "value": "light",
+          "label": "Light (white/gray)"
+        },
+        {
+          "value": "bamboo",
+          "label": "Bamboo green"
+        }
+      ],
+      "default": "light"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Quote",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote_text",
+          "label": "Quote text"
+        },
+        {
+          "type": "text",
+          "id": "attribution_name",
+          "label": "Name"
+        },
+        {
+          "type": "text",
+          "id": "attribution_role",
+          "label": "Role / Source"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonial Quotes"
+    }
+  ],
+  "max_blocks": 6
+}
+{% endschema %}

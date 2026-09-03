@@ -1,0 +1,1037 @@
+{% comment %}
+  BBC Video Hero Section
+  Two modes, all video types, fully editable via theme editor.
+
+  Mode: "background" — full-bleed autoplay muted video with text/CTA overlay
+  Mode: "featured"   — click-to-play video (YouTube / Vimeo / Shopify-hosted)
+                       with optional heading + subheading above or beside it
+
+  Video source priority (background mode):  Shopify-hosted → YouTube → Vimeo
+  Video source priority (featured mode):    Shopify-hosted → YouTube/Vimeo URL → MP4 URL
+
+  BBC brand compliant: no rounded buttons, BBC green/gold palette, sharp corners.
+  Uses Dawn's deferred-media pattern for featured mode (loads on click, no autoplay).
+  Background mode: native <video> element, autoplay/muted/loop, hides from screen readers.
+{% endcomment %}
+
+{%- liquid
+  assign mode = section.settings.mode
+
+  # Resolve video source (Shopify-hosted takes priority)
+  assign has_shopify_video = false
+  if section.settings.video != blank
+    assign has_shopify_video = true
+  endif
+
+  assign has_url_video = false
+  if section.settings.video_url != blank
+    assign has_url_video = true
+    assign url_video_type = section.settings.video_url.type
+    assign url_video_id = section.settings.video_url.id
+  endif
+
+  assign has_mp4 = false
+  if section.settings.mp4_url != blank
+    assign has_mp4 = true
+  endif
+
+  assign has_any_video = false
+  if has_shopify_video or has_url_video or has_mp4
+    assign has_any_video = true
+  endif
+
+  assign has_poster = false
+  if section.settings.poster_image != blank
+    assign has_poster = true
+  elsif has_shopify_video and section.settings.video.preview_image != blank
+    assign has_poster = true
+  endif
+-%}
+
+{%- style -%}
+/* ═══════════════════════════════════════════════
+   BBC Video Hero — Shared
+═══════════════════════════════════════════════ */
+.bbc-vh {
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", system-ui, sans-serif);
+}
+
+/* ═══════════════════════════════════════════════
+   Mode: Background (full-bleed autoplay)
+═══════════════════════════════════════════════ */
+.bbc-vh--background {
+  min-height: {{ section.settings.bg_height }}px;
+  display: flex;
+  align-items: {{ section.settings.vertical_align }};
+  background: var(--bbc-forest); /* fallback while video loads */
+}
+
+/* Background media layer */
+.bbc-vh__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.bbc-vh__bg-video,
+.bbc-vh__bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: {{ section.settings.media_position }};
+  display: block;
+}
+
+/* Overlay */
+.bbc-vh__overlay {
+  position: absolute;
+  inset: 0;
+  background: {{ section.settings.overlay_color }};
+  opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+}
+
+/* Content over background */
+.bbc-vh__bg-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: {{ settings.page_width | default: 1200 }}px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  text-align: {{ section.settings.text_align }};
+}
+
+{% if section.settings.text_align == 'center' %}
+.bbc-vh__bg-content .bbc-vh__body,
+.bbc-vh__bg-content .bbc-vh__cta {
+  justify-content: center;
+}
+{% endif %}
+
+.bbc-vh__eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: {{ section.settings.eyebrow_color | default: 'var(--bbc-gold)' }};
+  margin: 0 0 20px;
+  display: block;
+}
+
+.bbc-vh__heading {
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: {{ section.settings.heading_color | default: 'var(--bbc-white)' }};
+  margin: 0 0 20px;
+  text-wrap: balance;
+  max-width: {{ section.settings.heading_max_width }}px;
+  {% if section.settings.text_align == 'center' %}margin-left: auto; margin-right: auto;{% endif %}
+}
+
+.bbc-vh__body {
+  font-size: 18px;
+  line-height: 1.6;
+  color: {{ section.settings.body_color | default: 'rgba(255, 255, 255, 0.85)' }};
+  margin: 0 0 36px;
+  max-width: 580px;
+  {% if section.settings.text_align == 'center' %}margin-left: auto; margin-right: auto;{% endif %}
+}
+
+.bbc-vh__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Using global bbc-btn classes from bbc-buttons.css */
+
+/* Scroll indicator */
+.bbc-vh__scroll {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  z-index: 3;
+  animation: bbc-vh-bounce 2s ease-in-out infinite;
+}
+@keyframes bbc-vh-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ═══════════════════════════════════════════════
+   Mode: Featured (click-to-play)
+═══════════════════════════════════════════════ */
+.bbc-vh--featured {
+  padding: {{ section.settings.padding_top }}px 24px {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.featured_bg }};
+}
+
+.bbc-vh__featured-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Optional header above video */
+.bbc-vh__featured-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.bbc-vh__featured-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: {{ section.settings.featured_eyebrow_color | default: 'var(--bbc-teal)' }};
+  margin: 0 0 12px;
+  display: block;
+}
+
+.bbc-vh__featured-heading {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 800;
+  color: {{ section.settings.featured_heading_color | default: 'var(--bbc-forest)' }};
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 12px;
+}
+
+.bbc-vh__featured-sub {
+  font-size: 17px;
+  color: {{ section.settings.featured_sub_color | default: '#4a5568' }};
+  line-height: 1.6;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Video player */
+.bbc-vh__player {
+  position: relative;
+  border-radius: 0;
+  overflow: hidden;
+  background: var(--bbc-black);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Aspect ratio wrapper — default 16:9 */
+.bbc-vh__player-inner {
+  position: relative;
+  padding-bottom: {% if section.settings.aspect_ratio == '4:3' %}75{% elsif section.settings.aspect_ratio == '1:1' %}100{% elsif section.settings.aspect_ratio == '9:16' %}177.78{% else %}56.25{% endif %}%;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Poster image (shown before play) */
+.bbc-vh__poster {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bbc-vh__poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bbc-vh__poster-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 62, 39, 0.35);
+  transition: background 0.3s ease;
+}
+.bbc-vh__poster:hover .bbc-vh__poster-overlay {
+  background: rgba(7, 62, 39, 0.2);
+}
+
+/* Play button */
+.bbc-vh__play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background: var(--bbc-gold);
+  color: var(--bbc-forest);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+  z-index: 2;
+}
+.bbc-vh__play-btn:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+  background: #e09400;
+}
+.bbc-vh__play-btn svg {
+  width: 32px;
+  height: 32px;
+  margin-left: 4px; /* visual centering for play triangle */
+}
+
+/* Iframe / video embed (hidden until played) */
+.bbc-vh__embed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  border: none;
+}
+.bbc-vh__player-inner.bbc-vh--playing .bbc-vh__poster {
+  display: none;
+}
+.bbc-vh__player-inner.bbc-vh--playing .bbc-vh__embed {
+  display: block;
+}
+
+/* Native Shopify video */
+.bbc-vh__native-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Placeholder when no video added */
+.bbc-vh__placeholder {
+  position: absolute;
+  inset: 0;
+  background: var(--bbc-forest-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--bbc-teal);
+}
+.bbc-vh__placeholder svg {
+  width: 48px;
+  height: 48px;
+  opacity: 0.5;
+}
+.bbc-vh__placeholder p {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Caption below video */
+.bbc-vh__caption {
+  font-size: 13px;
+  color: #718096;
+  text-align: center;
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* ═══════════════════════════════════════════════
+   Mobile
+═══════════════════════════════════════════════ */
+@media (max-width: 749px) {
+  .bbc-vh--background {
+    min-height: {{ section.settings.bg_height_mobile | default: 560 }}px;
+  }
+
+  .bbc-vh__bg-content {
+    padding: 60px 16px;
+  }
+
+  .bbc-vh__heading {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+
+  .bbc-vh__body {
+    font-size: 16px;
+  }
+
+  /* Button mobile styles handled by bbc-buttons.css */
+
+  .bbc-vh--featured {
+    padding: 40px 16px;
+  }
+
+  .bbc-vh__play-btn {
+    width: 64px;
+    height: 64px;
+  }
+  .bbc-vh__play-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bbc-vh__scroll { animation: none; }
+  .bbc-vh__play-btn:hover { transform: translate(-50%, -50%); }
+}
+{%- endstyle -%}
+
+{% comment %} ─────────────────────────────────────────────
+   MODE: BACKGROUND (full-bleed autoplay video hero)
+───────────────────────────────────────────── {% endcomment %}
+{% if mode == 'background' %}
+<section class="bbc-vh bbc-vh--background">
+
+  {%- comment %} Background media {% endcomment -%}
+  <div class="bbc-vh__bg" aria-hidden="true">
+
+    {%- if has_shopify_video -%}
+      {{
+        section.settings.video
+        | video_tag:
+          class: 'bbc-vh__bg-video',
+          autoplay: true,
+          loop: true,
+          muted: true,
+          controls: false,
+          playsinline: true,
+          image_size: '1920x'
+      }}
+
+    {%- elsif has_url_video -%}
+      {%- comment %}
+        YouTube/Vimeo as background — use an <iframe> with autoplay, muted, loop.
+        Note: YouTube requires mute=1 for autoplay; Vimeo requires muted=1.
+        Browser security requires user interaction for unmuted autoplay,
+        so background mode is always muted regardless of settings.
+      {% endcomment -%}
+
+      {%- if url_video_type == 'youtube' -%}
+        <iframe
+          class="bbc-vh__bg-video"
+          src="https://www.youtube.com/embed/{{ url_video_id }}?autoplay=1&mute=1&loop=1&playlist={{ url_video_id }}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          title="{{ section.settings.heading | default: 'Background video' | escape }}"
+          style="position:absolute;inset:-10%;width:120%;height:120%;pointer-events:none;"
+        ></iframe>
+      {%- elsif url_video_type == 'vimeo' -%}
+        <iframe
+          class="bbc-vh__bg-video"
+          src="https://player.vimeo.com/video/{{ url_video_id }}?autoplay=1&muted=1&loop=1&background=1&transparent=0"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          title="{{ section.settings.heading | default: 'Background video' | escape }}"
+          style="position:absolute;inset:-10%;width:120%;height:120%;pointer-events:none;"
+        ></iframe>
+      {%- endif -%}
+
+    {%- elsif has_mp4 -%}
+      <video
+        class="bbc-vh__bg-video"
+        src="{{ section.settings.mp4_url }}"
+        autoplay
+        muted
+        loop
+        playsinline
+        {% if has_poster %}poster="{{ section.settings.poster_image | image_url: width: 1920 }}"{% endif %}
+      ></video>
+
+    {%- elsif has_poster -%}
+      <img
+        class="bbc-vh__bg-image"
+        src="{{ section.settings.poster_image | image_url: width: 1920 }}"
+        srcset="{{ section.settings.poster_image | image_url: width: 800 }} 800w,
+                {{ section.settings.poster_image | image_url: width: 1200 }} 1200w,
+                {{ section.settings.poster_image | image_url: width: 1920 }} 1920w"
+        sizes="100vw"
+        alt=""
+        loading="eager"
+      >
+    {%- endif -%}
+
+    <div class="bbc-vh__overlay"></div>
+  </div>
+
+  {%- comment %} Text & CTA overlay {% endcomment -%}
+  <div class="bbc-vh__bg-content">
+
+    {% if section.settings.eyebrow != blank %}
+      <span class="bbc-vh__eyebrow">{{ section.settings.eyebrow }}</span>
+    {% endif %}
+
+    {% if section.settings.heading != blank %}
+      <h1 class="bbc-vh__heading">{{ section.settings.heading }}</h1>
+    {% endif %}
+
+    {% if section.settings.subheading != blank %}
+      <p class="bbc-vh__body">{{ section.settings.subheading }}</p>
+    {% endif %}
+
+    {% assign has_cta = false %}
+    {% if section.settings.btn1_text != blank or section.settings.btn2_text != blank %}
+      {% assign has_cta = true %}
+    {% endif %}
+
+    {% if has_cta %}
+      <div class="bbc-vh__cta">
+        {% if section.settings.btn1_text != blank %}
+          <a href="{{ section.settings.btn1_link }}" class="bbc-btn bbc-btn--{{ section.settings.btn1_style }}">
+            {{ section.settings.btn1_text }}
+            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" width="14" height="14">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        {% endif %}
+        {% if section.settings.btn2_text != blank %}
+          <a href="{{ section.settings.btn2_link }}" class="bbc-btn bbc-btn--{{ section.settings.btn2_style }}">
+            {{ section.settings.btn2_text }}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+
+  </div>
+
+  {% if section.settings.show_scroll_hint %}
+    <div class="bbc-vh__scroll" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  {% endif %}
+
+</section>
+
+{% comment %} ─────────────────────────────────────────────
+   MODE: FEATURED (click-to-play standalone video)
+───────────────────────────────────────────── {% endcomment %}
+{% else %}
+<section class="bbc-vh bbc-vh--featured">
+  <div class="bbc-vh__featured-container">
+
+    {% if section.settings.featured_eyebrow != blank or section.settings.featured_heading != blank %}
+      <div class="bbc-vh__featured-header">
+        {% if section.settings.featured_eyebrow != blank %}
+          <span class="bbc-vh__featured-eyebrow">{{ section.settings.featured_eyebrow }}</span>
+        {% endif %}
+        {% if section.settings.featured_heading != blank %}
+          <h2 class="bbc-vh__featured-heading">{{ section.settings.featured_heading }}</h2>
+        {% endif %}
+        {% if section.settings.featured_sub != blank %}
+          <p class="bbc-vh__featured-sub">{{ section.settings.featured_sub }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="bbc-vh__player">
+      <div class="bbc-vh__player-inner" id="bbc-vh-player-{{ section.id }}">
+
+        {%- if has_shopify_video -%}
+          {%- comment %} Shopify-hosted video: use native <video> with controls {% endcomment -%}
+          {{
+            section.settings.video
+            | video_tag:
+              class: 'bbc-vh__native-video',
+              autoplay: false,
+              loop: false,
+              muted: false,
+              controls: true,
+              playsinline: true,
+              image_size: '1100x'
+          }}
+
+        {%- elsif has_url_video or has_mp4 -%}
+          {%- comment %} External/YouTube/Vimeo: show poster + play button, load on click {% endcomment -%}
+
+          <div class="bbc-vh__poster" id="bbc-vh-poster-{{ section.id }}" role="button" tabindex="0" aria-label="Play video">
+            {%- if has_poster -%}
+              <img
+                class="bbc-vh__poster-img"
+                src="{{ section.settings.poster_image | image_url: width: 1100 }}"
+                alt="{{ section.settings.video_description | default: section.settings.featured_heading | default: 'Video' }}"
+                loading="lazy"
+              >
+            {%- elsif has_url_video and url_video_type == 'youtube' -%}
+              <img
+                class="bbc-vh__poster-img"
+                src="https://img.youtube.com/vi/{{ url_video_id }}/maxresdefault.jpg"
+                alt="{{ section.settings.video_description | default: 'Video' }}"
+                loading="lazy"
+                onerror="this.src='https://img.youtube.com/vi/{{ url_video_id }}/hqdefault.jpg'"
+              >
+            {%- else -%}
+              <div class="bbc-vh__placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M15 10l4.553-2.531A1 1 0 0 1 21 8.469v7.062a1 1 0 0 1-1.447.9L15 14M3 8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/>
+                </svg>
+                <p>Video will appear here</p>
+              </div>
+            {%- endif -%}
+
+            <div class="bbc-vh__poster-overlay"></div>
+
+            <button class="bbc-vh__play-btn" type="button" aria-label="Play video">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5.14v14l11-7-11-7z"/>
+              </svg>
+            </button>
+          </div>
+
+          {%- if has_url_video -%}
+            {%- if url_video_type == 'youtube' -%}
+              <iframe
+                class="bbc-vh__embed"
+                id="bbc-vh-embed-{{ section.id }}"
+                src=""
+                data-src="https://www.youtube.com/embed/{{ url_video_id }}?autoplay=1&rel=0&modestbranding=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media; fullscreen"
+                allowfullscreen
+                title="{{ section.settings.video_description | default: section.settings.featured_heading | escape }}"
+              ></iframe>
+            {%- elsif url_video_type == 'vimeo' -%}
+              <iframe
+                class="bbc-vh__embed"
+                id="bbc-vh-embed-{{ section.id }}"
+                src=""
+                data-src="https://player.vimeo.com/video/{{ url_video_id }}?autoplay=1&title=0&byline=0&portrait=0"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+                title="{{ section.settings.video_description | default: section.settings.featured_heading | escape }}"
+              ></iframe>
+            {%- endif -%}
+          {%- elsif has_mp4 -%}
+            <video
+              class="bbc-vh__embed"
+              id="bbc-vh-embed-{{ section.id }}"
+              controls
+              playsinline
+              {% if has_poster %}poster="{{ section.settings.poster_image | image_url: width: 1100 }}"{% endif %}
+            >
+              <source src="{{ section.settings.mp4_url }}" type="video/mp4">
+            </video>
+          {%- endif -%}
+
+        {%- else -%}
+          <div class="bbc-vh__placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M15 10l4.553-2.531A1 1 0 0 1 21 8.469v7.062a1 1 0 0 1-1.447.9L15 14M3 8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/>
+            </svg>
+            <p>Add a video in the theme editor</p>
+          </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+
+    {% if section.settings.caption != blank %}
+      <p class="bbc-vh__caption">{{ section.settings.caption }}</p>
+    {% endif %}
+
+  </div>
+</section>
+{% endif %}
+
+<script>
+  (function() {
+    var playerId = 'bbc-vh-player-{{ section.id }}';
+    var posterId = 'bbc-vh-poster-{{ section.id }}';
+    var embedId  = 'bbc-vh-embed-{{ section.id }}';
+
+    var poster = document.getElementById(posterId);
+    if (!poster) return;
+
+    function activateVideo() {
+      var playerInner = document.getElementById(playerId);
+      var embed = document.getElementById(embedId);
+      if (!playerInner || !embed) return;
+
+      // Load the src from data-src (lazy load iframe)
+      if (embed.dataset.src) {
+        embed.src = embed.dataset.src;
+      }
+      // For <video> elements, just play
+      if (embed.tagName === 'VIDEO') {
+        embed.play();
+      }
+
+      playerInner.classList.add('bbc-vh--playing');
+    }
+
+    poster.addEventListener('click', activateVideo);
+    poster.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activateVideo();
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "BBC Video Hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Mode"
+    },
+    {
+      "type": "select",
+      "id": "mode",
+      "label": "Display mode",
+      "info": "Background: full-screen video behind text (homepage hero). Featured: click-to-play video block (impact page, about page).",
+      "options": [
+        { "value": "background", "label": "Background — full-screen video hero" },
+        { "value": "featured",   "label": "Featured — click-to-play video block" }
+      ],
+      "default": "featured"
+    },
+    {
+      "type": "header",
+      "content": "Video source"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add ONE video source. Priority: Shopify-hosted > YouTube/Vimeo URL > MP4 URL."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Shopify-hosted video",
+      "info": "Upload directly to Shopify (Files). Best quality, best performance."
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "YouTube or Vimeo URL",
+      "accept": ["youtube", "vimeo"],
+      "info": "Paste a YouTube or Vimeo URL. Used if no Shopify video is set."
+    },
+    {
+      "type": "url",
+      "id": "mp4_url",
+      "label": "Direct MP4 URL (advanced)",
+      "info": "For self-hosted MP4 files. Only used if no other video source is set."
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image",
+      "label": "Poster / thumbnail image",
+      "info": "Shown before video plays (featured mode) or as fallback if video cannot load (background mode). Recommended: 1920×1080px."
+    },
+    {
+      "type": "text",
+      "id": "video_description",
+      "label": "Video description (accessibility)",
+      "info": "Describes the video for screen readers. Not visible on screen.",
+      "default": "Bamboo Bicycle Club programme video"
+    },
+    {
+      "type": "header",
+      "content": "Background mode — text & CTAs",
+      "info": "These settings only apply when mode = Background"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Bamboo Bicycle Club"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Build Your Own Bamboo Bicycle"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Hands-on workshops and complete DIY kits. No experience needed."
+    },
+    {
+      "type": "text",
+      "id": "btn1_text",
+      "label": "Button 1 text",
+      "default": "Shop Frame Kits"
+    },
+    {
+      "type": "url",
+      "id": "btn1_link",
+      "label": "Button 1 link"
+    },
+    {
+      "type": "select",
+      "id": "btn1_style",
+      "label": "Button 1 style",
+      "options": [
+        { "value": "primary", "label": "Primary (Gold)" },
+        { "value": "secondary", "label": "Secondary (Dark Green)" },
+        { "value": "outline", "label": "Outline (Dark)" },
+        { "value": "outline-light", "label": "Outline (Light)" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "text",
+      "id": "btn2_text",
+      "label": "Button 2 text"
+    },
+    {
+      "type": "url",
+      "id": "btn2_link",
+      "label": "Button 2 link"
+    },
+    {
+      "type": "select",
+      "id": "btn2_style",
+      "label": "Button 2 style",
+      "options": [
+        { "value": "primary", "label": "Primary (Gold)" },
+        { "value": "secondary", "label": "Secondary (Dark Green)" },
+        { "value": "outline", "label": "Outline (Dark)" },
+        { "value": "outline-light", "label": "Outline (Light)" }
+      ],
+      "default": "outline-light"
+    },
+    {
+      "type": "header",
+      "content": "Background mode — text colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow text color",
+      "default": "#ffa900"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Subheading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Background mode — layout"
+    },
+    {
+      "type": "range",
+      "id": "bg_height",
+      "min": 400,
+      "max": 1000,
+      "step": 40,
+      "unit": "px",
+      "label": "Minimum height (desktop)",
+      "default": 720
+    },
+    {
+      "type": "range",
+      "id": "bg_height_mobile",
+      "min": 320,
+      "max": 680,
+      "step": 40,
+      "unit": "px",
+      "label": "Minimum height (mobile)",
+      "default": 560
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "vertical_align",
+      "label": "Vertical content position",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Middle" },
+        { "value": "flex-end", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width",
+      "min": 400,
+      "max": 880,
+      "step": 40,
+      "unit": "px",
+      "label": "Heading max width",
+      "default": 680
+    },
+    {
+      "type": "select",
+      "id": "media_position",
+      "label": "Video / image focal point",
+      "options": [
+        { "value": "center center", "label": "Centre" },
+        { "value": "top center", "label": "Top" },
+        { "value": "bottom center", "label": "Bottom" },
+        { "value": "center left", "label": "Left" },
+        { "value": "center right", "label": "Right" }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay colour",
+      "default": "#003C32"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "info": "Higher = text more readable, video less visible",
+      "default": 60
+    },
+    {
+      "type": "checkbox",
+      "id": "show_scroll_hint",
+      "label": "Show scroll hint arrow",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Featured mode — heading"
+    },
+    {
+      "type": "text",
+      "id": "featured_eyebrow",
+      "label": "Eyebrow text",
+      "default": "See It In Action"
+    },
+    {
+      "type": "text",
+      "id": "featured_heading",
+      "label": "Heading",
+      "default": "Watch a Build to Bond Session"
+    },
+    {
+      "type": "textarea",
+      "id": "featured_sub",
+      "label": "Subheading"
+    },
+    {
+      "type": "color",
+      "id": "featured_eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#3f8b66"
+    },
+    {
+      "type": "color",
+      "id": "featured_heading_color",
+      "label": "Heading color",
+      "default": "#003C32"
+    },
+    {
+      "type": "color",
+      "id": "featured_sub_color",
+      "label": "Subheading color",
+      "default": "#4a5568"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption (below video)",
+      "info": "Optional. Small text beneath the video player."
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Video aspect ratio",
+      "options": [
+        { "value": "16:9", "label": "16:9 (standard)" },
+        { "value": "4:3",  "label": "4:3 (older)" },
+        { "value": "1:1",  "label": "1:1 (square)" },
+        { "value": "9:16", "label": "9:16 (portrait / vertical)" }
+      ],
+      "default": "16:9"
+    },
+    {
+      "type": "color",
+      "id": "featured_bg",
+      "label": "Section background",
+      "default": "#f8f8f6"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Video Hero — Featured",
+      "settings": {
+        "mode": "featured",
+        "featured_eyebrow": "See It In Action",
+        "featured_heading": "Watch a Build to Bond Session",
+        "featured_sub": "See what happens inside a Build to Bond workshop — the focused craft, the pride in building, and the moment a parent presents a bike to their child for the first time."
+      }
+    },
+    {
+      "name": "BBC Video Hero — Background",
+      "settings": {
+        "mode": "background",
+        "eyebrow": "Since 2012",
+        "heading": "Build Your Own Bamboo Bicycle",
+        "subheading": "Hands-on workshops and complete DIY kits. No experience needed.",
+        "btn1_text": "Shop Frame Kits",
+        "btn2_text": "Book a Workshop",
+        "overlay_opacity": 60
+      }
+    }
+  ]
+}
+{% endschema %}

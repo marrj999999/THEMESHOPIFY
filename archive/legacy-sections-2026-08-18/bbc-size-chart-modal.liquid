@@ -1,0 +1,557 @@
+{% comment %}
+  BBC Size Chart Modal
+  Frame sizing guide popup - add to product template
+{% endcomment %}
+
+<div class="bbc-size-modal" id="size-modal-{{ section.id }}" role="dialog" aria-modal="true" aria-labelledby="size-modal-title-{{ section.id }}">
+  <div class="bbc-size-modal__backdrop" data-close-modal></div>
+  <div class="bbc-size-modal__content">
+    <div class="bbc-size-modal__header">
+      <h2 id="size-modal-title-{{ section.id }}" class="bbc-size-modal__title">
+        {{ section.settings.heading | default: 'Frame Size Guide' }}
+      </h2>
+      <button type="button" class="bbc-size-modal__close" data-close-modal aria-label="Close size guide">
+        {% render 'bbc-icons', icon: 'close', size: 24 %}
+      </button>
+    </div>
+    
+    <div class="bbc-size-modal__body">
+      {% if section.settings.intro != blank %}
+        <p class="bbc-size-modal__intro">{{ section.settings.intro }}</p>
+      {% endif %}
+
+      <div class="bbc-size-modal__calculator">
+        <label class="bbc-size-modal__label">
+          Your Height
+          <div class="bbc-size-modal__input-group">
+            <input type="number" 
+                   id="height-input-{{ section.id }}" 
+                   class="bbc-size-modal__input"
+                   placeholder="175"
+                   min="140"
+                   max="210">
+            <select id="height-unit-{{ section.id }}" class="bbc-size-modal__select">
+              <option value="cm">cm</option>
+              <option value="ft">ft/in</option>
+            </select>
+          </div>
+        </label>
+        
+        <button type="button" class="bbc-size-modal__calculate" id="calculate-size-{{ section.id }}">
+          Find My Size
+        </button>
+        
+        <div class="bbc-size-modal__result" id="size-result-{{ section.id }}" style="display: none;">
+          <span class="bbc-size-modal__result-label">Recommended Frame Size:</span>
+          <span class="bbc-size-modal__result-size" id="recommended-size-{{ section.id }}">54cm</span>
+        </div>
+      </div>
+
+      <div class="bbc-size-modal__table-wrapper">
+        <table class="bbc-size-modal__table">
+          <thead>
+            <tr>
+              <th>Frame Size</th>
+              <th>Rider Height (cm)</th>
+              <th>Rider Height (ft/in)</th>
+              <th>Inside Leg (cm)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for block in section.blocks %}
+              {% if block.type == 'size' %}
+                <tr {{ block.shopify_attributes }} data-height-min="{{ block.settings.height_cm_min }}" data-height-max="{{ block.settings.height_cm_max }}">
+                  <td><strong>{{ block.settings.size_label }}</strong></td>
+                  <td>{{ block.settings.height_cm_min }} - {{ block.settings.height_cm_max }}</td>
+                  <td>{{ block.settings.height_imperial }}</td>
+                  <td>{{ block.settings.inseam }}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      {% if section.settings.note != blank %}
+        <div class="bbc-size-modal__note">
+          {% render 'bbc-icons', icon: 'info', size: 16 %}
+          {{ section.settings.note }}
+        </div>
+      {% endif %}
+      
+      {% if section.settings.show_diagram %}
+        <div class="bbc-size-modal__diagram">
+          <h3 class="bbc-size-modal__diagram-title">How to Measure</h3>
+          {% if section.settings.diagram_image != blank %}
+            {{ section.settings.diagram_image | image_url: width: 600 | image_tag:
+              loading: 'lazy',
+              alt: 'How to measure for frame size'
+            }}
+          {% else %}
+            <div class="bbc-size-modal__diagram-placeholder">
+              <p><strong>Inside Leg Measurement:</strong></p>
+              <ol>
+                <li>Stand barefoot against a wall</li>
+                <li>Place a book between your legs, spine up</li>
+                <li>Measure from the top of the book to the floor</li>
+              </ol>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- Trigger button (place near buy button) -->
+<button type="button" class="bbc-size-modal__trigger" id="size-trigger-{{ section.id }}">
+  {% render 'bbc-icons', icon: 'ruler', size: 18 %}
+  {{ section.settings.trigger_text | default: 'Size Guide' }}
+</button>
+
+<style>
+.bbc-size-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.bbc-size-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.bbc-size-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.bbc-size-modal__content {
+  position: relative;
+  background: white;
+  border-radius: 16px;
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.bbc-size-modal.is-open .bbc-size-modal__content {
+  transform: translateY(0);
+}
+
+.bbc-size-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  background: white;
+  border-radius: 16px 16px 0 0;
+  z-index: 1;
+}
+
+.bbc-size-modal__title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin: 0;
+}
+
+.bbc-size-modal__close {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: var(--bbc-gray-600);
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.bbc-size-modal__close:hover {
+  background: #f0f0f0;
+  color: var(--bbc-forest, var(--bbc-forest));
+}
+
+.bbc-size-modal__body {
+  padding: 24px;
+}
+
+.bbc-size-modal__intro {
+  color: var(--bbc-gray-600);
+  margin: 0 0 24px;
+  line-height: 1.6;
+}
+
+.bbc-size-modal__calculator {
+  background: var(--bbc-cream);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.bbc-size-modal__label {
+  display: block;
+  font-weight: 600;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin-bottom: 12px;
+}
+
+.bbc-size-modal__input-group {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.bbc-size-modal__input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.bbc-size-modal__select {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  cursor: pointer;
+}
+
+.bbc-size-modal__calculate {
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px;
+  background: var(--bbc-forest, var(--bbc-forest));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.bbc-size-modal__calculate:hover {
+  background: var(--bbc-teal, var(--bbc-teal));
+}
+
+.bbc-size-modal__result {
+  margin-top: 16px;
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid var(--bbc-gold, var(--bbc-gold));
+}
+
+.bbc-size-modal__result-label {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--bbc-gray-600);
+  margin-bottom: 4px;
+}
+
+.bbc-size-modal__result-size {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--bbc-forest, var(--bbc-forest));
+}
+
+.bbc-size-modal__table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.bbc-size-modal__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.bbc-size-modal__table th,
+.bbc-size-modal__table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.bbc-size-modal__table th {
+  background: var(--bbc-cream);
+  font-weight: 600;
+  color: var(--bbc-forest, var(--bbc-forest));
+}
+
+.bbc-size-modal__table tr.is-highlighted {
+  background: rgba(255, 169, 0, 0.15);
+}
+
+.bbc-size-modal__note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #e8f4f0;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.bbc-size-modal__diagram {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.bbc-size-modal__diagram-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin: 0 0 12px;
+}
+
+.bbc-size-modal__diagram img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.bbc-size-modal__diagram-placeholder {
+  padding: 16px;
+  background: var(--bbc-cream);
+  border-radius: 8px;
+  font-size: 0.9375rem;
+}
+
+.bbc-size-modal__diagram-placeholder ol {
+  margin: 8px 0 0 20px;
+  padding: 0;
+}
+
+.bbc-size-modal__diagram-placeholder li {
+  margin-bottom: 8px;
+}
+
+/* Trigger button */
+.bbc-size-modal__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--bbc-forest, var(--bbc-forest));
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.bbc-size-modal__trigger:hover {
+  border-color: var(--bbc-forest, var(--bbc-forest));
+  background: var(--bbc-cream);
+}
+
+@media (max-width: 600px) {
+  .bbc-size-modal__content {
+    max-height: 95vh;
+  }
+  
+  .bbc-size-modal__table {
+    font-size: 0.8125rem;
+  }
+  
+  .bbc-size-modal__table th,
+  .bbc-size-modal__table td {
+    padding: 10px 8px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  const modal = document.getElementById('size-modal-{{ section.id }}');
+  const trigger = document.getElementById('size-trigger-{{ section.id }}');
+  const closeButtons = modal.querySelectorAll('[data-close-modal]');
+  const heightInput = document.getElementById('height-input-{{ section.id }}');
+  const unitSelect = document.getElementById('height-unit-{{ section.id }}');
+  const calculateBtn = document.getElementById('calculate-size-{{ section.id }}');
+  const resultDiv = document.getElementById('size-result-{{ section.id }}');
+  const recommendedSize = document.getElementById('recommended-size-{{ section.id }}');
+  const tableRows = modal.querySelectorAll('tbody tr');
+  
+  // Open modal
+  trigger.addEventListener('click', function() {
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    modal.querySelector('.bbc-size-modal__close').focus();
+  });
+  
+  // Close modal
+  function closeModal() {
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+    trigger.focus();
+  }
+  
+  closeButtons.forEach(btn => btn.addEventListener('click', closeModal));
+  
+  // Close on escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+      closeModal();
+    }
+  });
+  
+  // Calculate size
+  calculateBtn.addEventListener('click', function() {
+    let height = parseFloat(heightInput.value);
+    if (!height || isNaN(height)) return;
+    
+    // Convert feet/inches to cm if needed
+    if (unitSelect.value === 'ft') {
+      // Assume input is total inches or feet.inches format
+      if (height < 10) {
+        // Probably feet.inches format (e.g., 5.10 = 5ft 10in)
+        const feet = Math.floor(height);
+        const inches = Math.round((height - feet) * 10);
+        height = (feet * 30.48) + (inches * 2.54);
+      } else {
+        // Total inches
+        height = height * 2.54;
+      }
+    }
+    
+    // Find matching size
+    let matched = false;
+    tableRows.forEach(row => {
+      row.classList.remove('is-highlighted');
+      const min = parseFloat(row.dataset.heightMin);
+      const max = parseFloat(row.dataset.heightMax);
+      
+      if (height >= min && height <= max) {
+        row.classList.add('is-highlighted');
+        recommendedSize.textContent = row.querySelector('td strong').textContent;
+        matched = true;
+      }
+    });
+    
+    if (matched) {
+      resultDiv.style.display = 'block';
+    } else {
+      recommendedSize.textContent = 'Custom sizing may be needed';
+      resultDiv.style.display = 'block';
+    }
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "BBC Size Chart Modal",
+  "tag": "div",
+  "class": "bbc-size-modal-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frame Size Guide"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "Use this guide to find your ideal frame size. If you're between sizes, consider your riding style - go smaller for a more agile feel, larger for stability."
+    },
+    {
+      "type": "text",
+      "id": "trigger_text",
+      "label": "Trigger Button Text",
+      "default": "Size Guide"
+    },
+    {
+      "type": "textarea",
+      "id": "note",
+      "label": "Note",
+      "default": "These are general guidelines. For custom sizing or questions, contact us."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_diagram",
+      "label": "Show Measuring Diagram",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "diagram_image",
+      "label": "Diagram Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "size",
+      "name": "Size",
+      "settings": [
+        {
+          "type": "text",
+          "id": "size_label",
+          "label": "Size Label",
+          "default": "54cm"
+        },
+        {
+          "type": "number",
+          "id": "height_cm_min",
+          "label": "Height Min (cm)",
+          "default": 168
+        },
+        {
+          "type": "number",
+          "id": "height_cm_max",
+          "label": "Height Max (cm)",
+          "default": 175
+        },
+        {
+          "type": "text",
+          "id": "height_imperial",
+          "label": "Height Imperial",
+          "default": "5'6\" - 5'9\""
+        },
+        {
+          "type": "text",
+          "id": "inseam",
+          "label": "Inside Leg (cm)",
+          "default": "76 - 81"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Size Chart Modal",
+      "blocks": [
+        { "type": "size", "settings": { "size_label": "50cm (XS)", "height_cm_min": 155, "height_cm_max": 165, "height_imperial": "5'1\" - 5'5\"", "inseam": "71 - 76" } },
+        { "type": "size", "settings": { "size_label": "54cm (S)", "height_cm_min": 165, "height_cm_max": 175, "height_imperial": "5'5\" - 5'9\"", "inseam": "76 - 81" } },
+        { "type": "size", "settings": { "size_label": "58cm (M)", "height_cm_min": 175, "height_cm_max": 185, "height_imperial": "5'9\" - 6'1\"", "inseam": "81 - 86" } },
+        { "type": "size", "settings": { "size_label": "62cm (L)", "height_cm_min": 185, "height_cm_max": 195, "height_imperial": "6'1\" - 6'5\"", "inseam": "86 - 91" } }
+      ]
+    }
+  ],
+  "templates": ["product"]
+}
+{% endschema %}

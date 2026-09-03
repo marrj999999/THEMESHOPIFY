@@ -1,0 +1,398 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-product-2026",
+      "blocks": {
+        "perk_1": {
+          "type": "perk",
+          "settings": {
+            "text": "No power tools required — just basic hand tools"
+          }
+        },
+        "perk_2": {
+          "type": "perk",
+          "settings": {
+            "text": "Illustrated manual + 15+ hours of step-by-step video"
+          }
+        },
+        "perk_3": {
+          "type": "perk",
+          "settings": {
+            "text": "Lifetime community of 4,000+ builders for support"
+          }
+        },
+        "perk_4": {
+          "type": "perk",
+          "settings": {
+            "text": "Cycle to Work accepted — save through salary sacrifice"
+          }
+        }
+      },
+      "block_order": [
+        "perk_1",
+        "perk_2",
+        "perk_3",
+        "perk_4"
+      ],
+      "settings": {
+        "product_badge": "Road · carbon-lugged",
+        "product_subtitle": "Our premium road kit joins the bamboo with pre-formed aluminium lugs instead of hand-wrapped flax — lighter, stiffer joints and a cleaner finish that looks like a custom frame-shop build. You still get bamboo's all-day vibration damping; you just get it on the lightest, stiffest, sharpest-looking frame we make.",
+        "stock_line": "In stock — ships ~twice a week from our London workshop, fully tracked.",
+        "difficulty_label": "Beginner-friendly · no experience needed",
+        "build_time_label": "~15–25 hrs · lugs are faster",
+        "reassure_line": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks",
+        "mission_line": "Build your own — and help fund a place on our Build to Bond prison programme.",
+        "buddy_text": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories.",
+        "secondary_label": "Prefer a workshop?",
+        "sizing_eyebrow": "Find your fit",
+        "sizing_heading": "built to fit you",
+        "sizing_body": "Medium 160–180 cm · Large 176–190 cm. Between sizes, or not sure? Send us your height and inside-leg measurement and we'll recommend the fit — or choose a Custom frame.",
+        "sizing_note": "",
+        "loop_step1_sm": "a road frame",
+        "bundle_a_text": "Everything to build the bamboo lugged road frame.",
+        "bundle_total_text": "A complete, one-of-a-kind road bike — built by you.",
+        "bundle_b_label": "Component pack",
+        "bundle_b_price": "Priced by build",
+        "bundle_b_text": "Bars, wheels, drivetrain and finishing kit, chosen for your build.",
+        "press_quote": "To get one of these bamboo beauties you go on a two-day course to make your own.",
+        "press_cite": "Gregor MacGregor · BikeRadar",
+        "sticky_buy": true,
+        "content_bands": false
+      }
+    },
+    "kitspec": {
+      "type": "bbc-kit-spec",
+      "settings": {
+        "background": "bone",
+        "anchor": "spec",
+        "eyebrow": "fits your parts",
+        "heading": "will it take my parts?",
+        "lede": "The numbers you need to check a part you already own. The kit is the frame — fork, wheels and groupset are yours to choose.",
+        "foot_left": "Building from a donor bike? Send us its spec and we'll confirm the fit before you order.",
+        "foot_right": "Ask us about your parts",
+        "foot_url": "\/pages\/contact-us"
+      },
+      "blocks": {
+        "sp0": {
+          "type": "spec",
+          "settings": {
+            "label": "tyre clearance",
+            "value": "32 mm",
+            "note": "700c"
+          }
+        },
+        "sp1": {
+          "type": "spec",
+          "settings": {
+            "label": "dropouts",
+            "value": "Modular",
+            "note": "disc · QR · singlespeed · thru-axle"
+          }
+        },
+        "sp2": {
+          "type": "spec",
+          "settings": {
+            "label": "brakes",
+            "value": "Disc or calliper",
+            "note": "calliper bridge supplied"
+          }
+        },
+        "sp3": {
+          "type": "spec",
+          "settings": {
+            "label": "cable routing",
+            "value": "Internal",
+            "note": ""
+          }
+        },
+        "sp4": {
+          "type": "spec",
+          "settings": {
+            "label": "mounts",
+            "value": "Rack + mudguard",
+            "note": ""
+          }
+        },
+        "sp5": {
+          "type": "spec",
+          "settings": {
+            "label": "lugs",
+            "value": "Aluminium",
+            "note": "pre-formed, bonded to the bamboo"
+          }
+        },
+        "sp6": {
+          "type": "spec",
+          "settings": {
+            "label": "build time",
+            "value": "15–25 hrs",
+            "note": "lugs are faster"
+          }
+        }
+      },
+      "block_order": [
+        "sp0",
+        "sp1",
+        "sp2",
+        "sp3",
+        "sp4",
+        "sp5",
+        "sp6"
+      ]
+    },
+    "kitship": {
+      "type": "bbc-kit-shipping",
+      "settings": {
+        "background": "forest",
+        "anchor": "shipping",
+        "eyebrow": "shipped worldwide from the London workshop",
+        "heading": "no customs bill at the door",
+        "col1": "Destination",
+        "col2": "Shipping",
+        "col3": "Duty & tax",
+        "panel_title": "Delivered duty paid",
+        "panel_body": "The price at checkout is the price the kit costs you. We pay the import duty and tax before it ships, so the courier has nothing to collect when it arrives.",
+        "worked": "Sydney, Large kit: £795 kit + £75 shipping = £870 total, and nothing further on delivery.",
+        "foot": "Packed by hand and shipped twice a week, tracked all the way. Kits have reached 45 countries."
+      },
+      "blocks": {
+        "rt0": {
+          "type": "rate",
+          "settings": {
+            "place": "United Kingdom",
+            "rate": "£12",
+            "duty": "Included"
+          }
+        },
+        "rt1": {
+          "type": "rate",
+          "settings": {
+            "place": "Europe",
+            "rate": "£25",
+            "duty": "Paid by us"
+          }
+        },
+        "rt2": {
+          "type": "rate",
+          "settings": {
+            "place": "USA & Canada",
+            "rate": "£45",
+            "duty": "Paid by us"
+          }
+        },
+        "rt3": {
+          "type": "rate",
+          "settings": {
+            "place": "Rest of world",
+            "rate": "£75",
+            "duty": "Paid by us"
+          }
+        }
+      },
+      "block_order": [
+        "rt0",
+        "rt1",
+        "rt2",
+        "rt3"
+      ]
+    },
+    "lower": {
+      "type": "bbc-product-2026",
+      "settings": {
+        "product_badge": "Road · carbon-lugged",
+        "product_subtitle": "Our premium road kit joins the bamboo with pre-formed aluminium lugs instead of hand-wrapped flax — lighter, stiffer joints and a cleaner finish that looks like a custom frame-shop build. You still get bamboo's all-day vibration damping; you just get it on the lightest, stiffest, sharpest-looking frame we make.",
+        "stock_line": "In stock — ships ~twice a week from our London workshop, fully tracked.",
+        "difficulty_label": "Beginner-friendly · no experience needed",
+        "build_time_label": "~15–25 hrs · lugs are faster",
+        "reassure_line": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks",
+        "mission_line": "Build your own — and help fund a place on our Build to Bond prison programme.",
+        "buddy_text": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories.",
+        "secondary_label": "Prefer a workshop?",
+        "sizing_eyebrow": "Find your fit",
+        "sizing_heading": "built to fit you",
+        "sizing_body": "Medium 160–180 cm · Large 176–190 cm. Between sizes, or not sure? Send us your height and inside-leg measurement and we'll recommend the fit — or choose a Custom frame.",
+        "sizing_note": "",
+        "loop_step1_sm": "a road frame",
+        "bundle_a_text": "Everything to build the bamboo lugged road frame.",
+        "bundle_total_text": "A complete, one-of-a-kind road bike — built by you.",
+        "bundle_b_label": "Component pack",
+        "bundle_b_price": "Priced by build",
+        "bundle_b_text": "Bars, wheels, drivetrain and finishing kit, chosen for your build.",
+        "press_quote": "To get one of these bamboo beauties you go on a two-day course to make your own.",
+        "press_cite": "Gregor MacGregor · BikeRadar",
+        "show_buybox": false,
+        "content_bands": true
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "set the geometry",
+            "description": "Lock gravel geometry on the jig — wider clearance and a slacker head angle than road."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "join & wrap",
+            "description": "Bond the tubes with epoxy and wrap each joint with flax fibre."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "cure",
+            "description": "Leave it for a full cure — that's where maximum joint strength comes from."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "sand, seal & ride",
+            "description": "Sand smooth, seal the bamboo, fit headset and BB. Adventure awaits."
+          }
+        },
+        "review_p1": {
+          "type": "review",
+          "settings": {
+            "quote": "The aluminium lugs give it a really clean look. People think it's a custom frame shop build, not a home kit.",
+            "cite": "Road Lugged Builder · Home kit build, UK"
+          }
+        },
+        "review_p2": {
+          "type": "review",
+          "settings": {
+            "quote": "Ten years on, every joint is still sound and the frame is strong. I ride it daily and did the Dunwich Dynamo — 180km — on it. It handled it effortlessly.",
+            "cite": "Taro Tsuruta · architect, 10 years on his bamboo bike"
+          }
+        },
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "3,500+",
+            "label": "frames built at home",
+            "source": "BBC records · since 2012"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "84.3 MPa",
+            "label": "bamboo tubing, tested",
+            "source": "Swansea University · BS ISO 22157:2019"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "2012",
+            "label": "building since — early builds still ridden",
+            "source": "BBC records"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "number": "~2×\/wk",
+            "label": "shipped from London",
+            "source": "full tracking"
+          }
+        },
+        "related_1": {
+          "type": "related",
+          "settings": {
+            "title": "road lugged kit",
+            "price": "",
+            "fallback": "bbc-rd-prod-flax.jpg"
+          }
+        },
+        "related_2": {
+          "type": "related",
+          "settings": {
+            "title": "MTB frame kit",
+            "price": "",
+            "fallback": "bbc-rd-prod-build.jpg"
+          }
+        },
+        "related_3": {
+          "type": "related",
+          "settings": {
+            "title": "balance bike kit",
+            "price": "From £165",
+            "fallback": "bbc-rd-prod-balance.jpg"
+          }
+        },
+        "related_4": {
+          "type": "related",
+          "settings": {
+            "title": "custom frame kit",
+            "price": "Request a quote",
+            "fallback": "bbc-rd-road-charlie.jpg"
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "What are aluminium lugs, and how are they different from the standard road kit?",
+            "answer": "<p>On our standard road kit you wrap each joint by hand with flax fibre and epoxy. This flagship kit instead joins the bamboo with pre-formed aluminium lugs — ready-shaped aluminium sockets the tubes bond into. They give a cleaner, more uniform joint, a lighter and stiffer frame, and a faster, more forgiving build. It's the same endurance road geometry and the same bamboo ride feel — just the premium construction.<\/p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Are aluminium lugs really lighter and stiffer than wrapped joints?",
+            "answer": "<p>Yes — that's the whole point of the lugged build. Pre-formed aluminium lugs are lighter and torsionally stiffer than the equivalent hand-wrapped fibre joint, so more of your power goes to the back wheel and the finished frame is the lightest road frame we make. You still keep bamboo's natural vibration damping for all-day comfort — you're sharpening the joints, not deadening the ride.<\/p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it stiff and efficient enough for fast road riding?",
+            "answer": "Bamboo frame tubing tested at Swansea University to BS ISO 22157:2019 — 84.3 MPa ultimate tensile, comparable to mild steel at a fraction of the weight. That figure is for the tubing we supply, not for a finished frame: how strong your bike ends up is decided by your joints. Follow the manual, let the resin cure fully, and check the joints before every early ride — and call us if anything looks wrong."
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Why is the lugged road kit more than the standard road kit?",
+            "answer": "<p>The pre-formed aluminium lugs are a premium component — they cost more to produce than a reel of flax fibre, and they deliver the lighter, stiffer, cleaner-finished flagship frame. You're paying for the lug construction and the result. If you'd rather hand-wrap your joints and save, the standard Road kit is the same geometry and ride feel at a lower price.<\/p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Will the frame survive years of big road miles?",
+            "answer": "Finished frames are sealed with epoxy resin. Dry your bike after wet rides, store it indoors, and check the joints before every early ride. The tubing we supply is tested at Swansea University to BS ISO 22157:2019; how your bike holds up over the years is decided by the joints you make — follow the manual and let the resin cure fully, and call us if anything ever looks wrong."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "review_p1",
+        "review_p2",
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "related_1",
+        "related_2",
+        "related_3",
+        "related_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "kitspec",
+    "kitship",
+    "lower"
+  ]
+}

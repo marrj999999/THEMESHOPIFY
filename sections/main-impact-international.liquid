@@ -1,0 +1,170 @@
+{% comment %} International Programmes section — BBC Impact Page {% endcomment %}
+
+{% unless section.settings.hide_section %}
+<section class="impact-international-section" style="padding: 80px 20px; background: #f8f9f4;">
+  <div class="page-width" style="max-width: 1100px; margin: 0 auto;">
+
+    <div style="text-align: center; margin-bottom: 50px;">
+      {% if section.settings.label != blank %}
+        <p style="color: #8BC34A; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; font-size: 0.85rem;">{{ section.settings.label }}</p>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h2 style="margin-bottom: 16px; font-size: 2rem;">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.body != blank %}
+        <div style="color: #555; line-height: 1.8; font-size: 1rem; max-width: 760px; margin: 0 auto;">{{ section.settings.body }}</div>
+      {% endif %}
+    </div>
+
+    {% if section.blocks.size > 0 %}
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px;">
+      {% for block in section.blocks %}
+        {% if block.type == 'franchise_card' %}
+        <div style="background: #fff; border-radius: 8px; padding: 28px; border-left: 4px solid #8BC34A;" {{ block.shopify_attributes }}>
+          {% if block.settings.country_flag != blank %}
+            <p style="font-size: 2rem; margin: 0 0 12px;">{{ block.settings.country_flag }}</p>
+          {% endif %}
+          {% if block.settings.name != blank %}
+            <p style="font-weight: 700; font-size: 1.1rem; margin: 0 0 4px;">{{ block.settings.name }}</p>
+          {% endif %}
+          {% if block.settings.established != blank %}
+            <p style="color: #8BC34A; font-weight: 600; font-size: 0.85rem; margin: 0 0 10px;">{{ block.settings.established }}</p>
+          {% endif %}
+          {% if block.settings.description != blank %}
+            <p style="color: #666; font-size: 0.9rem; margin: 0; line-height: 1.6;">{{ block.settings.description }}</p>
+          {% endif %}
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if section.settings.cta_text != blank %}
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="{{ section.settings.cta_url }}"
+         style="display: inline-block; border: 2px solid #2E7D32; color: #2E7D32; padding: 14px 28px; border-radius: 4px; text-decoration: none; font-weight: 600;">
+        {{ section.settings.cta_text }}
+      </a>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+{% endunless %}
+
+<style>
+  @media (max-width: 768px) {
+    .impact-international-section .page-width > div:nth-child(2) {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "International Programmes",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "hide_section",
+      "label": "Hide this section",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "🌍 International Programmes"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "36 Countries. One Material. One Method."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body copy",
+      "default": "<p>Since 2012, people in 45 countries have built bamboo bicycles using BBC's methods. Three international workshop franchises — Munich (est. 2014), Amersfoort, Netherlands (est. 2019), and Toulouse, France (est. 2024) — run independent weekly programmes. In 2017, pupils at a school in The Hague built 7 bamboo bikes using our educational starter kit. In 2023, Kate Rawles cycled 8,288 miles from Colombia to Ushuaia on a bamboo bike built at our London workshop.</p>"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA button text",
+      "default": "Open a workshop in your city →"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA button URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "franchise_card",
+      "name": "Programme card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "country_flag",
+          "label": "Emoji flag",
+          "default": "🇩🇪"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Workshop / programme name",
+          "default": "Munich, Germany"
+        },
+        {
+          "type": "text",
+          "id": "established",
+          "label": "Established",
+          "default": "Est. 2014 — BBC's first international franchise"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "4,600 community members. Active weekly workshops."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "International Programmes",
+      "blocks": [
+        {
+          "type": "franchise_card",
+          "settings": {
+            "country_flag": "🇩🇪",
+            "name": "Munich, Germany",
+            "established": "Est. 2014 — BBC's first international franchise",
+            "description": "4,600 community members. Active weekly workshops. Munich team taught in Kenya, 2019."
+          }
+        },
+        {
+          "type": "franchise_card",
+          "settings": {
+            "country_flag": "🇳🇱",
+            "name": "Amersfoort, Netherlands",
+            "established": "Est. 2019",
+            "description": "Active education and community workshop hub. Regular gravel and city bike builds."
+          }
+        },
+        {
+          "type": "franchise_card",
+          "settings": {
+            "country_flag": "🇫🇷",
+            "name": "Toulouse, France",
+            "established": "Est. 2024 — Third international franchise",
+            "description": "Serving France's strong cycling community. Launched May 2024."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

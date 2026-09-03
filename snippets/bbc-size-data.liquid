@@ -1,0 +1,50 @@
+{%- comment -%}
+  bbc-size-data — CANONICAL BBC rider sizing, single source of truth.
+  Numbers taken verbatim from the live /pages/size-guide (inseam-first, XS–2XL).
+  Do NOT hand-edit per-section size tables elsewhere — render this instead.
+  Renders a clean, accessible height + inseam → frame-size table.
+{%- endcomment -%}
+<div class="bbc-rd bbc-size-data">
+  {%- comment -%}
+    Scroll wrapper added 2026-07-31. The table's three columns force a ~494px minimum,
+    and on a 390px phone the parent product section CLIPPED it — so roughly 120px of
+    inseam data was unreachable, not merely scrolled past. Measured: table right edge
+    512 vs viewport 390, nearest overflow ancestor `hidden`.
+    Same pattern already proven on /pages/why-bamboo (.wbx-tablewrap). tabindex + role
+    make the scroll region keyboard-reachable, which a bare overflow container is not.
+  {%- endcomment -%}
+  <div class="bbc-size-data__scroll" tabindex="0" role="region" aria-label="Frame size guide, scrollable">
+  <table class="bbc-size-data__table">
+    <caption class="rd-vh">Bamboo Bicycle Club frame size guide — by height and inseam</caption>
+    <thead>
+      <tr><th scope="col">Frame size</th><th scope="col">Rider height</th><th scope="col">Inseam</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row">XS</th><td>148–163 cm</td><td>68–74 cm</td></tr>
+      <tr><th scope="row">S</th><td>160–173 cm</td><td>74–80 cm</td></tr>
+      <tr><th scope="row">M</th><td>170–183 cm</td><td>78–86 cm</td></tr>
+      <tr><th scope="row">L</th><td>180–193 cm</td><td>84–92 cm</td></tr>
+      <tr><th scope="row">XL</th><td>190–203 cm</td><td>90–100 cm</td></tr>
+      <tr><th scope="row">2XL</th><td>200 cm +</td><td>98 cm +</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="bbc-size-data__note">Inseam is the better guide — measure barefoot, floor to crotch. Bands overlap on purpose: if you fall between two, choose the smaller frame.</p>
+</div>
+<style>
+  /* A grid item defaults to min-width:auto, which refuses to shrink below its content —
+     so the 494px table forced the whole track wide and the scroll container could never
+     scroll (measured: wrapper 494px inside a 354px track). min-width:0 lets the item
+     shrink to its track, and THEN overflow-x:auto does its job. This is the standard
+     CSS Grid/Flexbox overflow fix, not a hack. */
+  .bbc-rd-product .rd-grid > *{ min-width:0; }
+  .bbc-size-data, .bbc-size-data__scroll{ min-width:0; max-width:100%; }
+  .bbc-size-data__scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .bbc-size-data__scroll:focus-visible{ outline:3px solid var(--forest); outline-offset:2px; }
+  .bbc-size-data__table{ width:100%; min-width:420px; border-collapse:collapse; font-family:var(--rd-sans); }
+  .bbc-size-data__table th, .bbc-size-data__table td{ padding:10px 12px; text-align:left; border-bottom:1.5px solid var(--mist); }
+  .bbc-size-data__table thead th{ font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:var(--subtle); border-bottom:2px solid var(--border-strong); }
+  .bbc-size-data__table tbody th{ font-weight:800; color:var(--forest); }
+  .bbc-size-data__table tbody tr:hover{ background:var(--paper); }
+  .bbc-size-data__note{ font-size:14px; color:var(--subtle); margin-top:12px; }
+</style>

@@ -1,0 +1,129 @@
+/* ==========================================================================
+   BBC TYPE + COLOUR TOKENS — the single source of truth for the scale.
+
+   Created 2026-07-24. qa/TYPE-SCALE.md has called this file "the contract…
+   loads last, wins" since 22 Jul, and qa/ROLLOUT-TRACKER.md recorded it as
+   "deployed & read-back-identical" — but it did not exist: 404 on local,
+   draft AND live. The scale was instead duplicated across 6 sheets carrying
+   271 font-size declarations between them, with 17 bbc-*.css files competing
+   on cascade order. That duplication IS the mechanism behind the type
+   inconsistency: there was no single place a role was defined, so every page
+   drifted on its own.
+
+   Values are transcribed verbatim from qa/TYPE-SCALE.md "THE SCALE" and
+   FORMULA.md §1. Where the two agree, they agree; TYPE-SCALE is the newer
+   audit (2026-07-22) and wins on the display/h2 caps.
+
+   Originally definitions only, deliberately: ripping 271 declarations out in one
+   pass would be a blind refactor of a customer-facing estate. Sections are
+   repointed incrementally, with qa/estate-check.mjs measuring conformance
+   (FORMULA §1) and the stylelint ratchet preventing new raw literals.
+   As of 2026-07-27 it also carries a small ROLE APPLICATION block at the bottom —
+   the tokens' first real consumers, added to fix five classes that rendered at
+   more than one size across the estate. Every future addition there should
+   likewise be driven by a measured finding, not by tidying instinct.
+
+   WHAT THE AUDIT ACTUALLY FOUND (measured, not assumed):
+
+   1. The canonical scale IS already rendering. h1 measures 115.2px on home,
+      impact, programmes and workshops — that is 9vw of 1280, exactly
+      TYPE-SCALE's clamp(3.4rem, 9vw, 7.75rem). h2 measures 94.72px = 7.4vw,
+      exactly the documented band-h2. The canon is live and consistent.
+
+   2. …but NOT via tokens. It is applied by hardcoded !important rules
+      (e.g. bbc-universal.css:132 `.bbc-rd.bbc-rd-home .ew-h1`).
+
+   3. The token definitions in bbc-universal.css are STALE ORPHANS that
+      disagree with both the doc and the render, and nothing reads them:
+        --fs-hero: clamp(42px,6.6vw,86px)   consumed by 0 files
+        --fs-h1:   clamp(38px,5.4vw,72px)   consumed by 0 files
+        --fs-h2:   clamp(32px,6.6vw,84px)   consumed by 0 files
+        --fs-lede: clamp(18px,1.8vw,22px)   consumed by 0 files
+        --fs-h3:   clamp(22px,2.6vw,32px)   consumed by 1 file
+      So three scales existed at once — the doc, the dead tokens, and the
+      hardcoded rules that actually win.
+
+   NAMING: these use a --type-* prefix precisely so they collide with nothing.
+   Redefining --fs-h3 (the one legacy token with a consumer) would silently
+   change rendering, and a "tokens" file whose arrival moves type on a
+   customer-facing estate is not a refactor, it is an incident. The legacy
+   --fs-* names are left alone and marked deprecated below.
+   ========================================================================== */
+
+:root {
+  /* ── Type roles (qa/TYPE-SCALE.md · THE SCALE) ─────────────────────────── */
+  /* Display — hero h1. 124px ceiling is a deliberate step beyond every
+     documented system (Material 57, Carbon 92, Serendie 64): the masthead IS
+     the brand voice. lh .95 · tracking -0.025em */
+  --type-display:      clamp(3.4rem, 9vw, 7.75rem);   /* 115px @1280, cap 124 */
+  --type-display-lh:      0.95;
+  --type-display-tr:      -0.025em;
+
+  /* Band h2 — must always resolve smaller than h1 on the same page */
+  --type-h2:           clamp(3rem, 7.4vw, 6.4rem);    /* 95px @1280, cap 102 */
+  --type-h2-lh:           0.97;
+
+  /* Sub-head h3 — the single card/section heading size */
+  --type-h3:           clamp(21px, 2.3vw, 29px);      /* 29px @1280 */
+  --type-h3-lh:           1.12;
+
+  /* Article headline — blog only (.rd-art-hero h1). Editorial titles run
+     8–12 words; display scale would wrap 6+ lines. Added 2026-07-22 audit. */
+  --type-article:      clamp(2.2rem, 4.2vw, 3.5rem);  /* 54px @1280, cap 56 */
+  --type-article-lh:      1.05;
+
+  /* Prose headings (.rd-prose h1/h2) — admin-typed RTE content must read as a
+     document, never a masthead. Uses the h3 role. Added 2026-07-22 audit. */
+  --type-prose-head:   var(--type-h3);
+
+  --type-lede:         22px;   --type-lede-lh: 1.6;
+  --type-body:         18px;   --type-body-lh: 1.5;        /* brief-locked */
+  --type-button:       15px;   --type-button-weight: 700;      /* pill standard */
+  --type-eyebrow:      14px;   --type-eyebrow-weight: 800;     /* letterspaced chips */
+  --type-caption:      13px;                          /* never below 13 */
+
+  /* ── Measure (WCAG 1.4.8 AAA: ≤66ch, left-aligned, never justified) ────── */
+  --type-measure:         66ch;
+}
+
+/*  Colour deliberately NOT redefined here. --forest/--teal/--gold/--steel are
+    already defined in bbc-universal.css and ARE consumed; duplicating them under
+    a second name would recreate exactly the two-sources-of-truth problem this
+    file exists to end. This is the TYPE contract only.
+    (One known discrepancy for James: --steel is #DEE6F0 in bbc-universal.css but
+    CLAUDE.md brand canon says #8da4c1. Not changed here — it is a brand decision
+    and changing a consumed colour token would move rendering estate-wide.)  */
+
+/*  Roles, not raw values — the rule from qa/TYPE-SCALE.md:
+    "Never introduce a new font-size — use the roles above."
+    A new literal anywhere in assets/bbc-*.css trips the stylelint ratchet
+    (qa/stylelint-ratchet.sh, baseline down-only), so the count can only fall.  */
+
+/* ── ROLE APPLICATION (2026-07-27) ────────────────────────────────────────────
+   The tokens above were defined but unconsumed. These are their first real
+   consumers, and they exist because qa/type-drift-audit.mjs found five classes
+   rendering at more than one size across the estate — the honest drift metric
+   (same class, different size), as opposed to merely counting how many sizes a
+   page uses, which mistakes a working design system for an inconsistent one.
+
+   Each of these classes was styled only in a specific context (e.g.
+   `.bbc-rd .rd-stat .rd-src`), so outside that context it inherited whatever was
+   nearby. A base role size makes the component mean the same thing everywhere.
+
+   Also fixes a contract violation: .rd-src rendered 12px on 12 pages, and
+   qa/TYPE-SCALE.md says captions are "never below 13".
+   Using tokens rather than literals keeps the stylelint ratchet falling.        */
+.bbc-rd .rd-src,
+.bbc-rd .rd-frame-label   { font-size: var(--type-caption) !important; }
+.bbc-rd .rd-ship-note,
+.bbc-rd p.rd-body         { font-size: var(--type-body) !important; }
+
+/* Hero proof strip — shared by the homepage and impact heroes (2026-07-27).
+   One rule, two pages: the presentation audit found our first figure at y3897, four screens down
+   and 5x later than any peer, with zero figures above the fold. Peers isolate the number so the
+   eye catches it before the sentence; we wrote ours into prose. Tokens only, so the ratchet
+   keeps falling. Lime figure reads on the dark hero surfaces both pages use. */
+.bbc-rd .rd-heroproof{ list-style:none; display:flex; flex-wrap:wrap; gap:28px; margin:22px 0 0; padding:0; }
+.bbc-rd .rd-heroproof li{ display:flex; flex-direction:column; }
+.bbc-rd .rd-heroproof b{ font-size:var(--type-h3); font-weight:800; line-height:1; color:var(--bbc-lime,#D4FD62); }
+.bbc-rd .rd-heroproof span{ font-size:var(--type-caption); letter-spacing:.02em; opacity:.85; margin-top:4px; }

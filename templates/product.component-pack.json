@@ -1,0 +1,105 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-parts",
+      "settings": {}
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Complete Your Order",
+        "heading_size": "h2",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "packdraw": {
+      "type": "bbc-kit-drawing-2026",
+      "settings": {
+        "anchor": "in-the-box",
+        "tb_a_key": "pack",
+        "tb_a": "picked to fit your frame",
+        "tb_b_key": "shipped",
+        "tb_b": "from the London workshop",
+        "eyebrow": "what arrives",
+        "heading": "what's in the box.",
+        "lede": "Everything listed in the description, packed by hand. Not sure it fits your build? Book a free 10-minute call before you order.",
+        "foot": "",
+        "product_image_index": 1,
+        "image_alt": "",
+        "sheet_label": "as pictured",
+        "sticker": "",
+        "show_pins": false
+      }
+    },
+    "kitship": {
+      "type": "bbc-kit-shipping",
+      "blocks": {
+        "rt0": {
+          "type": "rate",
+          "settings": {
+            "place": "United Kingdom",
+            "rate": "£12",
+            "duty": "Included"
+          }
+        },
+        "rt1": {
+          "type": "rate",
+          "settings": {
+            "place": "Europe",
+            "rate": "£25",
+            "duty": "Paid by us"
+          }
+        },
+        "rt2": {
+          "type": "rate",
+          "settings": {
+            "place": "USA & Canada",
+            "rate": "£45",
+            "duty": "Paid by us"
+          }
+        },
+        "rt3": {
+          "type": "rate",
+          "settings": {
+            "place": "Rest of world",
+            "rate": "£75",
+            "duty": "Paid by us"
+          }
+        }
+      },
+      "block_order": [
+        "rt0",
+        "rt1",
+        "rt2",
+        "rt3"
+      ],
+      "settings": {
+        "background": "forest",
+        "anchor": "shipping",
+        "eyebrow": "shipped worldwide from the London workshop",
+        "heading": "no customs bill at the door",
+        "col1": "Destination",
+        "col2": "Shipping",
+        "col3": "Duty & tax",
+        "panel_title": "Delivered duty paid",
+        "panel_body": "The price at checkout is the price the kit costs you. We pay the import duty and tax before it ships, so the courier has nothing to collect when it arrives.",
+        "worked": "Sydney, Large kit: £385 kit + £75 shipping = £460 total, and nothing further on delivery.",
+        "foot": "Packed by hand and shipped twice a week, tracked all the way. Kits have reached 45 countries."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "packdraw",
+    "kitship",
+    "related-products"
+  ]
+}

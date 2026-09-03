@@ -1,0 +1,194 @@
+{%- comment -%}
+  BBC Sustainability Bar
+  Research-backed: Patagonia, Everlane, Bellroy show sustainability messaging
+  Position: Below product or in dedicated section
+{%- endcomment -%}
+
+<section class="bbc-sustainability-bar" style="padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;">
+  <div class="page-width">
+    <div class="bbc-sustainability-bar__content">
+      <div class="bbc-sustainability-bar__icon">
+        {% render 'bbc-icons', icon: 'eco', size: 32 %}
+      </div>
+      <div class="bbc-sustainability-bar__text">
+        <h3 class="bbc-sustainability-bar__title">{{ section.settings.title }}</h3>
+        <p class="bbc-sustainability-bar__description">{{ section.settings.description }}</p>
+      </div>
+      <div class="bbc-sustainability-bar__stats">
+        {% for block in section.blocks %}
+          {% if block.type == 'stat' %}
+            <div class="bbc-sustainability-bar__stat">
+              <span class="bbc-sustainability-bar__stat-value">{{ block.settings.value }}</span>
+              <span class="bbc-sustainability-bar__stat-label">{{ block.settings.label }}</span>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bbc-sustainability-bar {
+    background: {{ section.settings.background_color }};
+  }
+
+  .bbc-sustainability-bar__content {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .bbc-sustainability-bar__icon {
+    color: #1a3a1a;
+  }
+
+  .bbc-sustainability-bar__text {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .bbc-sustainability-bar__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a3a1a;
+    margin: 0 0 4px;
+  }
+
+  .bbc-sustainability-bar__description {
+    font-size: 14px;
+    color: var(--bbc-gray-600);
+    margin: 0;
+  }
+
+  .bbc-sustainability-bar__stats {
+    display: flex;
+    gap: 32px;
+  }
+
+  .bbc-sustainability-bar__stat {
+    text-align: center;
+  }
+
+  .bbc-sustainability-bar__stat-value {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a3a1a;
+  }
+
+  .bbc-sustainability-bar__stat-label {
+    display: block;
+    font-size: 12px;
+    color: var(--bbc-gray-600);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 749px) {
+    .bbc-sustainability-bar__content {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .bbc-sustainability-bar__stats {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Sustainability",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Built Sustainably"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Bamboo is a rapidly renewable resource. Our frames have over 50% lower carbon footprint than aluminium."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f0f5f0"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "50%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Less CO₂"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Sustainability",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "value": "50%",
+            "label": "Less CO₂"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "4-6yr",
+            "label": "Regrowth"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "0",
+            "label": "Chemicals"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

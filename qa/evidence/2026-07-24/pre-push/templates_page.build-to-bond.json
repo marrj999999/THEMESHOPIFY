@@ -1,0 +1,85 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-build-to-bond-2026",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "90%",
+            "label": "course completion",
+            "source": "BBC programme records"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "Level 2",
+            "label": "OCN — Sustainable Design & Manufacturing",
+            "source": "OCN London accredited"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "26%",
+            "label": "measured rise in Maker confidence",
+            "source": "programme evaluation"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "number": "4",
+            "label": "active prison sites",
+            "source": "with HMPPS"
+          }
+        },
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "enrol",
+            "body": "Makers join through the prison's workshops or education team. No prior experience needed."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "build",
+            "body": "Six weekly sessions in the workshop: frame layout, mitring, structural bonding and finishing — real manufacturing, taught by hand."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "accredit",
+            "body": "Portfolio work towards an OCN Level 2 in Sustainable Design & Manufacturing — a nationally recognised qualification."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "family visit day",
+            "body": "The finished balance bike is presented by the Maker to their own child — and goes home with them."
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "why_body_2": "Ministry of Justice research shows that people in prison who maintain family ties are 39% less likely to reoffend (Lord Farmer Review, 2017). And with just 20% of prison-leavers in work six weeks after release nationally (MoJ, 2025), the skills matter as much as the bond. Build to Bond is built around that evidence: a six-week course where the skills are real, the qualification is recognised, and the finish line is a stronger family bond."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "bbc_footer": {
+      "type": "bbc-footer",
+      "settings": {
+        "logo_width": 160,
+        "tagline": "Build your own bamboo bicycle. Workshops in London, DIY kits shipped worldwide. Sustainable, unique, and unmistakably yours.",
+        "email": "hello@bamboobicycleclub.org",
+        "location": "London, UK",
+        "company_reg": "Bamboo Mobility Project CIC · Reg 16257348",
+        "nav_shop_heading": "Shop",
+        "nav_shop": "footer-shop",
+        "nav_exp_heading": "Experience",
+        "nav_exp": "footer-experience",
+        "nav_about_heading": "About",
+        "nav_about": "footer-company",
+        "nav_support_heading": "Support",
+        "nav_support": "footer-help",
+        "show_trust_bar": true,
+        "show_newsletter": true,
+        "newsletter_heading": "Join the Bamboo Community",
+        "newsletter_text": "Get workshop updates, building tips, and exclusive offers. Join 15,000+ bamboo enthusiasts.",
+        "newsletter_placeholder": "Your email address",
+        "newsletter_button": "Subscribe",
+        "newsletter_success": "You're in! Welcome to the community.",
+        "show_awards": true
+      },
+      "blocks": {
+        "trust_1": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "calendar",
+            "value": "13 Years",
+            "label": "Of Expertise"
+          }
+        },
+        "trust_2": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "users",
+            "value": "4,000+",
+            "label": "Builders Worldwide"
+          }
+        },
+        "trust_3": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "globe",
+            "value": "36",
+            "label": "Countries Reached"
+          }
+        },
+        "trust_4": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "support",
+            "value": "Lifetime",
+            "label": "Expert Support"
+          }
+        },
+        "award_1": {
+          "type": "award",
+          "settings": {
+            "icon": "award",
+            "text": "Investec Beyond Business 2025"
+          }
+        },
+        "award_2": {
+          "type": "award",
+          "settings": {
+            "icon": "leaf",
+            "text": "Kevin McCloud's Green Heroes"
+          }
+        },
+        "award_3": {
+          "type": "award",
+          "settings": {
+            "icon": "verified",
+            "text": "OCN Accredited Education"
+          }
+        },
+        "award_4": {
+          "type": "award",
+          "settings": {
+            "icon": "newspaper",
+            "text": "As featured in the Financial Times"
+          }
+        }
+      },
+      "block_order": [
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "trust_4",
+        "award_1",
+        "award_2",
+        "award_3",
+        "award_4"
+      ]
+    }
+  },
+  "order": [
+    "bbc_footer"
+  ]
+}

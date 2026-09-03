@@ -1,0 +1,466 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-about-2026",
+      "settings": {
+        "stories_lead": false,
+        "stories_mosaic": false
+      },
+      "blocks": {
+        "milestone_1": {
+          "type": "milestone",
+          "settings": {
+            "year": "2012",
+            "hot": false,
+            "title": "a workshop in hackney",
+            "body": "Design engineers James Marr and Ian McMillan open the UK's first bamboo bike workshop. The Guardian covers it. They never sell a finished bicycle — they teach people to build their own.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/files/2012.jpg?v=1701172898",
+            "image_alt": "The first Bamboo Bicycle Club workshop, frames on the bench and the club logo painted on the wall"
+          }
+        },
+        "milestone_2": {
+          "type": "milestone",
+          "settings": {
+            "year": "2016",
+            "hot": false,
+            "title": "the design museum, and a first",
+            "body": "London's Design Museum exhibits the bike — the first bamboo frame built with 3D-printed lugs. The home-build kit starts shipping worldwide; builders make frames at their kitchen tables.",
+            "image": "",
+            "image_alt": ""
+          }
+        },
+        "milestone_3": {
+          "type": "milestone",
+          "settings": {
+            "year": "2018",
+            "hot": false,
+            "title": "kevin mccloud's green heroes",
+            "body": "Selected at Grand Designs Live as one of Kevin McCloud’s Green Heroes for sustainable design.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/Greenheroes9.jpg?v=1772819229",
+            "image_alt": "Bamboo Bicycle Club's stand at Grand Designs Live"
+          }
+        },
+        "milestone_4": {
+          "type": "milestone",
+          "settings": {
+            "year": "2021",
+            "hot": false,
+            "title": "the cycling world takes a proper look",
+            "body": "The Global Cycling Network puts a bamboo frame through its paces in “Are Bamboo Bikes Actually Any Good?”, the public edit of the GCN+ film “Bamboo Bike: Fad or Future”.",
+            "image": "",
+            "image_alt": ""
+          }
+        },
+        "milestone_5": {
+          "type": "milestone",
+          "settings": {
+            "year": "2024",
+            "hot": false,
+            "title": "a governor asks for accreditation",
+            "body": "HMP Lowdham Grange will only run the course if it is accredited. James builds one from scratch — OCN London Level 2, Workshop Skills and Sustainable Manufacturing — and a frame-building workshop goes in behind the wall.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/files/lowdham-workshop-empty.jpg?v=1745576812",
+            "image_alt": "The frame-building workshop inside HMP Lowdham Grange — benches and wall-mounted jigs, empty"
+          }
+        },
+        "milestone_6": {
+          "type": "milestone",
+          "settings": {
+            "year": "2025",
+            "hot": true,
+            "title": "the year the work was recognised",
+            "body": "Bamboo Mobility Project CIC is incorporated in February. In September the Financial Times profiles the prison programme and Investec’s Beyond Business backs it with £24,000 from 148 applicants. Inside Time carries it in November.",
+            "image": "",
+            "image_alt": ""
+          }
+        },
+        "value_1": {
+          "type": "value",
+          "settings": {
+            "tag": "01",
+            "lime": false,
+            "title": "craft over consumption",
+            "body": "A bike you build yourself is a bike you never throw away. We teach making, not buying.",
+            "evidence": "Architect Taro Tsuruta has ridden the frame he built for ten years. It is still his daily bike.",
+            "image": "bbc-rd-story-10k.jpg",
+            "image_alt": "A loaded bamboo touring bike parked beside a waymarker on open moorland"
+          }
+        },
+        "value_2": {
+          "type": "value",
+          "settings": {
+            "tag": "02",
+            "lime": false,
+            "title": "grown, not mined",
+            "body": "Bamboo regrows in 3–5 years and recycles fully. Sustainability is the material, not the marketing.",
+            "evidence": "Our frames were tested to BS ISO 22157 at Swansea University. The material is a grass — cut it, and it regrows from the same root.",
+            "image": "bbc-rd-bamboo-tubes.jpg",
+            "image_alt": "Cut and mitred bamboo tubes on a workbench beside a carpenter pencil"
+          }
+        },
+        "value_3": {
+          "type": "value",
+          "settings": {
+            "tag": "03",
+            "lime": false,
+            "title": "open to everyone",
+            "body": "From weekend workshops to prisons and schools, our goal is to put making within reach of people who'd never otherwise get the chance.",
+            "evidence": "Jon had the use of one hand. We adapted every step so the build stayed in his hands rather than ours — he left with a frame he had built himself.",
+            "image": "bbc-rd-wb-hand.jpg",
+            "image_alt": "Gloved hands wrapping and binding a bamboo frame joint on the workbench"
+          }
+        },
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "4,000+",
+            "label": "people have built a bike",
+            "source": "since 2012"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "90%+",
+            "label": "prison course completion",
+            "source": "BBC programme records"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "3,500+",
+            "label": "frames built",
+            "source": "since 2012"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "number": "45",
+            "label": "countries reached",
+            "source": "kits shipped worldwide"
+          }
+        },
+        "press_1": {
+          "type": "press",
+          "settings": {
+            "text": "FINANCIAL TIMES",
+            "style": "ft"
+          }
+        },
+        "press_2": {
+          "type": "press",
+          "settings": {
+            "text": "Inside Time",
+            "style": "serif-italic"
+          }
+        },
+        "press_3": {
+          "type": "press",
+          "settings": {
+            "text": "The Guardian",
+            "style": "serif"
+          }
+        },
+        "press_4": {
+          "type": "press",
+          "settings": {
+            "text": "BBC",
+            "style": "bbc"
+          }
+        },
+        "press_5": {
+          "type": "press",
+          "settings": {
+            "text": "Investec Beyond Business",
+            "style": "caps"
+          }
+        },
+        "press_6": {
+          "type": "press",
+          "settings": {
+            "text": "Green Heroes",
+            "style": "disc"
+          }
+        },
+        "press_7": {
+          "type": "press",
+          "settings": {
+            "text": "OCN Accredited",
+            "style": "caps"
+          }
+        },
+        "story_taro": {
+          "type": "story",
+          "settings": {
+            "kind": "ten years",
+            "title": "ten years on, still his daily ride.",
+            "blurb": "Architect Taro Tsuruta built his own frame after reading about us. A decade later it is still the bike he rides.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/files/kiku-obata_the-bamboo-biker-the-friend_01.jpg?v=1",
+            "url": "/blogs/club-news/taro-10-years-riding-my-hand-built-bamboo-bike"
+          }
+        },
+        "story_kate": {
+          "type": "story",
+          "settings": {
+            "kind": "expedition",
+            "title": "8,288 miles down the Andes, on a frame she built herself.",
+            "blurb": "Kate Rawles built her bike with us, then rode the length of South America on it.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/CordilleraBlancaPeru_617cbc2f-5a4b-4f15-b3be-56011f4be10a.jpg?v=1771839617",
+            "url": "/blogs/impact/kate-rawles-8-288-miles-to-patagonia-on-a-bamboo-bike"
+          }
+        },
+        "story_docs": {
+          "type": "story",
+          "settings": {
+            "kind": "expedition",
+            "title": "london to singapore, on bamboo they built themselves.",
+            "blurb": "Two doctors rode 22,000km across Europe and Asia on frames they made in our workshop.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/edad684e909bdbf87ecb75c13065888b_cc69559d-3cf7-499f-aa19-7e3ba5f2b5df.jpg?v=1771793484",
+            "url": "/blogs/impact/london-to-singapore-bamboo-bike-22000km",
+            "video": "J2KS_s9X5Jg"
+          }
+        },
+        "story_claire": {
+          "type": "story",
+          "settings": {
+            "kind": "everyday",
+            "title": "five years commuting, then a repaint — not a replacement.",
+            "blurb": "Claire rode hers across London every day for about five years, and came back to tidy the paint and add panniers.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/2530a5853a9ad49e4cc8953c85ef498f_e16ec77c-11b9-4fe0-a963-b7c99c5a5f76.jpg?v=1771793517",
+            "url": "/blogs/impact/claire-five-years-london-commuter-bamboo-bicycle"
+          }
+        },
+        "story_jon": {
+          "type": "story",
+          "settings": {
+            "kind": "access",
+            "title": "one hand, one frame — and he built it himself.",
+            "blurb": "We adapted every step of the build so the work stayed in Jon’s hands rather than ours.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/88d9e8b8012621f5946b32ce93b74c6c_7c3d767e-9d23-46a5-9203-ddad728ff26e.jpg?v=1771793497",
+            "url": "/blogs/impact/jon-one-hand-bamboo-bicycle-disability-inclusion"
+          }
+        },
+        "story_novice": {
+          "type": "story",
+          "settings": {
+            "kind": "first build",
+            "title": "never built a bike before — then rode it 10,000km.",
+            "blurb": "A confident amateur mechanic, a first frame, and adventures across the UK and Ireland.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/PXL_20230607_145122467.jpg?v=1762780024",
+            "url": "/blogs/club-news/building-my-first-bamboo-bicycle-a-journey-from-novice-to-10-000km"
+          }
+        },
+        "milestone_7": {
+          "type": "milestone",
+          "settings": {
+            "year": "Now",
+            "hot": false,
+            "title": "one engine for change",
+            "body": "Four prison sites and a schools programme, funded by the same workshop that teaches anyone to build a bike.",
+            "image": "",
+            "image_alt": ""
+          }
+        },
+        "story_film": {
+          "type": "story",
+          "settings": {
+            "kind": "2016",
+            "outcome": "a world first, built live at the design museum",
+            "title": "a world first, built live at the design museum",
+            "blurb": "The first bamboo frame with 3D-printed lugs — made in front of the crowd.",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/0_1920-DD00C0E8-A1C0-4273-80E2-33D7651CD6DD.jpg?v=1772819297",
+            "video": "XCnFSZhhUgY",
+            "url": "/blogs/news/design-museum-cycle-revolution-exhibition-bbc-frame-on-display"
+          }
+        },
+        "story_origin": {
+          "type": "story",
+          "settings": {
+            "kind": "2014",
+            "outcome": "how two engineers started this",
+            "title": "how two engineers started this",
+            "blurb": "The original film about where Bamboo Bicycle Club came from, and why bamboo.",
+            "image": "https://i.ytimg.com/vi/007bA-V0Z8M/maxresdefault.jpg",
+            "video": "007bA-V0Z8M",
+            "url": "https://www.youtube.com/watch?v=007bA-V0Z8M"
+          }
+        },
+        "story_manish_sustainable_ai_bamb": {
+          "type": "story",
+          "settings": {
+            "kind": "everyday",
+            "title": "From sustainable AI to the seafront: Manish rides his bamboo bike London to Brighton",
+            "blurb": "Manish is the founder of a sustainable AI company.",
+            "outcome": "",
+            "quote": "",
+            "cite": "",
+            "date": "",
+            "source_label": "",
+            "chips": "",
+            "source_url": "",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/SRW08509_37e9d0f2-7624-4ca7-b9c5-574a5890945c.jpg?v=1771793525",
+            "video": "",
+            "video_url": "",
+            "url": "/blogs/impact/manish-sustainable-ai-bamboo-gravel-bike-london-brighton"
+          }
+        },
+        "story_skandihus_meet_the_maker": {
+          "type": "story",
+          "settings": {
+            "kind": "maker",
+            "title": "Meet the Maker - Stine Dulong from SkandiHus",
+            "blurb": "SkandiHus was founded by the Danish ceramicist, Stine Dulong, who works and lives in London.",
+            "outcome": "",
+            "quote": "",
+            "cite": "",
+            "date": "",
+            "source_label": "",
+            "chips": "",
+            "source_url": "",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/EA_TheTelegraph_StineDoulong_02.jpg?v=1603802031",
+            "video": "",
+            "video_url": "",
+            "url": "/blogs/club-news/skandihus-meet-the-maker"
+          }
+        },
+        "story_new_blog_build_by_rhys_my": {
+          "type": "story",
+          "settings": {
+            "kind": "first build",
+            "title": "The Detail in the Joints — Rhys Builds His First Road Bike",
+            "blurb": "Rhys had a confession before he built his bike: \"My road bike experience is pretty limited.\" He didn't let that stop him.",
+            "outcome": "",
+            "quote": "",
+            "cite": "",
+            "date": "",
+            "source_label": "",
+            "chips": "",
+            "source_url": "",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/88d9e8b8012621f5946b32ce93b74c6c.jpg?v=1771505027",
+            "video": "",
+            "video_url": "",
+            "url": "/blogs/club-news/new-blog-build-by-rhys-my-road-bike-experience-is-pretty-limited-but-it-feels-great-to-me-ver"
+          }
+        },
+        "story_photo_from_aurelian_audrey": {
+          "type": "story",
+          "settings": {
+            "kind": "adventure",
+            "title": "The Passage du Gois — Audrey Rides the Atlantic Causeway on Her Bamboo Bike",
+            "blurb": "There are places you just have to ride. The Passage du Gois is one of them.",
+            "outcome": "",
+            "quote": "",
+            "cite": "",
+            "date": "",
+            "source_label": "",
+            "chips": "",
+            "source_url": "",
+            "image": "https://cdn.shopify.com/s/files/1/0502/8695/2631/articles/6d085f016c5ecaeeea9508307663534c.jpg?v=1771504965",
+            "video": "",
+            "video_url": "",
+            "url": "/blogs/club-news/photo-from-aurelian-💬-audrey-is-cycling-across-the-famous-passage-du-gois-in-noirmoutier-fr"
+          }
+        }
+      },
+      "block_order": [
+        "milestone_1",
+        "milestone_2",
+        "milestone_3",
+        "milestone_4",
+        "milestone_5",
+        "milestone_6",
+        "milestone_7",
+        "value_1",
+        "value_2",
+        "value_3",
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "press_1",
+        "press_2",
+        "press_3",
+        "press_4",
+        "press_5",
+        "press_6",
+        "press_7",
+        "story_taro",
+        "story_kate",
+        "story_docs",
+        "story_claire",
+        "story_jon",
+        "story_novice",
+        "story_film",
+        "story_origin",
+        "story_manish_sustainable_ai_bamb",
+        "story_skandihus_meet_the_maker",
+        "story_new_blog_build_by_rhys_my",
+        "story_photo_from_aurelian_audrey"
+      ]
+    },
+    "worldmap": {
+      "type": "bbc-worldmap",
+      "blocks": {
+        "wm0": {
+          "type": "stat",
+          "settings": {
+            "number": "45",
+            "label": "countries reached",
+            "top": 8,
+            "big": true
+          }
+        },
+        "wm1": {
+          "type": "stat",
+          "settings": {
+            "number": "10",
+            "label": "schools & universities",
+            "top": 33,
+            "big": false
+          }
+        },
+        "wm2": {
+          "type": "stat",
+          "settings": {
+            "number": "4",
+            "label": "active prison sites",
+            "top": 56,
+            "big": false
+          }
+        },
+        "wm3": {
+          "type": "stat",
+          "settings": {
+            "number": "3",
+            "label": "international hubs",
+            "top": 79,
+            "big": false
+          }
+        }
+      },
+      "block_order": [
+        "wm0",
+        "wm1",
+        "wm2",
+        "wm3"
+      ],
+      "settings": {
+        "background": "paper",
+        "anchor": "map",
+        "eyebrow": "where we've reached",
+        "heading": "45 countries, one kit at a time.",
+        "lede": "Every country a Bamboo Bicycle Club kit has reached since 2012 — and the programmes we run at home.",
+        "map_alt": "World map with every country a Bamboo Bicycle Club kit has reached shaded green",
+        "caption": "✱ every country our kits have reached since 2012 — straight from our customer records. home in dark green.",
+        "show_nodediv": true,
+        "cta_label": "see the impact in full",
+        "cta_url": "/pages/impact"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "worldmap"
+  ]
+}

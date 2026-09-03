@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "bbc-collection-hero": {
+      "type": "bbc-collection-enhanced-v4",
+      "settings": {
+        "show_collection_info": true,
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "filters_heading": "Filter",
+        "filter_text_size": 1.0,
+        "columns_desktop": 3,
+        "columns_mobile": "2",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "section_padding_top_mobile": 4,
+        "section_padding_bottom_mobile": 6,
+        "section_padding_top_desktop": 6,
+        "section_padding_bottom_desktop": 8,
+        "section_spacing_mobile": 4,
+        "section_spacing_desktop": 6,
+        "card_padding_mobile": 1,
+        "card_padding_desktop": 2
+      }
+    }
+  },
+  "order": [
+    "bbc-collection-hero"
+  ]
+}

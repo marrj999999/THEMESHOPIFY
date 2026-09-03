@@ -1,0 +1,73 @@
+{%- comment -%}
+  BBC FAQ SECTION — hosts bbc-accordion theme blocks as a stacked FAQ.
+  Reproduces the monolith FAQ markup from sections/bbc-workshops-2026.liquid /
+  bbc-why-bamboo-2026.liquid: <section class="rd-pad {bg}"> > .rd-wrap.rd-mw-820px >
+  (eyebrow + h2) + .rd-faq stack hosting the accordion <details> rows. Header band
+  (kicker / heading / lede) follows the bbc-stat-band / bbc-feature-band pattern.
+  Loads bbc-redesign-2026.css once and wraps in .bbc-rd so the scoped classes apply.
+{%- endcomment -%}
+{{ 'bbc-redesign-2026.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg = section.settings.background | default: 'paper'
+  case bg
+    when 'dark'
+      assign bg_cls = 'rd-dark'
+    when 'steel'
+      assign bg_cls = 'rd-steel'
+    else
+      assign bg_cls = 'rd-paper'
+  endcase
+
+  if bg == 'dark'
+    assign eyebrow_cls = 'rd-eyebrow rd-on-dark'
+  else
+    assign eyebrow_cls = 'rd-eyebrow'
+  endif
+-%}
+<div class="bbc-rd {{ bg_cls }}"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor }}" style="scroll-margin-top:64px"{% endif %}>
+  <section class="rd-pad">
+    <div class="rd-wrap rd-mw-820px">
+      {%- if section.settings.kicker != blank -%}<span class="{{ eyebrow_cls }}">{{ section.settings.kicker }}</span>{%- endif -%}
+      {%- if section.settings.title != blank -%}<h2>{{ section.settings.title }}</h2>{%- endif -%}
+      {%- if section.settings.lede != blank -%}<p class="rd-lede rd-mt2">{{ section.settings.lede }}</p>{%- endif -%}
+      <div class="rd-faq rd-mt3">
+        {% content_for 'blocks' %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "BBC FAQ",
+  "tag": "section",
+  "class": "bbc-faq-wrap",
+  "blocks": [{ "type": "bbc-accordion" }],
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anchor id (for jump links)" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Good to know" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Bamboo bike questions, answered" },
+    { "type": "textarea", "id": "lede", "label": "Lede" },
+    {
+      "type": "select", "id": "background", "label": "Background", "default": "paper",
+      "options": [
+        { "value": "paper", "label": "Paper (light)" },
+        { "value": "dark", "label": "Dark (forest green)" },
+        { "value": "steel", "label": "Steel (cool grey-blue)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC FAQ",
+      "blocks": [
+        { "type": "bbc-accordion" },
+        { "type": "bbc-accordion" },
+        { "type": "bbc-accordion" },
+        { "type": "bbc-accordion" }
+      ]
+    }
+  ]
+}
+{% endschema %}

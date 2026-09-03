@@ -1,0 +1,357 @@
+{% render 'bbc-design-system' %}
+{% render 'bbc-icons' %}
+
+<section class="bbc-section bbc-section--white" id="support" aria-labelledby="support-heading">
+  <div class="bbc-container">
+    <header class="bbc-header">
+      <h2 class="bbc-section-title" id="support-heading">{{ section.settings.title }}</h2>
+      <p class="bbc-section-subtitle">{{ section.settings.subtitle }}</p>
+    </header>
+    
+    <div class="bbc-stats" role="list" aria-label="Support statistics">
+      <div class="bbc-stats__item" role="listitem">
+        <p class="bbc-stat-value">95%</p>
+        <p class="bbc-stat-label">First-time builders</p>
+      </div>
+      <div class="bbc-stats__item" role="listitem">
+        <p class="bbc-stat-value">4,000+</p>
+        <p class="bbc-stat-label">Successful builds</p>
+      </div>
+      <div class="bbc-stats__item" role="listitem">
+        <p class="bbc-stat-value">13</p>
+        <p class="bbc-stat-label">Years experience</p>
+      </div>
+    </div>
+    
+    <div class="bbc-support-links bbc-grid bbc-grid--4">
+      <a href="https://www.youtube.com/@BamboobicycleclubOrg" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="bbc-support-card"
+         aria-label="Video Tutorials - Step-by-step build videos on YouTube (opens in new tab)">
+        <div class="bbc-support-card__icon" aria-hidden="true">
+          {% render 'bbc-icons', icon: 'video' %}
+        </div>
+        <p class="bbc-support-card__title">Video Tutorials</p>
+        <p class="bbc-support-card__desc">Step-by-step build videos</p>
+        <span class="bbc-support-card__arrow" aria-hidden="true">→</span>
+      </a>
+      
+      <a href="/pages/support-centre" class="bbc-support-card" aria-label="Build Guides - Written guides with photos">
+        <div class="bbc-support-card__icon" aria-hidden="true">
+          {% render 'bbc-icons', icon: 'book' %}
+        </div>
+        <p class="bbc-support-card__title">Build Guides</p>
+        <p class="bbc-support-card__desc">Written guides with photos</p>
+        <span class="bbc-support-card__arrow" aria-hidden="true">→</span>
+      </a>
+      
+      <a href="https://community.bamboobicycleclub.org" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="bbc-support-card"
+         aria-label="Builder Community - 4,000+ members worldwide (opens in new tab)">
+        <div class="bbc-support-card__icon" aria-hidden="true">
+          {% render 'bbc-icons', icon: 'users' %}
+        </div>
+        <p class="bbc-support-card__title">Builder Community</p>
+        <p class="bbc-support-card__desc">4,000+ members worldwide</p>
+        <span class="bbc-support-card__arrow" aria-hidden="true">→</span>
+      </a>
+      
+      <a href="mailto:info@bamboobicycleclub.org" class="bbc-support-card" aria-label="Direct Support - We respond within 24 hours">
+        <div class="bbc-support-card__icon" aria-hidden="true">
+          {% render 'bbc-icons', icon: 'message' %}
+        </div>
+        <p class="bbc-support-card__title">Direct Support</p>
+        <p class="bbc-support-card__desc">Respond within 24 hours</p>
+        <span class="bbc-support-card__arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+    
+    <div class="bbc-faq-mini">
+      <h3 class="bbc-faq-mini__heading">Common Questions</h3>
+      <div class="bbc-faq-mini__grid">
+        <div class="bbc-faq-mini__item">
+          <p class="bbc-faq-mini__q">Do I need mechanical experience?</p>
+          <p class="bbc-faq-mini__a">No! 95% of our builders have zero prior experience.</p>
+        </div>
+        <div class="bbc-faq-mini__item">
+          <p class="bbc-faq-mini__q">How long will the build take?</p>
+          <p class="bbc-faq-mini__a">20–40 hours over 2–4 weeks at your own pace.</p>
+        </div>
+        <div class="bbc-faq-mini__item">
+          <p class="bbc-faq-mini__q">What tools do I need?</p>
+          <p class="bbc-faq-mini__a">Basic tools: hacksaw, files, sandpaper, tape.</p>
+        </div>
+        <div class="bbc-faq-mini__item">
+          <p class="bbc-faq-mini__q">What if I mess something up?</p>
+          <p class="bbc-faq-mini__a">Most issues are fixable. Contact us and we'll help!</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bbc-contact-cta">
+      <div class="bbc-contact-cta__text">
+        <p class="bbc-contact-cta__title">We're Here To Help</p>
+        <p class="bbc-contact-cta__desc">Questions before you buy? We love talking bamboo bikes.</p>
+      </div>
+      <div class="bbc-contact-cta__actions">
+        <a href="mailto:info@bamboobicycleclub.org" class="bbc-contact-cta__btn bbc-contact-cta__btn--email">
+          {% render 'bbc-icons', icon: 'mail' %}
+          <span>Email Us</span>
+        </a>
+        <a href="tel:+447446930945" class="bbc-contact-cta__btn bbc-contact-cta__btn--phone">
+          {% render 'bbc-icons', icon: 'phone' %}
+          <span>+44 7446 930945</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Support Cards */
+  .bbc-support-links {
+    margin-bottom: var(--bbc-sp-8);
+  }
+  
+  .bbc-support-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--bbc-sp-5);
+    background: var(--bbc-cream);
+    border-radius: var(--bbc-radius-lg);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+  }
+  
+  .bbc-support-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--bbc-shadow-md);
+  }
+  
+  .bbc-support-card:focus-visible {
+    outline: 2px solid var(--bbc-gold);
+    outline-offset: 2px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-support-card {
+      transition: none;
+    }
+    .bbc-support-card:hover {
+      transform: none;
+    }
+  }
+  
+  .bbc-support-card__icon {
+    width: 48px;
+    height: 48px;
+    background: var(--bbc-forest);
+    border-radius: var(--bbc-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bbc-gold);
+    margin-bottom: var(--bbc-sp-3);
+  }
+  
+  .bbc-support-card__icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .bbc-support-card__title {
+    font-family: var(--bbc-font);
+    font-size: var(--bbc-size-base);
+    font-weight: 600;
+    color: var(--bbc-forest);
+    margin: 0 0 var(--bbc-sp-1) 0;
+  }
+  
+  .bbc-support-card__desc {
+    font-family: var(--bbc-font);
+    font-size: var(--bbc-size-sm);
+    color: var(--bbc-grey);
+    margin: 0;
+  }
+  
+  .bbc-support-card__arrow {
+    position: absolute;
+    top: var(--bbc-sp-3);
+    right: var(--bbc-sp-3);
+    color: var(--bbc-teal);
+    font-size: var(--bbc-size-lg);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  
+  .bbc-support-card:hover .bbc-support-card__arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* Mini FAQ */
+  .bbc-faq-mini {
+    background: var(--bbc-cream);
+    border-radius: var(--bbc-radius-lg);
+    padding: var(--bbc-sp-6);
+    margin-bottom: var(--bbc-sp-6);
+  }
+  
+  .bbc-faq-mini__heading {
+    font-family: var(--bbc-font);
+    font-size: var(--bbc-size-lg);
+    font-weight: 600;
+    color: var(--bbc-forest);
+    text-align: center;
+    margin: 0 0 var(--bbc-sp-5) 0;
+  }
+  
+  .bbc-faq-mini__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--bbc-sp-4);
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-faq-mini__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .bbc-faq-mini__item {
+    background: var(--bbc-white);
+    border-radius: var(--bbc-radius-md);
+    padding: var(--bbc-sp-4);
+  }
+  
+  .bbc-faq-mini__q {
+    font-family: var(--bbc-font);
+    font-size: var(--bbc-size-sm);
+    font-weight: 600;
+    color: var(--bbc-forest);
+    margin: 0 0 var(--bbc-sp-1) 0;
+  }
+  
+  .bbc-faq-mini__a {
+    font-family: var(--bbc-font);
+    font-size: var(--bbc-size-sm);
+    color: var(--bbc-grey);
+    margin: 0;
+    line-height: 1.5;
+  }
+  
+  /* Contact CTA */
+  .bbc-contact-cta {
+    background: var(--bbc-forest);
+    border-radius: var(--bbc-radius-lg);
+    padding: var(--bbc-sp-5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--bbc-sp-4);
+  }
+  
+  .bbc-contact-cta__title {
+    font-family: var(--bbc-font);
+    font-size: var(--bbc-size-base);
+    font-weight: 600;
+    color: var(--bbc-white);
+    margin: 0 0 var(--bbc-sp-1) 0;
+  }
+  
+  .bbc-contact-cta__desc {
+    font-family: var(--bbc-font);
+    font-size: var(--bbc-size-sm);
+    color: var(--bbc-white);
+    opacity: 0.9;
+    margin: 0;
+  }
+  
+  .bbc-contact-cta__actions {
+    display: flex;
+    gap: var(--bbc-sp-3);
+    flex-wrap: wrap;
+  }
+  
+  .bbc-contact-cta__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--bbc-sp-2);
+    padding: var(--bbc-sp-3) var(--bbc-sp-4);
+    border-radius: var(--bbc-radius-md);
+    text-decoration: none;
+    font-family: var(--bbc-font);
+    font-size: var(--bbc-size-sm);
+    font-weight: 600;
+    transition: transform 0.2s ease;
+  }
+  
+  .bbc-contact-cta__btn:hover {
+    transform: translateY(-2px);
+  }
+  
+  .bbc-contact-cta__btn:focus-visible {
+    outline: 2px solid var(--bbc-gold);
+    outline-offset: 2px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-contact-cta__btn {
+      transition: none;
+    }
+    .bbc-contact-cta__btn:hover {
+      transform: none;
+    }
+  }
+  
+  .bbc-contact-cta__btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .bbc-contact-cta__btn--email {
+    background: var(--bbc-white);
+    color: var(--bbc-forest);
+  }
+  
+  .bbc-contact-cta__btn--phone {
+    background: var(--bbc-gold);
+    color: var(--bbc-forest);
+  }
+  
+  @media (max-width: 640px) {
+    .bbc-contact-cta {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .bbc-contact-cta__actions {
+      width: 100%;
+      flex-direction: column;
+    }
+    
+    .bbc-contact-cta__btn {
+      justify-content: center;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Support",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Help & Support" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "You're not alone in this build. We've helped 4,000+ people create their first bamboo bike — and we'll help you too." }
+  ],
+  "presets": [{ "name": "BBC Support" }]
+}
+{% endschema %}

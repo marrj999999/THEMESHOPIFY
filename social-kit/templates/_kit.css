@@ -1,0 +1,52 @@
+/* BBC Social Visual Kit — shared tokens & geometry (spec 2026-07-06)
+   FOREST canon = #003C32 (decided 2026-07-02; verified in live --forest token).
+   Legacy #073e27 is retired. One variable = one-line swap if it ever changes. */
+@font-face { font-family:'Atkinson Hyperlegible'; font-weight:400; src:url('AtkinsonHyperlegible-Regular.woff2') format('woff2'); }
+@font-face { font-family:'Atkinson Hyperlegible'; font-weight:700; src:url('AtkinsonHyperlegible-Bold.woff2') format('woff2'); }
+
+:root {
+  --forest:#003C32; --teal:#3f8b66; --steel:#8da4c1; --gold:#ffa900;
+  --cream:#f8f7f4; --lime:#d4fd62; --sky:#87ceeb;
+  --accent:var(--lime); /* overridden per content type */
+  --stripe-gap-start:518px; --stripe-gap-end:562px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1080px; overflow:hidden; }
+body { font-family:'Atkinson Hyperlegible', sans-serif; position:relative; }
+
+/* content-type pairings */
+body[data-type="instructional"] { --accent:var(--lime); background:var(--forest); color:#fff; }
+body[data-type="product"]       { --accent:var(--teal); background:var(--cream); color:var(--forest); }
+body[data-type="workshop"]      { --accent:var(--sky);  background:var(--forest); color:#fff; }
+body[data-type="workshop-teal"] { --accent:var(--gold); background:var(--teal);   color:#fff; }
+
+/* bamboo stripe: left edge, node break at 48–52% height */
+.stripe { position:absolute; left:0; top:0; width:40px; height:100%; z-index:2;
+  background:linear-gradient(to bottom,
+    var(--accent) 0, var(--accent) var(--stripe-gap-start),
+    transparent var(--stripe-gap-start), transparent var(--stripe-gap-end),
+    var(--accent) var(--stripe-gap-end), var(--accent) 100%); }
+
+/* working text column: x 135–945 (IG grid-crop safe), y 64–1016 */
+.col { position:absolute; left:135px; right:135px; top:64px; bottom:64px; z-index:3; }
+
+.kicker { font-size:36px; font-weight:700; color:var(--accent); letter-spacing:.06em; }
+.meta   { font-size:28px; font-weight:400; opacity:.72; }
+
+/* logo lockup bottom-right: wordmark + symbol always two colours, symbol never black */
+.logo { position:absolute; right:64px; bottom:64px; height:72px; display:flex; align-items:center; gap:14px;
+  font-weight:700; font-size:30px; line-height:1.05; z-index:3; }
+.logo .sym { width:56px; height:56px; }
+.logo .word { max-width:220px; }
+
+/* story/reel variant 1080×1920: stripe on top edge, clear top 250 / bottom 420, sticker zone y1250–1450 */
+@media (min-height:1500px) {
+  html,body { width:1080px; height:1920px; }
+  .stripe { top:0; left:0; width:100%; height:40px;
+    background:linear-gradient(to right,
+      var(--accent) 0, var(--accent) 48%, transparent 48%, transparent 52%,
+      var(--accent) 52%, var(--accent) 100%); }
+  .col { top:280px; bottom:440px; left:135px; right:155px; }
+  .sticker-zone { position:absolute; top:1250px; height:200px; left:0; right:0; }
+  .logo { bottom:452px; }
+}

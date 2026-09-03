@@ -1,0 +1,1012 @@
+{%- comment -%}
+  BBC New Design (2026) — EDUCATION page ("Make Engineers"), single self-contained section.
+  This is a PUBLIC ADVERT / POSTER for the schools/colleges/youth engineering programmes — NOT an
+  operations page. It does NOT link into the separate instructor app; the app provides all the
+  operational context (session plans, build guides, curriculum maps) to people once they're in it.
+  The advert's only job: make a school/teacher want it and get in touch. The Speaker build is FREE
+  (the hook); every other programme is a paid investment, priced by quote (no public price). Every
+  CTA drives an ENQUIRY (contact page / on-page enquiry block / email). Prison work lives on the
+  Impact page; corporate on Team-Building. Generic by design. Scoped under .bbc-rd.
+{%- endcomment -%}
+
+{%- liquid
+  assign enquire_url = section.settings.enquiry_url | default: '/pages/contact-us'
+  assign email_url   = section.settings.enquiry_email | default: 'mailto:info@bamboobicycleclub.org'
+  assign hero_cta1   = section.settings.hero_cta1_url | default: '#enquire'
+  assign hero_cta2   = section.settings.hero_cta2_url | default: enquire_url
+  assign fund_cta    = section.settings.fund_cta_url | default: '#enquire'
+  assign cta1_url    = section.settings.cta1_url | default: enquire_url
+  assign cta2_url    = section.settings.cta2_url | default: email_url
+-%}
+
+<div class="bbc-rd bbc-rd-education">
+
+  {%- comment -%} ---------- HERO ---------- {%- endcomment -%}
+  <header class="rd-hero rd-mh-70">
+    <div class="rd-bg">
+      {%- if section.settings.hero_image != blank -%}
+        <img src="{{ section.settings.hero_image | image_url: width: 1600 }}" srcset="{{ section.settings.hero_image | image_url: width: 800 }} 800w, {{ section.settings.hero_image | image_url: width: 1200 }} 1200w, {{ section.settings.hero_image | image_url: width: 1600 }} 1600w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w" sizes="100vw" alt="{{ section.settings.hero_image_alt | default: 'Students building with bamboo' | escape }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" fetchpriority="high" loading="eager">
+      {%- else -%}
+        <img src="{{ section.settings.hero_fallback | default: 'bbc-rd-workshop.jpg' | asset_url }}" alt="{{ section.settings.hero_image_alt | default: 'Students building with bamboo' | escape }}" width="1400" height="933" fetchpriority="high" loading="eager">
+      {%- endif -%}
+    </div>
+    <div class="rd-scrim"></div>
+    <div class="rd-inner">
+      <div class="rd-wrap">
+        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><span class="rd-here">Schools</span></nav>
+        {%- if section.settings.hero_eyebrow != blank -%}<span class="rd-frame-label rd-c-lime">{{ section.settings.hero_eyebrow }}</span>{%- endif -%}
+        <h1 class="rd-mt2 rd-mw-18ch">{{ section.settings.hero_title }}</h1>
+        <div class="rd-lede">{{ section.settings.hero_lede }}</div>
+        <div class="rd-cta-row">
+          {%- if section.settings.hero_cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ hero_cta1 }}">{{ section.settings.hero_cta1_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+          {%- if section.settings.hero_cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ hero_cta2 }}">{{ section.settings.hero_cta2_label }}</a>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {%- comment -%} ---------- AS TAUGHT AT (institution logo grid) ---------- {%- endcomment -%}
+  {%- assign partner_blocks = section.blocks | where: 'type', 'partner' -%}
+  {%- if partner_blocks.size > 0 -%}
+    <section class="rd-pad-sm rd-paper rd-center">
+      <div class="rd-wrap">
+        <span class="rd-eyebrow">{{ section.settings.taught_eyebrow | default: 'As taught at' }}</span>
+        {%- if section.settings.taught_title != blank -%}<h2 class="rd-reveal rd-mt2 rd-mx-auto rd-mw-18ch">{{ section.settings.taught_title }}</h2>{%- endif -%}
+        <div class="rd-logogrid rd-mt4">
+          {%- for block in partner_blocks -%}
+            {%- capture cell -%}
+              {%- if block.settings.logo != blank -%}<img width="{{ block.settings.logo.width }}" height="{{ block.settings.logo.height }}" class="rd-logoimg" src="{{ block.settings.logo | image_url: width: 480 }}" alt="{{ block.settings.name | escape }}" loading="lazy">
+              {%- elsif block.settings.logo_asset != blank -%}<img class="rd-logoimg" src="{{ block.settings.logo_asset | asset_url }}" alt="{{ block.settings.name | escape }}" loading="lazy">
+              {%- else -%}<span class="rd-logotext">{{ block.settings.name }}</span>{%- endif -%}
+            {%- endcapture -%}
+            {%- if block.settings.url != blank -%}
+              <a class="rd-logocell" href="{{ block.settings.url }}" target="_blank" rel="noopener" aria-label="{{ block.settings.name | escape }} — read the case study">{{ cell }}</a>
+            {%- else -%}
+              <div class="rd-logocell">{{ cell }}</div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- PROOF STATS (dark) ----------
+    Moved below "As taught at" (was directly under the hero). The hero is dark and so is this
+    band, so the page opened with two dark bands run together — PAGE-STANDARD S3, the one rule
+    Impact never breaks. Impact's own order is hero -> a light band -> dark stats, and the light
+    band is the single mechanism that lets the stat band stay dark (which is what keeps the
+    figures lime, the thing James compared unfavourably across pages).
+
+    Reordered rather than recoloured, and rather than inventing a new band: no content changes,
+    and "as taught at" is credibility, which reads well directly under the hero. (2026-08-04)
+  {%- endcomment -%}
+  <section class="rd-pad-sm rd-dark">
+    <div class="rd-wrap">
+      <div class="rd-stats">
+        {%- for block in section.blocks -%}{%- if block.type == 'stat' -%}
+          <div class="rd-reveal rd-stat" {{ block.shopify_attributes }}>
+            <div class="rd-num bbc-counted">{{ block.settings.number }}</div>
+            <div class="rd-lbl">{{ block.settings.label }}</div>
+            {%- if block.settings.source != blank -%}<div class="rd-src">{{ block.settings.source }}</div>{%- endif -%}
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- THE PATHWAY (5 programmes — advert cards, not links) ---------- {%- endcomment -%}
+  <section class="rd-pad">
+    <div class="rd-wrap">
+      <span class="rd-eyebrow">{{ section.settings.prog_eyebrow }}</span>
+      <h2 class="rd-reveal rd-mw-16ch">{{ section.settings.prog_title }}</h2>
+      {%- if section.settings.prog_lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.prog_lede }}</p>{%- endif -%}
+
+      <div class="rd-grid rd-g3 rd-mt4">
+        {%- for block in section.blocks -%}{%- if block.type == 'programme' -%}
+          <div class="rd-reveal rd-card rd-stamp{% if block.settings.free %} rd-card-free{% endif %}" {{ block.shopify_attributes }}>
+            <div class="rd-body">
+              <div class="rd-flex rd-between rd-gap-24">
+                <span class="rd-frame-label rd-c-subtle">{{ block.settings.tier }}</span>
+                {%- if block.settings.status == 'coming' -%}
+                  <span class="rd-tag">{{ section.settings.tx_in_development | default: "In development" }}</span>
+                {%- elsif block.settings.free -%}
+                  <span class="rd-tag rd-lime">Free</span>
+                {%- else -%}
+                  <span class="rd-tag">{{ block.settings.price_tag | default: 'Request a quote' }}</span>
+                {%- endif -%}
+              </div>
+              <h3 class="rd-fs-21px rd-mt2">{{ block.settings.title }}</h3>
+              {%- if block.settings.detail != blank -%}<p class="rd-c-subtle rd-mt-10px">{{ block.settings.detail }}</p>{%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- TURNKEY (you don't need to be an engineer — NO app link) ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-steel">
+    <div class="rd-wrap">
+      <div class="rd-split rd-tight rd-gap48-ac">
+        <div>
+          <span class="rd-eyebrow">{{ section.settings.plat_eyebrow }}</span>
+          <h2 class="rd-reveal">{{ section.settings.plat_title }}</h2>
+          <p class="rd-lede rd-mt2">{{ section.settings.plat_lede }}</p>
+          <ul class="rd-list rd-mt3">
+            {%- if section.settings.plat_point1 != blank -%}<li>{{ section.settings.plat_point1 }}</li>{%- endif -%}
+            {%- if section.settings.plat_point2 != blank -%}<li>{{ section.settings.plat_point2 }}</li>{%- endif -%}
+            {%- if section.settings.plat_point3 != blank -%}<li>{{ section.settings.plat_point3 }}</li>{%- endif -%}
+            {%- if section.settings.plat_point4 != blank -%}<li>{{ section.settings.plat_point4 }}</li>{%- endif -%}
+          </ul>
+        </div>
+        <div class="rd-reveal rd-card rd-stamp rd-lime">
+          <div class="rd-ph rd-ar-43">
+            <img src="{{ section.settings.plat_fallback | default: 'bbc-rd-wb-kit.jpg' | asset_url }}" alt="{{ section.settings.plat_image_alt | default: 'Students building with bamboo' | escape }}" width="1200" height="900">
+          </div>
+          <div class="rd-body">
+            <p class="rd-cmp-35205">{{ section.settings.plat_quote }}</p>
+            {%- if section.settings.plat_cite != blank -%}<p class="rd-mt-10px">{{ section.settings.plat_cite }}</p>{%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- CASE STUDIES (image-led cards) ---------- {%- endcomment -%}
+  {%- assign cs_blocks = section.blocks | where: 'type', 'casestudy' -%}
+  {%- if cs_blocks.size > 0 -%}
+    <section class="rd-pad-sm">
+      <div class="rd-wrap">
+        <span class="rd-eyebrow">{{ section.settings.cs_eyebrow }}</span>
+        <h2 class="rd-reveal rd-mw-16ch">{{ section.settings.cs_title }}</h2>
+        {%- if section.settings.cs_lede != blank -%}<p class="rd-lede rd-mt2 rd-maxw">{{ section.settings.cs_lede }}</p>{%- endif -%}
+
+        <ul class="rd-csgrid rd-mt4" role="list">
+          {%- comment -%} Renders THE standard card (snippets/bbc-cscard.liquid), 2026-07-31.
+             The old markup promoted the BLURB into .rd-cscard__quote with an rd-noq class that
+             stripped the quote marks — so one visual slot carried either a person's words or body
+             copy depending on data. That is the "quote styles fighting" problem in our own code.
+             Now: heading = outcome (fallback institution), body copy = context, quote removed as a
+             competing display element. {%- endcomment -%}
+          {%- for block in cs_blocks -%}
+            {%- assign _img = block.settings.image | default: 'bbc-rd-frame-build.jpg' -%}
+            {%- assign _yt = block.settings.video_url | default: block.settings.video -%}
+            {%- assign _head = block.settings.outcome | default: block.settings.institution -%}
+            {%- render 'bbc-cscard',
+                 variant: 'grid',
+                 kind: block.settings.kind,
+                 heading: _head,
+                 url: block.settings.url,
+                 context: block.settings.blurb,
+                 attr: block.settings.institution,
+                 image: _img,
+                 youtube: _yt,
+                 video_file: block.settings.video_file,
+                 cta: block.settings.link_label -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+      {% render 'bbc-video-lightbox' %}
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- WATCH THE FREE BUILD (video) ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-paper rd-center">
+    <div class="rd-wrap rd-mw-820px">
+      <span class="rd-eyebrow">{{ section.settings.vid_eyebrow | default: 'See it first' }}</span>
+      <h2 class="rd-reveal rd-mt2">{{ section.settings.vid_title | default: 'watch the free speaker build, start to finish.' }}</h2>
+      <p class="rd-lede rd-mt2">{{ section.settings.vid_lede | default: 'A complete STEM project on camera — so you can see exactly what your class would make before you ask for anything.' }}</p>
+      {%- comment -%} standard player (2026-07-22): facade + auto YouTube thumbnail {%- endcomment -%}
+      {%- assign ev = section.settings.video_id | default: 'uhN-yv90F_Y' -%}
+      <div class="rd-mt3" style="border-radius:14px;overflow:hidden;">
+        {%- render 'bbc-media', youtube: ev, label: 'film', alt: 'Bamboo Bicycle Club — schools Speaker build film', class: 'bbc-media--ar169', sizes: '(max-width:749px) 100vw, 900px' -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- FUNDING (reassurance — NO app link) ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-center">
+    <div class="rd-wrap rd-mw-680px">
+      <span class="rd-eyebrow">{{ section.settings.fund_eyebrow }}</span>
+      <h2 class="rd-reveal rd-mt2">{{ section.settings.fund_title }}</h2>
+      <p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.fund_lede }}</p>
+      {%- if section.settings.fund_cta_label != blank -%}<div class="rd-mt3"><a class="rd-btn rd-lime" href="{{ fund_cta }}">{{ section.settings.fund_cta_label }} <span class="rd-arrow">&rarr;</span></a></div>{%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- ACCREDITATION & RECOGNITION ---------- {%- endcomment -%}
+  <section class="rd-pad-sm rd-paper rd-center rd-reveal">
+    <div class="rd-wrap">
+      {%- if section.settings.acc_eyebrow != blank -%}<span class="rd-eyebrow">{{ section.settings.acc_eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.acc_title != blank -%}<h2 class="rd-reveal rd-mt2">{{ section.settings.acc_title }}</h2>{%- endif -%}
+      {%- assign press_blocks = section.blocks | where: 'type', 'press' -%}
+      {%- if press_blocks.size > 0 -%}
+        <div class="rd-logobar rd-mt3">
+          {%- for block in press_blocks -%}
+            {%- if block.settings.logo_asset != blank -%}
+              {%- capture lg_inner -%}<img class="rd-lg-img" src="{{ block.settings.logo_asset | asset_url }}" alt="{{ block.settings.text | escape }}" loading="lazy">{%- endcapture -%}
+              {%- assign lg_class = 'rd-lg rd-lg-real' -%}
+            {%- else -%}
+              {%- capture lg_inner -%}{%- if block.settings.style == 'bbc' -%}{%- assign letters = block.settings.text | strip | split: '' -%}{%- for ch in letters -%}{%- unless ch == ' ' -%}<b>{{ ch }}</b>{%- endunless -%}{%- endfor -%}{%- else -%}{{ block.settings.text }}{%- endif -%}{%- endcapture -%}
+              {%- assign lg_class = 'rd-lg rd-lg-' | append: block.settings.style -%}
+              {%- if block.settings.style == 'serif-italic' -%}{%- assign lg_class = 'rd-lg rd-lg-serif rd-it' -%}{%- endif -%}
+            {%- endif -%}
+            {%- if block.settings.url != blank -%}
+              <a class="{{ lg_class }} rd-lg-link" href="{{ block.settings.url }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>{{ lg_inner }}</a>
+            {%- else -%}
+              <span class="{{ lg_class }}" {{ block.shopify_attributes }}>{{ lg_inner }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      <div class="rd-flex rd-mt4 rd-jc-center">
+        {%- for block in section.blocks -%}{%- if block.type == 'badge' -%}
+          <span class="rd-tag{% if block.settings.lime %} rd-lime{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label }}</span>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- ENQUIRY CTA (dark) ---------- {%- endcomment -%}
+  <section class="rd-pad rd-dark rd-center" id="enquire">
+    <div class="rd-wrap rd-mw-680px">
+      {%- if section.settings.cta_eyebrow != blank -%}<span class="rd-eyebrow rd-on-dark">{{ section.settings.cta_eyebrow }}</span>{%- endif -%}
+      <h2 class="rd-reveal">{{ section.settings.cta_title }}</h2>
+      <p class="rd-lede rd-mt2 rd-mx-auto">{{ section.settings.cta_lede }}</p>
+      <div class="rd-flex rd-mt3 rd-jc-center">
+        {%- if section.settings.cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ cta1_url }}">{{ section.settings.cta1_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ cta2_url }}">{{ section.settings.cta2_label }}</a>{%- endif -%}
+      </div>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Education 2026 (new)",
+  "tag": "section",
+  "class": "section bbc-education-2026-wrap",
+  "settings": [
+    { "type": "header", "content": "Editability pass 2026-08-10" },
+    { "type": "text", "id": "tx_in_development", "label": "In development", "default": "In development" },
+    {
+      "type": "header",
+      "content": "Enquiry destinations (no app links)"
+    },
+    {
+      "type": "url",
+      "id": "enquiry_url",
+      "label": "Enquiry / contact link",
+      "info": "Where every enquiry CTA goes. Default: /pages/contact-us"
+    },
+    {
+      "type": "url",
+      "id": "enquiry_email",
+      "label": "Enquiry email link (mailto:)",
+      "info": "Default: mailto:info@bamboobicycleclub.org"
+    },
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_fallback",
+      "label": "Default hero photo filename",
+      "default": "bbc-rd-workshop.jpg"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero image alt text",
+      "default": "A finished bamboo gravel bike, engineered and built by hand"
+    },
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Eyebrow",
+      "default": "Make Engineers · schools & colleges"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Headline",
+      "default": "try real engineering in your classroom this term — free."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_lede",
+      "label": "Lede",
+      "default": "Your students build a working bamboo speaker from scratch: a complete STEM project, mapped to the curriculum and to careers. No kit to fund, no risk to take."
+    },
+    {
+      "type": "text",
+      "id": "hero_cta1_label",
+      "label": "Primary CTA label",
+      "default": "Start the free Speaker build"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta1_url",
+      "label": "Primary CTA link (defaults to the on-page enquiry block)"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta2_label",
+      "label": "Secondary CTA label",
+      "default": "Send us an enquiry"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta2_url",
+      "label": "Secondary CTA link (defaults to the contact page)"
+    },
+    {
+      "type": "header",
+      "content": "As taught at (logo grid)"
+    },
+    {
+      "type": "text",
+      "id": "taught_eyebrow",
+      "label": "Eyebrow",
+      "default": "As taught at"
+    },
+    {
+      "type": "text",
+      "id": "taught_title",
+      "label": "Heading",
+      "default": "built into schools, colleges and universities."
+    },
+    {
+      "type": "header",
+      "content": "The pathway (programmes)"
+    },
+    {
+      "type": "text",
+      "id": "prog_eyebrow",
+      "label": "Eyebrow",
+      "default": "The pathway"
+    },
+    {
+      "type": "text",
+      "id": "prog_title",
+      "label": "Heading",
+      "default": "start free. build up when your students ask for more."
+    },
+    {
+      "type": "textarea",
+      "id": "prog_lede",
+      "label": "Lede",
+      "default": "The Speaker is the front door: a full STEM project at no cost, curriculum-mapped and built to the same accreditation standard (Level 1 OCN approval in progress). The Speaker is free; every other programme is paid — an investment in the skills, accreditation and career routes that follow, priced by quote. From there the ladder runs from a first frame to a rideable bamboo bicycle, the lugs students design and 3D-print, and electric mobility."
+    },
+    {
+      "type": "header",
+      "content": "Turnkey (you don't need to be an engineer)"
+    },
+    {
+      "type": "text",
+      "id": "plat_eyebrow",
+      "label": "Eyebrow",
+      "default": "You don't need to be an engineer"
+    },
+    {
+      "type": "text",
+      "id": "plat_title",
+      "label": "Heading",
+      "default": "everything to run it is provided. you just bring the class."
+    },
+    {
+      "type": "textarea",
+      "id": "plat_lede",
+      "label": "Lede",
+      "default": "Teachers run this whether or not they've ever held a saw. The build film, the session plan and the curriculum and careers map all come with it, so the free Speaker build is ready to teach — not a pile of resources you have to assemble first. If you'd rather not run it solo, a facilitator can co-deliver."
+    },
+    {
+      "type": "text",
+      "id": "plat_point1",
+      "label": "Point 1",
+      "default": "A chaptered build film you can play stage by stage on the board"
+    },
+    {
+      "type": "text",
+      "id": "plat_point2",
+      "label": "Point 2",
+      "default": "Step-by-step plans written for a workshop, not a textbook"
+    },
+    {
+      "type": "text",
+      "id": "plat_point3",
+      "label": "Point 3",
+      "default": "A curriculum and careers map — your Gatsby Benchmark 4 evidence, done"
+    },
+    {
+      "type": "text",
+      "id": "plat_point4",
+      "label": "Point 4",
+      "default": "Enhanced-DBS facilitators who can co-deliver if you'd rather not run it solo"
+    },
+    {
+      "type": "text",
+      "id": "plat_fallback",
+      "label": "Card image filename",
+      "default": "bbc-rd-wb-kit.jpg"
+    },
+    {
+      "type": "text",
+      "id": "plat_image_alt",
+      "label": "Card image alt text",
+      "default": "A bamboo frame on a build template, mid-build"
+    },
+    {
+      "type": "textarea",
+      "id": "plat_quote",
+      "label": "Card quote",
+      "default": "Real making, real materials, a real qualification — handed to you ready to teach."
+    },
+    {
+      "type": "text",
+      "id": "plat_cite",
+      "label": "Card attribution",
+      "default": "Make Engineers"
+    },
+    {
+      "type": "header",
+      "content": "Video"
+    },
+    {
+      "type": "text",
+      "id": "vid_eyebrow",
+      "label": "Eyebrow",
+      "default": "See it first"
+    },
+    {
+      "type": "text",
+      "id": "vid_title",
+      "label": "Heading",
+      "default": "watch the free speaker build, start to finish."
+    },
+    {
+      "type": "textarea",
+      "id": "vid_lede",
+      "label": "Lede",
+      "default": "A complete STEM project on camera — so you can see exactly what your class would make before you ask for anything."
+    },
+    {
+      "type": "text",
+      "id": "video_id",
+      "label": "YouTube video ID",
+      "default": "uhN-yv90F_Y"
+    },
+    {
+      "type": "header",
+      "content": "Case studies (link to our blog)"
+    },
+    {
+      "type": "text",
+      "id": "cs_eyebrow",
+      "label": "Eyebrow",
+      "default": "Already in classrooms & lecture halls"
+    },
+    {
+      "type": "text",
+      "id": "cs_title",
+      "label": "Heading",
+      "default": "schools, colleges and universities already build with us."
+    },
+    {
+      "type": "textarea",
+      "id": "cs_lede",
+      "label": "Lede",
+      "default": "From a Year 9 STEM lesson to a Russell Group Masters brief — real institutions, real builds, written up on our blog. Read how it has worked elsewhere, then picture it in your setting."
+    },
+    {
+      "type": "text",
+      "id": "cs_partner_label",
+      "label": "Logo-wall label",
+      "default": "A few of the schools, colleges and universities we’ve worked with"
+    },
+    {
+      "type": "header",
+      "content": "Funding"
+    },
+    {
+      "type": "text",
+      "id": "fund_eyebrow",
+      "label": "Eyebrow",
+      "default": "Money needn't be the blocker"
+    },
+    {
+      "type": "text",
+      "id": "fund_title",
+      "label": "Heading",
+      "default": "most schools run the paid programmes fully funded."
+    },
+    {
+      "type": "textarea",
+      "id": "fund_lede",
+      "label": "Lede",
+      "default": "The Speaker is free, so you can prove it works before you ask anyone for budget. When you're ready to go further, we help you find the funding — STEM grants, pupil premium, careers budgets and employer sponsorship routinely cover it. Tell us your setting in the same enquiry and we'll point you to the routes that fit."
+    },
+    {
+      "type": "text",
+      "id": "fund_cta_label",
+      "label": "Funding CTA label",
+      "default": "Send us an enquiry"
+    },
+    {
+      "type": "url",
+      "id": "fund_cta_url",
+      "label": "Funding CTA link (defaults to the on-page enquiry block)"
+    },
+    {
+      "type": "header",
+      "content": "Accreditation & recognition"
+    },
+    {
+      "type": "text",
+      "id": "acc_eyebrow",
+      "label": "Eyebrow",
+      "default": "Accredited & accountable"
+    },
+    {
+      "type": "text",
+      "id": "acc_title",
+      "label": "Heading",
+      "default": "recognised skills, real qualifications."
+    },
+    {
+      "type": "header",
+      "content": "Enquiry CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_eyebrow",
+      "label": "Eyebrow",
+      "default": "Get in touch"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Title",
+      "default": "start with the free build. see where it takes your class."
+    },
+    {
+      "type": "textarea",
+      "id": "cta_lede",
+      "label": "Lede",
+      "default": "Tell us your key stage, your subject and roughly how many students. We'll send you the free Speaker project and talk through where it could lead — no obligation, no quote until you want one, and a real reply from a real person within two working days."
+    },
+    {
+      "type": "text",
+      "id": "cta1_label",
+      "label": "Primary CTA label",
+      "default": "Start the free Speaker build"
+    },
+    {
+      "type": "url",
+      "id": "cta1_url",
+      "label": "Primary CTA link (defaults to the contact page)"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "Secondary CTA label",
+      "default": "Send us an enquiry"
+    },
+    {
+      "type": "url",
+      "id": "cta2_url",
+      "label": "Secondary CTA link (defaults to the enquiry email)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "programme",
+      "name": "Programme",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tier",
+          "label": "Tier label",
+          "default": "Foundation"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "acoustic engineering & sustainable product design"
+        },
+        {
+          "type": "textarea",
+          "id": "detail",
+          "label": "Detail line",
+          "default": "Ages 11–16 · KS3–KS4 · ~2–3 hrs · builds a working bamboo speaker"
+        },
+        {
+          "type": "checkbox",
+          "id": "free",
+          "label": "Free programme (shows a lime 'Free' tag)",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "price_tag",
+          "label": "Paid value tag (no number)",
+          "default": "Request a quote"
+        },
+        {
+          "type": "select",
+          "id": "status",
+          "label": "Status",
+          "default": "available",
+          "options": [
+            {
+              "value": "available",
+              "label": "Available now"
+            },
+            {
+              "value": "coming",
+              "label": "In development"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "1,500+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "young people have built with us"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source",
+          "default": "Make Engineers delivery to date"
+        }
+      ]
+    },
+    {
+      "type": "badge",
+      "name": "Accreditation badge",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Badge label",
+          "default": "OCN Accredited"
+        },
+        {
+          "type": "checkbox",
+          "id": "lime",
+          "label": "Lime fill",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "casestudy",
+      "name": "Case study",
+      "settings": [
+        {
+          "type": "text",
+          "id": "kind",
+          "label": "Kind tag",
+          "default": "University"
+        },
+        {
+          "type": "text",
+          "id": "institution",
+          "label": "Institution",
+          "default": "University College London"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Institution logo (uploaded — shown instead of the name)"
+        },
+        {
+          "type": "text",
+          "id": "logo_asset",
+          "label": "Institution logo theme-asset filename (e.g. bbc-logo-ucl.png)"
+        },
+        {
+          "type": "text",
+          "id": "image",
+          "label": "Card photo filename (theme asset)",
+          "default": "bbc-rd-edu.jpg"
+        },
+        {
+          "type": "text",
+          "id": "video",
+          "label": "YouTube video ID (optional — adds a play button, plays in-page)"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Standout quote (verbatim, no quote marks)"
+        },
+        {
+          "type": "text",
+          "id": "attribution",
+          "label": "Quote attribution (Name — Role, Institution)"
+        },
+        {
+          "type": "text",
+          "id": "outcome",
+          "label": "Outcome headline (the card's only link text)"
+        },
+        {
+          "type": "textarea",
+          "id": "blurb",
+          "label": "Context line (one sentence)",
+          "default": "Two years running, students delivered a live Masters electric-vehicle brief on a bamboo frame."
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link (a blog case study)"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Read the case study"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL (YouTube/Vimeo — plays inline)"
+        },
+        {
+          "type": "video",
+          "id": "video_file",
+          "label": "Or upload a video (plays inline)"
+        }
+      ]
+    },
+    {
+      "type": "partner",
+      "name": "Partner logo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Institution name (alt text / wordmark fallback)",
+          "default": "University College London"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo image (uploaded — overrides everything)"
+        },
+        {
+          "type": "text",
+          "id": "logo_asset",
+          "label": "Logo theme-asset filename (e.g. bbc-logo-ucl.png)"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link (optional)"
+        }
+      ]
+    },
+    {
+      "type": "press",
+      "name": "Press / recognition logo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Wordmark text (also logo alt text)",
+          "default": "The Guardian"
+        },
+        {
+          "type": "text",
+          "id": "logo_asset",
+          "label": "Real logo filename (e.g. logo-guardian.svg)",
+          "info": "Overrides the text wordmark. Leave blank to use styled text."
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link (optional — makes the wordmark clickable)"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "default": "serif",
+          "options": [
+            {
+              "value": "ft",
+              "label": "Peach box, serif (Financial Times)"
+            },
+            {
+              "value": "serif",
+              "label": "Serif (The Guardian)"
+            },
+            {
+              "value": "serif-italic",
+              "label": "Serif italic (Inside Time)"
+            },
+            {
+              "value": "bbc",
+              "label": "Boxed letters (BBC)"
+            },
+            {
+              "value": "caps",
+              "label": "Spaced caps (Investec)"
+            },
+            {
+              "value": "disc",
+              "label": "Bold (Discovery)"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Education 2026 (new)",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "1,500+",
+            "label": "young people reached through builds, tasters and talks",
+            "source": "Make Engineers delivery records"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "OCN Level 1 Award",
+            "label": "Practical Manufacturing Skills",
+            "source": "OCN London accredited"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "Benchmark 4",
+            "label": "links your curriculum to careers",
+            "source": "Gatsby Benchmarks"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "KS3–post-16",
+            "label": "curriculum-mapped, ages 11 to 19",
+            "source": "Make Engineers curriculum maps"
+          }
+        },
+        {
+          "type": "programme",
+          "settings": {
+            "tier": "Foundation — start here, free",
+            "title": "Acoustic Engineering & Sustainable Product Design",
+            "detail": "A working bamboo speaker, built by hand — design the chamber, test the sound, learn the physics. A complete STEM project in 2–3 hours, curriculum-mapped and OCN-accredited. Ages 11–16, KS3–KS4. The taster: run it, then decide the rest.",
+            "free": true,
+            "status": "available"
+          }
+        },
+        {
+          "type": "programme",
+          "settings": {
+            "tier": "Frame I",
+            "title": "Sustainable Product Engineering",
+            "detail": "The first frame your students build — a bamboo balance bike. Their entry into structural design and precision fabrication, where a finished object has to hold real weight. The natural next step once the Speaker has hooked them.",
+            "free": false,
+            "price_tag": "Request a quote",
+            "status": "coming"
+          }
+        },
+        {
+          "type": "programme",
+          "settings": {
+            "tier": "Frame II",
+            "title": "Sustainable Bicycle Technical Development",
+            "detail": "Students design, build and ride a real bamboo gravel frame — drawings, jig setup, mitring, structural bonding and quality checks, as a frame is made in industry. Multi-session, ages 14–18, KS4 / post-16.",
+            "free": false,
+            "price_tag": "Request a quote",
+            "status": "available"
+          }
+        },
+        {
+          "type": "programme",
+          "settings": {
+            "tier": "Additive",
+            "title": "Additive Manufacturing & Adaptive Design",
+            "detail": "Students design and 3D-print the frame lugs themselves — parametric, adaptive design taken from screen to part. Ages 14–19, post-16. Where digital design meets real fabrication.",
+            "free": false,
+            "price_tag": "Request a quote",
+            "status": "available"
+          }
+        },
+        {
+          "type": "programme",
+          "settings": {
+            "tier": "Systems",
+            "title": "Electric Mobility Engineering & Green Technology",
+            "detail": "Students wire and integrate the electronics that drive an electric bike — circuits, power and systems thinking, applied to clean transport. KS4 to post-16.",
+            "free": false,
+            "price_tag": "Request a quote",
+            "status": "coming"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "label": "OCN London accredited",
+            "lime": true
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "label": "Gatsby Benchmark 4",
+            "lime": false
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "label": "Bamboo Mobility Project CIC",
+            "lime": false
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "label": "Enhanced-DBS facilitators · public-liability insured",
+            "lime": false
+          }
+        },
+        {
+          "type": "press",
+          "settings": {
+            "text": "Financial Times",
+            "style": "ft",
+            "logo_asset": "logo-financial-times.svg"
+          }
+        },
+        {
+          "type": "press",
+          "settings": {
+            "text": "The Guardian",
+            "style": "serif",
+            "logo_asset": "logo-guardian.svg"
+          }
+        },
+        {
+          "type": "press",
+          "settings": {
+            "text": "Inside Time",
+            "style": "serif-italic"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

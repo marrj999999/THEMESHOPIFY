@@ -1,0 +1,320 @@
+{% comment %}
+  BBC Quick FAQ - Compact FAQ preview for Contact page
+  Rule Check:
+  - [x] All text editable via schema blocks
+  - [x] No hardcoded images
+  - [x] No URL defaults
+  - [x] CSS variables used
+  - [x] Semantic HTML (details/summary for accordion)
+  - [x] Accessibility (native accordion, focus states)
+  - [x] prefers-reduced-motion
+  - [x] shopify_attributes on blocks
+  - [x] Presets with real BBC content
+{% endcomment %}
+
+<section class="bbc-quick-faq">
+  <div class="bbc-quick-faq__container page-width">
+    <header class="bbc-quick-faq__header">
+      <h2 class="bbc-quick-faq__heading">{{ section.settings.heading }}</h2>
+      {% if section.settings.subheading != blank %}
+        <p class="bbc-quick-faq__subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </header>
+    
+    <div class="bbc-quick-faq__list">
+      {%- for block in section.blocks -%}
+        <details class="bbc-quick-faq__item" {{ block.shopify_attributes }}>
+          <summary class="bbc-quick-faq__question">
+            {{ block.settings.question }}
+            <span class="bbc-quick-faq__icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="bbc-quick-faq__answer">
+            {{ block.settings.answer }}
+          </div>
+        </details>
+      {%- endfor -%}
+    </div>
+    
+    {% if section.settings.link_text != blank %}
+      <footer class="bbc-quick-faq__footer">
+        <a href="{{ section.settings.link_url }}" class="bbc-quick-faq__link">
+          {{ section.settings.link_text }} →
+        </a>
+      </footer>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .bbc-quick-faq {
+    padding: 60px 20px;
+    background: var(--bbc-cream, var(--bbc-cream));
+  }
+  
+  .bbc-quick-faq__container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .bbc-quick-faq__header {
+    margin-bottom: 32px;
+    max-width: 500px;
+  }
+  
+  .bbc-quick-faq__heading {
+    font-family: var(--font-heading-family);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    color: var(--bbc-forest, var(--bbc-forest));
+    letter-spacing: -0.02em;
+    margin: 0 0 8px 0;
+    line-height: 1.1;
+  }
+  
+  .bbc-quick-faq__subheading {
+    font-size: 1rem;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.7;
+    margin: 0;
+  }
+  
+  .bbc-quick-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .bbc-quick-faq__item {
+    background: white;
+    border-left: 4px solid transparent;
+    border-bottom: 1px solid rgba(7, 62, 39, 0.1);
+    transition: border-left-color 0.2s ease;
+  }
+  
+  .bbc-quick-faq__item:hover {
+    border-left-color: var(--bbc-teal, var(--bbc-teal));
+  }
+  
+  .bbc-quick-faq__item[open] {
+    border-left-color: var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-quick-faq__item {
+      transition: none;
+    }
+  }
+  
+  .bbc-quick-faq__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--bbc-forest, var(--bbc-forest));
+    cursor: pointer;
+    list-style: none;
+    transition: background 0.2s ease;
+  }
+  
+  .bbc-quick-faq__question::-webkit-details-marker {
+    display: none;
+  }
+  
+  .bbc-quick-faq__question:hover {
+    background: var(--bbc-cream, var(--bbc-cream));
+  }
+  
+  .bbc-quick-faq__question:focus-visible {
+    outline: 2px solid var(--bbc-gold, var(--bbc-gold));
+    outline-offset: -2px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-quick-faq__question {
+      transition: none;
+    }
+  }
+  
+  .bbc-quick-faq__icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--bbc-forest, var(--bbc-forest));
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  
+  .bbc-quick-faq__item[open] .bbc-quick-faq__icon {
+    transform: rotate(45deg);
+    color: var(--bbc-gold, var(--bbc-gold));
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-quick-faq__icon {
+      transition: none;
+    }
+  }
+  
+  .bbc-quick-faq__answer {
+    padding: 0 24px 20px 24px;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.85;
+  }
+  
+  .bbc-quick-faq__footer {
+    text-align: center;
+    margin-top: 24px;
+  }
+  
+  .bbc-quick-faq__link {
+    display: inline-block;
+    padding: 12px 24px;
+    background: white;
+    color: var(--bbc-forest, var(--bbc-forest));
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-left: 4px solid transparent;
+    border: 2px solid var(--bbc-forest, var(--bbc-forest));
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  
+  .bbc-quick-faq__link:hover {
+    background: var(--bbc-forest, var(--bbc-forest));
+    color: white;
+  }
+  
+  .bbc-quick-faq__link:focus-visible {
+    outline: 2px solid var(--bbc-gold, var(--bbc-gold));
+    outline-offset: 2px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bbc-quick-faq__link {
+      transition: none;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-quick-faq {
+      padding: 40px 16px;
+    }
+    
+    .bbc-quick-faq__heading {
+      font-size: 1.5rem;
+    }
+    
+    .bbc-quick-faq__question {
+      padding: 16px 20px;
+      font-size: 0.9375rem;
+    }
+    
+    .bbc-quick-faq__answer {
+      padding: 0 20px 16px 20px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Quick FAQ",
+  "tag": "section",
+  "class": "bbc-quick-faq-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Common Questions"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Quick answers before you reach out"
+    },
+    {
+      "type": "header",
+      "content": "Link to Full FAQ"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "View all FAQs"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Quick FAQ",
+      "settings": {
+        "heading": "Common Questions",
+        "subheading": "Quick answers before you reach out",
+        "link_text": "View all FAQs"
+      },
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need any experience to build a bamboo bike?",
+            "answer": "Not at all! 95% of our builders are complete beginners with no prior bicycle or woodworking experience. Our kits come with detailed video tutorials, and our workshop instructors guide you through every step."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How long does it take to build?",
+            "answer": "Workshop builds take 2 days (weekends). Home kit builds typically take 20-40 hours spread over several weeks — most people work on it for a few hours at a time."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "UK orders ship within 3-5 business days. European orders take 7-10 days, and international orders 10-14 days. You'll receive tracking as soon as your kit ships."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Can I visit the workshop?",
+            "answer": "Absolutely! We welcome visitors by appointment. Get in touch to arrange a time — we'd love to show you around and let you see builds in progress."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

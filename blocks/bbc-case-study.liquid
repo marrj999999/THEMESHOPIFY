@@ -1,0 +1,201 @@
+{%- comment -%}
+  BBC theme block — Case study card. UNIFIES the monolith `casestudy` block
+  (sections/bbc-education-2026.liquid) and the `story` impact card
+  (sections/bbc-impact-2026.liquid): photo/video + kind tag + optional quote/attribution
+  + context blurb + a "read more" footer. The whole card is a link.
+
+  MEDIA SOURCE (image precedence): manually-picked photo → linked BLOG POST's featured
+  image → YOUTUBE video thumbnail (if a video/yt link is set) → bundled fallback asset.
+  A play badge appears when there's a video. The blog post comes from the "article"
+  picker or is auto-resolved from a /blogs/<blog>/<handle> link_url via articles['blog/handle'].
+  Link + title also fall back to the article (or the video). Reuses .rd-cscard classes.
+{%- endcomment -%}
+{%- liquid
+  # Resolve the linked blog article: explicit picker first, else parse link_url.
+  assign art = block.settings.article
+  if art == blank and block.settings.link_url contains '/blogs/'
+    assign seg = block.settings.link_url | split: '/blogs/' | last | split: '?' | first | split: '#' | first
+    assign segs = seg | split: '/'
+    assign blog_handle = segs[0]
+    assign art_handle = segs[1]
+    if blog_handle != blank and art_handle != blank
+      assign art_key = blog_handle | append: '/' | append: art_handle
+      assign art = articles[art_key]
+    endif
+  endif
+
+  # Resolve a YouTube video id from the video field, or a youtube link_url.
+  assign vid = ''
+  assign vsrc = block.settings.video
+  if vsrc == blank and block.settings.link_url contains 'youtu'
+    assign vsrc = block.settings.link_url
+  endif
+  if vsrc contains 'watch?v='
+    assign vid = vsrc | split: 'watch?v=' | last | split: '&' | first
+  elsif vsrc contains 'youtu.be/'
+    assign vid = vsrc | split: 'youtu.be/' | last | split: '?' | first
+  elsif vsrc contains '/embed/'
+    assign vid = vsrc | split: '/embed/' | last | split: '?' | first
+  elsif vsrc contains 'http'
+    assign vid = ''
+  else
+    assign vid = vsrc
+  endif
+
+  # Link: a video always links to the video (so the play badge is honest); else link_url, else article.
+  if vid != ''
+    assign cs_url = 'https://www.youtube.com/watch?v=' | append: vid
+  else
+    assign cs_url = block.settings.link_url
+    if cs_url == blank and art != blank
+      assign cs_url = art.url
+    endif
+  endif
+  assign cs_url = cs_url | default: '/blogs/impact'
+
+  assign cs_title = block.settings.title
+  if cs_title == blank and art != blank
+    assign cs_title = art.title
+  endif
+  assign cs_alt = block.settings.image_alt | default: art.title | default: 'Building with Bamboo Bicycle Club'
+  assign fallback = block.settings.fallback | default: 'bbc-rd-cohort.jpg'
+-%}
+{%- comment -%} Renders THE standard card (snippets/bbc-cscard.liquid), 2026-07-31.
+  The resolution cascade above is KEPT INTACT — it is better than anything the snippet does:
+  picked photo → linked article's featured image → YouTube thumbnail → bundled fallback, with the
+  article auto-resolved from a /blogs/<blog>/<handle> URL. Only the MARKUP changed, because this
+  block was the last place still emitting bordered, rounded boxes with a wrapper <a> and a title
+  that was not the link — the biggest visual outlier left on the estate.
+{%- endcomment -%}
+{%- liquid
+  assign cs_head = block.settings.outcome
+  if cs_head == blank
+    assign cs_head = cs_title
+  endif
+  assign cs_pic = block.settings.image
+  if cs_pic == blank and art != blank
+    assign cs_pic = art.image
+  endif
+-%}
+{%- render 'bbc-cscard',
+     item_tag: 'div',
+     item_attrs: block.shopify_attributes,
+     variant: 'grid',
+     kind: block.settings.kind,
+     heading: cs_head,
+     url: cs_url,
+     context: block.settings.blurb,
+     attr: block.settings.attribution,
+     image_pic: cs_pic,
+     image: fallback,
+     youtube: vid,
+     cta: block.settings.link_label -%}
+
+{% stylesheet %}
+  .rd-cscard__media { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #e7e0d0; }
+  .rd-cscard__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .rd-cscard__play {
+    position: absolute; inset: 0; margin: auto;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: rgba(8,42,32,.62); border: 2px solid rgba(255,255,255,.9);
+    display: grid; place-items: center; pointer-events: none;
+    transition: transform .2s ease, background .2s ease;
+  }
+  .rd-cscard__play::before {
+    content: ''; width: 0; height: 0; margin-left: 4px;
+    border-style: solid; border-width: 11px 0 11px 18px;
+    border-color: transparent transparent transparent #fff;
+  }
+  .rd-cscard:hover .rd-cscard__play { transform: scale(1.08); background: rgba(8,42,32,.82); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Case study",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Link a blog post to auto-use its featured image, link & title. Add a YouTube link/ID for a video (its thumbnail + a play badge show automatically)."
+    },
+    {
+      "type": "article",
+      "id": "article",
+      "label": "Linked blog post"
+    },
+    {
+      "type": "text",
+      "id": "video",
+      "label": "Video (YouTube URL or ID)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo override (optional)"
+    },
+    {
+      "type": "text",
+      "id": "fallback",
+      "label": "Fallback asset (if no photo / post)",
+      "default": "bbc-rd-cohort.jpg"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_fallback_image",
+      "label": "Use the fallback asset instead of the blog/video image",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Photo alt text"
+    },
+    {
+      "type": "text",
+      "id": "kind",
+      "label": "Kind tag",
+      "default": "Case study"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title / institution"
+    },
+    {
+      "type": "richtext",
+      "id": "quote",
+      "label": "Standout quote (optional)"
+    },
+    {
+      "type": "text",
+      "id": "attribution",
+      "label": "Quote attribution"
+    },
+    {
+      "type": "text",
+      "id": "outcome",
+      "label": "Outcome headline (the card's only link text)"
+    },
+    {
+      "type": "richtext",
+      "id": "blurb",
+      "label": "Context line"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link (if no blog post picked)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Case study"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,126 @@
+{{ 'bbc-why-bamboo.css' | asset_url | stylesheet_tag }}
+
+<section class="bbc-wb-quote {% if section.settings.video_url != blank %}bbc-wb-quote--has-video{% endif %}">
+
+  {%- if section.settings.video_url != blank -%}
+    <div class="bbc-wb-quote__video-wrap">
+      <div class="bbc-wb-video-embed">
+        {%- if section.settings.video_url.type == 'youtube' -%}
+          <iframe
+            src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?rel=0&modestbranding=1"
+            title="{{ section.settings.name | escape }} — testimonial"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        {%- elsif section.settings.video_url.type == 'vimeo' -%}
+          <iframe
+            src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}?title=0&byline=0&portrait=0"
+            title="{{ section.settings.name | escape }} — testimonial"
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  <blockquote class="bbc-wb-quote__inner">
+    {%- if section.settings.image -%}
+      <div class="bbc-wb-quote__avatar-wrap">
+        {%- assign quote_img_alt = section.settings.name | escape -%}
+        <img src="{{ section.settings.image | image_url: width: 160 }}" alt="{{ quote_img_alt }}" class="bbc-wb-quote__avatar" loading="lazy" width="72" height="72">
+      </div>
+    {%- endif -%}
+
+    <p class="bbc-wb-quote__text">{{ section.settings.quote }}</p>
+
+    <footer class="bbc-wb-quote__footer">
+      <p class="bbc-wb-quote__attr">
+        <strong>{{ section.settings.name }}</strong>
+        {%- if section.settings.context != blank -%}
+          <span> — {{ section.settings.context }}</span>
+        {%- endif -%}
+      </p>
+      {%- if section.settings.link_text != blank and section.settings.link_url != blank -%}
+        <a href="{{ section.settings.link_url }}" class="bbc-wb-quote__link">
+          {{ section.settings.link_text }}
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {%- endif -%}
+    </footer>
+  </blockquote>
+
+</section>
+
+{% schema %}
+{
+  "name": "Pull Quote",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Quote"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote text",
+      "default": "Woody turned out to be the most reliable bike I've ever owned."
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Person's name",
+      "default": "Kate Rawles"
+    },
+    {
+      "type": "text",
+      "id": "context",
+      "label": "Context / ride description",
+      "default": "8,288 miles, Colombia to Patagonia"
+    },
+    {
+      "type": "header",
+      "content": "Media (optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Author photo",
+      "info": "Optional. Circular headshot shown above the quote."
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Video testimonial",
+      "accept": ["youtube", "vimeo"],
+      "info": "Optional. Shown above the quote when set."
+    },
+    {
+      "type": "header",
+      "content": "Link (optional)"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pull Quote"
+    }
+  ]
+}
+{% endschema %}

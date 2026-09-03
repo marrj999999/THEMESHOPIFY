@@ -1,0 +1,114 @@
+{% comment %}
+  BBC Schools Enquiry — the conversion section (Layer 1)
+  Embedded Shopify contact form (fixes the mailto weakness). Two-column: proof + form.
+  NOTE: Shopify routes contact-form submissions to the store's contact email
+  (Settings > Notifications / Store details). Ensure that is info@ or schools@bamboobicycleclub.org
+  — NEVER the bamboobicycleclub@gmail.com login address. (Cannot be set in Liquid.)
+{% endcomment %}
+
+<section class="bbc-schools-enq" id="enquiry-form">
+  <div class="page-width">
+    <div class="bbc-schools-enq__grid">
+
+      <div class="bbc-schools-enq__intro">
+        <h2 class="bbc-schools-enq__title">{{ section.settings.title }}</h2>
+        {% if section.settings.subtitle != blank %}<p class="bbc-schools-enq__sub">{{ section.settings.subtitle }}</p>{% endif %}
+        {% if section.settings.quote != blank %}
+          <blockquote class="bbc-schools-enq__quote">
+            <p>{{ section.settings.quote }}</p>
+            {% if section.settings.quote_by != blank %}<cite>{{ section.settings.quote_by }}</cite>{% endif %}
+          </blockquote>
+        {% endif %}
+        {% if section.settings.trust_line != blank %}<p class="bbc-schools-enq__trust">{{ section.settings.trust_line }}</p>{% endif %}
+      </div>
+
+      <div class="bbc-schools-enq__formwrap">
+        {%- form 'contact', id: 'SchoolsEnquiry', class: 'bbc-schools-form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="bbc-schools-form__success" role="status">Thanks — we’ve got your enquiry and will reply within 2 working days.</p>
+          {%- elsif form.errors -%}
+            <p class="bbc-schools-form__error" role="alert">Please check the highlighted fields and try again.</p>
+          {%- endif -%}
+          <input type="hidden" name="contact[subject]" value="Schools Programme Enquiry">
+          <div class="bbc-schools-form__row">
+            <label for="se-name">Your name</label>
+            <input type="text" id="se-name" name="contact[name]" autocomplete="name" required>
+          </div>
+          <div class="bbc-schools-form__row">
+            <label for="se-school">School / college</label>
+            <input type="text" id="se-school" name="contact[School]" required>
+          </div>
+          <div class="bbc-schools-form__row">
+            <label for="se-role">Your role</label>
+            <select id="se-role" name="contact[Role]">
+              <option value="Head of D&amp;T">Head of D&amp;T</option>
+              <option value="STEM / Enrichment lead">STEM / Enrichment lead</option>
+              <option value="Bursar / Finance">Bursar / Finance</option>
+              <option value="Headteacher / SLT">Headteacher / SLT</option>
+              <option value="Alternative provision / SEND">Alternative provision / SEND</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="bbc-schools-form__row">
+            <label for="se-prog">Programme of interest</label>
+            <select id="se-prog" name="contact[Programme]">
+              <option value="Free speaker taster">Free speaker taster</option>
+              <option value="Bike-build programme">Bike-build programme</option>
+              <option value="Teacher-led taster day">Teacher-led taster day</option>
+              <option value="Not sure yet — recommend one">Not sure yet — recommend one</option>
+            </select>
+          </div>
+          <div class="bbc-schools-form__row">
+            <label for="se-email">Email</label>
+            <input type="email" id="se-email" name="contact[email]" autocomplete="email" spellcheck="false" required>
+          </div>
+          <div class="bbc-schools-form__row">
+            <label for="se-msg">Anything we should know? (optional)</label>
+            <textarea id="se-msg" name="contact[body]" rows="3"></textarea>
+          </div>
+          <button type="submit" class="bbc-schools-form__submit">{{ section.settings.button_text | default: 'Send enquiry' }}</button>
+          <p class="bbc-schools-form__fine">We respond within 2 working days. Your data is never shared.</p>
+        {%- endform -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .bbc-schools-enq{background:var(--bbc-forest,#073e27);color:#fff;padding:64px 0}
+  .bbc-schools-enq__grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+  .bbc-schools-enq__title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.25rem);color:#fff;margin:0 0 12px;line-height:1.15}
+  .bbc-schools-enq__sub{font-size:1.08rem;line-height:1.55;color:rgba(255,255,255,.9);margin:0 0 22px}
+  .bbc-schools-enq__quote{border-left:4px solid var(--bbc-gold,#ffa900);margin:0 0 18px;padding:6px 0 6px 18px}
+  .bbc-schools-enq__quote p{font-size:1.05rem;line-height:1.5;font-style:italic;color:#fff;margin:0 0 8px}
+  .bbc-schools-enq__quote cite{font-style:normal;font-weight:700;font-size:.9rem;color:var(--bbc-gold,#ffa900)}
+  .bbc-schools-enq__trust{font-size:.9rem;color:rgba(255,255,255,.8);margin:0}
+  .bbc-schools-enq__formwrap{background:var(--bbc-cream,#f8fafc);border-radius:16px;padding:28px}
+  .bbc-schools-form__row{display:flex;flex-direction:column;margin-bottom:14px}
+  .bbc-schools-form__row label{font-weight:700;font-size:.85rem;color:var(--bbc-forest,#073e27);margin-bottom:5px}
+  .bbc-schools-form__row input,.bbc-schools-form__row select,.bbc-schools-form__row textarea{font-family:inherit;font-size:1rem;color:var(--bbc-gray-700,#1e293b);background:#fff;border:1.5px solid var(--bbc-gray-200,#cbd5e1);border-radius:9px;padding:11px 13px}
+  .bbc-schools-form__row input:focus,.bbc-schools-form__row select:focus,.bbc-schools-form__row textarea:focus{outline:none;border-color:var(--bbc-teal,#3f8b66);box-shadow:0 0 0 3px rgba(63,139,102,.18)}
+  .bbc-schools-form__submit{width:100%;background:var(--bbc-gold,#ffa900);color:var(--bbc-forest,#073e27);font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.05rem;border:0;border-radius:10px;padding:14px;cursor:pointer;transition:transform .12s}
+  .bbc-schools-form__submit:hover{transform:translateY(-2px)}
+  .bbc-schools-form__fine{font-size:.78rem;color:var(--bbc-text-muted,#64748b);margin:12px 0 0;text-align:center}
+  .bbc-schools-form__success{background:var(--bbc-success-bg,#ecfdf5);color:#065f46;border-radius:9px;padding:12px 14px;font-weight:700;margin:0 0 14px}
+  .bbc-schools-form__error{background:var(--bbc-error-bg,#fef2f2);color:#991b1b;border-radius:9px;padding:12px 14px;font-weight:700;margin:0 0 14px}
+  @media (max-width:749px){.bbc-schools-enq__grid{grid-template-columns:1fr;gap:28px}}
+</style>
+
+{% schema %}
+{
+  "name": "BBC Schools Enquiry",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Bring it to your school" },
+    { "type": "textarea", "id": "subtitle", "label": "Subheading", "default": "Tell us about your school and we’ll recommend the right programme — or start with the free taster." },
+    { "type": "textarea", "id": "quote", "label": "Testimonial quote", "default": "Crafting bamboo bicycles goes beyond the workshop; it’s a journey of innovation, environmental responsibility, and the integration of STEM principles." },
+    { "type": "text", "id": "quote_by", "label": "Testimonial attribution", "default": "Nick Mills, Head of Design, Bradfield College" },
+    { "type": "text", "id": "trust_line", "label": "Trust line", "default": "Social enterprise (CIC) · enhanced-DBS facilitators · public-liability insured." },
+    { "type": "text", "id": "button_text", "label": "Submit button", "default": "Send enquiry" }
+  ],
+  "presets": [{ "name": "BBC Schools Enquiry" }]
+}
+{% endschema %}

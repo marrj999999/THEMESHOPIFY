@@ -1,0 +1,111 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "caption": {
+          "type": "text",
+          "settings": {
+            "text": "Give the gift of building \u2014 an unforgettable experience",
+            "text_style": "subtitle"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "dropdown",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "collapsible-how-it-works": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How Gift Vouchers Work",
+            "icon": "gift",
+            "content": "<p><strong>1. Purchase:</strong> Choose your voucher value and checkout</p><p><strong>2. Receive:</strong> Beautiful digital voucher emailed instantly (or choose a date)</p><p><strong>3. Redeem:</strong> Recipient books their preferred workshop date</p><p><strong>Validity:</strong> 12 months from purchase</p>",
+            "page": ""
+          }
+        },
+        "collapsible-whats-included": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What's Included",
+            "icon": "box",
+            "content": "<p><strong>Workshop Experience:</strong></p><ul><li>2 full days of expert-led instruction</li><li>All materials and tools provided</li><li>Bamboo frame kit included</li><li>Lunch and refreshments</li><li>Lifetime community membership</li></ul><p><strong>Location:</strong> BBC London workshop (E15)</p>",
+            "page": ""
+          }
+        },
+        "collapsible-booking": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Booking Your Workshop",
+            "icon": "calendar_today",
+            "content": "<p>After purchase, the recipient contacts us to book their preferred dates.</p><p><strong>Availability:</strong> Workshops run most weekends, subject to availability</p><p><strong>Group size:</strong> Maximum 4 people for personal attention</p><p>Email: info@bamboobicycleclub.org</p>",
+            "page": ""
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "caption",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "collapsible-how-it-works",
+        "collapsible-whats-included",
+        "collapsible-booking",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "gallery_layout": "thumbnail",
+        "mobile_thumbnails": "show",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "testimonials": {
+      "type": "bbc-testimonials",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "testimonials"
+  ]
+}

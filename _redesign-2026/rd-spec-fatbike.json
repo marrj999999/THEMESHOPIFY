@@ -1,0 +1,44 @@
+{
+  "discipline": "Fatbike",
+  "audience": "Adventure and expedition riders who want a bike that floats over the soft stuff — sand, snow, mud and beach — where a normal tyre just sinks.",
+  "positioning": {
+    "eyebrow": "Adventure · all-terrain",
+    "title": "Float over anything.",
+    "lede": "Massive 4\"-plus tyres at low pressure spread your weight and grip where everything else digs in. Hand-built by you from bamboo, flax and carbon — strong enough for the expedition, fun enough for the beach on a Sunday."
+  },
+  "specs": [
+    { "label": "Tyre clearance", "value": "Fits 26×4\" / 27.5×4\" fat tyres" },
+    { "label": "Build time", "value": "30–45 hrs" },
+    { "label": "Tensile strength", "value": "~28,000 PSI" },
+    { "label": "Terrain", "value": "Sand · snow · mud · beach" }
+  ],
+  "who_for": [
+    { "title": "Beach & snow riders", "body": "Ride the stuff that stops other bikes. Low-pressure fat tyres float on dry sand and packed snow instead of cutting in and bogging down." },
+    { "title": "Expedition & bikepacking", "body": "Built for long days on rough, remote ground with a loaded bike. Bamboo damps the buzz of all-day off-road miles, and a frame you built yourself you can fix yourself." },
+    { "title": "All-terrain explorers", "body": "One bike for forest, fen, fire road and shoreline. Huge tyre and fork clearance means mud and soft ground are an invitation, not a no-go." }
+  ],
+  "faq": [
+    { "q": "What tyre sizes will it fit?", "a": "Designed for 26×4\" or 27.5×4\" fat tyres, with massive clearance for sand, snow and soft ground. (Confirm the exact maximum tyre width / fork clearance with us before you order — see flag.)" },
+    { "q": "What terrain is a fatbike actually for?", "a": "Soft, loose and slippery ground — dry sand, packed snow, mud, beach and bog. The very wide tyres run at low pressure so your weight spreads out and floats over the surface instead of sinking into it. They're also a confidence-inspiring, forgiving ride on normal trails." },
+    { "q": "Is a bamboo frame strong enough for expeditions and a loaded bike?", "a": "Yes. Bamboo comes in around 28,000 PSI tensile strength — comparable to mild steel but lighter — and we've seen under a 1% failure rate across 4,000+ builds since 2012, with the design tested at Swansea University. Builders have ridden bamboo frames across continents fully loaded." },
+    { "q": "Will it survive cold, wet, sand and salt?", "a": "Finished frames are sealed with epoxy resin, so they shrug off cold and wet. After beach or salt rides, rinse off sand and salt, dry the bike, and store it indoors — do that and it'll last 8–12 years with proper care." },
+    { "q": "What gearing and components does it take?", "a": "The frame is the frame — you add fork, fat-specific wheels, drivetrain, bars and finishing kit (a fat-tyre fork and wide rims are the parts to get right). Source them from any bike shop, or take a matched component pack from us and we'll advise on fat-specific spec." }
+  ],
+  "reviews": [
+    { "quote": "I took it to the beach. Then the forest. Then snow. It handles everything I throw at it.", "author": "Fatbike Builder", "role": "Home kit build" }
+  ],
+  "related": [
+    { "title": "MTB Frame Kit", "note": "Trail-ready geometry for singletrack and rough ground.", "fallback": "bbc-rd-prod-build.jpg" },
+    { "title": "Gravel Frame Kit", "note": "Drop-bar adventure for gravel, touring and bikepacking.", "fallback": "bbc-rd-prod-gravel.jpg" },
+    { "title": "Custom Frame Kit", "note": "Built to your measurements and your discipline.", "fallback": "bbc-rd-road-charlie.jpg" }
+  ],
+  "hero_fallback": "bbc-rd-prod-build.jpg",
+  "price_from": "£385",
+  "needs_real_data": [
+    "EXACT tyre clearance / maximum tyre width spec — template says 26×4\" and 27.5×4\" but the true maximum fitted tyre width and fork clearance (in mm/inches) is not verified; confirm with James before publishing the spec strip and FAQ.",
+    "Ratings (4.8/4.9) and review count (127/214) are unverified design placeholders — replace with real fatbike data or suppress.",
+    "The single fatbike quote ('I took it to the beach...') is a generic placeholder in the existing template, not an attributed real builder — confirm or replace before using as a review.",
+    "No verified fatbike-specific expedition testimonial yet (Kate Rawles is a gravel reference, not fatbike) — markup slot ready if James supplies one.",
+    "Build time 30–45 hrs is from the fatbike template (longer than the 25–35 hr gravel baseline due to bigger tubes/clearances) — confirm it's the current figure."
+  ]
+}

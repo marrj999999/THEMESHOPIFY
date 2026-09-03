@@ -1,0 +1,145 @@
+{
+  "sections": {
+    "hero": {
+      "type": "image-banner",
+      "settings": {
+        "image_overlay_opacity": 40,
+        "image_height": "medium",
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "scheme-3"
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Our Story",
+            "heading_size": "h0"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "From a small London workshop to 4,000+ bikes in 36 countries",
+            "text_style": "subtitle"
+          }
+        }
+      },
+      "block_order": ["heading", "text"]
+    },
+    "intro": {
+      "type": "rich-text",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 60,
+        "padding_bottom": 60
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Building More Than Bikes"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Bamboo Bicycle Club was founded in 2012 by James Marr and Ian McMillan. James had developed bamboo bicycle-building skills in Canada and wanted to share this knowledge with others in London.</p><p>What started as a small workshop has grown into something we never expected — a global community of over 4,000 builders across 36+ countries, from Japan to South Africa, Romania to Australia.</p><p>But we've always been about more than just bikes. We believe in the power of making things with your hands. Whether you're a complete beginner or an experienced builder, there's something transformative about creating your own bicycle from bamboo.</p>"
+          }
+        }
+      },
+      "block_order": ["heading", "text"]
+    },
+    "timeline": {
+      "type": "bbc-timeline",
+      "settings": {
+        "heading": "Our Journey",
+        "subheading": "12 years of innovation, from Canada to the world"
+      }
+    },
+    "awards": {
+      "type": "bbc-awards",
+      "settings": {
+        "heading": "Awards & Recognition"
+      }
+    },
+    "epic-journeys": {
+      "type": "bbc-epic-journeys",
+      "settings": {
+        "heading": "Where Our Bikes Go",
+        "subheading": "Real adventures on bamboo bicycles built by real people"
+      }
+    },
+    "press-wall": {
+      "type": "bbc-press-wall",
+      "settings": {
+        "heading": "In The Press",
+        "subheading": "12 years of coverage from major publications"
+      }
+    },
+    "mission": {
+      "type": "rich-text",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 60,
+        "padding_bottom": 60
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Our Mission"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We believe everyone should have the opportunity to build something meaningful with their hands.</p><p>Through our workshops, kits, and educational programmes, we're making sustainable manufacturing accessible to all — from corporate teams seeking unique experiences to prisoners rebuilding their lives to school children discovering the joy of making.</p><p><strong>Build the change you want to see.</strong></p>"
+          }
+        }
+      },
+      "block_order": ["heading", "text"]
+    },
+    "cta": {
+      "type": "rich-text",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "full_width": true,
+        "padding_top": 60,
+        "padding_bottom": 60
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ready to Build?"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Join 4,000+ builders worldwide. Book a workshop, order a kit, or get in touch.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Get Started",
+            "button_link": "/collections/home-build-kits"
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"]
+    }
+  },
+  "order": ["hero", "intro", "timeline", "awards", "epic-journeys", "press-wall", "mission", "cta"]
+}

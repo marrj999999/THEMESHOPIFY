@@ -1,0 +1,418 @@
+{% comment %}
+  BBC Impact Timeline Section
+  Research finding: "Cafedirect and Elvis & Kresse show their journey visually (1991→2021).
+  This creates gravitas and shows BBC is a proven operator."
+  Pattern sourced from: Cafedirect (30-year milestones), Elvis & Kresse (journey narrative),
+  Big Issue (founded 1991, growing impact narrative)
+  
+  Horizontal timeline on desktop, vertical on mobile.
+  All content editable in the theme editor.
+{% endcomment %}
+
+{%- style -%}
+.bbc-timeline {
+  padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.background_color }};
+  overflow: hidden;
+}
+
+.bbc-timeline__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.bbc-timeline__header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.bbc-timeline__eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bbc-teal);
+  margin-bottom: 16px;
+}
+
+.bbc-timeline__heading {
+  font-size: clamp(1.625rem, 3vw, 2.25rem);
+  font-weight: 800;
+  color: var(--bbc-forest);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.bbc-timeline__subheading {
+  font-size: 17px;
+  color: #4a5568;
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ---- Desktop horizontal timeline ---- */
+.bbc-timeline__track {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .bbc-timeline__track {
+    display: block;
+    position: relative;
+  }
+
+  /* The connecting line */
+  .bbc-timeline__line {
+    position: absolute;
+    top: 28px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, var(--bbc-teal-light) 5%, var(--bbc-teal-light) 95%, transparent 100%);
+  }
+
+  .bbc-timeline__items {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .bbc-timeline__item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 8px;
+    position: relative;
+  }
+
+  /* Dot on the line */
+  .bbc-timeline__dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 3px solid var(--bbc-teal);
+    background: white;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 24px;
+    transition: background 0.2s ease;
+  }
+
+  .bbc-timeline__item--highlight .bbc-timeline__dot {
+    background: var(--bbc-teal);
+    width: 20px;
+    height: 20px;
+    border-width: 0;
+    box-shadow: 0 0 0 4px rgba(63, 139, 102, 0.2);
+  }
+
+  .bbc-timeline__year {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--bbc-forest);
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+    line-height: 1;
+  }
+
+  .bbc-timeline__item--highlight .bbc-timeline__year {
+    color: var(--bbc-teal);
+  }
+
+  .bbc-timeline__milestone {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--bbc-forest);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .bbc-timeline__detail {
+    font-size: 12px;
+    color: #718096;
+    line-height: 1.4;
+  }
+}
+
+/* ---- Mobile vertical timeline ---- */
+.bbc-timeline__mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 40px;
+}
+
+.bbc-timeline__mobile::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: var(--bbc-teal-light);
+}
+
+.bbc-timeline__mobile-item {
+  position: relative;
+  padding-bottom: 32px;
+}
+
+.bbc-timeline__mobile-item:last-child {
+  padding-bottom: 0;
+}
+
+.bbc-timeline__mobile-dot {
+  position: absolute;
+  left: -33px;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--bbc-teal);
+  background: white;
+}
+
+.bbc-timeline__mobile-item--highlight .bbc-timeline__mobile-dot {
+  background: var(--bbc-teal);
+  border-width: 0;
+}
+
+.bbc-timeline__mobile-year {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--bbc-teal);
+  margin-bottom: 2px;
+  letter-spacing: 0.05em;
+}
+
+.bbc-timeline__mobile-milestone {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--bbc-forest);
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+
+.bbc-timeline__mobile-detail {
+  font-size: 13px;
+  color: #718096;
+  line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+  .bbc-timeline__mobile {
+    display: none;
+  }
+}
+{%- endstyle -%}
+
+<section class="bbc-timeline">
+  <div class="bbc-timeline__container">
+
+    {% if section.settings.heading != blank or section.settings.eyebrow != blank %}
+      <div class="bbc-timeline__header">
+        {% if section.settings.eyebrow != blank %}
+          <p class="bbc-timeline__eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        {% if section.settings.heading != blank %}
+          <h2 class="bbc-timeline__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+        {% if section.settings.subheading != blank %}
+          <p class="bbc-timeline__subheading">{{ section.settings.subheading }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if section.blocks.size > 0 %}
+      <!-- Desktop -->
+      <div class="bbc-timeline__track">
+        <div class="bbc-timeline__line" aria-hidden="true"></div>
+        <div class="bbc-timeline__items">
+          {% for block in section.blocks %}
+            {% if block.type == 'milestone' %}
+              <div class="bbc-timeline__item{% if block.settings.highlight %} bbc-timeline__item--highlight{% endif %}" {{ block.shopify_attributes }}>
+                <div class="bbc-timeline__dot"></div>
+                <div class="bbc-timeline__year">{{ block.settings.year }}</div>
+                <div class="bbc-timeline__milestone">{{ block.settings.milestone }}</div>
+                {% if block.settings.detail != blank %}
+                  <div class="bbc-timeline__detail">{{ block.settings.detail }}</div>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Mobile -->
+      <div class="bbc-timeline__mobile">
+        {% for block in section.blocks %}
+          {% if block.type == 'milestone' %}
+            <div class="bbc-timeline__mobile-item{% if block.settings.highlight %} bbc-timeline__mobile-item--highlight{% endif %}" {{ block.shopify_attributes }}>
+              <div class="bbc-timeline__mobile-dot"></div>
+              <div class="bbc-timeline__mobile-year">{{ block.settings.year }}</div>
+              <div class="bbc-timeline__mobile-milestone">{{ block.settings.milestone }}</div>
+              {% if block.settings.detail != blank %}
+                <div class="bbc-timeline__mobile-detail">{{ block.settings.detail }}</div>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Impact Timeline",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Our Journey"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "14 Years of Building Impact"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "From a single workshop in London to a global programme changing lives."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f8f8f6"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 40,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 40,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "milestone",
+      "name": "Milestone",
+      "settings": [
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year",
+          "default": "2012"
+        },
+        {
+          "type": "text",
+          "id": "milestone",
+          "label": "Milestone headline",
+          "default": "Founded"
+        },
+        {
+          "type": "text",
+          "id": "detail",
+          "label": "Detail (optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "Highlight this milestone",
+          "info": "Makes the dot green and year bold. Use for major milestones.",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Impact Timeline",
+      "blocks": [
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2012",
+            "milestone": "BBC Founded",
+            "detail": "First workshops launched in London",
+            "highlight": false
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2014",
+            "milestone": "First Prison",
+            "detail": "Build to Bond programme piloted",
+            "highlight": true
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2018",
+            "milestone": "Kevin McCloud",
+            "detail": "Green Heroes award at Grand Designs Live",
+            "highlight": false
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2022",
+            "milestone": "OCN Level 2",
+            "detail": "Official qualification pathway accredited",
+            "highlight": true
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2025",
+            "milestone": "FT + Investec",
+            "detail": "Financial Times feature + Beyond Business winner",
+            "highlight": false
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "Now",
+            "milestone": "4,000+ Builders",
+            "detail": "45 countries, growing",
+            "highlight": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

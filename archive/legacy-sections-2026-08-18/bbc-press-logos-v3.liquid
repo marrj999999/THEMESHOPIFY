@@ -1,0 +1,360 @@
+{% comment %}
+  BBC Press Logos V3 — Fully Editable
+  All logos uploadable via Shopify editor image_picker
+  Supports unlimited logos via blocks
+{% endcomment %}
+
+{%- style -%}
+.bbc-press-logos-v3 {
+  padding: {{ section.settings.padding_top }}px 24px {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.background_color }};
+  {% if section.settings.show_borders %}
+  border-top: 1px solid rgba(7, 62, 39, 0.08);
+  border-bottom: 1px solid rgba(7, 62, 39, 0.08);
+  {% endif %}
+}
+
+.bbc-press-logos-v3__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.bbc-press-logos-v3__eyebrow {
+  text-align: center;
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: {{ section.settings.eyebrow_color }};
+  margin-bottom: 24px;
+}
+
+.bbc-press-logos-v3__grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: {{ section.settings.logo_gap }}px;
+}
+
+.bbc-press-logos-v3__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.bbc-press-logos-v3__item:hover {
+  transform: scale(1.05);
+}
+
+.bbc-press-logos-v3__image {
+  display: block;
+  max-height: {{ section.settings.logo_height }}px;
+  width: auto;
+  max-width: {{ section.settings.logo_max_width }}px;
+  object-fit: contain;
+  {% if section.settings.grayscale_effect %}
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+  {% endif %}
+}
+
+{% if section.settings.grayscale_effect %}
+.bbc-press-logos-v3__item:hover .bbc-press-logos-v3__image {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+{% endif %}
+
+/* Text fallback styling */
+.bbc-press-logos-v3__text {
+  font-family: var(--font-heading-family, "Plus Jakarta Sans", sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--bbc-forest);
+  font-style: italic;
+  white-space: nowrap;
+  {% if section.settings.grayscale_effect %}
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  {% endif %}
+}
+
+{% if section.settings.grayscale_effect %}
+.bbc-press-logos-v3__item:hover .bbc-press-logos-v3__text {
+  opacity: 1;
+}
+{% endif %}
+
+@media (max-width: 749px) {
+  .bbc-press-logos-v3 {
+    padding: {{ section.settings.padding_top | divided_by: 1.5 | round }}px 16px {{ section.settings.padding_bottom | divided_by: 1.5 | round }}px;
+  }
+
+  .bbc-press-logos-v3__grid {
+    gap: {{ section.settings.logo_gap | divided_by: 1.5 | round }}px;
+  }
+
+  .bbc-press-logos-v3__image {
+    max-height: {{ section.settings.logo_height | times: 0.75 | round }}px;
+    max-width: {{ section.settings.logo_max_width | times: 0.75 | round }}px;
+  }
+}
+{%- endstyle -%}
+
+<section class="bbc-press-logos-v3" data-section-id="{{ section.id }}">
+  <div class="bbc-press-logos-v3__container">
+    {% if section.settings.eyebrow != blank %}
+      <p class="bbc-press-logos-v3__eyebrow">{{ section.settings.eyebrow }}</p>
+    {% endif %}
+
+    {% if section.blocks.size > 0 %}
+      <div class="bbc-press-logos-v3__grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'logo' %}
+            {% if block.settings.link != blank %}
+              <a 
+                href="{{ block.settings.link }}" 
+                class="bbc-press-logos-v3__item"
+                {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}
+                aria-label="{{ block.settings.name | default: 'Press logo' }}"
+                {{ block.shopify_attributes }}
+              >
+            {% else %}
+              <div class="bbc-press-logos-v3__item" {{ block.shopify_attributes }}>
+            {% endif %}
+
+            {% if block.settings.logo_image != blank %}
+              <img
+                src="{{ block.settings.logo_image | image_url: width: 400 }}"
+                alt="{{ block.settings.name | default: 'Press logo' }}"
+                class="bbc-press-logos-v3__image"
+                loading="lazy"
+                width="{{ block.settings.logo_image.width }}"
+                height="{{ block.settings.logo_image.height }}"
+              >
+            {% elsif block.settings.logo_svg != blank %}
+              {%- comment -%} Use SVG from assets if specified {%- endcomment -%}
+              <img
+                src="{{ block.settings.logo_svg | asset_url }}"
+                alt="{{ block.settings.name | default: 'Press logo' }}"
+                class="bbc-press-logos-v3__image"
+                loading="lazy"
+              >
+            {% else %}
+              {%- comment -%} Text fallback {%- endcomment -%}
+              <span class="bbc-press-logos-v3__text">{{ block.settings.name }}</span>
+            {% endif %}
+
+            {% if block.settings.link != blank %}
+              </a>
+            {% else %}
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Press Logos",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "As Featured In"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#718096"
+    },
+    {
+      "type": "header",
+      "content": "Logo Appearance"
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "min": 24,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Logo height",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "min": 80,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo max width",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "logo_gap",
+      "min": 16,
+      "max": 80,
+      "step": 8,
+      "unit": "px",
+      "label": "Gap between logos",
+      "default": 48
+    },
+    {
+      "type": "checkbox",
+      "id": "grayscale_effect",
+      "label": "Grayscale effect (color on hover)",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_borders",
+      "label": "Show top/bottom borders",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 16,
+      "max": 96,
+      "step": 8,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 16,
+      "max": 96,
+      "step": 8,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Publication name",
+          "info": "Used for accessibility and as text fallback"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "Logo image",
+          "info": "Upload PNG or SVG. Transparent background recommended."
+        },
+        {
+          "type": "text",
+          "id": "logo_svg",
+          "label": "Asset filename (advanced)",
+          "info": "Alternative: use existing theme asset filename e.g. 'logo-ft.svg'"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL",
+          "info": "Link to article or publication website"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new_tab",
+          "label": "Open in new tab",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press Logos",
+      "settings": {
+        "eyebrow": "As Featured In"
+      },
+      "blocks": [
+        {
+          "type": "logo",
+          "settings": {
+            "name": "Financial Times",
+            "logo_svg": "logo-ft.svg",
+            "link": "https://www.ft.com/content/6ebe2eba-b832-4289-9924-2e9f948d5f98",
+            "open_new_tab": true
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "The Guardian",
+            "logo_svg": "logo-guardian.svg",
+            "open_new_tab": true
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "BikeRadar",
+            "logo_svg": "logo-bikeradar.svg",
+            "link": "https://www.bikeradar.com/features/bamboo-bicycle-club",
+            "open_new_tab": true
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "road.cc",
+            "logo_svg": "logo-roadcc.svg",
+            "open_new_tab": true
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "Design Museum",
+            "logo_svg": "logo-design-museum.svg",
+            "open_new_tab": true
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "Grand Designs",
+            "logo_svg": "logo-grand-designs.svg",
+            "open_new_tab": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

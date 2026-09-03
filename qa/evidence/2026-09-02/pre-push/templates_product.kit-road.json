@@ -1,0 +1,407 @@
+{
+  "sections": {
+    "main": {
+      "type": "bbc-product-2026",
+      "blocks": {
+        "perk_1": {
+          "type": "perk",
+          "settings": {
+            "text": "No power tools required — just basic hand tools"
+          }
+        },
+        "perk_2": {
+          "type": "perk",
+          "settings": {
+            "text": "Illustrated manual + 15+ hours of step-by-step video"
+          }
+        },
+        "perk_3": {
+          "type": "perk",
+          "settings": {
+            "text": "Lifetime community of 4,000+ builders for support"
+          }
+        },
+        "perk_4": {
+          "type": "perk",
+          "settings": {
+            "text": "Cycle to Work accepted — save through salary sacrifice"
+          }
+        }
+      },
+      "block_order": [
+        "perk_1",
+        "perk_2",
+        "perk_3",
+        "perk_4"
+      ],
+      "settings": {
+        "product_badge": "Road frame kit",
+        "product_subtitle": "Endurance geometry for long days on rough tarmac — a drop-bar frame you build yourself from bamboo and flax. Bamboo tubing tested at Swansea University to BS ISO 22157:2019 — and built on camera by road.cc.",
+        "stock_line": "In stock — ships ~twice a week from our London workshop, fully tracked.",
+        "difficulty_label": "Beginner-friendly · no experience needed",
+        "build_time_label": "~25–35 hrs · a few weekends",
+        "reassure_line": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks",
+        "mission_line": "Build your own — and help fund a place on our Build to Bond prison programme.",
+        "buddy_text": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories.",
+        "secondary_label": "Prefer a workshop?",
+        "sizing_eyebrow": "Find your fit",
+        "sizing_heading": "built to fit you",
+        "sizing_body": "Small 157–170 cm · Medium 168–184 cm · Large 180–193 cm · XL 190–196 cm. Between sizes, or not sure? Send us your height and inside-leg measurement and we'll recommend the fit — or choose a Custom frame.",
+        "sizing_note": "",
+        "loop_step1_sm": "a road frame",
+        "bundle_a_text": "Everything to build the bamboo road frame.",
+        "bundle_total_text": "A complete, one-of-a-kind road bike — built by you.",
+        "bundle_b_label": "Component pack",
+        "bundle_b_price": "Priced by build",
+        "bundle_b_text": "Bars, wheels, drivetrain and finishing kit, chosen for your build.",
+        "press_quote": "The Bamboo Bicycle Club has impressively improved the accessibility of building a bamboo bicycle.",
+        "press_cite": "road.cc",
+        "sticky_buy": true,
+        "content_bands": false
+      }
+    },
+    "kitspec": {
+      "type": "bbc-kit-spec",
+      "settings": {
+        "background": "bone",
+        "anchor": "spec",
+        "eyebrow": "fits your parts",
+        "heading": "will it take my parts?",
+        "lede": "The numbers you need to check a part you already own. The kit is the frame — fork, wheels and groupset are yours to choose.",
+        "foot_left": "Building from a donor bike? Send us its spec and we'll confirm the fit before you order.",
+        "foot_right": "Ask us about your parts",
+        "foot_url": "\/pages\/contact-us"
+      },
+      "blocks": {
+        "sp0": {
+          "type": "spec",
+          "settings": {
+            "label": "tyre clearance",
+            "value": "38 mm",
+            "note": "700c"
+          }
+        },
+        "sp1": {
+          "type": "spec",
+          "settings": {
+            "label": "rear spacing",
+            "value": "135 \/ 142 mm",
+            "note": "modular dropout"
+          }
+        },
+        "sp2": {
+          "type": "spec",
+          "settings": {
+            "label": "axle",
+            "value": "12 mm thru",
+            "note": "or QR · singlespeed · hub gear"
+          }
+        },
+        "sp3": {
+          "type": "spec",
+          "settings": {
+            "label": "brakes",
+            "value": "Disc",
+            "note": "post mount · flat mount with adapter"
+          }
+        },
+        "sp4": {
+          "type": "spec",
+          "settings": {
+            "label": "bottom bracket",
+            "value": "BSA 68 mm",
+            "note": "threaded"
+          }
+        },
+        "sp5": {
+          "type": "spec",
+          "settings": {
+            "label": "seatpost",
+            "value": "27.2 mm",
+            "note": "internal dropper routing optional"
+          }
+        },
+        "sp6": {
+          "type": "spec",
+          "settings": {
+            "label": "mounts",
+            "value": "Rack + mudguard",
+            "note": "braze-on front mech optional"
+          }
+        },
+        "sp7": {
+          "type": "spec",
+          "settings": {
+            "label": "build time",
+            "value": "25–35 hrs",
+            "note": "across a few weekends"
+          }
+        }
+      },
+      "block_order": [
+        "sp0",
+        "sp1",
+        "sp2",
+        "sp3",
+        "sp4",
+        "sp5",
+        "sp6",
+        "sp7"
+      ]
+    },
+    "kitship": {
+      "type": "bbc-kit-shipping",
+      "settings": {
+        "background": "forest",
+        "anchor": "shipping",
+        "eyebrow": "shipped worldwide from the London workshop",
+        "heading": "no customs bill at the door",
+        "col1": "Destination",
+        "col2": "Shipping",
+        "col3": "Duty & tax",
+        "panel_title": "Delivered duty paid",
+        "panel_body": "The price at checkout is the price the kit costs you. We pay the import duty and tax before it ships, so the courier has nothing to collect when it arrives.",
+        "worked": "Sydney, Large kit: £375 kit + £75 shipping = £450 total, and nothing further on delivery.",
+        "foot": "Packed by hand and shipped twice a week, tracked all the way. Kits have reached 45 countries."
+      },
+      "blocks": {
+        "rt0": {
+          "type": "rate",
+          "settings": {
+            "place": "United Kingdom",
+            "rate": "£12",
+            "duty": "Included"
+          }
+        },
+        "rt1": {
+          "type": "rate",
+          "settings": {
+            "place": "Europe",
+            "rate": "£25",
+            "duty": "Paid by us"
+          }
+        },
+        "rt2": {
+          "type": "rate",
+          "settings": {
+            "place": "USA & Canada",
+            "rate": "£45",
+            "duty": "Paid by us"
+          }
+        },
+        "rt3": {
+          "type": "rate",
+          "settings": {
+            "place": "Rest of world",
+            "rate": "£75",
+            "duty": "Paid by us"
+          }
+        }
+      },
+      "block_order": [
+        "rt0",
+        "rt1",
+        "rt2",
+        "rt3"
+      ]
+    },
+    "lower": {
+      "type": "bbc-product-2026",
+      "settings": {
+        "product_badge": "Road frame kit",
+        "product_subtitle": "Endurance geometry for long days on rough tarmac — a drop-bar frame you build yourself from bamboo and flax. Bamboo tubing tested at Swansea University to BS ISO 22157:2019 — and built on camera by road.cc.",
+        "stock_line": "In stock — ships ~twice a week from our London workshop, fully tracked.",
+        "difficulty_label": "Beginner-friendly · no experience needed",
+        "build_time_label": "~25–35 hrs · a few weekends",
+        "reassure_line": "1-year kit warranty · 14-day returns on unopened kits · ships in ~2 weeks",
+        "mission_line": "Build your own — and help fund a place on our Build to Bond prison programme.",
+        "buddy_text": "Build with a buddy — buy a second kit and save 15% on both. Better builds, better stories.",
+        "secondary_label": "Prefer a workshop?",
+        "sizing_eyebrow": "Find your fit",
+        "sizing_heading": "built to fit you",
+        "sizing_body": "Small 157–170 cm · Medium 168–184 cm · Large 180–193 cm · XL 190–196 cm. Between sizes, or not sure? Send us your height and inside-leg measurement and we'll recommend the fit — or choose a Custom frame.",
+        "sizing_note": "",
+        "loop_step1_sm": "a road frame",
+        "bundle_a_text": "Everything to build the bamboo road frame.",
+        "bundle_total_text": "A complete, one-of-a-kind road bike — built by you.",
+        "bundle_b_label": "Component pack",
+        "bundle_b_price": "Priced by build",
+        "bundle_b_text": "Bars, wheels, drivetrain and finishing kit, chosen for your build.",
+        "press_quote": "The Bamboo Bicycle Club has impressively improved the accessibility of building a bamboo bicycle.",
+        "press_cite": "road.cc",
+        "show_buybox": false,
+        "content_bands": true
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "set the geometry",
+            "description": "Lock gravel geometry on the jig — wider clearance and a slacker head angle than road."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "join & wrap",
+            "description": "Bond the tubes with epoxy and wrap each joint with flax fibre."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "cure",
+            "description": "Leave it for a full cure — that's where maximum joint strength comes from."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "sand, seal & ride",
+            "description": "Sand smooth, seal the bamboo, fit headset and BB. Adventure awaits."
+          }
+        },
+        "review_p1": {
+          "type": "review",
+          "settings": {
+            "quote": "Still riding mine daily after 7 years. Built it at home using the kit. It's outlasted two steel bikes I owned before.",
+            "cite": "Jamie · Road kit builder, Romania · verified builder"
+          }
+        },
+        "review_p2": {
+          "type": "review",
+          "settings": {
+            "quote": "Ten years on, every joint is still sound and the frame is strong. I ride it daily and did the Dunwich Dynamo — 180km — on it. It handled it effortlessly.",
+            "cite": "Taro Tsuruta · architect, 10 years on his bamboo bike"
+          }
+        },
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "3,500+",
+            "label": "frames built at home",
+            "source": "BBC records · since 2012"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "84.3 MPa",
+            "label": "bamboo tubing, tested",
+            "source": "Swansea University · BS ISO 22157:2019"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "2012",
+            "label": "building since — early builds still ridden",
+            "source": "BBC records"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "number": "~2×\/wk",
+            "label": "shipped from London",
+            "source": "full tracking"
+          }
+        },
+        "related_1": {
+          "type": "related",
+          "settings": {
+            "title": "road lugged kit",
+            "price": "",
+            "fallback": "bbc-rd-prod-flax.jpg"
+          }
+        },
+        "related_2": {
+          "type": "related",
+          "settings": {
+            "title": "MTB frame kit",
+            "price": "",
+            "fallback": "bbc-rd-prod-build.jpg"
+          }
+        },
+        "related_3": {
+          "type": "related",
+          "settings": {
+            "title": "balance bike kit",
+            "price": "From £165",
+            "fallback": "bbc-rd-prod-balance.jpg"
+          }
+        },
+        "related_4": {
+          "type": "related",
+          "settings": {
+            "title": "custom frame kit",
+            "price": "Request a quote",
+            "fallback": "bbc-rd-road-charlie.jpg"
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Is a bamboo road frame stiff and efficient enough for fast riding?",
+            "answer": "Bamboo frame tubing tested at Swansea University to BS ISO 22157:2019 — 84.3 MPa ultimate tensile, comparable to mild steel at a fraction of the weight. That figure is for the tubing we supply, not for a finished frame: how strong your bike ends up is decided by your joints. Follow the manual, let the resin cure fully, and check the joints before every early ride — and call us if anything looks wrong."
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does a finished bamboo road bike weigh?",
+            "answer": "<p>Bamboo is naturally a touch heavier than a top-end carbon race frame, so it's built for all-day comfort and durability rather than the lightest possible climbing weight. Most builders find the smoother ride and the fact they built it themselves more than worth it. Send us your build goals and we'll advise on the lightest sensible component spec.<\/p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Will the frame survive years of big road miles?",
+            "answer": "Finished frames are sealed with epoxy resin. Dry your bike after wet rides, store it indoors, and check the joints before every early ride. The tubing we supply is tested at Swansea University to BS ISO 22157:2019; how your bike holds up over the years is decided by the joints you make — follow the manual and let the resin cure fully, and call us if anything ever looks wrong."
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "What drivetrain and groupset can I run?",
+            "answer": "<p>The frame works with all major road groupsets. Add one of our matched component packs — Shimano 105 hydraulic disc, a clean single-speed pack, or GRX for road-plus versatility — or source your own parts from any bike shop. We'll advise on the right setup for how you ride.<\/p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "How wide a tyre will it take?",
+            "answer": "<p>It's built around modern road rubber — comfortably running wider tyres than a classic race frame for lower pressures and more compliance on rough surfaces. Tell us the tyres you have in mind and we'll confirm clearance for your build before you order.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "review_p1",
+        "review_p2",
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "related_1",
+        "related_2",
+        "related_3",
+        "related_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "kitspec",
+    "kitship",
+    "lower"
+  ]
+}

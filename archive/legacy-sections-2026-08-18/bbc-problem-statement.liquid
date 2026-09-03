@@ -1,0 +1,215 @@
+{% comment %}
+  BBC Problem Statement Section
+  Research: 7/8 social enterprises lead with the problem (WGAC, Tony's, Bombas, Warby Parker)
+  Purpose: Establish context before presenting solution
+{% endcomment %}
+
+{%- style -%}
+.bbc-problem {
+  padding: 80px 0;
+  background: {{ section.settings.background_color }};
+}
+
+.bbc-problem__container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.bbc-problem__eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bbc-teal, var(--bbc-teal));
+  margin-bottom: 16px;
+}
+
+.bbc-problem__heading {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin-bottom: 24px;
+}
+
+.bbc-problem__text {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--color-foreground, #4a5568);
+  max-width: 800px;
+  margin: 0 auto 48px;
+}
+
+.bbc-problem__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.bbc-problem__stat {
+  text-align: center;
+  padding: 24px;
+  background: white;
+  border-radius: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.bbc-problem__stat-number {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--bbc-forest, var(--bbc-forest));
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.bbc-problem__stat-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin-bottom: 4px;
+}
+
+.bbc-problem__stat-source {
+  font-size: 12px;
+  color: #718096;
+}
+
+@media (max-width: 749px) {
+  .bbc-problem {
+    padding: 48px 0;
+  }
+  
+  .bbc-problem__heading {
+    font-size: 28px;
+  }
+  
+  .bbc-problem__text {
+    font-size: 16px;
+  }
+  
+  .bbc-problem__stat-number {
+    font-size: 36px;
+  }
+}
+{%- endstyle -%}
+
+<section class="bbc-problem">
+  <div class="bbc-problem__container">
+    {% if section.settings.eyebrow != blank %}
+      <p class="bbc-problem__eyebrow">{{ section.settings.eyebrow }}</p>
+    {% endif %}
+    
+    <h2 class="bbc-problem__heading">{{ section.settings.heading }}</h2>
+    
+    {% if section.settings.text != blank %}
+      <div class="bbc-problem__text">{{ section.settings.text }}</div>
+    {% endif %}
+    
+    {% if section.blocks.size > 0 %}
+      <div class="bbc-problem__stats">
+        {% for block in section.blocks %}
+          <div class="bbc-problem__stat" {{ block.shopify_attributes }}>
+            <div class="bbc-problem__stat-number">{{ block.settings.number }}</div>
+            <div class="bbc-problem__stat-label">{{ block.settings.label }}</div>
+            {% if block.settings.source != blank %}
+              <div class="bbc-problem__stat-source">{{ block.settings.source }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Problem Statement",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Why This Matters"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Family Connection Reduces Reoffending"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Body text",
+      "default": "<p>Research consistently shows that maintaining family ties during imprisonment is one of the most effective ways to reduce reoffending. Yet many people in prison lose contact with their children — damaging relationships that are crucial for successful rehabilitation.</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f8f8f6"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Statistic",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "39%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "less likely to reoffend"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source",
+          "default": "MoJ Farmer Review"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Problem Statement",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "39%",
+            "label": "less likely to reoffend",
+            "source": "MoJ Farmer Review"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "90%+",
+            "label": "prison course completion",
+            "source": "BBC programme records"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "45%",
+            "label": "of people in prison lose family contact",
+            "source": "Prison Reform Trust"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

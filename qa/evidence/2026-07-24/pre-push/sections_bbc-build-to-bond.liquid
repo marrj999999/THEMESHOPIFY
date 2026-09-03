@@ -1,0 +1,444 @@
+{% comment %}
+  BBC Build to Bond - Prison rehabilitation programme section
+{% endcomment %}
+
+<section class="bbc-build-to-bond">
+  <div class="bbc-build-to-bond__container page-width">
+    <div class="bbc-build-to-bond__intro">
+      <h2 class="bbc-build-to-bond__heading">{{ section.settings.heading }}</h2>
+      <p class="bbc-build-to-bond__tagline">{{ section.settings.tagline }}</p>
+      <p class="bbc-build-to-bond__description">
+        Build to Bond helps Makers in prison build bamboo bicycles for their children. It's not just about learning a skill — it's about rebuilding family connections, boosting confidence, and preparing for life after release.
+      </p>
+    </div>
+    
+    <div class="bbc-build-to-bond__stats">
+      <div class="bbc-build-to-bond__stat">
+        <span class="bbc-build-to-bond__stat-value">39%</span>
+        <span class="bbc-build-to-bond__stat-label">Less likely to reoffend with family visits (MoJ research)</span>
+      </div>
+      <div class="bbc-build-to-bond__stat">
+        <span class="bbc-build-to-bond__stat-value">26%</span>
+        <span class="bbc-build-to-bond__stat-label">Confidence increase in programme participants</span>
+      </div>
+      <div class="bbc-build-to-bond__stat">
+        <span class="bbc-build-to-bond__stat-value">8</span>
+        <span class="bbc-build-to-bond__stat-label">Weeks to complete the programme</span>
+      </div>
+    </div>
+    
+    <div class="bbc-build-to-bond__how-it-works">
+      <h3>How It Works</h3>
+      <div class="bbc-build-to-bond__steps">
+        <div class="bbc-build-to-bond__step">
+          <span class="bbc-build-to-bond__step-number">1</span>
+          <h4>Learn Skills</h4>
+          <p>Over 8 weeks, participants learn sustainable manufacturing techniques — woodworking, composite materials, precision measurement.</p>
+        </div>
+        <div class="bbc-build-to-bond__step">
+          <span class="bbc-build-to-bond__step-number">2</span>
+          <h4>Build a Bike</h4>
+          <p>Each person builds a balance bike or bicycle for their child — something tangible, beautiful, and meaningful.</p>
+        </div>
+        <div class="bbc-build-to-bond__step">
+          <span class="bbc-build-to-bond__step-number">3</span>
+          <h4>Earn Qualification</h4>
+          <p>Completers receive an OCN Level 2 certificate — a nationally recognised qualification in sustainable manufacturing.</p>
+        </div>
+        <div class="bbc-build-to-bond__step">
+          <span class="bbc-build-to-bond__step-number">4</span>
+          <h4>Reconnect</h4>
+          <p>Families come together for a presentation ceremony — often the first positive family interaction in years.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bbc-build-to-bond__quote">
+      <blockquote>
+        <p>"Innovative projects, such as Build to Bond, support rehabilitation and help offenders build the skills they need for life after prison."</p>
+        <footer>
+          <strong>James Timpson</strong><br>
+          UK Minister for Prisons, Probation and Reducing Reoffending
+        </footer>
+      </blockquote>
+    </div>
+    
+    <div class="bbc-build-to-bond__partners">
+      <h3>Programme Outcomes</h3>
+      <p>BBC graduates go on to find employment with leading organisations:</p>
+      <div class="bbc-build-to-bond__partner-grid">
+        <div class="bbc-build-to-bond__partner">
+          <strong>Halfords Academy</strong>
+          <span>12 trainees — 20 graduates employed at Halfords stores</span>
+        </div>
+        <div class="bbc-build-to-bond__partner">
+          <strong>Network Rail</strong>
+          <span>100% job offer rate for graduates</span>
+        </div>
+      </div>
+      <p class="bbc-build-to-bond__context-note">The UK's largest prison employers — businesses that have made prison hiring a core part of their model:</p>
+      <div class="bbc-build-to-bond__partner-grid">
+        <div class="bbc-build-to-bond__partner">
+          <strong>Timpson</strong>
+          <span>600+ employees hired from prisons UK-wide</span>
+        </div>
+        <div class="bbc-build-to-bond__partner">
+          <strong>Greene King</strong>
+          <span>250+ employees hired from prisons UK-wide</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bbc-build-to-bond__award">
+      <div class="bbc-build-to-bond__award-badge">{% render 'bbc-icons', icon: 'award' %}</div>
+      <div class="bbc-build-to-bond__award-content">
+        <h4>Investec Beyond Business 2025</h4>
+        <p>£24,000 awarded for Build to Bond's innovative approach to prison rehabilitation</p>
+      </div>
+    </div>
+    
+    <div class="bbc-build-to-bond__cta">
+      <h3>Bring Build to Bond to Your Prison</h3>
+      <p>Our self-delivery model means we train your staff once, then you run the programme independently.</p>
+      <p class="bbc-build-to-bond__pricing"><strong>Setup: £10,000</strong> | <strong>Per learner: £200</strong></p>
+      <a href="/pages/contact-us" class="bbc-build-to-bond__button">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bbc-build-to-bond {
+    padding: 80px 20px;
+    background: white;
+  }
+  
+  .bbc-build-to-bond__intro {
+    max-width: 800px;
+    margin: 0 auto 60px;
+    text-align: center;
+  }
+  
+  .bbc-build-to-bond__heading {
+    font-family: var(--font-heading-family);
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 12px 0;
+  }
+  
+  .bbc-build-to-bond__tagline {
+    font-size: 20px;
+    color: var(--bbc-teal, var(--bbc-teal));
+    font-weight: 600;
+    margin: 0 0 20px 0;
+  }
+  
+  .bbc-build-to-bond__description {
+    font-size: 17px;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.85;
+    line-height: 1.7;
+    margin: 0;
+  }
+  
+  .bbc-build-to-bond__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto 60px;
+  }
+  
+  .bbc-build-to-bond__stat {
+    text-align: center;
+    padding: 32px 20px;
+    background: var(--bbc-cream, var(--bbc-cream));
+    border-left: 4px solid transparent;
+  }
+  
+  .bbc-build-to-bond__stat-value {
+    display: block;
+    font-family: var(--font-heading-family);
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--bbc-forest, var(--bbc-forest));
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  
+  .bbc-build-to-bond__stat-label {
+    font-size: 14px;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.7;
+  }
+  
+  .bbc-build-to-bond__how-it-works {
+    max-width: 1000px;
+    margin: 0 auto 60px;
+  }
+  
+  .bbc-build-to-bond__how-it-works h3 {
+    font-family: var(--font-heading-family);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    text-align: center;
+    margin: 0 0 40px 0;
+  }
+  
+  .bbc-build-to-bond__steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  
+  .bbc-build-to-bond__step {
+    text-align: center;
+  }
+  
+  .bbc-build-to-bond__step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--bbc-teal, var(--bbc-teal));
+    color: white;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  
+  .bbc-build-to-bond__step h4 {
+    font-family: var(--font-heading-family);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 8px 0;
+  }
+  
+  .bbc-build-to-bond__step p {
+    font-size: 14px;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.8;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  .bbc-build-to-bond__quote {
+    max-width: 700px;
+    margin: 0 auto 60px;
+    background: var(--bbc-forest, var(--bbc-forest));
+    border-left: 6px solid var(--bbc-gold, var(--bbc-gold));
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .bbc-build-to-bond__quote blockquote {
+    margin: 0;
+  }
+  
+  .bbc-build-to-bond__quote p {
+    font-size: 20px;
+    font-style: italic;
+    color: white;
+    line-height: 1.6;
+    margin: 0 0 24px 0;
+  }
+  
+  .bbc-build-to-bond__quote footer {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .bbc-build-to-bond__quote strong {
+    color: var(--bbc-gold, var(--bbc-gold));
+    display: block;
+    margin-bottom: 4px;
+  }
+  
+  .bbc-build-to-bond__partners {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    text-align: center;
+  }
+  
+  .bbc-build-to-bond__partners h3 {
+    font-family: var(--font-heading-family);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 8px 0;
+  }
+  
+  .bbc-build-to-bond__partners > p {
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.7;
+    margin: 0 0 32px 0;
+  }
+  
+  .bbc-build-to-bond__partner-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  
+  .bbc-build-to-bond__partner {
+    background: var(--bbc-cream, var(--bbc-cream));
+    border-left: 4px solid var(--bbc-teal, var(--bbc-teal));
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .bbc-build-to-bond__partner strong {
+    display: block;
+    font-size: 16px;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin-bottom: 8px;
+  }
+  
+  .bbc-build-to-bond__partner span {
+    font-size: 13px;
+    color: var(--bbc-teal, var(--bbc-teal));
+  }
+
+  .bbc-build-to-bond__context-note {
+    font-size: 13px;
+    color: var(--bbc-slate, #6b7280);
+    font-style: italic;
+    margin: 24px 0 12px;
+    text-align: center;
+  }
+  
+  .bbc-build-to-bond__award {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto 60px;
+    background: linear-gradient(135deg, var(--bbc-white)bf0 0%, var(--bbc-white)8e8 100%);
+    border: 2px solid var(--bbc-gold, var(--bbc-gold));
+    border-left: 4px solid transparent;
+    padding: 24px 32px;
+  }
+  
+  .bbc-build-to-bond__award-badge {
+    font-size: 48px;
+  }
+  
+  .bbc-build-to-bond__award-content h4 {
+    font-family: var(--font-heading-family);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 8px 0;
+  }
+  
+  .bbc-build-to-bond__award-content p {
+    font-size: 14px;
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.8;
+    margin: 0;
+  }
+  
+  .bbc-build-to-bond__cta {
+    text-align: center;
+    background: var(--bbc-cream, var(--bbc-cream));
+    border-left: 6px solid var(--bbc-gold, var(--bbc-gold));
+    padding: 48px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .bbc-build-to-bond__cta h3 {
+    font-family: var(--font-heading-family);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--bbc-forest, var(--bbc-forest));
+    margin: 0 0 12px 0;
+  }
+  
+  .bbc-build-to-bond__cta p {
+    color: var(--bbc-forest, var(--bbc-forest));
+    opacity: 0.8;
+    margin: 0 0 16px 0;
+  }
+  
+  .bbc-build-to-bond__pricing {
+    font-size: 18px;
+    margin: 0 0 24px 0 !important;
+    opacity: 1 !important;
+  }
+  
+  .bbc-build-to-bond__button {
+    display: inline-block;
+    background: var(--bbc-forest, var(--bbc-forest));
+    color: white;
+    padding: 16px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s ease;
+  }
+  
+  .bbc-build-to-bond__button:hover {
+    background: var(--bbc-teal, var(--bbc-teal));
+  }
+  
+  @media (max-width: 768px) {
+    .bbc-build-to-bond {
+      padding: 48px 16px;
+    }
+    
+    .bbc-build-to-bond__heading {
+      font-size: 32px;
+    }
+    
+    .bbc-build-to-bond__stats {
+      grid-template-columns: 1fr;
+    }
+    
+    .bbc-build-to-bond__steps {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px 20px;
+    }
+    
+    .bbc-build-to-bond__partner-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .bbc-build-to-bond__award {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BBC Build to Bond",
+  "tag": "section",
+  "class": "bbc-build-to-bond-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Build to Bond"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Building bicycles. Rebuilding lives."
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Build to Bond"
+    }
+  ]
+}
+{% endschema %}

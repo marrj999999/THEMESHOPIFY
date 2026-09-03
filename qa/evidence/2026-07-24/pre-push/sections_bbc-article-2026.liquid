@@ -1,0 +1,308 @@
+{%- comment -%}
+  BBC Article 2026 — editorial + case-study template (Rapha×Finisterre hybrid).
+  Auto-adapts by blog: /blogs/impact renders the CASE STUDY variant (portrait hero,
+  stats band, participant card, "support the mission" end module); all other blogs
+  render the STANDARD editorial variant (title-led hero, product/kit shop module).
+  Related "read next" and the shop/CTA module are chosen automatically by blog + tags.
+  Reading spec: 680px column, 18–20px, 1.5 line-height, styled pull-quotes, reading time.
+{%- endcomment -%}
+
+{%- liquid
+  assign is_case = false
+  if blog.handle == 'impact'
+    assign is_case = true
+  endif
+  assign words = article.content | strip_html | number_of_words
+  assign rt = words | divided_by: 265 | at_least: 1
+  assign t = article.tags | join: ',' | downcase
+
+  # Shop/CTA mapping by tag then blog
+  assign shop_url = '/pages/bicycle-frame-building-workshop'
+  assign shop_label = 'Book a build'
+  assign shop_kicker = 'Ready to make one?'
+  assign shop_body = 'Build your own bamboo bike — in a London workshop or from a kit shipped to your door. No experience needed.'
+  if t contains 'gravel'
+    assign shop_url = '/collections/gravel-adventure'
+    assign shop_label = 'Build a gravel bike'
+    assign shop_kicker = 'Build the bike in this story'
+  elsif t contains 'road'
+    assign shop_url = '/collections/road'
+    assign shop_label = 'Build a road bike'
+    assign shop_kicker = 'Build the bike in this story'
+  elsif t contains 'mtb' or t contains '29er' or t contains 'mountain'
+    assign shop_url = '/collections/mtb'
+    assign shop_label = 'Build an MTB'
+    assign shop_kicker = 'Build the bike in this story'
+  elsif t contains 'balance'
+    assign shop_url = '/collections/balance-bikes'
+    assign shop_label = 'Build a balance bike'
+    assign shop_kicker = 'Build the bike in this story'
+  elsif t contains 'team' or t contains 'corporate'
+    assign shop_url = '/pages/bicycleteambuilding'
+    assign shop_label = 'Plan a team day'
+    assign shop_kicker = 'Do this with your team'
+  endif
+  if blog.handle == 'schools-and-education'
+    assign shop_url = '/pages/schools'
+    assign shop_label = 'Bring it to your school'
+    assign shop_kicker = 'For schools & colleges'
+    assign shop_body = 'Hands-on STEM your students can build — mapped to the curriculum. Start with a free speaker session.'
+  endif
+-%}
+
+<div class="bbc-rd bbc-rd-article{% if is_case %} bbc-rd-article--case{% endif %}">
+  <article>
+
+    {%- comment -%} Article schema (audit 2026-07-22 — articles had no structured data) {%- endcomment -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": {{ article.title | json }},
+        "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+        "dateModified": {{ article.updated_at | default: article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+        {%- if article.image -%}
+        "image": {{ article.image | image_url: width: 1200 | prepend: 'https:' | json }},
+        {%- endif -%}
+        "author": { "@type": "Organization", "name": "Bamboo Bicycle Club" },
+        "publisher": { "@type": "Organization", "name": "Bamboo Bicycle Club", "url": {{ shop.url | json }} },
+        "mainEntityOfPage": {{ canonical_url | json }}
+      }
+    </script>
+
+    {%- comment -%} ===== HERO ===== {%- endcomment -%}
+    <header class="rd-art-hero{% if article.image %} rd-art-hero--img{% endif %}{% if is_case %} rd-art-hero--case{% endif %}">
+      {%- if article.image -%}
+        <div class="rd-bg"><img src="{{ article.image | image_url: width: 1800 }}" srcset="{{ article.image | image_url: width: 900 }} 900w, {{ article.image | image_url: width: 1400 }} 1400w, {{ article.image | image_url: width: 1800 }} 1800w, {{ article.image | image_url: width: 2400 }} 2400w" sizes="100vw" alt="{{ article.image.alt | escape | default: article.title }}" width="{{ article.image.width }}" height="{{ article.image.height }}" fetchpriority="high" loading="eager"></div>
+        <div class="rd-scrim"></div>
+      {%- endif -%}
+      <div class="rd-art-hero__inner">
+        <nav class="rd-crumb"><a href="{{ routes.root_url }}">Home</a><span class="rd-sep">/</span><a href="{{ blog.url }}">{{ blog.title }}</a></nav>
+        {%- if is_case -%}<span class="rd-tag rd-lime rd-art-kicker">Impact story</span>
+        {%- elsif article.tags.size > 0 -%}<span class="rd-art-kicker rd-c-lime">{{ article.tags.first | capitalize }}</span>{%- endif -%}
+        <h1>{{ article.title }}</h1>
+        {%- if article.excerpt != blank -%}<p class="rd-art-dek">{{ article.excerpt | replace: '>', '> ' | strip_html | strip | truncatewords: 34 }}</p>{%- endif -%}
+        <div class="rd-art-meta">
+          <span>{{ article.published_at | date: '%-d %B %Y' }}</span>
+          <span class="rd-art-dot">·</span>
+          <span>{{ rt }} min read</span>
+          {%- if article.author != blank -%}<span class="rd-art-dot">·</span><span>By {{ article.author }}</span>{%- endif -%}
+        </div>
+      </div>
+    </header>
+
+    {%- comment -%} ===== CASE-STUDY STATS BAND (dated + benchmarked; editable) ===== {%- endcomment -%}
+    {%- if is_case and section.settings.show_stats -%}
+      <div class="rd-dark rd-art-stats">
+        <div class="rd-art-col">
+          <span class="rd-eyebrow rd-on-dark">{{ section.settings.stats_label }}</span>
+          <div class="rd-art-statgrid">
+            {%- for i in (1..3) -%}
+              {%- assign nk = 'stat' | append: i | append: '_num' -%}
+              {%- assign lk = 'stat' | append: i | append: '_label' -%}
+              {%- assign num = section.settings[nk] -%}
+              {%- if num != blank -%}
+                <div class="rd-art-stat"><div class="rd-num bbc-counted">{{ num }}</div><div class="rd-lbl">{{ section.settings[lk] }}</div></div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          {%- if section.settings.stats_note != blank -%}<p class="rd-art-statnote">{{ section.settings.stats_note }}</p>{%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ===== BODY (680px reading column, styled prose) ===== {%- endcomment -%}
+    <section class="rd-pad">
+      <div class="rd-art-col">
+        <div class="rd-prose rd-art-prose">{{ article.content }}</div>
+
+        {%- comment -%} share (inline, at point of satisfaction) {%- endcomment -%}
+        <div class="rd-art-share">
+          <span>Share</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ article.url }}" rel="noopener" target="_blank" aria-label="Share on Facebook">Facebook</a>
+          <a href="https://www.linkedin.com/shareArticle?url={{ shop.url }}{{ article.url }}" rel="noopener" target="_blank" aria-label="Share on LinkedIn">LinkedIn</a>
+          <a href="mailto:?subject={{ article.title | url_encode }}&body={{ shop.url }}{{ article.url }}" aria-label="Share by email">Email</a>
+        </div>
+      </div>
+    </section>
+
+    {%- comment -%} ===== SHOP THE STORY / GET INVOLVED (switches by type) ===== {%- endcomment -%}
+    {%- if is_case -%}
+      <div class="rd-steel rd-art-cta">
+        <div class="rd-art-col rd-center">
+          <span class="rd-eyebrow">Back the mission</span>
+          <h2 class="rd-reveal">{{ section.settings.impact_cta_title | default: 'every bike we sell funds a place on the programme.' }}</h2>
+          <p class="rd-lede">{{ section.settings.impact_cta_body | default: 'Fund a cohort, offer placements, or partner with us. This is how stories like this one keep happening.' }}</p>
+          <a class="rd-btn rd-lime rd-btn-lg" href="{{ section.settings.impact_cta_url | default: '/pages/support-mission' }}">{{ section.settings.impact_cta_label | default: 'Support the mission →' }}</a>
+        </div>
+      </div>
+    {%- else -%}
+      <div class="rd-art-shop">
+        <div class="rd-art-col">
+          <div class="rd-art-shopcard rd-card rd-stamp">
+            <div class="rd-body">
+              <span class="rd-eyebrow">{{ shop_kicker }}</span>
+              <h2 class="rd-reveal rd-fs-21px">{{ shop_label }}</h2>
+              <p>{{ shop_body }}</p>
+              <a class="rd-btn rd-lime" href="{{ shop_url }}">{{ shop_label }} →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ===== READ NEXT — 3 cards, same blog, prefer shared tags ===== {%- endcomment -%}
+    {%- assign picked = ',' -%}
+    {%- assign count = 0 -%}
+    {%- comment -%} pass 1: shared-tag matches (ids delimiter-wrapped to avoid substring collisions) {%- endcomment -%}
+    {%- for a in blog.articles limit: 50 -%}
+      {%- if a.id != article.id and count < 3 -%}
+        {%- assign shared = false -%}
+        {%- for tag in article.tags -%}{%- if a.tags contains tag -%}{%- assign shared = true -%}{%- endif -%}{%- endfor -%}
+        {%- assign idkey = a.id | append: ',' -%}
+        {%- unless picked contains idkey -%}
+          {%- if shared -%}
+            {%- assign picked = picked | append: a.id | append: ',' -%}
+            {%- assign count = count | plus: 1 -%}
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+    
+  
+
+  {%- comment -%} pass 2: top-up with most-recent to reach 3 {%- endcomment -%}
+    {%- for a in blog.articles limit: 50 -%}
+      {%- if a.id != article.id and count < 3 -%}
+        {%- assign idkey = a.id | append: ',' -%}
+        {%- unless picked contains idkey -%}
+          {%- assign picked = picked | append: a.id | append: ',' -%}
+          {%- assign count = count | plus: 1 -%}
+        {%- endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if count > 0 -%}
+    <section class="rd-pad rd-paper rd-art-next">
+      <div class="rd-wrap">
+        <span class="rd-eyebrow">Read next</span>
+        <h2 class="rd-reveal rd-mw-18ch">More from {{ blog.title | downcase }}</h2>
+        <div class="rd-grid rd-g3 rd-mt4">
+          {%- for a in blog.articles limit: 50 -%}
+            {%- assign idkey = a.id | append: ',' -%}
+            {%- if picked contains idkey -%}
+                <a class="rd-reveal rd-card rd-stamp rd-art-nextcard" href="{{ a.url }}">
+                  <div class="rd-ph">
+                    {%- if a.image -%}<img src="{{ a.image | image_url: width: 700 }}" alt="{{ a.image.alt | escape | default: a.title }}" width="{{ a.image.width }}" height="{{ a.image.height }}" loading="lazy">
+                    {%- else -%}<img src="{{ 'bbc-rd-detail.jpg' | asset_url }}" alt="{{ a.title | escape }}" width="1200" height="800" loading="lazy">{%- endif -%}
+                    {%- if a.tags.size > 0 -%}<span class="rd-tag rd-lime rd-cardtag">{{ a.tags.first | capitalize }}</span>{%- endif -%}
+                  </div>
+                  <div class="rd-body">
+                    <h3 class="rd-fs-18px">{{ a.title }}</h3>
+                    <span class="rd-art-nextmore">Read the story →</span>
+                  </div>
+                </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        <div class="rd-center rd-mt4"><a class="rd-btn rd-ghost" href="{{ blog.url }}">All {{ blog.title | downcase }} →</a></div>
+      </div>
+    </section>
+    {%- endif -%}
+
+  </article>
+</div>
+
+{% schema %}
+{
+  "name": "Article 2026",
+  "tag": "section",
+  "class": "bbc-rd-article-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Case-study stats band (impact posts only)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show stats band on impact posts",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "stats_label",
+      "label": "Band label",
+      "default": "The programme, in numbers"
+    },
+    {
+      "type": "text",
+      "id": "stat1_num",
+      "label": "Stat 1 number",
+      "default": "90%+"
+    },
+    {
+      "type": "text",
+      "id": "stat1_label",
+      "label": "Stat 1 label",
+      "default": "course completion"
+    },
+    {
+      "type": "text",
+      "id": "stat2_num",
+      "label": "Stat 2 number",
+      "default": "Level 2"
+    },
+    {
+      "type": "text",
+      "id": "stat2_label",
+      "label": "Stat 2 label",
+      "default": "OCN — Sustainable Design & Manufacturing"
+    },
+    {
+      "type": "text",
+      "id": "stat3_num",
+      "label": "Stat 3 number",
+      "default": "4,000+"
+    },
+    {
+      "type": "text",
+      "id": "stat3_label",
+      "label": "Stat 3 label",
+      "default": "builders since 2012"
+    },
+    {
+      "type": "text",
+      "id": "stats_note",
+      "label": "Note under stats",
+      "default": "Figures from BBC programme records. Reoffending is a contested measure — we report what we can verify."
+    },
+    {
+      "type": "header",
+      "content": "Impact end CTA (impact posts)"
+    },
+    {
+      "type": "text",
+      "id": "impact_cta_title",
+      "label": "Title",
+      "default": "every bike we sell funds a place on the programme."
+    },
+    {
+      "type": "textarea",
+      "id": "impact_cta_body",
+      "label": "Body",
+      "default": "Fund a cohort, offer placements, or partner with us. This is how stories like this one keep happening."
+    },
+    {
+      "type": "text",
+      "id": "impact_cta_label",
+      "label": "Button label",
+      "default": "Support the mission →"
+    },
+    {
+      "type": "url",
+      "id": "impact_cta_url",
+      "label": "Button link"
+    }
+  ]
+}
+{% endschema %}

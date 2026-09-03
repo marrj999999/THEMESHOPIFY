@@ -1,0 +1,414 @@
+{% comment %}
+  BBC Press Logos V2 — Real logos with grayscale effect
+  Uses actual logo assets uploaded to theme
+{% endcomment %}
+
+{%- style -%}
+  .bbc-press-logos {
+    padding: 64px 24px;
+    background: var(--bbc-cream);
+  }
+
+  .bbc-press-logos__container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .bbc-press-logos__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .bbc-press-logos__label {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #718096;
+    margin-bottom: 8px;
+  }
+
+  .bbc-press-logos__heading {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--bbc-forest);
+    margin: 0;
+  }
+
+  .bbc-press-logos__grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 32px 48px;
+  }
+
+  .bbc-press-logos__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bbc-press-logos__item a {
+    display: block;
+    transition: transform 0.2s ease;
+  }
+
+  .bbc-press-logos__item a:hover {
+    transform: scale(1.05);
+  }
+
+  .bbc-press-logos__item img {
+    max-height: 40px;
+    max-width: 140px;
+    width: auto;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+  }
+
+  .bbc-press-logos__item:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  /* Specific logo sizing */
+  .bbc-press-logos__item--ft img {
+    max-height: 28px;
+  }
+
+  .bbc-press-logos__item--guardian img {
+    max-height: 24px;
+  }
+
+  .bbc-press-logos__item--telegraph img {
+    max-height: 32px;
+  }
+
+  .bbc-press-logos__item--bikeradar img {
+    max-height: 36px;
+  }
+
+  .bbc-press-logos__item--cyclingweekly img {
+    max-height: 32px;
+  }
+
+  .bbc-press-logos__item--designmuseum img {
+    max-height: 36px;
+  }
+
+  .bbc-press-logos__item--granddesigns img {
+    max-height: 48px;
+  }
+
+  .bbc-press-logos__item--cnn img {
+    max-height: 30px;
+  }
+
+  .bbc-press-logos__item--metro img {
+    max-height: 26px;
+  }
+
+  .bbc-press-logos__item--fastcompany img {
+    max-height: 22px;
+  }
+
+  @media (max-width: 600px) {
+    .bbc-press-logos {
+      padding: 48px 16px;
+    }
+
+    .bbc-press-logos__grid {
+      gap: 24px 32px;
+    }
+
+    .bbc-press-logos__item img {
+      max-height: 32px;
+      max-width: 100px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="bbc-press-logos">
+  <div class="bbc-press-logos__container">
+    <div class="bbc-press-logos__header">
+      {% if section.settings.label != blank %}
+        <div class="bbc-press-logos__label">{{ section.settings.label }}</div>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h2 class="bbc-press-logos__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+    </div>
+
+    <div class="bbc-press-logos__grid">
+      {% if section.settings.show_ft %}
+        <div class="bbc-press-logos__item bbc-press-logos__item--ft">
+          <a href="{{ section.settings.ft_link }}" target="_blank" rel="noopener" aria-label="Financial Times">
+            <img src="{{ 'logo-financial-times.svg' | asset_url }}" alt="Financial Times" loading="lazy" width="140" height="28">
+          </a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_guardian %}
+        <div class="bbc-press-logos__item bbc-press-logos__item--guardian">
+          <a href="{{ section.settings.guardian_link }}" target="_blank" rel="noopener" aria-label="The Guardian">
+            <img src="{{ 'logo-guardian.svg' | asset_url }}" alt="The Guardian" loading="lazy" width="140" height="24">
+          </a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_telegraph %}
+        <div class="bbc-press-logos__item bbc-press-logos__item--telegraph">
+          <a href="{{ section.settings.telegraph_link }}" target="_blank" rel="noopener" aria-label="The Telegraph">
+            <img src="{{ 'logo-telegraph.svg' | asset_url }}" alt="The Telegraph" loading="lazy" width="140" height="32">
+          </a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_bikeradar %}
+        <div class="bbc-press-logos__item bbc-press-logos__item--bikeradar">
+          <a href="{{ section.settings.bikeradar_link }}" target="_blank" rel="noopener" aria-label="BikeRadar">
+            <img src="{{ 'logo-bikeradar.svg' | asset_url }}" alt="BikeRadar" loading="lazy" width="120" height="36">
+          </a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_cyclingweekly %}
+        <div class="bbc-press-logos__item bbc-press-logos__item--cyclingweekly">
+          <a href="{{ section.settings.cyclingweekly_link }}" target="_blank" rel="noopener" aria-label="Cycling Weekly">
+            <img src="{{ 'logo-cyclingweekly.svg' | asset_url }}" alt="Cycling Weekly" loading="lazy" width="130" height="32">
+          </a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_designmuseum %}
+        <div class="bbc-press-logos__item bbc-press-logos__item--designmuseum">
+          <a href="{{ section.settings.designmuseum_link }}" target="_blank" rel="noopener" aria-label="Design Museum">
+            <img src="{{ 'logo-design-museum.svg' | asset_url }}" alt="Design Museum" loading="lazy" width="100" height="36">
+          </a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_granddesigns %}
+        <div class="bbc-press-logos__item bbc-press-logos__item--granddesigns">
+          <a href="{{ section.settings.granddesigns_link }}" target="_blank" rel="noopener" aria-label="Grand Designs">
+            <img src="{{ 'logo-grand-designs.svg' | asset_url }}" alt="Grand Designs" loading="lazy" width="120" height="48">
+          </a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_roadcc %}
+        <div class="bbc-press-logos__item">
+          <a href="{{ section.settings.roadcc_link }}" target="_blank" rel="noopener" aria-label="road.cc">
+            <img src="{{ 'logo-roadcc.svg' | asset_url }}" alt="road.cc" loading="lazy" width="80" height="32">
+          </a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_huck %}
+        <div class="bbc-press-logos__item">
+          <a href="{{ section.settings.huck_link }}" target="_blank" rel="noopener" aria-label="Huck Magazine">
+            <img src="{{ 'logo-huck.svg' | asset_url }}" alt="Huck Magazine" loading="lazy" width="80" height="32">
+          </a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_cnn %}
+        <div class="bbc-press-logos__item bbc-press-logos__item--cnn">
+          <a href="{{ section.settings.cnn_link }}" target="_blank" rel="noopener" aria-label="CNN">
+            <img src="{{ 'logo-cnn.svg' | asset_url }}" alt="CNN" loading="lazy" width="74" height="40">
+          </a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_metro %}
+        <div class="bbc-press-logos__item bbc-press-logos__item--metro">
+          <a href="{{ section.settings.metro_link }}" target="_blank" rel="noopener" aria-label="Metro">
+            <img src="{{ 'logo-metro.svg' | asset_url }}" alt="Metro" loading="lazy" width="120" height="32">
+          </a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_fastcompany %}
+        <div class="bbc-press-logos__item bbc-press-logos__item--fastcompany">
+          <a href="{{ section.settings.fastcompany_link }}" target="_blank" rel="noopener" aria-label="Fast Company">
+            <img src="{{ 'logo-fastcompany.svg' | asset_url }}" alt="Fast Company" loading="lazy" width="120" height="30">
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Press Logos V2",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "As Featured In"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Trusted by leading publications"
+    },
+    {
+      "type": "header",
+      "content": "Financial Times"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ft",
+      "label": "Show Financial Times",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "ft_link",
+      "label": "FT article link"
+    },
+    {
+      "type": "header",
+      "content": "The Guardian"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_guardian",
+      "label": "Show Guardian",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "guardian_link",
+      "label": "Guardian article link"
+    },
+    {
+      "type": "header",
+      "content": "The Telegraph"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_telegraph",
+      "label": "Show Telegraph",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "telegraph_link",
+      "label": "Telegraph article link"
+    },
+    {
+      "type": "header",
+      "content": "BikeRadar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bikeradar",
+      "label": "Show BikeRadar",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "bikeradar_link",
+      "label": "BikeRadar article link"
+    },
+    {
+      "type": "header",
+      "content": "Cycling Weekly"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cyclingweekly",
+      "label": "Show Cycling Weekly",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "cyclingweekly_link",
+      "label": "Cycling Weekly article link"
+    },
+    {
+      "type": "header",
+      "content": "Design Museum"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_designmuseum",
+      "label": "Show Design Museum",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "designmuseum_link",
+      "label": "Design Museum link"
+    },
+    {
+      "type": "header",
+      "content": "Grand Designs"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_granddesigns",
+      "label": "Show Grand Designs",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "granddesigns_link",
+      "label": "Grand Designs link"
+    },
+    {
+      "type": "header",
+      "content": "road.cc"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_roadcc",
+      "label": "Show road.cc",
+      "default": false
+    },
+    {
+      "type": "url",
+      "id": "roadcc_link",
+      "label": "road.cc article link"
+    },
+    {
+      "type": "header",
+      "content": "Huck Magazine"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_huck",
+      "label": "Show Huck",
+      "default": false
+    },
+    {
+      "type": "url",
+      "id": "huck_link",
+      "label": "Huck article link"
+    },
+    { "type": "header", "content": "CNN" },
+    { "type": "checkbox", "id": "show_cnn", "label": "Show CNN", "default": false },
+    { "type": "url", "id": "cnn_link", "label": "CNN article link" },
+    { "type": "header", "content": "Metro" },
+    { "type": "checkbox", "id": "show_metro", "label": "Show Metro", "default": false },
+    { "type": "url", "id": "metro_link", "label": "Metro article link" },
+    { "type": "header", "content": "Fast Company" },
+    { "type": "checkbox", "id": "show_fastcompany", "label": "Show Fast Company", "default": false },
+    { "type": "url", "id": "fastcompany_link", "label": "Fast Company article link" }
+  ],
+  "presets": [
+    {
+      "name": "BBC Press Logos V2"
+    }
+  ]
+}
+{% endschema %}

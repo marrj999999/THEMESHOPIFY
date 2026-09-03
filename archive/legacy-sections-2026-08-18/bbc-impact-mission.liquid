@@ -1,0 +1,369 @@
+{%- style -%}
+.bbc-impact-mission {
+  padding: {{ section.settings.padding_top }}px 24px {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.background_color }};
+}
+
+.bbc-impact-mission__container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.bbc-impact-mission__header {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 64px;
+}
+
+.bbc-impact-mission__eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bbc-teal, var(--bbc-teal));
+  margin-bottom: 16px;
+}
+
+.bbc-impact-mission__heading {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  color: var(--bbc-forest, var(--bbc-forest));
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+
+.bbc-impact-mission__intro {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--color-foreground, #4a5568);
+}
+
+/* 3-column impact areas */
+.bbc-impact-mission__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid rgba(7, 62, 39, 0.12);
+  margin-bottom: 48px;
+}
+
+.bbc-impact-mission__col {
+  padding: 40px 36px;
+  border-right: 1px solid rgba(7, 62, 39, 0.12);
+  position: relative;
+}
+
+.bbc-impact-mission__col:last-child {
+  border-right: none;
+}
+
+.bbc-impact-mission__col-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--bbc-gold, var(--bbc-gold));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.bbc-impact-mission__col-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--bbc-forest, var(--bbc-forest));
+}
+
+.bbc-impact-mission__col-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--bbc-forest, var(--bbc-forest));
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.bbc-impact-mission__col-body {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-foreground, #4a5568);
+  margin-bottom: 16px;
+}
+
+.bbc-impact-mission__col-detail {
+  font-size: 13px;
+  color: var(--bbc-teal, var(--bbc-teal));
+  font-weight: 600;
+  border-left: 3px solid var(--bbc-gold, var(--bbc-gold));
+  padding-left: 10px;
+}
+
+/* Pathway flow */
+.bbc-impact-mission__pathway {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+  background: var(--bbc-forest, var(--bbc-forest));
+  padding: 28px 32px;
+}
+
+.bbc-impact-mission__pathway-step {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.bbc-impact-mission__pathway-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.03em;
+  padding: 0 16px;
+  white-space: nowrap;
+}
+
+.bbc-impact-mission__pathway-arrow {
+  color: var(--bbc-gold, var(--bbc-gold));
+  font-size: 18px;
+  font-weight: 800;
+  padding: 0 4px;
+}
+
+@media (max-width: 768px) {
+  .bbc-impact-mission__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bbc-impact-mission__col {
+    border-right: none;
+    border-bottom: 1px solid rgba(7, 62, 39, 0.12);
+    padding: 32px 24px;
+  }
+
+  .bbc-impact-mission__col:last-child {
+    border-bottom: none;
+  }
+
+  .bbc-impact-mission__pathway {
+    flex-direction: column;
+    gap: 8px;
+    padding: 24px 20px;
+  }
+
+  .bbc-impact-mission__pathway-arrow {
+    transform: rotate(90deg);
+  }
+
+  .bbc-impact-mission__pathway-label {
+    text-align: center;
+  }
+}
+{%- endstyle -%}
+
+<section class="bbc-impact-mission">
+  <div class="bbc-impact-mission__container">
+
+    <div class="bbc-impact-mission__header">
+      {% if section.settings.eyebrow != blank %}
+        <p class="bbc-impact-mission__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h2 class="bbc-impact-mission__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.intro != blank %}
+        <p class="bbc-impact-mission__intro">{{ section.settings.intro }}</p>
+      {% endif %}
+    </div>
+
+    {% assign col_blocks = section.blocks | where: "type", "column" %}
+    {% if col_blocks.size > 0 %}
+      <div class="bbc-impact-mission__grid">
+        {% for block in col_blocks %}
+          <div class="bbc-impact-mission__col" {{ block.shopify_attributes }}>
+            <div class="bbc-impact-mission__col-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                {% case block.settings.icon %}
+                  {% when 'education' %}
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                  {% when 'employment' %}
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                    <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+                  {% when 'rehabilitation' %}
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                  {% when 'leaf' %}
+                    <path d="M17 8C8 10 5.9 16.17 3.82 21.2"/>
+                    <path d="M9.23 17.65C7.65 17.07 3 14.61 3 11.17V3l9 4 9-4v8.17c0 3.44-4.65 5.9-6.23 6.48"/>
+                  {% else %}
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 8v4l3 3"/>
+                {% endcase %}
+              </svg>
+            </div>
+            <h3 class="bbc-impact-mission__col-title">{{ block.settings.title }}</h3>
+            {% if block.settings.body != blank %}
+              <p class="bbc-impact-mission__col-body">{{ block.settings.body }}</p>
+            {% endif %}
+            {% if block.settings.detail != blank %}
+              <p class="bbc-impact-mission__col-detail">{{ block.settings.detail }}</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if section.settings.show_pathway %}
+      <div class="bbc-impact-mission__pathway">
+        {% assign pathway_steps = section.settings.pathway | split: " → " %}
+        {% for step in pathway_steps %}
+          <div class="bbc-impact-mission__pathway-step">
+            <span class="bbc-impact-mission__pathway-label">{{ step }}</span>
+            {% unless forloop.last %}
+              <span class="bbc-impact-mission__pathway-arrow" aria-hidden="true">→</span>
+            {% endunless %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Impact Mission",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Our Mission"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why We Build Bikes"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Mission paragraph",
+      "default": "We open pathways into green careers for people often excluded from traditional education — redefining how skills are learned through practical, hands-on making."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pathway",
+      "label": "Show pathway flow bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "pathway",
+      "label": "Pathway steps (separate with ' → ')",
+      "default": "Hands-on training → Skills development → Confidence & rehabilitation → Employment pathways"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f8f8f6"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 40,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 40,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Impact Column",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "education", "label": "Education (graduation cap)" },
+            { "value": "employment", "label": "Employment (briefcase)" },
+            { "value": "rehabilitation", "label": "Rehabilitation (heart)" },
+            { "value": "leaf", "label": "Sustainability (leaf)" }
+          ],
+          "default": "education"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Column title",
+          "default": "Education"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Column body",
+          "default": "OCN-accredited courses teaching real manufacturing skills."
+        },
+        {
+          "type": "text",
+          "id": "detail",
+          "label": "Highlighted detail (optional)",
+          "info": "Short call-out shown with gold bar accent"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Impact Mission",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "icon": "education",
+            "title": "Education",
+            "body": "OCN Level 2 — Workshop Skills and Sustainable Manufacturing. Practical STEM and vocational learning. Industry-relevant skills in manufacturing and engineering.",
+            "detail": "Recognised qualification"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "icon": "employment",
+            "title": "Employment",
+            "body": "Skills that map to real trades — sustainable transport, manufacturing, construction and composites. A recognised qualification and a maker's portfolio to show for it.",
+            "detail": "Work-ready skills on release"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "icon": "rehabilitation",
+            "title": "Rehabilitation",
+            "body": "Therapeutic, hands-on making process. Builds patience, focus and resilience. Strengthens family connections through Build to Bond.",
+            "detail": "90% prison course completion rate"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,425 @@
+{% comment %}
+  BBC Impact — Funder / Partner CTA
+  Research: 9/10 social enterprises have a partner/funder call-to-action on their impact page.
+  Pattern: Three distinct audience tracks (prisons, schools, funders/corporates)
+  Source: Shannon Trust, Timpson Foundation, Bikeworks, PACT
+{% endcomment %}
+
+{%- style -%}
+.bbc-funder-cta {
+  --bbc-white:#ffffff; --bbc-gold:#ffa900; --bbc-forest:#073e27; --bbc-teal:#3f8b66; --bbc-ink:#14211c;
+  padding: {{ section.settings.padding_top }}px 24px {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.background_color }};
+}
+
+.bbc-funder-cta__container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.bbc-funder-cta__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.bbc-funder-cta__eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bbc-teal, #3f8b66);
+  margin-bottom: 16px;
+}
+
+.bbc-funder-cta__heading {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  color: var(--bbc-forest, #073e27);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.bbc-funder-cta__sub {
+  font-size: 18px;
+  color: var(--color-foreground, #4a5568);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Grid of partner cards */
+.bbc-funder-cta__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.bbc-funder-cta__card {
+  background: var(--color-background, var(--bbc-white, #ffffff));
+  border: 1px solid rgba(7, 62, 39, 0.1);
+  padding: 36px 32px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bbc-funder-cta__card:hover {
+  border-color: var(--bbc-teal, #3f8b66);
+  box-shadow: 0 4px 20px rgba(7, 62, 39, 0.08);
+}
+
+.bbc-funder-cta__card-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(63, 139, 102, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.bbc-funder-cta__card-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--bbc-teal, #3f8b66);
+}
+
+.bbc-funder-cta__card-audience {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #38453f;
+}
+
+.bbc-funder-cta__card-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--bbc-forest, #073e27);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.bbc-funder-cta__card-body {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-foreground, #4a5568);
+  flex: 1;
+}
+
+.bbc-funder-cta__card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--bbc-forest, #073e27);
+  text-decoration: none;
+  margin-top: 8px;
+  border-bottom: 2px solid var(--bbc-gold, #ffa900);
+  padding-bottom: 2px;
+  align-self: flex-start;
+  transition: color 0.2s ease;
+}
+
+.bbc-funder-cta__card-link:hover {
+  color: var(--bbc-teal, #3f8b66);
+}
+
+.bbc-funder-cta__card-link svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+}
+
+.bbc-funder-cta__card-link:hover svg {
+  transform: translateX(3px);
+}
+
+/* Primary card emphasis */
+.bbc-funder-cta__card--primary {
+  background: var(--bbc-forest, #073e27);
+  border-color: var(--bbc-forest, #073e27);
+}
+
+.bbc-funder-cta__card--primary .bbc-funder-cta__card-icon {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.bbc-funder-cta__card--primary .bbc-funder-cta__card-icon svg {
+  stroke: var(--bbc-white, #ffffff);
+}
+
+.bbc-funder-cta__card--primary .bbc-funder-cta__card-audience {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.bbc-funder-cta__card--primary .bbc-funder-cta__card-title {
+  color: var(--bbc-white, #ffffff);
+}
+
+.bbc-funder-cta__card--primary .bbc-funder-cta__card-body {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.bbc-funder-cta__card--primary .bbc-funder-cta__card-link {
+  color: var(--bbc-gold, #ffa900) !important;
+  border-bottom-color: rgba(255, 169, 0, 0.4);
+}
+
+.bbc-funder-cta__card--primary .bbc-funder-cta__card-link:hover {
+  color: var(--bbc-white, #ffffff) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bbc-funder-cta__card,
+  .bbc-funder-cta__card-link,
+  .bbc-funder-cta__card-link svg {
+    transition: none;
+  }
+}
+
+@media (max-width: 749px) {
+  .bbc-funder-cta {
+    padding: 48px 16px;
+  }
+
+  .bbc-funder-cta__card {
+    padding: 28px 24px;
+  }
+}
+{%- endstyle -%}
+
+
+<section class="bbc-funder-cta">
+  <div class="bbc-funder-cta__container">
+    
+    {% if section.settings.heading != blank or section.settings.eyebrow != blank %}
+      <div class="bbc-funder-cta__header">
+        {% if section.settings.eyebrow != blank %}
+          <p class="bbc-funder-cta__eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        {% if section.settings.heading != blank %}
+          <h2 class="bbc-funder-cta__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+        {% if section.settings.subheading != blank %}
+          <p class="bbc-funder-cta__sub">{{ section.settings.subheading }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="bbc-funder-cta__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'card' %}
+          <div class="bbc-funder-cta__card{% if block.settings.primary %} bbc-funder-cta__card--primary{% endif %}" {{ block.shopify_attributes }}>
+            
+            {% if block.settings.icon != blank %}
+              <div class="bbc-funder-cta__card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  {% case block.settings.icon %}
+                    {% when 'building' %}
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                      <polyline points="9 22 9 12 15 12 15 22"/>
+                    {% when 'heart' %}
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    {% when 'school' %}
+                      <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                      <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                    {% when 'briefcase' %}
+                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                      <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+                    {% when 'users' %}
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                      <circle cx="9" cy="7" r="4"/>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    {% when 'leaf' %}
+                      <path d="M17 8C8 10 5.9 16.17 3.82 21.2"/>
+                      <path d="M9.23 17.65C7.65 17.07 3 14.61 3 11.17V3l9 4 9-4v8.17c0 3.44-4.65 5.9-6.23 6.48"/>
+                    {% else %}
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M12 8v4l3 3"/>
+                  {% endcase %}
+                </svg>
+              </div>
+            {% endif %}
+
+            {% if block.settings.audience != blank %}
+              <p class="bbc-funder-cta__card-audience">{{ block.settings.audience }}</p>
+            {% endif %}
+
+            <h3 class="bbc-funder-cta__card-title">{{ block.settings.title }}</h3>
+
+            {% if block.settings.body != blank %}
+              <p class="bbc-funder-cta__card-body">{{ block.settings.body }}</p>
+            {% endif %}
+
+            {% if block.settings.link_text != blank and block.settings.link_url != blank %}
+              <a href="{{ block.settings.link_url }}" class="bbc-funder-cta__card-link">
+                {{ block.settings.link_text }}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BBC Funder / Partner CTA",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Work With Us"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Partner With Bamboo Bicycle Club"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Whether you run a prison, a school, or a company with a CSR budget, we have a programme that delivers measurable impact."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f8f8f6"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 40,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 40,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Partner Card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "building", "label": "Building (Prisons)" },
+            { "value": "school", "label": "School" },
+            { "value": "briefcase", "label": "Corporate / CSR" },
+            { "value": "heart", "label": "Charity" },
+            { "value": "users", "label": "Community" },
+            { "value": "leaf", "label": "Sustainability" }
+          ],
+          "default": "building"
+        },
+        {
+          "type": "text",
+          "id": "audience",
+          "label": "Audience label",
+          "info": "e.g. 'For Prisons' / 'For Schools' / 'For Funders'",
+          "default": "For Prisons"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card title",
+          "default": "Bring Build to Bond to Your Prison"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Card body",
+          "default": "We train your staff to deliver the programme independently. A one-time investment that keeps delivering impact — no ongoing fees. OCN Level 2 accredited."
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text",
+          "default": "Request a programme pack"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "primary",
+          "label": "Primary card (dark background)",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BBC Funder / Partner CTA",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "icon": "building",
+            "audience": "For Prisons",
+            "title": "Bring Build to Bond to Your Prison",
+            "body": "We train your staff to deliver the programme independently. A one-time investment that keeps delivering impact — no ongoing fees. OCN Level 2 accredited.",
+            "link_text": "Request a programme pack",
+            "primary": true
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "icon": "school",
+            "audience": "For Schools",
+            "title": "STEM + Sustainability Education",
+            "body": "Bring hands-on bamboo building to the classroom. Curriculum-linked projects that teach materials science, sustainability, and engineering through making.",
+            "link_text": "Download school pack"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "icon": "briefcase",
+            "audience": "For Funders & Corporates",
+            "title": "Support Proven Rehabilitation",
+            "body": "Fund a programme cohort, sponsor a family handover session, or integrate Build to Bond into your CSR strategy. Every pound goes into accredited skills courses.",
+            "link_text": "Talk to us about funding"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

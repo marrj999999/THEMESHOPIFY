@@ -1,0 +1,18 @@
+{
+  "type": "header",
+  "name": "t:sections.header.name",
+  "sections": {
+    "bbc-header-2026": {
+      "type": "bbc-header-2026",
+      "settings": {
+        "brand_text": "Bamboo Bicycle Club",
+        "menu": "main-menu",
+        "cta_label": "Make a bike.",
+        "cta_url": ""
+      }
+    }
+  },
+  "order": [
+    "bbc-header-2026"
+  ]
+}

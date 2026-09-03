@@ -1,0 +1,29 @@
+{%- comment -%}
+  BBC theme block — Spec item (label + value). One cell of the PDP spec strip.
+  From the bbc-product-2026 `spec` block (.rd-spec-cell > .rd-frame-label + value).
+  Sits inside a grid container (the spec strip uses .rd-spectable). The value text
+  uses .bbc-spec__value here (the monolith used the utility class rd-cmp-43552) so
+  the block is self-contained without depending on per-page utility classes.
+{%- endcomment -%}
+<div class="rd-spec-cell" {{ block.shopify_attributes }}>
+  <div class="rd-frame-label">{{ block.settings.label }}</div>
+  <div class="bbc-spec__value">{{ block.settings.value }}</div>
+</div>
+
+{% stylesheet %}
+  .bbc-rd .rd-spec-cell .bbc-spec__value{ margin-top:6px; font-weight:800; font-size:18px; color:var(--forest,var(--forest,#003C32)); line-height:1.2; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BBC Spec item",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "label", "label": "Spec label", "default": "Build time" },
+    { "type": "text", "id": "value", "label": "Spec value", "default": "25-35 hrs" }
+  ],
+  "presets": [
+    { "name": "BBC Spec item" }
+  ]
+}
+{% endschema %}
