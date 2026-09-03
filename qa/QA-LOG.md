@@ -307,3 +307,10 @@ Gates: G1 lint clean · G2 pushed+validated (one schema race: template must push
 - canary 14/14 alive (visual baseline reseeded, run twice). Links: 16/16 resolve 200. Films all play (speaker facade → iframe, Kirui card → iframe, why-bamboo native 42 s, hero loop running).
 - Lighthouse desktop 99 perf / 100 a11y / 100 SEO, LCP 0.9 s, CLS 0, TBT 0. Mobile 100 a11y, 66 perf, LCP 8.5 s — /pages/impact scores 63 / 8.5 s on the same run (estate CSS baseline, not a regression).
 - Fixed while testing: .edt-instk contrast 3.64:1 → charcoal at full opacity; a11y 97 → 100 desktop and mobile.
+
+## 2026-09-03 — Programme-page links routed to contact / info@ (James: "these are the only pages for these programmes")
+- Audit of in-body links (site header and footer excluded): /pages/programmes 25 links — already compliant (4× contact, 1× mailto, in-page anchors, blog case studies). /pages/build-to-bond 16 links — 6 went to /pages/prisons (×4) and /pages/support-mission (×3), no contact or mailto anywhere in the body.
+- Build to Bond now: hero → contact?subject=prisons + mailto info@; fork card 1 → contact; "full costs" → mailto info@ (relabelled); final band → contact + mailto info@ + "back the mission". Added optional cta3_label/cta3_url to bbc-build-to-bond-2026 so the funding button survives the change.
+- Sitewide sweep: /pages/impact, /pages/impact-report and /pages/theory-of-change all sent "For prisons & commissioners" to /pages/prisons → now /pages/build-to-bond. Section defaults in bbc-impact-report-2026 and bbc-toc-2026 updated too.
+- Re-audit: nothing outside /pages/impact's funding CTA now points at either secondary page. Links resolve 200 on both programme pages (16/16 and 11/11 non-mail).
+- Kept: /pages/support-mission funding links (funding page, not a programme page) — flagged for James. /pages/prisons is now unlinked; recommend a 301 to /pages/build-to-bond on his word.

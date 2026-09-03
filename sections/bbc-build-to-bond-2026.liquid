@@ -427,6 +427,7 @@
       <div class="rd-flex rd-mt3 rd-jc-center">
         {%- if section.settings.cta1_label != blank -%}<a class="rd-btn rd-lime" href="{{ final_c1 }}">{{ section.settings.cta1_label }} <span class="rd-arrow">&rarr;</span></a>{%- endif -%}
         {%- if section.settings.cta2_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ final_c2 }}">{{ section.settings.cta2_label }}</a>{%- endif -%}
+        {%- if section.settings.cta3_label != blank -%}<a class="rd-btn rd-on-dark" href="{{ section.settings.cta3_url | default: '/pages/support-mission' }}">{{ section.settings.cta3_label }}</a>{%- endif -%}
       </div>
     </div>
   </section>
@@ -1343,6 +1344,16 @@
       "type": "text",
       "id": "path3_img",
       "label": "path3_img (asset filename)"
+    },
+    {
+      "type": "text",
+      "id": "cta3_label",
+      "label": "Enquiry CTA 3 label"
+    },
+    {
+      "type": "text",
+      "id": "cta3_url",
+      "label": "Enquiry CTA 3 URL"
     }
   ],
   "blocks": [
